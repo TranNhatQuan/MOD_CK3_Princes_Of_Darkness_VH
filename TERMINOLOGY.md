@@ -333,6 +333,90 @@ Không có mục nào dưới đây tồn tại trong `base_game_vh` — đã tr
 
 > ⚠️ **`Corruption` có hai bản dịch có chủ ý, tùy vị trí.** `glossary_wyrm_corruption` (tên cái đầu) = "Wyrm Ô Uế" — giữ theo mục B3 đã có. Nhưng trong `glossary_wyrm_tt`, `[Glossary('Corruption', …)]` đứng thành dãy ba danh từ trừu tượng với `Calamity`/`Consumption`, nên dịch là "Ô Uế" (không kèm "Wyrm"). Cùng một khái niệm, khác chức năng ngữ pháp — **không phải** vi phạm quy tắc một-thuật-ngữ-một-bản-dịch.
 
+## B3c. Kuei-Jin — đã chốt khi dịch `glossary_POD` đợt 1c (2026-07-26)
+
+Register Hán-Việt Phật giáo. **Tiền lệ trong base:** `bodhisattva_barbarian` = "Bồ Tát Man" → base chấp nhận register này.
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Yama King(s) | Diêm Ma Vương | ✅ `podgloss.yamaking` |
+| Devil Kings | Ma Vương | ✅ tên gọi khác của Yama King |
+| Yama Queen | Diêm Ma Nữ Vương | ✅ `podgloss.toumu` |
+| Yomi Hell(s) | Địa Ngục Yomi | ✅ tham số 2 của `UmbraGlossaryLocalized('yomi_wan', …)` |
+| Yomi | Yomi *(giữ nguyên)* | ✅ |
+| Dharma | Pháp Môn | ✅ `podgloss.dharma` |
+| Bodhisattva | Bồ Tát | ✅ **có tiền lệ base** |
+| Arhat / Grand Arhat | La Hán / Đại La Hán | ✅ `podgloss.arhat` |
+| Hundred Clouds | Bách Vân | ✅ `podgloss.hundredclouds` |
+| Demon Emperor | Ma Hoàng | ✅ `podgloss.demonemperor` |
+| August Personage of Jade | Ngọc Hoàng | ✅ thuật ngữ tiếng Việt đã có sẵn |
+| Wheel of Ages | Bánh Xe Kỷ Nguyên | ✅ `podgloss.wheelofages` |
+| Sixth Age | Kỷ Nguyên Thứ Sáu | ✅ |
+| Paradise *(mạt thế Kuei-Jin)* | Cực Lạc | ✅ `podgloss.wheelofages` |
+| Heavens / Heaven | Thiên Đình | ✅ |
+| Karmic cycle | vòng Nghiệp Báo | ✅ `podgloss.dharma` |
+| Enlightenment | Giác Ngộ | ✅ |
+| Final Death | Cái Chết Cuối Cùng | ✅ `podgloss.bodhisattva` |
+| Chi | Khí | ✅ `podgloss.shikome` |
+| Yin / Yang | Âm / Dương | ✅ |
+| Yin Aspect | Âm Tướng | ✅ `podgloss.emmao` |
+| True Name | Chân Danh | ✅ `podgloss.truename` |
+| Kindred of the East | Huyết tộc Đông phương | ✅ `podgloss.toumu` |
+| Iron Empress | Thiết Nữ Hoàng | ✅ `podgloss.toumu` |
+| Hell of Spiked Chains | Địa Ngục Xiềng Gai | ✅ `podgloss.hellspikedchains` |
+| Wicked City | Thành Đô Tà Nghiệt | ✅ `podgloss.wickedcity` |
+| Night Realm | Dạ Giới | ✅ `podgloss.kakuri` |
+| Pit of Salt and Iron | Hầm Muối và Sắt | ✅ `podgloss.wuhua` |
+| Iron Brothels | Thanh Lâu Sắt | ✅ `podgloss.wuhua` |
+| Infant Devil Civilizer | Quan Khai Hóa Ấu Ma | ✅ `podgloss.infantdevilcivilizer` |
+| Judge of Balance | Phán Quan Cân Bằng | ✅ `podgloss.emmao` |
+| Demonologist | Nhà Quỷ Học | ✅ `podgloss.truename` |
+| Wu | Wu *(giữ nguyên)* | ✅ đơn vị xã hội, giải thích trong `podgloss.wu` |
+| Ren | Ren *(giữ nguyên)* | ✅ giữ trong `#italic`, cách gọi Chân Danh của Mummy |
+| Nomenclature Hekau | *(giữ nguyên)* | ✅ tên hệ pháp thuật Mummy |
+| Emma-O, Mikaboshi, Tou Mu, Wu Hua, Dokhor-Khan, Kakuri, Shikome, Penangallan, Methuselah, Saulot, Yen-Lo, Anda, Itugen | *(giữ nguyên)* | ✅ danh từ riêng, B0 |
+
+### ⚠️ Ngũ Pháp Môn — tên chuẩn nằm ở `religion/`, KHÔNG ở `traits/`
+
+Tôi đã tra: 5 Dharma **không phải trait**, chúng là **faith** (tôn giáo) trong [religion/POD_religion_kueijin_l_english.yml](princesofdarkness/localization/english/religion/POD_religion_kueijin_l_english.yml):
+
+| Key nguồn (chưa dịch) | Chữ tiếng Anh | Đã dùng ở `podgloss.dharma` |
+|---|---|---|
+| `deviltigers_religion` | Devil Tiger | **Ma Hổ** |
+| `boneflowers_religion` | Song of the Shadow | **Ảnh Ca** |
+| `resplendentcranes_religion` | Resplendent Crane | **Thụy Hạc** |
+| *(Bone Flowers — tên gọi khác của `boneflowers_religion`)* | Bone Flowers | **Cốt Hoa** |
+| `thrashingdragons_religion` | Thrashing Dragon | **Đằng Long** |
+
+> **Khi dịch `religion/` phải dùng đúng 5 tên trên.** Lưu ý cái bẫy của POD: key `boneflowers_religion` lại hiển thị là "Song of the Shadow", còn "Bone Flowers" là tên gọi thứ hai của cùng tôn giáo đó — nên `Ảnh Ca` và `Cốt Hoa` là **hai tên của một Pháp Môn**, không phải hai Pháp Môn.
+>
+> Hai key trong `religion/` cũng đang **trỏ ngược về** đợt 1c này: `kueijin_high_god_name` = "the August Personage of Jade" và `kueijin_devil_name` = `"the [Glossary('Demon Emperor','podgloss.demonemperor')]"`. Khi dịch `religion/` phải khớp "Ngọc Hoàng" / "Ma Hoàng".
+
+## B3d. Glossary lịch sử — đã chốt đợt 1d (2026-07-26)
+
+43 key `podgloss.*` lịch sử Hàn / Việt / Nhật / Indonesia. Không có thuật ngữ WoD.
+
+Theo base (đã tra, dùng dạng chiếm đa số): **Nho giáo** (16 lần, không dùng "Khổng giáo"), **Phật giáo**, **nô lệ**, **Tể tướng**, **Đô đốc**, **khoa cử**, giữ nguyên **Goryeo** / **Joseon** / **Majapahit** / **Nusantara**, dùng **Đại Việt** / **Triều Tiên**.
+
+| English | Tiếng Việt |
+|---|---|
+| Confucian / neo-Confucian | Nho giáo / Tân Nho giáo |
+| Three Extraordinary Watches | Tam Biệt Sao |
+| Noble Youth Guards | Đội Cấm Vệ Quý Tộc Thiếu Niên |
+| Hall of Worthies | Tập Hiền Điện |
+| Literati Purges | Thanh Trừng Văn Nhân |
+| turtle ship | Quy thuyền |
+| temple name | Miếu hiệu |
+| stupa | bảo tháp |
+| Kenshō | kiến tính |
+| Dharmadhatu | Pháp Giới |
+| execution of nine relations | Tru di cửu tộc |
+| Patih / Rakryan Patih | Patih *(giữ nguyên)* / Thượng thư |
+| harbour master | Quan cảng vụ |
+| kshatriya, silat, kakawin, Wali, Songo, Bentahara, Laksamana, Kinalakian, Bhayangkara | *(giữ nguyên)* |
+
+> **Chính tả tiếng Việt trong bản gốc bị sai dấu** — POD viết `Đai Viet`, `Trân`, `Đuc Thanh Hung Đao`, `Cà Đôc Duoc`, `Đan Viêt`. Bản dịch **khôi phục dấu đúng**: Đại Việt, nhà Trần, Đức Thánh Hưng Đạo, Cà Độc Dược. Đây là sửa lỗi của bản gốc, không phải đổi nghĩa.
+
 ## B4. Splat (chủng loài) — nguồn: `traits/`
 
 Danh sách đầy đủ lấy từ `POD_splat_*`:
