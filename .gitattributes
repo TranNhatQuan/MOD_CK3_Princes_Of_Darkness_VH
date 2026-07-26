@@ -1,0 +1,28 @@
+# Repo Việt hóa CK3 / Princes of Darkness.
+#
+# Line ending KHÁC NHAU giữa hai cây và phải giữ đúng như vậy:
+#   princesofdarkness/  -> CRLF
+#   base_game_vh/       -> LF
+#
+# -text = git không được tự chuyển đổi EOL khi checkout/commit. Nếu để git
+# "chuẩn hóa", toàn bộ file sẽ bị viết lại và diff thành vô dụng.
+
+*.yml   -text
+*.txt   -text
+*.gui   -text
+*.font  -text
+*.mod   -text
+*.asset -text
+*.gfx   -text
+
+# Tài liệu dự án: để git xử lý bình thường.
+*.md    text eol=lf
+
+# Nhị phân — không diff, không đụng.
+*.ttf   binary
+*.otf   binary
+*.dds   binary
+*.tga   binary
+*.png   binary
+*.mesh  binary
+*.bank  binary

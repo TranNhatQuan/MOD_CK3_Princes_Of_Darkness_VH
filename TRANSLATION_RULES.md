@@ -199,6 +199,36 @@ File [glossary_POD_l_english.yml](princesofdarkness/localization/english/glossar
 | Dòng trống, comment | Giữ nguyên như file gốc |
 | Số dòng | File sau khi dịch phải có đúng số dòng như trước |
 
+### ⚠️ Formatter là mối nguy lớn nhất với repo này
+
+File `.yml` ở đây **không phải YAML thật** — chúng là định dạng localization riêng của Paradox. Mọi formatter YAML sẽ làm hỏng chúng.
+
+**Đã xảy ra thật (2026-07-26).** Formatter của editor chạy khi lưu file và đã:
+
+- đổi thụt đầu dòng 1 space → 2 space trên **226 key** (2 file),
+- xóa **6 dòng trống** + dòng chỉ chứa một space,
+- làm biến đổi **2 dấu `\"` escape** → chuỗi bị cắt giữa dòng, CK3 đọc sai key.
+
+Nguy hiểm nhất: **phần Tự kiểm tra đếm token KHÔNG bắt được** hai lỗi đầu, và với lỗi `\"` thì `ref`/`bracket`/`\n` vẫn khớp y nguyên. Chỉ phát hiện được nhờ đếm riêng số dòng, số dòng trống và số `\"`.
+
+**Repo đã có 3 lớp chặn** (đừng xóa):
+
+| File | Chặn gì |
+|---|---|
+| [.vscode/settings.json](.vscode/settings.json) | tắt `formatOnSave`/`formatOnPaste`/`trimTrailingWhitespace`; map `*.yml` → `plaintext` để không formatter nào bám vào; khóa `base_game_vh/` thành read-only |
+| [.editorconfig](.editorconfig) | `trim_trailing_whitespace = false`, `insert_final_newline = false`, `charset = utf-8-bom`, EOL đúng cho từng cây |
+| [.gitattributes](.gitattributes) | `*.yml -text` — git không tự chuyển EOL (POD dùng CRLF, base dùng LF; để git "chuẩn hóa" là viết lại toàn bộ file) |
+
+Nếu dùng editor khác, hãy tự tắt tương đương **trước khi mở bất kỳ file `.yml` nào**. Kiểm tra nhanh sau khi lưu:
+
+```bash
+f=princesofdarkness/localization/english/glossary_POD_l_english.yml
+grep -c ''            "$f"   # tổng dòng — phải bằng bản gốc
+grep -cE '^[[:space:]]*$' "$f"   # dòng trống — phải bằng bản gốc
+grep -cE '^ [A-Za-z_]' "$f"  # key thụt ĐÚNG 1 space
+grep -cE '^  [A-Za-z_]' "$f" # key thụt 2 space — phải là 0 ở file 1-space
+```
+
 ---
 
 ## 7. Quy tắc tiếng Việt

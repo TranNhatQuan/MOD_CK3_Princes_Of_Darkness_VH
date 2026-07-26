@@ -1,0 +1,33 @@
+# Repo Việt hóa CK3 / Princes of Darkness.
+#
+# File .yml ở đây KHÔNG phải YAML thật — là định dạng localization của Paradox.
+# Mọi việc "chuẩn hóa" (thụt đầu dòng, xóa space cuối dòng, thêm newline cuối
+# file) đều làm hỏng file. Xem TRANSLATION_RULES.md muc 6.
+
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# POD: CRLF + UTF-8 có BOM. Thụt đầu dòng giữ y nguyên dòng gốc — KHÔNG chuẩn hóa.
+# indent_size không đặt là có chủ ý: POD có key thụt 1 space, 2+ space và cả tab.
+[princesofdarkness/**.yml]
+end_of_line = crlf
+charset = utf-8-bom
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# base_game_vh: LF + UTF-8 có BOM. CHỈ ĐỌC — không sửa.
+[base_game_vh/**.yml]
+end_of_line = lf
+charset = utf-8-bom
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# Tài liệu dự án thì format bình thường được.
+[*.md]
+end_of_line = lf
+trim_trailing_whitespace = false
+insert_final_newline = true

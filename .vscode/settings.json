@@ -1,0 +1,79 @@
+{
+  // ---------------------------------------------------------------------------
+  // Repo Việt hóa CK3 / Princes of Darkness.
+  //
+  // File .yml ở đây KHÔNG phải YAML thật — chúng là định dạng localization
+  // riêng của Paradox (CK3). Mọi formatter YAML sẽ làm hỏng chúng.
+  //
+  // Đã xảy ra thật (2026-07-26): formatter đổi thụt đầu dòng 1 space -> 2 space
+  // trên 226 key, xóa 6 dòng trống, xóa dòng chỉ chứa một space, và làm biến
+  // đổi 2 dấu \" escape -> chuỗi bị cắt, CK3 đọc sai key.
+  //
+  // Quy ước bắt buộc — xem TRANSLATION_RULES.md muc 6:
+  //   - UTF-8 CÓ BOM (mất BOM = CK3 không đọc được file)
+  //   - CRLF (POD) / LF (base_game_vh)
+  //   - thụt đầu dòng giữ Y NGUYÊN dòng gốc (đa số 1 space, có chỗ 2+, có tab)
+  //   - không thêm/bớt dòng, giữ nguyên dòng trống và dòng chỉ có space
+  // ---------------------------------------------------------------------------
+
+  // Tắt format tự động toàn workspace
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSaveMode": "file",
+
+  // Không nhận .yml ở repo này là YAML -> không formatter nào bám vào
+  "files.associations": {
+    "*.yml": "plaintext",
+    "*.font": "plaintext",
+    "*.gui": "plaintext",
+    "*.txt": "plaintext",
+    "*.mod": "plaintext",
+    "*.asset": "plaintext",
+    "*.gfx": "plaintext"
+  },
+
+  // Chốt chặn lần hai: kể cả khi bị nhận là yaml/plaintext vẫn không format
+  "[yaml]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.trimAutoWhitespace": false
+  },
+  "[plaintext]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null,
+    "editor.detectIndentation": false,
+    "editor.trimAutoWhitespace": false
+  },
+
+  // Những thứ âm thầm sửa file khi lưu — phải tắt hết.
+  // trimTrailingWhitespace sẽ xóa dòng chỉ có một space và space cuối chuỗi.
+  "files.trimTrailingWhitespace": false,
+  "files.trimFinalNewlines": false,
+  "files.insertFinalNewline": false,
+  "files.autoSave": "off",
+
+  // Giữ BOM và CRLF
+  "files.encoding": "utf8bom",
+  "files.autoGuessEncoding": false,
+  "files.eol": "\r\n",
+
+  // Đừng "chuẩn hóa" thụt đầu dòng
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 1,
+
+  // Cho thấy khoảng trắng, vì space/tab ở đây có ý nghĩa
+  "editor.renderWhitespace": "all",
+
+  // Không đụng vào cây tham chiếu chỉ-đọc và bản dịch của nhóm khác
+  "files.readonlyInclude": {
+    "base_game_vh/**": true,
+    "princesofdarkness/localization/simp_chinese/**": true
+  },
+  "search.exclude": {
+    "princesofdarkness/localization/simp_chinese/**": true
+  }
+}
