@@ -423,21 +423,58 @@ Danh sách đầy đủ lấy từ `POD_splat_*`:
 
 `spirit`, `vampire`, `kueijin`, `werewolf`, `ajaba`, `entomos`, `apis`, `bastet`, `camazotz`, `corax`, `grondr`, `gurahl`, `kitsune`, `mokole`, `nagah`, `nuwisha`, `ratkin`, `rokea`, `fae`, `changeling`, `mage`, `mummy`, `demon`, `wraith`, `supehunter`, `revenant`, `ghoul`, `mortal`
 
-| English | Đề xuất |
+**✅ ĐÃ CHỐT VÀ ĐÃ ÁP DỤNG** (2026-07-26, bước 3). Đây là tên thật trong `traits/`, không còn là đề xuất.
+
+| English (bản gốc) | Tiếng Việt | Key |
+|---|---|---|
+| Vampire | Ma cà rồng | `trait_vampire` |
+| Werewolf | Người sói | `trait_werewolf` |
+| Mage | Pháp sư | `trait_mage` |
+| Mummy | Xác ướp | `trait_mummy` |
+| Demon | Ác quỷ | `trait_demon` |
+| Wraith | Oan hồn | `trait_wraith` |
+| Hunter | Thợ săn | `trait_supehunter` ⚠️ key là `supehunter`, không phải `hunter` |
+| Ghoul | Bộc huyết | `trait_ghoul` |
+| Revenant | Huyết tộc Hồi sinh | `trait_revenant` |
+| Mortal | Phàm nhân | `trait_mortal` |
+| Spirit | Linh thể | `trait_spirit` *(trong `POD_fera_traits`)* |
+| **True Fae** | **Fae Chân Chính** | `trait_fae` ⚠️ bản gốc là "True Fae", không phải "Fae" |
+| Changeling | Đứa Trẻ Bị Tráo | `trait_changeling` |
+| Kuei-jin → **Kuei-Jin** | Kuei-Jin *(giữ nguyên, đã chuẩn hóa hoa/thường)* | `trait_kueijin` |
+| Fera | *(không sửa)* | `trait_fera` = `"$glossary_fera$"` — đã có giá trị từ bước 1 |
+
+14 tên bộ tộc Fera giữ nguyên **danh từ riêng** (B4), đã kiểm tra từng dòng: `Ajaba`, `Éntomos`, `Apis`, `Bastet`, `Camazotz`, `Corax`, `Grondr`, `Gurahl`, `Kitsune`, `Mokolé`, `Nagah`, `Nuwisha`, `Ratkin`, `Rokea`. Giữ nguyên cả dấu phụ `É`/`é`.
+
+> ⚠️ **`Kuei-jin` → `Kuei-Jin` là sửa lỗi nhất quán của bản gốc.** POD tự viết hai kiểu: `Kuei-Jin` 25 lần, `Kuei-jin` 16 lần. Đã chuẩn hóa về dạng chiếm đa số. Khi dịch các file khác gặp `Kuei-jin` thì cũng viết `Kuei-Jin`.
+
+> ⚠️ **`trait_fae` là "True Fae", không phải "Fae".** Đừng dịch thành "Fae" trơn — mục B4 cũ ghi "Fae → giữ nguyên" là thiếu chính xác. `$POD_splat_fae$` hiển thị "Fae" (chữ trong `#L` của tooltip, giữ nguyên), còn *trait* thì tên đầy đủ là "Fae Chân Chính".
+
+### Mô tả splat (`_desc`) — đã dịch kèm
+
+Đã dịch 20 key `_desc` của các splat: `vampire`, `ghoul`, `mortal`, `mage`, `wraith`, `kueijin`, `supehunter`, `demon`, `mummy`, `revenant`, `spirit`, `fae`, `changeling`, `werewolf`, và 16 mô tả bộ tộc Fera (`ajaba`, `ananasi`, `apis`, `bastet`, `camazotz`, `corax`, `grondr`, `gurahl`, `kitsune`, `mokole`, `nagah`, `nuwisha`, `ratkin`, `rokea`, `entomos`).
+
+Thuật ngữ mới đặt trong các mô tả này:
+
+| English | Tiếng Việt |
 |---|---|
-| Vampire | Ma cà rồng |
-| Werewolf | Người sói |
-| Mage | Pháp sư |
-| Mummy | Xác ướp |
-| Demon | Ác quỷ |
-| Wraith | Oan hồn |
-| Hunter | Thợ săn |
-| Ghoul | Bộc huyết |
-| Revenant | Huyết tộc Hồi sinh |
-| Mortal | Phàm nhân |
-| Spirit | Linh thể |
-| Changeling | Đứa Trẻ Bị Tráo |
-| Fae | Fae *(giữ nguyên)* |
+| War of Rage | Cuộc Chiến Phẫn Nộ |
+| Rage *(chỉ số Garou)* | Phẫn Nộ |
+| Changing Breeds | Chủng Biến Hình |
+| Beast Courts | Thú Triều |
+| Middle Kingdom | Trung Vương Quốc |
+| Heavenly Mandate | Thiên Mệnh |
+| Skull Pigs | Trư Đầu Cốt |
+| Moon-bulls | Ngưu Nguyệt |
+| Matchmakers of Gaia | Kẻ Tác Hợp của Gaia |
+| Judges of Gaia | Phán Quan của Gaia |
+| Lizard Kings | Vua Thằn Lằn |
+| Old Man Coyote | Lão Sói Đồng |
+| Changeling Way | Đạo Trao Đổi |
+| Umbrood | Umbrood *(giữ nguyên)* |
+| werehyena / werespider / wereaurochs / werebat / wereraven / wereboar / werebear / werefox / weresaurian / weresnake / werecoyote / wererat / wereshark | người linh cẩu / người nhện / người bò rừng / người dơi / người quạ / người lợn rừng / người gấu / người cáo / người thằn lằn / người rắn / người sói đồng / người chuột / người cá mập |
+| Firstborn, Dark-kin, Inanimae, Adhene, Kithain, Ananasa, Anansi, Luna, C'etites, chimera | *(giữ nguyên — danh từ riêng)* |
+
+> **Chưa dịch trong `traits/`:** ~1.800 key còn lại (trait tính cách, Dị năng, thế hệ, predator type, kith Fae…). Bước 3 theo định nghĩa của dự án là "quyết tên mọi splat" — phần đó đã xong. Phần còn lại thuộc công việc cơ học về sau.
 
 Tên bộ tộc Fera (`bastet`, `corax`, `kitsune`, `mokole`, `nagah`, `nuwisha`, `ratkin`, `rokea`, `ajaba`, `apis`, `camazotz`, `entomos`, `grondr`, `gurahl`) là **danh từ riêng trong nguyên tác → giữ nguyên**, giống cách base giữ tên riêng vanilla.
 
