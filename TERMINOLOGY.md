@@ -232,6 +232,21 @@ Không đặt từ tùy tiện ở từng file. Ba nơi này là nguồn, dịch
 | [custom_localization/POD_misc_custom_loc_l_english.yml](princesofdarkness/localization/english/custom_localization/POD_misc_custom_loc_l_english.yml) | `POD_splat_*` — **không chứa chữ**, chỉ trỏ `[GetTrait('vampire').GetName(...)]` |
 | [traits/](princesofdarkness/localization/english/traits/) | Tên thật của mọi splat. Dịch `trait_vampire` là đổi luôn mọi `$POD_splat_vampire$` |
 
+**Đòn bẩy thực đo được** của các shortcut trong `glossary_POD` (đếm trong `localization/english/`):
+
+| Shortcut | File | Lần dùng |
+|---|---|---|
+| `$glossary_wyrm$` | 38 | 161 |
+| `$glossary_fera$` | 48 | 151 |
+| `$glossary_wyld$` | 19 | 44 |
+| `$glossary_weaver$` | 14 | 44 |
+| `$glossary_triat$` | 13 | 20 |
+| `$glossary_wyrm_triatic$` | 4 | 6 |
+
+→ Chỉ 6 key này đã chi phối **426 điểm gọi**. Đây là lý do phải dịch `glossary_POD` trước mọi thứ khác.
+
+> ⚠️ **Chiều ngược lại cũng có:** `trait_fera` trong `traits/` được định nghĩa là `"$glossary_fera$"`, và `gaia_devil_name` / `gaia_death_deity_name` trong `religion/` là `"$glossary_wyrm$"`. Nghĩa là dịch `glossary_fera`/`glossary_wyrm` ở đây **đã đổi luôn tên trait và tên thần** ở hai file kia. Khi tới `traits/` (bước 3) đừng dịch lại — chúng đã có giá trị rồi.
+
 → Muốn đổi cách gọi "Vampire" toàn mod thì sửa `trait_vampire` trong `traits/`, **không** sửa `POD_splat_vampire`.
 
 ## B2. Thuật ngữ ma cà rồng (từ `glossary_POD_l_english.yml`)
@@ -283,16 +298,40 @@ Không có mục nào dưới đây tồn tại trong `base_game_vh` — đã tr
 
 | English | Đề xuất | Ghi chú |
 |---|---|---|
-| Fera | Fera *(giữ nguyên)* | `glossary_fera` |
-| Triat | Tam Vị | `glossary_triat` |
-| Wyld | Wyld *(giữ nguyên)* | `glossary_wyld` |
-| Weaver | Weaver *(giữ nguyên)* | `glossary_weaver` |
-| Wyrm | Wyrm *(giữ nguyên)* | `glossary_wyrm` |
-| Triatic Wyrm | Wyrm Tam Vị | `glossary_wyrm_triatic` |
-| Apep / Apophis | Apep / Apophis *(giữ nguyên)* | `glossary_wyrm_apep`, `_apophis` |
-| Beast of War | Ác Thú Chiến Tranh | `glossary_wyrm_calamity` |
-| Eater of Souls | Kẻ Nuốt Linh Hồn | `glossary_wyrm_consumption` |
-| Defiler Wyrm | Wyrm Ô Uế | `glossary_wyrm_corruption` |
+| Fera | Fera *(giữ nguyên)* | ✅ `glossary_fera` |
+| Triat | Tam Vị | ✅ `glossary_triat` |
+| Wyld | Wyld *(giữ nguyên)* | ✅ `glossary_wyld` |
+| Weaver | Weaver *(giữ nguyên)* | ✅ `glossary_weaver` |
+| Wyrm | Wyrm *(giữ nguyên)* | ✅ `glossary_wyrm` |
+| Triatic Wyrm | Wyrm Tam Vị | ✅ `glossary_wyrm_triatic` |
+| Apep / Apophis | Apep / Apophis *(giữ nguyên)* | ✅ `glossary_wyrm_apep`, `_apophis` |
+| Beast of War | Ác Thú Chiến Tranh | ✅ `glossary_wyrm_calamity` |
+| Eater of Souls | Kẻ Nuốt Linh Hồn | ✅ `glossary_wyrm_consumption` |
+| Defiler Wyrm | Wyrm Ô Uế | ✅ `glossary_wyrm_corruption` |
+
+> **Wyld / Weaver / Wyrm giữ nguyên tiếng Anh là bắt buộc, không phải tùy chọn.** Ba từ này còn là **tên doctrine và tên tôn giáo** trong `religion/` (`doctrine_fera_triat_alignment_wyld_name`, `wyrm_religion_adj`, `rf_wyrm`…). Dịch ở glossary mà không dịch ở đó — hoặc ngược lại — là tạo hai bản dịch cho cùng một thực thể.
+
+### B3b. Đã chốt khi dịch `glossary_POD` đợt 1b (2026-07-26)
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Gaia | Gaia *(giữ nguyên)* | ✅ có tiền lệ base: `Gaia:0 "Gaia"` |
+| Mother Goddess | Mẫu Thần | ✅ `glossary_fera_tt` |
+| Chaos | Hỗn loạn | ✅ theo base (15 lần "Hỗn loạn", 0 lần "Hỗn mang") |
+| spirit *(thực thể linh giới)* | linh hồn | ✅ theo base (20 lần "Linh hồn") |
+| Rage | phẫn nộ | ✅ theo base (dạng chiếm đa số) |
+| Entropy | Hoại Diệt | ✅ `glossary_wyrm_tt` |
+| Creation *(Tạo Hóa)* | Tạo Hóa | ✅ `glossary_wyrm_tt` |
+| Dark God | Hắc Thần | ✅ `glossary_wyrm_tt` |
+| Wyrm of Calamity | Wyrm Tai Ương | ✅ biến thể của `Beast of War` |
+| Wyrm of Consumption | Wyrm Cuồng Thực | ✅ biến thể của `Eater of Souls` |
+| Wyrm of Corruption | Wyrm Bôi Nhọ | ✅ biến thể của `Defiler Wyrm` |
+| Calamity / Consumption / Corruption *(3 mặt của Wyrm)* | Tai Ương / Cuồng Thực / Ô Uế | ✅ `glossary_wyrm_tt`, tham số 1 của `Glossary()` |
+| Werecat / Werecrocodile / Weredragon | Người mèo / Người cá sấu / Người rồng | ✅ `glossary_fera_tt` |
+| Garou | Garou *(giữ nguyên)* | ✅ tên bộ tộc, B0 |
+| Garden of Eden | Vườn Địa Đàng | ✅ `glossary_wyrm_corruption_tt` |
+
+> ⚠️ **`Corruption` có hai bản dịch có chủ ý, tùy vị trí.** `glossary_wyrm_corruption` (tên cái đầu) = "Wyrm Ô Uế" — giữ theo mục B3 đã có. Nhưng trong `glossary_wyrm_tt`, `[Glossary('Corruption', …)]` đứng thành dãy ba danh từ trừu tượng với `Calamity`/`Consumption`, nên dịch là "Ô Uế" (không kèm "Wyrm"). Cùng một khái niệm, khác chức năng ngữ pháp — **không phải** vi phạm quy tắc một-thuật-ngữ-một-bản-dịch.
 
 ## B4. Splat (chủng loài) — nguồn: `traits/`
 
