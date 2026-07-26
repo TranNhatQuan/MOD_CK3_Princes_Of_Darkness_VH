@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is **not a software project** — there is no build, test, lint, or package manifest, and it is not a git repository. It is a **Vietnamese localization workspace** for Crusader Kings III and the *Princes of Darkness* (POD) total-conversion mod. All work is editing CK3 `.yml` localization files by hand.
+This is **not a software project** — there is no build, test, lint, or package manifest. It is a **Vietnamese localization workspace** for Crusader Kings III and the *Princes of Darkness* (POD) total-conversion mod. All work is editing CK3 `.yml` localization files by hand.
+
+It *is* a git repository (branch `main`, ~13,100 tracked files). Since there are no automated tests, **git is the only safety net** — commit per batch of translated files so a bad edit can be reverted.
 
 Read [README.md](README.md) first — it is the authoritative translation policy (terminology priority, consistency rules, style guide). This file covers the structural/technical facts that README does not.
 
@@ -92,7 +94,32 @@ Bulk of the work in `localization/english/`, by lines:
 
 ## Known conflict: fonts
 
-Both trees ship `fonts/fonts.font` and override the same font slots. `base_game_vh/fonts/fonts.font` maps `l_english` to its bundled Open Sans / Gitan / Fondamento files (the ones that render Vietnamese diacritics). `princesofdarkness/fonts/fonts.font` maps `l_english` to decorative faces (`cinzeldecorative-*.ttf`, `pirataone-regular.ttf`, `cabaletta.ttf`) that are unlikely to carry the full Vietnamese diacritic set. Whichever mod loads later wins. If translated POD text renders with missing or boxed glyphs, this is why — the fix is in POD's `fonts.font` groups, not in the `.yml` files.
+Font files and `fonts.font` override **independently** — a mod can replace the file at a path without touching the `.font` that references it. That is exactly what makes this work.
+
+**What `base_game_vh` does.** It ships 7 replacement font files, all measured at **98/98** coverage of the codepoints unique to Vietnamese (`U+1EA0–U+1EF9`, `đ Đ ơ Ơ ư Ư ă Ă`):
+
+```
+fonts/Open_Sans/OpenSans-SemiBold.ttf      fonts/Gitan/GitanLatin-Regular.otf
+fonts/Fondamento/Fondamento-Regular.otf    fonts/Gitan/GitanLatin-Bold.otf
+fonts/mapfont/Paradox_King_Script.otf      fonts/Gitan/GitanLatin-Italic.otf
+                                           fonts/Gitan/GitanLatin-Bold-Italic.otf
+```
+
+Its `fonts.font` defines 13 slots and maps `l_english` to those files. Note it swapped Fondamento from vanilla's `.ttf` to its own `.otf`.
+
+**What POD does.** POD's `fonts.font` defines **18 slots — a superset** of base's 13, adding `Cinzel-Decorative-Regular`, `Cinzel-Decorative-Bold`, `PirataOne-Regular`, `Cabaletta`, `PODSubtitles`. Its versions of the 13 shared slots point at the *same paths* base_game_vh replaces.
+
+**Consequence.** POD's `fonts.font` should be the one that wins (POD loading last) — it is a superset, whereas base's version leaves POD's 5 decorative slots undefined. Vietnamese still renders in the 13 shared slots because the *files* at those paths are base_game_vh's. Coverage of POD's own faces:
+
+| Font | Vietnamese coverage |
+|---|---|
+| `cinzeldecorative-regular.ttf` / `-bold.ttf` | 6 / 98 |
+| `pirataone-regular.ttf` | 10 / 98 |
+| `cabaletta.ttf` | **0 / 98** |
+
+So the exposure is narrow: only text rendered *in those 5 decorative slots* (POD headers, titles, subtitles). Their fallback chains list `fonts/Fondamento/Fondamento-Regular.ttf` and `fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf` — **neither path is one base_game_vh ships** (it ships Fondamento as `.otf`, and only `OpenSans-SemiBold`, not the Italic). Those fall through to vanilla's files.
+
+**Fix, if diacritics drop out of POD headings:** in `princesofdarkness/fonts/fonts.font`, append a path base_game_vh actually ships — `fonts/Open_Sans/OpenSans-SemiBold.ttf` or `fonts/Fondamento/Fondamento-Regular.otf` — to the `l_english` group of those 5 slots. Never fix it by stripping diacritics from the `.yml` files.
 
 ## Everything else in `princesofdarkness/`
 

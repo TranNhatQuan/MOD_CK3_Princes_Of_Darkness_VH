@@ -203,7 +203,24 @@ grep -rhE '^\s*game_concept_hook:[0-9]* "' base_game_vh/localization/english/gam
 
 # PHẦN B — Thuật ngữ Princes of Darkness
 
-> **Trạng thái: chưa dịch dòng nào.** Toàn bộ 460 file POD vẫn là tiếng Anh. Bảng dưới là **đề xuất cần chốt**, không phải bản dịch đã tồn tại. Chốt xong thì xóa cột "Trạng thái" và coi như bắt buộc.
+> **Trạng thái: chưa dịch dòng nào.** Toàn bộ 460 file POD vẫn là tiếng Anh, nên các mục dưới đây là do dự án tự đặt, không phải tra ra từ `base_game_vh`.
+>
+> Mục đánh ✅ **đã chốt** — dùng bắt buộc. Mục còn lại là **đề xuất**, chốt tới đâu đánh dấu tới đó.
+
+## B0. Chính sách: được phép giữ nguyên tiếng Anh
+
+Không bắt buộc phải Việt hóa mọi thuật ngữ POD. **Giữ nguyên tiếng Anh khi:**
+
+- Đó là **danh từ riêng / thuật ngữ nguyên tác** World of Darkness mà cộng đồng đã quen đọc bằng tiếng Anh (`Clan`, `Vitae`, `Diablerie`, `Wyrm`, `Fera`, `Kuei-Jin`, tên các bộ tộc).
+- Việt hóa sẽ **đụng thuật ngữ vanilla** đã có (trường hợp `Clan` vs `House` = "Gia tộc").
+- Bản dịch tiếng Việt nghe gượng hoặc dài hơn hẳn, làm vỡ UI.
+
+Có tiền lệ trong chính `base_game_vh`: **Men-at-Arms** và **De Jure** được giữ nguyên tiếng Anh.
+
+Hai điều kiện đi kèm khi giữ nguyên:
+
+1. **Giữ nguyên toàn bộ**, không nửa Anh nửa Việt. `Clan Curse` → `Lời nguyền Clan` là chấp nhận được (từ ghép), nhưng đừng lúc `Clan` lúc `Thị tộc`.
+2. **Vẫn phải nhất quán** — ghi vào bảng dưới rồi dùng đúng như thế ở mọi nơi.
 
 ## B1. Nơi thuật ngữ POD thực sự được định nghĩa
 
@@ -224,8 +241,8 @@ Không đặt từ tùy tiện ở từng file. Ba nơi này là nguồn, dịch
 | World of Darkness | Thế Giới Bóng Tối | `pod_wod` |
 | Vampire | Ma cà rồng | `trait_vampire` |
 | Cainite / Cainites | Hậu duệ Cain | `pod_cainite(s)` |
-| Clan | Gia tộc ⚠️ **xung đột** | `pod_clan` — vanilla đã dùng "Gia tộc" cho *House*. Phải chọn từ khác, ví dụ **Thị tộc** |
-| Clan Curse | Lời nguyền Thị tộc | `glossary_clan_curse` |
+| Clan | **Clan** *(giữ nguyên — đã chốt)* | `pod_clan` — tránh đụng `House` = "Gia tộc" của vanilla |
+| Clan Curse | Lời nguyền Clan | `glossary_clan_curse` |
 | Discipline / Disciplines | Dị năng | `pod_discipline(s)` |
 | Vitae | Vitae *(giữ nguyên)* | `pod_vitae` — thuật ngữ Latin trong nguyên tác |
 | Embrace / Embraced | Nghi lễ Trao truyền / được Trao truyền | `pod_Embrace(d)` |
@@ -279,14 +296,14 @@ Tên bộ tộc Fera (`bastet`, `corax`, `kitsune`, `mokole`, `nagah`, `nuwisha`
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
 |---|---|---|
-| **Clan** | `House` = "Gia tộc" | Clan → "Thị tộc" |
+| **Clan** | `House` = "Gia tộc" | ✅ **Giữ nguyên `Clan`** — đã chốt |
+| **Prince** (chức sắc Camarilla) | `Duke` = "Công tước", `King` = "Quốc vương" | ✅ **Giữ nguyên `Prince`** — dịch sẽ đụng tước vị phong kiến, mà nghĩa hoàn toàn khác |
+| **Bloodline** | `Dynasty` = "Triều đại" | "Huyết thống" — không đụng, dịch được |
 | **Discipline** | không xung đột | "Dị năng" |
 | **Generation** | không xung đột | "Thế hệ" |
 | **Beast** | không xung đột | "Dã Thú" |
 | **Masquerade** | không xung đột | "Luật Che Giấu" |
 | **Resonance** | không xung đột | "Cộng hưởng" |
-| **Bloodline** | `Dynasty` = "Triều đại" | "Huyết thống" |
-| **Prince** (chức sắc Camarilla) | `Duke/King` đã có | "Vương Đô" hoặc giữ "Prince" — cần chốt |
 
 ---
 
