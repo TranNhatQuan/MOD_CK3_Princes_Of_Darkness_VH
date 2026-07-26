@@ -513,6 +513,37 @@ Tên Art/Sliver giữ nguyên: Chicanery, Legerdemain, Primal, Soothsay, Wayfare
 
 `trait_realm_actor: "Realm Actor Mastery"` → **"Tinh Thông Realm Actor"** (mẫu: `Tinh Thông Realm <Tên>` cho 6 Realm; `Art [Tên] Mastery` → **"Tinh Thông Art [Tên]"**; hậu tố `_advanced` giữ cùng mẫu "Tinh Thông").
 
+## B4c. Thuật ngữ Fera / Werewolf (từ `POD_fera_traits_l_english.yml`)
+
+Nguồn: `traits/POD_fera_traits_l_english.yml` (479 dòng, phần trait phụ). Khác với B4b (Fae — giữ nguyên tiếng Anh), ở đây **dịch nghĩa** các danh từ hệ thống/chỉ số, theo đúng cách `base_game_vh` dịch nghĩa chỉ số vanilla (Prestige→Uy tín…). Tên riêng chủng loài (Garou, Ajaba, Ananasi, Bastet, Mokolé, Kitsune…) và tên gọi cấp bậc/giáo phái cụ thể (Ahroun, Ragabash, Ronin…) vẫn **giữ nguyên** theo B4/B0.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Rank | Cấp Bậc | hệ thống thứ bậc Garou/Fera nói chung |
+| Renown | Danh Vọng | tài nguyên tích lũy để lên Cấp Bậc |
+| Auspice | Thánh Triều | cách phân loại theo tuần trăng lúc sinh (Garou, Gurahl…) |
+| Solar Auspice | Thánh Triều Mặt Trời | biến thể của Mokolé |
+| Seasonal Auspice | Thánh Triều Mùa | biến thể của Makara/Nagah Ấn Độ |
+| Lunisolar Auspice | Thánh Triều Nhật Nguyệt | biến thể của Apis |
+| Water Auspice | Thánh Triều Nước | biến thể của Rokea |
+| Breed | Dòng Sinh | cách sinh ra: Homid/Lupus/Beastborn... |
+| Path | Đạo Lộ | hệ thống của Éntomos/Ananasi thay Auspice |
+| Aspect | Diện Mạo | hệ thống của Ajaba (Dawn/Dusk) thay Auspice |
+| Faction | Phe Phái | hệ thống của Ratkin/Éntomos |
+| Clade | Chi Phái | phân loại phụ của Éntomos |
+| Gnosis | Trí Ngộ | năng lượng phép thuật/tâm linh của Fera |
+| Bane | Tà Linh | linh thể bị Wyrm làm ô uế |
+| Abomination | Nghịch Đồ | người sói bị Trao truyền thành ma cà rồng |
+| Kinfolk | Thân Tộc | con người/thú vật có quan hệ huyết thống với Fera |
+| Umbrood | Umbrood *(giữ nguyên)* | đã chốt ở B4 (mô tả splat) |
+| Stream | Chi Phái *(của Mokolé)* | 4 nhánh Mokolé: Mokolé-mbembe, Gumagan, Makara, Zhong Lung — tên riêng giữ nguyên |
+
+### Tên riêng giữ nguyên (không dịch)
+
+Tên bộ tộc/dòng giống/chi phái cụ thể: Garou, Ajaba, Ananasi, Apis, Bastet, Camazotz, Corax, Grondr, Gurahl, Kitsune, Mokolé, Nagah, Nuwisha, Ratkin, Rokea, Éntomos; các biến thể Wyrm-hóa (Ozuzo, Histpah, Buzzards, Purgers, Nokhomi, Mad Destroyers, Balefire Sharks, Xibalan, Skull Pig, Kumo); tên Cấp Bậc theo Thánh Triều (Ahroun, Galliard, Philodox, Theurge, Ragabash và biến thể ở Gurahl: Uzmati, Kojubat, Rishi, Kieh, Arcas); tên Thánh Triều Mặt Trời của Mokolé (Rising Sun…dịch có, xem dưới) và tên phe của Ratkin (Warriors, Bards, Knife Skulkers, Shadow Seers, Tunnel Runners — dịch nghĩa vì là danh từ mô tả, không phải danh xưng ngoại lai); tên Linh thể (Rabbit Spirit…dịch nghĩa vì mô tả động vật, không phải danh xưng).
+
+> Ghi chú: các tên "Rising Sun", "Warriors", "Rabbit Spirit" v.v. là **cụm mô tả bằng tiếng Anh thường**, không phải danh xưng ngoại lai kiểu "Ahroun" hay "Sidhe" — nên áp dụng dịch nghĩa bình thường như văn xuôi, khác với nhóm tên riêng ở trên.
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
