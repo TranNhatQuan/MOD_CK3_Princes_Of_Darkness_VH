@@ -58,8 +58,15 @@ Tất cả ví dụ dưới đây đều lấy từ file thật trong repo.
 | **Format tag** | `#V …#!`, `#T …#!`, `#S …#!`, `#L …#!`, `#weak …#!`, `#flavor …#!`, `#bold …#!`, `#italic …#!` | Từ ngay sau `#` là tên tag |
 | **Tooltip inline** | `#TOOLTIP:GAME_TRAIT,fae,[GetNullCharacter] #L Fae#!#!`, `#TOOLTIP:BUILDING,glade_freehold_ …#!` | Có trong **59 file** POD. Phần sau `#TOOLTIP:` đến hết dấu phẩy cuối là ID script — chỉ dịch chữ nằm sau nó (`Fae`) |
 | **Điều kiện** | `[AddLocalizationIf( GreaterThan_int32( … ), 'MODIFIER_PREVIOUS_LEVELS_APPLY_NEWLINE' )]` | |
+| **Macro POD** | `[UmbraGlossary('shadowlands')]`, `[GetPODArtifactName('link')]`, `[TraitGuiIsShown('text')]` | Định nghĩa trong [POD_macros.txt](princesofdarkness/data_binding/POD_macros.txt). Tham số là ID script → không dịch. **Ngoại lệ duy nhất: `UmbraGlossaryLocalized` — xem mục 4** |
 | **Xuống dòng** | `\n`, `\n\n` | Không thay bằng Enter thật |
 | **Dấu " lồng nhau** | `#weak \"Câu trích dẫn.\"#!` | Giữ nguyên `\"` — 29 file POD dùng cách này |
+
+### Tag ghép `#L;bold`
+
+Tag format có thể **ghép nhiều tên bằng dấu `;`**: `#L;bold Garou#!`. Đây vẫn là *một* tag, đóng bằng *một* `#!`. Cả cụm `L;bold` là tên tag → không dịch.
+
+Hệ quả cho phần Tự kiểm tra (mục 8): lệnh `grep -oE '#[A-Za-z]+ '` **không khớp** `#L;bold ` vì có dấu `;`. Nên số "tag mở" luôn nhỏ hơn số "tag đóng" ở file nào dùng tag ghép — đó **không phải lỗi**. Chỉ so số tag mở của *cùng một file* trước/sau khi dịch; đừng so số mở với số đóng.
 
 ### Về `§Y`
 
@@ -103,7 +110,48 @@ pod_diablerie: "[Glossary('Diablerie','mô tả diablerie')]"
    cùng cái tên đó         nhưng đây là nội dung → PHẢI dịch
 ```
 
-`glossary_POD_l_english.yml` có 40 dòng key = **28 shortcut** `Glossary()` + **12 key `_tt`** chứa nội dung tooltip.
+`glossary_POD_l_english.yml` có **105 key / 147 dòng**, chia bốn khối:
+
+| Khối | Dòng | Key | Nội dung |
+|---|---|---|---|
+| Shortcut `pod_*` | 4–23 | 12 | chỉ có tham số 1 của `Glossary()` để dịch |
+| POD glossary + Fera | 28–70 | 28 | 16 shortcut + 12 key `_tt` (văn xuôi dài) |
+| Kuei-Jin `podgloss.*` | 80–101 | 22 | văn xuôi thuần |
+| Historical `podgloss.*` | 105–147 | 43 | văn xuôi thuần, không có thuật ngữ WoD |
+
+> Con số "28 shortcut + 12 `_tt`" chỉ mô tả **hai khối đầu**. 65 key `podgloss.*` cũng là prose phải dịch — đừng bỏ sót.
+
+### `UmbraGlossaryLocalized()` — thứ tự tham số NGƯỢC với `Glossary()`
+
+⚠️ **Cái bẫy nguy hiểm nhất trong repo.** Có **271 lần** trong **50 file** POD.
+
+```
+[UmbraGlossaryLocalized('yomi_wan','Yomi Hell')]
+                        └───┬────┘ └────┬────┘
+                         ID realm    chữ HIỂN THỊ
+                       → KHÔNG DỊCH    → DỊCH
+```
+
+**Ngược hoàn toàn với `Glossary()`.** Xác minh từ [POD_macros.txt:105-107](princesofdarkness/data_binding/POD_macros.txt#L105-L107):
+
+```
+definition   = "UmbraGlossaryLocalized(flag,loc)"
+replace_with = "Glossary(loc, Concatenate3('umbra_realm_', flag, '_desc'))"
+```
+
+Macro đảo tham số: `flag` bị ghép thành key `umbra_realm_<flag>_desc`, còn `loc` rơi vào chỗ tham số 1 của `Glossary()` = chữ hiển thị.
+
+Bằng chứng độc lập từ chính dữ liệu: cùng một `flag` nhưng tham số 2 biến thiên tùy ngữ cảnh — chứng tỏ tham số 2 là chữ, không phải key:
+
+| `flag` | các giá trị tham số 2 đã dùng |
+|---|---|
+| `shadowlands` | `'Underworld'`, `'Limbo'`, `'Yin World'`, `'Dark Umbra'` |
+| `yomi_wan` | `'Yomi Hell'`, `'Yomi Hells'`, `'Yomi'`, `'Thousand Hells'` |
+| `astral_reaches` | `'High Umbra'`, `'Astral Umbra'` |
+
+→ Dịch tham số 2, giữ nguyên tham số 1. Sai chiều = tooltip vỡ ở 50 file, mà **phần Tự kiểm tra không phát hiện được** (số bracket và số ref vẫn khớp).
+
+Anh em cùng họ: `[UmbraGlossary('flag')]` — chỉ **một** tham số, là ID realm, **không dịch gì cả** (nó tự lấy tên mặc định của realm qua `Localize()`).
 
 ### `Select_CString()` — ngược lại với `Glossary()`
 
@@ -191,6 +239,21 @@ head -c 3 "$f" | xxd -p                # phải ra efbbbf
 ```
 
 Nếu lệch bất kỳ con số nào → đã làm hỏng một token, sửa lại trước khi lưu.
+
+### ⚠️ Ba giới hạn của cách kiểm tra này
+
+Đếm token **không đủ**. Phải tự đọc lại `git diff` để bắt ba loại lỗi sau — chúng làm mọi con số vẫn khớp:
+
+1. **Dịch sai tham số của `Glossary()` / `UmbraGlossaryLocalized()`.** `[Glossary('Diablerie','mô tả diablerie')]` vẫn là 1 bracket, 0 ref → check pass, tooltip vỡ trong game. Đây là lỗi nguy hiểm nhất ở POD.
+2. **Số tag mở < số tag đóng** ở file dùng tag ghép `#L;bold` — bình thường, không phải lỗi. Xem mục 3.
+3. **Đổi ID bên trong `'…'`** của script function: `[GetTrait('vampire')…]` → `[GetTrait('ma_ca_rong')…]` vẫn đếm ra 1 bracket.
+
+Kiểm tra thêm cho hai hàm nguy hiểm — số lượng và **thứ tự** tham số ID phải khớp bản gốc:
+
+```bash
+git diff -U0 -- "$f" | grep -oE "Glossary\([^)]*\)" | sort | uniq -c
+git diff -U0 -- "$f" | grep -oE "UmbraGlossaryLocalized\('[^']*'" | sort | uniq -c
+```
 
 > Dùng `-F` (khớp chuỗi thô) cho `\n`, `\"`, `#!` và `-E` cho phần còn lại. Đừng viết `grep -o '\\n'` — tùy shell mà backslash bị nuốt, khi đó pattern thành `n` và đếm ra **6850** thay vì **256** trên chính file ví dụ trên.
 

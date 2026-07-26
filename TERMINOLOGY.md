@@ -228,7 +228,7 @@ Không đặt từ tùy tiện ở từng file. Ba nơi này là nguồn, dịch
 
 | Nguồn | Điều khiển |
 |---|---|
-| [glossary_POD_l_english.yml](princesofdarkness/localization/english/glossary_POD_l_english.yml) | 28 shortcut `$pod_*$` / `$glossary_*$` (tham số 1 của `Glossary()` là chữ hiển thị) + 12 key `_tt` chứa nội dung tooltip, cũng phải dịch |
+| [glossary_POD_l_english.yml](princesofdarkness/localization/english/glossary_POD_l_english.yml) | **105 key**: 28 shortcut `$pod_*$` / `$glossary_*$` (tham số 1 của `Glossary()` là chữ hiển thị) + 12 key `_tt` chứa nội dung tooltip + **65 key `podgloss.*`** (22 Kuei-Jin, 43 lịch sử) là văn xuôi thuần. Tất cả đều phải dịch |
 | [custom_localization/POD_misc_custom_loc_l_english.yml](princesofdarkness/localization/english/custom_localization/POD_misc_custom_loc_l_english.yml) | `POD_splat_*` — **không chứa chữ**, chỉ trỏ `[GetTrait('vampire').GetName(...)]` |
 | [traits/](princesofdarkness/localization/english/traits/) | Tên thật của mọi splat. Dịch `trait_vampire` là đổi luôn mọi `$POD_splat_vampire$` |
 
@@ -238,20 +238,46 @@ Không đặt từ tùy tiện ở từng file. Ba nơi này là nguồn, dịch
 
 | English | Đề xuất | Ghi chú |
 |---|---|---|
-| World of Darkness | Thế Giới Bóng Tối | `pod_wod` |
-| Vampire | Ma cà rồng | `trait_vampire` |
-| Cainite / Cainites | Hậu duệ Cain | `pod_cainite(s)` |
-| Clan | **Clan** *(giữ nguyên — đã chốt)* | `pod_clan` — tránh đụng `House` = "Gia tộc" của vanilla |
-| Clan Curse | Lời nguyền Clan | `glossary_clan_curse` |
-| Discipline / Disciplines | Dị năng | `pod_discipline(s)` |
-| Vitae | Vitae *(giữ nguyên)* | `pod_vitae` — thuật ngữ Latin trong nguyên tác |
-| Embrace / Embraced | Nghi lễ Trao truyền / được Trao truyền | `pod_Embrace(d)` |
-| Diablerie | Diablerie *(giữ nguyên)* | `pod_diablerie` |
-| Torpor | Miên trạng | `pod_torpor` |
-| Kuei-Jin | Kuei-Jin *(giữ nguyên)* | `pod_kueijin` |
-| Courts of Love | Tòa Ái Tình | `glossary_courts_of_love` |
-| Osirian League | Liên minh Osiris | `glossary_osirian_league` |
+| World of Darkness | Thế Giới Bóng Tối | ✅ `pod_wod` |
+| Vampire | Ma cà rồng | `trait_vampire` — *chốt ở `traits/`, bước 3* |
+| Cainite / Cainites | Hậu duệ Cain | ✅ `pod_cainite(s)` |
+| Clan | **Clan** *(giữ nguyên — đã chốt)* | ✅ `pod_clan` — tránh đụng `House` = "Gia tộc" của vanilla |
+| Clan Curse | Lời nguyền Clan | ✅ `glossary_clan_curse` |
+| Discipline / Disciplines | Dị năng | ✅ `pod_discipline(s)` |
+| Vitae | Vitae *(giữ nguyên)* | ✅ `pod_vitae` — thuật ngữ Latin trong nguyên tác |
+| Embrace / Embraced | Nghi lễ Trao truyền / được Trao truyền | ✅ `pod_Embrace(d)` |
+| Diablerie | Diablerie *(giữ nguyên)* | ✅ `pod_diablerie` |
+| Torpor | Miên trạng | ✅ `pod_torpor` |
+| Kuei-Jin | Kuei-Jin *(giữ nguyên)* | ✅ `pod_kueijin` |
+| Courts of Love | Tòa Ái Tình | ✅ `glossary_courts_of_love` |
+| Osirian League | Liên minh Osiris | ✅ `glossary_osirian_league` |
+
+> ✅ = đã áp dụng vào file, không còn là đề xuất.
 | Khitta / Khittas | Khitta *(giữ nguyên)* | `glossary_khitta(s)` |
+
+### B2b. Đã chốt khi dịch `glossary_POD` đợt 1a (2026-07-26)
+
+Không có mục nào dưới đây tồn tại trong `base_game_vh` — đã tra và xác nhận. Tất cả **đã áp dụng vào file**, dùng bắt buộc từ đây.
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Book of Nod | Sách Nod | `glossary_clan_curse_tt` |
+| Caine | Caine *(giữ nguyên)* | danh từ riêng, B0 |
+| Antediluvian | Antediluvian *(giữ nguyên)* | B0 |
+| Matriarch | Mẫu Chủ | `glossary_courts_of_love_tt` — chức sắc Toreador, không phải tước phong kiến |
+| werecat | người mèo | `glossary_osirian_league_tt` |
+| Children of Osiris | Con Cái Osiris | bloodline ma cà rồng |
+| Disciples of Anubis | Đệ Tử Anubis | |
+| Cult of Isis | Giáo phái Isis | |
+| wizard-priest | tăng lữ pháp thuật | |
+| lineage | chi hệ | tách khỏi `Bloodline` = "Huyết thống" (B5) |
+| Sultan | Sultan *(giữ nguyên)* | ⚠️ **đi lệch khỏi base** — xem ghi chú dưới |
+| Garou, Silent Striders, Bubasti, Ashirra, Khitta, tên Clan (Lasombra, Assamite, Nosferatu, Toreador, Ventrue, Setite, True Brujah, Gangrel) | *giữ nguyên* | B0 |
+
+> ⚠️ **`Sultan` là ngoại lệ có ý thức.** `base_game_vh` dịch `sultan:0` = "Quốc vương Hồi giáo". Nhưng trong `glossary_khitta_tt`, từ này đứng cặp với `Prince` — mà `Prince` đã chốt giữ nguyên tiếng Anh (B5). Viết "Quốc vương Hồi giáo hoặc Prince" thì nửa Anh nửa Việt, vỡ giọng. Chọn giữ "Sultan" theo B0 (cặp chức sắc đi liền nhau).
+> **Phạm vi ngoại lệ: chỉ khi `Sultan` đứng cặp với `Prince`.** Nếu gặp `Sultan` một mình như tước vị phong kiến ở file khác → dùng "Quốc vương Hồi giáo" của base.
+
+> **Số nhiều gộp làm một** (theo mục 7 TRANSLATION_RULES.md — tiếng Việt không biến đổi từ): `pod_cainite`/`pod_cainites` → cùng "Hậu duệ Cain"; `pod_discipline`/`pod_disciplines` → cùng "Dị năng"; `glossary_khitta`/`glossary_khittas` → cùng "Khitta". Key vẫn giữ đủ cả hai, chỉ giá trị trùng nhau.
 
 ## B3. Thuật ngữ người sói / Fera (từ `glossary_POD_l_english.yml`)
 
