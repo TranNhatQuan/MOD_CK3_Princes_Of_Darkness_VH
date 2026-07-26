@@ -478,6 +478,41 @@ Thuật ngữ mới đặt trong các mô tả này:
 
 Tên bộ tộc Fera (`bastet`, `corax`, `kitsune`, `mokole`, `nagah`, `nuwisha`, `ratkin`, `rokea`, `ajaba`, `apis`, `camazotz`, `entomos`, `grondr`, `gurahl`) là **danh từ riêng trong nguyên tác → giữ nguyên**, giống cách base giữ tên riêng vanilla.
 
+## B4b. Thuật ngữ Fae / Changeling (từ `POD_fae_traits_l_english.yml`)
+
+Nguồn: `traits/POD_fae_traits_l_english.yml` (330 dòng, kith Fae). Không có tiền lệ nào trong `base_game_vh`. Theo B0: **giữ nguyên tiếng Anh** cho danh từ WoD lõi — dịch nghĩa các từ này (Glamour, Banality, Cantrip…) sẽ vừa dài dòng vừa dễ lệch nghĩa giữa các file.
+
+| English | Xử lý | Ghi chú |
+|---|---|---|
+| Glamour | *giữ nguyên* | năng lượng phép của Fae, tương đương Vitae/Mộ đạo nhưng không có khái niệm vanilla gần |
+| Banality | *giữ nguyên* | lực đối nghịch Glamour |
+| Kithain | *giữ nguyên* | tên gọi chung giống loài fae có tổ tiên loài người |
+| Chimera | *giữ nguyên* | sinh vật ảo tạo từ Glamour |
+| Seelie / Unseelie | *giữ nguyên* | hai Triều đình (Courts) đối lập |
+| Cantrip | *giữ nguyên* | phép thuật của Fae, gồm Art + Realm |
+| Realm | *giữ nguyên* | ✅ đã dùng: `Realm Actor Mastery` → "Tinh Thông Realm Actor" (xem bảng trait bên dưới) |
+| Art | *giữ nguyên* | trường phái phép thuật (Chicanery, Legerdemain…) |
+| Sliver | *giữ nguyên* | biến thể Art của Inanimae (Petros, Aquis, Pyros, Stratus, Verdage) |
+| Bunk | *giữ nguyên* | nghi thức triệu Glamour để đọc cantrip |
+| Arcadia | *giữ nguyên* | quê hương nguyên thủy của Fae |
+| Chrysalis | *giữ nguyên* | nghi thức "thức tỉnh" thành Changeling |
+| Dán | *giữ nguyên* | khái niệm Số phận/Định mệnh của Kithain gốc Đông Á |
+| Kwannon-jin | *giữ nguyên* | phân loại xã hội Hsien |
+| Elegbara | *giữ nguyên* | tên gọi Kithain châu Phi (Eshu) |
+| Dreaming | Cõi Mộng | ✅ dịch nghĩa — dùng trong `[UmbraGlossary('dreaming')]`, tag không dịch nhưng khi văn xuôi nhắc "the Dreaming" thì dịch "Cõi Mộng" |
+| freehold | tổ ấm | nơi trú ẩn của Changeling |
+| Patron Council | Hội đồng Bảo Trợ | ✅ `trait_patron_council` |
+
+### Tên kith (giữ nguyên toàn bộ — danh từ riêng chủng loài)
+
+Sidhe, Boggan, Clurichaun, Eshu, Ghille dhu, Oba, Nocker, Piskey, Pooka, Troll, Redcap, River Hag, Satyr, Sluagh, Swan Maiden, Wichtel, Ifrit, Lilin, Qareen, Shaytan, Biloko, Djedi, Kuino, Obambo, Okubili, Hsien (Chu-ih-yu, Chu Jung, Fu Hsi, Hanumen, Heng Po, Hou-chi, Komuko, Nyan, Suijen, Tanuki), Inanimae (Glome, Kubera, Ondine, Paroseme, Solimond, Mannikin), Domovoi, Leshii, Kikimora, Polevik, Vodyanoi, Berenginy, Bannik, Dvorovoi — tên riêng slavic/Eshu cũng giữ nguyên (Agemo, Itiyere, Orisha-Oko, Taiyewo, Iroko, Olokuta, Kehinde, Ijapa, Jakuta, Oshosi, Olu-Igbo, Sonponno).
+
+Tên Art/Sliver giữ nguyên: Chicanery, Legerdemain, Primal, Soothsay, Wayfare, Chronos, Dream-Craft, Naming, Sovereign, Infusion, Tale Craft, Aphrodesia, Kryos, Metamorphosis, Pyretics, Petros, Aquis, Pyros, Stratus, Verdage, Tieh Tan, Lin Tan, Shui Tan, Hou Tan, Di Tan, Nei Tan.
+
+### Mẫu câu đã dùng
+
+`trait_realm_actor: "Realm Actor Mastery"` → **"Tinh Thông Realm Actor"** (mẫu: `Tinh Thông Realm <Tên>` cho 6 Realm; `Art [Tên] Mastery` → **"Tinh Thông Art [Tên]"**; hậu tố `_advanced` giữ cùng mẫu "Tinh Thông").
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
