@@ -1,0 +1,7023 @@
+﻿namespace = PODcanon_chars
+
+PODcanon_chars.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.1.t
+	desc = PODcanon_chars.1.desc
+	theme = toreador 
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	
+	immediate = {
+		show_as_tooltip = {
+			add_character_modifier = skilled_infiltrator_modifier
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.1.a
+
+		custom_tooltip = PODcanon_chars.helena
+
+	}
+}
+
+
+PODcanon_chars.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.2.t
+	desc = PODcanon_chars.2.desc
+	theme = nosferatu 
+	left_portrait = {
+		character = root
+		animation = fear
+		}
+	
+	
+	option = {
+		name = PODcanon_chars.2.a
+
+		add_character_modifier = absalon_svantevit_reborn		
+		give_nickname = nick_svantevit_reborn
+		set_character_faith = faith:wrath
+
+		POD_achiev_absalon_check = yes
+	}
+	
+	option = {
+		name = PODcanon_chars.2.b
+
+		if = {
+			limit = {
+				NOT = { has_trait = bloodsorcery }
+				NOT = { has_trait = bloodsorceryadvanced }
+			}
+			assign_bloodsorcery_effect = yes
+			if = {
+				limit = { has_any_bloodmagic_path = no }
+				add_character_flag = has_thaumaturgy_bloodmagic_flag
+			}
+		}
+		
+		add_choleric_lifestyle_xp = 1000
+		add_melancholy_lifestyle_xp = 1000
+		add_phlegmatic_lifestyle_xp = 1000
+		add_sanguine_lifestyle_xp = 1000			
+		
+	}	
+}
+
+
+PODcanon_chars.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.3.t
+	desc = PODcanon_chars.3.desc
+	theme = ventrue 
+	left_portrait = {
+		character = root
+		animation = flirtation_left
+		}
+
+	right_portrait = {
+		character = character:790512
+		animation = love
+		}			
+		
+	trigger = { 
+		character:790512 = {
+			is_alive = yes
+			is_ai = yes
+			}
+	}	
+		
+	immediate = {
+	if = {
+		limit = {
+			character:790512 = {
+				is_married = yes
+				}
+		}
+		character:790512 = {
+			primary_spouse = {
+				save_scope_as = kemintirihusband
+				}
+		}
+		}
+		
+	if = {
+		limit = {
+			character:790512 = {
+				is_married = yes
+				}
+		}
+		character:790512 = { divorce = scope:kemintirihusband }
+		}
+		
+	if = {
+		limit = {
+			character:505071 = {
+				is_married = yes
+				}
+		}
+		character:505071 = {
+			primary_spouse = {
+				save_scope_as = mithraswife
+				}
+		}
+		}
+		
+	if = {
+		limit = {
+			character:505071 = {
+				is_married = yes
+				}
+		}
+		character:505071 = { divorce = scope:mithraswife }
+		}	
+		
+		if = {
+			limit = {
+				character:790512 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790512 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790512	
+	}
+	
+	option = {
+		name = PODcanon_chars.3.a
+		
+		add_character_modifier = serpent_garden_modifier	
+		
+		marry = character:790512
+		
+		set_relation_soulmate = { reason = soulmate_professed_love target = character:790512 }
+		
+		custom_tooltip = PODcanon_chars.mithras	
+	}
+	
+}
+
+PODcanon_chars.4 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.4.t
+	desc = PODcanon_chars.4.desc
+	theme = tzimisce 
+	left_portrait = {
+		character = root
+		animation = anger
+		}
+
+	right_portrait = {
+		character = scope:recipient 
+		animation = fear
+		}			
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.4.a
+		
+		duel = {
+			skill = martial
+			target = scope:recipient
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = PODcanon_chars.4.effect.success.desc
+				
+				add_legitimacy = 5
+				
+				send_interface_toast = {
+					title = PODcanon_chars.4.success
+					left_icon = root
+					right_icon = scope:recipient
+					scope:recipient = { 
+						add_character_modifier = {
+							modifier = cowed_by_trial_modifier
+							years = 10
+						}
+					}
+				}								
+				
+			}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = PODcanon_chars.4.critical.failure.effect.desc
+					
+					add_legitimacy = -5
+					
+				send_interface_toast = {
+					title = PODcanon_chars.4.failure
+					left_icon = root
+					right_icon = scope:recipient
+					scope:recipient = { 
+						add_character_modifier = {
+							modifier = emboldened_by_trial_modifier
+							years = 10
+						}
+					}
+				}					
+								
+				}
+			}		
+		
+
+	}
+	
+	option = {
+		name = PODcanon_chars.4.b
+	
+	}	
+	
+}
+
+PODcanon_chars.5 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.5.t
+	desc = PODcanon_chars.5.desc
+	theme = tremere 
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+		}
+
+	right_portrait = {
+		character = scope:recipient 
+		animation = fear
+		}			
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.5.a
+			
+		add_prestige = 200
+		
+		add_tyranny = 5
+		
+		scope:recipient = { 
+			add_character_modifier = {
+				modifier = tremere_politics_modifier
+				years = 1
+					}
+				}		
+
+	}
+	
+	option = {
+		name = PODcanon_chars.5.b
+		
+		add_piety = 100
+		
+		add_tyranny = 5
+		
+		scope:recipient = { 
+			add_character_modifier = {
+				modifier = tremere_politics_modifier
+				years = 1
+					}
+				}		
+	
+	}	
+	
+	option = {
+		name = PODcanon_chars.5.c
+		
+		add_gold = 100
+		
+		add_tyranny = 5
+		
+		scope:recipient = { 
+			add_character_modifier = {
+				modifier = tremere_politics_modifier
+				years = 5
+					}
+				}		
+	
+	}	
+
+	option = {
+		name = PODcanon_chars.5.d
+	
+	}		
+	
+}
+
+PODcanon_chars.6 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.6.t
+	desc = PODcanon_chars.6.desc
+	theme = banu_haqim 
+	left_portrait = {
+		character = scope:ip_sorcerer
+		animation = personality_rational
+		}
+
+	right_portrait = {
+		character = scope:ip_warrior 
+		animation = personality_bold
+		}	
+
+	lower_center_portrait = {
+		character = scope:ip_vizir
+		animation = personality_honorable
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+			create_character = {
+			name = "Hasan" 
+			age = 38 
+			gender = male
+			dynasty = none
+			martial = 12
+			learning = 10
+			prowess = 20
+			faith = faith:tariqelhaqim
+			culture = culture:bedouin
+			trait = education_martial_prowess_4
+			trait = vampire
+			trait = assamite
+			trait = vampgeneration9
+			trait = patient
+			trait = content
+			trait = brave
+			trait = potence
+			trait = celerity
+			trait = fortitude
+			trait = lifestyle_blademaster
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = ip_warrior
+		}	
+		
+		create_character = {
+			name = "Adila" 
+			age = 29 
+			gender = female
+			dynasty = none
+			diplomacy = 10
+			learning = 10
+			stewardship = 11
+			faith = faith:tariqelhaqim
+			culture = culture:levantine
+			trait = education_diplomacy_4
+			trait = vampire
+			trait = assamite
+			trait = vampgeneration8
+			trait = gregarious
+			trait = content
+			trait = diligent
+			trait = diplomat
+			trait = auspex
+			trait = celerity
+			trait = presence
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = ip_vizir
+		}	
+
+		create_character = {
+			name = "Mubarak" 
+			age = 45 
+			gender = male
+			dynasty = none
+			learning = 10
+			intrigue = 10
+			faith = faith:tariqelhaqim
+			culture = culture:persian
+			trait = education_learning_4
+			trait = vampire
+			trait = assamite
+			trait = vampgeneration10			
+			trait = shy
+			trait = temperate
+			trait = content
+			trait = lifestyle_mystic
+			trait = bloodsorcery
+			trait = auspex
+			trait = fortitude
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = ip_sorcerer
+		}			
+	
+	}
+	
+	option = {
+		name = PODcanon_chars.6.a
+			
+		add_prestige = 500
+		
+		add_gold = 150
+		
+		add_pressed_claim = title:k_midnight_crescent
+		
+		add_courtier = scope:ip_sorcerer
+		add_courtier = scope:ip_vizir
+		add_courtier = scope:ip_warrior	
+	}
+		
+}
+
+PODcanon_chars.7 = {
+	orphan = yes
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.7.t
+	desc = PODcanon_chars.7.desc
+	theme = malkavian 
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+		}
+
+	right_portrait = {
+		character = scope:target
+		animation = worry
+		}			
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.7.a
+		
+		scope:target = { 
+			add_character_modifier = {
+				modifier = confused_by_roque_modifier
+				years = 5
+					}
+				}		
+
+	}
+	
+	option = {
+		name = PODcanon_chars.7.b
+		
+		add_stress = medium_stress_loss		
+	
+	}	
+	
+	option = {
+		name = PODcanon_chars.7.c
+		
+		add_prestige = 50		
+	
+	}	
+	
+	
+}
+
+PODcanon_chars.8 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.8.t
+	desc = PODcanon_chars.8.desc
+	theme = lasombra 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.8.a
+		
+		add_prestige = 500
+		
+		custom_tooltip = PODcanon_chars.montano
+		
+		add_character_modifier = restored_autorithy_modifier	
+
+	}
+	
+}
+
+
+PODcanon_chars.9 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.9.t
+	desc = PODcanon_chars.9.desc
+	theme = setite_coa 
+	left_portrait = {
+		character = root
+		animation = flirtation
+		}
+
+	right_portrait = {
+		character = scope:recipient 
+		animation = worry
+		}			
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.9.a
+		
+		duel = {
+			skill = diplomacy
+			target = scope:recipient
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = PODcanon_chars.9.effect.success.desc
+				
+				send_interface_toast = {
+					title = PODcanon_chars.9.success
+					left_icon = root
+					right_icon = scope:recipient
+					scope:recipient = { 
+						set_character_faith = faith:viaset
+						}
+					}
+				}								
+				
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = PODcanon_chars.9.critical.failure.effect.desc
+					
+				send_interface_toast = {
+					title = PODcanon_chars.9.failure
+					left_icon = root
+					right_icon = scope:recipient
+					scope:actor = { 
+						add_piety = -100
+						add_prestige = -100
+					}
+				}					
+								
+				}
+			}		
+		
+
+	}
+	
+	option = {
+		name = PODcanon_chars.9.b
+	
+	}	
+	
+}
+
+PODcanon_chars.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.10.t
+	desc = PODcanon_chars.10.desc
+	theme = torture 
+	left_portrait = {
+		character = root
+		animation = stress
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.10.a		
+		
+		custom_tooltip = PODcanon_chars.petaniqua
+		
+		hidden_effect = {
+		random_list = {
+			50 = {	
+				trigger_event = {
+						id = PODcanon_chars.11
+						days = { 5 6 }
+					}
+				}
+			20 = {	
+				trigger_event = {
+						id = PODcanon_chars.12
+						days = { 5 6 }
+					}
+				}
+			10 = {	
+				trigger_event = {
+						id = PODcanon_chars.13
+						days = { 5 6 }
+					}
+				}	
+			1 = {	
+				trigger_event = {
+						id = PODcanon_chars.14
+						days = { 5 6 }
+					}
+				}	
+			}
+		}		
+	}
+	
+	option = {
+		name = PODcanon_chars.10.b
+	
+	}	
+	
+}
+
+PODcanon_chars.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.11.t
+	desc = PODcanon_chars.11.desc
+	theme = torture 
+	left_portrait = {
+		character = root
+		animation = fear
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.11.a		
+		
+		add_character_modifier = {
+			modifier = black_spiraled_modifier
+			years = 5
+			}
+	}	
+	
+}
+
+PODcanon_chars.12 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.12.t
+	desc = PODcanon_chars.12.desc
+	theme = torture 
+	left_portrait = {
+		character = root
+		animation = stress
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.12.a		
+		
+		add_stress = medium_stress_loss
+	}	
+	
+}
+
+PODcanon_chars.13 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.13.t
+	desc = PODcanon_chars.13.desc
+	theme = torture 
+	left_portrait = {
+		character = root
+		animation = worry
+		}		
+		
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.13.a		
+		
+		add_stress = medium_stress_gain
+		
+		add_character_modifier = {
+			modifier = black_spiraled_good_modifier
+			years = 5
+			}		
+	}	
+	
+}
+
+
+PODcanon_chars.14 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.14.t
+	desc = PODcanon_chars.14.desc
+	theme = torture 
+	left_portrait = {
+		character = root
+		animation = happiness
+		}
+
+	right_portrait = {
+		character = scope:ip_alexander
+		animation = admiration
+		}	
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+		create_character = {
+			name = "Alexander" 
+			age = 18 
+			gender = male
+			dynasty = none
+			stewardship = 10
+			diplomacy = 10
+			learning = 10
+			intrigue = 6
+			martial = 10
+			prowess = 20
+			faith = faith:innocence
+			culture = culture:macedonian
+			trait = education_martial_5
+			trait = mortal
+			trait = ambitious
+			trait = diligent
+			trait = brave
+			trait = strategist
+			trait = august
+			trait = aggressive_attacker 
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = ip_alexander
+		}	
+		character:505082 = {
+			save_scope_as = ventrue_alexander
+		}
+		scope:ip_alexander = {
+			copy_inheritable_appearance_from = scope:ventrue_alexander	
+			give_nickname = nick_the_great
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.14.a			
+		
+		add_courtier = scope:ip_alexander
+		
+		add_character_flag = foundalexander
+		
+		custom_tooltip = PODcanon_chars.petaniqua2
+	}
+		
+}
+
+PODcanon_chars.15 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.15.t
+	desc = PODcanon_chars.15.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = disapproval
+		}
+
+	right_portrait = {
+		character = scope:recipient
+		animation = fear
+		}	
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.15.a			
+		
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = pressure_on_modifier
+				years = 5
+				}
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.15.b		
+		
+		scope:recipient = {
+			if = {
+				limit = {
+					has_trait = content
+					}
+				remove_trait = content
+				}
+			if = {
+				limit = {
+					NOT = { has_trait = ambitious }
+				}
+				add_trait = ambitious
+			}
+			add_prestige = 100
+			add_dread = 20
+		}
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.15.c		
+		
+		scope:recipient = {
+			set_relation_rival = { reason = rival_historical target = character:505050 }
+		}
+		
+		add_prestige = 200
+		add_dread = 20
+		
+		custom_tooltip = PODcanon_chars.hardestadt_tooltip
+	}		
+}
+
+
+PODcanon_chars.16 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.16.t
+	desc = PODcanon_chars.16.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+
+	right_portrait = {
+		character = character:699999
+		animation = personality_bold
+		}	
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.16.a			
+		
+		add_learning_lifestyle_xp = 100
+	}		
+}
+
+PODcanon_chars.17 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.17.t
+	desc = PODcanon_chars.17.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+
+	right_portrait = {
+		character = character:699999
+		animation = personality_bold
+		}	
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.17.a			
+		
+		add_stress = medium_stress_loss
+	}		
+}
+
+PODcanon_chars.18 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.18.t
+	desc = PODcanon_chars.18.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+
+	right_portrait = {
+		character = character:699999
+		animation = personality_bold
+		}	
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.18.a			
+		
+		add_prowess_skill = 3
+		
+		scope:recipient = {
+			add_prowess_skill = 3
+			}
+	}		
+}
+
+PODcanon_chars.19 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.19.t
+	desc = PODcanon_chars.19.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+		hidden_effect = {
+			POD_get_base_martial_effect = yes
+			POD_get_base_diplomacy_effect = yes
+			POD_get_base_intrigue_effect = yes
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.19.a	
+
+		trigger = {
+			scope:base_martial < 26
+			character:790015 = { is_alive = yes }
+			}
+		
+		add_martial_skill = 1
+		
+		add_stress = minor_stress_gain
+		
+	}
+
+	option = {
+		name = PODcanon_chars.19.b
+
+		trigger = {
+			scope:base_diplomacy < 21
+			character:790962 = { is_alive = yes }
+			}
+		
+		add_diplomacy_skill = 1
+		
+		add_stress = minor_stress_gain
+		
+	}	
+	
+	option = {
+		name = PODcanon_chars.19.c
+
+		trigger = {
+			scope:base_intrigue < 21
+			character:790962 = { is_alive = yes }
+			}
+		
+		add_intrigue_skill = 1
+		
+		add_stress = minor_stress_gain
+		
+	}
+
+	option = {
+		name = PODcanon_chars.19.d
+		
+	}	
+}
+
+PODcanon_chars.20 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.20.t
+	desc = PODcanon_chars.20.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = pain
+		}
+
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.20.a	
+		
+		remove_character_modifier = good_moncada_modifier
+		
+		add_character_modifier = {
+			modifier = bad_moncada_modifier
+			years = 50
+			}
+		
+		add_stress = massive_stress_gain
+		
+	}
+	
+}
+
+
+PODcanon_chars.21 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.21.t
+	desc = PODcanon_chars.21.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	right_portrait = {
+		character = character:790138
+		animation = fear
+		}		
+		
+		
+	trigger = { 
+		character:790138 = {
+			is_alive = yes
+			has_title = title:c_ile_de_france
+			}
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.21.a	
+		
+		custom_tooltip = salianna_intro_tooltip	
+		
+		remove_short_term_gold = 50
+		
+		add_stress = minor_stress_gain
+		
+		trigger_event = {
+			id = PODcanon_chars.22
+			days = 15
+			}		
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.21.b	
+		
+		character:790138 = {
+			add_opinion = {
+				target = root
+				opinion = 100
+				modifier = grateful_opinion
+				}
+			}		
+		
+		custom_tooltip = salianna_exit_tooltip	
+		
+	}	
+	
+}
+
+PODcanon_chars.22 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.22.t
+	desc = PODcanon_chars.22.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	right_portrait = {
+		character = character:791285
+		animation = disapproval
+		}		
+		
+		
+	trigger = { 
+		character:790138 = {
+			is_alive = yes
+			has_title = title:c_ile_de_france
+			}
+		character:791285 = {
+			is_alive = yes
+			}			
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.22.a	
+		
+		set_relation_rival = { reason = rival_historical target = character:791285 }
+		
+		trigger_event = {
+			id = PODcanon_chars.23
+			days = 15
+			}		
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.22.b	
+		
+		character:790138 = {
+			add_opinion = {
+				opinion = 100
+				target = root
+				modifier = grateful_opinion
+				}
+			}		
+		
+		custom_tooltip = salianna_exit_tooltip	
+		
+	}	
+	
+}
+
+PODcanon_chars.23 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.23.t
+	desc = PODcanon_chars.23.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	right_portrait = {
+		character = character:790138
+		animation = fear
+		}			
+		
+		
+	trigger = { 
+		character:790138 = {
+			is_alive = yes
+			has_title = title:c_ile_de_france
+			}			
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.23.a	
+				
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	
+		title:c_ile_de_france = {
+			change_title_holder = {
+				holder = character:505072
+				change = scope:change
+				take_baronies = yes
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change
+	
+	}
+	
+	option = {
+		name = PODcanon_chars.23.b			
+		
+		set_relation_rival = { reason = rival_historical target = character:790138 }	
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	
+		title:c_ile_de_france = {
+			change_title_holder = {
+				holder = character:505072
+				change = scope:change
+				take_baronies = yes
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	
+		change_diarchy_swing = -20
+	}	
+	
+}
+
+PODcanon_chars.24 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.24.t
+	desc = PODcanon_chars.24.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+		}
+		
+	right_portrait = {
+		character = scope:recipient
+		animation = personality_rational
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.24.a	
+		
+		trigger = { 
+			scope:recipient = {
+				has_trait = trusting
+				has_trait = gregarious
+				}
+			}
+			
+		custom_tooltip = rafael_trusting_tooltip
+
+		add_gold = 150
+		add_prestige = 50	
+	}
+	
+	option = {
+		name = PODcanon_chars.24.b	
+		
+		trigger = { 
+			scope:recipient = {
+				has_trait = compassionate
+				}
+			}
+			
+		custom_tooltip = rafael_compassionate_tooltip
+
+		add_gold = 200
+	}
+
+	option = {
+		name = PODcanon_chars.24.c
+		
+		trigger = { 
+			scope:recipient = {
+				has_trait = zealous
+				}
+			}
+			
+		custom_tooltip = rafael_zealous_tooltip
+
+		add_piety = 200
+	}
+
+	option = {
+		name = PODcanon_chars.24.d
+		
+		trigger = { 
+			scope:recipient = {
+				has_trait = diligent
+				has_trait = patient
+				}
+			}
+			
+		custom_tooltip = rafael_diligent_tooltip
+
+		add_stewardship_lifestyle_xp = 100
+	}
+
+	option = {
+		name = PODcanon_chars.24.e
+		
+		trigger = { 
+			scope:recipient = {
+				has_trait = brave
+				has_trait = stubborn
+				}
+			}
+			
+		custom_tooltip = rafael_brave_tooltip
+
+		add_martial_lifestyle_xp = 100
+	}
+
+	option = {
+		name = PODcanon_chars.24.f
+		
+		trigger = { 
+			scope:recipient = {
+			OR = {
+				has_trait = ambitious
+				has_trait = arrogant
+				}
+				}
+			}
+			
+		custom_tooltip = rafael_ambitious_tooltip
+
+		add_diplomacy_lifestyle_xp = 100
+	}	
+
+	option = {
+		name = PODcanon_chars.24.g
+		
+		trigger = { 
+			scope:recipient = {
+			OR = {
+				has_trait = content
+				has_trait = humble
+				}
+				}
+			}
+			
+		custom_tooltip = rafael_content_tooltip
+
+		add_stress = medium_stress_loss
+	}	
+
+	option = {
+		name = PODcanon_chars.24.h
+		
+		trigger = { 
+			scope:recipient = {
+			OR = {
+				has_trait = deceitful
+				has_trait = paranoid
+				}
+				}
+			}
+			
+		custom_tooltip = rafael_deceitful_tooltip
+
+		POD_masquerade_exposure_decrease_effect = yes		
+	}
+
+	option = {
+		name = PODcanon_chars.24.i
+		
+		trigger = { 
+			scope:recipient = {
+			OR = {
+				has_trait = cynical
+				has_trait = callous
+				}
+				}
+			}
+			
+		custom_tooltip = rafael_cynical_tooltip
+
+		add_intrigue_lifestyle_xp = 100		
+	}	
+
+	option = {
+		name = PODcanon_chars.24.j
+			
+		custom_tooltip = rafael_end_tooltip
+	
+	}	
+}	
+
+
+PODcanon_chars.25 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.25.t
+	desc = PODcanon_chars.25.desc
+	theme = brujah_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.25.a	
+			
+		custom_tooltip = menele_victory_tooltip
+	}
+
+}			
+	
+PODcanon_chars.26 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.26.t
+	desc = PODcanon_chars.26.desc
+	theme = brujah_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	right_portrait = {
+		character = scope:recipient
+		animation = personality_content
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.26.a	
+		
+		trigger = { 
+			scope:recipient = {
+				NOT = {
+					has_faith = faith:viaentelechia
+				}
+			}
+		}
+		
+		scope:recipient = {
+				set_character_faith = faith:viaentelechia
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.26.b	
+		
+		scope:recipient = {
+				add_learning_lifestyle_xp = 100
+			}
+		add_learning_lifestyle_xp = 100	
+	}
+
+	option = {
+		name = PODcanon_chars.26.c
+		
+		scope:recipient = {
+				add_stress = medium_stress_loss
+			}
+			
+		add_stress = medium_stress_loss
+
+	}
+
+}	
+
+PODcanon_chars.27 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.27.t
+	desc = PODcanon_chars.27.desc
+	theme = brujah_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.27.a	
+		
+		trigger = { 
+			character:791051 = {
+				is_alive = yes
+				}
+		}
+		
+		custom_tooltip = antiochus_alive_tooltip
+		
+		add_character_modifier = {
+			modifier = full_idealist_support_modifier
+			years = 5
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.27.b	
+		
+		add_character_modifier = {
+			modifier = idealist_support_modifier
+			years = 5
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.27.c
+
+	}
+
+	option = {
+		name = PODcanon_chars.27.d
+		
+		add_character_modifier = {
+			modifier = pragmatist_support_modifier
+			years = 5
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.27.e
+		
+		trigger = { 
+			character:790553 = {
+				is_alive = yes
+				}
+		}
+		
+		custom_tooltip = maureen_alive_tooltip
+		
+		add_character_modifier = {
+			modifier = full_pragmatist_support_modifier
+			years = 5
+			}
+	}	
+}
+
+PODcanon_chars.28 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.28.t
+	desc = PODcanon_chars.28.desc
+	theme = cappadocian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.28.a	
+		
+		trigger = { 
+			character:790141 = {
+				is_alive = yes
+				}
+		}
+		
+		custom_tooltip = claudius_alive_tooltip
+		
+		add_character_modifier = {
+			modifier = claudius_support_modifier
+			years = 5
+			}
+			
+		character:790140 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}	
+			
+		character:790144 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}			
+	}
+	
+	option = {
+		name = PODcanon_chars.28.b	
+		
+		trigger = { 
+			character:790140 = {
+				is_alive = yes
+				}
+		}
+		
+		custom_tooltip = ambrogino_alive_tooltip
+		
+		add_character_modifier = {
+			modifier = ambrogino_support_modifier
+			years = 5
+			}
+			
+		character:790141 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}	
+			
+		character:790144 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}			
+	}
+	
+	option = {
+		name = PODcanon_chars.28.c
+		
+		trigger = { 
+			character:790144 = {
+				is_alive = yes
+				}
+		}
+		
+		custom_tooltip = ignazio_alive_tooltip
+		
+		add_character_modifier = {
+			modifier = ignazio_support_modifier
+			years = 5
+			}
+			
+		character:790140 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}	
+			
+		character:790141 = {
+			add_opinion = {
+				target = root
+				opinion = -25
+				modifier = ignored_my_plan_opinion
+				}
+			}			
+	}
+	
+	option = {
+		name = PODcanon_chars.28.d
+
+	}
+
+}
+
+PODcanon_chars.29 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.29.t
+	desc = PODcanon_chars.29.desc
+	theme = cappadocian_coa 
+	left_portrait = {
+		character = root
+		animation = fear
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.29.a	
+		
+		add_stress = medium_stress_gain
+
+		add_prestige = 250	
+	}
+	
+	option = {
+		name = PODcanon_chars.29.b	
+		
+		add_stress = massive_stress_gain
+		
+		add_prestige = 600			
+	}
+	
+	option = {
+		name = PODcanon_chars.29.c
+		
+		add_stress = medium_stress_loss
+		
+		add_prestige = -100		
+	}
+	
+}
+
+
+PODcanon_chars.30 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.30.t
+	desc = PODcanon_chars.30.desc
+	theme = cappadocian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.30.a	
+		
+		add_learning_lifestyle_xp = 150
+	}
+	
+	option = {
+		name = PODcanon_chars.30.b	
+		
+		add_diplomacy_lifestyle_xp = 150			
+	}
+	
+	option = {
+		name = PODcanon_chars.30.c
+		
+		add_intrigue_lifestyle_xp = 150	
+	}
+	
+}
+
+PODcanon_chars.31 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.31.t
+	desc = PODcanon_chars.31.desc
+	theme = cappadocian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_content
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.31.a	
+		
+		add_phlegmatic_lifestyle_xp = 150
+		add_melancholy_lifestyle_xp = 150
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.31.b	
+		
+		add_piety = 150	
+
+		POD_masquerade_exposure_increase_effect = yes
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.31.c
+		
+		POD_masquerade_exposure_decrease_effect = yes
+	}
+	
+}
+
+
+PODcanon_chars.32 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.32.t
+	desc = PODcanon_chars.32.desc
+	theme = cappadocian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_callous
+		}
+	
+	
+	option = {
+		name = PODcanon_chars.32.a
+
+		add_character_modifier = kupala_avatar_modifier
+		
+		give_nickname = nick_avatar_kupala
+		
+		custom_tooltip = vampire_demonhood_tt
+		
+		add_choleric_lifestyle_xp = 1000
+		add_melancholy_lifestyle_xp = 1000
+		add_phlegmatic_lifestyle_xp = 1000
+		add_sanguine_lifestyle_xp = 1000	
+
+		spawn_army = {
+			name = event_troop_default_name
+			#levies = 1500
+			men_at_arms = {
+				type = demons
+				stacks = 10
+				}
+			men_at_arms = {
+				type = lucifergia
+				stacks = 10
+				}				
+				location = root.capital_province
+				origin = root.capital_province
+				inheritable = no
+			}				
+	}
+}	
+
+PODcanon_chars.33 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.33.t
+	desc = PODcanon_chars.33.desc
+	theme = tzimisce_coa 
+	left_portrait = {
+		character = root
+		animation = fear
+		}
+	
+	
+	option = {
+		name = PODcanon_chars.33.a
+		
+		give_nickname = nick_angel_caine
+		
+		change_first_name = "Sascha_Vykos"
+		
+		set_character_faith = faith:viamutationis
+		
+		if = {
+			limit = {
+				has_trait = deceitful
+				}
+			remove_trait = deceitful
+			}
+		
+		if = {
+			limit = {
+				NOT = { has_trait = sadistic }
+				NOT = { has_trait = callous }
+				NOT = { has_trait = compassionate }
+				}
+			 add_trait = sadistic
+		}
+		
+		if = {
+			limit = {
+				NOT = { has_trait = vicissitudeadvanced }
+				}
+			assign_vicissitude_effect = yes
+		}
+		
+		
+		add_choleric_lifestyle_xp = 1000
+		add_melancholy_lifestyle_xp = 1000
+		add_phlegmatic_lifestyle_xp = 1000
+		add_sanguine_lifestyle_xp = 1000	
+			
+	}
+	
+	option = {
+		name = PODcanon_chars.33.b	
+		
+		add_stress = massive_stress_gain
+		
+		add_piety = 500
+
+		add_learning_lifestyle_xp = 1000
+		
+		add_learning_skill = 5
+	}
+}	
+
+
+PODcanon_chars.34 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.34.t
+	desc = PODcanon_chars.34.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+		
+	right_portrait = {
+		character = character:505088
+		animation = fear
+		}		
+		
+		
+	trigger = { 
+		character:505088 = {
+			is_alive = yes
+			has_title = title:e_midgard
+			}
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.34.a	
+		
+		custom_tooltip = brunhilde_intro_tooltip	
+		
+		add_piety = -100
+		
+		add_stress = minor_stress_gain
+		
+		trigger_event = {
+			id = PODcanon_chars.35
+			days = 15
+			}		
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.34.b	
+		
+		character:505088 = {
+			add_opinion = {
+				target = root
+				opinion = 100
+				modifier = grateful_opinion
+				}
+			}		
+		
+		add_piety = 50
+		
+		custom_tooltip = brunhilde_exit_tooltip	
+		
+	}	
+
+}
+
+PODcanon_chars.35 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.35.t
+	desc = PODcanon_chars.35.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+		
+	right_portrait = {
+		character = character:790120
+		animation = disapproval
+		}		
+		
+		
+	trigger = { 
+		character:505088 = {
+			is_alive = yes
+			has_title = title:e_midgard
+			}
+		character:790120 = {
+			is_alive = yes
+			}			
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.35.a	
+		
+		set_relation_rival = { reason = rival_historical target = character:790120 }
+		
+		trigger_event = {
+			id = PODcanon_chars.36
+			days = 15
+			}		
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.35.b	
+		
+		character:790138 = {
+			add_opinion = {
+				opinion = 100
+				target = root
+				modifier = grateful_opinion
+				}
+			}		
+		add_piety = 50
+			
+		custom_tooltip = brunhilde_exit_tooltip	
+		
+	}	
+	
+}
+
+PODcanon_chars.36 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.36.t
+	desc = PODcanon_chars.36.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+		
+	right_portrait = {
+		character = character:505088
+		animation = worry
+		}			
+		
+		
+	trigger = { 
+		character:505088 = {
+			is_alive = yes
+			has_title = title:e_midgard
+			}			
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.36.a	
+			
+		set_relation_rival = { reason = rival_historical target = character:505088 }
+			
+		add_prestige = 200
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	
+		title:e_midgard = {
+			change_title_holder = {
+				holder = character:790270
+				change = scope:change
+				take_baronies = yes
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change		
+		
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		
+		character:505088 = {
+			change_liege = {
+				liege = root
+				change = scope:change
+				}
+			}
+		resolve_title_and_vassal_change = scope:change
+	
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.36.b			
+		
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	
+		title:e_midgard = {
+			change_title_holder = {
+				holder = character:790270
+				change = scope:change
+				take_baronies = yes
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change		
+		
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		
+		character:505088 = {
+			change_liege = {
+				liege = root
+				change = scope:change
+				}
+			}
+		resolve_title_and_vassal_change = scope:change
+	
+		
+	}	
+	
+}
+
+
+PODcanon_chars.37 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.37.t
+	desc = PODcanon_chars.37.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = root
+		animation = marshal
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.37.a	
+			
+		add_gold = 50
+			
+		add_prestige = 50
+		
+		add_character_modifier = {
+			modifier = red_thor_weakened_modifier
+			years = 5
+		}
+		
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.37.b
+			
+		add_gold = 100
+			
+		add_prestige = 100
+		
+		add_character_modifier = {
+			modifier = red_thor_depleted_modifier
+			years = 5
+		}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.37.c
+			
+		add_gold = 200
+			
+		add_prestige = 200
+		
+		add_character_modifier = {
+			modifier = red_thor_empty_modifier
+			years = 5
+		}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.37.d
+
+	}
+}
+
+
+PODcanon_chars.38 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.38.t
+	desc = PODcanon_chars.38.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.38.a	
+			
+		add_piety = -50
+			
+		
+		custom_tooltip = louhi_small_shades_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = shades
+					men_at_arms = {
+						type = shades
+						stacks = 1
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.38.b
+			
+		add_piety = -100
+			
+		
+		custom_tooltip = louhi_medium_shades_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = shades
+					men_at_arms = {
+						type = shades
+						stacks = 2
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.38.c
+			
+		add_piety = -150
+			
+		
+		custom_tooltip = louhi_high_shades_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = shades
+					men_at_arms = {
+						type = shades
+						stacks = 3
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.38.d
+
+	}
+}
+
+
+PODcanon_chars.39 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.39.t
+	desc = PODcanon_chars.39.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = fear
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.39.a	
+		
+		add_stress = medium_stress_gain
+
+		add_piety = 250	
+	}
+	
+	option = {
+		name = PODcanon_chars.39.b	
+		
+		add_stress = massive_stress_gain
+		
+		add_piety = 500			
+	}
+	
+	option = {
+		name = PODcanon_chars.39.c
+		
+		add_stress = medium_stress_loss
+		
+		add_piety = -100		
+	}
+	
+}
+
+
+PODcanon_chars.40 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.40.t
+	desc = PODcanon_chars.40.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.40.a	
+		
+		add_learning_lifestyle_xp = 150
+	}
+	
+	option = {
+		name = PODcanon_chars.40.b	
+		
+		add_diplomacy_lifestyle_xp = 150			
+	}
+	
+	option = {
+		name = PODcanon_chars.40.c
+		
+		add_faith_lifestyle_xp = 150	
+	}
+	
+}
+
+PODcanon_chars.41 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.41.t
+	desc = PODcanon_chars.41.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_content
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.41.a	
+		
+		add_prestige = 50
+		add_melancholy_lifestyle_xp = 100
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.41.b	
+		
+		add_piety = 150	
+
+		POD_masquerade_exposure_increase_effect = yes
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.41.c
+		
+		add_piety = -50
+		
+		POD_masquerade_exposure_decrease_effect = yes
+	}
+	
+}
+
+PODcanon_chars.42 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.42.t
+	desc = PODcanon_chars.42.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.42.a	
+		
+		add_character_modifier = {
+			modifier = zettler_beast_of_war_modifier
+			years = 5
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.42.b	
+		
+		add_character_modifier = {
+			modifier = zettler_eater_of_souls_modifier
+			years = 5
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.42.c
+		
+		add_character_modifier = {
+			modifier = zettler_defiler_modifier
+			years = 5
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.42.d
+		
+	}
+		
+}
+
+PODcanon_chars.43 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.43.t
+	desc = PODcanon_chars.43.desc
+	theme = nosferatu_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+		
+	trigger = { 		
+	}	
+
+		
+	immediate = {
+		random_courtier = {
+			save_scope_as = victim1
+		}
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+			}
+			save_scope_as = victim2
+		}	
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+				NOT = { this = scope:victim2 }
+			}
+			save_scope_as = victim3
+		}	
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+				NOT = { this = scope:victim2 }
+				NOT = { this = scope:victim3 }
+			}
+			save_scope_as = victim4
+		}
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+				NOT = { this = scope:victim2 }
+				NOT = { this = scope:victim3 }
+				NOT = { this = scope:victim4 }
+			}
+			save_scope_as = victim5
+		}				
+	}
+	
+	option = {
+		name = PODcanon_chars.43.a	
+		
+		trigger = {
+			capital_county = { 
+				development_level > 5
+			}
+		}	
+
+		custom_tooltip = lukas_sacrifice_dev_tt	
+		
+		add_investiture_lifestyle_xp = 250
+		
+		capital_county = {
+			change_development_level = -5
+		}	
+
+		trigger_event = {
+			id = PODcanon_chars.43
+			years = 5
+		}			
+	}
+	
+	option = {
+		name = PODcanon_chars.43.b	
+		
+		scope:victim1 ?= { death = { death_reason = death_sacrificed_to_gods } }
+		scope:victim2 ?= { death = { death_reason = death_sacrificed_to_gods } }		
+		scope:victim3 ?= { death = { death_reason = death_sacrificed_to_gods } }	
+		scope:victim4 ?= { death = { death_reason = death_sacrificed_to_gods } }	
+		scope:victim5 ?= { death = { death_reason = death_sacrificed_to_gods } }	
+		
+		add_investiture_lifestyle_xp = 250
+			
+		trigger_event = {
+			id = PODcanon_chars.43
+			years = 5
+		}				
+	}
+
+	option = {
+		name = PODcanon_chars.43.c
+		
+		add_stress = massive_stress_gain
+		
+		add_trait = depressed_1
+		add_trait = reclusive
+
+		hidden_effect = {
+			# hidden since the perk loss effect has broken loc as of 1.18.2 (vanilla bug)
+			remove_perk = investiture_uncanny_beauty_perk
+		}
+		remove_character_modifier = uncursed_nosferatu_modifier
+		remove_character_flag = stay_uncursed_after_losing_golconda
+		
+		if = {
+			limit = {
+				has_trait = beauty_good_3
+			}
+			remove_trait = beauty_good_3
+			add_trait_force_tooltip = beauty_bad_3
+		}
+		
+		add_character_flag = had_POD_character_nosferatu_looks
+		add_character_flag = POD_bubonic_look_flag
+		add_character_flag = POD_pale_skin_look_flag
+		add_character_flag = POD_bald_look_flag
+	}
+}
+
+
+PODcanon_chars.44 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.44.t
+	desc = PODcanon_chars.44.desc
+	theme = nosferatu_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+		random_courtier = {
+			save_scope_as = victim1
+			}
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+				}
+			save_scope_as = victim2
+			}	
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:victim1 }
+				NOT = { this = scope:victim2 }
+				}
+			save_scope_as = victim3
+			}				
+	}
+	
+	option = {
+		name = PODcanon_chars.44.a	
+		
+		trigger = {
+			completely_controls = title:c_briey
+			}	
+		
+		custom_tooltip = gregor_briey_tooltip
+		
+		add_piety = 100
+		add_stress = minor_stress_loss
+	}
+	
+	option = {
+		name = PODcanon_chars.44.b	
+		
+		scope:victim1 = {
+			death = { death_reason = death_sacrificed_to_gods }
+			}
+		scope:victim2 = {
+			death = { death_reason = death_sacrificed_to_gods }
+			}		
+		scope:victim3 = {
+			death = { death_reason = death_sacrificed_to_gods }
+			}	
+
+		add_piety = 300
+		add_stress = medium_stress_loss				
+	}
+
+	option = {
+		name = PODcanon_chars.44.c
+
+		custom_tooltip = gregor_is_done_tooltip
+		
+		add_character_flag = gregorisdone
+		
+		remove_character_modifier = gregor_knight_modifier
+		
+		add_stress = massive_stress_gain					
+	}
+
+	option = {
+		name = PODcanon_chars.44.d
+		
+	}
+		
+}
+
+PODcanon_chars.45 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.45.t
+	desc = PODcanon_chars.45.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = marshal
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {			
+	}
+	
+	option = {
+		name = PODcanon_chars.45.a	
+		
+		add_character_modifier = {
+			modifier = chandraputra_martial_modifier
+			years = 5
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.45.b	
+		
+		add_martial_skill = 1		
+	}
+
+	option = {
+		name = PODcanon_chars.45.c
+
+		add_martial_lifestyle_xp = 200				
+	}
+
+	option = {
+		name = PODcanon_chars.45.d
+
+		add_character_modifier = {
+			modifier = chandraputra_knights_modifier
+			years = 5
+			}		
+	}
+		
+}
+
+
+PODcanon_chars.46 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.46.t
+	desc = PODcanon_chars.46.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = marshal
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.46.a	
+			
+		add_gold = 50
+			
+		add_dread = 5
+		
+		add_character_modifier = {
+			modifier = iago_crew_weakened_modifier
+			years = 5
+		}
+		
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.46.b
+			
+		add_gold = 100
+			
+		add_dread = 10
+		
+		add_character_modifier = {
+			modifier = iago_crew_depleted_modifier
+			years = 5
+		}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.46.c
+			
+		add_gold = 200
+			
+		add_dread = 15
+		
+		add_character_modifier = {
+			modifier = iago_crew_empty_modifier
+			years = 5
+		}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.46.d
+
+	}
+}
+
+
+PODcanon_chars.47 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.47.t
+	desc = PODcanon_chars.47.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.47.a	
+			
+		remove_character_flag = mritunjay_careful
+
+		title:c_baghdad = {	
+			remove_county_modifier = POD_county_great_sacking_modifier 
+			add_county_modifier = {
+				modifier = baghdad_recovering_modifier
+				years = 30
+				}			
+		}
+			
+	}
+	
+}
+
+PODcanon_chars.48 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.48.t
+	desc = PODcanon_chars.48.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.48.a	
+			
+		add_learning_lifestyle_xp = 50
+		
+		add_martial_lifestyle_xp = 100
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.48.b
+			
+		add_learning_lifestyle_xp = 50
+		
+		add_intrigue_lifestyle_xp = 100
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.48.c
+			
+		add_learning_lifestyle_xp = 50
+		
+		add_stewardship_lifestyle_xp = 100
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.48.d
+			
+		add_learning_lifestyle_xp = 50
+		
+		add_diplomacy_lifestyle_xp = 100
+		
+	}
+	
+}
+
+PODcanon_chars.49 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.49.t
+	desc = PODcanon_chars.49.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = personality_content
+		}
+
+	right_portrait = {
+		character = character:790323
+		animation = personality_rational
+		}			
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.49.a	
+			
+		add_stress = medium_stress_loss
+		
+		character:790323 = {
+			add_stress = medium_stress_loss
+			}
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.49.b
+			
+		add_learning_lifestyle_xp = 100
+		
+		character:790323 = {
+			add_learning_lifestyle_xp = 100
+			}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.49.c
+			
+		add_learning_skill = 1
+		
+		character:790323 = {
+			add_learning_skill = 1
+			}
+		
+	}	
+
+	option = {
+		name = PODcanon_chars.49.d
+			
+		add_piety = 100
+		
+		character:790323 = {
+			add_piety = 100
+			}
+		
+	}
+	
+}
+
+#PODcanon_chars.50 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = PODcanon_chars.50.t
+#	desc = PODcanon_chars.50.desc
+#	theme = setite_coa 
+#	left_portrait = {
+#		character = root
+#		animation = personality_rational
+#		}		
+#		
+#		
+#	immediate = {
+#	}
+#	
+#	option = {
+#		name = PODcanon_chars.50.a	
+#			
+#		add_gold = 100
+#			
+#		add_piety = 100
+#		
+#		add_character_modifier = {
+#			modifier = andreas_away_modifier
+#			years = 1
+#		}
+#		
+#	}
+#	
+#	
+#	option = {
+#		name = PODcanon_chars.50.b
+#			
+#		add_gold = 300
+#			
+#		add_piety = 300
+#		
+#		add_character_modifier = {
+#			modifier = andreas_away_modifier
+#			years = 5
+#		}
+#		
+#	}	
+#
+#	option = {
+#		name = PODcanon_chars.50.c
+#			
+#		add_gold = 500
+#			
+#		add_piety = 500
+#		
+#		add_character_modifier = {
+#			modifier = andreas_away_modifier
+#			years = 10
+#		}
+#		
+#	}	
+#
+#	option = {
+#		name = PODcanon_chars.50.d
+#
+#	}
+#}
+#
+#
+PODcanon_chars.51 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.51.t
+	desc = PODcanon_chars.51.desc
+	theme = setite_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+
+				
+	trigger = { 
+		}	
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.51.a	
+
+		trigger = {
+			character:790126 = { is_alive = yes }
+			}
+		
+		add_character_modifier = {
+			modifier = seterpenre_advice_modifier
+			years = 5
+			}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.51.b
+
+		trigger = {
+			character:790128 = { is_alive = yes }
+			}
+		
+		add_character_modifier = {
+			modifier = maatkare_advice_modifier
+			years = 5
+			}
+		
+	}	
+	
+	option = {
+		name = PODcanon_chars.51.c
+
+		add_prestige = 100
+		add_piety = 100
+		
+	}
+	
+}
+
+PODcanon_chars.52 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.52.t
+	desc = PODcanon_chars.52.desc
+	theme = tremere_coa 
+	left_portrait = {
+		character = root
+		animation = anger
+		}
+		
+	right_portrait = {
+		character = character:505084
+		animation = schadenfreude
+		}	
+		
+	trigger = { 	
+		character:505084 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		}	
+
+		
+	immediate = {			
+	}
+	
+	option = {
+		name = PODcanon_chars.52.a	
+		
+		remove_short_term_gold = 100	
+
+
+		trigger_event = {
+			id = PODcanon_chars.52
+			years = 5
+			}			
+	}
+	
+	option = {
+		name = PODcanon_chars.52.b	
+		
+		add_prestige = -200
+
+		trigger_event = {
+			id = PODcanon_chars.52
+			years = 5
+			}				
+	}
+
+	option = {
+		name = PODcanon_chars.52.c
+		
+		add_stress = medium_stress_gain
+		
+		trigger_event = {
+			id = PODcanon_chars.52
+			years = 5
+			}				
+	}
+		
+}
+
+PODcanon_chars.53 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.53.t
+	desc = PODcanon_chars.53.desc
+	theme = tremere_coa 
+	left_portrait = {
+		character = root
+		animation = flirtation
+		}		
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.53.a	
+			
+		add_piety = -50
+			
+		
+		custom_tooltip = virstania_small_gargoyles_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = gargoyle_warriors
+					men_at_arms = {
+						type = gargoyle_warriors
+						stacks = 1
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.53.b
+			
+		add_piety = -100
+			
+		
+		custom_tooltip = virstania_medium_gargoyles_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = gargoyle_warriors
+					men_at_arms = {
+						type = gargoyle_warriors
+						stacks = 2
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.53.c
+			
+		add_piety = -150
+			
+		
+		custom_tooltip = virstania_high_gargoyles_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = gargoyle_warriors
+					men_at_arms = {
+						type = gargoyle_warriors
+						stacks = 3
+						}
+					location = capital_province
+					}
+				}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.53.d
+
+	}
+}
+
+
+PODcanon_chars.54 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.54.t
+	desc = PODcanon_chars.54.desc
+	theme = lasombra_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+		}
+		
+	trigger = { 		
+		}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.54.a	
+		
+		if = {	
+			limit = {
+				has_character_modifier = angry_fays_marconius_modifier
+				}
+			remove_character_modifier = angry_fays_marconius_modifier
+			}
+			
+		add_character_modifier = {
+			modifier = happy_fays_marconius_modifier
+			years = 5
+			}
+	}
+	
+	option = {
+		name = PODcanon_chars.54.b	
+		
+		if = {	
+			limit = {
+				has_character_modifier = angry_fays_marconius_modifier
+				}
+			remove_character_modifier = angry_fays_marconius_modifier
+			}
+			
+		if = {	
+			limit = {
+				has_character_modifier = happy_fays_marconius_modifier
+				}
+			remove_character_modifier = happy_fays_marconius_modifier
+			}			
+	}
+
+	option = {
+		name = PODcanon_chars.54.c
+
+		if = {	
+			limit = {
+				has_character_modifier = happy_fays_marconius_modifier
+				}
+			remove_character_modifier = happy_fays_marconius_modifier
+			}
+			
+		add_character_modifier = {
+			modifier = angry_fays_marconius_modifier
+			years = 5
+			}
+	}
+
+}
+
+PODcanon_chars.55 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.55.t
+	desc = PODcanon_chars.55.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = root
+		animation = anger
+		}
+
+	right_portrait = {
+		character = scope:recipient 
+		animation = fear
+		}	
+		
+	option = {
+		name = PODcanon_chars.55.a	
+		
+		add_prestige = -100
+		
+		scope:recipient = {
+			add_prestige = 100
+			add_opinion = {
+				target = root
+				opinion = 50
+				modifier = grateful_opinion
+				}
+			}		
+	}
+
+	option = {
+		name = PODcanon_chars.55.b
+
+		add_prestige = 100
+
+		scope:recipient = {
+			add_prestige = -100
+			add_opinion = {
+				target = root
+				opinion = -50
+				modifier = refusal_opinion
+				}
+			}	
+	}	
+	
+	option = {
+		name = PODcanon_chars.55.c
+
+	}	
+}
+
+PODcanon_chars.56 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.56.t
+	desc = PODcanon_chars.56.desc
+	theme = vampire 
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+		
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.56.a	
+			
+		add_prestige = -50
+			
+		
+		custom_tooltip = dyanang_small_werewolves_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = werewolfpack
+					men_at_arms = {
+						type = battlescarred_fera
+						stacks = 1
+					}
+					location = capital_province
+				}
+			}
+		
+	}
+	
+	
+	option = {
+		name = PODcanon_chars.56.b
+			
+		add_prestige = -100
+			
+		
+		custom_tooltip = dyanang_medium_werewolves_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = werewolfpack
+					men_at_arms = {
+						type = battlescarred_fera
+						stacks = 2
+					}
+					location = capital_province
+				}
+			}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.56.c
+			
+		add_prestige = -150
+			
+		
+		custom_tooltip = dyanang_high_werewolves_tt
+			hidden_effect = {
+				spawn_army = {
+					uses_supply = yes
+					inheritable = no
+					name = werewolfpack
+					men_at_arms = {
+						type = battlescarred_fera
+						stacks = 3
+					}
+					location = capital_province
+				}
+			}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.56.d
+
+	}
+}
+
+
+PODcanon_chars.57 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.57.t
+	desc = PODcanon_chars.57.desc
+	theme = inquisition 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+				
+	trigger = { 	
+		this = character:791723
+		
+		has_character_modifier = aignen_secrets_modifier
+		}	
+
+		
+	immediate = {			
+	}
+	
+	option = {
+		name = PODcanon_chars.57.a	
+		
+		remove_short_term_gold = 100	
+
+		trigger_event = {
+			id = PODcanon_chars.57
+			years = 5
+			}			
+	}
+	
+	option = {
+		name = PODcanon_chars.57.b	
+		
+		add_prestige = -200
+
+		trigger_event = {
+			id = PODcanon_chars.57
+			years = 5
+			}				
+	}
+
+	option = {
+		name = PODcanon_chars.57.c
+		
+		add_stress = medium_stress_gain
+		
+		trigger_event = {
+			id = PODcanon_chars.57
+			years = 5
+			}				
+	}
+
+	option = {
+		name = PODcanon_chars.57.d
+		
+		remove_character_modifier = aignen_secrets_modifier
+				
+	}		
+}
+
+
+PODcanon_chars.58 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.58.t
+	desc = PODcanon_chars.58.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = fear
+		}
+				
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+		character:505050 = {
+			save_scope_as = hardestadt
+		}	
+	}
+	
+	option = {
+		name = PODcanon_chars.58.a	
+		
+		change_first_name = "Hardestadt"
+
+		give_nickname = nick_the_younger
+		
+		add_diplomacy_skill = 5
+		add_stewardship_skill = 5
+		
+		if = {
+			limit = {
+				NOT = { has_faith = faith:camahumanity }
+				}
+		set_character_faith = faith:viatyrannus
+		}
+		custom_tooltip = hardestadt_takeover_tt
+		
+		hidden_effect = {		
+			copy_inheritable_appearance_from = scope:hardestadt
+
+			POD_remove_vanilla_traits_effect = yes
+			refund_perks = diplomacy_lifestyle
+			refund_perks = martial_lifestyle
+			refund_perks = stewardship_lifestyle
+			refund_perks = intrigue_lifestyle
+			refund_perks = learning_lifestyle
+			refund_perks = wanderer_lifestyle
+			
+			add_trait = education_diplomacy_4	
+			add_trait = arbitrary
+			add_trait = ambitious
+			add_trait = diligent
+			add_trait = family_first
+			
+			assign_family_effect = yes
+			
+			every_relation = { type = friend remove_relation_friend = root }
+			every_relation = { type = best_friend remove_relation_best_friend = root }
+			every_relation = { type = rival remove_relation_rival = root }
+			every_relation = { type = nemesis remove_relation_nemesis = root }
+			every_relation = { type = lover remove_relation_lover = root }
+			every_relation = { type = soulmate remove_relation_soulmate = root }
+		
+		}
+		
+		ai_chance = 100	
+	}
+	
+	option = {
+		name = PODcanon_chars.58.b	
+		
+		add_stress = massive_stress_gain				
+	}
+	
+}
+
+PODcanon_chars.59 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.59.t
+	desc = PODcanon_chars.59.desc
+	theme = lasombra_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+		}
+				
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.59.a	
+
+		give_nickname = nick_moncada_heir
+		
+		add_diplomacy_skill = -5
+		add_intrigue_skill = 5
+		
+		add_piety = 500
+		
+		if = {
+			limit = {
+				NOT = { has_faith = faith:vianoctis }
+				}
+		set_character_faith = faith:vianoctis
+		}
+		
+		if = {
+			limit = {
+				has_trait = stubborn
+			}
+		remove_trait = stubborn
+		add_trait = zealous
+		}
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.59.b	
+		
+		add_stress = medium_stress_gain				
+	}
+	
+}
+
+PODcanon_chars.60 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.60.t
+	desc = PODcanon_chars.60.desc
+	theme = faith 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+				
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.60.a	
+
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_horus # Achievement: Gods of Egypt II
+		}
+
+		if = {
+			limit = {
+				has_character_modifier = horus_first_modifier
+			}
+				remove_character_modifier = horus_first_modifier
+		}	
+		add_character_modifier = horus_the_avenger_modifier
+		
+	custom_tooltip = PODcanon_chars.60.custom.tt		
+	hidden_effect = {	
+	every_independent_ruler = {
+			limit = {
+				has_trait = setite
+				}
+			add_character_modifier = {
+				modifier = broken_authority_modifier
+				years = 200
+				}		
+			}				
+	}		
+	root.dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+	}
+	set_global_variable = {
+		name = variable_POD_set_dead
+		value = yes
+	}
+	character:505012 = {
+		set_death_reason = {
+			death_reason = death_execution
+			killer = root
+		}
+	}
+	}
+	
+	
+}
+
+
+PODcanon_chars.61 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.61.t
+	desc = PODcanon_chars.61.desc
+	theme = hunt_activity 
+	left_portrait = {
+		character = root
+		animation = grief
+		}
+				
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.61.a	
+
+		if = {
+			limit = {
+				has_character_modifier = tvarivich_twins_modifier
+				}
+			remove_character_modifier = tvarivich_twins_modifier
+			add_character_modifier = bad_moncada_modifier
+		}
+	}
+
+	option = {
+		name = PODcanon_chars.61.b
+
+		death = { death_reason = death_suicide }
+	}	
+	
+}
+
+
+PODcanon_chars.62 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.62.t
+	desc = PODcanon_chars.62.desc
+	theme = demon 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+	right_portrait = {
+		character = character:505075
+		animation = worry
+		}				
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.62.a	
+
+		custom_tooltip = bezariel_loyal_tt
+		
+		add_character_flag = bezariel_loyal_flag
+		
+		remove_character_modifier = babayaga_bound_bezariel_modifier
+		add_character_modifier = babayaga_allied_bezariel_modifier
+		
+	}
+
+	option = {
+		name = PODcanon_chars.62.b
+
+		custom_tooltip = bezariel_disloyal_tt
+		
+		remove_character_modifier = babayaga_bound_bezariel_modifier
+		add_character_modifier = bezariel_unleashed_modifier
+
+		hidden_effect = {		
+		every_living_character = {
+		limit = {
+			faith = faith:viatantabus
+			NOT = { this = character:505075 }
+		}
+			set_character_faith = root.faith
+		}
+		}		
+	}	
+	
+}
+
+PODcanon_chars.63 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.63.t
+	desc = PODcanon_chars.63.desc
+	theme = demon 
+	left_portrait = {
+		character = character:791012
+		animation = personality_bold
+		}
+	right_portrait = {
+		character = character:505109
+		animation = worry
+		}
+	lower_center_portrait = {
+		character = character:790821
+		animation = personality_bold
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.64
+			months = 3
+		}	
+	}
+	
+	option = {
+		name = PODcanon_chars.63.a	
+
+		add_prestige = -250
+
+		if = {
+			limit = {
+				character:791012 = {
+					is_playable_character = yes 
+					}
+				}
+				character:791012 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:791012	
+		
+		character:791012 = { 
+			set_character_faith = faith:sloth 
+		}	
+		if = {
+			limit = {
+				character:505109 = {
+					is_playable_character = yes 
+					}
+				}
+				character:505109 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:505109	
+		
+		character:505109 = { 
+			set_character_faith = faith:sloth 
+		}
+
+		if = {
+			limit = {
+				character:790821 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790821 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790821	
+		
+		character:790821 = { 
+			set_character_faith = faith:sloth 
+		}		
+	}
+
+	option = {
+		name = PODcanon_chars.63.b
+	
+	}	
+	
+}
+
+
+PODcanon_chars.64 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.64.t
+	desc = PODcanon_chars.63.desc
+	theme = demon 
+	left_portrait = {
+		character = character:790896
+		animation = personality_zealous
+		}
+	right_portrait = {
+		character = character:792344
+		animation = worry
+		}
+	lower_center_portrait = {
+		character = character:790984
+		animation = personality_rational
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.65
+			months = 3
+		}	
+	}
+	
+	option = {
+		name = PODcanon_chars.63.a	
+
+		add_piety = -250
+
+		if = {
+			limit = {
+				character:790896 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790896 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790896	
+		
+		character:790896 = { 
+			set_character_faith = faith:sloth 
+		}	
+		if = {
+			limit = {
+				character:792344 = {
+					is_playable_character = yes 
+					}
+				}
+				character:792344 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:792344	
+		
+		character:792344 = { 
+			set_character_faith = faith:sloth 
+		}
+
+		if = {
+			limit = {
+				character:790984 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790984 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790984	
+		
+		character:790984 = { 
+			set_character_faith = faith:sloth 
+		}		
+	}
+
+	option = {
+		name = PODcanon_chars.63.b
+	
+	}	
+	
+}
+
+
+PODcanon_chars.65 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.65.t
+	desc = PODcanon_chars.63.desc
+	theme = demon 
+	left_portrait = {
+		character = character:790657
+		animation = worry
+		}
+	right_portrait = {
+		character = character:505108
+		animation = dismissal
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.66
+			months = 3
+		}	
+	}
+	
+	option = {
+		name = PODcanon_chars.63.a	
+
+		remove_short_term_gold = 50
+
+		if = {
+			limit = {
+				character:790657 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790657 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790657	
+		
+		character:790657 = { 
+			set_character_faith = faith:sloth 
+		}	
+		if = {
+			limit = {
+				character:505108 = {
+					is_playable_character = yes 
+					}
+				}
+				character:505108 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:505108	
+		
+		character:505108 = { 
+			set_character_faith = faith:sloth 
+		}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.63.b
+	
+	}	
+	
+}
+
+PODcanon_chars.66 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.66.t
+	desc = PODcanon_chars.63.desc
+	theme = demon 
+	left_portrait = {
+		character = character:605131
+		animation = dismissal
+		}
+	right_portrait = {
+		character = character:790965
+		animation = worry
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.63.a
+
+		if = {
+			limit = {
+				character:605131 = {
+					is_playable_character = yes 
+					}
+				}
+				character:605131 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:605131	
+		
+		character:605131 = { 
+			set_character_faith = faith:sloth 
+		}	
+		if = {
+			limit = {
+				character:790965 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790965 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790965	
+		
+		character:790965 = { 
+			set_character_faith = faith:sloth 
+		}
+		
+	}
+
+	option = {
+		name = PODcanon_chars.63.b
+	
+	}	
+	
+}
+
+PODcanon_chars.67 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.67.t
+	desc = PODcanon_chars.67.desc
+	theme = faith 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.67.a
+
+		custom_tooltip = kemintiri_phasetwo_tt
+		
+	}
+	
+}
+
+PODcanon_chars.68 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.68.t
+	desc = PODcanon_chars.68.desc
+	theme = faith 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.68.a
+
+		custom_tooltip = kemintiri_second_decision_effect_tooltip
+
+		add_character_flag = kemintiriredemption_flag
+
+		set_character_faith = faith:childofosiris
+		
+		if = {
+			limit = {
+				has_trait = vengeful 
+			}
+			remove_trait = vengeful
+			add_trait_force_tooltip = forgiving
+		}
+		if = {
+			limit = {
+				has_trait = ambitious 
+			}
+			remove_trait = ambitious
+			add_trait_force_tooltip = content
+		}
+
+		faith:childofosiris = {
+			if = {
+				limit = { has_doctrine = doctrine_setite_evil }
+				remove_doctrine = doctrine_setite_evil
+			}
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.68.b
+
+		custom_tooltip = kemintiri_no_redemption_tt
+
+		add_character_modifier = hunted_down_eternity_modifier
+		
+		add_character_flag = kemintirinoredemption_flag
+	}	
+}
+
+PODcanon_chars.69 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.69.t
+	desc = PODcanon_chars.69.desc
+	theme = peccati_coa 
+	left_portrait = {
+		character = root
+		animation = flirtation_left
+		}
+		
+	option = {
+		name = PODcanon_chars.69.a
+	
+		every_character_artifact = {
+			limit = {
+			has_variable = camilla_crown
+			}
+			set_artifact_rarity = illustrious
+			add_artifact_modifier = artifact_monthly_piety_10_modifier
+			add_artifact_modifier = artifact_dynasty_opinion_7_modifier
+		}	
+	}
+	
+}
+
+PODcanon_chars.70 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.70.t
+	desc = PODcanon_chars.70.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = happiness
+		}
+	right_portrait = {
+		character = character:790731
+		animation = worry
+		}			
+		
+	trigger = { 
+		character:790731 = {
+			is_alive = yes
+			is_ai = yes
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.70.a
+		
+		hidden_effect = {
+		if = {
+			limit = {
+				character:790731 = {
+					is_playable_character = yes 
+					}
+				}
+			create_title_and_vassal_change = {
+				type = granted
+				save_scope_as = change
+			}
+			title:c_laconia = {
+				change_title_holder = {
+					holder = character:790159
+					change = scope:change
+					take_baronies = no
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+
+			}		
+		}
+		
+		add_courtier = character:790731	
+		
+	}
+
+	option = {
+		name = PODcanon_chars.70.b
+	}
+
+	after = {
+		trigger_event = {
+			id = PODcanon_chars.71
+			days = 15
+		}
+	}
+}	
+
+
+PODcanon_chars.71 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.71.t
+	desc = PODcanon_chars.71.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = happiness
+		}
+	right_portrait = {
+		character = character:790300
+		animation = anger
+		}			
+		
+	trigger = { 
+		character:790300 = {
+			is_alive = yes
+			is_ai = yes
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.71.a
+		
+		hidden_effect = {
+		if = {
+			limit = {
+				character:790300 = {
+					is_playable_character = yes 
+					}
+				}
+			create_title_and_vassal_change = {
+				type = granted
+				save_scope_as = change
+			}
+			title:c_santiago = {
+				change_title_holder = {
+					holder = character:790170
+					change = scope:change
+					take_baronies = no
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+
+			}		
+		}
+		
+		add_courtier = character:790300	
+
+		set_relation_rival = { reason = rival_historical target = character:790300 }	
+
+		character:790300 = {
+			add_opinion = {
+				target = root
+				opinion = -100
+				modifier = hate_opinion
+				}
+			}
+	}
+
+	option = {
+		name = PODcanon_chars.71.b
+	}
+
+	after = {
+		trigger_event = {
+			id = PODcanon_chars.72
+			days = 15
+		}
+	}
+}
+	
+
+PODcanon_chars.72 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.72.t
+	desc = PODcanon_chars.72.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = happiness
+		}
+	right_portrait = {
+		character = character:790301
+		animation = worry
+		}			
+		
+	trigger = { 
+		character:790301 = {
+			is_alive = yes
+			is_ai = yes
+			}			
+	}
+
+	option = {
+		name = PODcanon_chars.72.a
+		
+		hidden_effect = {
+		if = {
+			limit = {
+				character:790301 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790301 = {
+					depose = yes 
+					}	
+		}
+		}	
+		add_courtier = character:790301	
+
+		custom_tooltip = helena_villon_tt
+		
+		add_stress = medium_stress_gain
+	}
+
+	option = {
+		name = PODcanon_chars.72.b
+	}
+
+	after = {
+		trigger_event = {
+			id = PODcanon_chars.73
+			years = 3
+		}
+	}
+}
+
+PODcanon_chars.73 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.73.t
+	desc = PODcanon_chars.73.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = happiness
+		}
+	right_portrait = {
+		character = character:790301
+		animation = personality_bold
+		}			
+		
+	trigger = { 
+		character:790301 = {
+			is_alive = yes
+			is_ai = yes
+			OR = {
+				target_is_vassal_or_below = root
+				is_courtier_of = root
+			}
+		}
+	}
+
+	option = {
+		name = PODcanon_chars.73.a
+	
+	character:790301 = {
+		if = {
+			limit = {
+				has_trait = shy
+			}
+		remove_trait = shy
+		}
+		add_trait = ambitious
+		if = {
+			limit = {
+				has_trait = depressed_1
+			}
+		remove_trait = depressed_1
+		}
+		if = {
+			limit = {
+				has_trait = patient
+			}
+		remove_trait = patient
+		}
+		add_trait = deceitful
+		if = {
+			limit = {
+				has_trait = diligent
+			}
+		remove_trait = diligent
+		}
+		add_trait = lustful
+		add_trait = auspex
+		add_trait = fortitude
+		give_nickname = nick_shrewd_hedonist
+		add_stewardship_skill = 8
+	}
+	}
+
+}
+
+PODcanon_chars.74 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.74.t
+	desc = PODcanon_chars.74.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+	artifact = {
+        target = scope:the_alexiad
+        position = lower_left_portrait
+    }
+
+	immediate = {
+		
+		create_artifact_the_alexiad_effect = { OWNER = this TYPE = book }
+		
+		random_character_artifact = {
+			limit = {
+				has_variable = the_alexiad
+				}
+		save_scope_as = the_alexiad
+		}
+	}
+		
+	option = {
+		name = PODcanon_chars.74.a
+	}
+	
+}
+
+PODcanon_chars.75 = {
+	type = character_event
+	content_source = dlc_POD
+	title = thrax_decision
+	desc = PODcanon_chars.75.desc
+	theme = brujah_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+
+	immediate = {
+	}
+		
+	option = {
+		name = PODcanon_chars.75.a
+		
+	root.dynasty = {
+		add_dynasty_prestige = 1000
+		add_dynasty_prestige_level = 1
+	}	
+	
+	add_prestige = 500
+	
+	custom_tooltip = thrax_conversion_tt
+	hidden_effect = {
+	every_living_character = {	
+		if = {
+			limit = {
+				is_brujah_trigger = yes
+				NOT = { has_faith = faith:viapura }
+				NOT = { has_trait = zealous }
+				is_ai = yes
+			}
+			random = {
+				chance = 75
+			set_character_faith = faith:viapura
+			}
+		}	
+	}	
+	}
+	}
+	
+}
+
+PODcanon_chars.76 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.76.t
+	desc = PODcanon_chars.76.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = character:790860
+		animation = personality_content
+	}
+	lower_center_portrait = {
+		character = character:790545
+		animation = idle
+	}		
+	
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.77
+			days = 5
+		}
+	}
+		
+	option = {
+		name = PODcanon_chars.76.a
+		
+		character:790545 = {
+			add_character_modifier = {
+				modifier = drained_troops_modifier
+				years = 5
+			}
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.76.b
+		
+		character:790545 = {
+			remove_short_term_gold = 200
+		}
+	}	
+}
+
+PODcanon_chars.77 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.77.t
+	desc = PODcanon_chars.77.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = character:790860
+		animation = personality_content
+	}		
+	
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.78
+			days = 5
+		}
+	}
+		
+	option = {
+		name = PODcanon_chars.77.a
+		
+		character:790860 = {
+			add_gold = 200
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.77.b
+		
+		character:790860 = {
+			add_stewardship_lifestyle_perk_points = 1
+		}
+	}	
+}
+
+PODcanon_chars.78 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.78.t
+	desc = PODcanon_chars.78.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	right_portrait = {
+		character = character:790860
+		animation = personality_content
+	}
+	lower_center_portrait = {
+		character = character:790955
+		animation = personality_honorable
+	}		
+	
+	immediate = {
+	}
+		
+	option = {
+		name = PODcanon_chars.78.a
+		
+		character:790955 = {
+			set_relation_best_friend = { reason = best_friend_counsel_and_support target = character:790860 }
+		}
+		
+		death = {
+			death_reason = death_execution
+			killer = character:790955
+		}
+	}
+
+	option = {
+		name = PODcanon_chars.78.b
+		
+		character:790860 = {
+		spawn_army = {
+			name = event_troop_default_name
+			#levies = 500
+			men_at_arms = {
+				type = mahgrib_maa
+				stacks = 5
+				}
+				location = root.capital_province
+				origin = root.capital_province
+				inheritable = no
+			}			
+		}
+		
+		death = {
+			death_reason = death_execution
+			killer = character:790545
+		}
+	}	
+}
+
+PODcanon_chars.79 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.79.t
+	desc = PODcanon_chars.79.desc
+	theme = tzimisce_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}	
+	
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.80
+			days = 5
+		}
+	}
+		
+	option = {
+		name = PODcanon_chars.79.a
+		
+		add_gold = 100
+		
+		custom_tooltip = nikita_liquidating_tt
+		
+		hidden_effect = {
+		every_living_character = {
+			limit = {
+				is_ai = yes
+				faith = faith:viacain
+			}
+		remove_short_term_gold = 100
+		add_piety = -200
+		add_prestige = -200
+		}
+		}
+	}	
+}
+
+PODcanon_chars.80 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.80.t
+	desc = PODcanon_chars.80.desc
+	theme = tzimisce_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	right_portrait = {
+		character = character:605101
+		animation = fear
+	}
+	lower_center_portrait = {
+		character = character:791982
+		animation = idle
+	}		
+	
+	immediate = {
+		trigger_event = {
+			id = PODcanon_chars.81
+			days = 5
+		}		
+	}
+		
+	option = {
+		name = PODcanon_chars.80.a
+		
+		character:605101 = {
+		death = {
+			death_reason = death_execution
+			killer = root
+		}		
+		}
+		
+		character:791982 = {
+		death = {
+			death_reason = death_execution
+			killer = root
+		}		
+		}
+	}	
+}
+
+PODcanon_chars.81 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.81.t
+	desc = PODcanon_chars.81.desc
+	theme = tzimisce_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}		
+	
+	immediate = {		
+	}
+		
+	option = {
+		name = PODcanon_chars.81.a
+		
+		change_first_name = "The_Dracon"
+		set_character_faith = faith:viaarchangeli
+		set_culture = culture:greek
+
+		set_sexuality = homosexual
+		
+		remove_trait = diligent
+		remove_trait = deceitful
+		remove_trait = vampgeneration6
+		add_trait = vampgeneration4
+		add_trait = wrathful
+		add_trait = vengeful
+		add_trait = scholar
+		
+		add_learning_skill = 7
+		add_intrigue_skill = 7
+		add_stewardship_skill = 5
+		add_diplomacy_skill = 2
+		
+		assign_elder_vicissitude_effect = { GEN = 4 }
+		assign_scholarship_effect = yes
+		assign_protean_effect = yes
+		assign_auspex_effect = yes
+		assign_presence_effect = yes
+		
+		give_nickname = nick_holy_spirit
+		
+		destroy_title = title:k_seeofnod
+		destroy_title = title:d_croatia
+		add_pressed_claim = title:c_byzantion	
+		
+		hidden_effect = {
+			POD_remove_bloodpotency_modifiers_effect = yes
+			add_character_modifier = bloodpotency5_modifier
+			POD_learn_all_anatomy_traits_effect = yes
+		}
+		
+		hidden_effect = {
+			character:790341 = {
+				death = {
+					death_reason = death_disappearance
+				}
+			}
+		}
+	}	
+}
+
+PODcanon_chars.82 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.82.t
+	desc = PODcanon_chars.82.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}		
+	
+	immediate = {		
+	}
+		
+	option = {
+		name = PODcanon_chars.82.a
+		
+		remove_character_modifier = vencel_divided_attention_modifier
+	}	
+	
+	option = {
+		name = PODcanon_chars.82.b
+		
+		custom_tooltip = vencel_balancing_tt
+		
+		remove_short_term_gold = 100
+		
+		trigger_event = {
+			id = PODcanon_chars.83
+			years = 3
+		}			
+	}	
+	
+}
+
+PODcanon_chars.83 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.83.t
+	desc = PODcanon_chars.83.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}		
+	
+	immediate = {	
+	}
+		
+	option = {
+		name = PODcanon_chars.83.a
+		
+		remove_character_modifier = vencel_divided_attention_modifier
+	}	
+	
+	option = {
+		name = PODcanon_chars.83.b
+		
+		custom_tooltip = vencel_balancing_tt
+		
+		add_legitimacy = medium_legitimacy_loss
+		
+		trigger_event = {
+			id = PODcanon_chars.84
+			years = 4
+		}			
+	}	
+	
+}
+
+PODcanon_chars.84 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.84.t
+	desc = PODcanon_chars.84.desc
+	theme = ventrue_coa 
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}		
+	right_portrait = {
+		character = character:505052
+		animation = personality_vengeful
+	}
+		
+	trigger = {
+		character:505052 = {
+			is_alive = yes
+		}
+	}
+	
+	immediate = {	
+	}
+		
+	option = {
+		name = PODcanon_chars.84.a
+		
+		add_prestige = 200
+		add_martial_lifestyle_perk_points = 1
+		add_stewardship_lifestyle_perk_points = 1
+
+		spawn_army = {
+			name = event_troop_default_name
+			#levies = 500
+			men_at_arms = {
+				type = knights_blood_maa
+				stacks = 6
+				}
+				location = root.capital_province
+				origin = root.capital_province
+				inheritable = no
+		}
+			
+		character:505052 = {
+			give_nickname = nick_man_of_blood
+			
+			if = {
+				limit = {
+					has_trait = torpor
+				}
+			remove_trait = torpor
+			}
+			remove_trait = lustful
+			add_trait = diligent
+			set_character_faith = faith:viatyrannus	
+			add_martial_skill = 5
+			add_intrigue_skill = 5
+			add_diplomacy_skill = 5
+		}
+		
+	}	
+	
+}
+
+PODcanon_chars.85 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.85.t
+	desc = PODcanon_chars.85.desc
+	theme = banu_haqim_coa 
+	left_portrait = {
+		character = root
+		animation = fear
+	}		
+	right_portrait = {
+		character = character:790523
+		animation = personality_vengeful
+	}
+		
+	trigger = {
+		character:790523 = {
+			is_alive = yes
+		}
+	}
+	
+	immediate = {	
+	}
+		
+	option = {
+		name = PODcanon_chars.85.a
+		
+		add_stress = major_stress_gain
+		add_trait = depressed_1
+		
+		hidden_effect = {
+		character:790523 = {
+			death = {
+				death_reason = death_disappearance
+			}
+		}
+		}
+	}	
+
+	option = {
+		name = PODcanon_chars.85.b
+		
+		hidden_effect = {
+			
+		character:790523 = {
+			if = {
+				limit = {
+					has_trait = torpor
+				}
+			remove_trait = torpor
+			}
+			add_gold = 250
+			add_prestige = 250	
+			add_pressed_claim = title:e_assamites	
+		}
+	
+		create_title_and_vassal_change = {
+			type = faction_demand
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		
+		title:c_rasht = {
+			change_title_holder = {
+				holder = character:790523
+				change = scope:change
+				take_baronies = yes
+			}
+		}
+		resolve_title_and_vassal_change = scope:change			
+
+		title:c_rasht = {
+		holder = {
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		becomes_independent = {
+			change = scope:change
+			}
+		resolve_title_and_vassal_change = scope:change
+		}
+		}
+		character:790523  = {			
+		set_character_faith = faith:talmahera
+		
+		spawn_army = {
+			uses_supply = no
+			inheritable = no
+			name = POD_cult_of_izhim_ur_baal
+			#levies = {
+			#	value = 1000
+			#}
+			men_at_arms = {
+				type = cultists
+				stacks = 5
+			}
+			men_at_arms = {
+				type = war_servitors
+				stacks = 5
+			}
+			
+			location = capital_province
+		}								
+		}
+		remove_relation_soulmate = character:790523		
+		}
+		
+		set_player_character = character:790523	
+		
+		character:790523 = {
+			trigger_event = {
+				id = PODcanon_chars.86
+				days = 1
+			}
+		}
+
+		character:790524 = {		
+			death = {
+				death_reason = death_sacrificed_to_gods
+				killer = character:790523
+			}
+		}
+		
+		hidden_effect = {
+			every_living_character = {
+				limit = {
+					is_assamite_trigger = yes
+					NOT = { this = character:790523 }
+				}
+				POD_izhim_ur_baal_curse_effect = yes
+			}
+		}		
+	}		
+}
+
+PODcanon_chars.86 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.86.t
+	desc = PODcanon_chars.86.desc
+	theme = banu_haqim_coa 
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}		
+
+	option = {
+		name = PODcanon_chars.86.a
+		
+		custom_tooltip = izhim_intro_tt
+	}
+	
+}
+
+PODcanon_chars.87 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.87.t
+	desc = PODcanon_chars.87.desc
+	theme = malkavian_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}		
+
+	option = {
+		name = PODcanon_chars.87.a
+		
+		if = {
+			limit = {
+				has_character_modifier = midian_courtiers_modifier	
+			}
+			remove_character_modifier = midian_courtiers_modifier
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.87.b
+		
+		if = {
+			limit = {
+				has_character_modifier = midian_councilors_modifier	
+			}
+			remove_character_modifier = midian_councilors_modifier
+		}
+	}
+
+	option = {
+		name = PODcanon_chars.87.c
+		
+		if = {
+			limit = {
+				has_character_modifier = midian_vassals_modifier	
+			}
+			remove_character_modifier = midian_vassals_modifier
+		}
+	}
+
+	option = {
+		name = PODcanon_chars.87.d
+	}	
+}
+
+PODcanon_chars.88 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_kodesh_interaction
+	desc = PODcanon_chars.88.desc
+	theme = nosferatu_coa 
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}		
+
+	option = {
+		name = PODcanon_chars.88.a
+		
+		add_stress = medium_stress_loss
+		
+		scope:recipient = { 
+			add_character_modifier = {
+			modifier = seemingly_feeble_minded_modifier
+			years = 10
+			}
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.88.b
+		
+		add_stress = medium_stress_loss
+		
+		scope:recipient = { 
+			add_character_modifier = {
+			modifier = bp2_security_compromised
+			years = 10
+			}
+		}		
+	}
+
+	option = {
+		name = PODcanon_chars.88.c
+
+		add_stress = medium_stress_loss
+		
+		scope:recipient = { 
+			add_stress = medium_stress_gain
+		}	
+	}
+
+	option = {
+		name = PODcanon_chars.88.d
+
+		add_stress = medium_stress_loss
+
+		scope:recipient = { 
+			add_character_modifier = {
+			modifier = grail_fool_errand_modifier
+			years = 10
+			}
+		}
+
+	}	
+}
+
+
+PODcanon_chars.89 = {
+	type = character_event
+	content_source = dlc_POD
+	title = varsik_decision
+	desc = PODcanon_chars.89.desc
+	theme = ravnos_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}		
+
+	option = {
+		name = PODcanon_chars.89.a
+		
+		give_nickname = nick_prophet_revelations
+		
+		if = {
+			limit = {
+				has_trait = greedy
+			}
+		remove_trait = greedy
+		add_trait = generous
+		}
+		
+		add_piety = 250
+	}
+	
+	option = {
+		name = PODcanon_chars.89.b
+		
+		if = {
+			limit = {
+				has_trait = zealous
+			}
+		remove_trait = zealous
+		add_trait = cynical
+		}
+		
+		add_gold = 250		
+		
+	}
+
+	option = {
+		name = PODcanon_chars.89.c
+	
+		add_stress = medium_stress_gain
+	}
+}
+
+
+#Helena' diablerie hiding
+PODcanon_chars.90 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.90.t
+	desc = PODcanon_chars.90.desc
+	theme = toreador_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+		}					
+		
+	trigger = {
+		any_secret = {
+			secret_type = secret_diablerist
+		}
+	}	
+		
+	immediate = {		
+	}
+	
+	option = {
+		name = PODcanon_chars.90.a
+
+		remove_short_term_gold = 25
+		add_prestige = -50
+		
+		random_secret = { 
+			limit = {
+				secret_type = secret_diablerist
+			}
+			remove_secret = yes
+		}		
+	}
+	
+	option = {
+		name = PODcanon_chars.90.b
+	}
+}
+
+#Lucita : eleonor event
+PODcanon_chars.91 = {
+	type = character_event
+	content_source = dlc_POD
+	title = Eleanor_of_Aragon
+	desc = PODcanon_chars.91.desc
+	theme = lasombra_coa 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+	right_portrait = {
+		character = scope:eleonor
+		animation = personality_rational
+	}
+		
+	trigger = { 		
+	}	
+		
+	immediate = {
+		create_character = {
+			name = "Eleanor_of_Aragon" 
+			age = 39 #Not historical but needed for being younger than Luci
+			gender = female
+			dynasty = none
+			learning = 10
+			intrigue = 10
+			stewardship = 7
+			diplomacy = 6
+			martial = 7
+			faith = faith:viaregalis
+			culture = culture:aragonese
+			trait = education_stewardship_4
+			trait = vampire
+			trait = lasombra
+			trait = vampgeneration8			
+			trait = diligent
+			trait = brave
+			trait = stubborn
+			trait = dominate
+			trait = potence
+			trait = obtenebration
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = eleonor
+		}		
+	}
+	
+	option = {
+		name = PODcanon_chars.91.a
+
+		add_courtier = scope:eleonor
+		
+		scope:eleonor = {
+			set_mother = root
+			set_house = root.house
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.91.b
+		
+		scope:eleonor = {
+			silent_disappearance_effect = yes
+		}		
+	}
+}
+
+
+PODcanon_chars.92 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.36.t
+	desc = PODcanon_chars.92.desc
+	theme = gangrel_coa 
+	left_portrait = {
+		character = character:790119
+		animation = personality_zealous
+		}
+		
+	right_portrait = {
+		character = character:790264
+		animation = personality_bold
+		}		
+		
+	lower_center_portrait = {
+		character = character:790763
+	}		
+
+	lower_left_portrait = {
+		character = character:792117
+	}	
+	
+	trigger = { 
+	}	
+
+		
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.92.a	 
+
+		add_internal_flag = dangerous	
+
+		custom_tooltip = brunhilde_landless_cb_tt
+		
+		hidden_effect = {
+			character:790119 = {
+				# Transfer landed titles
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						tier > tier_barony
+					}
+					add_to_list = target_titles2
+				}
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				hidden_effect = {
+					every_in_list = {
+						list = target_titles2
+						change_title_holder_include_vassals = {
+							holder = character:790120
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+		}		
+		
+		add_courtier = character:790119
+		
+		hidden_effect = {
+			character:790264 = {
+				# Transfer landed titles
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						tier > tier_barony
+					}
+					add_to_list = target_titles3
+				}
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				hidden_effect = {
+					every_in_list = {
+						list = target_titles3
+						change_title_holder_include_vassals = {
+							holder = character:790644
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+		}		
+		
+		add_courtier = character:790264		
+
+		hidden_effect = {
+			character:790763 = {
+				# Transfer landed titles
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						tier > tier_barony
+					}
+					add_to_list = target_titles4
+				}
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				hidden_effect = {
+					every_in_list = {
+						list = target_titles4
+						change_title_holder_include_vassals = {
+							holder = character:505088
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+		}		
+		
+		add_courtier = character:790763
+		
+		hidden_effect = {
+			character:792117 = {
+				# Transfer landed titles
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						tier > tier_barony
+					}
+					add_to_list = target_titles5
+				}
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				hidden_effect = {
+					every_in_list = {
+						list = target_titles5
+						change_title_holder_include_vassals = {
+							holder = character:505088
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+		}		
+		
+		add_courtier = character:792117		
+		
+		hidden_effect = {
+			character:791136 = {
+				# Transfer landed titles
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						tier > tier_barony
+					}
+					add_to_list = target_titles6
+				}
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				hidden_effect = {
+					every_in_list = {
+						list = target_titles6
+						change_title_holder_include_vassals = {
+							holder = character:790438
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+			}
+		}		
+		
+		add_courtier = character:791136	
+
+		add_prestige = 200
+		add_gold = 200
+	}	
+
+}
+
+PODcanon_chars.93 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.59.t
+	desc = PODcanon_chars.93.desc
+	theme = lasombra_coa 
+	left_portrait = {
+		character = root
+		animation = worry
+		}
+	right_portrait = {
+		character = character:505154
+		animation = personality_zealous
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.59.a	
+
+		give_nickname = nick_moncada_heir
+		
+		add_diplomacy_skill = -5
+		add_intrigue_skill = 5
+		
+		add_piety = 500
+		
+		if = {
+			limit = {
+				NOT = { has_faith = faith:vianoctis }
+				}
+		set_character_faith = faith:vianoctis
+		}
+		
+		if = {
+			limit = {
+				has_trait = stubborn
+			}
+		remove_trait = stubborn
+		add_trait = zealous
+		}
+
+		if = {
+			limit = {
+				has_character_modifier = caged_lucita_modifier
+			}
+			remove_character_modifier = caged_lucita_modifier
+		}
+		
+		add_character_modifier = heiress_lucita_modifier
+		
+		custom_tooltip = lucita_landless_transfer_tt
+
+		hidden_effect = {
+		character:505154 = {
+			POD_transfer_all_titles_to_character = {
+				CHARACTER = root
+			}
+		}
+		}		
+	}
+	
+	option = {
+		name = PODcanon_chars.59.b	
+		
+		if = {
+			limit = {
+				has_character_modifier = caged_lucita_modifier
+			}
+			remove_character_modifier = caged_lucita_modifier
+		}			
+	}
+	
+}
+
+PODcanon_chars.94 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.94.t
+	desc = PODcanon_chars.94.desc
+	theme = baali_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.94.a	
+		
+		add_character_flag = leaning_towards_seker_flag
+	}
+	
+	option = {
+		name = PODcanon_chars.94.b	
+		
+		add_character_flag = leaning_towards_third_flag		
+	}
+
+	after = {
+		trigger_event = PODcanon_chars.95
+	}	
+}
+
+
+PODcanon_chars.95 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.95.t
+	desc = PODcanon_chars.95.desc
+	theme = baali_coa 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.95.a	
+		
+		if = {
+			limit = {
+				NOT = {
+					has_character_flag = leaning_towards_seker_flag
+				}
+			}
+		add_character_flag = leaning_towards_seker_flag
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.95.b	
+
+		if = {
+			limit = {
+				NOT = {
+					has_character_flag = leaning_towards_third_flag
+				}
+			}		
+		add_character_flag = leaning_towards_third_flag
+		}		
+	}
+
+	after = {
+		trigger_event = PODcanon_chars.96
+	}	
+}
+
+PODcanon_chars.96 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.96.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					has_character_flag = leaning_towards_seker_flag
+					has_character_flag = leaning_towards_third_flag
+				}
+				desc = PODcanon_chars.96.unnamed
+			}
+			triggered_desc = {
+				trigger = { 
+					has_character_flag = leaning_towards_seker_flag
+				}
+				desc = PODcanon_chars.96.seker
+			}
+			triggered_desc = {
+				trigger = { 
+					has_character_flag = leaning_towards_third_flag
+				}
+				desc = PODcanon_chars.96.third
+			}
+		}
+	}
+	theme = vampire
+	override_background = { reference = shader_event_hypertrip }
+	left_portrait = {
+		character = root
+		animation = personality_callous
+		}
+		
+	widgets = {
+		widget = {
+			gui = "POD_shader_event_hypertrip"
+			container = "background_shader_vfx_container"
+		}
+	}	
+	
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.96.a	
+		
+		if = {
+			limit = {
+				has_trait = education_intrigue_2
+			}
+			remove_trait = education_intrigue_2
+			add_trait_force_tooltip = education_intrigue_4
+		}
+
+		if = {
+			limit = {
+				has_character_flag = leaning_towards_third_flag
+				has_character_flag = leaning_towards_seker_flag
+			}
+		assign_obtenebration_effect = yes	
+		hidden_effect = {	
+		assign_elder_obtenebration_effect = { GEN = 5 }
+		}
+		assign_presence_effect = yes
+		hidden_effect = {	
+		assign_elder_presence_effect = { GEN = 5 }
+		}
+		assign_dominate_effect = yes
+		hidden_effect = {		
+		assign_elder_dominate_effect = { GEN = 5 }	
+		}		
+		}
+		else_if = {
+			limit = {
+				has_character_flag = leaning_towards_seker_flag
+			}
+		change_first_name = "Seker"
+
+		give_nickname = nick_red_death
+		
+		create_maa_regiment = {
+			type = sheddim_maa          
+			check_can_recruit = no
+			size = 10
+		}		
+		}
+		else_if = {
+			limit = {
+				has_character_flag = leaning_towards_third_flag
+			}		
+		change_first_name = "thethird"	
+
+		assign_auspex_effect = yes
+		hidden_effect = {
+		assign_elder_auspex_effect = { GEN = 5 }
+		}
+		assign_celerity_effect = yes
+		hidden_effect = {		
+		assign_elder_celerity_effect = { GEN = 5 }
+		}
+		assign_animalism_effect = yes
+		hidden_effect = {		
+		assign_elder_animalism_effect = { GEN = 5 }	
+		}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				has_character_flag = leaning_towards_third_flag
+			}		
+		remove_character_flag = leaning_towards_third_flag
+		}
+		if = {
+			limit = {
+				has_character_flag = leaning_towards_seker_flag
+			}
+		remove_character_flag = leaning_towards_seker_flag
+		}		
+	}	
+}
+
+PODcanon_chars.97 = {
+	type = character_event
+	content_source = dlc_POD
+	title = soo_kyung_decision
+	desc = PODcanon_chars.97.desc
+	theme = ruler_objectives 
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.97.a	
+		
+		trigger = {
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+			rarity = masterwork
+		}
+		}
+
+		every_character_artifact = {
+			limit = {
+			has_variable = flowers_scarlet_ebon
+			}
+			set_artifact_rarity = famed
+			add_artifact_modifier = artifact_magic_amulet_modifier
+		}			
+	}
+	
+	option = {
+		name = PODcanon_chars.97.b	
+
+		trigger = {
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+			rarity = masterwork
+		}
+		}
+
+		every_character_artifact = {
+			limit = {
+			has_variable = flowers_scarlet_ebon
+			}
+			set_artifact_rarity = famed
+			add_artifact_modifier = the_celestial_nail_modifier
+		}		
+	}
+
+	option = {
+		name = PODcanon_chars.97.c
+		
+		trigger = {
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+			rarity = famed
+		}
+		}
+
+		every_character_artifact = {
+			limit = {
+			has_variable = flowers_scarlet_ebon
+			}
+			set_artifact_rarity = illustrious
+			add_artifact_modifier = the_three_books_modifier
+		}
+		
+	}
+	
+	option = {
+		name = PODcanon_chars.97.d
+
+		trigger = {
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+			rarity = famed
+		}
+		}
+
+		every_character_artifact = {
+			limit = {
+			has_variable = flowers_scarlet_ebon
+			}
+			set_artifact_rarity = illustrious
+			add_artifact_modifier = artifact_learning_per_piety_level_modifier
+		}
+		
+	}	
+}
+
+PODcanon_chars.98 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.98.t
+	desc = PODcanon_chars.98.desc
+	theme = intrigue_skulduggery_focus
+	
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.98.a	
+		
+		add_gold = 1500
+
+		create_artifact_robe_kassapa_effect = { OWNER = this }
+
+		create_artifact_staff_kakusandha_effect = { OWNER = this }
+
+		add_trait = excommunicated
+		
+		add_character_modifier = {
+			modifier = hunted_emmao_modifier
+			years = 50
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.98.b
+
+		add_trait = excommunicated	
+	}
+
+	option = {
+		name = PODcanon_chars.98.c
+		
+		set_character_faith = faith:thousandhells_emma_o
+		
+	}
+	
+}
+
+
+PODcanon_chars.99 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.99.t
+	desc = PODcanon_chars.99.desc
+	theme = martial_strategy_focus
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}	
+	right_portrait = {
+		character = character:793216
+		animation = personality_content
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.99.a	
+		
+		if = {
+			limit = {
+				has_trait = lifestyle_blademaster
+			}
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+               value = 100
+           }
+		}
+	}
+}
+
+
+PODcanon_chars.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = the_passion_bloodflowers
+	desc = PODcanon_chars.100.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}	
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+		show_as_tooltip = {
+			add_trait_force_tooltip = conqueror
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.100.a	
+		
+		faith:the_passion_bloodflowers = {
+			add_doctrine = revelations_piyau_hunger_doctrine
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.100.b
+		
+		faith:the_passion_bloodflowers = {
+			add_doctrine = revelations_piyau_sex_doctrine
+		}
+	}	
+	
+	option = {
+		name = PODcanon_chars.100.c
+		
+		faith:the_passion_bloodflowers = {
+			add_doctrine = revelations_piyau_glory_doctrine
+		}
+	}
+
+	after = {
+		#khan allies of piyau content
+		if = {
+			limit = {
+				character:795213 = {
+					is_alive = yes
+					is_landed = yes
+				}
+			}
+			trigger_event = {
+				id = PODcanon_chars.108
+				days = 13
+			}			
+		}
+		
+		if = {
+			limit = {
+				character:791112 = {
+					is_alive = yes
+					is_ai = yes 
+					has_title = title:h_scarlet_phoenix_court
+				}
+			}
+		character:791112 = {
+			trigger_event = {
+				id = PODcanon_chars.103
+				days = 10
+			}	
+			}			
+		every_player = {
+			limit = {	
+				capital_province = {
+					geographical_region = world_asia_southeast				
+				}
+				OR = {
+					is_vampire_trigger = yes
+					is_kueijin_trigger = yes
+				}
+			}	
+			trigger_event = {
+				id = PODcanon_chars.104
+				days = 11
+			}
+		}
+		}		
+	}		
+}
+
+PODcanon_chars.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.101.t
+	desc = PODcanon_chars.101.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}	
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	
+		add_martial_skill = 5
+		add_prowess_skill = 10
+		
+		every_relation = {
+			type = coterie_member	
+
+			add_prowess_skill = 10
+			add_martial_skill = 5
+		}
+		every_directly_owned_province  = {
+			limit = {
+				has_special_building_slot = no
+			}
+			add_special_building = bloodflowers_fleshpits_01
+		}			
+	}
+	
+	option = {
+		name = PODcanon_chars.101.a	
+		
+		house ?= {
+			if = {
+				limit = {
+					has_house_modifier = house_penangallan_modifier
+				}
+			remove_house_modifier = house_penangallan_modifier
+			}
+			add_house_modifier = house_penangallan_improved_modifier
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.101.b
+		
+		house ?= {
+		add_house_modifier = house_penangallan_run_modifier
+		}
+	}	
+	
+	option = {
+		name = PODcanon_chars.101.c
+		
+		house ?= {
+		add_house_modifier = house_penangallan_protect_modifier
+		}
+	}	
+}
+
+
+PODcanon_chars.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.102.t
+	desc = PODcanon_chars.102.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}	
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+			
+	}
+	
+	option = {
+		name = PODcanon_chars.102.a	
+
+		custom_tooltip = {
+			text = piyau_third_decision_tt
+			
+		every_ruler = {
+			limit = {
+				NOT = { has_faith = faith:the_passion_bloodflowers }
+				NOT = { has_trait = zealous } # Never!
+				is_kueijin_trigger = yes
+				is_ai = yes
+				is_female = yes
+				NOT = { has_trait = dharma7 }
+				NOT = { has_trait = dharma8 }
+				NOT = { has_trait = dharma9 }
+				NOT = { has_trait = dharma10 }
+			}
+		set_character_faith = faith:the_passion_bloodflowers	
+		}
+		every_held_title = {
+			limit = { tier = tier_county }
+			set_county_faith = faith:the_passion_bloodflowers
+		}
+		}		
+	}
+	
+}
+
+PODcanon_chars.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.103.t
+	desc = PODcanon_chars.103.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = character:791112
+		animation = personality_zealous
+		}	
+	right_portrait = {
+		character = character:791113
+		animation = marshal
+		}	
+		
+	trigger = { 
+		character:791112 = {
+			is_alive = yes
+			is_ai = yes 
+			has_title = title:h_scarlet_phoenix_court
+		}	
+	}	
+
+		
+	immediate = {	
+			
+	}
+	
+	option = {
+		name = PODcanon_chars.103.a	
+
+		destroy_title = title:h_scarlet_phoenix_court
+
+		character:791112 = {
+			if = {
+				limit = {
+					has_trait = dharma9
+				}
+				remove_trait = dharma9
+				add_trait = dharma10
+			}
+			#Just in case the AI had a very early stress brak
+			else_if = {
+				limit = {
+					has_trait = dharma8
+				}
+				remove_trait = dharma8
+				add_trait = dharma10
+			}
+			
+			death = {
+				death_reason = death_hundred_clouds
+			}
+		}
+	}
+	
+}
+
+PODcanon_chars.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.103.t
+	desc = PODcanon_chars.103.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = character:791112
+		animation = personality_zealous
+		}	
+	right_portrait = {
+		character = character:791113
+		animation = marshal
+		}	
+		
+	trigger = { 
+	}	
+
+		
+	immediate = {	
+			
+	}
+	
+	option = {
+		name = PODcanon_chars.103.a	
+	}
+	
+}
+
+PODcanon_chars.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.105.t
+	desc = PODcanon_chars.105.desc
+	theme = ventrue_coa
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}
+		
+	immediate = {
+		}
+	
+	option = {
+		name = PODcanon_chars.105.a
+		custom_tooltip = livonian_orders_tooltip
+		remove_short_term_gold = 50
+		add_prestige = -50
+		add_character_flag = vamp_livonia_exception_flag
+	}
+	
+	option = {
+		name = PODcanon_chars.105.b
+	}
+}
+
+PODcanon_chars.106 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.106.t
+	desc = PODcanon_chars.106.desc
+	theme = lasombra_coa
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	after = {
+		trigger_event = {
+			id = PODcanon_chars.107
+			days = 10
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.106.a
+		add_diplomacy_lifestyle_perk_points = 4
+	}
+	
+	option = {
+		name = PODcanon_chars.106.b
+		custom_tooltip = aphro_saturn_court_tooltip
+		add_character_flag = aphro_saturn_court_special
+	}
+	
+	option = {
+		name = PODcanon_chars.106.c
+		add_prestige = 500
+	}
+}
+
+PODcanon_chars.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.107.t
+	desc = PODcanon_chars.107.desc
+	theme = lasombra_coa
+	left_portrait = {
+		character = root
+		animation = personality_rational
+		}
+		
+	trigger = { 
+		POD_vampire_can_show_up_in_events = { CHARACTER = scope:jack } 
+		scope:jack = {
+			OR = {
+				target_is_vassal_or_below = root
+				is_courtier_of = root
+			}
+		}
+		character:790420 = {
+			is_alive = yes		
+			is_ai = yes
+		}
+	}
+	
+	option = {
+		name = PODcanon_chars.107.a
+		if = {
+			limit = {
+				character:790420 = {
+					is_playable_character = yes 
+					}
+				}
+				character:790420 = {
+					depose = yes
+				}
+			}
+		
+		add_courtier = character:790420
+		set_relation_friend = { reason = friend_common_ground target = character:790420 } 
+	}
+	
+	option = {
+		name = PODcanon_chars.107.b
+		
+		scope:jack = {
+			add_character_modifier = { modifier = pod_emperor_hand_modifier }
+		}
+	}
+}
+
+
+PODcanon_chars.108 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.108.t
+	desc = PODcanon_chars.108.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}	
+	right_portrait = {
+		character = character:795213
+		animation = flirtation
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.108.a	
+		
+		custom_tooltip = piyau_khans_tt
+		
+		ai_chance = 100
+		
+		character:795213 = {
+			trigger_event = {
+				id = PODcanon_chars.109
+				days = 1
+			}	
+		}			
+	}
+	
+	option = {
+		name = PODcanon_chars.108.b
+		
+		if = {
+			limit = {
+				has_relation_lover = character:795213
+			}	
+		remove_relation_lover = character:795213
+		}
+		
+		ai_chance = 0
+	}		
+}
+
+
+PODcanon_chars.109 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.108.t
+	desc = PODcanon_chars.109.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}	
+	right_portrait = {
+		character = character:791113
+		animation = personality_zealous
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.109.a	
+		
+		POD_setup_tributary = { SUZERAIN = character:791113   TRIBUTARY = root } 	
+		
+		hidden_effect = {
+		if = {
+			limit = {
+				character:795219 = {
+					is_playable_character = yes 
+					}
+				}
+				character:795219 = {
+					depose = yes
+				}
+		}
+		if = {
+			limit = {
+				character:795220 = {
+					is_playable_character = yes 
+					}
+				}
+				character:795220 = {
+					depose = yes
+				}
+		}
+		if = {
+			limit = {
+				character:795221 = {
+					is_playable_character = yes 
+					}
+				}
+				character:795221 = {
+					depose = yes
+				}
+		}
+		}	
+		
+		character:791113 = {
+		
+		add_courtier = character:795219	
+		
+		reverse_add_opinion = {
+			modifier = respect_opinion
+			target = character:795219
+			opinion = 150
+		}
+		
+		add_courtier = character:795220		
+
+		reverse_add_opinion = {
+			modifier = respect_opinion
+			target = character:795220
+			opinion = 150
+		}
+		
+		add_courtier = character:795221		
+
+		reverse_add_opinion = {
+			modifier = respect_opinion
+			target = character:795221
+			opinion = 150
+		}
+		
+		}
+		
+		ai_chance = 100
+		
+		character:791113 = {
+			send_interface_toast = {
+				title = POD_anteshuntyamakings.50.effect.success.desc
+				left_icon = root
+				
+				add_character_flag = durga_chosen_exception_flag
+			
+				show_as_tooltip = {				
+					add_courtier = character:795219	
+					add_courtier = character:795220
+					add_courtier = character:795221	
+				}
+			}
+		}			
+	}
+	
+	option = {
+		name = PODcanon_chars.108.b
+		
+		if = {
+			limit = {
+				has_relation_lover = character:791113
+			}	
+		remove_relation_lover = character:791113
+		}
+		
+		character:791113 = {
+			send_interface_toast = {
+				title = willing_embrace_failure.tooltip
+				left_icon = root
+
+			show_as_tooltip = {
+				if = {
+					limit = {
+						has_relation_lover = character:795213
+					}	
+				remove_relation_lover = character:795213
+				}				
+				}
+			}
+		}
+		
+		ai_chance = 0
+	}		
+}
+
+
+PODcanon_chars.110 = {
+	type = character_event
+	content_source = dlc_POD
+	title = folch_decision
+	desc = PODcanon_chars.110.desc
+	theme = martial_strategy_focus 
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		}	
+	right_portrait = {
+		character = character:792273
+		animation = worry
+	}
+				
+	trigger = { 	
+	}	
+
+		
+	immediate = {	
+	}
+	
+	option = {
+		name = PODcanon_chars.110.a	
+		
+		character:792273 = {
+			release_from_prison = yes
+		}
+		
+		add_courtier = character:792273		
+
+		reverse_add_opinion = {
+			modifier = respect_opinion
+			target = character:792273
+			opinion = 150
+		}
+				
+	}
+	
+	option = {
+		name = PODcanon_chars.110.b
+		
+		character:792273 = {
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+		
+		add_stress = massive_stress_loss
+		add_prestige = 250
+	}	
+
+	option = {
+		name = PODcanon_chars.110.c
+		
+	}	
+}
+
+PODcanon_chars.111 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.111.t
+	desc = PODcanon_chars.111.desc
+	theme = ventrue
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = character:792175
+		animation = flirtation
+	}
+	lower_center_portrait = {
+		character = character:790101
+	}
+	
+	trigger = {
+		character:792175 = {
+			is_ai = yes
+		}
+		character:790201 = {
+			is_ai = yes
+		}		
+	}
+
+	immediate = {
+	}
+	
+	option = {
+		name = PODcanon_chars.111.a	
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+		title:k_romagna = {
+			change_title_holder = {
+				holder = character:790101
+				change = scope:change
+			}	
+		}
+	
+		resolve_title_and_vassal_change = scope:change
+		
+		if = {
+			limit = {
+				character:790201 = {
+					is_playable_character = yes 
+				}
+			}
+			character:790201 = {
+				depose = yes
+			}
+		}
+			
+		character:790201 = {
+			if = {
+				limit = {
+					has_trait = torpor
+				}
+				remove_trait = torpor
+			}
+		}
+		
+		add_courtier = character:790201
+	
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		
+		character:792175 = {
+			change_liege = {
+				liege = root
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	
+		ai_chance = 100
+	}
+
+	option = {
+		name = PODcanon_chars.111.b
+
+		ai_chance = 0
+	}
+}
+
+PODcanon_chars.112 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.112.t
+	desc = PODcanon_chars.112.desc
+	theme = gangrel_coa
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+		}
+		
+	trigger = {
+		current_date <= 1230.1.30
+		current_date >= 1230.1.1
+		has_ep3_dlc_trigger = yes
+		}
+		
+	immediate = {
+		}
+
+	option = {
+		name = PODcanon_chars.112.a
+
+		add_internal_flag = dangerous
+		
+		custom_tooltip = pod_generic_landless_tooltip
+
+		POD_transfer_all_titles_to_character = {
+			CHARACTER = character:791783
+		}
+		
+		create_landless_adventurer_title_effect = {
+			REASON = flag:voluntary
+			FLAVOR_CHAR = root
+		}
+
+	}
+
+	option = {
+		name = PODcanon_chars.112.b
+	}
+}
+
+PODcanon_chars.113 = {
+	type = character_event
+	content_source = dlc_POD
+	title = PODcanon_chars.113.t
+	desc = PODcanon_chars.113.desc
+	theme = ventrue_coa
+	left_portrait = {
+		character = root
+		animation = personality_callous
+		}
+	right_portrait = {
+		character = character:790243
+		animation = personality_rational
+		}
+				
+	trigger = {
+		current_date <= 1230.1.30
+		current_date >= 1230.1.1
+		}
+
+	immediate = {
+		}
+	
+	option = {
+		name = PODcanon_chars.113.a
+		
+		POD_setup_tributary = { SUZERAIN = character:790243   TRIBUTARY = root }	
+
+		stress_impact = {
+			arrogant = medium_stress_gain
+		}
+		hidden_effect = {
+		character:790243 = {
+			send_interface_toast = {
+				title = PODcanon_chars.113.toast
+				right_icon = character:790244
+			
+			POD_setup_tributary = { SUZERAIN = character:790243   TRIBUTARY = root }	
+		}
+		}
+		}		
+		ai_chance = 40
+				
+	}
+	
+	option = {
+		name = PODcanon_chars.113.b
+		
+		ai_chance = 60
+	}
+}

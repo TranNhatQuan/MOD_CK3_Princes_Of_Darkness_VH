@@ -1,0 +1,269 @@
+﻿l_english:
+#Travel Start Events
+#Generic start (no activity)
+  travel_start_event.1000.t_murder:0 "Khởi Đầu Rùng Rợn"
+  travel_start_event.1000.t_sick:0 "Khởi Đầu Dè Dặt"
+  travel_start_event.1000.t_migrating: "Hướng Tới Đồng Cỏ Xanh Tốt Hơn"
+  travel_start_event.1000.t:0 "Một Khởi Đầu Mới"
+  travel_start_event.1000.intro_activity:1 "[ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của ta, [host.GetTitledFirstName], đang tổ chức một [ROOT.Char.GetInvolvedActivity.GetShortName] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành."
+  travel_start_event.1000.intro_my_activity:1 "Ta sẽ tổ chức một [ROOT.Char.GetInvolvedActivity.GetShortName] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành."
+  travel_start_event.1000.desc_sick:0 "Ta hoàn toàn nhận thức được rằng việc lên đường trong tình trạng hiện tại của mình — khi bệnh tật đã là một rủi ro — chỉ khiến hành trình càng thêm nguy hiểm ngoài những hiểm họa vốn có của việc du hành. Tuy vậy, dù trong trạng thái tệ hại này, mọi việc vẫn phải tiếp diễn.\n\nHãy lên đường tới [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và mong rằng [ROOT.Char.GetFaith.HighGodName] sẽ dõi theo chuyến đi của chúng ta."
+  travel_start_event.1000.desc:0 "Mọi thứ đã được chuẩn bị đầy đủ, và cuối cùng chúng ta cũng đến lúc bắt đầu hành trình từ [ROOT.Char.GetCurrentLocation.GetName] tới điểm đến tiếp theo tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName].\n\nKhi chúng ta rời khỏi lãnh địa và những con ngựa bắt đầu bước trên vùng đất mới, ta tin chắc rằng chúng ta sẽ sớm trở về, vẫn nguyên vẹn."
+  travel_start_event.1000.desc_migrating: "Cả trại vang lên như thác nước gầm: trẻ con chạy khắp nơi, gia súc kêu la phản đối, người lớn tất bật hoàn tất việc đóng gói.\n\nHàng chục, hàng chục ký ức được buộc vội trong những bó hành lý và giá đỡ.\n\nTa nhìn lần cuối [ROOT.Char.GetCurrentLocation.GetName] trong khi vỗ nhẹ vào sườn ngựa. Ta chỉ có thể hy vọng [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] sẽ đối xử tốt với chúng ta như nơi này từng làm."
+
+  travel_start_event.1010.tt.tournament.every_knight:2 "Vì Ngài đang tham dự một [GetActivityType( 'activity_tournament' ).GetName], mọi [knight|E] [unlanded|E] khả dụng của Ngài sẽ đi cùng để thi đấu"
+  travel_start_event.1000.a:0 "Ta không thể chờ đợi thêm!"
+  travel_start_event.1000.a_cynical:0 "Ta đoán là chúng ta phải đi thôi..."
+  travel_start_event.1000.a_craven:0 "Hy vọng mọi chuyện sẽ ổn..."
+  travel_start_event.1000.a_hajj:0 "Ta đã chờ đợi điều này cả đời."
+  travel_start_event.1000.a_hajj_revisit:0 "Ta nóng lòng được nhìn thấy những bức tường rực sáng lần nữa."
+  travel_start_event.1000.take_test: "Ta cần chứng minh năng lực của mình trong kỳ thi."
+  travel_start_event.1000.take_test_tt: "Vì [governors|E] [landed|E] không được phép tham gia kỳ thi, Ngài cần từ chức để mở khóa các [merit_levels|E] mới."
+
+ #Travelling to a Tournament
+  travel_start_event.1010.t_sick_tournament:0 "$activity_tournament$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1010.t_tournament:0 "$activity_tournament$: $travel_start_event.1000.t$"
+ ##Tournament
+  travel_start_event.1010.desc_tournament_intro:1 "[ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của ta, [ROOT.Char.GetInvolvedActivity.GetHost.GetTitledFirstName], đang tổ chức một cuộc thi [ROOT.Char.GetInvolvedActivity.GetShortName] gần [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành."
+  travel_start_event.1010.desc_sick_tournament:0 "\n\nDù cơ thể bệnh tật đang ảnh hưởng đến sức khỏe của ta, ta thề rằng mình sẽ không bỏ lỡ sự kiện này — một sự kiện hứa hẹn sẽ vô cùng ngoạn mục, được nhắc đến suốt nhiều năm."
+  travel_start_event.1010.desc_tournament:0 "\n\nChúng ta sẽ đại diện cho gia tộc [ROOT.Char.GetHouse.GetName] và khiến người dân [ROOT.Char.GetCulture.GetNameNoTooltip] tự hào."
+  travel_start_event.1010.desc_tournament_outro_negative:0 "\n\nHy vọng phần còn lại của [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetNameNoTooltip] sẽ không thối nát như [host.GetTitledFirstNameNoTooltip], nhưng chúng ta vẫn nên cảnh giác khi bước vào hang sư tử."
+  travel_start_event.1010.desc_tournament_outro_positive_culture:0 "\n\nTrong khi ở đó, chúng ta cũng nên tận dụng cơ hội để trải nghiệm văn hóa [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetCulture.GetNameNoTooltip]."
+  travel_start_event.1010.desc_tournament_outro_positive:0 "\n\nXa nhà, chúng ta cũng nên nhân cơ hội mở rộng tầm mắt và tận hưởng mọi sự hiếu khách."
+ ##My Tournament
+  travel_start_event.1010.desc_sick_my_tournament:1 "Không biết mình còn bao nhiêu thời gian, điều quan trọng là cuối cùng ta cũng tham dự cuộc thi [ROOT.Char.GetInvolvedActivity.GetShortName] mà ta đã dành rất lâu để tổ chức. Nghĩ lại, ta ước mình đã tổ chức nó ở thủ đô thay vì tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName]\n\nDù ta nhận ra sức khỏe yếu có thể là rủi ro nếu tham gia thi đấu, chắc chắn ta vẫn có nhiều [ROOT.Char.Custom('KnightCulturePluralNoTooltipLowercase')] đủ khả năng chiến đấu thay ta."
+  travel_start_event.1010.desc_my_tournament:1 "Tươi tỉnh và cảnh giác, các thành viên trong đoàn tùy tùng của ta háo hức lên đường tới cuộc thi [ROOT.Char.GetInvolvedActivity.GetShortName] mà ta tổ chức tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName]."
+  travel_start_event.1010.desc_my_tournament_outro_shy:0 "Đây hẳn sẽ là một sự kiện thành công và cũng mang lại thịnh vượng cho lãnh địa.\n\nHy vọng mọi người sẽ có khoảng thời gian vui vẻ và trân trọng công sức tổ chức."
+  travel_start_event.1010.desc_my_tournament_outro:0 "Chúng ta sẽ đến đó và chiến thắng.\n\nViệc phô bày sự giàu có và uy thế của ta trước mọi vị khách danh giá cũng không phải là điều tệ."
+
+ #Setting off on a Tour
+  travel_start_event.1020.t_sick_tour:0 "$activity_tour$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1020.t_tour_majesty:0 "$activity_tour$: Khởi Đầu Uy Nghi"
+  travel_start_event.1020.t_tour_tax:0 "$activity_tour$: Khởi Đầu Sinh Lợi"
+  travel_start_event.1020.t_tour_dread:0 "$activity_tour$: Khởi Đầu Đáng Sợ"
+  travel_start_event.1020.desc_tour_intro:1 "Đã đến lúc khởi hành cho [ROOT.Char.GetInvolvedActivity.GetShortName] của ta tại [ROOT.Char.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]. Triều đình của ta đã sẵn sàng, háo hức lên đường.\n\nĐiểm dừng đầu tiên sẽ là [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('next_stop_liege'))] của ta, [next_stop_liege.GetTitledFirstNamePossessive], [next_stop_liege.Custom('FortifiedBuilding')], tại [next_stop_liege.GetCapitalLocation.GetName];"
+  travel_start_event.1020.desc_sick_tour:1 "sẽ thật thú vị khi gặp gỡ người dân.\n\nDù sức khỏe kém, ta tin rằng chuyến [ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip] này sẽ được nhắc đến suốt nhiều năm."
+  travel_start_event.1020.desc_tour_majesty:2 "Ta mong được thăm [next_stop_liege.GetHerHim] và nhìn ngắm lãnh địa của mình, từng lãnh địa một.\n\nTa chắc rằng thần dân của [ROOT.Char.GetPrimaryTitle.GetNamePossessiveNoTooltip] sẽ nói về lòng nhân từ của ta trong thời gian dài."
+  travel_start_event.1020.desc_tour_tax:2 "Ta mong được giúp người dân đóng góp cho ngân khố vương quốc, bằng mọi cách có thể.\n\nSau chuyến đi này, thần dân của [ROOT.Char.GetPrimaryTitle.GetNamePossessiveNoTooltip] chắc chắn sẽ không còn dư thừa gì để giấu khỏi vương miện."
+  travel_start_event.1020.desc_tour_dread:3 "Ta mong được gieo rắc nỗi sợ hãi vào những thần dân đáng thương của mình, từng lãnh địa một.\n\nTa sẽ đảm bảo rằng thần dân của [ROOT.Char.GetPrimaryTitle.GetNamePossessiveNoTooltip] sẽ không bao giờ quên chuyến [ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip] này..."
+  due_to_activity_options_tt:0 "Do [activity_options|E] của Ngài:"
+
+ #Travelling to a Wedding
+  travel_start_event.1030.t_red_wedding:0 "$activity_wedding$: $travel_start_event.1000.t_murder$"
+  travel_start_event.1030.t_sick_wedding:0 "$activity_wedding$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1030.t_wedding:0 "$activity_wedding$: $travel_start_event.1000.t$"
+ ##Red Wedding
+  travel_start_event.1030.desc_sick_red_wedding:0 "Chuông tang vang lên cho rất nhiều người, kể cả ta. Đã đến lúc khởi hành tới [ROOT.Char.GetInvolvedActivity.GetShortName] mà ta đã tổ chức tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName].\n\nCăn bệnh của ta sẽ không ngăn cản điều cần phải xảy ra, và [ROOT.Char.GetInvolvedActivity.GetNameNoTooltip] này sẽ và phải diễn ra. Ta sẽ đảm bảo rằng tất cả những ai còn sống sót sẽ thực sự nhớ mãi lễ cưới này."
+  travel_start_event.1030.desc_red_wedding:0 "Cũng như đã đến lúc ta và đoàn tùy tùng rời đi để đến [ROOT.Char.GetInvolvedActivity.GetShortName] của mình tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName]; thì cũng đã đến lúc các vị khách của [ROOT.Char.GetInvolvedActivity.GetNameNoTooltip] rời khỏi thế gian này.\n\nNếu sự kiện này diễn ra đúng như kế hoạch, lễ cưới này sẽ không sớm bị lãng quên... bởi những kẻ còn sống."
+ 
+
+ ##Host Wedding
+  travel_start_event.1030.desc_host_wedding:0 "[ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của ta, [host.GetTitledFirstName], đang tổ chức chính [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetPhase.GetName] của [host.GetHerHis] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành.\n\n[host.GetSheHe|U] sẽ bước vào [host.Custom('GetCulturallyAppropriateMarriageReference')] với [host_spouse_to_be.GetTitledFirstName]"
+  travel_start_event.1030.desc_host_wedding_negative:0 "và ta sẽ có mặt để chế giễu họ."
+  travel_start_event.1030.desc_host_wedding_positive:0 "và ta sẽ có mặt để chúc phúc cho sự kết hợp của họ."
+  travel_start_event.1030.desc_host_wedding_default:0 "và đám cưới hẳn sẽ khá dễ chịu, như hầu hết các đám cưới khác."
+
+  travel_start_event.1030.desc_host_wedding_outro_negative:0 "\n\nCầu cho cuộc hôn nhân của họ thối rữa như con cá để cả tháng — và nếu không gì khác, ta vẫn có thể lợi dụng lòng hiếu khách của [host.GetTitledFirstNamePossessiveNoTooltip] để thưởng thức đồ ăn và thức uống ngon."
+  travel_start_event.1030.desc_host_wedding_outro_positive:0 "\n\nCầu cho hôn nhân của họ dồi dào như mùa gặt mùa thu; và ngọt ngào gấp đôi."
+  travel_start_event.1030.desc_host_wedding_outro_default:0 "\n\nTa mong được thư giãn và tận hưởng những lễ hội đi kèm với dịp này."
+
+ ##Wedding
+  travel_start_event.1030.desc_wedding:1 "[ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của ta, [host.GetTitledFirstName], đang tổ chức một [ROOT.Char.GetInvolvedActivity.GetShortName] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành.\n\nNghi lễ sẽ kết hợp [host.GetHerHis] [host.Custom2('RelationToMe', SCOPE.sC('first_spouse'))] [first_spouse.GetTitledFirstName] và [host.Custom2('RelationToMe', SCOPE.sC('second_spouse'))] [second_spouse.GetTitledFirstName] trong [host.Custom('GetCulturallyAppropriateMarriageReference')]."
+
+  travel_start_event.1030.desc_wedding_outro_sick:0 "\n\nDù sức khỏe của ta đang suy yếu, ta vẫn mong chờ sự kiện này để có thể thư giãn và tận hưởng lễ hội."
+  travel_start_event.1030.desc_wedding_outro_negative:0 "$travel_start_event.1040.desc_feast_outro_negative$"
+  travel_start_event.1030.desc_wedding_outro_positive:0 "\n\nTa chắc rằng [host.GetTitledFirstNameNoTooltip] đã chuẩn bị một buổi lễ đáng nhớ; và ta mong được tham dự."
+  travel_start_event.1030.desc_wedding_outro_default:0 "$travel_start_event.1030.desc_host_wedding_outro_default$"
+ 
+
+ ##My Literal Wedding
+  travel_start_event.1030.desc_my_spouse_wedding:0 "Ta sẽ tổ chức chính [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetPhase.GetName] của mình tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành.\n\nQua sự kết hợp này, ta sẽ kết hôn với [my_spouse_to_be.GetTitledFirstName], và đây chắc chắn sẽ là một lễ kỷ niệm đáng nhớ."
+
+  travel_start_event.1030.desc_my_spouse_wedding_outro_negative:0 "\n\nDù ta không quá mến [my_spouse_to_be.GetTitledFirstNameNoTooltip], ta chắc rằng chúng ta sẽ hòa hợp."
+  travel_start_event.1030.desc_my_spouse_wedding_outro_positive:0 "\n\nTa rất hào hứng được cùng [ROOT.Char.Custom('PartnerOpinionHighDescription')] [my_spouse_to_be.GetTitledFirstNameNoTooltip] trải qua phần đời còn lại."
+  travel_start_event.1030.desc_my_spouse_wedding_outro_default:0 "\n\nTa chắc rằng sẽ rất thích dành phần đời còn lại bên [my_spouse_to_be.GetTitledFirstNameNoTooltip]."
+ 
+ ##My Wedding
+  travel_start_event.1030.desc_my_wedding:0 "$travel_start_event.1000.intro_my_activity$\n\nChúng ta sẽ cùng kết hợp [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('first_spouse'))] [first_spouse.GetTitledFirstName] và [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('second_spouse'))] [second_spouse.GetTitledFirstName] trong [ROOT.Char.Custom('GetCulturallyAppropriateMarriageReference')], vì lợi ích của tất cả mọi người tham gia."
+ 
+  travel_start_event.1030.desc_my_wedding_outro_sick:0 "\n\nDù sức khỏe của ta đang suy yếu, ta vẫn sẽ cố gắng để mọi khách mời đều cảm thấy ấn tượng và được quan tâm."
+  travel_start_event.1030.desc_my_wedding_outro_negative:0 "\n\nBây giờ, cặp đôi hạnh phúc nên biết ơn vì điều này."
+  travel_start_event.1030.desc_my_wedding_outro_positive:0 "\n\nTa không thể hào hứng hơn khi thấy hai người này cùng về chung một nhà."
+  travel_start_event.1030.desc_my_wedding_outro_default:0 "\n\nĐây sẽ là một lễ cưới đẹp, và khách mời của chúng ta sẽ phải ấn tượng."
+
+
+
+ 
+ #Travelling to a Feast
+  travel_start_event.1040.t_murder_feast:0 "$activity_feast$: $travel_start_event.1000.t_murder$"
+  travel_start_event.1040.t_sick_feast:0 "$activity_feast$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1040.t_feast:0 "$activity_feast$: $travel_start_event.1000.t$"
+ ##Feast
+  travel_start_event.1040.desc_feast:1 "Người [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của Ta, [host.GetTitledFirstName], đang tổ chức một [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetPhase.GetName] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName] và đã đến lúc chúng ta khởi hành."
+  travel_start_event.1040.desc_feast_celebration:0 "\n\n[ROOT.Char.GetInvolvedActivity.GetNameNoTooltip|l] được tổ chức để tôn vinh những thành tựu và chiến công gần đây của [celebratory_guest.GetTitledFirstNamePossessive]."
+  travel_start_event.1040.desc_feast_outro_sick:0 "\n\nDù sức khỏe đang suy yếu, Ta tin rằng tham dự sự kiện này sẽ giúp Ta thư giãn và giảm bớt căng thẳng."
+  travel_start_event.1040.desc_feast_outro_negative:0 "\n\nTa cần phải giữ cảnh giác cả với lưng lẫn thức ăn của mình trong chuyến viếng thăm này, vì [host.GetTitledFirstNameNoTooltip] là một kẻ khó lường."
+  travel_start_event.1040.desc_feast_outro_positive:1 "\n\nTa rất mong được dành thêm thời gian với [host.GetTitledFirstNameNoTooltip] trong [ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip] này."
+  travel_start_event.1040.desc_feast_outro_default:0 "\n\nTa mong được thưởng thức [host.Custom('RegionalDrink')] của vùng [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetNameNoTooltip] cũng như các món ăn địa phương."
+ ##My Murder Feast
+  travel_start_event.1040.desc_sick_murder_feast:0 "Đã đến lúc xét xử những vị khách trong [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetPhase.GetName] [ROOT.Char.GetInvolvedActivity.GetShortName] của Ta.\n\nChúng ta sẽ khởi hành tới [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName], nơi bữa tiệc đặc biệt của Ta sẽ diễn ra — và Ta phải nhanh chóng trước khi bản thân rời khỏi cõi đời này."
+  travel_start_event.1040.desc_murder_feast:0 "Ta sẽ giới thiệu cho các vị khách của mình những nghi thức đặc biệt khi tổ chức [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetPhase.GetName] [ROOT.Char.GetInvolvedActivity.GetShortName] tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetName].\n\nMọi thứ đã được chuẩn bị tỉ mỉ, và Ta chắc chắn họ sẽ cảm thấy được chào đón. Đây sẽ là một bữa tiệc đáng nhớ... cho những ai còn sống sót."
+ #My Feast
+  travel_start_event.1040.desc_my_feast:0 "$travel_start_event.1000.intro_activity$"
+  travel_start_event.1040.desc_my_feast_celebration_host:2 "\n\n[ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip|l] được tổ chức để tôn vinh Ta và tất cả những thành tựu lẫy lừng của Ta."
+  travel_start_event.1040.desc_my_feast_celebration:0 "\n\n[ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip|l] này được tổ chức để tôn vinh [celebratory_guest.GetTitledFirstName], một con người phi thường xứng đáng nhận được sự tôn kính đặc biệt."
+  travel_start_event.1040.desc_my_feast_outro_sick:0 "\n\nGần đây Ta không được khỏe, nhưng bữa tiệc này chắc chắn sẽ giúp Ta quên đi mọi chuyện."
+  travel_start_event.1040.desc_my_feast_outro_extrovert:1 "\n\nTa sẽ đảm bảo rằng [ROOT.Char.GetInvolvedActivity.GetShortNameNoTooltip|l] này là một sự kiện đáng nhớ; một sự kiện mà mọi người sẽ nhắc đến trong nhiều năm tới!"
+  travel_start_event.1040.desc_my_feast_outro_introvert:0 "\n\nDù Ta không mấy hứng thú với những sự kiện kiểu này, nhưng đôi khi chúng là điều cần thiết."
+  travel_start_event.1040.desc_my_feast_outro:0 "\n\nTa rất mong được thưởng thức một bữa tiệc ngon và xả stress!"
+
+  travel_start_event.1040.a:0 "Đó là điều mà họ mong muốn."
+
+ #Travelling to a Play Date
+  travel_start_event.1050.t_sick_playdate:0 "$activity_playdate$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1050.t_playdate:0 "$activity_playdate$: $travel_start_event.1000.t$"
+ ##Play Date
+  travel_start_event.1050.desc_playdate:0 "$travel_start_event.1000.intro_activity$"
+  travel_start_event.1050.desc_sick_playdate:0 "\n\nDù gần đây Ta không được khỏe, hy vọng mọi thứ vẫn suôn sẻ và Ta sẽ có thời gian vui vẻ."
+  travel_start_event.1050.desc_playdate_negative:0 "\n\nDù không phải là người quá ưa thích [host.GetTitledFirstName], Ta vẫn mong được dành thời gian với Bạn Bè cùng trang lứa."
+  travel_start_event.1050.desc_playdate_positive:0 "\n\nTa rất mong được ở bên [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] [host.GetTitledFirstName], và không thể chờ đến lúc chúng Ta đến nơi!"
+  travel_start_event.1050.desc_playdate_default:0 "\n\nTa mong được dành thời gian với Bạn Bè và khám phá khu đất tại [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetNameNoTooltip]."
+  travel_start_event.1050.desc_playdate_outro:0 "\n\nAi mà biết, có thể Ta còn sẽ [ROOT.Char.Custom('ChildhoodTraitActivity')]."
+ ##My Play Date
+  travel_start_event.1050.desc_my_playdate:0 "$travel_start_event.1000.intro_my_activity$"
+  travel_start_event.1050.desc_my_playdate_learning:0 "\n\nTa có những kế hoạch thú vị để chúng Ta vừa học hỏi, vừa có cơ hội kết bạn mới."
+  travel_start_event.1050.desc_my_playdate_bossy:0 "\n\nNhững đứa trẻ này sẽ biết rằng ở nơi của Ta, ý chí của Ta là luật pháp. Nhưng Ta chắc rằng chúng sẽ hợp tác tốt."
+  travel_start_event.1050.desc_my_playdate_pensive:0 "\n\nĐối mặt với Bạn Bè thực sự không phải điều Ta muốn lúc này hay… nói chung là bao giờ cả.\n\nDù không mấy ưa thích tình huống này, Ta đoán Ta cần tỏ ra dũng cảm và tham gia theo những sở thích này để giữ vị thế xã hội của mình."
+  travel_start_event.1050.desc_my_playdate_victim:0 "\n\n[playdate_victim.GetTitledFirstName|U] sẽ có mặt, nên ít nhất đối với Ta, đây hứa hẹn sẽ là khoảng thời gian vui vẻ.\n\nTrình diễn khu đất [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetNameNoTooltip] cũng sẽ rất thú vị."
+  travel_start_event.1050.desc_my_playdate_default:0 "\n\nCác quan lại và Ta đã lên kế hoạch nhiều hoạt động để tham gia, và Ta rất mong được đón tiếp Bạn Bè."
+  travel_start_event.1050.desc_my_playdate_outro:0 "\n\nSẽ rất vui và là cơ hội tuyệt vời để Ta khoe khu đất [ROOT.Char.GetTravelPlan.GetData.GetNextDestination.GetProvince.GetNameNoTooltip]."
+
+  travel_start_event.1051.t:0 "$activity_playdate$: Khởi hành đi chơi"
+  travel_start_event.1051.many:0 "Con [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('child_1'))] của Ta, [child_1.GetTitledFirstName], cùng với [child_2.GetTitledFirstName] và những đứa trẻ khác,"
+  travel_start_event.1051.three:0 "Con [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('child_1'))] của Ta, [child_1.GetTitledFirstName], cùng với [child_2.GetTitledFirstName] và [child_3.GetTitledFirstName],"
+  travel_start_event.1051.two:0 "Con [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('child_1'))] của Ta, [child_1.GetTitledFirstName], cùng với [child_2.GetTitledFirstName],"
+  travel_start_event.1051.one:0 "Con [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('child_1'))] của Ta, [child_1.GetTitledFirstName],"
+  travel_start_event.1051.desc:0 "đã được [host.GetTitledFirstName] mời đến buổi tụ họp với Bạn Bè cùng trang lứa."
+  travel_start_event.1051.single:0 "\n\n[child_1.GetSheHe|U] đã chuẩn bị xong và rõ ràng háo hức rời đến [host.GetCapitalLocation.GetNameNoTooltip]."
+  travel_start_event.1051.multiple:0 "\n\nHọ đã chuẩn bị xong và rõ ràng háo hức rời đến [host.GetCapitalLocation.GetNameNoTooltip]."
+  travel_start_event.1051.a_cynical:0 "Thôi được..."
+  travel_start_event.1051.a:0 "Chúc vui vẻ, [ROOT.Char.Custom2('RelationToMeShort', SCOPE.sC('child'))]!"
+  travel_start_event.1051.a.multiple:0 "Chúc vui vẻ, các con!"
+  travel_start_event.1051.b:0 "Ta nghĩ là không!"
+  playdate_depart_tt:0 "[THIS.Char.GetTitledFirstName] khởi hành đến [host.GetInvolvedActivity.GetName]"
+  playdate_blocked_tt: "Tất cả các con hoặc người được bảo hộ của Ngài đã được mời đến [host.GetInvolvedActivity.GetName]"
+  playdate_forbidden_title:0 "$activity_playdate$ Bị Cấm"
+  playdate_forbidden_tt:0 "[carer.GetTitledFirstName] cấm [child_1.GetFirstName] và những đứa trẻ khác tham dự $activity_playdate$ của Ngài"
+  playdate_forbidden_single_tt:0 "[carer.GetTitledFirstName] cấm [child_1.GetFirstName] tham dự $activity_playdate$ của Ngài"
+
+ #Going on a Pilgrimage
+  travel_start_event.1060.t_sick_pilgrimage:0 "$activity_pilgrimage$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1060.t_hajj:0 "Hajj"
+  travel_start_event.1060.t_pilgrimage:0 "$activity_pilgrimage$: $travel_start_event.1000.t$"
+  travel_start_event.1060.desc_sick_pilgrimage:2 "Ta có thể cảm nhận trong cơ thể mình; cơn đau nhẹ và sự suy nhược chậm chạp đi kèm với bệnh tật của Ta. Trong những ngày tăm tối nhất, điều duy nhất giữ Ta sống là biết rằng [ROOT.Char.GetFaith.HighGodName] có một kế hoạch cho chúng Ta.\n\nTuy nhiên, khi thiếu sự hiện diện của [ROOT.Char.GetFaith.HighGodHerHis], giờ đây Ta nhận ra rằng Ta phải thực hiện [ROOT.Char.GetInvolvedActivity.GetShortName] này đến [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetLocation.GetCounty.GetTitle.GetNameNoTier] để gần gũi hơn với [ROOT.Char.GetFaith.HighGodNameAlternate]. Đây cũng là một tấm chăn bình yên cho tâm hồn Ta, để khi Ta ra đi, Ta không còn gì phải sợ."
+  travel_start_event.1060.desc_hajj_pilgrimage:0 "Đã đến lúc Ta thực hiện chuyến hành hương đến Mecca. Đây là lệnh truyền, cũng như tất cả người Hồi giáo khác, để thể hiện sự phục tùng đối với [ROOT.Char.GetFaith.HighGodName]."
+  travel_start_event.1060.desc_pilgrimage:2 "Trong khi chuẩn bị cho chuyến đi, Ta có cảm giác thanh thản và biết rằng mọi thứ sẽ ổn thôi.\n\nTa rất vui khi khởi hành [ROOT.Char.GetInvolvedActivity.GetShortName] này đến [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetLocation.GetCounty.GetTitle.GetNameNoTier] để gần gũi hơn với [ROOT.Char.GetFaith.HighGodName]; và giờ hơn bao giờ hết Ta cảm thấy chắc chắn rằng [ROOT.Char.GetFaith.HighGodNameSheHe] sẽ che chở Ta trên hành trình."
+  travel_start_event.1060.tt.random_pilgrim_counter:1 "Ngài đã thêm [THIS.Char.MakeScope.Var('rando_pilgrim_counter').GetValue] [THIS.Char.Custom('GetPilgrimSingularPlural')] tiềm năng vào [THIS.Char.GetInvolvedActivity.GetShortName] đến [THIS.Char.GetInvolvedActivity.GetCurrentPhase.GetLocation.GetCounty.GetTitle.GetNameNoTier]"
+  travel_start_event.1060.desc_yatra_pilgrimage: "Khi Ta bắt đầu [Glossary('Yatra', 'YATRA_GLOSS')], Ta tràn đầy cảm giác phấn khích lẫn lo lắng. Ta nhắc nhở bản thân rằng hành trình cũng quan trọng như đích đến. Bất kỳ khó khăn nào Ta phải chịu cũng chính là một hành động tôn kính.\n\nTa hy vọng rằng thực hiện [ROOT.Char.GetInvolvedActivity.GetShortName] này đến [ROOT.Char.GetInvolvedActivity.GetCurrentPhase.GetLocation.GetCounty.GetTitle.GetNameNoTier] sẽ giúp Ta gần gũi hơn với [ROOT.Char.GetFaith.HighGodName]."
+ #Yatra gloss
+  YATRA_GLOSS: "Tiếng Sanskrit có nghĩa là 'hành trình, đoàn rước'. Những người tham gia được gọi là Yatri."
+ #Travelling to a Hunt
+  travel_start_event.1070.t_sick_hunt:0 "$activity_hunt$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1070.t_hunt:0 "$activity_hunt$: $travel_start_event.1000.t$"
+ ##Hunt
+  travel_start_event.1070.desc_hunt:0 "$travel_start_event.1000.intro_activity$"
+  travel_start_event.1070.desc_hunt_negative:0 "Ta sẽ phải cẩn thận trong chuyến đi này; Ta không tin [host.GetTitledFirstNameNoTooltip] hơn mức Ta có thể quăng [host.GetHerHim]."
+  travel_start_event.1070.desc_hunt_positive:0 "Ta mong được dành nhiều thời gian hơn với [host.GetHerHim] của mình."
+  travel_start_event.1070.desc_hunt_default:0 "Ta nên tự hào đại diện cho nhà [ROOT.Char.GetHouse.GetName]."
+  travel_start_event.1070.desc_sick_hunt_outro:0 "\n\nVới sức khỏe đang suy yếu, hy vọng cuộc săn này sẽ giúp Ta giải tỏa tâm trí và giảm bớt căng thẳng."
+  travel_start_event.1070.desc_hunt_outro_standard:1 "\n\nSẽ là một môn thể thao thú vị, nếu sự kiện được tổ chức đúng cách."
+  travel_start_event.1070.desc_hunt_outro_dangerous:1 "\n\nChúng ta sẽ săn những sinh vật nguy hiểm; sự dũng cảm và khéo léo là điều tối quan trọng."
+  travel_start_event.1070.desc_hunt_outro_legendary:1 "\n\nCon mồi của chúng ta là một sinh vật huyền thoại, và con mồi sẽ thuộc về Ta..."
+  travel_start_event.1070.desc_hunt_outro_falconry:1 "\n\nSăn với chim là một thú vui cao quý; Ta chắc chắn sẽ xuất sắc."
+ ##My Hunt
+  travel_start_event.1070.desc_my_hunt:0 "$travel_start_event.1000.intro_my_activity$"
+  travel_start_event.1070.desc_my_hunt_hunter:1 "Cuối cùng cũng có cơ hội theo đuổi đam mê và rèn luyện kỹ năng."
+  travel_start_event.1070.desc_my_hunt_humble:1 "Ta mong được dành thời gian ngoài trời."
+  travel_start_event.1070.desc_my_hunt_arrogant:1 "Ta không nghi ngờ gì rằng Ta sẽ sớm trở về nhà, rực rỡ vinh quang."
+  travel_start_event.1070.desc_sick_my_hunt_outro:1 "\n\nDù sức khỏe không tốt, Ta sẽ cố gắng hết sức để làm hài lòng khách mời. Ta chắc chắn sự kiện này sẽ thú vị cho tất cả mọi người."
+  travel_start_event.1070.desc_my_hunt_outro_standard:1 "\n\nThật vậy, không gì sánh bằng một cuộc săn truyền thống!"
+  travel_start_event.1070.desc_my_hunt_outro_dangerous:1 "\n\nCon mồi của chúng ta sẽ dữ tợn; chắc chắn sẽ thu hút những kẻ liều lĩnh."
+  travel_start_event.1070.desc_my_hunt_outro_legendary:1 "\n\nCon mồi mà chúng ta theo đuổi là huyền thoại, nếu nó thực sự tồn tại..."
+  travel_start_event.1070.desc_my_hunt_outro_falconry:1 "\n\nKỹ năng của những con chim của Ta sẽ cho người khác thấy cách duy trì một cái lồng tốt."
+
+ #Travelling to a Witch Ritual
+  travel_start_event.1080.t_sick_witch_ritual:0 "$activity_witch_ritual$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1080.t_witch_ritual:0 "$activity_witch_ritual$: $travel_start_event.1000.t$"
+ ##Witch Ritual
+  travel_start_event.1080.desc_witch_ritual:0 "$travel_start_event.1000.intro_activity$"
+ 
+  travel_start_event.1080.desc_witch_ritual_negative:0 "\n\nDù Ta không quá ưa thích [host.GetTitledFirstNameNoTooltip], Ta vẫn mong chờ cơ hội chia sẻ kiến thức và học hỏi từ các đồng đạo khác."
+  travel_start_event.1080.desc_witch_ritual_positive:0 "\n\nVới tư cách là một [host.Custom('MagicUserTerm')] xuất sắc, [host.GetTitledFirstNameNoTooltip], Ta mong được dành thời gian với [host.GetHerHim] và các đồng đạo để chia sẻ kiến thức cũng như trau dồi kỹ năng."
+  travel_start_event.1080.desc_witch_ritual_default:0 "\n\nDành thời gian với các đồng đạo thường là một dịp hiếm hoi, và Ta mong được gặp gỡ các chị em và anh em, trau dồi kỹ năng cũng như chia sẻ kiến thức."
+
+  travel_start_event.1080.desc_sick_witch_ritual_outro:0 "\n\nDù sức khỏe không tốt, Ta chắc chắn không muốn bỏ lỡ sự kiện này."
+  travel_start_event.1080.desc_witch_ritual_outro:0 "\n\nĐây hứa hẹn sẽ là một sự kiện tuyệt vời, mà các mặt trăng sẽ còn nhớ lâu dài!"
+ ##My Witch Ritual
+  travel_start_event.1080.desc_my_witch_ritual:0 "$travel_start_event.1000.intro_my_activity$"
+  travel_start_event.1080.desc_my_witch_ritual_learned:0 "\n\nVới tư cách là một [ROOT.Char.Custom('MagicUserTerm')] uyên bác, Ta sẽ truyền đạt kiến thức của mình đến các chị em và anh em để tất cả chúng Ta đều có cuộc sống đầy kiến thức hơn."
+  travel_start_event.1080.desc_my_witch_ritual_mystic:0 "\n\nLà một nhà huyền bí và tiên tri, Ta thấy trước những điều tốt lành trong tương lai và trí tuệ của Ta sẽ được các đồng đạo trân trọng trong lễ kỷ niệm cho [ROOT.Char.GetFaith.WitchGodMistressMaster] của chúng Ta."
+  travel_start_event.1080.desc_my_witch_ritual_health:0 "\n\nVới kiến thức về cơ thể và bệnh tật, những bài dạy của Ta sẽ đảm bảo các đồng đạo khác cũng có thể sống lâu và khỏe mạnh."
+  travel_start_event.1080.desc_my_witch_ritual_default:0 "\n\nTa sẽ là một chủ nhà tuyệt vời cho tất cả chị em và anh em đã đi từ gần xa để tụ họp, gắn kết và tôn vinh [ROOT.Char.GetFaith.WitchGodMistressMaster] của chúng ta!"
+  travel_start_event.1080.desc_sick_my_witch_ritual_outro:0 "$travel_start_event.1080.desc_sick_witch_ritual_outro$"
+  travel_start_event.1080.desc_my_witch_ritual_outro:0 "$travel_start_event.1080.desc_witch_ritual_outro$"
+
+ #Travelling to an Imperial Examination
+  travel_start_event.1100.t_sick_exam: "$activity_imperial_examination$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1100.t_sick_exam_local: "$activity_local_examination$: $travel_start_event.1000.t_sick$"
+  travel_start_event.1100.t_exam: "$activity_imperial_examination$: $travel_start_event.1000.t$"
+  travel_start_event.1100.t_exam_local: "$activity_local_examination$: $travel_start_event.1000.t$"
+ ##Imperial Examination
+  travel_start_event.1100.desc_exam: "$travel_start_event.1000.intro_activity$\n\nĐồn đoán rằng vòng thi này sẽ tập trung vào "
+  travel_start_event.1100.desc_exam_learning: "kiến thức học thuật, vì vậy Ta đã tự ôn lại các tác phẩm kinh điển để chuẩn bị."
+  travel_start_event.1100.desc_exam_stewardship: "chức vụ cai trị, vì vậy Ta đã ôn lại kiến thức về tất cả các vấn đề của nhà nước."
+  travel_start_event.1100.desc_exam_martial: "chiến lược quân sự, vì vậy Ta đã dành thời gian nghiên cứu các ghi chép quân sự để chuẩn bị."
+ ##My Imperial Examination
+  travel_start_event.1100.desc_my_exam_imperial: "$travel_start_event.1000.intro_my_activity$\n\nVới tư cách là [ROOT.Char.GetTitleAsName], Ta mong thấy các học giả đức hạnh từ khắp các miền, tranh tài để chứng minh mình xứng đáng cai trị tất cả những ai ngước nhìn bầu trời."
+  travel_start_event.1100.desc_my_exam_local: "$travel_start_event.1000.intro_my_activity$\n\nTa mong những cư dân xuất sắc nhất nhanh chóng tham gia cùng Ta tại [location.GetName], sẵn sàng chứng minh giá trị của mình."
+  travel_start_event.1100.desc_sick_exam_outro:0 "\n\nDù cơ thể yếu ớt, Ta cũng không muốn bỏ lỡ sự kiện này."
+  travel_start_event.1100.desc_exam_wrong_gender: "\n\nTa biết vị trí của mình trong kỳ thi này sẽ bị nghi ngờ, nhưng Ta #EMP sẽ#! chứng tỏ năng lực của mình."
+  travel_start_event.1100.desc_exam_outro: "\n\nTa tự hỏi liệu mình có nổi bật giữa đám đông không."
+  travel_start_event.1100.desc_my_exam_outro:0 "\n\nAi sẽ nổi bật giữa đám đông đây, Ta tự hỏi?"
+  wrong_examination_gender_tt: "@warning_icon! #X Do luật giới tính của vương quốc [gender_law|E]#!"
+ 
+  tgp_wrong_examination_gender_female_modifier: "Bị từ chối tham gia"
+  tgp_wrong_examination_gender_female_modifier_desc: "Nhân vật này vẫn quyết định tham gia kỳ thi, bất chấp giới tính của mình."
+  tgp_wrong_examination_gender_male_modifier: "$tgp_wrong_examination_gender_female_modifier$"
+  tgp_wrong_examination_gender_male_modifier_desc: "$tgp_wrong_examination_gender_female_modifier_desc$"
+
+ #Travelling to a Mandala Ritual
+  travel_start_event.1110.t_sick: "Nghi lễ Mandala: $travel_start_event.1000.t_sick$"
+  travel_start_event.1110.t: "Nghi lễ Mandala: $travel_start_event.1000.t$"
+  travel_start_event.1110.desc: "Con đường gọi mời! Ta phải tiến lên và hướng dẫn các tín đồ của mình tại [contract_location.GetName], đảm bảo họ cảm nhận được sự che chở bởi lòng nhân từ của Ta."
+  travel_start_event.1110.desc_sick_outro: "\n\nDù cơ thể yếu ớt, Ta cần tập hợp sức mạnh và vượt qua."
+  travel_start_event.1110.desc_outro: "\n\nHãy xem họ có gì để đóng góp."
+ 
+ # Traveling to a Debate
+  travel_start_event.1120.t_special_guest: "Tranh luận: Thử thách"
+  travel_start_event.1120.t_sick_debate: "Tranh luận: $travel_start_event.1000.t_sick$"
+  travel_start_event.1120.t_debate: "Tranh luận: $travel_start_event.1000.t$"
+  travel_start_event.1120.desc_special_guest: "Người [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('host'))] của Ta, [host.GetTitledFirstName], muốn tranh luận với Ta về quyền lãnh đạo của [ROOT.Char.Custom('GetMyMovement')]."
+  travel_start_event.1120.desc_my_debate: "$travel_start_event.1000.intro_my_activity$"
+  travel_start_event.1120.desc_debate: "$travel_start_event.1000.intro_activity$"
+  travel_start_event.1120.desc_sick_debate_outro: "\n\nDù cơ thể yếu ớt, tương lai của [primary_title.GetName] vẫn là ưu tiên."
+  travel_start_event.1120.a_leader: "Chúng ta sẽ xem ai đủ trí tuệ để thành công."
+  travel_start_event.1120.desc_debate_outro: "\n\nNhiệm vụ của Ta là đảm bảo tương lai của [primary_title.GetName] được định hướng đúng."
+  travel_start_event.1120.desc.undecided: "\n\nTuy nhiên, Ta nhận được thông báo rằng mình phải thuộc một trong những phong trào thống trị để tham gia."
+  travel_start_event.1120.conservatives: "Ta sẽ tham gia [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'conservative_movement' ).GetNameNoTooltip]."
+  travel_start_event.1120.conservatives.tt: "Ngài tham gia [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'conservative_movement' ).GetName]"
+  travel_start_event.1120.expansionists: "Nhóm [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'expansion_movement' ).GetNameNoTooltip] là hợp lý nhất."
+  travel_start_event.1120.expansionists.tt: "Ngài tham gia [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'expansion_movement' ).GetName]"
+  travel_start_event.1120.advancement: "Nhóm [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'advancement_movement' ).GetNameNoTooltip] thu hút Ta."
+  travel_start_event.1120.advancement.tt: "Ngài tham gia [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'advancement_movement' ).GetName]"
+  travel_start_event.1120.pro_hegemon: "Nhóm [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'pro_hegemon_movement' ).GetNameNoTooltip] sẽ dẫn dắt chúng ta!"
+  travel_start_event.1120.pro_hegemon.tt: "Ngài tham gia [GetSituation('dynastic_cycle').GetTopParticipantGroupByKey( 'pro_hegemon_movement' ).GetName]"
+  travel_start_event.1120.bye: "Ta không muốn tham gia bất kỳ nhóm nào trong số này." 
+ 
+  travel_starts: "Khởi hành Hành trình"
+  travel_destination_activity: "Ngài đang tiến về [location.GetName] để tham dự [host.GetInvolvedActivity.GetName]"
+  travel_destination_location: "Ngài đang tiến về [location.GetName]"

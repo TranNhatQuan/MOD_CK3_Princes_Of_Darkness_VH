@@ -1,0 +1,4220 @@
+﻿
+# NOTE:
+# Do not use these trait categories for PoD traits:
+# - fame
+# - lifestyle
+# since they're used in script to identify traits that aren't from this mod
+
+
+# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+@endgame_trait_rd_cost = 999999
+
+##############
+## Splat
+##############
+
+
+werewolf = {
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	prowess_no_portrait = 12
+	life_expectancy = 40
+	years_of_fertility = 20
+	health = 1
+	monthly_prestige_gain_per_legitimacy_level_add = 0.3 #All Fera should have this
+	POD_terrain_umbra_aptitude_advantage = 0.5
+	POD_terrain_umbra_sense_advantage = 0.05
+	POD_terrain_umbra_spirit_wilds_access_cancel_negative_supply = yes
+	POD_terrain_umbra_deep_umbra_access_cancel_negative_supply = yes
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	flag = can_become_ancestor_spirit
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = lycanthropy_illegal
+		opinion_modifier = lycanthropy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = lycanthropy_shunned
+		opinion_modifier = lycanthropy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_werewolf
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { POD_fera_is_hakken = yes }
+				desc = trait_hakken
+			}
+			desc = trait_werewolf
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_werewolf_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { POD_fera_is_hakken = yes }
+				desc = trait_hakken_desc
+			}
+			desc = trait_werewolf_desc
+		}
+	}
+
+	track = {
+		0 = {} # To make icon start with 1
+		20 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			monthly_legitimacy_add = 0.05
+			POD_terrain_umbra_aptitude_advantage = 0.25
+		}
+		40 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			POD_terrain_umbra_aptitude_advantage = 0.25
+		}
+		60 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			stress_loss_per_prestige_level = 0.05
+			POD_terrain_umbra_aptitude_advantage = 0.5
+		}
+		80 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			men_at_arms_maintenance_per_dread_mult = -0.0015
+			monthly_legitimacy_add = 0.05
+			vassal_opinion = 5
+			POD_terrain_umbra_aptitude_advantage = 0.5
+		}
+		100 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			POD_terrain_umbra_aptitude_advantage = 0.75
+		}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 1
+}
+
+ajaba = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 3
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = ajaba_illegal
+		opinion_modifier = ajaba_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = ajaba_shunned
+		opinion_modifier = ajaba_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ajaba
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_ozuzo
+			}
+			desc = trait_ajaba
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ajaba_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_ozuzo_desc
+			}
+			desc = trait_ajaba_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 2
+}
+
+ananasi = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	
+	max_hostile_schemes_add = 1
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ananasi
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_kumo
+			}
+			desc = trait_ananasi
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ananasi_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_kumo_desc
+			}
+			desc = trait_ananasi_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+	
+	flag = fera_type
+	icon = ananasi.dds
+	group_equivalence = fera
+	level = 3
+}
+
+apis = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 5
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = apis_illegal
+		opinion_modifier = apis_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = apis_shunned
+		opinion_modifier = apis_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_apis
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			desc = trait_apis
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_apis_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			desc = trait_apis_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 4
+}
+
+bastet = {
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	prowess_no_portrait = 10 #Bastet are on the stronger side fera wise, but not werewolf strong
+	life_expectancy = 40
+	years_of_fertility = 60
+	health = 1
+	monthly_prestige_gain_per_legitimacy_level_add = 0.3 #All Fera should have this
+	POD_terrain_umbra_aptitude_advantage = 0.25
+	POD_terrain_umbra_spirit_wilds_access_cancel_negative_supply = yes
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	flag = can_become_ancestor_spirit
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = bastet_illegal
+		opinion_modifier = bastet_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = bastet_shunned
+		opinion_modifier = bastet_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_bastet
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_histpah
+			}
+			desc = trait_bastet
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_bastet_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_histpah_desc
+			}
+			desc = trait_bastet_desc
+		}
+	}
+
+	track = {
+		0 = {} # To make icon start with 1
+		20 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			monthly_legitimacy_add = 0.05
+		}
+		40 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			monthly_lifestyle_xp_gain_mult = 0.15
+		}
+		60 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			stress_loss_per_prestige_level = 0.05
+			POD_terrain_umbra_aptitude_advantage = 0.25
+		}
+		80 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			men_at_arms_maintenance_per_dread_mult = -0.0015
+			monthly_legitimacy_add = 0.05
+			vassal_opinion = 5
+			POD_terrain_umbra_aptitude_advantage = 0.25
+			monthly_lifestyle_xp_gain_mult = 0.15
+		}
+		100 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			fera_tribe_government_opinion = 1
+			monthly_piety_gain_per_legitimacy_level_mult = 0.01
+			POD_terrain_umbra_aptitude_advantage = 0.35
+		}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 5
+}
+
+camazotz = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 2
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = camazotz_illegal
+		opinion_modifier = camazotz_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = camazotz_shunned
+		opinion_modifier = camazotz_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_camazotz
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_xibalan
+			}
+			desc = trait_camazotz
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_camazotz_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_xibalan_desc
+			}
+			desc = trait_camazotz_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 6
+}
+
+corax = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 2
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = corax_illegal
+		opinion_modifier = corax_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = corax_shunned
+		opinion_modifier = corax_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_corax
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_tengu
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_buzzards
+			}
+			desc = trait_corax
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_corax_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_tengu_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_buzzards_desc
+			}
+			desc = trait_corax_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 7
+}
+
+grondr = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 5
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = grondr_illegal
+		opinion_modifier = grondr_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = grondr_shunned
+		opinion_modifier = grondr_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_grondr
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_skull_pig
+			}
+			desc = trait_grondr
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_grondr_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_skull_pig_desc
+			}
+			desc = trait_grondr_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 8
+}
+
+gurahl = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 7
+	life_expectancy = 105
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = gurahl_illegal
+		opinion_modifier = gurahl_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = gurahl_shunned
+		opinion_modifier = gurahl_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_gurahl
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_okuma
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_purgers
+			}
+			desc = trait_gurahl
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_gurahl_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_okuma_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_purgers_desc
+			}
+			desc = trait_gurahl_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 9
+}
+
+kitsune = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = kitsune_illegal
+		opinion_modifier = kitsune_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = kitsune_shunned
+		opinion_modifier = kitsune_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_kitsune
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			desc = trait_kitsune
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_kitsune_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			desc = trait_kitsune_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 10
+}
+
+mokole = {
+	flag = splat
+	flag = sidebar_priority_display
+
+
+	prowess_no_portrait = 10 #their prowess is in their archid
+	health = 2 #they live for a really long time and this degrades too quickly at 1 health
+	life_expectancy = 250
+	years_of_fertility = 200
+	fertility = -0.4
+	monthly_prestige_gain_per_legitimacy_level_add = 0.3 #All Fera should have this
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+	POD_terrain_mokole_archid_option_advantage = 2
+
+	flag = regeneration
+	flag = fera_trait_healing
+	flag = can_become_ancestor_spirit
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = mokole_illegal
+		opinion_modifier = mokole_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = mokole_shunned
+		opinion_modifier = mokole_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_mokole
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_mokole_mbembe_trigger = yes }
+				desc = trait_mokole_mbembe
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_gumagan_trigger = yes }
+				desc = trait_gumagan
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_makara_trigger = yes }
+				desc = trait_makara
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_zhong_lung_trigger = yes }
+				desc = trait_zhong_lung
+			}
+			desc = trait_mokole
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_mokole_desc
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_mokole_mbembe_trigger = yes }
+				desc = trait_mokole_mbembe_desc
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_gumagan_trigger = yes }
+				desc = trait_gumagan_desc
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_makara_trigger = yes }
+				desc = trait_makara_desc
+			}
+			triggered_desc = {
+				trigger = { POD_mokole_is_zhong_lung_trigger = yes }
+				desc = trait_zhong_lung_desc
+			}
+			desc = trait_mokole_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			monthly_legitimacy_add = 0.05
+			life_expectancy = 50
+			years_of_fertility = 40
+			POD_terrain_mokole_archid_option_advantage = 1
+		}
+		40 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			monthly_piety = 0.15
+			POD_terrain_umbra_sense_advantage = 0.1
+			POD_terrain_mokole_archid_option_advantage = 1
+		}
+		60 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			monthly_legitimacy_add = 0.05
+			life_expectancy = 50
+			years_of_fertility = 40
+			POD_terrain_mokole_archid_option_advantage = 1
+			POD_terrain_umbra_aptitude_advantage = 0.2
+		}
+		80 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			monthly_piety = 0.15
+			stress_loss_per_piety_level = 0.05
+			POD_terrain_mokole_archid_option_advantage = 1
+			POD_terrain_umbra_sense_advantage = 0.1
+		}
+		100 = {
+			monthly_prestige_gain_per_legitimacy_level_add = 0.1 #All Fera should have this
+			prowess_per_prestige_level = 1 #All Fera should have this
+			learning_per_piety_level = 1
+			life_expectancy = 100
+			years_of_fertility = 90
+			POD_terrain_mokole_archid_option_advantage = 2
+		}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 11
+}
+
+nagah = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 3
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = nagah_illegal
+		opinion_modifier = nagah_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = nagah_shunned
+		opinion_modifier = nagah_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_nagah
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			desc = trait_nagah
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_nagah_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			desc = trait_nagah_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 12
+}
+
+nuwisha = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 3
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = nuwisha_illegal
+		opinion_modifier = nuwisha_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = nuwisha_shunned
+		opinion_modifier = nuwisha_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_nuwisha
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_nokhomi
+			}
+			desc = trait_nuwisha
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_nuwisha_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_nokhomi_desc
+			}
+			desc = trait_nuwisha_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 13
+}
+
+ratkin = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 2
+	life_expectancy = 45
+	years_of_fertility = 60
+	health = 1
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = ratkin_illegal
+		opinion_modifier = ratkin_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = ratkin_shunned
+		opinion_modifier = ratkin_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ratkin
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_nezumi
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_mad_destroyers
+			}
+			desc = trait_ratkin
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ratkin_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_nezumi_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_mad_destroyers_desc
+			}
+			desc = trait_ratkin_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 14
+}
+
+rokea = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	flag = devbuild_trait
+	prowess_no_portrait = 7
+	flag = immortality
+	immortal = yes
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+	flag = regeneration
+	flag = fera_trait_healing
+
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		kueijin
+		# ghoul
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = rokea_illegal
+		opinion_modifier = rokea_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = rokea_shunned
+		opinion_modifier = rokea_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_rokea
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_same_bito
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_balefire_sharks
+			}
+			desc = trait_rokea
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_rokea_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_beast_courts } }
+				desc = trait_same_bito_desc
+			}
+			triggered_desc = {
+				trigger = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+				desc = trait_balefire_sharks_desc
+			}
+			desc = trait_rokea_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	flag = fera_type
+	group_equivalence = fera
+	level = 15
+}
+
+
+#TODO Fera: figure out the situation with this
+entomos = {
+	shown_in_ruler_designer = no
+	flag = splat
+	flag = sidebar_priority_display
+	flag = landless_unavailable
+	prowess_no_portrait = 2
+	life_expectancy = 5
+	years_of_fertility = 20
+	health = 1
+	vassal_limit = -10
+	domain_limit = -50
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+
+
+	flag = devbuild_trait
+	
+	opposites = {
+		use_ingame_chargen
+		vampire
+		werewolf
+		kueijin
+		revenant
+		supehunter
+		mortal
+		mage
+		fae
+		changeling
+		demon
+		wraith
+		mummy
+	}
+	
+	triggered_opinion = {
+		parameter = fera_illegal
+		opinion_modifier = fera_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = fera_shunned
+		opinion_modifier = fera_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = entomos_illegal
+		opinion_modifier = entomos_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = entomos_shunned
+		opinion_modifier = entomos_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	triggered_opinion = {
+		parameter = hunter_hunting_fera
+		opinion_modifier = hunter_hunting
+		ignore_opinion_value_if_same_trait = yes
+	}
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_entomos
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal
+			}
+			desc = trait_entomos
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_entomos_desc
+			}
+			triggered_desc = {
+				trigger = { has_global_variable = prodigal }
+				desc = trait_prodigal_fera_desc
+			}
+			desc = trait_entomos_desc
+		}
+	}
+	
+	track = {
+		0 = {}
+		20 = {}
+		40 = {}
+		60 = {}
+		80 = {}
+		100 = {}
+	}
+
+	group_equivalence = fera
+	level = 16
+	icon = ananasi.dds
+}
+
+
+
+abomination = {
+	flag = subsplat
+	flag = immortality
+	immortal = yes
+	prowess_no_portrait = 5
+	stress_gain_mult = 0.5
+	general_opinion = -20
+	
+	shown_in_ruler_designer = no
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_abomination
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						is_alive = no
+						NOT = { exists = var:fera_type }
+					}
+				}
+				desc = trait_abomination
+			}
+			triggered_desc = {
+				trigger = { var:fera_type = trait:werewolf }
+				desc = trait_werewolf_abomination
+			}
+			triggered_desc = {
+				trigger = { var:fera_type = trait:gurahl }
+				desc = trait_gurahl_abomination
+			}
+			triggered_desc = {
+				trigger = { exists = var:fera_type }
+				desc = trait_abomination_with_type
+			}
+			desc = trait_abomination
+		}
+	}
+}
+
+
+#####Kinfolk#####
+kinfolk = {
+	flag = splat
+	shown_in_ruler_designer = no
+	inherit_chance = 100
+	
+	ai_war_chance = -0.5
+	ai_boldness = -250
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_kinfolk
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						is_alive = no
+						NOT = { exists = var:fera_type }
+					}
+				}
+				desc = trait_kinfolk
+			}
+			triggered_desc = {
+				trigger = { var:fera_type = trait:werewolf }
+				desc = trait_werewolf_kinfolk
+			}
+			triggered_desc = {
+				trigger = { exists = var:fera_type }
+				desc = trait_kinfolk_with_type
+			}
+			desc = trait_kinfolk
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_kinfolk_desc
+			}
+			triggered_desc = {
+				trigger = {
+					is_alive = yes
+					var:fera_type ?= trait:werewolf
+				}
+				desc = trait_werewolf_kinfolk_desc
+			}
+			desc = trait_kinfolk_desc
+		}
+	}
+}
+
+gnosis = {
+	shown_in_ruler_designer = no
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_gnosis
+			}
+			triggered_desc = {
+				trigger = {
+					POD_is_kinfolk_trigger = yes
+				}
+				desc = trait_gnosis_kinfolk
+			}
+
+			desc = trait_gnosis
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_gnosis_desc
+			}
+			triggered_desc = {
+				trigger = {
+					POD_is_kinfolk_trigger = yes
+				}
+				desc = trait_gnosis_kinfolk_desc
+			}
+			desc = trait_gnosis_desc
+		}
+	}
+
+	icon = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+					desc = gnosis.dds
+			}
+			triggered_desc = {
+				trigger = { POD_is_kinfolk_trigger = yes }
+					desc = gnosis.dds
+			}
+			desc = gnosis.dds
+		}
+	}
+	
+	same_opinion = 5
+	prowess_no_portrait = 2
+	learning = 1
+}
+
+
+#####Spirit#####
+spirit = {
+	flag = splat
+	shown_in_ruler_designer = no
+	
+	flag = immortality
+	flag = is_spirit
+
+	immortal = yes
+	prowess_no_portrait = 5
+	POD_terrain_umbra_aptitude_advantage = 0.5
+	POD_terrain_umbra_sense_advantage = 0.1
+	POD_terrain_umbra_astral_reaches_access_cancel_negative_supply = yes
+	POD_terrain_umbra_spirit_wilds_access_cancel_negative_supply = yes
+	POD_terrain_umbra_deep_umbra_access_cancel_negative_supply = yes
+	POD_terrain_can_damage_spirit_cancel_negative_supply = yes
+	POD_terrain_spirit_companion_pact_strength_advantage = 1
+	
+	flag = can_not_marry
+	can_have_children = no
+	inheritance_blocker = all
+	claim_inheritance_blocker = all
+
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_spirit
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rabbit } }
+				desc = trait_spirit_rabbit
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_deer } }
+				desc = trait_spirit_deer
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bat } }
+				desc = trait_spirit_bat
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rooster } }
+				desc = trait_spirit_rooster
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_tiger } }
+				desc = trait_spirit_tiger
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rhino } }
+				desc = trait_spirit_rhino
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bear } }
+				desc = trait_spirit_bear
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_porcupine } }
+				desc = trait_spirit_porcupine
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_ant } }
+				desc = trait_spirit_ant
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bull } }
+				desc = trait_spirit_bull
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_vulture } }
+				desc = trait_spirit_vulture
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_stone } }
+				desc = trait_spirit_stone
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_fox } }
+				desc = trait_spirit_fox
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_mouse } }
+				desc = trait_spirit_mouse
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_chameleon } }
+				desc = trait_spirit_chameleon
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_raccoon } }
+				desc = trait_spirit_raccoon
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_crow } }
+				desc = trait_spirit_crow
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_monkey } }
+				desc = trait_spirit_monkey
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_toad } }
+				desc = trait_spirit_toad
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_tree } }
+				desc = trait_spirit_tree
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_innocent } }
+				desc = trait_spirit_innocent
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_drattosi } }
+				desc = trait_spirit_drattosi
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_ooralath } }
+				desc = trait_spirit_ooralath
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_nocturna } }
+				desc = trait_spirit_nocturna
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_raptor } }
+				desc = trait_spirit_raptor
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_harpy } }
+				desc = trait_spirit_harpy
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rotwalker } }
+				desc = trait_spirit_rotwalker
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_seeder } }
+				desc = trait_spirit_seeder
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_dreammaker } }
+				desc = trait_spirit_dreammaker
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_nihilach } }
+				desc = trait_spirit_nihilach
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_shatteredhart } }
+				desc = trait_spirit_shatteredhart
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_smog } }
+				desc = trait_spirit_smog
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_balefire } }
+				desc = trait_spirit_balefire
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_sludge } }
+				desc = trait_spirit_sludge
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_toxin } }
+				desc = trait_spirit_toxin
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_werewolf } }
+				desc = trait_spirit_werewolf
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bastet } }
+				desc = trait_spirit_bastet
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_mokole } }
+				desc = trait_spirit_mokole
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_human } }
+				desc = trait_spirit
+			}
+			desc = trait_spirit
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_spirit_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rabbit } }
+				desc = trait_spirit_rabbit_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_deer } }
+				desc = trait_spirit_deer_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bat } }
+				desc = trait_spirit_bat_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rooster } }
+				desc = trait_spirit_rooster_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_tiger } }
+				desc = trait_spirit_tiger_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rhino } }
+				desc = trait_spirit_rhino_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bear } }
+				desc = trait_spirit_bear_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_porcupine } }
+				desc = trait_spirit_porcupine_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_ant } }
+				desc = trait_spirit_ant_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bull } }
+				desc = trait_spirit_bull_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_vulture } }
+				desc = trait_spirit_vulture_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_stone } }
+				desc = trait_spirit_stone_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_fox } }
+				desc = trait_spirit_fox_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_mouse } }
+				desc = trait_spirit_mouse_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_chameleon } }
+				desc = trait_spirit_chameleon_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_raccoon } }
+				desc = trait_spirit_raccoon_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_crow } }
+				desc = trait_spirit_crow_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_monkey } }
+				desc = trait_spirit_monkey_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_toad } }
+				desc = trait_spirit_toad_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_tree } }
+				desc = trait_spirit_tree_desc
+			}
+			
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_innocent } }
+				desc = trait_spirit_innocent_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_drattosi } }
+				desc = trait_spirit_drattosi_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_ooralath } }
+				desc = trait_spirit_ooralath_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_nocturna } }
+				desc = trait_spirit_nocturna_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_raptor } }
+				desc = trait_spirit_raptor_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_harpy } }
+				desc = trait_spirit_harpy_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_rotwalker } }
+				desc = trait_spirit_rotwalker_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_seeder } }
+				desc = trait_spirit_seeder_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_dreammaker } }
+				desc = trait_spirit_dreammaker_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_nihilach } }
+				desc = trait_spirit_nihilach_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_shatteredhart } }
+				desc = trait_spirit_shatteredhart_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_smog } }
+				desc = trait_spirit_smog_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_balefire } }
+				desc = trait_spirit_balefire_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_sludge } }
+				desc = trait_spirit_sludge_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_toxin } }
+				desc = trait_spirit_toxin_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_werewolf } }
+				desc = trait_spirit_werewolf_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_bastet } }
+				desc = trait_spirit_bastet_desc
+			}
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_mokole } }
+				desc = trait_spirit_mokole_desc
+			}
+			
+			triggered_desc = {
+				trigger = { POD_has_spirit_type = { TYPE = spirit_human } }
+				desc = trait_spirit_human_desc
+			}
+			desc = trait_spirit_human_desc
+		}
+	}
+
+	track = {
+		0 = {}
+		25 = {
+			prowess_no_portrait = 5
+			POD_terrain_spirit_companion_pact_strength_advantage = 1
+		}
+		50 = {
+			prowess_no_portrait = 5
+			POD_terrain_spirit_companion_pact_strength_advantage = 1
+		}
+		75 = {
+			prowess_no_portrait = 7
+			POD_terrain_spirit_companion_pact_strength_advantage = 1
+		}
+		100 = {
+			prowess_no_portrait = 8
+			POD_terrain_spirit_companion_pact_strength_advantage = 1
+		}
+	}
+}
+
+
+############
+## Breed ###
+############
+
+homid_born = {
+	flag = fera_trait
+
+	legitimacy_gain_mult = 0.2
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_homid_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = kitsune }
+				desc = trait_kojin
+			}
+			triggered_desc = {
+				trigger = { has_trait = nagah }
+				desc = trait_balaram
+			}
+			desc = trait_homid_born
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_homid_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = kitsune }
+				desc = trait_kojin_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = nagah }
+				desc = trait_balaram_desc
+			}
+			desc = trait_homid_born_desc
+		}
+	}
+
+	group_equivalence = breed
+	level = 1
+}
+
+beast_born = {
+	flag = fera_trait
+	POD_terrain_gnosis_regen_supply_limit_mult = 0.1
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_beast_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = werewolf }
+				desc = trait_lupus_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_hyaena_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = apis }
+				desc = trait_bos_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = bastet }
+				desc = trait_feline_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = camazotz }
+				desc = trait_chiroptera_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = corax }
+				desc = trait_corvid_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = grondr }
+				desc = trait_scrofa_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_ursine_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = kitsune }
+				desc = trait_roko_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = mokole }
+				desc = trait_suchid_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = nagah }
+				desc = trait_vasuki_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = nuwisha }
+				desc = trait_latrani_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_rodens_born
+			}
+			triggered_desc = {
+				trigger = { has_trait = rokea }
+				desc = trait_squamus_born
+			}
+			desc = trait_beast_born
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_beast_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = werewolf }
+				desc = trait_lupus_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_hyaena_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = apis }
+				desc = trait_bos_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = bastet }
+				desc = trait_feline_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = camazotz }
+				desc = trait_chiroptera_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = corax }
+				desc = trait_corvid_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = grondr }
+				desc = trait_scrofa_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_ursine_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = kitsune }
+				desc = trait_roko_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = mokole }
+				desc = trait_suchid_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = nagah }
+				desc = trait_vasuki_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = nuwisha }
+				desc = trait_latrani_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_rodens_born_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = rokea }
+				desc = trait_squamus_born_desc
+			}
+			desc = trait_beast_born_desc
+		}
+	}
+
+	icon = lupus_born.dds
+	group_equivalence = breed
+	level = 2
+}
+
+
+
+############
+## Auspices ###
+############
+
+###Lunar Auspices
+galliard = {
+	flag = fera_trait
+	
+	opposites = {
+		bastet
+		corax
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.5
+	
+	
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_galliard
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dawn
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_kojubat
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_bards
+			}
+			desc = trait_galliard
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_galliard_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dawn_male_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_kojubat_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_bards_desc
+			}
+			desc = trait_galliard_desc
+		}
+	}
+
+	group_equivalence = lunar_auspice
+	level = 2
+}
+
+ahroun = {
+	flag = fera_trait
+	
+	opposites = {
+		bastet
+		corax
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ahroun
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dawn
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_uzmati
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_warriors
+			}
+			desc = trait_ahroun
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ahroun_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dawn_female_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_uzmati_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_warriors_desc
+			}
+			desc = trait_ahroun_desc
+		}
+	}
+
+	group_equivalence = lunar_auspice
+	level = 1
+}
+
+philodox = {
+	flag = fera_trait
+	
+	opposites = {
+		ajaba
+		bastet
+		corax
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.5
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_philodox
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_rishi
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_knife_skulkers
+			}
+			desc = trait_philodox
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_philodox_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_rishi_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_knife_skulkers_desc
+			}
+			desc = trait_philodox_desc
+		}
+	}
+
+	group_equivalence = lunar_auspice
+	level = 3
+}
+
+ragabash = {
+	flag = fera_trait
+	opposites = {
+		bastet
+		corax
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.5
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ragabash
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dusk
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_arcas
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_tunnel_runners
+			}
+			desc = trait_ragabash
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_ragabash_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dusk_female_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_arcas_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_tunnel_runners_desc
+			}
+			desc = trait_ragabash_desc
+		}
+	}
+
+	group_equivalence = lunar_auspice
+	level = 5
+}
+
+theurge = {
+	flag = fera_trait
+	
+	opposites = {
+		bastet
+		corax
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+	
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_theurge
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dusk
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_kieh
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_shadow_seers
+			}
+			desc = trait_theurge
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_theurge_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ajaba }
+				desc = trait_dusk_male_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = gurahl }
+				desc = trait_kieh_desc
+			}
+			triggered_desc = {
+				trigger = { has_trait = ratkin }
+				desc = trait_shadow_seers_desc
+			}
+			desc = trait_theurge_desc
+		}
+	}
+
+	group_equivalence = lunar_auspice
+	level = 4
+}
+
+
+
+
+###Bastet Pryio
+
+pryio_twilight = {
+	flag = fera_trait
+	
+	opposites = {
+		werewolf
+		ajaba
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.35
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.15
+	
+	group_equivalence = pryio
+	level = 1
+}
+
+pryio_daylight = {
+	flag = fera_trait
+	
+	opposites = {
+		werewolf
+		ajaba
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.25
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	
+	group_equivalence = pryio
+	level = 2
+}
+
+pryio_night = {
+	flag = fera_trait
+	
+	opposites = {
+		werewolf
+		ajaba
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.25
+	monthly_learning_lifestyle_xp_gain_mult = 0.25
+	
+	group_equivalence = pryio
+	level = 3
+}
+
+
+
+####Solar Auspices
+
+#Mokole-mbembe and Gumagan
+rising_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 1
+}
+
+noonday_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.5
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 2
+}
+
+setting_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_martial_lifestyle_xp_gain_mult = 0.25
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.25
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 3
+}
+
+midnight_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.25
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 4
+}
+
+shrouded_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 5
+}
+
+decorated_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.25
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 6
+}
+
+eclipsed_sun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.1
+	monthly_martial_lifestyle_xp_gain_mult = 0.1
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.1
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.1
+	monthly_learning_lifestyle_xp_gain_mult = 0.1
+
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 7
+}
+
+#Makara
+vasanta = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 8
+}
+
+grisma = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.5
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 9
+}
+
+zarad = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 10
+}
+
+hemanta = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.5
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 11
+}
+
+#Zhong Lung
+tung_chun = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.2
+	monthly_martial_lifestyle_xp_gain_mult = 0.3
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 12
+}
+
+nam_hsia = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.2
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.3
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 13
+}
+
+sai_chau = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_martial_lifestyle_xp_gain_mult = 0.2
+	monthly_learning_lifestyle_xp_gain_mult = 0.3
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 14
+}
+
+pei_tung = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	monthly_learning_lifestyle_xp_gain_mult = 0.2
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.3
+	
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	
+	group_equivalence = solar_auspice
+	level = 15
+}
+
+##########################################Everything below this line is unimplemented###################################################
+
+####Paths
+eji = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+	
+	icon = realm_spirit.dds
+	group_equivalence = path
+	level = 1
+}
+
+doshi = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = realm_spirit.dds
+	group_equivalence = path
+	level = 2
+}
+
+gukutsushi = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = realm_spirit.dds
+	group_equivalence = path
+	level = 3
+}
+
+kataribe = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = realm_spirit.dds
+	group_equivalence = path
+	level = 4
+}
+
+
+####Seasonal Aupsices
+
+kamakshi = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.25
+	
+	#inherit_chance = 100
+	icon = art_spring.dds
+	group_equivalence = seasonal_auspice
+	level = 1
+}
+
+kartikeya = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = art_summer.dds
+	group_equivalence = seasonal_auspice
+	level = 2
+}
+
+kamsa = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = art_autumn.dds
+	group_equivalence = seasonal_auspice
+	level = 3
+}
+
+kali = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nuwisha
+		ratkin
+		rokea
+		apis
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = art_winter.dds
+	group_equivalence = seasonal_auspice
+	level = 4
+}
+
+
+
+####Freak Paths
+
+engineers = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+		
+		lunar_auspice
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.35
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.15
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = freak
+	level = 1
+}
+
+munchmausen = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+		
+		lunar_auspice
+	}
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.35
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.15
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = freak
+	level = 2
+}
+
+plague_lords = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+		
+		lunar_auspice
+	}
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.35
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.15
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = freak
+	level = 3
+}
+
+twitchers = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		rokea
+		apis
+		camazotz
+		grondr
+		
+		lunar_auspice
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.35
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.15
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = freak
+	level = 4
+}
+
+
+####Aquatic Auspices
+
+brightwater = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		apis
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = pryio_daylight.dds
+	group_equivalence = aquatic_auspice
+	level = 1
+}
+
+dimwater = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		apis
+		camazotz
+		grondr
+	}
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.25
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	
+	#inherit_chance = 100
+	icon = pryio_twilight.dds
+	group_equivalence = aquatic_auspice
+	level = 2
+}
+
+darkwater = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		apis
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.25
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.25
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = aquatic_auspice
+	level = 3
+}
+
+
+####Apis Auspices
+lunar = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		camazotz
+		grondr
+	}
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+	
+	#inherit_chance = 100
+	icon = pryio_night.dds
+	group_equivalence = lunisolar_auspice
+	level = 1
+}
+
+twilight = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		camazotz
+		grondr
+	}
+	monthly_learning_lifestyle_xp_gain_mult = 0.25
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.25
+	
+	#inherit_chance = 100
+	icon = pryio_twilight.dds
+	group_equivalence = lunisolar_auspice
+	level = 2
+}
+
+solar = {
+	flag = fera_trait
+	shown_in_ruler_designer = no
+	opposites = {
+		werewolf
+		ajaba
+		bastet
+		corax
+		gurahl
+		kitsune
+		mokole
+		nagah
+		nuwisha
+		ratkin
+		rokea
+		camazotz
+		grondr
+	}
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.25
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.25
+	
+	#inherit_chance = 100
+	icon = pryio_daylight.dds
+	group_equivalence = lunisolar_auspice
+	level = 3
+}
+
+
+
+
+
+
+
+
+
+
+################
+# Entomos Trait
+################
+
+myrmidon = {
+	flag = entomos_trait
+	
+	monthly_martial_lifestyle_xp_gain_mult = 0.3
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.3
+	
+	#inherit_chance = 100
+	group_equivalence = faction
+	level = 1
+	icon = ananasi.dds
+}
+
+viskr = {
+	flag = entomos_trait
+	
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.3
+	monthly_learning_lifestyle_xp_gain_mult = 0.3
+	
+	#inherit_chance = 100
+	group_equivalence = faction
+	level = 2
+	icon = ananasi.dds
+}
+
+wyrsta = {
+	flag = entomos_trait
+	
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.3
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.3
+	
+	#inherit_chance = 100
+	group_equivalence = faction
+	level = 3
+	icon = ananasi.dds
+}
+
+succor = {
+	flag = entomos_trait
+	
+	monthly_learning_lifestyle_xp_gain_mult = 0.3
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.3
+	
+	#inherit_chance = 100
+	group_equivalence = faction
+	level = 4
+	icon = ananasi.dds
+}
+
+tenere = {
+	flag = entomos_trait
+	
+	opposites = {
+		eshieho
+		mishaho
+		bahaesh
+		ishihambi
+		iqhawe
+		umakhi
+		umlimi
+		umbulali
+		umhloli
+		injiki
+		kstyw
+	}
+	
+	#inherit_chance = 100
+	group_equivalence = aspect
+	level = 1
+	icon = ananasi.dds
+}
+
+kumoti = {
+	flag = entomos_trait
+	
+	opposites = {
+		eshieho
+		mishaho
+		bahaesh
+		ishihambi
+		iqhawe
+		umakhi
+		umlimi
+		umbulali
+		umhloli
+		injiki
+		kstyw
+	}
+	
+	#inherit_chance = 100
+	group_equivalence = aspect
+	level = 2
+	icon = ananasi.dds
+}
+
+hatar = {
+	flag = entomos_trait
+	
+	opposites = {
+		eshieho
+		mishaho
+		bahaesh
+		ishihambi
+		iqhawe
+		umakhi
+		umlimi
+		umbulali
+		umhloli
+		injiki
+		kstyw
+	}
+	
+	#inherit_chance = 100
+	group_equivalence = aspect
+	level = 3
+	icon = ananasi.dds
+}
+
+human_born = {
+	flag = entomos_trait
+	
+	#inherit_chance = 100
+	group_equivalence = entomos_breed
+	level = 1
+	icon = ananasi.dds
+}
+
+macro_born = {
+	flag = entomos_trait
+	
+	#inherit_chance = 100
+	group_equivalence = entomos_breed
+	level = 2
+	icon = ananasi.dds
+}
+
+micro_born = {
+	flag = entomos_trait
+	
+	#inherit_chance = 100
+	group_equivalence = entomos_breed
+	level = 3
+	icon = ananasi.dds
+}
+
+fera_born = {
+	flag = entomos_trait
+	can_have_children = no
+	
+	#inherit_chance = 100
+	group_equivalence = entomos_breed
+	level = 4
+	icon = ananasi.dds
+}
+
+titan_born = {
+	flag = entomos_trait
+	flag = immortality
+	immortal = yes
+	can_have_children = no
+	prowess_no_portrait = 25
+	stress_gain_mult = 0.5
+	stress_loss_mult = -0.5
+	different_faith_opinion = -5000
+	
+	
+	#inherit_chance = 100
+	group_equivalence = entomos_breed
+	level = 5
+	icon = ananasi.dds
+}
+
+
+
+#Crayfish C'etites
+eshieho = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	coastal_advantage = 5
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 1
+	icon = ananasi.dds
+}
+
+#Crab C'etites
+mishaho = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	no_disembark_penalty = yes
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 2
+	icon = ananasi.dds
+}
+
+#Lobster C'etites
+bahaesh = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	prowess_no_portrait = 5
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 3
+	icon = ananasi.dds
+}
+
+#Moth Insect Race
+ishihambi = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	vassal_limit = 20
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 4
+	icon = ananasi.dds
+}
+
+#Mantis Insect Race
+iqhawe = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	character_travel_speed_mult = 0.2
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 5
+	icon = ananasi.dds
+}
+
+#Termite Insect Race
+umakhi = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	holding_build_speed = -0.15
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 6
+	icon = ananasi.dds
+}
+
+#Locust Insect Race
+umlimi = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	drylands_advantage = 3
+	farmlands_advantage = 5
+	floodplains_advantage = 3
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 7
+	icon = ananasi.dds
+}
+
+#Wasp Insect Race
+umbulali = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	maa_screen_mult = 0.25
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 8
+	icon = ananasi.dds
+}
+
+#Ant Insect Race
+umhloli = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	maa_toughness_mult = 0.15
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 9
+	icon = ananasi.dds
+}
+
+#Bee Insect Race
+injiki = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	build_gold_cost = -0.15
+	build_prestige_cost = -0.15
+	build_piety_cost = -0.15
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 10
+	icon = ananasi.dds
+}
+
+#Beetle/Scarab Insect Race
+kstyw = {
+	flag = entomos_trait
+	flag = subsplat
+	
+	additional_fort_level = 3
+	
+	#inherit_chance = 100
+	flag = fera_type
+	group_equivalence = clade
+	level = 11
+	icon = ananasi.dds
+}

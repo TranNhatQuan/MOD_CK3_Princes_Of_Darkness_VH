@@ -1,0 +1,1943 @@
+﻿namespace = POD_hunteradoption
+
+POD_hunteradoption.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.100.t
+	desc =  POD_hunteradoption.100.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.100.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_martial_skill = 4
+			}
+			else = {
+			add_martial_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+				scope:vampiresire = { has_trait = order_member }
+				scope:target = {
+				NOT = { has_trait = order_member }
+						}
+					}
+			add_trait = order_member
+				}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_hunteradoption.100.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_prowess_skill = 10
+			}
+			else = {
+			add_prowess_skill = 5
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait_force_tooltip = supehunter
+			if = {
+				limit = {
+				scope:vampiresire = { has_trait = order_member }
+				scope:target = {
+				NOT = { has_trait = order_member }
+						}
+					}
+			add_trait = order_member
+				}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	option = {
+		name = POD_hunteradoption.100.option.c
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		trigger = {
+			dynasty = dynasty:13000006 
+		}
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_intrigue_skill = 4
+			}
+			else = {
+			add_intrigue_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+				scope:vampiresire = { has_trait = order_member }
+				scope:target = {
+				NOT = { has_trait = order_member }
+						}
+					}
+			add_trait = order_member
+				}	
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}	
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}	
+}
+
+POD_hunteradoption.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.101.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root.dynasty ?= dynasty:13000011
+				}
+				desc = POD_hunteradoption.101.desc.joan	
+			}
+			desc = POD_hunteradoption.101.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.101.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_learning_skill = 4
+			}
+			else = {
+			add_learning_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }		
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_hunteradoption.101.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_stewardship_skill = 4
+			}
+			else = {
+			add_stewardship_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait_force_tooltip = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }	
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	option = {
+		name = POD_hunteradoption.101.option.c
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_diplomacy_skill = 4
+			}
+			else = {
+			add_diplomacy_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				NOT = { scope:vampiresire.dynasty = dynasty:13000011 }	
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}		
+	}
+	option = {
+		name = POD_hunteradoption.101.option.d
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		trigger = {
+			scope:vampiresire.dynasty ?= dynasty:13000011
+		}
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_martial_skill = 4
+			add_prowess_skill = 4
+			}
+			else = {
+			add_martial_skill = 2
+			add_prowess_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				NOT = { scope:vampiresire.dynasty = dynasty:13000011 }	
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}
+	}
+	option = {
+		name = POD_hunteradoption.101.option.e
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		trigger = {
+			scope:vampiresire.dynasty ?= dynasty:13000011
+		}
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				NOT = { scope:vampiresire.dynasty = dynasty:13000011 }	
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_trait = theurgist }
+				}
+					add_trait = theurgist
+			}				
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }
+		}
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}	
+}
+
+POD_hunteradoption.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.102.t
+	desc =  POD_hunteradoption.102.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.102.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_learning_skill = 4
+			}
+			else = {
+			add_learning_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }	
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_hunteradoption.102.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_stewardship_skill = 4
+			}
+			else = {
+			add_stewardship_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait_force_tooltip = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house	
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }		
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	option = {
+		name = POD_hunteradoption.102.option.c
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_intrigue_skill = 4
+			}
+			else = {
+			add_intrigue_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			if = {
+				limit = {
+					NOT = { has_trait = order_member }
+						}
+			add_trait = order_member
+			}			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+			POD_remove_spouse_relation_effect = yes
+			every_child = { add_trait = bastard }		
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}	
+}
+
+POD_hunteradoption.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.103.t
+	desc =  POD_hunteradoption.103.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.103.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_intrigue_skill = 8
+			}
+			else = {
+			add_intrigue_skill = 4
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = supehunter
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+		}
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+		
+	}	
+}
+
+POD_hunteradoption.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.104.t
+	desc =  POD_hunteradoption.104.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.104.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_intrigue_skill = 4
+			}
+			else = {
+			add_intrigue_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}	
+			add_trait = supehunter
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+		
+	}
+
+	option = {
+		name = POD_hunteradoption.104.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+			add_stewardship_skill = 4
+			}
+			else = {
+			add_stewardship_skill = 2
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait_force_tooltip = supehunter
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	option = {
+		name = POD_hunteradoption.104.option.c
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_diplomacy_skill = 4
+			}
+			else = {
+				add_diplomacy_skill = 2
+			}	
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait_force_tooltip = supehunter		
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			hidden_effect = {
+			if = {
+				limit = {
+				has_orison_trigger = no
+				}
+				POD_give_orison_effect = yes
+			}
+			}
+			if = {
+				limit = {
+					has_trait = sorcerer
+				}
+			remove_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				if = {
+					limit = {
+						NOT = { scope:vampiresire.dynasty = dynasty:13000011 }
+						has_trait = theurgist
+					}	
+					remove_trait = theurgist
+					add_trait = truefaith
+				}
+				else = {
+					random = {
+						chance = 5
+						add_trait = truefaith
+					}
+				}
+			}
+		}		
+		
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}	
+}
+
+POD_hunteradoption.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.105.t
+	desc =  POD_hunteradoption.105.desc		
+	theme = faith
+	override_background = {
+		reference = forest_pineday_background
+	}
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.105.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_martial_skill = 4
+			}
+			else = {
+				add_martial_skill = 2
+			}
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = peasant_leader
+			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house	
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_hunteradoption.105.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_learning_skill = 4
+			}
+			else = {
+				add_learning_skill = 2
+			}
+			
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house	
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}		
+	}	
+	
+	after = {
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_hunteradoption.106 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.106.t
+	desc =  POD_hunteradoption.106.desc		
+	theme = faith
+	override_background = {
+		reference = forest_pineday_background
+	}
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.106.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = peasant_leader
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_martial_skill = 4
+			}
+			else = {
+				add_martial_skill = 2
+			}
+			
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			POD_shih_initialization_effect = yes
+			#set_character_faith = scope:vampiresire.faith # already set in POD_shih_initialization_effect
+			set_house = scope:vampiresire.house
+		}	
+	}
+
+	option = {
+		name = POD_hunteradoption.106.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_learning_skill = 4
+			}
+			else = {
+				add_learning_skill = 2
+			}
+			
+			POD_shih_initialization_effect = yes
+			#set_character_faith = scope:vampiresire.faith # already set in POD_shih_initialization_effect
+			set_house = scope:vampiresire.house
+		}	
+	}	
+	
+	after = {
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_hunteradoption.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.107.t
+	desc =  POD_hunteradoption.107.desc		
+	theme = faith
+	override_background = {
+		reference = forest_pineday_background
+	}
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.107.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			add_trait = peasant_leader
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_martial_skill = 4
+			}
+			else = {
+				add_martial_skill = 2
+			}
+			
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			if = {
+				limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+				add_trait = theurgist
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+				add_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}	
+	}
+
+	option = {
+		name = POD_hunteradoption.107.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = {
+					has_any_bastard_trait_trigger = yes
+				}
+				remove_all_bastard_traits = yes
+			}
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_learning_skill = 4
+			}
+			else = {
+				add_learning_skill = 2
+			}
+			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			if = {
+				limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+				add_trait = theurgist
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+				add_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}
+	}	
+	
+	after = {
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_hunteradoption.108 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_hunteradoption.108.t
+	desc =  POD_hunteradoption.108.desc		
+	theme = faith
+	override_background = {
+		reference = forest_pineday_background
+	}
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		scope:victim = { POD_set_parent_effect = { PARENT = scope:vampiresire } }
+	}
+	
+	option = {
+		name = POD_hunteradoption.108.option.a
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = { has_any_bastard_trait_trigger = yes }
+				remove_all_bastard_traits = yes
+			}
+			add_trait = peasant_leader
+			
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_martial_skill = 4
+			}
+			else = {
+				add_martial_skill = 2
+			}
+			
+			if = {
+				limit = { scope:vampiresire = { has_trait = shih } }
+				POD_shih_initialization_effect = yes
+			}
+			
+			hidden_effect = {
+				if = {
+					limit = { has_orison_trigger = no }
+					POD_give_orison_effect = yes
+				}
+			}
+			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+		
+			if = {
+				limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+				add_trait = theurgist
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+				add_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}	
+	}
+
+	option = {
+		name = POD_hunteradoption.108.option.b
+		custom_tooltip = POD_hunteradoption.101.option.c.tt
+
+		
+		stress_impact = {
+			base = medium_stress_gain
+		}
+
+		scope:target = {
+			# Remove bastard traits
+			if = {
+				limit = { has_any_bastard_trait_trigger = yes }
+				remove_all_bastard_traits = yes
+			}
+			
+			remove_trait = mortal
+			remove_trait = turnedhunter
+			add_trait_force_tooltip = supehunter
+			
+			if = {
+				limit = { scope:vampiresire.dynasty ?= { has_dynasty_perk = unity_legacy_4 } }
+				add_learning_skill = 4
+			}
+			else = {
+				add_learning_skill = 2
+			}
+			
+			if = {
+				limit = { scope:vampiresire = { has_trait = shih } }
+				POD_shih_initialization_effect = yes
+			}
+			
+			hidden_effect = {
+				if = {
+					limit = { has_orison_trigger = no }
+					POD_give_orison_effect = yes
+				}
+			}
+			
+			set_character_faith = scope:vampiresire.faith
+			set_house = scope:vampiresire.house
+			
+			if = {
+				limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+				add_trait = theurgist
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+				add_trait = sorcerer
+			}
+			if = {
+				limit = { 
+					POD_has_true_faith_trigger = no
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				random = {
+					chance = 5
+					add_trait = truefaith
+				}
+			}
+		}	
+	}	
+	
+	after = {
+		hidden_effect = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}

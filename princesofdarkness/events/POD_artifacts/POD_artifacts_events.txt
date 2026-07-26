@@ -1,0 +1,6784 @@
+﻿namespace = pod_artifacts
+# Generation of pod artifacts #
+
+
+#Historical artifacts generator at game start
+pod_artifacts.0001 = {
+	scope = none
+	hidden = yes
+
+
+	immediate = {	
+		# Links for Journeys
+		character:POD_wraith_01 ?= {
+			# Book of Nod
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_book_of_nod_effect = { OWNER = this TYPE = book }
+			}
+			else = {
+				create_artifact_book_of_nod_effect = { OWNER = this TYPE = miscellaneous }
+			}
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = book_of_nod_link }
+
+			# Bai Ze Tu
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_baizetu_effect = { OWNER = this TYPE = book }
+			}
+			else = {
+				create_artifact_baizetu_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = baizetu_link }
+			
+			# Incunabulum Kupalam
+			if = {
+				limit = { game_start_date < 1499.1.1 }
+				create_artifact_incunabulum_kupalam_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = incunabulum_kupalam_link }
+			}
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = lilith_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = lilith_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = enoch_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = enoch_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = sphere_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = sphere_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = diplomacy_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = diplomacy_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = martial_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = martial_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = stewardship_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = stewardship_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = intrigue_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = intrigue_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = learning_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = learning_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = genesis_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = genesis_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = caine_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = caine_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = soul_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = soul_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = body_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = body_shard_link }
+
+			POD_create_book_artifact_effect = { OWNER = this artifact = seth_shard }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = seth_shard_link }
+			
+			# Siklos
+			create_artifact_siklos_effect = { OWNER = this } # is available
+			POD_save_new_artifact_as_link = { LINK = siklos }
+		}
+
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_europe_west }
+			}
+			trigger_event = pod_artifacts.0002
+			}
+		if = {
+			limit = {
+			character:555022 = { is_alive = yes }
+			}
+			character:555022 = {
+				create_artifact_eternal_love_effect = { OWNER = this }
+			}
+		}			
+		if = {
+			limit = {
+			character:792050 = { is_alive = yes }
+			}
+			character:792050 = {
+				trigger_event = pod_artifacts.0003
+				}
+		}
+		if = {
+			limit = {
+			character:790641 = { is_alive = yes }
+			}
+			character:790641 = {
+				trigger_event = pod_artifacts.0004
+				}
+		}
+		if = {
+			limit = {
+			character:605110 = { is_alive = yes }
+			}
+			character:605110 = {
+				trigger_event = pod_artifacts.0005
+				}
+		}
+		if = {
+			limit = {
+			character:790265 = { is_alive = yes }
+			}
+			character:790265 = {
+				trigger_event = pod_artifacts.0006
+				}
+		}
+		if = {
+			limit = {
+			character:790261 = { is_alive = yes }
+			}
+			character:790261 = {
+				trigger_event = pod_artifacts.0007
+				}
+		}
+		if = {
+			limit = {
+			character:790802 = { is_alive = yes }
+			}
+			character:790802 = {
+				trigger_event = pod_artifacts.0008
+				}
+		}
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_africa }
+			}
+			trigger_event = pod_artifacts.0009
+		}
+		if = {
+			limit = {
+			character:790514 = { is_alive = yes }
+			}
+			character:790514 = {
+				trigger_event = pod_artifacts.0010
+				}
+		}
+		if = {
+			limit = {
+			character:790020 = { is_alive = yes }
+			}
+			character:790020 = {
+				trigger_event = pod_artifacts.0011
+				}
+		}
+		if = {
+			limit = {
+			character:505082 = { is_alive = yes }
+			}
+			character:505082 = {
+				trigger_event = pod_artifacts.0012
+				}
+		}
+		if = {
+			limit = {
+			character:790326 = { is_alive = yes }
+			}
+			character:790326 = {
+				trigger_event = pod_artifacts.0013
+				trigger_event = pod_artifacts.0066
+				trigger_event = pod_artifacts.0112
+				}
+		}		
+		
+
+		while = {
+			count = 5
+			random_landed_ruler = {
+				limit = {
+					faith = faith:viadiabolis
+				}
+				trigger_event = pod_artifacts.0013
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				POD_is_infernalist_trigger = yes
+			}
+			create_artifact_cup_laezar_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_artifact_gift_fallen_effect = { OWNER = this }
+		}
+		
+		if = {
+			limit = {
+			character:791845 = { is_alive = yes }
+			}
+			character:791845 = {
+				trigger_event = pod_artifacts.0014
+				}
+		}
+
+		if = {
+			limit = {
+			character:791852 = { is_alive = yes }
+			}
+			character:791852 = {
+				trigger_event = pod_artifacts.0015
+				}
+		}
+
+		if = {
+			limit = {
+			character:791288 = { is_alive = yes }
+			}
+			character:791288 = {
+				trigger_event = pod_artifacts.0016
+				}
+		}
+
+		if = {
+			limit = {
+			character:505080 = { is_alive = yes }
+			}
+			character:505080 = {
+				trigger_event = pod_artifacts.0017
+				}
+		}
+
+		if = {
+			limit = {
+			character:505080 = { is_alive = yes }
+			}
+			character:505080 = {
+				trigger_event = pod_artifacts.0018
+				}
+		}
+
+		if = {
+			limit = {
+			character:505102 = { is_alive = yes }
+			}
+			character:505102 = {
+				trigger_event = pod_artifacts.0019
+				}
+		}
+
+		if = {
+			limit = {
+			character:791220 = { is_alive = yes }
+			}
+			character:791220 = {
+				trigger_event = pod_artifacts.0020
+				}
+		}
+
+		if = {
+			limit = {
+			character:791290 = { is_alive = yes }
+			}
+			character:791290 = {
+				trigger_event = pod_artifacts.0021
+				}
+		}
+
+		if = {
+			limit = {
+			character:791909 = { is_alive = yes }
+			}
+			character:791909 = {
+				trigger_event = pod_artifacts.0022
+				}
+		}
+
+		if = {
+			limit = {
+			character:505073 = { is_alive = yes }
+			}
+			character:505073 = {
+				trigger_event = pod_artifacts.0023
+				}
+		}
+
+		if = {
+			limit = {
+			character:790136 = { is_alive = yes }
+			}
+			character:790136 = {
+				trigger_event = pod_artifacts.0024
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:breton
+				}
+				trigger_event = pod_artifacts.0025
+			}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:norman
+				}
+				trigger_event = pod_artifacts.0026
+			}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:french
+				}
+				trigger_event = pod_artifacts.0027
+			}
+
+		if = {
+			limit = {
+			character:505102 = { is_alive = yes }
+			}
+			character:505102 = {
+				trigger_event = pod_artifacts.0028
+				}
+		}
+
+		if = {
+			limit = {
+			character:790138 = { is_alive = yes }
+			}
+			character:790138 = {
+				create_artifact_ayr_sword_convoquee_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505079 = { is_alive = yes }
+			}
+			character:505079 = {
+				create_artifact_ayr_sword_chanceuse_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505080 = { is_alive = yes }
+			}
+			character:505080 = {
+				create_artifact_ayr_sword_immaterielle_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:791285 = { is_alive = yes }
+			}
+			character:791285 = {
+				create_artifact_ayr_sword_mordante_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505072 = { is_alive = yes }
+			}
+			character:505072 = {
+				create_artifact_ayr_sword_vivace_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505050 = { is_alive = yes }
+			}
+			character:505050 = {
+				create_artifact_ayr_sword_faucheuse_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505085 = { is_alive = yes }
+			}
+			character:505085 = {
+				create_artifact_ayr_sword_clepsydre_effect = { OWNER = THIS }
+				}
+		}
+
+		if = {
+			limit = {
+			character:505105 = { is_alive = yes }
+			}
+			character:505105 = {
+				trigger_event = pod_artifacts.0030
+				}
+		}
+
+		if = {
+			limit = {
+			character:790999 = { is_alive = yes }
+			}
+			character:790999 = {
+				trigger_event = pod_artifacts.0030
+				}
+		}
+
+		if = {
+			limit = {
+			character:505082 = { is_alive = yes }
+			}
+			character:505082 = {
+				trigger_event = pod_artifacts.0030
+				}
+		}
+
+		if = {
+			limit = {
+			character:791232 = { is_alive = yes }
+			}
+			character:791232 = {
+				trigger_event = pod_artifacts.0030
+				}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0030
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_europe }
+			}
+			trigger_event = pod_artifacts.0031
+		}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:egyptian
+				}
+				trigger_event = pod_artifacts.0032
+			}
+
+		random_landed_ruler = {
+			limit = {
+				is_nosferatu_trigger = yes
+				}
+				trigger_event = pod_artifacts.0033
+			}
+
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_europe }
+			}
+			trigger_event = pod_artifacts.0034
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viadiabolis
+			}
+			trigger_event = pod_artifacts.0035
+		}
+
+		if = {
+			limit = {
+			character:790631 = { is_alive = yes }
+			}
+			character:790631 = {
+				trigger_event = pod_artifacts.0036
+				}
+		}
+
+		if = {
+			limit = {
+			character:505086 = { is_alive = yes }
+			}
+			character:505086 = {
+				trigger_event = pod_artifacts.0037
+				}
+		}
+
+		if = {
+			limit = {
+			character:791707 = { is_alive = yes }
+			}
+			character:791707 = {
+				trigger_event = pod_artifacts.0038
+				}
+		}
+
+		if = {
+			limit = {
+			character:790175 = { is_alive = yes }
+			}
+			character:790175 = {
+				trigger_event = pod_artifacts.0039
+				}
+		}
+
+		if = {
+			limit = {
+			character:505084 = { is_alive = yes }
+			}
+			character:505084 = {
+				trigger_event = pod_artifacts.0040
+				}
+		}
+
+		if = {
+			limit = {
+			character:505073 = { is_alive = yes }
+			}
+			character:505073 = {
+				trigger_event = pod_artifacts.0041
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viapura
+			}
+			trigger_event = pod_artifacts.0042
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viapura
+			}
+			trigger_event = pod_artifacts.0043
+		}
+
+		if = {
+			limit = {
+			character:791713 = { is_alive = yes }
+			}
+			character:791713 = {
+				trigger_event = pod_artifacts.0044
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_cappadocian_trigger = yes
+				}
+				trigger_event = pod_artifacts.0045
+			}
+
+		if = {
+			limit = {
+			character:790853 = { is_alive = yes }
+			}
+			character:790853 = {
+				trigger_event = pod_artifacts.0046
+				}
+		}
+
+		if = {
+			limit = {
+			character:791822 = { is_alive = yes }
+			}
+			character:791822 = {
+				trigger_event = pod_artifacts.0047
+				}
+		}
+
+		if = {
+			limit = {
+			character:791778 = { is_alive = yes }
+			}
+			character:791778 = {
+				trigger_event = pod_artifacts.0048
+				}
+		}
+
+		if = {
+			limit = {
+			character:791844 = { is_alive = yes }
+			}
+			character:791844 = {
+				trigger_event = pod_artifacts.0049
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:breton
+				}
+				trigger_event = pod_artifacts.0050
+			}
+
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_india }
+			}
+			trigger_event = pod_artifacts.0051
+		}
+
+		random_landed_ruler = {
+			limit = {
+				culture = culture:greek
+				}
+				trigger_event = pod_artifacts.0052
+			}
+
+		if = {
+			limit = {
+			character:790247 = { is_alive = yes }
+			}
+			character:790247 = {
+				trigger_event = pod_artifacts.0053
+				}
+		}
+
+		if = {
+			limit = {
+			character:791955 = { is_alive = yes }
+			}
+			character:791955 = {
+				trigger_event = pod_artifacts.0054
+				}
+		}
+
+		if = {
+			limit = {
+			character:791955 = { is_alive = yes }
+			}
+			character:791955 = {
+				trigger_event = pod_artifacts.0055
+				}
+		}
+
+		if = {
+			limit = {
+			character:505070 = { is_alive = yes }
+			}
+			character:505070 = {
+				trigger_event = pod_artifacts.0056
+				}
+		}
+
+		if = {
+			limit = {
+			character:710203 = { is_alive = yes }
+			}
+			character:710203 = {
+				trigger_event = pod_artifacts.0057
+				}
+		}
+
+		if = {
+			limit = {
+			character:790128 = { is_alive = yes }
+			}
+			character:790128 = {
+				trigger_event = pod_artifacts.0058
+				}
+		}
+
+		if = {
+			limit = {
+			character:791707 = { is_alive = yes }
+			}
+			character:791707 = {
+				trigger_event = pod_artifacts.0059
+				}
+		}
+
+		if = {
+			limit = {
+			character:790166 = { is_alive = yes }
+			}
+			character:790166 = {
+				trigger_event = pod_artifacts.0060
+				}
+		}
+
+		if = {
+			limit = {
+			character:790801 = { is_alive = yes }
+			}
+			character:790801 = {
+				trigger_event = pod_artifacts.0061
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viamutationis
+			}
+			trigger_event = pod_artifacts.0062
+		}
+
+		if = {
+			limit = {
+			character:792024 = { is_alive = yes }
+			}
+			character:792024 = {
+				trigger_event = pod_artifacts.0063
+				}
+		}
+
+		if = {
+			limit = {
+			character:791294 = { is_alive = yes }
+			}
+			character:791294 = {
+				trigger_event = pod_artifacts.0064
+				}
+		}
+
+		if = {
+			limit = {
+			character:790190 = { is_alive = yes }
+			}
+			character:790190 = {
+				trigger_event = pod_artifacts.0065
+				}
+		}
+
+		if = {
+			limit = {
+			character:505084 = { is_alive = yes }
+			}
+			character:505084 = {
+				trigger_event = pod_artifacts.0066
+				}
+		}
+
+		if = {
+			limit = {
+			character:792040 = { is_alive = yes }
+			}
+			character:792040 = {
+				trigger_event = pod_artifacts.0067
+				}
+		}
+
+		if = {
+			limit = {
+			character:790101 = { is_alive = yes }
+			}
+			character:790101 = {
+				trigger_event = pod_artifacts.0068
+				create_artifact_camilla_crown_effect = { OWNER = this }
+				}
+		}
+
+		if = {
+			limit = {
+			character:790534 = { is_alive = yes }
+			}
+			character:790534 = {
+				trigger_event = pod_artifacts.0069
+				}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0070
+				}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0071
+				}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0072
+				}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0073
+				}
+		}
+
+		if = {
+			limit = {
+			character:791715 = { is_alive = yes }
+			}
+			character:791715 = {
+				trigger_event = pod_artifacts.0074
+				}
+		}
+
+		if = {
+			limit = {
+			character:791723 = { is_alive = yes }
+			}
+			character:791723 = {
+				trigger_event = pod_artifacts.0075
+				}
+		}
+
+		if = {
+			limit = {
+			character:791710 = { is_alive = yes }
+			}
+			character:791710 = {
+				trigger_event = pod_artifacts.0076
+				}
+		}
+
+		if = {
+			limit = {
+			character:791725 = { is_alive = yes }
+			}
+			character:791725 = {
+				trigger_event = pod_artifacts.0077
+				}
+		}
+
+		if = {
+			limit = {
+			character:791709 = { is_alive = yes }
+			}
+			character:791709 = {
+				trigger_event = pod_artifacts.0078
+				}
+		}
+
+		if = {
+			limit = {
+			character:605128 = { is_alive = yes }
+			}
+			character:605128 = {
+				trigger_event = pod_artifacts.0079
+				}
+		}
+
+		if = {
+			limit = {
+			character:790236 = { is_alive = yes }
+			}
+			character:790236 = {
+				trigger_event = pod_artifacts.0080
+				}
+		}
+
+		if = {
+			limit = {
+			character:792082 = { is_alive = yes }
+			}
+			character:792082 = {
+				trigger_event = pod_artifacts.0081
+				}
+		}
+
+		if = {
+			limit = {
+			character:790020 = { is_alive = yes }
+			}
+			character:790020 = {
+				trigger_event = pod_artifacts.0082
+				create_artifact_khazar_diary_effect = { OWNER = this  }
+				POD_save_new_artifact_as_link = { LINK = khazar_diary_link }
+			}
+		}
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_ubar_chronicles_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_ubar_chronicles_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = ubar_chronicles_link }
+		}
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_gospels_irad_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_gospels_irad_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = gospels_irad_link }
+		}
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_codex_damned_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_codex_damned_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = codex_damned_link }
+		}
+		random_landed_ruler = {
+			limit = {
+				religion = religion:raktasadhus_religion
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book			
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_wounds_sword_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_wounds_sword_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+		}
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_canticle_japhet_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_canticle_japhet_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = canticle_japhet_link }
+		}	
+		random_landed_ruler = {
+			limit = {
+				POD_is_infernalist_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_gospel_consoler_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_gospel_consoler_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+		}
+		random_landed_ruler = {
+			limit = {
+				POD_is_infernalist_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_book_tobit_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_book_tobit_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = book_tobit_link }
+		}
+		
+		if = {
+			limit = {
+			character:505018 = { is_alive = yes }
+			}
+			character:505018 = {
+				trigger_event = pod_artifacts.0083
+				}
+		}
+
+		if = {
+			limit = {
+			character:792155 = { is_alive = yes }
+			}
+			character:792155 = {
+				trigger_event = pod_artifacts.0084
+				}
+		}
+
+		if = {
+			limit = {
+			character:792144 = { is_alive = yes }
+			}
+			character:792144 = {
+				trigger_event = pod_artifacts.0085
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_middle_east_arabia }
+			}
+			trigger_event = pod_artifacts.0086
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+			}
+			trigger_event = pod_artifacts.0087
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viacaeli
+			}
+			trigger_event = pod_artifacts.0088
+		}
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viacaeli
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+			trigger_event = pod_artifacts.0089
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+			}
+			trigger_event = pod_artifacts.0090
+		}
+
+		if = {
+			limit = {
+			character:792152 = { is_alive = yes }
+			}
+			character:792152 = {
+				trigger_event = pod_artifacts.0091
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofbeast_religion }
+			}
+			trigger_event = pod_artifacts.0092
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofhumanity_religion }
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+			trigger_event = pod_artifacts.0093
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = faith:viaprometheus
+			}
+			trigger_event = pod_artifacts.0094
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+			}
+			trigger_event = pod_artifacts.0095
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+			}
+			trigger_event = pod_artifacts.0096
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofhumanity_religion }
+			}
+			trigger_event = pod_artifacts.0097
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_setite_trigger = yes
+			}
+			trigger_event = pod_artifacts.0098
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_tzimisce_trigger = yes
+				faith = { religion_tag = roadofkings_religion }
+			}
+			trigger_event = pod_artifacts.0099
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofkings_religion }
+			}
+			trigger_event = pod_artifacts.0100
+		}
+
+		if = {
+			limit = {
+			character:505050 = { is_alive = yes }
+			}
+			character:505050 = {
+				trigger_event = pod_artifacts.0101
+				}
+		}
+
+		if = {
+			limit = {
+			character:792171 = { is_alive = yes }
+			}
+			character:792171 = {
+				trigger_event = pod_artifacts.0102
+				}
+		}
+
+		if = {
+			limit = {
+			character:790201 = { is_alive = yes }
+			}
+			character:790201 = {
+				trigger_event = pod_artifacts.0103
+				}
+		}
+
+		if = {
+			limit = {
+			character:790917 = { is_alive = yes }
+			}
+			character:790917 = {
+				trigger_event = pod_artifacts.0104
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofsin_religion }
+			}
+			trigger_event = pod_artifacts.0105
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofsin_religion }
+			}
+			trigger_event = pod_artifacts.0106
+		}
+
+		random_landed_ruler = {
+			limit = {
+				faith = { religion_tag = roadofsin_religion }
+			}
+			trigger_event = pod_artifacts.0107
+		}
+
+		if = {
+			limit = {
+			character:790166 = { is_alive = yes }
+			}
+			character:790166 = {
+				trigger_event = pod_artifacts.0108
+				create_artifact_ancestor_talisman_effect = { OWNER = this }
+				create_artifact_bow_sun_effect = { OWNER = this }
+				create_artifact_fang_kali_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:792192 = { is_alive = yes }
+			}
+			character:792192 = {
+				trigger_event = pod_artifacts.0109
+				}
+		}
+
+		if = {
+			limit = {
+			character:790530 = { is_alive = yes }
+			}
+			character:790530 = {
+				trigger_event = pod_artifacts.0110
+				create_artifact_ancestor_talisman_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790531 = { is_alive = yes }
+			}
+			character:790531 = {
+				trigger_event = pod_artifacts.0111
+				}
+		}
+
+		if = {
+			limit = {
+			character:505094 = { is_alive = yes }
+			}
+			character:505094 = {
+				trigger_event = pod_artifacts.0112
+				}
+		}
+
+		if = {
+			limit = {
+			character:790205 = { is_alive = yes }
+			}
+			character:790205 = {
+				trigger_event = pod_artifacts.0113
+				}
+		}
+
+		if = {
+			limit = {
+			character:790633 = { is_alive = yes }
+			}
+			character:790633 = {
+				trigger_event = pod_artifacts.0114
+				}
+		}
+
+		if = {
+			limit = {
+			character:790021 = { is_alive = yes }
+			}
+			character:790021 = {
+				trigger_event = pod_artifacts.0115
+				}
+		}
+
+		if = {
+			limit = {
+			character:790420 = { is_alive = yes }
+			}
+			character:790420 = {
+				trigger_event = pod_artifacts.0116
+				}
+		}
+
+		if = {
+			limit = {
+			character:792231 = { is_alive = yes }
+			}
+			character:792231 = {
+				trigger_event = pod_artifacts.0117
+				}
+		}
+
+		if = {
+			limit = {
+			character:790204 = { is_alive = yes }
+			}
+			character:790204 = {
+				trigger_event = pod_artifacts.0122
+				}
+		}
+
+		#Book of nod, aristotle has the first chronicle
+		if = {
+			limit = {
+			character:790324 = { is_alive = yes }
+			}
+			character:790324 = {
+				trigger_event = pod_artifacts.0123
+				}
+		}
+
+		#Book of nod, ambrogino has the second chronicle
+		if = {
+			limit = {
+			character:790140 = { is_alive = yes }
+			}
+			character:790140 = {
+				trigger_event = pod_artifacts.0124
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0123
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0124
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0125
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0125
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0126
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0126
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0127
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0127
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0128
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0128
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0129
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0129
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0130
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0130
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0131
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				learning > 14
+			}
+			trigger_event = pod_artifacts.0131
+		}
+
+		if = {
+			limit = {
+			exists = character:790458 # Vald only exist after 1510 bookmark
+			character:790458 = { is_alive = yes }
+			}
+			character:790458 = {
+				trigger_event = pod_artifacts.0132
+				}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_vampire_trigger = yes
+				diplomacy > 14
+			}
+			trigger_event = pod_artifacts.0133
+		}
+
+		if = {
+			limit = {
+			character:790490 = { is_alive = yes }
+			}
+			character:790490 = {
+				trigger_event = pod_artifacts.0134
+			}
+		}
+
+		if = {
+			limit = {
+			character:790101 = { is_alive = yes }
+			}
+			character:790101 = {
+				trigger_event = pod_artifacts.0135
+			}
+		}
+
+		if = {
+			limit = {
+			character:505096 = { is_alive = yes }
+			}
+			character:505096 = {
+				trigger_event = pod_artifacts.0135
+			}
+		}
+
+		if = {
+			limit = {
+			character:790292 = { is_alive = yes }
+			}
+			character:790292 = {
+				trigger_event = pod_artifacts.0135
+			}
+		}
+
+		if = {
+			limit = {
+			character:790292 = { is_alive = yes }
+			}
+			character:790292 = {
+				trigger_event = pod_artifacts.0136
+			}
+		}
+
+		if = {
+			limit = {
+			character:790101 = { is_alive = yes }
+			}
+			character:790101 = {
+				trigger_event = pod_artifacts.0136
+			}
+		}
+
+		if = {
+			limit = {
+			character:790204 = { is_alive = yes }
+			}
+			character:790204 = {
+				trigger_event = pod_artifacts.0136
+			}
+		}
+
+		if = {
+			limit = {
+			character:792235 = { is_alive = yes }
+			}
+			character:792235 = {
+				trigger_event = pod_artifacts.0137
+			}
+		}
+
+		if = {
+			limit = {
+			character:790780 = { is_alive = yes }
+			}
+			character:790780 = {
+				trigger_event = pod_artifacts.0138
+			}
+		}
+
+		if = {
+			limit = {
+			character:790863 = { is_alive = yes }
+			}
+			character:790863 = {
+				trigger_event = pod_artifacts.0139
+			}
+		}
+
+		if = {
+			limit = {
+			character:790323 = { is_alive = yes }
+			}
+			character:790323 = {
+				trigger_event = pod_artifacts.0140
+			}
+		}
+
+		if = {
+			limit = {
+			character:790237 = { is_alive = yes }
+			}
+			character:790237 = {
+				trigger_event = pod_artifacts.0141
+			}
+		}
+
+		if = {
+			limit = {
+			character:791710 = { is_alive = yes }
+			}
+			character:791710 = {
+				trigger_event = pod_artifacts.0142
+			}
+		}
+
+		if = {
+			limit = {
+			character:790382 = { is_alive = yes }
+			}
+			character:790382 = {
+				trigger_event = pod_artifacts.0143
+			}
+		}
+
+		if = {
+			limit = {
+			character:792467 = { is_alive = yes }
+			}
+			character:792467 = {
+				trigger_event = pod_artifacts.0144
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			trigger_event = pod_artifacts.0145
+		}
+
+		if = {
+			limit = {
+			character:605110 = { is_alive = yes }
+			}
+			character:605110 = {
+				trigger_event = pod_artifacts.0146
+				create_artifact_ancestor_talisman_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790164 = { is_alive = yes }
+			}
+			character:790164 = {
+				trigger_event = pod_artifacts.0146
+				create_artifact_ancestor_talisman_effect = { OWNER = this }
+			}
+		}
+		
+		if = {
+			limit = {
+			character:791970 = { is_alive = yes }
+			}
+			character:791970 = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_dreams_angra_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_dreams_angra_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = dreams_angra_link }
+			}
+		}
+		
+		if = {
+			limit = {
+			character:790241 = { is_alive = yes }
+			}
+			character:790241 = {
+				trigger_event = pod_artifacts.0146
+			}
+		}
+
+		if = {
+			limit = {
+			character:790168 = { is_alive = yes }
+			}
+			character:790168 = {
+				trigger_event = pod_artifacts.0146
+				create_artifact_artifact_amala_doll_effect = { OWNER = this }
+				create_artifact_artifact_arrows_vengeance_effect = { OWNER = this }				
+			}
+		}
+
+		if = {
+			limit = {
+			character:792624 = { is_alive = yes }
+			}
+			character:792624 = {
+				create_artifact_artifact_amulet_dawn_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790490 = { is_alive = yes }
+			}
+			character:790490 = {
+				create_artifact_artifact_book_grave_war_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790913 = { is_alive = yes }
+			}
+			character:790913 = {
+				create_artifact_artifact_coin_muhammad_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790387 = { is_alive = yes }
+			}
+			character:790387 = {
+				create_artifact_artifact_iskender_saber_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790126 = { is_alive = yes }
+			}
+			character:790126 = {
+				create_artifact_artifact_testament_seterpenre_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:790127 = { is_alive = yes }
+			}
+			character:790127 = {
+				create_artifact_artifact_final_day_effect = { OWNER = this }
+			}
+		}
+		
+		if = {
+			limit = {
+			character:790103 = { is_alive = yes }
+			}
+			character:790103 = {
+				trigger_event = pod_artifacts.0147
+			}
+		}
+
+		if = {
+			limit = {
+			character:790438 = { is_alive = yes }
+			}
+			character:790438 = {
+				trigger_event = pod_artifacts.0147
+			}
+		}
+
+		if = {
+			limit = {
+			character:790270 = { is_alive = yes }
+			}
+			character:790270 = {
+				trigger_event = pod_artifacts.0147
+			}
+		}
+
+		if = {
+			limit = {
+			character:791233 = { is_alive = yes }
+			}
+			character:791233 = {
+				trigger_event = pod_artifacts.0148
+			}
+		}
+
+		if = {
+			limit = {
+			character:505071 = { is_alive = yes }
+			}
+			character:505071 = {
+				trigger_event = pod_artifacts.0149
+			}
+		}
+
+		if = {
+			limit = {
+			character:605112 = { is_alive = yes }
+			}
+			character:605112 = {
+				trigger_event = pod_artifacts.0150
+			}
+		}
+
+		if = {
+			limit = {
+			character:790348 = { is_alive = yes }
+			}
+			character:790348 = {
+				trigger_event = pod_artifacts.0151
+			}
+		}
+
+		if = {
+			limit = {
+			character:791074 = { is_alive = yes }
+			}
+			character:791074 = {
+				trigger_event = pod_artifacts.0152
+			}
+		}
+
+		if = {
+			limit = {
+			character:605122 = { is_alive = yes }
+			}
+			character:605122 = {
+				trigger_event = pod_artifacts.0153
+			}
+		}
+
+		if = {
+			limit = {
+			character:790554 = { is_alive = yes }
+			}
+			character:790554 = {
+				trigger_event = pod_artifacts.0154
+			}
+		}
+
+		if = {
+			limit = {
+			character:791070 = { is_alive = yes }
+			}
+			character:791070 = {
+				trigger_event = pod_artifacts.0155
+			}
+		}
+
+		if = {
+			limit = {
+			character:605133 = { is_alive = yes }
+			}
+			character:605133 = {
+				trigger_event = pod_artifacts.0156
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			trigger_event = pod_artifacts.0157
+		}
+
+		if = {
+			limit = {
+			character:790363 = { is_alive = yes }
+			}
+			character:790363 = {
+				create_artifact_artifact_travels_fedoso_effect = { OWNER = this }				
+				trigger_event = pod_artifacts.0158
+			}
+		}
+
+		if = {
+			limit = {
+			character:790204 = { is_alive = yes }
+			}
+			character:790204 = {
+				trigger_event = pod_artifacts.0159
+			}
+		}
+
+		if = {
+			limit = {
+			character:792526 = { is_alive = yes }
+			}
+			character:792526 = {
+				trigger_event = pod_artifacts.0161
+			}
+		}
+
+		if = {
+			limit = {
+			character:792537 = { is_alive = yes }
+			}
+			character:792537 = {
+				trigger_event = pod_artifacts.0162
+			}
+		}
+
+		if = {
+			limit = {
+			character:792570 = { is_alive = yes }
+			}
+			character:792570 = {
+				trigger_event = pod_artifacts.0163
+			}
+		}
+
+		if = {
+			limit = {
+			character:560126 = { is_alive = yes }
+			}
+			character:560126 = {
+				trigger_event = pod_artifacts.0164
+			}
+		}
+
+		if = {
+			limit = {
+			character:792593 = { is_alive = yes }
+			}
+			character:792593 = {
+				trigger_event = pod_artifacts.0165
+			}
+		}
+
+		if = {
+			limit = {
+			character:792729 = { is_alive = yes }
+			}
+			character:792729 = {
+				trigger_event = pod_artifacts.0166
+			}
+		}
+
+		if = {
+			limit = {
+			character:792760 = { is_alive = yes }
+			}
+			character:792760 = {
+				trigger_event = pod_artifacts.0245
+			}
+		}
+
+		if = {
+			limit = {
+			character:792731 = { is_alive = yes }
+			}
+			character:792731 = {
+				trigger_event = pod_artifacts.0246
+			}
+		}
+
+		if = {
+			limit = {
+			character:792734 = { is_alive = yes }
+			}
+			character:792734 = {
+				trigger_event = pod_artifacts.0247
+			}
+		}
+
+		random_landed_ruler = {
+			limit = { 
+				has_trait = supehunter 
+			}
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_friars_cross_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_friars_cross_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_black_gloves_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_concoction_vitality_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_giants_blood_effect = { OWNER = this }
+		}
+		
+		random_landed_ruler = {
+			limit = {
+				capital_province = { geographical_region = world_europe }
+			}
+			create_artifact_hand_conrad_effect = { OWNER = this }
+		}		
+
+		if = {
+			limit = {
+				character:790275 = { is_alive = yes }
+			}
+			character:790275 = { create_artifact_seal_veddartha_effect = { OWNER = this } }
+		}
+		
+		random_landed_ruler = {
+			limit = {
+				has_trait = malkavian
+			}
+			create_artifact_martinelli_ring_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_phylactery_memory_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_ivory_bow_effect = { OWNER = this }
+		}
+		
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_pumping_heart_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			has_ep1_dlc_trigger = yes 
+			character:790514 = { is_alive = yes }
+			}
+			character:790514 = {
+				create_artifact_golden_throne_neferu_effect = { OWNER = this TYPE = throne_special }
+			}
+		}
+		
+		#Margali is an art collector, a way for us to salvage some unused vanilla artifacts
+		if = {
+			limit = {
+			has_dlc_feature = legacy_of_persia
+			character:793084 = { is_alive = yes }
+			}
+			character:793084 = {
+				create_artifact_oxus_bracelet_effect = { OWNER = this }
+			}
+		}
+		
+		if = {
+			limit = {
+			has_ep3_dlc_trigger = yes
+			character:793084 = { is_alive = yes }
+			}
+			character:793084 = {
+				create_artifact_statue_roman_woman_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:793084 = { is_alive = yes }
+			}
+			character:793084 = {
+				create_artifact_qadib_al_mulk_effect = { OWNER = this }
+			}
+		}
+
+		#Neferukhayt isn't alive in the vamp bookmark but the book is needed
+		#so we let it spawn then passes on to a random char if she isn't there
+		
+		if = {
+			limit = {
+				character:792595 = { is_alive = yes }
+			}
+		character:792595 ?= {
+			create_artifact_isis_fragments_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = isis_fragments_link }
+		}	
+		}
+		else = {
+		random_landed_ruler= {
+			create_artifact_isis_fragments_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = isis_fragments_link }
+		}	
+		}
+		
+		#Fera bookmark related stuff starts
+		
+		if = {
+			limit = {
+				OR = {
+					POD_bookmark_has_fera = yes
+					any_player = { has_trait = fera }
+				}
+			}
+			character:POD_wraith_01 = {
+				# Incarna artifacts
+				create_artifact_eternal_grace_of_eshtarras_might_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = eternal_grace_of_eshtarras_might_link }
+
+				create_artifact_shining_klaive_of_sokhta_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = shining_klaive_of_sokhta_link }
+
+				create_artifact_radiant_blade_of_katanka_sonnak_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = radiant_blade_of_katanka_sonnak_link }
+
+				create_artifact_mercurial_mask_of_mitanu_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = mercurial_mask_of_mitanu_link }
+
+				create_artifact_burning_mask_of_hakahe_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = burning_mask_of_hakahe_link }
+
+				create_artifact_radiant_dress_of_tambiyah_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = radiant_dress_of_tambiyah_link }
+
+				create_artifact_burning_horns_of_nerigal_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = burning_horns_of_nerigal_link }
+
+				create_artifact_ruinous_talons_of_rorg_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = ruinous_talons_of_rorg_link }
+
+				create_artifact_imperious_crown_of_zarok_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = imperious_crown_of_zarok_link }
+
+				create_artifact_eternal_wings_of_lu_bat_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = eternal_wings_of_lu_bat_link }
+
+				create_artifact_shadowed_stave_of_ruatma_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = shadowed_stave_of_ruatma_link }
+
+				create_artifact_dancing_loom_of_shantar_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = dancing_loom_of_shantar_link }
+
+				create_artifact_whispering_ankh_of_meros_effect = { OWNER = this }
+				scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+				POD_save_new_artifact_as_link = { LINK = whispering_ankh_of_meros_link }
+			}
+		}
+		
+		if = {
+			limit = {
+				POD_bookmark_has_fera = yes
+			}
+
+		if = {
+			limit = {
+			character:POD_wraith_02 = { is_alive = yes }
+			}
+			character:POD_wraith_02 = {
+				create_artifact_pomegranate_effect = { OWNER = this }
+			}
+		}
+
+		character:792278 ?= {
+			create_artifact_fans_of_ma_yi_yuan_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = fans_of_ma_yi_yuan }
+		}
+		
+		if = {
+			limit = {
+			character:792955 = { is_alive = yes }
+			}
+			character:792955 = {
+				create_artifact_devil_deck_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:792937 = { is_alive = yes }
+			}
+			character:792937 = {
+				create_artifact_lotus_petals_effect = { OWNER = this }
+			}
+		}
+		
+		if = {
+			limit = {
+			character:792931 = { is_alive = yes }
+			}
+			character:792931 = {
+				create_artifact_grandmothers_stones_effect = { OWNER = this }
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_ai = yes 
+				has_trait = bastet
+			}
+			create_artifact_truthspeaker_stick_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+				has_trait = fera
+			}
+			create_artifact_bell_warning_effect = { OWNER = this }
+		}
+		
+		if = {
+			limit = {
+			character:792972 = { is_alive = yes }
+			}
+			character:792972 = {
+				create_artifact_silver_hakarr_effect = { OWNER = this }
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_ai = yes 
+				has_trait = bastet
+			}
+			create_artifact_frog_skin_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_ai = yes 
+				has_trait = bastet
+			}
+			create_artifact_ice_knife_effect = { OWNER = this }
+		}
+
+		if = {
+			limit = {
+			character:791127 = { is_alive = yes }
+			}
+			character:791127 = {
+				create_artifact_judgment_hammer_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = judgment_hammer }
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_ai = yes 
+				has_trait = bastet
+			}
+			create_artifact_foe_heart_effect = { OWNER = this }
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_ai = yes 
+				has_trait = bastet
+			}
+			create_artifact_false_protection_effect = { OWNER = this }
+		}
+
+		if = {
+			limit = {
+			character:792958 = { is_alive = yes }
+			}
+			character:792958 = {
+				create_artifact_jade_arrows_effect = { OWNER = this }
+			}
+		}
+
+		if = {
+			limit = {
+			character:793001 = { is_alive = yes }
+			}
+			character:793001 = {
+				create_artifact_quicksilver_effect = { OWNER = this }
+			}
+		}
+
+		random_landed_ruler = {
+			limit = {
+				is_mummy_trigger = yes
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_book_thoth_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_book_thoth_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = book_thoth_link }
+		}
+		
+		}
+
+		
+
+		####Fera####
+		if = {
+			limit = {
+				POD_bookmark_has_fera = yes
+			}
+
+			#### Werewolves #####
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_anklet_false_trails_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_eye_leech_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_owl_feather_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_owner_bridle_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_dyonisian_horn_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_shield_arrows_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_amulet_tongues_effect = { OWNER = this  }					
+			}
+
+			random_landed_ruler = {
+				limit = {
+					has_trait = fera
+				}
+				create_artifact_unicorn_ire_effect = { OWNER = this  }					
+			}
+			
+			if = {
+				limit = { character:792565 = { is_alive = yes } } 
+				character:792565 = { trigger_event = pod_artifacts.0178 }
+			}
+
+			if = {
+				limit = { character:792721 = { is_alive = yes } } 
+				character:792721 = { create_artifact_cauldron_dagda_effect = { OWNER = this  } }
+				character:792721 = { create_artifact_harp_dagda_effect = { OWNER = this  } }
+			}
+			if = {
+				limit = { character:792692 = { is_alive = yes } } 
+				character:792692 = { create_artifact_silver_spear_effect = { OWNER = this  } }
+			}
+			
+			#Thunder of Inoue
+			if = {
+				limit = { character:795223 = { is_alive = yes } } 
+				character:795223 = { create_artifact_thunder_inoue_effect = { OWNER = this  } }
+			}
+			
+			#Seven Blades of Inoue
+			if = {
+				limit = { character:795224 = { is_alive = yes } } 
+				character:795224 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795224 } } #these effects have an ID for history purposes
+			}
+			if = {
+				limit = { character:795225 = { is_alive = yes } } 
+				character:795225 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795225 } }
+			}
+			if = {
+				limit = { character:795226 = { is_alive = yes } } 
+				character:795226 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795226 } }
+			}
+			if = {
+				limit = { character:795227 = { is_alive = yes } } 
+				character:795227 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795227 } }
+			}
+			if = {
+				limit = { character:795228 = { is_alive = yes } } 
+				character:795228 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795228 } }
+			}
+			if = {
+				limit = { character:795229 = { is_alive = yes } } 
+				character:795229 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795229 } }
+			}
+			if = {
+				limit = { character:795230 = { is_alive = yes } } 
+				character:795230 = { create_artifact_seven_blades_inoue_effect = { OWNER = this ID = 795230 } }
+			}
+
+			#Clan Chika
+			if = {
+				limit = { character:795249 = { is_alive = yes } } 
+				character:795249 = { create_artifact_wolven_oath_effect = { OWNER = this } }
+			}
+			#Clan Kasutoshi
+			if = {
+				limit = { character:795255 = { is_alive = yes } } 
+				character:795255 = { create_artifact_chiming_serpent_effect = { OWNER = this } }
+			}
+			#Clan Chikara
+			if = {
+				limit = { character:795257 = { is_alive = yes } } 
+				character:795257 = { create_artifact_serrated_tempest_effect = { OWNER = this } }
+			}
+			#Clan Ozatu
+			if = {
+				limit = { character:795264 = { is_alive = yes } } 
+				character:795264 = { create_artifact_lunar_dragon_tide_effect = { OWNER = this } }
+			}
+			#Clan Kintaro
+			if = {
+				limit = { character:795266 = { is_alive = yes } } 
+				character:795266 = { create_artifact_stalking_moon_effect = { OWNER = this } }
+			}
+		
+			### hunters and mummy stuff, as they share bookmarks with fera 
+			
+			random_landed_ruler = {
+				limit = { is_amenti_trigger = yes }
+				create_artifact_khopesh_of_balance_effect = { OWNER = this }
+			}
+			character:792903 ?= {
+				create_artifact_rasail_safa_effect = { OWNER = this }
+			}	
+
+			#### Mokole ####
+			if = {
+				limit = { character:795113 = { is_alive = yes } } #Swims-in-Mbembe's-Wake
+				character:795113 = { create_artifact_mask_of_mnante_effect = { OWNER = this } }
+			}
+			if = {
+				limit = { character:795116 = { is_alive = yes } } #Unseen-in-Shallow-Water
+				character:795116 = { create_artifact_mask_of_mnante_effect = { OWNER = this } }
+			}
+			
+			if = {
+				limit = { character:795108 = { is_alive = yes } } #Tong Long Hua
+				character:795108 = { create_artifact_dragon_skin_effect = { OWNER = this } }
+			}
+			if = {
+				limit = { character:795112 = { is_alive = yes } } #Towers-Above-the-Kings
+				character:795112 = { create_artifact_dragon_skin_effect = { OWNER = this } }
+			}
+			if = {
+				limit = { character:795111 = { is_alive = yes } } #Mokole-Mbembe
+				character:795111 = { create_artifact_sword_of_fever_effect = { OWNER = this } }
+			}
+			if = {
+				limit = { character:795110 = { is_alive = yes } } #Wolaru
+				character:795110 = { create_artifact_sun_spear_thrower_effect = { OWNER = this } }
+			}
+		}
+		
+		#Fae stuff starts
+		if = {
+			limit = {
+				POD_bookmark_has_fae = yes
+			}
+
+		character:POD_wraith_01 = {
+			# Caliburn
+			create_artifact_caliburn_effect = { OWNER = this }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = caliburn_link }
+
+			create_artifact_caliburns_sheath_effect = { OWNER = this }
+			scope:newly_created_artifact = { POD_make_artifact_unavailable_effect = yes }
+			POD_save_new_artifact_as_link = { LINK = caliburns_sheath_link }
+		}
+
+		# Spread some mounts around the Fae
+
+		# War Horses
+		while = {
+			count = 10
+			random_landed_ruler = {
+				limit = {
+					OR = {
+						has_trait = sidhe
+						has_trait = eshu
+						has_trait = chuihyu
+						has_trait = chujung
+						has_trait = houchi
+						has_trait = komuko
+						has_trait = suijen
+					}
+				}
+				create_artifact_warhorse_nostory_effect  = { OWNER = this }
+				#trigger_event = pod_artifacts.0258
+			}
+		}
+
+		# Wolves
+		while = {
+			count = 4
+			random_landed_ruler = {
+				limit = {
+					OR = {
+						has_trait = sidhe
+						has_trait = eshu
+						has_trait = chuihyu
+						has_trait = chujung
+						has_trait = houchi
+						has_trait = komuko
+						has_trait = suijen
+					}
+					#NOT = { capital_county.title_province = { geographical_region = world_africa } } # No Wolves in Africa in 1230
+				}
+
+				create_artifact_wolf_effect = { OWNER = this }
+				#trigger_event = pod_artifacts.0259
+			}
+		}
+
+		# Bears
+		while = {
+			count = 2
+			random_landed_ruler = {
+				if = {
+					limit = {
+						OR = {
+							has_trait = sidhe
+							has_trait = eshu
+							has_trait = chuihyu
+							has_trait = chujung
+							has_trait = houchi
+							has_trait = komuko
+							has_trait = suijen
+						}
+						#NOT = { capital_county.title_province = { geographical_region = world_africa } } # No bears in Africa in 1230
+					}
+				}
+				create_artifact_bear_effect = { OWNER = this }
+			}
+		}
+
+		# Lions
+		while = {
+			count = 2
+			random_landed_ruler = {
+				limit = {
+					OR = {
+						has_trait = kuino
+						has_trait = eshu
+						has_trait = obambo
+						has_trait = biloko
+						has_trait = djedi
+						has_trait = ifrit
+						has_trait = lilin
+						has_trait = qareen
+						has_trait = shaytan
+					}
+					#capital_county.title_province = { geographical_region = world_africa }
+				}
+				create_artifact_lion_effect = { OWNER = this }
+				#trigger_event = pod_artifacts.0261
+			}
+		}
+		# Tigers
+		while = {
+			count = 2
+			random_landed_ruler = {
+				limit = {
+					OR = {
+						has_trait = chuihyu
+						has_trait = chujung
+						has_trait = houchi
+						has_trait = komuko
+						has_trait = suijen
+						# None of the Animal Hsien/Hirayanu
+						has_trait = eshu
+					}
+					#NOT = { capital_county.title_province = { geographical_region = world_africa } } # No Wolves in Africa in 1230
+				}
+				create_artifact_tiger_effect = { OWNER = this }
+				#trigger_event = pod_artifacts.0262
+			}
+		}
+					
+		random_landed_ruler = {
+			create_artifact_caladbolg_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_chalice_of_rain_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_chalice_of_rain_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_broach_of_scrying_effect = { OWNER = this }
+			}
+			POD_save_new_artifact_as_link = { LINK = broach_of_scrying_link }
+		}
+		random_landed_ruler = {
+			create_artifact_singing_sword_of_madog_cynydd_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			create_artifact_black_torc_of_carniog_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = black_torc_of_carniog_link }
+		}
+		random_landed_ruler = {
+			create_artifact_blazing_silver_torc_of_myfanwy_du_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_cauldron_of_gruffydd_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_cauldron_of_gruffydd_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_cauldron_of_annwn_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_cauldron_of_annwn_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_faerie_dust_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_cabinet_stick_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_cap_of_neglect_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_ring_of_linked_sight_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_sealing_needle_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_arrow_of_midnight_sun_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_arrow_of_inky_noon_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_vulcans_hammer_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = vulcans_hammer_link }
+			}
+		}
+		random_landed_ruler = {
+			create_artifact_pegasus_bridle_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = pegasus_bridle_link }
+		}
+		random_landed_ruler = {
+			create_artifact_rooting_amulet_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_twin_glass_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_twin_glass_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+		while = {
+			count = 2
+			random_landed_ruler = {
+				create_artifact_shatterhammer_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 2
+			random_landed_ruler = {
+				create_artifact_sword_of_drowning_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_cauldron_of_nightmares_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_cauldron_of_nightmares_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+		random_landed_ruler = {
+			limit = {
+			}
+			create_artifact_gray_sword_effect = { OWNER = this }
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_durable_sandals_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_trail_dust_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_blessed_opa_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_basilisk_stone_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_basilisk_stone_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_goblin_lantern_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_goblin_lantern_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_goblin_parchment_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_goblin_parchment_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_goblin_shoes_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_razor_claws_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_goblin_bow_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_goblin_cloak_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_pendulum_effect = { OWNER = this }
+			}
+		}
+		character:POD_fae_character_07 = { # Because him is the only Nockers
+			if = {
+				limit = { is_alive = yes }
+				create_artifact_universal_solvent_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_magical_crumbs_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_cat_boots_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			create_artifact_balthazars_bracelets_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			create_artifact_cleopatras_wings_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			create_artifact_osiris_flail_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = osiris_flail_link }
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_gauntlets_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_dry_dust_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_blooded_gauntlets_effect = { OWNER = this }
+			}
+		}
+		character:POD_fae_character_37 = { # Because him is the only redcap
+			if = {
+				limit = { is_alive = yes }
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_grinder_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_grinder_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				create_artifact_logis_ashes_effect = { OWNER = this }
+				create_artifact_winterblade_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_grapes_of_wrath_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_horn_of_hermes_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_halcyon_halter_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_inner_spinners_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_gray_vines_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 3
+			random_landed_ruler = {
+				limit = {
+				}
+				create_artifact_gloves_of_night_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 3
+			random_landed_ruler = {
+				limit = {
+				}
+				create_artifact_gloves_of_night_effect = { OWNER = this }
+			}
+		}
+		character:POD_fae_character_29 = { # Because her is the only sluagh
+			if = {
+				limit = { is_alive = yes }
+				create_artifact_wordspider_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_brooch_of_the_true_suitor_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_highland_blade_effect = { OWNER = this }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_rorys_bag_effect = { OWNER = this }
+			}
+		}
+		character:POD_fae_character_30 = { # Because him is the only Troll
+			if = {
+				limit = { is_alive = yes }
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_shield_of_virtue_effect = { OWNER = this TYPE = wall_shield }
+					create_artifact_shield_of_virtue_effect = { OWNER = this TYPE = wall_shield } #twin shield
+				}
+				else = {
+					create_artifact_shield_of_virtue_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+					create_artifact_shield_of_virtue_effect = { OWNER = this TYPE = miscellaneous_when_not_court } #twin shield
+				}
+			}
+		}
+		character:POD_fae_character_06 = { # Aife should get her own tool
+			if = {
+				limit = { is_alive = yes }
+				create_artifact_caliper_of_aife_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = caliper_of_aife_link }
+			}
+		}
+		dynasty:POD_fae_dynasty_dougal = {
+			dynast ?= {
+				create_artifact_achen_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = achen_link }
+			}
+			dynast ?= {
+				create_artifact_ship_of_the_four_quarters_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = ship_of_the_four_quarters_link }
+			}
+			random_dynasty_member = {
+				create_artifact_anweyth_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = anweyth_link }
+			}
+		}
+
+		dynasty:POD_fae_dynasty_eiluned = {
+			while = {
+				count = 6
+				random_dynasty_member = {
+					if = {
+						limit = { has_ep1_dlc_trigger = yes }
+						create_artifact_mooncrystal_effect = { OWNER = this TYPE = pedestal }
+					}
+					else = {
+						create_artifact_mooncrystal_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+					}
+				}
+			}
+		}
+		dynasty:POD_fae_dynasty_balor = {
+			random_dynasty_member = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_balors_crystal_eye_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_balors_crystal_eye_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = balors_crystal_eye_link }
+			}
+			while = {
+				count = 6
+				random_dynasty_member = {
+					create_artifact_blood_dross_effect = { OWNER = this }
+				}
+			}
+			random_dynasty_member = {
+				create_artifact_steaming_spear_of_vengeance_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = steaming_spear_of_vengeance_link }
+			}
+			random_dynasty_member = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_cauldron_of_fear_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_cauldron_of_fear_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = cauldron_of_fear_link }
+			}
+		}
+		dynasty:POD_fae_dynasty_leanhaun = {
+			random_dynasty_member = {
+				create_artifact_rose_of_leanhaun_effect = { OWNER = this }
+			}
+		}
+		dynasty:POD_fae_dynasty_beaumayn = {
+			while = {
+				count = 2
+				random_dynasty_member = {
+					create_artifact_masquers_eyes_effect = { OWNER = this }
+				}
+			}
+			while = {
+				count = 6
+				random_dynasty_member = {
+					create_artifact_passion_braceler_effect = { OWNER = this }
+				}
+			}
+		}
+		dynasty:POD_fae_dynasty_aesin = {
+			random_dynasty_member = {
+				create_artifact_eilaf_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = eilaf_link }
+			}
+			random_dynasty_member = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_tapestry_of_fate_effect = { OWNER = this TYPE = wall_big }
+				}
+				else = {
+					create_artifact_tapestry_of_fate_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = tapestry_of_fate_link }
+			}
+			while = {
+				count = 6
+				random_dynasty_member = {
+					create_artifact_berserker_armor_effect = { OWNER = this }
+				}
+			}
+		}
+		dynasty:POD_fae_dynasty_daireann = {
+			random_dynasty_member = {
+				create_artifact_cudgel_of_conchobhair_effect = { OWNER = this }
+			}
+		}
+
+		dynasty:POD_fae_dynasty_varich = {
+			while = {
+				count = 6
+				random_dynasty_member = {
+					if = {
+						limit = { has_ep1_dlc_trigger = yes }
+						create_artifact_amber_wyrm_effect = { OWNER = this TYPE = pedestal }
+					}
+					else = {
+						create_artifact_amber_wyrm_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+					}
+				}
+			}
+			random_dynasty_member = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_firebird_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_firebird_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				create_artifact_havens_compass_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = havens_compass_link }
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_bakers_stone_effect = { OWNER = this TYPE = pedestal }
+				}
+				else = {
+					create_artifact_bakers_stone_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		while = {
+			count = 6
+			random_landed_ruler = {
+				limit = {
+				}
+				create_artifact_bane_dagger_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_dreamstone_of_madoc_effect = { OWNER = this TYPE = pedestal }
+			}
+			else = {
+				create_artifact_dreamstone_of_madoc_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+			POD_save_new_artifact_as_link = { LINK = dreamstone_of_madoc_link }
+		}
+		}
+		random_landed_ruler = {
+			limit = { is_amenti_trigger = yes }
+			create_artifact_kohl_of_the_hawk_lord_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { is_amenti_trigger = yes }
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_screens_of_the_harem_effect = { OWNER = this TYPE = wall_big }
+			}
+			else = {
+				create_artifact_screens_of_the_harem_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+		}
+	
+		character:792855 ?= {
+			create_artifact_book_enoch_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = book_enoch_link }
+		}
+		character:505018 ?= {
+			create_artifact_the_jawbone_effect = { OWNER = this }
+		}
+		
+		###There is only Ma Yi Yuan as a Shih. Her starting with all the Shih artifacts is too much. Having to retrieve them is better and now part of her starting event
+		###She can keep her fans though obviously
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_bow_of_yi_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = bow_of_yi }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin  }
+			create_artifact_staff_of_shing_tse_lee_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = staff_of_shing_tse_lee }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_sword_of_shu_mo_pan_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = sword_of_shu_mo_pan }
+		}
+
+		#There are very few demons, so the chance of the player demon having these powerful artifacts is too high at the start
+		#Make the player work for it instead
+		
+		#soultaker has been reworked as landless demon reward
+		#random_landed_ruler = {
+		#	limit = {
+		#		has_trait = demon
+		#		is_ai = yes
+		#		}
+		#	create_artifact_soultaker_effect = { OWNER = this }
+		#	POD_save_new_artifact_as_link = { LINK = soultaker }
+		#}
+		random_landed_ruler = {
+			limit = {
+				has_trait = demon
+				is_ai = yes
+				}
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_the_black_throne_of_genhinnom_effect = { OWNER = this TYPE = throne_special }
+			}
+			else = {
+				create_artifact_the_black_throne_of_genhinnom_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+			POD_save_new_artifact_as_link = { LINK = the_black_throne_of_genhinnom }
+		}
+		random_landed_ruler = {
+			limit = {
+				has_trait = demon
+				is_ai = yes
+				}
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_soulforge_effect = { OWNER = this TYPE = scientific_apparatus }
+			}
+			else = {
+				create_artifact_soulforge_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+			POD_save_new_artifact_as_link = { LINK = soulforge }
+		}
+		while = {
+			count = 2
+			random_landed_ruler = {
+				limit = {
+					has_trait = demon
+					is_ai = yes
+					}
+				create_artifact_somber_axe_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			create_artifact_javaniel_key_effect = { OWNER = this }
+			POD_save_new_artifact_as_link = { LINK = javaniel_key }
+		}
+		random_landed_ruler = {
+			limit = { artifact_use_indian_building_visuals_trigger = no } # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book
+			create_artifact_javaniel_journal_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = {
+				culture = culture:han
+			}
+			if = {
+				limit = { has_ep1_dlc_trigger = yes }
+				create_artifact_ivory_tablets_effect = { OWNER = this TYPE = book }
+			}
+			else = {
+				create_artifact_ivory_tablets_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+			}
+			POD_save_new_artifact_as_link = { LINK = ivory_tablets }
+		}
+		random_landed_ruler = {
+			limit = {
+				is_assamite_trigger = yes
+			}
+			create_artifact_accursed_dust_effect = { OWNER = this }
+		}
+		while = {
+			count = 10 # Was 5. From Aaron2000: "Bai Ze Tu Fragments should have a few extra copies added. The Book of Nod has 2 of each copy incase artifacts are destroyed in the time it takes for the player to acquire them. The Bai Ze Tu has no such provision so losing even a single copy to the ai's hijinks will permanently lock you out of the artifact. 3-5 copies should be added to allow for the same here."
+			random_landed_ruler = {
+				limit = {
+					has_trait = kueijin
+				}
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_baizetu_fragment_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_baizetu_fragment_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		if = {
+			limit = {
+			character:792827 = { is_alive = yes }
+			}
+			character:792827 = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_fragment_code_samiel_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_fragment_code_samiel_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = fragment_code_samiel1 }
+			}
+		}
+		if = {
+			limit = {
+			character:791014 = { is_alive = yes }
+			}
+			character:791014 = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_fragment_code_samiel_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_fragment_code_samiel_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+				POD_save_new_artifact_as_link = { LINK = fragment_code_samiel2 }
+			}
+		}
+		if = {
+			limit = {
+			character:792804 = { is_alive = yes }
+			}
+			character:792804 = {
+				create_artifact_set_phallus_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = set_phallus_link }
+			}
+		}
+		if = {
+			limit = {
+			character:790149 = { is_alive = yes }
+			}
+			character:790149 = {
+				create_artifact_broken_blade_michael_effect = { OWNER = this }
+			}
+		}		
+		while = {
+			count = 10
+			random_landed_ruler = {
+				limit = {
+					culture = {		
+						OR = {
+							has_cultural_pillar = heritage_south_slavic
+							has_cultural_pillar = heritage_magyar
+							has_cultural_pillar = heritage_vlach
+						}
+					}
+				}
+				create_artifact_incunabulum_fragment_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+				game_start_date >= 1499.1.1
+			}
+			random_landed_ruler = {
+				limit = {
+					culture = {		
+						OR = {
+							has_cultural_pillar = heritage_south_slavic
+							has_cultural_pillar = heritage_magyar
+							has_cultural_pillar = heritage_vlach
+						}
+					}
+				}
+				create_artifact_incunabulum_kupalam_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = incunabulum_kupalam_link }
+			}
+		}
+		while = {
+			count = 13
+			random_landed_ruler = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_scroll_enlightenment_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_scroll_enlightenment_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		if = {
+			limit = {
+			character:791330 = { is_alive = yes }
+			}
+			character:791330 = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_book_hidden_stars_effect = { OWNER = this TYPE = book }
+				}
+				else = {
+					create_artifact_book_hidden_stars_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+				}
+			}
+		}
+		if = {
+			limit = {
+			character:505053 = { is_alive = yes }
+			}
+			character:505053 = {
+				create_artifact_nightmare_horse_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = nightmare_horse_link }
+			}
+		}
+		if = {
+			limit = {
+			character:505073 = { is_alive = yes }
+			}
+			character:505073 = {
+				create_artifact_sorn_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = sorn_link }
+			}
+		}
+		if = {
+			limit = {
+			character:791831 = { is_alive = yes }
+			}
+			character:791831 = {
+				create_artifact_sorel_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = sorel_link }
+			}
+		}
+		if = {
+			limit = {
+			character:790941 = { is_alive = yes }
+			}
+			character:790941 = {
+				create_artifact_vozhd_palanquin_effect = { OWNER = this }
+				POD_save_new_artifact_as_link = { LINK = vozhd_palanquin_link }
+			}
+		}
+
+
+		random_landed_ruler = {
+			limit = { 	
+				has_trait = werewolf
+				artifact_use_indian_building_visuals_trigger = no # Error: create_artifact effect [ Couldn't determine 'asset' visual type; all triggers returned false for book 
+			}
+			trigger_event = pod_artifacts.0192
+		}
+		
+		character:easteregg_shadowfang ?= {
+			trigger_event = pod_artifacts.0248
+		}
+		# Sargon Codex Shards
+		if = {
+			limit = {
+			character:790021 = { is_alive = yes }
+			}
+			character:790021 = {
+				POD_create_book_artifact_effect = { OWNER = this artifact = lilith_shard }
+			}
+		}		
+		if = {
+			limit = {
+			character:790143 = { is_alive = yes }
+			}
+			character:790143 = {
+				POD_create_book_artifact_effect = { OWNER = this artifact = sphere_shard }
+			}
+		}		
+		if = {
+			limit = {
+			character:710502 = { is_alive = yes }
+			}
+			character:710502 = {
+				POD_create_book_artifact_effect = { OWNER = this artifact = enoch_shard }
+			}
+		}		
+		if = {
+			limit = {
+			character:505094 = { is_alive = yes }
+			}
+			character:505094 = {
+				POD_create_book_artifact_effect = { OWNER = this artifact = seth_shard }
+			}
+		}	
+		if = {
+			limit = {
+			character:793052 = { is_alive = yes }
+			}
+			character:793052 = {
+				create_artifact_day_armor_effect = { OWNER = this }
+			}
+		}
+
+
+		#Asia prep artifact
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_ki_chuan_effect = { OWNER = this TYPE = journal }
+			POD_save_new_artifact_as_link = { LINK = ki_chuan }
+		}
+		if = {
+			limit = {
+			character:505109 = { is_alive = yes }
+			}
+			character:505109 = {
+				create_artifact_analects_saulot_effect = { OWNER = this TYPE = journal }
+			}
+		}
+		if = {
+			limit = {
+			character:791015 = { is_alive = yes }
+			}
+			character:791015 = {
+				create_artifact_journal_rothriel_effect = { OWNER = this TYPE = journal }
+			}
+		}			
+		if = {
+			limit = {
+			character:795013 = { is_alive = yes }
+			}
+			character:795013 = {
+				create_artifact_red_book_of_the_iron_bridge_effect = { OWNER = this TYPE = journal }
+				POD_save_new_artifact_as_link = { LINK = red_book_of_the_iron_bridge }
+			}
+		}		
+		random_landed_ruler = {
+			limit = { religion = religion:deviltigers_religion }
+			create_artifact_the_blood_sutras_effect = { OWNER = this TYPE = journal }
+			POD_save_new_artifact_as_link = { LINK = the_blood_sutras }
+		}
+		if = {
+			limit = {
+			character:793223 = { is_alive = yes }
+			}
+			character:793223 = {
+				create_artifact_the_midnight_jewel_effect = { OWNER = this TYPE = journal }
+				POD_save_new_artifact_as_link = { LINK = the_midnight_jewel }
+			}
+		}		
+		random_landed_ruler = {
+			limit = { religion = religion:thousandwhispers_religion }
+			create_artifact_the_hollow_reed_effect = { OWNER = this TYPE = journal }
+			POD_save_new_artifact_as_link = { LINK = the_hollow_reed }
+		}
+		if = {
+			limit = {
+			character:791129 = { is_alive = yes }
+			}
+			character:791129 = {
+				create_artifact_book_of_the_ninth_immortal_effect = { OWNER = this TYPE = journal }
+				POD_save_new_artifact_as_link = { LINK = book_of_the_ninth_immortal }
+			}
+		}		
+		random_landed_ruler = {
+			limit = { religion = religion:deviltigers_religion }
+			create_artifact_the_songs_of_hell_effect = { OWNER = this TYPE = journal }
+		}
+		random_landed_ruler = {
+			limit = { faith = faith:faceofthegods }
+			create_artifact_sevenfold_gathering_effect = { OWNER = this TYPE = journal }
+		}		
+		random_landed_ruler = {
+			limit = { has_trait = kueijin } #Not an error, it's held by KJ
+			create_artifact_manual_of_yi_effect = { OWNER = this TYPE = journal }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_the_three_books_effect = { OWNER = this TYPE = journal }
+		}
+		if = {
+			limit = {
+			character:795013 = { is_alive = yes }
+			}
+			character:795013 = {
+				create_artifact_practice_divinity_effect = { OWNER = this TYPE = journal }
+			}
+		}		
+		if = {
+			limit = {
+			character:795014 = { is_alive = yes }
+			}
+			character:795014 = {
+				create_artifact_the_celestial_nail_effect = { OWNER = this TYPE = journal }
+				POD_save_new_artifact_as_link = { LINK = the_celestial_nail }
+			}
+		}			
+		random_landed_ruler = {
+			limit = { religion = religion:thousandhells_religion }
+			create_artifact_seven_scriptures_of_immortal_iniquity_effect = { OWNER = this TYPE = journal }
+			POD_save_new_artifact_as_link = { LINK = seven_scriptures_of_immortal_iniquity }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_the_righteous_fire_effect = { OWNER = this TYPE = journal }
+		}
+		if = {
+			limit = {
+			character:793211 = { is_alive = yes }
+			}
+			character:793211 = {
+				create_artifact_delectations_of_the_flowers_of_blood_effect = { OWNER = this TYPE = journal }
+				POD_save_new_artifact_as_link = { LINK = delectations_of_the_flowers_of_blood }
+			}
+		}			
+		random_landed_ruler = {
+			limit = { culture = culture:japanese }
+			create_artifact_lady_yukio_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:795044 = { is_alive = yes }
+			}
+			character:795044 = {
+				create_artifact_star_shower_blade_effect = { OWNER = this }
+			}
+		}			
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_golden_talons_effect = { OWNER = this }
+		}		
+		random_landed_ruler = {
+			limit = { religion = religion:deviltigers_religion }
+			create_artifact_unirighteous_prayer_strips_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { faith = faith:black_iron_talons }
+			create_artifact_knives_of_subline_hunger_effect = { OWNER = this }
+		}		
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_fire_watch_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_harmony_charm_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_joss_charm_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_wu_shi_effect = { OWNER = this }
+		}
+		#it's in addition to the above, as they are several of those
+		if = {
+			limit = {
+			game_start_date >= 1598.1.1
+			character:793179 = { is_alive = yes }
+			}
+			character:793179 = {
+				create_artifact_wu_shi_effect = { OWNER = this }
+			}
+		}			
+		random_landed_ruler = {
+			limit = { religion = religion:deviltigers_religion }
+			create_artifact_incense_of_inauspicious_attention_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:deviltigers_religion }
+			create_artifact_demon_jade_talisman_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:791113 = { is_alive = yes }
+			}
+			character:791113 = {
+				create_artifact_wayang_sash_effect = { OWNER = this }
+			}
+		}				
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_mandarin_mask_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:793174 = { is_alive = yes }
+			}
+			character:793174 = {
+				create_artifact_flowers_scarlet_ebon_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+			character:795103 = { is_alive = yes }
+			}
+			character:795103 = {
+				create_artifact_broken_winged_crane_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+			character:793222 = { is_alive = yes }
+			}
+			character:793222 = {
+				create_artifact_commentaries_ki_effect = { OWNER = this }
+			}
+		}		
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_discourse_iniquity_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:boneflowers_religion }
+			create_artifact_book_ghosts_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:793222 = { is_alive = yes }
+			}
+			character:793222 = {
+				create_artifact_heaven_scream_book_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			limit = { has_trait = kueijin }
+			create_artifact_phoenix_monkey_rat_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:boneflowers_religion }
+			create_artifact_laughing_buddha_mask_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:793222 = { is_alive = yes }
+			}
+			character:793222 = {
+				create_artifact_black_metal_egg_effect = { OWNER = this }
+			}
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:boneflowers_religion }
+			create_artifact_soul_ashes_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:boneflowers_religion }
+			create_artifact_ghost_shackles_effect = { OWNER = this }
+		}	
+		if = {
+			limit = {
+			character:793235 = { is_alive = yes }
+			}
+			character:793235 = {
+				create_artifact_journey_thousand_steps_effect = { OWNER = this }
+			}
+		}	
+		random_landed_ruler = {
+			limit = { religion = religion:thousandwhispers_religion }
+			create_artifact_wisdom_centipede_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:thousandwhispers_religion }
+			create_artifact_pale_jade_mask_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:thousandwhispers_religion }
+			create_artifact_black_mirror_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:thrashingdragons_religion }
+			create_artifact_wine_plenty_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:thrashingdragons_religion }
+			create_artifact_prostitute_ointment_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:791112 = { is_alive = yes }
+			}
+			character:791112 = {
+				create_artifact_baton_mastery_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+			character:793246 = { is_alive = yes }
+			}
+			character:793246 = {
+				create_artifact_great_jade_club_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+			character:793276 = { is_alive = yes }
+			}
+			character:793276 = {
+				create_artifact_contemplations_demonic_effect = { OWNER = this }
+			}
+		}
+		if = {
+			limit = {
+			character:793268 = { is_alive = yes }
+			}
+			character:793268 = {
+				create_artifact_empty_throne_effect = { OWNER = this }
+			}
+		}	
+		random_landed_ruler = {
+			limit = { religion = religion:resplendentcranes_religion }
+			create_artifact_harp_songs_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { religion = religion:resplendentcranes_religion }
+			create_artifact_crown_rising_authority_effect = { OWNER = this }
+		}
+		if = {
+			limit = {
+			character:793309 = { is_alive = yes }
+			}
+			character:793309 = {
+				create_artifact_emperor_sword_effect = { OWNER = this }
+			}
+		}	
+		random_landed_ruler = {
+			limit = { religion = religion:boneflowers_religion }
+			create_artifact_scrolls_zaolat_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { culture = culture:japanese }
+			create_artifact_dragon_night_effect = { OWNER = this }
+		}
+		random_landed_ruler = {
+			limit = { culture = culture:han }
+			create_artifact_robe_golden_mandarin_effect = { OWNER = this }
+		}	
+		
+	}
+}
+
+#Sword of Nul
+pod_artifacts.0002 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sword_of_nul_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = sword_of_nul }
+	}
+}
+
+#Tablet of Destiny
+pod_artifacts.0003 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tablet_of_destiny_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_tablet_of_destiny_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = tablet_of_destiny }
+	}
+}
+
+#Eye of Hazimel
+pod_artifacts.0004 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_eye_of_hazimel_effect = { OWNER = root }
+	}
+}
+
+#Ankaran Sarcophagus
+pod_artifacts.0005 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_ankaran_sarcophagus_effect = { OWNER = root TYPE = chest }
+		}
+		else = {
+			create_artifact_ankaran_sarcophagus_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Kristrbani
+pod_artifacts.0006 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_kristrbani_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = kristrbani_link }
+	}
+}
+
+#Euagetaematikon
+pod_artifacts.0007 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_euagetaematikon_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_euagetaematikon_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Ainkurn
+pod_artifacts.0008 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ainkurn_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = ainkurn_link }
+	}
+}
+
+#Lamp of Constantine
+pod_artifacts.0009 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_lamp_of_constantine_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = lamp_of_constantine }
+	}
+}
+
+#Magic Lantern
+pod_artifacts.0010 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_magic_lantern_effect = { OWNER = root }
+	}
+}
+
+#Japhet's Cloak
+pod_artifacts.0011 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_japhet_cloak_effect = { OWNER = root }
+	}
+}
+
+#Alexander's Scarlet Rose
+pod_artifacts.0012 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_scarlet_rose_effect = { OWNER = root }
+	}
+}
+
+#Six infernal tomes
+pod_artifacts.0013 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_infernal_tome_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_infernal_tome_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Flagrum of the Passion
+pod_artifacts.0014 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_flagrum_passion_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = flagrum_passion }
+	}
+}
+
+#Lantern of the Night Father
+pod_artifacts.0015 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_night_lantern_effect = { OWNER = root }
+	}
+}
+
+#Corona Ferrata
+pod_artifacts.0016 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_corona_ferrata_effect = { OWNER = root }
+	}
+}
+
+#Caecus Rose
+pod_artifacts.0017 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_caecus_rose_effect = { OWNER = root }
+	}
+}
+
+#Makeda's Crown
+pod_artifacts.0018 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_makeda_crown_effect = { OWNER = root }
+	}
+}
+
+#Goratrix' Mirror
+pod_artifacts.0019 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_goratrix_mirror_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_goratrix_mirror_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Sarcophagus of Shemaziel
+pod_artifacts.0020 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_shemaziel_sarcophagus_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_shemaziel_sarcophagus_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = shemaziel_sarcophagus }
+	}
+}
+
+#Codex Mortis
+pod_artifacts.0021 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_codex_mortis_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_codex_mortis_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Slay Death
+pod_artifacts.0022 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_slay_death_effect = { OWNER = root }
+	}
+}
+
+#Michaelis' Rosary
+pod_artifacts.0023 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_michaelis_rosary_effect = { OWNER = root }
+	}
+}
+
+#Abraxas Sarcophagus
+pod_artifacts.0024 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_abraxas_sarcophagus_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_abraxas_sarcophagus_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Ermentrude's Cross
+pod_artifacts.0025 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ermentrude_cross_effect = { OWNER = root }
+	}
+}
+
+#Odin's Runic Stone
+pod_artifacts.0026 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_odin_stone_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_odin_stone_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = odin_stone_link }
+	}
+}
+
+#Holy Flask
+pod_artifacts.0027 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_holy_flask_effect = { OWNER = root }
+	}
+}
+
+#Uraeus Osiris
+pod_artifacts.0028 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_uraeus_osiris_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_uraeus_osiris_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = uraeus_osiris_link }
+	}
+}
+
+#Ayr's Swords
+pod_artifacts.0029 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ayr_sword_effect = { OWNER = root }
+	}
+}
+
+#Ayr's Armors
+pod_artifacts.0030 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ayr_armor_effect = { OWNER = root }
+	}
+}
+
+#Sofia's finger
+pod_artifacts.0031 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sofia_finger_effect = { OWNER = root }
+	}
+}
+
+#Water of Meriba
+pod_artifacts.0032 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_water_meriba_effect = { OWNER = root }
+	}
+}
+
+#Hand of Nikolas
+pod_artifacts.0033 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_hand_nikolas_effect = { OWNER = root }
+	}
+}
+
+#The Caul of Jos
+pod_artifacts.0034 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_caul_jos_effect = { OWNER = root }
+	}
+}
+
+#The Labrys
+pod_artifacts.0035 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_labrys_effect = { OWNER = root }
+	}
+}
+
+#Guarded Rubrics
+pod_artifacts.0036 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_guarded_rubrics_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_guarded_rubrics_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Jurgen's broadsword
+pod_artifacts.0037 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_jurgen_broadsword_effect = { OWNER = root }
+	}
+}
+
+#True cross
+pod_artifacts.0038 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_true_cross_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = true_cross }
+	}
+}
+
+#Rowan ring
+pod_artifacts.0039 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_rowan_ring_effect = { OWNER = root }
+	}
+}
+
+#Tapestry of blood
+pod_artifacts.0040 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tapestry_blood_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_tapestry_blood_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Michaelis' crown
+pod_artifacts.0041 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_michaelis_crown_effect = { OWNER = root }
+	}
+}
+
+#Ignace notes
+pod_artifacts.0042 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_ignace_notes_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_ignace_notes_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = ignace_notes_link }
+	}
+}
+
+#Consolation of philosophy
+pod_artifacts.0043 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_consolation_philosophy_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_consolation_philosophy_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = consolation_philosophy_link }
+	}
+}
+
+#Sword of Arthur
+pod_artifacts.0044 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sword_arthur_effect = { OWNER = root }
+	}
+}
+
+#Skull of Saulot
+pod_artifacts.0045 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_skull_saulot_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_skull_saulot_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Scrolls of Carthage
+pod_artifacts.0046 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_scrolls_carthage_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_scrolls_carthage_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#the Great Book
+pod_artifacts.0047 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_great_book_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_great_book_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = great_book }
+	}
+}
+
+#Vassago Earring
+pod_artifacts.0048 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_vassago_earring_effect = { OWNER = root }
+	}
+}
+
+#Marguerite's Ring
+pod_artifacts.0049 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_marguerite_ring_effect = { OWNER = root }
+	}
+}
+
+#Raquel's Band
+pod_artifacts.0050 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_raquel_band_effect = { OWNER = root }
+	}
+}
+
+#Pacifist Ji
+pod_artifacts.0051 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_pacifist_ji_effect = { OWNER = root }
+	}
+}
+
+#Lost Yoni
+pod_artifacts.0052 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_lost_yoni_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_lost_yoni_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Phrygian Codex
+pod_artifacts.0053 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_phrygian_codex_effect = { OWNER = root }
+	}
+}
+
+#Severed Head
+pod_artifacts.0054 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_severed_head_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_severed_head_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Holy Grail
+pod_artifacts.0055 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_holy_grail_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = holy_grail }
+	}
+}
+
+#Orb of Shadows
+pod_artifacts.0056 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_orb_shadows_effect = { OWNER = root }
+	}
+}
+
+#Bone of Osiris
+pod_artifacts.0057 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bone_osiris_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = bone_osiris_link }
+	}
+}
+
+#Bloodroot
+pod_artifacts.0058 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bloodroot_effect = { OWNER = root }
+	}
+}
+
+#Gauthier's Sword
+pod_artifacts.0059 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_gauthier_sword_effect = { OWNER = root }
+	}
+}
+
+#Al-Ashrad's Eye
+pod_artifacts.0060 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_alashrad_eye_effect = { OWNER = root }
+	}
+}
+
+#Book of the Patriarch
+pod_artifacts.0061 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_book_patriarch_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_book_patriarch_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Librum Terrum
+pod_artifacts.0062 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_librum_terrum_effect = { OWNER = root }
+	}
+}
+
+#Gaffari's Scrolls
+pod_artifacts.0063 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_gaffari_scrolls_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_gaffari_scrolls_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Ashes of the all high
+pod_artifacts.0064 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_ashes_allhigh_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_ashes_allhigh_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Karalavanisha Vrana
+pod_artifacts.0065 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_karalavanisha_vrana_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_karalavanisha_vrana_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = karalavanisha_vrana_link }
+	}
+}
+
+#Corpus Hermeticum
+pod_artifacts.0066 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_corpus_hermeticum_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_corpus_hermeticum_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Bernardo's ashes
+pod_artifacts.0067 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_bernardo_ashes_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_bernardo_ashes_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#On Hunger and its Satisfaction
+pod_artifacts.0068 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_hunger_satisfaction_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_hunger_satisfaction_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Mithras Ceremic Goblet
+pod_artifacts.0069 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_mithras_goblet_effect = { OWNER = root }
+	}
+}
+
+#Mithras Phrygian Cap
+pod_artifacts.0070 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_mithras_cap_effect = { OWNER = root }
+	}
+}
+
+#Mithras Ruby Ring
+pod_artifacts.0071 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_mithras_ring_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = mithras_ring_link }
+	}
+}
+
+#Mithras Egyptian Dagger
+pod_artifacts.0072 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_mithras_dagger_effect = { OWNER = root TYPE = dagger }
+		POD_save_new_artifact_as_link = { LINK = mithras_dagger_link }
+	}
+}
+
+#Mithras Seal
+pod_artifacts.0073 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_mithras_seal_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_mithras_seal_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Ring of Chrysostom
+pod_artifacts.0074 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ring_chrysostom_effect = { OWNER = root }
+	}
+}
+
+#Franciscan Aspergill
+pod_artifacts.0075 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_franciscan_aspergill_effect = { OWNER = root }
+	}
+}
+
+#Martyr's Fire
+pod_artifacts.0076 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_martyr_fire_effect = { OWNER = root }
+	}
+}
+
+#Eunuch's Scapular
+pod_artifacts.0077 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_eunuch_scapular_effect = { OWNER = root }
+	}
+}
+
+#Dagger of Thorns
+pod_artifacts.0078 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_dagger_thorns_effect = { OWNER = root }
+	}
+}
+
+#Spear of Destiny
+pod_artifacts.0079 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_spear_destiny_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = spear_destiny }
+	}
+}
+
+#Code of Samiel
+pod_artifacts.0080 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_code_samiel_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_code_samiel_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Valencia Chalice
+pod_artifacts.0081 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_valencia_chalice_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = valencia_chalice }
+	}
+}
+
+#Erciyes fragments
+pod_artifacts.0082 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_erciyes_fragments_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_erciyes_fragments_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = erciyes_fragments }
+	}
+}
+
+#Erciyes broken fragments
+pod_artifacts.0083 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_erciyes_broken_fragments_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_erciyes_broken_fragments_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Correspondence Rodrigo
+pod_artifacts.0084 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_correspondence_rodrigo_effect = { OWNER = root }
+	}
+}
+
+#Grey Book
+pod_artifacts.0085 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_grey_book_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_grey_book_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Gabriel Trumpet
+pod_artifacts.0086 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_gabriel_trumpet_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = gabriel_trumpet }
+	}
+}
+
+#The Stone
+pod_artifacts.0087 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_the_stone_effect = { OWNER = root }
+	}
+}
+
+#Warding Iron
+pod_artifacts.0088 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_warding_iron_effect = { OWNER = root }
+	}
+}
+
+#Gospel of Laodice
+pod_artifacts.0089 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_gospel_laodice_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_gospel_laodice_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = gospel_laodice_link }
+	}
+}
+
+#The Bone
+pod_artifacts.0090 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_the_bone_effect = { OWNER = root }
+	}
+}
+
+#Horns of the hunter
+pod_artifacts.0091 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_horns_hunter_effect = { OWNER = root }
+	}
+}
+
+#Flesh of the Hunted
+pod_artifacts.0092 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_flesh_hunted_effect = { OWNER = root }
+	}
+}
+
+#Book of the Sun
+pod_artifacts.0093 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_book_sun_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_book_sun_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = book_sun_link }
+	}
+}
+
+#Dialogues of Troile and Arikel
+pod_artifacts.0094 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_dialogues_troile_arikel_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_dialogues_troile_arikel_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Blade of Enoch
+pod_artifacts.0095 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_blade_enoch_effect = { OWNER = root }
+	}
+}
+
+#Well of Ashes
+pod_artifacts.0096 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_well_ashes_effect = { OWNER = root }
+	}
+}
+
+#Martyr's Icon
+pod_artifacts.0097 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_martyr_icon_effect = { OWNER = root }
+	}
+}
+
+#Veddartha's Chalice
+pod_artifacts.0098 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_veddartha_chalice_effect = { OWNER = root }
+	}
+}
+
+#Tyrant's Lash
+pod_artifacts.0099 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_tyrant_lash_effect = { OWNER = root }
+	}
+}
+
+#Wax Seal
+pod_artifacts.0100 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_wax_seal_effect = { OWNER = root }
+	}
+}
+
+#The Empowerment of the Justicars
+pod_artifacts.0101 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_empowerment_justicars_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_empowerment_justicars_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Letters of Acindynus
+pod_artifacts.0102 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_letters_acindynus_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_letters_acindynus_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Lyrics of Aconia
+pod_artifacts.0103 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_lyrics_aconia_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_lyrics_aconia_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Satires
+pod_artifacts.0104 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_satires_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_satires_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Pilgrim's Badge
+pod_artifacts.0105 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_pilgrim_badge_effect = { OWNER = root }
+	}
+}
+
+#Sigil of the lord of Misrule
+pod_artifacts.0106 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sigil_misrule_effect = { OWNER = root }
+	}
+}
+
+#Water of Venus
+pod_artifacts.0107 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_water_venus_effect = { OWNER = root }
+	}
+}
+
+#Enchanted Scimitar
+pod_artifacts.0108 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_enchanted_scimitar_effect = { OWNER = root }
+	}
+}
+
+#Code of Chivalry
+pod_artifacts.0109 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_code_chivalry_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_code_chivalry_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Chronicles of the Heartblood
+pod_artifacts.0110 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_chronicles_heartblood_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_chronicles_heartblood_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = chronicles_heartblood_link }
+	}
+}
+
+#Laws of Haqim
+pod_artifacts.0111 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_laws_haqim_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_laws_haqim_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Book of going forth by night
+pod_artifacts.0112 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_book_going_night_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_book_going_night_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = book_going_night_link }
+	}
+}
+
+#Apostate Auguries
+pod_artifacts.0113 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_apostate_auguries_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_apostate_auguries_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Louhi's Staff
+pod_artifacts.0114 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_louhi_staff_effect = { OWNER = root }
+	}
+}
+
+#Shroud of Kaymakli
+pod_artifacts.0115 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_shroud_kaymakli_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_shroud_kaymakli_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Spear of Bathel
+pod_artifacts.0116 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_spear_bathel_effect = { OWNER = root }
+	}
+}
+
+#Biblia Negra
+pod_artifacts.0117 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_biblia_negra_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_biblia_negra_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = biblia_negra_link }
+	}
+}
+
+#Wooden Coffin
+pod_artifacts.0118 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_wooden_coffin_effect = { OWNER = root TYPE = chest }
+		}
+		else = {
+			create_artifact_wooden_coffin_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Lupine Skull
+pod_artifacts.0119 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_lupine_skull_effect = {
+				OWNER = root
+				CREATOR = root
+				DESKULLED = root
+				TYPE = animal_skull
+			}
+		}
+		else = {
+			create_artifact_lupine_skull_effect = {
+				OWNER = root
+				CREATOR = root
+				DESKULLED = root
+				TYPE = miscellaneous_when_not_court
+			}
+		}
+	}
+}
+
+#Lupine Hide
+pod_artifacts.0120 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_lupine_hide_effect = {
+				OWNER = root
+				CREATOR = root
+				DESKULLED = root
+				TYPE = animal_hide_big
+			}
+		}
+		else = {
+			create_artifact_lupine_hide_effect = {
+				OWNER = root
+				CREATOR = root
+				DESKULLED = root
+				TYPE = miscellaneous_when_not_court
+			}
+		}
+	}
+}
+
+#Vampire Skull
+pod_artifacts.0121 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_skull_vampire_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_skull_vampire_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Banner of Carthage
+pod_artifacts.0122 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_banner_carthage_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_banner_carthage_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.500 = {
+	hidden = yes
+	orphan = yes
+
+	immediate = {
+		root = {
+			trigger_event = pod_artifacts.0002
+		}
+		trigger_event = pod_artifacts.0003
+		trigger_event = pod_artifacts.0004
+		trigger_event = pod_artifacts.0005
+		trigger_event = pod_artifacts.0006
+		trigger_event = pod_artifacts.0007
+		trigger_event = pod_artifacts.0008
+		trigger_event = pod_artifacts.0009
+		trigger_event = pod_artifacts.0010
+		trigger_event = pod_artifacts.0011
+		trigger_event = pod_artifacts.0012
+		trigger_event = pod_artifacts.0013
+		trigger_event = pod_artifacts.0014
+		trigger_event = pod_artifacts.0015
+		trigger_event = pod_artifacts.0016
+		trigger_event = pod_artifacts.0017
+		trigger_event = pod_artifacts.0018
+		trigger_event = pod_artifacts.0019
+		trigger_event = pod_artifacts.0020
+		trigger_event = pod_artifacts.0021
+		trigger_event = pod_artifacts.0022
+		trigger_event = pod_artifacts.0023
+		trigger_event = pod_artifacts.0024
+		trigger_event = pod_artifacts.0025
+		trigger_event = pod_artifacts.0026
+		trigger_event = pod_artifacts.0027
+		trigger_event = pod_artifacts.0028
+		trigger_event = pod_artifacts.0029
+		trigger_event = pod_artifacts.0030
+		trigger_event = pod_artifacts.0031
+		trigger_event = pod_artifacts.0032
+		trigger_event = pod_artifacts.0033
+		trigger_event = pod_artifacts.0034
+		trigger_event = pod_artifacts.0035
+		trigger_event = pod_artifacts.0036
+		trigger_event = pod_artifacts.0037
+		trigger_event = pod_artifacts.0038
+		trigger_event = pod_artifacts.0039
+		trigger_event = pod_artifacts.0040
+		trigger_event = pod_artifacts.0041
+		trigger_event = pod_artifacts.0042
+		trigger_event = pod_artifacts.0043
+		trigger_event = pod_artifacts.0044
+		trigger_event = pod_artifacts.0045
+		trigger_event = pod_artifacts.0046
+		trigger_event = pod_artifacts.0047
+		trigger_event = pod_artifacts.0048
+		trigger_event = pod_artifacts.0049
+		trigger_event = pod_artifacts.0050
+		trigger_event = pod_artifacts.0051
+		trigger_event = pod_artifacts.0052
+		trigger_event = pod_artifacts.0053
+		trigger_event = pod_artifacts.0054
+		trigger_event = pod_artifacts.0055
+		trigger_event = pod_artifacts.0056
+		trigger_event = pod_artifacts.0057
+		trigger_event = pod_artifacts.0058
+		trigger_event = pod_artifacts.0059
+		trigger_event = pod_artifacts.0060
+		trigger_event = pod_artifacts.0061
+		trigger_event = pod_artifacts.0062
+		trigger_event = pod_artifacts.0063
+		trigger_event = pod_artifacts.0064
+		trigger_event = pod_artifacts.0065
+		trigger_event = pod_artifacts.0066
+		trigger_event = pod_artifacts.0067
+		trigger_event = pod_artifacts.0068
+		trigger_event = pod_artifacts.0069
+		trigger_event = pod_artifacts.0070
+		trigger_event = pod_artifacts.0071
+		trigger_event = pod_artifacts.0072
+		trigger_event = pod_artifacts.0073
+		trigger_event = pod_artifacts.0074
+		trigger_event = pod_artifacts.0075
+		trigger_event = pod_artifacts.0076
+		trigger_event = pod_artifacts.0077
+		trigger_event = pod_artifacts.0078
+		trigger_event = pod_artifacts.0079
+		trigger_event = pod_artifacts.0080
+		trigger_event = pod_artifacts.0081
+		trigger_event = pod_artifacts.0082
+		trigger_event = pod_artifacts.0083
+		trigger_event = pod_artifacts.0084
+		trigger_event = pod_artifacts.0085
+		trigger_event = pod_artifacts.0086
+		trigger_event = pod_artifacts.0087
+		trigger_event = pod_artifacts.0088
+		trigger_event = pod_artifacts.0089
+		trigger_event = pod_artifacts.0090
+		trigger_event = pod_artifacts.0091
+		trigger_event = pod_artifacts.0092
+		trigger_event = pod_artifacts.0093
+		trigger_event = pod_artifacts.0094
+		trigger_event = pod_artifacts.0095
+		trigger_event = pod_artifacts.0096
+		trigger_event = pod_artifacts.0097
+		trigger_event = pod_artifacts.0098
+		trigger_event = pod_artifacts.0099
+		trigger_event = pod_artifacts.0100
+		trigger_event = pod_artifacts.0101
+		trigger_event = pod_artifacts.0102
+		trigger_event = pod_artifacts.0103
+		trigger_event = pod_artifacts.0104
+		trigger_event = pod_artifacts.0105
+		trigger_event = pod_artifacts.0106
+		trigger_event = pod_artifacts.0107
+		trigger_event = pod_artifacts.0108
+		trigger_event = pod_artifacts.0109
+		trigger_event = pod_artifacts.0110
+		trigger_event = pod_artifacts.0111
+		trigger_event = pod_artifacts.0112
+		trigger_event = pod_artifacts.0113
+		trigger_event = pod_artifacts.0114
+		trigger_event = pod_artifacts.0115
+		trigger_event = pod_artifacts.0116
+		trigger_event = pod_artifacts.0117
+		trigger_event = pod_artifacts.0118
+		trigger_event = pod_artifacts.0119
+		trigger_event = pod_artifacts.0120
+		trigger_event = pod_artifacts.0121
+		trigger_event = pod_artifacts.0122
+		trigger_event = pod_artifacts.0123
+		trigger_event = pod_artifacts.0124
+		trigger_event = pod_artifacts.0125
+		trigger_event = pod_artifacts.0126
+		trigger_event = pod_artifacts.0127
+		trigger_event = pod_artifacts.0128
+		trigger_event = pod_artifacts.0129
+		trigger_event = pod_artifacts.0130
+		trigger_event = pod_artifacts.0131
+		trigger_event = pod_artifacts.0132
+		trigger_event = pod_artifacts.0133
+		trigger_event = pod_artifacts.0134
+		trigger_event = pod_artifacts.0134
+		trigger_event = pod_artifacts.0136
+		trigger_event = pod_artifacts.0137
+		trigger_event = pod_artifacts.0138
+		trigger_event = pod_artifacts.0139
+		trigger_event = pod_artifacts.0140
+		trigger_event = pod_artifacts.0141
+		trigger_event = pod_artifacts.0142
+		trigger_event = pod_artifacts.0143
+		trigger_event = pod_artifacts.0144
+		trigger_event = pod_artifacts.0145
+		trigger_event = pod_artifacts.0146
+		trigger_event = pod_artifacts.0147
+		trigger_event = pod_artifacts.0148
+		trigger_event = pod_artifacts.0149
+		trigger_event = pod_artifacts.0150
+		trigger_event = pod_artifacts.0151
+		trigger_event = pod_artifacts.0152
+		trigger_event = pod_artifacts.0153
+		trigger_event = pod_artifacts.0154
+		trigger_event = pod_artifacts.0155
+		trigger_event = pod_artifacts.0156
+		trigger_event = pod_artifacts.0157
+		trigger_event = pod_artifacts.0158
+		trigger_event = pod_artifacts.0159
+		trigger_event = pod_artifacts.0161
+		trigger_event = pod_artifacts.0162
+		trigger_event = pod_artifacts.0163
+		trigger_event = pod_artifacts.0164
+		trigger_event = pod_artifacts.0165
+		trigger_event = pod_artifacts.0166
+		trigger_event = pod_artifacts.0167
+		trigger_event = pod_artifacts.0168
+		trigger_event = pod_artifacts.0169
+		trigger_event = pod_artifacts.0170
+		trigger_event = pod_artifacts.0171
+		trigger_event = pod_artifacts.0172
+		trigger_event = pod_artifacts.0173
+		trigger_event = pod_artifacts.0174
+		trigger_event = pod_artifacts.0175
+		trigger_event = pod_artifacts.0176
+		trigger_event = pod_artifacts.0177
+		trigger_event = pod_artifacts.0179
+		trigger_event = pod_artifacts.0180
+		trigger_event = pod_artifacts.0181
+		trigger_event = pod_artifacts.0182
+		trigger_event = pod_artifacts.0183
+		trigger_event = pod_artifacts.0184
+		trigger_event = pod_artifacts.0185
+		trigger_event = pod_artifacts.0186
+		trigger_event = pod_artifacts.0187
+		trigger_event = pod_artifacts.0188
+		trigger_event = pod_artifacts.0189
+		trigger_event = pod_artifacts.0190
+		trigger_event = pod_artifacts.0191
+		trigger_event = pod_artifacts.0192
+		trigger_event = pod_artifacts.0193
+		trigger_event = pod_artifacts.0194
+		trigger_event = pod_artifacts.0195
+		trigger_event = pod_artifacts.0196
+		trigger_event = pod_artifacts.0197
+		trigger_event = pod_artifacts.0198
+		trigger_event = pod_artifacts.0199
+		trigger_event = pod_artifacts.0200
+		trigger_event = pod_artifacts.0201
+		trigger_event = pod_artifacts.0202
+		trigger_event = pod_artifacts.0203
+		trigger_event = pod_artifacts.0204
+		trigger_event = pod_artifacts.0205
+		#removed 206, add something new here
+		trigger_event = pod_artifacts.0207
+		trigger_event = pod_artifacts.0208
+		trigger_event = pod_artifacts.0209
+		trigger_event = pod_artifacts.0210
+		trigger_event = pod_artifacts.0211
+		trigger_event = pod_artifacts.0212
+		trigger_event = pod_artifacts.0213
+		trigger_event = pod_artifacts.0214
+		trigger_event = pod_artifacts.0215
+		trigger_event = pod_artifacts.0216
+		trigger_event = pod_artifacts.0217
+		trigger_event = pod_artifacts.0218
+		trigger_event = pod_artifacts.0219
+		trigger_event = pod_artifacts.0220
+		trigger_event = pod_artifacts.0221
+		trigger_event = pod_artifacts.0222
+		trigger_event = pod_artifacts.0223
+		trigger_event = pod_artifacts.0224
+		trigger_event = pod_artifacts.0225
+		trigger_event = pod_artifacts.0226
+		trigger_event = pod_artifacts.0227
+		trigger_event = pod_artifacts.0228
+		trigger_event = pod_artifacts.0229
+		trigger_event = pod_artifacts.0230
+		trigger_event = pod_artifacts.0231
+		trigger_event = pod_artifacts.0232
+		
+		set_variable = banner_from_dynasty
+		create_artifact_wall_banner_effect = {
+			OWNER = root
+			CREATOR = root
+			TARGET = root.primary_title
+		}
+		root = { set_variable = banner_from_house }
+		create_artifact_wall_banner_effect = {
+			OWNER = root
+			CREATOR = root
+			TARGET = root.house
+		}
+		root = { set_variable = banner_from_dynasty }
+		create_artifact_wall_banner_effect = {
+			OWNER = root
+			CREATOR = root
+			TARGET = root.dynasty
+		}
+
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.house
+			CREATOR = root
+		}
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.house
+			CREATOR = root
+		}
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.dynasty
+			CREATOR = root
+		}
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.dynasty
+			CREATOR = root
+		}
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.primary_title
+			CREATOR = root
+		}
+		create_artifact_wall_shield_effect = {
+			OWNER = root
+			TARGET = root.primary_title
+			CREATOR = root
+		}
+	}
+}
+
+#chronicle of shadows
+pod_artifacts.0123 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_chronicle_of_shadows_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_chronicle_of_shadows_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = chronicle_of_shadows1 } } }
+			POD_save_new_artifact_as_link = { LINK = chronicle_of_shadows1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = chronicle_of_shadows2 }
+		}
+	}
+}
+
+#chronicle of secrets
+pod_artifacts.0124 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_chronicle_of_secrets_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_chronicle_of_secrets_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = chronicle_of_secrets1 } } }
+			POD_save_new_artifact_as_link = { LINK = chronicle_of_secrets1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = chronicle_of_secrets2 }
+		}
+	}
+}
+
+
+pod_artifacts.0125 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_first_of_times_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_first_of_times_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = first_of_times1 } } }
+			POD_save_new_artifact_as_link = { LINK = first_of_times1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = first_of_times2 }
+		}
+	}
+}
+
+pod_artifacts.0126 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_coming_of_lilith_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_coming_of_lilith_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = coming_of_lilith1 } } }
+			POD_save_new_artifact_as_link = { LINK = coming_of_lilith1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = coming_of_lilith2 }
+		}
+	}
+}
+
+pod_artifacts.0127 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_liliths_magick_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_liliths_magick_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = liliths_magick1 } } }
+			POD_save_new_artifact_as_link = { LINK = liliths_magick1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = liliths_magick2 }
+		}
+	}
+}
+
+pod_artifacts.0128 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_temptation_of_caine_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_temptation_of_caine_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = temptation_of_caine1 } } }
+			POD_save_new_artifact_as_link = { LINK = temptation_of_caine1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = temptation_of_caine2 }
+		}
+	}
+}
+
+pod_artifacts.0129 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_zillahs_tale_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_zillahs_tale_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = zillahs_tale1 } } }
+			POD_save_new_artifact_as_link = { LINK = zillahs_tale1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = zillahs_tale2 }
+		}
+	}
+}
+
+pod_artifacts.0130 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tale_of_the_crone_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_tale_of_the_crone_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = tale_of_the_crone1 } } }
+			POD_save_new_artifact_as_link = { LINK = tale_of_the_crone1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = tale_of_the_crone2 }
+		}
+	}
+}
+
+pod_artifacts.0131 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tale_of_the_first_city_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_tale_of_the_first_city_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		if = {
+			limit = { NOT = { POD_artifact_link_exists = { LINK = tale_of_the_first_city1 } } }
+			POD_save_new_artifact_as_link = { LINK = tale_of_the_first_city1 }
+		}
+		else = {
+			POD_save_new_artifact_as_link = { LINK = tale_of_the_first_city2 }
+		}
+	}
+}
+
+pod_artifacts.0132 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sword_of_dracula_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = sword_of_dracula_link }
+	}
+}
+
+pod_artifacts.0133 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tapestry_jawbone_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_tapestry_jawbone_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0134 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tapestry_noir_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_tapestry_noir_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = tapestry_noir_link }
+	}
+}
+
+pod_artifacts.0135 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_iulus_sword_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0136 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_iulus_armor_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0137 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_esoara_ax_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0138 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_house_tremere_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_house_tremere_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0139 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_tremere_chronicles_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_tremere_chronicles_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0140 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_robe_nessus_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0141 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_fingerbone_hannah_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0142 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_plait_lucrezia_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0143 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_rayzeel_song_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_rayzeel_song_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0144 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_portrait_saulot_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_portrait_saulot_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0145 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_vitus_heel_effect = { OWNER = root }
+	}
+}
+
+
+pod_artifacts.0146 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_dweomered_scimitar_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0147 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_weyland_wyrcan_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0148 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_black_stake_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0149 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_roll_damned_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_roll_damned_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0150 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_toomler_femur_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0151 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_cycle_lilith_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_cycle_lilith_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = cycle_lilith_link }
+	}
+}
+
+pod_artifacts.0152 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_veil_night_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0153 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_tawiz_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0154 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_albuduh_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0155 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_khoumsa_effect = { OWNER = root TYPE = wall_big }
+		}
+		else = {
+			create_artifact_khoumsa_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0156 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_inscrutable_eye_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0157 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_waxen_poetica_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0158 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_writings_cabirus_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_writings_cabirus_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = writings_cabirus_link }
+	}
+}
+
+pod_artifacts.0159 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_shattered_spear_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0161 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_antler_crown_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0162 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_yuri_klaive_effect = { OWNER = root }
+	}
+}
+
+pod_artifacts.0163 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_head_hardrule_effect = { OWNER = root }
+	}
+}
+
+#Djangalbi
+pod_artifacts.0164 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_djangalbi_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_djangalbi_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+		POD_save_new_artifact_as_link = { LINK = djangalbi_link }
+	}
+}
+
+#Set's Emasculation
+pod_artifacts.0165 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sets_emasculation_effect = { OWNER = root }
+		POD_save_new_artifact_as_link = { LINK = sets_emasculation_link }
+	}
+}
+
+#Vassago's Reliquarie
+pod_artifacts.0166 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_vassagos_reliquary_effect = { OWNER = root TYPE = pedestal }
+		}
+		else = {
+			create_artifact_vassagos_reliquary_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+# Bronze Labrys
+
+pod_artifacts.0167 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bronze_labrys_effect = { OWNER = root }
+	}
+}
+
+# Gaia Big Thumb
+
+pod_artifacts.0168 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_gaia_big_thumb_effect = { OWNER = root }
+	}
+}
+
+# Chalice Renewal
+
+pod_artifacts.0169 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_chalice_renewal_effect = { OWNER = root }
+	}
+}
+
+# Watcher Shield
+
+pod_artifacts.0170 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_watcher_shield_effect = { OWNER = root }
+	}
+}
+
+# Crescent Moon Waterskin
+
+pod_artifacts.0171 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_crescent_moon_waterskin_effect = { OWNER = root }
+	}
+}
+
+# Threefold Axe
+
+pod_artifacts.0172 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_threefold_axe_effect = { OWNER = root }
+	}
+}
+
+# Bramble Branch
+
+pod_artifacts.0173 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bramble_branch_effect = { OWNER = root }
+	}
+}
+
+# Assassin Klaive
+
+pod_artifacts.0174 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_assassin_klaive_effect = { OWNER = root }
+	}
+}
+
+# Firebeard Feather
+
+pod_artifacts.0175 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_firebird_feather_effect = { OWNER = root }
+	}
+}
+
+# Owl Talon
+
+pod_artifacts.0176 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_owl_talon_effect = { OWNER = root }
+	}
+}
+
+# Yellow Veil
+
+pod_artifacts.0177 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_yellow_veil_effect = { OWNER = root }
+	}
+}
+
+# Klaive
+
+pod_artifacts.0178 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_klaive_effect = { OWNER = root }
+	}
+}
+
+# Eternal Waterskin
+
+pod_artifacts.0179 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_eternal_waterskin_effect = { OWNER = root }
+	}
+}
+
+# Beff of Ice
+
+pod_artifacts.0180 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_beff_of_ice_effect = { OWNER = root }
+	}
+}
+
+# Spirit Astrolabe
+
+pod_artifacts.0181 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_spirit_astrolabe_effect = { OWNER = root }
+	}
+}
+
+# Truth Earring
+
+pod_artifacts.0182 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_truth_earring_effect = { OWNER = root }
+	}
+}
+
+# Blanket of Peaceful Past
+
+pod_artifacts.0183 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_blanket_of_peaceful_past_effect = { OWNER = root }
+	}
+}
+
+# Dark Mask
+
+pod_artifacts.0184 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_dark_mask_effect = { OWNER = root }
+	}
+}
+
+# Eyes of the Night
+
+pod_artifacts.0185 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_eyes_of_the_night_effect = { OWNER = root }
+	}
+}
+
+# Kinship Doll
+
+pod_artifacts.0186 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_kinship_doll_effect = { OWNER = root }
+	}
+}
+
+# Law Skull
+
+pod_artifacts.0187 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_law_skull_effect = { OWNER = root }
+	}
+}
+
+# Moongleam
+
+pod_artifacts.0188 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_moongleam_effect = { OWNER = root }
+	}
+}
+
+# Air Foot Greaves
+
+pod_artifacts.0189 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_air_foot_greaves_effect = { OWNER = root }
+	}
+}
+
+# Sun Axe
+
+pod_artifacts.0190 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_sun_axe_effect = { OWNER = root }
+	}
+}
+
+# Whistle Caff
+
+pod_artifacts.0191 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_whistle_caff_effect = { OWNER = root }
+	}
+}
+
+# Book of the Spirits Secrets
+
+pod_artifacts.0192 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_book_of_the_spirits_secrets_effect = { OWNER = this TYPE = book }		
+		}
+		else = {
+			create_artifact_book_of_the_spirits_secrets_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+		}
+
+		POD_save_new_artifact_as_link = { LINK = book_of_the_spirits_secrets_link }
+	}
+}
+
+# Feathered Cloak
+
+pod_artifacts.0193 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_feathered_cloak_effect = { OWNER = root }
+	}
+}
+
+# Tangling Lance
+
+pod_artifacts.0194 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_tangling_lance_effect = { OWNER = root }
+	}
+}
+
+# Time Piece
+
+pod_artifacts.0195 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_time_piece_effect = { OWNER = root }
+	}
+}
+
+# Wind Hammer
+
+pod_artifacts.0196 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_wind_hammer_effect = { OWNER = root }
+	}
+}
+
+# Bindrune Amulet
+
+pod_artifacts.0197 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bindrune_amulet_effect = { OWNER = root }
+	}
+}
+
+# Cloud String
+
+pod_artifacts.0198 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_cloud_string_effect = { OWNER = root }
+	}
+}
+
+# Horn of the White_Stag
+
+pod_artifacts.0199 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_horn_of_the_white_stag_effect = { OWNER = root }
+	}
+}
+
+# Golden Torc
+
+pod_artifacts.0200 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_golden_torc_effect = { OWNER = root }
+	}
+}
+
+# Crones Tongue
+
+pod_artifacts.0201 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_crones_tongue_effect = { OWNER = root }
+	}
+}
+
+# Lepers Rags
+
+pod_artifacts.0202 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_lepers_rags_effect = { OWNER = root }
+	}
+}
+
+# Trail Branch
+
+pod_artifacts.0203 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_trail_branch_effect = { OWNER = root }
+	}
+}
+
+# Feather of the Waters
+
+pod_artifacts.0204 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_feather_of_the_waters_effect = { OWNER = root }
+	}
+}
+
+# Heart of Fire
+
+pod_artifacts.0205 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_heart_of_fire_effect = { OWNER = root }
+	}
+}
+
+# Beast Mask
+
+pod_artifacts.0207 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_beast_mask_effect = { OWNER = root }
+	}
+}
+
+# Belt of the Giants
+
+pod_artifacts.0208 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_belt_of_the_giants_effect = { OWNER = root }
+	}
+}
+
+
+# Cloak of WovenMists
+
+pod_artifacts.0209 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_cloak_of_woven_mists_effect = { OWNER = root }
+	}
+}
+
+
+# Staff of Life
+
+pod_artifacts.0210 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_staff_of_life_effect = { OWNER = root }
+	}
+}
+
+# Bone Flute
+
+pod_artifacts.0211 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bone_flute_effect = { OWNER = root }
+	}
+}
+
+# Forest Crown
+
+pod_artifacts.0212 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_forest_crown_effect = { OWNER = root }
+	}
+}
+
+# Iron Crown
+
+pod_artifacts.0213 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_iron_crown_effect = { OWNER = root }
+	}
+}
+
+# Keystone
+
+pod_artifacts.0214 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_keystone_effect = { OWNER = root }
+	}
+}
+
+# Dreamcaller
+
+pod_artifacts.0215 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_dreamcaller_effect = { OWNER = root }
+	}
+}
+
+# Harp of Enchantment
+
+pod_artifacts.0216 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_harp_of_enchantment_effect = { OWNER = root }
+	}
+}
+
+# Iceblade
+
+pod_artifacts.0217 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_iceblade_effect = { OWNER = root }
+	}
+}
+
+# Lionfang
+
+pod_artifacts.0218 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_lionfang_effect = { OWNER = root }
+	}
+}
+
+# Ring of the Elements
+
+pod_artifacts.0219 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_ring_of_the_elements_effect = { OWNER = root }
+	}
+}
+
+
+# Grand Klaive
+
+pod_artifacts.0220 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_grand_klaive_effect = { OWNER = root }
+	}
+}
+
+# Forge Crusher
+
+pod_artifacts.0221 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_forge_crusher_effect = { OWNER = root }
+	}
+}
+
+# Grinding Tooth
+
+pod_artifacts.0222 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_grinding_tooth_effect = { OWNER = root }
+	}
+}
+
+
+# Spear Chaser
+
+pod_artifacts.0223 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_spear_chaser_effect = { OWNER = root }
+	}
+}
+
+# Troll Eater
+
+pod_artifacts.0224 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_troll_eater_effect = { OWNER = root }
+	}
+}
+
+# Bright Arm
+
+pod_artifacts.0225 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bright_arm_effect = { OWNER = root }
+	}
+}
+
+# Hag Talon
+
+pod_artifacts.0226 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_hag_talon_effect = { OWNER = root }
+	}
+}
+
+# Pain Eagle
+
+pod_artifacts.0227 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_pain_eagle_effect = { OWNER = root }
+	}
+}
+
+# Runestone of Gab
+
+pod_artifacts.0228 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_runestone_of_gab_effect = { OWNER = root }
+	}
+}
+
+# Runestone of War
+
+pod_artifacts.0229 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_runestone_of_war_effect = { OWNER = root }
+	}
+}
+
+# Runestone of Control
+
+pod_artifacts.0230 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_runestone_of_control_effect = { OWNER = root }
+	}
+}
+
+# Runestone of Cunning
+
+pod_artifacts.0231 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_runestone_of_cunning_effect = { OWNER = root }
+	}
+}
+
+# Runestone of Wisdom
+
+pod_artifacts.0232 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_runestone_of_wisdom_effect = { OWNER = root }
+	}
+}
+
+#Bezariel's dagger
+pod_artifacts.0245 = {
+	hidden = yes
+
+	immediate = {
+		create_artifact_bezariel_dagger_effect = { OWNER = root }
+	}
+}
+
+#Orobas statue
+pod_artifacts.0246 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_orobas_statue_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_orobas_statue_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+#Lamasthu's ark
+pod_artifacts.0247 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_heart_lamashtu_effect = { OWNER = root TYPE = sculpture }
+		}
+		else = {
+			create_artifact_heart_lamashtu_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}
+	}
+}
+
+pod_artifacts.0248 = {
+	hidden = yes
+
+	immediate = {
+		save_scope_as = owner
+		create_character = {
+			name = "Evangeline" 
+			save_scope_as = host
+			faith = scope:owner.faith
+			culture = scope:owner.culture
+			gender = female
+			dynasty = none
+			employer = scope:owner
+			trait = vampire
+			trait = maeghar
+			trait = automaton
+			after_creation = { 
+				POD_character_create_vampirelord_effect = yes 
+			}
+		}
+	}
+}

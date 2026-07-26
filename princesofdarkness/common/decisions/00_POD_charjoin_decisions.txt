@@ -1,0 +1,301 @@
+﻿become_vampire_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+	
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		has_character_flag = chargen_changing_splat_flag
+		POD_can_be_embraced_scheme_trigger = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_has_true_faith_trigger = no
+		NOT = { has_trait = orison_sanguine }
+	}
+
+    effect = {
+		custom_tooltip = become_vampire_decision_tooltip
+		remove_character_flag = chargen_changing_splat_flag
+		add_character_flag = charjoin_become_vampire_flag
+	}
+}
+
+become_mummy_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		OR = {
+			has_character_flag = chargen_changing_splat_flag
+			POD_charjoin_decisions_enabled = yes
+		}
+		has_main_supernatural_race_trigger = no
+	}
+
+	is_valid = {
+		OR = {
+			has_relation_lover = character:792600
+			has_relation_friend = character:792600
+			has_relation_best_friend = character:792600
+			has_relation_soulmate = character:792600
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		NOT = { is_at_war_with = character:792600 }
+	}
+
+	effect = {
+		custom_tooltip = become_mummy_decision_tooltip
+		remove_character_flag = chargen_changing_splat_flag
+
+		POD_become_mummy_effect = yes
+		POD_mummy_initialization_cabiri_effect = yes
+		
+		add_opinion = {
+			modifier = POD_spell_of_life_opinion
+			target = character:792600
+		}
+		
+	}
+}
+
+# become_ghoul_decision = {
+# 	picture = {
+# 		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+# 	}
+# 	decision_group_type = pod_customization
+#     ai_check_interval = 0
+
+#     is_shown = {
+# 		is_playable_character = yes
+# 		OR = {
+# 			has_character_flag = chargen_changing_splat_flag
+# 			POD_charjoin_decisions_enabled = yes
+# 		}
+# 		OR = {
+# 			has_trait = supehunter
+# 			has_trait = revenant
+# 			has_trait = fera
+# 		}
+# 		NOT = { has_trait = ghoul }
+# 	}
+	
+# 	is_valid = {
+# 		any_prisoner = {
+# 			has_trait = vampire
+# 		}
+# 	}
+
+# 	is_valid_showing_failures_only = {
+# 		POD_has_true_faith_trigger = no
+# 		NOT = { has_trait = orison_sanguine }
+# 	}
+
+#     effect = {
+# 		custom_tooltip = become_ghoul_decision_tooltip
+		
+# 		POD_become_ghoul_effect = yes
+# 		random_prisoner = {
+# 			limit = { has_trait = vampire }
+# 			save_scope_as = victim
+# 			execute_opinion_effect = { VICTIM = scope:victim EXECUTIONER = scope:domitor }
+# 			death = {
+# 	        		death_reason = death_bloodloss
+# 				killer = PREV
+# 	   	  	}
+# 		}
+		
+# 		remove_character_flag = chargen_changing_splat_flag
+# 		trigger_event = podintroductions.2002
+# 	}
+# }
+
+become_changeling_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		has_character_flag = chargen_changing_splat_flag
+		POD_can_be_herd_trigger = yes
+	}
+
+	is_valid = {
+		POD_is_glamour_enchanted = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_is_not_weaver_splat_trigger = yes
+	}
+
+    effect = {
+		custom_tooltip = become_changeling_decision_tooltip
+		remove_character_flag = chargen_changing_splat_flag
+		add_character_flag = charjoin_become_changeling_flag
+	}
+}
+
+become_demon_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		OR = {
+			has_character_flag = chargen_changing_splat_flag
+			POD_charjoin_decisions_enabled = yes
+		}
+		POD_can_be_possessed_trigger = yes	
+	}
+
+	is_valid = {
+		OR = {
+			POD_character_owns_linked_artifact = {
+				LINK = sword_of_nul
+			}
+			POD_character_owns_linked_artifact = {
+				LINK = shemaziel_sarcophagus
+			}
+			completely_controls = title:e_voivodate
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_has_true_faith_trigger = no
+	}
+
+    effect = {
+		custom_tooltip = become_demon_decision_tooltip
+		
+		trigger_event = POD_charjoin.1000
+	}
+}
+
+join_order_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		has_character_flag = chargen_changing_order_flag
+		OR = {
+			POD_is_supehunter_trigger = yes
+			POD_is_mortal_trigger = yes
+		}
+		NOR = {
+			 dynasty = dynasty:13000001
+			 dynasty = dynasty:13000002
+			 dynasty = dynasty:13000003
+			 dynasty = dynasty:13000004
+			 dynasty = dynasty:13000005
+			 dynasty = dynasty:13000006
+			 dynasty = dynasty:13000008
+			 dynasty = dynasty:13000011
+		}
+	}
+
+    effect = {
+		custom_tooltip = join_order_decision_tooltip
+		remove_character_flag = chargen_changing_order_flag
+		add_character_flag = independent_char_join_order_flag
+	}
+}
+
+join_wu_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		is_kueijin_trigger = yes
+		has_character_flag = chargen_changing_order_flag
+		NOT = { exists = root.father }
+		NOT = { exists = root.mother }
+	}
+
+    effect = {
+		custom_tooltip = join_wu_decision_tooltip
+		remove_character_flag = chargen_changing_order_flag
+		add_character_flag = independent_char_join_wu_flag
+	}
+}
+
+join_ghoulbros_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		is_playable_character = yes
+		has_character_flag = chargen_changing_order_flag
+		POD_is_any_kind_of_ghoul_trigger = yes
+		NOT = {
+			 dynasty = dynasty:13000007
+		}
+	}
+
+    effect = {
+		custom_tooltip = join_ghoulbros_decision_tooltip
+		remove_character_flag = chargen_changing_order_flag
+		add_character_flag = independent_char_join_ghoulbros_flag
+	}
+}
+
+join_shih_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = pod_customization
+	ai_check_interval = 120
+
+	is_shown = {
+		is_playable_character = yes
+		has_character_flag = chargen_changing_order_flag
+		OR = {
+			has_trait = supehunter
+			has_trait = mortal
+		}
+		NOT = { has_trait = shih }
+	}
+
+	effect = {
+		custom_tooltip = join_shih_decision_tooltip
+		if = { 
+			limit = {
+				has_trait = mortal 
+			}
+		remove_trait = mortal
+		}
+		if = {
+			limit = {
+				NOT = { has_trait = supehunter }
+			}
+		add_trait = supehunter
+		}
+		POD_shih_initialization_effect = yes
+		remove_character_flag = chargen_changing_order_flag
+	}
+}

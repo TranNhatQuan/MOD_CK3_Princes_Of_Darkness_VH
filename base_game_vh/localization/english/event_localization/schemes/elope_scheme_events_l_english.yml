@@ -1,0 +1,79 @@
+﻿l_english:
+ ### OUTCOME EVENTS ###
+
+ ##I am a player, do I want to take the risk?
+  elope_event_title:0 "Trốn Chạy:"
+  elope.0001.t:0 "$elope_event_title$ Bảo Vệ Trong Bóng Tối"
+  elope.0001.positive.desc:0 "Mọi chuẩn bị cuối cùng đã sẵn sàng. Lộ trình trốn chạy đã được vạch, lính canh đã được hối lộ và [target.GetTitledFirstName] đã sẵn sàng. Đêm nay, khi bóng tối bao trùm [location.GetNameNoTooltip], Ta sẽ giải thoát [target.Custom('LoverPetName')] và biến [target.GetHerHim] thành [target.GetWifeHusband] của Ta."
+  elope.0001.negative.desc:0 "Ta tự nhẩm lại danh sách trong đầu. Lộ trình trốn chạy đã được vạch, lính canh lẽ ra đã nhận hối lộ và hy vọng bức thư Ta gửi cho [target.GetTitledFirstName] đã đến tay [target.GetHerHim] kịp thời. Nhưng nếu không? Có thể [target.GetSheHe] chưa nhận được gì cả! Và còn quá nhiều điều có thể sai lầm...\n\nKhông còn thời gian để do dự. Đây là cơ hội duy nhất của Ta. Ta phải đến với [target.GetHerHim], bất kể điều gì xảy ra, hoặc từ bỏ kế hoạch."
+  elope.0001.a:0 "Ta đến tìm Ngài, [target.GetFirstNameNoTooltip]!"
+  elope.0001.b:0 "Ta đang làm gì vậy? Thật điên rồ!"
+  elope.0001.a.tt:0 "Ta cố gắng trốn chạy cùng [target.GetShortUIName]"
+  elope.0001.a.success:0 "Ta #P thành công#!"
+  elope.0001.a.failure_discover:0 "Ta #N thất bại và bị phát hiện#!"
+  elope.0001.a.failure_hidden:0 "Ta #N thất bại#! nhưng chưa bị phát hiện"
+
+#Success event owner
+  elope.1001.t:0 "$elope_event_title$ Tình Yêu Bền Bỉ"
+  elope.1001.start.desc:0 "Trong khi chờ đợi, Ta không thể ngừng tưởng tượng mọi việc có thể đi sai. Ta cảm thấy hoàn toàn bất lực — một cảm giác mà Ta #EMP không#! muốn quen thêm.\n\nTa nhìn thấy một ngọn đuốc phía trước, di chuyển về hướng chúng Ta, và ra hiệu cho lính canh trốn đi."
+  elope.1001.start.desc_brave:0 "Trong khi chờ đợi, Ta không thể ngừng tự hỏi [target.GetFirstName] giờ đang ở đâu. [target.GetSheHe] có thoát an toàn không? Có ai đuổi theo không?\n\nTa nhìn thấy một ngọn đuốc phía trước, di chuyển về hướng chúng Ta, và ra hiệu cho lính canh trốn đi."
+  elope.1001.end.desc:0 "Ánh sáng tiến lại gần hơn và chúng ta có thể nhận ra hai bóng người. Một người đang mang theo một thanh kiếm, điều đó rất rõ ràng. Người kia... hẳn phải là #EMP [target.GetHerHim]#!!\n\nTa chạy đến gặp [target.Custom('LoverPetName')] của mình, và [target.GetSheHe] lao vào vòng tay đang mở rộng của ta. Cái ôm nhanh chóng, nhưng ngọt ngào như mật. Với tay [target.GetHerHis] trong tay ta, ta bắt đầu chạy."
+  elope.1001.a:0 "Nhanh lên, tình yêu của Ta! [ROOT.Char.Custom('DefaultPriestTitle')] đang chờ!"
+ 
+ #Success for target liege
+  elope.1002.t:0 "Biến Mất Trong Đêm"
+  elope.1002.start.desc:1 "Ta bị đánh thức bởi một cú gõ mạnh vào cửa. \"[ROOT.Char.GetTitleAsNameNoTooltip]! Một lính canh đã chết và [ROOT.GetCharacter.Custom2('RelationToMeShort' , SCOPE.sC('target'))] của ngài đã mất tích!\""
+  elope.1002.desc_naked:0 "Ta nhảy ra khỏi giường, ra lệnh trước cả khi ra khỏi phòng."
+  elope.1002.desc_not_naked:0 "Ta nhảy ra khỏi giường, vừa ra lệnh vừa mặc quần áo."
+  elope.1002.desc:0 "\n\nCuộc tìm kiếm kéo dài hàng giờ. Phải đến trưa mới tìm thấy một bức thư có chữ ký của [target.GetTitledFirstName]. Chữ viết không thể nhầm lẫn là của [target.GetHersHis].\n\n"
+  elope.1002.apologetic_relationship.desc:0 "\"[target.GetFirstNameNoTooltip] yêu dấu của Ta, Ta rất tiếc, nhưng Ta phải theo trái tim mình. Ta đã bỏ Ngài để kết hôn với tình yêu đời Ta — [owner.Custom2('YourCharacterIntroductionNoComma', ROOT.Char)].\""
+  elope.1002.unapologetic_relationship.desc:0 "\"Ta đã đi kết hôn với [owner.Custom2('YourCharacterIntroductionNoComma', ROOT.Char)]. Đừng theo Ta — Ta thà chết còn hơn thuộc về Ngài lần nữa!\""
+  elope.1002.apologetic_family.desc:0 "\"[ROOT.GetCharacter.Custom2('RelationToMeShort' , SCOPE.sC('target'))|U], Ta đã đi kết hôn với tình yêu đời Ta — [owner.Custom2('YourCharacterIntroductionNoComma', ROOT.Char)]. Tất cả những gì Ta muốn là hạnh phúc. Ta hy vọng Ngài có thể tha thứ cho Ta.\""
+  elope.1002.unapologetic_family.desc:0 "\"Nếu Ngài thật sự yêu [ROOT.Char.Custom2('RelationToMeShort' , target)] của mình, Ngài sẽ muốn Ta được hạnh phúc. Nhưng vì Ngài quá thờ ơ với Ta, Ta đã theo trái tim mình. Ta sẽ kết hôn với [owner.Custom2('YourCharacterIntroduction', ROOT.Char)] và Ngài không thể ngăn Ta!\""
+  elope.1002.a.fallback:0 "Làm sao [target.GetSheHe] có thể?"
+  elope.1002.a.vengeful:0 "Cái [target.Custom2('InsultNounSexual', ROOT.Char)] phản bội đó sẽ nhận được những gì hắn xứng đáng!"
+  elope.1002.a.compassionate:0 "Ta hy vọng [target.GetSheHe] sẽ hạnh phúc, bất kể chuyện gì xảy ra."
+ 
+ #Success event for relatives of target and owner
+  elope.1003.opening:0 "[target_keeper.Custom2('AppropriateGreetingNegative', ROOT.Char)]"
+  elope.1003.start.desc:0 "Ta viết thư để thông báo rằng"
+  elope.1003.target_root_family.desc:0 "[ROOT.GetCharacter.Custom2('RelationToMeShort' , SCOPE.sC('target'))] của ngài [target.GetFirstName]"
+  elope.1003.target_keeper_relation.desc:0 "[target_keeper.Custom2('RelationToMeShort' , SCOPE.sC('target'))] của Ta [target.GetFirstName]"
+  elope.1003.target_liege_subject.desc:0 "chủ nhân của Ta [target.GetFirstName]"
+  elope.1003.middle.desc:0 "đã bỏ trốn cùng"
+  elope.1003.owner_root_family.desc:0 "[ROOT.GetCharacter.Custom2('RelationToMeShort' , SCOPE.sC('owner'))] của ngài [owner.GetFirstName]!"
+  elope.1003.your_character_introduction.desc:0 "[owner.Custom2('YourCharacterIntroductionNoComma', ROOT.Char)]!"
+  elope.1003.end.desc:0 "Hãy thẳng thắn: đây là một sự xúc phạm nghiêm trọng, và làm ô danh dự gia đình ngài. Nếu #EMP cặp đôi hạnh phúc#! tìm nơi trú ẩn tại [capital.GetNameNoTooltip], Ta tin rằng ngài sẽ dạy cho họ một bài học!"
+  elope.1003.a:0 "Thật là thảm họa!"
+
+#Failure discovered event owner
+  elope.1011.t:0 "$elope_event_title$ Ngọn Đuốc Trong Bóng Tối"
+  elope.1011.middle.desc:0 "Ta thấy hai bóng, ba, bốn... [ROOT.Char.GetFaith.HighGodName], điều này không tốt!"
+  elope.1011.end.desc:0 "Theo lệnh Ta, chúng Ta rút lui qua bụi rậm. Kẻ truy đuổi thì không quan tâm đến sự tinh tế và nhanh chóng áp sát.\n\n\"Ngươi không thể trốn mãi, [ROOT.Char.GetTitledFirstNameNoTooltip]! Chúng Ta đã bắt một trong những [dummy_soldier.GetWomenMen] của ngươi, và ngươi sẽ là người tiếp theo!\""
+  elope.1011.a:0 "#EMP Chạy ngay!#!"
+
+  elope.1012.t:0 "Trốn Chạy Thất Bại"
+  elope.1012.desc:0 "Một âm mưu bỏ trốn cùng [target.Custom2('MyCharacterIntroductionNoComma', ROOT.Char)] đã bị ngăn chặn! Đội trưởng đội cận vệ bảo ta [owner.Custom2('YourCharacterIntroduction', ROOT.Char)] đã âm mưu đánh cắp [target.GetHerHim] đi và kết hôn bí mật với [target.GetHerHim].\n\nNhư thể điều đó chưa đủ, những lá thư được tìm thấy trong phòng của [target.GetFirstNamePossessiveNoTooltip] cho thấy [target.GetSheHe] đã tham gia vào toàn bộ sự việc!"
+  elope.1012.a:0 "Kẻ [owner.Custom2('InsultAdjective', ROOT.Char)] [owner.Custom2('InsultNounSexual', ROOT.Char)] đó sẽ không bao giờ có được [ROOT.GetCharacter.Custom2('RelationToMeShort' , SCOPE.sC('target'))] của Ta!"
+  elope.1012.b:0 "Phản bội! Khóa [target.GetFirstNameNoTooltip] lại, #EMP ngay!#!"
+  elope.1012.c:0 "Ta sẽ khiến họ phải trả giá, nhớ lấy lời Ta!"
+  elope.1012.d:0 "Chuyện này làm Ta đau đầu..."
+
+#Failure undiscovered for owner
+  elope.1021.end.desc:0 "\n\nTheo lệnh Ta, chúng Ta rút lui qua bụi rậm. Nhờ may mắn, chúng Ta trở lại xe ngựa và trốn thoát trong đêm."
+  elope.1021.a:0 "[target.GetFirstNameNoTooltip], tình yêu của Ta... Ta cầu nguyện Ngài ổn."
+
+
+### ONGOING EVENTS ###
+
+# Lover is doubting
+  elope.2000.t:0 "Tình yêu của Ta,"
+  elope.2000.start.desc:0 "Ngài đã bảo Ta dũng cảm, nhưng Ta không thể kiềm chế nỗi sợ nữa. Nếu"
+  elope.2000.target_relation.desc:0 "[target.Custom2('RelationToMeShort' , SCOPE.sC('discoverer'))] của ta phát hiện ra kế hoạch của chúng ta? Ta khó mà ngủ được và đấu tranh để giữ thức ăn trong bụng. [discoverer.GetSheHe|U] bắt đầu trở nên lo lắng — thậm chí có thể là nghi ngờ!"
+  elope.2000.titledname.desc:0 "[discoverer.GetTitledFirstName] phát hiện kế hoạch của chúng ta? Mỗi khi [discoverer.GetSheHe] xuất hiện, Ta cứng đờ và im lặng. Chỉ là vấn đề thời gian trước khi [discoverer.GetSheHe] nhận ra!"
+  elope.2000.end.desc:0 "\n\nChúng ta đang hết thời gian. Làm ơn, người yêu quý [ROOT.Char.GetFirstNameNoTooltip] của Ta, hãy mau lên!"
+  elope.2000.a:0 "Chúng ta sẽ đẩy nhanh kế hoạch, [target.Custom('LoverPetName')] của Ta."
+  elope.2000.c:0 "Tin Ta đi — mọi việc đều trong tầm kiểm soát."
+  elope.2000.c.success:0 "[target.GetShortUIName|U] đã tin tưởng"
+  elope.2000.c.failure:0 "[target.GetShortUIName|U] cảm thấy bị bỏ qua"
+  elope.2000.b:0 "Vậy Ngài không nên gửi thư!"

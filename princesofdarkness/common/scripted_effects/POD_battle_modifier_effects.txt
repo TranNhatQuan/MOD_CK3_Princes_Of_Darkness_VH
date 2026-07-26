@@ -1,0 +1,1609 @@
+﻿POD_enemy_knight_set_discipline_battle_effect = {
+	# Vamp
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = nocturne_power_modifier } }
+		if = {
+			limit = {
+				NOT = { has_character_modifier = nocturne_drained_stamina_modifier }
+				NOT = { has_character_modifier = darkness_within_drained_stamina_modifier }
+				NOT = { has_character_modifier = devour_all_hope_drained_stamina_modifier }
+				POD_eat_spirit_custom_trigger = {
+					RECIPIENT = this
+					ACTOR = $CASTER$
+				}
+			}
+			nocturne_power_effect = { NOCTURNE_USER = $CASTER$ }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = internal_recursion_perk } }
+		add_character_modifier = internal_recursion_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ramble_on_perk } }
+		add_character_modifier = ramble_on_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = blessed_audience_perk } }
+		POD_stress_break_effect = yes
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = song_of_the_blooded_perk } }
+		add_character_modifier = song_of_the_blooded_perk_knight_negative_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = riddle_phantastique_perk } }
+		add_character_modifier = riddle_phantastique_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = crush_perk } }
+		add_character_modifier = crush_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = control_storm_perk } }
+		add_character_modifier = control_storm_modifier
+	}
+	else_if = {
+		limit = { $CASTER$ = { has_perk = control_wind_perk } }
+		add_character_modifier = control_wind_modifier
+	}
+	else_if = {
+		limit = { $CASTER$ = { has_perk = control_fog_perk } }
+		add_character_modifier = control_fog_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = a_sending_of_serpents_perk } }
+		add_character_modifier = a_sending_of_serpents_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_narrow_house_perk } }
+		add_character_modifier = the_narrow_house_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = bs_cauldron_of_blood_perk } }
+		add_character_modifier = cauldron_of_blood_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = lord_of_storms_perk } }
+		add_character_modifier = lord_of_storms_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ns_aura_of_decay_perk } }
+		add_character_modifier = aura_of_decay_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ns_night_cry_perk } }
+		add_character_modifier = night_cry_enemy_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = ritual_esilio_modifier } OR = { has_trait = wraith has_trait = spectre } }
+		add_character_modifier = ritual_esilio_duel_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = adramelechs_wrath_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_multiple_hostile_effect = { REASON = sun AMOUNT = 2 ATTACKER = $CASTER$ }
+		}
+	}
+	if = {
+		limit = {
+			$CASTER$ = { has_perk = repel_the_angry_dead_perk }
+			POD_is_wraith_trigger = yes
+		}
+		add_character_modifier = repel_the_angry_dead_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = aegis_alighieri_perk } POD_is_demonic_trigger = yes }
+		add_character_modifier = aegis_alighieri_modifier
+	}
+	if = {
+		limit = {
+			$CASTER$ = { has_perk = nuzra_allah_perk }
+			has_variable = engaged_in_single_combat
+		}
+		add_character_modifier = nuzra_allah_modifier
+	}
+	if = {
+		limit = {
+			$CASTER$ = { has_perk = scorpions_curse_perk }
+			has_variable = engaged_in_single_combat
+		}
+		add_character_modifier = scorpions_curse_perk_modifier
+	}
+	if = {
+		limit = {
+			has_variable = engaged_in_single_combat
+			$CASTER$.domicile ?= { has_domicile_parameter = mokole_domicile_duel_t2 }
+		}
+		add_character_modifier = mokole_domicile_duel_t2_modifier
+	}
+	else_if = {
+		limit = {
+			has_variable = engaged_in_single_combat
+			$CASTER$.domicile ?= { has_domicile_parameter = mokole_domicile_duel_t1 }
+		}
+		add_character_modifier = mokole_domicile_duel_t1_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = ward_against_djinn_modifier } has_trait_with_flag = fae_trait }
+		increase_wounds_effect = { REASON = fight }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = fc_head_caustic_gland_perk } }
+		add_character_modifier = caustic_gland_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = fc_arm_r_ejectable_blades_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = fc_arm_l_ejectable_blades_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = biting_gale_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = breeze_of_lethargy_perk } }
+		add_character_modifier = breeze_of_lethargy_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = bs_heat_wave_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_fire_damage REASON = fire }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_weeping_of_kruchina_perk } }
+		POD_static_stress_gain = { COUNT = 30 }
+	}
+	
+
+	# KJ
+	if = {
+		limit = { $CASTER$ = { has_perk = soul_arts_curse_of_ashes_perk } }
+		add_character_modifier = soul_arts_curse_of_ashes_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = chi_arts_yin_nihilus_perk } }
+		add_character_modifier = chi_arts_yin_nihilus_modifier
+	}
+	
+	# Hunter
+	if = {
+		limit = {
+			$CASTER$ = { has_perk = aura_of_sanctity_perk }
+			POD_is_unholy_trigger = yes
+		}
+		increase_wounds_no_death_effect = { REASON = fight }
+	}
+	# Shih
+
+	# Mummy
+	if = {
+		limit = { $CASTER$ = { has_perk = sahu_ra_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_multiple_hostile_effect = { REASON = sun AMOUNT = 1 ATTACKER = $CASTER$ }
+		}
+	}
+	# Wraith
+	if = {
+		limit = { $CASTER$ = { has_perk = dark_ether_perk } }
+		add_character_modifier = dark_ether_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = phantom_pain_perk } }
+		add_character_modifier = phantom_pain_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = rend_perk } }
+		increase_wounds_no_death_effect = { REASON = fight }
+	}
+	#### Fera ####
+	if = {
+		limit = {
+			OR = {
+				$CASTER$ = { POD_bypass_immunity_to_the_delirium_trigger = yes }
+				POD_immunity_to_the_delirium_trigger = no
+			}
+		}
+		if = {
+			limit = {
+				$CASTER$ = { POD_give_delirium_trigger = yes }
+			}
+			add_character_modifier = POD_delirium_modifier
+		}
+		else_if = {
+			limit = {
+				$CASTER$ = { POD_give_reduced_delirium_trigger = yes }
+			}
+			add_character_modifier = POD_reduced_delirium_modifier
+		}
+	}
+	##Werewolf
+	if = {
+		limit = { $CASTER$ = { has_perk = pack_mind_perk } }
+		add_character_modifier = pack_mind_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = wyld_spirits_perk } }
+		add_character_modifier = erratic_behavior_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_paradox_of_time_perk } }
+		add_character_modifier = the_paradox_of_time_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = mousemaze_perk } }
+		add_character_modifier = mousemaze_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = rising_sun_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes  }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = shriek_perk } }
+		add_character_modifier = shriek_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = haunting_howl_perk } }
+		add_character_modifier = haunting_howl_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = maddening_howl_perk } }
+		add_character_modifier = maddening_howl_perk_modifier
+		add_stress = 100
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = white_fire_perk } }
+		increase_wounds_no_death_effect = { REASON = fire }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_white_howl_perk } }
+		add_character_modifier = the_white_howl_modifier_enemy
+	}
+
+	##Mokole
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_bladed_tail_modifier } }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_poison_sacs_modifier } }
+		add_character_modifier = { modifier = POD_mokole_poison_sacs_battle_modifier years = 1 } #duration is intentional
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_hinged_jaw_modifier } NOT = { has_trait = one_legged } }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_add_maim_trait_hostile = { ATTACKER = $CASTER$ TRAIT = trait:one_legged REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = POD_mokole_silver_claws_modifier } POD_weak_to_silver_trigger = yes }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = silver }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = bunyips_boom_perk } }
+		add_character_modifier = POD_mokole_bunyips_boom_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = eye_of_the_cobra_perk } }
+		add_character_modifier = POD_mokole_eye_of_the_cobra_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = wrath_of_the_dragon_perk  } POD_is_wyrm_servant_trigger = yes }
+		POD_static_stress_gain = { COUNT = 40 }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = sun_enfleshed_perk } POD_fear_the_sun_trigger = yes }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_sun_damage REASON = sun }
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = dracomus } } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_fire_damage REASON = fire }
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_prehistoric_terror_modifier } }
+		add_character_modifier = { modifier = POD_mokole_primal_fear_modifier years = 1 } #duration is intentional
+	}
+
+	##Wyrm
+	if = {
+		limit = { 
+			$CASTER$ = { has_perk = thundering_throat_perk }
+			has_dread_level_towards = {
+				target = $CASTER$
+				level >= 1
+			}
+		}
+		add_character_modifier = wyrm_thundering_throat_modifier
+		POD_static_stress_gain = { COUNT = 30 }
+	}
+
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = shadowflame prev = { can_benefit_from_artifact = prev } } } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_balefire_damage REASON = balefire }
+	}
+
+	# Possessed
+	if = {
+		limit = {
+			$CASTER$ = {
+				OR = {
+					has_perk = drone_aura_of_tranquility_perk
+					has_perk = kami_aura_of_tranquility_perk
+				}
+			}
+		}
+		add_character_modifier = aura_of_tranquility_perk_modifier
+	}
+	if = {
+		limit = {
+			$CASTER$ = {
+				OR = {
+					has_perk = fomori_fungal_touch_perk
+					has_perk = gorgon_fungal_touch_perk
+				}
+			}
+		}
+		add_character_modifier = fungal_touch_perk_modifier
+	}
+	if = {
+		limit = {
+			$CASTER$ = { has_perk = fomori_noxious_breath_perk }
+		}
+		add_character_modifier = noxious_breath_perk_modifier
+	}
+	# Demon
+	
+	# Fae
+	if = {
+		limit = { $CASTER$ = { has_perk = wyrd_perk } }
+		add_character_modifier = wyrd_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = gelid_rime_perk } }
+		add_character_modifier = gelid_rime_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = art_stasis_perk } }
+		add_character_modifier = stasis_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = friction_perk } }
+		add_character_modifier = friction_perk_knight_negative_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = conceal_confuse_perk } }
+		add_character_modifier = conceal_confuse_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = summon_dispel_fire_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes  }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+		add_character_modifier = summon_dispel_fire_perk_modifier
+	}
+	# Artifact
+	if = {
+		limit = {
+			$CASTER$ = {
+				any_equipped_character_artifact = {
+					has_variable = arrow_of_midnight_sun
+					var:arrow_of_midnight_sun = yes
+				}
+			}
+		}
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = cauldron_of_fear } } }
+		add_character_modifier = cauldron_of_fear_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = cold_light } } }
+		add_character_modifier = cold_light_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = bow_of_yi } } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = staff_of_shing_tse_lee } } }
+		if = {
+			limit = { has_trait = kueijin }
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = sword_of_shu_mo_pan } } }
+		if = {
+			limit = { has_trait = fera }
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = fans_of_ma_yi_yuan } } }
+		if = {
+			limit = {
+				OR = {
+					has_trait = fae
+					has_trait = changeling
+				}
+			}
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = spiritual_armor } } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = seeds_of_decay } } }
+		if = {
+			limit = { has_trait = vampire }
+			increase_wounds_no_death_effect = { REASON = old_age }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = magic_spewer prev = { can_benefit_from_artifact = prev } } } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_fire_damage REASON = fire }
+	}
+
+	# Sorcery
+	if = { 
+		limit = { $CASTER$ = { has_perk = numina_hellfire_6_perk } }
+		POD_increase_wounds_hostile_effect = {
+			ATTACKER = $CASTER$
+			REASON = duel_aggravated
+			COUNT = POD_numina_hellfire_6_damage
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_hellfire_5_perk } }
+		POD_increase_wounds_hostile_effect = {
+			ATTACKER = $CASTER$
+			REASON = duel_aggravated
+			COUNT = POD_numina_hellfire_5_damage
+		}
+	}
+	
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_6_perk } } add_character_modifier = numina_sorcery_quintessence_manipulation_6_malus_modifier }
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_5_perk } has_trait = mage } add_character_modifier = numina_sorcery_quintessence_manipulation_malus_modifier }
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_4_perk } has_POD_fae_blood_trigger = yes} add_character_modifier = numina_sorcery_quintessence_manipulation_malus_modifier }
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_3_perk } is_demonic_trigger = yes } add_character_modifier = numina_sorcery_quintessence_manipulation_malus_modifier }
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_2_perk } POD_chi_user_trigger = yes } add_character_modifier = numina_sorcery_quintessence_manipulation_malus_modifier }
+	if = { limit = { $CASTER$ = { has_perk = numina_quintessence_manipulation_1_perk } POD_splat_has_gnosis_trigger = yes } add_character_modifier = numina_sorcery_quintessence_manipulation_malus_modifier }
+	
+	# To prevent stacking
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_4_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_5_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_6_modifier }
+
+	if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_6_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_6_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_5_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_5_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_4_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_4_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_3_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_3_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_2_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_2_modifier
+			months = 6
+		}
+	}
+
+	if = { 
+		limit = { 
+			$CASTER$ = { has_perk = numina_via_ignis_5_perk } 
+			POD_fear_the_sun_trigger = yes 
+		}
+		POD_increase_wounds_effect = {
+			REASON = sun
+			COUNT = POD_numina_via_ignis_5_damage
+		}
+	}
+	if = { 
+		limit = { 
+			$CASTER$ = { has_perk = numina_via_ignis_4_perk } 
+			POD_fear_the_sun_trigger = yes 
+		}
+		add_character_modifier = numina_via_ignis_4_modifier
+	}
+	else_if = { 
+		limit = { 
+			$CASTER$ = { has_perk = numina_via_ignis_3_perk } 
+			POD_fear_the_sun_trigger = yes 
+		}
+		add_character_modifier = numina_via_ignis_3_modifier
+	}
+	else_if = { 
+		limit = { 
+			$CASTER$ = { has_perk = numina_via_ignis_2_perk } 
+			POD_fear_the_sun_trigger = yes 
+		}
+		add_character_modifier = numina_via_ignis_2_modifier
+	}
+	else_if = { 
+		limit = { 
+			$CASTER$ = { has_perk = numina_via_ignis_1_perk } 
+			POD_fear_the_sun_trigger = yes 
+		}
+		add_character_modifier = numina_via_ignis_1_modifier
+	}
+
+	#Investiture
+	if = { 
+		limit = { $CASTER$ = { has_perk = investiture_claws_and_horns_perk } }
+		increase_wounds_multiple_hostile_effect = {
+			REASON = fight
+			AMOUNT = POD_investiture_claws_and_horns_perk_damage
+			ATTACKER = $CASTER$
+		}
+	}
+	if = { 
+		limit = { $CASTER$ = { has_perk = investiture_claws_and_horns_perk } }
+		POD_static_stress_gain = { COUNT = 25 }
+	}
+	if = { 
+		limit = { $CASTER$ = { has_perk = investiture_hellfire_perk } }
+		increase_wounds_multiple_hostile_effect = {
+			REASON = fire
+			AMOUNT = POD_investiture_hellfire_perk_damage
+			ATTACKER = $CASTER$
+		}
+	}
+}
+
+POD_enemy_commander_set_discipline_battle_effect = {
+	# Vamp
+	if = {
+		limit = { $CASTER$ = { has_perk = lapse_perk } }
+		add_character_modifier = lapse_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = subjective_suspension_perk } }
+		add_character_modifier = subjective_suspension_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = blessed_audience_perk } }
+		POD_stress_break_effect = yes
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = song_of_the_blooded_perk } }
+		add_character_modifier = song_of_the_blooded_perk_commander_negative_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = biting_gale_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = bs_heat_wave_perk } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_fire_damage REASON = fire }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_weeping_of_kruchina_perk } }
+		POD_static_stress_gain = { COUNT = 30 }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_misfortune_of_chernogolov_perk } }
+		add_character_modifier = the_misfortune_of_chernogolov_modifier
+	}
+	
+	# KJ
+	if = {
+		limit = { $CASTER$ = { has_perk = soul_arts_curse_of_ashes_perk } }
+		add_character_modifier = soul_arts_curse_of_ashes_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = chi_arts_yin_nihilus_perk } }
+		add_character_modifier = chi_arts_yin_nihilus_modifier
+	}
+	# Mummy
+	if = {
+		limit = { $CASTER$ = { has_perk = sahu_ra_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_multiple_hostile_effect = { REASON = sun AMOUNT = 1 ATTACKER = $CASTER$ }
+		}
+	}
+	# Wraith
+	if = {
+		limit = { $CASTER$ = { has_perk = tesseract_bomb_perk } }
+		add_character_modifier = tesseract_bomb_modifier
+	}
+	#### Fera ####
+	if = {
+		limit = {
+			OR = {
+				$CASTER$ = { POD_bypass_immunity_to_the_delirium_trigger = yes }
+				POD_immunity_to_the_delirium_trigger = no
+			}
+		}
+		if = {
+			limit = {
+				$CASTER$ = { POD_give_delirium_trigger = yes }
+			}
+			add_character_modifier = POD_delirium_modifier
+		}
+		else_if = {
+			limit = {
+				$CASTER$ = { POD_give_reduced_delirium_trigger = yes }
+			}
+			add_character_modifier = POD_reduced_delirium_modifier
+		}
+	}
+	##Werewolf
+	if = {
+		limit = { $CASTER$ = { has_perk = rising_sun_perk } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes  }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = howl_of_hunger_perk } }
+		add_character_modifier = howl_of_hunger_perk_modifier
+	}
+
+	##Mokole
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_bladed_tail_modifier } }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_poison_sacs_modifier } }
+		add_character_modifier = { modifier = POD_mokole_poison_sacs_battle_modifier years = 1 } #duration is intentional
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_predators_roar_modifier } }
+		add_character_modifier = POD_mokole_predators_roar_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_hinged_jaw_modifier } NOT = { has_trait = one_legged } }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_add_maim_trait_hostile = { ATTACKER = $CASTER$ TRAIT = trait:one_legged REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = POD_mokole_silver_claws_modifier } POD_weak_to_silver_trigger = yes }
+		random = {
+			chance = $CASTER$.mokole_battle_effect_chance
+			POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_wound_damage REASON = silver }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = wrath_of_the_dragon_perk  } POD_is_wyrm_servant_trigger = yes }
+		POD_static_stress_gain = { COUNT = 40 }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = sun_enfleshed_perk } POD_fear_the_sun_trigger = yes }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_sun_damage REASON = sun }
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = dracomus } } }
+		POD_increase_wounds_hostile_effect = { ATTACKER = $CASTER$ COUNT = POD_base_fire_damage REASON = fire }
+	}
+	if = {
+		limit = { $CASTER$ = { has_character_modifier = archid_prehistoric_terror_modifier } }
+		add_character_modifier = { modifier = POD_mokole_primal_fear_modifier years = 1 } #duration is intentional
+	}
+
+	# Possessed
+	if = {
+		limit = { $CASTER$ = { has_perk = gorgon_chaos_engine_perk } }
+		add_character_modifier = chaos_engine_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = drone_stasis_engine_perk } }
+		add_character_modifier = stasis_engine_perk_modifier
+	}
+	if = {
+		limit = {
+			$CASTER$ = {
+				OR = {
+					has_perk = fomori_enchanting_voice_perk
+					has_perk = gorgon_enchanting_voice_perk
+					has_perk = drone_enchanting_voice_perk
+					has_perk = kami_enchanting_voice_perk
+				}
+			}
+		}
+		add_character_modifier = enchanting_voice_perk_modifier
+	}
+	# Demon
+	# Fae
+	if = {
+		limit = { $CASTER$ = { has_perk = wyrd_perk } }
+		add_character_modifier = wyrd_perk_commander_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = gelid_rime_perk } }
+		add_character_modifier = gelid_rime_perk_commander_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = conceal_confuse_perk } }
+		add_character_modifier = conceal_confuse_perk_commander_modifier
+	}
+	# Artifact
+	if = {
+		limit = {
+			$CASTER$ = {
+				any_equipped_character_artifact = {
+					has_variable = arrow_of_midnight_sun
+					var:arrow_of_midnight_sun = yes
+				}
+			}
+		}
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = logis_ashes } } }
+		add_character_modifier = logis_ashes_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = bow_of_yi } } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = staff_of_shing_tse_lee } } }
+		if = {
+			limit = { has_trait = kueijin }
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = sword_of_shu_mo_pan } } }
+		if = {
+			limit = { has_trait = fera }
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = fans_of_ma_yi_yuan } } }
+		if = {
+			limit = {
+				OR = {
+					has_trait = fae
+					has_trait = changeling
+				}
+			}
+			increase_wounds_no_death_effect = { REASON = fight }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = spiritual_armor } } }
+		if = {
+			limit = { POD_fear_the_sun_trigger = yes }
+			increase_wounds_no_death_effect = { REASON = sun }
+		}
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = seeds_of_decay } } }
+		if = {
+			limit = { has_trait = vampire }
+			increase_wounds_no_death_effect = { REASON = old_age }
+		}
+	}
+	#Investiture
+	if = { 
+		limit = { $CASTER$ = { has_perk = investiture_hellfire_perk } }
+		liege = { add_character_modifier = POD_investiture_invisibility_to_animals_perk_modifier }
+	}
+	# Sorcery
+	# To prevent stacking
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_4_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_5_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_shadows_6_modifier }
+
+	if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_6_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_6_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_5_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_5_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_4_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_4_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_3_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_3_modifier
+			months = 6
+		}
+	}
+	else_if = { 
+		limit = { $CASTER$ = { has_perk = numina_shadows_2_perk } } 
+		add_character_modifier = {
+			modifier = numina_shadows_2_modifier
+			months = 6
+		}
+	}
+}
+
+POD_enemy_ruler_set_discipline_battle_effect = {
+	# Vamp
+	if = {
+		limit = { $CASTER$ = { has_perk = crush_perk } }
+		add_character_modifier = crush_perk_ruler_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ghadub_allah_perk } }
+		add_character_modifier = ghadub_allah_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = grasping_soil_perk } }
+		add_character_modifier = grasping_soil_modifier
+	}
+	# KJ
+
+
+	# Fae
+	if = {
+		limit = { $CASTER$ = { has_perk = quake_perk } }
+		add_character_modifier = quake_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = conceal_confuse_perk } }
+		add_character_modifier = conceal_confuse_perk_ruler_modifier
+	}
+	# Demon
+	# Artifact
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = achen } } }
+		add_character_modifier = achen_modifier
+	}
+	# Mummy
+
+	#Mokole
+	if = {
+		limit = { $CASTER$ = { has_perk = song_of_the_great_beast_perk } }
+		POD_mokole_song_effect = { CASTER = $CASTER$ }
+	}
+}
+
+POD_ally_knight_set_discipline_battle_effect = {
+	# Vamp
+	if = {
+		limit = { $CASTER$ = { has_perk = song_of_the_blooded_perk } }
+		add_character_modifier = song_of_the_blooded_perk_knight_positive_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = blood_of_destruction_perk } }
+		add_character_modifier = blood_of_destruction_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = warcry_perk OR = { has_perk = comrades_at_arms_perk PREV = $CASTER$ } } }
+		add_character_modifier = warcry_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = strike_true_perk OR = { has_perk = comrades_at_arms_perk PREV = $CASTER$ } } }
+		add_character_modifier = strike_true_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = wind_dance_perk OR = { has_perk = comrades_at_arms_perk PREV = $CASTER$ } } }
+		add_character_modifier = wind_dance_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = fearless_heart_perk OR = { has_perk = comrades_at_arms_perk PREV = $CASTER$ } } }
+		add_character_modifier = fearless_heart_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ns_night_cry_perk } }
+		add_character_modifier = night_cry_ally_modifier
+	}
+	
+	# KJ
+	if = {
+		limit = { $CASTER$ = { has_perk = chi_arts_yang_phoenix_perk } }
+		add_character_modifier = chi_arts_yang_phoenix_modifier
+	}
+	
+	# Wraith
+	if = {
+		limit = { $CASTER$ = { has_perk = foul_humour_perk } }
+		add_character_modifier = foul_humour_modifier
+	}
+	# WW
+	if = {
+		limit = { $CASTER$ = { has_perk = call_to_battle_perk } }
+		add_character_modifier = call_to_battle_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = howl_of_healing_perk } }
+		POD_heal_superficial_wound_effect = { COUNT = POD_base_heal_value }
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = the_white_howl_perk } }
+		add_character_modifier = the_white_howl_modifier_ally
+	}
+	
+	# Mokole
+	if = {
+		limit = { $CASTER$ = { has_perk = dragon_drill_perk } }
+		add_character_modifier = POD_mokole_dragon_drill_modifier
+	}
+
+
+	# Demon
+	
+	# Fae
+	if = {
+		limit = { $CASTER$ = { has_perk = captive_heart_perk } }
+		add_character_modifier = captive_heart_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = prometheus_fist_perk } }
+		add_character_modifier = prometheus_fist_perk_knight_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ironarm_perk } }
+		add_character_modifier = ironarm_perk_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = friction_perk } }
+		add_character_modifier = friction_perk_knight_positive_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = ares_fist_perk } }
+		add_character_modifier = ares_fist_perk_modifier
+	}
+	# Artifact
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = caliburn } } }
+		add_character_modifier = caliburn_light_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { any_equipped_character_artifact = { has_variable = caliburns_sheath } } }
+		add_character_modifier = caliburn_shield_modifier
+	}
+}
+
+POD_ally_commander_set_discipline_battle_effect = {
+	# Vamp
+	if = {
+		limit = { $CASTER$ = { has_perk = song_of_the_blooded_perk } }
+		add_character_modifier = song_of_the_blooded_perk_commander_positive_modifier
+	}
+	# Wraith
+	if = {
+		limit = { $CASTER$ = { has_perk = tempus_fugit_perk } }
+		add_character_modifier = tempus_fugit_modifier
+	}
+	# KJ
+	if = {
+		limit = { $CASTER$ = { has_perk = chi_arts_yang_phoenix_perk } }
+		add_character_modifier = chi_arts_yang_phoenix_modifier
+	}
+
+	# Demon
+	
+	# Fae
+	if = {
+		limit = { $CASTER$ = { has_perk = captive_heart_perk } }
+		add_character_modifier = captive_heart_perk_commander_modifier
+	}
+	if = {
+		limit = { $CASTER$ = { has_perk = prometheus_fist_perk } }
+		add_character_modifier = prometheus_fist_perk_commander_modifier
+	}
+}
+
+POD_clear_discipline_battle_effect = {
+	POD_knight_clear_discipline_battle_effect = yes
+	POD_commander_clear_discipline_battle_effect = yes
+	POD_ruler_clear_discipline_battle_effect = yes
+}
+
+POD_knight_clear_discipline_battle_effect = {
+	### Malus ###
+	# Vamp
+	POD_remove_character_modifier = { MODIFIER = nocturne_drained_stamina_modifier }
+	POD_remove_character_modifier = { MODIFIER = darkness_within_drained_stamina_modifier }
+	POD_remove_character_modifier = { MODIFIER = devour_all_hope_drained_stamina_modifier }
+	POD_remove_character_modifier = { MODIFIER = internal_recursion_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = ramble_on_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = song_of_the_blooded_perk_knight_negative_modifier }
+	POD_remove_character_modifier = { MODIFIER = riddle_phantastique_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = crush_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = cauldron_of_blood_modifier }
+	POD_remove_character_modifier = { MODIFIER = the_narrow_house_modifier }
+	POD_remove_character_modifier = { MODIFIER = a_sending_of_serpents_modifier }
+	POD_remove_character_modifier = { MODIFIER = warcry_modifier }
+	POD_remove_character_modifier = { MODIFIER = strike_true_modifier }
+	POD_remove_character_modifier = { MODIFIER = wind_dance_modifier }
+	POD_remove_character_modifier = { MODIFIER = fearless_heart_modifier }
+	POD_remove_character_modifier = { MODIFIER = control_storm_modifier }
+	POD_remove_character_modifier = { MODIFIER = control_wind_modifier }
+	POD_remove_character_modifier = { MODIFIER = control_fog_modifier }
+	POD_remove_character_modifier = { MODIFIER = lord_of_storms_modifier }
+	POD_remove_character_modifier = { MODIFIER = aura_of_decay_modifier }
+	POD_remove_character_modifier = { MODIFIER = night_cry_enemy_modifier }
+	POD_remove_character_modifier = { MODIFIER = night_cry_ally_modifier }
+	POD_remove_character_modifier = { MODIFIER = ritual_esilio_duel_modifier }
+	POD_remove_character_modifier = { MODIFIER = nuzra_allah_modifier }
+	POD_remove_character_modifier = { MODIFIER = scorpions_curse_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = repel_the_angry_dead_modifier }
+	POD_remove_character_modifier = { MODIFIER = aegis_alighieri_modifier }
+	POD_remove_character_modifier = { MODIFIER = caustic_gland_modifier }
+	POD_remove_character_modifier = { MODIFIER = breeze_of_lethargy_modifier }
+	# KJ
+	POD_remove_character_modifier = { MODIFIER = soul_arts_curse_of_ashes_modifier }
+	POD_remove_character_modifier = { MODIFIER = chi_arts_yin_nihilus_modifier }
+	# Wraith
+	POD_remove_character_modifier = { MODIFIER = dark_ether_modifier }
+	POD_remove_character_modifier = { MODIFIER = phantom_pain_modifier }
+	### Fera ###
+	POD_remove_character_modifier = { MODIFIER = POD_delirium_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_reduced_delirium_modifier }
+	# Werewolf
+	POD_remove_character_modifier = { MODIFIER = pack_mind_modifier }
+	POD_remove_character_modifier = { MODIFIER = erratic_behavior_modifier }
+	POD_remove_character_modifier = { MODIFIER = the_paradox_of_time_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = mousemaze_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = shriek_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = haunting_howl_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = maddening_howl_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = the_white_howl_modifier_ally }
+	POD_remove_character_modifier = { MODIFIER = the_white_howl_modifier_enemy }
+	#Mokole
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_bunyips_boom_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_eye_of_the_cobra_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_dragon_drill_modifier }
+	POD_remove_character_modifier = { MODIFIER = mokole_domicile_duel_t2_modifier }
+	POD_remove_character_modifier = { MODIFIER = mokole_domicile_duel_t1_modifier }
+	# Possessed
+	POD_remove_character_modifier = { MODIFIER = aura_of_tranquility_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = fungal_touch_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = noxious_breath_perk_modifier }
+	# Demon
+	# Fae
+	POD_remove_character_modifier = { MODIFIER = wyrd_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = gelid_rime_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = stasis_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = friction_perk_knight_negative_modifier }
+	POD_remove_character_modifier = { MODIFIER = conceal_confuse_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = summon_dispel_fire_perk_modifier }
+	# Artifact
+	POD_remove_character_modifier = { MODIFIER = cauldron_of_fear_modifier }
+	POD_remove_character_modifier = { MODIFIER = cold_light_modifier }
+	
+	### Bonus ###
+	# Vamp
+	POD_remove_character_modifier = { MODIFIER = song_of_the_blooded_perk_knight_positive_modifier }
+	POD_remove_character_modifier = { MODIFIER = blood_of_destruction_perk_modifier }
+	# Wraith
+	POD_remove_character_modifier = { MODIFIER = foul_humour_modifier }
+	# WW
+	POD_remove_character_modifier = { MODIFIER = call_to_battle_perk_modifier }
+	# KJ
+	POD_remove_character_modifier = { MODIFIER = chi_arts_yang_phoenix_modifier }
+
+	# Demon
+	
+	# Fae
+	POD_remove_character_modifier = { MODIFIER = captive_heart_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = prometheus_fist_perk_knight_modifier }
+	POD_remove_character_modifier = { MODIFIER = ironarm_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = friction_perk_knight_positive_modifier }
+	POD_remove_character_modifier = { MODIFIER = ares_fist_perk_modifier }
+	# Artifact
+	POD_remove_character_modifier = { MODIFIER = caliburn_light_modifier }
+	POD_remove_character_modifier = { MODIFIER = caliburn_shield_modifier }
+	# Sorcery
+	POD_remove_character_modifier = { MODIFIER = numina_sorcery_quintessence_manipulation_6_malus_modifier }
+	POD_remove_all_character_modifier_instances = { MODIFIER = numina_sorcery_quintessence_manipulation_malus_modifier }
+	# Works differently
+	# POD_remove_character_modifier = { MODIFIER = numina_shadows_2_modifier }
+	# POD_remove_character_modifier = { MODIFIER = numina_shadows_3_modifier }
+	# POD_remove_character_modifier = { MODIFIER = numina_shadows_4_modifier }
+	# POD_remove_character_modifier = { MODIFIER = numina_shadows_5_modifier }
+	# POD_remove_character_modifier = { MODIFIER = numina_shadows_6_modifier }
+	
+	# Theurgy
+	POD_remove_character_modifier = { MODIFIER = numina_via_ignis_1_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_via_ignis_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_via_ignis_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = numina_via_ignis_4_modifier }
+	#Investiture
+	liege ?= { POD_remove_character_modifier = { MODIFIER = POD_investiture_invisibility_to_animals_perk_modifier } } #Safeguard
+}
+
+POD_commander_clear_discipline_battle_effect = {
+	### Malus ###
+	# Vamp
+	POD_remove_character_modifier = { MODIFIER = lapse_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = subjective_suspension_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = song_of_the_blooded_perk_commander_negative_modifier }
+	POD_remove_character_modifier = { MODIFIER = the_misfortune_of_chernogolov_modifier }
+	# KJ
+	POD_remove_character_modifier = { MODIFIER = soul_arts_curse_of_ashes_modifier }
+	POD_remove_character_modifier = { MODIFIER = chi_arts_yin_nihilus_modifier }
+	# Wraith
+	POD_remove_character_modifier = { MODIFIER = tesseract_bomb_modifier }
+	# Fera
+	POD_remove_character_modifier = { MODIFIER = POD_delirium_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_reduced_delirium_modifier }
+	# Werewolf
+	POD_remove_character_modifier = { MODIFIER = howl_of_hunger_perk_modifier }
+	#Mokole
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_predators_roar_modifier }
+	#Wyrm
+	POD_remove_character_modifier = { MODIFIER = wyrm_thundering_throat_modifier }
+	# Possessed
+	POD_remove_character_modifier = { MODIFIER = chaos_engine_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = stasis_engine_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = enchanting_voice_perk_modifier }
+	# Demon
+	
+	# Fae
+	POD_remove_character_modifier = { MODIFIER = wyrd_perk_commander_modifier }
+	POD_remove_character_modifier = { MODIFIER = gelid_rime_perk_commander_modifier }
+	POD_remove_character_modifier = { MODIFIER = conceal_confuse_perk_commander_modifier }
+	# Artifact
+	POD_remove_character_modifier = { MODIFIER = logis_ashes_modifier }
+	### Bonus ###
+	# Vamp
+	POD_remove_character_modifier = { MODIFIER = phobia_1_modifier }
+	POD_remove_character_modifier = { MODIFIER = phobia_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = phobia_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = phobia_4_modifier }
+	POD_remove_character_modifier = { MODIFIER = phobia_5_modifier }
+	POD_remove_character_modifier = { MODIFIER = bloodlust_1_modifier }
+	POD_remove_character_modifier = { MODIFIER = bloodlust_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = bloodlust_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = bloodlust_4_modifier }
+	POD_remove_character_modifier = { MODIFIER = bloodlust_5_modifier }
+	POD_remove_character_modifier = { MODIFIER = song_of_the_blooded_perk_commander_positive_modifier }
+	# Wraith
+	POD_remove_character_modifier = { MODIFIER = tempus_fugit_modifier }
+	# KJ
+	POD_remove_character_modifier = { MODIFIER = chi_arts_yang_phoenix_modifier }
+	
+	# Demon
+	
+	# Fae
+	POD_remove_character_modifier = { MODIFIER = captive_heart_perk_commander_modifier }
+	POD_remove_character_modifier = { MODIFIER = prometheus_fist_perk_commander_modifier }
+
+	#Investiture
+	liege ?= { POD_remove_character_modifier = { MODIFIER = POD_investiture_invisibility_to_animals_perk_modifier } }
+}
+
+POD_ruler_clear_discipline_battle_effect = {
+	### Malus ###
+	# Vamp
+	POD_remove_character_modifier = { MODIFIER = crush_perk_ruler_modifier }
+	POD_remove_character_modifier = { MODIFIER = ghadub_allah_modifier }
+	POD_remove_character_modifier = { MODIFIER = grasping_soil_modifier }
+	
+	
+	# KJ
+	
+	# Fae
+	POD_remove_character_modifier = { MODIFIER = quake_perk_modifier }
+	POD_remove_character_modifier = { MODIFIER = conceal_confuse_perk_ruler_modifier }
+	# Demon
+	
+	# Artifact
+	POD_remove_character_modifier = { MODIFIER = achen_modifier }
+	# Mummy
+
+	#Mokole
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_1_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_2_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_3_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_4_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_5_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_6_modifier }
+	POD_remove_character_modifier = { MODIFIER = POD_mokole_song_debuff_7_modifier }
+}
+
+
+POD_ruler_general_discipline_effect = {
+	#Wound knight, lowest prowess
+	if = {
+		limit = {
+			$ACTOR$ = {
+				OR = {
+					has_perk = warrior_scorpions_touch_perk
+					has_perk = vertigo_perk
+				}
+			}
+		}
+		$RECIPIENT$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+					multiply = -1
+				}
+				max = 1
+				
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$ACTOR$ = {
+				OR = {
+					has_perk = warrior_baals_caress_perk
+					has_perk = contortion_perk
+				}
+			}
+		}
+		$RECIPIENT$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+					multiply = -1
+				}
+				max = 2
+				
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$ACTOR$ = {
+				has_perk = seizure_perk
+			}
+		}
+		$RECIPIENT$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+					multiply = -1
+				}
+				max = 3
+				
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$ACTOR$ = {
+				has_perk = body_failure_perk
+			}
+		}
+		$RECIPIENT$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+					multiply = -1
+				}
+				max = 4
+				
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	
+	#Wound knight, highest prowess
+	if = {
+		limit = {
+			$ACTOR$ = {
+				OR = {
+					has_perk = ns_rigor_mortis_perk
+					has_perk = pall_of_despair_perk
+				}
+			}
+		}
+		$RECIPIENT$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+				}
+				max = 1
+				
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	
+	#Give a timed (thus safe, not like the battle modifiers) modifier
+	if = {
+		limit = {
+			$ACTOR$ = {
+				has_perk = horrid_reality_perk
+			}
+		}
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = horrid_reality_perk_modifier
+				years = 2
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ACTOR$ = {
+				has_perk = mass_horror_perk
+			}
+		}
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = mass_horror_perk_modifier
+				years = 2
+			}
+		}
+	}
+	
+	#Shih
+	if = {
+		limit = { $ACTOR$ = { has_perk = divine_prohibition_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = divine_prohibition_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = heavens_judgment_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = heavens_judgment_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = heavens_thunder_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = heavens_thunder_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = celestial_fires_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = celestial_fires_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = heavenly_flames_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = heavenly_flames_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = divine_bindings_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = divine_bindings_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = celestial_punishment_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = celestial_punishment_modifier
+				years = 3
+			}
+		}
+	}
+
+	if = {
+		limit = { $ACTOR$ = { has_perk = celestial_barrier_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = shih_celestial_barrier_modifier
+				years = 3
+			}
+		}
+	}
+	
+	#demon
+	if = {
+		limit = { $ACTOR$ = { has_perk = arcana_ultimate_horror_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = POD_ultimate_horror_modifier
+				years = 3
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = lore_wave_of_mutilation_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_wave_of_mutilation_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = lore_lash_of_corruption_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_lash_of_corruption_modifier
+				years = 3
+			}
+		}
+	}
+	else_if = {
+		limit = { $ACTOR$ = { has_perk = lore_reality_tremors_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_reality_tremors_modifier
+				years = 3
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = lore_command_the_flame_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_command_the_flame_modifier
+				years = 3
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = lore_alter_path_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_alter_path_modifier
+				years = 3
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = lore_extinguish_life_perk } }
+		$RECIPIENT$ = {
+			add_character_modifier = {
+				modifier = lore_extinguish_life_modifier
+				years = 3
+			}
+		}
+	}
+
+	# KJ
+	if = {
+		limit = { $ACTOR$ = { has_perk = soul_arts_beloved_champion_perk } }
+		# applied to the same side
+		$ACTOR$ = {
+			ordered_knight = {
+				order_by = {
+					value = prowess
+				}
+				max = 1
+				add_character_modifier = {
+					modifier = soul_arts_beloved_champion_modifier
+					years = 2
+				}
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = chi_arts_cry_of_yin_perk } }
+		$RECIPIENT$ = {
+			every_knight = {
+				add_character_modifier = {
+					modifier = chi_arts_cry_of_yin_modifier
+					years = 2
+				}
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = chi_arts_cry_of_yang_perk } }
+		$RECIPIENT$ = {
+			every_knight = {
+				add_character_modifier = {
+					modifier = chi_arts_cry_of_yang_modifier
+					years = 2
+				}
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = chi_arts_shout_of_inner_pain_perk } }
+		$RECIPIENT$ = {
+			every_knight = {
+				add_stress = 20
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$ = { has_perk = chi_arts_scream_of_demon_perk } }
+		$RECIPIENT$ = {
+			every_knight = {
+				limit = {
+					OR = {
+						POD_has_a_beast_trigger = yes
+						AND = {
+							has_trait = kueijin
+							NOT = { has_trait = dharma10 }
+						}
+						has_trait = wraith
+					}
+				}
+				add_stress = 30
+			}
+		}
+	}
+}

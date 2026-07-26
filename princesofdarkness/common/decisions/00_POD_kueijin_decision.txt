@@ -1,0 +1,159 @@
+﻿POD_kueijin_become_enlightened_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_eternal_knowledge.dds" }
+
+	decision_group_type = major
+
+	ai_check_interval = 12
+
+	is_shown = {
+		has_trait = dharma
+		NOT = { has_trait = dharma10 }
+	}
+
+	is_valid = {
+		has_trait = dharma9
+		has_trait_xp = { trait = dharma9 value >= 100 }
+	}
+
+	is_valid_showing_failures_only = { }
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		
+		if = {
+			limit = {
+				NOT = { has_trait = dharma9 }
+			}
+			custom_tooltip = you_will_get_dharma_10_tt
+		}
+			
+		show_as_tooltip = {
+			if = {
+				limit = {
+					has_trait = dharma9
+				}
+			POD_enlightenment_effect = yes
+			}
+		}
+		trigger_event = pod1230objectives_kj.1
+	}
+
+	ai_potential = {
+		has_trait = dharma9
+		has_trait_xp = { trait = dharma9 value >= 100 }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+POD_kueijin_dharma_lifestyle_spend_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/prospect.dds"
+	}
+
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+
+
+	is_shown = {
+		has_trait = dharma
+		OR = {
+			POD_gains_boneflowers_dharma_xp = yes
+			POD_gains_livingearth_dharma_xp = yes
+			POD_gains_faceofthegoddess_dharma_xp = yes
+		}
+	}
+
+	is_valid = {
+		OR = {
+			shintai_lifestyle_perk_points >= 1
+			chi_arts_lifestyle_perk_points >= 1
+			soul_arts_lifestyle_perk_points >= 1
+			demon_arts_lifestyle_perk_points >= 1
+		}
+	}
+
+	cooldown = { years = 5 }
+
+	desc = POD_kueijin_dharma_lifestyle_spend_decision_desc
+
+	effect = {
+		if = { limit = { shintai_lifestyle_perk_points >= 1 } add_shintai_lifestyle_perk_points = -1 }
+		else_if = { limit = { chi_arts_lifestyle_perk_points >= 1 } add_chi_arts_lifestyle_perk_points = -1 }
+		else_if = { limit = { soul_arts_lifestyle_perk_points >= 1 } add_soul_arts_lifestyle_perk_points = -1 }
+		else_if = { limit = { demon_arts_lifestyle_perk_points >= 1 } add_demon_arts_lifestyle_perk_points = -1 }
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_huge }
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_kueijin_dharma_blood_spend_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/prospect.dds"
+	}
+
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+
+
+	is_shown = {
+		has_trait = dharma
+		has_trait = hun_and_po
+	}
+
+	is_valid = {
+		POD_has_enough_blood_for_discipline = { AMOUNT = 5 }
+	}
+
+	cooldown = { years = 1 }
+
+	desc = POD_kueijin_dharma_blood_spend_decision_desc
+
+	effect = {
+		POD_discipline_cost_effect = { COUNT = 5 }
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium }
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_kueijin_dharma_piety_spend_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/prospect.dds"
+	}
+
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+
+
+	is_shown = {
+		has_trait = dharma
+		has_trait = hun_and_po
+	}
+
+	cost = {
+		piety = 1000
+	}
+
+	cooldown = { years = 1 }
+
+	desc = POD_kueijin_dharma_piety_spend_decision_desc
+
+	effect = {
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium }
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

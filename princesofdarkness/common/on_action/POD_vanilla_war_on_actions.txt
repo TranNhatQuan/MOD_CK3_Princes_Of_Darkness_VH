@@ -1,0 +1,373 @@
+﻿# Appending our additions to vanilla on_actions in a separate file, to keep vanilla diffs clean
+
+on_join_war_as_secondary = {
+	on_actions = { POD_on_join_war_as_secondary }
+}
+
+POD_on_join_war_as_secondary = {
+	effect = {
+		scope:war = {
+			if = {
+				limit = { is_attacker = root }
+				every_war_defender = { root = { POD_enemy_ruler_set_discipline_battle_effect = { CASTER = prev } } }
+				every_war_defender = { POD_enemy_ruler_set_discipline_battle_effect = { CASTER = root } }
+			}
+			else = {
+				every_war_attacker = { root = { POD_enemy_ruler_set_discipline_battle_effect = { CASTER = prev } } }
+				every_war_attacker = { POD_enemy_ruler_set_discipline_battle_effect = { CASTER = root } }
+			}
+		}
+		if = {
+			limit = {
+				has_trait = fera
+				is_ai = yes
+				POD_can_shapeshift_trigger = yes
+			}
+			POD_shapeshift_fera_warform_effect = yes
+		}
+		every_knight = {
+			limit = {
+				has_trait = fera
+				is_ai = yes
+				POD_can_shapeshift_trigger = yes
+			}
+			POD_shapeshift_fera_warform_effect = yes
+		}
+		
+		POD_endowments_reward_medium_effect = yes
+		POD_bonus_military_orders_effect = yes
+		POD_mokole_army_of_the_ancestors_effect = yes
+		save_scope_as = caster
+		POD_sorcery_illusion_army_spawn_effect = {
+			CASTER = scope:caster
+			WAR = scope:war
+		}
+	}
+}
+
+
+on_war_started = {
+	on_actions = { POD_on_war_started }
+}
+
+POD_on_war_started = {
+	effect = {
+		scope:attacker = {
+			if = {
+				limit = {
+					has_trait = fera
+					is_ai = yes
+					POD_can_shapeshift_trigger = yes
+				}
+				POD_shapeshift_fera_warform_effect = yes
+			}
+			every_knight = {
+				limit = {
+					has_trait = fera
+					is_ai = yes
+					POD_can_shapeshift_trigger = yes
+				}
+				POD_shapeshift_fera_warform_effect = yes
+			}
+			
+			POD_enemy_ruler_set_discipline_battle_effect = { CASTER = scope:defender }
+			
+			###Bandaid because our AI will never call to arms and we can't figure out why
+			if = {
+				limit = {
+					always = no # tentatively disabled since this might've gotten fixed
+					is_ai = yes
+					scope:war = {
+						is_war_leader = scope:attacker
+					}
+				}
+				POD_war_ai_ally_bandaid_effect = {
+					PARTICIPANT = scope:attacker
+				}
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						POD_gains_deviltigers_dharma_xp = yes
+						POD_gains_inwardfocus_dharma_xp = yes
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_huge }
+			}
+			
+			if = {
+				limit = {
+					POD_gains_tou_mu_dharma_xp = yes
+					scope:defender = { has_trait = kueijin }
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_very_huge }
+			}
+			
+			if = {
+				limit = {
+					POD_gains_the_wandering_overlord_dharma_xp = yes
+					scope:defender = { 
+						POD_is_akuma_trigger = yes
+					 	NOT = { faith = PREV.faith }
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_very_huge }
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						POD_gains_hine_nui_te_po_dharma_xp = yes
+						POD_gains_malaveyovo_dharma_xp = yes
+					}
+					scope:defender = { 
+						OR = {
+							religion = religion:thrashingdragons_religion
+							faith = faith:brillant_coals
+						}
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_very_huge }
+			}
+
+			POD_mokole_army_of_the_ancestors_effect = yes
+
+			POD_sorcery_illusion_army_spawn_effect = {
+				CASTER = scope:attacker
+				WAR = scope:war
+			}
+		}
+		
+		scope:defender = {
+			if = {
+				limit = {
+					faith = faith:camahumanity
+					camarilla_status > scope:attacker.camarilla_status
+					scope:attacker = {
+						POD_is_anathema_trigger = no
+						NOT = { has_character_flag = forgived_anathema }
+					}
+				}
+				trigger_event = { id = POD_camarilla.200 days = 1 }
+			}
+			
+			if = {
+				limit = {
+					has_trait = fera
+					is_ai = yes
+					POD_can_shapeshift_trigger = yes
+				}
+				POD_shapeshift_fera_warform_effect = yes
+			}
+			every_knight = {
+				limit = { 
+					has_trait = fera
+					is_ai = yes
+					POD_can_shapeshift_trigger = yes
+				}
+				POD_shapeshift_fera_warform_effect = yes
+			}
+			
+			POD_enemy_ruler_set_discipline_battle_effect = { CASTER = scope:attacker }
+
+			###Bandaid because our AI will never call to arms and we can't figure out why
+			if = {
+				limit = {
+					always = no # tentatively disabled since this might've gotten fixed
+					is_ai = yes
+					scope:war = {
+						is_war_leader = scope:defender
+					}
+				}
+				POD_war_ai_ally_bandaid_effect = {
+					PARTICIPANT = scope:defender
+				}
+			}
+
+			POD_mokole_army_of_the_ancestors_effect = yes
+
+			POD_sorcery_illusion_army_spawn_effect = {
+				CASTER = scope:defender
+				WAR = scope:war
+			}
+		}
+
+		#POD crown authority
+		if = {
+			limit = {
+				scope:war = { is_civil_war = no }
+				NOT = {
+					scope:attacker = {
+						is_vassal_or_below_of = scope:defender
+					}
+				}
+				scope:defender = {
+					has_realm_law = crown_authority_3
+				}
+			}
+
+			scope:defender = {
+				every_vassal_or_below = {
+					if = {
+						limit = {
+							highest_held_title_tier >= tier_duchy
+							any_held_title = {
+								OR = {
+									any_title_to_title_neighboring_county = {
+										exists = holder
+										holder = {
+											OR = {
+												is_vassal_or_below_of = scope:attacker
+												this = scope:attacker
+											}
+										}
+									}
+
+									any_title_to_title_neighboring_duchy = {
+										exists = holder
+										holder = {
+											OR = {
+												is_vassal_or_below_of = scope:attacker
+												this = scope:attacker
+											}
+										}
+									}
+								}
+							}
+						}
+						scope:war = { add_defender = prev }
+					}
+				}
+			}
+		}
+		
+		POD_ruler_general_discipline_effect = {
+			ACTOR     = scope:attacker
+			RECIPIENT = scope:defender
+		}
+		POD_ruler_general_discipline_effect = {
+			ACTOR     = scope:defender
+			RECIPIENT = scope:attacker
+		}
+	}
+}
+
+
+on_war_won_attacker = {
+	on_actions = { POD_on_war_won_attacker }
+}
+
+POD_on_war_won_attacker = {
+	effect = {
+		scope:attacker = {
+			if = {
+				limit = { has_variable = involving_to_season_war }
+				set_realm_capital = var:involving_to_season_war
+				remove_variable = involving_to_season_war
+			}
+		}
+		
+		
+		scope:war = {
+			every_war_participant = {
+				POD_clear_battle_modifiers_for_war_participant = yes
+				trigger_event = { id = POD_mokole.506 days = 1 }
+			}
+
+			if = {
+				limit = { scope:winner ?= scope:attacker }
+				every_war_attacker = {
+					if = {
+						limit = {
+							OR = {
+								AND = {
+									POD_is_wyrm_servant_trigger = yes
+									scope:defender = { POD_is_wyrm_servant_trigger = no }
+								}
+								AND = {
+									POD_is_wyrm_servant_trigger = no
+									scope:defender = { POD_is_wyrm_servant_trigger = yes }
+								}
+							}
+						}
+						POD_fera_add_renown_effect = { TYPE = glory }
+					}
+				}
+			}
+		}
+		
+		scope:winner = {
+			if = {
+				limit = {
+					OR = {
+						POD_gains_faceofthegods_dharma_xp = yes
+						POD_gains_greatclans_dharma_xp = yes
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_huge }
+			}
+			POD_fera_add_renown_effect = { TYPE = power }
+		}
+	}
+}
+
+
+on_war_won_defender = {
+	on_actions = { POD_on_war_won_defender }
+}
+
+POD_on_war_won_defender = {
+	effect = {
+		scope:war = {
+			every_war_participant = {
+				POD_clear_battle_modifiers_for_war_participant = yes
+				trigger_event = { id = POD_mokole.506 days = 1 }
+			}
+		}
+		scope:winner = {
+			if = {
+				limit = {
+					OR = {
+						POD_gains_faceofthegods_dharma_xp = yes
+						POD_gains_greatclans_dharma_xp = yes
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_huge }
+			}
+			POD_fera_add_renown_effect = { TYPE = power }
+		}
+	}
+}
+
+
+on_war_white_peace = {
+	on_actions = { POD_on_war_white_peace }
+}
+
+POD_on_war_white_peace = {
+	effect = {
+		scope:war = {
+			every_war_participant = {
+				POD_clear_battle_modifiers_for_war_participant = yes
+				trigger_event = { id = POD_mokole.506 days = 1 }
+			}
+		}
+	}
+}
+
+
+on_war_invalidated = {
+	on_actions = { POD_on_war_invalidated }
+}
+
+POD_on_war_invalidated = {
+	effect = {
+		scope:war = {
+			every_war_participant = {
+				POD_clear_battle_modifiers_for_war_participant = yes
+				trigger_event = { id = POD_mokole.506 days = 1 }
+			}
+		}
+	}
+}

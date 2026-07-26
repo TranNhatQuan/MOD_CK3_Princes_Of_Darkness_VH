@@ -1,0 +1,81 @@
+﻿l_english:
+
+ #Disbelieve Mandala Scheme
+  disbelieve_mandala: "Phá Vỡ Mandala"
+  disbelieve_mandala_desc: "Đã đến lúc hạ bậc [SCHEME.GetTargetCharacter.GetShortUINameNoTooltip] trong hệ thống [mandala|E]. Hoặc hai bậc."
+  disbelieve_mandala_desc_general: "Kế hoạch $disbelieve_mandala$ [scheme|E] là một [hostile_scheme|E] nhằm làm tổn hại uy tín của [scheme_target|E] như một Mandala thần thánh.\n\nNó có thể tuyển dụng [agents|E], là một [secret_scheme|E] dựa trên [intrigue|E], và nếu bị phát hiện sẽ làm gia tăng sự đối đầu giữa người khởi xướng và Mục Tiêu."
+  DISBELIEVE_MANDALA_SUCCESS_DESC: "[TARGET_CHARACTER.GetShortUIName|U] có thể trở thành [GetModifier( 'disbelieved_mandala_modifier' ).GetNameWithTooltip|L]"
+  disbelieve_mandala_invalidated_title: "@scheme_icon! Kế Hoạch Phá Vỡ Mandala Kết Thúc"
+
+  scheme_target_not_mandala: "[SCHEME.GetTargetCharacter.GetShortUIName|U] không có chính quyền [mandala|E]"
+  scheme_owner_not_mandala: "Ngài không có chính quyền [mandala|E]"
+  scheme_owner_not_house_head: "Ngài không còn là [house_head|E]"
+  scheme_target_not_independent: "[SCHEME.GetTargetCharacter.GetShortUIName|U] không [independent|E]"
+  scheme_target_tributary_of_owner: "[SCHEME.GetTargetCharacter.GetShortUIName|U] là [subject|E] của Ngài"
+
+ #Disbelieve Mandala Interaction
+  start_disbelieve_mandala_interaction: "$disbelieve_mandala$ #weak (Scheme)#!"
+  disbelieve_mandala_action: "Phá Vỡ"
+  scheme_interaction_tt_disbelieve_mandala: "Cố gắng phá vỡ niềm tin của [recipient.GetShortUINameNoTooltip], có thể làm tổn hại [recipient.GetHerHis] [legitimacy|E], [piety|E] và gây rối loạn trong số [recipient.GetHerHis] [subjects|E]"
+  disbelieve_mandala_interaction_notification: "Phá Vỡ Mandala"
+  unlock_disbelieve_mandala_scheme_tt: "Yêu cầu cấp độ #V 3#! của [aspect_of_trickery|E]"
+
+ #Coerce Tributary Scheme
+  coerce_tributary: "Ép Chư Hầu"
+  coerce_tributary_desc: "[SCHEME.GetTargetCharacter.GetShortUINameNoTooltip] sớm sẽ biết ai là lãnh đạo #EMP thực sự#! của [SCHEME.GetTargetCharacter.GetHerHis]..."
+  coerce_tributary_desc_general: "Kế hoạch $coerce_tributary$ [scheme|E] là một [political_scheme|E] nhằm thuyết phục [scheme_target|E] trở thành [tributary|E] của [scheme_owner|E].\n\nNếu Mục Tiêu đã có một [suzerain|E], người đó sẽ có quyền lựa chọn cách phản ứng và sẽ gieo [rivalry|E] giữa Chủ Sở Hữu và Chư Hầu."
+  COERCE_TRIBUTARY_SUCCESS_DESC: "[TARGET_CHARACTER.GetShortUIName|U] có thể trở thành [tributary|E] của Ngài"
+  coerce_tributary_invalidated_title: "@scheme_icon! Kế Hoạch Ép Chư Hầu Kết Thúc"
+
+ #Coerce Tributary Interaction
+  start_coerce_tributary_interaction: "$coerce_tributary$ #weak (Scheme)#!"
+  coerce_tributary_action: "Ép"
+  scheme_interaction_tt_coerce_tributary: "Cố gắng ép [recipient.GetShortUINameNoTooltip] trở thành [tributary|E] của Ngài"
+  coerce_tributary_interaction_notification: "Ép Chư Hầu"
+
+  target_is_your_subject.tt: "[target.GetShortUIName] là [owner.GetShortUINamePossessive] [subject|E]"
+  recipient_is_your_suzerain.tt: "[recipient.GetShortUIName] là [actor.GetShortUINamePossessive] [suzerain|E]"
+  you_share_suzerain.tt: "Ngài chia sẻ cùng một [suzerain|E]"
+  was_betrayed_after_being_coerced.tt: "Ngài từng phản bội [recipient.GetShortUIName] sau khi ép họ"
+
+
+ #Coerce Contribution Scheme
+  coerce_contribution: "Ép Đóng Góp"
+  coerce_contribution_desc: "Người dân [SCHEME.GetTargetTitle.GetBaseNameNoTier] chắc chắn có thể được thuyết phục đóng góp vào dự án vĩ đại này..."
+  coerce_contribution_desc_general: "Kế hoạch $coerce_contribution$ [scheme|E] là một [political_scheme|E] nhằm thuyết phục dân cư [scheme_target|E] mở lòng và ví tiền để [great_project_contribute|E] vào [great_project|E] của [scheme_owner|E]."
+  COERCE_CONTRIBUTION_SUCCESS_DESC: "Người dân [TARGET_TITLE.GetBaseName|U] tài trợ cho một trong các [great_project_contributions|E] của Ngài"
+  coerce_contribution_invalidated_title: "@scheme_icon! Kế Hoạch Ép Đóng Góp Kết Thúc"
+
+ #Coerce Contribution Interaction
+  start_coerce_contribution_interaction: "$coerce_contribution$ #weak (Scheme)#!"
+  coerce_contribution_action: "Ép Đóng Góp tại"
+  scheme_interaction_tt_coerce_contribution: "Cố gắng ép dân cư của Ngài đóng góp vào [great_project|E]"
+  coerce_contribution_interaction_notification: "Ép Đóng Góp"
+  coerce_contribution_scheme_success_outcome_tt: "Nếu thành công, một trong các #high [GetBuilding('mandala_capital_01').GetTypeName]#! [great_project_contributions|E] của Ngài được tài trợ bởi dân cư [target.GetBaseName]"
+  start_coerce_contribution_interaction.tt.agent_focus_success: "$schemes.tt.agent_packages.list_boilerplate$\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_thug' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_herald' ).GetName]"
+  start_coerce_contribution_interaction.tt.agent_focus_speed: "$schemes.tt.agent_packages.list_boilerplate$\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_thug' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_herald' ).GetName]"
+
+  no_available_target_titles.tt: "Không còn quận chưa khai thác trong [realm|E] của Ngài"
+  no_contributions_to_fund.tt: "Ngài không còn bất kỳ [great_project|E] [great_project_contributions|E] nào để tài trợ"
+
+  scheme_title_changed_holder: "Quận [target.GetBaseName] đã đổi chủ"
+  scheme_great_project_is_funded: "[great_project|E] của Ngài không còn [great_project_contributions|E] chưa được tài trợ"
+  attempted_to_coerce_contribution_from_my_realm_opinion: "Đã cố gắng Ép Đóng Góp từ Lãnh Thổ của Ta"
+ 
+ #Leverage Contribution Scheme
+  leverage_contribution: "Khuyến Khích Đóng Góp"
+  leverage_contribution_desc: "[SCHEME.GetTargetCharacter.GetShortUINameNoTooltip] chắc chắn có thể được thuyết phục đóng góp vào dự án vĩ đại này..."
+  leverage_contribution_desc_general: "Kế hoạch $leverage_contribution$ [scheme|E] là một [political_scheme|E] nhằm thuyết phục [scheme_target|E] mở lòng và ví tiền để [great_project_contribute|E] vào [great_project|E] của [scheme_owner|E]."
+  LEVERAGE_CONTRIBUTION_SUCCESS_DESC: "[TARGET_CHARACTER.GetShortUIName|U] tài trợ cho một trong các [great_project_contributions|E] của Ngài"
+  leverage_contribution_invalidated_title: "@scheme_icon! Kế Hoạch Khuyến Khích Đóng Góp Kết Thúc"
+
+  recipient_is_unable_to_afford_contributions.tt: "[recipient.GetShortUIName|U] không đủ khả năng để tài trợ bất kỳ [great_project_contributions|E] nào của Ngài"
+
+ #Leverage Contribution Interaction
+  start_leverage_contribution_interaction: "$leverage_contribution$ #weak (Scheme)#!"
+  leverage_contribution_action: "Khuyến Khích Đóng Góp từ"
+  scheme_interaction_tt_leverage_contribution: "Cố gắng khuyến khích [recipient.GetShortUINameNoTooltip] đóng góp vào một [great_project_contribution|E]"
+  leverage_contribution_interaction_notification: "Khuyến Khích Đóng Góp"
+  leverage_contribution_scheme_success_outcome_tt: "Nếu thành công, một trong các #high [GetBuilding('mandala_capital_01').GetTypeName]#! [great_project_contributions|E] của Ngài được tài trợ bởi [recipient.GetShortUIName]"
+  start_leverage_contribution_interaction.tt.agent_focus_success: "$schemes.tt.agent_packages.list_boilerplate$\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_thug' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_herald' ).GetName]"
+  start_leverage_contribution_interaction.tt.agent_focus_speed: "$schemes.tt.agent_packages.list_boilerplate$\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_thug' ).GetName]\n$EFFECT_LIST_BULLET$[success_chance_max_i] [GetAgentSlotType( 'agent_devotee' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_cleric' ).GetName]\n$EFFECT_LIST_BULLET$[scheme_speed_i] [GetAgentSlotType( 'agent_herald' ).GetName]"

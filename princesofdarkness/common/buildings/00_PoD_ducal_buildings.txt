@@ -1,0 +1,7169 @@
+﻿####################
+# Ducal Buildings #
+####################
+
+### Vampires ###
+
+prince_city_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }				
+	}
+	
+	is_enabled = {
+		scope:holder = { has_trait = vampire }		
+	}
+
+	cost_prestige = cheap_building_tier_1_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.1
+		monthly_income = good_building_tax_tier_1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 0.1	
+		monthly_prestige = 0.5
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 13
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_02
+}
+prince_city_02 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 10 }		
+	}	
+	
+	is_enabled = {	
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_1_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.1
+		monthly_income = good_building_tax_tier_2
+		stationed_POD_vampire_maa_damage_mult = 0.1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 0.15
+		monthly_prestige = 0.5
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_03
+}
+prince_city_03 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }			
+	}
+	
+	can_construct = {
+		county = { development_level > 20 }		
+	}
+	
+	is_enabled = {	
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_1_cost
+	
+	levy = excellent_building_levy_tier_2
+	
+	province_modifier = {
+		garrison_size = 0.2
+		monthly_income = good_building_tax_tier_3
+		stationed_POD_vampire_maa_damage_mult = 0.15
+	}
+	
+	county_modifier = {
+		tax_mult = 0.1
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 0.25
+		monthly_prestige = 0.5
+		cultural_head_fascination_mult = 0.05
+		POD_vampire_maa_max_size_add = 1
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_04
+}
+prince_city_04 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 30 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 10 }	
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_2_cost
+	
+	levy = excellent_building_levy_tier_3
+	
+	province_modifier = {
+		garrison_size = 0.4
+		monthly_income = good_building_tax_tier_4
+		stationed_POD_vampire_maa_damage_mult = 0.2
+	}
+	county_modifier = {
+		tax_mult = 0.2
+		development_growth = 0.2		
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 0.5
+		monthly_prestige = 1
+		cultural_head_fascination_mult = 0.1
+		knight_limit = 1
+		POD_vampire_maa_max_size_add = 1
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_05
+}
+prince_city_05 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 40 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 20 }	
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_2_cost
+	
+	levy = excellent_building_levy_tier_4
+	
+	province_modifier = {
+		garrison_size = 0.4
+		monthly_income = good_building_tax_tier_5
+		stationed_POD_vampire_maa_damage_mult = 0.25
+	}
+	county_modifier = {
+		tax_mult = 0.2
+		development_growth = 0.2		
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 0.75
+		monthly_prestige = 1
+		cultural_head_fascination_mult = 0.15
+		knight_limit = 1
+		POD_vampire_maa_max_size_add = 1
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_06
+}
+prince_city_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 50 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 30 }	
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_3_cost
+	
+	levy = excellent_building_levy_tier_5
+	
+	province_modifier = {
+		garrison_size = 0.6
+		monthly_income = good_building_tax_tier_6
+		stationed_POD_vampire_maa_damage_mult = 0.3
+	}
+	county_modifier = {
+		tax_mult = 0.3
+		development_growth = 0.2
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 1
+		monthly_prestige = 1.5
+		cultural_head_fascination_mult = 0.2
+		knight_limit = 2
+		knight_effectiveness_mult = 0.25
+		POD_vampire_maa_max_size_add = 2
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_07
+}
+prince_city_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 60 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 50 }
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_4_cost
+	
+	levy = excellent_building_levy_tier_6
+	
+	province_modifier = {
+		garrison_size = 0.8
+		monthly_income = good_building_tax_tier_7
+		stationed_POD_vampire_maa_damage_mult = 0.35
+	}
+	county_modifier = {
+		tax_mult = 0.4
+		development_growth = 0.2
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 2
+		monthly_prestige = 2
+		cultural_head_fascination_mult = 0.25
+		knight_limit = 3
+		knight_effectiveness_mult = 0.3
+		POD_vampire_maa_max_size_add = 3
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+		
+	next_building = prince_city_08
+}
+prince_city_08 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 70 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 50 }
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_5_cost
+	
+	levy = excellent_building_levy_tier_7
+	
+	province_modifier = {
+		garrison_size = 0.9
+		monthly_income = good_building_tax_tier_8
+		stationed_POD_vampire_maa_damage_mult = 0.4
+	}
+	county_modifier = {
+		tax_mult = 0.45
+		development_growth = 0.25
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 3
+		monthly_prestige = 3
+		cultural_head_fascination_mult = 0.25
+		knight_limit = 3
+		knight_effectiveness_mult = 0.35
+		POD_vampire_maa_max_size_add = 3
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	next_building = prince_city_09
+	
+}
+prince_city_09 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { has_trait = vampire }		
+	}
+	
+	can_construct = {
+		county = { development_level > 80 }		
+	}
+	
+	is_enabled = {
+		#county = { development_level > 50 }
+		scope:holder = { has_trait = vampire }				
+	}
+
+	cost_prestige = cheap_building_tier_6_cost
+	
+	levy = excellent_building_levy_tier_8
+	
+	province_modifier = {
+		garrison_size = 1
+		monthly_income = good_building_tax_tier_8
+		stationed_POD_vampire_maa_damage_mult = 0.5
+	}
+	county_modifier = {
+		tax_mult = 0.5
+		development_growth = 0.3
+		building_slot_add = 1
+	}
+	character_modifier = {
+		monthly_dynasty_prestige = 5
+		monthly_prestige = 3
+		cultural_head_fascination_mult = 0.3
+		knight_limit = 3
+		knight_effectiveness_mult = 0.4
+		POD_vampire_maa_max_size_add = 3
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+	
+	type = duchy_capital	
+	
+	flag = fully_upgraded_duchy_capital_building
+
+	
+}
+
+### Inquisitors ###
+
+#ARMORY
+
+inquisition_armory_01 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		# county = {
+			# county_control > 25
+			# }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 200
+	
+	character_modifier = {
+		light_cavalry_pursuit_mult = 0.1
+		archers_damage_mult = 0.1
+		pikemen_toughness_mult = 0.1
+		heavy_infantry_toughness_mult = 0.1
+		skirmishers_screen_mult = 0.1
+		men_at_arms_maintenance = -0.05
+	}
+	
+	next_building = inquisition_armory_02
+	
+	type_icon = "icon_building_royal_armory.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder.dynasty ?= {
+				# OR = {
+					# this = dynasty:13000006
+					# this = dynasty:13000008
+				# }
+				NOR = {
+					has_dynasty_modifier = custom_lay_order_modifier
+					has_dynasty_modifier = custom_contemplative_order_modifier
+					has_dynasty_modifier = custom_mendicant_order_modifier
+					has_dynasty_modifier = custom_knightly_order_modifier
+					this = dynasty:13000001
+					this = dynasty:13000002
+					this = dynasty:13000003
+					this = dynasty:13000004
+					this = dynasty:13000005
+				}
+			}
+		}
+	}
+}
+
+inquisition_armory_02 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 350
+	
+	character_modifier = {
+		light_cavalry_pursuit_mult = 0.15
+		archers_damage_mult = 0.15
+		pikemen_toughness_mult = 0.15
+		heavy_infantry_toughness_mult = 0.15
+		skirmishers_screen_mult = 0.15
+		men_at_arms_maintenance = -0.1
+		heavy_cavalry_toughness_add = 5
+		heavy_cavalry_damage_add = 3
+	}
+	
+	next_building = inquisition_armory_03
+	
+	type_icon = "icon_building_royal_armory.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder.dynasty ?= {
+				# OR = {
+					# this = dynasty:13000006
+					# this = dynasty:13000008
+				# }
+				NOR = {
+					has_dynasty_modifier = custom_lay_order_modifier
+					has_dynasty_modifier = custom_contemplative_order_modifier
+					has_dynasty_modifier = custom_mendicant_order_modifier
+					has_dynasty_modifier = custom_knightly_order_modifier
+					this = dynasty:13000001
+					this = dynasty:13000002
+					this = dynasty:13000003
+					this = dynasty:13000004
+					this = dynasty:13000005
+				}
+			}
+		}
+	}
+}
+
+inquisition_armory_03 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 3
+			scope:holder.dynasty.dynasty_prestige_level >= 3
+		}
+		culture = {
+			has_innovation = innovation_burhs
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+			#development_level > 15
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 600
+	
+	character_modifier = {
+		light_cavalry_pursuit_mult = 0.2
+		archers_damage_mult = 0.2
+		pikemen_toughness_mult = 0.2
+		heavy_infantry_toughness_mult = 0.2
+		skirmishers_screen_mult = 0.2
+		men_at_arms_maintenance = -0.15
+		heavy_cavalry_toughness_add = 10
+		heavy_cavalry_damage_add = 7
+		siege_weapon_siege_value_mult = 0.2
+	}
+	
+	next_building = inquisition_armory_04
+	
+	type_icon = "icon_building_royal_armory.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder.dynasty ?= {
+				# OR = {
+					# this = dynasty:13000006
+					# this = dynasty:13000008
+				# }
+				NOR = {
+					has_dynasty_modifier = custom_lay_order_modifier
+					has_dynasty_modifier = custom_contemplative_order_modifier
+					has_dynasty_modifier = custom_mendicant_order_modifier
+					has_dynasty_modifier = custom_knightly_order_modifier
+					this = dynasty:13000001
+					this = dynasty:13000002
+					this = dynasty:13000003
+					this = dynasty:13000004
+					this = dynasty:13000005
+				}
+			}
+		}
+	}
+}
+
+inquisition_armory_04 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 6
+			scope:holder.dynasty.dynasty_prestige_level >= 6
+		}
+		culture = {
+			has_innovation = innovation_castle_baileys
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 1200
+	
+	character_modifier = {
+		light_cavalry_pursuit_mult = 0.25
+		archers_damage_mult = 0.25
+		pikemen_toughness_mult = 0.25
+		heavy_infantry_toughness_mult = 0.25
+		skirmishers_screen_mult = 0.25
+		men_at_arms_maintenance = -0.20
+		heavy_cavalry_toughness_add = 15
+		heavy_cavalry_damage_add = 10
+		siege_weapon_siege_value_mult = 0.3
+		martial = 1
+	}
+	
+	type_icon = "icon_building_royal_armory.dds"
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder.dynasty ?= {
+				# OR = {
+					# this = dynasty:13000006
+					# this = dynasty:13000008
+				# }
+				NOR = {
+					has_dynasty_modifier = custom_lay_order_modifier
+					has_dynasty_modifier = custom_contemplative_order_modifier
+					has_dynasty_modifier = custom_mendicant_order_modifier
+					has_dynasty_modifier = custom_knightly_order_modifier
+					this = dynasty:13000001
+					this = dynasty:13000002
+					this = dynasty:13000003
+					this = dynasty:13000004
+					this = dynasty:13000005
+				}
+			}
+		}
+	}
+}
+
+#KEEP
+
+inquisition_keep_01 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		# county = {
+			# county_control > 25
+			# }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 200
+	
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 5		
+	}
+	
+	province_modifier = {
+		additional_fort_level = 1
+	}
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.15
+	}
+	next_building = inquisition_keep_02
+	
+	type_icon = "icon_structure_tower_of_london.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_lay_order_no_murnau_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_keep_02 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+			#development_level > 10
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 350
+	
+	province_modifier = {
+		additional_fort_level = 2
+	}
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.20
+	}
+	
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 10
+	}
+	
+	next_building = inquisition_keep_03
+	
+	type_icon = "icon_structure_tower_of_london.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_lay_order_no_murnau_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_keep_03 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 3
+			scope:holder.dynasty.dynasty_prestige_level >= 3
+		}
+		culture = {
+			has_innovation = innovation_burhs
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 600
+	
+	province_modifier = {
+		additional_fort_level = 3
+	}
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.25
+	}
+	
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 15
+		enemy_hostile_scheme_success_chance_add = -15
+	}
+	
+	next_building = inquisition_keep_04
+	
+	type_icon = "icon_structure_tower_of_london.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_lay_order_no_murnau_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_keep_04 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 6
+			scope:holder.dynasty.dynasty_prestige_level >= 6
+		}
+		culture = {
+			has_innovation = innovation_castle_baileys
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 1200
+	
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 20
+		enemy_hostile_scheme_success_chance_add = -25
+		intrigue = 1
+	}
+	
+	province_modifier = {
+		additional_fort_level = 4
+	}
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.30
+	}
+	
+	type_icon = "icon_structure_tower_of_london.dds"
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_lay_order_no_murnau_dynasty_trigger = yes }
+		}
+	}
+}
+
+#CHURCH
+
+inquisition_church_01 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 200
+	
+	
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.1
+		monthly_lifestyle_xp_gain_mult = 0.1
+	}
+	
+	next_building = inquisition_church_02
+	
+	type_icon = "icon_structure_cologne_cathedral.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_contemplative_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_church_02 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 350
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+		monthly_lifestyle_xp_gain_mult = 0.2
+		direct_vassal_opinion = 5
+	}
+	
+	next_building = inquisition_church_03
+	
+	type_icon = "icon_structure_cologne_cathedral.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_contemplative_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_church_03 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 3
+			scope:holder.dynasty.dynasty_prestige_level >= 3
+		}
+		culture = {
+			has_innovation = innovation_manorialism
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 600
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.3
+		monthly_lifestyle_xp_gain_mult = 0.3
+		direct_vassal_opinion = 10
+	}
+	
+	next_building = inquisition_church_04
+	
+	type_icon = "icon_structure_cologne_cathedral.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_contemplative_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_church_04 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 6
+			scope:holder.dynasty.dynasty_prestige_level >= 6
+		}
+		culture = {
+			has_innovation = innovation_windmills
+		}	
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 1200
+	
+	county_modifier = {
+		building_slot_add = 1	
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.4
+		monthly_lifestyle_xp_gain_mult = 0.5
+		direct_vassal_opinion = 15
+		piety_level_impact_mult = 0.5
+		learning = 1
+	}
+	
+	type_icon = "icon_structure_cologne_cathedral.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_contemplative_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+#OFFICE
+
+inquisition_office_01 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		# county = {
+			# county_control > 25
+			# }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 200
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+		levy_size = 0.1
+		development_growth_factor = 0.1		
+	}
+	
+	character_modifier = {
+	
+		
+	}
+	
+	next_building = inquisition_office_02
+	
+	type_icon = "icon_building_tax_assessor.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_mendicant_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_office_02 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 350
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.15
+		levy_size = 0.15
+		development_growth_factor = 0.2
+	}
+	
+	character_modifier = {
+		army_maintenance_mult = -0.05
+		
+	}
+	
+	next_building = inquisition_office_03
+	
+	type_icon = "icon_building_tax_assessor.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_mendicant_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_office_03 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 3
+			scope:holder.dynasty.dynasty_prestige_level >= 3
+		}
+		culture = {
+			has_innovation = innovation_manorialism
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+			}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 600
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.25
+		levy_size = 0.25
+		development_growth_factor = 0.3
+	}
+	
+	character_modifier = {
+		army_maintenance_mult = -0.1
+	}
+	
+	next_building = inquisition_office_04
+	
+	type_icon = "icon_building_tax_assessor.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_mendicant_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_office_04 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 6
+			scope:holder.dynasty.dynasty_prestige_level >= 6
+		}
+		culture = {
+			has_innovation = innovation_windmills
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+			}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 1200
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.3
+		levy_size = 0.3
+		development_growth_factor = 0.4
+	}
+	
+	character_modifier = {
+		army_maintenance_mult = -0.15
+		stewardship = 1
+	}
+	
+	type_icon = "icon_building_tax_assessor.dds"
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_mendicant_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+#PALACE
+
+inquisition_palace_01 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		# county = {
+			# county_control > 25
+			# }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 200
+	
+	character_modifier = {
+		knight_effectiveness_mult = 0.05
+		stress_loss_mult = 0.15
+		owned_personal_scheme_success_chance_add = 3
+	}
+	
+	next_building = inquisition_palace_02
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_knightly_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_palace_02 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 350
+	
+	character_modifier = {
+		knight_effectiveness_mult = 0.10
+		stress_loss_mult = 0.2
+		owned_personal_scheme_success_chance_add = 5
+		monthly_prestige_gain_mult = 0.025
+		
+	}
+	
+	next_building = inquisition_palace_03
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_knightly_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_palace_03 = {
+	construction_time = slow_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 3
+			scope:holder.dynasty.dynasty_prestige_level >= 3
+		}
+		culture = {
+			has_innovation = innovation_manorialism
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 600
+	
+	character_modifier = {
+		knight_effectiveness_mult = 0.15
+		stress_loss_mult = 0.25
+		owned_personal_scheme_success_chance_add = 7
+		monthly_prestige_gain_mult = 0.05
+		knight_limit = 1
+	}
+	
+	next_building = inquisition_palace_04
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_knightly_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+inquisition_palace_04 = {
+	construction_time = standard_construction_time
+
+	flag = inquisition_ducal
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+	}
+	
+	can_construct = {
+		OR = {
+			scope:holder.liege.dynasty.dynasty_prestige_level >= 6
+			scope:holder.dynasty.dynasty_prestige_level >= 6
+		}
+		culture = {
+			has_innovation = innovation_windmills
+		}	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_inquisitor = yes
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = 1200
+	
+	character_modifier = {
+		knight_effectiveness_mult = 0.20
+		stress_loss_mult = 0.30
+		owned_personal_scheme_success_chance_add = 10
+		monthly_prestige_gain_mult = 0.15
+		knight_limit = 3
+		diplomacy = 1
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 1000
+		modifier = {
+			add = 1000
+			scope:holder = { has_knightly_order_dynasty_trigger = yes }
+		}
+	}
+}
+
+#Ghoulbro
+
+heretic_hall_01 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { building_requirement_ghoulbro = yes }				
+	}
+	
+	is_enabled = {
+		scope:holder = { building_requirement_ghoulbro = yes }		
+	}
+
+	cost_piety = expensive_building_tier_1_cost
+	
+	levy = 300
+	max_garrison = 300
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.2
+		levy_size = 0.2
+		levy_reinforcement_rate = 0.2
+	}
+	
+	province_modifier = {
+		supply_limit_mult = 1
+	}
+		
+	county_modifier = {
+		development_growth = 0.1
+	}
+		
+	character_modifier = {
+		supply_duration = 0.5
+		supply_capacity_mult = 0.5
+		levy_maintenance = -0.1
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 1000
+	}
+	
+	type = duchy_capital	
+	
+	next_building = heretic_hall_02
+}
+
+heretic_hall_02 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { building_requirement_ghoulbro = yes  }
+	}
+	
+	can_construct = {
+		county = {
+			development_level > 5
+		}	
+	}
+	
+	is_enabled = {
+		scope:holder = { building_requirement_ghoulbro = yes }				
+	}
+
+	cost_piety = expensive_building_tier_2_cost
+	
+	levy = 300
+	max_garrison = 300
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.4
+		levy_size = 0.4
+		levy_reinforcement_rate = 0.4
+	}
+	
+	province_modifier = {
+		supply_limit_mult = 1
+	}
+		
+	county_modifier = {
+		development_growth = 0.1
+	}
+		
+	character_modifier = {
+		supply_duration = 0.5
+		supply_capacity_mult = 0.5
+		knight_limit = 1
+		levy_maintenance = -0.1
+		levy_attack = 1
+		levy_toughness = 1
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 1000
+	}
+	
+	type = duchy_capital
+	
+	next_building = heretic_hall_03
+}
+
+heretic_hall_03 = {
+	construction_time = standard_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { building_requirement_ghoulbro = yes }
+	}
+	
+	can_construct = {
+		county = {
+			development_level > 10
+		}	
+	}
+	
+	is_enabled = {
+		scope:holder = { building_requirement_ghoulbro = yes  }				
+	}
+
+	cost_piety = expensive_building_tier_3_cost
+	
+	levy = 300
+	max_garrison = 300
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.6
+		levy_size = 0.6
+		levy_reinforcement_rate = 0.6
+	}
+	
+	province_modifier = {
+		supply_limit_mult = 1
+	}
+		
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		supply_duration = 0.5
+		supply_capacity_mult = 0.5
+		knight_limit = 2
+		levy_maintenance = -0.1
+		levy_attack = 1
+		levy_toughness = 1
+		levy_pursuit = 1
+		levy_screen = 1
+	}
+		
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 1000
+	}
+	
+	type = duchy_capital	
+	
+	next_building = heretic_hall_04
+}
+
+heretic_hall_04 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = { building_requirement_ghoulbro = yes }
+	}
+	
+	can_construct = {
+		county = { development_level > 15 }	
+	}
+	
+	is_enabled = {
+		scope:holder = { building_requirement_ghoulbro = yes  }				
+	}
+
+	cost_piety = expensive_building_tier_4_cost
+	
+	levy = 300
+	max_garrison = 300
+	
+	duchy_capital_county_modifier = {
+		garrison_size = 0.8
+		levy_size = 0.8
+		levy_reinforcement_rate = 0.8
+	}
+	
+	province_modifier = {
+		supply_limit_mult = 1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1	
+		building_slot_add = 1	
+	}
+	
+	character_modifier = {
+		supply_duration = 0.5
+		supply_capacity_mult = 0.5
+		knight_limit = 3
+		levy_maintenance = -0.1
+		levy_attack = 1
+		levy_toughness = 1
+		levy_pursuit = 1
+		levy_screen = 1
+		levy_siege = 0.1
+	}	
+
+	type_icon = "icon_building_guild_halls.dds"
+	
+	ai_value = {
+		base = 1000
+	}
+	
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+}
+
+### Ghoul ###
+
+family_rights_01 = {
+	construction_time = slow_construction_time
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+	
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		# county = {
+			# county_control > 25
+			# }
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = cheap_building_tier_1_cost
+	cost_prestige = expensive_building_tier_1_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+		levy_size = 0.1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 0.1
+		vassal_tax_contribution_mult = 0.05
+	}
+	
+	next_building = family_rights_02
+	
+	type_icon = "icon_building_warcamps.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 13
+		ai_vampire_building_duchy = yes
+	}
+}
+family_rights_02 = {
+	construction_time = slow_construction_time
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+	
+	}
+	
+	can_construct = {
+		county = {
+			development_level > 5
+		}
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = cheap_building_tier_2_cost
+	cost_prestige = expensive_building_tier_2_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.15
+		levy_size = 0.15
+		supply_limit_mult = 0.5
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+	monthly_dynasty_prestige = 0.25
+	vassal_tax_contribution_mult = 0.10	
+	}
+	
+	next_building = family_rights_03
+	
+	type_icon = "icon_building_warcamps.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+}
+family_rights_03 = {
+	construction_time = slow_construction_time
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_manorialism
+		}
+		county = {
+			development_level > 10
+		}
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = cheap_building_tier_3_cost
+	cost_prestige = expensive_building_tier_3_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.25
+		levy_size = 0.25
+		supply_limit_mult = 1
+		county_opinion_add = 5	
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 0.5
+		vassal_tax_contribution_mult = 0.15
+	}
+	
+	next_building = family_rights_04
+	
+	type_icon = "icon_building_warcamps.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+}
+family_rights_04 = {
+	construction_time = slow_construction_time
+
+	can_construct_potential = {
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_windmills
+		}
+		county = {
+			development_level > 15
+		}
+	}
+	is_enabled = {
+		#county.duchy.holder = county.holder
+		county = {
+			county_control > 25
+		}
+		scope:holder = {
+			building_requirement_ghoul = yes
+			building_requirement_ghoulbro = no
+		}
+		#building_disable_if_vastly_over_domain_limit_trigger = yes
+	}
+	show_disabled = yes
+	
+	cost_gold = cheap_building_tier_4_cost
+	cost_prestige = expensive_building_tier_4_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.3
+		levy_size = 0.3
+		supply_limit_mult = 2
+		county_opinion_add = 10	
+	}
+	
+	county_modifier = {
+		development_growth = 0.2
+		building_slot_add = 1
+	}
+	
+	province_modifier = {
+		stationed_heavy_cavalry_damage_mult = 0.15
+		stationed_heavy_cavalry_pursuit_mult = 0.15
+		stationed_heavy_cavalry_toughness_mult = 0.15		
+	}
+	
+	character_modifier = {
+		monthly_dynasty_prestige = 1
+		vassal_tax_contribution_mult = 0.20
+	}
+	
+	type_icon = "icon_building_warcamps.dds"
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 10
+		ai_vampire_building_duchy = yes
+	}
+}
+
+### Kuei-Jin ###
+
+dragon_nest_01 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.1
+		monthly_income = good_building_tax_tier_1
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.05
+		legitimacy_loss_mult = 0.05
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.05
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.05	
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		monthly_war_income_add = 0.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 5
+		development_growth = 0.1
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1	
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.2
+	}
+	
+	on_complete = {
+		scope:holder ?= {
+			if = {
+				limit = {
+					OR = {
+						POD_gains_mikaboshi_dharma_xp = yes
+						POD_gains_dokhor_khan_dharma_xp = yes
+					}
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_very_high }
+			}
+		}
+	}
+
+	next_building = dragon_nest_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 13
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_02 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.2
+		stationed_maa_damage_mult = normal_maa_damage_tier_1
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_1	
+		monthly_income = good_building_tax_tier_2
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 5
+		enemy_hostile_scheme_success_chance_max_add = -5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.1
+		legitimacy_loss_mult = 0.05
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.1
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.05	
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 0.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 10
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+	
+	next_building = dragon_nest_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_03 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	
+	levy = excellent_building_levy_tier_2
+	
+	province_modifier = {
+		garrison_size = 0.4
+		stationed_maa_damage_mult = normal_maa_damage_tier_2
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_2	
+		monthly_income = good_building_tax_tier_3
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 2
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 7
+		enemy_hostile_scheme_success_chance_max_add = -5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.1
+		legitimacy_loss_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.1
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 0.7
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 15
+		development_growth = 0.2
+	}
+	
+	county_modifier = {
+		development_growth = 0.2
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+
+	type = duchy_capital
+	
+	next_building = dragon_nest_04
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_04 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		trigger_if = {
+			limit = { scope:holder.faith = { has_doctrine_parameter = ignore_dragon_nest_requirements } }
+			always = yes
+		}
+		trigger_else = {
+			county = { development_level > scope:holder.dragon_nest_4_requirement }
+		}
+	}
+
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_4_cost
+	
+	levy = excellent_building_levy_tier_3
+	
+	province_modifier = {
+		garrison_size = 0.5
+		stationed_maa_damage_mult = normal_maa_damage_tier_3
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_3		
+		monthly_income = good_building_tax_tier_4
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 2
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 7
+		enemy_hostile_scheme_success_chance_max_add = -7
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.15
+		legitimacy_loss_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.15
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 1
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 20
+		development_growth = 0.2
+	}
+	
+	county_modifier = {
+		development_growth = 0.2
+		development_growth_factor = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+
+	type = duchy_capital
+	
+	next_building = dragon_nest_05
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_05 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		trigger_if = {
+			limit = { scope:holder.faith = { has_doctrine_parameter = ignore_dragon_nest_requirements } }
+			always = yes
+		}
+		trigger_else = {
+			county = { development_level > scope:holder.dragon_nest_5_requirement }
+		}
+	}
+
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_5_cost
+	
+	levy = excellent_building_levy_tier_4
+	
+	province_modifier = {
+		garrison_size = 0.6
+		stationed_maa_damage_mult = normal_maa_damage_tier_4
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_4	
+		monthly_income = good_building_tax_tier_5
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -7
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.2
+		legitimacy_loss_mult = 0.2
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.15
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 2
+		monthly_war_income_add = 1
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 25
+		development_growth = 0.3
+	}
+		
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+		cultural_head_fascination_mult = 0.1
+		knight_limit = 1
+		knight_effectiveness_mult = 0.1
+		POD_vampire_maa_max_size_add = 1			
+	}
+
+	type = duchy_capital
+	
+	next_building = dragon_nest_06
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_06 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		trigger_if = {
+			limit = { scope:holder.faith = { has_doctrine_parameter = ignore_dragon_nest_requirements } }
+			always = yes
+		}
+		trigger_else = {
+			county = { development_level > scope:holder.dragon_nest_6_requirement }
+		}
+	}
+
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_6_cost
+	
+	levy = excellent_building_levy_tier_5
+	
+	province_modifier = {
+		garrison_size = 0.8
+		stationed_maa_damage_mult = normal_maa_damage_tier_5
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_5		
+		monthly_income = good_building_tax_tier_6
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -10
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.25
+		legitimacy_loss_mult = 0.25
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.2
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 2
+		monthly_war_income_add = 1.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 30
+		development_growth = 0.3
+	}
+	
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.2
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.4
+		cultural_head_fascination_mult = 0.2
+		knight_limit = 2
+		knight_effectiveness_mult = 0.3
+		POD_vampire_maa_max_size_add = 2			
+	}
+
+	type = duchy_capital
+	
+	next_building = dragon_nest_07
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+dragon_nest_07 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		trigger_if = {
+			limit = { scope:holder.faith = { has_doctrine_parameter = ignore_dragon_nest_requirements } }
+			always = yes
+		}
+		trigger_else = {
+			county = { development_level > scope:holder.dragon_nest_7_requirement }
+		}
+	}
+
+	is_enabled = {		
+		scope:holder = { building_requirement_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_7_cost
+	
+	levy = excellent_building_levy_tier_6
+	
+	province_modifier = {
+		garrison_size = 1
+		stationed_maa_damage_mult = normal_maa_damage_tier_6
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_6	
+		monthly_income = good_building_tax_tier_7
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -10
+		max_hostile_schemes_add = 1
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.25
+		legitimacy_loss_mult = 0.25
+		monthly_prestige_gain_per_legitimacy_level_add = 0.5
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.2
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.2
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 3
+		monthly_war_income_add = 1.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 35
+		development_growth = 0.3
+	}
+	
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.2
+	}
+	
+	county_modifier = {
+		building_slot_add = 1
+		development_growth = 0.3
+		development_growth_factor = 0.3
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.5
+		cultural_head_fascination_mult = 0.3
+		knight_limit = 3
+		knight_effectiveness_mult = 0.4
+		POD_vampire_maa_max_size_add = 3		
+	}
+
+	type = duchy_capital
+		
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+
+corrupted_dragon_nest_01 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		always = no
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.1
+		monthly_income = good_building_tax_tier_1
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.05
+		legitimacy_loss_mult = 0.05
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.05
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.05	
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		monthly_war_income_add = 0.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 5
+		development_growth = 0.1
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1	
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.2
+	}
+	
+	next_building = corrupted_dragon_nest_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 13
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_02 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		#trigger_if = {
+		#	limit = { 
+		#		scope:holder = { has_POD_kj_blood_trigger = yes }
+		#	}
+		#	scope:holder = { has_perk = chi_shaping_perk }
+		#}
+		#trigger_else = {
+		#	trigger_if = {
+		#		limit = { scope:holder = { is_ai = no } }
+		#		custom_tooltip = {
+		#			text = wall_lower_than_2_trigger_tooltip
+		#			gauntlet_level <= 2
+		#		}
+		#	}
+		#}
+	}
+	
+	is_enabled = {		
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	
+	levy = excellent_building_levy_tier_1
+	
+	province_modifier = {
+		garrison_size = 0.2
+		stationed_maa_damage_mult = normal_maa_damage_tier_1
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_1	
+		monthly_income = good_building_tax_tier_2
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+		development_growth = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 5
+		enemy_hostile_scheme_success_chance_max_add = -5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.1
+		legitimacy_loss_mult = 0.05
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.1
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.05
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.05	
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 0.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 10
+		development_growth = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+	
+	next_building = corrupted_dragon_nest_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_03 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		#trigger_if = {
+		#	limit = { 
+		#		scope:holder = { has_POD_kj_blood_trigger = yes }
+		#	}
+		#	scope:holder = { has_perk = chi_shaping_perk }
+		#}
+		#trigger_else = {
+		#	trigger_if = {
+		#		limit = { scope:holder = { is_ai = no } }
+		#		custom_tooltip = {
+		#			text = wall_lower_than_1_trigger_tooltip
+		#			gauntlet_level <= 1
+		#		}
+		#	}
+		#}
+	}
+
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	
+	levy = excellent_building_levy_tier_2
+	
+	province_modifier = {
+		garrison_size = 0.4
+		stationed_maa_damage_mult = normal_maa_damage_tier_2
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_2	
+		monthly_income = good_building_tax_tier_3
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 2
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 7
+		enemy_hostile_scheme_success_chance_max_add = -5
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.1
+		legitimacy_loss_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.1
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 0.7
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 15
+		development_growth = 0.2
+	}
+	
+	county_modifier = {
+		development_growth = 0.2
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+
+	type = duchy_capital
+	
+	next_building = corrupted_dragon_nest_04
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_04 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		county = { development_level > scope:holder.dragon_nest_4_requirement }		
+	}
+
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_4_cost
+	
+	levy = excellent_building_levy_tier_3
+	
+	province_modifier = {
+		garrison_size = 0.5
+		stationed_maa_damage_mult = normal_maa_damage_tier_3
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_3		
+		monthly_income = good_building_tax_tier_4
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 2
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 7
+		enemy_hostile_scheme_success_chance_max_add = -7
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.15
+		legitimacy_loss_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.15
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.1
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.1
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 1
+		monthly_war_income_add = 1
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 20
+		development_growth = 0.2
+	}
+	
+	county_modifier = {
+		development_growth = 0.2
+		development_growth_factor = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+	}
+
+	type = duchy_capital
+	
+	next_building = corrupted_dragon_nest_05
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_05 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		county = { development_level > scope:holder.dragon_nest_5_requirement }		
+	}
+
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_5_cost
+	
+	levy = excellent_building_levy_tier_4
+	
+	province_modifier = {
+		garrison_size = 0.6
+		stationed_maa_damage_mult = normal_maa_damage_tier_4
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_4	
+		monthly_income = good_building_tax_tier_5
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -7
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.2
+		legitimacy_loss_mult = 0.2
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.15
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 2
+		monthly_war_income_add = 1
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 25
+		development_growth = 0.3
+	}
+		
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.1
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.3
+		cultural_head_fascination_mult = 0.1
+		knight_limit = 1
+		knight_effectiveness_mult = 0.1
+		POD_vampire_maa_max_size_add = 1			
+	}
+
+	type = duchy_capital
+	
+	next_building = corrupted_dragon_nest_06
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_06 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		county = { development_level > scope:holder.dragon_nest_6_requirement }		
+	}
+
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_6_cost
+	
+	levy = excellent_building_levy_tier_5
+	
+	province_modifier = {
+		garrison_size = 0.8
+		stationed_maa_damage_mult = normal_maa_damage_tier_5
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_5		
+		monthly_income = good_building_tax_tier_6
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -10
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.25
+		legitimacy_loss_mult = 0.25
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.2
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.15
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.15
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 2
+		monthly_war_income_add = 1.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 30
+		development_growth = 0.3
+	}
+	
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.2
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.4
+		cultural_head_fascination_mult = 0.2
+		knight_limit = 2
+		knight_effectiveness_mult = 0.3
+		POD_vampire_maa_max_size_add = 2			
+	}
+
+	type = duchy_capital
+	
+	next_building = corrupted_dragon_nest_07
+		
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+corrupted_dragon_nest_07 = {
+	construction_time = slow_construction_time
+	
+	flag = dragon_nest
+	flag = corrupted_dragon_nest
+
+	can_construct_potential = {
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	
+	can_construct = {
+		county = { development_level > scope:holder.dragon_nest_7_requirement }		
+	}
+
+	is_enabled = {
+		#wall_weak_enough_trigger = yes
+		scope:holder = { building_requirement_corrupted_dragon_nest = yes }
+	}
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_7_cost
+	
+	levy = excellent_building_levy_tier_6
+	
+	province_modifier = {
+		garrison_size = 1
+		stationed_maa_damage_mult = normal_maa_damage_tier_6
+		stationed_maa_toughness_mult = normal_maa_toughness_tier_6	
+		monthly_income = good_building_tax_tier_7
+	}
+	
+	duchy_capital_county_modifier = {
+		additional_fort_level = 3
+	}
+
+	character_faith_modifier = {
+		parameter = west_building_parameter
+		
+		owned_hostile_scheme_success_chance_add = 10
+		enemy_hostile_scheme_success_chance_max_add = -10
+		max_hostile_schemes_add = 1
+	}
+
+	character_faith_modifier = {
+		parameter = north_building_parameter
+		
+		legitimacy_gain_mult = 0.25
+		legitimacy_loss_mult = 0.25
+		monthly_prestige_gain_per_legitimacy_level_add = 0.5
+	}
+
+	character_faith_modifier = {
+		parameter = center_building_parameter
+		
+		monthly_shintai_lifestyle_xp_gain_mult = 0.2
+		monthly_chi_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_demon_arts_lifestyle_xp_gain_mult = 0.2
+		monthly_soul_arts_lifestyle_xp_gain_mult = 0.2
+	}
+
+	character_faith_modifier = {
+		parameter = south_building_parameter
+		
+		tolerance_advantage_mod = 3
+		monthly_war_income_add = 1.5
+	}
+	
+	county_faith_modifier = {
+		parameter = east_building_parameter
+		
+		epidemic_resistance = 35
+		development_growth = 0.3
+	}
+	
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.2
+	}
+	
+	county_modifier = {
+		building_slot_add = 1
+		development_growth = 0.3
+		development_growth_factor = 0.3
+	}
+	
+	character_modifier = {
+		monthly_piety = 0.5
+		cultural_head_fascination_mult = 0.3
+		knight_limit = 3
+		knight_effectiveness_mult = 0.4
+		POD_vampire_maa_max_size_add = 3		
+	}
+
+	type = duchy_capital
+		
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 10
+		ai_general_building_dragon_nest_duchy = yes
+	}
+}
+
+
+
+### Mummy ###
+# Web of Faith
+web_of_faith_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		in_land_of_faith_trigger = yes
+		scope:holder = {
+			building_requirement_mummy = yes
+			building_requirement_wutian = no
+		}
+	}	
+	
+	can_construct = {
+		in_land_of_faith_trigger = yes
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 1 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_1_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 1 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_1_cost
+	cost_prestige = main_building_tier_1_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.05
+		levy_size = 0.05
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.1
+		development_growth = 0.05
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_1
+		build_gold_cost = -0.05
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+		monthly_piety_gain_mult = 0.05
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.05
+		domain_tax_same_faith_mult_even_if_baron = 0.05
+		holy_order_hire_cost_mult = -0.01
+	}
+	
+	next_building = web_of_faith_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 2 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_2_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 2 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_2_cost
+	cost_prestige = main_building_tier_2_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+		levy_size = 0.1
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.2
+		development_growth = 0.10
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_2
+		build_gold_cost = -0.1
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.10
+		monthly_piety_gain_mult = 0.10
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.10
+		domain_tax_same_faith_mult_even_if_baron = 0.10
+		holy_order_hire_cost_mult = -0.02
+	}
+	
+	next_building = web_of_faith_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 3 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_3_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 3 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_3_cost
+	cost_prestige = main_building_tier_3_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.15
+		levy_size = 0.15
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.3
+		development_growth = 0.15
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_3
+		build_gold_cost = -0.15
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.15
+		monthly_piety_gain_mult = 0.15
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.15
+		domain_tax_same_faith_mult_even_if_baron = 0.15
+		men_at_arms_maintenance = -0.005
+		holy_order_hire_cost_mult = -0.03
+	}
+	
+	next_building = web_of_faith_04
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 4 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_4_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 4 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_4_cost
+	cost_prestige = main_building_tier_4_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.2
+		levy_size = 0.2
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.4
+		development_growth = 0.2
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_4
+		build_gold_cost = -0.20
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.1
+		monthly_prestige_gain_mult = 0.20
+		monthly_piety_gain_mult = 0.20
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.20
+		domain_tax_same_faith_mult_even_if_baron = 0.20
+		men_at_arms_maintenance = -0.01
+		holy_order_hire_cost_mult = -0.04
+	}
+	
+	next_building = web_of_faith_05
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 5 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_5_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 5 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_5_cost
+	cost_prestige = main_building_tier_5_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.25
+		levy_size = 0.25
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.5
+		development_growth = 0.25
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_5
+		build_gold_cost = -0.25
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.15
+		monthly_prestige_gain_mult = 0.25
+		monthly_piety_gain_mult = 0.25
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.25
+		domain_tax_same_faith_mult_even_if_baron = 0.25
+		men_at_arms_maintenance = -0.015
+		holy_order_hire_cost_mult = -0.05
+	}
+	
+	next_building = web_of_faith_06
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 6 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_6_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 6 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_6_cost
+	cost_prestige = main_building_tier_6_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.3
+		levy_size = 0.3
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.6
+		development_growth = 0.3
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_6
+		build_gold_cost = -0.3
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.2
+		monthly_prestige_gain_mult = 0.3
+		monthly_piety_gain_mult = 0.3
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.3
+		domain_tax_same_faith_mult_even_if_baron = 0.3
+		men_at_arms_maintenance = -0.015
+		holy_order_hire_cost_mult = -0.06
+	}
+	
+	next_building = web_of_faith_07
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 8 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_8_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 8 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_7_cost
+	cost_prestige = main_building_tier_7_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.4
+		levy_size = 0.4
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.8
+		development_growth = 0.4
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_7
+		build_gold_cost = -0.4
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.25
+		monthly_prestige_gain_mult = 0.4
+		monthly_piety_gain_mult = 0.4
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.4
+		domain_tax_same_faith_mult_even_if_baron = 0.4
+		men_at_arms_maintenance = -0.015
+		holy_order_hire_cost_mult = -0.08
+	}
+	
+	next_building = web_of_faith_08
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+web_of_faith_08 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	can_construct = {
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				dynasty = { dynasty_prestige_level >= 10 }
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_dynasty_prestige_level_10_trigger
+					any_relation = {
+						type = worshipped_reborn
+						dynasty = { dynasty_prestige_level >= 10 }
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_mummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_8_cost
+	cost_prestige = main_building_tier_8_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.5
+		levy_size = 0.5
+	}
+	
+	county_modifier = {
+		development_growth_factor = 1
+		development_growth = 0.5
+		building_slot_add = 1
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_8
+		build_gold_cost = -0.5
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.3
+		monthly_prestige_gain_mult = 0.5
+		monthly_piety_gain_mult = 0.5
+		levy_reinforcement_rate_same_faith_even_if_baron = 0.5
+		domain_tax_same_faith_mult_even_if_baron = 0.5
+		men_at_arms_maintenance = -0.02
+		holy_order_hire_cost_mult = -0.1
+	}
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 50
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+# Maat's Haven
+maats_haven_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	cost_piety = main_building_tier_1_cost
+	
+	max_garrison = normal_building_max_garrison_tier_1
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.05
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+		county_opinion_add = 5
+	}
+	
+	province_modifier = {
+		garrison_size = 0.1	
+		defender_holding_advantage = normal_building_advantage_tier_1
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.05
+		enemy_hostile_scheme_phase_duration_add = 2
+		stress_loss_mult = 0.05
+		personal_scheme_phase_duration_add = -2
+	}
+	
+	next_building = maats_haven_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	cost_piety = main_building_tier_2_cost
+	
+	max_garrison = normal_building_max_garrison_tier_1
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.2
+		additional_fort_level = 2
+	}
+	
+	county_modifier = {
+		county_opinion_add = 10
+	}
+	
+	province_modifier = {
+		garrison_size = 0.2	
+		defender_holding_advantage = normal_building_advantage_tier_2
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.1
+		enemy_hostile_scheme_phase_duration_add = 5
+		personal_scheme_phase_duration_add = -5
+		stress_loss_mult = 0.05
+	}
+	
+	next_building = maats_haven_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	cost_piety = main_building_tier_3_cost
+	
+	max_garrison = normal_building_max_garrison_tier_2
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.3
+		additional_fort_level = 3
+	}
+	
+	county_modifier = {
+		county_opinion_add = 15
+	}
+	
+	province_modifier = {
+		garrison_size = 0.3
+		defender_holding_advantage = normal_building_advantage_tier_3
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.1
+		monthly_piety_gain_mult = 0.15
+		enemy_hostile_scheme_phase_duration_add = 7
+		personal_scheme_phase_duration_add = -7
+		stress_loss_mult = 0.1
+	}
+	
+	next_building = maats_haven_04
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}	
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = shemsuheru }
+				piety_level >= low_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_1_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= low_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_4_cost
+	cost_piety = main_building_tier_4_cost
+	
+	max_garrison = normal_building_max_garrison_tier_3
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.4
+		additional_fort_level = 4
+	}
+	
+	county_modifier = {
+		county_opinion_add = 20
+	}
+	
+	province_modifier = {
+		garrison_size = 0.4
+		defender_holding_advantage = normal_building_advantage_tier_4
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.15
+		monthly_piety_gain_mult = 0.2
+		enemy_hostile_scheme_phase_duration_add = 10
+		personal_scheme_phase_duration_add = -10
+		stress_loss_mult = 0.1
+	}
+	
+	next_building = maats_haven_05
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}	
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = shemsuheru }
+				piety_level >= medium_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_2_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= medium_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_5_cost
+	cost_piety = main_building_tier_5_cost
+	
+	max_garrison = normal_building_max_garrison_tier_5
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.5
+		additional_fort_level = 5
+	}
+	
+	county_modifier = {
+		county_opinion_add = 25
+	}
+	
+	province_modifier = {
+		garrison_size = 0.5
+		defender_holding_advantage = normal_building_advantage_tier_5
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.2
+		monthly_piety_gain_mult = 0.25
+		enemy_hostile_scheme_phase_duration_add = 13
+		personal_scheme_phase_duration_add = -13
+		stress_loss_mult = 0.15
+	}
+	
+	next_building = maats_haven_06
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = shemsuheru }
+				piety_level >= high_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_3_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= high_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_6_cost
+	cost_piety = main_building_tier_6_cost
+	
+	max_garrison = normal_building_max_garrison_tier_6
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.6
+		additional_fort_level = 6
+	}
+	
+	county_modifier = {
+		county_opinion_add = 30
+	}
+	
+	province_modifier = {
+		garrison_size = 0.6
+		defender_holding_advantage = normal_building_advantage_tier_6
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.25
+		monthly_piety_gain_mult = 0.3
+		enemy_hostile_scheme_phase_duration_add = 15
+		personal_scheme_phase_duration_add = -15
+		stress_loss_mult = 0.15
+	}
+	
+	next_building = maats_haven_07
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}		
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = shemsuheru }
+				piety_level >= very_high_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_4_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= very_high_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_7_cost
+	cost_piety = main_building_tier_7_cost
+	
+	max_garrison = normal_building_max_garrison_tier_7
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.8
+		additional_fort_level = 8
+	}
+	
+	county_modifier = {
+		county_opinion_add = 40
+	}
+	
+	province_modifier = {
+		garrison_size = 0.8
+		defender_holding_advantage = normal_building_advantage_tier_7
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.25
+		monthly_piety_gain_mult = 0.4
+		enemy_hostile_scheme_phase_duration_add = 20
+		personal_scheme_phase_duration_add = -20
+		stress_loss_mult = 0.2
+	}
+	
+	next_building = maats_haven_08
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+maats_haven_08 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = shemsuheru
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}	
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = shemsuheru }
+				piety_level >= max_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_5_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= max_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_shemsuheru = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_8_cost
+	cost_piety = main_building_tier_8_cost
+	
+	max_garrison = normal_building_max_garrison_tier_8
+	
+	duchy_capital_county_modifier = {
+		levy_size = 1
+		additional_fort_level = 10
+	}
+	
+	county_modifier = {
+		county_opinion_add = 50
+	}
+	
+	province_modifier = {
+		garrison_size = 1
+		defender_holding_advantage = normal_building_advantage_tier_8
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.25
+		monthly_piety_gain_mult = 0.5
+		enemy_hostile_scheme_phase_duration_add = 25
+		personal_scheme_phase_duration_add = -25
+		stress_loss_mult = 0.25
+	}
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+# Occult Affiliation
+occult_affiliation_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_1_cost
+	cost_piety = main_building_tier_1_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.05
+		levy_size = 0.05
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_1
+		garrison_size = 0.05
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_1
+		build_gold_cost = -0.05
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.1
+		monthly_piety_gain_mult = 0.05
+		men_at_arms_maintenance = -0.01
+		enemy_hostile_scheme_phase_duration_add = 5
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_2_cost
+	cost_piety = main_building_tier_2_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+		levy_size = 0.1
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_2
+		garrison_size = 0.10
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_2
+		build_gold_cost = -0.1
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.2
+		monthly_piety_gain_mult = 0.10
+		men_at_arms_maintenance = -0.02
+		enemy_hostile_scheme_phase_duration_add = 10
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_3_cost
+	cost_piety = main_building_tier_3_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.15
+		levy_size = 0.15
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_3
+		garrison_size = 0.15
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_3
+		build_gold_cost = -0.15
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.3
+		monthly_piety_gain_mult = 0.15
+		men_at_arms_maintenance = -0.03
+		enemy_hostile_scheme_phase_duration_add = 15
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_04
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+		scope:holder = { 
+			trigger_if = {
+				limit = { 
+					is_ai = no 
+					NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:new_theourgia_arts_objective_decision } }
+				} 
+				custom_tooltip = {
+					text = has_mage_friend_1_trigger
+					any_relation = {
+						type = friend
+						count >= 1
+						OR = {
+							is_sorcerer_trigger = yes
+							has_trait = mage
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_4_cost
+	cost_piety = main_building_tier_4_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.2
+		levy_size = 0.2
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_4
+		garrison_size = 0.2
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_4
+		build_gold_cost = -0.20
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.35
+		monthly_piety_gain_mult = 0.20
+		men_at_arms_maintenance = -0.04
+		enemy_hostile_scheme_phase_duration_add = 20
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_05
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+		scope:holder = { 
+			trigger_if = {
+				limit = { 
+					is_ai = no 
+					NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:new_theourgia_arts_objective_decision } }
+				} 
+				custom_tooltip = {
+					text = has_mage_friend_2_trigger
+					any_relation = {
+						type = friend
+						count >= 2
+						OR = {
+							is_sorcerer_trigger = yes
+							has_trait = mage
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_5_cost
+	cost_piety = main_building_tier_5_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.25
+		levy_size = 0.25
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_5
+		garrison_size = 0.25
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_5
+		build_gold_cost = -0.25
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.4
+		monthly_piety_gain_mult = 0.25
+		men_at_arms_maintenance = -0.05
+		enemy_hostile_scheme_phase_duration_add = 25
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_06
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+		scope:holder = { 
+			trigger_if = {
+				limit = { 
+					is_ai = no 
+					NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:new_theourgia_arts_objective_decision } }
+				} 
+				custom_tooltip = {
+					text = has_mage_friend_3_trigger
+					any_relation = {
+						type = friend
+						count >= 3
+						OR = {
+							is_sorcerer_trigger = yes
+							has_trait = mage
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_6_cost
+	cost_piety = main_building_tier_6_cost
+	cost_prestige = main_building_tier_6_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.3
+		levy_size = 0.3
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_6
+		garrison_size = 0.3
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_6
+		build_gold_cost = -0.3
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.45
+		monthly_piety_gain_mult = 0.3
+		men_at_arms_maintenance = -0.05
+		enemy_hostile_scheme_phase_duration_add = 30
+		negate_learning_penalty_add = 1
+	}
+	
+	next_building = occult_affiliation_07
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 60
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+		scope:holder = { 
+			trigger_if = {
+				limit = { 
+					is_ai = no 
+					NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:new_theourgia_arts_objective_decision } }
+				} 
+				custom_tooltip = {
+					text = has_mage_friend_4_trigger
+					any_relation = {
+						type = friend
+						count >= 4
+						OR = {
+							is_sorcerer_trigger = yes
+							has_trait = mage
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_7_cost
+	cost_piety = main_building_tier_7_cost
+	cost_prestige = main_building_tier_7_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.4
+		levy_size = 0.4
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_7
+		garrison_size = 0.4
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_7
+		build_gold_cost = -0.4
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.5
+		monthly_piety_gain_mult = 0.4
+		men_at_arms_maintenance = -0.05
+		enemy_hostile_scheme_phase_duration_add = 40
+		negate_learning_penalty_add = 2
+	}
+	
+	next_building = occult_affiliation_08
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 70
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+occult_affiliation_08 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = cabiri
+		}
+	}
+	
+	can_construct = {
+		scope:holder = { 
+			trigger_if = {
+				limit = { 
+					is_ai = no 
+					NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:new_theourgia_arts_objective_decision } }
+				} 
+				custom_tooltip = {
+					text = has_mage_friend_5_trigger
+					any_relation = {
+						type = friend
+						count >= 5
+						OR = {
+							is_sorcerer_trigger = yes
+							has_trait = mage
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_cabiri = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = expensive_building_tier_8_cost
+	cost_piety = main_building_tier_8_cost
+	cost_prestige = main_building_tier_8_cost
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.5
+		levy_size = 0.5
+	}
+	
+	county_modifier = {
+		additional_fort_level = good_building_fort_level_tier_8
+		garrison_size = 0.5
+	}
+	
+	province_modifier = {
+		build_speed = great_building_build_speed_tier_8
+		build_gold_cost = -0.5
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.5
+		monthly_piety_gain_mult = 0.5
+		men_at_arms_maintenance = -0.05
+		enemy_hostile_scheme_phase_duration_add = 50
+		negate_learning_penalty_add = 2
+	}
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 70
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+# Cult of Amkhat
+cult_of_amkhat_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	cost_piety = main_building_tier_1_cost
+	
+	max_garrison = normal_building_max_garrison_tier_1
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.05
+	}
+	
+	county_modifier = {
+		county_opinion_add = 5
+	}
+	
+	province_modifier = {
+		garrison_size = 0.1	
+		monthly_income = normal_building_tax_tier_1
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.25
+		monthly_piety_gain_mult = 0.05
+		enemy_hostile_scheme_phase_duration_add = 2
+	}
+	
+	next_building = cult_of_amkhat_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	cost_piety = main_building_tier_2_cost
+	
+	max_garrison = normal_building_max_garrison_tier_2
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.2
+	}
+	
+	county_modifier = {
+		county_opinion_add = 10
+	}
+	
+	province_modifier = {
+		garrison_size = 0.2
+		monthly_income = normal_building_tax_tier_2
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.30
+		monthly_piety_gain_mult = 0.1
+		enemy_hostile_scheme_phase_duration_add = 1
+	}
+	
+	next_building = cult_of_amkhat_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	cost_piety = main_building_tier_3_cost
+	
+	max_garrison = normal_building_max_garrison_tier_3
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.3
+	}
+	
+	county_modifier = {
+		county_opinion_add = 10
+	}
+	
+	province_modifier = {
+		garrison_size = 0.3
+		monthly_income = normal_building_tax_tier_3
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.35
+		monthly_piety_gain_mult = 0.15
+		enemy_hostile_scheme_phase_duration_add = 7
+	}
+	
+	next_building = cult_of_amkhat_04
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = banemummy }
+				piety_level >= low_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_1_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= low_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_4_cost
+	cost_piety = main_building_tier_4_cost
+	
+	max_garrison = normal_building_max_garrison_tier_4
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.4
+	}
+	
+	county_modifier = {
+		county_opinion_add = 15
+	}
+	
+	province_modifier = {
+		garrison_size = 0.4
+		monthly_income = normal_building_tax_tier_4
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.4
+		monthly_piety_gain_mult = 0.2
+		enemy_hostile_scheme_phase_duration_add = 10
+	}
+	
+	next_building = cult_of_amkhat_05
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = banemummy }
+				piety_level >= medium_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_2_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= medium_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_5_cost
+	cost_piety = main_building_tier_5_cost
+	
+	max_garrison = normal_building_max_garrison_tier_5
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.5
+	}
+	
+	county_modifier = {
+		county_opinion_add = 15
+	}
+	
+	province_modifier = {
+		garrison_size = 0.5
+		monthly_income = normal_building_tax_tier_5
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.5
+		monthly_piety_gain_mult = 0.25
+		enemy_hostile_scheme_phase_duration_add = 13
+	}
+	
+	next_building = cult_of_amkhat_06
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = banemummy }
+				piety_level >= high_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_3_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= high_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_6_cost
+	cost_piety = main_building_tier_6_cost
+	
+	max_garrison = normal_building_max_garrison_tier_6
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.6
+	}
+	
+	county_modifier = {
+		county_opinion_add = 20
+	}
+	
+	province_modifier = {
+		garrison_size = 0.6
+		monthly_income = normal_building_tax_tier_6
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.6
+		monthly_piety_gain_mult = 0.3
+		enemy_hostile_scheme_phase_duration_add = 15
+	}
+	
+	next_building = cult_of_amkhat_07
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = banemummy }
+				piety_level >= very_high_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_4_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= very_high_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_7_cost
+	cost_piety = main_building_tier_7_cost
+	
+	max_garrison = normal_building_max_garrison_tier_7
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.8
+	}
+	
+	county_modifier = {
+		county_opinion_add = 20
+	}
+	
+	province_modifier = {
+		garrison_size = 0.8
+		monthly_income = normal_building_tax_tier_7
+	}
+	
+	character_modifier = {
+		monthly_prestige = 0.8
+		monthly_piety_gain_mult = 0.4
+		enemy_hostile_scheme_phase_duration_add = 20
+	}
+	
+	next_building = cult_of_amkhat_08
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+cult_of_amkhat_08 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = banemummy
+		}
+	}
+	
+	can_construct = {
+		custom_tooltip = {
+			text = POD_has_special_building_slot_tt
+			has_special_building_slot = yes
+		}
+		scope:holder = {
+			trigger_if = {
+				limit = { has_trait = banemummy }
+				piety_level >= max_piety_level
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = worshipped_reborn_piety_level_5_trigger
+					any_relation = {
+						type = worshipped_reborn
+						piety_level >= max_piety_level
+					}
+				}
+			}
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_banemummy = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_8_cost
+	cost_piety = main_building_tier_8_cost
+	
+	max_garrison = normal_building_max_garrison_tier_8
+	
+	duchy_capital_county_modifier = {
+		levy_size = 1
+	}
+	
+	county_modifier = {
+		county_opinion_add = 25
+	}
+	
+	province_modifier = {
+		garrison_size = 1
+		monthly_income = normal_building_tax_tier_8
+	}
+	
+	character_modifier = {
+		monthly_prestige = 1
+		monthly_piety_gain_mult = 0.5
+		enemy_hostile_scheme_phase_duration_add = 25
+	}
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+
+# Inauhaten building
+necromantic_sekhem_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	cost_piety = main_building_tier_1_cost
+	
+	max_garrison = good_building_max_garrison_tier_1
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.05
+		additional_fort_level = 1
+	}
+	
+	county_modifier = {
+	}
+	
+	province_modifier = {
+		garrison_size = 0.1	
+		defender_holding_advantage = normal_building_advantage_tier_1
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.05
+		monthly_piety_gain_mult = 0.05
+		owned_hostile_scheme_success_chance_add = 5
+		stress_gain_mult = -0.05
+	}
+	
+	next_building = necromantic_sekhem_02
+	
+	type_icon = "icon_building_royal_forest.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 0
+	}
+}
+
+necromantic_sekhem_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	cost_piety = main_building_tier_2_cost
+	
+	max_garrison = good_building_max_garrison_tier_2
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.2
+		additional_fort_level = 2
+	}
+	
+	county_modifier = {
+		county_opinion_add = 10
+	}
+	
+	province_modifier = {
+		garrison_size = 0.2	
+		defender_holding_advantage = normal_building_advantage_tier_2
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.1
+		monthly_piety_gain_mult = 0.1
+		owned_hostile_scheme_success_chance_add = 10
+		stress_gain_mult = -0.1
+	}
+	
+	next_building = necromantic_sekhem_03
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 0
+	}
+}
+
+necromantic_sekhem_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			can_use_necromantic_sekhem_trigger = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	cost_piety = main_building_tier_3_cost
+	
+	max_garrison = good_building_max_garrison_tier_5
+	
+	duchy_capital_county_modifier = {
+		levy_size = 0.3
+		additional_fort_level = 3
+	}
+	
+	county_modifier = {
+		county_opinion_add = 15
+	}
+	
+	province_modifier = {
+		garrison_size = 0.3
+		defender_holding_advantage = normal_building_advantage_tier_3
+	}
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.15
+		monthly_piety_gain_mult = 0.15
+		owned_hostile_scheme_success_chance_add = 10
+		stress_gain_mult = -0.15
+		knight_effectiveness_mult = 0.05
+	}
+	
+	type = duchy_capital
+	
+	ai_value = {
+		base = 0
+	}
+}
+
+### Wraith ###
+
+citadel_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 5 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_1_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.05
+		monthly_prestige_gain_mult = 0.05
+	}
+
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.05
+		city_holding_build_gold_cost = -0.05
+		church_holding_build_gold_cost = -0.05
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.1
+		stationed_POD_wraith_maa_damage_mult = 0.1
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+		fort_level = 1
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+	
+	next_building = citadel_02
+	
+	show_disabled = yes
+}
+
+citadel_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 10 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_2_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.1
+		monthly_prestige_gain_mult = 0.1
+	}
+	
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.1
+		city_holding_build_gold_cost = -0.1
+		church_holding_build_gold_cost = -0.1
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.2
+		stationed_POD_wraith_maa_damage_mult = 0.2
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.2
+		fort_level = 2
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+	
+	next_building = citadel_03
+	
+	show_disabled = yes
+}
+
+citadel_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 20 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_3_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.15
+		monthly_prestige_gain_mult = 0.15
+	}
+	
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.15
+		city_holding_build_gold_cost = -0.15
+		church_holding_build_gold_cost = -0.15
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.3
+		stationed_POD_wraith_maa_damage_mult = 0.3
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.4
+		fort_level = 3
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+	
+	next_building = citadel_04
+	
+	show_disabled = yes
+}
+
+citadel_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 40 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_4_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+		monthly_prestige_gain_mult = 0.2
+	}
+	
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.2
+		city_holding_build_gold_cost = -0.2
+		church_holding_build_gold_cost = -0.2
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.4
+		stationed_POD_wraith_maa_damage_mult = 0.4
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.4
+		fort_level = 4
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+	
+	next_building = citadel_05
+	
+	show_disabled = yes
+}
+
+citadel_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 60 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_5_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.25
+		monthly_prestige_gain_mult = 0.25
+	}
+	
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.25
+		city_holding_build_gold_cost = -0.25
+		church_holding_build_gold_cost = -0.25
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.5
+		stationed_POD_wraith_maa_damage_mult = 0.5
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.5
+		fort_level = 5
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+	
+	next_building = citadel_06
+	
+	show_disabled = yes
+}
+
+citadel_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = { scope:holder = { building_requirement_wraith = yes } }
+
+	can_construct = { county = { development_level > 80 } }
+	
+	is_enabled = { scope:holder = { building_requirement_wraith = yes } }
+	
+	cost_gold = expensive_building_tier_6_cost
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.3
+		monthly_prestige_gain_mult = 0.3
+	}
+	
+	county_modifier = {
+		castle_holding_build_gold_cost = -0.3
+		city_holding_build_gold_cost = -0.3
+		church_holding_build_gold_cost = -0.3
+	}
+	
+	province_modifier = {
+		stationed_POD_plasmic_maa_damage_mult = 0.6
+		stationed_POD_wraith_maa_damage_mult = 0.6
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.6
+		fort_level = 6
+	}
+	
+	type_icon = "icon_building_leisure_palace.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+		
+	show_disabled = yes
+}
+
+### Demon ###
+
+bastion_01 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_1_cost
+	cost_prestige = main_building_tier_1_cost
+	
+	max_garrison = good_building_max_garrison_tier_1
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_1
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.01
+		monthly_prestige_gain_per_dread_add = 0.01
+		men_at_arms_maintenance_per_dread_mult = -0.0005
+		dread_per_tyranny_add = 0.01
+		knight_effectiveness_mult = 0.01
+	}
+	
+	county_modifier = {
+		additional_fort_level = 1
+		garrison_size = 0.1
+	}
+	
+	duchy_capital_county_modifier = {
+		defender_holding_advantage = good_building_advantage_tier_1
+	}
+	
+	type_icon = "summoning_chamber.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	next_building = bastion_02
+}
+
+bastion_02 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_2_cost
+	cost_prestige = main_building_tier_2_cost
+
+	max_garrison = good_building_max_garrison_tier_2
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_2
+	
+	province_modifier = {
+		stationed_POD_demonic_maa_damage_add = 2
+		stationed_POD_demonic_maa_toughness_add = 2	
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.02
+		monthly_prestige_gain_per_dread_add = 0.02
+		men_at_arms_maintenance_per_dread_mult = -0.0005
+		dread_per_tyranny_add = 0.02
+		knight_effectiveness_mult = 0.05
+	}
+	
+	county_modifier = {
+		additional_fort_level = 2
+		garrison_size = 0.2
+	}
+	
+	duchy_capital_county_modifier = {
+		fort_level = 1
+		defender_holding_advantage = good_building_advantage_tier_2
+	}
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	show_disabled = yes
+	
+	next_building = bastion_03
+}
+
+bastion_03 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_3_cost
+	cost_prestige = main_building_tier_3_cost
+	
+	max_garrison = good_building_max_garrison_tier_3
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_3
+	
+	province_modifier = {
+		stationed_POD_demonic_maa_damage_add = 4
+		stationed_POD_demonic_maa_toughness_add = 4		
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.03
+		monthly_prestige_gain_per_dread_add = 0.03
+		men_at_arms_maintenance_per_dread_mult = -0.0005
+		dread_per_tyranny_add = 0.04
+		knight_effectiveness_mult = 0.1
+	}
+	
+	county_modifier = {
+		additional_fort_level = 3
+		garrison_size = 0.4
+	}
+	
+	duchy_capital_county_modifier = {
+		fort_level = 2
+		defender_holding_advantage = good_building_advantage_tier_3
+	}
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	show_disabled = yes
+	
+	next_building = bastion_04
+}
+
+bastion_04 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_4_cost
+	cost_prestige = main_building_tier_4_cost
+
+	max_garrison = good_building_max_garrison_tier_4
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_4
+
+	province_modifier = {
+		stationed_POD_demonic_maa_damage_add = 6
+		stationed_POD_demonic_maa_toughness_add = 6
+		stationed_POD_demonic_maa_pursuit_add = 2
+		stationed_POD_demonic_maa_screen_add = 2		
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.04
+		monthly_prestige_gain_per_dread_add = 0.04
+		men_at_arms_maintenance_per_dread_mult = -0.0005
+		dread_per_tyranny_add = 0.06
+		knight_effectiveness_mult = 0.15
+	}
+	
+	county_modifier = {
+		additional_fort_level = 4
+		garrison_size = 0.6
+	}
+	
+	duchy_capital_county_modifier = {
+		fort_level = 3
+		defender_holding_advantage = good_building_advantage_tier_4
+	}
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	show_disabled = yes
+	
+	next_building = bastion_05
+}
+
+bastion_05 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_6_cost
+	cost_prestige = main_building_tier_6_cost
+	
+	max_garrison = good_building_max_garrison_tier_6
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_6
+
+	province_modifier = {
+		stationed_POD_demonic_maa_damage_add = 8
+		stationed_POD_demonic_maa_toughness_add = 8
+		stationed_POD_demonic_maa_pursuit_add = 6
+		stationed_POD_demonic_maa_screen_add = 6	
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.05
+		monthly_prestige_gain_per_dread_add = 0.05
+		men_at_arms_maintenance_per_dread_mult = -0.001
+		dread_per_tyranny_add = 0.08
+		knight_effectiveness_mult = 0.2
+	}
+	
+	county_modifier = {
+		additional_fort_level = 5
+		garrison_size = 0.8
+	}
+	
+	duchy_capital_county_modifier = {
+		fort_level = 4
+		defender_holding_advantage = good_building_advantage_tier_6
+	}
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	show_disabled = yes
+	
+	next_building = bastion_06
+}
+
+bastion_06 = {
+	construction_time = very_slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}	
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_demon = yes
+		}
+	}
+	
+	cost_piety = main_building_tier_8_cost
+	cost_prestige = main_building_tier_8_cost	
+	
+	max_garrison = good_building_max_garrison_tier_8
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_8
+
+	province_modifier = {
+		stationed_POD_demonic_maa_damage_add = 10
+		stationed_POD_demonic_maa_toughness_add = 10
+		stationed_POD_demonic_maa_pursuit_add = 10
+		stationed_POD_demonic_maa_screen_add = 10	
+	}
+	
+	character_modifier = {
+		monthly_piety_gain_per_dread_add = 0.06
+		monthly_prestige_gain_per_dread_add = 0.06
+		men_at_arms_maintenance_per_dread_mult = -0.001
+		dread_per_tyranny_add = 0.1
+		knight_effectiveness_mult = 0.2
+		POD_demonic_maa_siege_value_add = 0.1
+	}
+	
+	county_modifier = {
+		additional_fort_level = 6
+		garrison_size = 1
+		building_slot_add = 1
+	}
+	
+	duchy_capital_county_modifier = {
+		fort_level = 5
+		defender_holding_advantage = good_building_advantage_tier_8
+	}
+
+	type = duchy_capital
+	
+	flag = fully_upgraded_duchy_capital_building
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+		culture_likely_to_fortify_modifier = yes
+	}
+	
+	show_disabled = yes
+}
+
+#Ramessu's special building
+
+ramessu_court_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = vampire 
+			this = character:790194
+			is_ai = no
+		}					
+	}
+	
+	is_enabled = {	
+		scope:holder = {
+			has_trait = vampire 
+			this = character:790194
+		}				
+	}
+
+	cost_prestige = cheap_building_tier_3_cost
+	
+	levy = excellent_building_levy_tier_6
+	
+	province_modifier = {
+		garrison_size = 0.6
+		monthly_income = good_building_tax_tier_6
+	}
+	county_modifier = {
+		tax_mult = 0.3
+		development_growth = 0.1
+	}
+	character_modifier = {
+		monthly_prestige = 2
+		cultural_head_fascination_mult = 0.2
+		knight_limit = 1
+		knight_effectiveness_mult = 0.10
+		stress_loss_mult = 0.2
+	}	
+
+	type_icon = "icon_structure_the_pyramids.dds"
+	
+	ai_value = {
+		base = 0
+	}
+	
+	type = duchy_capital
+	
+}
+
+#Sundervere's special building
+
+sundervere_cult_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+			is_ai = no
+		}					
+	}
+	
+	is_enabled = {	
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+		}				
+	}
+
+	cost_prestige = cheap_building_tier_2_cost
+	
+	levy = 2000
+	
+	province_modifier = {
+		garrison_size = 0.6
+		monthly_income = good_building_tax_tier_1
+	}
+	county_modifier = {
+	}
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 5
+	}	
+
+	type_icon = "summoning_chamber.dds"
+	
+	ai_value = {
+		base = 0
+	}
+	
+	type = duchy_capital	
+	
+	next_building = sundervere_cult_02
+}
+
+sundervere_cult_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+			is_ai = no
+		}					
+	}
+	
+	is_enabled = {	
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+		}				
+	}
+
+	cost_prestige = cheap_building_tier_4_cost
+	
+	levy = 4000
+	
+	province_modifier = {
+		garrison_size = 0.8
+		monthly_income = good_building_tax_tier_2
+	}
+	county_modifier = {
+	}
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 10
+	}	
+	
+	ai_value = {
+		base = 0
+	}
+	
+	type = duchy_capital	
+	
+	next_building = sundervere_cult_03
+}
+
+sundervere_cult_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+			is_ai = no
+		}					
+	}
+	
+	is_enabled = {	
+		scope:holder = {
+			has_trait = vampire 
+			this = character:791147
+		}				
+	}
+
+	cost_prestige = cheap_building_tier_4_cost
+	
+	levy = 6000
+	
+	province_modifier = {
+		garrison_size = 1
+		monthly_income = good_building_tax_tier_3
+	}
+	county_modifier = {
+	}
+	character_modifier = {
+		owned_hostile_scheme_success_chance_add = 10
+		max_hostile_schemes_add = 1
+	}	
+	
+	ai_value = {
+		base = 0
+	}
+	
+	type = duchy_capital	
+	
+}
+
+# Wu T'ian
+dragon_nested_alchemy_laboratory_01 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_1_cost
+	cost_piety = main_building_tier_1_cost
+	cost_gold = main_building_tier_1_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 0.25
+	}
+	
+	county_modifier = {
+		county_opinion_add = 10
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_1
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.1
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_02
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_02 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_2_cost
+	cost_piety = main_building_tier_2_cost
+	cost_gold = main_building_tier_2_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 0.5
+	}
+	
+	county_modifier = {
+		county_opinion_add = 15
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_2
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.2
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_03
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_03 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_3_cost
+	cost_piety = main_building_tier_3_cost
+	cost_gold = main_building_tier_3_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 0.75
+	}
+	
+	county_modifier = {
+		county_opinion_add = 20
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_3
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.3
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_04
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_04 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_4_cost
+	cost_piety = main_building_tier_4_cost
+	cost_gold = main_building_tier_4_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 1
+	}
+	
+	county_modifier = {
+		county_opinion_add = 25
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_4
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.4
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_05
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_05 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_5_cost
+	cost_piety = main_building_tier_5_cost
+	cost_gold = main_building_tier_5_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 1.25
+	}
+	
+	county_modifier = {
+		county_opinion_add = 30
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_5
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.5
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_06
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_06 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_6_cost
+	cost_piety = main_building_tier_6_cost
+	cost_gold = main_building_tier_6_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 1.5
+	}
+	
+	county_modifier = {
+		county_opinion_add = 35
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_6
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.6
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_07
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_07 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_7_cost
+	cost_piety = main_building_tier_7_cost
+	cost_gold = main_building_tier_7_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 1.75
+	}
+	
+	county_modifier = {
+		county_opinion_add = 40
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_7
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.7
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+
+	next_building = dragon_nested_alchemy_laboratory_08
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}
+dragon_nested_alchemy_laboratory_08 = {
+	construction_time = slow_construction_time
+	
+	can_construct_potential = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	can_construct = {
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			building_requirement_wutian = yes
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_prestige = expensive_building_tier_8_cost
+	cost_piety = main_building_tier_8_cost
+	cost_gold = main_building_tier_8_cost
+		
+	character_modifier = {
+		monthly_tan_lifestyle_xp_gain_add = 2
+	}
+	
+	county_modifier = {
+		county_opinion_add = 45
+	}
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_8
+	}
+
+	duchy_capital_county_modifier ={
+		development_growth_factor = 0.8
+	}
+		
+	type_icon = "oculi_safehouse.dds"
+
+	type = duchy_capital
+	
+	ai_value = {
+		base = 20
+		modifier = {
+			factor = 2
+			scope:holder.capital_province = this
+		}
+	}
+}

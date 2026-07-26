@@ -1,0 +1,640 @@
+﻿
+POD_fleshcraft_interaction = {
+	category = interaction_category_vampire
+	icon = POD_vicissitude_interaction
+	desc = POD_fleshcraft_interaction_desc
+	
+	is_shown = {
+		scope:actor = { has_perk = malleable_visage_perk }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = { scope:actor != scope:recipient }
+			scope:recipient = {
+				POD_splat_can_be_fleshcrafted = yes
+				NOT = { has_trait = azhi_dahaka }
+			}
+
+			trigger_if = {
+				limit = {
+					scope:actor = { has_perk = sculpture_of_the_mind_perk }
+					scope:recipient = {
+						NOR = {
+							is_imprisoned_by = scope:actor
+							has_relation_ghoul_domitor = scope:actor
+						}
+					}
+				}
+				POD_strong_mental_defenses_trigger = yes
+			}
+			trigger_else = {
+				scope:recipient = {
+					custom_tooltip = {
+						text = POD_fleshcraft_interaction_requirement
+						OR = {
+							is_imprisoned_by = scope:actor
+							has_relation_ghoul_domitor = scope:actor
+						}
+					}
+				}
+			}
+			POD_interaction_is_valid_showing_failures_only = yes
+		}
+		trigger_else = {
+			POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+		}
+	}
+
+	#Face
+	send_option = {
+		is_shown = { always = yes }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 1 } } }
+		flag = face
+		localization = POD_fleshcraft_interaction_face_option
+	}
+
+	#Revert Face
+	send_option = {
+		is_shown = { scope:recipient = { has_character_flag = had_POD_character_tzimisce_looks } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 1 } } }
+		flag = revert_face
+		localization = POD_fleshcraft_interaction_revert_face_option
+	}
+
+	#Toggle Azhi Dahaka looks
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = azhi_dahaka } }
+		is_valid = { }
+		flag = toggle_azhi_dahaka
+		localization = POD_fleshcraft_interaction_toggle_azhi_dahaka_option
+	}
+
+	#Immortal Age
+	send_option = {
+		is_shown = { scope:recipient = { is_immortal = yes } }
+		is_valid = {
+			scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 1 } }
+			scope:recipient = { NOT = { has_character_modifier = baba_yagas_curse_modifier } }
+		}
+		flag = immortal_age
+		localization = POD_fleshcraft_interaction_immortal_age_option
+	}
+
+	#Physical Traits
+	send_option = {
+		is_shown = { always = yes }
+		is_valid = {
+			scope:actor = {
+				has_trait = vicissitudeadvanced
+				custom_tooltip = {
+					text = POD_fleshcraft_interaction_physical_trait_option_req
+					has_variable_list = known_true_name_traits
+				}
+			}
+		}
+		flag = physical_trait
+		localization = POD_fleshcraft_interaction_physical_trait_option
+	}
+
+	#Fleshcrafting Perks
+	send_option = {
+		is_shown = {
+			# safeguard for multiplayer
+			scope:recipient = {
+				trigger_if = {
+					limit = { has_variable = fleshcrafted_by }
+					var:fleshcrafted_by = { is_ai = yes }
+				}
+			}
+		}
+		is_valid = {
+			scope:actor = { has_perk = transmogrify_the_mortal_clay_perk }
+		}
+		flag = fleshcrafting
+		localization = POD_fleshcraft_interaction_fleshcrafting_option
+	}
+
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:face ?= yes
+				scope:revert_face ?= yes
+				scope:toggle_azhi_dahaka ?= yes
+				scope:immortal_age ?= yes
+				scope:physical_trait ?= yes
+				scope:fleshcrafting ?= yes
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			if = {
+				# happens in the GUI for fleshcrafting
+				limit = {
+					NOR = {
+						scope:physical_trait ?= yes
+						scope:fleshcrafting ?= yes
+					}
+				}
+				POD_willpower_rouse_check_effect = yes
+			}
+			
+			switch = {
+				trigger = yes
+
+				scope:face = {
+					POD_discipline_cost_effect = { COUNT = 1 }
+					scope:recipient = {
+						add_character_flag = had_POD_character_tzimisce_looks
+						POD_moderate_risk_of_increasing_masquerade_exposure = yes
+					}
+					set_variable = { name = vicissitude_target value = scope:recipient }
+				}
+
+				scope:revert_face = {
+					POD_discipline_cost_effect = { COUNT = 1 }
+					scope:recipient = {
+						POD_shapeshift_vicissitude_face_revert_effect = yes
+						POD_moderate_risk_of_increasing_masquerade_exposure = yes
+						remove_character_flag = had_POD_character_tzimisce_looks
+					}
+				}
+
+				scope:toggle_azhi_dahaka = {
+					scope:recipient = {
+						if = {
+							limit = { has_character_flag = POD_azhi_dahaka_form_flag }
+							remove_character_flag = POD_azhi_dahaka_form_flag
+						}
+						else = { add_character_flag = POD_azhi_dahaka_form_flag }
+					}
+				}
+
+				scope:immortal_age = {
+					POD_discipline_cost_effect = { COUNT = 1 }
+					trigger_event = POD_transmogrify.100
+				}
+
+				scope:physical_trait = {
+					custom_tooltip = POD_fleshcraft_interaction_physical_trait_option_effect
+					set_variable = { name = reweaving_recipient value = scope:recipient }
+					set_variable = { name = reweaving_ability value = flag:vicissitude }
+					scope:recipient = { add_character_flag = physical_trait_only }
+				}
+
+				scope:fleshcrafting = {
+					custom_tooltip = {
+						text = POD_open_fleshcrafting_gui_interaction
+						POD_open_fleshcrafting_gui = { CHARACTER = scope:recipient }
+					}
+				}
+			}
+		}
+	}
+	
+	send_options_exclusive = yes
+
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+POD_liquefy_the_mortal_coil_interaction = {
+	category = interaction_category_vampire
+	icon = POD_vicissitude_interaction
+	desc = POD_liquefy_the_mortal_coil_interaction_desc
+	
+	cooldown = { years = 5 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_perk = liquefy_the_mortal_coil_perk }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { POD_splat_can_be_fleshcrafted = yes }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_eyed } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 2 } } }
+		flag = one_eyed
+		localization = trait_one_eyed
+	}
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_legged } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 2 } } }
+		flag = one_legged
+		localization = trait_one_legged
+	}
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = blind } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 3 } } }
+		flag = blind
+		localization = trait_blind
+	}
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = disfigured } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 3 } } }
+		flag = disfigured
+		localization = trait_disfigured
+	}
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = maimed } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 4 } } }
+		flag = maimed
+		localization = trait_maimed
+	}
+	send_option = {
+		is_shown = { scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = eunuch_1 } } }
+		is_valid = { scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = 4 } } }
+		flag = eunuch
+		localization = trait_eunuch_1
+	}
+
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:one_eyed ?= yes
+				scope:one_legged ?= yes
+				scope:blind ?= yes
+				scope:disfigured ?= yes
+				scope:maimed ?= yes
+				scope:eunuch ?= yes
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			switch = {
+				trigger = yes
+
+				scope:one_eyed = { POD_discipline_cost_effect = { COUNT = 2 } }
+				scope:one_legged = { POD_discipline_cost_effect = { COUNT = 2 } }
+				scope:blind = { POD_discipline_cost_effect = { COUNT = 3 } }
+				scope:disfigured = { POD_discipline_cost_effect = { COUNT = 3 } }
+				scope:maimed = { POD_discipline_cost_effect = { COUNT = 4 } }
+				scope:eunuch = { POD_discipline_cost_effect = { COUNT = 4 } }
+			}
+
+			duel = {
+				skills = { learning prowess }
+				target = scope:recipient
+				40 = {
+					desc = POD_shared_loca_success
+					compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+
+					switch = {
+						trigger = yes
+
+						scope:one_eyed = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = one_eyed TIME = 10 } } }
+						scope:one_legged = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = one_legged TIME = 10 } } }
+						scope:blind = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = blind TIME = 10 } } }
+						scope:disfigured = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = disfigured TIME = 10 } } }
+						scope:maimed = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = maimed TIME = 10 } } }
+						scope:eunuch = { scope:recipient = { POD_give_semi_permanent_injury_effect = { TRAIT = eunuch_1 TIME = 10 } } }
+					}
+				}
+				50 = {
+					desc = POD_shared_loca_failure
+					compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+					scope:actor = {
+						add_stress = medium_stress_impact_gain
+						add_piety = medium_piety_loss
+					}
+				}
+			}
+		}
+	}
+	
+	send_options_exclusive = yes
+
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+POD_study_anatomy_interaction = {
+	category = interaction_category_vampire
+	icon = POD_vicissitude_interaction
+	desc = POD_study_anatomy_interaction_desc
+
+	is_shown = {
+		scope:actor = { has_trait = vicissitudeadvanced }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_adult = yes
+			trigger_if = {
+				limit = {
+					NOR = { 
+						this = scope:actor
+						has_relation_ghoul_domitor = scope:actor
+					}
+				}
+				is_imprisoned_by = scope:actor
+			}
+			NOT = { has_character_modifier = recently_tortured }
+			custom_description = {
+				text = "currently_being_tortured"
+				NOT = { has_character_flag = is_being_tortured }
+			}
+			custom_tooltip = {
+				text = POD_study_anatomy_interaction_trait_requirement
+				any_character_trait = { POD_can_study_anatomy_trait = { SCHOLAR = scope:actor } }
+			}
+			POD_splat_can_be_fleshcrafted = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			if = {
+				# Only one eligible trait? No need to show the selection GUI
+				limit = {
+					scope:recipient = {
+						any_character_trait = {
+							POD_can_study_anatomy_trait = { SCHOLAR = scope:actor }
+							save_temporary_scope_as = anatomy_trait
+							count = 1
+						}
+					}
+				}
+				POD_start_anatomy_study_journey_effect = { TRAIT = scope:anatomy_trait }
+
+				if = {
+					limit = { scope:actor != scope:recipient }
+					POD_torture_interaction_effect = yes
+				}
+			}
+			else = {
+				custom_tooltip = {
+					text = POD_study_anatomy_interaction_select_traits_tt
+					trigger_event = POD_transmogrify.500
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+
+POD_transmogrify_interaction = {
+	category = interaction_category_vampire
+	icon = POD_vicissitude_interaction
+	desc = POD_transmogrify_interaction_desc
+	options_heading = POD_transmogrify_interaction_options_heading
+	
+	is_shown = {
+		always = no ##TODO Tzimisce
+		scope:actor = { has_perk = transmogrify_the_mortal_clay_perk }
+		scope:actor != scope:recipient
+		OR = {
+			has_ep1_dlc_trigger = yes
+			has_perk = sublimation_of_the_larval_flesh_perk
+		}
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			POD_splat_can_be_fleshcrafted = yes
+			is_imprisoned_by = scope:actor
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	#Wall big
+	send_option = {
+		is_shown = { has_ep1_dlc_trigger = yes }
+		is_valid = { }
+		flag = wall_big
+		localization = POD_transmogrify_interaction_wall_big
+	}
+
+	#Wall small
+	send_option = {
+		is_shown = { scope:recipient = { has_character_flag = had_POD_character_tzimisce_looks } }
+		is_valid = { }
+		flag = wall_small
+		localization = POD_transmogrify_interaction_wall_small
+	}
+
+	#Throne
+	send_option = {
+		is_shown = { has_ep1_dlc_trigger = yes }
+		is_valid = { }
+		flag = throne
+		localization = POD_transmogrify_interaction_throne
+	}
+
+	#Sculpture
+	send_option = {
+		is_shown = { has_ep1_dlc_trigger = yes }
+		is_valid = { }
+		flag = sculpture
+		localization = POD_transmogrify_interaction_sculpture
+	}
+
+	#Book
+	send_option = {
+		is_shown = { has_ep1_dlc_trigger = yes }
+		is_valid = { }
+		flag = book
+		localization = POD_transmogrify_interaction_book
+	}
+
+	#Pedestal
+	send_option = {
+		is_shown = { has_ep1_dlc_trigger = yes }
+		is_valid = { }
+		flag = pedestal
+		localization = POD_transmogrify_interaction_pedestal
+	}
+
+	#Odious Chalice
+	send_option = {
+		is_shown = { has_perk = sublimation_of_the_larval_flesh_perk }
+		is_valid = { }
+		flag = odious_chalice
+		localization = POD_transmogrify_interaction_odious_chalice
+	}
+
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:wall_big ?= yes
+				scope:wall_small ?= yes
+				scope:throne ?= yes
+				scope:sculpture ?= yes
+				scope:book ?= yes
+				scope:pedestal ?= yes
+				scope:odious_chalice ?= yes
+			}
+		}
+		POD_has_enough_blood_for_discipline = { AMOUNT = 5 }
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_discipline_cost_effect = { COUNT = 5 }
+
+
+			hidden_effect = {
+				set_artifact_rarity_common = yes
+
+				create_artifact = {
+					name = artifact_fleshcrafted_artifact_name
+					description = artifact_fleshcrafted_artifact_description
+					type = armor_plate
+					visuals = armor
+					wealth = scope:wealth
+					quality = scope:quality
+					modifier = POD_fleshcrafted_artifact_generic_modifier
+					generate_history = no
+					save_scope_as = newly_created_artifact
+                }
+
+
+				scope:newly_created_artifact = {
+					#Visuals and rarity
+					switch = {
+						trigger = yes
+
+						scope:wall_big = {
+							reforge_artifact = { type = tapestry visuals = tapestry generate_history = no }
+							POD_transmogrify_set_rarity_effect = { SKILL = diplomacy }
+						}
+						scope:wall_small = {
+							reforge_artifact = { type = wall_small visuals = wall_shield generate_history = no }
+							POD_transmogrify_set_rarity_effect = { SKILL = diplomacy }
+						}
+						scope:throne = {
+							reforge_artifact = { type = throne visuals = throne generate_history = no }
+							POD_transmogrify_set_rarity_effect = { SKILL = stewardship }
+						}
+						scope:sculpture = {
+							random_list = {
+								50 = {
+									if = {
+										limit = { scope:recipient = { is_female = yes } }
+										save_scope_value_as = { name = owner_fm value = flag:female }
+									}
+									else = { save_scope_value_as = { name = owner_fm value = flag:male } }
+									reforge_artifact = { type = sculpture visuals = statue generate_history = no }
+								}
+								50 = { reforge_artifact = { type = cabinet visuals = cabinet generate_history = no } }
+								50 = { reforge_artifact = { type = cabinet visuals = table generate_history = no } }
+							}
+							POD_transmogrify_set_rarity_effect = { SKILL = martial }
+						}
+						scope:book = {
+							reforge_artifact = { type = book visuals = fleshcrafted_book generate_history = no }
+							POD_transmogrify_set_rarity_effect = { SKILL = learning }
+						}
+						scope:pedestal = {
+							random_list = {
+								50 = { reforge_artifact = { type = urn visuals = urn generate_history = no } }
+								50 = { reforge_artifact = { type = bowl visuals = bowl generate_history = no } }
+								50 = { reforge_artifact = {type = goblet visuals = goblet generate_history = no } }
+							}
+							POD_transmogrify_set_rarity_effect = { SKILL = intrigue }
+						}
+						scope:odious_chalice = {
+							reforge_artifact = { type = miscellaneous visuals = regalia generate_history = no }
+								if = {
+								limit = { scope:recipient.POD_transmogrify_odious_value >= 8 }
+								set_artifact_rarity = illustrious
+							}
+							else_if = {
+								limit = { scope:recipient.POD_transmogrify_odious_value >= 6 }
+								set_artifact_rarity = famed
+							}
+							else_if = {
+								limit = { scope:recipient.POD_transmogrify_odious_value >= 4 }
+								set_artifact_rarity = masterwork
+							}
+						}
+					}
+				}
+			}
+
+
+			####This whole thing is very boring. Needs to be redesigned
+			#Modifiers
+			scope:newly_created_artifact = {
+				switch = {
+					trigger = yes
+
+					scope:wall_big = {
+						if = {
+							limit = { scope:recipient.diplomacy >= POD_transmogrify_very_high_skill }
+							add_artifact_modifier = artifact_dread_gain_mult_1_modifier
+
+							add_artifact_modifier = artifact_court_grandeur_baseline_add_5_modifier
+							add_artifact_modifier = artifact_courtly_vassal_opinion_3_modifier
+							random_list = {
+								50 = { add_artifact_modifier = artifact_courtly_tax_contribution_mult_4_modifier }
+								50 = { add_artifact_modifier = artifact_courtly_tax_contribution_mult_3_modifier }
+							}
+						}
+						else_if = {
+							limit = { scope:recipient.diplomacy >= POD_transmogrify_high_skill }
+							add_artifact_modifier = artifact_court_grandeur_baseline_add_3_modifier
+							add_artifact_modifier = artifact_courtly_vassal_opinion_2_modifier
+							random_list = {
+								50 = { add_artifact_modifier = artifact_courtly_tax_contribution_mult_3_modifier }
+								50 = { add_artifact_modifier = artifact_courtly_tax_contribution_mult_3_modifier }
+							}
+						}
+						else_if = {
+							limit = { scope:recipient.diplomacy >= POD_transmogrify_medium_skill }
+							add_artifact_modifier = artifact_court_grandeur_baseline_add_2_modifier
+							random_list = {
+								50 = { add_artifact_modifier = artifact_courtly_tax_contribution_mult_2_modifier }
+								50 = { add_artifact_modifier = artifact_courtly_vassal_opinion_2_modifier }
+							}
+						}
+						else = {
+							add_artifact_modifier = artifact_court_grandeur_baseline_add_1_modifier
+						}
+						
+					}
+					scope:wall_small = {}
+					scope:throne = {}
+					scope:sculpture = {}
+					scope:book = {}
+					scope:pedestal = {}
+
+					scope:odious_chalice = { POD_energy_vessel_add_max_effect = { COUNT = scope:recipient.POD_transmogrify_odious_value } }
+				}
+
+
+				#Relation Modifiers
+
+			}
+
+		}
+	}
+	
+	send_options_exclusive = yes
+
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}

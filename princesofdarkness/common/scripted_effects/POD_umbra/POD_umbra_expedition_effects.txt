@@ -1,0 +1,952 @@
+﻿#########################
+# Expedition Management #
+#########################
+POD_umbra_expedition_return_effect = {
+	if = {
+		limit = { has_variable = umbra_origin_location }
+		if = {
+			limit = { 
+				NOT = { var:spirit_location = var:umbra_origin_location } 
+				NOT = { in_shadow_realm_trigger = { LOCATION = var:spirit_location } }
+			}
+			set_variable = { name = spirit_destination value = var:umbra_origin_location }
+			show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = var:umbra_origin_location } }
+			if = {
+				limit = { POD_umbra_bypass_trigger = { LOCATION = var:umbra_origin_location } }
+				trigger_event = { on_action = spirit_travel_movement_end_pulse }
+			}
+			else = {
+				trigger_event = { on_action = spirit_travel_movement_start_pulse }
+			}
+		}
+		remove_variable = umbra_origin_location
+	}
+	else = {
+		POD_remove_umbra_modifier_effect = yes
+		remove_variable = spirit_location
+	}
+}
+
+POD_umbra_expedition_cooldown_effect = {
+	if = {
+		limit = { NOT = { any_memory = { has_memory_type = umbra_expedition_memory } } }
+		custom_tooltip = line_break
+		if = {
+			limit = { NOT = { var:spirit_location ?= flag:earth } }
+			custom_description_no_bullet = {
+				text = umbra_cooldown_desc
+			}
+		}
+		create_character_memory = {
+			type = umbra_expedition_memory
+		}
+	}
+}
+
+#######################
+# Artifact Management #
+#######################
+POD_umbra_create_artifact_from_flag_effect = {
+	$OWNER$ = { # create_artifact needs to be called in character scope
+		switch = {
+			trigger = $FLAG$
+			flag:lens_of_zadkiel = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_lens_of_zadkiel_effect = { OWNER = $OWNER$ TYPE = scientific_apparatus }
+				}
+				else = {
+					create_artifact_lens_of_zadkiel_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:sebastiannas_ghost_devouring_jack_o_lantern = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_sebastiannas_ghost_devouring_jack_o_lantern_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_sebastiannas_ghost_devouring_jack_o_lantern_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:beast_cloak = {
+				create_artifact_beast_cloak_effect = { OWNER = $OWNER$ }
+			}
+			flag:astral_tiki = {
+				create_artifact_astral_tiki_effect = { OWNER = $OWNER$ }
+			}
+			flag:seeds_of_decay = {
+				create_artifact_seeds_of_decay_effect = { OWNER = $OWNER$ }
+			}
+			flag:salvation_bell = {
+				create_artifact_salvation_bell_effect = { OWNER = $OWNER$ }
+			}
+			flag:ginger_dragons = {
+				create_artifact_ginger_dragons_effect = { OWNER = $OWNER$ }
+			}
+			flag:ebon_candles_of_manifest_nigrescence = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_ebon_candles_of_manifest_nigrescence_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_ebon_candles_of_manifest_nigrescence_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:clay_man_amulet = {
+				create_artifact_clay_man_amulet_effect = { OWNER = $OWNER$ }
+			}
+			flag:eyes_of_the_snow_maiden = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_eyes_of_the_snow_maiden_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_eyes_of_the_snow_maiden_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:cauldron_of_sceanbh = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_cauldron_of_sceanbh_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_cauldron_of_sceanbh_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:crown_of_dreams = {
+				create_artifact_crown_of_dreams_effect = { OWNER = $OWNER$ }
+			}
+			flag:edanns_harp = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_edanns_harp_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_edanns_harp_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:elenas_mirror = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_elenas_mirror_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_elenas_mirror_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:maul_of_thunder = {
+				create_artifact_maul_of_thunder_effect = { OWNER = $OWNER$ }
+			}
+			flag:cold_light = {
+				create_artifact_cold_light_effect = { OWNER = $OWNER$ }
+			}
+			flag:syrinx = {
+				create_artifact_syrinx_effect = { OWNER = $OWNER$ }
+			}
+			flag:sands_of_time = {
+				create_artifact_sands_of_time_effect = { OWNER = $OWNER$ }
+			}
+			flag:minoan_mosaic = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_minoan_mosaic_effect = { OWNER = $OWNER$ TYPE = wall_big }
+				}
+				else = {
+					create_artifact_minoan_mosaic_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:castors_star = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_castors_star_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_castors_star_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:cauldron_of_nightmares = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_cauldron_of_nightmares_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_cauldron_of_nightmares_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:excaliburs_scabbard = {
+				create_artifact_excaliburs_scabbard_effect = { OWNER = $OWNER$ }
+			}
+			flag:gale_flute = {
+				create_artifact_gale_flute_effect = { OWNER = $OWNER$ }
+			}
+			flag:trance_drum = {
+				create_artifact_trance_drum_effect = { OWNER = $OWNER$ }
+			}
+			flag:spiritual_armor = {
+				create_artifact_spiritual_armor_effect = { OWNER = $OWNER$ }
+			}
+			flag:serpent_pen = {
+				create_artifact_serpent_pen_effect = { OWNER = $OWNER$ }
+			}
+			flag:great_sigil_pendant = {
+				create_artifact_great_sigil_pendant_effect = { OWNER = $OWNER$ }
+			}
+			flag:dream_spirit_bag = {
+				create_artifact_dream_spirit_bag_effect = { OWNER = $OWNER$ }
+			}
+			flag:divine_staff_of_fortuitous_intervention = {
+				create_artifact_divine_staff_of_fortuitous_intervention_effect = { OWNER = $OWNER$ }
+			}
+			flag:cauldron_of_spies = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_cauldron_of_spies_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_cauldron_of_spies_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:bottle_of_fire = {
+				create_artifact_bottle_of_fire_effect = { OWNER = $OWNER$ }
+			}
+			flag:bean_nighe_caul = {
+				create_artifact_bean_nighe_caul_effect = { OWNER = $OWNER$ }
+			}
+			flag:klaive_hammer = {
+				create_artifact_klaive_hammer_effect = { OWNER = $OWNER$ }
+			}
+			flag:amulet_of_kinship = {
+				create_artifact_amulet_of_kinship_effect = { OWNER = $OWNER$ }
+			}
+			flag:memory_net = {
+				create_artifact_memory_net_effect = { OWNER = $OWNER$ }
+			}
+			flag:forgebait = {
+				create_artifact_forgebait_effect = { OWNER = $OWNER$ }
+			}
+			flag:guardian_orb = {
+				create_artifact_guardian_orb_effect = { OWNER = $OWNER$ }
+			}
+			flag:wail_tongue = {
+				create_artifact_wail_tongue_effect = { OWNER = $OWNER$ }
+			}
+			flag:shroudripper_gloves = {
+				create_artifact_shroudripper_gloves_effect = { OWNER = $OWNER$ }
+			}
+			flag:bloodwebs = {
+				create_artifact_bloodwebs_effect = { OWNER = $OWNER$ }
+			}
+			flag:beasthide = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_beasthide_effect = { OWNER = $OWNER$ TYPE = animal_hide }
+				}
+				else = {
+					create_artifact_beasthide_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:fetterguard = {
+				create_artifact_fetterguard_effect = { OWNER = $OWNER$ }
+			}
+			flag:living_chains = {
+				create_artifact_living_chains_effect = { OWNER = $OWNER$ }
+			}
+			flag:stygian_wall_flies = {
+				create_artifact_stygian_wall_flies_effect = { OWNER = $OWNER$ }
+			}
+			flag:stygian_steel_armor = {
+				create_artifact_stygian_steel_armor_effect = { OWNER = $OWNER$ }
+			}
+			flag:candelabra_of_souls = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_candelabra_of_souls_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_candelabra_of_souls_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:star_of_the_east = {
+				create_artifact_star_of_the_east_effect = { OWNER = $OWNER$ }
+			}
+			flag:soulfire_lantern = {
+				create_artifact_soulfire_lantern_effect = { OWNER = $OWNER$ }
+			}
+			flag:soulfire_mask = {
+				create_artifact_soulfire_mask_effect = { OWNER = $OWNER$ }
+			}
+			flag:scribblers_pen = {
+				create_artifact_scribblers_pen_effect = { OWNER = $OWNER$ }
+			}
+			flag:redeyes = {
+				create_artifact_redeyes_effect = { OWNER = $OWNER$ }
+			}
+			flag:instant_nihil = {
+				create_artifact_instant_nihil_effect = { OWNER = $OWNER$ }
+			}
+			flag:masks = {
+				create_artifact_masks_effect = { OWNER = $OWNER$ }
+			}
+			flag:bell_of_summoning = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_bell_of_summoning_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_bell_of_summoning_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:emperors_nightingale = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_emperors_nightingale_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_emperors_nightingale_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:sweeneys_pride = {
+				create_artifact_sweeneys_pride_effect = { OWNER = $OWNER$ }
+			}
+			flag:old_glory = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_old_glory_effect = { OWNER = $OWNER$ TYPE = wall_big }
+				}
+				else = {
+					create_artifact_old_glory_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:thornstick = {
+				create_artifact_thornstick_effect = { OWNER = $OWNER$ }
+			}
+			flag:faerie_dust = {
+				create_artifact_faerie_dust_effect = { OWNER = $OWNER$ }
+			}
+			flag:cabinet_stick = {
+				create_artifact_cabinet_stick_effect = { OWNER = $OWNER$ }
+			}
+			flag:cap_of_neglect = {
+				create_artifact_cap_of_neglect_effect = { OWNER = $OWNER$ }
+			}
+			flag:ring_of_linked_sight = {
+				create_artifact_ring_of_linked_sight_effect = { OWNER = $OWNER$ }
+			}
+			flag:sealing_needle = {
+				create_artifact_sealing_needle_effect = { OWNER = $OWNER$ }
+			}
+			flag:arrow_of_midnight_sun = {
+				create_artifact_arrow_of_midnight_sun_effect = { OWNER = $OWNER$ }
+			}
+			flag:arrow_of_inky_noon = {
+				create_artifact_arrow_of_inky_noon_effect = { OWNER = $OWNER$ }
+			}
+			flag:vulcans_hammer = {
+				create_artifact_vulcans_hammer_effect = { OWNER = $OWNER$ }
+			}
+			flag:durable_sandals = {
+				create_artifact_durable_sandals_effect = { OWNER = $OWNER$ }
+			}
+			flag:trail_dust = {
+				create_artifact_trail_dust_effect = { OWNER = $OWNER$ }
+			}
+			flag:blessed_opa = {
+				create_artifact_blessed_opa_effect = { OWNER = $OWNER$ }
+			}
+			flag:basilisk_stone = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_basilisk_stone_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_basilisk_stone_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:goblin_lantern = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_goblin_lantern_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_goblin_lantern_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:goblin_parchment = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_goblin_parchment_effect = { OWNER = $OWNER$ TYPE = book }
+				}
+				else = {
+					create_artifact_goblin_parchment_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:goblin_shoes = {
+				create_artifact_goblin_shoes_effect = { OWNER = $OWNER$ }
+			}
+			flag:razor_claws = {
+				create_artifact_razor_claws_effect = { OWNER = $OWNER$ }
+			}
+			flag:goblin_bow = {
+				create_artifact_goblin_bow_effect = { OWNER = $OWNER$ }
+			}
+			flag:goblin_cloak = {
+				create_artifact_goblin_cloak_effect = { OWNER = $OWNER$ }
+			}
+			flag:pendulum = {
+				create_artifact_pendulum_effect = { OWNER = $OWNER$ }
+			}
+			flag:magical_crumbs = {
+				create_artifact_magical_crumbs_effect = { OWNER = $OWNER$ }
+			}
+			flag:cat_boots = {
+				create_artifact_cat_boots_effect = { OWNER = $OWNER$ }
+			}
+			flag:gauntlets = {
+				create_artifact_gauntlets_effect = { OWNER = $OWNER$ }
+			}
+			flag:dry_dust = {
+				create_artifact_dry_dust_effect = { OWNER = $OWNER$ }
+			}
+			flag:blooded_gauntlets = {
+				create_artifact_blooded_gauntlets_effect = { OWNER = $OWNER$ }
+			}
+			flag:grapes_of_wrath = {
+				create_artifact_grapes_of_wrath_effect = { OWNER = $OWNER$ }
+			}
+			flag:horn_of_hermes = {
+				create_artifact_horn_of_hermes_effect = { OWNER = $OWNER$ }
+			}
+			flag:halcyon_halter = {
+				create_artifact_halcyon_halter_effect = { OWNER = $OWNER$ }
+			}
+			flag:inner_spinners = {
+				create_artifact_inner_spinners_effect = { OWNER = $OWNER$ }
+			}
+			flag:gray_vines = {
+				create_artifact_gray_vines_effect = { OWNER = $OWNER$ }
+			}
+			flag:gloves_of_night = {
+				create_artifact_gloves_of_night_effect = { OWNER = $OWNER$ }
+			}
+			flag:brooch_of_the_true_suitor = {
+				create_artifact_brooch_of_the_true_suitor_effect = { OWNER = $OWNER$ }
+			}
+			flag:highland_blade = {
+				create_artifact_highland_blade_effect = { OWNER = $OWNER$ }
+			}
+			flag:rorys_bag = {
+				create_artifact_rorys_bag_effect = { OWNER = $OWNER$ }
+			}
+			flag:mooncrystal = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_mooncrystal_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_mooncrystal_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:blood_dross = {
+				create_artifact_blood_dross_effect = { OWNER = $OWNER$ }
+			}
+			flag:passion_braceler = {
+				create_artifact_passion_braceler_effect = { OWNER = $OWNER$ }
+			}
+			flag:berserker_armor = {
+				create_artifact_berserker_armor_effect = { OWNER = $OWNER$ }
+			}
+			flag:amber_wyrm = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_amber_wyrm_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_amber_wyrm_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:havens_compass = {
+				create_artifact_havens_compass_effect = { OWNER = $OWNER$ }
+			}
+			flag:bakers_stone = {
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_artifact_bakers_stone_effect = { OWNER = $OWNER$ TYPE = pedestal }
+				}
+				else = {
+					create_artifact_bakers_stone_effect = { OWNER = $OWNER$ TYPE = miscellaneous_when_not_court }
+				}
+			}
+			flag:bane_dagger = {
+				create_artifact_bane_dagger_effect = { OWNER = $OWNER$ }
+			}
+		}
+	}
+}
+
+POD_umbra_artifact_init_effect = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { exists = scope:artifact_flag_1 } 
+				scope:artifact_flag_1 = flag:no
+			}
+		}
+		save_scope_value_as = {
+			name = artifact_flag_1
+			value = flag:$ARTIFACT$
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				NOT = { exists = scope:artifact_flag_2 } 
+				scope:artifact_flag_2 = flag:no
+			}
+		}
+		save_scope_value_as = {
+			name = artifact_flag_2
+			value = flag:$ARTIFACT$
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name = artifact_flag_3
+			value = flag:$ARTIFACT$
+		}
+	}
+}
+
+
+
+################
+# Node effects #
+################
+POD_umbra_retreat_effect = {
+	add_prestige = miniscule_prestige_loss
+	stress_impact = {
+		base = minor_stress_gain
+		brave = minor_stress_impact_gain
+		craven = minor_stress_impact_loss
+	}
+	random = {
+		chance = umbra_sense_value
+		custom_tooltip = {
+			text = umbra_retreat_tt
+		}
+		POD_umbra_expedition_cleanup_effect = yes
+		POD_umbra_expedition_return_effect = yes
+		POD_umbra_expedition_cooldown_effect = yes
+	}
+}
+
+POD_umbra_end_effect = {
+	POD_umbra_trigger_expedition_discovery_effect = {
+		DISCOVERY = var:current_umbra_discovery
+		LOCATION = root.var:spirit_location
+	}
+	hidden_effect = {
+		POD_umbra_remove_expedition_discovery_effect = {
+			LOCATION = root.var:spirit_location
+		}
+		POD_umbra_expedition_cleanup_effect = yes
+	}
+	POD_umbra_expedition_return_effect = yes
+	POD_umbra_expedition_cooldown_effect = yes
+	POD_fera_add_renown_effect = { TYPE = wisdom }
+}
+
+POD_umbra_event_effect = {
+	custom_tooltip = {
+		text = umbra_expedition_event_tooltip
+		trigger_event = {
+			on_action = POD_umbra_location_event_random_pulse
+		}
+	}
+	add_piety = minor_piety_gain
+}
+
+POD_umbra_prowess_challenge_scopes = {
+	save_scope_value_as = {
+		name = duel_challenge_value
+		value = $DUEL_CHALLENGE_VALUE$
+	}
+	save_scope_value_as = {
+		name = prestige_gain
+		value = $PRESTIGE_GAIN$
+	}
+	save_scope_value_as = {
+		name = wound_multiplier
+		value = $WOUND_MULTIPLIER$
+	}
+	save_scope_value_as = {
+		name = stress_gain
+		value = $STRESS_GAIN$
+	}
+	save_scope_value_as = {
+		name = piety_loss
+		value = $PIETY_LOSS$
+	}
+}
+
+POD_umbra_prowess_challenge_effect = {
+	save_scope_as = duelist
+	if = {
+		limit = {
+			has_variable = coterie_spirit_travel
+		}
+		POD_force_save_coterie_duelists = yes
+		save_scope_value_as = {
+			name = duelist
+			value = scope:prowess_duelist
+		}
+	}
+	# 
+	if = {
+		limit = {
+			umbra_difficulty >= 5
+		}
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_very_high_skill_rating
+			PRESTIGE_GAIN = medium_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 2
+			STRESS_GAIN = medium_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 4
+		}
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_high_skill_rating
+			PRESTIGE_GAIN = medium_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 2
+			STRESS_GAIN = medium_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 3
+		}
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_decent_skill_rating
+			PRESTIGE_GAIN = minor_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 2
+		}
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_medium_skill_rating
+			PRESTIGE_GAIN = minor_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 1
+		}
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_mediocre_skill_rating
+			PRESTIGE_GAIN = miniscule_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else = {
+		POD_umbra_prowess_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = POD_prowess_low_skill_rating
+			PRESTIGE_GAIN = miniscule_dynasty_prestige_gain
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	save_temporary_scope_as = player
+	scope:player = {
+		duel = {
+			desc = POD_umbra_prowess.desc
+			skill = prowess
+			value = scope:duel_challenge_value
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = POD_umbra_prowess.success
+				scope:player.dynasty = {
+					add_dynasty_prestige = scope:prestige_gain
+				}
+				years_from_game_start_difficulty_modifier = yes
+			}
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					factor = 0.75
+					uses_cairo_eshu_alternate_reward = yes
+				}
+				desc = POD_umbra_prowess.fail
+				if = {
+					limit = {
+						has_variable = physical_spirit_travel
+					}
+					increase_wounds_multiple_effect = {
+						REASON = fight
+						AMOUNT = scope:wound_multiplier
+					}
+				}
+				else = {
+					add_stress = scope:stress_gain
+				}
+				scope:player = {
+					add_piety = scope:piety_loss
+				}
+			}
+		}
+	}
+}
+
+POD_umbra_skill_challenge_scopes = {
+	save_scope_value_as = {
+		name = duel_challenge_value
+		value = $DUEL_CHALLENGE_VALUE$
+	}
+	save_scope_value_as = {
+		name = lifestyle_gain
+		value = $LIFESTYLE_GAIN$
+	}
+	save_scope_value_as = {
+		name = lifestyle_skill2_gain
+		value = $LIFESTYLE_SKILL2_GAIN$
+	}
+	save_scope_value_as = {
+		name = wound_multiplier
+		value = $WOUND_MULTIPLIER$
+	}
+	save_scope_value_as = {
+		name = stress_gain
+		value = $STRESS_GAIN$
+	}
+	save_scope_value_as = {
+		name = piety_loss
+		value = $PIETY_LOSS$
+	}
+}
+
+POD_umbra_select_skill_challenge_effect = {
+	save_scope_as = duelist
+	if = {
+		limit = {
+			has_variable = coterie_spirit_travel
+		}
+		POD_force_save_coterie_duelists = yes
+		save_scope_value_as = {
+			name = duelist
+			value = scope:$SKILL$_duelist
+		}
+	}
+	# 
+	if = {
+		limit = {
+			umbra_difficulty >= 5
+		}
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = very_high_skill_rating
+			LIFESTYLE_GAIN = medium_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = major_lifestyle_xp
+			WOUND_MULTIPLIER = 3
+			STRESS_GAIN = major_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 4
+		}
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = high_skill_rating
+			LIFESTYLE_GAIN = medium_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = major_lifestyle_xp
+			WOUND_MULTIPLIER = 3
+			STRESS_GAIN = major_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 3
+		}
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = decent_skill_rating
+			LIFESTYLE_GAIN = minor_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = medium_lifestyle_xp
+			WOUND_MULTIPLIER = 2
+			STRESS_GAIN = medium_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 2
+		}
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = medium_skill_rating
+			LIFESTYLE_GAIN = minor_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = medium_lifestyle_xp
+			WOUND_MULTIPLIER = 2
+			STRESS_GAIN = medium_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else_if = {
+		limit = {
+			umbra_difficulty >= 1
+		}
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = mediocre_skill_rating
+			LIFESTYLE_GAIN = minor_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = minor_lifestyle_xp
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	else = {
+		POD_umbra_skill_challenge_scopes = {
+			DUEL_CHALLENGE_VALUE = low_skill_rating
+			LIFESTYLE_GAIN = minor_lifestyle_xp
+			LIFESTYLE_SKILL2_GAIN = minor_lifestyle_xp
+			WOUND_MULTIPLIER = 1
+			STRESS_GAIN = minor_stress_gain
+			PIETY_LOSS = minor_piety_loss
+		}
+	}
+	save_temporary_scope_as = player
+	scope:player = {
+		duel = {
+			desc = POD_umbra_$SKILL$.desc
+			skill = $SKILL$
+			value = scope:duel_challenge_value
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = POD_umbra_$SKILL$.success
+				scope:player = {
+					add_$SKILL$_lifestyle_xp = scope:lifestyle_gain
+				}
+				years_from_game_start_difficulty_modifier = yes
+			}
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					factor = 0.75
+					uses_cairo_eshu_alternate_reward = yes
+				}
+				desc = POD_umbra_$SKILL$.fail
+				if = {
+					limit = {
+						has_variable = physical_spirit_travel
+					}
+					increase_wounds_multiple_effect = {
+						REASON = fight
+						AMOUNT = scope:wound_multiplier
+					}
+				}
+				else = {
+					add_stress = scope:stress_gain
+				}
+				scope:player = {
+					add_piety = scope:piety_loss
+				}
+			}
+		}
+	}
+}
+
+POD_umbra_skill_challenge_effect = {
+	switch = {
+		trigger = scope:story.var:type
+
+		flag:node_diplomacy = {
+			POD_umbra_select_skill_challenge_effect = { SKILL = diplomacy }
+		}
+		flag:node_martial = {
+			POD_umbra_select_skill_challenge_effect = { SKILL = martial }
+		}
+		flag:node_stewardship = {
+			POD_umbra_select_skill_challenge_effect = { SKILL = stewardship }
+		}
+		flag:node_intrigue = {
+			POD_umbra_select_skill_challenge_effect = { SKILL = intrigue }
+		}
+		flag:node_learning = {
+			POD_umbra_select_skill_challenge_effect = { SKILL = learning }
+		}
+	}
+}
+
+POD_umbra_elite_challenge_effect = {
+	custom_tooltip = umbra_expedition_challange_spirit
+	show_as_tooltip = {
+		random_list = {
+			50 = {
+				show_chance = no
+				desc = POD_shared_loca_success
+				custom_tooltip = umbra_expedition_challange_spirit.win
+			}
+			50 = {
+				show_chance = no
+				desc = POD_shared_loca_failure
+				custom_tooltip = umbra_expedition_challange_spirit.lose
+			}
+		}
+	}
+	trigger_event = POD_umbra_expedition.10
+}
+
+POD_umbra_shop_effect = {
+	custom_tooltip ={
+		text = POD_umbra_expedition.201.desc
+		trigger_event = POD_umbra_expedition.200
+	}
+}
+
+# Startup
+POD_umbra_expedition_on_start = {
+	if = {
+		limit = {
+			NOT = {
+				exists = var:umbra_map
+			}
+		}
+		POD_create_umbra_expedition = yes
+	}
+}
+
+POD_umbra_expedition_cleanup_effect = {
+	hidden_effect = {
+		if = {
+			limit = { has_variable = umbra_map }
+			var:umbra_map ?= {
+				end_story = yes
+			}
+			remove_variable = umbra_map
+		}
+	}
+}

@@ -1,0 +1,279 @@
+﻿
+POD_splat_has_access_to_disciplines = {
+	OR = {
+		has_POD_vamp_blood_trigger = yes
+		has_character_flag = vamp_discipline_access
+	}
+}
+
+POD_splat_has_access_to_risen_disciplines = {
+	OR = {
+		POD_splat_has_access_to_disciplines = yes
+		has_trait = risen
+	}
+}
+
+POD_splat_has_access_to_kj_arts = {
+	OR = {
+		has_trait = kueijin
+		has_trait = dhampyr
+		has_trait = hun_and_po
+		has_character_flag = kj_arts_access
+	}
+}
+
+POD_splat_has_access_to_demon_arts = {
+	OR = {
+		POD_splat_has_access_to_kj_arts = yes
+		has_character_modifier = higher_shih_modifier
+	}
+}
+
+POD_splat_has_access_to_soul_arts = {
+	OR = {
+		POD_splat_has_access_to_kj_arts = yes
+		has_character_modifier = higher_shih_modifier
+	}
+}
+
+POD_splat_has_access_to_chi_arts = {
+	POD_splat_has_access_to_kj_arts = yes
+	trigger_if = {
+		limit = { has_trait = dhampyr }
+		has_character_modifier = shade_walker_modifier
+	}
+}
+
+POD_splat_has_access_to_shintai = {
+	POD_splat_has_access_to_kj_arts = yes
+}
+
+POD_splat_has_access_to_fae_arts = {
+	OR = {
+		has_POD_fae_blood_trigger = yes
+		has_character_flag = fae_arts_access
+	}
+}
+
+# for lifestyle xp
+POD_splat_has_access_to_kith_arts = {
+	POD_splat_has_access_to_fae_arts = yes
+	has_trait = kithain
+}
+
+POD_splat_has_access_to_slivers = {
+	POD_splat_has_access_to_fae_arts = yes
+	has_trait = phyla
+}
+
+POD_splat_has_access_to_wu_tan = {
+	POD_splat_has_access_to_fae_arts = yes
+	has_trait = hsien
+}
+
+POD_splat_has_access_to_arcana = {
+	POD_is_demon_or_pseudo_demon = yes
+}
+
+POD_splat_has_access_to_lores = {
+	OR = {
+		POD_is_demon_or_pseudo_demon = yes
+		has_trait = nephilim
+		has_character_modifier = kupala_avatar_modifier
+		has_character_flag = demon_lores_access
+	}
+}
+
+POD_splat_has_access_to_qiao = {
+	OR = {
+		has_trait = shih
+		has_character_flag = qiao_access
+	}
+}
+
+POD_splat_has_access_to_planetary_gifts = {
+	OR = {
+		AND = {
+			has_trait = fera
+			religion = { is_in_family = rf_gaia }
+			NOT = { has_trait = mokole }
+		}
+		has_character_flag = planetary_gifts_access
+	}
+}
+
+POD_splat_has_access_to_urgetaints = {
+	OR = {
+		AND = {
+			has_trait = fera
+			religion = { is_in_family = rf_wyrm }
+		}
+		has_trait = banemummy
+	}
+}
+
+POD_splat_has_access_to_hengeyokaigifts = {
+	faith = { has_doctrine = doctrine_fera_beast_courts }
+}
+
+POD_splat_has_access_to_hekau = {
+	OR = {
+		POD_is_mummy_trigger = yes
+		has_character_flag = hekau_access
+	}
+}
+POD_splat_has_access_to_hekau_necromancy = {
+	OR = {
+		POD_splat_has_access_to_hekau = yes
+		has_character_modifier = wepauwet_modifier
+		has_character_flag = has_access_to_hekau_necromancy
+		#faith = { has_doctrine = special_returning_home_doctrine }
+	}
+}
+
+POD_splat_has_access_to_hekau_nomenclature = {
+	#OR = {
+		POD_splat_has_access_to_hekau = yes
+	#}
+}
+
+POD_splat_has_access_to_tan = {
+	OR = {
+		has_trait = wutian
+		has_trait = wukuei
+		has_character_flag = tan_access
+	}
+}
+
+POD_splat_has_access_to_arcanoi = {
+	OR = {
+		POD_is_wraith_trigger = yes
+		has_character_flag = arcanoi_access
+	}
+}
+
+# Presence of abilities
+
+has_abombwe_trigger = {
+	has_trait = abombwediscipline
+}
+
+has_animalism_trigger = {
+	has_trait = animalismdiscipline
+}
+
+has_auspex_trigger = {
+	has_trait = auspexdiscipline
+}
+
+has_bardo_trigger = {
+	has_trait = bardodiscipline
+}
+
+has_celerity_trigger = {
+	has_trait = celeritydiscipline
+}
+
+has_chimerstry_trigger  = {
+	has_trait = chimerstrydiscipline
+}
+
+has_daimonion_trigger = {
+	has_trait = daimoniondiscipline
+}
+
+has_dementation_trigger = {
+	has_trait = dementationdiscipline
+}
+
+has_dominate_trigger = {
+	has_trait = dominatediscipline
+}
+
+has_flight_trigger = {
+	has_trait = flightdiscipline
+}
+
+has_kai_trigger = {
+	has_trait = kaidiscipline
+}
+
+has_melpominee_trigger = {
+	has_trait = melpomineediscipline
+}
+
+has_mytherceria_trigger = {
+	has_trait = mytherceriadiscipline
+}
+
+has_necromancy_trigger = {
+	has_trait = necromancydiscipline
+}
+
+has_obfuscate_trigger = {
+	has_trait = obfuscatediscipline
+}
+
+has_obtenebration_trigger = {
+	has_trait = obtenebrationdiscipline
+}
+
+has_potence_trigger = {
+	has_trait = potencediscipline
+}
+
+has_presence_trigger = {
+	has_trait = presencediscipline
+}
+
+has_protean_trigger = {
+	has_trait = proteandiscipline
+}
+
+has_quietus_trigger = {
+	has_trait = quietusdiscipline
+}
+
+has_rift_trigger = {
+	has_trait = riftdiscipline
+}
+
+has_serpentis_trigger = {
+	has_trait = serpentisdiscipline
+}
+
+has_spiritus_trigger = {
+	has_trait = spiritusdiscipline
+}
+
+has_temporis_trigger = {
+	has_trait = temporisdiscipline
+}
+
+has_thinbloodalchemy_trigger = {
+	has_trait = thinbloodalchemydiscipline
+}
+
+has_valeren_trigger = {
+	has_trait = valerendiscipline
+}
+
+has_vicissitude_trigger = {
+	has_trait = vicissitudediscipline
+}
+
+has_visceratika_trigger = {
+	 has_trait = visceratikadiscipline
+}
+
+has_bloodsorcery_trigger = {
+	has_trait = bloodsorcerydiscipline
+}
+
+has_fortitude_trigger = {
+	has_trait = fortitudediscipline
+}
+
+has_oblivion_trigger = {
+	has_trait = obliviondiscipline
+}

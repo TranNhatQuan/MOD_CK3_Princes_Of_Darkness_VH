@@ -1,0 +1,1035 @@
+﻿namespace = POD_imprison
+
+
+POD_imprison.001 = {
+    hidden = yes
+	
+	trigger = {
+		scope:imprisoner = { is_ai = no }
+		prowess > 20
+		trigger_if = {
+			limit = { POD_custom_incompatible_splats_trigger = { ACTOR = scope:imprisoner RECIPIENT = root } }
+			NOT = { is_vassal_of = scope:imprisoner }
+		}
+		trigger_else = {
+			NOT = { scope:imprisoner = { has_imprisonment_reason = root } }
+		}
+		NOT = { has_character_flag = lost_duel }
+		is_imprisoned = yes
+        is_ai = yes
+	}
+	immediate = {
+	    save_scope_as = targetdefender
+		add_character_flag = {
+			flag = escaped_from_prison_flag
+			days = 1
+		}
+		add_character_flag = { #To make sure you don't get spammed about the release
+			flag = block_for_prison_release_notification
+			days = 1
+		}
+		release_from_prison = yes
+	    scope:imprisoner = {
+		    save_scope_as = attacker
+			trigger_event = POD_imprison.002
+		}
+    }
+}
+
+
+
+POD_imprison.002 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_imprison.002.title
+	desc = {
+	    first_valid = {
+		    triggered_desc = {
+			    trigger = {
+				    has_trait = supehunter
+					scope:targetdefender = { has_POD_public_vamp_blood_trigger = yes }
+				}
+				desc = POD_imprison.002.desc.hunter
+			}
+			desc = POD_imprison.002.desc
+		}
+	}
+	
+	trigger = {
+	    exists = scope:targetdefender
+	}
+
+	theme = vampire
+	left_portrait = {
+	    character = scope:attacker
+		animation = war_defender 
+	}
+	
+	right_portrait = {
+	    character = scope:targetdefender
+		animation = fear 
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		if = {
+		    limit = { 
+			    exists = cp:councillor_marshal
+			}
+			cp:councillor_marshal = {
+		        save_scope_as = attacker_marshal
+		    }	
+		}
+		POD_force_save_coterie_duelists = yes
+	}
+	
+	#Dominate duel(stewardship)
+	option = {
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+				has_perk = mesmerize_perk
+				has_perk = submerged_directive_perk
+				has_perk = rationalize_perk
+				has_perk = terminal_decree_perk
+				has_trait = dominateadvanced
+			}
+			POD_strong_mental_defenses_custom_trigger = { ACTOR = root RECIPIENT = scope:targetdefender }
+		}
+		
+		name = POD_imprison.002.option.a
+		
+		scope:attacker = { 
+			POD_hunger_rouse_check_effect = yes
+			POD_willpower_rouse_check_effect = yes
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = mesmerize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.mesmerize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = submerged_directive_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.submerged_directive
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = rationalize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.rationalize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = terminal_decree_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.terminal_decree
+			}
+		}
+		
+		duel = {
+		    skill = stewardship
+			value = scope:targetdefender.stewardship
+			desc = POD_imprison.002.option.a.desc
+			
+			13 = {
+			    desc = POD_imprison.002.option.success
+				
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				modifier = {
+					add = 5
+					scope:attacker = { has_trait = dominateadvanced }
+				}
+				
+				custom_tooltip = POD_imprison.002.option.a.tt.attacker_wins
+				
+				hidden_effect = {	
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_won_dominate
+					}
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.102
+							days = 2
+						}
+					}
+				}
+				
+				
+			}
+			
+			13 = {
+			    desc = POD_imprison.002.option.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5 
+				}
+				
+				modifier = {
+					add = 5
+					scope:targetdefender = { has_trait = fortitudeadvanced }
+				}
+				
+				custom_tooltip = POD_imprison.002.option.a.tt.attacker_lost
+
+				hidden_effect = {
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_lost_dominate
+					}	
+					add_character_flag = duel_lost_dominate
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.302 
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+		}
+	}
+	
+	#Presence duel(diplomacy)
+	option = {
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+			    has_perk = entrancement_perk
+				has_trait = presenceadvanced
+			}
+			POD_strong_mental_defenses_custom_trigger = { ACTOR = root RECIPIENT = scope:targetdefender }
+		}
+		
+		name = POD_imprison.002.option.b
+		
+		scope:attacker = { 
+			POD_hunger_rouse_check_effect = yes
+			POD_willpower_rouse_check_effect = yes
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = entrancement_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.entrancement
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = majesty_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.majesty
+			}
+			
+		}
+		
+		duel = {
+		    skill = diplomacy
+			value = scope:targetdefender.diplomacy
+			desc = POD_imprison.002.option.b.desc
+			
+			13 = {
+			    desc = POD_imprison.002.option.success
+				
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				modifier = {
+					add = 5
+					scope:attacker = { has_trait = presenceadvanced }
+				}
+				
+				custom_tooltip = POD_imprison.002.option.b.tt.attacker_wins
+				
+				hidden_effect = {	
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_won_presence
+					}
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.102
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+			13 = {
+			    desc = POD_imprison.002.option.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5 
+				}
+				modifier = {
+					add = 5
+					scope:targetdefender = { has_trait = fortitudeadvanced }
+				}
+
+				custom_tooltip = POD_imprison.002.option.b.tt.attacker_lost
+
+				hidden_effect = {
+				    add_character_flag = duel_lost_presence
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_lost_presence
+					}	
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.302 
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+		}
+	}
+
+	#prowess duel
+	option = {
+	    name = POD_imprison.002.option.c
+		
+		duel = {
+		    skill = prowess
+			value = scope:targetdefender.prowess
+			desc = POD_imprison.002.option.c.desc
+			
+			20 = {
+			    desc = POD_imprison.002.option.success
+				
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				custom_tooltip = POD_imprison.002.option.c.tt.attacker_wins
+				
+				hidden_effect = {	
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_won
+					}
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.102
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+			20 = {
+			    desc = POD_imprison.002.option.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				custom_tooltip = POD_imprison.002.option.c.tt.attacker_lost
+				
+				hidden_effect = {
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_lost
+					}	
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.202
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+		}
+	}
+	
+	#Marshal prowess duel
+	option = {
+		
+		trigger = {
+		    exists = scope:attacker_marshal
+			NOT = { scope:targetdefender = cp:councillor_marshal }
+			NOT = { scope:attacker_marshal = scope:prowess_duelist }
+		}
+		name = POD_imprison.002.option.d
+		
+		scope:attacker_marshal = {
+		    if = {
+			    limit = { is_vampire_trigger = yes }
+				POD_hunger_rouse_check_effect = yes
+		        POD_willpower_rouse_check_effect = yes
+			}
+			
+		    duel = {
+		        skill = prowess
+			    value = scope:targetdefender.prowess
+			    desc = POD_imprison.002.option.d.desc
+			
+			    20 = {
+			        desc = POD_imprison.002.option.d.success
+				
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = 0.5
+				    }
+					
+					custom_tooltip = POD_imprison.002.option.d.tt.attacker_wins
+				
+				    hidden_effect = {	
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_won_marshal
+					    }
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.102
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+			    20 = {
+			        desc = POD_imprison.002.option.failure
+
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = -0.5
+				    }
+					
+					custom_tooltip = POD_imprison.002.option.d.tt.attacker_lost
+
+				    hidden_effect = {
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_marshal_lost
+					    }	
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.202
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+		    }
+		}
+	}
+	
+	#Coterie prowess duel
+	option = {
+		trigger = {
+		    NOT = { scope:prowess_duelist = root }
+		    NOT = { scope:prowess_duelist = scope:targetdefender }
+		}
+		name = POD_imprison.002.option.coterie
+		
+		scope:prowess_duelist = {
+		    if = {
+			    limit = { is_vampire_trigger = yes }
+				POD_hunger_rouse_check_effect = yes
+		        POD_willpower_rouse_check_effect = yes
+			}
+			
+		    duel = {
+		        skill = prowess
+			    value = scope:targetdefender.prowess
+			    desc = POD_imprison.002.option.coterie.desc
+			
+			    20 = {
+			        desc = POD_imprison.002.option.coterie.success
+				
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = 0.5
+				    }
+					
+					custom_tooltip = POD_imprison.002.option.coterie.tt.attacker_wins
+				
+				    hidden_effect = {	
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_won_coterie
+					    }
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.102
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+			    20 = {
+			        desc = POD_imprison.002.option.failure
+
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = -0.5
+				    }
+					
+					custom_tooltip = POD_imprison.002.option.coterie.tt.attacker_lost
+
+				    hidden_effect = {
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_marshal_lost
+					    }	
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.202
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+		    }
+		}
+	}
+	
+	#Hunter-specific option(Marshal martial vs target prowess)
+	option = {
+	    trigger = {
+		    has_trait = supehunter
+			scope:targetdefender = { has_POD_public_vamp_blood_trigger = yes }
+		}
+		name = POD_imprison.002.option.e
+		
+		scope:attacker_marshal = {
+			
+		    duel = {
+		        skill = martial
+			    value = scope:targetdefender.prowess
+			    desc = POD_imprison.002.option.e.desc
+			
+			    20  = {
+			        desc = POD_imprison.002.option.e.success
+				
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = 0.5
+				    }
+					
+					modifier = {
+					    add = 5
+						has_trait = truefaith
+					}
+					modifier = {
+					    add = 10
+						has_trait = beatific
+					}
+					
+					
+					custom_tooltip = POD_imprison.002.option.e.tt.attacker_wins
+				
+				    hidden_effect = {	
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_won_marshal_hunter
+					    }
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.102
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+			    20 = {
+			        desc = POD_imprison.002.option.e.failure
+
+				    compare_modifier = {
+					    value = scope:duel_value
+					    multiplier = -0.5
+				    }
+					
+					modifier = {
+					    add = 5
+						scope:targetdefender = {
+						    has_trait = auspexadvanced
+						}
+					}
+					modifier = {
+					    add = 10
+						scope:targetdefender = {
+						    has_trait = fortitudeadvanced
+						}
+					}
+					
+					custom_tooltip = POD_imprison.002.option.e.tt.attacker_lost
+
+				    hidden_effect = {
+					    save_scope_value_as = {
+						    name = imprison_fight_duel
+						    value = flag:attacker_marshal_lost_hunter
+					    }	
+					    scope:attacker = {
+						    trigger_event = {
+							    id = POD_imprison.202
+							    days = 2
+						    }
+					    }
+				    }
+				
+			    }
+			
+		    }
+		}
+	}
+	
+	#Tears of the Martyr special perk option
+	option = {
+	    trigger = {
+			has_perk = tears_of_the_martyr_perk
+			piety >= 25
+		}
+		show_as_unavailable = {
+			has_perk = tears_of_the_martyr_perk
+			piety < 25
+		}
+		name = POD_imprison.002.option.f
+		custom_tooltip = POD_imprison.002.option.f.tt
+		add_piety = -25
+		
+		hidden_effect = {
+		    scope:targetdefender = {
+			    add_character_flag = {
+				    flag = lost_duel
+					days = 10
+				}
+			}
+			save_scope_value_as = {
+				name = imprison_fight_duel
+				value = flag:attacker_won_tears
+			}	
+		    scope:attacker = {
+				trigger_event = {
+					id = POD_imprison.102
+					days = 2
+				}
+			}
+		}
+	}
+
+	#Rift level 9 imprison, Guaranteed at stress cost
+	option = {
+	    trigger = {
+			OR = {
+				# for showing the icons
+				has_trait = rift
+				has_trait = riftadvanced
+			}
+			has_perk = rift_imprison_perk
+			POD_has_enough_blood_for_discipline = { AMOUNT = 2 }
+		}
+		show_as_unavailable = {
+			OR = {
+				# for showing the icons
+				has_trait = rift
+				has_trait = riftadvanced
+			}
+			has_perk = rift_imprison_perk
+			NOT = { 
+				POD_has_enough_blood_for_discipline = { AMOUNT = 2 }
+			}
+		}
+		name = POD_imprison.002.option.h
+		custom_tooltip = POD_imprison.002.option.h.tt
+		
+		POD_discipline_cost_effect = { COUNT = 2 }
+		#POD_commit_heinous_act_effect = yes #Lore wise this should be the case but disabled for consistency with the passive effect of the perk (virtually impossible to escape prison passive)
+		POD_static_stress_gain = { COUNT = rift_user_stress_gain }
+
+		hidden_effect = {
+		    scope:targetdefender = {
+			    add_character_flag = {
+				    flag = lost_duel
+					days = 10
+				}
+				POD_static_stress_gain = { COUNT = rift_target_stress_gain }
+				add_character_modifier = {
+					modifier = glimpse_of_the_pain_modifier
+					months = 1 #Should theoretically start at the time they are released but it doesn't really matter all that much since it is just a bit of flavour (Maybe an alternative longer rift_imprison modifier with stress based effects might be better?)
+				}
+			}
+			save_scope_value_as = {
+				name = imprison_fight_duel
+				value = flag:attacker_won_rift
+			}	
+		    scope:attacker = {
+				trigger_event = {
+					id = POD_imprison.102
+					days = 2
+				}
+			}
+		}
+	}
+	
+	
+	option = {
+	    name = POD_imprison.002.option.g
+		custom_tooltip = POD_imprison.002.option.g.tt
+	}
+}
+
+
+
+
+POD_imprison.102 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_imprison.102.title
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_dominate
+				}
+				desc = POD_imprison.102.desc.dominate
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_presence
+				}
+				desc = POD_imprison.102.desc.presence
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won
+				}
+				desc = POD_imprison.102.desc.prowess
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_marshal
+				}
+				desc = POD_imprison.102.desc.marshal
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_coterie
+				}
+				desc = POD_imprison.102.desc.coterie
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_marshal_hunter
+				}
+				desc = POD_imprison.102.desc.hunter
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_tears
+				}
+				desc = POD_imprison.102.desc.tears
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_won_rift
+				}
+				desc = POD_imprison.102.desc.rift
+			}
+		}
+	}
+	theme = prison
+	left_portrait = {
+		character = scope:attacker
+		animation = personality_callous
+	}
+	
+	
+	right_portrait = {
+		character = scope:targetdefender
+		animation = severelywounded 
+	}
+	
+	immediate = {
+	    if = {
+		    limit = {
+			    OR = {    
+					scope:imprison_fight_duel = flag:attacker_won
+					scope:imprison_fight_duel = flag:attacker_won_marshal
+					scope:imprison_fight_duel = flag:attacker_won_marshal_hunter
+				}
+				POD_damage_spirit_custom_trigger = {
+					RECIPIENT = scope:targetdefender
+					ACTOR = scope:sc_attacker
+				}
+			}
+			scope:targetdefender = {
+		        increase_wounds_no_death_effect = { REASON = fight } 
+		    }
+		}
+	  
+	}
+	
+	option = {
+		name = POD_imprison.102.option.a
+		hidden_effect = {
+		    scope:targetdefender = {
+			    add_character_flag = {
+				    flag = lost_duel
+					days = 10
+				}
+			}
+		    scope:attacker = {
+			    rightfully_imprison_character_effect = {
+				     TARGET = scope:targetdefender
+					 IMPRISONER = scope:attacker
+				}
+			}	
+		}
+	}
+}
+
+POD_imprison.202 = {
+    type = character_event
+	content_source = dlc_POD 
+	title = POD_imprison.202.title
+	desc = {
+	    first_valid = {
+		    triggered_desc = {
+			    trigger = {
+				    scope:imprison_fight_duel = flag:attacker_marshal_lost_hunter
+				}
+				desc = POD_imprison.202.desc.hunter
+			}
+			desc = POD_imprison.202.desc
+		}
+	}
+	
+	theme = vampire 
+	left_portrait = {
+	    character = scope:attacker
+		animation = rage
+	}
+	
+	right_portrait = {
+	    character = scope:targetdefender
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	    if = {
+		    limit = { 
+				scope:imprison_fight_duel = flag:attacker_lost 
+				POD_damage_spirit_custom_trigger = {
+					RECIPIENT = scope:sc_attacker
+					ACTOR = scope:targetdefender
+				}
+			}
+			scope:attacker = {
+				increase_wounds_no_death_effect = { REASON = fight }
+		    }
+		}
+		
+		if = {
+		    limit = { 
+			    OR = {    
+					scope:imprison_fight_duel = flag:attacker_marshal_lost 
+					scope:imprison_fight_duel = flag:attacker_marshal_lost_hunter
+				}
+				POD_damage_spirit_custom_trigger = {
+					RECIPIENT = scope:attacker_marshal
+					ACTOR = scope:targetdefender
+				}
+			}
+			scope:attacker_marshal = {
+				increase_wounds_no_death_effect = { REASON = fight }
+		    }
+		}		
+	}
+	
+	option = {
+	    name = POD_imprison.202.option.a
+		
+		scope:targetdefender = {
+			add_opinion = {
+			target = scope:attacker
+			modifier = attempted_imprisonment_opinion
+				}
+			}			
+	}
+}
+
+POD_imprison.302 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD.imprison.302.title
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_lost_dominate
+				}
+				desc = POD_imprison.302.desc.dominate
+			}
+			triggered_desc = {
+				trigger = {
+					scope:imprison_fight_duel = flag:attacker_lost_presence
+				}
+				desc = POD_imprison.302.desc.presence
+			}
+		}	
+	}
+	theme = vampire
+	
+	left_portrait = {
+	    character = scope:attacker
+		animation = stress
+	}
+	right_portrait = {
+	    character = scope:targetdefender
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_imprison.302.option.a
+		
+		duel = {
+		    skill = prowess
+			value = scope:targetdefender.prowess
+			desc = POD_imprison.002.option.c.desc
+			
+			20 = {
+			    desc = POD_imprison.002.option.success
+				
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				custom_tooltip = POD_imprison.002.option.c.tt.attacker_wins
+				
+				hidden_effect = {	
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_won
+					}
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.102
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+			20 = {
+			    desc = POD_imprison.002.option.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				custom_tooltip = POD_imprison.002.option.c.tt.attacker_lost
+				
+				hidden_effect = {
+					save_scope_value_as = {
+						name = imprison_fight_duel
+						value = flag:attacker_lost
+					}	
+					scope:attacker = {
+						trigger_event = {
+							id = POD_imprison.202
+							days = 2
+						}
+					}
+				}
+				
+			}
+			
+		}
+		hidden_effect = {
+		    if = {
+		        limit = { has_character_flag = duel_lost_dominate }
+			    remove_character_flag = duel_lost_dominate
+		    }
+		    if = {
+		        limit = { has_character_flag = duel_lost_presence }
+			    remove_character_flag = duel_lost_presence
+		    }
+		}
+	}
+	
+	option = {
+	    name = POD_imprison.302.option.b
+		custom_tooltip = POD_imprison.302.option.b.tt
+		hidden_effect = {
+		    scope:targetdefender = {
+				add_hook = {
+					target = scope:attacker
+					type = favor_hook
+				}	
+			}
+			if = {
+		        limit = { has_character_flag = duel_lost_dominate }
+			    remove_character_flag = duel_lost_dominate
+		    }
+		    if = {
+		        limit = { has_character_flag = duel_lost_presence }
+			    remove_character_flag = duel_lost_presence
+		    }
+		}
+		
+	}
+}

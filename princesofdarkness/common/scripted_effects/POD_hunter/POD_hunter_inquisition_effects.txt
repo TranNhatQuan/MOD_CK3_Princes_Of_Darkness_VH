@@ -1,0 +1,4080 @@
+﻿# Reusable effects
+
+# Need to pass TITLE
+POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+	create_title_and_vassal_change = {
+		# setting this to "usurped" should hopefully fix the insta-enthralled inquisitors
+		type = usurped
+		save_scope_as = change
+		add_claim_on_loss = no
+	}
+	
+	$TITLE$ = {
+		change_title_holder = {
+			holder = prev
+			change = scope:change
+			take_baronies = yes
+		}
+		add_county_modifier = {
+			modifier = POD_heart_of_rebellion_modifier
+			years = 10
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+}
+
+POD_inquisition_gm_after_creation_effect = {
+	#add_character_modifier = POD_war_fervor_modifier
+	add_character_flag = immune_to_disease
+	
+	house ?= { POD_set_colorscheme_white = yes }
+	
+	add_piety_level = 4
+	add_gold = 5000
+	add_prestige = 1000
+	add_piety = 5000
+	
+	# Start declaring wars on the highest difficulty
+	trigger_event = {
+		id = PODinquisition.1000
+		days = 5
+	}
+	
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		POD_become_scripted_conqueror = yes
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		add_character_modifier = {
+			modifier = ai_extreme_conqueror_modifier
+		}
+	}
+	
+	# Become independent
+	hidden_effect = {
+		if = {
+			limit = { is_imprisoned = yes }
+			release_from_prison = yes
+		}
+	}
+	create_title_and_vassal_change = {
+		type = independency
+		save_scope_as = going_independent
+		add_claim_on_loss = no
+	}
+	becomes_independent = {
+		change = scope:going_independent
+	}
+	resolve_title_and_vassal_change = scope:going_independent
+	
+	# for naughty players who switch game rules while inquisitors are spawning
+	POD_achiev_redlist_eligibility_check = yes
+}
+
+#France
+
+find_title_for_frenchinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_uses = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_uses = {
+			save_scope_as = frenchinquisition_county
+		}
+	}
+	else = {
+		title:k_grand_court = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_frenchinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_grand_court.holder }
+						title:k_grand_court.holder = {
+							OR = {
+								this = scope:potential_frenchinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_frenchinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = frenchinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:frenchinquisition_county } }
+		debug_log = "No frenchinquisition title found, frenchinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:frenchinquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_west_francia }
+				}
+				trigger_event = PODinquisition.1001
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0003
+			days = { 5 10 }
+		}
+	}
+}
+
+create_frenchgm_effect = {
+	create_character = {
+		name = "Samson_de_Saint_Germain"
+		age = 32
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:french
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_vigilance
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		trait = ha_patris_mastery
+		trait = oculi_wine
+		random_traits = no
+		location = title:c_uses.title_province
+		save_scope_as = frenchgm
+		after_creation = {
+			give_nickname = nick_grandmaster_michel
+			dynasty = { add_dynasty_modifier = custom_lay_order_modifier }
+		}
+	}
+	scope:frenchgm = {
+		add_pressed_claim = title:k_grand_court
+		add_pressed_claim = title:d_valois
+		add_pressed_claim = title:d_berry
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_uses
+		}
+		
+		spawn_first_frenchgm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+		
+		# create_story = {
+		# type = story_frenchgm_invasion
+		# save_scope_as = story
+		# }
+	}
+	# scope:story = {
+	# set_variable = {
+	# name = frenchgm
+	# value = scope:frenchgm
+	# }
+	# set_variable = {
+	# name = frenchinquisition_county
+	# value = scope:frenchinquisition_county
+	# }
+	# }
+	# random_player = {
+	# limit = {
+	# any_realm_province = {
+	# geographical_region = ghw_region_italy
+	# }
+	# is_vampire_trigger = yes
+	# highest_held_title_tier > tier_county
+	# }
+	# trigger_event = {
+	# id = PODadventurers.1002
+	# days = 5
+	# }
+	# }
+}
+
+spawn_first_frenchgm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_frenchgm_event_troops
+			levies = {
+				value = 1000
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = knights_hospitaler_maa
+				stacks = 200
+			}
+			location = scope:frenchgm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_frenchgm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:frenchgm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_frenchgm_event_troops
+			men_at_arms = {
+				type = crossbowmen
+				stacks = 400
+			}
+			men_at_arms = {
+				type = chasseur
+				stacks = 400
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 1000
+			}
+			location = scope:frenchgm.capital_province
+		}
+	}
+	spawn_frenchgm_court_effect = yes
+}
+
+### Knights
+spawn_frenchgm_court_effect = {
+	create_character = {
+		name = "Matthieu_de_Sens"
+		age = 30
+		gender = male
+		dynasty = scope:frenchgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:french
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:frenchgm
+	}
+	create_character = {
+		name = "Juliette_Forge"
+		age = 28
+		gender = female
+		dynasty = scope:frenchgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:french
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_penitent
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:frenchgm
+	}
+}
+
+
+#Britain
+
+find_title_for_britishinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_dorset = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_dorset = {
+			save_scope_as = britishinquisition_county
+		}
+	}
+	else = {
+		title:k_england = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_britishinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_england.holder }
+						title:k_england.holder = {
+							OR = {
+								this = scope:potential_britishinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_britishinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = britishinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:britishinquisition_county } }
+		debug_log = "No britishinquisition title found, britishinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:britishinquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_west_britannia }
+				}
+				trigger_event = PODinquisition.1002
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0005
+			days = { 5 10 }
+		}
+	}
+}
+
+create_britishgm_effect = {
+	create_character = {
+		name = "Katherine_Potier"
+		age = 32
+		gender = female
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:breton
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_hierophant
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		trait = ha_patris_mastery
+		trait = oculi_wine
+		random_traits = no
+		location = title:c_dorset.title_province
+		save_scope_as = britishgm
+		after_creation = {
+			give_nickname = nick_espy_herault
+			dynasty = { add_dynasty_modifier = custom_contemplative_order_modifier }
+		}
+	}
+	scope:britishgm = {
+		add_pressed_claim = title:k_england
+		add_pressed_claim = title:d_bedford
+		add_pressed_claim = title:d_canterbury
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_dorset
+		}
+		
+		spawn_first_britishgm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_britishgm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_britishgm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = knights_st_thomas_maa
+				stacks = 200
+			}
+			location = scope:britishgm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_britishgm_event_troops
+		levies = {
+			value = 1000
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:britishgm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_britishgm_event_troops
+			men_at_arms = {
+				type = longbowmen
+				stacks = 800
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 800
+			}
+			location = scope:britishgm.capital_province
+		}
+	}
+	spawn_britishgm_court_effect = yes
+}
+
+### Knights
+spawn_britishgm_court_effect = {
+	create_character = {
+		name = "Richard_of_Somerset"
+		age = 30
+		gender = male
+		dynasty = scope:britishgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:english
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_sanguine
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:britishgm
+	}
+	create_character = {
+		name = "Henry_Lebourd"
+		age = 28
+		gender = male
+		dynasty = scope:britishgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:english
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_years
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:britishgm
+	}
+}
+
+#Germany
+
+find_title_for_germaninquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_dortmund = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_dortmund = {
+			save_scope_as = germaninquisition_county
+		}
+	}
+	else = {
+		title:k_east_francia = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_germaninquisition_county
+					trigger_if = {
+						limit = { exists = title:k_east_francia.holder }
+						title:k_east_francia.holder = {
+							OR = {
+								this = scope:potential_germaninquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_germaninquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = germaninquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:germaninquisition_county } }
+		debug_log = "No germaninquisition title found, germaninquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:germaninquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_west_germania }
+				}
+				trigger_event = PODinquisition.1003
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0007
+			days = { 5 10 }
+		}
+	}
+}
+
+create_germangm_effect = {
+	create_character = {
+		name = "Ludwig_von_Erlichshausen"
+		age = 43
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:bavarian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = order_member
+		trait = orison_penitent
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		trait = ha_filius_mastery
+		trait = acre_auto
+		random_traits = no
+		location = title:c_dortmund.title_province
+		save_scope_as = germangm
+		after_creation = {
+			give_nickname = nick_teutonic_grandmaster
+		}
+	}
+	scope:germangm = {
+		add_pressed_claim = title:k_east_francia
+		add_pressed_claim = title:d_upper_lorraine
+		add_pressed_claim = title:d_lower_lorraine
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_dortmund
+		}
+		
+		spawn_first_germangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_germangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_germangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = teutonic_knights_maa
+				stacks = 250
+			}
+			location = scope:germangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_germangm_event_troops
+		levies = {
+			value = 1000
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:germangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_germangm_event_troops
+			men_at_arms = {
+				type = crossbowmen
+				stacks = 400
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 400
+			}
+			men_at_arms = {
+				type = landsknecht
+				stacks = 800
+			}
+			location = scope:germangm.capital_province
+		}
+	}
+	spawn_germangm_court_effect = yes
+}
+
+### Knights
+spawn_germangm_court_effect = {
+	create_character = {
+		name = "Heinrich_Reuss"
+		age = 30
+		gender = male
+		dynasty = scope:germangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:bavarian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = order_member
+		trait = orison_sanguine
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		employer = scope:germangm
+	}
+	create_character = {
+		name = "Konrad_von_Trier"
+		age = 28
+		gender = male
+		dynasty = scope:germangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:bavarian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = order_member
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		employer = scope:germangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+
+#Iberia
+
+find_title_for_iberianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_braganza = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_braganza = {
+			save_scope_as = iberianinquisition_county
+		}
+	}
+	else = {
+		title:k_portugal = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_iberianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_portugal.holder }
+						title:k_portugal.holder = {
+							OR = {
+								this = scope:potential_iberianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_iberianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = iberianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:iberianinquisition_county } }
+		debug_log = "No iberianinquisition title found, iberianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:iberianinquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_west_iberia }
+				}
+				trigger_event = PODinquisition.1005
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0009
+			days = { 5 10 }
+		}
+	}
+}
+
+create_iberiangm_effect = {
+	create_character = {
+		name = "Fernando_Rodrigues_de_Sequeira"
+		age = 45
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:portuguese
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = order_member
+		trait = orison_vigilance
+		trait = supehunter
+		trait = strategist
+		trait = ha_filius_mastery
+		trait = acre_auto
+		random_traits = no
+		location = title:c_braganza.title_province
+		save_scope_as = iberiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_knight_aviz
+			dynasty = { add_dynasty_modifier = custom_knightly_order_modifier }
+		}
+	}
+	scope:iberiangm = {
+		add_pressed_claim = title:k_portugal
+		add_pressed_claim = title:d_leon
+		add_pressed_claim = title:d_porto
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_braganza
+		}
+		
+		spawn_first_iberiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_iberiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_iberiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = knights_calatrava_maa
+				stacks = 200
+			}
+			location = scope:iberiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_iberiangm_event_troops
+		levies = {
+			value = 1000
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:iberiangm.capital_province
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_iberiangm_event_troops
+		levies = {
+			value = 1000
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:iberiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_iberiangm_event_troops
+			men_at_arms = {
+				type = caballero
+				stacks = 800
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 800
+			}
+			location = scope:iberiangm.capital_province
+		}
+	}
+	spawn_iberiangm_court_effect = yes
+}
+
+### Knights
+spawn_iberiangm_court_effect = {
+	create_character = {
+		name = "Gomes_Eanes"
+		age = 30
+		gender = male
+		dynasty = scope:iberiangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:portuguese
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = order_member
+		trait = orison_talespinner
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		father = scope:iberiangm
+		employer = scope:iberiangm
+	}
+	create_character = {
+		name = "Fernao_das_Regras"
+		age = 28
+		gender = male
+		dynasty = scope:iberiangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:portuguese
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = order_member
+		trait = orison_noah
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		father = scope:iberiangm
+		employer = scope:iberiangm
+	}
+}
+
+
+
+#Scandinavia
+
+find_title_for_scandinavianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_sodermannaland = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_sodermannaland = {
+			save_scope_as = scandinavianinquisition_county
+		}
+	}
+	else = {
+		title:k_sweden = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_scandinavianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_sweden.holder }
+						title:k_sweden.holder = {
+							OR = {
+								this = scope:potential_scandinavianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_scandinavianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = scandinavianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:scandinavianinquisition_county } }
+		debug_log = "No scandinavianinquisition title found, scandinavianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:scandinavianinquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_west_iberia }
+				}
+				trigger_event = PODinquisition.1006
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0011
+			days = { 5 10 }
+		}
+	}
+}
+
+create_scandinaviangm_effect = {
+	create_character = {
+		name = "Albjorn"
+		age = 33
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:swedish
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_noah
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		trait = ha_patris_mastery
+		trait = oculi_wine
+		random_traits = no
+		location = title:c_sodermannaland.title_province
+		save_scope_as = scandinaviangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			dynasty = { add_dynasty_modifier = custom_lay_order_modifier }
+			give_nickname = nick_self_made_knight
+		}
+	}
+	scope:scandinaviangm = {
+		add_pressed_claim = title:k_sweden
+		add_pressed_claim = title:d_svealand
+		add_pressed_claim = title:d_bergslagen
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_sodermannaland
+		}
+		
+		spawn_first_scandinaviangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_scandinaviangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_scandinaviangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:scandinaviangm.capital_province
+		}
+	}
+	
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_easy
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_scandinaviangm_event_troops
+			levies = {
+				value = 1000
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			location = scope:scandinaviangm.capital_province
+		}
+	}
+	
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_scandinaviangm_event_troops
+			men_at_arms = {
+				type = crossbowmen
+				stacks = 400
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 800
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 400
+			}
+			location = scope:scandinaviangm.capital_province
+		}
+	}
+	spawn_scandinaviangm_court_effect = yes
+}
+
+### Knights
+spawn_scandinaviangm_court_effect = {
+	create_character = {
+		name = "Linder"
+		age = 30
+		gender = male
+		dynasty = scope:scandinaviangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:swedish
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_talespinner
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:scandinaviangm
+	}
+	create_character = {
+		name = "Dagher"
+		age = 28
+		gender = male
+		dynasty = scope:scandinaviangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:swedish
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = oculi_shepherd
+		#trait = oculi_sight
+		#trait = oculi_liturgy
+		random_traits = no
+		employer = scope:scandinaviangm
+	}
+}
+
+
+#Italy
+
+find_title_for_italianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_viterbo = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_viterbo = {
+			save_scope_as = italianinquisition_county
+		}
+	}
+	else = {
+		title:k_romagna = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_italianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_romagna.holder }
+						title:k_romagna.holder = {
+							OR = {
+								this = scope:potential_italianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_italianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = italianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:italianinquisition_county } }
+		debug_log = "No italianinquisition title found, italianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:italianinquisition_county = {
+			set_county_faith = faith:shadowinquisition
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_europe_south_italy  }
+				}
+				trigger_event = PODinquisition.1007
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0013
+			days = { 5 10 }
+		}
+	}
+}
+
+create_italiangm_effect = {
+	create_character = {
+		name = "Jean_de_Lastic"
+		age = 45
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:occitan
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = order_member
+		trait = orison_hierophant
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		trait = ha_filius_mastery
+		trait = acre_auto
+		random_traits = no
+		location = title:c_viterbo.title_province
+		save_scope_as = italiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_savior_rhodes
+			dynasty = { add_dynasty_modifier = custom_knightly_order_modifier }
+		}
+	}
+	scope:italiangm = {
+		add_pressed_claim = title:k_romagna
+		add_pressed_claim = title:d_latium
+		add_pressed_claim = title:d_spoleto
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_viterbo
+		}
+		
+		spawn_first_italiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_italiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_italiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:italiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = yes
+		name = first_italiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 50
+		}
+		location = scope:italiangm.capital_province
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_italiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:italiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_italiangm_event_troops
+			men_at_arms = {
+				type = crossbowmen
+				stacks = 800
+			}
+			men_at_arms = {
+				type = picchieri
+				stacks = 1200
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 400
+			}
+			location = scope:italiangm.capital_province
+		}
+	}
+	spawn_italiangm_court_effect = yes
+}
+
+### Knights
+spawn_italiangm_court_effect = {
+	create_character = {
+		name = "Jacques_de_Mily"
+		age = 30
+		gender = male
+		dynasty = scope:italiangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:occitan
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = order_member
+		trait = orison_innocent
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		father = scope:italiangm
+		employer = scope:italiangm
+	}
+	create_character = {
+		name = "Piero_Raimondo_Zacosta"
+		age = 28
+		gender = male
+		dynasty = scope:italiangm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:catalan
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = order_member
+		trait = orison_compass
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		father = scope:italiangm
+		employer = scope:italiangm
+	}
+}
+
+#Levant
+
+find_title_for_levantinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_ghazza = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_ghazza = {
+			save_scope_as = levantinquisition_county
+		}
+	}
+	else = {
+		title:k_olives = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_levantinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_olives.holder }
+						title:k_olives.holder = {
+							OR = {
+								this = scope:potential_levantinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_levantinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = levantinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:levantinquisition_county } }
+		debug_log = "No levantinquisition title found, levantinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:levantinquisition_county = {
+			set_county_faith = faith:ikhwan_al_safa
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_middle_east_jerusalem  }
+				}
+				trigger_event = PODinquisition.1008
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0015
+			days = { 5 10 }
+		}
+	}
+}
+
+create_levantgm_effect = {
+	create_character = {
+		name = "Antonio_da_Mugnano"
+		age = 43
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:italian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_compass
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		random_traits = no
+		location = title:c_ghazza.title_province
+		save_scope_as = levantgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_custodian_holy
+		}
+	}
+	scope:levantgm = {
+		add_pressed_claim = title:k_olives
+		add_pressed_claim = title:d_oultrejourdain
+		add_pressed_claim = title:d_palestine
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_ghazza
+		}
+		
+		spawn_first_levantgm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_levantgm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_levantgm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 200
+			}
+			men_at_arms = {
+				type = knights_hospitaler_maa
+				stacks = 200
+			}
+			location = scope:levantgm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = yes
+		name = first_levantgm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 50
+		}
+		location = scope:levantgm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_levantgm_event_troops
+			men_at_arms = {
+				type = chasseur
+				stacks = 800
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 800
+			}
+			location = scope:levantgm.capital_province
+		}
+	}
+	spawn_levantgm_court_effect = yes
+}
+
+### Knights
+spawn_levantgm_court_effect = {
+	create_character = {
+		name = "Gabriele_Mezzavacca"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:italian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_sanguine
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:levantgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Paolo_d_Albenga"
+		age = 28
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:italian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:levantgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+#Arabia
+
+find_title_for_arabianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_thalabiya = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_thalabiya = {
+			save_scope_as = arabianinquisition_county
+		}
+	}
+	else = {
+		title:k_arabia = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_arabianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_arabia.holder }
+						title:k_arabia.holder = {
+							OR = {
+								this = scope:potential_arabianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_arabianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = arabianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:arabianinquisition_county } }
+		debug_log = "No arabianinquisition title found, arabianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:arabianinquisition_county = {
+			set_county_faith = faith:ikhwan_al_safa
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_middle_east_arabia  }
+				}
+				trigger_event = PODinquisition.1009
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0017
+			days = { 5 10 }
+		}
+	}
+}
+
+create_arabiangm_effect = {
+	create_character = {
+		name = "Aarif"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:ikhwan_al_safa
+		culture = culture:bedouin
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_innocent
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		random_traits = no
+		location = title:c_thalabiya.title_province
+		save_scope_as = arabiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_guardian_purity
+		}
+	}
+	scope:arabiangm = {
+		add_pressed_claim = title:k_arabia
+		add_pressed_claim = title:d_jawf
+		add_pressed_claim = title:d_amman
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_thalabiya
+		}
+		
+		spawn_first_arabiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_arabiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_arabiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = mubarizun
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:arabiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_arabiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = mubarizun
+			stacks = 200
+		}
+		location = scope:arabiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_arabiangm_event_troops
+			men_at_arms = {
+				type = mubarizun
+				stacks = 800
+			}
+			men_at_arms = {
+				type = mulaththamun
+				stacks = 800
+			}
+			location = scope:arabiangm.capital_province
+		}
+	}
+	spawn_arabiangm_court_effect = yes
+}
+
+### Knights
+spawn_arabiangm_court_effect = {
+	create_character = {
+		name = "Shujah"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:bedouin
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_compass
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:arabiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Mukhtar"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:bedouin
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_vigilance
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:arabiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+#Persia
+
+find_title_for_persianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_ardestan = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_ardestan = {
+			save_scope_as = persianinquisition_county
+		}
+	}
+	else = {
+		title:k_persia = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_persianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_persia.holder }
+						title:k_persia.holder = {
+							OR = {
+								this = scope:potential_persianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_persianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = persianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:persianinquisition_county } }
+		debug_log = "No persianinquisition title found, persianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:persianinquisition_county = {
+			set_county_faith = faith:ikhwan_al_safa
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_middle_east_persia  }
+				}
+				trigger_event = PODinquisition.1010
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0019
+			days = { 5 10 }
+		}
+	}
+}
+
+create_persiangm_effect = {
+	create_character = {
+		name = "Khudayar"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:ikhwan_al_safa
+		culture = culture:persian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_hierophant
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		random_traits = no
+		location = title:c_ardestan.title_province
+		save_scope_as = persiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_sayyad
+		}
+	}
+	scope:persiangm = {
+		add_pressed_claim = title:k_persia
+		add_pressed_claim = title:d_kirman
+		add_pressed_claim = title:d_isfahan
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_ardestan
+		}
+		
+		spawn_first_persiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_persiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_persiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = ayyar
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:persiangm.capital_province
+		}
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_easy
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_persiangm_event_troops
+			levies = {
+				value = 1000
+			}
+			men_at_arms = {
+				type = ayyar
+				stacks = 50
+			}
+			location = scope:persiangm.capital_province
+		}
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_persiangm_event_troops
+			men_at_arms = {
+				type = bowmen
+				stacks = 800
+			}
+			men_at_arms = {
+				type = ayyar
+				stacks = 800
+			}
+			location = scope:persiangm.capital_province
+		}
+	}
+	spawn_persiangm_court_effect = yes
+}
+
+### Knights
+spawn_persiangm_court_effect = {
+	create_character = {
+		name = "Vishtasb"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:persian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_years
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:persiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Bozorg"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:persian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_penitent
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:persiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+#India
+
+find_title_for_indianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_sonda = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_sonda = {
+			save_scope_as = indianinquisition_county
+		}
+	}
+	else = {
+		title:k_sindh = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_indianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_sindh.holder }
+						title:k_sindh.holder = {
+							OR = {
+								this = scope:potential_indianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_indianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = indianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:indianinquisition_county } }
+		debug_log = "No indianinquisition title found, indianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:indianinquisition_county = {
+			set_county_faith = faith:independenthunters
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_india  }
+				}
+				trigger_event = PODinquisition.1011
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0021
+			days = { 5 10 }
+		}
+	}
+}
+
+create_indiangm_effect = {
+	create_character = {
+		name = "Prabhavati"
+		age = 30
+		gender = female
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:independenthunters
+		culture = culture:rajput
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_years
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		random_traits = no
+		location = title:c_sonda.title_province
+		save_scope_as = indiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_moksha
+		}
+	}
+	scope:indiangm = {
+		add_pressed_claim = title:k_sindh
+		add_pressed_claim = title:d_sauvira
+		add_pressed_claim = title:d_bhakkar
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_sonda
+		}
+		
+		spawn_first_indiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_indiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_indiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = khandayat
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:indiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_indiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = khandayat
+			stacks = 200
+		}
+		location = scope:indiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_indiangm_event_troops
+			men_at_arms = {
+				type = paiks
+				stacks = 800
+			}
+			men_at_arms = {
+				type = khandayat
+				stacks = 200
+			}
+			men_at_arms = {
+				type = war_elephant
+				stacks = 100
+			}
+			location = scope:indiangm.capital_province
+		}
+	}
+	spawn_indiangm_court_effect = yes
+}
+
+### Knights
+spawn_indiangm_court_effect = {
+	create_character = {
+		name = "Valhana"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:independenthunters
+		culture = culture:rajput
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_innocent
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:indiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Sahajapala"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:independenthunters
+		culture = culture:persian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_noah
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:indiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+#Maghreb
+
+find_title_for_maghrebinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_annaba = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_annaba = {
+			save_scope_as = maghrebinquisition_county
+		}
+	}
+	else = {
+		title:k_africa = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_maghrebinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_africa.holder }
+						title:k_africa.holder = {
+							OR = {
+								this = scope:potential_maghrebinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_maghrebinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = maghrebinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:maghrebinquisition_county } }
+		debug_log = "No maghrebinquisition title found, maghrebinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:maghrebinquisition_county = {
+			set_county_faith = faith:ikhwan_al_safa
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = ghw_region_north_africa  }
+				}
+				trigger_event = PODinquisition.1012
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0023
+			days = { 5 10 }
+		}
+	}
+}
+
+create_maghrebgm_effect = {
+	create_character = {
+		name = "Mehtar"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:ikhwan_al_safa
+		culture = culture:maghrebi
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_compass
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		random_traits = no
+		location = title:c_annaba.title_province
+		save_scope_as = maghrebgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_sayyad
+		}
+	}
+	scope:maghrebgm = {
+		add_pressed_claim = title:k_africa
+		add_pressed_claim = title:d_kroumerie
+		add_pressed_claim = title:d_tunis
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_annaba
+		}
+		
+		spawn_first_maghrebgm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_maghrebgm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_maghrebgm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = abudrar
+				stacks = 100
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:maghrebgm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_maghrebgm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = abudrar
+			stacks = 400
+		}
+		location = scope:maghrebgm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_maghrebgm_event_troops
+			men_at_arms = {
+				type = sahel_horsemen
+				stacks = 800
+			}
+			men_at_arms = {
+				type = camel_rider
+				stacks = 800
+			}
+			location = scope:maghrebgm.capital_province
+		}
+	}
+	spawn_maghrebgm_court_effect = yes
+}
+
+### Knights
+spawn_maghrebgm_court_effect = {
+	create_character = {
+		name = "Murshid"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:maghrebi
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_sanguine
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:maghrebgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Tajaddin"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:maghrebi
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:maghrebgm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+#Egypt
+
+find_title_for_egyptianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_awjila = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_awjila = {
+			save_scope_as = egyptianinquisition_county
+		}
+	}
+	else = {
+		title:k_egypt = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_egyptianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_egypt.holder }
+						title:k_egypt.holder = {
+							OR = {
+								this = scope:potential_egyptianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_egyptianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = egyptianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:egyptianinquisition_county } }
+		debug_log = "No egyptianinquisition title found, egyptianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:egyptianinquisition_county = {
+			set_county_faith = faith:ikhwan_al_safa
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = world_africa_north_east  }
+				}
+				trigger_event = PODinquisition.1013
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0025
+			days = { 5 10 }
+		}
+	}
+}
+
+create_egyptiangm_effect = {
+	create_character = {
+		name = "Muzaffaraddin"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:ikhwan_al_safa
+		culture = culture:egyptian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_vigilance
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		random_traits = no
+		location = title:c_awjila.title_province
+		save_scope_as = egyptiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_baybars_revenge
+		}
+	}
+	scope:egyptiangm = {
+		add_pressed_claim = title:k_egypt
+		add_pressed_claim = title:d_cyrenaica
+		add_pressed_claim = title:d_alexandria
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_awjila
+		}
+		
+		spawn_first_egyptiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_egyptiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_egyptiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = mubarizun
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:egyptiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = yes
+		name = first_egyptiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = mubarizun
+			stacks = 50
+		}
+		location = scope:egyptiangm.capital_province
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_egyptiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = mubarizun
+			stacks = 200
+		}
+		location = scope:egyptiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_egyptiangm_event_troops
+			men_at_arms = {
+				type = mubarizun
+				stacks = 400
+			}
+			men_at_arms = {
+				type = camel_rider
+				stacks = 400
+			}
+			men_at_arms = {
+				type = archers_of_the_nile
+				stacks = 800
+			}
+			location = scope:egyptiangm.capital_province
+		}
+	}
+	spawn_egyptiangm_court_effect = yes
+}
+
+### Knights
+spawn_egyptiangm_court_effect = {
+	create_character = {
+		name = "Abisalom"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:egyptian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_innocent
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:egyptiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Firuz"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:ikhwan_al_safa
+		culture = culture:egyptian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_talespinner
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:egyptiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+#Carpathian
+
+find_title_for_carpathianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_calarasi = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_calarasi = {
+			save_scope_as = carpathianinquisition_county
+		}
+	}
+	else = {
+		title:k_dacia = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_carpathianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_dacia.holder }
+						title:k_dacia.holder = {
+							OR = {
+								this = scope:potential_carpathianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_carpathianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = carpathianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:carpathianinquisition_county } }
+		debug_log = "No carpathianinquisition title found, carpathianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:carpathianinquisition_county = {
+			set_county_faith = faith:akritai
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = custom_carpathia  }
+				}
+				trigger_event = PODinquisition.1014
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0027
+			days = { 5 10 }
+		}
+	}
+}
+
+create_carpathiangm_effect = {
+	create_character = {
+		name = "Radu_Prodanic"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:vlach
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		trait = orison_hierophant
+		random_traits = no
+		location = title:c_calarasi.title_province
+		save_scope_as = carpathiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_red_crossed_dragon
+		}
+	}
+	scope:carpathiangm = {
+		add_pressed_claim = title:k_dacia
+		add_pressed_claim = title:d_transylvanian_alps
+		add_pressed_claim = title:d_muntenia
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_calarasi
+		}
+		
+		spawn_first_carpathiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_carpathiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_carpathiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = zbrojnosh
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:carpathiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_carpathiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = zbrojnosh
+			stacks = 200
+		}
+		location = scope:carpathiangm.capital_province
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_carpathiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = zbrojnosh
+			stacks = 200
+		}
+		location = scope:carpathiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_carpathiangm_event_troops
+			men_at_arms = {
+				type = zbrojnosh
+				stacks = 400
+			}
+			men_at_arms = {
+				type = bowmen
+				stacks = 800
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 400
+			}
+			location = scope:carpathiangm.capital_province
+		}
+	}
+	spawn_carpathiangm_court_effect = yes
+}
+
+### Knights
+spawn_carpathiangm_court_effect = {
+	create_character = {
+		name = "Vintila"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:vlach
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_compass
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:carpathiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Teodor"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:vlach
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_vigilance
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:carpathiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+#Byzantine
+
+find_title_for_byzantineinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_serres = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_serres = {
+			save_scope_as = byzantineinquisition_county
+		}
+	}
+	else = {
+		title:k_thessalonika = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_byzantineinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_thessalonika.holder }
+						title:k_thessalonika.holder = {
+							OR = {
+								this = scope:potential_byzantineinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_byzantineinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = byzantineinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:byzantineinquisition_county } }
+		debug_log = "No byzantineinquisition title found, byzantineinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:byzantineinquisition_county = {
+			set_county_faith = faith:akritai
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					OR = {
+						capital_province = { geographical_region = world_europe_south_east  }
+						capital_province = { geographical_region = world_asia_minor  }
+					}
+				}
+				trigger_event = PODinquisition.1015
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0029
+			days = { 5 10 }
+		}
+	}
+}
+
+create_byzantinegm_effect = {
+	create_character = {
+		name = "Hubert_de_Caux"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:french
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_penitent
+		trait = supehunter
+		trait = strategist
+		trait = unyielding_defender
+		random_traits = no
+		location = title:c_serres.title_province
+		save_scope_as = byzantinegm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_blessed_lady
+		}
+	}
+	scope:byzantinegm = {
+		add_pressed_claim = title:k_thessalonika
+		add_pressed_claim = title:d_strymon
+		add_pressed_claim = title:d_thrace
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_serres
+		}
+		
+		spawn_first_byzantinegm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_byzantinegm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_byzantinegm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = palace_guards
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:byzantinegm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_byzantinegm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = palace_guards
+			stacks = 200
+		}
+		location = scope:byzantinegm.capital_province
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_byzantinegm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = palace_guards
+			stacks = 200
+		}
+		location = scope:byzantinegm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_byzantinegm_event_troops
+			men_at_arms = {
+				type = palace_guards
+				stacks = 400
+			}
+			men_at_arms = {
+				type = crossbowmen
+				stacks = 400
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 800
+			}
+			location = scope:byzantinegm.capital_province
+		}
+	}
+	spawn_byzantinegm_court_effect = yes
+}
+
+### Knights
+spawn_byzantinegm_court_effect = {
+	create_character = {
+		name = "Guilhelm"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:occitan
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:byzantinegm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Archibald"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:french
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_sanguine
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:byzantinegm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+#Russia
+
+find_title_for_russianinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_suzdal = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_suzdal = {
+			save_scope_as = russianinquisition_county
+		}
+	}
+	else = {
+		title:k_opolye = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_russianinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_opolye.holder }
+						title:k_opolye.holder = {
+							OR = {
+								this = scope:potential_russianinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_russianinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = russianinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:russianinquisition_county } }
+		debug_log = "No russianinquisition title found, russianinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:russianinquisition_county = {
+			set_county_faith = faith:akritai
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = ghw_region_russia  }
+				}
+				trigger_event = PODinquisition.1016
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0031
+			days = { 5 10 }
+		}
+	}
+}
+
+create_russiangm_effect = {
+	create_character = {
+		name = "Ivan_Dobrynich"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 10
+		faith = faith:akritai
+		culture = culture:russian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = orison_sanguine
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		random_traits = no
+		location = title:c_suzdal.title_province
+		save_scope_as = russiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+			give_nickname = nick_grandmaster_akritai
+		}
+	}
+	scope:russiangm = {
+		add_pressed_claim = title:k_opolye
+		add_pressed_claim = title:d_opolye
+		add_pressed_claim = title:d_ryazan
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_suzdal
+		}
+		
+		spawn_first_russiangm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_russiangm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_russiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = druzhina
+				stacks = 50
+			}
+			men_at_arms = {
+				type = witchhunters
+				stacks = 200
+			}
+			location = scope:russiangm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_russiangm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = druzhina
+			stacks = 200
+		}
+		location = scope:russiangm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_russiangm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = druzhina
+				stacks = 600
+			}
+			men_at_arms = {
+				type = bowmen
+				stacks = 600
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 400
+			}
+			location = scope:russiangm.capital_province
+		}
+	}
+	spawn_russiangm_court_effect = yes
+}
+
+### Knights
+spawn_russiangm_court_effect = {
+	create_character = {
+		name = "Vyshata"
+		age = 30
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:russian
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = orison_vigilance
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:russiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+	create_character = {
+		name = "Pavel"
+		age = 20
+		gender = male
+		dynasty = none
+		martial = 10
+		prowess = 30
+		faith = faith:akritai
+		culture = culture:russian
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_years
+		trait = supehunter
+		trait = lifestyle_blademaster
+		random_traits = no
+		employer = scope:russiangm
+		after_creation = {
+			POD_give_random_endowments_effect = yes
+		}
+	}
+}
+
+
+#Poland
+
+find_title_for_polishinquisition_spawn_effect = {
+	if = { # The important thing is to not mess too much with players who can't resist
+		limit = {
+			title:c_stezycka = {
+				holder = { is_ai = yes }
+				OR = {
+					duchy = { is_title_created = yes }
+					duchy.holder = { is_ai = yes }
+				}
+			}
+		}
+		title:c_stezycka = {
+			save_scope_as = polishinquisition_county
+		}
+	}
+	else = {
+		title:k_poland = {
+			random_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				limit = {
+					tier = tier_county
+					holder = { is_ai = yes } # Let's not murder players
+					save_temporary_scope_as = potential_polishinquisition_county
+					trigger_if = {
+						limit = { exists = title:k_poland.holder }
+						title:k_poland.holder = {
+							OR = {
+								this = scope:potential_polishinquisition_county.holder
+								any_sub_realm_county = {
+									this = scope:potential_polishinquisition_county
+								}
+							}
+						}
+					}
+					# Either this should be the holder's only title, or it should NOT be their capital
+					trigger_if = {
+						limit = {
+							holder = {
+								any_sub_realm_county = { count > 1 }
+							}
+						}
+						NOT = {
+							this = holder.capital_county
+						}
+					}
+				}
+				weight = {
+					base = 1
+					# Massively prefer to avoid a player-held Duchies if possible
+					modifier = {
+						factor = 0.01
+						exists = duchy.holder
+						duchy.holder = { is_ai = no }
+					}
+				}
+				save_scope_as = polishinquisition_county
+			}
+		}
+	}
+	
+	if = { # Discard stuff from here on out
+		limit = { NOT = { exists = scope:polishinquisition_county } }
+		debug_log = "No polishinquisition title found, polishinquisition won't spawn"
+	}
+	# Convert the County and warn relevant people
+	else = {
+		scope:polishinquisition_county = {
+			set_county_faith = faith:akritai
+		}
+		
+		every_ruler = {
+			if = {
+				limit = {
+					is_ai = no
+					capital_province = { geographical_region = ghw_region_poland  }
+				}
+				trigger_event = PODinquisition.1017
+			}
+		}
+		
+		trigger_event = { # Random amount of time to prepare
+			id = PODinquisition.0033
+			days = { 5 10 }
+		}
+	}
+}
+
+create_polishgm_effect = {
+	create_character = {
+		name = "Piotr_Czartoryski"
+		age = 30
+		gender = male
+		dynasty = generate
+		martial = 10
+		prowess = 10
+		faith = faith:shadowinquisition
+		culture = culture:polish
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = ambitious
+		trait = order_member
+		trait = orison_years
+		trait = supehunter
+		trait = strategist
+		trait = reckless
+		trait = ha_filius_mastery
+		trait = acre_auto
+		random_traits = no
+		location = title:c_stezycka.title_province
+		save_scope_as = polishgm
+		after_creation = {
+			give_nickname = nick_grandmaster_dobrzyn
+			dynasty = { add_dynasty_modifier = custom_knightly_order_modifier }
+		}
+	}
+	scope:polishgm = {
+		add_pressed_claim = title:k_poland
+		add_pressed_claim = title:d_wielkopolska
+		add_pressed_claim = title:d_lesser_poland
+		
+		POD_inquisition_find_gm_title_and_assign_to_gm_effect = {
+			TITLE = title:c_stezycka
+		}
+		
+		spawn_first_polishgm_troops_effect = yes
+		
+		POD_inquisition_gm_after_creation_effect = yes
+	}
+}
+
+spawn_first_polishgm_troops_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = age_of_inquisition_difficulty_easy
+			}
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_polishgm_event_troops
+			levies = {
+				value = 2500
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 50
+			}
+			men_at_arms = {
+				type = knights_hospitaler_maa
+				stacks = 200
+			}
+			location = scope:polishgm.capital_province
+		}
+	}
+	spawn_army = {
+		uses_supply = no
+		inheritable = no
+		name = first_polishgm_event_troops
+		levies = {
+			value = 2500
+		}
+		men_at_arms = {
+			type = teutonic_knights
+			stacks = 200
+		}
+		location = scope:polishgm.capital_province
+	}
+	if = {
+		limit = {
+			has_game_rule = age_of_inquisition_difficulty_hard
+		}
+		spawn_army = {
+			uses_supply = no
+			inheritable = yes
+			name = first_polishgm_event_troops
+			men_at_arms = {
+				type = hussar
+				stacks = 800
+			}
+			men_at_arms = {
+				type = armored_horsemen
+				stacks = 800
+			}
+			location = scope:polishgm.capital_province
+		}
+	}
+	spawn_polishgm_court_effect = yes
+}
+
+### Knights
+spawn_polishgm_court_effect = {
+	create_character = {
+		name = "Andrzej"
+		age = 30
+		gender = male
+		dynasty = scope:polishgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:polish
+		trait = education_martial_4
+		trait = zealous
+		trait = brave
+		trait = diligent
+		trait = order_member
+		trait = orison_vigilance
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		employer = scope:polishgm
+		father = scope:polishgm
+	}
+	create_character = {
+		name = "Witosz"
+		age = 20
+		gender = male
+		dynasty = scope:polishgm.dynasty
+		martial = 10
+		prowess = 30
+		faith = faith:shadowinquisition
+		culture = culture:polish
+		trait = education_martial_4
+		trait = wrathful
+		trait = brave
+		trait = zealous
+		trait = orison_hierophant
+		trait = supehunter
+		trait = lifestyle_blademaster
+		#trait = acre_catechumen
+		#trait = acre_flesh
+		#trait = acre_flight
+		random_traits = no
+		employer = scope:polishgm
+		father = scope:polishgm
+	}
+}

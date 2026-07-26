@@ -1,0 +1,134 @@
+﻿namespace = POD_umbra_lost
+
+POD_umbra_lost.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.100.t
+	desc = POD_umbra_lost.100.desc
+	
+	left_portrait = root
+	theme = oblivion
+	
+	immediate = {
+		set_variable = { name = spirit_location value = flag:oblivion }
+	}
+
+	option = {
+		name = POD_umbra_lost.100.a
+		add_internal_flag = dangerous
+		POD_erase_from_existence = yes
+	}
+}
+
+POD_umbra_lost.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.101.t
+	desc = POD_umbra_lost.101.desc
+	
+	left_portrait = root
+	theme = labyrinth
+	
+	immediate = { 
+		add_character_modifier = trapped_in_tempest_modifier
+	}
+
+	option = {
+		name = POD_umbra_lost.101.a
+	}
+}
+
+POD_umbra_lost.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.102.t
+	desc = POD_umbra_lost.102.desc
+	
+	left_portrait = root
+	theme = labyrinth
+	
+	immediate = { 
+		add_character_modifier = trapped_in_labyrinth_modifier
+	}
+
+	option = {
+		name = POD_umbra_lost.102.a
+	}
+}
+
+POD_umbra_lost.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.103.t
+	desc = POD_umbra_lost.103.desc
+	
+	left_portrait = root
+	theme = labyrinth
+	
+	immediate = { 
+		add_character_modifier = trapped_in_yomi_modifier
+	}
+
+	option = {
+		name = POD_umbra_lost.103.a
+	}
+}
+
+POD_umbra_lost.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.104.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+			    trigger = {
+					has_trait = demon
+			    }
+			    desc = POD_umbra_lost.104.desc_demon
+			}
+			desc = POD_umbra_lost.104.desc_infernalist
+		}
+	}
+	
+	left_portrait = root
+	theme = labyrinth
+	
+	trigger = { 
+		var:spirit_location ?= flag:abyss 
+	}
+	
+	immediate = { 
+		add_character_modifier = trapped_in_abyss_modifier
+	}
+	
+	option = {
+		name = POD_umbra_lost.104.a
+		
+		trigger = { has_trait = demon }
+	}
+
+	option = {
+		name = POD_umbra_lost.104.c
+		
+		trigger = { NOT = { has_trait = demon } }
+	}
+}
+
+POD_umbra_lost.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_lost.105.t
+	desc = POD_umbra_lost.105.desc
+	
+	left_portrait = root
+	theme = labyrinth
+	
+	immediate = { 
+		add_character_modifier = trapped_in_malfeas_modifier
+	}
+
+	option = {
+		name = POD_umbra_lost.102.a
+	}
+}

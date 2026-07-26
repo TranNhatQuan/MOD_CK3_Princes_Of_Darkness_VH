@@ -1,0 +1,5264 @@
+﻿namespace = POD_education_events
+
+scripted_trigger POD_has_vassal_or_follower = {
+	trigger_if = {
+		limit = { is_landless_adventurer = yes }
+		any_courtier = { count >= 1 }
+	}
+	trigger_else = {
+		any_vassal = { count >= 1 }
+	}
+}
+
+scripted_effect POD_save_random_vassal_or_follower = {
+	if = {
+		limit = { is_landless_adventurer = yes }
+		random_courtier = {
+			limit = { this != scope:created_vampirechilde }
+			save_scope_as = $SAVE_AS$
+		}
+	}
+	else = {
+		random_vassal = {
+			limit = { this != scope:created_vampirechilde }
+			save_scope_as = $SAVE_AS$
+		}
+	}
+}
+
+#Does the childe try to eat you?
+
+POD_education_events.1000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.1.t
+	desc = POD_education_events.1.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		is_ai = yes
+		}	
+	
+	option = {
+		name = POD_education_events.1.option.a
+		
+		ai_chance = { base = 95 }
+		
+		scope:vampiresire = {
+			trigger_event = {
+				id = POD_education_events.1
+				days = 10
+				}		
+			}
+		}
+
+	option = {
+		name = POD_education_events.1.option.a
+		
+		ai_chance = { 
+				base = 1 
+		
+			modifier = { 
+				add = 30
+				has_trait = ambitious
+			}
+			modifier = { 
+				add = 10
+				has_trait = callous
+			}	
+			modifier = { 
+				add = 20
+				has_trait = sadistic
+			}
+			modifier = { 
+				add = 30
+				has_relation_rival = scope:vampiresire
+			}			
+		}
+		
+		scope:vampiresire = {
+			trigger_event = {
+				id = POD_education_events.1001
+				days = 1
+				}		
+			}
+		}
+}	
+
+# The childe tries to eat you
+
+POD_education_events.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.1001.t
+	desc = POD_education_events.1001.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = anger
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}	
+		
+	option = {
+		name = POD_education_events.1001.option.a	
+		
+		duel = {
+			skill = prowess
+			target = scope:created_vampirechilde
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_education_events.1001.effect.success.desc
+				
+				trigger_event = { 	
+					id = POD_education_events.1002
+					days = 1	
+					}				
+				
+			}
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.7
+					}
+
+					desc = POD_education_events.1001.critical.failure.effect.desc
+					
+					trigger_event = { 	
+						id = POD_education_events.1003
+						days = 1	
+						}			
+				}
+			}
+		}
+}
+
+# The childe tries to eat you : you push him back
+
+POD_education_events.1002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.1002.t
+	desc = POD_education_events.1002.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = fear
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}	
+
+	option = {
+		name = POD_education_events.1002.option.a	
+	
+			trigger_event = {
+				id = POD_education_events.1
+				days = 10
+				}		
+	}
+	
+	option = {
+		name = POD_education_events.1002.option.b	
+		
+		scope:created_vampirechilde = {
+			death = {
+	        	death_reason = death_duel
+				killer = scope:vampiresire
+	        }
+		}
+	}
+}
+
+# The childe tries to eat you : he succeeds
+
+POD_education_events.1003 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.1003.t
+	desc = POD_education_events.1003.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = anger
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}	
+
+	option = {
+		name = POD_education_events.1003.option.a
+				
+		scope:created_vampirechilde = {
+			POD_drain_victim_effect = { VICTIM = scope:vampiresire }
+		}	
+	}
+}
+	
+#Tier 1 : general education
+
+POD_education_events.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.1.t
+	desc = POD_education_events.1.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_honorable
+	}
+	right_portrait =  scope:created_vampirechilde
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.1.option.a
+
+		custom_tooltip = POD_education_events.1.option.obedience
+		
+		#Never have the most rebellious events, have the obedient bonus events
+	hidden_effect = {	
+		random_list = {
+		
+			30 = {
+				trigger_event = {
+					id = POD_education_events.21
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_nobles_legacy_2 }
+					}
+					}				
+			}
+			
+			30 = {
+				trigger_event = {
+					id = POD_education_events.22
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_knights_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.23
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_seneschals_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.24
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_thieves_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.25
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_cults_legacy_2 }
+					}
+					}				
+			}			
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.2
+					days = 30 
+				}
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.3
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.5
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.6
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.7
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.9
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.10
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.11
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.12
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.13
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.15
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.16
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.17
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.18
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.19
+					days = 30
+				}
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.29
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						diplomacy >= 10
+						stewardship >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.30
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						intrigue >= 10
+						learning >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.31
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						martial >= 10
+						prowess >= 40
+						POD_is_available_for_events = yes
+					}
+				}				
+			}			
+		}	
+	}
+	}
+	option = {
+		name = POD_education_events.1.option.b
+
+		custom_tooltip = POD_education_events.1.option.lenient	
+
+		#Can have all events	
+	hidden_effect = {			
+		random_list = {
+			30 = {
+				trigger_event = {
+					id = POD_education_events.21
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_nobles_legacy_2 }
+					}
+					}				
+			}
+			
+			30 = {
+				trigger_event = {
+					id = POD_education_events.22
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_knights_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.23
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_seneschals_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.24
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_thieves_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.25
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_cults_legacy_2 }
+					}
+					}				
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.2
+					days = 30 
+				}
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.3
+					days = 30
+				}
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.4
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.5
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.6
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.7
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.8
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.9
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.10
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.11
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.12
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.13
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.14
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.15
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.16
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.17
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.18
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.19
+					days = 30
+				}
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.29
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						diplomacy >= 10
+						stewardship >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.30
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						intrigue >= 10
+						learning >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.31
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						martial >= 10
+						prowess >= 40
+						POD_is_available_for_events = yes
+					}
+				}				
+			}			
+		}		
+	}
+}
+	option = {
+		name = POD_education_events.1.option.c
+		
+		custom_tooltip = POD_education_events.1.option.free	
+		
+		#Never have the soul crush events, can have the free spirited bonus events
+	hidden_effect = {			
+		random_list = {
+			30 = {
+				trigger_event = {
+					id = POD_education_events.21
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_nobles_legacy_2 }
+					}
+					}				
+			}
+			
+			30 = {
+				trigger_event = {
+					id = POD_education_events.22
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_knights_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.23
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_seneschals_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.24
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_thieves_legacy_2 }
+					}
+					}				
+			}
+
+			30 = {
+				trigger_event = {
+					id = POD_education_events.25
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+					dynasty = { has_dynasty_perk = ashen_cults_legacy_2 }
+					}
+					}				
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.3
+					days = 30
+				}
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.4
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.5
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.6
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.8
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.9
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.10
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.11
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.12
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.13
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.14
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.15
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.16
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.18
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.19
+					days = 30
+				}
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.29
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						diplomacy >= 10
+						stewardship >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.30
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						intrigue >= 10
+						learning >= 10
+						POD_is_available_for_events = yes
+					}
+				}				
+			}
+			0 = {
+				trigger_event = {
+					id = POD_education_events.31
+					days = 30
+				}
+				modifier = {
+					add = 30
+					any_courtier = {
+						martial >= 10
+						prowess >= 40
+						POD_is_available_for_events = yes
+					}
+				}				
+			}			
+		}		
+	}	
+}	
+
+	#Durga special education
+	option = {
+		name = POD_education_events.1.option.d
+		
+		trigger = {
+			this = character:790274	
+			}
+			
+		trigger_event = {
+				id = POD_education_events.20
+				days = 30
+			}
+			
+		custom_tooltip = POD_education_events.1.option.durga	
+
+	}
+	
+	#Isouda special 'education'
+	option = {
+		name = POD_education_events.1.option.e
+		
+		trigger = {
+			this = character:505081	
+			}
+		
+	hidden_effect = {	
+		random_list = {
+		50 = {
+			trigger_event = {
+				id = POD_education_events.26
+				days = 30
+			}
+		}	
+		50 = {
+			trigger_event = {
+				id = POD_education_events.27
+				days = 30
+			}
+		}
+		}
+		}
+		custom_tooltip = POD_education_events.1.option.isouda	
+
+	}
+
+	#Adisa special education
+	option = {
+		name = POD_education_events.1.option.f
+		
+		trigger = {
+			this = character:791706	
+			}
+			
+		trigger_event = {
+				id = POD_education_events.28
+				days = 30
+			}
+			
+		custom_tooltip = POD_education_events.1.option.adisa	
+
+	}	
+}
+
+#Tier 1 : Broken spirit
+
+POD_education_events.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.2.t
+	desc = POD_education_events.2.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = dismissal
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.2.option.a
+		
+		scope:created_vampirechilde = {
+			add_character_modifier = soul_crushed_modifier
+			}
+			
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.2.option.b
+		
+		add_stress = medium_stress_impact_gain
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : human ties
+
+POD_education_events.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.3.t
+	desc = POD_education_events.3.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = sadness
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.3.option.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+			
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.3.option.b
+		
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_dislike_opinion
+				}
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : freedom
+
+POD_education_events.4 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.4.t
+	desc = POD_education_events.4.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.4.option.a
+		
+		root = {
+			add_character_modifier = {
+			modifier = isolated_modifier
+			years = 1
+			}
+		}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.4.option.b
+		
+		scope:created_vampirechilde = {
+			set_relation_rival = root
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Easygoing childe
+
+POD_education_events.5 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.5.t
+	desc = POD_education_events.5.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.5.option.a
+		
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_like_opinion
+				}
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.5.option.b
+		
+		add_prestige = 100
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Model childe, diplomacy
+
+POD_education_events.6 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.6.t
+	desc = POD_education_events.6.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_rational
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.6.option.a
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.6.option.b
+		
+		add_character_modifier = {
+			modifier = helpful_diplomat_childe_modifier
+			years = 10
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Obedient childe
+
+POD_education_events.7 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.7.t
+	desc = POD_education_events.7.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.7.option.a
+		
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_like_opinion
+				}
+			}
+		add_prestige = 500
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.7.option.b
+		
+		add_character_modifier = {
+			modifier = helpful_childe_modifier
+			years = 10
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Free spirited childe
+
+POD_education_events.8 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.8.t
+	desc = POD_education_events.8.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_honorable
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.8.option.a
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 5
+			add_stewardship_skill = 5
+			add_intrigue_skill = 5
+			}
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.8.option.b
+		
+		add_character_modifier = {
+			modifier = helpful_childe_modifier
+			years = 10
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Malus diplo
+
+POD_education_events.9 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.9.t
+	desc = POD_education_events.9.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = disbelief
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.9.option.a
+		
+		add_prestige = -250
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.9.option.b
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = -5
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Model childe, stewardship
+
+POD_education_events.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.10.t
+	desc = POD_education_events.10.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_rational
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.10.option.a
+		
+		scope:created_vampirechilde = {
+			add_stewardship_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.10.option.b
+		
+		add_character_modifier = {
+			modifier = helpful_steward_childe_modifier
+			years = 10
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Malus stewardship
+
+POD_education_events.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.11.t
+	desc = POD_education_events.11.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = disbelief
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.11.option.a
+		
+		remove_short_term_gold = 100
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.11.option.b
+		
+		scope:created_vampirechilde = {
+			add_stewardship_skill = -5
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Model childe, intrigue
+
+POD_education_events.12 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.12.t
+	desc = POD_education_events.12.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = scheme
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.12.option.a
+		
+		scope:created_vampirechilde = {
+			add_intrigue_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.12.option.b
+		
+		add_character_modifier = {
+			modifier = helpful_intrigue_childe_modifier
+			years = 10
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Malus intrigue
+
+POD_education_events.13 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.13.t
+	desc = POD_education_events.13.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = paranoia
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.13.option.a
+		
+		add_stress = medium_stress_impact_gain
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.13.option.b
+		
+		scope:created_vampirechilde = {
+			add_intrigue_skill = -5
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : friendship
+
+POD_education_events.14 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.14.t
+	desc = POD_education_events.14.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = admiration
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.14.option.a
+		
+		scope:created_vampirechilde = {
+			set_relation_friend = root
+			}		
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Model childe, martial
+
+POD_education_events.15 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.15.t
+	desc = POD_education_events.15.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.15.option.a
+		
+		scope:created_vampirechilde = {
+			add_martial_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.15.option.b
+		
+		scope:created_vampirechilde = {
+			if = {
+				limit = {
+					NOT = { has_trait = logistician }
+					}
+				add_trait = logistician
+				}
+			else_if = {
+				limit = {
+					NOT = { has_trait = unyielding_defender }
+					}
+				add_trait = unyielding_defender
+				}				
+			}
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Malus martial
+
+POD_education_events.16 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.16.t
+	desc = POD_education_events.16.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = dismissal
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.16.option.a
+		
+		scope:created_vampirechilde = {
+			add_martial_skill = -5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.16.option.b
+		
+		POD_masquerade_exposure_increase_effect = yes		
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Exemplar childe
+
+POD_education_events.17 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.17.t
+	desc = POD_education_events.17.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.17.option.a
+		
+		add_character_modifier = {
+			modifier = exemplar_childe_modifier
+			years = 25
+			}
+		scope:created_vampirechilde = {
+			add_character_modifier = soul_crushed_modifier
+			}			
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.17.option.b
+					
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Model childe, learning
+
+POD_education_events.18 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.18.t
+	desc = POD_education_events.18.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_rational
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.18.option.a
+		
+		scope:created_vampirechilde = {
+			add_learning_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.18.option.b
+		
+		add_learning_lifestyle_perk_points = 1	
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+#Tier 1 : Malus learning
+
+POD_education_events.19 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.19.t
+	desc = POD_education_events.19.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = stress
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.19.option.a
+		
+		scope:created_vampirechilde = {
+			add_learning_skill = -5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.19.option.b
+		
+		add_character_modifier = {
+			modifier = isolated_modifier
+			years = 1
+			}		
+		
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Durga Syn's special
+
+POD_education_events.20 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.20.t
+	desc = POD_education_events.20.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.20.option.a
+		
+		scope:created_vampirechilde = {
+			add_martial_skill = 5
+			add_prowess_skill = 10
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.20.option.b
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 5
+			add_intrigue_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.20.option.c
+		
+		scope:created_vampirechilde = {
+			add_learning_skill = 5
+			add_stewardship_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}	
+
+}
+
+#Tier 1 : Ashen Noble
+
+POD_education_events.21 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.21.t
+	desc = POD_education_events.21.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.21.option.a
+		
+		scope:created_vampirechilde = {
+			add_martial_skill = 2
+			add_diplomacy_skill = 3
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+#Tier 1 : Ashen Knight
+
+POD_education_events.22 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.22.t
+	desc = POD_education_events.22.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.22.option.a
+		
+		scope:created_vampirechilde = {
+			add_martial_skill = 2
+			add_prowess_skill = 5
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+#Tier 1 : Ashen Seneschal
+
+POD_education_events.23 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.23.t
+	desc = POD_education_events.23.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.23.option.a
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 2
+			add_stewardship_skill = 3
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+#Tier 1 : Ashen Thief
+
+POD_education_events.24 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.24.t
+	desc = POD_education_events.24.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.24.option.a
+		
+		scope:created_vampirechilde = {
+			add_prowess_skill = 3
+			add_intrigue_skill = 3
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+#Tier 1 : Ashen Cultist
+
+POD_education_events.25 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.25.t
+	desc = POD_education_events.25.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.25.option.a
+		
+		scope:created_vampirechilde = {
+			add_learning_skill = 3
+			add_intrigue_skill = 2
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+#Tier 1 : Isouda's trial, success
+
+POD_education_events.26 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.26.t
+	desc = POD_education_events.26.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.26.option.a
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 5
+			add_intrigue_skill = 5
+			add_prowess_skill = 5
+			add_prestige = 250
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+}
+
+
+#Tier 1 : Isouda's trial, defeat
+
+POD_education_events.27 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.27.t
+	desc = POD_education_events.27.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.27.option.a
+		
+		scope:created_vampirechilde = {
+			death = {
+				death_reason = death_murder
+				}
+			}	
+		add_stress = minor_stress_loss			
+	}
+
+}
+
+#Tier 1 : Adisa's training
+
+POD_education_events.28 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.28.t
+	desc = POD_education_events.28.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.28.option.a
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = -5
+			add_stewardship_skill = -5
+			add_martial_skill = 5
+			add_prowess_skill = 10
+			
+			if = {
+				limit = {
+					NOT = { has_trait = physique_good }
+				}
+			random = {
+				chance = 15
+				add_trait = physique_good_1
+			}
+			}
+		}
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+
+	option = {
+		name = POD_education_events.28.option.b
+		
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 5
+			add_stewardship_skill = 5
+			add_martial_skill = -5
+			add_prowess_skill = -5
+			
+			if = {
+				limit = {
+					NOT = { has_trait = intellect_good }
+				}
+			random = {
+				chance = 15
+				add_trait = intellect_good_1
+			}
+			}			
+			}	
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.28.option.c
+
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+			}		
+	}	
+}	
+
+# Tier 2 : Faith
+
+POD_education_events.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.100.t
+	desc = POD_education_events.100.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_cynical
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.100.option.a
+		
+		add_piety = 200
+		
+		add_stress = medium_stress_impact_gain
+	hidden_effect = {				
+		random_list = {
+			
+			10 = {
+				trigger_event = {
+					id = POD_education_events.101
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viahumanitatis
+					}				
+			}
+			
+			10 = {
+				trigger_event = {
+					id = POD_education_events.102
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viafurores
+					}					
+			}
+			
+			30 = {
+				trigger_event = {
+					id = POD_education_events.104
+					days = 30
+				}					
+			}			
+
+			5 = {
+				trigger_event = {
+					id = POD_education_events.103
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viamercator
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = greedy }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.105
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_religion = religion:roadofsin_religion
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = lustful }
+					}						
+			}			
+			10 = {
+				trigger_event = {
+					id = POD_education_events.106
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaregalis
+					}				
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.107
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viatyrannus
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = arbitrary }
+					}						
+			}	
+			5 = {
+				trigger_event = {
+					id = POD_education_events.108
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viacaeli
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = zealous }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.109
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaquiritare
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = sadistic }
+					}						
+			}	
+			5 = {
+				trigger_event = {
+					id = POD_education_events.110
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaconsuasor
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = content }
+					}						
+			}			
+		}		
+
+	}
+}	
+	option = {
+		name = POD_education_events.100.option.b
+		
+		remove_short_term_gold = 100
+		
+	hidden_effect = {			
+		random_list = {
+			
+			10 = {
+				trigger_event = {
+					id = POD_education_events.101
+					days = 30
+				}
+				
+				modifier = {
+					factor = 0
+					has_faith = faith:viahumanitatis
+					}
+			}
+			
+			10 = {
+				trigger_event = {
+					id = POD_education_events.102
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viafurores
+					}				
+			}	
+			
+			35 = {
+				trigger_event = {
+					id = POD_education_events.104
+					days = 30
+				}					
+			}	
+			
+			5 = {
+				trigger_event = {
+					id = POD_education_events.103
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viamercator
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = greedy }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.105
+					days = 30
+				}	
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = lustful }
+					}
+				modifier = {
+					factor = 0
+					has_religion = religion:roadofsin_religion
+					}						
+			}	
+			10 = {
+				trigger_event = {
+					id = POD_education_events.106
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaregalis
+					}				
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.107
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viatyrannus
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = arbitrary }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.108
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viacaeli
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = zealous }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.109
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaquiritare
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = sadistic }
+					}						
+			}
+			5 = {
+				trigger_event = {
+					id = POD_education_events.110
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					has_faith = faith:viaconsuasor
+					}		
+				modifier = {
+					add = 20
+					scope:created_vampirechilde = { has_trait = content }
+					}						
+			}				
+		}			
+
+	}	
+}
+
+	option = {
+		name = POD_education_events.100.option.c
+		
+		trigger = {
+			this = character:790155
+		}
+		
+		custom_tooltip = POD_education_events.100.dionysius
+		
+		trigger_event = {
+				id = POD_education_events.111
+				days = 30
+		}
+	}
+	
+	option = {
+		name = POD_education_events.100.option.d
+		
+		trigger = {
+			this = character:605128
+			faith = faith:viachristi
+		}
+		
+		add_piety = 100
+		
+		custom_tooltip = POD_education_events.100.ahmed
+		
+		trigger_event = {
+			id = POD_education_events.111
+			days = 30
+		}
+	}
+
+	option = {
+		name = POD_education_events.100.option.e
+		
+		trigger = {
+			faith = { has_doctrine_parameter = ashirra_second_embrace }
+		}
+		
+		custom_tooltip = POD_education_events.100.ashirra
+		
+		trigger_event = {
+			id = POD_education_events.112
+			days = 30
+		}
+	}
+}
+
+#Tier 2 : Childe wants road of humanity
+
+POD_education_events.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.101.t
+	desc = POD_education_events.101.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_cynical
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.101.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		capital_county = {
+			add_county_modifier = {
+			modifier = left_alone_modifier
+			years = 20
+				}
+		}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.101.option.b
+		
+		if = {
+            limit = {
+                scope:created_vampirechilde = { POD_is_muslim_gp = yes }
+            }
+            scope:created_vampirechilde = {
+            set_character_faith = faith:tariqelumma
+            }
+        }
+        else = {
+        scope:created_vampirechilde = {
+            set_character_faith = faith:viahumanitatis
+            }
+        }
+
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Childe wants furores
+
+POD_education_events.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.102.t
+	desc = POD_education_events.102.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.102.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		scope:created_vampirechilde = {
+			set_relation_rival = root
+			}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.102.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viafurores
+			}
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Greedy Childe wants mercator
+
+POD_education_events.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.103.t
+	desc = POD_education_events.103.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = schadenfreude
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.103.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		remove_short_term_gold = 250
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}
+	
+	option = {
+		name = POD_education_events.103.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viamercator
+			}
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Childe wants nothing
+
+POD_education_events.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.104.t
+	desc = POD_education_events.104.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+	
+	option = {
+		name = POD_education_events.104.option.a
+		
+		add_piety = 200
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Lustful Childe wants sin
+
+POD_education_events.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.105.t
+	desc = POD_education_events.105.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = ecstasy
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.105.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		add_stress = medium_stress_impact_gain
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.105.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viapeccati
+			}
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Childe wants regalis
+
+POD_education_events.106 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.106.t
+	desc = POD_education_events.106.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_honorable
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.106.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		add_piety = 50
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.106.option.b
+		
+		if = {
+            limit = {
+               scope:created_vampirechilde = { POD_is_muslim_gp = yes }
+            }
+        scope:created_vampirechilde = {
+            set_character_faith = faith:tariqelharb
+            }
+        }
+        else = {
+        scope:created_vampirechilde = {
+            set_character_faith = faith:viaregalis
+            }
+        }
+		
+		
+		add_prestige = 100	
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+# Tier 2 : Arbitrary Childe wants tyrannus
+
+POD_education_events.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.107.t
+	desc = POD_education_events.107.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_callous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.107.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.107.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viatyrannus
+			}
+		
+		add_stewardship_lifestyle_perk_points = 1	
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Zealous Childe wants caeli
+
+POD_education_events.108 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.108.t
+	desc = POD_education_events.108.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_zealous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.108.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		add_piety = 50
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.108.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viacaeli
+			}
+		
+			set_character_faith = faith:viacaeli
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Sadistic Childe wants Quiritare
+
+POD_education_events.109 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.109.t
+	desc = POD_education_events.109.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_callous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.109.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		scope:created_vampirechilde = {
+			set_relation_rival = root
+			}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.109.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viaquiritare
+			}
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+# Tier 2 : Content Childe wants Consuasor
+
+POD_education_events.110 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.110.t
+	desc = POD_education_events.110.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.110.option.a
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+		
+		scope:created_vampirechilde = {
+			if = {
+				limit = {
+					has_trait = content
+					}
+			remove_trait = content
+			add_trait_force_tooltip = ambitious
+			}
+			}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+	
+	option = {
+		name = POD_education_events.110.option.b
+		
+		scope:created_vampirechilde = {
+			set_character_faith = faith:viaconsuasor
+			}
+		add_stress = medium_stress_loss
+		
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+}
+
+# Tier 2 : Dionysius special
+
+POD_education_events.111 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.111.t
+	desc = POD_education_events.111.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.111.option.a
+		
+		add_piety = 200
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}	
+
+	option = {
+		name = POD_education_events.111.option.b
+		
+		scope:created_vampirechilde = {
+			add_learning_skill = 5
+			add_piety = 200
+			}
+
+	hidden_effect = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = {
+					NOT = { has_faith = scope:vampiresire.faith }
+				}
+			}
+			scope:created_vampirechilde = {
+				set_character_faith = scope:vampiresire.faith
+			}
+		}
+	}
+			
+		trigger_event = {
+			id = POD_education_events.200
+			days = 30
+			}			
+
+	}
+}
+
+# Tier 2: Ashirra Second Embrace
+POD_education_events.112 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.112.t
+	desc = POD_education_events.112.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = prayer
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = prayer
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}
+
+	immediate = {
+		scope:created_vampirechilde = {
+			set_character_faith = scope:vampiresire.faith
+		}
+	}
+	
+	option = {
+		name = POD_education_events.112.option.a
+		add_piety = 50
+		add_stress = medium_stress_loss
+		scope:created_vampirechilde = { 
+			add_piety = 50
+			add_stress = medium_stress_loss
+		}
+	}
+
+	option = {
+		name = POD_education_events.112.option.b
+		trigger = {
+			scope:created_vampirechilde = { num_sinful_traits >= 1 }
+		}
+		add_piety = -50
+		add_stress = medium_stress_gain
+		scope:created_vampirechilde = {
+			random_list = {
+				20 = {
+					modifier = {
+						add = -5
+						piety_level >= 3
+					}
+					modifier = {
+						add = -5
+						piety_level >= 3
+					}
+					modifier = {
+						add = -5
+						piety_level >= 4
+					}
+					modifier = {
+						add = -5
+						piety_level >= 5
+					}
+					modifier = {
+						add = 10
+						scope:vampiresire = { num_sinful_traits = 1 }
+					}
+					modifier = {
+						add = 10
+						scope:vampiresire = { num_sinful_traits = 2 }
+					}
+					modifier = {
+						add = 10
+						scope:vampiresire = { num_sinful_traits = 3 }
+					}
+				}
+				#Common sins
+				50 = {
+					trigger = { has_trait = gluttonous faith = { trait_is_sin = gluttonous } }
+					remove_trait = gluttonous
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = temperate } } add_trait_force_tooltip = temperate }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = wrathful faith = { trait_is_sin = wrathful } }
+					remove_trait = wrathful
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = calm } } add_trait_force_tooltip = calm }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = callous faith = { trait_is_sin = callous } }
+					remove_trait = callous
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = compassionate } } add_trait_force_tooltip = compassionate }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = cynical faith = { trait_is_sin = cynical } }
+					remove_trait = cynical
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						40 = { trigger = { NOT = { has_trait = humble } } add_trait_force_tooltip = humble }
+						10 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = drunkard faith = { trait_is_sin = drunkard } }
+					remove_trait = drunkard
+				}
+				50 = {
+					trigger = { has_trait = rakish faith = { trait_is_sin = rakish } }
+					remove_trait = rakish
+				}
+				50 = {
+					trigger = { has_trait = oathbreaker faith = { trait_is_sin = oathbreaker } }
+					remove_trait = oathbreaker
+				}
+				#Specific sins
+				50 = {
+					trigger = { has_trait = sadistic faith = { trait_is_sin = sadistic } }
+					remove_trait = sadistic
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = compassionate } } add_trait_force_tooltip = compassionate }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = impatient faith = { trait_is_sin = impatient } }
+					remove_trait = impatient
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = patient } } add_trait_force_tooltip = patient }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = craven faith = { trait_is_sin = craven } }
+					remove_trait = craven
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = brave } } add_trait_force_tooltip = brave }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = greedy faith = { trait_is_sin = greedy } }
+					remove_trait = greedy
+					random_list = {
+						50 = { trigger = { NOT = { has_trait = content } } add_trait_force_tooltip = content }
+						30 = { trigger = { NOT = { has_trait = generous } } add_trait_force_tooltip = generous }
+						20 = { trigger = { NOT = { has_trait = zealous } } add_trait_force_tooltip = zealous }
+					}
+				}
+				50 = {
+					trigger = { has_trait = lifestyle_reveler faith = { trait_is_sin = lifestyle_reveler } }
+					remove_trait = lifestyle_reveler
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_education_events.112.option.c
+		trigger = {
+			has_trait = true_faith
+			scope:created_vampirechilde = { NOT = { has_trait = true_faith } }
+		}
+		trait = truefaith
+		trait = beatific
+
+		add_stress = medium_stress_gain
+		add_piety = -500
+		random_list = {
+			90 = {}
+
+			10 = {
+				scope:created_vampirechilde = { add_trait = truefaith }
+			}
+		}
+	}
+
+	after = {
+		trigger_event = { id = POD_education_events.200 days = 30 }
+	}
+}
+
+# Tier 3 : Court talk
+
+POD_education_events.200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.200.t
+	desc = POD_education_events.200.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}	
+		
+	option = {
+		name = POD_education_events.200.option.a
+					
+	hidden_effect = {	
+		random_list = {
+			20 = {
+				trigger_event = {
+					id = POD_education_events.201
+					days = 30 
+				}
+			}
+			
+			20 = {
+				trigger_event = {
+					id = POD_education_events.202
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.203
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.204
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.205
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.206
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.207
+					days = 30
+				}
+				modifier = {
+					factor = 0
+					
+					is_landless_adventurer = yes
+				}					
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.208
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.209
+					days = 30
+				}
+			}	
+			20 = {
+				trigger_event = {
+					id = POD_education_events.210
+					days = 30
+				}
+			}
+			20 = {
+				trigger_event = {
+					id = POD_education_events.211
+					days = 30
+				}
+			}			
+		}	
+	}
+	}
+	
+	option = {
+		name = POD_education_events.200.option.b
+		
+		add_prestige = -50
+
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+			}			
+
+	}			
+}
+		
+#Tier 3 : Annoying vassal is annoying
+
+POD_education_events.201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.201.t
+	desc = POD_education_events.201.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:annoyingvassal
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		POD_save_random_vassal_or_follower = {
+			SAVE_AS = annoyingvassal
+		}
+	}
+	
+	option = {
+		name = POD_education_events.201.option.a
+		
+		scope:created_vampirechilde = {
+			set_relation_rival = scope:annoyingvassal
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+	
+	option = {
+		name = POD_education_events.201.option.b
+		
+		reverse_add_opinion = {
+			target = scope:annoyingvassal
+			modifier = angry_opinion
+			opinion = -30
+		}
+		
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}	
+
+}
+
+# Tier 3 : Friendly vassal is friendly
+
+POD_education_events.202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.202.t
+	desc = POD_education_events.202.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:friendlyvassal
+		animation = admiration
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		POD_save_random_vassal_or_follower = {
+			SAVE_AS = friendlyvassal
+		}
+	}
+	
+	option = {
+		name = POD_education_events.202.option.a
+		
+		scope:created_vampirechilde = {
+			set_relation_friend = scope:friendlyvassal
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+	
+	option = {
+		name = POD_education_events.202.option.b
+		
+		add_prestige = 150
+		
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}	
+
+}
+
+# Tier 3 : Scheming vassal is scheming
+
+POD_education_events.203 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.203.t
+	desc = POD_education_events.203.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:schemingvassal
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		POD_save_random_vassal_or_follower = {
+			SAVE_AS = schemingvassal
+		}
+	}
+	
+	option = {
+		name = POD_education_events.203.option.a
+		
+		scope:schemingvassal = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+		
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+	
+	option = {
+		name = POD_education_events.203.option.b
+		
+		reverse_add_opinion = {
+			target = scope:schemingvassal
+			modifier = angry_opinion
+			opinion = -40
+		}
+		
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}	
+
+}
+
+# Tier 3 : Infatuated vassal
+
+POD_education_events.204 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.204.t
+	desc = POD_education_events.204.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:infatuatedvassal
+		animation = flirtation
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		POD_save_random_vassal_or_follower = {
+			SAVE_AS = infatuatedvassal
+		}
+	}
+	
+	option = {
+		name = POD_education_events.204.option.a
+		
+		add_hook = {
+			target = scope:infatuatedvassal
+			type = favor_hook
+		}
+			
+		reverse_add_opinion = {
+			target = scope:created_vampirechilde
+			modifier = angry_opinion
+			opinion = -40
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+	
+	option = {
+		name = POD_education_events.204.option.b
+		
+		
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+			}			
+
+	}	
+
+}
+
+
+# Tier 3 : Good enough
+
+POD_education_events.205 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.205.t
+	desc = POD_education_events.205.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_honorable
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}	
+
+	immediate = {
+	}
+	
+	option = {
+		name = POD_education_events.205.option.a
+		
+		add_prestige = 150
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+}
+
+# Tier 3 : Flawless
+
+POD_education_events.206 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.206.t
+	desc = POD_education_events.206.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_honorable
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}	
+
+	immediate = {
+	}
+	
+	option = {
+		name = POD_education_events.206.option.a
+		
+		add_character_modifier = {
+			modifier = flawless_presentation_modifier
+			years = 5
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+}
+
+
+# Tier 3 : Botch
+
+POD_education_events.207 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.207.t
+	desc = POD_education_events.207.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	left_portrait = {
+		character = scope:powerfulvassal
+		animation = schadenfreude
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		if = {
+			limit = { is_landless_adventurer = yes }
+			random_courtier = { save_scope_as = powerfulvassal }
+		}
+		else = {
+			random_vassal = {
+				limit = { 
+					is_powerful_vassal = yes 
+					is_landed = yes
+					}
+				save_scope_as = powerfulvassal
+			}
+		}
+	}
+	
+	option = {
+		name = POD_education_events.207.option.a
+		
+		scope:powerfulvassal = {
+			add_pressed_claim = root.primary_title
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+}
+
+# Tier 3 : Too successful
+
+POD_education_events.208 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.208.t
+	desc = POD_education_events.208.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	left_portrait = {
+		character = scope:created_vampirechilde
+		animation = schadenfreude
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		is_landless_adventurer = no # no claims for LAAMP titles? idk
+	}	
+
+	immediate = {
+	}
+	
+	option = {
+		name = POD_education_events.208.option.a
+		
+		scope:created_vampirechilde = {
+			add_pressed_claim = root.primary_title
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+}
+
+# Tier 3 : Impressed vassal
+
+POD_education_events.209 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.209.t
+	desc = POD_education_events.209.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	
+	left_portrait = {
+		character = scope:powerfulvassal
+		animation = admiration
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		POD_has_vassal_or_follower = yes
+	}	
+
+	immediate = {
+		if = {
+			limit = { is_landless_adventurer = yes }
+			random_courtier = { save_scope_as = powerfulvassal }
+		}
+		else = {
+			random_vassal = {
+				limit = { is_powerful_vassal = yes }
+				save_scope_as = powerfulvassal
+			}
+		}
+	}
+	
+	option = {
+		name = POD_education_events.209.option.a
+		
+		reverse_add_opinion = {
+			target = scope:powerfulvassal
+			modifier = respect_opinion
+			opinion = 20
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+	option = {
+		name = POD_education_events.209.option.b
+		
+		reverse_add_opinion = {
+			target = scope:created_vampirechilde
+			modifier = respect_opinion
+			opinion = 20
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+}
+
+# Tier 3 : The Gift
+
+POD_education_events.210 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.210.t
+	desc = POD_education_events.210.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	
+	left_portrait = {
+		character = scope:created_vampirechilde
+		animation = worry
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}	
+
+	immediate = {
+	}
+	
+	option = {
+		name = POD_education_events.210.option.a
+		
+		add_gold = 200
+		
+		reverse_add_opinion = {
+			target = scope:created_vampirechilde
+			modifier = angry_opinion
+			opinion = -50
+		}		
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+	option = {
+		name = POD_education_events.210.option.b
+		
+		scope:created_vampirechilde = {
+			add_gold = 200
+		}
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+}
+
+# Tier 4 : Gifted childe
+
+POD_education_events.211 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.211.t
+	desc = POD_education_events.211.desc
+
+	theme = vampire
+
+	right_portrait = {
+		character = root
+		animation = personality_content
+	}
+	
+	left_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_rational
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}	
+
+	immediate = {
+	}
+	
+	option = {
+		name = POD_education_events.211.option.a
+		
+		add_character_modifier = {
+			modifier = laying_back_modifier
+			years = 10
+		}	
+			
+		add_stress = major_stress_loss	
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+
+	option = {
+		name = POD_education_events.211.option.b
+	
+			
+		trigger_event = {
+			id = POD_education_events.300
+			days = 30
+		}			
+
+	}
+}
+
+# End 
+
+POD_education_events.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.300.t
+	desc = POD_education_events.300.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_cynical
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}		
+	
+	option = {
+		name = POD_education_events.300.option.a	
+
+		hidden_effect = {
+			if = {
+				limit = {
+					is_tzimisce_trigger = yes
+				}
+				trigger_event = {
+					id = POD_education_events.301
+					years = { 15 30 }
+				}
+			}
+		}
+	}	
+
+}
+
+
+POD_education_events.29 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.29.t
+	desc = POD_education_events.29.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:mentor
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	immediate = {
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:created_vampirechilde }
+				diplomacy >= 10
+				stewardship >= 10
+				POD_is_available_for_events = yes
+			}
+			save_scope_as = mentor	
+		}
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+		}			
+	}
+	
+	option = {
+		name = POD_education_events.29.option.a	
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+			
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 1
+			add_stewardship_skill = 1
+		}
+		
+		remove_short_term_gold = 50
+	}	
+
+	option = {
+		name = POD_education_events.29.option.b
+
+		custom_tooltip = badmentor_tooltip
+
+		random_list = {	
+		50 = {
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 1
+			add_stewardship_skill = 1
+		}
+		}
+		50 = {
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = -1
+			add_stewardship_skill = -1
+		}
+		}		
+		}
+	}
+	
+	option = {
+		name = POD_education_events.29.option.c
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+
+		scope:created_vampirechilde = {
+			add_diplomacy_skill = 1
+			add_stewardship_skill = 1
+		}
+
+		remove_short_term_gold = 100
+
+		add_diplomacy_lifestyle_xp = 100
+		add_stewardship_lifestyle_xp = 100		
+	}
+
+	option = {
+		name = POD_education_events.29.option.d
+	}
+}
+
+POD_education_events.30 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.29.t
+	desc = POD_education_events.29.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:mentor
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+	}		
+	
+	immediate = {
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:created_vampirechilde }
+				intrigue >= 10
+				learning >= 10
+				POD_is_available_for_events = yes
+			}
+			save_scope_as = mentor	
+		}
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+		}			
+	}
+	
+	option = {
+		name = POD_education_events.29.option.a	
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+			
+		scope:created_vampirechilde = {
+			add_intrigue_skill = 1
+			add_learning_skill = 1
+		}
+		
+		remove_short_term_gold = 50
+	}	
+
+	option = {
+		name = POD_education_events.29.option.b
+
+		custom_tooltip = badmentor_tooltip
+
+		random_list = {	
+		50 = {
+		scope:created_vampirechilde = {
+			add_intrigue_skill = 1
+			add_learning_skill = 1
+		}
+		}
+		50 = {
+		scope:created_vampirechilde = {
+			add_intrigue_skill = -1
+			add_learning_skill = -1
+		}
+		}		
+		}
+	}
+	
+	option = {
+		name = POD_education_events.29.option.c
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+
+		scope:created_vampirechilde = {
+			add_intrigue_skill = 1
+			add_learning_skill = 1
+		}
+
+		remove_short_term_gold = 100
+
+		add_learning_lifestyle_xp = 100
+		add_intrigue_lifestyle_xp = 100		
+	}
+
+	option = {
+		name = POD_education_events.29.option.d
+	}
+}
+
+POD_education_events.31 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.29.t
+	desc = POD_education_events.29.desc
+
+	theme = vampire
+	left_portrait = {
+		character = scope:mentor
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	immediate = {
+		random_courtier = {
+			limit = {
+				NOT = { this = scope:created_vampirechilde }
+				martial >= 10
+				prowess >= 40
+				POD_is_available_for_events = yes
+			}
+			save_scope_as = mentor	
+		}
+		trigger_event = {
+			id = POD_education_events.100
+			days = 30
+		}			
+	}
+	
+	option = {
+		name = POD_education_events.29.option.a	
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+			
+		scope:created_vampirechilde = {
+			add_martial_skill = 1
+			add_prowess_skill = 3
+		}
+		
+		remove_short_term_gold = 50
+	}	
+
+	option = {
+		name = POD_education_events.29.option.b
+
+		custom_tooltip = badmentor_tooltip
+
+		random_list = {	
+		50 = {
+		scope:created_vampirechilde = {
+			add_martial_skill = 1
+			add_prowess_skill = 3
+		}
+		}
+		50 = {
+		scope:created_vampirechilde = {
+			add_martial_skill = -1
+			add_prowess_skill = -3
+		}
+		}		
+		}
+	}
+	
+	option = {
+		name = POD_education_events.29.option.c
+
+		scope:mentor = {
+			add_hook = {
+				target = root
+				type = favor_hook
+			}
+		}
+
+		scope:created_vampirechilde = {
+			add_martial_skill = 1
+			add_prowess_skill = 3
+		}
+
+		remove_short_term_gold = 100
+
+		add_martial_lifestyle_xp = 200
+	}
+
+	option = {
+		name = POD_education_events.29.option.d
+	}
+}
+
+# Rite of release : does the childe wants it?
+
+POD_education_events.301 = {
+	hidden = yes
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	immediate = {
+		if = {
+			limit = {
+				scope:created_vampirechilde = { is_playable_character = yes }
+			}
+		trigger_event = POD_education_events.302
+		}
+		else = {
+			random_list = {
+				5 = {
+					trigger_event = POD_education_events.303
+					
+					modifier = {
+						add = 20
+					
+					scope:created_vampirechilde = { has_trait = ambitious }
+					}
+					
+					modifier = {
+						add = 20
+					
+					scope:created_vampirechilde = { has_trait = diligent }
+					}					
+				}
+				5 = {
+					trigger_event = POD_education_events.304
+					
+					modifier = {
+						add = 20
+					
+					scope:created_vampirechilde = { has_trait = content }
+					}
+					
+					modifier = {
+						add = 20
+					
+					scope:created_vampirechilde = { has_trait = lazy }
+					}					
+				}				
+			}
+		}
+	}	
+
+}
+
+#Your childe is already landed, the rite of release is a formality
+POD_education_events.302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.302.t
+	desc = POD_education_events.302.desc
+
+	theme = tzimisce_coa
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_bold
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.302.option.a	
+
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_like_opinion
+				}
+			add_prestige = 200
+			add_gold = 50
+		}
+		
+		remove_short_term_gold = 50
+	}	
+
+	option = {
+		name = POD_education_events.302.option.b	
+
+		add_prestige = 50
+	}
+	
+	option = {
+		name = POD_education_events.302.option.c	
+
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_dislike_opinion
+				}
+		}
+		
+		add_prestige = 150
+	}		
+}
+
+#Your ambitious childe asks for the rite of release
+POD_education_events.303 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.302.t
+	desc = POD_education_events.303.desc
+
+	theme = tzimisce_coa
+	left_portrait = {
+		character = scope:vampiresire
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_bold
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.303.option.a	
+
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_like_opinion
+				}
+			add_prestige = 200
+		}
+				
+		if = {
+			limit = {
+				scope:created_vampirechilde = { is_courtier_of = root }
+			}
+			scope:created_vampirechilde = {
+				select_and_move_to_pool_effect = yes
+			}
+		}
+	}	
+
+	option = {
+		name = POD_education_events.303.option.b
+
+		trigger = {
+			scope:created_vampirechilde = { is_courtier_of = root }
+		}
+		
+		scope:created_vampirechilde = {
+			add_prestige = 200
+			add_gold = 100
+		}
+		
+		remove_short_term_gold = 100
+	}
+	
+	option = {
+		name = POD_education_events.303.option.c	
+
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_dislike_opinion
+				}
+		}
+
+		add_prestige = 200
+	
+	}		
+}
+
+
+#Your content childe doesn't care
+POD_education_events.304 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_education_events.302.t
+	desc = POD_education_events.304.desc
+
+	theme = tzimisce_coa
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:created_vampirechilde
+		animation = personality_content
+	}
+	
+	trigger = {
+		exists = scope:vampiresire
+		scope:created_vampirechilde = { is_alive = yes }
+		}		
+	
+	option = {
+		name = POD_education_events.304.option.a	
+
+		trigger = {
+			scope:created_vampirechilde = { is_courtier_of = root }
+		}
+
+		add_prestige = 200
+		
+		if = {
+			limit = {
+				scope:created_vampirechilde = { is_courtier_of = root }
+			}
+			scope:created_vampirechilde = {
+				select_and_move_to_pool_effect = yes
+			}
+		}
+	}	
+
+	option = {
+		name = POD_education_events.304.option.b
+		
+		scope:created_vampirechilde = {
+			add_opinion = {
+				target = root
+				modifier = POD_childe_like_opinion
+				}
+			add_prestige = 200
+			add_gold = 100
+		}
+		
+		remove_short_term_gold = 100
+	}
+	
+	option = {
+		name = POD_education_events.304.option.c	
+	
+	}		
+}

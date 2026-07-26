@@ -1,0 +1,182 @@
+﻿POD_copy_lifestyle_trait_xp_single_track = {
+	trait:$TRAIT$ = { save_scope_as = trait_to_copy }
+	if = {
+		limit = {
+			has_trait = $TRAIT$
+			scope:cloned_character = { has_trait = $TRAIT$ }
+		}
+		add_trait_xp = { 
+			trait = $TRAIT$
+			value = "scope:cloned_character.has_trait_xp(scope:trait_to_copy)"
+		}
+	}
+}
+
+# bandaid fix until cloning effects get refactored
+POD_copy_trait_xp_for_clone_effect = {
+	POD_copy_vanilla_lifestyle_trait_xp_effect = yes
+	POD_copy_supernatural_lifestyle_trait_xp_effect = yes
+}
+
+POD_copy_vanilla_lifestyle_trait_xp_effect = {
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = lifestyle_reveler }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = lifestyle_blademaster }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = lifestyle_mystic }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = lifestyle_physician }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = pilgrim }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = scarred }
+	if = {
+		limit = {
+			has_trait = lifestyle_hunter
+			scope:cloned_character = { has_trait = lifestyle_hunter }
+		}
+		add_trait_xp = { 
+			trait = lifestyle_hunter
+			track = hunter
+			value = "scope:cloned_character.has_trait_xp(lifestyle_hunter|hunter)"
+		}
+		add_trait_xp = { 
+			trait = lifestyle_hunter
+			track = falconer
+			value = "scope:cloned_character.has_trait_xp(lifestyle_hunter|falconer)"
+		}
+	}
+	if = {
+		limit = {
+			has_trait = tourney_participant
+			scope:cloned_character = { has_trait = tourney_participant }
+		}
+		add_trait_xp = { 
+			trait = tourney_participant
+			track = foot
+			value = "scope:cloned_character.has_trait_xp(tourney_participant|foot)"
+		}
+		add_trait_xp = { 
+			trait = tourney_participant
+			track = bow
+			value = "scope:cloned_character.has_trait_xp(tourney_participant|bow)"
+		}
+		add_trait_xp = { 
+			trait = tourney_participant
+			track = horse
+			value = "scope:cloned_character.has_trait_xp(tourney_participant|horse)"
+		}
+		add_trait_xp = { 
+			trait = tourney_participant
+			track = wit
+			value = "scope:cloned_character.has_trait_xp(tourney_participant|wit)"
+		}
+	}
+	if = {
+		limit = {
+			has_trait = lifestyle_traveler
+			scope:cloned_character = { has_trait = lifestyle_traveler }
+		}
+		add_trait_xp = { 
+			trait = lifestyle_traveler
+			track = travel
+			value = "scope:cloned_character.has_trait_xp(lifestyle_traveler|travel)"
+		}
+		add_trait_xp = { 
+			trait = lifestyle_traveler
+			track = danger
+			value = "scope:cloned_character.has_trait_xp(lifestyle_traveler|danger)"
+		}
+	}
+}
+
+POD_copy_supernatural_lifestyle_trait_xp_effect = {
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = scourge }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = spectre }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = werewolf }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = ajaba }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = bastet }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = corax }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = gurahl }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = mokole }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = nagah }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = nuwisha }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = ratkin }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = rokea }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = apis }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = camazotz }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = grondr }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = entomos }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = psychic }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = golconda_seeker }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = azhi_dahaka_scholar }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = kitsune }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma1 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma2 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma3 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma4 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma5 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma6 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma7 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma8 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = dharma9 }
+	POD_copy_lifestyle_trait_xp_single_track = { TRAIT = demonology }
+	if = {
+		limit = {
+			has_trait = pod_crafter
+			scope:cloned_character = { has_trait = pod_crafter }
+		}
+		add_trait_xp = { 
+			trait = pod_crafter
+			track = forging
+			value = "scope:cloned_character.has_trait_xp(pod_crafter|forging)"
+		}
+		add_trait_xp = { 
+			trait = pod_crafter
+			track = brewing
+			value = "scope:cloned_character.has_trait_xp(pod_crafter|brewing)"
+		}
+		add_trait_xp = { 
+			trait = pod_crafter
+			track = enhancing
+			value = "scope:cloned_character.has_trait_xp(pod_crafter|enhancing)"
+		}
+	}
+	if = {
+		limit = {
+			has_trait = ashen_adventurer
+			scope:cloned_character = { has_trait = ashen_adventurer }
+		}
+		add_trait_xp = { 
+			trait = ashen_adventurer
+			track = ashen_ambassador
+			value = "scope:cloned_character.has_trait_xp(ashen_adventurer|ashen_ambassador)"
+		}
+		add_trait_xp = { 
+			trait = ashen_adventurer
+			track = ashen_grandmaster
+			value = "scope:cloned_character.has_trait_xp(ashen_adventurer|ashen_grandmaster)"
+		}
+		add_trait_xp = { 
+			trait = ashen_adventurer
+			track = ashen_cult
+			value = "scope:cloned_character.has_trait_xp(ashen_adventurer|ashen_cult)"
+		}
+		add_trait_xp = { 
+			trait = ashen_adventurer
+			track = ashen_caravan
+			value = "scope:cloned_character.has_trait_xp(ashen_adventurer|ashen_caravan)"
+		}
+	}
+	if = {
+		limit = {
+			has_trait = wraith
+			scope:cloned_character = { has_trait = wraith }
+		}
+		add_trait_xp = { 
+			trait = wraith
+			track = fetter
+			value = "scope:cloned_character.has_trait_xp(wraith|fetter)"
+		}
+		add_trait_xp = { 
+			trait = wraith
+			track = fetter_resolved
+			value = "scope:cloned_character.has_trait_xp(wraith|fetter_resolved)"
+		}
+	}
+}

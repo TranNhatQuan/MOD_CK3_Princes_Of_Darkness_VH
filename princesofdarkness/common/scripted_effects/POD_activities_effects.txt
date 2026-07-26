@@ -1,0 +1,195 @@
+﻿
+scripted_effect_survey_increase_control_effect = {
+	
+	if = {
+		limit = {
+			capital_county = {
+				has_county_modifier = lax_control_modifier
+				}
+			}
+			capital_county = {
+				remove_county_modifier = lax_control_modifier
+				}
+	}
+	
+	else = {
+		capital_county = {
+			add_county_modifier = {
+			modifier = strict_control_modifier
+			years = 10
+				}
+			}
+		}
+}
+
+scripted_effect_survey_decrease_control_effect = {
+	
+	if = {
+		limit = {
+			capital_county = {
+				has_county_modifier = strict_control_modifier
+				}
+			}
+			capital_county = {
+				remove_county_modifier = strict_control_modifier
+				}
+	}
+	
+	else = {
+		capital_county = {
+			add_county_modifier = {
+			modifier = lax_control_modifier
+			years = 10
+				}
+			}
+		}
+}
+
+scripted_effect_survey_increase_opportunities_effect = {
+
+	if = {
+		limit = {
+			OR = {
+			capital_province = {
+					building_slots > 8				
+					}	
+			capital_province = {
+					building_slots > 7
+					has_special_building_slot = yes
+					}														
+			}				
+			}
+			capital_county  = {
+				if = {
+					limit = {
+						NOT = {
+							this = title:c_byzantion	
+							has_county_modifier = opportunitiesend_modifier
+							}
+						}
+				add_county_modifier  = opportunitiesend_modifier
+				}
+				
+				else_if = {
+					limit = {
+						this = title:c_byzantion	 #Byzantion is already fully sloted, need another bonus
+						}
+				random = {
+					chance = 25
+					
+				change_development_level = 1
+				}
+				}
+				
+				else = {}
+				
+							
+			}
+	}
+
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities1_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities1_modifier
+				add_province_modifier = opportunities2_modifier
+				}
+	}
+	
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities2_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities2_modifier
+				add_province_modifier = opportunities3_modifier
+				}
+	}	
+
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities3_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities3_modifier
+				add_province_modifier = opportunities4_modifier
+				}
+	}
+	
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities4_modifier
+				building_slots <= 8
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities4_modifier
+				add_province_modifier = extra_building_slot
+				}
+	}	
+	
+	else = {
+		capital_province = {
+			add_province_modifier = opportunities1_modifier
+			}
+		}
+}	
+
+scripted_effect_survey_decrease_opportunities_effect = {
+
+	if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities1_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities1_modifier
+				}
+	}
+	
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities2_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities2_modifier
+				add_province_modifier = opportunities1_modifier
+				}
+	}	
+
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities3_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities3_modifier
+				add_province_modifier = opportunities2_modifier
+				}
+	}
+	
+	else_if = {
+		limit = {
+			capital_province = {
+				has_province_modifier = opportunities4_modifier
+				}
+			}
+			capital_province = {
+				remove_province_modifier = opportunities4_modifier
+				add_province_modifier = opportunities3_modifier
+				}
+	}	
+
+}	

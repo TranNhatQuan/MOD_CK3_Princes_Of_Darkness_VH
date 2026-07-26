@@ -1,0 +1,119 @@
+﻿l_english:
+
+############## 
+# OPTIONS
+##############
+
+  gruesome_festival_option_size:0 "Quy mô lễ hội"
+  gruesome_festival_size_small:0 "Lễ hội nhỏ"
+  gruesome_festival_size_small_desc:1 "$EFFECT_LIST_BULLET$ Các thay đổi về [opinion|E] sẽ ít xảy ra hơn.\n\n#weak Người dân của quận này vẫn giữ đức tin đủ tốt để tiếp đón chúng ta.#!"
+  gruesome_festival_size_medium:0 "Lễ hội vừa"
+  gruesome_festival_size_medium_desc:1 "$EFFECT_LIST_BULLET$ Các thay đổi về [opinion|E] trở nên thường xuyên hơn.\n\n#weak Tất cả [GetPlayer.Custom('WomenMenPeople_GenderPreference')] tự do trong lãnh địa của ta đều phải đến!#!"
+  gf_medium_option_valid:0 "Ngài không sở hữu ít nhất 2 tước hiệu [rank|E] Quận"
+  gruesome_festival_size_large:0 "Lễ hội lớn"
+  gruesome_festival_size_large_desc:1 "$EFFECT_LIST_BULLET$ Các thay đổi về [opinion|E] xảy ra thường xuyên.\n\n#weak Mọi [GetPlayer.Custom('LadyLordNoble_GenderPreference')|U] và thường dân trong [GetPlayer.GetPrimaryTitle.GetTierAsNameNoTooltip] đều được mời!#!"
+  activity_gruesome_festival_destination_selection:0 "Ngài chỉ có thể tổ chức $activity_gruesome_festival$ tại các tỉnh có [doctrine|E] $gruesome_festivals_active_name$."
+  activity_gruesome_festival_conclusion_desc:1 "[GetActivityType( 'activity_gruesome_festival' ).GetName] đã kết thúc"
+  activity_gruesome_festival_guest_desc:1 "$BULLET_WITH_TAB$ Người tham gia có thể nhận được [piety|E]\n$BULLET_WITH_TAB$ Người tham gia có thể tăng [opinion|E] với những người tham gia khác\n$BULLET_WITH_TAB$ Người tham gia có thể mất [stress_loss_i][stress|E]"
+
+  gruesome_festival_option_sacrifice:0 "Vật hiến tế"
+
+  gf_suitable_rank_valid:0 "Ngài không độc lập và cũng không phải là chư hầu [rank|E] cấp Vua"
+  gf_valid_county_faith:0 "Ngài không kiểm soát bất kỳ Quận nào có đức tin cho phép tổ chức [GetActivityType( 'activity_gruesome_festival' ).GetName]"
+
+### ANIMALS
+
+ # Option loc for animals if you have a faith allowing gruesome festivals
+  gruesome_festival_sacrifice_animals_genuine:0 "Động vật"
+  gruesome_festival_sacrifice_animals_genuine_desc:1 "$gruesome_festival_sacrifice_animals_genuine_desc_help$\n\n#weak Một loạt các lễ hiến tế động vật tử tế là đủ rồi.#!"
+  gruesome_festival_sacrifice_animals_genuine_desc_help:2 "$gruesome_festival_sacrifice_animals_only.regular.opinion$\n$gruesome_festival_sacrifice_animals_only.appeased_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.regular.piety$"
+
+ # Option loc for animals if you only rule over a faith allowing gruesome festivals
+  gruesome_festival_sacrifice_animals_poser:0 "Động vật"
+  gruesome_festival_sacrifice_animals_poser_desc:1 "$gruesome_festival_sacrifice_animals_poser_desc_help$\n\n#weak Một loạt các lễ hiến tế động vật tử tế là đủ rồi.#!"
+  gruesome_festival_sacrifice_animals_poser_desc_help:2 "$gruesome_festival_sacrifice_animals_only.regular.opinion$\n$gruesome_festival_sacrifice_animals_only.appeased_humsac_haters$\n $EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.regular.piety.loss$"
+
+# Animals Help Text
+  gruesome_festival_sacrifice_animals_only.regular.opinion:1 "$EFFECT_LIST_BULLET$ Lượng tăng [opinion|E] và [county_opinion|E] với [GetPlayer.GetFaith.GetAdherentNamePlural] sẽ thấp hơn so với hiến tế con người"
+  gruesome_festival_sacrifice_animals_only.appeased_humsac_haters:1 "$EFFECT_LIST_BULLET$ Các thần dân không ủng hộ hiến tế con người sẽ không bị mất [opinion|E] hoặc [county_opinion|E]"
+ #gruesome_festival_sacrifice_animals_only.regular.piety: "#positive_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_regular_animal_piety_value')|0]#! [piety_i] will be gained $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_animals_only.regular.piety:1 "#positive_value Small#! [piety_i][piety|E] nhận được"
+ #gruesome_festival_sacrifice_animals_only.regular.piety.loss: "#negative_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_regular_animal_piety_value')|0]#! [piety_i] will be lost $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_animals_only.regular.piety.loss:1 "#negative_value Small#! [piety_i][piety|E] mất đi"
+
+
+### MAGNIFICENT ANIMALS
+
+# Option loc for magnificent animals if you have a faith allowing gruesome festivals
+# GENUINE
+  gruesome_festival_sacrifice_animals_magnificent_genuine:0 "Động vật – Lộng lẫy"
+  gruesome_festival_sacrifice_animals_magnificent_genuine_desc:1 "$gruesome_festival_sacrifice_animals_magnificent_genuine_desc_help$\n\n#weak Mang đến một con thú hoặc gia cầm cho mỗi [GetPlayer.Custom('WomanManPerson_GenderPreference')]!#!"
+  gruesome_festival_sacrifice_animals_magnificent_genuine_desc_help:2 "$gruesome_festival_sacrifice_animals_only.magnificent.opinion$\n$gruesome_festival_sacrifice_animals_only.appeased_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.magnificent.piety$"
+# Option loc for magnificent animals if you only rule over a faith allowing gruesome festivals
+# POSER
+  gruesome_festival_sacrifice_animals_magnificent_poser:0 "Động vật – Lộng lẫy"
+  gruesome_festival_sacrifice_animals_magnificent_poser_desc:1 "$gruesome_festival_sacrifice_animals_magnificent_poser_desc_help$\n\n#weak Mang đến một con thú hoặc gia cầm cho mỗi [GetPlayer.Custom('WomanManPerson_GenderPreference')]!#!"
+  gruesome_festival_sacrifice_animals_magnificent_poser_desc_help:2 "$gruesome_festival_sacrifice_animals_only.magnificent.opinion$\n$gruesome_festival_sacrifice_animals_only.appeased_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.magnificent.piety.loss$#!"
+
+# Magnificent Animals Help Text
+  gruesome_festival_sacrifice_animals_only.magnificent.opinion:1 "$EFFECT_LIST_BULLET$ Lượng tăng [opinion|E] và [county_opinion|E] với [GetPlayer.GetFaith.GetAdherentNamePlural] tương đương với hiến tế con người"
+ #gruesome_festival_sacrifice_animals_only.magnificent.piety: "#positive_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_magnificent_animal_piety_value')|0]#! [piety_i] will be gained $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_animals_only.magnificent.piety:1 "#positive_value Small#! [piety_i][piety|E] nhận được"
+ #gruesome_festival_sacrifice_animals_only.magnificent.piety.loss: "#negative_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_magnificent_animal_piety_value')|0]#! [piety_i] will be lost $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_animals_only.magnificent.piety.loss:1 "#negative_value Small#! [piety_i][piety|E] mất đi"
+
+
+### HUMANS
+
+# GENUINE
+  gruesome_festival_sacrifice_humans_genuine:0 "Con người"
+  gruesome_festival_sacrifice_humans_genuine_desc:1 "$gruesome_festival_sacrifice_humans_genuine_desc_help$\n\n#weak Truyền thống là điều quan trọng. [GetPlayer.GetFaith.PantheonTerm|U] sẽ được nếm máu người.#!"
+  gruesome_festival_sacrifice_humans_genuine_desc_help:1 "$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.regular.opinion$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.offended_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.regular.piety$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.optional_victim_picker$[SelectLocalization( ActivityPlanner.GetSingleLocationPhase.GetLocation.GetCounty.GetFaith.HasParameterByKey('cannibalism_legal'), 'gruesome_festival_sacrifice_human_sacrifice.become_cannibal', '')]"
+
+ # POSER
+  gruesome_festival_sacrifice_humans_poser:0 "Con người"
+  gruesome_festival_sacrifice_humans_poser_desc:1 "$gruesome_festival_sacrifice_humans_poser_desc_help$\n\n#weak Truyền thống là điều quan trọng. [GetPlayer.GetFaith.PantheonTerm|U] sẽ được nếm máu người.#!"
+  gruesome_festival_sacrifice_humans_poser_desc_help:1 "$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.regular.opinion$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.offended_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.regular.piety.loss$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.optional_victim_picker$[SelectLocalization( ActivityPlanner.GetSingleLocationPhase.GetLocation.GetCounty.GetFaith.HasParameterByKey('cannibalism_legal'), 'gruesome_festival_sacrifice_human_sacrifice.become_cannibal', '')]"
+
+# Humans Help Text
+  gruesome_festival_sacrifice_human_sacrifice.regular.opinion:0 "[opinion|E] và [county_opinion|E] nhận được với [GetPlayer.GetFaith.GetAdherentNamePlural] sẽ ngang bằng với hiến tế động vật tráng lệ"
+  gruesome_festival_sacrifice_animals_only.offended_humsac_haters:1 "Những thần dân không ủng hộ hiến tế người sẽ mất [opinion|E] & [county_opinion|E]"
+ #gruesome_festival_sacrifice_human_sacrifice.regular.piety: "#positive_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_regular_human_piety_value')|0]#! [piety_i] will be gained $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_human_sacrifice.regular.piety:1 "#positive_value Lớn#! [piety_i][piety|E] nhận được"
+ #gruesome_festival_sacrifice_human_sacrifice.regular.piety.loss:0 "#negative_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_regular_human_piety_value')|0]#! [piety_i] will be lost $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_human_sacrifice.regular.piety.loss:1 "#negative_value Lớn#! [piety_i][piety|E] bị mất"
+  gruesome_festival_sacrifice_human_sacrifice.optional_victim_picker:0 "Ngoài ra, Ngài có thể [designate_chief_sacrifice_article|E] từ những [prisoners|E] của mình"
+  gruesome_festival_sacrifice_human_sacrifice.become_cannibal:1 "\n$EFFECT_LIST_BULLET$ Ngài sẽ trở thành một [GetTrait('cannibal').GetName( GetNullCharacter )] $gruesome_festival_activity.piety_gain.rump$"
+
+
+### MAGNIFICENT HUMANS 
+
+# GENUINE
+  gruesome_festival_sacrifice_humans_magnificent_genuine:0 "Con người – Tráng lệ"
+  gruesome_festival_sacrifice_humans_magnificent_genuine_desc:1 "$gruesome_festival_sacrifice_humans_magnificent_genuine_desc_help$\n\n#weak Chỉ những lễ vật tinh túy nhất mới đủ xứng đáng: cả [GetPlayer.Custom('WomanManPerson_GenderPreference')] lẫn động vật...#!"
+  gruesome_festival_sacrifice_humans_magnificent_genuine_desc_help:2 "$gruesome_festival_sacrifice_human_sacrifice.magnificent.opinion$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.offended_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.magnificent.piety$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.optional_victim_picker$[SelectLocalization( ActivityPlanner.GetSingleLocationPhase.GetLocation.GetCounty.GetFaith.HasParameterByKey('cannibalism_legal'), 'gruesome_festival_sacrifice_human_sacrifice.become_cannibal', '')]"
+
+# POSER
+  gruesome_festival_sacrifice_humans_magnificent_poser:0 "Con người – Tráng lệ"
+  gruesome_festival_sacrifice_humans_magnificent_poser_desc:1 "$gruesome_festival_sacrifice_humans_magnificent_poser_desc_help$\n\n#weak Chỉ những lễ vật tinh túy nhất mới đủ xứng đáng: cả [GetPlayer.Custom('WomanManPerson_GenderPreference')] lẫn động vật...#!"
+  gruesome_festival_sacrifice_humans_magnificent_poser_desc_help:1 "$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.magnificent.opinion$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_animals_only.offended_humsac_haters$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.magnificent.piety.loss$\n$EFFECT_LIST_BULLET$ $gruesome_festival_sacrifice_human_sacrifice.optional_victim_picker$[SelectLocalization( ActivityPlanner.GetSingleLocationPhase.GetLocation.GetCounty.GetFaith.HasParameterByKey('cannibalism_legal'), 'gruesome_festival_sacrifice_human_sacrifice.become_cannibal', '')]"
+
+ # Magnificent Humans Help Text 
+  gruesome_festival_sacrifice_human_sacrifice.magnificent.opinion:1 "$EFFECT_LIST_BULLET$ [opinion|E] và [county_opinion|E] nhận được với [GetPlayer.GetFaith.GetAdherentNamePlural] sẽ đạt mức cao nhất có thể"
+ #gruesome_festival_sacrifice_human_sacrifice.magnificent.piety: "#positive_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_magnificent_human_piety_value')|0]#! [piety_i] will be gained $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_human_sacrifice.magnificent.piety:1 "#positive_value Lớn#! [piety_i][piety|E] nhận được"
+ #gruesome_festival_sacrifice_human_sacrifice.magnificent.piety.loss: "#negative_value [GetPlayer.MakeScope.ScriptValue('gruesome_festival_magnificent_human_piety_value')|0]#! [piety_i] will be lost $gruesome_festival_activity.piety_gain.rump$"
+  gruesome_festival_sacrifice_human_sacrifice.magnificent.piety.loss:1 "#negative_value Lớn#! [piety_i][piety|E] bị mất"
+
+  gruesome_festival_activity.piety_gain.rump:0 "tại [Select_CString( Character.IsLocalPlayer, GetPlayer.Custom('GruesomeFestivalName'), '$gruesomefestivalname_festival|q$' )]"
+
+  gruesome_festival_immediate_log_title:0 "[Select_CString( Character.IsLocalPlayer, GetPlayer.Custom('GruesomeFestivalName') , '$gruesomefestivalname_festival|q$' )] Hoàn tất"
+  gruesome_festival_faithful_faith_option_log_title:0 "$gruesome_festival_immediate_log_title$"
+  gruesome_festival_faithful_nobility_option_log_title:0 "$gruesome_festival_immediate_log_title$"
+  gruesome_festival_faithful_commoners_option_log_title:0 "$gruesome_festival_immediate_log_title$"
+
+############## 
+# PHASE
+##############
+  gruesome_festival_phase:0 "$activity_gruesome_festival$"
+  gruesome_festival_phase_desc:0 "Hãy gắn kết các tín đồ lại với nhau bằng hiến tế và khẳng định vị thế của ta với tư cách là [GetPlayer.GetTitleAsNameNoTooltip] của toàn bộ vùng đất."

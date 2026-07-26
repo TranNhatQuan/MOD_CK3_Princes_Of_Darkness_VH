@@ -1,0 +1,35 @@
+﻿has_animal_resonance_trigger = {
+	OR = {
+		has_trait = kinfolk
+		has_trait = fera
+		has_trait_with_flag = animal_discipline
+		has_perk = fc_torso_vitae_enhancer_perk
+	}
+}
+
+POD_has_mundane_blood_trigger = {
+	OR = {
+		has_main_supernatural_race_trigger = no
+		POD_is_mage_trigger = yes
+	}
+}
+
+POD_will_die_from_feeding_trigger = {
+	trigger_if = {
+		limit = { is_vampire_trigger = no }
+		drinkable_blood_left < $AMOUNT$
+	}
+	trigger_else = {
+		always = no
+	}
+}
+
+POD_bloodloss_causes_piety_loss_trigger = {
+	trigger_if = {
+		limit = { has_supernatural_race_trigger = no }
+		1 >= { value = drinkable_blood_left subtract = $AMOUNT$ }
+	}
+	trigger_else = {
+		always = no
+	}
+}

@@ -1,0 +1,266 @@
+﻿namespace = POD_days_of_fire
+
+#1342 Second Great Maelstrom [34]
+#1401 Renaissance [37]
+#1430 Inquisition Rising [36]
+#1450 Anarch Revolt [35]
+#1492 America [38]
+#1605 Third Great Maelstrom [39]
+#1759 Industrial Revolution [40]
+#1775 American Revolution [41]
+#1837 Victorian Era [45]
+#1914 World War I [47]
+#1916 Fourth Great Maelstrom [48]
+#1918 Spanish flu [49]
+#1931 World War II [50]
+#1937 Second Sino-Japanese War [51]
+#1945 End of World War II [52]
+#1950 Iron Curtain [53]
+#1999 Sixth Great Maelstrom [71]
+
+POD_days_of_fire.100 = {
+#Called from specific yearly pulse on action with a small delay
+	hidden = yes
+	scope = none
+
+	immediate =	{
+		if = {
+			limit = {
+				NOT = { has_global_variable = black_death_prevented }
+				current_year = 1342
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1342.t
+					desc = POD_days_of_fire.1342.desc
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1401
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1401.t
+					desc = POD_days_of_fire.1401.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1430
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1430.t
+					desc = POD_days_of_fire.1430.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1450
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1450.t
+					desc = POD_days_of_fire.1450.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1492
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1492.t
+					desc = POD_days_of_fire.1492.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1605
+			}	
+			every_player = {
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1605.t
+					desc = POD_days_of_fire.1605.desc
+					if = {
+						limit = { POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow } }
+						random_in_list = {
+							variable = known_umbra_realms_list
+							limit = { var:name = flag:sea_of_shadow }
+							set_variable = { name = name value = flag:tempest }
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1759
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1759.t
+					desc = POD_days_of_fire.1759.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1775
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1775.t
+					desc = POD_days_of_fire.1775.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1837
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1837.t
+					desc = POD_days_of_fire.1837.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1914
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1914.t
+					desc = POD_days_of_fire.1914.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1916
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1916.t
+					desc = POD_days_of_fire.1916.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1918
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1918.t
+					desc = POD_days_of_fire.1918.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1931
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1931.t
+					desc = POD_days_of_fire.1931.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1937
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1937.t
+					desc = POD_days_of_fire.1937.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1945
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1945.t
+					desc = POD_days_of_fire.1945.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1950
+			}	
+			every_player = {
+				limit = { has_trait = demon }
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1950.t
+					desc = POD_days_of_fire.1950.desc
+				}
+			}		
+		}
+		else_if = {
+			limit = {
+				current_year = 1999
+			}	
+			every_player = {
+				send_interface_message = {
+					type = POD_event_days_of_fire
+					title = POD_days_of_fire.1999.t
+					desc = POD_days_of_fire.1999.desc
+					if = {
+						limit = { 
+							POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+						}
+						random_in_list = {
+							variable = known_umbra_realms_list
+							limit = { var:name = flag:tempest }
+							set_variable = { name = name value = flag:stormwall }
+						}
+					}
+				}
+			}		
+		}
+	}
+}

@@ -1,0 +1,2656 @@
+﻿POD_character_vampire_clan_initialization_effect = {
+		
+	#Am I lost in the void?
+	if = {
+		limit = { 
+			NOT = { exists = location }
+			NOT = { # Can't set move non-courtier Merc Commander to pool
+				AND = {
+					primary_title.tier = tier_duchy
+					is_playable_character = no
+				}
+			}
+		}
+
+		#Oops, no good! Go someplace.
+		random_independent_ruler = {
+			limit = {
+				exists = capital_province
+				capital_province = { local_pool_is_full_trigger = no }
+			}
+			alternative_limit = { exists = capital_province }
+			capital_province = { save_scope_as = destination }
+		}
+		
+		move_to_pool_at = scope:destination
+	}
+		
+if = {
+	limit = {
+		exists = location
+		
+		is_vampire_trigger = yes
+		is_mortal_trigger = no
+	}
+
+
+# England
+
+	if = {
+		limit = {
+			location = { geographical_region = custom_england }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { add_trait = brujah }
+			30 = { add_trait = ventrue }
+			20 = { add_trait = toreador }
+			10 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }
+			5 = { 
+				if = {
+					limit = { current_date < 1220.1.1 }
+					add_trait = salubri 
+				}
+				else = {
+					add_trait = tremere
+				}
+			}			
+		}
+	}
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_west_germania }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { add_trait = brujah }
+			30 = { add_trait = ventrue }
+			20 = { add_trait = toreador }
+			10 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }			
+		}
+	}	
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_west_britannia }
+			NOT = { location = { geographical_region = custom_england } 
+			has_POD_vampire_clan_trigger = no }
+		}
+		random_list = {
+			10 = { add_trait = brujah }
+			15 = { add_trait = ventrue }
+			15 = { add_trait = toreador }
+			40 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }
+		}
+	}
+	
+# Tremere
+
+	if = {
+		limit = {
+			location = { geographical_region = custom_bavaria }
+			has_POD_vampire_clan_trigger = no
+			current_date > 1220.1.1
+		}
+		random_list = {
+			10 = { add_trait = brujah }
+			15 = { add_trait = ventrue }
+			10 = { add_trait = toreador }
+			15 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }
+			30 = { add_trait = tremere }
+		}			
+	}
+		
+	
+# world_europe_west_francia	
+
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_west_francia }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = brujah }
+			15 = { add_trait = ventrue }
+			40 = { add_trait = toreador }
+			10 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }
+			5 = { 
+				if = {
+					limit = { current_date < 1220.1.1 }
+					add_trait = salubri 
+				}
+				else = {
+					add_trait = tremere
+				}
+			}
+		}
+	}
+	
+# world_europe_west_iberia	
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_west_iberia }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			25 = { add_trait = lasombra }
+			15 = { add_trait = brujah }		
+			15 = { add_trait = toreador }
+			10 = { add_trait = assamite }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = ventrue }
+			5 = { add_trait = malkavian }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite }
+			2 = { add_trait = ravnos }
+			1 = { add_trait = salubri }
+			1 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}	
+	
+# world_europe_north	
+
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_north }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = brujah }
+			15 = { add_trait = ventrue }
+			10 = { add_trait = toreador }
+			40 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = malkavian }
+			5 = { 
+				if = {
+					limit = { current_date < 1220.1.1 }
+					add_trait = salubri 
+				}
+				else = {
+					add_trait = tremere
+				}
+			}			
+		}
+	}
+	
+# world_europe_south_east
+
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_south_east }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			20 = { add_trait = tzimisce }
+			10 = { add_trait = gangrel }
+			15 = { add_trait = brujah }
+			5 = { add_trait = nosferatu }
+			15 = { add_trait = cappadocian }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ventrue }
+			15 = { add_trait = lasombra }	
+			1 = { add_trait = assamite }
+			6 = { 
+				if = {
+					limit = { current_date < 1220.1.1 }
+					add_trait = salubri 
+				}
+				else = {
+					add_trait = tremere
+				}
+			}
+			1 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			1 = { add_trait = ravnos }
+			1 = { add_trait = baali }
+		}
+	}
+
+
+# world_europe_south_italy	
+	
+# world_europe_east
+
+	if = {
+		limit = {
+			location = { geographical_region = world_europe_east }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			40 = { add_trait = tzimisce }
+			10 = { add_trait = gangrel }
+			15 = { add_trait = brujah }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = cappadocian }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ventrue }
+			5 = { add_trait = lasombra }	
+			1 = { add_trait = assamite }
+			6 = { 
+				if = {
+					limit = { current_date < 1220.1.1 }
+					add_trait = salubri 
+				}
+				else = {
+					add_trait = tremere
+				}
+			}
+			1 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			1 = { add_trait = ravnos }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_asia_minor	
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_asia_minor }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { add_trait = toreador }
+			15 = { add_trait = ventrue }
+			15 = { add_trait = tzimisce }
+			10 = { add_trait = cappadocian }
+			10 = { add_trait = brujah }
+			10 = { add_trait = assamite }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = lasombra }	
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = malkavian }
+			2 = { add_trait = gangrel }
+			1 = { add_trait = ravnos }
+			1 = { add_trait = salubri }
+			1 = { add_trait = baali }
+		}
+	}	
+	
+# world_africa_north_west
+
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_north_west }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			15 = { add_trait = assamite }
+			15 = { add_trait = lasombra }		
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = brujah }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_africa_north_east
+
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_north_east }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			25 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			10 = { add_trait = assamite }
+			10 = { add_trait = lasombra }		
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = brujah }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_africa_sahara
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_sahara }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			15 = { add_trait = assamite }
+			15 = { add_trait = lasombra }		
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = brujah }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}	
+	
+# world_africa_east 
+
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_east }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = toreador }
+			10 = { add_trait = ravnos }
+			5 = { add_trait = tzimisce }
+			10 = { add_trait = brujah }
+			25 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			10 = { add_trait = assamite }
+			5 = { add_trait = lasombra }
+			2 = { add_trait = malkavian }
+			1 = { add_trait = salubri }
+			1 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_africa_west
+
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_west }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { add_trait = gangrel }
+			10 = { add_trait = nosferatu }
+			10 = { add_trait = toreador }
+			10 = { add_trait = ravnos }
+			8 = { add_trait = tzimisce }
+			10 = { add_trait = brujah }
+			10 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			10 = { add_trait = assamite }
+			5 = { add_trait = lasombra }
+			1 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_africa_north
+	
+	if = {
+		limit = {
+			location = { geographical_region = world_africa_north }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			15 = { add_trait = assamite }
+			15 = { add_trait = lasombra }		
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = toreador }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = brujah }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+		}
+	}		
+	
+# world_steppe
+
+	if = {
+		limit = {
+			location = { geographical_region = world_steppe }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			55 = { add_trait = gangrel }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = assamite }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = cappadocian }
+			5 = { add_trait = brujah }
+			1 = { add_trait = lasombra }
+			1 = { add_trait = ventrue }
+			1 = { add_trait = tzimisce }
+			1 = { add_trait = toreador }
+			1 = { add_trait = baali }
+		}
+	}
+
+# world_middle_east
+
+	if = {
+		limit = {
+			location = { geographical_region = world_middle_east }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			15 = { add_trait = lasombra }
+			15 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			15 = { add_trait = assamite }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = ventrue }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			5 = { add_trait = toreador }
+			5 = { add_trait = cappadocian }
+			1 = { add_trait = baali }
+			5 = { add_trait = brujah }
+		}
+	}
+	
+# world tibet
+
+	if = {
+		limit = {
+			location = { geographical_region = world_tibet }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = ravnos }
+			#45 = { add_trait = kueijin }
+			5 = { add_trait = ventrue }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = assamite }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			1 = { add_trait = lasombra }
+			3 = { add_trait = toreador }
+			3 = { add_trait = cappadocian }
+		}
+	}
+
+# world burma
+
+	if = {
+		limit = {
+			location = { geographical_region = world_burma }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = ravnos }
+			#45 = { add_trait = kueijin }
+			5 = { add_trait = ventrue }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = assamite }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			1 = { add_trait = lasombra }
+			3 = { add_trait = toreador }
+			3 = { add_trait = cappadocian }
+		}
+	}
+
+# world_india		
+
+	if = {
+		limit = {
+			location = { geographical_region = world_india_bengal }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			10 = { add_trait = ravnos }
+			#45 = { add_trait = kueijin }
+			5 = { add_trait = ventrue }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = assamite }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			1 = { add_trait = lasombra }
+			3 = { add_trait = toreador }
+			3 = { add_trait = cappadocian }
+		}
+	}
+
+	if = {
+		limit = {
+			location = { geographical_region = world_india }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			30 = { add_trait = ravnos }
+			#15 = { add_trait = kueijin }
+			5 = { add_trait = ventrue }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite  }
+			5 = { add_trait = assamite }
+			5 = { add_trait = tzimisce }
+			5 = { add_trait = malkavian }
+			5 = { add_trait = salubri }
+			5 = { add_trait = gangrel }
+			5 = { add_trait = nosferatu }
+			1 = { add_trait = lasombra }
+			3 = { add_trait = toreador }
+			3 = { add_trait = cappadocian }
+		}
+	}
+	
+	if = {
+		limit = {
+			NOT = { location = { geographical_region = custom_england } }
+			NOT = { location = { geographical_region = world_india } }
+			NOT = { location = { geographical_region = world_middle_east } }
+			NOT = { location = { geographical_region = world_steppe } }
+			NOT = { location = { geographical_region = world_africa_west } }
+			NOT = { location = { geographical_region = world_africa_east } }
+			NOT = { location = { geographical_region = world_africa_north_west } }
+			NOT = { location = { geographical_region = world_africa_north_east } }
+			NOT = { location = { geographical_region = world_africa_sahara } }
+			NOT = { location = { geographical_region = world_africa_north } }
+			NOT = { location = { geographical_region = world_asia_minor } }
+			NOT = { location = { geographical_region = world_europe_east } }
+			NOT = { location = { geographical_region = world_europe_south_east } }
+			NOT = { location = { geographical_region = world_europe_west_francia } }
+			NOT = { location = { geographical_region = world_europe_north } }
+			NOT = { location = { geographical_region = world_europe_west_iberia } }
+			has_POD_vampire_clan_trigger = no
+		}
+		random_list = {
+			5 = { add_trait = assamite }
+			1 = { add_trait = baali }
+			10 = { add_trait = brujah }
+			5 = { add_trait = caitiff }
+			5 = { add_trait = cappadocian }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite }
+			10 = { add_trait = gangrel }
+			5 = { add_trait = lasombra }
+			5 = { add_trait = malkavian }	
+			10 = { add_trait = nosferatu }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = salubri }
+			10 = { add_trait = toreador }
+			5 = { add_trait = tzimisce }
+			10 = { add_trait = ventrue }
+		}
+	}
+		
+}
+
+	if = { 
+		limit = { # For merc
+			NOT = { exists = location }	
+			is_vampire_trigger = yes
+			is_mortal_trigger = no
+		}
+		random_list = {
+			5 = { add_trait = assamite }
+			1 = { add_trait = baali }
+			10 = { add_trait = brujah }
+			10 = { add_trait = caitiff }
+			5 = { add_trait = cappadocian }
+			5 = { trigger = { POD_can_setite_be_embraced_trigger = yes } add_trait = setite }
+			10 = { add_trait = gangrel }
+			5 = { add_trait = lasombra }
+			5 = { add_trait = malkavian }	
+			10 = { add_trait = nosferatu }
+			5 = { add_trait = ravnos }
+			5 = { add_trait = salubri }
+			5 = { add_trait = toreador }
+			5 = { add_trait = tzimisce }
+			10 = { add_trait = ventrue }
+		}	
+	}	
+}
+
+POD_character_vampire_clan_traits_effect = {
+	if = {
+		limit = { has_trait = assamite }
+		assamite_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = baali }
+		baali_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = brujah }
+		brujah_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = cappadocian }
+		cappadocian_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = gangrel }
+		gangrel_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = giovanni }
+		giovanni_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = lasombra }
+		lasombra_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = malkavian }
+		malkavian_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = nosferatu }
+		nosferatu_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = ravnos }
+		ravnos_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = salubri }
+		salubri_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = setite }
+		setite_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = toreador }
+		toreador_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = tremere }
+		tremere_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = truebrujah }
+		truebrujah_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = tzimisce }
+		tzimisce_traits_effect = yes
+	}
+	if = {
+		limit = { has_trait = ventrue }
+		ventrue_traits_effect = yes
+	}
+}
+
+assamite_traits_effect = {
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = arbitrary }
+		random = {
+			chance = 30
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 20
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = { has_trait = sadistic }
+		random = {
+			chance = 20
+			remove_trait = sadistic
+			add_trait = callous
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_blademaster
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+					add = 2
+					age > 100
+				}
+				add_trait = lifestyle_blademaster
+			}
+			2 = {
+				modifier = {
+					add = 1
+					age > 200
+				}
+				add_trait = lifestyle_blademaster
+				add_trait_xp = { trait = lifestyle_blademaster value = 50 }
+			}
+			0 = {
+				modifier = {
+					add = 1
+					age > 500
+				}
+				add_trait = lifestyle_blademaster
+				add_trait_xp = { trait = lifestyle_blademaster value = 100 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_mystic
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+				add = 2
+				age > 100
+				}
+				add_trait = lifestyle_mystic
+			}
+			2 = {
+				modifier = {
+				add = 1
+				age > 200
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 50 }
+			}
+			0 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 100 }
+			}
+		}
+	}
+}
+
+baali_traits_effect = {
+	if = {
+		limit = { has_trait = honest }
+		random = {
+			chance = 30
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+	if = {
+		limit = { has_trait = trusting }
+		random = {
+			chance = 30
+			remove_trait = trusting
+			add_trait = paranoid
+		}
+	}
+	if = {
+		limit = { has_trait = content }
+		random = {
+			chance = 20
+			remove_trait = content
+			add_trait = ambitious
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 10
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = { has_trait = just }
+		random = {
+			chance = 10
+			remove_trait = just
+			add_trait = arbitrary
+		}
+	}
+	### deprecated (witch trait ID and secret were replaced with infernalism)
+	# if = {
+	# 	limit = {
+	# 		NOT = {
+	# 			has_trait = witch
+	# 		}
+	# 	}
+	# 	random = {
+	# 		chance = 1
+	# 		modifier = {
+	# 			add = 1
+	# 			age > 100
+	# 		}
+	# 		modifier = {
+	# 			add = 3
+	# 			age > 200
+	# 		}
+	# 		modifier = {
+	# 			add = 5
+	# 			age > 500
+	# 		}
+	# 		add_trait = witch
+	# 	}
+	# }
+	
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_mystic
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+				add = 2
+				age > 100
+				}
+				add_trait = lifestyle_mystic
+			}
+			2 = {
+				modifier = {
+				add = 1
+				age > 200
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 50 }
+			}
+			0 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 100 }
+			}
+		}
+	}
+}
+
+brujah_traits_effect = {
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = patient }
+		random = {
+			chance = 30
+			remove_trait = patient
+			add_trait = impatient
+		}
+	}
+	if = {
+		limit = { has_trait = calm }
+		random = {
+			chance = 20
+			remove_trait = calm
+			add_trait = wrathful
+		}
+	}
+	if = {
+		limit = { has_trait = arbitrary }
+		random = {
+			chance = 10
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 10
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = physique_good_1
+				has_trait = physique_good_2
+				has_trait = physique_good_3
+			}
+		}
+		random_list = {
+			94 = {}
+			3 = { add_trait = physique_good_1 }
+			2 = { add_trait = physique_good_2 }
+			1 = { add_trait = physique_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = intellect_good_1
+				has_trait = intellect_good_2
+				has_trait = intellect_good_3
+			}
+		}
+		random_list = {
+			94 = {}
+			3 = { add_trait = intellect_good_1 }
+			2 = { add_trait = intellect_good_2 }
+			1 = { add_trait = intellect_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = scholar
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 2
+				age > 200
+			}
+			modifier = {
+				add = 4
+				age > 500
+			}
+			add_trait = scholar
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = gallant
+			}
+		}
+		random = {
+			chance = 5
+			add_trait = gallant
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = strategist
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 2
+				age > 500
+			}
+			add_trait = strategist
+		}
+	}
+}
+
+cappadocian_traits_effect = {
+	if = {
+		limit = { has_trait = impatient }
+		random = {
+			chance = 30
+			remove_trait = impatient
+			add_trait = patient
+		}
+	}
+	if = {
+		limit = { has_trait = wrathful }
+		random = {
+			chance = 30
+			remove_trait = wrathful
+			add_trait = calm
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 20
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = { has_trait = lustful }
+		random = {
+			chance = 10
+			remove_trait = lustful
+			add_trait = chaste
+		}
+	}
+	if = {
+		limit = { has_trait = ambitious }
+		random = {
+			chance = 10
+			remove_trait = ambitious
+			add_trait = content
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_1 }
+		random = {
+			chance = 20
+			remove_trait = education_martial_1 
+			add_trait = education_learning_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_2 }
+		random = {
+			chance = 20
+			remove_trait = education_martial_2 
+			add_trait = education_learning_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_3 }
+		random = {
+			chance = 20
+			remove_trait = education_martial_3 
+			add_trait = education_learning_4
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_1 }
+		random = {
+			chance = 20
+			remove_trait = education_intrigue_1 
+			add_trait = education_learning_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_2 }
+		random = {
+			chance = 20
+			remove_trait = education_intrigue_2 
+			add_trait = education_learning_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_3 }
+		random = {
+			chance = 20
+			remove_trait = education_intrigue_3 
+			add_trait = education_learning_4
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = devoted
+			}
+		}
+		random = {
+			chance = 25
+			add_trait = devoted
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = intellect_good_1
+				has_trait = intellect_good_2
+				has_trait = intellect_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = intellect_good_1 }
+			4 = { add_trait = intellect_good_2 }
+			2 = { add_trait = intellect_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = theologian
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 3
+				age > 200
+			}
+			modifier = {
+				add = 8
+				age > 500
+			}
+			add_trait = theologian
+		}
+	}
+}
+
+gangrel_traits_effect = {
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 20
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = patient }
+		random = {
+			chance = 20
+			remove_trait = patient
+			add_trait = impatient
+		}
+	}
+	if = {
+		limit = { has_trait = zealous }
+		random = {
+			chance = 15
+			remove_trait = zealous
+			add_trait = cynical
+		}
+	}
+	if = {
+		limit = { has_trait = calm }
+		random = {
+			chance = 15
+			remove_trait = calm
+			add_trait = wrathful
+		}
+	}
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 10
+			remove_trait = chaste
+			add_trait = lustful
+		}
+	}
+	if = {
+		limit = { has_trait = stubborn }
+		random = {
+			chance = 10
+			remove_trait = stubborn
+			add_trait = fickle
+		}
+	}
+	if = {
+		limit = { has_trait = just }
+		random = {
+			chance = 10
+			remove_trait = just
+			add_trait = arbitrary
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_hunter
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = {
+				modifier = {
+				add = 4
+				age > 100
+				}
+				add_trait = lifestyle_hunter
+			}
+			4 = {
+				modifier = {
+				add = 3
+				age > 200
+				}
+				add_trait = lifestyle_hunter
+				add_trait_xp = { trait = lifestyle_hunter track = hunter value = 50 }
+			}
+			2 = {
+				modifier = {
+				add = 2
+				age > 500
+				}
+				add_trait = lifestyle_hunter
+				add_trait_xp = { trait = lifestyle_hunter track = hunter value = 100 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = physique_good_1
+				has_trait = physique_good_2
+				has_trait = physique_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = physique_good_1 }
+			4 = { add_trait = physique_good_2 }
+			2 = { add_trait = physique_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_herbalist
+			}
+		}
+		random = {
+			chance = 2
+			modifier = {
+				add = 2
+				age > 100
+			}
+			modifier = {
+				add = 4
+				age > 300
+			}
+			modifier = {
+				add = 6
+				age > 500
+			}
+			add_trait = lifestyle_herbalist
+		}
+	}
+}
+
+giovanni_traits_effect = {
+	if = {
+		limit = { has_trait = honest }
+		random = {
+			chance = 30
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+	if = {
+		limit = { has_trait = content }
+		random = {
+			chance = 20
+			remove_trait = content
+			add_trait = ambitious
+		}
+	}
+	if = {
+		limit = { has_trait = compassionate }
+		random_list = {
+			50 = {}
+			25 = {
+				remove_trait = compassionate
+				add_trait = callous
+			}
+			25 = {
+				remove_trait = compassionate
+				add_trait = sadistic
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = forgiving }
+		random = {
+			chance = 10
+			remove_trait = forgiving
+			add_trait = vengeful
+		}
+	}
+	if = {
+		limit = { has_trait = generous }
+		random = {
+			chance = 10
+			remove_trait = generous
+			add_trait = greedy
+		}
+	}
+	if = {
+		limit = { has_trait = education_learning_1 }
+		random = {
+			chance = 10
+			remove_trait = education_learning_1 
+			add_trait = education_intrigue_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_learning_2 }
+		random = {
+			chance = 10
+			remove_trait = education_learning_2 
+			add_trait = education_intrigue_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_learning_3 }
+		random = {
+			chance = 10
+			remove_trait = education_learning_3 
+			add_trait = education_intrigue_4
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_1 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_1 
+			add_trait = education_intrigue_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_2 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_2 
+			add_trait = education_intrigue_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_3 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_3 
+			add_trait = education_intrigue_4
+		}
+	}
+}
+
+lasombra_traits_effect = {
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = humble }
+		random = {
+			chance = 15
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}
+	if = {
+		limit = { has_trait = compassionate }
+		random = {
+			chance = 15
+			remove_trait = compassionate
+			add_trait = callous
+		}
+	}
+	if = {
+		limit = { has_trait = forgiving }
+		random = {
+			chance = 15
+			remove_trait = forgiving
+			add_trait = vengeful
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 25
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = gallant
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 3
+				age > 200
+			}
+			modifier = {
+				add = 8
+				age > 500
+			}
+			add_trait = gallant
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = faith_warrior
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 3
+				age > 200
+			}
+			modifier = {
+				add = 8
+				age > 500
+			}
+			add_trait = faith_warrior
+		}
+	}
+}
+
+malkavian_traits_effect = {
+	if = {
+		limit = { 
+			has_trait = content 
+			NOT = { has_trait = paranoid }
+		}
+		random = {
+			chance = 30
+			remove_trait = content
+			add_trait = paranoid
+		}
+	}
+	if = {
+		limit = { has_trait = trusting }
+		random = {
+			chance = 30
+			remove_trait = trusting
+			add_trait = paranoid
+		}
+	}
+	if = {
+		limit = { has_trait = stubborn }
+		random = {
+			chance = 20
+			remove_trait = stubborn
+			add_trait = fickle
+		}
+	}
+	if = {
+		limit = { has_trait = vengeful }
+		random = {
+			chance = 10
+			remove_trait = vengeful
+			add_trait = forgiving
+		}
+	}
+	if = {
+		limit = { has_trait = callous }
+		random = {
+			chance = 10
+			remove_trait = callous
+			add_trait = compassionate
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = intellect_good_1
+				has_trait = intellect_good_2
+				has_trait = intellect_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = intellect_good_1 }
+			4 = { add_trait = intellect_good_2 }
+			2 = { add_trait = intellect_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_mystic
+			}
+		}
+		random_list = {
+			95 = {}
+			5 = {
+				modifier = {
+				add = 5
+				age > 100
+				}
+				add_trait = lifestyle_mystic
+			}
+			3 = {
+				modifier = {
+				add = 2
+				age > 200
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 50 }
+			}
+			1 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 100 }
+			}
+		}
+	}
+}
+
+nosferatu_traits_effect = {
+	if = {
+		limit = { has_trait = gregarious }
+		random = {
+			chance = 30
+			remove_trait = gregarious
+			add_trait = shy
+		}
+	}
+	if = {
+		limit = { has_trait = arrogant }
+		random = {
+			chance = 20
+			remove_trait = arrogant
+			add_trait = humble
+		}
+	}
+	if = {
+		limit = { has_trait = impatient }
+		random = {
+			chance = 20
+			remove_trait = impatient
+			add_trait = patient
+		}
+	}
+	if = {
+		limit = { has_trait = zealous }
+		random = {
+			chance = 15
+			remove_trait = zealous
+			add_trait = cynical
+		}
+	}
+	if = {
+		limit = { has_trait = honest }
+		random = {
+			chance = 15
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_1 }
+		random = {
+			chance = 10
+			remove_trait = education_intrigue_1 
+			add_trait = education_intrigue_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_2 }
+		random = {
+			chance = 10
+			remove_trait = education_intrigue_2 
+			add_trait = education_intrigue_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_3 }
+		random = {
+			chance = 10
+			remove_trait = education_intrigue_3 
+			add_trait = education_intrigue_4
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = schemer
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 3
+				age > 200
+			}
+			modifier = {
+				add = 8
+				age > 500
+			}
+			add_trait = schemer
+		}
+	}
+}
+
+ravnos_traits_effect = {
+	if = {
+		limit = { has_trait = stubborn }
+		random = {
+			chance = 20
+			remove_trait = stubborn
+			add_trait = fickle
+		}
+	}
+	if = {
+		limit = { has_trait = just }
+		random = {
+			chance = 20
+			remove_trait = just
+			add_trait = arbitrary
+		}
+	}
+	if = {
+		limit = { has_trait = shy }
+		random = {
+			chance = 20
+			remove_trait = shy
+			add_trait = gregarious
+		}
+	}
+	if = {
+		limit = { has_trait = patient }
+		random = {
+			chance = 15
+			remove_trait = patient
+			add_trait = impatient
+		}
+	}
+	if = {
+		limit = { has_trait = callous }
+		random = {
+			chance = 15
+			remove_trait = callous
+			add_trait = compassionate
+		}
+	}
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 10
+			remove_trait = chaste
+			add_trait = lustful
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = adventurer
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 3
+				age > 200
+			}
+			modifier = {
+				add = 8
+				age > 500
+			}
+			add_trait = adventurer
+		}
+	}
+}
+
+salubri_traits_effect = {
+	if = {
+		limit = { has_trait = sadistic }
+		random = {
+			chance = 25
+			remove_trait = sadistic
+			add_trait = compassionate
+		}
+	}
+	if = {
+		limit = { has_trait = callous }
+		random = {
+			chance = 25
+			remove_trait = callous
+			add_trait = compassionate
+		}
+	}
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = arbitrary }
+		random = {
+			chance = 20
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 20
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_blademaster
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+					add = 2
+					age > 100
+				}
+				add_trait = lifestyle_blademaster
+			}
+			2 = {
+				modifier = {
+					add = 1
+					age > 200
+				}
+				add_trait = lifestyle_blademaster
+				add_trait_xp = { trait = lifestyle_blademaster value = 50 }
+			}
+			0 = {
+				modifier = {
+					add = 1
+					age > 500
+				}
+				add_trait = lifestyle_blademaster
+				add_trait_xp = { trait = lifestyle_blademaster value = 100 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_mystic
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+				add = 2
+				age > 100
+				}
+				add_trait = lifestyle_mystic
+			}
+			2 = {
+				modifier = {
+				add = 1
+				age > 200
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 50 }
+			}
+			0 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 100 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_physician
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+				add = 2
+				age > 100
+				}
+				add_trait = lifestyle_physician
+			}
+			2 = {
+				modifier = {
+				add = 1
+				age > 200
+				}
+				add_trait = lifestyle_physician
+				add_trait_xp = { trait = lifestyle_physician value = 50 }
+			}
+			0 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_physician
+				add_trait_xp = { trait = lifestyle_physician value = 100 }
+			}
+		}
+	}
+}
+
+setite_traits_effect = {
+	if = {
+		limit = { has_trait = honest }
+		random = {
+			chance = 30
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 30
+			remove_trait = chaste
+			add_trait = lustful
+		}
+	}
+	if = {
+		limit = { has_trait = temperate }
+		random = {
+			chance = 20
+			remove_trait = temperate
+			add_trait = gluttonous
+		}
+	}
+	if = {
+		limit = { has_trait = cynical }
+		random = {
+			chance = 10
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	if = {
+		limit = { has_trait = just }
+		random = {
+			chance = 10
+			remove_trait = just
+			add_trait = arbitrary
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_mystic
+			}
+		}
+		random_list = {
+			95 = {}
+			3 = {
+				modifier = {
+				add = 2
+				age > 100
+				}
+				add_trait = lifestyle_mystic
+			}
+			2 = {
+				modifier = {
+				add = 1
+				age > 200
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 50 }
+			}
+			0 = {
+				modifier = {
+				add = 1
+				age > 500
+				}
+				add_trait = lifestyle_mystic
+				add_trait_xp = { trait = lifestyle_mystic value = 100 }
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = seducer
+			}
+		}
+		random = {
+			chance = 3
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 2
+				age > 200
+			}
+			modifier = {
+				add = 3
+				age > 500
+			}
+			add_trait = seducer
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = beauty_good_1
+				has_trait = beauty_good_2
+				has_trait = beauty_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = beauty_good_1 }
+			4 = { add_trait = beauty_good_2 }
+			2 = { add_trait = beauty_good_3 }
+		}
+	}
+}
+
+toreador_traits_effect = {
+	if = {
+		limit = { has_trait = humble }
+		random = {
+			chance = 30
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}
+	if = {
+		limit = { has_trait = shy }
+		random = {
+			chance = 30
+			remove_trait = shy
+			add_trait = gregarious
+		}
+	}
+	if = {
+		limit = { has_trait = diligent }
+		random = {
+			chance = 20
+			remove_trait = diligent
+			add_trait = lazy
+		}
+	}
+	if = {
+		limit = { has_trait = temperate }
+		random = {
+			chance = 15
+			remove_trait = temperate
+			add_trait = gluttonous
+		}
+	}
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 15
+			remove_trait = chaste
+			add_trait = lustful
+		}
+	}
+	if = {
+		limit = { has_trait = compassionate }
+		random = {
+			chance = 10
+			remove_trait = compassionate
+			add_trait = callous
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_1 }
+		random_list = {
+			85 = {}
+			9 = {
+			remove_trait = education_martial_1 
+			add_trait = education_diplomacy_2
+			}
+			3 = {
+			remove_trait = education_martial_1 
+			add_trait = education_intrigue_2
+			}
+			3 = {
+			remove_trait = education_martial_1 
+			add_trait = education_learning_2
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_2 }
+		random_list = {
+			85 = {}
+			9 = {
+			remove_trait = education_martial_2 
+			add_trait = education_diplomacy_3
+			}
+			3 = {
+			remove_trait = education_martial_2 
+			add_trait = education_intrigue_3
+			}
+			3 = {
+			remove_trait = education_martial_2 
+			add_trait = education_learning_3
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_3 }
+		random_list = {
+			85 = {}
+			9 = {
+			remove_trait = education_martial_3 
+			add_trait = education_diplomacy_4
+			}
+			3 = {
+			remove_trait = education_martial_3 
+			add_trait = education_intrigue_4
+			}
+			3 = {
+			remove_trait = education_martial_3 
+			add_trait = education_learning_4
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = education_stewardship_1 }
+		random_list = {
+			85 = {}
+			9 = {
+			remove_trait = education_stewardship_1 
+			add_trait = education_diplomacy_2
+			}
+			3 = {
+			remove_trait = education_stewardship_1 
+			add_trait = education_intrigue_2
+			}
+			3 = {
+			remove_trait = education_stewardship_1 
+			add_trait = education_learning_2
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = education_stewardship_2 }
+		random_list = {
+			85 = {}
+			9 = {
+			remove_trait = education_stewardship_2 
+			add_trait = education_diplomacy_3
+			}
+			3 = {
+			remove_trait = education_stewardship_2 
+			add_trait = education_intrigue_3
+			}
+			3 = {
+			remove_trait = education_stewardship_2 
+			add_trait = education_learning_3
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = beauty_good_1
+				has_trait = beauty_good_2
+				has_trait = beauty_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = beauty_good_1 }
+			4 = { add_trait = beauty_good_2 }
+			2 = { add_trait = beauty_good_3 }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = architect
+			}
+		}
+		random = {
+			chance = 0
+			modifier = {
+				add = 1
+				has_trait = education_stewardship_2 
+			}
+			modifier = {
+				add = 3
+				has_trait = education_stewardship_3 
+			}
+			modifier = {
+				add = 5
+				has_trait = education_stewardship_4 
+			}
+			add_trait = architect
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_gardener
+			}
+		}
+		random = {
+			chance = 0
+			modifier = {
+				add = 1
+				has_trait = education_stewardship_2 
+			}
+			modifier = {
+				add = 3
+				has_trait = education_stewardship_3 
+			}
+			modifier = {
+				add = 5
+				has_trait = education_stewardship_4 
+			}
+			add_trait = lifestyle_gardener
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = lifestyle_poet
+			}
+		}
+		random = {
+			chance = 10
+			add_trait = lifestyle_poet
+		}
+	}
+}
+
+tremere_traits_effect = {
+	if = {
+		limit = { has_trait = content }
+		random = {
+			chance = 30
+			remove_trait = content
+			add_trait = ambitious
+		}
+	}
+	if = {
+		limit = { has_trait = lazy }
+		random = {
+			chance = 30
+			remove_trait = lazy
+			add_trait = diligent
+		}
+	}
+	if = {
+		limit = { has_trait = humble }
+		random = {
+			chance = 20
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}
+	if = {
+		limit = { has_trait = honest }
+		random = {
+			chance = 20
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_1 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_1 
+			add_trait = education_learning_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_2 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_2 
+			add_trait = education_learning_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_3 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_3 
+			add_trait = education_learning_4
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_1 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_1 
+			add_trait = education_learning_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_2 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_2 
+			add_trait = education_learning_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_3 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_3 
+			add_trait = education_learning_4
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = scholar
+			}
+		}
+		random = {
+			chance = 2
+			modifier = {
+				add = 2
+				age > 100
+			}
+			modifier = {
+				add = 4
+				age > 200
+			}
+			modifier = {
+				add = 6
+				age > 500
+			}
+			add_trait = scholar
+		}
+	}
+	if = {
+		limit = {
+			NOR = {
+				has_trait = intellect_good_1
+				has_trait = intellect_good_2
+				has_trait = intellect_good_3
+			}
+		}
+		random_list = {
+			88 = {}
+			6 = { add_trait = intellect_good_1 }
+			4 = { add_trait = intellect_good_2 }
+			2 = { add_trait = intellect_good_3 }
+		}
+	}
+}
+
+truebrujah_traits_effect = {
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = impatient }
+		random = {
+			chance = 30
+			remove_trait = impatient
+			add_trait = patient
+		}
+	}
+	if = {
+		limit = { has_trait = wrathful }
+		random = {
+			chance = 50
+			remove_trait = wrathful
+			add_trait = calm
+		}
+	}
+	if = {
+		limit = { has_trait = arbitrary }
+		random = {
+			chance = 10
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = scholar
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 1
+				age > 100
+			}
+			modifier = {
+				add = 2
+				age > 200
+			}
+			modifier = {
+				add = 4
+				age > 500
+			}
+			add_trait = scholar
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = gallant
+			}
+		}
+		random = {
+			chance = 5
+			add_trait = gallant
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = strategist
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 2
+				age > 500
+			}
+			add_trait = strategist
+		}
+	}
+}
+
+tzimisce_traits_effect = {
+	if = {
+		limit = { has_trait = compassionate }
+		random_list = {
+			50 = {}
+			30 = {
+				remove_trait = compassionate
+				add_trait = callous
+			}
+			20 = {
+				remove_trait = compassionate
+				add_trait = sadistic
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = wrathful }
+		random = {
+			chance = 30
+			remove_trait = wrathful
+			add_trait = calm
+		}
+	}
+	if = {
+		limit = { has_trait = humble }
+		random = {
+			chance = 20
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}
+	if = {
+		limit = { has_trait = fickle }
+		random = {
+			chance = 20
+			remove_trait = fickle
+			add_trait = stubborn
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = overseer
+			}
+		}
+		random = {
+			chance = 2
+			modifier = {
+				add = 2
+				age > 100
+			}
+			modifier = {
+				add = 4
+				age > 200
+			}
+			modifier = {
+				add = 6
+				age > 500
+			}
+			add_trait = overseer
+		}
+	}
+	if = {
+		limit = { 
+			has_trait = sadistic
+			NOT = { has_trait = torturer }
+		}
+		random = {
+			chance = 10
+			modifier = {
+				add = 5
+				age > 100
+			}
+			modifier = {
+				add = 10
+				age > 200
+			}
+			modifier = {
+				add = 15
+				age > 500
+			}
+			add_trait = torturer
+		}
+	}
+}
+
+ventrue_traits_effect = {
+	if = {
+		limit = { has_trait = humble }
+		random = {
+			chance = 30
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}
+	if = {
+		limit = { has_trait = arbitrary }
+		random = {
+			chance = 30
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}
+	if = {
+		limit = { has_trait = craven }
+		random = {
+			chance = 10
+			remove_trait = craven
+			add_trait = brave
+		}
+	}
+	if = {
+		limit = { has_trait = compassionate }
+		random = {
+			chance = 10
+			remove_trait = compassionate
+			add_trait = callous
+		}
+	}
+	if = {
+		limit = { has_trait = fickle }
+		random = {
+			chance = 20
+			remove_trait = fickle
+			add_trait = stubborn
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_1 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_1 
+			add_trait = education_martial_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_2 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_2 
+			add_trait = education_martial_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_martial_3 }
+		random = {
+			chance = 10
+			remove_trait = education_martial_3 
+			add_trait = education_martial_4
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_1 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_1 
+			add_trait = education_diplomacy_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_2 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_2 
+			add_trait = education_diplomacy_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_diplomacy_3 }
+		random = {
+			chance = 10
+			remove_trait = education_diplomacy_3 
+			add_trait = education_diplomacy_4
+		}
+	}
+	if = {
+		limit = { has_trait = education_stewardship_1 }
+		random = {
+			chance = 10
+			remove_trait = education_stewardship_1 
+			add_trait = education_martial_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_stewardship_2 }
+		random = {
+			chance = 10
+			remove_trait = education_stewardship_2 
+			add_trait = education_martial_3
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_1 }
+		random = {
+			chance = 10
+			remove_trait = education_intrigue_1 
+			add_trait = education_diplomacy_2
+		}
+	}
+	if = {
+		limit = { has_trait = education_intrigue_2 }
+		random = {
+			chance = 10
+			remove_trait = education_intrigue_2 
+			add_trait = education_diplomacy_3
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = gallant
+			}
+		}
+		random = {
+			chance = 5
+			add_trait = gallant
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_trait = diplomat
+			}
+		}
+		random = {
+			chance = 1
+			modifier = {
+				add = 2
+				age > 500
+			}
+			add_trait = diplomat
+		}
+	}
+}

@@ -1,0 +1,696 @@
+﻿POD_character_masquerade_initialization_effect = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		add_character_modifier = masquerade0_modifier
+	}
+}
+
+POD_set_masquerade_modifier_effect = {
+	if = {
+		limit = { masquerade_exposure_level != $AMOUNT$ }
+		hidden_effect = { POD_remove_masquerade_modifiers_effect = yes }
+		switch = {
+			trigger  = $AMOUNT$
+			0        = { add_character_modifier = masquerade0_modifier }
+			1        = { add_character_modifier = masquerade1_modifier }
+			2        = { add_character_modifier = masquerade2_modifier }
+			3        = { add_character_modifier = masquerade3_modifier }
+			4        = { add_character_modifier = masquerade4_modifier }
+			fallback = { 
+				add_character_modifier = masquerade5_modifier
+
+				# Reduce AI masquerade after a few years if it is at max
+				trigger_event = {
+					id = POD_maintenance.26
+					years = { 1 5 }
+				}
+			}
+		}
+	}
+}
+
+POD_change_masquerade_exposure_effect = {
+	save_temporary_scope_value_as = {
+		name = new_exposure
+		value = {
+			value = masquerade_exposure_level
+			add = $DELTA$
+			min = minimum_masquerade_exposure
+			max = 5
+		}
+	}
+	if = {
+		limit = { exists = scope:new_exposure } # error suppression
+		POD_set_masquerade_modifier_effect = { AMOUNT = scope:new_exposure }
+	}
+}
+
+POD_masquerade_exposure_increase_effect = {
+	if = {
+		limit = {
+			POD_splat_has_masquerade_trigger = yes
+			NOR = {
+				has_trait = exposed
+				POD_is_forever_infamous_trigger = yes
+				has_character_modifier = masquerade5_modifier
+			}
+			
+		}
+		custom_tooltip = masquerade_exposure_increase_effect.tt
+
+		if = {
+			limit = {
+				NOT = { has_character_flag = is_in_POD_vampire_masquerade_breach_100 }
+			}
+			hidden_effect = {
+				random = {
+					chance = 10
+					modifier = { factor = masquerade_exposure_level }
+					trigger_event = {
+						id = POD_vampire_masquerade_breach.100
+						days = 7
+					}
+				}
+			}
+		}
+
+		POD_change_masquerade_exposure_effect = { DELTA = 1 }
+	}
+}
+
+POD_masquerade_exposure_increase_multiple_effect = {
+	if = {
+		limit = {
+			POD_splat_has_masquerade_trigger = yes
+			NOR = {
+				has_trait = exposed
+				POD_is_forever_infamous_trigger = yes
+				has_character_modifier = masquerade5_modifier
+			}
+		}
+		custom_tooltip = masquerade_increased_$AMOUNT$
+
+		if = {
+			limit = {
+				NOT = { has_character_flag = is_in_POD_vampire_masquerade_breach_100 }
+			}
+			hidden_effect = {
+				random = {
+					chance = 10
+					modifier = {
+						factor = {
+							value = masquerade_exposure_level
+							add = $AMOUNT$
+						}
+					}
+					trigger_event = {
+						id = POD_vampire_masquerade_breach.100
+						days = 7
+					}
+				}
+			}
+		}
+
+		POD_change_masquerade_exposure_effect = { DELTA = $AMOUNT$ }
+	}
+}
+
+POD_masquerade_exposure_decrease_effect = {
+	if = {
+		limit = {
+			POD_splat_has_masquerade_trigger = yes
+		}
+		if = {
+			limit = { masquerade_exposure_level <= minimum_masquerade_exposure }
+			custom_description = {
+				text = POD_cover_masquerade_interaction_cap
+				object = this
+			}
+		}
+		else = {
+			custom_tooltip = masquerade_exposure_decrease_effect.tt
+			POD_change_masquerade_exposure_effect = { DELTA = -1 }
+		}
+	}
+}
+
+POD_masquerade_exposure_decrease_multiple_effect = {
+	if = {
+		limit = {
+			POD_splat_has_masquerade_trigger = yes
+		}
+		if = {
+			limit = { masquerade_exposure_level <= minimum_masquerade_exposure }
+			custom_description = {
+				text = POD_cover_masquerade_interaction_cap
+				object = this
+			}
+		}
+		else = {
+			custom_tooltip = masquerade_reduced_$AMOUNT$
+			POD_change_masquerade_exposure_effect = { DELTA = -$AMOUNT$ }
+		}
+	}
+}
+
+POD_masquerade_positive_factors_tooltip_effect = {
+	if = {
+		limit = {
+			OR = {
+				has_trait = dominateadvanced
+				has_perk = the_forgetful_mind_perk
+			}
+		}
+		custom_tooltip = POD_masquerade_risk_decrease_dominate_the_forgetful_mind_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				has_trait = dominateadvanced
+				has_perk = cloud_memory_perk
+			}
+		}
+		custom_tooltip = POD_masquerade_risk_decrease_dominate_cloud_memory_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_trait = necromancyadvanced
+					has_cappadocian_necromancy_trigger = yes
+				}
+				has_perk = ns_ashes_to_ashes_perk
+			}
+		}
+		custom_tooltip = POD_masquerade_risk_decrease_necromancy_ashes_to_ashes_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_trait = necromancyadvanced
+					has_lamia_necromancy_trigger = yes
+				}
+				has_perk = ns_tend_the_body_garden_perk
+			}
+		}
+		custom_tooltip = POD_masquerade_risk_decrease_necromancy_tend_the_body_garden_tt
+	}
+	if = {
+		limit = {
+			has_sihr_bloodmagic_trigger = yes
+			has_character_modifier = mask_of_allah_modifier
+		}
+		custom_tooltip = POD_masquerade_risk_decrease_blood_magic_mask_of_allah_tt
+	}
+}
+
+POD_masquerade_all_factors_tooltip_effect = {
+	POD_masquerade_positive_factors_tooltip_effect = yes
+	if = {
+		limit = { faith = { has_doctrine_parameter = harder_masquerade_reduction } }
+		custom_tooltip = POD_masquerade_risk_increase_tenets_tt
+	}
+	if = {
+		limit = {
+			OR = {
+				has_character_modifier = POD_gangrel_frenzy_modifier_light
+				has_character_modifier = POD_gangrel_frenzy_modifier_medium
+				has_character_modifier = POD_gangrel_frenzy_modifier_heavy
+			}
+		}
+		custom_tooltip = POD_masquerade_risk_increase_gangrel_frenzy_tt
+	}
+}
+
+POD_minimal_risk_of_increasing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 5
+			POD_masquerade_exposure_increase_effect = yes
+			POD_masquerade_all_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_all_factors_mult }
+		}
+	}
+}
+
+POD_small_risk_of_increasing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 10
+			POD_masquerade_exposure_increase_effect = yes
+			POD_masquerade_all_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_all_factors_mult }
+		}
+	}
+}
+
+POD_moderate_risk_of_increasing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		if = {
+			limit = { faith = { has_doctrine_parameter = no_masquerade_penalty } }
+			POD_masquerade_exposure_increase_effect = yes
+		}
+		else = {
+			random = {
+				chance = 25
+				POD_masquerade_exposure_increase_effect = yes
+				POD_masquerade_all_factors_tooltip_effect = yes
+				modifier = { factor = masquerade_all_factors_mult }
+			}
+		}
+	}
+}
+
+POD_high_risk_of_increasing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		if = {
+			limit = { faith = { has_doctrine_parameter = no_masquerade_penalty } }
+			POD_masquerade_exposure_increase_effect = yes
+		}
+		else = {
+			random = {
+				chance = 50
+				POD_masquerade_exposure_increase_effect = yes
+				POD_masquerade_all_factors_tooltip_effect = yes
+				modifier = { factor = masquerade_all_factors_mult }
+			}
+		}
+	}
+}
+
+POD_very_high_risk_of_increasing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		if = {
+			limit = { faith = { has_doctrine_parameter = no_masquerade_penalty } }
+			POD_masquerade_exposure_increase_effect = yes
+		}
+		else = {
+			random = {
+				chance = 75
+				POD_masquerade_exposure_increase_effect = yes
+				POD_masquerade_all_factors_tooltip_effect = yes
+				modifier = { factor = masquerade_all_factors_mult }
+			}
+		}
+	}
+}
+
+POD_minimal_chance_of_reducing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 5
+			POD_masquerade_exposure_decrease_effect = yes
+			POD_masquerade_positive_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_positive_factors_mult }
+		}
+	}
+}
+
+
+POD_small_chance_of_reducing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 10
+			POD_masquerade_exposure_decrease_effect = yes
+			POD_masquerade_positive_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_positive_factors_mult }
+		}
+	}
+}
+
+POD_moderate_chance_of_reducing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 25
+			POD_masquerade_exposure_decrease_effect = yes
+			POD_masquerade_positive_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_positive_factors_mult }
+		}
+	}
+}
+
+POD_high_chance_of_reducing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 50
+			POD_masquerade_exposure_decrease_effect = yes
+			POD_masquerade_positive_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_positive_factors_mult }
+		}
+	}
+}
+
+POD_very_high_chance_of_reducing_masquerade_exposure = {
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = yes }
+		random = {
+			chance = 75
+			POD_masquerade_exposure_decrease_effect = yes
+			POD_masquerade_positive_factors_tooltip_effect = yes
+			modifier = { factor = masquerade_positive_factors_mult }
+		}
+	}
+}
+
+POD_piety_loss_from_massembrace = {
+
+	if = { 
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine_parameter = vampirism_illegal
+					has_doctrine_parameter = hurt_mortal_lose_piety
+					has_doctrine_parameter = vampirethemasquerade_consent
+					has_doctrine_parameter = vampirethemasquerade_strict
+				}
+			}
+		}
+		add_piety = massive_piety_loss
+	}
+
+	else_if = { 
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine_parameter = vampirism_shunned
+					has_doctrine_parameter = vampirethemasquerade_family
+				}
+			}
+		}
+		add_piety = major_piety_loss
+	}
+	
+	else_if = { 
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine_parameter = vampirethemasquerade_lax
+					has_doctrine_parameter = vampirethemasquerade_cult
+				}
+			}
+		}
+		add_piety = medium_piety_loss
+	}
+}
+
+POD_piety_loss_from_massghouling = {
+	if = { 
+		limit = {
+			OR = {
+				faith = { has_doctrine_parameter = vampireghouling_illegal }
+				faith = { has_doctrine_parameter = vampirethemasquerade_strict }
+				faith = { has_doctrine_parameter = vampirethemasquerade_family }
+				faith = { has_doctrine_parameter = vampirethemasquerade_consent }
+			}
+		}
+		add_piety = medium_piety_loss
+	}
+	
+	else_if = { 
+		limit = {
+			OR = {
+				faith = { has_doctrine_parameter = vampireghouling_shunned }
+				faith = { has_doctrine_parameter = vampirethemasquerade_lax }
+			}
+		}
+		add_piety = minor_piety_loss
+	}
+}
+
+POD_destroy_masquerade_effect = {
+	custom_tooltip = forever_indomitable_decision_effect
+	hidden_effect = {
+		set_global_variable = destroyed_masquerade
+		# Remove Masquerade modifiers from everyone
+		every_living_character = {
+			POD_remove_masquerade_modifiers_effect = yes
+		}
+		# Remove Masquerade doctrines
+		every_religion_global = {
+			every_faith = {
+				limit = {
+					OR = {
+						has_doctrine = doctrine_vampirethemasquerade_strict
+						has_doctrine = doctrine_vampirethemasquerade_lax
+						has_doctrine = doctrine_vampirethemasquerade_cult
+						has_doctrine = doctrine_vampirethemasquerade_family
+						has_doctrine = doctrine_vampirethemasquerade_consent
+					}
+				}
+				switch = {
+					trigger = has_doctrine
+					doctrine_vampirethemasquerade_strict  = { remove_doctrine = doctrine_vampirethemasquerade_strict  }
+					doctrine_vampirethemasquerade_lax     = { remove_doctrine = doctrine_vampirethemasquerade_lax     }
+					doctrine_vampirethemasquerade_cult    = { remove_doctrine = doctrine_vampirethemasquerade_cult    }
+					doctrine_vampirethemasquerade_family  = { remove_doctrine = doctrine_vampirethemasquerade_family  }
+					doctrine_vampirethemasquerade_consent = { remove_doctrine = doctrine_vampirethemasquerade_consent }
+					fallback = { }
+				}
+				add_doctrine = doctrine_vampirethemasquerade_none
+			}
+		}
+	}
+}
+
+POD_cover_up_masquerade_effect = {
+	$USER$ = { save_scope_as = user }
+	$BENEFACTOR$ = { 
+		save_scope_as = benefactor
+		switch = {
+			trigger = yes
+			scope:dominate = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_dominate_beast
+					}
+					POD_willpower_rouse_check_effect = yes
+					POD_hunger_rouse_check_effect = yes
+				}
+				random_list = {
+					30 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					10 = {
+						modifier = {
+							add = scope:user.stewardship
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = dominateadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+					5 = {
+						modifier = {
+							add = {
+								value = scope:user.stewardship
+								divide = 2
+							}
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = dominateadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 3 }
+					}
+				}
+			}
+			scope:bloodsorcery = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_bloodsorcery_beast
+					}
+					POD_willpower_rouse_check_effect = yes
+					POD_hunger_rouse_check_effect = yes
+				}
+				random_list = {
+					30 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					10 = {
+						modifier = {
+							add = scope:user.learning
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = bloodsorceryadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+					5 = {
+						modifier = {
+							add = {
+								value = scope:user.learning
+								divide = 2
+							}
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = bloodsorceryadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 3 }
+					}
+				}
+			}
+			scope:presence = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_presence_beast
+					}
+					POD_willpower_rouse_check_effect = yes
+					POD_hunger_rouse_check_effect = yes
+				}
+				random_list = {
+					30 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					10 = {
+						modifier = {
+							add = scope:user.diplomacy
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = presenceadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+					5 = {
+						modifier = {
+							add = {
+								value = scope:user.diplomacy
+								divide = 2
+							}
+						}
+						modifier = {
+							factor = 2
+							scope:user = { has_trait = presenceadvanced }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 3 }
+					}
+				}
+			}
+			scope:bribe = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_bribe_beast
+					}
+					remove_short_term_gold = major_gold_value
+					stress_impact = {
+						greedy = medium_stress_gain
+					}
+				}
+				random_list = {
+					30 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					15 = {
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+				}
+			}
+			scope:murderspree = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_murderspree_beast
+					}
+					POD_commit_murder_effect = yes
+					stress_impact = {
+						# making sure the values properly cancel each other out
+						base = 60 # major_stress_gain
+						callous = -60 # massive_stress_loss
+						sadistic = -60
+						compassionate = 40 # medium_stress_gain
+					}
+					random = {
+						chance = 40
+						#modifier = {
+						#	subtract = prowess
+						#}
+						increase_wounds_effect = { REASON = fight }
+						
+					}
+				}
+				random_list = {
+					20 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						scope:user = { 
+							if = {
+								limit = { NOT = { has_character_modifier = masquerade5_modifier } }
+								POD_masquerade_exposure_increase_effect = yes 
+							}
+						}
+						save_scope_as = failed
+					}
+					40 = {
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					10 = {
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+				}
+			}
+			scope:layinglow = {
+				scope:user = {
+					if = {
+						limit = { POD_has_a_beast_trigger = yes }
+						custom_tooltip = POD_cover_masquerade_interaction_layinglow_beast
+					}
+					add_character_modifier = {
+						modifier = laying_back_modifier
+						years = 2
+					}
+					stress_impact = {
+						diligent = medium_stress_gain
+						lazy = medium_stress_loss
+					}
+				}
+				random_list = {
+					30 = {
+						modifier = {
+							factor = 2
+							scope:user.faith = { has_doctrine_parameter = harder_masquerade_reduction }
+						}
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 1 }
+					}
+					15 = {
+						POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 }
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,152 @@
+﻿l_english:
+ ### SETUP
+  activity_imperial_examination: "Khoa Cử Kinh Đô"
+  activity_imperial_examination_plural: "Các Khoa Cử Kinh Đô"
+  activity_imperial_examination_destination_selection: "Ngài chỉ có thể tổ chức $activity_imperial_examination$ tại [capital|E] của mình."
+  activity_imperial_examination_not_hegemon: "Ngài #bold không#! nắm giữ [title|E] cấp [hegemony|E]"
+  activity_imperial_examination_selection_tooltip: "Tổ chức [GetActivityType('activity_imperial_examination').GetName] để đánh giá kỹ năng và [merit|E] của thần dân $activity_imperial_examination_host_rewards$"
+  activity_imperial_examination_desc: "Đó là vinh dự và bổn phận của chúng ta trong việc duy trì thể chế và tổ chức các kỳ thi này. Chúng cho phép chúng ta đánh giá, tuyển chọn và ban thưởng [merit|E] cho những cá nhân phù hợp nhất — nhằm bảo đảm sự phồn thịnh tương lai của quốc gia."
+  activity_imperial_examination_host_desc: "$activity_imperial_examination_host_rewards$$activity_imperial_examination_guest_rewards$"
+  activity_imperial_examination_host_rewards: "\n$BULLET_WITH_TAB$[legitimacy_i] [legitimacy|E]\n$BULLET_WITH_TAB$[prestige_i|E] [prestige|E]"
+  activity_imperial_examination_guest_desc: "\n$BULLET_WITH_TAB$Có cơ hội hoàn thành @metropolitan_exam_icon! #V Kỳ thi Kinh đô#!\n$BULLET_WITH_TAB$Có cơ hội hoàn thành @palace_exam_icon! #V Kỳ thi Điện đình#!\n$BULLET_WITH_TAB$Có thể gia tăng kinh nghiệm [trait_level_track_xp|E] trong [GetTrait('confucian_education').GetName( GetNullCharacter )] [trait|E] của ngài\n$BULLET_WITH_TAB$Có thể gia tăng [merit|E] của ngài\n$BULLET_WITH_TAB$ @alert_icon! #alert_trial Nếu ngài không biết [language|E] [host.GetCulture.GetLanguage.GetName], khả năng thành công của ngài sẽ bị giảm mạnh!#![SelectLocalization( Scope.HasFlag('passed_provincial_exam'), 'blank_line', 'activity_imperial_examination_warning' )]"
+  activity_imperial_examination_warning: "\n#indent_newline:8 $BULLET_WITH_TAB$ @warning_icon! #color_red Do Ngài chưa vượt qua @provincial_exam_icon! [provincial_examination|E], khả năng trượt là rất cao!#!"
+  activity_imperial_examination_guest_rewards: "\n$BULLET_WITH_TAB$Có thể chiêu mộ một nhân vật có kỹ năng rất cao\n$BULLET_WITH_TAB$Những người tham gia có thể nhận [trait_level_track_xp|E] của [GetTrait('confucian_education').GetName( GetNullCharacter )]\n$BULLET_WITH_TAB$Những người tham gia có thể nhận [merit|E]"
+  imperial_examination_base_cost: "Chi Phí Cơ Bản"
+
+  activity_imperial_examination_with_icon: "$activity_imperial_examination$ @metropolitan_exam_icon! @palace_exam_icon!"
+  activity_imperial_examination_can_complete_tt: "$activity_imperial_examination_not_available_tt$"
+  activity_imperial_examination_expected_frequency: "Dự kiến mỗi #V 5#! năm"
+  activity_imperial_examination_not_available_tt: "#T [GetActivityType( 'activity_imperial_examination' ).GetNameNoTooltip]#!\nTrong [activity|E] này, thí sinh có thể hoàn thành:\n@metropolitan_exam_icon! Khoa Thi Hội\n@palace_exam_icon! Khoa Thi Đình\n\n$activity_imperial_examination_expected_frequency$"
+
+ # Province Selection
+  activity_imperial_examination_province_kaifeng_palace_desc: "#P ++ $building_type_kaifeng_palace_01$#!"
+  activity_imperial_examination_province_examination_hall_desc: "#P ++ $building_type_examination_hall_01$#!"
+
+ #Activity Window Characters
+  activity_window_character_player_entrant_traveling: "$activity_window_character_player_entrant$"
+  activity_window_character_player_entrant: "$activity_window_character_entrant$"
+  activity_window_character_entrant: "[entrant|E]\n[Character.GetShortUINameNoTooltip|U]"
+  activity_window_character_examiner: "Giám Khảo\n[Character.GetShortUINameNoTooltip|U]"
+  activity_window_character_minister_of_rites: "[minister_of_rites|E]\n[Character.GetShortUINameNoTooltip|U]"
+
+  activity_imperial_examination_guest_help_text: "Bất kỳ [activity_guests|E] nào đủ điều kiện dự thi đều có thể tham gia. Đạt yêu cầu sẽ mang lại nhiều [merit|E] hơn cho thí sinh cũng như nhiều [prestige|E] hơn cho [activity_host|E]. Mặc dù Khách không được phép vào bên trong trường thi, họ vẫn có thể sử dụng ảnh hưởng của mình để hỗ trợ thí sinh theo nhiều cách khác nhau.\n\nCác kỳ thi là dịp hoàn hảo để tạo dựng mối quan hệ và gây ấn tượng với các giám khảo, thậm chí có thể giành được một trưởng bối."
+
+ ### GUEST INVITE RULES
+  activity_invite_rule_imperial_exam_entrants: "Ứng Cử Viên Khu Vực"
+ # Children, Grandchildren, Parents, Grandparents
+  activity_invite_rule_imperial_exam_close_family: "Ứng Cử Viên Gia Tộc" 
+  activity_invite_rule_local_exam_entrants: "Ứng Cử Viên Địa Phương"
+  activity_invite_rule_landless_family_heads_entrants: "Gia Chủ Quý Tộc"
+  activity_invite_rule_local_exam_close_family: "$activity_invite_rule_imperial_exam_close_family$"
+  activity_invite_rule_imperial_exam_guests: "Khách"
+  activity_invite_rule_local_exam_guests: "$activity_invite_rule_imperial_exam_guests$"
+  activity_invite_rule_bloc_house_heads: "Gia Chủ Khối"
+  activity_invite_rule_bloc_members: "Các Thành Viên Khối Khác"
+
+ ### GUEST JOIN CHANCE REASONS
+  ACTIVITY_GUEST_FAILED_EXAMINATION_REASON: "[ROOT.Char.GetSheHe|U] đã từng tham gia một kỳ thi trước đó: $VALUE|=+0$"
+  ACTIVITY_GUEST_IS_HEGEMON_REASON: "[ROOT.Char.GetSheHe|U] không được kỳ vọng sẽ trực tiếp tham gia các kỳ thi địa phương: $VALUE|=+0$"
+  ACTIVITY_GUEST_FORCED_BACK_REASON: "[ROOT.Char.GetSheHe|U] đã bị ép phải thi lại: $VALUE|=+0$"
+  ACTIVITY_GUEST_IS_MINISTER_OF_RITES_REASON: "$game_concept_minister_of_rites$: $VALUE|=+0$"
+
+ ### PHASES
+  imperial_examination_phase_assembly: "Tập Hợp"
+  imperial_examination_phase_assembly_desc: "Tìm kiếm khắp nơi, tất cả các thí sinh đủ điều kiện đang trên đường tới các trường thi."
+  imperial_examination_phase_preparation: "Chuẩn Bị"
+  imperial_examination_phase_preparation_desc: "Các thí sinh, cũng như chủ trì, chờ đợi thời điểm, vội vàng chuẩn bị những gì có thể cho kỳ thi."
+  imperial_examination_phase_examination: "Khoa Thi Hội"
+  imperial_examination_phase_examination_desc: "Khoa thi Hội bắt đầu. Hãy để kết quả tự định đoạt."
+  imperial_examination_phase_palace_examination: "Khoa Thi Đình"
+  imperial_examination_phase_palace_examination_desc: "Khoa thi Đình bắt đầu. Đây là lúc những học giả xuất sắc nhất chứng tỏ bản thân trước Hoàng Đế."
+
+ ### OPTIONS
+ #Examination Focus [Special Type] Option
+  imperial_examination_focus: "Trọng Tâm Kỳ Thi"
+  imperial_examination_focus_martial: "Chiến Lược Gia Quân Sự"
+  imperial_examination_focus_martial_desc: "Kỳ thi sẽ trao nhiều [merit|E] hơn cho những thí sinh xuất sắc về [martial|E]\n\n#weak \"Chiến lược quân sự cũng là một đức hạnh như bất kỳ học vấn nào khác.\"#!"
+  imperial_examination_focus_stewardship: "Quản Trị Hiệu Quả"
+  imperial_examination_focus_stewardship_desc: "Kỳ thi sẽ trao nhiều [merit|E] hơn cho những thí sinh xuất sắc về [stewardship|E]\n\n#weak \"Có sự khác biệt rõ ràng giữa những kẻ sống bằng lời nói và những người thực sự hữu dụng.\"#!"
+  imperial_examination_focus_learning: "Học Giả Uyên Bác"
+  imperial_examination_focus_learning_desc: "Kỳ thi sẽ trao nhiều [merit|E] hơn cho những thí sinh xuất sắc về [learning|E]\n\n#weak \"Học tập là niềm vui, và vận dụng tri thức ấy vào thực tiễn còn đáng quý hơn.\"#!"
+
+ #Examination Breadth Option
+  imperial_examination_breadth: "Phạm Vi Kỳ Thi"
+  imperial_examination_breadth_exclusive: "Triệu Tập Giới Hạn"
+  imperial_examination_breadth_exclusive_desc: "$EFFECT_LIST_BULLET$ Hoạt động chỉ mở cho một số ít người được chọn, loại trừ dân chúng phổ thông\n$EFFECT_LIST_BULLET$Ngài sẽ nhận #EMP ít hơn#! [merit|E] khi hoàn thành\n\n#weak Ta sẽ để những đứa con ưu tú nhất của thần dân phục vụ trong #EMP lãnh thổ của ta#!.#!"
+  imperial_examination_breadth_restricted: "Triệu Tập Hạn Chế"
+  imperial_examination_breadth_restricted_desc: "$EFFECT_LIST_BULLET$Số lượng thí sinh bị giới hạn ở mức vừa phải, cho phép một phần dân chúng tham gia. \n\n#weak Những vị quan tương lai có thể xuất thân từ những cội nguồn khiêm nhường nhất.#!"
+  imperial_examination_breadth_open: "Triệu Tập Rộng Rãi"
+  imperial_examination_breadth_open_desc: "$EFFECT_LIST_BULLET$ Hoạt động được tổ chức trên quy mô lớn, thu hút rất nhiều thí sinh nhiệt huyết\n$EFFECT_LIST_BULLET$ Ngài sẽ nhận #EMP nhiều hơn#! [legitimacy|E] khi hoàn thành\n\n#weak Trí tuệ có thể đến từ mọi tầng lớp. Hãy giăng lưới rộng và xem ai sẽ vươn lên.#!"
+
+ #Passing Grade Option
+  imperial_examination_passing_grade: "Mức Đạt Kỳ Thi"
+  imperial_examination_passing_grade_extreme: "Mức Cực Cao"
+  imperial_examination_passing_grade_extreme_desc: "$EFFECT_LIST_BULLET$ Mức đạt của kỳ thi rất cao, loại bỏ #EMP rất nhiều#! thí sinh\n$EFFECT_LIST_BULLET$ Ngài sẽ nhận #EMP nhiều hơn rất nhiều#! [legitimacy|E] khi hoàn thành\n\n#weak Chỉ những tinh hoa trong tinh hoa mới đạt yêu cầu và trở thành #EMP quan lại#! tiếp theo của ta.#!"
+  imperial_examination_passing_grade_high: "Mức Cao"
+  imperial_examination_passing_grade_high_desc: "$EFFECT_LIST_BULLET$ Mức đạt của kỳ thi ở mức tiêu chuẩn, loại bỏ số thí sinh dự kiến\n$EFFECT_LIST_BULLET$ Phần thưởng [legitimacy|E] khi hoàn thành không thay đổi\n\n#weak Tiêu chuẩn của ta cao, nhưng không vô lý. Nếu muốn quan lại dựa trên thực tài, họ phải đạt đến một mức độ xuất sắc nhất định.#!"
+  imperial_examination_passing_grade_mediocre: "Mức Trung Bình"
+  imperial_examination_passing_grade_mediocre_desc: "$EFFECT_LIST_BULLET$ Mức đạt của kỳ thi được nới lỏng đôi chút, loại bỏ #EMP ít hơn#! thí sinh\n$EFFECT_LIST_BULLET$ Ngài sẽ nhận #EMP ít hơn#! [legitimacy|E] khi hoàn thành\n\n#weak Ai dám chắc những thí sinh xuất thân khiêm nhường này sẽ không học hỏi trong quá trình làm việc. Chỉ cần nền tảng vững chắc, ta cho phép họ vượt qua.#!"
+  imperial_examination_passing_grade_low: "Mức Thấp"
+  imperial_examination_passing_grade_low_desc: "$EFFECT_LIST_BULLET$ Mức đạt của kỳ thi rất thấp, loại bỏ #EMP rất ít#! thí sinh\n$EFFECT_LIST_BULLET$ Ngài sẽ nhận #EMP ít hơn rất nhiều#! [legitimacy|E] khi hoàn thành\n\n#weak Ta cần những quan lại có thực tài #EMP ngay bây giờ#!. Ta đặt ra luật lệ và tiêu chuẩn; họ tuân theo. Đó chính là thiên mệnh của ta.#!"
+
+ #Conclusion
+  activity_imperial_examination_conclusion_desc: "Kỳ [GetActivityType( 'activity_imperial_examination' ).GetName] đã kết thúc."
+  imperial_examination_conclusion.intro: "Kỳ thi cuối cùng cũng đã đi đến hồi kết."
+  imperial_examination_conclusion.intro.passing_grade.extreme: "\n\nCác quy định #BOL $imperial_examination_passing_grade_extreme$#! đã trao một lượng [merit|E] #BOL Phi thường#! cho một số lượng #BOL Nhỏ#! [entrants|E]."
+  imperial_examination_conclusion.intro.passing_grade.high: "\n\nCác quy định #BOL $imperial_examination_passing_grade_high$#! đã trao một lượng [merit|E] #BOL Cao#! cho một số lượng #BOL Trung bình#! [entrants|E]."
+  imperial_examination_conclusion.intro.passing_grade.mediocre: "\n\nCác quy định #BOL $imperial_examination_passing_grade_mediocre$#! đã trao một lượng [merit|E] #BOL Trung bình#! cho một số lượng #BOL Lớn#! [entrants|E]."
+  imperial_examination_conclusion.intro.passing_grade.low: "\n\nCác quy định #BOL $imperial_examination_passing_grade_low$#! đã trao một lượng [merit|E] #BOL Thấp#! cho một số lượng #BOL Rất lớn#! [entrants|E]."
+  imperial_examination_conclusion.intro.breadth.imperial: "\n\nMức độ mời gọi #BOL $imperial_examination_breadth_open$#! đồng nghĩa với việc có tổng cộng #BOL Nhiều#! [entrants|E]."
+  imperial_examination_conclusion.intro.breadth.grand: "\n\nMức độ mời gọi #BOL $imperial_examination_breadth_restricted$#! đồng nghĩa với việc có tổng cộng #BOL Khá#! [entrants|E]."
+  imperial_examination_conclusion.intro.breadth.palace: "\n\nMức độ mời gọi #BOL $imperial_examination_breadth_exclusive$#! đồng nghĩa với việc có tổng cộng #BOL Ít#! [entrants|E]."
+  imperial_examination_conclusion.general: "\n\nTrong tổng số ban đầu là #BOL [activity.MakeScope.Var('num_initial_entrants').GetValue]#! [entrants|E], có #BOL [activity.MakeScope.Var('num_final_failees').GetValue]#! người đã #EMP trượt#! kỳ thi.\n\n[activity.MakeScope.Var('first_place_entrant').Char.GetShortUIName] là người xuất sắc nhất trong số các [entrants|E], đạt mức đánh giá [activity.Custom('ActivityGetExamScoreAdjective')] với số điểm #BOL [activity.MakeScope.Var('first_place_entrant_score').GetValue|0]#!, theo sau là [activity.MakeScope.Var('second_place_entrant').Char.GetShortUIName] và [activity.MakeScope.Var('third_place_entrant').Char.GetShortUIName]."
+  imperial_examination_conclusion.entrant_failee: "\n\nKỳ thi kết thúc trong sự thất vọng nặng nề. Ta phải cố gắng hơn nữa vào lần sau."
+  imperial_examination_conclusion.entrant_passed: "\n\nTa đã vượt qua Kỳ thi Đô thành, và gia đình ta có thể tự hào về thành tích này."
+  imperial_examination_conclusion.entrant_passed_palace: "\n\nĐế quốc giờ đây biết đến ta như một trong những học giả xuất sắc nhất, và những cơ hội phía trước là vô cùng rộng mở."
+  local_examination_conclusion.entrant_passed: "\n\nTa đã vượt qua Kỳ thi Tỉnh hôm nay, và gia đình ta có thể tự hào về thành tích này."
+ #Activity Log
+ #Aced an exam
+  imperial_examination_ace_essay_log_title: "Bài luận xuất sắc"
+  imperial_examination_ace_essay_log: "[CHARACTER.GetShortUIName|U] đã vượt trội hơn tất cả mọi người ở phần viết luận tại [PROVINCE.GetBaronyNameExplicitly]"
+  imperial_examination_ace_classics_log_title: "Kinh điển xuất chúng"
+  imperial_examination_ace_classics_log: "[CHARACTER.GetShortUIName|U] đã vượt trội hơn tất cả mọi người ở phần thi kinh điển tại [PROVINCE.GetBaronyNameExplicitly]"
+  imperial_examination_ace_poetry_log_title: "Thơ ca tuyệt vời"
+  imperial_examination_ace_poetry_log: "[CHARACTER.GetShortUIName|U] đã vượt trội hơn tất cả mọi người ở phần sáng tác thơ tại [PROVINCE.GetBaronyNameExplicitly]"
+  imperial_examination_ace_archery_log_title: "Phát bắn ấn tượng"
+  imperial_examination_ace_archery_log: "[CHARACTER.GetShortUIName|U] đã chứng tỏ là xạ thủ xuất sắc nhất trong phần thi bắn cung tại [PROVINCE.GetBaronyNameExplicitly]"
+  imperial_examination_ace_polearm_log_title: "Bậc thầy binh khí cán dài"
+  imperial_examination_ace_polearm_log: "[CHARACTER.GetShortUIName|U] đã thể hiện kỹ năng nổi bật trong phần trình diễn binh khí cán dài tại [PROVINCE.GetBaronyNameExplicitly]"
+  imperial_examination_ace_riding_log_title: "Thiên tài cưỡi ngựa bắn cung"
+  imperial_examination_ace_riding_log: "[CHARACTER.GetShortUIName|U] đã thể hiện kỹ năng xuất sắc trong môn bắn cung trên lưng ngựa tại kỳ thi"
+
+ #Rewards
+  imperial_examination_host_rewards_title: "$activity_imperial_examination$ được tổ chức"
+  imperial_examination_host_rewards: "Phần thưởng cho người chủ trì"
+  imperial_examination_entrant_rewards_title: "Tham gia kỳ thi"
+  imperial_examination_entrant_rewards: "Phần thưởng cho thí sinh"
+
+ #APAs
+  apa_boasting_calligraphy_title: "Thư pháp của [first.GetShortUINamePossessive|U] được các giám khảo khen ngợi"
+  apa_overcome_with_stress_title: "[first.GetShortUINamePossessive|U] đã ngất xỉu vì khó thở, do [first.GetHerHis] căng thẳng lấn át [first.GetHerHim]"
+  apa_brought_huangdi_gift_title: "[first.GetShortUIName|U] đã gửi một món quà tinh xảo đến [second.GetShortUIName|U]"
+  apa_impressive_shot_title: "[first.GetShortUIName|U] đã phô diễn kỹ thuật bắn cung điêu luyện"
+  apa_friendly_discussions_title: "[first.GetShortUIName|U] và [second.GetShortUIName|U] đã có những cuộc tranh luận thân thiện"
+  apa_high_tempers_title: "[first.GetShortUIName|U] đã giao chiến với những người đồng môn của [first.GetHerHis] tại trường đấu luyện"
+  apa_impressed_examiner_title: "[first.GetShortUIName|U] đã để lại ấn tượng xuất sắc với giám khảo [second.GetShortUIName|U]"
+  apa_entrant_disagreement_title: "[first.GetShortUIName|U] và [second.GetShortUIName|U] đã tranh cãi về mặt ngữ nghĩa"
+  apa_burning_midnight_oil_title: "[first.GetShortUIName|U] đã thức trắng đêm để chuẩn bị cho kỳ thi"
+  apa_found_disciple_title: "[second.GetShortUIName|U] đã trở thành Trưởng bối của [first.GetShortUINamePossessive|U]"
+  apa_fruitful_debate_title: "[first.GetShortUIName|U] và [second.GetShortUIName|U] đã chia sẻ ghi chép trước kỳ thi"
+  apa_confucian_fervor_title: "[first.GetShortUIName|U] đã rơi nước mắt vì vui sướng trước lời khen của giám khảo"
+  apa_floating_poetry_title: "[first.GetShortUIName|U] đã lan truyền các bài thơ của [first.GetHerHis] trong giới giám khảo"
+
+ #GUI Setup
+  ENTRANTS_WINDOW_LABEL: "Bảng điểm"
+  ENTRANTS_SORT_METHOD_PREDICTION: "Dự đoán xuất sắc"
+  ENTRANTS_SORT_METHOD_SCORE: "Sắp xếp theo [exam_score|E]"
+
+ #Intent Custom Tooltip
+  no_available_family_candidates: "Không có ứng viên gia tộc hoặc môn sinh phù hợp"
+  already_taken_exam_tooltip: "Đã vượt qua kỳ thi"
+  take_exam_tooltip: "#alert_trial Để ngừng làm tổng đốc, hãy chọn [GetDecision('renounce_governorship_decision').GetName] [decision|E]#!"
+  already_landed_tooltip: "Ngài là một [governor|E]"

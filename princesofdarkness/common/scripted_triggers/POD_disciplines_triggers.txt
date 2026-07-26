@@ -1,0 +1,684 @@
+﻿POD_has_strong_mental_defenses_trigger = {
+	OR = {
+		has_trait_with_flag = strong_mental_defenses
+
+		has_perk = holy_bulwark_perk
+		has_perk = mountain_meditation_perk
+		has_perk = anti_psi_5_perk
+		
+		has_perk = kai_elder_3_perk	
+		
+		has_trait = dharma10
+		has_trait = dharma9
+		has_trait = dharma8
+
+		has_perk = release_from_bondage_perk
+		has_perk = arcanoi_know_thyself_perk
+		has_perk = arcana_inviolate_soul_perk
+
+		has_perk = righteous_hungry_spirit_perk
+
+		has_perk = piercing_eye_of_thoth_perk
+
+		has_perk = soul_arts_chainbreaker_meditation_perk
+
+		has_perk = numina_fascination_5_perk
+		
+		any_equipped_character_artifact = { has_variable = ancestor_talisman }
+		any_equipped_character_artifact = { has_variable = dragon_night }
+	}
+}
+
+POD_has_conditional_strong_mental_defenses_trigger = {
+	has_perk = aegis_alighieri_perk #against POD_is_demonic_trigger
+}
+
+can_bypass_mental_defenses_trigger = {
+	has_trait_with_flag = bypass_mental_defenses
+}
+
+
+POD_strong_mental_defenses_trigger = {
+	POD_strong_mental_defenses_custom_trigger = {
+		ACTOR = scope:actor
+		RECIPIENT = scope:recipient
+	}
+}
+
+POD_strong_mental_defenses_custom_trigger = {
+	trigger_if = {
+		limit = {
+			$RECIPIENT$ = { POD_has_strong_mental_defenses_trigger = yes }
+		}
+		
+		$ACTOR$ = {
+			custom_description = {
+				object = $RECIPIENT$
+				text = "POD_has_strong_mental_defenses_trigger"
+				can_bypass_mental_defenses_trigger = yes
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = { $RECIPIENT$ = { POD_has_conditional_strong_mental_defenses_trigger = yes } }
+		trigger_if = {
+			limit = {
+				$RECIPIENT$ = { has_perk = aegis_alighieri_perk }
+				$ACTOR$ = { POD_is_demonic_trigger = yes }
+			}
+			$ACTOR$ = {
+				custom_description = {
+					object = $RECIPIENT$
+					text = "POD_has_strong_mental_defenses_trigger"
+					can_bypass_mental_defenses_trigger = yes
+				}
+			}
+		}
+	}
+	trigger_else = { always = yes }
+}
+
+
+#TODO Fae: Kept this for the fae trigger below it. I have no clue about the Fae rework code so I'm not going to touch it incase it results in a merge nightmare.
+strong_mental_defenses_interaction_trigger = {
+	OR = {
+		scope:actor = { can_bypass_mental_defenses_trigger = yes }
+		scope:recipient = { POD_has_strong_mental_defenses_trigger = no }
+	}
+}
+
+strong_mental_defenses_art_interaction_trigger = {
+	trigger_if = {
+		limit = { scope:recipient = { POD_is_glamour_enchanted = no } } # Do ai ever get it?
+		strong_mental_defenses_interaction_trigger = yes
+	}
+}
+
+# for sieges and raids
+# need to pass RAIDER (the character doing the raid)
+POD_can_be_captured_by = {
+	trigger_if = {
+		limit = { 
+			$RAIDER$ = { POD_bypass_capture_immunity_trigger = no }
+		}
+		NOR = {
+			prowess >= 30
+			intrigue >= 15
+			has_trait = dominateadvanced
+			has_trait = presenceadvanced
+			has_trait = proteanadvanced
+			has_trait = fortitudeadvanced
+			has_trait = celerityadvanced
+			has_trait = temporisadvanced
+			has_trait = flightadvanced
+			
+			has_perk = humbabas_escape_perk
+			has_perk = arcana_incorporeal_form_perk
+			has_perk = shintai_flow_like_blood_perk
+		}
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+POD_has_advanced_defensive_capabilities_trigger = { #Lore and Possessions (Fomori etc) are missing but not needed, Wraiths are also not factored in
+    calc_true_if = {
+        $AMOUNT$
+
+		#Vampire
+        has_trait = auspexadvanced
+        has_trait = celerityadvanced
+        has_trait = fortitudeadvanced
+		has_trait = flightadvanced
+		has_trait = visceratikaadvanced
+		has_trait = temporisadvanced
+		has_perk  = turnabout_perk #Protean's Turnabout "Quickly change positions by moving through the earth"
+		has_perk  = kai_elder_3_perk #Monk's Endurance
+
+		#Demon/Arcana (Demons have a lot of quality defensive)
+		has_perk  = arcana_resilience_perk
+		has_perk  = arcana_preternatural_reflexes_perk
+		has_perk  = arcana_damage_immunity_perk
+		has_perk  = arcana_speed_of_thought_perk
+		has_perk  = arcana_premonition_perk
+		has_perk  = arcana_inured_to_agony_perk
+		has_perk  = arcana_unyielding_perk
+		has_perk  = arcana_step_between_perk
+		has_perk  = arcana_portal_mastery_perk
+		has_perk  = arcana_alter_fate_perk
+		has_perk  = arcana_beyond_now_perk
+
+		#Fae
+		has_trait = art_soothsay_advanced
+		has_trait = art_wayfare_advanced
+		has_trait = art_chronos_advanced
+
+		#Mummy
+		has_perk  = wisdom_of_isis_perk
+
+		#Sorcerer
+		has_perk  = numina_conveyance_6_perk
+		has_perk  = numina_divination_6_perk
+		has_character_modifier = numina_fortune_6_bless_modifier #Godly luck
+
+		#Werewolf
+		has_perk  = unstoppable_warrior_perk
+
+		#Kuei Jin
+		
+		#Shih
+		has_perk  = diamond_body_perk
+		has_perk  = wind_racing_prana_perk
+		has_perk  = the_eye_of_heaven_perk
+	}
+}
+
+POD_used_discipline_in_battle_trigger = {
+	has_character_flag = POD_used_disciplines_in_battle_flag
+}
+
+POD_visceratika_unavailable_for_creation_trigger = {
+	OR = {
+		game_start_date >= 1497.1.1
+		has_global_variable = visceratika_created
+	}	
+}
+
+POD_visceratika_available_trigger = {
+	custom_tooltip = {
+		text = seek_knowledge_visceratika_isvalid
+	OR = {
+		game_start_date >= 1497.1.1
+		has_global_variable = visceratika_created
+	}
+		
+	OR = {
+		has_game_rule = pod_seek_knowledge_limits_disabled
+		learning >= 20
+		OR = {
+			any_relation = {
+				type = best_friend
+				has_visceratika_trigger = yes
+			}
+			any_relation = {
+				type = soulmate
+				has_visceratika_trigger = yes
+			}
+		}
+		AND = {
+			has_trait = fortitudeadvanced
+			has_trait = proteanadvanced	
+		}
+		has_trait = gargoyle
+	}		
+	}	
+}
+
+has_immunity_to_psychic_interactions = {
+	trigger_if = { 
+		limit = { NOT = { this = scope:actor } }
+		has_perk = anti_psi_4_perk
+	}
+	trigger_else = { always = no }
+}
+
+# Trait scope
+POD_is_valid_trait_for_study_anatomy_trigger = {
+	has_trait_flag = reweaving_physical_trait
+}
+
+POD_has_resurrection = {
+	OR = {
+		POD_has_guaranteed_resurrection = yes
+		POD_has_random_resurrection = yes
+	}
+}
+
+POD_has_guaranteed_resurrection = {
+	OR = {
+		has_trait = mummy
+		has_trait = demon
+		has_trait = wraith
+		has_trait = hsien
+		has_trait = siochain
+		trigger_if = {
+			limit = { stress < 300 } 
+			has_perk = ashes_of_the_phoenix_perk
+		}
+		has_perk = rebirthing_perk
+		has_perk = sleep_of_the_hero_perk
+		has_perk = draught_of_phoenix_blood_perk
+		has_perk = the_fleeing_scarab_perk
+		has_character_modifier = extra_life_4_modifier
+		has_character_modifier = extra_life_3_modifier
+		has_character_modifier = extra_life_2_modifier
+		has_character_modifier = extra_life_1_modifier
+		has_character_modifier = green_man_modifier
+		has_character_modifier = life_warden_modifier
+		has_character_modifier = ritual_the_curse_belated_modifier
+	}
+}
+
+POD_has_random_resurrection = {
+	OR = {
+		POD_can_become_ancestor_spirit_trigger = yes
+	}
+}
+
+POD_immune_to_staking_trigger = {
+	OR = {
+		has_perk = rockheart_perk
+		has_perk = curse_the_laurel_perk
+		has_perk = wood_ward_perk
+		has_perk = arcana_damage_immunity_perk
+	}
+}
+
+POD_immune_to_fire_trigger = {
+	OR = {
+		has_perk = darkstatue_perk
+		has_perk = shield_from_fire_perk
+		has_perk = move_fire_perk
+		has_perk = arcana_damage_immunity_perk
+		has_perk = shintai_dance_of_embers_perk
+		has_perk = master_of_fire_perk #Mokole
+		has_trait = chujung
+		any_equipped_character_artifact = { has_artifact_modifier = fire_watch_modifier }
+		faith = { has_doctrine_parameter = gain_fire_immunity }
+		has_perk = investiture_sign_of_the_inferno_perk
+	}
+}
+
+POD_immune_to_sun_damage_trigger = {
+	OR = {
+		has_perk = ras_blessing_perk
+		has_perk = ns_benedicto_mortem_perk
+		has_character_modifier = touch_the_protectors_mind_modifier
+	}
+}
+
+POD_takes_sun_damage_as_superficial = {
+	OR = {
+		has_perk = shintai_the_shintai_of_ash_and_fire_perk
+	}
+}
+
+POD_can_predict_weather_trigger = {
+	OR = {
+		has_perk = weather_eye_perk # Wraith (Argos)
+		has_perk = numina_weather_control_1_perk # Numina (Sorcery)
+		has_perk = weather_sight_perk # Mummy (Celestial)
+	}
+}
+
+POD_can_manipulate_weather_basic_trigger = {
+	OR = {
+		has_perk = eldritch_prime_perk # Fae (Primal)
+		has_perk = numina_weather_control_3_perk # Numina (Sorcery)
+		has_perk = becalm_perk # Mummy (Celestial)
+	}
+}
+
+POD_can_manipulate_floods = {
+	OR = {
+		POD_can_manipulate_weather_basic_trigger = yes
+		has_perk = call_the_tides_perk
+		has_perk = flood_the_land_perk
+	}
+}
+
+POD_can_manipulate_earthquakes = {
+	OR = {
+		POD_can_manipulate_weather_basic_trigger = yes
+	}
+}
+
+POD_can_manipulate_storms = {
+	OR = {
+		POD_can_manipulate_weather_basic_trigger = yes
+		has_perk = anger_of_the_wani_perk
+	}
+}
+
+POD_can_use_greater_flood = {
+	OR = {
+		uses_cairo_sobek_alternate_reward = yes
+		any_equipped_character_artifact = { has_variable = pearls_flood_ebb prev = { can_benefit_from_artifact = prev } }
+	}
+}
+
+POD_can_predict_schemes_trigger = {
+	OR = {
+		has_perk = precognition_3_perk
+		has_perk = foreshadow_perk
+		has_perk = moonpool_of_sokhta_perk
+		has_perk = prophetic_vision_perk
+		has_perk = attunement_perk
+		has_perk = supernal_awareness_perk
+		has_perk = divine_perk
+		has_perk = hypnos_reclining_perk
+		has_perk = arcana_premonition_perk
+		has_perk = lore_foresee_perk
+		has_perk = book_of_thoth_perk
+		has_perk = soul_arts_read_destiny_perk
+		has_perk = numina_via_oraculi_5_perk
+		has_perk = breaking_the_tomorrow_wall_perk
+	}
+}
+
+POD_can_trace_murder_trigger = {
+	OR = {
+		has_perk = sense_of_the_transformation_perk
+		has_perk = ns_peering_across_the_shroud_perk
+		has_perk = small_hours_perk
+		has_perk = numina_necromancy_1_perk
+		has_perk = lore_foresee_perk
+		has_perk = revisit_death_perk
+		has_perk = breaking_the_tomorrow_wall_perk
+	}
+}
+
+POD_bypass_capture_immunity_trigger = {
+	OR = {
+		has_perk = fomori_mind_blast_perk
+		has_perk = drone_mind_blast_perk
+	}
+}
+
+POD_unlock_animals_maa_trigger = {
+	OR = {
+		has_perk = animal_dominion_perk
+		has_perk = control_creature_perk
+		has_perk = animal_psi_3_perk
+		has_perk = fomori_animal_control_perk 
+		has_perk = gorgon_animal_control_perk
+		has_perk = kami_animal_control_perk
+		has_perk = lore_command_animals_perk
+		has_perk = soul_arts_at_the_gates_of_wind_and_water_perk
+	}
+}
+
+POD_not_has_possess_ward_trigger = {
+	NOT = { has_perk = protect_against_the_demon_perk }
+	NOT = { has_perk = banish_the_dead_perk }
+	NOT = { has_perk = self_exorcism_perk }
+	NOT = { has_perk = exorcism_perk }
+	NOT = { has_perk = sense_magic_perk }
+	NOT = { has_perk = miracle_of_protection_perk }
+}
+
+POD_can_banish_demons_trigger = {
+	OR = {
+		has_perk = nyarashahims_banishing_sign_perk
+		has_perk = lore_hand_of_faith_perk
+		has_perk = miracle_of_protection_perk		
+		any_character_artifact = {
+			has_variable = flagrum_passion
+		}
+		has_perk = soul_arts_perfect_eye_of_heaven_perk
+		has_perk = numina_via_geniorum_5_perk
+		has_trait_xp = {
+			trait = demonology
+			value >= 100
+		}
+		has_perk = heave_the_host_of_hell_perk
+	}
+}
+
+POD_can_banish_fae_trigger = {
+	OR = {
+		has_perk = nyarashahims_banishing_sign_perk
+		has_perk = lore_hand_of_faith_perk
+		has_perk = miracle_of_protection_perk	
+		has_perk = soul_arts_perfect_eye_of_heaven_perk
+		has_perk = numina_via_geniorum_5_perk
+	}
+}
+
+POD_can_banish_wraith_trigger = {
+	OR = {
+		has_perk = nyarashahims_banishing_sign_perk
+		has_perk = lore_hand_of_faith_perk
+		has_perk = miracle_of_protection_perk		
+		has_perk = soul_arts_perfect_eye_of_heaven_perk
+		has_perk = numina_via_geniorum_5_perk
+		has_perk = exorcism_perk
+		has_perk = repel_the_angry_dead_perk
+	}
+}
+
+POD_can_summon_on_death_trigger = {
+	OR = {
+		custom_tooltip = {
+			text = has_artifact_black_torc_of_carniog
+			any_equipped_character_artifact = { has_variable = black_torc_of_carniog }
+		}
+		has_perk = arcana_spirit_sight_perk # Demons
+		has_perk = bind_the_living_perk # Mummies
+		has_perk = ns_summon_soul_perk # Vampires
+		has_perk = necro_psi_2_perk # Psychic Powers
+		has_perk = wind_talk_perk # Qiao
+		has_perk = death_track_perk # Silent Strider Tribal Gifts
+		has_perk = fates_hand_apparent_perk # Wraiths
+		has_perk = numina_necromancy_1_perk # Sorcery
+		has_perk = soul_arts_beacon_of_longing_perk # KJ
+		has_perk = numina_via_necromantiae_1_perk # Theurgy
+	}
+}
+
+POD_can_weaken_fetter_trigger = {
+	OR = {
+		has_perk = ns_compel_soul_perk # Vamp
+		has_perk = arcana_command_the_dead_perk # Demon
+		has_perk = lore_command_the_dead_perk
+		has_perk = celestial_window_perk # Shih
+		has_perk = ensnare_perk # Wraith
+		has_perk = necro_psi_2_perk # Psi
+		has_perk = numina_necromancy_2_perk # Sorcery
+		has_perk = fomori_spirit_kinship_perk # Possessed
+		has_perk = gorgon_spirit_kinship_perk # Possessed
+		has_perk = drone_spirit_kinship_perk # Possessed
+		has_perk = kami_spirit_kinship_perk # Possessed
+		has_perk = bind_the_dead_perk # Mummy
+		has_perk = ebon_bonds_perk # Wu T'ian
+		has_perk = soul_arts_haunters_rage_perk # KJ
+		any_equipped_character_artifact = { has_variable = black_torc_of_carniog }
+		has_perk = numina_via_necromantiae_3_perk # Theurgy
+		has_perk = command_the_freshly_dead_perk # Blood Sorcery
+	}
+}
+
+POD_can_bind_wraith_trigger = {
+	OR = {
+		has_perk = ns_compel_soul_perk # Vamp
+		has_perk = arcana_command_the_dead_perk # Demon
+		has_perk = lore_command_the_dead_perk
+		has_perk = celestial_window_perk # Shih
+		has_perk = ensnare_perk # Wraith
+		has_perk = necro_psi_2_perk # Psi
+		has_perk = numina_necromancy_2_perk # Sorcery
+		has_perk = fomori_spirit_kinship_perk # Possessed
+		has_perk = gorgon_spirit_kinship_perk # Possessed
+		has_perk = drone_spirit_kinship_perk # Possessed
+		has_perk = kami_spirit_kinship_perk # Possessed
+		has_perk = bind_the_dead_perk # Mummy
+		has_perk = ebon_bonds_perk # Wu T'ian
+		has_perk = soul_arts_making_love_to_ghosts_perk # KJ
+		any_equipped_character_artifact = { has_variable = black_torc_of_carniog }
+		has_perk = numina_via_necromantiae_2_perk # Theurgy
+		has_perk = command_the_freshly_dead_perk # Blood Sorcery
+	}
+}
+
+POD_can_command_wraith_trigger = {
+	OR = {
+		has_perk = ns_tongue_of_the_dark_kingdoms_perk # Vamp
+		has_perk = arcana_command_the_dead_perk # Demon
+		has_perk = lore_command_the_dead_perk
+		has_perk = voice_of_the_yama_kings_perk # Shih
+		has_perk = ensnare_perk # Wraith
+		has_perk = necro_psi_3_perk # Psi
+		has_perk = numina_necromancy_3_perk # Sorcery
+		has_perk = fomori_spirit_kinship_perk # Possessed
+		has_perk = gorgon_spirit_kinship_perk # Possessed
+		has_perk = drone_spirit_kinship_perk # Possessed
+		has_perk = kami_spirit_kinship_perk # Possessed
+		has_perk = bind_the_dead_perk # Mummy
+		has_perk = ebon_bonds_perk # Wu T'ian
+		has_perk = soul_arts_making_love_to_ghosts_perk # KJ
+		any_equipped_character_artifact = { has_variable = black_torc_of_carniog }
+		has_perk = numina_via_necromantiae_4_perk # Theurgy
+		has_perk = command_the_freshly_dead_perk # Blood Sorcery
+	}
+}
+
+POD_can_summon_wraith_trigger = {
+	OR = {
+		has_perk = ns_shroudsight_perk # Vamps
+		has_perk = ns_caul_of_the_neverborn_perk # Vamps
+		has_perk = summon_the_dead_perk # Mummy
+		has_perk = wind_talk_perk # Shih
+		has_perk = arcana_excise_soul_perk # Demon
+		has_perk = soul_arts_beacon_of_longing_perk # KJ
+		has_perk = numina_via_necromantiae_1_perk # Theurgy
+		has_perk = see_the_dead_perk # Sielanic Thaumaturgy
+	}
+}
+
+POD_can_covert_to_wraith_trigger = { # Unlocks the #italic $EXECUTION_CONVERT_TO_WRAITH$#! [execution|E] option.
+	OR = {
+		has_perk = bind_the_living_perk
+		has_perk = ns_baleful_exorcism_perk
+		has_perk = agon_perk
+		has_perk = arcana_excise_soul_perk
+		any_equipped_character_artifact = { has_variable = black_torc_of_carniog }
+	}
+}
+
+remove_damage_wraith_cost_trigger = { # For splat already can damage wraith
+	OR = {
+		has_perk = ns_torment_perk
+		has_perk = spirit_scepter_perk
+		
+		POD_can_naturally_damage_spirit_trigger = yes
+		
+		any_equipped_character_artifact = { has_artifact_modifier = artifact_can_damage_spirit_modifier }
+	}
+}
+
+POD_not_has_cantrip_defenses_trigger = {
+	custom_tooltip = { text = has_artifact_fans_of_ma_yi_yuan NOT = { any_equipped_character_artifact = { has_variable = fans_of_ma_yi_yuan } } }
+}
+
+POD_can_shapeshift_trigger = {
+	trigger_if = {
+		limit = {
+			NOR = {
+				has_perk = aspect_of_duat_perk
+				has_perk = grasp_the_beyond_perk
+				# native to the umbra
+				has_trait = wraith
+				has_trait = spirit
+			}
+		}
+		is_in_umbra_trigger = no
+	}
+	NOR = { 
+		has_character_modifier = ritual_stone_of_the_true_form_modifier
+		has_character_modifier = POD_mokole_take_the_true_form_modifier
+		has_character_modifier = innocent_stolen_form_modifier
+	}
+}
+
+POD_is_immune_to_weather_magic = {
+	OR = {
+		has_perk = wisdom_of_isis_perk
+	}
+}
+
+POD_title_is_immune_to_weather_magic = {
+	OR = {
+		holder = { POD_is_immune_to_weather_magic = yes } # count
+		holder.liege = { POD_is_immune_to_weather_magic = yes } # duke
+		holder.liege.liege = { POD_is_immune_to_weather_magic = yes } # king
+		holder.liege.liege.liege = { POD_is_immune_to_weather_magic = yes } # emperor
+		holder.liege.liege.liege.liege = { POD_is_immune_to_weather_magic = yes } # hegemon
+	}
+}
+
+POD_can_die_from_wounds = {
+	NOR = {
+		has_perk = armoured_flesh_perk
+		has_perk = flames_of_the_phoenix_perk
+		has_perk = heart_of_the_ice_warrior_perk
+		has_perk = drone_invulnerability_perk
+		has_perk = kami_invulnerability_perk
+		has_perk = arcana_relentless_soul_perk
+		has_perk = shintai_the_shintai_of_blood_perk
+		has_perk = shintai_the_shintai_of_smoke_perk
+		has_perk = jointsnakes_mojo_perk
+		has_character_modifier = mountain_stance_modifier
+		has_perk = investiture_relentless_perk
+		has_perk = numina_healing_5_perk
+	}
+}
+
+# In gaining this, also pulse `POD_make_mount_immortal_effect`
+POD_pet_can_die_trigger = {
+	NOR = {
+		has_perk = soul_arts_one_nights_revival_perk
+	}
+}
+
+POD_can_pick_elder_perk_trigger = {
+	OR = {
+		vampgeneration_less_or_equal_to_trigger = { LEVEL = $GEN$ }
+		has_character_modifier = antediluvian_dominor_modifier
+		has_trait_with_flag = elder_perk_flag
+	}
+	POD_is_not_clone_trigger = yes
+}
+
+POD_can_obtain_discipline_of_level_trigger = {
+	has_trait = $DISCIPLINE$discipline
+	POD_can_obtain_discipline_of_level_elder_advanced_effect = { DISCIPLINE = $DISCIPLINE$ LEVEL = $LEVEL$ }
+	POD_can_obtain_discipline_of_level_ghoul_trigger = { DISCIPLINE = $DISCIPLINE$ LEVEL = $LEVEL$ }
+	POD_can_obtain_discipline_of_level_vampire_trigger = { LEVEL = $LEVEL$ }
+}
+
+POD_can_obtain_discipline_of_level_elder_advanced_effect = {
+	trigger_if = {
+		limit = { $LEVEL$ >= 7 }
+		has_trait = $DISCIPLINE$advanced
+	}
+}
+POD_can_obtain_discipline_of_level_ghoul_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				has_trait = ghoul
+				has_trait = revenant
+			}
+			NOR = {
+				trait:$DISCIPLINE$ = trait:necromancy
+				trait:$DISCIPLINE$ = trait:bloodsorcery
+			}
+		}
+		POD_allowed_discipline_level_for_ghouls_or_revenants >= $LEVEL$
+	}
+}
+POD_can_obtain_discipline_of_level_vampire_trigger = {
+	trigger_if = {
+		limit = { has_trait = vampgeneration }
+		switch = {
+			trigger = $LEVEL$
+			7 = { POD_can_pick_elder_perk_trigger = { GEN = 7 } }
+			8 = { POD_can_pick_elder_perk_trigger = { GEN = 6 } }
+			9 = { POD_can_pick_elder_perk_trigger = { GEN = 5 } }
+			10 = { POD_can_pick_elder_perk_trigger = { GEN = 4 } }
+			11 = { POD_can_pick_elder_perk_trigger = { GEN = 3 } }
+			fallback = { always = yes }
+		}
+	}
+}

@@ -1,0 +1,4115 @@
+﻿namespace = POD_umbra_expedition
+
+scripted_trigger POD_umbra_expedition_ww_elite_trigger = {
+	OR = {
+ 		var:spirit_location = flag:wolfhome
+ 		var:spirit_location = flag:the_homeland_of_the_black_furies
+ 		var:spirit_location = flag:the_homeland_of_the_bone_gnawers
+ 		var:spirit_location = flag:the_homeland_of_the_children_of_gaia
+ 		var:spirit_location = flag:the_homeland_of_the_fianna
+ 		var:spirit_location = flag:the_homeland_of_the_get_of_fenris
+ 		var:spirit_location = flag:the_homeland_of_the_glass_walkers
+ 		var:spirit_location = flag:the_homeland_of_the_red_talons
+ 		var:spirit_location = flag:the_homeland_of_the_shadow_lords
+ 		var:spirit_location = flag:the_homeland_of_the_stargazers
+ 		var:spirit_location = flag:the_homeland_of_the_silver_fangs
+ 		var:spirit_location = flag:the_homeland_of_the_silent_striders
+ 		var:spirit_location = flag:the_homeland_of_the_uktena
+ 		var:spirit_location = flag:the_homeland_of_the_wendigo
+ 		var:spirit_location = flag:the_homeland_of_the_croatan
+ 		var:spirit_location = flag:the_homeland_of_the_bunyip
+ 		var:spirit_location = flag:the_former_homeland_of_the_white_howlers
+	}
+}
+
+scripted_effect POD_umbra_expedition_create_elite_duel_rival_effect = {
+	random_list = {
+		5 = {
+			trigger = { in_astral_reaches_trigger = { LOCATION = var:spirit_location } }
+			create_character = {
+				location = root.location
+				template = POD_enemy_mage_character
+				save_scope_as = spirit
+			}
+		}
+		10 = {
+			trigger = { in_spirit_wilds_trigger = { LOCATION = var:spirit_location } }
+			modifier = {
+				add = 10000
+				POD_umbra_expedition_ww_elite_trigger = yes
+			}
+			create_character = {
+				location = root.location
+				template = werewolf_generic_evil_character
+				save_scope_as = spirit
+			}
+		}
+		100 = {
+			trigger = { in_dreaming_trigger = { LOCATION = var:spirit_location } }
+			create_character = {
+				location = root.location
+				template = POD_enemy_fae_character
+				save_scope_as = spirit
+			}
+		}
+		100 = {
+			trigger = { in_underworld_trigger = { LOCATION = var:spirit_location } }
+			create_character = {
+				location = root.location
+				template = POD_enemy_wraith_character
+				save_scope_as = spirit
+			}
+		}
+		1050 = {
+			trigger = { in_underworld_trigger = { LOCATION = var:spirit_location } }
+			create_character = {
+				location = root.location
+				template = POD_enemy_spectre_character
+				save_scope_as = spirit
+			}
+		}
+		1 = {
+			trigger = { in_underworld_trigger = { LOCATION = var:spirit_location } }
+			modifier = {
+				add = 10000
+				var:spirit_location = flag:abyss
+			}
+			create_character = {
+				location = root.location
+				template = POD_enemy_demon_character
+				save_scope_as = spirit
+			}
+		}
+		20 = {
+			trigger = { in_deep_umbra_trigger = { LOCATION = var:spirit_location } }
+			create_character = {
+				location = root.location
+				template = POD_enemy_alien_character
+				save_scope_as = spirit
+			}
+		}
+		100 = {
+			save_scope_value_as = { name = spirit_spawn_notification value = no }
+			POD_spawn_hostile_spirit_effect = yes
+			scope:spawned_spirit = { save_scope_as = spirit }
+		}
+	}
+
+	scope:spirit = { 
+		POD_umbra_send_effect = { LOCATION = root.var:spirit_location }
+		add_prowess_skill = { -10 10 }
+		add_prowess_skill = root.umbra_difficulty
+
+		if = {
+			limit = { years_from_game_start > 150 }
+			add_prowess_skill = root.umbra_difficulty
+			add_prowess_skill = root.umbra_difficulty
+			add_random_tiered_trait_xp_effect = {
+				TRAIT = lifestyle_blademaster
+				LEVEL_1 = yes
+				LEVEL_3 = yes
+			}
+			add_random_tiered_trait_xp_effect = {
+				TRAIT = spectre
+				LEVEL_1 = yes
+				LEVEL_3 = yes
+			}
+		}
+
+		else_if = {
+			limit = { years_from_game_start > 75 }
+			add_prowess_skill = root.umbra_difficulty
+			add_random_tiered_trait_xp_effect = {
+				TRAIT = lifestyle_blademaster
+				LEVEL_1 = yes
+				LEVEL_3 = no
+			}
+			add_random_tiered_trait_xp_effect = {
+				TRAIT = spectre
+				LEVEL_1 = yes
+				LEVEL_3 = no
+			}
+		}
+	}
+}
+
+POD_umbra_expedition.10 = {
+	hidden = yes
+	
+	immediate = {
+		POD_umbra_expedition_create_elite_duel_rival_effect = yes
+		if = {
+			limit = { POD_is_on_golconda_trigger = yes }
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = scope:spirit
+				SC_ATTACKER = scope:spirit
+				SC_DEFENDER = root
+				FATALITY = no
+				FIXED = no
+				LOCALE = terrain_scope
+				OUTPUT_EVENT = POD_umbra_expedition.100
+				INVALIDATION_EVENT = tribal.1022
+			}
+		}
+		else = {
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = scope:spirit
+				SC_ATTACKER = scope:spirit
+				SC_DEFENDER = root
+				FATALITY = possible
+				FIXED = no
+				LOCALE = terrain_scope
+				OUTPUT_EVENT = POD_umbra_expedition.100
+				INVALIDATION_EVENT = tribal.1022
+			}
+		}
+	}
+}
+
+#Who won the final duel?
+POD_umbra_expedition.100 = {
+	hidden = yes
+
+	immediate = {
+		scope:spirit = { 
+			if = {
+				limit = { is_alive = yes }
+				POD_disappearance_effect = yes
+			}
+		}
+		# Did win?
+		if = {
+			limit = { scope:sc_victor = scope:spirit }
+			scope:sc_loser = {
+				POD_umbra_retreat_effect = yes
+				POD_umbra_expedition_cleanup_effect = yes
+				POD_umbra_expedition_cooldown_effect = yes
+			}
+		}
+		# Did lose?
+		else = {
+			scope:sc_victor = { 
+				random_list = {
+					pick = 3
+					unique = yes
+					10 = { save_scope_value_as = { name = accolade_glory_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = active_accolades_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = additional_fort_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_damage_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_maintenance_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_pursuit_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_screen_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_siege_value_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = army_toughness_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = artifact_decay_reduction_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = attacker_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = attraction_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = build_gold_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = build_piety_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = build_prestige_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = build_speed_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = building_slot_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = character_capital_county_monthly_development_growth_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = character_travel_safety_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = character_travel_safety_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = character_travel_speed_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = character_travel_speed_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = coastal_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = controlled_province_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = counter_efficiency_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = counter_resistance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = county_opinion_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = court_grandeur_baseline_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cowed_vassal_levy_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cowed_vassal_levy_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cowed_vassal_tax_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cowed_vassal_tax_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cultural_head_acceptance_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cultural_head_fascination_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = cultural_head_fascination_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = defender_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = defender_holding_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = development_growth_factor_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = development_growth_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = different_faith_opinion_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = diplomacy_per_piety_level_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = diplomacy_per_prestige_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = diplomacy_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = diplomacy_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = diplomatic_range_mult_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = domain_limit_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = domain_tax_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_baseline_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_decay_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_decay_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_loss_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_per_tyranny_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dread_per_tyranny_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dynasty_house_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = dynasty_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = embarkation_cost_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = enemy_hard_casualty_modifier_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = enemy_hostile_scheme_success_chance_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = enemy_terrain_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = fertility_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = fort_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = garrison_size_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = general_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = genetic_trait_strengthen_chance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = happy_powerful_vassal_levy_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = happy_powerful_vassal_levy_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = happy_powerful_vassal_tax_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = happy_powerful_vassal_tax_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hard_casualty_modifier_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = health_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holding_build_gold_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holding_build_piety_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holding_build_prestige_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holding_build_speed_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holy_order_hire_cost_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = holy_order_hire_cost_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostage_income_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostage_piety_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostage_prestige_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostage_renown_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_county_attrition_raiding_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_county_attrition_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_raid_time_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_scheme_power_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_scheme_power_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_scheme_resistance_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = hostile_scheme_resistance_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = inbreeding_chance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = independent_ruler_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = intimidated_vassal_levy_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = intimidated_vassal_levy_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = intimidated_vassal_tax_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = intimidated_vassal_tax_contribution_mult_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = intrigue_per_piety_level_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = intrigue_per_prestige_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = intrigue_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = intrigue_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = knight_effectiveness_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = knight_effectiveness_per_dread_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = knight_effectiveness_per_tyranny_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = knight_limit_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = learning_per_piety_level_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = learning_per_prestige_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = learning_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = learning_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_attack_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_maintenance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_pursuit_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_reinforcement_rate_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_screen_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_siege_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_size_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = levy_toughness_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = liege_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = life_expectancy_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_damage_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_damage_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_pursuit_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_pursuit_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_screen_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_screen_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_siege_value_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_siege_value_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_toughness_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = maa_toughness_mult_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = martial_per_piety_level_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = martial_per_prestige_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = martial_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = martial_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = max_combat_roll_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = max_hostile_schemes_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = max_loot_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = max_personal_schemes_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = men_at_arms_cap_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = men_at_arms_limit_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = men_at_arms_maintenance_per_dread_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = men_at_arms_maintenance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = men_at_arms_recruitment_cost_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = mercenary_hire_cost_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = mercenary_hire_cost_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = min_combat_roll_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_county_control_change_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_county_control_change_at_war_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_county_control_change_at_war_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_county_control_change_factor_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_court_grandeur_change_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_court_grandeur_change_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_dread_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_dynasty_prestige_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_dynasty_prestige_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_income_mult_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = monthly_income_per_stress_level_add_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = monthly_income_per_stress_level_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_income_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_lifestyle_xp_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_from_buildings_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_dread_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_dread_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_happy_powerful_vassal_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_happy_powerful_vassal_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_knight_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_gain_per_knight_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_piety_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_from_buildings_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_dread_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_dread_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_happy_powerful_vassal_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_happy_powerful_vassal_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_knight_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_gain_per_knight_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_prestige_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_tyranny_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_war_income_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = monthly_war_income_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = movement_speed_land_raiding_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = movement_speed_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = naval_movement_speed_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_diplomacy_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_fertility_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_health_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_intrigue_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_learning_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_martial_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_prowess_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negate_stewardship_penalty_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negative_inactive_inheritance_chance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = negative_random_genetic_chance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = owned_hostile_scheme_success_chance_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = owned_personal_scheme_success_chance_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = owned_scheme_secrecy_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = personal_scheme_power_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = personal_scheme_power_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = positive_inactive_inheritance_chance_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = positive_random_genetic_chance_umbra_modifier value = yes } }
+					2 = { save_scope_value_as = { name = prowess_per_piety_level_umbra_modifier value = yes } }
+					2 = { save_scope_value_as = { name = prowess_per_prestige_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = prowess_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = prowess_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = pursue_efficiency_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = raid_speed_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = retreat_losses_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = revolting_siege_morale_loss_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = same_faith_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = scheme_discovery_chance_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = siege_morale_loss_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = siege_phase_time_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = stewardship_per_piety_level_umbra_modifier value = yes } }
+					1 = { save_scope_value_as = { name = stewardship_per_prestige_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = stewardship_per_stress_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = stewardship_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = stress_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = stress_loss_mult_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = stress_loss_per_piety_level_umbra_modifier value = yes } }
+					5 = { save_scope_value_as = { name = stress_loss_per_prestige_level_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = supply_capacity_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = supply_capacity_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = supply_duration_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = supply_limit_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = supply_limit_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = tax_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = tax_slot_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = title_creation_cost_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = travel_danger_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = tyranny_gain_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = tyranny_loss_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = uncontrolled_province_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_levy_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_levy_contribution_mult_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_limit_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_opinion_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_tax_contribution_add_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = vassal_tax_contribution_mult_umbra_modifier value = yes } }
+					0 = { save_scope_value_as = { name = vassal_tax_mult_umbra_modifier value = yes } } # 0% chance because modifier doesn't do anything
+					10 = { save_scope_value_as = { name = winter_advantage_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = winter_movement_speed_umbra_modifier value = yes } }
+					10 = { save_scope_value_as = { name = years_of_fertility_umbra_modifier value = yes } }
+				}
+				trigger_event = POD_umbra_expedition.101 
+			}
+		} 
+		scope:spirit = { death = { death_reason = death_returned_umbra } }
+	}	
+}
+
+POD_umbra_expedition.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.101.t
+	desc = POD_umbra_expedition.101.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = accolade_glory_gain_mult_umbra_modifier
+		trigger = { exists = scope:accolade_glory_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = accolade_glory_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = active_accolades_umbra_modifier
+		trigger = { exists = scope:active_accolades_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = active_accolades_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = additional_fort_level_umbra_modifier
+		trigger = { exists = scope:additional_fort_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = additional_fort_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = advantage_umbra_modifier
+		trigger = { exists = scope:advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_damage_mult_umbra_modifier
+		trigger = { exists = scope:army_damage_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_damage_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_maintenance_mult_umbra_modifier
+		trigger = { exists = scope:army_maintenance_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_maintenance_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_pursuit_mult_umbra_modifier
+		trigger = { exists = scope:army_pursuit_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_pursuit_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_screen_mult_umbra_modifier
+		trigger = { exists = scope:army_screen_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_screen_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_siege_value_mult_umbra_modifier
+		trigger = { exists = scope:army_siege_value_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_siege_value_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = army_toughness_mult_umbra_modifier
+		trigger = { exists = scope:army_toughness_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = army_toughness_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = artifact_decay_reduction_mult_umbra_modifier
+		trigger = { exists = scope:artifact_decay_reduction_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = artifact_decay_reduction_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = attacker_advantage_umbra_modifier
+		trigger = { exists = scope:attacker_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = attacker_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = attraction_opinion_umbra_modifier
+		trigger = { exists = scope:attraction_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = attraction_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = build_gold_cost_umbra_modifier
+		trigger = { exists = scope:build_gold_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = build_gold_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = build_piety_cost_umbra_modifier
+		trigger = { exists = scope:build_piety_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = build_piety_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = build_prestige_cost_umbra_modifier
+		trigger = { exists = scope:build_prestige_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = build_prestige_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = build_speed_umbra_modifier
+		trigger = { exists = scope:build_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = build_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = building_slot_add_umbra_modifier
+		trigger = { exists = scope:building_slot_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = building_slot_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = character_capital_county_monthly_development_growth_add_umbra_modifier
+		trigger = { exists = scope:character_capital_county_monthly_development_growth_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = character_capital_county_monthly_development_growth_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = character_travel_safety_mult_umbra_modifier
+		trigger = { exists = scope:character_travel_safety_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = character_travel_safety_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = character_travel_safety_umbra_modifier
+		trigger = { exists = scope:character_travel_safety_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = character_travel_safety_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = character_travel_speed_mult_umbra_modifier
+		trigger = { exists = scope:character_travel_speed_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = character_travel_speed_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = character_travel_speed_umbra_modifier
+		trigger = { exists = scope:character_travel_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = character_travel_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = coastal_advantage_umbra_modifier
+		trigger = { exists = scope:coastal_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = coastal_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = controlled_province_advantage_umbra_modifier
+		trigger = { exists = scope:controlled_province_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = controlled_province_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = counter_efficiency_umbra_modifier
+		trigger = { exists = scope:counter_efficiency_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = counter_efficiency_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = counter_resistance_umbra_modifier
+		trigger = { exists = scope:counter_resistance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = counter_resistance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = county_opinion_add_umbra_modifier
+		trigger = { exists = scope:county_opinion_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = county_opinion_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = court_grandeur_baseline_add_umbra_modifier
+		trigger = { exists = scope:court_grandeur_baseline_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = court_grandeur_baseline_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cowed_vassal_levy_contribution_add_umbra_modifier
+		trigger = { exists = scope:cowed_vassal_levy_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cowed_vassal_levy_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cowed_vassal_levy_contribution_mult_umbra_modifier
+		trigger = { exists = scope:cowed_vassal_levy_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cowed_vassal_levy_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cowed_vassal_tax_contribution_add_umbra_modifier
+		trigger = { exists = scope:cowed_vassal_tax_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cowed_vassal_tax_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cowed_vassal_tax_contribution_mult_umbra_modifier
+		trigger = { exists = scope:cowed_vassal_tax_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cowed_vassal_tax_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cultural_head_acceptance_gain_mult_umbra_modifier
+		trigger = { exists = scope:cultural_head_acceptance_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cultural_head_acceptance_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cultural_head_fascination_add_umbra_modifier
+		trigger = { exists = scope:cultural_head_fascination_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cultural_head_fascination_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = cultural_head_fascination_mult_umbra_modifier
+		trigger = { exists = scope:cultural_head_fascination_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = cultural_head_fascination_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = defender_advantage_umbra_modifier
+		trigger = { exists = scope:defender_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = defender_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = defender_holding_advantage_umbra_modifier
+		trigger = { exists = scope:defender_holding_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = defender_holding_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = development_growth_factor_umbra_modifier
+		trigger = { exists = scope:development_growth_factor_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = development_growth_factor_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = development_growth_umbra_modifier
+		trigger = { exists = scope:development_growth_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = development_growth_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = different_faith_opinion_umbra_modifier
+		trigger = { exists = scope:different_faith_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = different_faith_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = diplomacy_per_piety_level_umbra_modifier
+		trigger = { exists = scope:diplomacy_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = diplomacy_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = diplomacy_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:diplomacy_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = diplomacy_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = diplomacy_per_stress_level_umbra_modifier
+		trigger = { exists = scope:diplomacy_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = diplomacy_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = diplomacy_umbra_modifier
+		trigger = { exists = scope:diplomacy_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = diplomacy_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = diplomatic_range_mult_umbra_modifier
+		trigger = { exists = scope:diplomatic_range_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = diplomatic_range_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = domain_limit_umbra_modifier
+		trigger = { exists = scope:domain_limit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = domain_limit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = domain_tax_mult_umbra_modifier
+		trigger = { exists = scope:domain_tax_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = domain_tax_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_baseline_add_umbra_modifier
+		trigger = { exists = scope:dread_baseline_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_baseline_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_decay_add_umbra_modifier
+		trigger = { exists = scope:dread_decay_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_decay_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_decay_mult_umbra_modifier
+		trigger = { exists = scope:dread_decay_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_decay_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_gain_mult_umbra_modifier
+		trigger = { exists = scope:dread_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_loss_mult_umbra_modifier
+		trigger = { exists = scope:dread_loss_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_loss_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_per_tyranny_add_umbra_modifier
+		trigger = { exists = scope:dread_per_tyranny_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_per_tyranny_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dread_per_tyranny_mult_umbra_modifier
+		trigger = { exists = scope:dread_per_tyranny_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dread_per_tyranny_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dynasty_house_opinion_umbra_modifier
+		trigger = { exists = scope:dynasty_house_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dynasty_house_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = dynasty_opinion_umbra_modifier
+		trigger = { exists = scope:dynasty_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = dynasty_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = embarkation_cost_mult_umbra_modifier
+		trigger = { exists = scope:embarkation_cost_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = embarkation_cost_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = enemy_hard_casualty_modifier_umbra_modifier
+		trigger = { exists = scope:enemy_hard_casualty_modifier_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = enemy_hard_casualty_modifier_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = enemy_hostile_scheme_success_chance_add_umbra_modifier
+		trigger = { exists = scope:enemy_hostile_scheme_success_chance_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = enemy_hostile_scheme_success_chance_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = enemy_terrain_advantage_umbra_modifier
+		trigger = { exists = scope:enemy_terrain_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = enemy_terrain_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = fertility_umbra_modifier
+		trigger = { exists = scope:fertility_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = fertility_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = fort_level_umbra_modifier
+		trigger = { exists = scope:fort_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = fort_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = garrison_size_umbra_modifier
+		trigger = { exists = scope:garrison_size_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = garrison_size_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = general_opinion_umbra_modifier
+		trigger = { exists = scope:general_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = general_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = genetic_trait_strengthen_chance_umbra_modifier
+		trigger = { exists = scope:genetic_trait_strengthen_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = genetic_trait_strengthen_chance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = happy_powerful_vassal_levy_contribution_add_umbra_modifier
+		trigger = { exists = scope:happy_powerful_vassal_levy_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = happy_powerful_vassal_levy_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = happy_powerful_vassal_levy_contribution_mult_umbra_modifier
+		trigger = { exists = scope:happy_powerful_vassal_levy_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = happy_powerful_vassal_levy_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = happy_powerful_vassal_tax_contribution_add_umbra_modifier
+		trigger = { exists = scope:happy_powerful_vassal_tax_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = happy_powerful_vassal_tax_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = happy_powerful_vassal_tax_contribution_mult_umbra_modifier
+		trigger = { exists = scope:happy_powerful_vassal_tax_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = happy_powerful_vassal_tax_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hard_casualty_modifier_umbra_modifier
+		trigger = { exists = scope:hard_casualty_modifier_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hard_casualty_modifier_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = health_umbra_modifier
+		trigger = { exists = scope:health_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = health_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holding_build_gold_cost_umbra_modifier
+		trigger = { exists = scope:holding_build_gold_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holding_build_gold_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holding_build_piety_cost_umbra_modifier
+		trigger = { exists = scope:holding_build_piety_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holding_build_piety_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holding_build_prestige_cost_umbra_modifier
+		trigger = { exists = scope:holding_build_prestige_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holding_build_prestige_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holding_build_speed_umbra_modifier
+		trigger = { exists = scope:holding_build_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holding_build_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holy_order_hire_cost_add_umbra_modifier
+		trigger = { exists = scope:holy_order_hire_cost_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holy_order_hire_cost_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = holy_order_hire_cost_mult_umbra_modifier
+		trigger = { exists = scope:holy_order_hire_cost_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = holy_order_hire_cost_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostage_income_mult_umbra_modifier
+		trigger = { exists = scope:hostage_income_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostage_income_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostage_piety_mult_umbra_modifier
+		trigger = { exists = scope:hostage_piety_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostage_piety_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostage_prestige_mult_umbra_modifier
+		trigger = { exists = scope:hostage_prestige_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostage_prestige_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostage_renown_mult_umbra_modifier
+		trigger = { exists = scope:hostage_renown_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostage_renown_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_county_attrition_raiding_umbra_modifier
+		trigger = { exists = scope:hostile_county_attrition_raiding_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_county_attrition_raiding_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_county_attrition_umbra_modifier
+		trigger = { exists = scope:hostile_county_attrition_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_county_attrition_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_raid_time_umbra_modifier
+		trigger = { exists = scope:hostile_raid_time_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_raid_time_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_scheme_power_add_umbra_modifier
+		trigger = { exists = scope:hostile_scheme_power_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_scheme_power_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_scheme_power_mult_umbra_modifier
+		trigger = { exists = scope:hostile_scheme_power_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_scheme_power_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_scheme_resistance_add_umbra_modifier
+		trigger = { exists = scope:hostile_scheme_resistance_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_scheme_resistance_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = hostile_scheme_resistance_mult_umbra_modifier
+		trigger = { exists = scope:hostile_scheme_resistance_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = hostile_scheme_resistance_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = inbreeding_chance_umbra_modifier
+		trigger = { exists = scope:inbreeding_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = inbreeding_chance_umbra_modifier
+			years = 5
+		}
+	}
+	
+	option = {
+		name = independent_ruler_opinion_umbra_modifier
+		trigger = { exists = scope:independent_ruler_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = independent_ruler_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intimidated_vassal_levy_contribution_add_umbra_modifier
+		trigger = { exists = scope:intimidated_vassal_levy_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intimidated_vassal_levy_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intimidated_vassal_levy_contribution_mult_umbra_modifier
+		trigger = { exists = scope:intimidated_vassal_levy_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intimidated_vassal_levy_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intimidated_vassal_tax_contribution_add_umbra_modifier
+		trigger = { exists = scope:intimidated_vassal_tax_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intimidated_vassal_tax_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intimidated_vassal_tax_contribution_mult_umbra_modifier
+		trigger = { exists = scope:intimidated_vassal_tax_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intimidated_vassal_tax_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intrigue_per_piety_level_umbra_modifier
+		trigger = { exists = scope:intrigue_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intrigue_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intrigue_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:intrigue_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intrigue_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intrigue_per_stress_level_umbra_modifier
+		trigger = { exists = scope:intrigue_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intrigue_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = intrigue_umbra_modifier
+		trigger = { exists = scope:intrigue_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = intrigue_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = knight_effectiveness_mult_umbra_modifier
+		trigger = { exists = scope:knight_effectiveness_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = knight_effectiveness_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = knight_effectiveness_per_dread_umbra_modifier
+		trigger = { exists = scope:knight_effectiveness_per_dread_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = knight_effectiveness_per_dread_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = knight_effectiveness_per_tyranny_umbra_modifier
+		trigger = { exists = scope:knight_effectiveness_per_tyranny_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = knight_effectiveness_per_tyranny_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = knight_limit_umbra_modifier
+		trigger = { exists = scope:knight_limit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = knight_limit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = learning_per_piety_level_umbra_modifier
+		trigger = { exists = scope:learning_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = learning_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = learning_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:learning_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = learning_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = learning_per_stress_level_umbra_modifier
+		trigger = { exists = scope:learning_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = learning_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = learning_umbra_modifier
+		trigger = { exists = scope:learning_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = learning_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_attack_umbra_modifier
+		trigger = { exists = scope:levy_attack_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_attack_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_maintenance_umbra_modifier
+		trigger = { exists = scope:levy_maintenance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_maintenance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_pursuit_umbra_modifier
+		trigger = { exists = scope:levy_pursuit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_pursuit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_reinforcement_rate_umbra_modifier
+		trigger = { exists = scope:levy_reinforcement_rate_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_reinforcement_rate_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_screen_umbra_modifier
+		trigger = { exists = scope:levy_screen_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_screen_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_siege_umbra_modifier
+		trigger = { exists = scope:levy_siege_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_siege_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_size_umbra_modifier
+		trigger = { exists = scope:levy_size_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_size_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = levy_toughness_umbra_modifier
+		trigger = { exists = scope:levy_toughness_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = levy_toughness_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = liege_opinion_umbra_modifier
+		trigger = { exists = scope:liege_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = liege_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = life_expectancy_umbra_modifier
+		trigger = { exists = scope:life_expectancy_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = life_expectancy_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_damage_add_umbra_modifier
+		trigger = { exists = scope:maa_damage_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_damage_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_damage_mult_umbra_modifier
+		trigger = { exists = scope:maa_damage_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_damage_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_pursuit_add_umbra_modifier
+		trigger = { exists = scope:maa_pursuit_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_pursuit_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_pursuit_mult_umbra_modifier
+		trigger = { exists = scope:maa_pursuit_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_pursuit_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_screen_add_umbra_modifier
+		trigger = { exists = scope:maa_screen_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_screen_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_screen_mult_umbra_modifier
+		trigger = { exists = scope:maa_screen_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_screen_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_siege_value_add_umbra_modifier
+		trigger = { exists = scope:maa_siege_value_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_siege_value_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_siege_value_mult_umbra_modifier
+		trigger = { exists = scope:maa_siege_value_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_siege_value_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_toughness_add_umbra_modifier
+		trigger = { exists = scope:maa_toughness_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_toughness_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = maa_toughness_mult_umbra_modifier
+		trigger = { exists = scope:maa_toughness_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = maa_toughness_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = martial_per_piety_level_umbra_modifier
+		trigger = { exists = scope:martial_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = martial_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = martial_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:martial_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = martial_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = martial_per_stress_level_umbra_modifier
+		trigger = { exists = scope:martial_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = martial_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = martial_umbra_modifier
+		trigger = { exists = scope:martial_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = martial_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = max_combat_roll_umbra_modifier
+		trigger = { exists = scope:max_combat_roll_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = max_combat_roll_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = max_hostile_schemes_add_umbra_modifier
+		trigger = { exists = scope:max_hostile_schemes_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = max_hostile_schemes_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = max_loot_mult_umbra_modifier
+		trigger = { exists = scope:max_loot_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = max_loot_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = max_personal_schemes_add_umbra_modifier
+		trigger = { exists = scope:max_personal_schemes_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = max_personal_schemes_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = men_at_arms_cap_umbra_modifier
+		trigger = { exists = scope:men_at_arms_cap_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = men_at_arms_cap_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = men_at_arms_limit_umbra_modifier
+		trigger = { exists = scope:men_at_arms_limit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = men_at_arms_limit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = men_at_arms_maintenance_per_dread_mult_umbra_modifier
+		trigger = { exists = scope:men_at_arms_maintenance_per_dread_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = men_at_arms_maintenance_per_dread_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = men_at_arms_maintenance_umbra_modifier
+		trigger = { exists = scope:men_at_arms_maintenance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = men_at_arms_maintenance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = men_at_arms_recruitment_cost_umbra_modifier
+		trigger = { exists = scope:men_at_arms_recruitment_cost_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = men_at_arms_recruitment_cost_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = mercenary_hire_cost_add_umbra_modifier
+		trigger = { exists = scope:mercenary_hire_cost_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = mercenary_hire_cost_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = mercenary_hire_cost_mult_umbra_modifier
+		trigger = { exists = scope:mercenary_hire_cost_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = mercenary_hire_cost_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = min_combat_roll_umbra_modifier
+		trigger = { exists = scope:min_combat_roll_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = min_combat_roll_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_county_control_change_add_umbra_modifier
+		trigger = { exists = scope:monthly_county_control_change_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_county_control_change_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_county_control_change_at_war_add_umbra_modifier
+		trigger = { exists = scope:monthly_county_control_change_at_war_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_county_control_change_at_war_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_county_control_change_at_war_mult_umbra_modifier
+		trigger = { exists = scope:monthly_county_control_change_at_war_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_county_control_change_at_war_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_county_control_change_factor_umbra_modifier
+		trigger = { exists = scope:monthly_county_control_change_factor_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_county_control_change_factor_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_court_grandeur_change_add_umbra_modifier
+		trigger = { exists = scope:monthly_court_grandeur_change_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_court_grandeur_change_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_court_grandeur_change_mult_umbra_modifier
+		trigger = { exists = scope:monthly_court_grandeur_change_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_court_grandeur_change_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_dread_umbra_modifier
+		trigger = { exists = scope:monthly_dread_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_dread_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_dynasty_prestige_mult_umbra_modifier
+		trigger = { exists = scope:monthly_dynasty_prestige_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_dynasty_prestige_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_dynasty_prestige_umbra_modifier
+		trigger = { exists = scope:monthly_dynasty_prestige_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_dynasty_prestige_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_income_mult_umbra_modifier
+		trigger = { exists = scope:monthly_income_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_income_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_income_per_stress_level_add_umbra_modifier
+		trigger = { exists = scope:monthly_income_per_stress_level_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_income_per_stress_level_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_income_per_stress_level_mult_umbra_modifier
+		trigger = { exists = scope:monthly_income_per_stress_level_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_income_per_stress_level_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_income_umbra_modifier
+		trigger = { exists = scope:monthly_income_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_income_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_lifestyle_xp_gain_mult_umbra_modifier
+		trigger = { exists = scope:monthly_lifestyle_xp_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_lifestyle_xp_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_from_buildings_mult_umbra_modifier
+		trigger = { exists = scope:monthly_piety_from_buildings_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_from_buildings_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_mult_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_dread_add_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_dread_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_dread_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_dread_mult_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_dread_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_dread_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_happy_powerful_vassal_add_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_happy_powerful_vassal_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_happy_powerful_vassal_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_happy_powerful_vassal_mult_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_happy_powerful_vassal_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_happy_powerful_vassal_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_knight_add_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_knight_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_knight_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_gain_per_knight_mult_umbra_modifier
+		trigger = { exists = scope:monthly_piety_gain_per_knight_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_gain_per_knight_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_piety_umbra_modifier
+		trigger = { exists = scope:monthly_piety_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_piety_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_from_buildings_mult_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_from_buildings_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_from_buildings_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_mult_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_dread_add_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_dread_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_dread_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_dread_mult_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_dread_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_dread_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_happy_powerful_vassal_add_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_happy_powerful_vassal_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_happy_powerful_vassal_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_happy_powerful_vassal_mult_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_happy_powerful_vassal_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_happy_powerful_vassal_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_knight_add_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_knight_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_knight_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_gain_per_knight_mult_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_gain_per_knight_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_gain_per_knight_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_prestige_umbra_modifier
+		trigger = { exists = scope:monthly_prestige_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_prestige_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_tyranny_umbra_modifier
+		trigger = { exists = scope:monthly_tyranny_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_tyranny_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_war_income_add_umbra_modifier
+		trigger = { exists = scope:monthly_war_income_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_war_income_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = monthly_war_income_mult_umbra_modifier
+		trigger = { exists = scope:monthly_war_income_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = monthly_war_income_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = movement_speed_land_raiding_umbra_modifier
+		trigger = { exists = scope:movement_speed_land_raiding_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = movement_speed_land_raiding_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = movement_speed_umbra_modifier
+		trigger = { exists = scope:movement_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = movement_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = naval_movement_speed_mult_umbra_modifier
+		trigger = { exists = scope:naval_movement_speed_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = naval_movement_speed_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_diplomacy_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_diplomacy_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_diplomacy_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_fertility_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_fertility_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_fertility_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_health_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_health_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_health_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_intrigue_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_intrigue_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_intrigue_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_learning_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_learning_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_learning_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_martial_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_martial_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_martial_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_prowess_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_prowess_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_prowess_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negate_stewardship_penalty_add_umbra_modifier
+		trigger = { exists = scope:negate_stewardship_penalty_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negate_stewardship_penalty_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negative_inactive_inheritance_chance_umbra_modifier
+		trigger = { exists = scope:negative_inactive_inheritance_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negative_inactive_inheritance_chance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = negative_random_genetic_chance_umbra_modifier
+		trigger = { exists = scope:negative_random_genetic_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = negative_random_genetic_chance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = owned_hostile_scheme_success_chance_add_umbra_modifier
+		trigger = { exists = scope:owned_hostile_scheme_success_chance_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = owned_hostile_scheme_success_chance_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = owned_personal_scheme_success_chance_add_umbra_modifier
+		trigger = { exists = scope:owned_personal_scheme_success_chance_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = owned_personal_scheme_success_chance_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = owned_scheme_secrecy_add_umbra_modifier
+		trigger = { exists = scope:owned_scheme_secrecy_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = owned_scheme_secrecy_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = personal_scheme_power_add_umbra_modifier
+		trigger = { exists = scope:personal_scheme_power_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = personal_scheme_power_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = personal_scheme_power_mult_umbra_modifier
+		trigger = { exists = scope:personal_scheme_power_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = personal_scheme_power_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = positive_inactive_inheritance_chance_umbra_modifier
+		trigger = { exists = scope:positive_inactive_inheritance_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = positive_inactive_inheritance_chance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = positive_random_genetic_chance_umbra_modifier
+		trigger = { exists = scope:positive_random_genetic_chance_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = positive_random_genetic_chance_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = prowess_per_piety_level_umbra_modifier
+		trigger = { exists = scope:prowess_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = prowess_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = prowess_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:prowess_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = prowess_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = prowess_per_stress_level_umbra_modifier
+		trigger = { exists = scope:prowess_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = prowess_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = prowess_umbra_modifier
+		trigger = { exists = scope:prowess_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = prowess_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = pursue_efficiency_umbra_modifier
+		trigger = { exists = scope:pursue_efficiency_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = pursue_efficiency_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = raid_speed_umbra_modifier
+		trigger = { exists = scope:raid_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = raid_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = retreat_losses_umbra_modifier
+		trigger = { exists = scope:retreat_losses_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = retreat_losses_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = revolting_siege_morale_loss_mult_umbra_modifier
+		trigger = { exists = scope:revolting_siege_morale_loss_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = revolting_siege_morale_loss_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = same_faith_opinion_umbra_modifier
+		trigger = { exists = scope:same_faith_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = same_faith_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = scheme_discovery_chance_mult_umbra_modifier
+		trigger = { exists = scope:scheme_discovery_chance_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = scheme_discovery_chance_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = siege_morale_loss_umbra_modifier
+		trigger = { exists = scope:siege_morale_loss_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = siege_morale_loss_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = siege_phase_time_umbra_modifier
+		trigger = { exists = scope:siege_phase_time_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = siege_phase_time_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stewardship_per_piety_level_umbra_modifier
+		trigger = { exists = scope:stewardship_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stewardship_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stewardship_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:stewardship_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stewardship_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stewardship_per_stress_level_umbra_modifier
+		trigger = { exists = scope:stewardship_per_stress_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stewardship_per_stress_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stewardship_umbra_modifier
+		trigger = { exists = scope:stewardship_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stewardship_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stress_gain_mult_umbra_modifier
+		trigger = { exists = scope:stress_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stress_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stress_loss_mult_umbra_modifier
+		trigger = { exists = scope:stress_loss_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stress_loss_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stress_loss_per_piety_level_umbra_modifier
+		trigger = { exists = scope:stress_loss_per_piety_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stress_loss_per_piety_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = stress_loss_per_prestige_level_umbra_modifier
+		trigger = { exists = scope:stress_loss_per_prestige_level_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = stress_loss_per_prestige_level_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = supply_capacity_add_umbra_modifier
+		trigger = { exists = scope:supply_capacity_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = supply_capacity_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = supply_capacity_mult_umbra_modifier
+		trigger = { exists = scope:supply_capacity_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = supply_capacity_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = supply_duration_umbra_modifier
+		trigger = { exists = scope:supply_duration_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = supply_duration_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = supply_limit_mult_umbra_modifier
+		trigger = { exists = scope:supply_limit_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = supply_limit_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = supply_limit_umbra_modifier
+		trigger = { exists = scope:supply_limit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = supply_limit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = tax_mult_umbra_modifier
+		trigger = { exists = scope:tax_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = tax_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = tax_slot_add_umbra_modifier
+		trigger = { exists = scope:tax_slot_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = tax_slot_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = title_creation_cost_mult_umbra_modifier
+		trigger = { exists = scope:title_creation_cost_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = title_creation_cost_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = travel_danger_umbra_modifier
+		trigger = { exists = scope:travel_danger_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = travel_danger_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = tyranny_gain_mult_umbra_modifier
+		trigger = { exists = scope:tyranny_gain_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = tyranny_gain_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = tyranny_loss_mult_umbra_modifier
+		trigger = { exists = scope:tyranny_loss_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = tyranny_loss_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = uncontrolled_province_advantage_umbra_modifier
+		trigger = { exists = scope:uncontrolled_province_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = uncontrolled_province_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_levy_contribution_add_umbra_modifier
+		trigger = { exists = scope:vassal_levy_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_levy_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_levy_contribution_mult_umbra_modifier
+		trigger = { exists = scope:vassal_levy_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_levy_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_limit_umbra_modifier
+		trigger = { exists = scope:vassal_limit_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_limit_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_opinion_umbra_modifier
+		trigger = { exists = scope:vassal_opinion_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_opinion_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_tax_contribution_add_umbra_modifier
+		trigger = { exists = scope:vassal_tax_contribution_add_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_tax_contribution_add_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_tax_contribution_mult_umbra_modifier
+		trigger = { exists = scope:vassal_tax_contribution_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_tax_contribution_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = vassal_tax_mult_umbra_modifier
+		trigger = { exists = scope:vassal_tax_mult_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = vassal_tax_mult_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = winter_advantage_umbra_modifier
+		trigger = { exists = scope:winter_advantage_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = winter_advantage_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = winter_movement_speed_umbra_modifier
+		trigger = { exists = scope:winter_movement_speed_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = winter_movement_speed_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = years_of_fertility_umbra_modifier
+		trigger = { exists = scope:years_of_fertility_umbra_modifier }
+		
+		add_character_modifier = {
+			modifier = years_of_fertility_umbra_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.101.fallback
+		
+		add_prestige = minor_prestige_gain
+	}
+}
+
+POD_umbra_expedition.200 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { in_dreaming_trigger = { LOCATION = var:spirit_location } }
+			random_list = {
+				pick = 3
+				unique = yes
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:eyes_of_the_snow_maiden
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = eyes_of_the_snow_maiden }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:cauldron_of_sceanbh
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = cauldron_of_sceanbh }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:crown_of_dreams
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = crown_of_dreams }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:edanns_harp
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = edanns_harp }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:elenas_mirror
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = elenas_mirror }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:maul_of_thunder
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = maul_of_thunder }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:cold_light
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = cold_light }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:syrinx
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = syrinx }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:sands_of_time
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = sands_of_time }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:minoan_mosaic
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = minoan_mosaic }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:castors_star
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = castors_star }
+				}
+				3 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:cauldron_of_nightmares
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = cauldron_of_nightmares }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:excaliburs_scabbard
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = excaliburs_scabbard }
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:gale_flute
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = gale_flute }
+				}
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = faerie_dust } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = cabinet_stick } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = cap_of_neglect } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = ring_of_linked_sight } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = sealing_needle } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = arrow_of_midnight_sun } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = arrow_of_inky_noon } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = vulcans_hammer } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = durable_sandals } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = trail_dust } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = blessed_opa } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = basilisk_stone } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = goblin_lantern } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = goblin_parchment } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = goblin_shoes } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = razor_claws } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = goblin_bow } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = goblin_cloak } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = pendulum } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = magical_crumbs } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = cat_boots } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = gauntlets } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = dry_dust } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = blooded_gauntlets } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = grapes_of_wrath } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = horn_of_hermes } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = halcyon_halter } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = inner_spinners } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = gray_vines } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = gloves_of_night } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = brooch_of_the_true_suitor } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = highland_blade } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = rorys_bag } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = mooncrystal } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = blood_dross } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = passion_braceler } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = berserker_armor } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = amber_wyrm } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = havens_compass } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = bakers_stone } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = bane_dagger } }
+			}
+		}
+		else_if = {
+			limit = { in_underworld_trigger = { LOCATION = var:spirit_location } }
+			random_list = {
+				pick = 3
+				unique = yes
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = thornstick } }
+				3 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:old_glory
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = old_glory }
+				
+				}
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:sweeneys_pride
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = sweeneys_pride }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:emperors_nightingale
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = emperors_nightingale }
+				}
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = bell_of_summoning } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = masks } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = instant_nihil } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = redeyes } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = scribblers_pen } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = soulfire_mask } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = soulfire_lantern } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = star_of_the_east } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = candelabra_of_souls } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = stygian_steel_armor } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = stygian_wall_flies } }
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:living_chains
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = living_chains }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:fetterguard
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = fetterguard }
+				}
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = beasthide } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = bloodwebs } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = shroudripper_gloves } }
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:wail_tongue
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = wail_tongue }
+				}
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:guardian_orb
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = guardian_orb }
+				}
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = forgebait } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = memory_net } }
+				1 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:bean_nighe_caul
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = bean_nighe_caul }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				in_spirit_wilds_trigger = { LOCATION = var:spirit_location } 
+			}
+			random_list = {
+				pick = 3
+				unique = yes
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = amulet_of_kinship } }
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = klaive_hammer } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = astral_tiki } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = beast_cloak } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = sebastiannas_ghost_devouring_jack_o_lantern } }
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:lens_of_zadkiel
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = lens_of_zadkiel }
+				}
+			}
+		}
+		else = {
+			# limit = {
+				# OR = {
+					# in_astral_reaches_trigger = { LOCATION = var:spirit_location } 
+					# in_deep_umbra_trigger = { LOCATION = var:spirit_location } 
+				# }
+			# }
+			random_list = {
+				pick = 3
+				unique = yes
+				4 = { POD_umbra_artifact_init_effect = { ARTIFACT = bottle_of_fire } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = cauldron_of_spies } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = divine_staff_of_fortuitous_intervention } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = dream_spirit_bag } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = great_sigil_pendant } }
+				3 = { POD_umbra_artifact_init_effect = { ARTIFACT = serpent_pen } }
+				2 = { 
+					trigger = { 
+						NOT = {
+							is_target_in_global_variable_list = {
+								name = unavailable_unique_artifacts
+								target = flag:spiritual_armor
+							}
+						}
+					}
+					POD_umbra_artifact_init_effect = { ARTIFACT = spiritual_armor }
+				}
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = trance_drum } }
+				3 = { POD_umbra_artifact_init_effect = { ARTIFACT = clay_man_amulet } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = ebon_candles_of_manifest_nigrescence } }
+				10 = { POD_umbra_artifact_init_effect = { ARTIFACT = ginger_dragons } }
+				5 = { POD_umbra_artifact_init_effect = { ARTIFACT = salvation_bell } }
+				3 = { POD_umbra_artifact_init_effect = { ARTIFACT = seeds_of_decay } }
+			}
+		}
+		if = {
+			limit = { exists = scope:artifact_flag_1 }
+			POD_umbra_create_artifact_from_flag_effect = {
+				FLAG = scope:artifact_flag_1
+				OWNER = character:POD_wraith_01
+			}
+			scope:newly_created_artifact = { save_scope_as = artifact_1 }
+		}
+		if = {
+			limit = { exists = scope:artifact_flag_2 }
+			POD_umbra_create_artifact_from_flag_effect = {
+				FLAG = scope:artifact_flag_2
+				OWNER = character:POD_wraith_01
+			}
+			scope:newly_created_artifact = { save_scope_as = artifact_2 }
+		}
+		if = {
+			limit = { exists = scope:artifact_flag_3 }
+			POD_umbra_create_artifact_from_flag_effect = {
+				FLAG = scope:artifact_flag_3
+				OWNER = character:POD_wraith_01
+			}
+			scope:newly_created_artifact = { save_scope_as = artifact_3 }
+		}
+		trigger_event = POD_umbra_expedition.201
+	}
+}
+
+scripted_effect POD_umbra_expedition_200_pay_for_artifact_effect = {
+	remove_short_term_gold = {
+		if = {
+			limit = {
+				$ARTIFACT$ = { rarity = illustrious }
+			}
+			add = {
+				value = 25
+			}
+		}
+		else_if = {
+			limit = {
+				$ARTIFACT$ = { rarity = famed }
+			}
+			add = {
+				value = 15
+			}
+		}
+		else_if = {
+			limit = {
+				$ARTIFACT$ = { rarity = masterwork }
+			}
+			add = {
+				value = 8
+			}
+		}
+		else = {
+			add = {
+				value = 4
+			}
+		}
+		# Boost the value up to something meaningful
+		multiply = 9
+	}
+}
+
+POD_umbra_expedition.201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.201.t
+	desc = POD_umbra_expedition.201.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	artifact = {
+		target = scope:artifact_1
+		position = lower_left_portrait
+		trigger = { exists = scope:artifact_1 }
+	}
+
+	artifact = {
+		target = scope:artifact_2
+		position = lower_center_portrait
+		trigger = { exists = scope:artifact_2 }
+	}
+
+	artifact = {
+		target = scope:artifact_3
+		position = lower_right_portrait
+		trigger = { exists = scope:artifact_3 }
+	}
+
+	option = {
+		name = POD_umbra_expedition.201.artifact_1
+		trigger = { exists = scope:artifact_1 }
+		
+		POD_umbra_expedition_200_pay_for_artifact_effect = { ARTIFACT = scope:artifact_1 }
+		scope:artifact_1 = { set_owner = root }
+
+		hidden_effect = {
+			if = {
+				limit = { POD_is_unique_umbra_artifact_trigger = { FLAG = scope:artifact_flag_1 } }
+				add_to_global_variable_list = {
+					name = unavailable_unique_artifacts
+					target = scope:artifact_flag_1
+				}
+			}
+			if = { limit = { exists = scope:artifact_2 } destroy_artifact = scope:artifact_2 }
+			if = { limit = { exists = scope:artifact_3 } destroy_artifact = scope:artifact_3 }
+		}
+		remove_variable = loot_reroll
+	}
+
+	option = {
+		name = POD_umbra_expedition.201.artifact_2
+		trigger = { exists = scope:artifact_2 }
+
+		POD_umbra_expedition_200_pay_for_artifact_effect = { ARTIFACT = scope:artifact_2 }
+		scope:artifact_2 = { set_owner = root }
+
+		hidden_effect = {
+			if = {
+				limit = { POD_is_unique_umbra_artifact_trigger = { FLAG = scope:artifact_flag_2 } }
+				add_to_global_variable_list = {
+					name = unavailable_unique_artifacts
+					target = scope:artifact_flag_2
+				}
+			}
+			if = { limit = { exists = scope:artifact_1 } destroy_artifact = scope:artifact_1 }
+			if = { limit = { exists = scope:artifact_3 } destroy_artifact = scope:artifact_3 }
+		}
+		remove_variable = loot_reroll
+	}
+
+	option = {
+		name = POD_umbra_expedition.201.artifact_3
+		trigger = { exists = scope:artifact_3 }
+
+		POD_umbra_expedition_200_pay_for_artifact_effect = { ARTIFACT = scope:artifact_3 }
+		scope:artifact_3 = { set_owner = root }
+
+		hidden_effect = {
+			if = {
+				limit = { POD_is_unique_umbra_artifact_trigger = { FLAG = scope:artifact_flag_3 } }
+				add_to_global_variable_list = {
+					name = unavailable_unique_artifacts
+					target = scope:artifact_flag_3
+				}
+			}
+			if = { limit = { exists = scope:artifact_1 } destroy_artifact = scope:artifact_1 }
+			if = { limit = { exists = scope:artifact_2 } destroy_artifact = scope:artifact_2 }
+		}
+		remove_variable = loot_reroll
+	}
+	
+	option = {
+		name = POD_umbra_expedition.201.reroll
+		if = { 
+			limit = { NOT = { has_variable = loot_reroll } }
+			set_variable = { name = loot_reroll value = 1 }
+			add_prestige = -10
+		}
+		else = { 
+			change_variable = { name = loot_reroll add = 1 }
+			add_prestige = { value = -10    multiply = var:loot_reroll }
+		}
+
+		save_scope_value_as = {
+			name = artifact_flag_1
+			value = flag:no
+		}
+		save_scope_value_as = {
+			name = artifact_flag_2
+			value = flag:no
+		}
+		save_scope_value_as = {
+			name = artifact_flag_3
+			value = flag:no
+		}
+		
+		hidden_effect = {
+			if = { limit = { exists = scope:artifact_1 } destroy_artifact = scope:artifact_1 }
+			if = { limit = { exists = scope:artifact_2 } destroy_artifact = scope:artifact_2 }
+			if = { limit = { exists = scope:artifact_3 } destroy_artifact = scope:artifact_3 }
+		}
+		
+		trigger_event = POD_umbra_expedition.200
+	}
+	
+	option = {
+		name = POD_umbra_expedition.201.fallback
+
+		hidden_effect = {
+			if = { limit = { exists = scope:artifact_1 } destroy_artifact = scope:artifact_1 }
+			if = { limit = { exists = scope:artifact_2 } destroy_artifact = scope:artifact_2 }
+			if = { limit = { exists = scope:artifact_3 } destroy_artifact = scope:artifact_3 }
+		}
+		
+		remove_variable = loot_reroll
+	}
+}
+
+POD_umbra_expedition.300 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.301
+		}
+	}
+}
+
+POD_umbra_expedition.301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.300.t
+	desc = POD_umbra_expedition.300.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+	
+	immediate = {
+		ordered_ruler = {
+			limit = {
+				is_landed = yes
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			order_by = prowess
+			position = 0
+			save_scope_as = target
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.300.a
+		
+		POD_start_targeted_journey_effect = {
+			TYPE     = unstoppable_warrior
+			MONTHLY  = instant
+			TARGET  = scope:target
+		}
+	}
+}
+
+POD_umbra_expedition.302 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = { var:current_journey.var:target = { is_alive = no } }
+			POD_clear_journeys_with_target_effect = { TARGET = var:current_journey.var:target }
+			ordered_ruler = {
+				limit = {
+					is_landed = yes
+					OR = {
+						faith = { has_doctrine = wyrm_tainted_doctrine }
+						faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+					}
+				}
+				order_by = prowess
+				position = 0
+				save_scope_as = new_target
+			}
+			POD_start_targeted_journey_effect = {
+				TYPE     = unstoppable_warrior
+				MONTHLY  = instant
+				TARGET  = scope:new_target
+			}
+		}
+		else = {
+			current_travel_plan ?= {
+				pause_travel_plan = yes
+			}
+			save_scope_as = attacker
+			var:current_journey.var:target = {
+				save_scope_as = defender
+			}
+			trigger_event = POD_umbra_expedition.303
+		}
+	}
+}
+
+POD_umbra_expedition.303 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.302.t
+	desc =  POD_umbra_expedition.302.desc		
+	theme = hunt_activity
+
+	left_portrait = {
+		character = scope:defender
+		animation = shock
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	option = {
+		name = POD_umbra_expedition.302.a
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = scope:attacker
+			SC_ATTACKER = scope:attacker
+			SC_DEFENDER = scope:defender
+			FATALITY = always
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = POD_umbra_expedition.304
+			INVALIDATION_EVENT = tribal.1022
+		}
+	}
+}
+
+POD_umbra_expedition.304 = {
+	hidden = yes
+	
+	immediate = {
+		scope:attacker = {
+			if = {
+				limit = { is_alive = yes }
+				trigger_event = POD_umbra_expedition.305
+			}
+			POD_end_journey_effect = yes 
+		}
+	}
+}
+
+POD_umbra_expedition.305 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.304.t
+	desc =  POD_umbra_expedition.304.desc		
+	theme = hunt_activity
+	
+	right_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	option = {
+		name = POD_umbra_expedition.304.a
+		
+		add_perk = unstoppable_warrior_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.399 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.399.t
+	desc = POD_umbra_expedition.399.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.399.a
+		POD_umbra_expedition_cleanup_effect = yes
+	}
+	
+	option = {
+		name = POD_umbra_expedition.399.b
+		if = {
+			limit = { exists = scope:great_fenris }
+			death = { death_reason = death_great_fenris }
+		}
+		else = {
+			death = { death_reason = death_annihilated }
+		}
+	}
+}
+	
+POD_umbra_expedition.400 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.401
+		}
+	}
+}
+
+POD_umbra_expedition.401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.400.t
+	desc = POD_umbra_expedition.400.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.400.a
+		
+		add_character_flag = storyteller_quest
+	}
+}
+
+POD_umbra_expedition.500 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.501
+		}
+	}
+}
+
+POD_umbra_expedition.501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.500.t
+	desc = POD_umbra_expedition.500.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.500.a
+		
+		add_character_flag = release_from_bondage_quest
+	}
+}
+
+POD_umbra_expedition.600 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.601
+		}
+	}
+}
+
+POD_umbra_expedition.601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.600.t
+	desc = POD_umbra_expedition.600.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.600.a
+		
+		add_character_flag = firebringer_quest
+	}
+}
+
+POD_umbra_expedition.700 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.701
+		}
+	}
+}
+
+POD_umbra_expedition.701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.700.t
+	desc = POD_umbra_expedition.700.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.700.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:gaia_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.700.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:gaia_objective_decision
+			}
+		}
+		add_perk = rebirthing_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.800 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.801
+		}
+	}
+}
+
+POD_umbra_expedition.801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.800.t
+	desc = POD_umbra_expedition.800.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.800.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:fianna_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.800.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:fianna_objective_decision
+			}
+		}
+		add_perk = sleep_of_the_hero_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.900 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			save_scope_as = great_fenris
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.901
+		}
+	}
+}
+
+POD_umbra_expedition.901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.900.t
+	desc = POD_umbra_expedition.900.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.900.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:get_fenris_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.900.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:get_fenris_objective_decision
+			}
+		}
+		add_perk = call_great_fenris_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.1000 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.1001
+		}
+	}
+}
+
+POD_umbra_expedition.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1000.t
+	desc = POD_umbra_expedition.1000.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.1000.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:redtalon_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.1000.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:redtalon_objective_decision
+			}
+		}
+		add_perk = home_in_all_lands_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.1100 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.1101
+		}
+	}
+}
+
+POD_umbra_expedition.1101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1100.t
+	desc = POD_umbra_expedition.1100.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.1100.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:silverfang_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.1100.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:silverfang_objective_decision
+			}
+		}
+		add_perk = renew_the_cycle_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.1200 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+				}
+			}
+			trigger_event = POD_umbra_expedition.399
+		}
+		else = {
+			trigger_event = POD_umbra_expedition.1201
+		}
+	}
+}
+
+POD_umbra_expedition.1201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1200.t
+	desc = POD_umbra_expedition.1200.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.1200.a
+		trigger = {
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:stargazer_objective_decision
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_umbra_expedition.1200.b
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:stargazer_objective_decision
+			}
+		}
+		add_perk = thought_form_of_the_twelve_ministers_perk
+		add_prestige = massive_prestige_value
+	}
+}
+
+POD_umbra_expedition.1300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1300.t
+	desc = POD_umbra_expedition.1300.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_expedition.1300.a
+		
+		custom_tooltip = POD_umbra_expedition.1300.tooltip
+		add_character_flag = prelude_to_apocalypse_flag
+	}
+}
+
+POD_umbra_expedition.1400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1400.t
+	desc = POD_umbra_expedition.1400.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = { 
+		name = POD_umbra_expedition.1400.a
+		#add_perk = the_fleeing_scarab_perk
+		#add_prestige = massive_prestige_value
+		
+		add_character_flag = quest_fleeing_scarab_flag
+		
+		custom_tooltip = kemintiri_phasetwo_tt
+	}
+}
+
+POD_umbra_expedition.1500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_expedition.1500.t
+	desc = POD_umbra_expedition.1500.desc
+	
+	left_portrait = root
+	theme = umbra_expedition
+
+	option = { 
+		name = POD_umbra_expedition.1500.a
+		#add_perk = the_fleeing_scarab_perk
+		#add_prestige = massive_prestige_value
+		
+		add_character_flag = quest_royal_privilege_flag
+		
+		custom_tooltip = kemintiri_phasetwo_tt		
+	}
+}
+
+
+# Maintenance for Umbra explorer salary
+POD_umbra_expedition.7000 = {
+	hidden = yes
+	immediate = {
+		remove_character_modifier = umbra_explorer_cost_modifier
+		if = {
+			limit = { umbra_salary_scale > 0 }
+			add_character_modifier = umbra_explorer_cost_modifier
+		}
+	}
+}

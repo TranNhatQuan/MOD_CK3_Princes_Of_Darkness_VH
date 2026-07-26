@@ -1,0 +1,435 @@
+﻿namespace = POD_ai_inquisitor_ordination
+
+# Hunter order spawn child
+POD_ai_inquisitor_ordination.1 = {
+	type = character_event
+	hidden = yes
+
+    trigger = {
+		is_playable_character = yes
+		has_trait = supehunter
+		age > 20
+		trigger_if = {
+			limit = { highest_held_title_tier >= tier_county }
+			any_child = { is_alive = yes count < 2 }
+		}
+		trigger_else = {
+			any_child = { is_alive = yes count < 1 }
+		}
+		has_lay_order_dynasty_trigger = no
+		is_imprisoned = no
+		is_ai = yes
+    }
+
+    immediate = {
+		save_scope_as = masterhunter
+		scope:masterhunter = {
+			POD_ai_inquisitor_ordination_effect = yes	
+		}
+		scope:created_apprenticehunter = {
+			random = {
+				chance = 1
+				add_trait = truefaith
+			}
+			POD_endowments_reward_large_effect = yes
+			if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_1 }
+					}
+				meritocracy_1_effect = yes
+			}
+		
+		if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_2 }
+					is_female = no
+					}
+				meritocracy_2_effect_a = yes
+			}
+		
+		if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_2 }
+					is_female = yes
+					}
+				meritocracy_2_effect_b = yes
+			}
+		
+		if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_3 }
+					}
+				meritocracy_3_effect = yes
+			}
+		
+		if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_4 }
+					}
+				meritocracy_4_effect = yes
+			}
+			
+		if = {
+				limit = {
+					scope:masterhunter = {
+					has_trait = order_member
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = meritocracy_legacy_5 }
+					}
+				meritocracy_5_effect = yes
+			}
+			if = {
+				limit = {
+					scope:masterhunter = {
+						OR = {
+					dynasty = dynasty:13000001
+					dynasty = dynasty:13000011
+						}
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = {
+					has_dynasty_perk = unity_legacy_4
+						}
+					}
+				add_learning_skill = 2
+				add_martial_skill = 2
+			}
+			if = {
+				limit = {
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = { has_dynasty_perk = unity_legacy_4 }
+					scope:masterhunter = {
+						OR = {
+							dynasty = dynasty:13000002
+							dynasty = dynasty:13000006
+							dynasty = dynasty:13000008
+							}
+						}
+					}
+				add_martial_skill = 2
+				add_prowess_skill = 5
+			}
+			if = {
+				limit = {
+					scope:masterhunter = {
+					dynasty = dynasty:13000003
+					}
+					exists = scope:masterhunter.dynasty
+					scope:masterhunter.dynasty = {
+					has_dynasty_perk = unity_legacy_4
+						}
+					}
+				add_stewardship_skill = 2
+				add_learning_skill = 2
+			}
+		}
+	}
+}
+
+# A no ghoulbro mortal becoming hunter in adult
+POD_ai_inquisitor_ordination.2 = {
+	type = character_event
+	hidden = yes
+
+    trigger = {
+        is_mortal_trigger = yes
+		trigger_if = {
+			limit = { has_lay_order_dynasty_trigger = yes }
+		}
+		trigger_else_if = {
+			limit = { has_inquisitor_dynasty_trigger = yes }
+			has_trait = legitimized_bastard
+		}
+		trigger_else = {
+			OR = {
+				father ?= { has_trait = supehunter }
+				mother ?= { has_trait = supehunter }
+				liege ?= { has_trait = supehunter }
+			}
+			NOT = { dynasty = dynasty:13000007 }
+			is_a_neteru = no
+		}
+		NOT = { has_trait = turnedhunter }
+		NOT = { faith = faith:sanbenito }
+		OR = {
+			POD_is_infernalist_trigger = no
+			POD_splat_mixing_haight_mode = yes
+		}
+        is_adult = yes
+    }
+
+    immediate = {
+		remove_trait = mortal
+		add_trait = supehunter
+		
+		if = {
+			limit = { can_be_shih_trigger = no }
+			POD_give_orison_effect = yes
+		}
+		else = {
+			POD_shih_initialization_effect = yes
+			POD_shih_random_perk_initialization_for_noble_effect = yes
+		}
+		
+		random = {
+			chance = 1
+			add_trait = truefaith
+		}
+		
+		if = {
+			limit = { NOT = { religion = { is_in_family = rf_hunters } } }
+			if = {
+				limit = { mother ?= { religion = { is_in_family = rf_hunters } } }
+				set_character_faith = mother.faith
+			}
+			else_if = {
+				limit = { father ?= { religion = { is_in_family = rf_hunters } } }
+				set_character_faith = father.faith
+			}
+			else = {
+				POD_character_hunter_faith_initialization_effect = yes
+			}
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+			add_trait = theurgist
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+			add_trait = sorcerer
+		}
+		
+		if = {
+			limit = { dynasty = dynasty:13000004 }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_stewardship_skill = 2
+				add_diplomacy_skill = 2
+			}
+		}
+		else_if = {
+			limit = { has_lay_order_dynasty_trigger = yes }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_intrigue_skill = 2
+				add_prowess_skill = 5
+			}
+		}
+		else_if = {
+			limit = { has_inquisitor_dynasty_trigger = yes }
+			add_trait = order_member
+		}
+	}
+}
+
+# Ghoulbro
+POD_ai_inquisitor_ordination.3 = {
+	type = character_event
+	hidden = yes
+
+    trigger = {
+		OR = {
+			has_trait = mortal
+			has_trait = ghoul
+		}
+		dynasty = dynasty:13000007
+		NOT = { has_trait = turnedhunter }
+		NOT = { faith = faith:sanbenito }
+        is_adult = yes
+		OR = { 
+			POD_is_infernalist_trigger = no
+			POD_splat_mixing_haight_mode = yes
+		}
+    }
+
+    immediate = {
+		remove_trait = mortal
+		add_trait = supehunter
+		add_trait = ghoul
+			
+		random = {
+			chance = 1
+			add_trait = truefaith
+		}
+			
+		if = {
+			limit = {
+				NOT = { religion = religion:calomenasforsaken_religion }
+			}
+			if = {
+				limit = { mother ?= { religion = religion:calomenasforsaken_religion } }
+				set_character_faith = mother.faith
+			}
+			else_if = {
+				limit = { father ?= { religion = religion:calomenasforsaken_religion } }
+				set_character_faith = father.faith
+			}
+			else = {
+				set_character_faith = faith:calomenasforsaken
+			}
+		}
+		
+		if = {
+			limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+			add_martial_skill = 2
+			add_intrigue_skill = 2
+		}
+	}
+}
+
+# Dhampyr Shih
+POD_ai_inquisitor_ordination.4 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		has_trait = dhampyr 
+		# Haight mode safeguard: No splat traits aside from Dhampyr
+		any_character_trait = {
+			count = 0
+			has_trait_flag = splat
+			this != trait:dhampyr
+			this != trait:supehunter
+		}
+		can_be_shih_trigger = yes
+		NOT = { has_trait = turnedhunter }
+		NOT = { faith = faith:sanbenito }
+		is_adult = yes
+		OR = { 
+			POD_is_infernalist_trigger = no
+			POD_splat_mixing_haight_mode = yes
+		}
+	}
+
+	immediate = {
+		add_trait = supehunter
+		POD_shih_initialization_effect = yes
+		POD_shih_random_perk_initialization_for_noble_effect = yes
+		
+		if = {
+			limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+			add_trait = theurgist
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+			add_trait = sorcerer
+		}
+		
+		if = {
+			limit = { dynasty = dynasty:13000004 }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_stewardship_skill = 2
+				add_diplomacy_skill = 2
+			}
+		}
+		else_if = {
+			limit = { has_lay_order_dynasty_trigger = yes }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_intrigue_skill = 2
+				add_prowess_skill = 5
+			}
+		}
+		else_if = {
+			limit = { has_inquisitor_dynasty_trigger = yes }
+			add_trait = order_member
+		}
+	}
+}
+
+# Sanbenito
+POD_ai_inquisitor_ordination.5 = {
+	type = character_event
+	hidden = yes
+
+    trigger = {
+		faith = faith:sanbenito
+		NOT = { has_trait = turnedhunter }
+        is_adult = yes
+		OR = { 
+			POD_is_infernalist_trigger = no
+			POD_splat_mixing_haight_mode = yes
+		}
+    }
+
+    immediate = {
+		remove_trait = mortal
+		add_trait = supehunter
+		
+		if = {
+			limit = { can_be_shih_trigger = yes }
+			POD_shih_initialization_effect = yes
+			POD_shih_random_perk_initialization_for_noble_effect = yes
+			set_character_faith = faith:sanbenito
+		}
+		
+		POD_give_orison_effect = yes
+		
+		random = {
+			chance = 1
+			add_trait = truefaith
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine_parameter = theurgist_ordination } }
+			add_trait = theurgist
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = sorcerer_ordination } }
+			add_trait = sorcerer
+		}
+		
+		if = {
+			limit = { dynasty = dynasty:13000007 }
+			add_trait = ghoul
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_martial_skill = 2
+				add_intrigue_skill = 2
+			}
+		}
+		else_if = {
+			limit = { dynasty = dynasty:13000004 }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_stewardship_skill = 2
+				add_diplomacy_skill = 2
+			}
+		}
+		else_if = {
+			limit = { has_lay_order_dynasty_trigger = yes }
+			if = {
+				limit = { dynasty = { has_dynasty_perk = unity_legacy_4 } }
+				add_intrigue_skill = 2
+				add_prowess_skill = 5
+			}
+		}
+		else_if = {
+			limit = { has_inquisitor_dynasty_trigger = yes }
+			add_trait = order_member
+		}
+	}
+}

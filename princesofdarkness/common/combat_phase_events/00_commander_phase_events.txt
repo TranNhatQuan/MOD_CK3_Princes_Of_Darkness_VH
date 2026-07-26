@@ -1,0 +1,632 @@
+﻿commander_discipline = {
+	type = commander
+	is_valid = {
+		exists = root
+		POD_used_discipline_in_battle_trigger = no
+	}
+	chance = {
+		base = 100000
+	}
+	
+	effect = {
+		save_scope_as = attacker
+		scope:combat_side.enemy_side = {
+			every_side_knight = { POD_enemy_knight_set_discipline_battle_effect = { CASTER = root } }
+			every_side_commander = { POD_enemy_commander_set_discipline_battle_effect = { CASTER = root } }
+		}
+		scope:combat_side = {
+			every_side_knight = { POD_ally_knight_set_discipline_battle_effect = { CASTER = root } }
+			every_side_commander = { POD_ally_commander_set_discipline_battle_effect = { CASTER = root } }
+		}
+
+		if = { 
+			limit = { has_perk = soul_arts_healing_sleep_perk } 
+			scope:combat_side.enemy_side = {
+				ordered_side_knight = { 
+					limit = { POD_has_strong_mental_defenses_trigger = no }
+					order_by = {
+						value = prowess
+					}
+					max = 1
+					set_knight_status = forbid
+					set_knight_status = allow
+				}
+			}
+		}
+		if = { 
+			limit = { has_perk = soul_arts_killing_shriek_perk } 
+			scope:combat_side.enemy_side = {
+				ordered_side_knight = { 
+					limit = { POD_has_strong_mental_defenses_trigger = no }
+					order_by = {
+						value = prowess
+					}
+					max = 1
+					set_knight_status = forbid
+					set_knight_status = allow
+				}
+			}
+		}
+		if = { 
+			limit = { has_perk = chi_arts_divine_cry_perk } 
+			scope:combat_side.enemy_side = {
+				every_side_knight = { 
+					limit = { 
+						POD_has_strong_mental_defenses_trigger = no 
+						stress >= 70
+					}
+					set_knight_status = forbid
+					set_knight_status = allow
+				}
+			}
+		}
+		if = {
+			limit = { has_character_modifier = archid_gale_cloak_modifier }
+
+			location.empire = { random_de_jure_county = { title_province = { save_scope_as = wind_location } } }
+			scope:combat_side.enemy_side = {
+				ordered_side_knight = { 
+					limit = { is_landed = no }
+					order_by = {
+						value = prowess
+						multiply = -1
+					}
+					max = 1
+					save_scope_as = wind_character
+					move_to_pool = yes
+					set_location = scope:wind_location
+				}
+			}
+			send_interface_message = {
+				type = POD_mokole_message_good
+				title = POD_archid_gale_cloak_notification
+				right_icon = scope:wind_character
+				show_as_tooltip = {
+					scope:wind_character = { set_location = scope:wind_location }
+				}
+			}
+		}
+		if = {
+			limit = { has_perk = living_testudo_perk }
+			scope:combat_side.enemy_side = {
+				ordered_side_knight = { 
+					order_by = {
+						value = prowess
+					}
+					max = 1
+					set_knight_status = forbid
+					set_knight_status = allow
+					POD_increase_wounds_hostile_effect = { ATTACKER = scope:attacker COUNT = POD_base_wound_damage REASON = fleshcrafting }
+				}
+			}
+		}
+
+		if = {
+			limit = { has_perk = mouth_of_djabalek_perk }
+			scope:combat_side.enemy_side = {
+				ordered_side_knight = { 
+					order_by = {
+						value = prowess
+						multiply = -1
+					}
+					max = 1
+					set_knight_status = forbid
+					set_knight_status = allow
+					save_scope_as = djabalak_victim
+				}
+			}
+			POD_drink_from_victim_effect = { VICTIM = scope:djabalak_victim AMOUNT = 1 }
+		}
+
+
+		# Self
+		if = {
+			limit = { has_perk = phobia_perk }
+			phobia_power_effect = yes
+		}
+		# Cost
+		if = {
+			limit = {
+				any_equipped_character_artifact = {
+					has_variable = arrow_of_midnight_sun
+					var:arrow_of_midnight_sun = yes
+				}
+			}
+			random_equipped_character_artifact = {
+				limit = { 
+					has_variable = arrow_of_midnight_sun 
+					var:arrow_of_midnight_sun = yes
+				}
+				add_durability = -10
+			}
+		}
+		# Sum
+		if = {
+			limit = {
+				NOT = { has_character_flag = POD_used_disciplines_in_battle_flag }
+			}
+			add_character_flag = POD_used_disciplines_in_battle_flag
+		}
+	}
+}
+
+commander_none = {
+	type = commander
+
+	chance = {
+		base = 1000
+		modifier = {
+			add = 1000
+			has_perk = stalwart_leader_perk
+			is_ai = no
+		}
+		modifier = {
+			add = 300
+			has_perk = stalwart_leader_perk
+			is_ai = yes
+		}
+		modifier = {
+			add = 500
+			is_acclaimed = yes
+		}
+		modifier = {
+			add = 300
+			dynasty ?= {
+				has_dynasty_perk = warfare_legacy_3
+			}
+		}
+		modifier = { # Difficulty
+			add = 1000
+			is_ai = no
+			has_game_rule = easy_difficulty
+		}
+		modifier = {
+			add = 2000
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+		}
+		modifier = {
+			add = 2000
+			ai_should_get_extreme_conqueror_bonuses = yes
+		}		
+		modifier = {
+			add = 2000
+			has_trait = fortitudeadvanced
+		}
+		modifier = {
+			add = 2000
+			has_trait = celerityadvanced
+		}
+		modifier = {
+			add = 2000
+			has_trait = flightadvanced
+		}
+		modifier = {
+			add = 2000
+			has_trait = temporisadvanced
+		}	
+	}
+}
+
+commander_wounded = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		has_trait_rank = {
+			trait = wounded
+			rank <= 3
+		}
+	}
+
+	chance = {
+		base = 25
+		knight_not_be_target_chance_modifier = yes
+		modifier = {
+			factor = { # Prowess directly reduces chance of injury/death
+				value = 40 # Value at which 'immortality' happens
+				subtract = prowess
+				divide = 40
+				min = 0.1 # Everyone dies.
+			}
+		}
+		modifier = { # Reduce chance when outnumbering the enemy
+			factor = {
+				value = scope:combat_side.enemy_side.side_strength
+				divide = scope:combat_side.side_strength
+				multiply = 1.4 # Outnumbering 2-1 reduces chance by 30%
+				max = 1
+			}
+			scope:combat_side.side_strength > scope:combat_side.enemy_side.side_strength
+		}
+		modifier = {
+			factor = 1.1
+			faith = {
+				has_doctrine_parameter = death_is_glory
+			}
+		}
+		modifier = {
+			factor = 2
+			has_trait = brave
+		}
+		modifier = {
+			factor = 2
+			has_character_modifier = POD_ha_rod_and_staff_modifier
+		}
+		modifier = {
+			factor = 2
+			AND = {
+				has_character_modifier = POD_ha_rod_and_staff_modifier
+				scope:combat_side.enemy_side = {
+					any_side_knight = { prowess > root.prowess }
+				}
+			}		
+		}
+		modifier = {
+			factor = 2
+			AND = {
+				has_character_modifier = POD_ha_rod_and_staff_modifier
+				scope:combat_side.side_strength > scope:combat_side.enemy_side.side_strength
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = commander
+		# Trigger the battle event indicating we have been Wounded.
+		if = {
+			limit = {
+				scope:combat_side.enemy_side = {
+					any_side_knight = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+					}
+				}
+			}
+			scope:combat_side.enemy_side = {
+				random_side_knight = {
+					limit = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+					}
+					save_scope_as = enemy_knight
+					add_prestige = knight_prestige_gain_on_wound_inverse
+					knight_increase_prowess_chance_effect = yes
+					weight = {
+						base = 1
+						modifier = {
+							factor = 10
+							has_any_nickname = yes
+						}
+					}
+				}
+			}
+			# Trigger the battle event where we are wounded by the enemy Knight.
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_wounded_by_enemy"
+					left_portrait = scope:commander
+					right_portrait = scope:enemy_knight
+					type = wound
+				}
+			}
+			# Send the toast telling the player if they have been wounded.
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = commander_wounded_by_enemy_interface_friendly_player
+				left_icon = scope:commander
+				right_icon = scope:enemy_knight
+
+				# Inflict a wound on the commander.
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+		else = {
+			# Trigger the battle event where we are wounded by a nameless soldier.
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_wounded_no_enemy"
+					left_portrait = scope:commander
+					type = wound
+				}
+			}
+			# Send the toast telling the player if they have been wounded.
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = commander_wounded_no_enemy_interface_friendly_player
+				left_icon = scope:commander
+
+				# Inflict a wound on the commander.
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+}
+
+commander_maimed = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		NAND = {
+			has_trait = one_legged
+			has_trait = disfigured
+			has_trait = one_eyed
+			has_trait = maimed
+		}
+	}
+
+	chance = {
+		base = 10
+		knight_not_be_target_chance_modifier = yes
+		modifier = {
+			factor = { # Prowess directly reduces chance of injury/death
+				value = 30 # Value at which 'immortality' happens
+				subtract = prowess
+				divide = 30
+				min = 0.1 # Everyone dies.
+			}
+		}
+		modifier = { # Reduce chance when outnumbering the enemy
+			factor = {
+				value = scope:combat_side.enemy_side.side_strength
+				divide = scope:combat_side.side_strength
+				multiply = 1.4 # Outnumbering 2-1 reduces chance by 30%
+				max = 1
+			}
+			scope:combat_side.side_strength > scope:combat_side.enemy_side.side_strength
+		}
+		modifier = { # No deaths when vastly outnumbering the enemy
+			factor = 0
+			scope:combat_side.side_strength > scope:combat_side.enemy_side.vastly_outnumbered_combat_side_threshold
+		}
+		modifier = {
+			factor = 1.1
+			faith = {
+				has_doctrine_parameter = death_is_glory
+			}
+		}
+		modifier = {
+			factor = 2
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+	}
+
+	effect = {
+		save_scope_as = commander
+		# Trigger the battle event indicating we have been Maimed.
+		if = {
+			limit = {
+				scope:combat_side.enemy_side = {
+					any_side_knight = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+					}
+				}
+			}
+			scope:combat_side.enemy_side = {
+				random_side_knight = {
+					limit = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+					}
+					save_scope_as = enemy_knight
+					add_prestige = knight_prestige_gain_on_wound_inverse
+					knight_increase_prowess_chance_effect = yes
+					weight = {
+						base = 1
+						modifier = {
+							factor = 10
+							has_any_nickname = yes
+						}
+					}
+				}
+			}
+
+			# Trigger the battle event where we are maimed by an enemy Knight.
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_maimed_by_enemy"
+					left_portrait = scope:commander
+					right_portrait = scope:enemy_knight
+					type = wound
+				}
+			}
+			# Send the toast telling the player if they have been maimed.
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = commander_maimed_by_enemy_interface_friendly_player
+				left_icon = scope:commander
+				right_icon = scope:enemy_knight
+
+				# Main the commander.
+				maimed_in_battle_effect = yes
+			}
+		}
+		else = {
+			# Trigger the battle event were we are maimed by a nameless soldier.
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_maimed_no_enemy"
+					left_portrait = scope:commander
+					type = wound
+				}
+			}
+			# Send the toast telling the player if they have been maimed.
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = commander_maimed_no_enemy_interface_friendly_player
+				left_icon = scope:commander
+
+				# Main the commander.
+				maimed_in_battle_effect = yes
+			}	
+		}
+	}
+}
+
+commander_killed = {
+	type = commander
+
+	is_valid = {
+		exists = root
+		#Commanders cannot be killed outright unless...
+		OR = {
+			#...they are already wounded...
+			has_trait_rank = {
+				trait = wounded
+				rank >= 1
+			}
+			#...or they are absolutely terrible at battle to begin with!
+			AND = {
+				martial <= low_skill_rating
+				prowess <= low_skill_rating
+			}
+		}
+		NOR = {
+			AND = {
+				is_ai = no
+				has_game_rule = very_easy_difficulty
+			}
+			ai_should_get_extreme_conqueror_bonuses = yes
+		}
+		prowess <= 30
+	}
+
+	chance = {
+		base = 5
+		knight_not_be_target_chance_modifier = yes
+		modifier = {
+			factor = { # Prowess directly reduces chance of injury/death
+				value = 30 # Value at which 'immortality' happens
+				subtract = prowess
+				divide = 30
+				min = 0.1 # Everyone dies.
+			}
+		}
+		modifier = { # Reduce chance when outnumbering the enemy
+			factor = {
+				value = scope:combat_side.enemy_side.side_strength
+				divide = scope:combat_side.side_strength
+				multiply = 1.4 # Outnumbering 2-1 reduces chance by 30%
+				max = 1
+			}
+			scope:combat_side.side_strength > scope:combat_side.enemy_side.side_strength
+		}
+		modifier = { # No deaths when vastly outnumbering the enemy
+			factor = 0
+			scope:combat_side.side_strength > scope:combat_side.enemy_side.vastly_outnumbered_combat_side_threshold
+		}
+		modifier = {
+			factor = 1.1
+			faith = {
+				has_doctrine_parameter = death_is_glory
+			}
+		}
+		modifier = {
+			factor = 2
+			has_trait = brave
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = craven
+		}
+		modifier = {
+			factor = 4
+			has_trait_rank = {
+				trait = wounded
+				rank = 3
+			}
+		}
+	}
+
+	effect = {
+		save_scope_as = commander
+		save_died_in_battle_variables_effect = {
+			ENEMY = scope:combat_side.enemy_side.side_primary_participant
+			LEADER = scope:combat_side.side_primary_participant
+			LOCATION = scope:combat_side.combat.location
+		}
+		if = {
+			limit = {
+				scope:combat_side.enemy_side = {
+					any_side_knight = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+						POD_is_on_golconda_trigger = no
+					}
+				}
+			}
+			scope:combat_side.enemy_side = {
+				random_side_knight = {
+					limit = {
+						this.prowess >= scope:commander.prowess_for_combat_event_opponent
+						POD_is_on_golconda_trigger = no
+					}
+					save_scope_as = enemy_knight
+					add_prestige = knight_prestige_gain_on_kill_inverse
+					knight_increase_prowess_chance_effect = yes
+					weight = {
+						base = 1
+						modifier = {
+							factor = 10
+							has_any_nickname = yes
+						}
+					}
+				}
+			}
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_killed_by_enemy"
+					left_portrait = scope:commander
+					right_portrait = scope:enemy_knight
+					type = death
+				}
+			}
+			#house ?= {
+			#	change_house_relation_effect = {
+			#		HOUSE = scope:enemy_knight.house
+			#		VALUE = house_relation_damage_medium_value
+			#		REASON = killed
+			#		CHAR = root
+			#		TARGET_CHAR = scope:enemy_knight
+			#		TITLE = scope:dummy_gender
+			#	}
+			#}
+			send_interface_toast = {
+				type = event_slain_combatants_bad
+				title = commander_killed_by_enemy_interface_friendly
+				left_icon = scope:commander
+				right_icon = scope:enemy_knight
+
+				# Kill the commander.
+				pod_death = {
+					death_reason = death_battle
+					killer = scope:enemy_knight
+				}
+			}
+			
+		}
+		else = {
+			scope:combat_side = {
+				battle_event = {
+					key = "commander_killed_no_enemy"
+					left_portrait = scope:commander
+					type = death
+				}
+			}
+			send_interface_toast = {
+				type = event_slain_combatants_bad
+				title = commander_killed_no_enemy_interface_friendly
+				left_icon = scope:commander
+				# Kill the commander.
+				pod_death_no_killer = {
+					death_reason = death_battle
+				}
+			}
+		}
+	}
+}

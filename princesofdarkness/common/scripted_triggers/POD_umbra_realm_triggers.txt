@@ -1,0 +1,1645 @@
+﻿POD_umbra_realm_known_localized_trigger = {
+	trigger_if = {
+		limit = {
+			save_temporary_scope_value_as = { 
+				name = name
+				value = $NAME$
+			}
+		}
+		scope:name = {
+			custom_tooltip = {
+				text = umbra_realm_known_tooltip
+				prev = { POD_umbra_realm_known_trigger = { NAME = $NAME$ } }
+			}
+		}
+	}
+}
+
+POD_umbra_realm_known_trigger = {
+	any_in_list = {
+		variable = known_umbra_realms_list
+		var:name = $NAME$
+	}
+}
+
+POD_umbra_every_neighboring_realm_known_trigger = {
+	switch = {
+		trigger = $LOCATION$
+
+		flag:earth = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:calumn }
+			trigger_if = {
+				limit = { current_date >= 1940.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:digital_web }
+			}
+			trigger_if = {
+				limit = { has_trait = fera }
+				POD_umbra_realm_known_trigger = { NAME = flag:court_of_eshtarra }
+			}
+			trigger_if = {
+				limit = { has_access_to_deep_umbra_trigger = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+			}
+			trigger_if = {
+				limit = { has_POD_fae_blood_trigger = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:hollow_worlds }
+			POD_umbra_realm_known_trigger = { NAME = flag:chimare }
+			trigger_if = {
+				limit = { has_trait = mage }
+				POD_umbra_realm_known_trigger = { NAME = flag:demesne }
+			}
+		}
+
+		flag:astral_plane = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:vulgate }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_stargazers }
+		}
+		
+		flag:vulgate = {
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:spires }
+			POD_umbra_realm_known_trigger = { NAME = flag:grand_hall }
+		}
+		
+		flag:grand_hall = {
+			POD_umbra_realm_known_trigger = { NAME = flag:vulgate }
+		}
+
+		flag:spires = {
+			POD_umbra_realm_known_trigger = { NAME = flag:vulgate }
+			POD_umbra_realm_known_trigger = { NAME = flag:epiphamy }
+			POD_umbra_realm_known_trigger = { NAME = flag:elemental_courts }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_court_of_the_muses }
+			POD_umbra_realm_known_trigger = { NAME = flag:inventium }
+			
+		}
+		
+		flag:inventium = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spires }
+		}
+
+		flag:epiphamy = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:spires }
+			POD_umbra_realm_known_trigger = { NAME = flag:heaven }
+			POD_umbra_realm_known_trigger = { NAME = flag:city_of_brass }
+		}
+		
+		flag:city_of_brass = {
+			POD_umbra_realm_known_trigger = { NAME = flag:epiphamy }
+		}
+
+		flag:elemental_courts = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spires }
+		}
+
+		flag:the_court_of_the_muses = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spires }
+		}
+
+		flag:spirit_wilds = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:atrocity_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:battleground }
+			POD_umbra_realm_known_trigger = { NAME = flag:erebus }
+			POD_umbra_realm_known_trigger = { NAME = flag:flux_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:hy_brasil }
+			POD_umbra_realm_known_trigger = { NAME = flag:legendary_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:pangaea }
+			POD_umbra_realm_known_trigger = { NAME = flag:summer_country }
+			POD_umbra_realm_known_trigger = { NAME = flag:wolfhome }
+			POD_umbra_realm_known_trigger = { NAME = flag:xi_wang_chin } #Realm of the Nagah and Mokole TBD later when more relevant
+			POD_umbra_realm_known_trigger = { NAME = flag:heavenly_flower_garden } #Forbidden realm of the Wu Keng, TBD when (and if) more relevant at one point
+			POD_umbra_realm_known_trigger = { NAME = flag:umi }
+			
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:cyberrealm }
+			}
+			trigger_if = {
+				limit = { POD_middle_kingdom_splat_trigger = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:mountains_of_heaven }
+				POD_umbra_realm_known_trigger = { NAME = flag:tiger_lands }
+			}
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_dark_fantastic } }
+				POD_umbra_realm_known_trigger = { NAME = flag:scar }
+			}
+			trigger_if = {
+				limit = { religion = religion:blackfury_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_black_furies }
+			}
+			trigger_if = {
+				limit = { POD_fera_is_bonegnawer = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_bone_gnawers }
+			}
+			trigger_if = {
+				limit = { religion = religion:childofgaia_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_children_of_gaia }
+			}
+			trigger_if = {
+				limit = { religion = religion:fianna_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_fianna }
+			}
+			trigger_if = {
+				limit = { religion = religion:getoffenris_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_get_of_fenris }
+			}
+			trigger_if = {
+				limit = { POD_fera_is_warderofmen = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_glass_walkers }
+			}
+			trigger_if = {
+				limit = { religion = religion:redtalon_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_red_talons }
+			}
+			trigger_if = {
+				limit = { POD_fera_is_shadowlord = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_shadow_lords }
+			}
+			trigger_if = {
+				limit = { POD_fera_is_stargazer = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_stargazers }
+			}
+			trigger_if = {
+				limit = { religion = religion:silverfang_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_silver_fangs }
+			}
+			trigger_if = {
+				limit = { faith = faith:siberakh }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_uktena }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_croatan }
+			}
+			trigger_if = {
+				limit = { religion = religion:silverfang_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_silver_fangs }
+			}
+			trigger_if = {
+				limit = { religion = religion:blackspiraldancer_religion }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+			}
+			trigger_if = {
+				limit = { POD_fera_is_silentstrider = yes }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_silent_striders }
+			}
+			trigger_if = {
+				limit = { has_trait = werewolf }
+				POD_umbra_realm_known_trigger = { NAME = flag:wolfhome }
+			}
+			trigger_if = {
+				limit = { has_trait = corax }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_corax }
+			}
+			trigger_if = {
+				limit = { has_trait = nuwisha }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_nuwisha }
+			}
+			trigger_if = {
+				limit = { has_trait = mokole }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_bunyip }
+			}
+		}
+		
+		flag:calumn = {
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+			POD_umbra_realm_known_trigger = { NAME = flag:atrocity_realm }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_dark_fantastic } }
+				POD_umbra_realm_known_trigger = { NAME = flag:scar }
+			}
+		}
+
+		flag:heavenly_flower_garden = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:xi_wang_chin = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:atrocity_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:calumn }
+		}
+
+		flag:battleground = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:cyberrealm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			trigger_if = {
+				limit = { current_date >= 1940.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:digital_web }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_bone_gnawers }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_glass_walkers }
+		}
+
+		flag:erebus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:flux_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:hy_brasil = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_fianna }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+			trigger_if = {
+				limit = { global_var:fae_era < 3 }
+				POD_umbra_realm_known_trigger = { NAME = flag:arcadia }
+			}
+		}
+		
+		flag:legendary_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+		}
+		
+		flag:mountains_of_heaven = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:pangaea = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:scar = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+		}
+
+		flag:summer_country = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:tiger_lands = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:umi = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:wolfhome = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_black_furies = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_bone_gnawers = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:cyberrealm }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_glass_walkers }
+		}
+
+		flag:the_homeland_of_the_children_of_gaia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_fianna = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			trigger_if = {
+				limit = { 
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+						has_trait = kinain
+						has_trait = kiasyd
+						has_trait = maeghar
+						has_perk = faerie_kin_perk
+					}
+				}
+				POD_umbra_realm_known_trigger = { NAME = flag:hy_brasil }
+			}
+		}
+
+		flag:the_homeland_of_the_get_of_fenris = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_glass_walkers = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:cyberrealm }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_bone_gnawers }
+		}
+
+		flag:the_homeland_of_the_red_talons = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_shadow_lords = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_stargazers = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:the_homeland_of_the_silver_fangs = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_uktena = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+			POD_umbra_realm_known_trigger = { NAME = flag:galunlati }
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+		}
+		
+		flag:galunlati = {
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_uktena }
+		}
+
+		flag:the_homeland_of_the_wendigo = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:weaver_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyld_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyrm_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:pangaea }
+			POD_umbra_realm_known_trigger = { NAME = flag:legendary_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_uktena }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_croatan }
+		}
+		
+		flag:the_former_homeland_of_the_white_howlers = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:pangaea }
+			trigger_if = {
+				limit = { 
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+						has_trait = kinain
+						has_trait = kiasyd
+						has_trait = maeghar
+						has_perk = faerie_kin_perk
+					}
+				}
+				POD_umbra_realm_known_trigger = { NAME = flag:hy_brasil }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:black_spiral_labyrinth }
+			POD_umbra_realm_known_trigger = { NAME = flag:erebus }
+		}
+
+		flag:the_homeland_of_the_bunyip = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:dreamtime }
+		}
+
+		flag:the_homeland_of_the_croatan = {
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_silent_striders = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+		
+		flag:the_homeland_of_the_corax = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+
+		flag:the_homeland_of_the_nuwisha = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+		}
+
+		flag:shadowlands = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:epiphamy }
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_return_perk_trigger = yes
+			trigger_if = {
+				limit = { has_trait = mummy }
+				POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_sand }
+			}
+		}
+			
+		flag:tempest = {
+			trigger_if = {
+				limit = { has_perk = return_perk }
+				POD_return_perk_trigger = yes
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:sunless_sea }
+			POD_umbra_realm_known_trigger = { NAME = flag:dis }
+			POD_umbra_realm_known_trigger = { NAME = flag:islands_of_flint }
+			POD_umbra_realm_known_trigger = { NAME = flag:mirrorlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:neter_khertet }
+			POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth }
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+		}
+		
+		flag:sea_of_shadow = {
+			trigger_if = {
+				limit = { has_perk = return_perk }
+				POD_return_perk_trigger = yes
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:sunless_sea }
+			POD_umbra_realm_known_trigger = { NAME = flag:dis }
+			POD_umbra_realm_known_trigger = { NAME = flag:islands_of_flint }
+			POD_umbra_realm_known_trigger = { NAME = flag:mirrorlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:neter_khertet }
+			POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth }	
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+		}
+		
+		flag:stormwall = {
+			trigger_if = {
+				limit = { has_perk = return_perk }
+				POD_return_perk_trigger = yes
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:sunless_sea }
+			POD_umbra_realm_known_trigger = { NAME = flag:dis }
+			POD_umbra_realm_known_trigger = { NAME = flag:islands_of_flint }
+			POD_umbra_realm_known_trigger = { NAME = flag:mirrorlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:neter_khertet }
+			POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth	}
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+		}
+		
+		flag:mirrorlands = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:island_below_the_sea }
+		}
+		
+		flag:island_below_the_sea = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mirrorlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+			POD_umbra_realm_known_trigger = { NAME = flag:oblivion }
+		}
+		
+		flag:dis = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth }
+		}
+		
+		flag:swar = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+		
+		flag:night_markets = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+		
+		flag:mantaqat_khayal = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+		
+		flag:islands_of_flint = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+		}
+		
+		flag:river_of_death = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+			POD_umbra_realm_known_trigger = { NAME = flag:isle_of_sorrows }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_iron }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_clay }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_ivory }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_jade }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_obsidian }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_sand }
+			POD_umbra_realm_known_trigger = { NAME = flag:swar }
+			POD_umbra_realm_known_trigger = { NAME = flag:night_markets }
+			POD_umbra_realm_known_trigger = { NAME = flag:mantaqat_khayal }
+			POD_umbra_realm_known_trigger = { NAME = flag:isle_of_eurydice }
+		}
+		
+		flag:sunless_sea = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:far_shore }
+			POD_umbra_realm_known_trigger = { NAME = flag:weeping_bay }
+		}
+		
+		flag:far_shore = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sunless_sea }
+		}
+
+		flag:weeping_bay = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sunless_sea }
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_souls }
+		}
+		
+		flag:sea_of_souls = {
+			POD_umbra_realm_known_trigger = { NAME = flag:weeping_bay }
+			POD_umbra_realm_known_trigger = { NAME = flag:isle_of_sorrows }
+		}
+		
+		flag:isle_of_sorrows = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_souls }
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_iron }
+			trigger_if = {
+				limit = { current_date >= 1946.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_wire }
+			}
+		}
+		
+		flag:dark_kingdom_of_iron = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:isle_of_sorrows }
+		}
+		
+		flag:isle_of_eurydice = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+		}
+
+		flag:neter_khertet = {
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_iron }
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_sand }
+		}
+
+		flag:first_city = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+
+		flag:dark_kingdom_of_wire = {
+			POD_umbra_realm_known_trigger = { NAME = flag:isle_of_sorrows }
+		}
+
+		flag:dark_kingdom_of_clay = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+		}
+
+		flag:dark_kingdom_of_ivory = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+		
+		flag:dark_kingdom_of_obsidian = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+		}
+
+		flag:dark_kingdom_of_jade = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:feng_tu }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+
+		flag:feng_tu = {
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_jade }
+		}
+
+		flag:dark_kingdom_of_sand = {
+			POD_umbra_realm_known_trigger = { NAME = flag:river_of_death }
+			POD_umbra_realm_known_trigger = { NAME = flag:fields_of_aaru }
+			POD_umbra_realm_known_trigger = { NAME = flag:neter_khertet }
+		}
+
+		flag:fields_of_aaru = {
+			POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_sand }
+		}
+
+		flag:pod_realm_labyrinth = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:well_of_the_void }
+			POD_umbra_realm_known_trigger = { NAME = flag:dis }
+		}
+
+		flag:well_of_the_void = {
+			POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth }
+			POD_umbra_realm_known_trigger = { NAME = flag:oblivion }
+		}
+
+		flag:oblivion = {
+		}
+
+		flag:abyss = {
+			trigger_if = {
+				limit = { current_date < 1605.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:sea_of_shadow }
+			}
+			trigger_else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:tempest }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:stormwall }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:island_below_the_sea }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_uktena }
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+		}
+		
+		flag:aetherial_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+			
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_eshtarra }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_mitanu }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_hakahe }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_tambiyah }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_nerigal }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_rorg }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_zarok }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_lu_bat }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_ruatma }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_shantar }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_meros }
+			
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:first_horizon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon } #Mage stuff will wait for mages
+
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_correspondence }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_life }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_forces }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_matter }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_time }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_spirit }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_mind }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_entropy }
+			
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shard_realm_of_prime = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_eshtarra }
+
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:moon }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			trigger_if = {
+				limit = { global_var:fae_era < 3 }
+				POD_umbra_realm_known_trigger = { NAME = flag:arcadia } #Shade Realm of the Moon
+			}
+		}
+		
+		flag:moon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:darkside_moon_base }
+			}
+			trigger_if = {
+				limit = { current_date >= 1893.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:victoria_station }
+			}
+		}
+		
+		flag:darkside_moon_base = {
+			POD_umbra_realm_known_trigger = { NAME = flag:moon }
+		}
+
+		flag:victoria_station = {
+			POD_umbra_realm_known_trigger = { NAME = flag:moon }
+		}
+
+		flag:court_of_eshtarra = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:court_of_sokhta = {
+			POD_umbra_realm_known_trigger = { NAME = flag:moon }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:weaver_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyld_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyrm_reaches }
+		}
+		
+		flag:true_horizon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:far_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_infinity }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_correspondence }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_life }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_forces }
+			
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:autochthonia }
+				POD_umbra_realm_known_trigger = { NAME = flag:gernsback_continuum }
+				POD_umbra_realm_known_trigger = { NAME = flag:moreauvia }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:balador }
+			POD_umbra_realm_known_trigger = { NAME = flag:midrealm }
+			trigger_if = {
+				limit = { current_date >= 1400.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:red_donjon }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:yenosia }
+		}
+		
+		flag:autochthonia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+		}
+
+		flag:balador = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+		}
+
+		flag:gernsback_continuum = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+		}
+
+		flag:midrealm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:null_zone }
+		}
+
+		flag:moreauvia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+		}
+
+		flag:red_donjon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+		}
+
+		flag:yenosia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			trigger_if = {
+				limit = { current_date >= 1700.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:null_b }		#Way too early for that
+			}
+		}
+		
+		flag:null_b = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yenosia }
+		}
+
+		flag:horizon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:concordia }
+		}
+		
+		flag:concordia = {
+			trigger_if = {
+				limit = { current_date >= 1450.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:horizon }
+			}
+		}
+
+		flag:shard_realm_of_infinity = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:sun }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+		}
+		
+		flag:sun = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_infinity }
+		}
+
+		flag:court_of_katanka_sonnak = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sun }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_infinity }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:weaver_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyld_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyrm_reaches }
+		}
+		
+		flag:shard_realm_of_correspondence = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:mercury }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_mitanu }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_correspondence }
+		}
+		
+		flag:mercury = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_mitanu }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_correspondence }
+			POD_umbra_realm_known_trigger = { NAME = flag:mus }
+		}
+		
+		flag:mus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mercury }
+			trigger_if = {
+				limit = { current_date >= 1450.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:fors_collegis_mercuris }
+			}
+		}
+		
+		flag:fors_collegis_mercuris = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mus }
+		}
+
+		flag:court_of_mitanu = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mercury }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_correspondence }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_correspondence = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_correspondence }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:court_of_hakahe = {
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+
+		flag:shard_realm_of_life = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:venus }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_tambiyah }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_life }
+			POD_umbra_realm_known_trigger = { NAME = flag:seasonal_realms }
+		}
+		
+		flag:venus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_tambiyah }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_life }
+		}
+		
+		flag:seasonal_realms = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_life }
+		}
+
+		flag:court_of_tambiyah = {
+			POD_umbra_realm_known_trigger = { NAME = flag:venus }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_life }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_life = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_life }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:shard_realm_of_forces = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:mars }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_nerigal }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_forces }
+			POD_umbra_realm_known_trigger = { NAME = flag:doissetep }
+		}
+		
+		flag:mars = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_nerigal }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_forces }
+		}
+
+		flag:court_of_nerigal = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mars }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_forces }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_forces = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_forces }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:far_horizon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:true_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		}
+
+		flag:court_of_rorg = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shard_realm_of_matter = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:jupiter }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_zarok }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_matter }
+		}
+		
+		flag:jupiter = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_zarok }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_matter }
+		}
+
+		flag:court_of_zarok = {
+			POD_umbra_realm_known_trigger = { NAME = flag:jupiter }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_matter }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+
+		flag:shade_realm_of_matter = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_matter }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:hollow_worlds }
+		}
+		
+		flag:shard_realm_of_time = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:saturn }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_lu_bat }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_time }
+		}
+		
+		flag:saturn = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_lu_bat }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_time }
+		}
+
+		flag:court_of_lu_bat = {
+			POD_umbra_realm_known_trigger = { NAME = flag:saturn }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_time }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_time = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_time }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:shard_realm_of_spirit = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:uranus }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_ruatma }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_spirit }
+		}
+		
+		flag:uranus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_ruatma }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_spirit }
+		}
+
+		flag:court_of_ruatma = {
+			POD_umbra_realm_known_trigger = { NAME = flag:uranus }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_spirit }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_spirit = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_spirit }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:shard_realm_of_mind = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:neptune }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_shantar }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_mind }
+		}
+		
+		flag:neptune = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_shantar }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_mind }
+		}
+
+		flag:court_of_shantar = {
+			POD_umbra_realm_known_trigger = { NAME = flag:neptune }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_mind }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_mind = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_mind }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:shard_realm_of_entropy = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:pluto }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_meros }
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_entropy }
+		}
+		
+		flag:pluto = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_meros }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_entropy }
+			POD_umbra_realm_known_trigger = { NAME = flag:cerberus }
+		}
+		
+		flag:cerberus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:pluto }
+		}
+
+		flag:court_of_meros = {
+			POD_umbra_realm_known_trigger = { NAME = flag:pluto }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_entropy }
+			POD_umbra_realm_known_trigger = { NAME = flag:aetherial_realm }
+		}
+		
+		flag:shade_realm_of_entropy = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_entropy }
+			POD_umbra_realm_known_trigger = { NAME = flag:first_horizon }
+		}
+		
+		flag:weaver_reaches = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+		}
+		
+		flag:wyld_reaches = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+		}
+		
+		flag:wyrm_reaches = {
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_katanka_sonnak }
+			POD_umbra_realm_known_trigger = { NAME = flag:court_of_sokhta }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_wendigo }
+		}
+		
+		flag:deep_umbra = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_horizon }
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:copernicus_research_center }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:heaven }
+			POD_umbra_realm_known_trigger = { NAME = flag:qlippoth }
+
+			POD_umbra_realm_known_trigger = { NAME = flag:weaver_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyld_reaches }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyrm_reaches }
+
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_matter }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_time }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_spirit }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_mind }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_entropy }
+		}
+		
+		flag:central_duchy = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+			POD_umbra_realm_known_trigger = { NAME = flag:black_spiral_labyrinth }
+			POD_umbra_realm_known_trigger = { NAME = flag:abyss }
+			POD_umbra_realm_known_trigger = { NAME = flag:calumn }
+			
+			POD_umbra_realm_known_trigger = { NAME = flag:maeljin_duchies }
+			POD_umbra_realm_known_trigger = { NAME = flag:earth_pit }
+			POD_umbra_realm_known_trigger = { NAME = flag:elemental_duchies }
+		}
+		
+		flag:maeljin_duchies = {
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+			POD_umbra_realm_known_trigger = { NAME = flag:border_duchies }
+		}
+		
+		flag:border_duchies = {
+			POD_umbra_realm_known_trigger = { NAME = flag:maeljin_duchies }
+		}
+		
+		flag:earth_pit = {
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+		}
+		
+		flag:elemental_duchies = {
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+		}
+		
+		flag:black_spiral_labyrinth = {
+			POD_umbra_realm_known_trigger = { NAME = flag:central_duchy }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:copernicus_research_center = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		}
+
+		# flag:paradox_realms = {
+		# 	POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		# }
+
+		flag:heaven = {
+			POD_umbra_realm_known_trigger = { NAME = flag:epiphamy }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		}
+
+		flag:dreamtime = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_bunyip }
+		}
+
+		flag:chimare = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:demesne = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:near_dreaming = {
+			POD_umbra_realm_known_trigger = { NAME = flag:dreamtime }
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:vale_of_mists }
+			POD_umbra_realm_known_trigger = { NAME = flag:slumbering_oceans }
+			POD_umbra_realm_known_trigger = { NAME = flag:the_homeland_of_the_stargazers }
+			POD_umbra_realm_known_trigger = { NAME = flag:blotkeldur }
+			POD_umbra_realm_known_trigger = { NAME = flag:wyldweir }
+			POD_umbra_realm_known_trigger = { NAME = flag:great_chasm }
+			POD_umbra_realm_known_trigger = { NAME = flag:lake_of_sorrows }
+			POD_umbra_realm_known_trigger = { NAME = flag:rivers_of_phantasia }
+			POD_umbra_realm_known_trigger = { NAME = flag:seas_of_dream }
+			POD_umbra_realm_known_trigger = { NAME = flag:dream_burrow }
+			POD_umbra_realm_known_trigger = { NAME = flag:madness_realm }
+			POD_umbra_realm_known_trigger = { NAME = flag:meridianus }
+			POD_umbra_realm_known_trigger = { NAME = flag:spawning_fields }
+			POD_umbra_realm_known_trigger = { NAME = flag:maharaurava }
+		}
+		
+		flag:far_dreaming = {
+			POD_umbra_realm_known_trigger = { NAME = flag:vale_of_mists }
+			POD_umbra_realm_known_trigger = { NAME = flag:slumbering_oceans }
+			POD_umbra_realm_known_trigger = { NAME = flag:kureksarra }
+			POD_umbra_realm_known_trigger = { NAME = flag:rubezhal }
+			POD_umbra_realm_known_trigger = { NAME = flag:capecia }
+			POD_umbra_realm_known_trigger = { NAME = flag:irrgarten }
+			POD_umbra_realm_known_trigger = { NAME = flag:arike }
+			POD_umbra_realm_known_trigger = { NAME = flag:hieronymus_continuum }
+			POD_umbra_realm_known_trigger = { NAME = flag:arawns_forge }
+			POD_umbra_realm_known_trigger = { NAME = flag:great_dream_forest }
+			POD_umbra_realm_known_trigger = { NAME = flag:splintered_mountains }
+			POD_umbra_realm_known_trigger = { NAME = flag:mistweir }
+			POD_umbra_realm_known_trigger = { NAME = flag:spawning_fields }
+		}
+		
+		flag:deep_dreaming = {
+			trigger_if = {
+				limit = { global_var:fae_era < 3 }
+				POD_umbra_realm_known_trigger = { NAME = flag:arcadia }
+			}
+			trigger_else = {
+				POD_umbra_realm_known_trigger = { NAME = flag:myrmitown }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_tunnels }
+				POD_umbra_realm_known_trigger = { NAME = flag:balloon }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:vale_of_mists }
+			POD_umbra_realm_known_trigger = { NAME = flag:slumbering_oceans }
+			POD_umbra_realm_known_trigger = { NAME = flag:wastelands }
+			POD_umbra_realm_known_trigger = { NAME = flag:brobdingnag }
+			POD_umbra_realm_known_trigger = { NAME = flag:great_engine }
+			POD_umbra_realm_known_trigger = { NAME = flag:fin_bheara }
+			POD_umbra_realm_known_trigger = { NAME = flag:mistweir }
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_silver }
+		}
+		
+		flag:arcadia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_silver }
+			POD_umbra_realm_known_trigger = { NAME = flag:distant_cities }
+			POD_umbra_realm_known_trigger = { NAME = flag:hy_brasil }
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_prime }
+		}
+		
+		flag:kingdom_of_dan = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_silver }
+		}
+
+		flag:kureksarra = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:rubezhal = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:capecia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:irrgarten = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:arike = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:snail_graveyards }
+		}
+
+		flag:myrmitown = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+			trigger_if = {
+				limit = { global_var:fae_era > 2 }
+				POD_umbra_realm_known_trigger = { NAME = flag:the_tunnels }
+			}
+		}
+
+		flag:the_tunnels = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+			trigger_if = {
+				limit = { global_var:fae_era > 2 }
+				POD_umbra_realm_known_trigger = { NAME = flag:myrmitown }
+			}
+		}
+
+		flag:balloon = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:vale_of_mists = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:mistweir }
+		}
+		
+		flag:fields_behind = {
+			POD_umbra_realm_known_trigger = { NAME = flag:vale_of_mists }
+			POD_umbra_realm_known_trigger = { NAME = flag:bullydale_wastes }
+		}
+		
+		flag:bullydale_wastes = {
+			POD_umbra_realm_known_trigger = { NAME = flag:fields_behind }
+			POD_umbra_realm_known_trigger = { NAME = flag:low_dukedoms }
+		}
+		
+		flag:low_dukedoms = {
+			POD_umbra_realm_known_trigger = { NAME = flag:bullydale_wastes }
+			POD_umbra_realm_known_trigger = { NAME = flag:splintered_mountains }
+		}
+
+		flag:blotkeldur = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:wastelands = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:hieronymus_continuum = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:wyldweir = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:brobdingnag = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:arawns_forge = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:great_dream_forest = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:discordant_woods }
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_sorrow }
+			POD_umbra_realm_known_trigger = { NAME = flag:forest_of_lies }
+		}
+
+		flag:discordant_woods = {
+			POD_umbra_realm_known_trigger = { NAME = flag:great_dream_forest }
+		}
+
+		flag:great_chasm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:great_engine = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:lake_of_sorrows = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:distant_cities }
+		}
+
+		flag:sea_of_sorrow = {
+			POD_umbra_realm_known_trigger = { NAME = flag:great_dream_forest }
+		}
+
+		flag:rivers_of_phantasia = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:seas_of_dream = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:slumbering_oceans = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:splintered_mountains = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:middlemarch }
+			POD_umbra_realm_known_trigger = { NAME = flag:chakravada }
+			POD_umbra_realm_known_trigger = { NAME = flag:low_dukedoms }
+		}
+
+		flag:middlemarch = {
+			POD_umbra_realm_known_trigger = { NAME = flag:splintered_mountains }
+		}
+
+		flag:chakravada = {
+			POD_umbra_realm_known_trigger = { NAME = flag:splintered_mountains }
+		}
+
+		flag:goblin_market = {
+			POD_umbra_realm_known_trigger = { NAME = flag:fin_bheara }
+		}
+
+		flag:distant_cities = {
+			POD_umbra_realm_known_trigger = { NAME = flag:lake_of_sorrows }
+			trigger_if = {
+				limit = { global_var:fae_era < 3 }
+				POD_umbra_realm_known_trigger = { NAME = flag:arcadia }
+			}
+		}
+
+		flag:fin_bheara = {
+			POD_umbra_realm_known_trigger = { NAME = flag:mistweir }
+			POD_umbra_realm_known_trigger = { NAME = flag:goblin_market }
+		}
+
+		flag:mistweir = {
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:fin_bheara }
+		}
+
+		flag:dream_burrow = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:madness_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:meridianus = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:sea_of_silver = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+			trigger_if = {
+				limit = { global_var:fae_era < 3 }
+				POD_umbra_realm_known_trigger = { NAME = flag:arcadia }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:winterweir }
+			POD_umbra_realm_known_trigger = { NAME = flag:kingdom_of_dan }
+		}
+
+		flag:snail_graveyards = {
+			POD_umbra_realm_known_trigger = { NAME = flag:arike }
+		}
+
+		flag:spawning_fields = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+			POD_umbra_realm_known_trigger = { NAME = flag:far_dreaming }
+		}
+
+		flag:tenebrous_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_dreaming }
+		}
+
+		flag:winterweir = {
+			POD_umbra_realm_known_trigger = { NAME = flag:sea_of_silver }
+			POD_umbra_realm_known_trigger = { NAME = flag:forest_of_lies }
+		}
+
+		flag:forest_of_lies = {
+			POD_umbra_realm_known_trigger = { NAME = flag:great_dream_forest }
+		}
+
+		flag:maharaurava = {
+			POD_umbra_realm_known_trigger = { NAME = flag:near_dreaming }
+		}
+
+		flag:digital_web = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:cyberrealm }
+			}
+		}
+
+		flag:hollow_worlds = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shade_realm_of_matter }
+		}
+
+		flag:mirror_zone = {
+			POD_umbra_realm_known_trigger = { NAME = flag:astral_plane }
+			POD_umbra_realm_known_trigger = { NAME = flag:spirit_wilds }
+			POD_umbra_realm_known_trigger = { NAME = flag:shadowlands }
+		}
+
+		flag:null_zone = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:midrealm }
+		}
+
+		flag:yomi_wan = {
+			POD_umbra_realm_known_trigger = { NAME = flag:earth }
+			POD_umbra_realm_known_trigger = { NAME = flag:kakuri }
+			trigger_if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_umbra_realm_known_trigger = { NAME = flag:wicked_city }
+			}
+			POD_umbra_realm_known_trigger = { NAME = flag:hell_of_burrowing_maggots }
+			POD_umbra_realm_known_trigger = { NAME = flag:hell_of_being_skinned_alive }
+			POD_umbra_realm_known_trigger = { NAME = flag:hell_of_boiling_oil }
+			POD_umbra_realm_known_trigger = { NAME = flag:hell_of_bitter_truth }
+			trigger_if = {
+				limit = { current_date < 1301.1.1 }
+				POD_umbra_realm_known_trigger = { NAME = flag:hell_of_spiked_chains }
+			}
+		}
+		
+		flag:kakuri = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:wicked_city = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+			POD_umbra_realm_known_trigger = { NAME = flag:cyberrealm }
+		}
+
+		flag:hell_of_burrowing_maggots = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:hell_of_being_skinned_alive = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:hell_of_boiling_oil = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:hell_of_bitter_truth = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:hell_of_spiked_chains = {
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan }
+		}
+
+		flag:qlippoth = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		}
+
+		flag:doissetep = {
+			POD_umbra_realm_known_trigger = { NAME = flag:shard_realm_of_forces }
+		}
+
+		flag:hive_realm = {
+			POD_umbra_realm_known_trigger = { NAME = flag:deep_umbra }
+		}
+	}
+}
+
+POD_return_perk_trigger = {
+	trigger_if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_europe
+					geographical_region = world_asia_minor
+				}
+			}
+		}
+		POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_iron }
+	}
+	trigger_else_if = { 
+		limit = { capital_province ?= { geographical_region = world_africa } }
+		POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_ivory }
+	}
+	trigger_else_if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_tibet
+					geographical_region = world_steppe
+				}
+			}
+		}
+		POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_jade }
+	}
+	trigger_else_if = { 
+		limit = { capital_province ?= { geographical_region = world_india } }
+		POD_umbra_realm_known_trigger = { NAME = flag:swar }
+	}
+	trigger_else_if = { 
+		limit = { capital_province ?= { geographical_region = world_burma } }
+		POD_umbra_realm_known_trigger = { NAME = flag:night_markets }
+	}
+	trigger_else_if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_middle_east
+					geographical_region = world_middle_east_persia
+				}
+			} 
+		}
+		POD_umbra_realm_known_trigger = { NAME = flag:mantaqat_khayal }
+	}
+	trigger_else = { 
+		POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_clay }
+		POD_umbra_realm_known_trigger = { NAME = flag:dark_kingdom_of_obsidian }
+	}
+}

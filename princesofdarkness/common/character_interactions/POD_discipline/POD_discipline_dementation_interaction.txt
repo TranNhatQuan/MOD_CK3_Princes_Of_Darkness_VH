@@ -1,0 +1,949 @@
+﻿POD_insanity_interaction = {
+	category = interaction_category_vampire
+	#common_interaction = yes
+	#interface_priority = 87
+	scheme = PODinsanity
+	icon = POD_dementation_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_dementation_trigger = yes }
+		scope:actor = {
+			has_perk = stain_the_soul_perk
+			OR = {
+				is_malkavian_trigger = yes
+				POD_is_keskinen_trigger = yes
+				faith = faith:calomenasforsaken
+			}
+		}
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			can_start_scheme = {
+				type = PODinsanity
+				target_character = scope:recipient
+			}
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		POD_strong_mental_defenses_trigger = yes
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = PODinsanity
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_PODinsanity_approved
+		}
+
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_hunger_rouse_check_effect = yes
+		}
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = PODinsanity
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	#ai_potential = {
+	#	# The basic requirements
+	#	is_imprisoned = no
+	#	is_landed = yes
+	#}
+	#ai_targets = {
+	#	ai_recipients = primary_war_enemies
+	#}
+
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+				is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_dementation_interaction = {
+	category = interaction_category_vampire
+	desc = POD_dementation_interaction_desc
+	icon = POD_dementation_interaction
+	options_heading = POD_dementation_interaction_options_heading
+	
+	cooldown_against_recipient = { years = 5 }
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_dementation_trigger = yes }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	send_options_exclusive = no
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = incubus_passion_perk }
+		}
+		flag = incubus_passion
+		localization = incubus_passion_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = passion_perk }
+		}
+		flag = passion
+		localization = passion_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = the_haunting_perk }
+		}
+		flag = the_haunting
+		localization = the_haunting_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = silence_the_sane_mind_perk }
+		}
+		flag = silence_the_sane_mind
+		localization = silence_the_sane_mind_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = fire_voice_perk }
+			scope:recipient = { exists = location }
+			scope:recipient = { cant_frenzy_trigger = no }
+		}
+		flag = fire_voice
+		localization = fire_voice_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = total_insanity_perk }
+			scope:recipient = {
+				OR = {
+					can_be_drunkard = yes
+					can_be_comfort_eater = yes
+					can_be_inappetetic = yes
+					can_be_hashishiyah = yes
+					can_be_rakish = yes
+					can_be_flagellant = yes
+					can_be_profligate = yes
+					can_be_improvident = yes
+					can_be_reclusive = yes
+					can_be_irritable = yes
+					AND = {
+						NOT = { has_trait = contrite }
+						OR = { # Must have a fitting personality or lifestyle
+							has_trait = deceitful
+							has_trait = schemer
+							has_trait = honest
+							has_trait = trusting
+							has_trait = humble
+						}
+						OR = { # Must have something to feel guilty about / confess to.
+							num_sinful_traits >= 1
+							any_secret = {
+								exists = this
+								can_be_exposed_by = scope:recipient
+							}
+						}
+					}
+				}
+			}
+		}
+		flag = total_insanity
+		localization = total_insanity_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = stain_the_soul_perk }
+			scope:recipient = {
+				NAND = {
+					has_trait = depressed
+					has_trait = lunatic
+					has_trait = possessed
+				}
+			}
+		}
+		flag = stain_the_soul
+		localization = stain_the_soul_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = childmind_perk }
+			scope:recipient = {
+				NOT = { has_trait = intellect_bad_3 }
+			}
+		}
+		flag = childmind
+		localization = childmind_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = cobble_the_road_perk }
+			scope:recipient.num_virtuous_traits > 0
+		}
+		flag = cobble_the_road
+		localization = cobble_the_road_perk_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = prison_of_the_mind_perk }
+			scope:recipient = { NOT = { has_character_modifier = prison_of_the_mind } }
+		}
+		flag = prison_of_the_mind
+		localization = prison_of_the_mind_perk_name
+	}
+	
+	is_valid_showing_failures_only = {
+		OR = {
+			scope:actor = { has_trait = dementationadvanced }
+			POD_strong_mental_defenses_trigger = yes
+		}
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = POD_dementation_interaction_cost }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = {
+			POD_discipline_cost_effect = { COUNT = POD_dementation_interaction_cost }
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+		scope:actor = {
+			duel = {
+				skill = diplomacy
+				target = scope:recipient
+				50 = {
+					desc = POD_dementation_interaction_sucess
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					scope:recipient = {
+						add_stress = medium_stress_impact_gain
+						add_piety = medium_piety_loss
+					}
+					modifier = {
+						add = {
+							value = dread
+							multiply = 0.25
+						}
+						NOT = { dread = 0 }
+					}
+					if = {
+						limit = { scope:incubus_passion = yes }
+						scope:recipient = {
+							hidden_effect = { POD_set_resonance_effect = yes }
+							if = {
+								limit = { has_character_flag = choleric_resonance }
+								add_character_modifier = {
+									modifier = incubus_passion_perk_choleric_modifier
+									years = 5
+								}
+							}
+							if = {
+								limit = { has_character_flag = phlegmatic_resonance }
+								add_character_modifier = {
+									modifier = incubus_passion_perk_phlegmatic_modifier
+									years = 5
+								}
+							}
+							if = {
+								limit = { has_character_flag = melancholic_resonance }
+								add_character_modifier = {
+									modifier = incubus_passion_perk_melancholic_modifier
+									years = 5
+								}
+							}
+							if = {
+								limit = { has_character_flag = sanguine_resonance }
+								add_character_modifier = {
+									modifier = incubus_passion_perk_sanguine_modifier
+									years = 5
+								}
+							}
+						}
+					}
+					if = {
+						limit = { scope:passion = yes }
+						scope:recipient = {
+							add_character_modifier = {
+								modifier = passion_perk_modifier
+								years = 5
+							}
+						}
+					}
+					if = {
+						limit = { scope:the_haunting = yes }
+						scope:recipient = {
+							add_character_modifier = {
+								modifier = the_haunting_perk_modifier
+								years = 5
+							}
+						}
+					}
+					if = {
+						limit = { scope:silence_the_sane_mind = yes }
+						scope:recipient = {
+							add_character_modifier = {
+								modifier = silence_the_sane_mind_perk_modifier
+								years = 5
+							}
+						}
+					}
+					if = {
+						limit = { scope:fire_voice = yes }
+						scope:recipient = {
+							location = {
+								add_province_modifier = {
+									modifier = POD_frenzy_terrified_populace_modifier
+									years = 5
+								}
+							}
+						}
+					}
+					if = {
+						limit = { scope:total_insanity = yes }
+						scope:recipient = {
+							POD_gain_stress_trait_effect = { COUNT = 5 }
+						}
+					}
+					if = {
+						limit = { scope:stain_the_soul = yes }
+						scope:recipient = {
+							random_list = {
+								10 = {
+									trigger = { NOT = { has_trait = depressed } }
+									add_trait = depressed_genetic
+								}
+								10 = {
+									trigger = { NOT = { has_trait = lunatic } }
+									add_trait = lunatic_genetic
+								}
+								10 = {
+									trigger = { NOT = { has_trait = possessed } }
+									add_trait = possessed_genetic
+								}
+							}
+						}
+					}
+					if = {
+						limit = { scope:childmind = yes }
+						scope:recipient = {
+							POD_become_stupid_effect = yes
+						}
+					}
+					if = {
+						limit = { scope:cobble_the_road = yes }
+						scope:recipient = {
+							POD_revert_virtue_effect = yes
+						}
+					}
+					if = {
+						limit = { scope:prison_of_the_mind = yes }
+						scope:recipient = { add_character_modifier = prison_of_the_mind }
+					}
+					min = 1
+				}
+				50 = {
+					desc = POD_dementation_interaction_fail
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					modifier = {
+						add = {
+							value = scope:recipient.ai_boldness
+							multiply = 0.25
+						}
+						NOT = { scope:recipient.ai_boldness = 0 }
+					}
+					modifier = {
+						add = 5
+						scope:incubus_passion = yes
+					}
+					modifier = {
+						add = 5
+						scope:passion = yes
+					}
+					modifier = {
+						add = 10
+						scope:the_haunting = yes
+					}
+					modifier = {
+						add = 10
+						scope:silence_the_sane_mind = yes
+					}
+					modifier = {
+						add = 15
+						scope:fire_voice = yes
+					}
+					modifier = {
+						add = 20
+						scope:total_insanity = yes
+					}
+					modifier = {
+						add = 25
+						scope:stain_the_soul = yes
+					}
+					modifier = {
+						add = 30
+						scope:childmind = yes
+					}
+					modifier = {
+						add = 30
+						scope:cobble_the_road = yes
+					}
+					modifier = {
+						add = 50
+						scope:prison_of_the_mind = yes
+					}
+					min = 1
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	#ai_potential = {
+	#	# The basic requirements
+	#	is_imprisoned = no
+	#	is_landed = yes
+	#}
+	#ai_targets = {
+	#	ai_recipients = primary_war_enemies
+	#}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+				is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_lunatic_eruption_interaction = {
+	category = interaction_category_vampire
+	icon = POD_dementation_interaction
+	desc = POD_lunatic_eruption_interaction_desc
+	
+	cooldown_against_recipient = { years = 5 }
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = { has_dementation_trigger = yes }
+		scope:actor = { has_perk = lunatic_eruption_perk }
+		scope:recipient = { NOT = { has_character_modifier = lunatic_summon_modifier } }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+	   scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			POD_discipline_cost_effect = { COUNT = 1 }
+			duel = {
+				skill = learning
+				value = 20
+			
+				50 = {
+					desc = POD_lunatic_summon.duel.success
+					
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = lunatic_summon_modifier
+							years = 5
+						}
+					}
+				}
+				
+				50 = {
+					desc = POD_lunatic_summon.duel.failure
+
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	#ai_targets = {
+	#	ai_recipients = self
+	#}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 10
+			scope:actor = {
+				is_at_war = yes
+			}
+		}
+	}
+}
+
+POD_touch_of_the_saints_interaction = {
+	category = interaction_category_vampire
+	desc = POD_touch_of_the_saints_interaction_desc
+	options_heading = POD_blood_heal_interaction_options_heading
+	icon = POD_dementation_interaction
+
+	cooldown = { months = 3 }
+	
+	is_shown = {
+		scope:actor = { has_dementation_trigger = yes }
+		scope:actor = { has_perk = touch_of_the_saints_perk }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = drunkard
+				has_trait = flagellant
+				has_trait = comfort_eater
+				has_trait = contrite
+				has_trait = improvident
+				has_trait = inappetetic
+				has_trait = reclusive
+				has_trait = irritable
+				has_trait = rakish
+				has_trait = hashishiyah
+				has_trait = profligate
+				
+				has_trait = depressed_1
+				has_trait = lunatic_1
+				has_trait = possessed_1
+				
+				trigger_if = {
+					limit = { #Malks can't remove their innate madness
+						OR = {
+							is_malkavian_trigger = no
+							POD_suppress_clan_curse_trigger = yes
+						}
+					}
+					OR = {
+						has_trait = lunatic_genetic
+						has_trait = depressed_genetic
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { NOT = { has_character_modifier = prison_of_the_mind } }
+		scope:actor = { POD_has_enough_blood_for_discipline = { AMOUNT = POD_touch_of_the_saints_interaction_cost } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = drunkard
+			}
+		}
+		flag = drunkard
+		localization = POD_exorcism_drunkard
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = flagellant
+			}
+		}
+		flag = flagellant
+		localization = POD_exorcism_flagellant
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = comfort_eater
+			}
+		}
+		flag = comfort_eater
+		localization = POD_exorcism_comfort_eater
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = contrite
+			}
+		}
+		flag = contrite
+		localization = POD_exorcism_contrite
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = improvident
+			}
+		}
+		flag = improvident
+		localization = POD_exorcism_improvident
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = inappetetic
+			}
+		}
+		flag = inappetetic
+		localization = POD_exorcism_inappetetic
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = reclusive
+			}
+		}
+		flag = reclusive
+		localization = POD_exorcism_reclusive
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = irritable
+			}
+		}
+		flag = irritable
+		localization = POD_exorcism_irritable
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = rakish
+			}
+		}
+		flag = rakish
+		localization = POD_exorcism_rakish
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = hashishiyah
+			}
+		}
+		flag = hashishiyah
+		localization = POD_exorcism_hashishiyah
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = profligate
+			}
+		}
+		flag = profligate
+		localization = POD_exorcism_profligate
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = depressed_1
+			}
+		}
+		flag = depressed
+		localization = POD_exorcism_depressed
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = lunatic_1
+			}
+		}
+		flag = lunatic
+		localization = POD_exorcism_lunatic
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = possessed_1
+			}
+		}
+		flag = possessed
+		localization = POD_exorcism_possessed
+	}
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = lunatic_genetic
+			}
+		}
+		is_valid = {
+			scope:recipient = {
+				trigger_if = {
+					limit = { POD_suppress_clan_curse_trigger = no }
+					NOT = { has_trait = malkavian } #Malks can't remove their innate madness
+				}
+			}
+		}
+		flag = lunatic_genetic
+		localization = POD_exorcism_lunatic_genetic
+	}
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = depressed_genetic
+			}
+		}
+		is_valid = {
+			scope:recipient = {
+				trigger_if = {
+					limit = { POD_suppress_clan_curse_trigger = no }
+					NOT = { has_trait = malkavian } #Malks can't remove their innate madness
+				}
+			}
+		}
+		flag = depressed_genetic
+		localization = POD_exorcism_depressed_genetic
+	}
+
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:drunkard ?= yes
+				scope:flagellant ?= yes
+				scope:comfort_eater ?= yes
+				scope:contrite ?= yes
+				scope:improvident ?= yes
+				scope:inappetetic ?= yes
+				scope:reclusive ?= yes
+				scope:irritable ?= yes
+				scope:rakish ?= yes
+				scope:hashishiyah ?= yes
+				scope:profligate ?= yes
+				scope:depressed ?= yes
+				scope:lunatic ?= yes
+				scope:possessed ?= yes
+				scope:lunatic_genetic ?= yes
+				scope:depressed_genetic ?= yes
+			}
+		}
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_discipline_cost_effect = { COUNT = POD_touch_of_the_saints_interaction_cost }
+		}
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:recipient = {
+				add_opinion = {
+					target = scope:actor
+					modifier = pleased_opinion
+					opinion = 30
+				}
+			}
+		}
+		scope:recipient = {
+			play_music_cue = "mx_cue_peace_ensues"
+
+			if = {
+				limit = { scope:drunkard = yes }
+				remove_trait = drunkard
+			}
+			if = {
+				limit = { scope:flagellant = yes }
+				remove_trait = flagellant
+			}
+			if = {
+				limit = { scope:comfort_eater = yes }
+				remove_trait = comfort_eater
+			}
+			if = {
+				limit = { scope:contrite = yes }
+				remove_trait = contrite
+			}
+			if = {
+				limit = { scope:improvident = yes }
+				remove_trait = improvident
+			}
+			if = {
+				limit = { scope:inappetetic = yes }
+				remove_trait = inappetetic
+			}
+			if = {
+				limit = { scope:reclusive = yes }
+				remove_trait = reclusive
+			}
+			if = {
+				limit = { scope:irritable = yes }
+				remove_trait = irritable
+			}
+			if = {
+				limit = { scope:rakish = yes }
+				remove_trait = rakish
+			}
+			if = {
+				limit = { scope:hashishiyah = yes }
+				remove_trait = hashishiyah
+			}
+			if = {
+				limit = { scope:profligate = yes }
+				remove_trait = profligate
+			}
+			if = {
+				limit = { scope:depressed = yes }
+				remove_trait = depressed_1
+			}
+			if = {
+				limit = { scope:lunatic = yes }
+				remove_trait = lunatic_1
+			}
+			if = {
+				limit = { scope:possessed = yes }
+				remove_trait = possessed_1
+			}
+			if = {
+				limit = { scope:lunatic_genetic = yes }
+				remove_trait = lunatic_genetic
+			}
+			if = {
+				limit = { scope:depressed_genetic = yes }
+				remove_trait = depressed_genetic
+			}
+		}
+	}
+	
+	auto_accept = yes
+
+	#ai_potential = {
+	#	# The basic requirements
+	#	is_imprisoned = no
+	#	is_landed = yes
+	#}
+	#ai_targets = {
+	#	ai_recipients = self
+	#}
+	#ai_targets = {
+	#	ai_recipients = courtiers
+	#	ai_recipients = peer_vassals
+	#	max = 10
+	#}
+	ai_frequency = 0
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 100
+			scope:recipient = {
+				OR = {
+					this = scope:actor
+					is_knight_of = scope:actor
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,801 @@
+﻿
+POD_other_looks = {
+	usage = game
+	
+	bat_nose = {
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = POD_NOSschnoz
+				template = nosies
+				value = 1.0
+			}
+			
+			morph = {
+				mode = modify
+				gene = POD_NOSschnoz
+				template = schnozies
+				value = 1.0
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 120
+				AND = {
+					#OR = {
+						has_character_flag = POD_bat_nose_flag
+					#}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	dermal_horns = {
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = POD_horn
+				template = horns
+				range = { 0.0 0.5 }
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 50
+				OR = {
+					has_character_modifier = arsenal_of_the_beast_horns_modifier
+					has_character_modifier = natural_weaponry_horns_modifier
+				}
+				OR = {
+					has_game_rule = world_of_monsters
+					AND = {
+						NOT = { has_game_rule = world_of_monsters }
+						has_POD_public_vamp_blood_trigger = yes
+					}
+				}
+			}
+			modifier = {
+				add = 50
+				has_character_flag = POD_dermal_horns_flag
+				OR = {
+					has_game_rule = world_of_monsters
+					AND = {
+						NOT = { has_game_rule = world_of_monsters }
+						has_POD_public_vamp_blood_trigger = yes
+					}
+				}
+			}
+		}
+	}
+
+	pale_skin = {
+		dna_modifiers = {
+			color = {
+				gene = skin_color
+				mode = modify
+				
+				x = -1.0
+				y = -1.0
+			}
+
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				AND = {
+					OR = {
+						has_character_flag = POD_pale_skin_look_flag
+						has_character_modifier = bloodhunger5_modifier
+						this = character:790113
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	dark_skin = {
+
+		dna_modifiers = {
+		
+			color = {
+				gene = skin_color
+				mode = modify
+				
+				x = -0.98
+				y = 0.98
+			}
+
+		}
+
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				AND = {
+					OR = {
+						has_character_flag = POD_dark_skin_look_flag
+						AND = {
+							has_POD_obsidian_skin_trigger  = yes
+							age > 1500
+						}
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				AND = {
+					AND = {
+							has_POD_obsidian_skin_trigger  = yes
+							age > 1000
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+			modifier = {
+				add = 15
+				AND = {
+					AND = {
+							has_POD_obsidian_skin_trigger  = yes
+							age > 750
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				AND = {
+					AND = {
+							has_POD_obsidian_skin_trigger  = yes
+							age > 500
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+			modifier = {
+				add = 5
+				AND = {
+					AND = {
+							has_POD_obsidian_skin_trigger = yes
+							age > 250
+					}
+					OR = {
+						has_game_rule = world_of_monsters
+						AND = {
+							NOT = { has_game_rule = world_of_monsters }
+							has_POD_public_vamp_blood_trigger = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_portrait_bloodsmear = {
+	usage = game
+
+	bloodsmear1 = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_POD_bloodsmear
+				value = 1.0
+				template = bloodsmear_1
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 75
+				has_character_flag = POD_recent_killed_victim
+				should_show_disturbing_portrait_modifiers = yes
+				OR = {
+					current_month = 11
+					current_month = 12
+				}
+			}
+			modifier = {
+				add = 300
+				has_character_flag = POD_bloodsmear_1_flag
+			}
+			
+		}
+	}
+	
+	bloodsmear2 = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_POD_bloodsmear
+				value = 1.0
+				template = bloodsmear_2
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 75
+				has_character_flag = POD_recent_killed_victim
+				should_show_disturbing_portrait_modifiers = yes
+				OR = {
+					current_month = 3
+					current_month = 4
+				}
+			}
+			modifier = {
+				add = 300
+				has_character_flag = POD_bloodsmear_2_flag
+			}
+			
+		}
+	}
+	
+	bloodsmear3 = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_POD_bloodsmear
+				value = 1.0
+				template = bloodsmear_3
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 75
+				has_character_flag = POD_recent_killed_victim
+				should_show_disturbing_portrait_modifiers = yes
+				OR = {
+					current_month = 5
+					current_month = 6
+					current_month = 7
+				}
+			}
+			modifier = {
+				add = 300
+				has_character_flag = POD_bloodsmear_3_flag
+			}
+			
+		}
+	}
+
+	bloodsmear4 = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_POD_bloodsmear
+				value = 1.0
+				template = bloodsmear_4
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 75
+				has_character_flag = POD_recent_killed_victim
+				should_show_disturbing_portrait_modifiers = yes
+				OR = {
+					current_month = 8
+					current_month = 9
+					current_month = 10
+				}
+			}
+			modifier = {
+				add = 300
+				has_character_flag = POD_bloodsmear_4_flag
+			}
+			modifier = {
+				add = 1000
+				has_trait = "vampgeneration2"
+				has_trait = "education_martial_prowess_4"
+			}
+		}
+	}
+
+	bloodsmear5 = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_POD_bloodsmear
+				value = 1.0
+				template = bloodsmear_5
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 75
+				has_character_flag = POD_recent_killed_victim
+				should_show_disturbing_portrait_modifiers = yes
+				OR = {
+					current_month = 1
+					current_month = 2
+				}
+			}
+			modifier = {
+				add = 300
+				has_character_flag = POD_bloodsmear_5_flag
+			}
+		}
+	}
+}
+
+POD_portrait_hunter_age = {
+	usage = game
+	
+	hunters_age = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_age
+				template = old_beauty_1
+				value = 1.0
+			}
+		}
+		weight = {
+			base = 0
+			
+			modifier = {
+				add = 200
+				OR = {
+				POD_is_supehunter_trigger = yes
+				has_trait = dhampyr
+				}
+			}
+		}
+	}
+}
+
+POD_portrait_bald = {
+	usage = game
+
+	portrait_bald = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = hairstyles
+				template = no_hairstyles
+				value = 0
+			}
+		}
+		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					POD_portrait_bald_trigger = yes
+					POD_no_hair_trigger = yes
+				}
+			}
+		}
+	}
+
+}
+	
+POD_portrait_chad = {
+	usage = game
+
+	portrait_chad = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				template = body_average
+				value = 1.0
+			}
+			morph = {
+				mode = replace
+				gene = gene_bs_body_shape
+				template = body_shape_average
+				value = 1.0
+			}
+		}
+		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					POD_portrait_chad_trigger = yes
+				}
+			}
+		}
+	}
+
+}
+	
+POD_clan_curse_removal = {
+	usage = game
+	
+	nossie_gene_remover = {
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = POD_neckless
+				template = podneckless
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSschnoz
+				template = nosies
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSschnoz
+				template = schnozies
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSsification
+				template = nossification
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSsification
+				template = nosferatitude
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSsification
+				template = nosfferization
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSsification
+				template = nossimization
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSjawz
+				template = jawwies
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSjawz
+				template = wawwies
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSforehead_height
+				template = Nosheadhigh
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSforehead_forward
+				template = Nosheadforward
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSforehead_curve
+				template = Nosheadcurve
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSconifier
+				template = smallerhats
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSeye
+				template = aye
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSeye
+				template = eyee
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSear
+				template = nosear
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSear
+				template = longear
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_NOSear
+				template = noear
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_browcrest
+				template = zerghead
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_amphibieyes
+				template = igoreyes
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_spliceeyes
+				template = thegreys
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_widebrain
+				template = galaxybrain
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_longbrain
+				template = akhenaten
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_serpentinejaw
+				template = smile
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_BROW
+				template = pox
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_BROW
+				template = spike
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_FACE
+				template = mowhawk
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_JAW
+				template = jawspike
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_NOSE
+				template = nosblade
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_NOSE
+				template = nosespike
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_NOSE
+				template = nosespine
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_upperlip
+				template = catfish
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_TEMPLE
+				template = templecuts
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_TEMPLE
+				template = templepox
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_tzm_TEMPLE
+				template = templespike
+				value = 0.0
+			}
+			morph = {
+				mode = replace
+				gene = POD_vamp_open_mouth
+				template = show_fangs
+				value = 0.0
+			}
+			morph = {
+				mode = modify
+				gene = gene_eyebrows_shape
+				template = far_spacing_low_thickness
+				value = 0.0
+			}
+			morph = {
+				mode = modify
+				gene = gene_eyebrows_fullness
+				template = layer_2_low_thickness
+				value = 0.0
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 500
+				POD_suppress_nosferatu_portrait_modifiers_trigger = yes
+			}
+		}
+	}
+}
+
+POD_portrait_eternal_youth = {
+	usage = game
+
+	portrait_eternal_youth = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_age
+				template = no_aging
+				value = 1.0
+			}
+			morph = {
+				mode = replace
+				gene = gene_eyebrows_shape
+				template = avg_spacing_lower_thickness
+				value = 1.0
+			}
+			morph = {
+				mode = replace
+				gene = gene_eyebrows_fullness
+				template = layer_2_avg_thickness
+				value = 0
+			}
+			
+		}
+		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					POD_portrait_eternal_youth_trigger = yes
+				}
+			}
+		}
+	}
+
+}
+
+POD_portrait_average_body = {
+	usage = game
+
+	portrait_average_body = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				template = body_average
+				range = { 0.1 0.4 }
+			}
+			morph = {
+				mode = replace
+				gene = gene_bs_body_shape
+				template = body_shape_average
+				range = { 0.1 0.4 }
+			}
+		}
+		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					POD_portrait_average_body_trigger = yes
+				}
+				NAND = {
+					exists = this
+					is_alive = yes
+					OR = {
+						has_variable = vicissitude_muscular
+						has_variable = vicissitude_weight
+					}
+				}
+			}
+		}
+	}
+
+}
+
+POD_portrait_btggf = {
+	usage = game
+	
+	portrait_btggf = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_bust
+				template = bust_default
+				range = { 0.8 1.0 }
+			}
+		}
+		
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000
+				OR = {
+					POD_portrait_btggf_trigger = yes
+				}
+				NAND = {
+					exists = this
+					is_alive = yes
+					has_variable = vicissitude_bust
+				}
+			}
+		}
+	}
+}

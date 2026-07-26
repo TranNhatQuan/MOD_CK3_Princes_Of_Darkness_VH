@@ -1,0 +1,3793 @@
+﻿namespace = POD_heists
+
+# Arrival via artifact_heist Journey
+POD_heists.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heist_arrival_title
+	theme = heist
+	override_background = { reference = terrain_travel }
+	override_sound = { reference = "event:/DLC/EP2/SFX/Events/Travel/ep2_evn_travel_end_neutral" }
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					POD_custom_incompatible_splats_trigger = {
+						ACTOR = root
+						RECIPIENT = scope:target_court
+					}
+				}
+				desc = {
+					first_valid = {
+						triggered_desc = {
+							trigger = { POD_has_coterie_members_present_trigger = yes }
+							desc = POD_heists.1.desc.hostile.coterie
+						}
+						desc = POD_heists.1.desc.hostile.nocoterie
+					}
+				}
+			}
+			desc = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { POD_has_coterie_members_present_trigger = yes }
+						desc = POD_heists.1.desc.coterie
+					}
+					desc = POD_heists.1.desc.nocoterie
+				}
+			}
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold 
+	}
+
+	artifact = {
+		target = var:current_journey.var:target_artifact
+		position = lower_center_portrait
+	}
+
+	immediate = {
+		hidden_effect = {
+			POD_pause_journey_travel_plan_effect = yes
+			var:current_journey.var:target_artifact.artifact_owner = { save_scope_as = target_court }
+		}
+	}
+	
+	option = {
+		name = POD_heist_arrival_confirm
+
+		play_music_cue = "mood_twilights_approach"
+
+		POD_heist_setup_and_select_map = {
+			COURT   = scope:target_court
+			ENDING  = POD_heists.100
+			SAVE_AS = heist
+		}
+		POD_heist_select_suspicion_events = {
+			HEIST         = scope:heist
+			ON_FAILURE    = POD_heists.102
+			FORCE_HOSTILE = no
+		}
+		POD_heist_initialize_artifact_heist = {
+			HEIST    = scope:heist
+			ARTIFACT = var:current_journey.var:target_artifact
+		}
+	}
+	
+	option = {
+		name = POD_heist_arrival_decline
+		scope:target_court = {
+			add_character_modifier = {
+				modifier = wary_of_infiltrators_modifier
+				years = 20
+			}
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+# Arrival via gold_heist Journey
+POD_heists.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heist_arrival_title
+	theme = heist
+	override_background = { reference = terrain_travel }
+	override_sound = { reference = "event:/DLC/EP2/SFX/Events/Travel/ep2_evn_travel_end_neutral" }
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					POD_custom_incompatible_splats_trigger = {
+						ACTOR = root
+						RECIPIENT = scope:target_court
+					}
+				}
+				desc = {
+					first_valid = {
+						triggered_desc = {
+							trigger = { POD_has_coterie_members_present_trigger = yes }
+							desc = POD_heists.2.desc.hostile.coterie
+						}
+						desc = POD_heists.2.desc.hostile.nocoterie
+					}
+				}
+			}
+			desc = {
+				first_valid = {
+					triggered_desc = {
+						trigger = { POD_has_coterie_members_present_trigger = yes }
+						desc = POD_heists.2.desc.coterie
+					}
+					desc = POD_heists.2.desc.nocoterie
+				}
+			}
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold 
+	}
+
+	immediate = {
+		hidden_effect = {
+			POD_pause_journey_travel_plan_effect = yes
+			var:current_journey.var:target = { save_scope_as = target_court }
+		}
+	}
+	
+	option = {
+		name = POD_heist_arrival_confirm
+
+		play_music_cue = "mood_twilights_approach"
+
+		POD_heist_setup_and_select_map = {
+			COURT   = var:current_journey.var:target
+			ENDING  = POD_heists.100
+			SAVE_AS = heist
+		}
+		POD_heist_select_suspicion_events = {
+			HEIST         = scope:heist
+			ON_FAILURE    = POD_heists.102
+			FORCE_HOSTILE = no
+		}
+		POD_heist_initialize_gold_heist = {
+			HEIST  = scope:heist
+			TARGET = var:current_journey.var:target
+		}
+	}
+	
+	option = {
+		name = POD_heist_arrival_decline
+		scope:target_court = {
+			add_character_modifier = {
+				modifier = wary_of_infiltrators_modifier
+				years = 20
+			}
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+# Arrival via assault_lair Journey
+POD_heists.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.3.t
+	theme = heist
+	override_background = { reference = terrain_travel }
+	override_sound = { reference = "event:/DLC/EP2/SFX/Events/Travel/ep2_evn_travel_end_neutral" }
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.3.desc.coterie
+			}
+			desc = POD_heists.3.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = assassin 
+	}
+
+	immediate = {
+		hidden_effect = {
+			POD_pause_journey_travel_plan_effect = yes
+			var:current_journey.var:target = { save_scope_as = target_court }
+		}
+	}
+	
+	option = {
+		name = POD_heists.3.a
+
+		play_music_cue = "mood_twilights_approach"
+
+		POD_heist_setup_and_select_map = {
+			COURT   = var:current_journey.var:target
+			ENDING  = POD_heists.100 ##################### TODO: new ending event
+			SAVE_AS = heist
+		}
+		POD_heist_select_suspicion_events = {
+			HEIST         = scope:heist
+			ON_FAILURE    = POD_heists.102
+			FORCE_HOSTILE = yes
+		}
+		POD_heist_initialize_lair_assault = {
+			HEIST  = scope:heist
+			TARGET = var:current_journey.var:target
+		}
+	}
+	
+	option = {
+		name = POD_heist_arrival_decline
+		scope:target_court = {
+			add_character_modifier = {
+				modifier = wary_of_infiltrators_modifier
+				years = 20
+			}
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+
+scripted_trigger POD_heists_100_is_successful = {
+	OR = {
+		exists = scope:success_artifact
+		exists = scope:success_gold
+		exists = scope:success_hunt
+	}
+}
+
+# Successful escape during an artifact_heist Journey
+POD_heists.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.100.t
+	theme = heist
+	override_background = { reference = terrain_travel }
+	
+	override_sound = {
+		trigger = { POD_heists_100_is_successful = yes }
+		reference = "event:/DLC/EP1/SFX/UI/Notifications/inspiration_project_complete"
+	}
+	override_sound = { reference = "event:/DLC/EP2/SFX/Events/Travel/ep2_evn_travel_end_neutral" }
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.100.desc.coterie
+			}
+			desc = POD_heists.100.desc.nocoterie
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = scope:success_artifact }
+				desc = POD_heists.100.desc.artifact
+			}
+			triggered_desc = {
+				trigger = {
+					var:current_heist = { has_variable = target_artifact }
+					NOT = { exists = scope:success_artifact }
+				}
+				desc = POD_heists.100.desc.noartifact
+			}
+			triggered_desc = {
+				trigger = { exists = scope:success_hunt }
+				desc = POD_heists.100.desc.hunt
+			}
+			triggered_desc = {
+				trigger = {
+					var:current_heist = { has_variable = hunt_target }
+					NOT = { exists = scope:success_hunt }
+				}
+				desc = POD_heists.100.desc.nohunt
+			}
+			triggered_desc = {
+				trigger = { exists = scope:success_gold }
+				desc = POD_heists.100.desc.gold
+			}
+			desc = POD_heists.100.desc.nogold
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold 
+	}
+
+	artifact = {
+		target = scope:displayed_artifact
+		position = lower_center_portrait
+		trigger = { exists = scope:displayed_artifact }
+	}
+
+	immediate = {
+		var:current_heist ?= {
+			random_in_list = {
+				variable = loot_artifacts
+				limit = { prev.var:target_artifact ?= this }
+				save_scope_as = displayed_artifact
+				save_scope_value_as = { name = success_artifact value = yes }
+			}
+			var:court_owner = {
+				if = {
+					limit = { is_alive = yes }
+					add_character_modifier = {
+						modifier = wary_of_infiltrators_modifier
+						years = 20
+					}
+				}
+			}
+			var:gold_owner ?= {
+				save_scope_as = gold_owner
+			}
+		}
+		if = {
+			limit = {
+				var:current_heist.var:stolen_gold > 0
+			}
+			save_scope_value_as = { name = success_gold value = yes }
+		}
+		if = {
+			limit = {
+				var:current_heist = { has_variable = success_hunt }
+			}
+			save_scope_value_as = { name = success_hunt value = yes }
+		}
+
+		POD_close_heist = yes
+		POD_heist_gain_loot_effect = yes
+		if = {
+			limit = { POD_heists_100_is_successful = yes }
+			POD_heist_increase_infiltration_skill = yes
+			POD_fera_add_renown_effect = { TYPE = cunning }
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_steal_rivals_gold
+				limit = {
+					exists = scope:gold_owner
+					POD_ghoul_mission_can_be_finished = yes
+					task_contract_employer = {
+						has_relation_rival = scope:gold_owner
+					}
+				}
+				complete_task_contract = success_standard
+			}
+		}
+		POD_heist_display_expenditures = yes
+	}
+	
+	option = {
+		name = {
+			trigger = {
+				POD_heists_100_is_successful = yes
+				POD_has_coterie_members_present_trigger = yes
+			}
+			text = POD_heists.100.a.success.coterie
+		}
+		name = {
+			trigger = {
+				POD_heists_100_is_successful = yes
+				POD_has_coterie_members_present_trigger = no
+			}
+			text = POD_heists.100.a.success.nocoterie
+		}
+		name = {
+			trigger = {
+				POD_heists_100_is_successful = no
+			}
+			text = POD_heists.100.a.failure
+		}
+		POD_heist_cleanup_effect = yes
+		POD_end_journey_effect = yes
+	}
+}
+
+
+# Hidden event when failing an artifact_heist Journey (select outcome based on splat hostility)
+POD_heists.102 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				POD_heist_is_hostile_trigger = { HEIST = var:current_heist }
+				var:current_heist.var:court_owner = { POD_is_willing_to_kill_trigger = yes }
+			}
+			# Hostile splat: Kill the infiltrators
+			trigger_event = POD_heists.103
+		}
+		else = {
+			# Friendly splat: Imprison the infiltrators and give them a lasting debuff
+			trigger_event = POD_heists.101
+		}
+	}
+}
+
+
+# Failed an artifact_heist on a friendly splat, resulting in imprisonment and a debuff
+POD_heists.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.101.t
+	theme = heist_suspicion
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_bad" }
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:heist_imprisoner = { is_ruler = no } }
+				desc = POD_heists.101.desc.landless
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = {
+						POD_damage_spirit_custom_trigger = {
+							RECIPIENT = this
+							ACTOR = scope:heist_imprisoner
+						}
+					}
+				}
+				desc = POD_heists.101.desc.spirit
+			}
+			desc = POD_heists.101.desc
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = prisondungeon
+	}
+
+	right_portrait = {
+		character = scope:heist_imprisoner
+		animation = war_defender
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_4_tooltip = yes
+		POD_close_heist = yes
+		var:current_heist.var:court_owner = {
+			save_scope_as = heist_imprisoner
+			add_character_modifier = {
+				modifier = wary_of_infiltrators_modifier
+				years = 20
+			}
+		}
+
+		POD_heist_give_stolen_gold_back = yes
+
+		add_character_modifier = {
+			modifier = heist_caught_modifier
+			years = 20
+		}
+
+		if = {
+			limit = {
+				var:current_heist.var:court_owner = {
+					is_vassal_or_below_of = root
+				}
+			}
+			custom_tooltip = {
+				text = POD_heist_legitimacy_loss_tt
+				add_legitimacy = major_legitimacy_loss
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.101.a
+
+		scope:heist_imprisoner = {
+			progress_towards_rival_effect = {
+				CHARACTER = root
+				REASON    = rival_infiltration
+				OPINION   = default_rival_opinion
+			}
+		}
+
+		if = {
+			limit = { POD_has_coterie_members_trigger = yes }
+			var:coterie = {
+				every_in_list = {
+					variable = members
+					limit = {
+						POD_is_in_same_journey_trigger = { TARGET = root }
+					}
+					POD_heist_get_imprisoned_if_possible = {
+						IMPRISONER = scope:heist_imprisoner
+					}
+				}
+			}
+		}
+		else = {
+			POD_heist_get_imprisoned_if_possible = {
+				IMPRISONER = scope:heist_imprisoner
+			}
+		}
+
+		POD_heist_cleanup_effect = yes
+		hidden_effect = { POD_end_journey_effect = yes }
+	}
+}
+
+
+# Failed an artifact_heist on a hostile splat, resulting in death
+POD_heists.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.101.t # hash collision prevention
+	desc  = POD_heists.103.desc
+	theme = heist_suspicion
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_bad" }
+	
+	left_portrait = {
+		character = root
+		animation = prisondungeon
+	}
+
+	right_portrait = {
+		character = scope:heist_imprisoner
+		animation = war_defender
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_4_tooltip = yes
+		POD_close_heist = yes
+		var:current_heist.var:court_owner = {
+			save_scope_as = heist_imprisoner
+			add_character_modifier = {
+				modifier = wary_of_infiltrators_modifier
+				years = 20
+			}
+		}
+
+		POD_heist_give_stolen_gold_back = yes
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_guaranteed_resurrection = no }
+			text = ELLIPSIS
+		}
+		name = {
+			trigger = { POD_has_guaranteed_resurrection = yes }
+			text = POD_heists.103.a.resurrection
+		}
+
+		scope:heist_imprisoner = {
+			progress_towards_rival_effect = {
+				CHARACTER = root
+				REASON    = rival_infiltration
+				OPINION   = default_rival_opinion
+			}
+		}
+
+		if = {
+			limit = { POD_has_coterie_members_trigger = yes }
+			var:coterie = {
+				every_in_list = {
+					variable = members
+					limit = {
+						POD_is_in_same_journey_trigger = { TARGET = root }
+					}
+					pod_death = {
+						death_reason = death_execution
+						killer = scope:heist_imprisoner
+					}
+				}
+			}
+		}
+		else = {
+			pod_death = {
+				death_reason = death_execution
+				killer = scope:heist_imprisoner
+			}
+		}
+
+		POD_heist_cleanup_effect = yes
+		hidden_effect = { POD_end_journey_effect = yes }
+	}
+}
+
+
+# Releasing a prisoner during a hostile heist
+POD_heists.200 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	override_background = { reference = dungeon }
+
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						scope:prisoner_type = flag:relation
+						scope:prisoner_type = flag:subject
+					}
+				}
+				desc = POD_heists.200.t.relation
+			}
+			desc = POD_heists.200.t
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						scope:prisoner_type = flag:relation
+						scope:prisoner_type = flag:subject
+					}
+				}
+				desc = POD_heists.200.desc
+			}
+			triggered_desc = {
+				trigger = { scope:prisoner_type = flag:friendly_splat }
+				desc = POD_heists.200.desc.stranger
+			}
+			triggered_desc = {
+				trigger = { scope:prisoner_type = flag:hostile_splat }
+				desc = POD_heists.200.desc.hostile
+			}
+		}
+	}
+	
+	left_portrait = {
+		character = root
+	}
+	
+	right_portrait = {
+		character = scope:prisoner_to_release
+		animation = prisondungeon
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_pause_for_node_event = yes
+	}
+
+	option = {
+		name = POD_heists.200.a
+		scope:prisoner_to_release = {
+			if = {
+				limit = { is_imprisoned = yes } # safeguard
+				release_from_prison = yes
+			}
+			add_opinion = {
+				modifier = released_from_prison
+				target = root
+			}
+		}
+		stress_impact = {
+			compassionate = medium_stress_impact_loss
+			sadistic = medium_stress_impact_gain
+			callous = minor_stress_impact_gain
+		}
+	}
+
+	option = {
+		name = POD_heists.200.b
+		trigger = { scope:prisoner_to_release = { gold >= 1 } }
+		scope:prisoner_to_release = {
+			if = {
+				limit = { is_imprisoned = yes } # safeguard
+				release_from_prison = yes
+			}
+			pay_short_term_gold = {
+				gold = {
+					if = {
+						limit = { gold >= ransom_cost_value }
+						add = ransom_cost_value
+					}
+					else = {
+						add = gold
+					}
+				}
+				target = root
+			}
+			add_opinion = {
+				target = root
+				modifier = requested_money_opinion
+				opinion = -20
+			}
+		}
+		stress_impact = {
+			compassionate = major_stress_impact_gain
+			forgiving = major_stress_impact_gain
+			generous = medium_stress_impact_gain
+			greedy = medium_stress_impact_loss
+		}
+	}
+
+	option = {
+		name = POD_heists.200.c
+		trigger = {
+			scope:prisoner_to_release = {
+				is_ruler = no
+				NOT = { is_courtier_of = root }
+			}
+			NOT = {
+				POD_custom_incompatible_splats_trigger = {
+					ACTOR = root
+					RECIPIENT = scope:prisoner_to_release
+				}
+			}
+		}
+		scope:prisoner_to_release = {
+			if = {
+				limit = { is_imprisoned = yes } # safeguard
+				release_from_prison = yes
+			}
+			root = { add_courtier = prev }
+			hidden_effect = {
+				return_to_court = yes
+			}
+			add_character_flag = {
+				flag = blocked_from_leaving
+				years = 5
+			}
+		}
+	}
+
+	option = {
+		name = POD_heists.200.d
+		scope:prisoner_to_release = {
+			pod_death = {
+				death_reason = death_murder
+				killer = root
+			}
+		}
+		stress_impact = {
+			compassionate = medium_stress_impact_gain
+			sadistic = medium_stress_impact_loss
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_node_event = yes
+	}
+}
+
+
+# Outcome event when dueling an elite knight
+POD_heists.201 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { root = scope:sc_victor }
+			trigger_event = POD_heists.202
+		}
+		else = {
+			POD_heist_resume_after_node_event = yes
+			if = {
+				limit = { scope:sc_victor = { POD_is_willing_to_kill_trigger = yes } }
+				POD_die_during_heist_effect = {
+					DEATH_REASON = death_duel
+					KILLER = scope:sc_victor
+				}
+			}
+			else = {
+				# If the knight isn't willing to kill, deliver the Coterie to their liege instead
+				POD_heist_trigger_suspicion_failure_event = yes
+			}
+		}
+		
+		var:current_heist ?= {
+			var:current_location = {
+				POD_heist_clear_node_type = yes
+				POD_heist_set_node_type = { TYPE = prowess ICON = prowess }
+			}
+		}
+	}
+}
+
+# Beat the elite knight. What to do with them?
+POD_heists.202 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	title = POD_heists.202.t
+	desc = POD_heists.202.desc
+
+	left_portrait = {
+		character = root
+		animation = sword_coup_degrace
+	}
+	
+	right_portrait = {
+		character = scope:sc_loser
+		triggered_animation = {
+			trigger = { scope:sc_loser = { is_alive = yes } }
+			animation = severelywounded
+		}
+		triggered_animation = {
+			trigger = { scope:sc_loser = { is_alive = no } }
+			animation = dead
+		}
+	}
+	
+	immediate = {
+		POD_setup_heist_event_background = yes
+	}
+	
+	option = {
+		name = {
+			text = POD_heists.202.a
+			trigger = { scope:sc_loser = { is_alive = yes } }
+		}
+		name = {
+			text = POD_heists.202.a.dead
+			trigger = { scope:sc_loser = { is_alive = no } }
+		}
+
+		if = {
+			limit = { POD_is_supehunter_trigger = yes }
+
+			save_scope_as = attacker
+			scope:sc_loser = { save_scope_as = defender }
+
+			POD_inquihunt_success_side_effects = yes
+		}
+
+		scope:sc_loser = {
+			pod_death = {
+				death_reason = death_duel
+				killer = root
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.202.b
+		
+		trigger = { scope:sc_loser = { is_alive = yes } }
+		
+		scope:sc_loser = {
+			add_character_flag = { flag = lost_duel days = 1 } # bypass duel event
+		}
+		
+		rightfully_imprison_character_effect = {
+			IMPRISONER = root
+			TARGET = scope:sc_loser
+		}
+	}
+	
+	option = {
+		name = POD_heists.202.c
+		
+		trigger = { scope:sc_loser = { is_alive = yes } }
+
+		POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }
+
+		scope:sc_loser = {
+			add_prestige = -500
+			progress_towards_rival_effect = {
+				CHARACTER = root
+				REASON    = rival_duel_vengeance
+				OPINION   = default_rival_opinion
+			}
+		}
+	}
+
+	after = {
+		POD_clear_onetime_buffs = yes
+		POD_heist_resume_after_node_event = yes
+	}
+}
+
+# assumes scope:adversary is present on the TopScope
+scripted_effect POD_set_personality_flag_from_adversary = {
+	save_scope_value_as = {
+		name = target_rational
+		value = scope:adversary.ai_rationality
+	}
+	save_scope_value_as = {
+		name = target_irrational
+		value = { value = scope:adversary.ai_rationality multiply = -1 }
+	}
+	save_scope_value_as = {
+		name = target_compassionate
+		value = scope:adversary.ai_compassion
+	}
+	save_scope_value_as = {
+		name = target_callous
+		value = { value = scope:adversary.ai_compassion multiply = -1 }
+	}
+	save_scope_value_as = {
+		name = target_honorable
+		value = scope:adversary.ai_honor
+	}
+	save_scope_value_as = {
+		name = target_dishonorable
+		value = { value = scope:adversary.ai_honor multiply = -1 }
+	}
+
+	if = {
+		limit = {
+			scope:target_rational >= scope:target_irrational
+			scope:target_rational >= scope:target_compassionate
+			scope:target_rational >= scope:target_callous
+			scope:target_rational >= scope:target_honorable
+			scope:target_rational >= scope:target_dishonorable
+		}
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:rational
+		}
+	}
+	else_if = {
+		limit = {
+			scope:target_irrational >= scope:target_rational
+			scope:target_irrational >= scope:target_compassionate
+			scope:target_irrational >= scope:target_callous
+			scope:target_irrational >= scope:target_honorable
+			scope:target_irrational >= scope:target_dishonorable
+		}
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:irrational
+		}
+	}
+	else_if = {
+		limit = {
+			scope:target_compassionate >= scope:target_rational
+			scope:target_compassionate >= scope:target_irrational
+			scope:target_compassionate >= scope:target_callous
+			scope:target_compassionate >= scope:target_honorable
+			scope:target_compassionate >= scope:target_dishonorable
+		}
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:compassionate
+		}
+	}
+	else_if = {
+		limit = {
+			scope:target_callous >= scope:target_rational
+			scope:target_callous >= scope:target_irrational
+			scope:target_callous >= scope:target_compassionate
+			scope:target_callous >= scope:target_honorable
+			scope:target_callous >= scope:target_dishonorable
+		}
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:callous
+		}
+	}
+	else_if = {
+		limit = {
+			scope:target_honorable >= scope:target_rational
+			scope:target_honorable >= scope:target_irrational
+			scope:target_honorable >= scope:target_compassionate
+			scope:target_honorable >= scope:target_callous
+			scope:target_honorable >= scope:target_dishonorable
+		}
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:honorable
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name  = $SAVE_AS$
+			value = flag:dishonorable
+		}
+	}
+}
+
+# About to fight the hunt_target while hunting
+POD_heists.203 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	title = POD_heists.203.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:rational }
+				desc = POD_heists.203.desc.rational
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:irrational }
+				desc = POD_heists.203.desc.irrational
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:compassionate }
+				desc = POD_heists.203.desc.compassionate
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:callous }
+				desc = POD_heists.203.desc.callous
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:honorable }
+				desc = POD_heists.203.desc.honorable
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:dishonorable }
+				desc = POD_heists.203.desc.dishonorable
+			}
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.203.desc.coterie
+			}
+			desc = POD_heists.203.desc.nocoterie
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = aggressive_sword
+	}
+	
+	right_portrait = {
+		character = scope:adversary
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		hidden_effect = {
+			var:current_heist.var:hunt_target = { save_scope_as = adversary }
+		
+			POD_set_personality_flag_from_adversary = { SAVE_AS = adversary_personality }
+			
+			POD_save_coterie_duelists_except_root = yes
+		}
+	}
+	
+	option = {
+		name = POD_heists.203.a
+
+		custom_tooltip = {
+			text = POD_heist_effect_node_fight_elite
+			
+			# This is where I'd put group combat mechanics. IF I HAD ANY
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = root
+				SC_ATTACKER = root
+				SC_DEFENDER = scope:adversary
+				FATALITY = no
+				FIXED = no
+				LOCALE = corridor_night
+				OUTPUT_EVENT = POD_heists.204
+				INVALIDATION_EVENT = fp1_tbc.0102
+			}
+		}
+	}
+
+	option = {
+		name = POD_heists.203.b
+
+		trigger = { NOT = { scope:prowess_duelist = root } }
+		
+		scope:prowess_duelist = {
+			duel = {
+				skill = prowess
+				target = scope:adversary
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					desc = POD_heists.203.b.success
+					show_as_tooltip = {
+						scope:adversary = {
+							pod_death = {
+								death_reason = death_duel
+								killer = scope:prowess_duelist
+							}
+						}
+					}
+					hidden_effect = {
+						scope:adversary = { save_scope_as = sc_loser }
+						root = {
+							save_scope_as = sc_victor
+							trigger_event = POD_heists.204
+						}
+					}
+				}
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					desc = POD_heists.203.b.failure
+					root = {
+						POD_heist_trigger_suspicion_failure_event = yes
+					}
+				}
+			}
+		}
+	}
+
+	after = {
+		#POD_heist_resume_after_node_event = yes
+	}
+}
+
+scripted_trigger POD_could_potentially_be_ghouled_by = {
+	$DOMITOR$ = {
+		POD_is_vampire_trigger = yes
+		is_adult = yes
+		POD_is_thinblooded_trigger = no
+	}
+	trigger_if = {
+		limit = { NOT = { has_trait = ghoul } }
+		POD_can_be_ghouled_scheme_trigger = yes 
+	}
+	dynasty ?= { NOT = { has_variable = POD_kill_upon_being_bound } }
+}
+
+# Outcome event when dueling the target of your hunt
+POD_heists.204 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { root = scope:sc_victor }
+
+			var:current_heist = { set_variable = success_hunt }
+
+			trigger_event = POD_heists.205
+		}
+		else = {
+			POD_heist_resume_after_node_event = yes
+			
+			if = {
+				limit = { scope:sc_victor = { POD_is_willing_to_kill_trigger = yes } }
+				
+				if = {
+					# cheat death by asking to become a ghoul instead
+					limit = {
+						#OR = {
+							POD_could_potentially_be_ghouled_by = { DOMITOR = scope:sc_victor }
+							# other outcomes here
+						#}
+					}
+					trigger_event = POD_heists.206
+				}
+				else = {
+					POD_die_during_heist_effect = {
+						DEATH_REASON = death_duel
+						KILLER = scope:sc_victor
+					}
+				}
+			}
+			else = {
+				# If the knight isn't willing to kill, deliver the Coterie to their liege instead
+				POD_heist_trigger_suspicion_failure_event = yes
+			}
+		}
+	}
+}
+
+# Beat the hunt target, gain resources
+POD_heists.205 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	title = POD_heists.202.t # hash collision prevention
+	desc = POD_heists.205.desc
+
+	left_portrait = {
+		character = root
+		animation = sword_coup_degrace
+	}
+	
+	right_portrait = {
+		character = scope:sc_loser
+		animation = severelywounded
+	}
+	
+	immediate = {
+		POD_setup_heist_event_background = yes
+	}
+	
+	option = {
+		name = POD_heists.202.a # hash collision prevention
+
+		save_scope_as = attacker
+		scope:sc_loser = { save_scope_as = defender }
+
+		POD_inquihunt_success_side_effects = yes
+
+		scope:sc_loser = {
+			pod_death = {
+				death_reason = death_duel
+				killer = root
+			}
+		}
+	}
+
+	after = {
+		POD_clear_onetime_buffs = yes
+		POD_heist_resume_after_node_event = yes
+	}
+}
+
+# You died... unless?
+POD_heists.206 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	
+	title = POD_heists.206.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = scope:friend }
+				desc = POD_heists.206.desc.coterie
+			}
+			desc = POD_heists.206.desc.nocoterie
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = severelywounded
+	}
+	
+	right_portrait = {
+		character = scope:sc_victor
+		animation = aggressive_sword
+	}
+	
+	lower_center_portrait = {
+		character = scope:friend
+		trigger = { exists = scope:friend }
+	}
+	
+	immediate = {
+		POD_setup_heist_event_background = yes
+		
+		scope:sc_victor = { save_scope_as = adversary }
+		
+		ordered_relation = {
+			type = coterie_member
+			
+			limit = {
+				POD_is_in_same_journey_trigger = { TARGET = root }
+			}
+			
+			order_by = {
+				value = "opinion(root)"
+				
+				if = {
+					limit = { has_relation_soulmate = root }
+					add = 20
+				}
+				if = {
+					limit = { has_relation_best_friend = root }
+					add = 20
+				}
+				if = {
+					limit = { has_relation_lover = root }
+					add = 10
+				}
+				if = {
+					limit = { has_relation_friend = root }
+					add = 10
+				}
+			}
+			
+			save_scope_as = friend
+		}
+	}
+	
+	option = {
+		name = POD_heists.206.a
+		
+		trigger = {
+			POD_could_potentially_be_ghouled_by = { DOMITOR = scope:adversary }
+			
+			is_unbondable_trigger = no
+			
+			save_temporary_scope_value_as = {
+				name = easier_generation_requirement
+				value = {
+					value = scope:adversary.POD_vampgeneration
+					add = 1
+				}
+			}
+			
+			POD_can_beg_for_ghouldom_from_generation = {
+				GENERATION = scope:easier_generation_requirement
+			}
+		}
+		
+		show_as_unavailable = {
+			POD_could_potentially_be_ghouled_by = { DOMITOR = scope:adversary }
+		}
+
+		show_as_tooltip = { add_trait_force_tooltip = ghoul }
+		
+		trigger_event = POD_heists.207
+		
+		POD_kill_other_coterie_members = {
+			DEATH_REASON = death_duel
+			KILLER = scope:adversary
+		}
+	}
+	
+	# My ancestors are smiling at me, Imperials. Can you say the same?
+	option = {
+		name = POD_heists.206.c
+
+		POD_die_during_heist_effect = {
+			DEATH_REASON = death_duel
+			KILLER = scope:adversary
+		}
+	}
+}
+
+# Become a Ghoul
+POD_heists.207 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist
+	
+	title = POD_heists.207.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:rational }
+				desc = POD_heists.207.desc.rational
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:irrational }
+				desc = POD_heists.207.desc.irrational
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:compassionate }
+				desc = POD_heists.207.desc.compassionate
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:callous }
+				desc = POD_heists.207.desc.callous
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:honorable }
+				desc = POD_heists.207.desc.honorable
+			}
+			triggered_desc = {
+				trigger = { scope:adversary_personality = flag:dishonorable }
+				desc = POD_heists.207.desc.dishonorable
+			}
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = shame
+		camera = camera_event_very_left
+	}
+	
+	right_portrait = {
+		character = scope:sc_victor
+		animation = idle
+	}
+	
+	immediate = {
+		POD_setup_heist_event_background = yes
+		
+		hidden_effect = {
+			POD_set_personality_flag_from_adversary = { SAVE_AS = adversary_personality }
+		}
+	}
+	
+	option = {
+		name = POD_heists.207.a
+		
+		POD_fame_loss_from_begging_for_ghouldom = yes
+		
+		POD_become_ghoul_effect = yes
+		POD_become_bound_ghoul_effect = { DOMITOR = scope:adversary }
+	}
+	
+	after = {
+		hidden_effect = {
+			POD_end_journey_effect = yes
+			POD_heist_give_stolen_gold_back = yes
+		}
+		POD_heist_cleanup_effect = yes
+	}
+}
+
+
+###############################################
+####### FRIENDLY-SPLAT SUSPICION EVENTS #######
+#######        IDs: 1000 - 1999         #######
+###############################################
+
+scripted_effect POD_heist_suspicion_event_skill_check = {
+	scope:$SKILL$_duelist = {
+		duel = {
+			skill = $SKILL$
+			value = heist_suspicion_event_$EVENT$_difficulty
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = $LOC_KEY$.success
+				root = { $ON_SUCCESS$ }
+			}
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				desc = $LOC_KEY$.failure
+				root = { $ON_FAILURE$ }
+			}
+		}
+		POD_clear_onetime_buffs = yes
+	}
+}
+
+scripted_trigger POD_is_valid_heist_adversary = {
+	POD_is_available_for_events = yes
+	this != root
+	# root should always be the heist leader so this is fine, probably
+	NOT = { has_relation_coterie_member = root }
+}
+
+####### CHANCELLOR ROUTE #######
+
+# Chancellor route, 25 Suspicion
+POD_heists.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1001.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1001.desc.coterie
+			}
+			desc = POD_heists.1001.desc.nocoterie
+		}
+		desc = POD_heists.1001.desc.end
+	}
+	
+	left_portrait = {
+		character = root
+		animation = boredom
+	}
+	
+	right_portrait = {
+		character = scope:diplomacy_courtier
+		animation = thinking
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+
+			ordered_courtier_or_guest = {
+				limit = {
+					trigger_if = {
+						limit = {
+							exists = prev.cp:councillor_chancellor
+							prev.cp:councillor_chancellor = { POD_is_valid_heist_adversary = yes }
+						}
+						NOT = { this = prev.cp:councillor_chancellor }
+					}
+					trigger_else = {
+						POD_is_valid_heist_adversary = yes
+					}
+				}
+				order_by = diplomacy
+				save_scope_as = diplomacy_courtier
+			}
+			if = {
+				limit = { NOT = { exists = scope:diplomacy_courtier } }
+				save_scope_as = diplomacy_courtier
+			}
+
+			if = {
+				limit = { exists = capital_province }
+				capital_province = { save_scope_as = flavortext_province }
+			}
+			else = {
+				location = { save_scope_as = flavortext_province }
+			}
+			scope:flavortext_province = {
+				county_controller = {
+					random_neighboring_and_across_water_top_liege_realm = {
+						save_scope_as = flavortext_realm
+					}
+				}
+			}
+		}
+
+	}
+	
+	option = {
+		name = POD_heists.1001.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1001.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1001.b.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1001.b.nocoterie
+		}
+		add_character_modifier = {
+			modifier = heist_diploroute_1_modifier
+			years = heist_negative_modifier_duration
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Chancellor route, 50 Suspicion
+POD_heists.1002 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+	
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:chancellor = var:current_heist.var:court_owner }
+				desc = POD_heists.1002.t.target
+			}
+			desc = POD_heists.1002.t
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1002.desc.coterie
+			}
+			desc = POD_heists.1002.desc.nocoterie
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:chancellor = var:current_heist.var:court_owner }
+				desc = POD_heists.1002.desc.target
+			}
+			desc = POD_heists.1002.desc
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1002.desc.end.coterie
+			}
+			desc = POD_heists.1002.desc.end.nocoterie
+		}
+		desc = POD_heists.1002.desc.end
+	}
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	
+	right_portrait = {
+		character = scope:chancellor
+		animation = chancellor
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+
+			if = {
+				limit = {
+					exists = cp:councillor_chancellor
+					cp:councillor_chancellor = { POD_is_valid_heist_adversary = yes }
+				}
+				cp:councillor_chancellor = { save_scope_as = chancellor }
+			}
+			else = {
+				save_scope_as = chancellor
+			}
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1002.a.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1002.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1002.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1002.b.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1002.b.nocoterie
+		}
+		add_character_modifier = {
+			modifier = heist_diploroute_2_modifier
+			years = heist_negative_modifier_duration
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Chancellor route, 75 Suspicion
+POD_heists.1003 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1003.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1003.desc.coterie
+			}
+			desc = POD_heists.1003.desc.nocoterie
+		}
+		desc = POD_heists.1003.desc.end
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_dishonorable
+	}
+
+	right_portrait = {
+		character = scope:chancellor
+		animation = happy_teacher
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+
+			if = {
+				limit = {
+					exists = cp:councillor_chancellor
+					cp:councillor_chancellor = { POD_is_valid_heist_adversary = yes }
+				}
+				cp:councillor_chancellor = { save_scope_as = chancellor }
+			}
+			else = {
+				save_scope_as = chancellor
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1003.a
+
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1003.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1003.b
+		add_character_modifier = {
+			modifier = heist_diploroute_3_modifier
+			years = heist_negative_modifier_duration
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+####### SPYMASTER ROUTE #######
+
+# Spymaster route, 25 Suspicion
+POD_heists.1011 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1011.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1011.desc.coterie
+			}
+			desc = POD_heists.1011.desc.nocoterie
+		}
+
+		desc = POD_heists.1011.desc
+
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1011.desc.end.coterie
+			}
+			desc = POD_heists.1011.desc.end.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = war_defender
+	}
+	
+	right_portrait = {
+		character = scope:potential_rival
+		animation = disapproval
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+
+			# Exclude the Spymaster for this event so they can be used in the second one
+			if = {
+				limit = {
+					exists = cp:councillor_spymaster
+					POD_is_valid_heist_adversary = yes
+				}
+				cp:councillor_spymaster = { save_scope_as = spymaster }
+			}
+			else = {
+				ordered_vassal = {
+					limit = {
+						root = { can_set_relation_rival_trigger = { CHARACTER = prev } }
+						POD_is_valid_heist_adversary = yes
+					}
+					order_by = intrigue
+					save_scope_as = spymaster
+				}
+			}
+
+			ordered_vassal = {
+				limit = {
+					root = { can_set_relation_rival_trigger = { CHARACTER = prev } }
+					NOT = { this = scope:spymaster }
+					POD_is_valid_heist_adversary = yes
+				}
+				order_by = max_military_strength
+				save_scope_as = potential_rival
+			}
+			if = {
+				limit = { NOT = { exists = scope:potential_rival } }
+				ordered_courtier = {
+					limit = {
+						root = { can_set_relation_rival_trigger = { CHARACTER = prev } }
+						NOT = { this = scope:spymaster }
+						POD_is_valid_heist_adversary = yes
+					}
+					order_by = sum_of_all_skills_value
+					save_scope_as = potential_rival
+				}
+			}
+
+		}
+
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1011.a.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1011.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1011.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1011.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.1011.b
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1011.c.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1011.c.nocoterie
+		}
+		if = {
+			limit = { can_set_relation_rival_trigger = { CHARACTER = scope:potential_rival } }
+			scope:potential_rival = {
+				set_relation_rival = {
+					target = prev
+					reason = rival_grave_insult
+				}
+			}
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Spymaster route, 50 Suspicion
+POD_heists.1012 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:current_heist.var:court_owner.cp:councillor_spymaster ?= scope:spymaster }
+				desc = POD_heists.1012.t.spymaster
+			}
+			desc = POD_heists.1012.t.rando
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1012.desc.coterie
+			}
+			desc = POD_heists.1012.desc.nocoterie
+		}
+
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:current_heist.var:court_owner.cp:councillor_spymaster ?= scope:spymaster }
+				desc = POD_heists.1012.desc.spymaster
+			}
+			desc = POD_heists.1012.desc.rando
+		}
+
+		desc = POD_heists.1012.desc.end
+	}
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	right_portrait = {
+		character = scope:spymaster
+		animation = spymaster
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			if = {
+				limit = {
+					exists = cp:councillor_spymaster
+					POD_is_valid_heist_adversary = yes
+				}
+				cp:councillor_spymaster = { save_scope_as = spymaster }
+			}
+			else = {
+				ordered_vassal = {
+					limit = {
+						root = { can_set_relation_rival_trigger = { CHARACTER = prev } }
+						POD_is_valid_heist_adversary = yes
+					}
+					order_by = intrigue
+					save_scope_as = spymaster
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1012.a.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1012.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1012.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1012.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.1012.b
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1012.c
+		if = {
+			limit = { can_set_relation_rival_trigger = { CHARACTER = scope:spymaster } }
+			scope:spymaster = {
+				set_relation_rival = {
+					target = root
+					reason = rival_grave_insult
+				}
+			}
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Spymaster route, 75 Suspicion
+POD_heists.1013 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1013.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = {
+		desc = POD_heists.1013.desc
+
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1013.desc.coterie
+			}
+			desc = POD_heists.1013.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = war_attacker
+	}
+	
+	right_portrait = {
+		character = scope:court_owner
+		animation = personality_honorable
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+			save_scope_as = court_owner
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1013.a.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1013.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.1013.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.1013.b.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.1013.b.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.1013.b
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1013.c
+		if = {
+			limit = { can_set_relation_rival_trigger = { CHARACTER = scope:court_owner } }
+			scope:court_owner = {
+				set_relation_rival = {
+					target = prev
+					reason = rival_grave_insult
+				}
+			}
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+####### COTERIE OPINION ROUTE #######
+
+scripted_effect POD_heist_coterie_strife_success = {
+	send_interface_toast = {
+		title = $LOC_KEY$.success
+	}
+}
+
+scripted_effect POD_heist_coterie_strife_opinion = {
+	send_interface_toast = {
+		title = $LOC_KEY$.failure
+		var:coterie = {
+			every_in_list = {
+				variable = members
+				limit = {
+					NOT = { this = root }
+					POD_is_in_same_journey_trigger = { TARGET = root }
+				}
+				add_opinion = {
+					target = root
+					modifier = heist_coterie_strife
+					opinion = $OPINION$
+				}
+			}
+		}
+	}
+}
+
+# Coterie opinion route, 25 Suspicion
+POD_heists.1021 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1021.t
+	theme = heist_suspicion
+
+	desc = POD_heists.1021.desc
+	
+	left_portrait = {
+		character = root
+		animation = boredom
+	}
+	
+	right_portrait = {
+		character = scope:coterie_member
+		animation = anger
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:coterie = {
+			random_in_list = {
+				variable = members
+				limit = {
+					NOT = { this = root }
+					POD_is_in_same_journey_trigger = { TARGET = root }
+				}
+				save_scope_as = coterie_member
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1021.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = learning
+			LOC_KEY = POD_heists.1021.a
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1021.a }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1021.a OPINION = -20 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1021.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = stewardship
+			LOC_KEY = POD_heists.1021.b
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1021.b }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1021.b OPINION = -20 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1021.c
+		POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Coterie opinion route, 50 Suspicion
+POD_heists.1022 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1022.t
+	theme = heist_suspicion
+
+	desc = POD_heists.1022.desc
+	
+	left_portrait = {
+		character = root
+		animation = eyeroll
+	}
+	
+	right_portrait = {
+		character = scope:coterie_member
+		animation = wedding_objection_start
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:coterie = {
+			random_in_list = {
+				variable = members
+				limit = {
+					NOT = { this = root }
+					POD_is_in_same_journey_trigger = { TARGET = root }
+				}
+				save_scope_as = coterie_member
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1022.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = learning
+			LOC_KEY = POD_heists.1022.a
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1022.a }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1022.a OPINION = -30 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1022.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = stewardship
+			LOC_KEY = POD_heists.1022.b
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1022.b }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1022.b OPINION = -30 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1022.c
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Coterie opinion route, 75 Suspicion
+POD_heists.1023 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1023.t
+	theme = heist_suspicion
+
+	desc = POD_heists.1023.desc
+	
+	left_portrait = {
+		character = root
+		animation = war_over_win
+	}
+	
+	right_portrait = {
+		character = scope:coterie_member
+		animation = anger
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+
+		var:coterie = {
+			random_in_list = {
+				variable = members
+				limit = {
+					NOT = { this = root }
+					POD_is_in_same_journey_trigger = { TARGET = root }
+				}
+				save_scope_as = coterie_member
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1023.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = learning
+			LOC_KEY = POD_heists.1023.a
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1023.a }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1023.a OPINION = -40 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1023.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = stewardship
+			LOC_KEY = POD_heists.1023.b
+			ON_SUCCESS = "POD_heist_coterie_strife_success = { LOC_KEY = POD_heists.1023.b }"
+			ON_FAILURE = "POD_heist_coterie_strife_opinion = { LOC_KEY = POD_heists.1023.b OPINION = -40 }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.1023.c
+		POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+####### CHAPLAIN ROUTE #######
+
+# Chaplain route, 25 Suspicion
+POD_heists.1031 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1031.t
+	theme = heist_suspicion
+	override_background = { reference = temple_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1031.desc.coterie
+			}
+			desc = POD_heists.1031.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+	}
+	
+	right_portrait = {
+		character = scope:court_chaplain
+		animation = personality_zealous
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_1_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_temple_scope # for event background
+
+			if = {
+				limit = {
+					exists = cp:councillor_court_chaplain
+					cp:councillor_court_chaplain = { POD_is_valid_heist_adversary = yes }
+				}
+				cp:councillor_court_chaplain = { save_scope_as = court_chaplain }
+			}
+			else = {
+				save_scope_as = court_chaplain
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1031.a
+		add_stress = medium_stress_gain
+	}
+	
+	option = {
+		name = POD_heists.1031.b
+		POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Chaplain route, 50 Suspicion
+POD_heists.1032 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1032.t
+	theme = heist_suspicion
+	override_background = { reference = temple_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1032.desc.coterie
+			}
+			desc = POD_heists.1032.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = boredom
+	}
+	
+	right_portrait = {
+		character = scope:court_chaplain
+		animation = personality_zealous
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_2_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_temple_scope # for event background
+
+			if = {
+				limit = {
+					exists = cp:councillor_court_chaplain
+					cp:councillor_court_chaplain = { POD_is_valid_heist_adversary = yes }
+				}
+				cp:councillor_court_chaplain = { save_scope_as = court_chaplain }
+			}
+			else = {
+				save_scope_as = court_chaplain
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1032.a
+		add_stress = major_stress_gain
+	}
+	
+	option = {
+		name = POD_heists.1032.b
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Chaplain route, 75 Suspicion
+POD_heists.1033 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1033.t
+	theme = heist_suspicion
+	override_background = { reference = temple_scope }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.1033.desc.coterie
+			}
+			desc = POD_heists.1033.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	
+	right_portrait = {
+		character = scope:court_chaplain
+		animation = personality_zealous
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_3_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_temple_scope # for event background
+
+			if = {
+				limit = {
+					exists = cp:councillor_court_chaplain
+					cp:councillor_court_chaplain = { POD_is_valid_heist_adversary = yes }
+				}
+				cp:councillor_court_chaplain = { save_scope_as = court_chaplain }
+			}
+			else = {
+				save_scope_as = court_chaplain
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1033.a
+		add_stress = massive_stress_gain
+	}
+	
+	option = {
+		name = POD_heists.1033.b
+		POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+####### "EASY" ROUTE #######
+
+# Easy route, 25 Suspicion
+POD_heists.1051 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1051.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = POD_heists.1051.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:coterie_member
+		animation = ecstasy
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_1_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+		}
+
+		var:coterie = {
+			random_in_list = {
+				variable = members
+				limit = {
+					NOT = { this = root }
+					POD_is_in_same_journey_trigger = { TARGET = root }
+				}
+				save_scope_as = coterie_member
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.1051.a
+		POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_gain_1 }
+		POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }
+	}
+	
+	option = {
+		name = POD_heists.1051.b
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Easy route, 50 Suspicion
+POD_heists.1052 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1052.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = POD_heists.1052.desc
+	
+	left_portrait = {
+		character = root
+		animation = throne_room_bow_3
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_2_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+		}
+	}
+	
+	option = {
+		name = POD_heists.1052.a
+		POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_gain_2 }
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+	
+	option = {
+		name = POD_heists.1052.b
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Easy route, 75 Suspicion
+POD_heists.1053 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.1053.t
+	theme = heist_suspicion
+	override_background = { reference = throne_room_scope }
+
+	desc = POD_heists.1053.desc
+	
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	
+	right_portrait = {
+		character = scope:court_owner
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_heist_suspicion_threshold_3_tooltip = yes
+		
+		var:current_heist.var:court_owner = {
+			save_scope_as = background_throne_room_scope # for event background
+			save_scope_as = court_owner
+		}
+	}
+	
+	option = {
+		name = POD_heists.1053.a
+		POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_gain_3 }
+		POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }
+	}
+	
+	option = {
+		trigger = {
+			NOR = {
+				has_trait = lunatic
+				has_trait = malkavian
+			}
+		}
+		name = POD_heists.1053.b
+	}
+	
+	option = {
+		# to highlight the trait in the option
+		trigger = {
+			OR = {
+				has_trait = lunatic
+				has_trait = malkavian
+			}
+		}
+		name = POD_heists.1053.b.mad
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+##############################################
+####### HOSTILE-SPLAT SUSPICION EVENTS #######
+#######        IDs: 2000 - 2999        #######
+##############################################
+
+
+####### MGS1 ROUTE #######
+
+# MGS1 route, 25 Suspicion
+POD_heists.2001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.2001.t
+	theme = heist_suspicion
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2001.desc.coterie
+			}
+			desc = POD_heists.2001.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = spymaster
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2001.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.2002.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2001.b
+		trigger = {
+			OR = {
+				has_trait = eccentric
+				has_trait = lunatic
+				is_malkavian_trigger = yes
+			}
+		}
+		add_stress = minor_stress_loss
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# MGS1 route, 50 Suspicion
+POD_heists.2002 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2002.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2002.desc.coterie
+			}
+			desc = POD_heists.2002.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = { NOT = { root = scope:prowess_duelist } }
+			animation = thinking
+		}
+		triggered_animation = {
+			trigger = { root = scope:prowess_duelist }
+			animation = assassin
+		}
+	}
+	
+	right_portrait = {
+		character = scope:prowess_duelist
+		animation = assassin
+		trigger = { NOT = { root = scope:prowess_duelist } }
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = {
+			trigger = { NOT = { scope:prowess_duelist = root } }
+			text = POD_heists.2002.a.coterie
+		}
+		name = {
+			trigger = { scope:prowess_duelist = root }
+			text = POD_heists.2002.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2002.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_trigger_suspicion_failure_event = yes"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2002.b
+		add_stress = medium_stress_gain
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# MGS1 route, 75 Suspicion
+POD_heists.2003 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2003.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2003.desc.coterie
+			}
+			desc = POD_heists.2003.desc.nocoterie
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2003.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3_deadly
+			SKILL   = martial
+			LOC_KEY = POD_heists.2003.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_battle }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+####### MGS3 ROUTE #######
+
+# MGS3 route, 25 Suspicion
+POD_heists.2011 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.2011.t
+	theme = heist_suspicion
+	override_background = { reference = garden }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2011.desc.coterie
+			}
+			desc = POD_heists.2011.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = disapproval
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		#POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2011.a
+		POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_loss_1 }
+	}
+	
+	option = {
+		name = POD_heists.2011.b
+		add_stress = minor_stress_gain
+		POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }
+	}
+	
+	option = {
+		name = POD_heists.2011.c
+		trigger = { has_trait = animalismdiscipline } # TODO: track animal control coterie ability
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# MGS3 route, 50 Suspicion
+POD_heists.2012 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2012.t
+	override_background = { reference = garden }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2012.desc.coterie
+			}
+			desc = POD_heists.2012.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		#POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2012.a
+		POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_loss_2 }
+	}
+	
+	option = {
+		name = POD_heists.2012.b
+		add_stress = medium_stress_gain
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# MGS3 route, 75 Suspicion
+POD_heists.2013 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2013.t
+	desc = POD_heists.2013.desc
+	override_background = { reference = garden }
+
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		#POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2013.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3_deadly
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.2013.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_fire }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2013.b
+		add_stress = major_stress_gain
+		POD_heist_raise_suspicion_effect = { VALUE = massive_suspicion_value }
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+####### ASSASSIN'S CREED ROUTE #######
+
+# Assassin's Creed route, 25 Suspicion
+POD_heists.2031 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.2031.t
+	theme = heist_suspicion
+	override_background = { reference = alley_night }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2031.desc.coterie
+			}
+			desc = POD_heists.2031.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	widgets = {
+		widget = {
+			gui = "POD_shader_event_fog_alley_night"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+			container = "custom_widgets_container"
+		}
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2031.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2031.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_loss_1 } increase_wounds_effect = { REASON = fall } POD_heist_raise_suspicion_effect = { VALUE = minor_suspicion_value }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Assassin's Creed route, 50 Suspicion
+POD_heists.2032 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2032.t
+	override_background = { reference = alley_night }
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2032.desc.coterie
+			}
+			desc = POD_heists.2032.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = assassin
+	}
+	
+	widgets = {
+		widget = {
+			gui = "POD_shader_event_fog_alley_night"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+			container = "custom_widgets_container"
+		}
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2032.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2032.a
+			ON_SUCCESS = "POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_gain_2 }"
+			ON_FAILURE = "POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_loss_2 } increase_wounds_effect = { REASON = fight } POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Assassin's Creed route, 75 Suspicion
+POD_heists.2033 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2033.t
+	desc = POD_heists.2033.desc
+	override_background = { reference = alley_night }
+
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	
+	widgets = {
+		widget = {
+			gui = "POD_shader_event_fog_alley_night"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+			container = "custom_widgets_container"
+		}
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2033.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3_deadly
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2033.a
+			ON_SUCCESS = "POD_heist_add_and_track_prestige = { AMOUNT = heist_event_prestige_gain_3 }"
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_fall }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2033.b
+		trigger = { has_trait = fortitudeadvanced } # TODO: track resilience coterie ability
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+####### DUNGEON KEEPER ROUTE #######
+
+# Dungeon Keeper route, 25 Suspicion
+POD_heists.2041 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.2041.t
+	theme = heist_suspicion
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2041.desc.coterie
+			}
+			desc = POD_heists.2041.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = {
+			trigger = { NOT = { scope:learning_duelist = root } }
+			text = POD_heists.2041.a.coterie
+		}
+		name = {
+			trigger = { scope:learning_duelist = root }
+			text = POD_heists.2041.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = learning
+			LOC_KEY = POD_heists.2041.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_gain_wound_with_toast = yes add_stress = medium_stress_gain"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2041.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2041.b
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_heist_gain_wound_with_toast = yes add_stress = medium_stress_gain"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Dungeon Keeper route, 50 Suspicion
+POD_heists.2042 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2042.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2042.desc.coterie
+			}
+			desc = POD_heists.2042.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.2042.a.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.2042.a.nocoterie
+		}
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2_deadly
+			SKILL   = learning
+			LOC_KEY = POD_heists.2041.a # reuse loc for hash collision prevention
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_accident }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2042.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 2_deadly
+			SKILL   = stewardship
+			LOC_KEY = POD_heists.2041.b # reuse loc for hash collision prevention
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_accident }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Dungeon Keeper route, 75 Suspicion
+POD_heists.2043 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2043.t
+	desc = POD_heists.2043.desc
+
+	left_portrait = {
+		character = root
+		animation = paranoia
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2043.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3_deadly
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.2043.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_accident }"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2043.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3_deadly
+			SKILL   = martial
+			LOC_KEY = POD_heists.2043.a # reuse loc for hash collision prevention
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_accident }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+####### INSIDE HELP ROUTE #######
+
+# Inside Help route, 25 Suspicion
+POD_heists.2061 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.2061.t
+	theme = heist_suspicion
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2061.desc.coterie
+			}
+			desc = POD_heists.2061.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = steward
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_1"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_1_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2061.a
+		save_scope_value_as = {
+			name = big_bribe
+			value = {
+				value = heist_node_gold_loss
+				multiply = 5
+			}
+		}
+		POD_heist_add_and_track_gold = { AMOUNT = scope:big_bribe }
+	}
+	
+	option = {
+		name = POD_heists.2061.b
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = diplomacy
+			LOC_KEY = POD_heists.2061.b
+			ON_SUCCESS = "POD_heist_add_and_track_gold = { AMOUNT = heist_node_gold_loss }"
+			ON_FAILURE = "POD_heist_trigger_suspicion_failure_event = yes"
+		}
+	}
+	
+	option = {
+		name = POD_heists.2061.c
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 1
+			SKILL   = intrigue
+			LOC_KEY = POD_heists.2061.b # hash collision prevention
+			ON_SUCCESS = "POD_heist_add_and_track_gold = { AMOUNT = heist_node_gold_loss }"
+			ON_FAILURE = "POD_heist_trigger_suspicion_failure_event = yes"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Inside Help route, 50 Suspicion
+POD_heists.2062 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2062.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2062.desc.coterie
+			}
+			desc = POD_heists.2062.desc.nocoterie
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_2"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_2_tooltip = yes
+
+		#POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2062.a
+		add_stress = miniscule_stress_gain
+		POD_heist_raise_suspicion_effect = { VALUE = major_suspicion_value }
+	}
+	
+	option = {
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = yes }
+			text = POD_heists.2062.b.coterie
+		}
+		name = {
+			trigger = { POD_has_coterie_members_present_trigger = no }
+			text = POD_heists.2062.b.nocoterie
+		}
+		add_stress = major_stress_gain
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+# Inside Help route, 75 Suspicion
+POD_heists.2063 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = heist_suspicion
+	title = POD_heists.2063.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { POD_has_coterie_members_present_trigger = yes }
+				desc = POD_heists.2063.desc.coterie
+			}
+			desc = POD_heists.2063.desc.nocoterie
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = aggressive_sword
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_heist_suspicion_threshold_3"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		POD_setup_heist_event_background = yes
+		POD_heist_suspicion_threshold_3_tooltip = yes
+
+		POD_save_coterie_duelists = yes
+	}
+	
+	option = {
+		name = POD_heists.2063.a
+		POD_heist_suspicion_event_skill_check = {
+			EVENT   = 3
+			SKILL   = prowess
+			LOC_KEY = POD_heists.2063.a
+			ON_SUCCESS = ""
+			ON_FAILURE = "POD_die_during_heist_no_killer_effect = { DEATH_REASON = death_battle }"
+		}
+	}
+
+	after = {
+		POD_heist_resume_after_suspicion_event = yes
+	}
+}
+
+
+
+
+####################
+####### MISC #######
+####################
+
+# Hidden event for displaying learned secrets (since interface messages display the wrong RNG results)
+# triggered by POD_heist_option_gossip_sgui, need to pass scope:secret
+POD_heists.6000 = {
+	hidden = yes
+	immediate = {
+		send_interface_toast = {
+			title = secret_discovered_toast
+			left_icon = scope:secret.secret_owner
+
+			scope:secret = {
+				reveal_to = prev
+			}
+		}
+	}
+}
+
+# You died and got resurrected outside a heist
+POD_heists.6001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.6001.t
+	desc = POD_heists.6001.desc
+	theme = heist
+	override_background = { reference = terrain_travel }
+	override_sound = { reference = "event:/DLC/EP2/SFX/Events/Travel/ep2_evn_travel_end_neutral" }
+	
+	left_portrait = {
+		character = root
+	}
+	
+	option = {
+		name = POD_heists.6001.a
+		custom_tooltip = POD_heists.6001.a.tt
+	}
+}
+
+# Event for debugging: steal an artifact from Charon
+POD_heists.7777 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_heists.7777.t
+	desc  = POD_heists.7777.desc
+	theme = heist
+
+	orphan = yes
+
+	trigger = {
+		POD_is_on_heist_trigger = no
+		character:POD_wraith_01 = {
+			any_character_artifact = {
+				count > 0
+			}
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold 
+	}
+	
+	right_portrait = {
+		character = character:POD_wraith_01
+		animation = war_defender
+	}
+
+	artifact = {
+		target = scope:charon_artifact
+		position = lower_center_portrait
+	}
+
+	immediate = {
+		character:POD_wraith_01 = {
+			random_character_artifact = {
+				save_scope_as = charon_artifact
+			}
+		}
+	}
+	
+	option = {
+		name = POD_heists.7777.a
+
+		play_music_cue = "mood_twilights_approach"
+		
+		POD_heist_setup_with_specific_map = {
+			COURT   = character:POD_wraith_01
+			MAP     = star
+			ENDING  = POD_heists.100
+			SAVE_AS = heist
+		}
+		scope:charon_artifact = {
+			remove_variable = unavailable_artifact
+		}
+		POD_heist_initialize_artifact_heist = {
+			HEIST    = scope:heist
+			ARTIFACT = scope:charon_artifact
+		}
+		POD_heist_select_suspicion_events = {
+			HEIST         = scope:heist
+			ON_FAILURE    = POD_heists.102
+			FORCE_HOSTILE = no
+		}
+		# POD_heist_setup_suspicion_effect = {
+		# 	HEIST  = scope:heist
+		# 	EVENT1 = POD_heists.2061
+		# 	EVENT2 = POD_heists.2062
+		# 	EVENT3 = POD_heists.2063
+		# 	EVENT4 = POD_heists.103
+		# }
+	}
+	
+	option = {
+		name = POD_heists.7777.b
+	}
+}

@@ -1,0 +1,2967 @@
+﻿
+# Discovery
+POD_umbra_set_expedition_discovery_pos_effect = {
+	save_temporary_scope_as = this_character
+	var:umbra_stationed_realm = { 
+		save_temporary_scope_as = this_realm
+		set_variable = { name = umbra_discovery_type value = flag:$TYPE$ years = umbra_discovery_duration } 
+	}
+	if = {
+		limit = { NOT = { scope:player = this } }
+		scope:player = {
+			send_interface_message = {
+				type = event_generic_good_with_text
+				title = umbra_discovery.title
+				desc = umbra_discovery.$TYPE$.desc
+				left_icon = scope:player
+				right_icon = scope:this_character
+				
+				scope:this_character = {
+					create_character_memory = {
+						type = umbra_discovery_memory
+					}
+				}
+			}
+		}
+	}
+	else = {
+		send_interface_message = {
+			type = event_generic_good_with_text
+			title = umbra_discovery.title
+			desc = umbra_discovery.$TYPE$.desc
+			right_icon = this
+			
+			create_character_memory = {
+				type = umbra_discovery_memory
+			}
+		}
+	}
+}
+
+POD_umbra_set_expedition_crisis_effect = {
+	save_scope_as = this_character
+	var:umbra_stationed_realm = { 
+		save_temporary_scope_as = this_realm
+		set_variable = { name = umbra_discovery_type value = flag:$TYPE$ years = umbra_discovery_duration } 
+	}
+	if = {
+		limit = { NOT = { scope:player = this } }
+		send_interface_message = {
+			type = event_generic_bad_with_text
+			title = umbra_discovery.title
+			desc = umbra_discovery.$TYPE$.desc
+			left_icon = scope:player
+			right_icon = this
+				
+			scope:this_character = {
+				create_character_memory = {
+					type = umbra_discovery_memory
+				}
+			}
+		}
+	}
+	else = {
+		send_interface_message = {
+			type = event_generic_bad_with_text
+			title = umbra_discovery.title
+			desc = umbra_discovery.$TYPE$.desc
+			right_icon = this
+			
+			create_character_memory = {
+				type = umbra_discovery_memory
+			}
+		}
+	}
+	scope:player = { trigger_event = POD_umbra_crisis.1 }
+}
+
+POD_umbra_remove_expedition_discovery_effect = {
+	if = {
+		limit = { var:umbra_stationed_realm.var:name ?= $LOCATION$ }
+		POD_umbra_remove_discovery_effect = yes
+	}
+	else = {
+		every_relation = {
+			type = umbra_explorer
+			limit = { var:umbra_stationed_realm.var:name ?= $LOCATION$ }
+			POD_umbra_remove_discovery_effect = yes
+		}
+	}
+}
+
+POD_umbra_remove_discovery_effect = {
+	save_temporary_scope_as = discoverer
+	custom_tooltip = {
+		text = umbra_discovery_remove_tt
+		every_memory = {
+			limit = { has_memory_type = umbra_discovery_memory }
+			scope:discoverer = { destroy_character_memory = prev }
+		}
+		var:umbra_stationed_realm = { remove_variable = umbra_discovery_type }
+	}
+}
+
+#Expedition list for ease of adding more
+#Legendary gifts, fera, everywhere
+#KJ, underworld and everywhere, dharmas
+#Coruroc, underworld
+#Aidan, spirit wilds
+#Aristotle, underworld
+#Hypatia, astral reaches
+#Mafhuz, underworld
+#Grey, deep umbra
+#whistimmu , sea of shadows, tempest, stormwall
+#Werewolves, incarna perk, fetish in their homelands
+#Fae perks
+#Pets story, everywhere
+#Siklos, dark kingdom of iron
+#Muses, court of muses
+#Elemental court armor
+#Grand hall, astral explorer
+#Paradise, only for TF/Beatific chars
+#Epiphamies
+POD_umbra_set_expedition_discovery_effect = {
+	if = {
+		limit = { NOT = { scope:player = { POD_umbra_every_neighboring_realm_known_trigger = { LOCATION = prev.var:umbra_stationed_realm.var:name } } } }
+		POD_umbra_set_expedition_discovery_pos_effect = { TYPE = neighboring_realm } 
+	}
+	else = {
+		random_list = {
+			50 = {
+				modifier = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					factor = 0.75
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = treasure } # Until I get something to put
+			}
+			15 = {
+				trigger = { 
+					has_umbra_ruler_trigger = { LOCATION = var:umbra_stationed_realm.var:name } 
+					trigger_if = { 
+						limit = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+						scope:player = { 
+							has_trait = fera
+							religion = { is_in_family = rf_gaia }
+						}
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = grace }
+			}
+			# Legendary Gifts
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = strength_will_perk
+						has_perk = shared_strength_perk
+						NOT = { has_perk = unstoppable_warrior_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = unstoppable_warrior } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = unstoppable_warrior }
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = bridge_walker_perk
+						has_perk = song_siren_perk
+						NOT = { has_perk = storyteller_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = storyteller } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = storyteller } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = roll_over_perk
+						has_perk = scent_beyond_perk
+						NOT = { has_perk = release_from_bondage_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = release_from_bondage } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = release_from_bondage } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = reynard_lie_perk
+						has_perk = fool_luck_perk
+						NOT = { has_perk = firebringer_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = firebringer } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = firebringer } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = prophetic_vision_perk
+						has_perk = spirit_vessel_perk
+						NOT = { has_perk = rebirthing_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = rebirthing } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = rebirthing } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = fog_on_the_moor_perk
+						has_perk = forms_of_cernunnos_perk
+						NOT = { has_perk = sleep_of_the_hero_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = sleep_of_the_hero } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = sleep_of_the_hero } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = strength_of_the_ancestors_perk
+						has_perk = fenris_bite_perk
+						NOT = { has_perk = call_great_fenris_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = call_great_fenris } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = call_great_fenris } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = blessing_of_the_first_pack_perk
+						has_perk = shattering_howl_perk
+						NOT = { has_perk = home_in_all_lands_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = home_in_all_lands } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = home_in_all_lands } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = full_moons_wrath_perk
+						has_perk = the_secret_of_gaia_perk
+						NOT = { has_perk = renew_the_cycle_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = renew_the_cycle } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = renew_the_cycle } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = atma_perk
+						has_perk = liberation_of_flesh_perk
+						NOT = { has_perk = thought_form_of_the_twelve_ministers_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = thought_form_of_the_twelve_ministers } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = thought_form_of_the_twelve_ministers } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = shadow_brethren_perk
+						has_perk = spirit_wall_perk
+						NOT = { has_perk = the_fleeing_scarab_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = the_fleeing_scarab } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = the_fleeing_scarab } 
+			}
+			10 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = command_the_multitude_perk
+						has_perk = rising_sun_perk
+						NOT = { has_perk = royal_privilege_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = royal_privilege } }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = royal_privilege } 
+			}
+			# KJ
+			2 = { 
+				trigger = { 
+					scope:player = { 
+						has_trait = kueijin
+						NOT = { has_character_modifier = wisdom_of_black_pearl_mistress_modifier }
+						NOT = { has_umbra_discovery_trigger = { TYPE = black_pearl_mistress } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = black_pearl_mistress } 
+			}
+			2 = { 
+				trigger = { 
+					scope:player = { 
+						has_trait = kueijin
+						NOT = { has_character_modifier = knowledge_of_thousand_cranes_mother_modifier }
+						NOT = { has_umbra_discovery_trigger = { TYPE = thousand_cranes_mother } }
+					}
+					NOT = { var:umbra_stationed_realm.var:type = flag:underworld }
+					NOT = { var:umbra_stationed_realm.var:type = flag:deep_umbra }
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = thousand_cranes_mother } 
+			}
+			2 = { 
+				trigger = { 
+					scope:player = {
+						is_kueijin_trigger = yes
+						NOT = { has_character_modifier = dah_modifier }
+					}
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = dah } 
+			}
+			#Artifact Shards
+			30 = { 
+				trigger = {
+					scope:player = { has_perk = age_of_man_perk }
+					var:umbra_stationed_realm.var:type = flag:astral_reaches
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = artifact_shards } 
+			}
+			
+			# GP
+			5 = { 
+				trigger = {
+					POD_bookmark_has_fera = yes
+					scope:player = { 
+						POD_is_wyrm_servant_trigger = no
+						NOT = { has_character_flag = coruroc_quest }
+						NOT = { has_umbra_discovery_trigger = { TYPE = coruroc } }
+					}
+					character:POD_wraith_04 = { has_character_flag = POD_do_not_disturb_flag }
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = coruroc } 
+			}
+			5 = { 
+				trigger = {
+					POD_bookmark_has_fera = yes
+					scope:player = { 
+						POD_is_wyrm_servant_trigger = no
+						NOT = { has_character_flag = aidan_farwatcher_quest }
+						NOT = { has_umbra_discovery_trigger = { TYPE = aidan_farwatcher } }
+					}
+					character:POD_spirit_01 = { has_character_flag = POD_do_not_disturb_flag }
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = aidan_farwatcher } 
+			}
+			5 = { 
+				trigger = {
+					NOT = { 
+						is_target_in_global_variable_list = { 
+							name = special_character_list 
+							target = flag:spawned_gp_aristotle
+						} 
+					}
+					scope:player = { NOT = { has_umbra_discovery_trigger = { TYPE = aristotle } } }
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = aristotle } 
+			}
+			5 = { 
+				trigger = {
+					NOT = { 
+						is_target_in_global_variable_list = { 
+							name = special_character_list 
+							target = flag:spawned_gp_hypatia 
+						} 
+					}
+					scope:player = { NOT = { has_umbra_discovery_trigger = { TYPE = hypatia } } }
+					var:umbra_stationed_realm.var:type = flag:astral_reaches
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = hypatia } 
+			}
+			5 = { 
+				trigger = {
+					NOT = { 
+						is_target_in_global_variable_list = { 
+							name = special_character_list 
+							target = flag:spawned_gp_mahfuz_alam 
+						} 
+					}
+					scope:player = { NOT = { has_umbra_discovery_trigger = { TYPE = mahfuz_alam } } }
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = mahfuz_alam } 
+			}
+			1 = { 
+				trigger = {
+					NOT = { 
+						is_target_in_global_variable_list = { 
+							name = special_character_list 
+							target = flag:spawned_gp_grey 
+						} 
+					}
+					var:umbra_stationed_realm.var:name = flag:deep_umbra
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = grey } 
+			}
+			# Bygone
+			1 = { 
+				trigger = {
+					scope:player = { 
+						has_character_flag = released_your_dragon
+						NOT = { has_character_modifier = blessed_by_great_celestial_dragons_modifier }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = celestial_dragons } 
+			}
+			#Find a Spirit
+			20 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				modifier = {
+					add = -10
+					POD_is_wyrm_servant_trigger = yes
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = spirit } 
+			}
+			#Find a Bane
+			20 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				modifier = {
+					add = 10
+					in_malfeas_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = bane } 
+			}
+			#Discover Mokole dinosaur MAA
+			18 = { 
+				trigger = {
+					POD_mokole_can_discover_dinosaur_maa = yes
+					var:umbra_stationed_realm.var:type = flag:astral_reaches
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				modifier = {
+					add = 10
+					mokole_mnesis_age_value >= 3
+				}
+				modifier = {
+					add = 10
+					mokole_mnesis_age_value = 4
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = mokole_dinosaur_maa } 
+			}
+			20 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = lesser_bygone } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = greater_bygone } 
+			}
+			5 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = potent_bygone } 
+			}
+			# Whistimmu
+			10 = { 
+				trigger = {
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_ailerons } 
+			}
+			10 = { 
+				trigger = {
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_cerements } 
+			}
+			5 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_kraken_story }
+					}
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_kraken } 
+			}
+			10 = { 
+				trigger = {
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_mourners } 
+			}
+			10 = { 
+				trigger = {
+					current_year >= 1945
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_shroudrippers } 
+			}
+			10 = { 
+				trigger = {
+					current_year >= 1901
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:sea_of_shadow
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = whistimmu_tindelhounds } 
+			}
+			# Crisis
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:type = flag:deep_umbra
+					in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					scope:player = { 
+						POD_is_wyrm_servant_trigger = no
+						POD_umbra_crisis_valid_trigger = { LOCATION = prev.var:umbra_stationed_realm.var:name } 
+					}
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = wyrmish_summoning }
+			}
+			50 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:tempest
+					can_be_lost_in_tempest_trigger = yes
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = prev.var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_tempest }
+				POD_umbra_send_effect = { LOCATION = flag:tempest }
+				trigger_event = POD_umbra_lost.101
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			50 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:stormwall
+					can_be_lost_in_tempest_trigger = yes
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = prev.var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_tempest }
+				POD_umbra_send_effect = { LOCATION = flag:stormwall }
+				trigger_event = POD_umbra_lost.101
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			50 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:abyss
+					POD_is_demonic_trigger = no
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_abyss }
+				POD_umbra_send_effect = { LOCATION = flag:abyss }
+				trigger_event = POD_umbra_lost.104
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			50 = { 
+				trigger = {
+					in_yomi_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					POD_is_akuma_trigger = no
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_yomi }
+				POD_umbra_send_effect = { LOCATION = var:umbra_stationed_realm.var:name }
+				trigger_event = POD_umbra_lost.103
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			250 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:pod_realm_labyrinth
+					POD_is_oblivion_servant_trigger = no
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_labyrinth }
+				POD_umbra_send_effect = { LOCATION = flag:pod_realm_labyrinth }
+				trigger_event = POD_umbra_lost.102
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			1000 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:well_of_the_void
+					POD_is_oblivion_servant_trigger = no
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_labyrinth }
+				POD_umbra_send_effect = { LOCATION = flag:well_of_the_void }
+				trigger_event = POD_umbra_lost.102
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+			}
+			# Fera
+			10 = { 
+				trigger = {
+					scope:player = { 
+						has_trait = werewolf 
+						dynasty ?= { NOT = { has_dynasty_perk = neutral_totems_legacy_4 } }
+						NOT = { has_umbra_discovery_trigger = { TYPE = black_tortoise } }
+					}
+					var:umbra_stationed_realm.var:type = flag:spirit_wilds
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = black_tortoise } 
+			}
+			25 = { 
+				trigger = {
+					scope:player = { POD_can_equip_fetish_trigger = yes }
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:epiphamy
+						var:umbra_stationed_realm.var:name = flag:the_court_of_the_muses
+						var:umbra_stationed_realm.var:name = flag:city_of_brass
+						var:umbra_stationed_realm.var:name = flag:wolfhome
+						var:umbra_stationed_realm.var:name = flag:calumn
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_black_furies
+							scope:player = { NOT = { any_character_artifact = { has_variable = lionfang } } }
+						}
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_bone_gnawers
+							scope:player = { NOT = { any_character_artifact = { has_variable = ring_of_the_elements } } }
+						}
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_children_of_gaia
+							scope:player = { NOT = { any_character_artifact = { has_variable = harp_of_enchantment } } }
+						}
+						var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_fianna
+						var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_get_of_fenris
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_glass_walkers
+							scope:player = { NOT = { any_character_artifact = { has_variable = dreamcaller } } }
+						}
+						var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_red_talons
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_shadow_lords
+							scope:player = { NOT = { any_character_artifact = { has_variable = grand_klaive } } }
+						}
+						AND = {
+							var:umbra_stationed_realm.var:name = flag:the_homeland_of_the_silver_fangs
+							scope:player = { NOT = { any_character_artifact = { has_variable = iceblade } } }
+						}
+						var:umbra_stationed_realm.var:name = flag:wyld_reaches
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = fetish } 
+			}
+			# Fae
+			15 = { 
+				trigger = {
+					scope:player = {
+						can_learn_chicanery_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_chicanery } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_chicanery
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = chicanery } 
+			}
+			15 = { 
+				trigger = {
+					scope:player = {
+						can_learn_legerdemain_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_legerdemain } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_legerdemain
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = legerdemain } 
+			}
+			15 = { 
+				trigger = {
+					scope:player = {
+						can_learn_primal_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_primal } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_primal
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = primal } 
+			}
+			15 = { 
+				trigger = {
+					scope:player = {
+						can_learn_soothsay_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_soothsay } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_soothsay
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = soothsay } 
+			}
+			15 = { 
+				trigger = {
+					scope:player = {
+						can_learn_wayfare_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_wayfare } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_wayfare
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = wayfare } 
+			}
+			20 = { 
+				trigger = {
+					scope:player = {
+						can_learn_dream_craft_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_dream_craft } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_dream_craft
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = dream_craft } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = {
+						can_learn_aphrodesia_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_aphrodesia } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_aphrodesia
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = aphrodesia } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = {
+						can_learn_kryos_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_kryos } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_kryos
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = kryos } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = {
+						can_learn_metamorphosis_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_metamorphosis } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_metamorphosis
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = metamorphosis } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = {
+						can_learn_pyretics_trigger = yes
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_pyretics } }
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:art_pyretics
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pyretics } 
+			}
+			5 = { 
+				trigger = {
+					scope:player = { 
+						has_POD_fae_blood_trigger = yes
+						has_perk = realm_nature_4_perk
+						NOT = { has_trait = realm_nature }
+						NOT = { POD_is_on_journey_trigger = { TYPE = realm_mastery_nature } }
+						POD_blocked_from_learning_trigger = no
+						POD_not_already_on_journey_for_trait_trigger = {
+							TYPE  = study_trait
+							TRAIT = trait:realm_nature
+						}
+					}
+					var:umbra_stationed_realm.var:type = flag:dreaming
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = realm_nature } 
+			}
+			# pet
+			5 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_dragon_story }
+						NOT = { has_umbra_discovery_trigger = { TYPE = pet_dragon } }
+					}
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { var:umbra_stationed_realm.var:type = flag:underworld }
+					NOT = { var:umbra_stationed_realm.var:type = flag:astral_reaches }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pet_dragon } 
+			}
+			7 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_unicorn_story }
+						NOT = { has_umbra_discovery_trigger = { TYPE = pet_unicorn } }
+					}
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { var:umbra_stationed_realm.var:type = flag:underworld }
+					NOT = { var:umbra_stationed_realm.var:type = flag:astral_reaches }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pet_unicorn } 
+			}
+			7 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_pegasus_story }
+						NOT = { has_umbra_discovery_trigger = { TYPE = pet_pegasus } }
+					}
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { has_planetary_incarna_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+					NOT = { var:umbra_stationed_realm.var:type = flag:underworld }
+					NOT = { var:umbra_stationed_realm.var:type = flag:astral_reaches }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pet_pegasus } 
+			}
+			1 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:deep_umbra
+					scope:player = { NOT = { has_character_modifier = exotic_pet_amoeba } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pet_amoeba } 
+			}
+			# misc
+			1 = { 
+				trigger = {
+					scope:player = { 
+						has_trait = beatific
+					}
+					var:umbra_stationed_realm.var:type = flag:astral_reaches
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = miracle } 
+			}
+			10 = { 
+				trigger = {
+					current_year >= 1588
+					NOT = {
+						is_target_in_global_variable_list = {
+							name = unavailable_unique_artifacts
+							target = flag:flying_dutchman
+						}
+					}
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:river_of_death
+						var:umbra_stationed_realm.var:name = flag:tempest
+						var:umbra_stationed_realm.var:name = flag:stormwall
+						var:umbra_stationed_realm.var:name = flag:sea_of_souls
+						var:umbra_stationed_realm.var:name = flag:sunless_sea
+					}
+					scope:player = { NOT = { has_umbra_discovery_trigger = { TYPE = flying_dutchman } } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = flying_dutchman } 
+			}
+			50 = { 
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:dark_kingdom_of_iron
+					scope:player = {
+						NOR = {
+							has_character_flag = siklos_heist
+							any_character_artifact = {
+								has_variable = siklos
+							}
+						}
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = siklos } 
+			}
+			# Location based
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:inventium
+						NOT = { has_variable = search_invention_unlocked }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = search_invention_unlock } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:inventium
+						NOT = { has_variable = search_innovation_unlocked }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = search_innovation_unlock } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:inventium
+						has_variable = search_invention_unlocked
+						NOT = { has_variable = search_invention_upgraded }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = search_invention_up } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:inventium
+						has_variable = search_invention_unlocked
+						NOT = { has_variable = search_invention_golded }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = search_invention_gold } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:inventium
+						has_variable = search_innovation_unlocked
+						NOT = { has_variable = search_innovation_upgraded }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = search_innovation_up } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:dark_kingdom_of_iron
+						NOT = { has_variable = onyx_tower_unlocked }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = onyx_tower_unlock } 
+			}
+			10 = { 
+				trigger = {
+					var:umbra_stationed_realm = {
+						var:name = flag:great_chasm
+						NOT = { has_variable = caliburn_unlocked }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = caliburn_unlock } 
+			}
+			10 = {
+				trigger = {
+					in_dark_kingdom_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					var:umbra_stationed_realm = { NOT = { has_variable = hire_artificer_unlocked } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = hire_artificer_unlock } 
+			}
+			10 = {
+				trigger = {
+					in_dark_kingdom_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					var:umbra_stationed_realm = { 
+						has_variable = hire_artificer_unlocked
+						NOT = { has_variable = hire_masquer_unlocked }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = hire_masquer_unlock } 
+			}
+			10 = {
+				trigger = {
+					scope:player = { POD_is_possessed_trigger = no }
+					var:umbra_stationed_realm = { 
+						var:name = flag:wyld_reaches
+						NOT = { has_variable = wyld_possesion_chance }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = wyld_possesion_chance }
+			}
+			10 = {
+				trigger = {
+					scope:player = { POD_is_possessed_trigger = no }
+					var:umbra_stationed_realm = { 
+						var:name = flag:weaver_reaches
+						NOT = { has_variable = weaver_possesion_chance }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = weaver_possesion_chance }
+			}
+			10 = {
+				trigger = {
+					scope:player = { POD_is_possessed_trigger = no }
+					var:umbra_stationed_realm = {
+						var:name = flag:shard_realm_of_prime
+						NOT = { has_variable = gaia_possesion_chance }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = gaia_possesion_chance }
+			}
+			10 = { 
+				trigger = {
+					in_yomi_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					scope:player = { POD_is_akuma_trigger = yes }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = investments_of_soul }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_eshtarra }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = earth_heal_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = eshtarra_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_sokhta }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = moondream_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = sokhta_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_katanka_sonnak }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = cleansing_flame_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = katanka_sonnak_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_mitanu }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = madthought_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = mitanu_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_hakahe }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = planetarygifts_ebon_binding_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = hakahe_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_tambiyah }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = bring_forth_the_future_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = tambiyah_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_nerigal }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = heart_of_the_ice_warrior_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = nerigal_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_rorg }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = pack_mind_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = rorg_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_zarok }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = grand_gesture_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = zarok_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_lu_bat }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = burden_of_knowledge_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = lu_bat_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_ruatma }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = diplomatic_immunity_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = ruatma_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_shantar }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = drown_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = shantar_gift }
+			}
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm = { var:name = flag:court_of_meros }
+					scope:player = { 
+						POD_splat_has_access_to_planetary_gifts = yes
+						NOT = { has_perk = essential_transformation_perk } 
+					}
+				}
+				planetarygifts_addicional_chance_modifier = yes
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = meros_gift }
+			}
+			# 25 = {
+			# 	trigger = {
+			# 		var:umbra_stationed_realm.var:name = flag:dark_kingdom_of_ivory
+			# 		scope:player = { 
+			# 			has_trait = wraith
+			# 			NOT = { has_character_flag = learned_behest_flag }
+			# 		}
+			# 	}
+			# 	POD_umbra_set_expedition_discovery_pos_effect = { TYPE = learn_behest }
+			# }
+			# 25 = {
+			# 	trigger = {
+			# 		var:umbra_stationed_realm.var:name = flag:island_below_the_sea
+			# 		scope:player = { 
+			# 			has_trait = wraith
+			# 			culture = { has_cultural_era_or_later = culture_era_gothic_victorian }
+			# 			NOT = { has_character_flag = learned_connaissance_flag }
+			# 		}
+			# 	}
+			# 	POD_umbra_set_expedition_discovery_pos_effect = { TYPE = learn_connaissance }
+			# }
+			# 25 = {
+			# 	trigger = {
+			# 		var:umbra_stationed_realm.var:name = flag:swar
+			# 		scope:player = { 
+			# 			has_trait = wraith
+			# 			NOT = { has_character_flag = learned_displace_flag }
+			# 		}
+			# 	}
+			# 	POD_umbra_set_expedition_discovery_pos_effect = { TYPE = learn_displace }
+			# }
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:pod_realm_labyrinth
+					scope:player = { 
+						has_trait = wraith
+						NOT = { has_trait = spectre }
+						NOT = { has_character_modifier = doomslayer_modifier }
+					}
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = doomslayer }
+			}
+			10 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:pangaea
+					scope:player = { NOT = { has_character_modifier = paleontologist_modifier } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = paleontologist }
+			}
+			10 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:brobdingnag
+					scope:player = { NOT = { is_target_in_variable_list = { name = umbra_maa_list target = flag:giants } } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = dnt_giants }
+			}
+			10 = {
+				trigger = {
+					var:umbra_stationed_realm = {
+						OR = {
+							var:name = flag:sea_of_shadow
+							var:name = flag:tempest
+							var:name = flag:stormwall
+						}
+					}
+					scope:player = { NOT = { is_target_in_variable_list = { name = umbra_maa_list target = flag:wyrds } } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = plasmics }
+			}
+			10 = {
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_muse_expedition }
+					}
+					var:umbra_stationed_realm.var:name = flag:the_court_of_the_muses
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = muse_expedition } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armor
+							}
+						}
+					}
+					var:umbra_stationed_realm.var:name = flag:elemental_courts
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = elemental_court_armor_expedition } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = { 	
+						any_character_artifact = {
+							has_variable = elemental_armor
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorimproved
+							}
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorimproved2
+							}
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorfinished
+							}
+						}					
+					}
+					var:umbra_stationed_realm.var:name = flag:elemental_courts
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = elemental_court_armor_expedition2 } 
+			}	
+			10 = { 
+				trigger = {
+					scope:player = { 	
+						any_character_artifact = {
+							has_variable = elemental_armor
+						}		
+						any_character_artifact = {
+							has_variable = elemental_armorimproved
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorimproved2
+							}
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorfinished
+							}
+						}					
+					}
+					var:umbra_stationed_realm.var:name = flag:elemental_courts
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = elemental_court_armor_expedition3 } 
+			}	
+			10 = { 
+				trigger = {
+					scope:player = { 	
+						any_character_artifact = {
+							has_variable = elemental_armor
+						}		
+						any_character_artifact = {
+							has_variable = elemental_armorimproved
+						}		
+						any_character_artifact = {
+							has_variable = elemental_armorimproved2
+						}
+						NOT = { 		
+							any_character_artifact = {
+								has_variable = elemental_armorfinished
+							}
+						}					
+					}
+					var:umbra_stationed_realm.var:name = flag:elemental_courts
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = elemental_court_armor_expedition4 } 
+			}	
+			10 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_grand_hall_expedition }
+					}
+					var:umbra_stationed_realm.var:name = flag:grand_hall
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = grand_hall_expedition } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_heaven_expedition }
+						OR = { 
+							has_trait = truefaith
+							has_trait = beatific 
+						}
+					}
+					var:umbra_stationed_realm.var:name = flag:heaven
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = heaven_expedition } 
+			}
+			10 = { 
+				trigger = {
+					scope:player = { 
+						NOT = { has_character_flag = had_epiphamies_expedition }
+					}
+					var:umbra_stationed_realm.var:name = flag:epiphamy
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = epiphamies_expedition } 
+			}
+			#Wraith
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_argos }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_argos } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = argos } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_castigate }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_castigate } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = castigate } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_embody }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_embody } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = embody } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_fatalism }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_fatalism } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = fatalism } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_flux }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_flux } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = flux } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_inhabit }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_inhabit } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = inhabit } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_intimation }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_intimation } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = intimation } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_keening }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_keening } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = keening } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_lifeweb }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_lifeweb } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = lifeweb } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_mnemosynis }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_mnemosynis } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = mnemosynis } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_moliate }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_moliate } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = moliate } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_outrage }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_outrage } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = outrage } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_pandemonium }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_pandemonium } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = pandemonium } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_phantasm }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_phantasm} }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = phantasm } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_puppetry }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_puppetry } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = puppetry } 
+			}		
+			15 = { 
+				trigger = {
+					scope:player = {
+						POD_splat_has_access_to_arcanoi = yes
+						NOT = { has_trait = arcanos_usury }
+						NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_arcanoi_usury } }
+					}
+					var:umbra_stationed_realm.var:type = flag:underworld
+					NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = usury } 
+			}
+			#################
+			#### Malfeas ####
+			#################
+			#Trapped
+			250 = { 
+				trigger = {
+					in_malfeas_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+					POD_is_wyrm_servant_trigger = no
+					scope:player = { POD_umbra_crisis_valid_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				}
+				modifier = {
+					factor = umbra_trapped_chance_percent
+				}
+				POD_umbra_set_expedition_crisis_effect = { TYPE = trapped_in_malfeas }
+				POD_umbra_send_effect = { LOCATION = var:umbra_stationed_realm.var:name }
+				trigger_event = POD_umbra_lost.105
+			}
+			#Bane MAA
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:border_duchies
+					scope:player = { POD_is_wyrm_servant_trigger = yes }
+				}
+				modifier = {
+					piety_level >= 2
+					add = 2
+				}
+				modifier = {
+					piety_level >= 3
+					add = 3
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = bane_maa }
+			}
+			#Elemental Bane Spirits
+			20 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:elemental_duchies
+					scope:player = { POD_is_wyrm_servant_trigger = yes }
+				}
+				modifier = {
+					piety_level >= 2
+					add = 2
+				}
+				modifier = {
+					piety_level >= 3
+					add = 3
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = elemental_bane }
+			}
+			#Wyrm Fetishes
+			25 = {
+				trigger = {
+					OR = {
+						var:umbra_stationed_realm.var:name = flag:black_spiral_labyrinth
+						var:umbra_stationed_realm.var:name = flag:earth_pit
+					}
+					scope:player = { POD_wyrm_can_discover_malfeas_fetish = yes }
+				}
+				modifier = {
+					piety_level >= 2
+					add = 2
+				}
+				modifier = {
+					piety_level >= 3
+					add = 3
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = wyrm_fetish }
+			}
+			#Urge Taints xp
+			25 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:maeljin_duchies
+					scope:player = { POD_splat_has_access_to_urgetaints = yes }
+				}
+				modifier = {
+					piety_level >= 2
+					add = 2
+				}
+				modifier = {
+					piety_level >= 3
+					add = 3
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = urgetaints_xp }
+			}
+			#Temple Obscura exploration
+			20 = {
+				trigger = {
+					var:umbra_stationed_realm.var:name = flag:central_duchy
+					scope:player = {
+						POD_wyrm_can_discover_malfeas_fetish = yes
+						OR = {
+							NOT = { has_variable = temple_obscura_room_counter }
+							var:temple_obscura_room_counter < 9
+						}
+					}
+				}
+				modifier = {
+					piety_level >= 2
+					add = 2
+				}
+				modifier = {
+					piety_level >= 3
+					add = 3
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = temple_obscura }
+			}
+			
+			
+			#BSD Perk Quest
+			20 = { 
+				trigger = { 
+					scope:player = { 
+						has_perk = the_white_howl_perk
+						has_perk = totem_form_perk
+						NOT = { has_perk = prelude_to_apocalypse_perk }
+						NOT = { has_umbra_discovery_trigger = { TYPE = prelude_to_apocalypse } }
+					}
+					var:umbra_stationed_realm.var:name = flag:black_spiral_labyrinth
+				}
+				modifier = {
+					piety_level >= 2
+					add = 5
+				}
+				modifier = {
+					piety_level >= 3
+					add = 5
+				}
+				modifier = {
+					piety_level >= 4
+					add = 5
+				}
+				modifier = {
+					piety_level >= 5
+					add = 5
+				}
+				POD_umbra_set_expedition_discovery_pos_effect = { TYPE = prelude_to_apocalypse } 
+			}
+		}
+	}
+}
+
+POD_umbra_trigger_expedition_discovery_effect = {
+	switch = {
+		trigger = $DISCOVERY$
+		flag:treasure = {
+			# Until I get something to put
+			add_legitimacy = medium_legitimacy_gain
+		}
+		flag:neighboring_realm = {
+			custom_tooltip = known_neighboring_realm_tt
+			POD_umbra_set_neighboring_realm_known_effect = { LOCATION = $LOCATION$ }
+		}
+		flag:grace = {
+			custom_description = {
+				text = add_grace
+				value = 1000
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					change_variable = {
+						name = grace
+						add = 1000
+					}
+				}
+			}
+		}
+		# Legendary Gifts
+		flag:unstoppable_warrior = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.300.t
+				trigger_event = POD_umbra_expedition.300
+			}
+		}
+		flag:storyteller = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.400.t
+				trigger_event = POD_umbra_expedition.400
+			}
+		}
+		flag:release_from_bondage = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.500.t
+				trigger_event = POD_umbra_expedition.500
+			}
+		}
+		flag:firebringer = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.600.t
+				trigger_event = POD_umbra_expedition.600
+			}
+		}
+		flag:rebirthing = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.700.t
+				trigger_event = POD_umbra_expedition.700
+			}
+		}
+		flag:sleep_of_the_hero = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.800.t
+				trigger_event = POD_umbra_expedition.800
+			}
+		}
+		flag:call_great_fenris = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.900.t
+				trigger_event = POD_umbra_expedition.900
+			}
+		}
+		flag:home_in_all_lands = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1000.t
+				trigger_event = POD_umbra_expedition.1000
+			}
+		}
+		flag:renew_the_cycle = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1100.t
+				trigger_event = POD_umbra_expedition.1100
+			}
+		}
+		flag:thought_form_of_the_twelve_ministers = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1200.t
+				trigger_event = POD_umbra_expedition.1200
+			}
+		}
+		flag:prelude_to_apocalypse = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1300.t
+				trigger_event = POD_umbra_expedition.1300
+			}
+		}
+		flag:the_fleeing_scarab = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1400.t
+				trigger_event = POD_umbra_expedition.1400
+			}
+		}
+		flag:royal_privilege = {
+			custom_tooltip = {
+				text = POD_umbra_expedition.1500.t
+				trigger_event = POD_umbra_expedition.1500
+			}
+		}
+		# KJ
+		flag:black_pearl_mistress = {
+			custom_tooltip = {
+				text = podkueijin.1221.t
+				trigger_event = POD_umbra_kj.1004
+			}
+		}
+		flag:thousand_cranes_mother = {
+			custom_tooltip = {
+				text = podkueijin.1311.t
+				trigger_event = POD_umbra_kj.1005
+			}
+		}
+		flag:dah = {
+			custom_tooltip = {
+				text = POD_umbra_kj.1002.t
+				trigger_event = POD_umbra_kj.1002
+			}
+		}
+		flag:artifact_shards = {
+			POD_mokole_gain_umbra_shards_effect = yes
+		}
+		# GP
+		flag:coruroc = {
+			custom_tooltip = {
+				text = POD_umbra_gp.101.t
+				trigger_event = POD_umbra_gp.101
+			}
+		}
+		flag:aidan_farwatcher = {
+			custom_tooltip = {
+				text = POD_umbra_gp.102.t
+				trigger_event = POD_umbra_gp.102
+			}
+		}
+		flag:aristotle = {
+			custom_tooltip = {
+				text = POD_umbra_gp.103.t
+				trigger_event = POD_umbra_gp.103
+			}
+		}
+		flag:hypatia = {
+			custom_tooltip = {
+				text = POD_umbra_gp.104.t
+				trigger_event = POD_umbra_gp.104
+			}
+		}
+		flag:mahfuz_alam = {
+			custom_tooltip = {
+				text = POD_umbra_gp.105.t
+				trigger_event = POD_umbra_gp.105
+			}
+		}
+
+		flag:spirit = {
+			POD_spawn_gaian_spirit_effect = yes
+		}
+		flag:bane = {
+			if = {
+				limit = { in_malfeas_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+				save_scope_value_as = { name = malfeas_bane value = yes }
+			}
+			POD_spawn_bane_spirit_effect = yes
+		}
+		# Bygone
+		flag:celestial_dragons = {
+			add_character_modifier = { modifier = blessed_by_great_celestial_dragons_modifier years = 5 }
+		}
+		flag:lesser_bygone = {
+			POD_umbra_recruit_lesser_bygone = yes
+		}
+		flag:greater_bygone = {
+			POD_umbra_recruit_greater_bygone = yes
+		}
+		flag:potent_bygone = {
+			POD_umbra_recruit_potent_bygone = yes
+		}
+		flag:mokole_dinosaur_maa = {
+			POD_mokole_discover_dinosaur_maa_effect = yes
+		}
+		# Whistimmu
+		flag:whistimmu_ailerons = {
+			custom_tooltip = {
+				text = recruit_whistimmu_ailerons_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_ailerons }
+			}
+		}
+		flag:whistimmu_cerements = {
+			custom_tooltip = {
+				text = recruit_whistimmu_cerements_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_cerements }
+			}
+		}
+		flag:whistimmu_kraken = {
+			add_character_flag = had_kraken_story 
+			custom_tooltip = {
+				text = recruit_whistimmu_kraken_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_kraken }
+			}
+		}
+		flag:whistimmu_mourners = {
+			custom_tooltip = {
+				text = recruit_whistimmu_mourners_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_mourners }
+			}
+		}
+		flag:whistimmu_shroudrippers = {
+			custom_tooltip = {
+				text = recruit_whistimmu_shroudrippers_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_shroudrippers }
+			}
+		}
+		flag:whistimmu_tindelhounds = {
+			custom_tooltip = {
+				text = recruit_whistimmu_tindelhounds_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:whistimmu_tindelhounds }
+			}
+		}
+		# Crisis
+		flag:wyrmish_summoning = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.110.t
+				trigger_event = POD_umbra_crisis.110
+			}
+		}
+		flag:trapped_in_tempest = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.210.t
+				trigger_event = POD_umbra_crisis.210
+			}
+		}
+		flag:trapped_in_labyrinth = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.310.t
+				trigger_event = POD_umbra_crisis.310
+			}
+		}
+		flag:trapped_in_yomi = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.410.t
+				trigger_event = POD_umbra_crisis.410
+			}
+		}
+		flag:trapped_in_abyss = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.510.t
+				trigger_event = POD_umbra_crisis.510
+			}
+		}
+		flag:trapped_in_malfeas = {
+			set_variable = {
+				name = umbra_crisis_location
+				value = var:spirit_location
+				days = 1
+			}
+			custom_tooltip = {
+				text = POD_umbra_crisis.610.t
+				trigger_event = POD_umbra_crisis.610
+			}
+		}
+		# Fera
+		flag:black_tortoise = {
+			custom_tooltip = {
+				text = POD_spirit_travel.1501.t
+				trigger_event = POD_spirit_travel.1501
+			}
+		}
+		flag:fetish = {
+			POD_umbra_fetish_discovery_effect = yes
+		}
+		# Fae
+		flag:chicanery = {
+			if = {
+				limit = {
+					can_learn_chicanery_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_chicanery } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_chicanery
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_chicanery }
+			}
+		}
+		flag:legerdemain = {
+			if = {
+				limit = {
+					can_learn_legerdemain_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_legerdemain } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_legerdemain
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_legerdemain }
+			}
+		}
+		flag:primal = {
+			if = {
+				limit = {
+					can_learn_primal_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_primal } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_primal
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_primal }
+			}
+		}
+		flag:soothsay = {
+			if = {
+				limit = {
+					can_learn_soothsay_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_soothsay } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_soothsay
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_soothsay }
+			}
+		}
+		flag:wayfare = {
+			if = {
+				limit = {
+					can_learn_wayfare_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_wayfare } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_wayfare
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_wayfare }
+			}
+		}
+		flag:dream_craft = {
+			if = {
+				limit = {
+					can_learn_dream_craft_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_dream_craft } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_dream_craft
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_dream_craft }
+			}
+		}
+		flag:aphrodesia = {
+			if = {
+				limit = {
+					can_learn_aphrodesia_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_aphrodesia } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_aphrodesia
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_aphrodesia }
+			}
+		}
+		flag:kryos = {
+			if = {
+				limit = {
+					can_learn_kryos_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_kryos } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_kryos
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_kryos }
+			}
+		}
+		flag:metamorphosis = {
+			if = {
+				limit = {
+					can_learn_metamorphosis_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_metamorphosis } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_metamorphosis
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_metamorphosis }
+			}
+		}
+		flag:pyretics = {
+			if = {
+				limit = {
+					can_learn_pyretics_trigger = yes
+					NOT = { POD_is_on_journey_trigger = { TYPE = seek_knowledge_pyretics } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:art_pyretics
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:art_pyretics }
+			}
+		}
+		flag:realm_nature = {
+			if = {
+				limit = {
+					NOT = { has_trait = realm_nature }
+					NOT = { POD_is_on_journey_trigger = { TYPE = realm_mastery_nature } }
+					POD_not_already_on_journey_for_trait_trigger = {
+						TYPE  = study_trait
+						TRAIT = trait:realm_nature
+					}
+				}
+				POD_start_trait_study_journey_effect = { TRAIT = trait:realm_nature }
+			}
+		}
+		# pet
+		flag:pet_dragon = {
+			start_dragon_story_cycle_effect = yes
+		}
+		flag:pet_unicorn = {
+			start_unicorn_story_cycle_effect = yes
+		}
+		flag:pet_pegasus = {
+			start_pegasus_story_cycle_effect = yes
+		}
+		flag:pet_amoeba = {
+			add_character_modifier = exotic_pet_amoeba
+		}
+		flag:grey = {
+			custom_tooltip = {
+				text = Grey
+				trigger_event = POD_umbra_gp.106
+			}		
+		}
+		# Misc
+		flag:search_invention_unlock = {
+			custom_tooltip = {
+				text = search_invention_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = search_invention_unlocked
+				}
+			}
+		}
+		flag:search_innovation_unlock = {
+			custom_tooltip = {
+				text = search_innovation_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = search_innovation_unlocked
+				}
+			}
+		}
+		flag:search_invention_up = {
+			custom_tooltip = {
+				text = search_invention_upgrade
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = search_invention_upgraded
+				}
+			}
+		}
+		flag:search_invention_gold = {
+			custom_tooltip = {
+				text = search_invention_golding
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = search_invention_golded
+				}
+			}
+		}
+		flag:search_innovation_up = {
+			custom_tooltip = {
+				text = search_innovation_upgrade
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = search_innovation_upgraded
+				}
+			}
+		}
+		flag:onyx_tower_unlock = {
+			custom_tooltip = {
+				text = onyx_tower_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = onyx_tower_unlocked
+				}
+			}
+		}
+		flag:caliburn_unlock = {
+			custom_tooltip = {
+				text = caliburn_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = caliburn_unlocked
+				}
+			}
+		}
+		flag:hire_artificer_unlock = {
+			custom_tooltip = {
+				text = hire_artificer_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = hire_artificer_unlocked
+				}
+			}
+		}
+		flag:hire_masquer_unlock = {
+			custom_tooltip = {
+				text = hire_masquer_unlocked
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = hire_masquer_unlocked
+				}
+			}
+		}
+		flag:wyld_possesion_chance = {
+			custom_tooltip = {
+				text = wyld_possesion_chance_gain
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = {
+						name = wyld_possesion_chance
+						years = 5
+					}
+				}
+			}
+		}
+		flag:weaver_possesion_chance = {
+			custom_tooltip = {
+				text = weaver_possesion_chance_gain
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = {
+						name = weaver_possesion_chance
+						years = 5
+					}
+				}
+			}
+		}
+		flag:gaia_possesion_chance = {
+			custom_tooltip = {
+				text = gaia_possesion_chance_gain
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = $LOCATION$ }
+					set_variable = {
+						name = gaia_possesion_chance
+						years = 5
+					}
+				}
+			}
+		}
+		flag:eshtarra_gift = {
+			assign_eshtarra_perk_effect = yes
+		}
+		flag:sokhta_gift = {
+			assign_sokhta_perk_effect = yes
+		}
+		flag:katanka_sonnak_gift = {
+			assign_katanka_sonnak_perk_effect = yes
+		}
+		flag:mitanu_gift = {
+			assign_mitanu_perk_effect = yes
+		}
+		flag:hakahe_gift = {
+			assign_hakahe_perk_effect = yes
+		}
+		flag:tambiyah_gift = {
+			assign_tambiyah_perk_effect = yes
+		}
+		flag:nerigal_gift = {
+			assign_nerigal_perk_effect = yes
+		}
+		flag:rorg_gift = {
+			assign_rorg_perk_effect = yes
+		}
+		flag:zarok_gift = {
+			assign_zarok_perk_effect = yes
+		}
+		flag:lu_bat_gift = {
+			assign_lu_bat_perk_effect = yes
+		}
+		flag:ruatma_gift = {
+			assign_ruatma_perk_effect = yes
+		}
+		flag:shantar_gift = {
+			assign_shantar_perk_effect = yes
+		}
+		flag:meros_gift = {
+			assign_meros_perk_effect = yes
+		}
+		flag:investments_of_soul = {
+			POD_investments_of_soul_effect = yes
+		}
+		# flag:learn_behest = {
+		# 	custom_tooltip = {
+		# 		text = behest_visible
+		# 		add_character_flag = learned_behest_flag
+		# 	}
+		# }
+		# flag:learn_connaissance = {
+		# 	custom_tooltip = {
+		# 		text = connaissance_visible
+		# 		add_character_flag = learned_connaissance_flag
+		# 	}
+		# }
+		# flag:learn_displace = {
+		# 	custom_tooltip = {
+		# 		text = displace_visible
+		# 		add_character_flag = learned_displace_flag
+		# 	}
+		# }
+		flag:doomslayer = {
+			add_character_modifier = doomslayer_modifier
+		}
+		flag:paleontologist = {
+			add_character_modifier = paleontologist_modifier
+		}
+		flag:dnt_giants = {
+			custom_tooltip = {
+				text = recruit_giants_tt
+				add_to_variable_list = { name = umbra_maa_list target = flag:giants }
+			}
+		}
+		flag:plasmics = {
+			POD_recruit_plasmics_effect = yes
+		}
+		flag:miracle = {
+			add_piety = 750
+		}
+		flag:flying_dutchman = {
+			create_artifact_flying_dutchman_effect = { OWNER = this }
+			add_to_global_variable_list = {
+				name = unavailable_unique_artifacts
+				target = flag:flying_dutchman
+			}
+		}
+		flag:siklos = {
+			custom_tooltip = {
+				text = POD_artifact_heist_interaction_effect
+				POD_start_artifact_journey_effect = {
+					TYPE    = artifact_heist
+					MONTHLY = find_artifact
+					TARGET  = character:POD_wraith_01.var:siklos
+				}
+			}
+			add_character_flag = siklos_heist
+		}
+		flag:muse_expedition = {
+			add_character_flag = had_muse_expedition
+			custom_tooltip = {
+				text = POD_umbra_gp.107.t
+				trigger_event = POD_umbra_gp.107
+			}
+		}
+		flag:elemental_court_armor_expedition = {
+			custom_tooltip = {
+				text = POD_umbra_gp.110.t
+				trigger_event = POD_umbra_gp.110
+			}
+		}
+		flag:elemental_court_armor_expedition2 = {
+			custom_tooltip = {
+				text = POD_umbra_gp.110.t
+				trigger_event = POD_umbra_gp.111
+			}
+		}
+		flag:elemental_court_armor_expedition3 = {
+			custom_tooltip = {
+				text = POD_umbra_gp.110.t
+				trigger_event = POD_umbra_gp.112
+			}
+		}
+		flag:elemental_court_armor_expedition4 = {
+			custom_tooltip = {
+				text = POD_umbra_gp.110.t
+				trigger_event = POD_umbra_gp.113
+			}
+		}	
+		flag:grand_hall_expedition = {
+			add_character_flag = had_grand_hall_expedition
+			custom_tooltip = {
+				text = POD_umbra_gp.114.t
+				trigger_event = POD_umbra_gp.114
+			}
+		}
+		flag:heaven_expedition = {
+			add_character_flag = had_heaven_expedition
+			custom_tooltip = {
+				text = POD_umbra_gp.115.t
+				trigger_event = POD_umbra_gp.115
+			}
+		}
+		flag:epiphamies_expedition = {
+			add_character_flag = had_epiphamies_expedition
+			custom_tooltip = {
+				text = POD_umbra_gp.116.t
+				trigger_event = POD_umbra_gp.116
+			}
+		}	
+		# Wraith
+		flag:argos = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_argos MONTHLY = flag:seek_knowledge }
+		}			
+		flag:castigate = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_castigate MONTHLY = flag:seek_knowledge }
+		}			
+		flag:embody = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_embody MONTHLY = flag:seek_knowledge }
+		}			
+		flag:fatalism = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_fatalism MONTHLY = flag:seek_knowledge }
+		}			
+		flag:flux = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_flux MONTHLY = flag:seek_knowledge }
+		}			
+		flag:inhabit = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_inhabit MONTHLY = flag:seek_knowledge }
+		}			
+		flag:intimation = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_intimation MONTHLY = flag:seek_knowledge }
+		}			
+		flag:keening = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_keening MONTHLY = flag:seek_knowledge }
+		}			
+		flag:lifeweb = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_lifeweb MONTHLY = flag:seek_knowledge }
+		}			
+		flag:mnemosynis = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_mnemosynis MONTHLY = flag:seek_knowledge }
+		}			
+		flag:moliate = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_moliate MONTHLY = flag:seek_knowledge }
+		}			
+		flag:outrage = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_outrage MONTHLY = flag:seek_knowledge }
+		}			
+		flag:pandemonium = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_pandemonium MONTHLY = flag:seek_knowledge }
+		}			
+		flag:phantasm = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_phantasm MONTHLY = flag:seek_knowledge }
+		}			
+		flag:puppetry = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_puppetry MONTHLY = flag:seek_knowledge }
+		}			
+		flag:usury = {
+			POD_start_journey_effect = { TYPE = flag:seek_knowledge_arcanoi_usury MONTHLY = flag:seek_knowledge }
+		}
+		#################
+		#### Malfeas ####
+		#################
+		flag:bane_maa = {
+			POD_malfeas_discover_bane_maa_effect = yes
+		}
+		flag:elemental_bane = {
+			POD_spawn_elemental_bane_spirit_effect = yes
+		}
+		flag:wyrm_fetish = {
+			POD_malfeas_give_wyrm_fetish = yes
+		}
+		flag:urgetaints_xp = {
+			add_urgetaints_lifestyle_xp = urgetaints_xp_gain_value
+		}
+		flag:temple_obscura = {
+			trigger_event = POD_wyrm.500
+		}
+	}
+}
+
+POD_umbra_fetish_discovery_effect = {
+	switch = {
+		trigger = var:spirit_location
+		flag:epiphamy = {
+			custom_tooltip = {
+				text = POD_spirit_travel.2303.t
+				trigger_event = POD_spirit_travel.2303
+			}
+		}
+		flag:the_court_of_the_muses = {
+			custom_tooltip = {
+				text = POD_spirit_travel.2503.t
+				trigger_event = POD_spirit_travel.2503
+			}
+		}
+		flag:city_of_brass = {
+			custom_tooltip = {
+				text = POD_spirit_travel.2603.t
+				trigger_event = POD_spirit_travel.2603
+			}
+		}
+		flag:wolfhome = {
+			custom_tooltip = {
+				text = POD_spirit_travel.3903.t
+				trigger_event = POD_spirit_travel.3903
+			}
+		}
+		flag:calumn = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4003.t
+				trigger_event = POD_spirit_travel.4003
+			}
+		}
+		flag:calumn = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4003.t
+				trigger_event = POD_spirit_travel.4003
+			}
+		}
+		flag:the_homeland_of_the_black_furies = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4103.t
+				trigger_event = POD_spirit_travel.4103
+			}
+		}
+		flag:the_homeland_of_the_bone_gnawers = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4203.t
+				trigger_event = POD_spirit_travel.4203
+			}
+		}
+		flag:the_homeland_of_the_children_of_gaia = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4303.t
+				trigger_event = POD_spirit_travel.4303
+			}
+		}
+		flag:the_homeland_of_the_fianna = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4403.t
+				trigger_event = POD_spirit_travel.4403
+			}
+		}
+		flag:the_homeland_of_the_get_of_fenris = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4503.t
+				trigger_event = POD_spirit_travel.4503
+			}
+		}
+		flag:the_homeland_of_the_glass_walkers = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4603.t
+				trigger_event = POD_spirit_travel.4603
+			}
+		}
+		flag:the_homeland_of_the_red_talons = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4703.t
+				trigger_event = POD_spirit_travel.4703
+			}
+		}
+		flag:the_homeland_of_the_shadow_lords = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4803.t
+				trigger_event = POD_spirit_travel.4803
+			}
+		}
+		flag:the_homeland_of_the_silver_fangs = {
+			custom_tooltip = {
+				text = POD_spirit_travel.4903.t
+				trigger_event = POD_spirit_travel.4903
+			}
+		}
+		flag:wyld_reaches = {
+			custom_tooltip = {
+				text = POD_spirit_travel.5403.t
+				trigger_event = POD_spirit_travel.5403
+			}
+		}
+	}
+}
+
+#######
+# Pet #
+#######
+
+### Dragon ###
+start_dragon_story_cycle_effect = {
+	show_as_tooltip = {
+		add_character_modifier = {
+			modifier = dragon_story_modifier
+		}
+	}
+	hidden_effect = {
+		create_story = POD_story_pet_dragon
+	}
+}
+
+#Assign the gender of the dragon
+assign_dragon_gender_effect = {
+	save_temporary_scope_value_as = {
+		name = gender
+		value = flag:$GENDER$
+	}
+	if = {
+		limit = { scope:gender = flag:random }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_variable = {
+						name = dragon_gender
+						value = flag:female
+					}
+				}
+				50 = {
+					set_variable = {
+						name = dragon_gender
+						value = flag:male
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:gender = flag:male
+				scope:gender = flag:female
+			}
+		}
+		set_variable = {
+			name = dragon_gender
+			value = flag:$GENDER$
+		}
+	}
+}
+
+#Remove everything related to the story
+remove_dragon_story_modifiers_effect = {
+	if = {
+		limit = {
+			has_character_modifier = dragon_story_modifier
+		}
+		remove_character_modifier = dragon_story_modifier
+	}
+	
+	prev.var:artifact_dragon ?= { destroy_artifact = this }
+}
+
+remove_dragon_name_effect = {
+	remove_variable = story_cycle_dragon_name
+	remove_localized_text = story_cycle_dragon_name
+}
+
+### Unicorn ###
+start_unicorn_story_cycle_effect = {
+	show_as_tooltip = {
+		add_character_modifier = {
+			modifier = unicorn_story_modifier
+		}
+	}
+	hidden_effect = {
+		create_story = POD_story_pet_unicorn
+	}
+}
+
+#Assign the gender of the unicorn
+assign_unicorn_gender_effect = {
+	save_temporary_scope_value_as = {
+		name = gender
+		value = flag:$GENDER$
+	}
+	if = {
+		limit = { scope:gender = flag:random }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_variable = {
+						name = unicorn_gender
+						value = flag:female
+					}
+				}
+				50 = {
+					set_variable = {
+						name = unicorn_gender
+						value = flag:male
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:gender = flag:male
+				scope:gender = flag:female
+			}
+		}
+		set_variable = {
+			name = unicorn_gender
+			value = flag:$GENDER$
+		}
+	}
+}
+
+#Remove everything related to the story
+remove_unicorn_story_modifiers_effect = {
+	if = {
+		limit = {
+			has_character_modifier = unicorn_story_modifier
+		}
+		remove_character_modifier = unicorn_story_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = unicorn_strength_modifier
+		}
+		remove_character_modifier = unicorn_strength_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = unicorn_agility_modifier
+		}
+		remove_character_modifier = unicorn_agility_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = unicorn_endurance_modifier
+		}
+		remove_character_modifier = unicorn_endurance_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = unicorn_fierceness_modifier
+		}
+		remove_character_modifier = unicorn_fierceness_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = unicorn_practice_modifier  
+		}
+		remove_character_modifier = unicorn_practice_modifier
+	}
+	
+	prev.var:artifact_unicorn ?= { destroy_artifact = this }
+}
+
+remove_unicorn_name_effect = {
+	remove_variable = story_cycle_unicorn_name
+	remove_localized_text = story_cycle_unicorn_name
+}
+
+### Pegasus ###
+start_pegasus_story_cycle_effect = {
+	show_as_tooltip = {
+		add_character_modifier = {
+			modifier = pegasus_story_modifier
+		}
+	}
+	hidden_effect = {
+		create_story = POD_story_pet_pegasus
+	}
+}
+
+#Assign the gender of the pegasus
+assign_pegasus_gender_effect = {
+	save_temporary_scope_value_as = {
+		name = gender
+		value = flag:$GENDER$
+	}
+	if = {
+		limit = { scope:gender = flag:random }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_variable = {
+						name = pegasus_gender
+						value = flag:female
+					}
+				}
+				50 = {
+					set_variable = {
+						name = pegasus_gender
+						value = flag:male
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:gender = flag:male
+				scope:gender = flag:female
+			}
+		}
+		set_variable = {
+			name = pegasus_gender
+			value = flag:$GENDER$
+		}
+	}
+}
+
+#Remove everything related to the story
+remove_pegasus_story_modifiers_effect = {
+	if = {
+		limit = {
+			has_character_modifier = pegasus_story_modifier
+		}
+		remove_character_modifier = pegasus_story_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = pegasus_strength_modifier
+		}
+		remove_character_modifier = pegasus_strength_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = pegasus_agility_modifier
+		}
+		remove_character_modifier = pegasus_agility_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = pegasus_endurance_modifier
+		}
+		remove_character_modifier = pegasus_endurance_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = pegasus_fierceness_modifier
+		}
+		remove_character_modifier = pegasus_fierceness_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = pegasus_practice_modifier 
+		}
+		remove_character_modifier = pegasus_practice_modifier
+	}
+	
+	prev.var:artifact_pegasus ?= { destroy_artifact = this }
+}
+
+remove_pegasus_name_effect = {
+	remove_variable = story_cycle_pegasus_name
+	remove_localized_text = story_cycle_pegasus_name
+}

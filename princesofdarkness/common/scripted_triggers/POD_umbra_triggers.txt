@@ -1,0 +1,1306 @@
+﻿### Access ###
+has_access_to_skinlands_trigger = {
+	custom_description = {
+		text = has_access_to_skinlands_trigger_tooltip
+		OR = {
+			NOR = { 
+				has_trait = wraith 
+				has_trait = spirit
+			}
+			has_trait = risen
+			
+			has_perk = materialize_perk
+			num_of_relation_necromancer >= 1
+		}
+		NOT = { has_trait = ferryman }
+	}
+}
+
+has_umbra_access_trigger = {
+	OR = {
+		has_access_to_astral_reaches_trigger = yes
+		has_access_to_spirit_wilds_trigger = yes
+		has_access_to_dreaming_trigger = yes
+		has_access_to_underworld_trigger = yes
+		has_access_to_deep_umbra_trigger = yes
+	}
+}
+
+has_access_to_astral_reaches_trigger = {
+	custom_description = {
+		text = has_access_to_astral_reaches_trigger_tooltip
+		OR = {
+			has_trait = spirit
+			
+			has_perk = psychic_projection_perk # Vamp
+			has_perk = unlock_the_jade_portal_perk # Hsien
+			has_perk = separate_ba_perk # Mummy
+			has_perk = see_the_lands_of_the_spirit_perk # Wutian
+			has_perk = astral_projection_1_perk # Psi
+			has_perk = arcana_step_between_perk # Demon
+			has_perk = lore_step_beyond_the_veil_perk # Demon
+			has_perk = soul_arts_mantle_of_living_prayer_perk # KJ
+			has_perk = mokole_walking_between_worlds_perk #Mokole
+			has_perk = investiture_journey_to_the_spirit_realm_perk # Investiture
+			
+			has_character_modifier = ritual_orphic_sojourn_modifier
+		}
+	}
+}
+
+has_access_to_spirit_wilds_trigger = {
+	custom_description = {
+		text = has_access_to_spirit_wilds_trigger_tooltip
+		OR = {
+			has_trait = spirit
+			has_trait = werewolf
+			has_trait = bastet
+			
+			has_perk = the_spirit_beast_perk # Vamp
+			has_perk = unlock_the_jade_portal_perk # Hsien
+			has_perk = separate_ba_perk # Mummy
+			has_perk = see_the_lands_of_the_spirit_perk # Wutian
+			has_perk = numina_ephemera_5_perk # Sorcery
+			has_perk = fomori_step_sideways_perk # Possessed
+			has_perk = gorgon_step_sideways_perk # Possessed
+			has_perk = drone_step_sideways_perk # Possessed
+			has_perk = kami_step_sideways_perk # Possessed
+			has_perk = astral_projection_2_perk # Psi
+			has_perk = arcana_step_between_perk # Demon
+			has_perk = lore_step_beyond_the_veil_perk # Demon
+			has_perk = soul_arts_running_with_the_wolves_perk # KJ
+			has_perk = mokole_walking_between_worlds_perk #Mokole
+			has_perk = part_the_wall_perk #Hengeyokai
+			has_perk = investiture_journey_to_the_spirit_realm_perk # Investiture
+			
+			has_character_modifier = ritual_orphic_sojourn_modifier
+		}
+	}
+}
+
+has_access_to_dreaming_trigger = {
+	custom_description = {
+		text = has_access_to_dreaming_trigger_tooltip
+		OR = {
+			has_trait = fae
+
+			has_perk = visit_faerieland_perk # Vamp
+			has_perk = unlock_the_jade_portal_perk # Hsien
+			has_perk = separate_ba_perk # Mummy
+			has_perk = see_the_lands_of_the_spirit_perk # Wutian
+			has_perk = astral_projection_2_perk # Psi
+			has_perk = numina_oneiromancy_5_perk # Sorcery
+			has_perk = arcana_step_between_perk # Demon
+			has_perk = lore_step_beyond_the_veil_perk # Demon
+			has_perk = soul_arts_mantle_of_living_prayer_perk # KJ
+			has_perk = investiture_journey_to_the_spirit_realm_perk # Investiture
+
+			POD_fera_is_stargazer = yes
+			any_equipped_character_artifact = { has_variable = access_to_dreaming }
+			trigger_if = {
+				limit = { is_landed = yes }
+				capital_province ?= { has_building_with_flag = trod }
+			}
+
+			has_character_modifier = ritual_orphic_sojourn_modifier
+			has_character_modifier = visited_arcadia_modifier
+		}
+	}
+}
+
+has_access_to_underworld_trigger = {
+	custom_description = {
+		text = has_access_to_underworld_trigger_tooltip
+		OR = {
+			has_trait = wraith
+			
+			has_perk = ns_ex_nihilo_perk # Vamp Necromancy
+			has_perk = shroud_of_oblivion_perk # Vamp Blood Sorcery
+			has_perk = walk_the_road_of_shadows_perk #Vamp Blood Sorcery
+			has_perk = walk_with_hades_perk # Werewolf
+			has_perk = unlock_the_jade_portal_perk # Hsien
+			has_perk = separate_ka_perk # Mummy
+			has_perk = lesser_spirit_projection_perk # Wutian
+			has_perk = astral_projection_3_perk # Psi
+			has_perk = arcana_step_between_perk # Demon
+			has_perk = lore_step_beyond_the_veil_perk # Demon
+			has_perk = soul_arts_ghost_mask_perk # KJ
+			has_perk = walking_the_bone_road_perk #Hengeyokai
+			has_perk = investiture_journey_to_the_spirit_realm_perk # Investiture
+
+			faith = { has_doctrine_parameter = access_to_underworld }
+			
+			building_unlocks_underworld_trigger = yes
+
+			has_character_modifier = ritual_orphic_sojourn_modifier
+		}
+	}
+}
+
+has_access_to_deep_umbra_trigger = {
+	custom_description = {
+		text = has_access_to_deep_umbra_trigger_tooltip
+		OR = {
+			has_trait = mage
+			has_trait = werewolf
+			has_trait = spirit
+			
+			has_perk = psychic_projection_perk # Vamp
+			has_perk = unlock_the_jade_portal_perk # Hsien
+			has_perk = separate_ba_perk # Mummy
+			has_perk = see_the_lands_of_the_spirit_perk # Wutian
+			has_perk = astral_projection_1_perk # Psi
+			has_perk = numina_ephemera_5_perk # Sorcery
+			has_perk = arcana_step_between_perk # Demon
+			has_perk = lore_step_beyond_the_veil_perk # Demon
+			has_perk = soul_arts_mantle_of_living_prayer_perk # KJ
+			has_perk = mokole_walking_between_worlds_perk #Mokole
+			has_perk = investiture_journey_to_the_spirit_realm_perk # Investiture
+			
+			has_character_modifier = ritual_orphic_sojourn_modifier
+
+			faith = { has_doctrine = tenet_hypnotic_serpent }
+		}
+	}
+}
+
+### Gauntlet ###
+can_manipulate_the_gauntlet_trigger = {
+	OR = {
+		has_perk = drone_spirit_static_perk #Drone
+		has_perk = fortify_the_wall_perk #Hsien
+		has_perk = lore_pierce_the_barrier_perk #Demon
+		has_perk = open_the_sebkhet_perk #Mummy
+		has_perk = the_clearing_of_the_way_perk # Wu T'ian
+		has_perk = chi_arts_yang_wall_perk # KJ
+		has_perk = dreamwalk_perk #Mokole
+	}
+}
+
+can_tear_down_the_gauntlet_trigger = {
+	OR = {
+		has_perk = prelude_to_apocalypse_perk #WW, special
+	}
+}
+
+can_manipulate_the_shroud_trigger = {
+	OR = {
+		any_relation = { type = bound_wraith has_trait = arcanos_outrage }
+		has_perk = ns_shroud_mastery_perk #Vamp
+		building_unlocks_local_shroud_manipulation_trigger = yes
+		has_perk = lore_pierce_the_barrier_perk #Demon
+		has_perk = open_the_sebkhet_perk #Mummy
+		has_perk = brambles_on_the_road_perk # Wu T'ian
+		has_perk = chi_arts_yin_wall_perk # KJ
+	}
+}
+
+can_tear_down_the_shroud_trigger = {
+	has_perk = anger_enough_for_two_worlds_perk #Wraith, special
+}
+
+### Grace ###
+has_umbra_ruler_trigger = {
+	OR = {
+		$LOCATION$ = flag:dark_kingdom_of_iron
+		$LOCATION$ = flag:dark_kingdom_of_jade
+		$LOCATION$ = flag:court_of_eshtarra
+		$LOCATION$ = flag:court_of_sokhta
+ 		$LOCATION$ = flag:court_of_katanka_sonnak
+ 		$LOCATION$ = flag:court_of_mitanu
+ 		$LOCATION$ = flag:court_of_hakahe
+ 		$LOCATION$ = flag:court_of_tambiyah
+ 		$LOCATION$ = flag:court_of_nerigal
+ 		$LOCATION$ = flag:court_of_rorg
+ 		$LOCATION$ = flag:court_of_zarok
+ 		$LOCATION$ = flag:court_of_lu_bat
+ 		$LOCATION$ = flag:court_of_ruatma
+ 		$LOCATION$ = flag:court_of_shantar
+ 		$LOCATION$ = flag:court_of_meros
+	}
+}
+
+has_planetary_incarna_trigger = {
+	OR = {
+		$LOCATION$ = flag:court_of_eshtarra
+		$LOCATION$ = flag:court_of_sokhta
+ 		$LOCATION$ = flag:court_of_katanka_sonnak
+ 		$LOCATION$ = flag:court_of_mitanu
+ 		$LOCATION$ = flag:court_of_hakahe
+ 		$LOCATION$ = flag:court_of_tambiyah
+ 		$LOCATION$ = flag:court_of_nerigal
+ 		$LOCATION$ = flag:court_of_rorg
+ 		$LOCATION$ = flag:court_of_zarok
+ 		$LOCATION$ = flag:court_of_lu_bat
+ 		$LOCATION$ = flag:court_of_ruatma
+ 		$LOCATION$ = flag:court_of_shantar
+ 		$LOCATION$ = flag:court_of_meros
+	}
+}
+
+communing_with_charon_trigger = {
+	var:umbra_ruler ?= character:POD_wraith_01
+}
+
+communing_with_yuhuang_trigger = {
+	var:umbra_ruler ?= character:POD_wraith_03
+}
+
+communing_with_incarna_trigger = {
+	NOT = { has_variable = umbra_ruler }
+	has_variable = incarna_court
+}
+
+can_assign_incarna_perk_trigger = {
+	switch = {
+		trigger = var:incarna_court.var:name
+		flag:court_of_eshtarra = {
+			NOT = { has_perk = earth_heal_perk }
+		}
+		flag:court_of_sokhta = {
+			NOT = { has_perk = moondream_perk }
+		}
+		flag:court_of_katanka_sonnak = {
+			NOT = { has_perk = cleansing_flame_perk }
+		}
+		flag:court_of_mitanu = {
+			NOT = { has_perk = madthought_perk }
+		}
+		flag:court_of_hakahe = {
+			NOT = { has_perk = planetarygifts_ebon_binding_perk }
+		}
+		flag:court_of_tambiyah = {
+			NOT = { has_perk = bring_forth_the_future_perk }
+		}
+		flag:court_of_nerigal = {
+			NOT = { has_perk = heart_of_the_ice_warrior_perk }
+		}
+		flag:court_of_rorg = {
+			NOT = { has_perk = pack_mind_perk }
+		}
+		flag:court_of_zarok = {
+			NOT = { has_perk = grand_gesture_perk }
+		}
+		flag:court_of_lu_bat = {
+			NOT = { has_perk = burden_of_knowledge_perk }
+		}
+		flag:court_of_ruatma = {
+			NOT = { has_perk = diplomatic_immunity_perk }
+		}
+		flag:court_of_shantar = {
+			NOT = { has_perk = drown_perk }
+		}
+		flag:court_of_meros = {
+			NOT = { has_perk = essential_transformation_perk }
+		}
+	}
+}
+
+### Location ###
+is_in_umbra_trigger = {
+	custom_tooltip = {
+		text = is_in_umbra_tooltip
+		OR = {
+			var:spirit_location ?= { NOT = { in_penumbra_trigger = { LOCATION = this } } }
+			has_variable = spirit_destination
+			has_character_modifier = trapped_in_shadow_realm_modifier
+		}
+	}
+}
+
+in_yang_world_trigger = {
+	OR = {
+ 		in_astral_reaches_trigger = { LOCATION = $LOCATION$ }
+ 		in_spirit_wilds_trigger = { LOCATION = $LOCATION$ }
+ 		in_dreaming_trigger = { LOCATION = $LOCATION$ }
+	}
+}
+
+in_dark_kingdom_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:dark_kingdom_of_wire
+ 		$LOCATION$ = flag:dark_kingdom_of_iron
+ 		$LOCATION$ = flag:dark_kingdom_of_clay
+ 		$LOCATION$ = flag:dark_kingdom_of_ivory
+ 		$LOCATION$ = flag:dark_kingdom_of_jade
+ 		$LOCATION$ = flag:dark_kingdom_of_obsidian
+ 		$LOCATION$ = flag:dark_kingdom_of_sand
+		$LOCATION$ = flag:swar
+		$LOCATION$ = flag:night_markets
+		$LOCATION$ = flag:mantaqat_khayal
+	}
+}
+
+in_malfeas_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:black_spiral_labyrinth
+		$LOCATION$ = flag:central_duchy
+		$LOCATION$ = flag:maeljin_duchies
+		$LOCATION$ = flag:border_duchies
+		$LOCATION$ = flag:earth_pit
+		$LOCATION$ = flag:elemental_duchies
+	}
+}
+
+in_yomi_trigger = {
+	OR = {
+		$LOCATION$ = flag:yomi_wan
+ 		$LOCATION$ = flag:kakuri
+ 		$LOCATION$ = flag:wicked_city
+ 		$LOCATION$ = flag:hell_of_burrowing_maggots
+ 		$LOCATION$ = flag:hell_of_being_skinned_alive
+ 		$LOCATION$ = flag:hell_of_boiling_oil
+ 		$LOCATION$ = flag:hell_of_bitter_truth
+ 		$LOCATION$ = flag:hell_of_spiked_chains
+	}
+}
+
+in_shadow_realm_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:yomi_wan
+		$LOCATION$ = flag:hades
+	}
+}
+
+in_spirit_wilds_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:court_of_meros
+ 		$LOCATION$ = flag:court_of_shantar
+ 		$LOCATION$ = flag:court_of_ruatma
+ 		$LOCATION$ = flag:court_of_lu_bat
+ 		$LOCATION$ = flag:court_of_zarok
+ 		$LOCATION$ = flag:court_of_rorg
+ 		$LOCATION$ = flag:court_of_nerigal
+ 		$LOCATION$ = flag:court_of_tambiyah
+ 		$LOCATION$ = flag:court_of_hakahe
+ 		$LOCATION$ = flag:court_of_mitanu
+ 		$LOCATION$ = flag:court_of_katanka_sonnak
+ 		$LOCATION$ = flag:court_of_sokhta
+ 		$LOCATION$ = flag:court_of_eshtarra
+ 		$LOCATION$ = flag:aetherial_realm
+ 		$LOCATION$ = flag:atrocity_realm
+ 		$LOCATION$ = flag:cyberrealm
+ 		$LOCATION$ = flag:battleground
+ 		$LOCATION$ = flag:erebus
+ 		$LOCATION$ = flag:flux_realm
+ 		$LOCATION$ = flag:hy_brasil
+ 		$LOCATION$ = flag:legendary_realm
+ 		$LOCATION$ = flag:mountains_of_heaven
+ 		$LOCATION$ = flag:pangaea
+ 		$LOCATION$ = flag:scar
+ 		$LOCATION$ = flag:summer_country
+ 		$LOCATION$ = flag:tiger_lands
+ 		$LOCATION$ = flag:umi
+ 		$LOCATION$ = flag:wolfhome
+ 		$LOCATION$ = flag:the_homeland_of_the_black_furies
+ 		$LOCATION$ = flag:the_homeland_of_the_bone_gnawers
+ 		$LOCATION$ = flag:the_homeland_of_the_children_of_gaia
+ 		$LOCATION$ = flag:the_homeland_of_the_fianna
+ 		$LOCATION$ = flag:the_homeland_of_the_get_of_fenris
+ 		$LOCATION$ = flag:the_homeland_of_the_glass_walkers
+ 		$LOCATION$ = flag:the_homeland_of_the_red_talons
+ 		$LOCATION$ = flag:the_homeland_of_the_shadow_lords
+ 		$LOCATION$ = flag:the_homeland_of_the_stargazers
+ 		$LOCATION$ = flag:the_homeland_of_the_silver_fangs
+ 		$LOCATION$ = flag:the_homeland_of_the_silent_striders
+ 		$LOCATION$ = flag:the_homeland_of_the_uktena
+ 		$LOCATION$ = flag:the_homeland_of_the_wendigo
+ 		$LOCATION$ = flag:the_homeland_of_the_croatan
+ 		$LOCATION$ = flag:the_homeland_of_the_bunyip
+ 		$LOCATION$ = flag:the_homeland_of_the_corax
+ 		$LOCATION$ = flag:the_homeland_of_the_nuwisha
+ 		$LOCATION$ = flag:the_former_homeland_of_the_white_howlers
+ 		$LOCATION$ = flag:spirit_wilds
+ 		$LOCATION$ = flag:calumn
+ 		$LOCATION$ = flag:galunlati
+ 		$LOCATION$ = flag:heavenly_flower_garden
+ 		$LOCATION$ = flag:xi_wang_chin
+	}
+}
+
+in_dreaming_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:arcadia
+ 		$LOCATION$ = flag:deep_dreaming
+ 		$LOCATION$ = flag:far_dreaming
+ 		$LOCATION$ = flag:near_dreaming
+ 		$LOCATION$ = flag:kingdom_of_dan
+ 		$LOCATION$ = flag:kureksarra
+ 		$LOCATION$ = flag:rubezhal
+ 		$LOCATION$ = flag:capecia
+ 		$LOCATION$ = flag:irrgarten
+ 		$LOCATION$ = flag:arike
+ 		$LOCATION$ = flag:myrmitown
+ 		$LOCATION$ = flag:the_tunnels
+ 		$LOCATION$ = flag:balloon
+ 		$LOCATION$ = flag:vale_of_mists
+ 		$LOCATION$ = flag:fields_behind
+ 		$LOCATION$ = flag:bullydale_wastes
+ 		$LOCATION$ = flag:low_dukedoms
+ 		$LOCATION$ = flag:blotkeldur
+ 		$LOCATION$ = flag:wastelands
+ 		$LOCATION$ = flag:hieronymus_continuum
+ 		$LOCATION$ = flag:wyldweir
+ 		$LOCATION$ = flag:brobdingnag
+ 		$LOCATION$ = flag:arawns_forge
+ 		$LOCATION$ = flag:great_dream_forest
+ 		$LOCATION$ = flag:discordant_woods
+ 		$LOCATION$ = flag:sea_of_sorrow
+ 		$LOCATION$ = flag:great_chasm
+ 		$LOCATION$ = flag:great_engine
+ 		$LOCATION$ = flag:lake_of_sorrows
+ 		$LOCATION$ = flag:rivers_of_phantasia
+ 		$LOCATION$ = flag:seas_of_dream
+ 		$LOCATION$ = flag:slumbering_oceans
+ 		$LOCATION$ = flag:splintered_mountains
+ 		$LOCATION$ = flag:middlemarch
+ 		$LOCATION$ = flag:chakravada
+ 		$LOCATION$ = flag:goblin_market
+ 		$LOCATION$ = flag:distant_cities
+ 		$LOCATION$ = flag:fin_bheara
+ 		$LOCATION$ = flag:mistweir
+ 		$LOCATION$ = flag:dream_burrow
+ 		$LOCATION$ = flag:madness_realm
+ 		$LOCATION$ = flag:meridianus
+ 		$LOCATION$ = flag:sea_of_silver
+ 		$LOCATION$ = flag:snail_graveyards
+ 		$LOCATION$ = flag:spawning_fields
+ 		$LOCATION$ = flag:tenebrous_realm
+ 		$LOCATION$ = flag:winterweir
+ 		$LOCATION$ = flag:forest_of_lies
+ 		$LOCATION$ = flag:maharaurava
+ 		$LOCATION$ = flag:chimare
+ 		$LOCATION$ = flag:demesne
+	}
+}
+
+in_underworld_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:yomi_wan
+ 		$LOCATION$ = flag:oblivion
+ 		$LOCATION$ = flag:well_of_the_void
+ 		$LOCATION$ = flag:pod_realm_labyrinth
+ 		$LOCATION$ = flag:abyss
+ 		$LOCATION$ = flag:dis
+ 		$LOCATION$ = flag:sea_of_shadow
+ 		$LOCATION$ = flag:tempest
+ 		$LOCATION$ = flag:stormwall
+ 		$LOCATION$ = flag:dark_kingdom_of_wire
+ 		$LOCATION$ = flag:dark_kingdom_of_iron
+ 		$LOCATION$ = flag:isle_of_sorrows
+ 		$LOCATION$ = flag:sea_of_souls
+ 		$LOCATION$ = flag:weeping_bay
+ 		$LOCATION$ = flag:far_shore
+ 		$LOCATION$ = flag:sunless_sea
+ 		$LOCATION$ = flag:dark_kingdom_of_clay
+ 		$LOCATION$ = flag:dark_kingdom_of_ivory
+ 		$LOCATION$ = flag:dark_kingdom_of_jade
+ 		$LOCATION$ = flag:dark_kingdom_of_obsidian
+ 		$LOCATION$ = flag:dark_kingdom_of_sand
+ 		$LOCATION$ = flag:swar
+ 		$LOCATION$ = flag:night_markets
+ 		$LOCATION$ = flag:mantaqat_khayal
+ 		$LOCATION$ = flag:river_of_death
+ 		$LOCATION$ = flag:shadowlands
+ 		$LOCATION$ = flag:first_city
+ 		$LOCATION$ = flag:kakuri
+ 		$LOCATION$ = flag:wicked_city
+ 		$LOCATION$ = flag:hell_of_burrowing_maggots
+ 		$LOCATION$ = flag:hell_of_being_skinned_alive
+ 		$LOCATION$ = flag:hell_of_boiling_oil
+ 		$LOCATION$ = flag:hell_of_bitter_truth
+ 		$LOCATION$ = flag:hell_of_spiked_chains
+ 		$LOCATION$ = flag:islands_of_flint
+ 		$LOCATION$ = flag:mirrorlands
+ 		$LOCATION$ = flag:island_below_the_sea
+ 		$LOCATION$ = flag:feng_tu
+ 		$LOCATION$ = flag:fields_of_aaru
+ 		$LOCATION$ = flag:isle_of_eurydice
+ 		$LOCATION$ = flag:hades
+ 		$LOCATION$ = flag:neter_khertet
+	}
+}
+
+in_astral_reaches_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:epiphamy
+ 		$LOCATION$ = flag:elemental_courts
+ 		$LOCATION$ = flag:the_court_of_the_muses
+ 		$LOCATION$ = flag:spires
+ 		$LOCATION$ = flag:city_of_brass
+ 		$LOCATION$ = flag:grand_hall
+ 		$LOCATION$ = flag:vulgate
+ 		$LOCATION$ = flag:astral_plane
+ 		$LOCATION$ = flag:inventium
+	}
+}
+
+in_deep_umbra_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:black_spiral_labyrinth
+ 		$LOCATION$ = flag:shard_realm_of_entropy
+ 		$LOCATION$ = flag:shard_realm_of_mind
+ 		$LOCATION$ = flag:shard_realm_of_spirit
+ 		$LOCATION$ = flag:shard_realm_of_time
+ 		$LOCATION$ = flag:shard_realm_of_matter
+ 		$LOCATION$ = flag:shard_realm_of_forces
+ 		$LOCATION$ = flag:shard_realm_of_life
+ 		$LOCATION$ = flag:shard_realm_of_correspondence
+ 		$LOCATION$ = flag:shard_realm_of_infinity
+ 		$LOCATION$ = flag:shade_realm_of_entropy
+ 		$LOCATION$ = flag:shade_realm_of_mind
+ 		$LOCATION$ = flag:shade_realm_of_spirit
+ 		$LOCATION$ = flag:shade_realm_of_time
+ 		$LOCATION$ = flag:shade_realm_of_matter
+ 		$LOCATION$ = flag:shade_realm_of_forces
+ 		$LOCATION$ = flag:shade_realm_of_life
+ 		$LOCATION$ = flag:shade_realm_of_correspondence
+ 		$LOCATION$ = flag:shard_realm_of_prime
+ 		$LOCATION$ = flag:weaver_reaches
+ 		$LOCATION$ = flag:wyld_reaches
+ 		$LOCATION$ = flag:wyrm_reaches
+ 		$LOCATION$ = flag:deep_umbra
+ 		$LOCATION$ = flag:far_horizon
+ 		$LOCATION$ = flag:true_horizon
+ 		$LOCATION$ = flag:first_horizon
+ 		#$LOCATION$ = flag:paradox_realms
+ 		$LOCATION$ = flag:heaven
+ 		$LOCATION$ = flag:jupiter
+ 		$LOCATION$ = flag:mars
+ 		$LOCATION$ = flag:mercury
+ 		$LOCATION$ = flag:neptune
+ 		$LOCATION$ = flag:pluto
+ 		$LOCATION$ = flag:saturn
+ 		$LOCATION$ = flag:uranus
+ 		$LOCATION$ = flag:venus
+ 		$LOCATION$ = flag:moon
+ 		$LOCATION$ = flag:sun
+ 		$LOCATION$ = flag:cerberus
+ 		$LOCATION$ = flag:autochthonia
+ 		$LOCATION$ = flag:copernicus_research_center
+ 		$LOCATION$ = flag:darkside_moon_base
+ 		$LOCATION$ = flag:victoria_station
+ 		$LOCATION$ = flag:balador
+ 		$LOCATION$ = flag:gernsback_continuum
+ 		$LOCATION$ = flag:midrealm
+ 		$LOCATION$ = flag:moreauvia
+ 		$LOCATION$ = flag:red_donjon
+ 		$LOCATION$ = flag:null_b
+ 		$LOCATION$ = flag:yenosia
+ 		$LOCATION$ = flag:concordia
+ 		$LOCATION$ = flag:horizon
+ 		$LOCATION$ = flag:fors_collegis_mercuris
+ 		$LOCATION$ = flag:mus
+ 		$LOCATION$ = flag:seasonal_realms
+ 		$LOCATION$ = flag:qlippoth
+ 		$LOCATION$ = flag:doissetep
+ 		$LOCATION$ = flag:hive_realm
+ 		$LOCATION$ = flag:central_duchy
+ 		$LOCATION$ = flag:maeljin_duchies
+ 		$LOCATION$ = flag:border_duchies
+ 		$LOCATION$ = flag:earth_pit
+ 		$LOCATION$ = flag:elemental_duchies
+	}
+}
+
+in_penumbra_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:earth
+ 		$LOCATION$ = flag:digital_web
+ 		$LOCATION$ = flag:hollow_worlds
+ 		$LOCATION$ = flag:dreamtime
+	}
+}
+
+in_zone_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:mirror_zone
+ 		$LOCATION$ = flag:null_zone
+	}
+}
+
+in_tempest_trap_umbra_location_trigger = {
+	OR = {
+		$LOCATION$ = flag:tempest
+		$LOCATION$ = flag:stormwall
+	}
+}
+
+in_wyrm_trap_umbra_location_trigger = {
+	OR = {
+		$LOCATION$ = flag:calumn
+		$LOCATION$ = flag:central_duchy
+		$LOCATION$ = flag:maeljin_duchies
+		$LOCATION$ = flag:border_duchies
+		$LOCATION$ = flag:earth_pit
+		$LOCATION$ = flag:elemental_duchies
+		$LOCATION$ = flag:black_spiral_labyrinth
+	}
+}
+
+in_oblivion_trap_umbra_location_trigger = {
+	OR = {
+		$LOCATION$ = flag:pod_realm_labyrinth
+		$LOCATION$ = flag:well_of_the_void
+	}
+}
+
+in_eventful_umbra_location_trigger = {
+	OR = {
+ 		$LOCATION$ = flag:astral_plane
+ 		$LOCATION$ = flag:vulgate
+ 		$LOCATION$ = flag:grand_hall
+ 		$LOCATION$ = flag:city_of_brass
+ 		$LOCATION$ = flag:spires
+ 		$LOCATION$ = flag:inventium
+ 		$LOCATION$ = flag:epiphamy
+ 		$LOCATION$ = flag:elemental_courts
+ 		$LOCATION$ = flag:the_court_of_the_muses
+ 		$LOCATION$ = flag:shadowlands
+ 		$LOCATION$ = flag:dark_kingdom_of_sand
+ 		$LOCATION$ = flag:abyss
+ 		$LOCATION$ = flag:spirit_wilds
+ 		$LOCATION$ = flag:the_homeland_of_the_black_furies
+ 		$LOCATION$ = flag:the_homeland_of_the_bone_gnawers
+ 		$LOCATION$ = flag:the_homeland_of_the_children_of_gaia
+ 		$LOCATION$ = flag:the_homeland_of_the_fianna
+ 		$LOCATION$ = flag:the_homeland_of_the_get_of_fenris
+ 		$LOCATION$ = flag:the_homeland_of_the_glass_walkers
+ 		$LOCATION$ = flag:the_homeland_of_the_red_talons
+ 		$LOCATION$ = flag:the_homeland_of_the_shadow_lords
+ 		$LOCATION$ = flag:the_homeland_of_the_stargazers
+ 		$LOCATION$ = flag:the_homeland_of_the_silver_fangs
+ 		$LOCATION$ = flag:the_homeland_of_the_silent_striders
+ 		$LOCATION$ = flag:the_former_homeland_of_the_white_howlers
+ 		$LOCATION$ = flag:calumn
+ 		$LOCATION$ = flag:atrocity_realm
+ 		$LOCATION$ = flag:battleground
+ 		$LOCATION$ = flag:erebus
+ 		$LOCATION$ = flag:flux_realm
+ 		$LOCATION$ = flag:hy_brasil
+ 		$LOCATION$ = flag:legendary_realm
+ 		$LOCATION$ = flag:mountains_of_heaven
+ 		$LOCATION$ = flag:pangaea
+ 		$LOCATION$ = flag:summer_country
+ 		$LOCATION$ = flag:tiger_lands
+ 		$LOCATION$ = flag:umi
+ 		$LOCATION$ = flag:wolfhome
+ 		$LOCATION$ = flag:aetherial_realm
+ 		$LOCATION$ = flag:weaver_reaches
+ 		$LOCATION$ = flag:wyld_reaches
+ 		$LOCATION$ = flag:wyrm_reaches
+ 		$LOCATION$ = flag:black_spiral_labyrinth
+ 		$LOCATION$ = flag:first_city
+ 		$LOCATION$ = flag:mirror_zone
+ 		$LOCATION$ = flag:null_zone
+ 		$LOCATION$ = flag:neter_khertet
+	}
+}
+
+in_dangerous_umbra_location_trigger = { # can't use interaction even both im umbra, disables some discovery triggering
+	OR = {
+		AND = {
+			NOT = { has_global_variable = black_death_prevented }
+			character:POD_wraith_01 ?= { 
+				current_year >= 1342
+				current_year < 1357
+			}
+			in_underworld_trigger = { LOCATION = $LOCATION$ }
+		}
+		AND = {
+			character:POD_wraith_01 ?= { 
+				current_year >= 1605
+				current_year < 1620
+			}
+			in_underworld_trigger = { LOCATION = $LOCATION$ }
+		}
+		AND = {
+			character:POD_wraith_01 ?= { 
+				current_year >= 1916
+				current_year < 1931
+			}
+			in_underworld_trigger = { LOCATION = $LOCATION$ }
+		}
+		AND = {
+			character:POD_wraith_01 ?= { 
+				current_year >= 1945
+				current_year < 1960
+			}
+			in_underworld_trigger = { LOCATION = $LOCATION$ }
+		}
+		AND = {
+			character:POD_wraith_01 ?= { 
+				current_year >= 1999
+				current_year < 2014
+			}
+			in_underworld_trigger = { LOCATION = $LOCATION$ }
+		}
+ 		$LOCATION$ = flag:hades
+ 		$LOCATION$ = flag:yomi_wan
+ 		$LOCATION$ = flag:kakuri
+ 		$LOCATION$ = flag:wicked_city
+ 		$LOCATION$ = flag:hell_of_burrowing_maggots
+ 		$LOCATION$ = flag:hell_of_being_skinned_alive
+ 		$LOCATION$ = flag:hell_of_boiling_oil
+ 		$LOCATION$ = flag:hell_of_bitter_truth
+ 		$LOCATION$ = flag:hell_of_spiked_chains
+ 		$LOCATION$ = flag:tempest
+ 		$LOCATION$ = flag:stormwall
+ 		$LOCATION$ = flag:pod_realm_labyrinth
+ 		$LOCATION$ = flag:well_of_the_void
+ 		$LOCATION$ = flag:oblivion
+ 		$LOCATION$ = flag:abyss
+ 		$LOCATION$ = flag:black_spiral_labyrinth
+		#$LOCATION$ = flag:paradox_realms
+ 		$LOCATION$ = flag:scar
+ 		$LOCATION$ = flag:erebus
+ 		$LOCATION$ = flag:flux_realm
+ 		$LOCATION$ = flag:atrocity_realm
+ 		$LOCATION$ = flag:calumn
+ 		$LOCATION$ = flag:central_duchy
+ 		$LOCATION$ = flag:maeljin_duchies
+ 		$LOCATION$ = flag:border_duchies
+ 		$LOCATION$ = flag:earth_pit
+ 		$LOCATION$ = flag:elemental_duchies
+ 		$LOCATION$ = flag:weaver_reaches
+ 		$LOCATION$ = flag:wyld_reaches
+ 		$LOCATION$ = flag:wyrm_reaches
+ 		$LOCATION$ = flag:sun
+ 		$LOCATION$ = flag:qlippoth
+ 		$LOCATION$ = flag:bullydale_wastes
+ 		$LOCATION$ = flag:low_dukedoms
+ 		$LOCATION$ = flag:blotkeldur
+ 		$LOCATION$ = flag:wastelands
+ 		$LOCATION$ = flag:madness_realm
+ 		$LOCATION$ = flag:winterweir
+ 		$LOCATION$ = flag:meridianus
+ 		$LOCATION$ = flag:tenebrous_realm
+	}
+}
+
+in_umbra_realm_trigger = { # 2000 to upgrade level instead of 1500
+	OR = {
+		$LOCATION$ = flag:astral_plane
+		$LOCATION$ = flag:epiphamy
+		$LOCATION$ = flag:spires
+		$LOCATION$ = flag:vulgate
+		$LOCATION$ = flag:deep_umbra
+		$LOCATION$ = flag:far_horizon
+		$LOCATION$ = flag:first_horizon
+		$LOCATION$ = flag:true_horizon
+		$LOCATION$ = flag:arcadia
+		$LOCATION$ = flag:deep_dreaming
+		$LOCATION$ = flag:far_dreaming
+		$LOCATION$ = flag:near_dreaming
+		$LOCATION$ = flag:great_dream_forest
+		$LOCATION$ = flag:mistweir
+		$LOCATION$ = flag:slumbering_oceans
+		$LOCATION$ = flag:spawning_fields
+		$LOCATION$ = flag:splintered_mountains
+		$LOCATION$ = flag:vale_of_mists
+		$LOCATION$ = flag:spirit_wilds
+		$LOCATION$ = flag:shadowlands
+		$LOCATION$ = flag:sea_of_shadow
+		$LOCATION$ = flag:tempest
+		$LOCATION$ = flag:stormwall
+		$LOCATION$ = flag:pod_realm_labyrinth
+		$LOCATION$ = flag:yomi_wan
+ 		$LOCATION$ = flag:jupiter
+ 		$LOCATION$ = flag:mars
+ 		$LOCATION$ = flag:mercury
+ 		$LOCATION$ = flag:neptune
+ 		$LOCATION$ = flag:pluto
+ 		$LOCATION$ = flag:saturn
+ 		$LOCATION$ = flag:uranus
+ 		$LOCATION$ = flag:venus
+ 		$LOCATION$ = flag:moon
+ 		$LOCATION$ = flag:sun
+ 		$LOCATION$ = flag:earth
+ 		$LOCATION$ = flag:central_duchy
+ 		$LOCATION$ = flag:oblivion
+		$LOCATION$ = flag:islands_of_flint
+		$LOCATION$ = flag:dark_kingdom_of_sand
+		$LOCATION$ = flag:dark_kingdom_of_iron
+		$LOCATION$ = flag:dark_kingdom_of_clay
+		$LOCATION$ = flag:dark_kingdom_of_ivory
+		$LOCATION$ = flag:dark_kingdom_of_jade
+		$LOCATION$ = flag:dark_kingdom_of_obsidian
+		$LOCATION$ = flag:dark_kingdom_of_wire
+		$LOCATION$ = flag:swar
+		$LOCATION$ = flag:night_markets
+		$LOCATION$ = flag:mantaqat_khayal
+		$LOCATION$ = flag:far_shore
+	}
+}
+
+in_small_umbra_location_trigger = { # 1000 to upgrade level instead of 1500
+	OR = {
+		$LOCATION$ = flag:grand_hall
+		$LOCATION$ = flag:city_of_brass
+		$LOCATION$ = flag:elemental_courts
+		$LOCATION$ = flag:the_court_of_the_muses
+		$LOCATION$ = flag:weeping_bay
+		$LOCATION$ = flag:isle_of_sorrows
+		$LOCATION$ = flag:dis
+		$LOCATION$ = flag:calumn
+		$LOCATION$ = flag:first_city
+		#$LOCATION$ = flag:paradox_realms
+ 		$LOCATION$ = flag:doissetep
+	}
+}
+
+can_be_lost_in_tempest_trigger = {
+	NOR = { 
+		has_perk = stormreader_perk
+		has_perk = stormwalk_perk
+	}
+}
+
+### Interaction ###
+POD_is_not_trapped_in_umbra_basic_trigger = {
+	NOT = { has_character_modifier = trapped_in_malfeas_modifier }
+	NOT = { has_character_modifier = trapped_in_yomi_modifier }
+	NOT = { has_character_modifier = trapped_in_abyss_modifier }
+	NOT = { has_character_modifier = trapped_in_arcadia_modifier }
+	NOT = { has_character_modifier = trapped_in_labyrinth_modifier }
+	NOT = { has_character_modifier = trapped_in_paradox_realm_modifier }
+	NOT = { has_character_modifier = trapped_in_tempest_modifier }
+	NOT = { has_character_modifier = trapped_in_pattern_web_modifier }
+	NOT = { has_character_modifier = trapped_in_shadow_realm_modifier }
+}
+
+POD_is_not_trapped_in_umbra_trigger = {
+	POD_is_not_trapped_in_umbra_basic_trigger = yes
+	trigger_if = {
+		limit = { 
+			exists = this
+			is_alive = yes
+			has_variable = umbra_stationed_realm
+		}
+		custom_description = {
+			text = lost_in_umbra
+			subject = this
+			NOT = { in_dangerous_umbra_location_trigger = { LOCATION = var:umbra_stationed_realm.var:name } }
+		}
+	}
+}
+
+POD_cross_umbra_interaction_valid_trigger = {
+	POD_cross_umbra_valid_trigger = { ACTOR = scope:actor RECIPIENT = scope:recipient }
+	POD_cross_umbra_valid_trigger = { ACTOR = scope:recipient RECIPIENT = scope:actor }
+}
+
+POD_cross_umbra_interaction_secondary_valid_trigger = {
+	POD_cross_umbra_valid_trigger = { ACTOR = scope:secondary_actor RECIPIENT = scope:recipient }
+	POD_cross_umbra_valid_trigger = { ACTOR = scope:recipient RECIPIENT = scope:secondary_actor }
+}
+
+POD_cross_umbra_scheme_valid_trigger = {
+	scope:owner = { POD_is_available_in_umbra_trigger = { RECIPIENT = scope:target } }
+	scope:target = { POD_is_available_in_umbra_trigger = { RECIPIENT = scope:owner } }
+}
+
+POD_cross_umbra_valid_trigger = {
+	$ACTOR$ = { save_temporary_scope_as = umbra_actor }
+	$RECIPIENT$ = { save_temporary_scope_as = umbra_recipient }
+	scope:umbra_actor = { 
+		trigger_if = {
+			limit = { is_in_umbra_trigger = yes }
+			POD_is_available_in_umbra_trigger = { RECIPIENT = scope:umbra_recipient }
+			trigger_if = {
+				limit = { scope:umbra_recipient = { is_in_umbra_trigger = no } }
+				custom_description = {
+					text = POD_is_in_same_plane_tooltip
+					object = scope:umbra_actor
+					subject = scope:umbra_recipient
+					OR = {
+						#has_perk = whispers_perk
+						has_character_modifier = embody_whispers_modifier
+						has_perk = attunement_perk
+						has_perk = hermetic_sight_perk
+						has_perk = sight_of_the_jackal_perk
+						has_perk = numina_ephemera_1_perk
+						has_perk = numina_necromancy_1_perk
+						has_perk = manifestation_perk
+						has_perk = necro_psi_2_perk
+						has_perk = shroud_of_oblivion_perk
+						AND = {
+							has_perk = strand_channel_perk
+							is_my_fetter_trigger = { FETTER = scope:umbra_recipient }
+						}
+						scope:umbra_recipient = { has_perk = hermetic_sight_perk }
+						scope:umbra_recipient = { has_perk = sight_of_the_jackal_perk }
+						scope:umbra_recipient = { has_perk = numina_ephemera_1_perk }
+						scope:umbra_recipient = { has_perk = numina_necromancy_1_perk }
+						scope:umbra_recipient = { has_perk = necro_psi_2_perk }
+						scope:umbra_recipient = { has_perk = khu_of_two_lands_perk }
+						scope:umbra_recipient = { has_perk = celestial_doorway_perk }
+						scope:umbra_recipient = { has_perk = ns_touch_of_the_nether_perk }
+						scope:umbra_recipient = { has_perk = soul_arts_ghost_mask_perk }
+						scope:umbra_recipient = { has_perk = numina_via_geniorum_1_perk }
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_is_available_in_umbra_trigger = {
+	trigger_if = {
+		limit = { has_character_modifier = trapped_in_shadow_realm_modifier }
+		trigger_if = {
+			limit = { NOT = { $RECIPIENT$.var:spirit_location ?= var:spirit_location } }
+			has_perk = heart_of_life_perk
+		}
+	}
+	trigger_else = {
+		trigger_if = {
+			limit = { NOT = { $RECIPIENT$.var:spirit_location ?= var:spirit_location } }
+			POD_is_not_trapped_in_umbra_trigger = yes
+		}
+	}
+}
+
+### Trigger Event ###
+POD_umbra_event_available_trigger = {
+	trigger_if = {
+		limit = { NOT = { var:spirit_location ?= flag:earth } }
+		var:spirit_location ?= $LOCATION$
+	}
+	trigger_else = {
+		POD_umbra_stationed_trigger = { LOCATION = $LOCATION$ }
+	}
+}
+
+POD_umbra_stationed_trigger = {
+	OR = {
+		var:umbra_stationed_realm.var:name ?= $LOCATION$
+		any_relation = {
+			type = umbra_explorer
+			var:umbra_stationed_realm.var:name = $LOCATION$
+		}
+	}
+}
+
+POD_umbra_bypass_trigger = {
+	POD_umbra_stationed_trigger = { LOCATION = $LOCATION$ } # Stationed
+}
+
+POD_umbra_travel_valid_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { has_variable = spirit_location }
+				NOT = { var:spirit_location = $LOCATION$ }
+			}
+		}
+		POD_is_not_trapped_in_umbra_basic_trigger = yes
+		trigger_if = {
+			limit = {
+				OR = {
+					in_penumbra_trigger = { LOCATION = $LOCATION$ } 
+					in_zone_trigger = { LOCATION = $LOCATION$ } 
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { in_underworld_trigger = { LOCATION = $LOCATION$ } }
+			has_access_to_underworld_trigger = yes
+			trigger_if = {
+				limit = { location ?= { is_sea_province = no } }
+				trigger_if = {
+					limit = { has_trait = entomos }
+					shroud_too_weak_trigger = no
+				}
+				trigger_else = {
+					shroud_too_strong_trigger = no
+				}
+			}
+		}
+		trigger_else = {
+			trigger_if = {
+				limit = { in_dreaming_trigger = { LOCATION = $LOCATION$ } }
+				has_access_to_dreaming_trigger = yes
+			}
+			trigger_if = {
+				limit = { in_spirit_wilds_trigger = { LOCATION = $LOCATION$ } }
+				has_access_to_spirit_wilds_trigger = yes
+				trigger_if = {
+					limit = { POD_is_bastet_trigger = yes }
+					custom_tooltip = {
+						text = bastet_spirit_wilds_access_tooltip
+						OR = {
+							has_faith = faith:swara
+							has_trait_xp = { trait = bastet value >= 20 }
+						}
+					}
+				}
+			}
+			trigger_if = {
+				limit = { in_astral_reaches_trigger = { LOCATION = $LOCATION$ } }
+				has_access_to_astral_reaches_trigger = yes
+			}
+			trigger_if = {
+				limit = { in_deep_umbra_trigger = { LOCATION = $LOCATION$ } }
+				has_access_to_deep_umbra_trigger = yes
+			}
+			trigger_if = {
+				limit = { location ?= { is_sea_province = no } }
+				trigger_if = {
+					limit = { has_trait = entomos }
+					gauntlet_too_weak_trigger = no
+				}
+				trigger_else = {
+					gauntlet_too_strong_trigger = no
+				}
+			}
+		}
+		switch = {
+			trigger = $LOCATION$
+			flag:calumn = {
+				stress_level >= 2
+			}
+			flag:summer_country = {
+				has_trait = kami
+			}
+			flag:the_homeland_of_the_silent_striders = {
+				custom_tooltip = {
+					text = silentstrider_objective_decision_finished
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:silentstrider_objective_decision
+					}
+				}
+			}
+			flag:abyss = {
+				trigger_if = {
+					limit = { has_trait = demon }
+					custom_tooltip = {
+						text = breakdown_the_abyss_objective_decision_finished
+						has_global_variable = abyss_broken
+					}
+				}
+			}
+			flag:digital_web = {
+				has_trait = mage
+			}
+			flag:umi = {
+				location = {
+					trigger_if = {
+						limit = { is_sea_province = no }
+						is_coastal = yes
+					}
+				}
+			}
+			flag:hollow_worlds = {
+				location = {
+					custom_tooltip = {
+						text = has_any_special_mine_tt
+						OR = {
+							has_building_or_higher = chaw_gully_mine_01
+							has_any_special_mine_trigger = yes
+						}
+					}
+				}
+			}
+			fallback = {
+			}
+		}
+		trigger_if = {
+			limit = { has_trait = demon }
+			custom_tooltip = {
+				text = demon_umbra_travel_tt
+				OR = {
+					has_global_variable = abyss_broken
+					in_penumbra_trigger = { LOCATION = $LOCATION$ } 
+					has_perk = arcana_step_between_perk
+					has_perk = lore_step_beyond_the_veil_perk
+				}
+			}
+		}
+		trigger_if = {
+			limit = { has_trait = mokole is_ai = yes }
+			custom_tooltip = {
+				text = mokole_ai_no_umbra
+				always = no
+			}
+		}
+	}
+}
+
+### Action ###
+has_invention_modifier_trigger = {
+	OR = {
+		has_character_modifier = firebombs_modifier 
+		has_character_modifier = firespewer_modifier 
+		has_character_modifier = difference_engine_modifier
+		has_character_modifier = aeolipile_modifier 
+		has_character_modifier = antikythera_mechanism_modifier 
+		has_character_modifier = flexible_glass_modifier
+		has_character_modifier = archimedes_death_ray_modifier
+		#has_character_modifier = damascus_steel_modifier
+		#has_character_modifier = roman_concrete_modifier
+		has_character_modifier = wodden_hawk_modifier
+		has_character_modifier = wodden_ox_modifier
+		has_character_modifier = lingjen_modifier
+		has_character_modifier = south_pointing_chariot_modifier
+		has_character_modifier = seismoscope_modifier
+		has_character_modifier = bhaskaras_wheel_modifier
+	}
+}
+
+has_two_invention_modifier_trigger = {
+	calc_true_if = {
+		amount >= 2
+
+		has_character_modifier = firebombs_modifier 
+		has_character_modifier = firespewer_modifier 
+		has_character_modifier = difference_engine_modifier
+		has_character_modifier = aeolipile_modifier 
+		has_character_modifier = antikythera_mechanism_modifier 
+		has_character_modifier = flexible_glass_modifier
+		has_character_modifier = archimedes_death_ray_modifier
+		has_character_modifier = wodden_hawk_modifier
+		has_character_modifier = wodden_ox_modifier
+		has_character_modifier = lingjen_modifier
+		has_character_modifier = south_pointing_chariot_modifier
+		has_character_modifier = seismoscope_modifier
+		has_character_modifier = bhaskaras_wheel_modifier
+	}
+}
+
+has_three_invention_modifier_trigger = {
+	calc_true_if = {
+		amount >= 3
+
+		has_character_modifier = firebombs_modifier 
+		has_character_modifier = firespewer_modifier 
+		has_character_modifier = difference_engine_modifier
+		has_character_modifier = aeolipile_modifier 
+		has_character_modifier = antikythera_mechanism_modifier 
+		has_character_modifier = flexible_glass_modifier
+		has_character_modifier = archimedes_death_ray_modifier
+		has_character_modifier = wodden_hawk_modifier
+		has_character_modifier = wodden_ox_modifier
+		has_character_modifier = lingjen_modifier
+		has_character_modifier = south_pointing_chariot_modifier
+		has_character_modifier = seismoscope_modifier
+		has_character_modifier = bhaskaras_wheel_modifier
+	}
+}
+
+### Umbra Expedition ###
+POD_is_currently_in_umbra_expedition_trigger = {
+	exists = var:umbra_map
+}
+
+POD_umbra_crisis_valid_trigger = {
+	NOT = { is_target_in_variable_list = { name = umbra_secured_list target = $LOCATION$ } }
+}
+
+POD_is_umbra_crisis_trigger = {
+	OR = {
+		$TYPE$ = flag:wyrmish_summoning
+	}
+}
+
+### Explorer ###
+
+can_be_umbra_explorer_trigger = {
+	is_incapable = no
+	trigger_if = {
+		limit = { is_ai = yes }
+		OR = { 
+			is_courtier_of = root
+			has_relation_coterie_member = root
+		}
+	}
+}
+
+can_set_umbra_explorer_trigger = { # shown
+	NOR = { 
+		scope:location = flag:earth
+		scope:location = flag:hades
+ 		scope:location = flag:oblivion
+ 		#scope:location = flag:paradox_realms
+ 		scope:location = flag:heaven
+	}
+}
+
+can_assign_umbra_explorer_trigger = { # valid
+	trigger_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_black_furies } 
+		religion = religion:blackfury_religion
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_bone_gnawers } 
+		POD_fera_is_bonegnawer = yes
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_children_of_gaia } 
+		religion = religion:childofgaia_religion
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_fianna } 
+		religion = religion:fianna_religion
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_get_of_fenris } 
+		religion = religion:getoffenris_religion
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_glass_walkers } 
+		POD_fera_is_warderofmen = yes
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_red_talons } 
+		religion = religion:redtalon_religion
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_shadow_lords } 
+		POD_fera_is_shadowlord = yes
+	}
+	trigger_else_if = {
+		limit = { var:local_umbra_realm.var:name = flag:the_homeland_of_the_silver_fangs } 
+		religion = religion:silverfang_religion
+	}
+	trigger_else = {}
+}
+
+has_umbra_discovery_trigger = {
+	any_in_list = {
+		variable = known_umbra_realms_list
+		var:umbra_discovery_type ?= flag:$TYPE$
+	}
+}
+
+### Misc ###
+
+POD_is_unique_umbra_artifact_trigger = {
+	OR = {
+		$FLAG$ = flag:eyes_of_the_snow_maiden
+		$FLAG$ = flag:cauldron_of_sceanbh
+		$FLAG$ = flag:crown_of_dreams
+		$FLAG$ = flag:edanns_harp
+		$FLAG$ = flag:elenas_mirror
+		$FLAG$ = flag:maul_of_thunder
+		$FLAG$ = flag:cold_light
+		$FLAG$ = flag:syrinx
+		$FLAG$ = flag:sands_of_time
+		$FLAG$ = flag:minoan_mosaic
+		$FLAG$ = flag:castors_star
+		$FLAG$ = flag:cauldron_of_nightmares
+		$FLAG$ = flag:excaliburs_scabbard
+		$FLAG$ = flag:gale_flute
+		$FLAG$ = flag:old_glory
+		$FLAG$ = flag:sweeneys_pride
+		$FLAG$ = flag:emperors_nightingale
+		$FLAG$ = flag:living_chains
+		$FLAG$ = flag:fetterguard
+		$FLAG$ = flag:wail_tongue
+		$FLAG$ = flag:guardian_orb
+		$FLAG$ = flag:bean_nighe_caul
+		$FLAG$ = flag:lens_of_zadkiel
+		$FLAG$ = flag:spiritual_armor
+	}
+}

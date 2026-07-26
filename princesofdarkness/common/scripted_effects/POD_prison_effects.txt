@@ -1,0 +1,924 @@
+﻿POD_release_from_prison_send_option_effects = {
+	# Neferu special option
+	if = {
+		limit = { scope:neferu_release = yes }
+		set_character_faith = scope:actor.faith
+		scope:actor = {
+			add_hook = { #Hook effect must match gain_hook option condition
+				target = scope:recipient
+				type = favor_hook
+			}
+			add_piety = 50	
+		}					
+	}
+	
+	# Track
+	if = {
+		limit = { scope:track = yes }
+		
+		scope:actor = {
+			duel = {
+				skill = intrigue
+				target = scope:recipient
+				25 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 1
+					}
+				
+					scope:recipient = { 
+						add_character_modifier = {
+							modifier = tracked_down_modifier
+							years = 10
+						} 
+					}
+					if = {
+						limit = {
+							exists = scope:recipient.liege
+							scope:recipient.liege = { POD_is_vampire_trigger = yes }
+						}
+						send_interface_message = {
+							title = tracked_down.t
+							desc = tracked_down.desc
+							type = event_heretic_good
+							left_icon = scope:recipient.liege
+						}
+						scope:recipient.liege = {
+							add_character_modifier = {
+								modifier = tracked_down_modifier
+								years = 10
+							}
+						}
+					}
+					
+					if = {
+						limit = {
+							exists = scope:recipient.primary_heir
+							scope:recipient.primary_heir = { POD_is_vampire_trigger = yes }
+						}
+						send_interface_message = {
+							title = tracked_down.t
+							desc = tracked_down.desc
+							type = event_heretic_good
+							left_icon = scope:recipient.primary_heir
+						}
+						scope:recipient.primary_heir = {
+							add_character_modifier = {
+								modifier = tracked_down_modifier
+								years = 10
+							}
+						}
+					}
+					
+					if = {
+						limit = {
+							exists = scope:recipient.primary_spouse
+							scope:recipient.primary_spouse = { POD_is_vampire_trigger = yes }
+						}
+						send_interface_message = {
+							title = tracked_down.t
+							desc = tracked_down.desc
+							type = event_heretic_good
+							left_icon = scope:recipient.primary_spouse
+						}
+						scope:recipient.primary_spouse = {
+							add_character_modifier = {
+								modifier = tracked_down_modifier
+								years = 10
+							}
+						}
+					}
+				}
+				
+				25 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -1
+					}
+					send_interface_message = {
+						title = tracked_lost.t
+						desc = tracked_lost.desc
+						type = event_heretic_bad
+						left_icon = scope:recipient
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_release_from_prison_no_demands_effect = {
+	scope:actor = {
+		if = {
+			limit = {
+				faith = faith:shadowinquisition
+				POD_is_supehunter_trigger = yes
+				scope:recipient = {
+					has_POD_public_vamp_blood_trigger = yes
+					POD_is_supehunter_trigger = no
+				}
+			}
+			add_character_modifier = fiend_lover_modifier
+			add_piety_level = -5
+		}
+	}
+	if = {
+		limit = { 
+			scope:actor.faith = { has_doctrine_parameter = piety_from_releasing }
+			scope:recipient.faith = {
+				faith_hostility_level = {
+					target = scope:actor.faith
+					value >= faith_hostile_level
+				}
+			}
+		}
+		scope:actor = { add_piety = 100 }
+	}
+}
+
+POD_execute_prisoner_effects = {
+	if = {
+		limit = {
+			scope:actor.faith = { has_doctrine_parameter = hurt_mortal_lose_piety }
+			scope:recipient = { has_trait = orison_innocent }
+		}
+		scope:actor = { add_piety = -500 }
+	}
+	
+
+	if = {
+		limit = {
+			scope:actor.faith = { has_doctrine_parameter = executing_hostile_evil_vampires_costs_piety }
+			scope:recipient.faith = {
+				faith_hostility_level = {
+					target = scope:actor.faith
+					value >= faith_hostile_level
+				}
+			}
+			scope:recipient = { POD_is_vampire_trigger = yes }
+		}
+		scope:actor = { add_piety = -100 }
+	}
+
+	if = {
+		limit = {
+			scope:actor = { POD_splat_can_have_wyrm_taint = yes }
+			scope:recipient = { POD_is_wyrm_servant_trigger = no }
+		}
+		POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_medium_value }
+	}
+
+	if = {
+		limit = {
+			scope:actor = { NOT = { has_execute_reason = scope:recipient } }
+			scope:recipient = {
+				is_vassal_or_below_of = scope:actor
+				highest_held_title_tier >= tier_duchy
+			}
+		}
+		POD_fera_add_renown_effect = { TYPE = infamy }
+	}
+
+	# if = {
+	# 	limit = {
+	# 		scope:actor = {
+	# 			is_ai = no
+	# 			has_character_flag = dark_passion_execute_prisoner_flag
+	# 		}
+	# 	}
+	# 	scope:actor = { add_character_flag = finish_execute_prisoner_flag }
+	# }
+	
+	if = {
+		limit = {
+			scope:actor = {
+				OR = { 
+					has_trait = truefaith
+					faith = faith:shadowinquisition
+				}
+				POD_is_supehunter_trigger = yes
+			}
+			scope:recipient = { POD_is_unholy_trigger = yes }
+		}
+		if = {
+			limit = {
+				scope:recipient = { 
+					age >= 1000
+					}
+				} 
+				scope:actor = { add_faith_lifestyle_xp = 500 }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = { 
+					age < 1000
+				}
+				scope:recipient = { 
+					age >= 400
+				}	
+			} 
+			scope:actor = { add_faith_lifestyle_xp = 250 }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = { 
+					age < 400
+				}
+				scope:recipient = { 
+					age >= 200
+				} 
+			}
+			scope:actor = { add_faith_lifestyle_xp = 100 }	
+		}	
+		else = {
+			scope:actor = { add_faith_lifestyle_xp = 50 }
+		}
+	}
+
+	if = {
+		limit = {
+			scope:actor = { POD_is_supehunter_trigger = yes }
+			scope:recipient = { POD_is_unholy_trigger = yes }
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					highest_held_title_tier = 5
+				}
+			}
+			scope:actor = { add_piety = massive_piety_gain }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					highest_held_title_tier = 4 
+				}
+			}
+			scope:actor = { add_piety = major_piety_gain }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					highest_held_title_tier = 3 
+				}
+			}
+			scope:actor = { add_piety = medium_piety_gain }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					highest_held_title_tier = 2 
+				}
+			}
+			scope:actor = { add_piety = minor_piety_gain }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					highest_held_title_tier = 1 
+				}
+			}
+			scope:actor = { add_piety = miniscule_piety_gain }
+		}
+	}
+
+	if = {
+		limit = {
+			scope:actor = { POD_is_supehunter_trigger = yes }
+			scope:recipient = { has_POD_public_vamp_blood_trigger = yes }
+		}
+
+		scope:actor = {
+			dynasty = {
+				save_scope_as = hunter_dynasty
+			}
+		}
+	
+
+		if = {
+			limit = {
+				scope:recipient = { 
+					age >= 1000
+				}
+			}
+			
+			custom_tooltip = POD_hunter_dynasty_prestige_massive_gain.tt
+			
+			hidden_effect = {
+				scope:hunter_dynasty = {
+					add_dynasty_prestige = major_dynasty_prestige_gain
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:recipient = { 
+					age < 1000
+				}
+				scope:recipient = { 
+					age >= 400
+				}
+			}
+			
+			custom_tooltip = POD_hunter_dynasty_prestige_medium_gain.tt
+			
+			hidden_effect = {
+				scope:hunter_dynasty = {
+					add_dynasty_prestige = medium_dynasty_prestige_gain
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:recipient = { 
+					scope:recipient = { 
+						age < 400
+					}
+					scope:recipient = { 
+						age >= 200
+					}
+				}
+			}
+				
+			custom_tooltip = POD_hunter_dynasty_prestige_minor_gain.tt
+			
+			hidden_effect = {
+				scope:hunter_dynasty = {
+					add_dynasty_prestige = minor_dynasty_prestige_gain
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:recipient = { 
+					scope:recipient = { 
+						age < 200
+					}
+				}
+			}
+				
+			custom_tooltip = POD_hunter_dynasty_prestige_miniscule_gain.tt
+			
+			hidden_effect = {
+				scope:hunter_dynasty = {
+					add_dynasty_prestige = miniscule_dynasty_prestige_gain
+				}
+			}
+		}
+	}
+	
+	# Special Execution Effects
+	
+	if = {
+		limit = { scope:execution_yorak ?= yes }
+		if = {
+			limit = { scope:actor = { has_character_modifier = cathedral_satiated_modifier } }
+			scope:actor = {
+				remove_character_modifier = cathedral_satiated_modifier
+				add_character_modifier = {
+					modifier = cathedral_satiated_modifier
+					years = 3
+				}
+				trigger_event = { id = POD_interface.100 days = 912 } #reminder event
+			}
+		}
+		else_if = {
+			limit = { scope:actor = { has_character_modifier = cathedral_hungry_modifier } }
+			scope:actor = {
+				remove_character_modifier = cathedral_hungry_modifier
+				add_character_modifier = {
+					modifier = cathedral_satiated_modifier
+					years = 3
+				}
+				trigger_event = { id = POD_interface.100 days = 912 } #reminder event
+			}
+		}
+		else_if = {
+			limit = { scope:actor = { has_character_modifier = cathedral_famished_modifier } }
+			scope:actor = {
+				remove_character_modifier = cathedral_famished_modifier
+				add_character_modifier = {
+					modifier = cathedral_hungry_modifier
+					years = 3
+				}
+				trigger_event = { id = POD_interface.100 days = 912 } #reminder event
+			}
+		}
+		else = {
+			scope:actor = {
+				add_character_modifier = {
+					modifier = cathedral_famished_modifier
+					years = 3
+				}
+				trigger_event = { id = POD_interface.100 days = 912 } #reminder event
+			}
+		}
+	}
+		
+	if = {
+		limit = { scope:execution_darvag ?= yes }	
+		if = {
+			limit = { scope:actor = { has_character_modifier = baba_delighted_modifier } }
+			scope:actor = {
+				remove_character_modifier = baba_delighted_modifier
+				add_character_modifier = {
+					modifier = baba_delighted_modifier
+					years = 3
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:actor = { has_character_modifier = baba_pleased_modifier } }
+			scope:actor = {		
+				remove_character_modifier = baba_pleased_modifier
+				add_character_modifier = {
+					modifier = baba_delighted_modifier
+					years = 3
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:actor = { has_character_modifier = baba_intrigued_modifier } }
+			scope:actor = {
+				remove_character_modifier = baba_intrigued_modifier
+				add_character_modifier = {
+					modifier = baba_pleased_modifier
+					years = 3
+				}
+			}
+		}
+		else = {
+			scope:actor = {
+				add_character_modifier = {
+					modifier = baba_intrigued_modifier
+					years = 3
+				}
+			}
+		}
+	}	
+	
+	if = {
+		limit = { scope:execution_diablerie ?= yes }
+		scope:actor = {
+			POD_drain_victim_effect = { VICTIM = scope:recipient }
+			POD_queue_diablerie_suspicion_event = { VICTIM = scope:recipient }
+		}
+	}	
+
+	if = {
+		limit = { scope:execution_exsanguination ?= yes }
+		
+		scope:actor = {
+			save_scope_as = exsanguinator
+		}				
+		
+		scope:recipient = { 
+			save_scope_as = victim 
+		}
+		
+		scope:exsanguinator = {
+			scope:recipient = { save_scope_as = victim }
+			
+			if = {
+				limit = { POD_splat_has_glamour_exclusively = yes }
+				create_artifact_blood_dross_effect = { OWNER = this }
+			}
+			else = {
+				POD_drain_victim_effect = { VICTIM = scope:recipient }
+			}
+			
+			if = {
+				limit = {
+					faith = { has_doctrine_parameter = hurt_mortal_lose_piety }
+					scope:recipient = { has_trait = orison_innocent }
+				}
+				add_piety = -500
+			}
+		}
+	}
+		
+	if = {
+		limit = {
+			scope:execution_absorb_the_mind ?= yes
+		}
+		scope:actor = {
+			add_stress = massive_stress_impact_gain
+			POD_splat_agnostic_energy_cost = { COUNT = 6 }
+			trigger_event = kueijin_scheme.140
+			create_character_memory = {
+				type = devore_mind_memory
+			}
+			POD_queue_cooldown_message = {
+				LOC = POD_cooldown_message_devour_mind
+				COOLDOWN = "years = devore_mind_cooldown_value"
+			}
+			custom_tooltip = execution_absorb_the_mind_tooltip
+		}
+	}
+
+	if = {
+		limit = {
+			scope:execution_feed_the_caul ?= yes
+		}
+		scope:actor = {
+			if = {
+				limit = { NOT = { any_memory = { has_memory_type = devore_mind_memory } } }
+				add_stress = massive_stress_impact_gain
+				POD_splat_agnostic_energy_cost = { COUNT = 6 }
+				trigger_event = kueijin_scheme.140
+				create_character_memory = {
+					type = devore_mind_memory
+				}
+				POD_queue_cooldown_message = {
+					LOC = POD_cooldown_message_devour_mind
+					COOLDOWN = "years = devore_mind_cooldown_value"
+				}
+				custom_tooltip = execution_feed_the_caul_tooltip
+			}
+			else = { 
+				custom_tooltip = used_devour_soul
+			}
+			random_equipped_character_artifact = { 
+				limit = { has_variable = bean_nighe_caul }
+				add_artifact_modifier = artifact_monthly_lifestyle_xp_1_modifier
+				add_artifact_modifier = artifact_general_opinion_penalty_1_modifier
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			scope:execution_experiments ?= yes
+		}
+		scope:actor = {
+				add_piety = minor_piety_gain
+				add_learning_lifestyle_xp = 100
+			}
+		}
+
+	if = {
+		limit = { scope:execution_shou ?= yes }
+		scope:actor = {
+			add_stress = minor_stress_loss
+			add_shintai_lifestyle_xp = 50
+			add_chi_arts_lifestyle_xp = 50
+			add_demon_arts_lifestyle_xp = 50
+		}
+	}	
+	
+	if = {
+		limit = {
+			scope:execution_fill_jars ?= yes
+		}
+		scope:actor = {
+			custom_tooltip = execution_fill_jars_tooltip
+			if = {
+				limit = { has_character_modifier = extra_life_3_modifier }
+				remove_character_modifier = extra_life_3_modifier
+				add_character_modifier = extra_life_4_modifier
+			}
+			else_if = {
+				limit = { has_character_modifier = extra_life_2_modifier }
+				remove_character_modifier = extra_life_2_modifier
+				add_character_modifier = extra_life_3_modifier
+			}
+			else_if = {
+				limit = { has_character_modifier = extra_life_1_modifier }
+				remove_character_modifier = extra_life_1_modifier
+				add_character_modifier = extra_life_2_modifier
+			}
+			else = {
+				add_character_modifier = extra_life_1_modifier
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			scope:execution_evaporation ?= yes
+		}
+		scope:actor = {
+			add_dread = minor_dread_gain
+		}
+	}
+	
+	if = {
+		limit = {
+			scope:execution_soultaker ?= yes
+		}
+		scope:actor = {
+			show_as_tooltip = {
+				POD_soultaker_effect = { EXECUTIONER = scope:actor VICTIM = scope:recipient }
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			scope:execution_convert_to_wraith ?= yes
+		}
+		scope:recipient = { 
+			custom_tooltip = turned_to_wraith 
+			scope:actor = { remove_short_term_gold = medium_gold_value }
+			add_character_flag = marked_for_return
+			if = {
+				limit = { NOT = { exists = var:marked_for_return } }
+				set_variable = {
+					name = marked_for_return
+					value = scope:actor
+					days = 10
+				}
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			scope:execution_colosseum ?= yes
+		}
+		scope:actor = {
+			add_prestige = 50
+			add_dread = 5
+		}
+	}	
+
+	if = {
+		limit = { scope:execution_shih_devour_soul ?= yes }
+		scope:actor = { 
+			if = {
+				limit = { NOT = { any_memory = { has_memory_type = devore_mind_memory } } }
+				add_stress = massive_stress_impact_gain
+				POD_splat_agnostic_energy_cost = { COUNT = 6 }
+				trigger_event = kueijin_scheme.140
+				create_character_memory = {
+					type = devore_mind_memory
+				}
+				POD_queue_cooldown_message = {
+					LOC = POD_cooldown_message_devour_mind
+					COOLDOWN = "years = devore_mind_cooldown_value"
+				}
+				custom_tooltip = execution_devour_soul_tooltip
+			}
+			else = { 
+				custom_tooltip = used_devour_soul
+			}
+		}
+	}
+
+	if = {
+		limit = { scope:execution_demon_devour_soul ?= yes }
+		scope:actor = { 
+			add_arcana_lifestyle_perk_points = 10
+		}
+		hidden_effect = { scope:recipient = { death = { death_reason = death_souleaten killer = scope:actor } } } # Sneaky second death.
+	}		
+
+	if = {
+		limit = { scope:execution_sin_eating ?= yes }
+		scope:actor = {
+			add_stress = -25
+		}
+	}			
+
+	if = {
+		limit = { scope:execution_call_khaibit ?= yes }
+		scope:actor = {
+			if = { 
+				limit = { POD_has_integrity = yes }
+				POD_gain_integrity = { VALUE = 2 }
+			}
+			else = {
+				POD_static_stress_gain = { COUNT = -10 }
+			}
+		}
+	}
+
+	if = {
+		limit = { scope:execution_edge_of_the_sun ?= yes }
+		scope:actor = {
+			random_character_artifact = {
+				limit = { is_equipped = yes has_variable = edge_of_the_sun }
+				save_scope_as = edge_of_the_sun
+			}
+
+			if = {
+				limit = { scope:recipient = { has_trait = education_diplomacy } }
+				add_diplomacy_lifestyle_xp = scope:edge_of_the_sun.edge_of_the_sun_lifestyle_value
+			}
+			else_if = {
+				limit = { scope:recipient = { OR = { has_trait = education_martial has_trait = education_martial_prowess } } }
+				add_martial_lifestyle_xp = scope:edge_of_the_sun.edge_of_the_sun_lifestyle_value
+			}
+			else_if = {
+				limit = { scope:recipient = { has_trait = education_stewardship } }
+				add_stewardship_lifestyle_xp = scope:edge_of_the_sun.edge_of_the_sun_lifestyle_value
+			}
+			else_if = {
+				limit = { scope:recipient = { has_trait = education_intrigue } }
+				add_intrigue_lifestyle_xp = scope:edge_of_the_sun.edge_of_the_sun_lifestyle_value
+			}
+			else_if = {
+				limit = { scope:recipient = { has_trait = education_learning } }
+				add_learning_lifestyle_xp = scope:edge_of_the_sun.edge_of_the_sun_lifestyle_value
+			}
+
+			add_piety = scope:edge_of_the_sun.edge_of_the_sun_piety_value
+		}
+	}
+
+	
+}
+
+# requires scope:actor and scope:recipient
+POD_secondary_effects_from_cannibalism = {
+	POD_secondary_effects_from_cannibalism_custom = {
+		ACTOR = scope:actor
+		RECIPIENT = scope:recipient
+	}
+}
+
+POD_secondary_effects_from_cannibalism_custom = {
+	if = {
+		limit = {
+			$ACTOR$ = { has_trait = banemummy }
+		}
+		$ACTOR$ = { POD_sekhem_income_effect = { COUNT = 10 } }
+		#$RECIPIENT$ = { POD_increase_bloodloss = { COUNT = 5 } }
+	}
+	if = {
+		limit = {
+			$ACTOR$ = { is_vampire_trigger = yes }
+		}
+		$ACTOR$ = {
+			POD_drain_victim_effect = { VICTIM = $RECIPIENT$ }
+			POD_queue_diablerie_suspicion_event = { VICTIM = $RECIPIENT$ }
+		}
+	}
+	$ACTOR$ = {
+		if = {
+			limit = { dynasty ?= { has_dynasty_perk = nagaraja_legacy_1 } }
+			add_dread = minor_dread_gain
+		}
+	}
+	if = {
+		limit = {
+			$ACTOR$ = {
+				has_perk = bane_stomach_perk
+				any_relation = {
+					type = spirit_companion
+					has_faith = faith:wyrmbound
+				}
+			}
+		}
+		$RECIPIENT$ = {
+			save_scope_value_as = {
+				name = bane_xp
+				value = {
+					value = average_of_all_skills
+					divide = 2
+					floor = yes
+				}
+			}
+		}
+		$ACTOR$ = {
+			random_relation = {
+				type = spirit_companion
+				limit = { has_faith = faith:wyrmbound }
+				add_trait_xp = { trait = spirit value = scope:bane_xp }
+			}
+		}
+	}
+	if = {
+		limit = { $ACTOR$.faith = { has_doctrine_parameter = wyrm_education_lifestyle_xp_from_cannibalism } }
+		$ACTOR$ = {
+			add_piety = -50
+			POD_add_lifestyle_xp_matching_education = { VALUE = $RECIPIENT$.wyrm_cannibalism_tenet_lifestyle_xp }
+		}
+	}
+
+	if = {
+		limit = {
+			$ACTOR$ = {
+				faith = { has_doctrine_parameter = infamy_renown_from_cannibalism }
+				has_trait = fera
+			}
+			$RECIPIENT$ = { age >= 200 }
+		}
+		$ACTOR$ = { POD_fera_add_renown_effect = { TYPE = infamy } }
+	}
+}
+
+# requires scope:actor and scope:recipient
+POD_torture_interaction_effect = {
+	if = {
+		limit = { NOT = { exists = scope:torture_method } }
+		save_scope_value_as = { name = torture_method value = flag:rack }
+	}
+	
+	# These effects automatically scope themselves to scope:actor and scope:recipient
+	torture_interaction_actor_effect = yes
+	torturer_interaction_recipient_effect = yes
+	house_feud_torture_event_effect = yes
+
+	# These don't
+	scope:actor = {
+		POD_secondary_effects_from_torturing = yes
+		
+		if = {
+			limit = { has_perk = dark_insights_perk }
+			dark_insights_skill_gain_roll_effect = yes
+		}
+	}
+}
+
+# requires scope:actor and scope:recipient
+POD_torture_interaction_no_actor_effect = {
+	if = {
+		limit = { NOT = { exists = scope:torture_method } }
+		save_scope_value_as = { name = torture_method value = flag:rack }
+	}
+	
+	# These effects automatically scope themselves to scope:actor and scope:recipient
+	#torture_interaction_actor_effect = yes
+	torture_blind_castrate_disfigure_opinion_effect = { VERB = tortured }
+	torturer_interaction_recipient_effect = yes
+	house_feud_torture_event_effect = yes
+
+	# These don't
+	scope:actor = {
+		#POD_secondary_effects_from_torturing = yes
+		
+		if = {
+			limit = { has_perk = dark_insights_perk }
+			dark_insights_skill_gain_roll_effect = yes
+		}
+	}
+}
+
+POD_secondary_effects_from_torturing = {
+	POD_commit_heinous_act_effect = yes
+	
+	if = {
+		limit = { this = character:605111 }
+		add_stress = massive_stress_loss
+		add_intrigue_lifestyle_xp = 100
+	}
+
+	# Torture is factually known as ending TF.
+	random = {
+		chance = 10
+		POD_lose_true_faith_effect = yes
+	}
+
+	if = {
+		limit = {
+			OR = {
+				# POD_gains_deviltigers_dharma_xp = yes
+				# POD_gains_inwardfocus_dharma_xp = yes
+				# POD_gains_kinofizanami_dharma_xp = yes
+				always = no
+			}
+		} 
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_low } 
+	}
+
+	if = {
+		limit = {
+			OR = {
+				POD_gains_tou_mu_dharma_xp = yes
+				POD_gains_hine_nui_te_po_dharma_xp = yes
+			}
+			scope:recipient = { has_trait = kueijin }
+		} 
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium } 
+	}
+
+	if = {
+		limit = {
+			POD_gains_the_wandering_overlord_dharma_xp = yes
+			scope:recipient = { 
+				POD_is_akuma_trigger = yes
+				NOT = { faith = PREV.faith }
+			}
+		}
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium } 
+	}
+
+	if = {
+		limit = { scope:recipient = { POD_splat_can_have_wyrm_taint = yes } }
+		scope:recipient = { POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_torture_value  } }
+	}
+	
+	if = {
+		limit = {
+			faith = { has_doctrine_parameter = remove_relation_torture }
+			scope:recipient = { POD_has_any_vanilla_relation_trigger = yes }
+		}
+		scope:recipient = { POD_remove_random_relation_effect = yes }
+	}
+	
+	POD_pact_complete_obligation = { OBLIGATION = tribute_of_agony }
+}

@@ -1,0 +1,573 @@
+﻿POD_create_artifact_warhorse_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_warhorse_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = story_cycle_martial_lifestyle_warhorse
+				exists = var:story_cycle_horse_name
+				NOT = { exists = var:artifact_warhorse }
+			}
+		}
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_warhorse_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+					exists = var:story_cycle_horse_name
+					NOT = { exists = var:artifact_warhorse }
+				}
+				set_variable = { name = artifact_warhorse value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_create_artifact_dragon_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_dragon_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon
+				exists = var:story_cycle_dragon_name
+				NOT = { exists = var:artifact_dragon }
+			}
+		}
+	}
+
+	is_valid = {
+		scope:actor = {
+			custom_tooltip = {
+				text = dragon_age_can_mount
+				any_owned_story = {
+					story_type = POD_story_pet_dragon
+					trigger_if = {
+						limit = { exists = var:dragon_age_variable }
+						var:dragon_age_variable >= 3
+					}
+					NOT = { exists = var:artifact_dragon }
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_dragon_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = POD_story_pet_dragon
+					trigger_if = {
+						limit = { exists = var:dragon_age_variable }
+						var:dragon_age_variable >= 3
+					}
+					NOT = { exists = var:artifact_dragon }
+				}
+				set_variable = { name = artifact_dragon value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_create_artifact_unicorn_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_unicorn_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn
+				exists = var:story_cycle_unicorn_name
+				NOT = { exists = var:artifact_unicorn }
+			}
+		}
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_unicorn_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = POD_story_pet_unicorn
+					exists = var:story_cycle_unicorn_name
+					NOT = { exists = var:artifact_unicorn }
+				}
+				set_variable = { name = artifact_unicorn value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_create_artifact_pegasus_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_pegasus_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus
+				exists = var:story_cycle_pegasus_name
+				NOT = { exists = var:artifact_pegasus }
+			}
+		}
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_pegasus_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = POD_story_pet_pegasus
+					exists = var:story_cycle_pegasus_name
+					NOT = { exists = var:artifact_pegasus }
+				}
+				set_variable = { name = artifact_pegasus value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_create_artifact_cat_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_cat_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = story_cycle_pet_cat
+				exists = var:story_cycle_cat_name
+				NOT = { exists = var:artifact_cat }
+			}
+		}
+	}
+
+	is_valid = {
+		scope:actor = {
+			OR = {
+				has_perk = go_ask_alice_perk
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_cat_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = story_cycle_pet_cat
+					NOT = { exists = var:artifact_cat }
+				}
+				set_variable = { name = artifact_cat value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_create_artifact_dog_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_create_artifact_dog_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_owned_story = {
+				story_type = story_cycle_pet_dog
+				exists = var:story_cycle_dog_name
+				NOT = { exists = var:artifact_dog }
+			}
+		}
+	}
+
+	is_valid = {
+		scope:actor = {
+			OR = {
+				has_perk = go_ask_alice_perk
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			create_artifact_dog_effect = { OWNER = this }
+			random_owned_story = {
+				limit = {
+					story_type = story_cycle_pet_dog
+					NOT = { exists = var:artifact_dog }
+				}
+				set_variable = { name = artifact_dog value = scope:newly_created_artifact }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_call_pet_to_war_interaction = {
+	category = interaction_category_friendly
+	icon = alliance
+	desc = POD_call_pet_to_war_interaction_desc
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			POD_unlock_animals_maa_trigger = yes
+			has_pet_to_call_trigger = yes
+		}
+	}
+
+	is_valid = {
+		scope:actor = {
+			is_at_war = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			trigger_if = {
+				limit = { has_variable = pet_summon }
+				custom_tooltip = {
+					text = POD_call_pet_to_war_interaction_valid
+					NOT = { any_character_war = { this = scope:actor.var:pet_summon } }
+				}
+			}
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = POD_story_pet_dragon } }
+		}
+		is_valid = {
+			scope:actor = {
+				custom_tooltip = {
+					text = dragon_age_can_fight
+					any_owned_story = {
+						story_type = POD_story_pet_dragon
+						trigger_if = {
+							limit = { exists = var:dragon_age_variable }
+							var:dragon_age_variable >= 5
+						}
+					}
+				}
+			}
+		}
+		flag = dragons
+		localization = dragons
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = POD_story_pet_unicorn } }
+		}
+		flag = unicorn
+		localization = unicorn
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = POD_story_pet_pegasus } }
+		}
+		flag = pegasus
+		localization = pegasus
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = story_cycle_martial_lifestyle_warhorse } }
+		}
+		flag = horses
+		localization = horses
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = story_cycle_pet_dog } }
+		}
+		flag = dogs
+		localization = dogs
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { any_owned_story = { story_type = story_cycle_pet_cat } }
+		}
+		flag = cats
+		localization = cats
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = exotic_pet_wolf }
+		}
+		flag = wolves
+		localization = wolves
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = exotic_pet_bear }
+		}
+		flag = bears
+		localization = bears
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = exotic_pet_lion }
+		}
+		flag = lions
+		localization = lions
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = exotic_pet_tiger }
+		}
+		flag = tigers
+		localization = tigers
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = prison_pet_rat_modifier }
+		}
+		flag = rats
+		localization = rats
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { has_character_modifier = prison_pet_cockroach_modifier }
+		}
+		flag = cockroaches
+		localization = cockroaches
+	}
+
+	send_options_exclusive = no
+
+	on_accept = {
+		scope:actor = {
+			random_character_war = { save_temporary_scope_as = war }
+			if = {
+				limit = { scope:dragons = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = dragons
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = dragons
+				}
+			}
+			if = {
+				limit = { scope:unicorn = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = unicorn
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = unicorn
+				}
+			}
+			if = {
+				limit = { scope:pegasus = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = pegasus
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = pegasus
+				}
+			}
+			if = {
+				limit = { scope:horses = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = horses
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = horses
+				}
+			}
+			if = {
+				limit = { scope:dogs = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = wolves
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = dogs
+				}
+			}
+			if = {
+				limit = { scope:cats = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = cats
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = cats
+				}
+			}
+			if = {
+				limit = { scope:wolves = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = wolves
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = wolves
+				}
+			}
+			if = {
+				limit = { scope:bears = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = bears
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = bears
+				}
+			}
+			if = {
+				limit = { scope:lions = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = lions
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = lions
+				}
+			}
+			if = {
+				limit = { scope:tigers = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = tigers
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = tigers
+				}
+			}
+			if = {
+				limit = { scope:rats = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = rats
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = rats
+				}
+			}
+			if = {
+				limit = { scope:cockroaches = yes }
+				spawn_army = {
+					men_at_arms = {
+						type = insects
+						stacks = 1
+					}
+					location = capital_province
+					war = scope:war
+					inheritable = no
+					name = cockroaches
+				}
+			}
+			set_variable = { name = pet_summon value = scope:war }
+		}
+	}
+
+	auto_accept = yes
+}

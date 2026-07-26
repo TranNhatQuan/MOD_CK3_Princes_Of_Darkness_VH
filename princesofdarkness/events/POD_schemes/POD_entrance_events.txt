@@ -1,0 +1,244 @@
+﻿namespace = POD_entrance
+
+POD_entrance.100 = { #decide if defender will use willpower
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.100.t
+	desc =  POD_entrance.100.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+	
+	immediate = {
+		scope:scheme.scheme_target_character = {
+			save_scope_as = target
+		}
+		scope:scheme.scheme_owner = {
+			save_scope_as = actor
+		}
+		#needed for modifier and tt effect
+		scope:scheme.scheme_target_character = { save_scope_as = defender }
+		scope:scheme.scheme_owner = { save_scope_as = attacker }
+	}
+	option = {
+		name = POD_entrance.100.option.a
+		trigger = {
+			stress < very_high_stress
+		}
+		
+		POD_willpower_rouse_check_effect = yes
+		
+		add_character_flag = {
+			flag = willpower_spent
+			days = 2
+		}
+		
+		scope:scheme.scheme_owner = {
+			trigger_event = POD_entrance.200
+		}
+		
+		ai_chance = {
+			base = 95
+		}	
+	}
+
+	option = {
+		name = POD_entrance.100.option.b
+		scope:scheme.scheme_owner = {
+			trigger_event = POD_entrance.200
+		}		
+	}	
+}
+
+POD_entrance.200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.200.t
+	desc =  POD_entrance.200.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_entrance.200.option.a #willpower unspent
+		POD_hunger_rouse_check_effect = yes
+		duel = {
+			skill = diplomacy
+			target = scope:defender
+			50 = {
+				max = 95
+				POD_entrance_attacker_modifier = yes
+				POD_entrance_attacker_tt_effect = yes
+				desc = POD_entrance.200.a.success.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = {
+						trigger_event = POD_entrance.300 #entrance success
+					}
+				}
+			}
+			50 = {
+				min = 5
+				POD_entrance_defender_modifier = yes
+				POD_entrance_defender_tt_effect = yes
+				desc = POD_entrance.200.a.failure.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = { 
+						trigger_event = POD_entrance.500 #entrance failure
+					}
+				}
+			}
+		}
+	}
+
+	option = { #willpower spent
+		name = POD_entrance.200.option.b 
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		duel = {
+			skill = diplomacy
+			target = scope:defender
+			60 = { #+10 added for willpower spent
+				max = 95
+				POD_entrance_attacker_modifier = yes
+				POD_entrance_attacker_tt_effect = yes
+				desc = POD_entrance.200.a.success.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = {
+						trigger_event = POD_entrance.300 #entrance success
+					}
+				}
+			}
+			40 = { #-10 added for willpower spent
+				min = 5
+				POD_entrance_defender_modifier = yes
+				POD_entrance_defender_tt_effect = yes
+				desc = POD_entrance.200.a.failure.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = { 
+						trigger_event = POD_entrance.500 #entrance failure
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_entrance.200.option.b.tt.beast	
+		}
+	}
+	
+	option = {
+		name = POD_entrance.200.option.c
+
+		#Cancel the scheme 
+		scope:scheme = {
+			end_scheme = yes
+		}
+		custom_tooltip = POD_entrance.200.option.c.tt
+	}		
+}
+
+# Scheme Success, entrancer Notified
+
+POD_entrance.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.300.t
+	desc =  POD_entrance.300.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_entrance.300.option.a
+		
+		scope:scheme.scheme_target_character = {
+			add_opinion = {
+				target = scope:scheme.scheme_owner
+				modifier = entrancement_opinion
+			}
+			
+			trigger_event = POD_entrance.400
+		}
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_entrance.300.option.a.tt.beast
+		}
+	}		
+}
+
+# Sceme Success, entrancee Notified
+
+POD_entrance.400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.400.t
+	desc =  POD_entrance.400.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_entrance.400.option.a	
+	}
+	
+	after = {
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+# Sceme Failure, entrancer Notified
+
+POD_entrance.500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.500.t
+	desc =  POD_entrance.500.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_entrance.500.option.a
+		scope:scheme.scheme_target_character = {
+			trigger_event = POD_entrance.600
+		}
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_entrance.500.option.a.tt.beast
+		}
+	}
+}
+
+# Scene Failure, entrancee Notified
+
+POD_entrance.600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_entrance.600.t
+	desc =  POD_entrance.600.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	immediate = {
+		scope:scheme.scheme_owner = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_entrance.600.option.a
+
+		scope:scheme.scheme_owner = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+}
+

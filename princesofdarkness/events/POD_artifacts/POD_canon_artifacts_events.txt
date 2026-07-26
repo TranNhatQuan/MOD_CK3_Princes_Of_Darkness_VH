@@ -1,0 +1,3218 @@
+﻿namespace = POD_canon_artifacts
+
+#The Sword of Nul calls
+
+POD_canon_artifacts.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.100.t
+	desc = POD_canon_artifacts.100.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:sword_of_nul
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		is_ai = no
+		NOT = {
+			has_character_flag = answered_call_nul
+			}
+		any_character_artifact = {
+			has_variable = sword_of_nul
+		}
+		POD_has_true_faith_trigger = no
+		POD_can_be_possessed_trigger = yes		
+	}
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = sword_of_nul
+				}
+		save_scope_as = sword_of_nul
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.100.a
+		
+		stress_impact = {
+			base = major_stress_gain
+			}
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.100.b
+		
+		custom_tooltip = sword_of_nul_warning
+		
+		trigger_event = {
+				id = POD_canon_artifacts.101
+				days = { 10 15 }
+				}		
+			
+		}	
+										
+}
+
+
+POD_canon_artifacts.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.101.t
+	desc = POD_canon_artifacts.101.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:sword_of_nul
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = sword_of_nul
+		}			
+	}
+	
+	immediate = {
+		add_character_flag = answered_call_nul
+	}
+	
+	option = {
+		name = POD_canon_artifacts.101.a
+		
+		duel = {
+			skill = stewardship
+			value = 20
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.101.effect.success.desc
+								
+			trigger_event = {
+				id = POD_canon_artifacts.102
+				days = { 10 15 }
+				}					
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.101.critical.failure.effect.desc
+					
+					send_interface_toast = {
+						title = POD_canon_artifacts.101.critical.failure
+						left_icon = root
+
+						death = {
+							death_reason = death_disappearance
+							}						
+						}
+				}
+			}	
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.101.b
+		
+		remove_short_term_gold = 300
+		
+		trigger_event = {
+				id = POD_canon_artifacts.102
+				days = { 10 15 }
+				}		
+			
+		}	
+										
+}
+
+POD_canon_artifacts.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.102.t
+	desc = POD_canon_artifacts.102.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:sword_of_nul
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = sword_of_nul
+		}			
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.102.a
+		
+		duel = {
+			skill = intrigue
+			value = 20
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.102.effect.success.desc
+								
+			trigger_event = {
+				id = POD_canon_artifacts.103
+				days = { 10 15 }
+				}					
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.102.critical.failure.effect.desc
+					
+					send_interface_toast = {
+						title = POD_canon_artifacts.102.critical.failure
+						left_icon = root
+
+						death = {
+							death_reason = death_execution
+							}						
+						}
+				}
+			}	
+			
+		}	
+										
+}
+
+
+POD_canon_artifacts.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.103.t
+	desc = POD_canon_artifacts.103.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:sword_of_nul
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = sword_of_nul
+		}			
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.103.a
+		
+		custom_tooltip = drakonskyr_free
+		
+		add_gold = 500
+		add_prestige = 500
+		
+		}
+
+	option = {
+		name = POD_canon_artifacts.103.b
+		
+		if = { 
+			limit = {
+				is_ai = no
+				this = character:505091
+			}
+			set_global_variable = pod_achiev_rusenko # Achievement: Wait, Wrong Demon!
+		}
+		
+		add_character_modifier = drakonskyr_reborn_modifier
+
+		POD_achiev_absalon_check = yes
+		
+		#give_nickname = nick_drakonskyr
+		change_first_name = "Drakonskyr"
+		
+		if = {
+			limit = {
+				has_trait = vampire
+			}
+			set_character_faith = faith:viadiabolis
+		}
+		else = {
+			POD_character_demon_faith_initiation_effect = yes
+		}
+
+		if = {
+			limit = {
+				has_trait = chaste
+			}
+			remove_trait = chaste
+		}
+
+		if = {
+			limit = {
+				has_trait = lustful
+			}
+			remove_trait = lustful
+		}
+
+		if = {
+			limit = {
+				has_trait = temperate
+			}
+			remove_trait = temperate
+		}
+
+		if = {
+			limit = {
+				has_trait = gluttonous 
+			}
+			remove_trait = gluttonous 
+		}
+
+		if = {
+			limit = {
+				has_trait = generous 
+			}
+			remove_trait = generous
+		}
+
+
+		if = {
+			limit = {
+				has_trait = greedy
+			}
+			remove_trait = greedy
+		}
+
+
+		if = {
+			limit = {
+				has_trait = diligent
+			}
+			remove_trait = diligent
+		}
+
+		if = {
+			limit = {
+				has_trait = lazy
+			}
+			remove_trait = lazy
+		}
+	
+		if = {
+			limit = {
+				has_trait = calm 
+			}
+			remove_trait = calm 
+		}
+
+		if = {
+			limit = {
+				has_trait = wrathful
+			}
+			remove_trait = wrathful
+		}
+	
+		if = {
+			limit = {
+				has_trait = impatient
+			}
+			remove_trait = impatient
+		}	
+
+		if = {
+			limit = {
+				has_trait = patient
+			}
+			remove_trait = patient
+		}		
+
+	if = {
+		limit = {
+			NOT = { has_trait = arrogant  }
+		}
+		add_trait = arrogant
+	}
+
+		if = {
+			limit = {
+				has_trait = honest
+			}
+			remove_trait = honest
+		}
+
+		if = {
+			limit = {
+				has_trait = deceitful
+			}
+			remove_trait = deceitful
+		}
+
+		if = {
+			limit = {
+				has_trait = brave
+			}
+			remove_trait = brave
+		}
+	
+		if = {
+			limit = {
+				has_trait = craven
+			}
+			remove_trait = craven
+		}	
+
+		if = {
+			limit = {
+				has_trait = gregarious
+			}
+			remove_trait = gregarious
+		}
+
+		if = {
+			limit = {
+				has_trait = shy
+			}
+			remove_trait = shy
+		}
+
+	if = {
+		limit = {
+			NOT = { has_trait = ambitious }
+			}
+			add_trait = ambitious
+		}
+	
+
+		if = {
+			limit = {
+				has_trait = content
+			}
+			remove_trait = content
+		}	
+	
+		if = {
+			limit = {
+				has_trait = just
+			}
+			remove_trait = just
+		}	
+		
+		if = {
+			limit = {
+				has_trait = arbitrary
+			}
+			remove_trait = arbitrary
+		}
+
+		if = {
+			limit = {
+				has_trait = zealous
+			}
+			remove_trait = zealous
+		}	
+	
+		if = {
+			limit = {
+				has_trait = cynical
+			}
+			remove_trait = cynical
+		}	
+	
+		if = {
+			limit = {
+				has_trait = trusting
+			}
+			remove_trait = trusting
+		}		
+	
+		if = {
+			limit = {
+				has_trait = paranoid
+			}
+			remove_trait = paranoid
+		}
+		
+		if = {
+			limit = {
+				has_trait = callous
+			}
+			remove_trait = callous
+		}
+			
+
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			remove_trait = compassionate
+		}
+
+	if = {
+		limit = {
+			NOT = { has_trait = sadistic }
+		}
+		add_trait = sadistic
+		}	
+
+		if = {
+			limit = {
+				has_trait = fickle
+			}
+			remove_trait = fickle
+		}
+
+		if = {
+			limit = {
+				has_trait = stubborn
+			}
+			remove_trait = stubborn
+		}
+		
+		if = {
+			limit = {
+				has_trait = forgiving
+			}
+			remove_trait = forgiving
+		}
+		
+		if = {
+			limit = {
+				has_trait = vengeful
+			}
+			remove_trait = vengeful
+		}
+
+		if = {
+			limit = {
+				has_trait = eccentric
+			}
+			remove_trait = eccentric
+		}		
+	}			
+										
+}
+
+#The Tablet of Destiny
+
+POD_canon_artifacts.200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.200.t
+	desc = POD_canon_artifacts.200.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:tablet_of_destiny
+        position = lower_left_portrait
+    }	
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = tablet_of_destiny
+				}
+		save_scope_as = tablet_of_destiny
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.200.option.a
+
+		trigger = {
+			NOT = { has_trait = dominate }
+			NOT = { has_trait = dominateadvanced }
+		}
+
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = dominate
+		
+	}
+	
+	option = {
+		name = POD_canon_artifacts.200.option.b
+
+		trigger = {
+			NOT = { has_trait = animalism }
+			NOT = { has_trait = animalismadvanced }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = animalism
+		
+	}	
+	
+	option = {
+		name = POD_canon_artifacts.200.option.c
+
+		trigger = {
+			NOT = { has_trait = auspex }
+			NOT = { has_trait = auspexadvanced }
+		}
+		
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = auspex
+		
+	}		
+
+	option = {
+		name = POD_canon_artifacts.200.option.d
+
+		trigger = {
+			NOT = { has_trait = celerity }
+			NOT = { has_trait = celerityadvanced }
+		}
+			
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = celerity
+		
+	}
+
+	option = {
+		name = POD_canon_artifacts.200.option.e
+
+		trigger = {
+			NOT = { has_trait = obfuscate }
+			NOT = { has_trait = obfuscateadvanced }	
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = obfuscate
+		
+	}	
+
+	option = {
+		name = POD_canon_artifacts.200.option.f
+
+		trigger = {
+			NOT = { has_trait = potence }
+			NOT = { has_trait = potenceadvanced }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = potence
+		
+	}
+
+	option = {
+		name = POD_canon_artifacts.200.option.g
+
+		trigger = {
+			NOT = { has_trait = presence }
+			NOT = { has_trait = presenceadvanced }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = presence
+		
+	}
+
+	option = {
+		name = POD_canon_artifacts.200.option.h
+
+		trigger = {
+			NOT = { has_trait = protean }
+			NOT = { has_trait = proteanadvanced }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = protean
+		
+	}	
+
+	#option = {
+	#	name = POD_canon_artifacts.200.option.i
+	#
+	#	trigger = {
+	#		NOT = { has_trait = bloodsorcery }
+	#		NOT = { has_trait = bloodsorceryadvanced }	
+	#	}
+	#	
+	#	stress_impact = {
+	#		base = major_stress_gain
+	#	}
+	#	
+	#	add_trait = bloodsorcery
+	#	add_character_flag = has_dur_an_ki_bloodmagic_flag
+	#	
+	#}	
+
+	option = {
+		name = POD_canon_artifacts.200.option.j
+
+		trigger = {
+			NOT = { has_trait = fortitude }
+			NOT = { has_trait = fortitudeadvanced }	
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		
+		add_trait = fortitude
+		
+	}
+
+
+	#option = {
+	#	name = POD_canon_artifacts.200.option.k
+	#
+	#	trigger = {
+	#		NOT = { has_trait = obtenebration }
+	#		NOT = { has_trait = obtenebrationadvanced }
+	#	}
+	#	
+	#	stress_impact = {
+	#		base = major_stress_gain
+	#	}
+	#	
+	#	add_trait = obtenebration
+	#	
+	#}
+	
+	option = {
+		name = POD_canon_artifacts.200.option.l		
+	}	
+										
+}
+
+
+#The Eye of Hazimel
+
+POD_canon_artifacts.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.300.t
+	desc = POD_canon_artifacts.300.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:eye_of_hazimel
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = eye_of_hazimel
+				}
+		save_scope_as = eye_of_hazimel
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.300.a
+		
+		custom_tooltip = eye_of_hazimel_warning
+		
+		add_character_flag = eye_of_hazimel_tamed
+		
+		trigger_event = {
+				id = POD_canon_artifacts.301
+				days = { 1 5 }
+				}			
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.300.b	
+			
+		}	
+										
+}
+
+#The Eye of Hazimel : fight for control
+
+POD_canon_artifacts.301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.301.t
+	desc = POD_canon_artifacts.301.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:eye_of_hazimel
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.301.a
+		
+		POD_give_permanent_injury_effect = { TRAIT = one_eyed }
+			
+		duel = {
+			skill = learning
+			value = 20
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.301.effect.success.desc
+								
+			trigger_event = {
+				id = POD_canon_artifacts.302
+				days = { 1 5 }
+				}					
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.301.critical.failure.effect.desc
+					
+					modifier = {
+						factor = 0
+						this = character:790192
+					}
+					
+				trigger_event = {
+					id = POD_canon_artifacts.303
+					days = { 1 5 }
+					}	
+				}
+			}			
+			
+		}	
+		
+										
+}
+
+#The Eye of Hazimel : victory
+
+POD_canon_artifacts.302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.302.t
+	desc = POD_canon_artifacts.302.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		destroy_artifact = scope:eye_of_hazimel
+	}
+	
+	option = {
+		name = POD_canon_artifacts.302.a
+		
+		remove_character_flag = eye_of_hazimel_tamed
+		
+		add_character_modifier = eye_of_hazimel_tamed_modifier
+		
+		if = {
+			limit = {
+			NOT = { has_trait = fortitudeadvanced }
+			}
+			assign_fortitude_effect = yes
+		}
+
+		if = {
+			limit = {
+			NOT = { has_trait = chimerstryadvanced }
+			}
+			assign_chimerstry_effect = yes
+		}				
+
+		if = {
+			limit = {
+			NOT = { has_trait = potenceadvanced }
+			}
+			assign_potence_effect = yes
+		}
+		
+		}	
+		
+										
+}
+
+
+#The Eye of Hazimel : defeat
+
+POD_canon_artifacts.303 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.303.t
+	desc = POD_canon_artifacts.303.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		destroy_artifact = scope:eye_of_hazimel		
+	}
+	
+	option = {
+		name = POD_canon_artifacts.303.a
+		
+		remove_character_flag = eye_of_hazimel_tamed
+				
+		add_character_modifier = eye_of_hazimel_unleashed_modifier
+		
+		if = {
+			limit = {
+			NOT = { has_trait = presence }
+			NOT = { has_trait = presenceadvanced }
+			}
+			assign_presence_effect = yes
+		}
+
+		if = {
+			limit = {
+			NOT = { has_trait = obfuscate }
+			NOT = { has_trait = obfuscateadvanced }
+			}
+			assign_obfuscate_effect = yes
+		}				
+			
+		}	
+		
+										
+}
+
+#The Ankaran Sarcophagus
+
+POD_canon_artifacts.400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.400.t
+	desc = POD_canon_artifacts.400.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:ankaran_sarcophagus
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = ankaran_sarcophagus
+				}
+		save_scope_as = ankaran_sarcophagus
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.400.a
+		
+		custom_tooltip = ankaran_sarcophagus_warning
+		
+		add_character_flag = ankaran_sarcophagus_opened
+		
+		trigger_event = {
+			id = POD_canon_artifacts.401
+			days = { 1 5 }
+			}			
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.400.b	
+			
+		}	
+										
+}
+
+#The Ankaran Sarcophagus opened
+
+POD_canon_artifacts.401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.401.t
+	desc = POD_canon_artifacts.401.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:ankaran_sarcophagus
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.401.a
+		
+		add_learning_skill = 3
+							
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.401.b	
+			
+		add_intrigue_skill = 3
+		
+		}	
+
+	option = {
+		name = POD_canon_artifacts.401.c
+			
+		add_diplomacy_skill = 3
+		
+		}	
+
+	option = {
+		name = POD_canon_artifacts.401.d
+			
+		add_stewardship_skill = 3
+		
+		}			
+}
+
+#The Shemiazel Sarcophagus
+
+POD_canon_artifacts.500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.500.t
+	desc = POD_canon_artifacts.500.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:shemaziel_sarcophagus
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = shemaziel_sarcophagus
+				}
+		save_scope_as = shemaziel_sarcophagus
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.500.a
+		
+		custom_tooltip = shemaziel_sarcophagus_warning
+		
+		add_character_flag = shemaziel_sarcophagus_opened
+		
+		trigger_event = {
+			id = POD_canon_artifacts.501
+			days = { 1 5 }
+			}			
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.500.b	
+			
+		}	
+										
+}
+
+#The Shemiazel Sarcophagus : Opened
+
+POD_canon_artifacts.501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.501.t
+	desc = POD_canon_artifacts.501.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:shemaziel_sarcophagus
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.501.a
+		
+		add_character_modifier = shemaziel_reborn_modifier
+
+		POD_achiev_absalon_check = yes
+		
+		change_first_name = "Shemaziel"
+		
+		give_nickname = nick_duke_arrogance
+		
+		if = {
+			limit = {
+				has_trait = vampire
+			}
+			set_character_faith = faith:viadiabolis
+		}
+		else = {
+			POD_character_demon_faith_initiation_effect = yes
+		}
+
+		if = {
+			limit = {
+				has_trait = chaste
+			}
+			remove_trait = chaste
+		}
+
+		if = {
+			limit = {
+				has_trait = lustful
+			}
+			remove_trait = lustful
+		}
+
+		if = {
+			limit = {
+				has_trait = temperate
+			}
+			remove_trait = temperate
+		}
+
+		if = {
+			limit = {
+				has_trait = gluttonous 
+			}
+			remove_trait = gluttonous 
+		}
+
+		if = {
+			limit = {
+				has_trait = generous 
+			}
+			remove_trait = generous
+		}
+
+
+		if = {
+			limit = {
+				has_trait = greedy
+			}
+			remove_trait = greedy
+		}
+
+
+		if = {
+			limit = {
+				has_trait = diligent
+			}
+			remove_trait = diligent
+		}
+
+		if = {
+			limit = {
+				has_trait = lazy
+			}
+			remove_trait = lazy
+		}
+	
+		if = {
+			limit = {
+				has_trait = calm 
+			}
+			remove_trait = calm 
+		}
+
+		if = {
+			limit = {
+				has_trait = wrathful
+			}
+			remove_trait = wrathful
+		}
+	
+		if = {
+			limit = {
+				has_trait = impatient
+			}
+			remove_trait = impatient
+		}	
+
+		if = {
+			limit = {
+				has_trait = patient
+			}
+			remove_trait = patient
+		}		
+
+	if = {
+		limit = {
+			NOT = { has_trait = arrogant  }
+		}
+		add_trait = arrogant
+	}
+
+		if = {
+			limit = {
+				has_trait = honest
+			}
+			remove_trait = honest
+		}
+
+		if = {
+			limit = {
+				has_trait = deceitful
+			}
+			remove_trait = deceitful
+		}
+
+		if = {
+			limit = {
+				has_trait = brave
+			}
+			remove_trait = brave
+		}
+	
+		if = {
+			limit = {
+				has_trait = craven
+			}
+			remove_trait = craven
+		}	
+
+		if = {
+			limit = {
+				has_trait = gregarious
+			}
+			remove_trait = gregarious
+		}
+
+		if = {
+			limit = {
+				has_trait = shy
+			}
+			remove_trait = shy
+		}
+
+	if = {
+		limit = {
+			NOT = { has_trait = ambitious }
+			}
+			add_trait = ambitious
+		}
+	
+
+		if = {
+			limit = {
+				has_trait = content
+			}
+			remove_trait = content
+		}	
+	
+		if = {
+			limit = {
+				has_trait = just
+			}
+			remove_trait = just
+		}	
+		
+		if = {
+			limit = {
+				has_trait = arbitrary
+			}
+			remove_trait = arbitrary
+		}
+
+		if = {
+			limit = {
+				has_trait = zealous
+			}
+			remove_trait = zealous
+		}	
+	
+		if = {
+			limit = {
+				has_trait = cynical
+			}
+			remove_trait = cynical
+		}	
+	
+		if = {
+			limit = {
+				has_trait = trusting
+			}
+			remove_trait = trusting
+		}		
+	
+		if = {
+			limit = {
+				has_trait = paranoid
+			}
+			remove_trait = paranoid
+		}
+		
+		if = {
+			limit = {
+				has_trait = callous
+			}
+			remove_trait = callous
+		}
+			
+
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			remove_trait = compassionate
+		}
+
+	if = {
+		limit = {
+			NOT = { has_trait = sadistic }
+		}
+		add_trait = sadistic
+		}	
+
+		if = {
+			limit = {
+				has_trait = fickle
+			}
+			remove_trait = fickle
+		}
+
+		if = {
+			limit = {
+				has_trait = stubborn
+			}
+			remove_trait = stubborn
+		}
+		
+		if = {
+			limit = {
+				has_trait = forgiving
+			}
+			remove_trait = forgiving
+		}
+		
+		if = {
+			limit = {
+				has_trait = vengeful
+			}
+			remove_trait = vengeful
+		}
+		
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.501.b	
+
+		destroy_artifact = scope:shemaziel_sarcophagus
+		
+		add_prestige = 500
+			
+		}	
+										
+}
+
+#The Gaffari Scrolls
+
+POD_canon_artifacts.600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.600.t
+	desc = POD_canon_artifacts.600.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:gaffari_scrolls
+        position = lower_left_portrait
+    }	
+
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = gaffari_scrolls
+				}
+		save_scope_as = gaffari_scrolls
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.600.a
+		
+		add_gold = 500
+		
+		destroy_artifact = scope:gaffari_scrolls		
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.600.b
+		
+		add_gold = 250
+		add_prestige = 300
+		
+		destroy_artifact = scope:gaffari_scrolls		
+					
+		}	
+
+	option = {
+		name = POD_canon_artifacts.600.c
+		
+		trigger = {
+			is_assamite_trigger = yes
+			}
+		
+		add_pressed_claim = title:e_assamites
+		add_pressed_claim = title:k_webofknives
+		
+		destroy_artifact = scope:gaffari_scrolls		
+					
+		}											
+}
+
+# Drinking from the Grail
+
+POD_canon_artifacts.700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.700.t
+	desc = POD_canon_artifacts.700.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = drink_goblet
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:holy_grail
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = holy_grail
+				}
+		save_scope_as = holy_grail
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.700.a
+
+		duel = {
+			skill = prowess
+			value = 80
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.700.effect.success.desc
+								
+			trigger_event = {
+				id = POD_canon_artifacts.701
+				days = { 1 5 }
+				}					
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.700.critical.failure.effect.desc
+					
+				add_stress = medium_stress_gain
+				
+				}
+			}
+
+
+	}
+	
+}
+
+POD_canon_artifacts.701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.701.t
+	desc = POD_canon_artifacts.701.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = drink_goblet
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:holy_grail
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = holy_grail
+				}
+		save_scope_as = holy_grail
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.701.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank <= 5
+			}
+		}
+		
+		custom_tooltip = drink_grail_tt
+		
+		hidden_effect = {
+			random_list = {
+				5 = {
+					trigger_event = POD_canon_artifacts.702
+					
+					modifier = {
+						add = 10
+						has_trait = brave
+					}
+					modifier = {
+						add = 10
+						has_trait = generous
+					}
+					modifier = {
+						add = 10
+						has_trait = compassionate
+					}					
+				}
+				
+				55 = {
+					trigger_event = POD_canon_artifacts.702
+
+					add_character_flag = failed_first_test_flag
+				}
+
+				40 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = craven
+					}
+					modifier = {
+						add = 10
+						has_trait = greedy
+					}
+					modifier = {
+						add = 10
+						has_trait = callous
+					}	
+					modifier = {
+						add = 10
+						has_trait = sadistic
+					}					
+				}				
+			}
+		}
+	}
+
+	option = {
+		name = POD_canon_artifacts.701.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank > 5
+			}
+			has_trait_rank = {
+				trait = vampgeneration
+				rank < 9
+			}
+		}
+
+		custom_tooltip = drink_grail_tt
+		
+		hidden_effect = {
+			random_list = {
+				15 = {
+					trigger_event = POD_canon_artifacts.702
+					
+					modifier = {
+						add = 10
+						has_trait = brave
+					}
+					modifier = {
+						add = 10
+						has_trait = generous
+					}
+					modifier = {
+						add = 10
+						has_trait = compassionate
+					}					
+				}
+				
+				55 = {
+					trigger_event = POD_canon_artifacts.702
+
+					add_character_flag = failed_first_test_flag	
+				}
+
+				30 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = craven
+					}
+					modifier = {
+						add = 10
+						has_trait = greedy
+					}
+					modifier = {
+						add = 10
+						has_trait = callous
+					}	
+					modifier = {
+						add = 10
+						has_trait = sadistic
+					}					
+				}				
+			}
+		}			
+	}
+
+	option = {
+		name = POD_canon_artifacts.701.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank >= 9
+			}
+		}
+
+		custom_tooltip = drink_grail_tt
+		
+		hidden_effect = {
+			random_list = {
+				25 = {
+					trigger_event = POD_canon_artifacts.702
+					
+					modifier = {
+						add = 10
+						has_trait = brave
+					}
+					modifier = {
+						add = 10
+						has_trait = generous
+					}
+					modifier = {
+						add = 10
+						has_trait = compassionate
+					}
+					modifier = {
+						factor = 0
+						has_trait = witch
+					}						
+				}
+				
+				50 = {
+					trigger_event = POD_canon_artifacts.702			
+
+					add_character_flag = failed_first_test_flag
+
+				}
+
+				25 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = craven
+					}
+					modifier = {
+						add = 10
+						has_trait = greedy
+					}
+					modifier = {
+						add = 10
+						has_trait = callous
+					}	
+					modifier = {
+						add = 10
+						has_trait = sadistic
+					}
+					modifier = {
+						factor = 100
+						has_trait = witch
+					}					
+				}				
+			}
+		}			
+	}	
+}
+
+POD_canon_artifacts.702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.702.t
+	desc = POD_canon_artifacts.702.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = drink_goblet
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:holy_grail
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = holy_grail
+				}
+		save_scope_as = holy_grail
+		}
+		if = {
+			limit = {
+				has_character_flag = failed_first_test_flag
+			}
+			remove_character_flag = failed_first_test_flag
+			POD_increase_wounds_hostile_effect = { REASON = duel_aggravated ATTACKER = root COUNT = POD_triple_wound_damage } #attacker is technically the grail but... yeah, stop hitting yourself
+		}	
+	}
+
+	option = {
+		name = POD_canon_artifacts.702.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank <= 5
+			}
+		}
+		
+		custom_tooltip = drink_grail_tt2
+		
+		hidden_effect = {
+			random_list = {
+				5 = {
+					trigger_event = POD_canon_artifacts.703
+					
+					modifier = {
+						add = 10
+						has_trait = patient
+					}
+					modifier = {
+						add = 10
+						has_trait = zealous
+					}
+					modifier = {
+						add = 10
+						has_trait = calm
+					}					
+				}
+				
+				55 = {
+					trigger_event = POD_canon_artifacts.703
+
+					add_character_flag = failed_second_test_flag
+				}
+
+				40 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = impatient
+					}
+					modifier = {
+						add = 10
+						has_trait = cynical
+					}
+					modifier = {
+						add = 10
+						has_trait = wrathful
+					}						
+				}				
+			}
+		}
+	}
+
+	option = {
+		name = POD_canon_artifacts.702.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank > 5
+			}
+			has_trait_rank = {
+				trait = vampgeneration
+				rank < 9
+			}
+		}
+		
+		custom_tooltip = drink_grail_tt2
+		
+		hidden_effect = {
+			random_list = {
+				15 = {
+					trigger_event = POD_canon_artifacts.703
+					
+					modifier = {
+						add = 10
+						has_trait = patient
+					}
+					modifier = {
+						add = 10
+						has_trait = zealous
+					}
+					modifier = {
+						add = 10
+						has_trait = calm
+					}					
+				}
+				
+				55 = {
+					trigger_event = POD_canon_artifacts.703
+
+					add_character_flag = failed_second_test_flag
+				}
+
+				30 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = impatient
+					}
+					modifier = {
+						add = 10
+						has_trait = cynical
+					}
+					modifier = {
+						add = 10
+						has_trait = wrathful
+					}						
+				}				
+			}
+		}
+	}
+
+	option = {
+		name = POD_canon_artifacts.702.a
+		
+		trigger = {
+			has_trait_rank = {
+				trait = vampgeneration
+				rank >= 9
+			}
+		}
+		
+		custom_tooltip = drink_grail_tt2
+		
+		hidden_effect = {
+			random_list = {
+				25 = {
+					trigger_event = POD_canon_artifacts.703
+					
+					modifier = {
+						add = 10
+						has_trait = patient
+					}
+					modifier = {
+						add = 10
+						has_trait = zealous
+					}
+					modifier = {
+						add = 10
+						has_trait = calm
+					}					
+				}
+				
+				50 = {
+					trigger_event = POD_canon_artifacts.703
+
+					add_character_flag = failed_second_test_flag
+				}
+
+				25 = {
+					trigger_event = POD_canon_artifacts.704
+					
+					modifier = {
+						add = 10
+						has_trait = impatient
+					}
+					modifier = {
+						add = 10
+						has_trait = cynical
+					}
+					modifier = {
+						add = 10
+						has_trait = wrathful
+					}						
+				}				
+			}
+		}
+	}
+}	
+
+POD_canon_artifacts.703 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.703.t
+	desc = POD_canon_artifacts.703.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = drink_goblet
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:holy_grail
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = holy_grail
+				}
+		save_scope_as = holy_grail
+		}
+		if = {
+			limit = {
+				has_character_flag = failed_second_test_flag
+			}
+			remove_character_flag = failed_second_test_flag
+			add_stress = monumental_stress_gain				
+		}	
+	}
+	
+	option = {
+		name = POD_canon_artifacts.703.a
+	
+		custom_tooltip = drink_grail_tt3
+
+		hidden_effect = {
+			POD_remove_hunger_modifiers_effect = yes
+			add_character_modifier = bloodhunger0_modifier
+			every_relation = {
+				type = ghoul_thrall
+				POD_apply_bonuses_for_ghoul_of_grail_knight = yes
+			}
+		}
+		add_trait = POD_grail_knight
+		POD_remove_clan_curse_effect = yes
+	}
+}
+
+POD_canon_artifacts.704 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.704.t
+	desc = POD_canon_artifacts.704.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:holy_grail
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = holy_grail
+				}
+		save_scope_as = holy_grail
+		}
+		add_stress = massive_stress_gain					
+	}
+	
+	option = {
+		name = POD_canon_artifacts.704.a
+			
+		destroy_artifact = scope:holy_grail
+		
+	}
+
+	option = {
+		name = POD_canon_artifacts.704.b
+			
+		add_prestige = -300
+		add_piety = -300
+		
+	}	
+}
+
+POD_canon_artifacts.800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.800.t
+	desc = POD_canon_artifacts.800.desc
+	theme = salubri_coa
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	immediate = {
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_javaniel # Achievement: The Truth about Saulot?
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.800.a
+			
+		trigger = {
+			is_vampire_trigger = no
+		}
+		
+		add_learning_lifestyle_perk_points = 2
+	}
+
+	option = {
+		name = POD_canon_artifacts.800.b
+			
+		trigger = {
+			is_vampire_trigger = yes
+		}
+		
+		add_prestige = 500
+		
+		custom_tooltip = POD_canon_artifacts.800.custom
+	
+		hidden_effect = {		
+		every_living_character = {
+			limit = {
+				is_salubri_trigger = yes			
+				NOT = { this = root }
+				}
+		add_prestige = -1500
+		add_stress = monumental_stress_gain
+		}	
+		}		
+
+		hidden_effect = {		
+		every_living_character = {
+			limit = {
+				is_tremere_trigger = yes			
+				}
+		add_prestige = 500
+		add_stress = medium_stress_loss
+		}	
+		}		
+	}
+
+	option = {
+		name = POD_canon_artifacts.800.c
+			
+		trigger = {
+			is_vampire_trigger = yes
+		}
+
+		add_learning_lifestyle_perk_points = 1
+		add_intrigue_lifestyle_perk_points = 1
+		
+		every_character_artifact = {
+			limit = {
+			has_variable = javaniel_journal
+			}
+			destroy_artifact = this
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.800.d
+			
+		trigger = {
+			is_salubri_trigger = yes
+		}
+
+		root.dynasty = {
+			add_dynasty_prestige = 10000
+		}
+		
+		every_character_artifact = {
+			limit = {
+			has_variable = javaniel_journal
+			}
+			destroy_artifact = this
+		}
+		
+		every_character_artifact = {
+			limit = {
+			has_variable = javaniel_key
+			}
+			destroy_artifact = this
+		}
+
+		every_character_artifact = {
+			limit = {
+			has_variable = ivory_tablets
+			}
+			destroy_artifact = this
+		}		
+	}	
+}
+	
+POD_canon_artifacts.900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = codex_mortis_decision
+	desc = POD_canon_artifacts.900.desc
+	theme = cappadocian_coa
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+
+	option = {
+		name = POD_canon_artifacts.900.a
+			
+		trigger = {
+			any_killed_character = { this = character:791290 }
+		}
+
+		custom_tooltip = codex_mortis_kill_tt
+
+		every_character_artifact = {
+			limit = {
+			has_variable = codex_mortis
+			}
+			destroy_artifact = this
+		}		
+	}
+	
+	option = {
+		name = POD_canon_artifacts.900.b
+			
+		trigger = {
+			OR = {
+			has_relation_friend = character:791290
+			has_relation_best_friend = character:791290
+			has_relation_lover = character:791290
+			has_relation_soulmate = character:791290
+			}
+		}
+
+		custom_tooltip = codex_mortis_friend_tt
+
+		add_character_flag = has_giovanni_necromancy_flag		
+		
+		assign_melancholy_necromancy_effect = yes		
+	}	
+	
+	option = {
+		name = POD_canon_artifacts.900.c
+			
+		trigger = {
+			NOT = { any_killed_character = { this = character:791290 } }
+			
+			NOR = {
+			has_relation_friend = character:791290
+			has_relation_best_friend = character:791290
+			has_relation_lover = character:791290
+			has_relation_soulmate = character:791290
+			}
+		}
+
+		duel = {
+			skill = diplomacy
+			value = 20
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.900.effect.success.desc
+								
+				add_character_flag = has_giovanni_necromancy_flag		
+				
+				assign_melancholy_necromancy_effect = yes									
+
+				send_interface_toast = {
+					title = POD_canon_artifacts.900.effect.success.desc
+					left_icon = root
+
+				}
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.900.critical.failure.effect.desc
+
+					custom_tooltip = codex_mortis_fail_tt	
+					
+					send_interface_toast = {
+						title = POD_canon_artifacts.900.critical.failure.effect.desc
+						left_icon = root
+
+						add_character_flag = codex_mortis_rejected_flag
+					}
+				}
+			}
+				
+	}
+	
+}
+
+#The Tapestry of Fate
+
+POD_canon_artifacts.1000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1000.t
+	desc = POD_canon_artifacts.1000.desc
+	theme = fae
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	
+	artifact = {
+		target = scope:tapestry_of_fate
+		position = lower_left_portrait
+	}	
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = tapestry_of_fate
+			}
+			save_scope_as = tapestry_of_fate
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.personality
+		
+		trigger = {
+			POD_has_higher_true_name_access_trigger = yes
+			NOT = { has_character_flag = personality_true_name_studied }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_type_effect = { TYPE = personality }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = personality_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+
+	option = {
+		name = POD_canon_artifacts.1000.education
+		
+		trigger = {
+			POD_has_higher_true_name_access_trigger = yes
+			NOT = { has_character_flag = education_true_name_studied }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_type_effect = { TYPE = education }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = education_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.commander
+		
+		trigger = {
+			POD_has_higher_true_name_access_trigger = yes
+			NOT = { has_character_flag = commander_true_name_studied }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = commander }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = commander_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.lifestyle
+		
+		trigger = {
+			POD_has_higher_true_name_access_trigger = yes
+			NOT = { has_character_flag = lifestyle_true_name_studied }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = lifestyle }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = lifestyle_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.fame
+		
+		trigger = {
+			POD_has_higher_true_name_access_trigger = yes
+			NOT = { has_character_flag = fame_true_name_studied }
+		}
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = fame }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = fame_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.stress
+		
+		trigger = { NOT = { has_character_flag = stress_true_name_studied } }
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = stress }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = stress_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.health
+		
+		trigger = { NOT = { has_character_flag = health_true_name_studied } }
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = health }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = health_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1000.physical
+		
+		trigger = { NOT = { has_character_flag = physical_true_name_studied } }
+		
+		stress_impact = {
+			base = major_stress_gain
+		}
+		hidden_effect = {
+			POD_learn_random_true_name_of_trait_flag_effect = { FLAG = physical }
+		
+			if = {
+				limit = { exists = scope:trait }
+				trigger_event = POD_canon_artifacts.1011
+			}
+			else = {
+				add_character_flag = physical_true_name_studied
+				trigger_event = POD_canon_artifacts.1012
+			}
+		}
+	}
+
+	option = {
+		name = POD_canon_artifacts.1000.k
+		remove_decision_cooldown = tapestry_of_fate_decision
+	}
+}
+
+POD_canon_artifacts.1011 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1011.t
+	desc = POD_canon_artifacts.1011.desc
+	
+	left_portrait = root
+	theme = fae
+	
+	immediate = { show_as_tooltip = { POD_learn_true_name_of_trait_effect = { TRAIT = scope:trait } } }
+	
+	option = { name = POD_canon_artifacts.1011.a }
+}
+
+POD_canon_artifacts.1012 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1012.t
+	desc = POD_canon_artifacts.1012.desc
+	
+	left_portrait = root
+	theme = fae
+	
+	option = { name = POD_canon_artifacts.1012.a }
+}	
+
+
+POD_canon_artifacts.1020 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1020.t
+	desc = POD_canon_artifacts.1020.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:dragon_night
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		is_ai = no
+		NOT = {
+			has_character_flag = answered_call_dragon_night
+			}
+		any_character_artifact = {
+			has_variable = dragon_night
+		}
+		POD_has_true_faith_trigger = no
+		#Not using the basic possessed trigger because KJ can be possessed in the scenario 
+		NOT = { has_trait = fomori }
+		NOT = { has_trait = drone }
+		NOT = { has_trait = gorgon }
+		NOT = { has_trait = kami }	
+		NOT = { has_trait = wraith }
+		NOT = { has_trait = demon }		
+	}
+	
+	immediate = {
+		random_character_artifact = {
+			limit = {
+				has_variable = dragon_night
+				}
+		save_scope_as = dragon_night
+		}
+	}
+	
+	option = {
+		name = POD_canon_artifacts.100.a
+			
+		destroy_artifact = scope:dragon_night
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}	
+		
+	option = {
+		name = POD_canon_artifacts.1020.b
+		
+		custom_tooltip = sword_of_nul_warning
+
+		stress_impact = {
+			base = major_stress_gain
+		}
+			
+		trigger_event = {
+				id = POD_canon_artifacts.1021
+				days = { 10 15 }
+				}		
+			
+		}	
+										
+}
+
+
+POD_canon_artifacts.1021 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1021.t
+	desc = POD_canon_artifacts.1021.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:dragon_night
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = dragon_night
+		}			
+	}
+	
+	immediate = {
+		add_character_flag = answered_call_dragon_night
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1021.a
+		
+		duel = {
+			skill = learning
+			value = 20
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.1021.effect.success.desc
+								
+			trigger_event = {
+				id = POD_canon_artifacts.1022
+				days = { 10 15 }
+				}					
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.1021.critical.failure
+					
+					send_interface_toast = {
+						title = POD_canon_artifacts.1021.critical.failure
+						left_icon = root
+
+						death = {
+							death_reason = death_suicide
+							}						
+						}
+				}
+			}	
+			
+		}	
+		
+	option = {
+		name = POD_canon_artifacts.1021.b
+		
+		destroy_artifact = scope:dragon_night
+		
+		custom_tooltip = podregionalpersons.7.customb	
+			
+		}	
+										
+}
+
+POD_canon_artifacts.1022 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1022.t
+	desc = POD_canon_artifacts.1022.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:dragon_night
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = dragon_night
+		}			
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1022.a
+		
+		duel = {
+			skill = prowess
+			value = 125
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+				desc = POD_canon_artifacts.1022.effect.success.desc
+								
+			trigger_event =  POD_canon_artifacts.1023
+				
+			}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+
+					desc = POD_canon_artifacts.1022.critical.failure.effect.desc
+					
+				trigger_event = POD_canon_artifacts.1024
+					}	
+				
+			}	
+			
+		}	
+										
+}
+
+
+POD_canon_artifacts.1023 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1023.t
+	desc = POD_canon_artifacts.1023.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:dragon_night
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = dragon_night
+		}			
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_canon_artifacts.1023.a
+				
+		add_prestige = 1000		
+	}
+									
+}
+
+POD_canon_artifacts.1024 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1024.t
+	desc = POD_canon_artifacts.1024.desc
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = ecstasy
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	artifact = {
+        target = scope:dragon_night
+        position = lower_left_portrait
+    }	
+
+	trigger = {
+		any_character_artifact = {
+			has_variable = dragon_night
+		}			
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = POD_canon_artifacts.1024.a
+				
+		give_nickname = nick_vengeful_spectre
+		change_first_name = "Isamu_Harujiro"
+		
+		add_character_modifier = isamu_modifier
+
+		if = {
+			limit = {
+				NOT = {
+					has_trait = pod_crafter
+				}
+			}
+		add_trait = pod_crafter
+		}
+		
+		add_trait_xp = {
+               trait = pod_crafter
+			track = forging
+               value = 100
+           }
+		add_trait_xp = {
+               trait = pod_crafter
+			track = enhancing
+               value = 100
+           }
+		
+		if = {
+			limit = {
+				has_trait = chaste
+			}
+			remove_trait = chaste
+		}
+
+		if = {
+			limit = {
+				has_trait = lustful
+			}
+			remove_trait = lustful
+		}
+
+		if = {
+			limit = {
+				has_trait = temperate
+			}
+			remove_trait = temperate
+		}
+
+		if = {
+			limit = {
+				has_trait = gluttonous 
+			}
+			remove_trait = gluttonous 
+		}
+
+		if = {
+			limit = {
+				has_trait = generous 
+			}
+			remove_trait = generous
+		}
+
+
+		if = {
+			limit = {
+				has_trait = greedy
+			}
+			remove_trait = greedy
+		}
+
+
+		if = {
+			limit = {
+				has_trait = diligent
+			}
+			remove_trait = diligent
+		}
+
+		if = {
+			limit = {
+				has_trait = lazy
+			}
+			remove_trait = lazy
+		}
+	
+		if = {
+			limit = {
+				has_trait = calm 
+			}
+			remove_trait = calm 
+		}
+
+		if = {
+			limit = {
+				has_trait = wrathful
+			}
+			remove_trait = wrathful
+		}
+	
+		if = {
+			limit = {
+				has_trait = impatient
+			}
+			remove_trait = impatient
+		}	
+
+		if = {
+			limit = {
+				has_trait = patient
+			}
+			remove_trait = patient
+		}		
+
+	if = {
+		limit = {
+			NOT = { has_trait = arrogant  }
+		}
+		add_trait = arrogant
+	}
+
+		if = {
+			limit = {
+				has_trait = honest
+			}
+			remove_trait = honest
+		}
+
+		if = {
+			limit = {
+				has_trait = deceitful
+			}
+			remove_trait = deceitful
+		}
+
+		if = {
+			limit = {
+				has_trait = brave
+			}
+			remove_trait = brave
+		}
+	
+		if = {
+			limit = {
+				has_trait = craven
+			}
+			remove_trait = craven
+		}	
+
+		if = {
+			limit = {
+				has_trait = gregarious
+			}
+			remove_trait = gregarious
+		}
+
+		if = {
+			limit = {
+				has_trait = shy
+			}
+			remove_trait = shy
+		}
+
+	if = {
+		limit = {
+			NOT = { has_trait = ambitious }
+			}
+			add_trait = ambitious
+		}
+	
+
+		if = {
+			limit = {
+				has_trait = content
+			}
+			remove_trait = content
+		}	
+	
+		if = {
+			limit = {
+				has_trait = just
+			}
+			remove_trait = just
+		}	
+		
+		if = {
+			limit = {
+				has_trait = arbitrary
+			}
+			remove_trait = arbitrary
+		}
+
+		if = {
+			limit = {
+				has_trait = zealous
+			}
+			remove_trait = zealous
+		}	
+	
+		if = {
+			limit = {
+				has_trait = cynical
+			}
+			remove_trait = cynical
+		}	
+	
+		if = {
+			limit = {
+				has_trait = trusting
+			}
+			remove_trait = trusting
+		}		
+	
+		if = {
+			limit = {
+				has_trait = paranoid
+			}
+			remove_trait = paranoid
+		}
+		
+		if = {
+			limit = {
+				has_trait = callous
+			}
+			remove_trait = callous
+		}
+			
+
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			remove_trait = compassionate
+		}
+
+		if = {
+			limit = {
+				has_trait = sadistic
+			}
+			remove_trait = sadistic
+		}
+		
+	if = {
+		limit = {
+			NOT = { has_trait = vengeful }
+		}
+		add_trait = vengeful
+		}	
+
+		if = {
+			limit = {
+				has_trait = fickle
+			}
+			remove_trait = fickle
+		}
+
+		if = {
+			limit = {
+				has_trait = stubborn
+			}
+			remove_trait = stubborn
+		}
+		
+		if = {
+			limit = {
+				has_trait = forgiving
+			}
+			remove_trait = forgiving
+		}
+
+		if = {
+			limit = {
+				has_trait = eccentric
+			}
+			remove_trait = eccentric
+		}		
+	}			
+										
+}
+
+
+#Sword of Fever
+POD_canon_artifacts.1100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_canon_artifacts.1100.t
+	desc = POD_canon_artifacts.1100.desc
+	theme = witchcraft
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	
+	artifact = {
+        target = scope:sword_of_fever
+        position = lower_left_portrait
+    }
+	
+	immediate = {
+		random_equipped_character_artifact = {
+			limit = { has_variable = sword_of_fever }
+			save_scope_as = sword_of_fever
+		}
+	}
+	
+	#Do it
+	option = {
+		name = POD_canon_artifacts.1100.a
+		add_piety = -1000
+		add_piety_level = -1
+
+		location ?= { create_epidemic_outbreak = { type = entoban_plague intensity = apocalyptic } }
+		add_character_modifier = { modifier = sword_of_fever_used_modifier years = 25 }
+	}
+	
+	#Nvm
+	option = {
+		name = POD_canon_artifacts.1100.b
+	}
+}

@@ -1,0 +1,134 @@
+﻿POD_seek_ambassadorial_patron_interaction = {
+	category = interaction_category_diplomacy
+	#common_interaction = yes
+	#interface_priority = 90
+	desc = POD_seek_ambassadorial_patron_interaction_desc
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = { has_character_flag = ambassador_searching_for_patron_flag }
+		NOT = { scope:recipient = scope:actor }
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			trigger_if = {
+				limit = { is_ai = yes }
+				opinion = {
+					target = scope:actor
+					value >= 50
+				}
+			}
+			POD_can_receive_landed_titles = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			trigger_event = pod1230objectives.169
+		}
+	}
+
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ambassadorial_request_interaction = {
+	category = interaction_category_diplomacy
+	#common_interaction = yes
+	icon = icon_liege
+	desc = POD_ambassadorial_request_interaction_desc
+	
+	ai_frequency = 0
+
+	cooldown = {
+		years = 5
+	}
+
+	is_shown = {
+		scope:actor = { is_landless_adventurer = yes }
+		scope:recipient = {
+			has_relation_ashen_ambassadorial_patron = scope:actor
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		custom_tooltip = POD_ambassadorial_request_interaction_desc
+		scope:actor = {
+			trigger_event = pod1230objectives.170
+		}
+	}
+	
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ambassadorial_visit_interaction = {
+	category = interaction_category_diplomacy
+	#common_interaction = yes
+	icon = icon_scheme_claim_throne
+	desc = POD_ambassadorial_visit_interaction_desc
+	
+	ai_frequency = 0
+
+	cooldown_against_recipient = {
+		years = 5
+	}
+	
+	cost = { prestige = 150 }
+
+	is_shown = {
+		scope:actor = {
+			any_relation = {
+				type = ashen_ambassadorial_patron
+				count >= 1
+			}
+		}
+		scope:recipient = { is_landed = yes }
+		scope:actor = { is_landless_adventurer = yes }
+		NOT = { scope:recipient = scope:actor }
+		scope:recipient = {
+			NOT = { has_relation_ashen_ambassadorial_patron = scope:actor }
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = I_MUST_BE_AT_THE_SAME_LOCATION_TRIGGER
+			scope:actor = { exists = location }
+			scope:recipient = { exists = location }
+			scope:actor = { location = scope:recipient.location }
+		}
+		scope:recipient = {
+			is_imprisoned = no
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		custom_tooltip = POD_ambassadorial_visit_interaction_desc
+		scope:actor = {
+			trigger_event = pod1230objectives.171
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -1,0 +1,1380 @@
+﻿# POD Herd
+# Thaumaturge
+
+
+POD_drink_herd = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority = 88
+	desc = POD_drink_herd_desc
+	ai_frequency = 0
+	
+	is_shown = {
+		scope:actor = {
+			POD_is_vampire_trigger = yes
+		}
+		scope:actor != scope:recipient
+		scope:recipient = { is_adult = yes }
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			has_relation_herd_owner = scope:actor
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_options_exclusive = no
+	
+	send_option = {
+		flag = sip
+		is_shown = {
+			scope:recipient = { drinkable_blood_left >= 1 }
+			NOR = {
+				scope:drink = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:drink = no
+			scope:alot = no
+			scope:drain = no
+		}
+		localization = POD_drink_herd_sip_option
+	}
+	
+	send_option = {
+		flag = drink
+		is_shown = {
+			scope:recipient = { drinkable_blood_left >= 2 }
+			NOR = {
+				scope:sip = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:alot = no
+			scope:drain = no
+		}
+		localization = POD_drink_herd_drink_option
+	}
+	
+	send_option = {
+		flag = alot
+		is_shown = {
+			scope:recipient = { drinkable_blood_left >= 3 }
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:drink = no
+			scope:drain = no
+		}
+		localization = POD_drink_herd_alot_option
+	}
+	
+	send_option = {
+		flag = drain
+		is_shown = {
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:drink = no
+			scope:alot = no
+		}
+		localization = POD_drink_herd_drain_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				OR = {
+					has_perk = mold_humours_perk
+					has_trait_with_flag = can_intensify_herd_resonance # Presence 6: Passion
+				}
+			}
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+			}
+			scope:release = no
+			scope:drain = no
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = modify
+		localization = POD_drink_herd_modify_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+				scope:modify = yes
+				NOR = {
+					scope:sanguine = yes
+					scope:melancholic = yes
+					scope:phlegmatic = yes
+					scope:increase = yes
+				}
+			}
+			scope:recipient = { NOT = { has_character_flag = choleric_resonance } }
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = choleric
+		localization = POD_drink_herd_choleric_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:recipient = { NOT = { has_character_flag = melancholic_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:sanguine = yes
+				scope:phlegmatic = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = melancholic
+		localization = POD_drink_herd_melancholic_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:recipient = { NOT = { has_character_flag = phlegmatic_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:sanguine = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = phlegmatic
+		localization = POD_drink_herd_phlegmatic_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:recipient = { NOT = { has_character_flag = sanguine_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:phlegmatic = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = sanguine
+		localization = POD_drink_herd_sanguine_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				# Presence 6: Passion
+				has_trait_with_flag = can_intensify_herd_resonance
+			}
+			scope:recipient = { NOT = { has_character_flag = POD_resonance_acute_flag } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:phlegmatic = yes
+				scope:sanguine = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = increase
+		localization =  POD_drink_herd_increase_intensity_option
+	}
+
+	send_option = {
+		is_shown = {
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:modify = yes
+			}
+		}
+		flag = release
+		localization =  POD_drink_herd_release_option
+	}
+	
+	on_accept = {
+		#Sets the proper scopes so that the effects work
+		scope:actor = { save_scope_as = vampire }
+		scope:recipient = { save_scope_as = victim }
+		scope:actor = { save_scope_as = herd_owner }
+		scope:recipient = { save_scope_as = herdmember }
+		
+		hidden_effect = {
+			scope:victim = {
+				POD_set_resonance_effect = yes
+			}
+		}
+
+		if = {
+			limit = { scope:sip = yes }
+			
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:recipient
+					AMOUNT = 1
+				}
+			}
+		}
+
+		if = {
+			limit = { scope:drink = yes }
+			
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:recipient
+					AMOUNT = 2
+				}
+			}
+		}
+
+		if = {
+			limit = { scope:alot = yes }
+			
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:recipient
+					AMOUNT = 3
+				}
+			}
+		}
+
+		if = {
+			limit = { scope:drain = yes }
+
+			#Add drain effect here
+			scope:actor = {
+				POD_drain_victim_effect = { VICTIM = scope:recipient }
+				POD_queue_diablerie_suspicion_event = { VICTIM = scope:recipient }
+			}
+		}
+		
+
+		if = {
+			limit = {
+				scope:modify = yes
+				OR = {
+					scope:choleric = yes
+					scope:melancholic = yes
+					scope:phlegmatic = yes
+					scope:sanguine = yes
+					scope:increase = yes
+				}
+			}
+			scope:actor = { POD_discipline_cost_effect = { COUNT = 1 } }
+			scope:actor = { add_stress = minor_stress_impact_gain }
+			scope:victim = { add_stress = medium_stress_impact_gain }
+		}
+		
+		if = {
+			limit = {
+				scope:choleric = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_choleric.tt }
+				scope:victim = { POD_resonance_change_to_choleric_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:melancholic = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_melancholic.tt }
+				scope:victim = { POD_resonance_change_to_melancholic_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:phlegmatic = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_phlegmatic.tt }
+				scope:victim = { POD_resonance_change_to_phlegmatic_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:sanguine = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_sanguine.tt }
+				scope:victim = { POD_resonance_change_to_sanguine_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:increase = yes
+			}
+			random_list = {
+				50 = {
+					scope:victim = { POD_resonance_increase_intensity_effect = yes }
+					modifier = {
+						add = 55
+						scope:actor = {
+							stewardship >= 30
+						}
+					}
+					modifier = {
+						add = 40
+						AND = {
+							scope:actor = {
+								stewardship >= 15
+							}
+							scope:actor = {
+								stewardship < 30
+							}
+						}
+					}
+				}
+				50 = {
+					scope:victim = { POD_resonance_decrease_effect = yes }
+					modifier = {
+						add = -20
+						scope:actor = {
+							stewardship >= 15
+						}
+					}
+					
+					modifier = {
+						add = 20
+						scope:actor = {
+							stewardship <= 5
+						}
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:release = yes
+			}
+			
+			scope:actor = { POD_remove_herd_effect = { TARGET = scope:victim } }
+		}
+	}
+	auto_accept = yes
+}
+
+POD_drink_herd_choose = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority = 88
+	desc = POD_drink_herd_choose_desc
+	icon = POD_drink_herd
+	ai_frequency = 0
+	send_options_exclusive = no
+	
+	is_shown = {
+		scope:actor = { POD_is_vampire_trigger = yes }
+		scope:actor = scope:recipient
+		scope:recipient = { is_adult = yes }
+		scope:actor = { is_adult = yes }
+		scope:actor = {
+			num_of_relation_herd_member > 0
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	populate_recipient_list = {
+		scope:actor = {
+			every_relation = {
+				type = herd_member
+				limit = { is_alive = yes }
+				
+				add_to_list = characters
+			}
+		}
+	
+	
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:secondary_recipient ?= { drinkable_blood_left >= 1 }
+			NOR = {
+				scope:drink = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:drink = no
+			scope:alot = no
+			scope:drain = no
+		}
+		starts_enabled = { always = yes }
+		flag = sip
+		localization = POD_drink_herd_sip_option
+		
+
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:secondary_recipient ?= { drinkable_blood_left >= 2 }
+			NOR = {
+				scope:sip = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:alot = no
+			scope:drain = no
+		}
+		flag = drink
+		localization = POD_drink_herd_drink_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:secondary_recipient ?= { drinkable_blood_left >= 3 }
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:drain = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:drink = no
+			scope:drain = no
+		}
+		flag = alot
+		localization = POD_drink_herd_alot_option
+	}
+	
+	send_option = {
+		is_shown = {
+			exists = scope:secondary_recipient
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+				scope:release = yes
+				scope:modify = yes
+			}
+		}
+		is_valid = {
+			scope:sip = no
+			scope:drink = no
+			scope:alot = no
+		}
+		flag = drain
+		localization = POD_drink_herd_drain_option
+	}
+
+	send_option = {
+		is_shown = {
+			exists = scope:secondary_recipient
+			scope:actor = {
+				OR = {
+					has_perk = mold_humours_perk
+					has_trait_with_flag = can_intensify_herd_resonance # Presence 6: Passion
+				}
+			}
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+			}
+			scope:release = no
+			scope:drain = no
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = modify
+		localization = POD_drink_herd_modify_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+				scope:modify = yes
+				NOR = {
+					scope:sanguine = yes
+					scope:melancholic = yes
+					scope:phlegmatic = yes
+					scope:increase = yes
+				}
+			}
+			scope:secondary_recipient ?= { NOT = { has_character_flag = choleric_resonance } }
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = choleric
+		localization = POD_drink_herd_choleric_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:secondary_recipient ?= { NOT = { has_character_flag = melancholic_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:sanguine = yes
+				scope:phlegmatic = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = melancholic
+		localization = POD_drink_herd_melancholic_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:secondary_recipient ?= { NOT = { has_character_flag = phlegmatic_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:sanguine = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = phlegmatic
+		localization = POD_drink_herd_phlegmatic_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = mold_humours_perk
+			}
+			scope:secondary_recipient ?= { NOT = { has_character_flag = sanguine_resonance } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:phlegmatic = yes
+				scope:increase = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = sanguine
+		localization = POD_drink_herd_sanguine_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				# Presence 6: Passion
+				has_trait_with_flag = can_intensify_herd_resonance
+			}
+			scope:secondary_recipient ?= { NOT = { has_character_flag = POD_resonance_acute_flag } }
+			scope:modify = yes
+			NOR = {
+				scope:choleric = yes
+				scope:melancholic = yes
+				scope:phlegmatic = yes
+				scope:sanguine = yes
+			}
+		}
+
+		is_valid = {
+			scope:actor = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+		}
+
+		flag = increase
+		localization =  POD_drink_herd_increase_intensity_option
+	}
+
+	send_option = {
+		is_shown = {
+			exists = scope:secondary_recipient
+			NOR = {
+				scope:sip = yes
+				scope:drink = yes
+				scope:alot = yes
+				scope:drain = yes
+				scope:modify = yes
+			}
+		}
+		flag = release
+		localization =  POD_drink_herd_release_option
+	
+	}
+	
+	on_accept = {
+		#Sets the proper scopes so that the effects work
+		scope:recipient = { save_scope_as = vampire }
+		scope:secondary_recipient = { save_scope_as = victim }
+		scope:recipient = { save_scope_as = herd_owner }
+		scope:secondary_recipient = { save_scope_as = herdmember }
+
+		hidden_effect = {
+			scope:victim = {
+				POD_set_resonance_effect = yes
+			}
+		}
+		
+		if = {
+			limit = { scope:sip = yes }
+
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+			
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:herdmember
+					AMOUNT = 1
+				}
+			}
+		}
+		if = {
+			limit = { scope:drink = yes }
+
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+			
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:herdmember
+					AMOUNT = 2
+				}
+			}
+		}
+		if = {
+			limit = { scope:alot = yes }
+
+			#Warning about manual feeding pausing due to increased bloodloss
+			custom_tooltip = POD_drink_herd_pause_warning
+			
+			scope:actor = {
+				POD_drink_from_victim_no_secondary_effect = {
+					VICTIM = scope:herdmember
+					AMOUNT = 3
+				}
+			}
+		}
+		if = {
+			limit = { scope:drain = yes }
+
+			scope:actor = {
+				POD_drain_victim_effect = { VICTIM = scope:herdmember }
+				POD_queue_diablerie_suspicion_event = { VICTIM = scope:herdmember }
+			}
+		}
+
+		if = {
+			limit = {
+				scope:modify = yes
+				OR = {
+					scope:choleric = yes
+					scope:melancholic = yes
+					scope:phlegmatic = yes
+					scope:sanguine = yes
+					scope:increase = yes
+				}
+			}
+			scope:actor = { POD_discipline_cost_effect = { COUNT = 1 } }
+			scope:actor = { add_stress = minor_stress_impact_gain }
+			scope:victim = { add_stress = medium_stress_impact_gain }
+		}
+		
+		if = {
+			limit = {
+				scope:choleric = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_choleric.tt }
+				scope:victim = { POD_resonance_change_to_choleric_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:melancholic = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_melancholic.tt }
+				scope:victim = { POD_resonance_change_to_melancholic_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:phlegmatic = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_phlegmatic.tt }
+				scope:victim = { POD_resonance_change_to_phlegmatic_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:sanguine = yes
+			}
+			random = {
+				chance = 60
+				scope:victim = { custom_tooltip = POD_drink_herd_change_to_sanguine.tt }
+				scope:victim = { POD_resonance_change_to_sanguine_effect = yes }
+				modifier = {
+					add = 35
+					scope:actor = {
+						stewardship >= 30
+					}
+				}
+				modifier = {
+					add = 15
+					AND = {
+						scope:actor = {
+							stewardship >= 15
+						}
+						scope:actor = {
+							stewardship < 30
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:increase = yes
+			}
+			random_list = {
+				50 = {
+					scope:victim = { POD_resonance_increase_intensity_effect = yes }
+					modifier = {
+						add = 55
+						scope:actor = {
+							stewardship >= 30
+						}
+					}
+					modifier = {
+						add = 40
+						AND = {
+							scope:actor = {
+								stewardship >= 15
+							}
+							scope:actor = {
+								stewardship < 30
+							}
+						}
+					}
+				}
+				50 = {
+					scope:victim = { POD_resonance_decrease_effect = yes }
+					modifier = {
+						add = -20
+						scope:actor = {
+							stewardship >= 15
+						}
+					}
+					
+					modifier = {
+						add = 20
+						scope:actor = {
+							stewardship <= 5
+						}
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:release = yes
+			}
+			
+			scope:actor = { POD_remove_herd_effect = { TARGET = scope:victim } }
+		}
+	}
+	auto_accept = yes
+}
+
+POD_herdify_mortal_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority = 88
+	scheme = herdify_mortal
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = { is_courtier_of = scope:actor }
+		scope:actor = {
+			is_vampire_trigger = yes
+			is_adult = yes
+			POD_is_hungerless_trigger = no
+		}
+		scope:recipient = {
+			POD_can_be_herd_trigger = yes
+			NOT = { has_relation_herd_owner = scope:actor }
+			is_imprisoned = no
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_adult = yes
+		}
+		custom_description = {
+			object = scope:recipient
+			text = "blood_is_holy"
+			scope:recipient = {
+				NOR = {
+					POD_has_true_faith_trigger = yes
+					has_trait = orison_sanguine
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = herdify_mortal
+				target_character = scope:recipient
+			}
+		}
+		custom_description = {
+			text = POD_herdify_interaction_limit
+			scope:actor = {
+				num_of_relation_herd_member < max_herd_cap
+			}
+		}
+		
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					is_ventrue_trigger = yes
+					is_ai = no
+				}
+			}
+			custom_tooltip = {
+				text = ventrue_bane_warning
+				
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = scope:actor
+					RECIPIENT = scope:recipient
+				}
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = POD_herdify_mortal_interaction_desc
+
+	on_accept = {
+	
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = herdify_mortal
+					target_character = scope:recipient
+				}
+			}
+		}
+		
+		scope:actor = {
+			if = {
+				limit = {
+					OR = {
+						has_relation_best_friend = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_lover = scope:recipient
+					}
+				}
+				stress_impact = {
+					compassionate = medium_stress_impact_gain
+				}
+			}
+			
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_illegal } }
+				add_piety = major_piety_loss
+			}
+			
+			else_if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_shunned } }
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_herdify_vampire_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority = 88
+	scheme = herdify_vampire
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			POD_is_vampire_trigger = yes
+			is_adult = yes
+			POD_is_hungerless_trigger = no
+		}
+		scope:recipient = {
+			POD_is_vampire_trigger = yes
+			NOT = { has_relation_herd_owner = scope:actor }
+			is_imprisoned = no
+		}
+		scope:recipient = { is_courtier_of = scope:actor }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_adult = yes
+		}
+		custom_description = {
+			object = scope:recipient
+			text = "blood_is_holy"
+			scope:recipient = {
+				NOR = {
+					POD_has_true_faith_trigger = yes
+					has_trait = orison_sanguine
+				}
+			}
+		}
+		POD_strong_mental_defenses_trigger = yes
+		scope:actor = {
+			can_start_scheme = {
+				type = herdify_vampire
+				target_character = scope:recipient
+			}
+		}
+		custom_description = {
+			text = POD_herdify_interaction_limit
+			scope:actor = {
+				num_of_relation_herd_member < max_herd_cap
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = POD_herdify_vampire_interaction_desc
+
+	on_accept = {
+	
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = herdify_vampire
+					target_character = scope:recipient
+				}
+			}
+		}
+		
+		scope:actor = {
+			if = {
+				limit = {
+					OR = {
+						has_relation_best_friend = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_lover = scope:recipient
+					}
+				}
+				stress_impact = {
+					compassionate = medium_stress_impact_gain
+				}
+			}
+			
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_illegal } }
+				add_piety = major_piety_loss
+			}
+			
+			else_if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_shunned } }
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_herdify_prisoner_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	interface_priority = 88
+	icon = POD_herdify_mortal_interaction
+	desc = POD_herdify_prisoner_interaction_desc
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			POD_is_vampire_trigger = yes # ghouls/revenants don't have herds anymore
+			is_adult = yes
+			POD_is_hungerless_trigger = no
+		}
+		scope:recipient = {
+			is_imprisoned_by = scope:actor
+			OR = {
+				POD_can_be_herd_trigger = yes
+				POD_is_vampire_trigger = yes
+			}
+			NOT = { has_relation_herd_owner = scope:actor }
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_adult = yes
+		}
+		custom_description = {
+			object = scope:recipient
+			text = "blood_is_holy"
+			scope:recipient = {
+				NOR = {
+					POD_has_true_faith_trigger = yes
+					has_trait = orison_sanguine
+				}
+			}
+		}
+		custom_description = {
+			text = POD_herdify_interaction_limit
+			scope:actor = {
+				num_of_relation_herd_member < max_herd_cap
+			}
+		}
+		scope:recipient = { is_ruler = no }
+
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					is_ventrue_trigger = yes
+					is_ai = no
+				}
+			}
+			custom_tooltip = {
+				text = ventrue_bane_warning
+				
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = scope:actor
+					RECIPIENT = scope:recipient
+				}
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = { save_scope_as = owner }
+		scope:recipient = { save_scope_as = target }
+		scope:actor = {
+			custom_tooltip = POD_herdify_prisoner_interaction.tt
+			trigger_event = POD_herdify.1
+		}
+		scope:actor = {
+			if = {
+				limit = {
+					OR = {
+						has_relation_best_friend = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_lover = scope:recipient
+					}
+				}
+				stress_impact = {
+					compassionate = medium_stress_impact_gain
+				}
+			}
+			
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_illegal } }
+				add_piety = major_piety_loss
+			}
+			
+			else_if = {
+				limit = { faith = { has_doctrine_parameter = vampirism_shunned } }
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

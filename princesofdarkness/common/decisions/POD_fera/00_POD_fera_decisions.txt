@@ -1,0 +1,266 @@
+﻿
+fera_advance_rank_decision = {
+	decision_group_type = major
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_personal_religious.dds" }
+
+	desc = {
+		desc = fera_advance_rank_decision_desc
+
+		#Renown Types
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_glory = yes }
+			desc = fera_advance_rank_renown_glory
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_honor = yes }
+			desc = fera_advance_rank_renown_honor
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_wisdom = yes }
+			desc = fera_advance_rank_renown_wisdom
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_power = yes }
+			desc = fera_advance_rank_renown_power
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_cunning = yes }
+			desc = fera_advance_rank_renown_cunning
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_ferocity = yes }
+			desc = fera_advance_rank_renown_ferocity
+		}
+		triggered_desc = {
+			trigger = { POD_fera_uses_renown_infamy = yes }
+			desc = fera_advance_rank_renown_infamy
+		}
+		
+		##Add new here
+		
+		#Auspice and other bonuses
+		desc = fera_advance_rank_renown_bonuses
+	}
+	is_shown = {
+		has_trait = fera
+		POD_is_max_fera_rank = no
+	}
+	
+	is_valid = {
+		POD_has_trait_xp_for_fera_rankup = yes
+		
+		trigger_if = {
+			limit = { POD_fera_rank_value = 1 }
+			any_powerful_vassal = {
+				count = all
+
+				opinion = {
+					target = root
+					value >= 0
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { POD_fera_rank_value = 2 }
+			OR = {
+				prestige_level >= 2
+				piety_level >= 2
+			}
+			any_powerful_vassal = {
+				count = all
+
+				opinion = {
+					target = root
+					value >= 25
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { POD_fera_rank_value = 3 }
+			OR = {
+				prowess >= 40
+				diplomacy >= 15
+				martial >= 15
+				stewardship >= 15
+				intrigue >= 15
+				learning >= 15
+			}
+			OR = {
+				prestige_level >= 3
+				piety_level >= 3
+			}
+			any_powerful_vassal = {
+				count = all
+
+				opinion = {
+					target = root
+					value >= 50
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = { POD_fera_rank_value = 4 }
+			OR = {
+				prowess >= 70
+				diplomacy >= 25
+				martial >= 25
+				stewardship >= 25
+				intrigue >= 25
+				learning >= 25
+			}
+			OR = {
+				prestige_level >= 4
+				piety_level >= 4
+			}
+			any_powerful_vassal = {
+				count = all
+
+				opinion = {
+					target = root
+					value >= 75
+				}
+			}
+		}
+		trigger_else = {
+			prestige_level >= 5
+			piety_level >= 5
+			legitimacy_level >= 5
+			OR = {
+				highest_held_title_tier >= tier_empire
+				custom_tooltip = {
+					text = fera_advance_rank_decision_requirement_tributaries
+					any_tributary = {
+						count = 2
+						highest_held_title_tier >= tier_kingdom
+					}
+				}
+			}
+			any_powerful_vassal = {
+				count = all
+
+				opinion = {
+					target = root
+					value >= 75
+				}
+			}
+		}
+	}
+	
+	effect = {
+		POD_fera_advance_to_next_rank = yes
+	}
+	
+	#AI skips this process
+	ai_check_interval = 0
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+
+
+fera_recruit_beastborn_decision = {
+	decision_group_type = pod_splat
+	picture = {
+		trigger = { POD_is_werewolf_trigger = yes }
+		reference = "gfx/interface/illustrations/men_at_arms_big/wolves.dds"
+	}
+	picture = {
+		trigger = {
+			OR = {
+				POD_is_bastet_trigger = yes
+				uses_cairo_bast_main_reward = yes
+			}
+		}
+		reference = "gfx/interface/illustrations/men_at_arms_big/cats.dds"
+	}
+	picture = {
+		trigger = { POD_is_mokole_trigger = yes }
+		reference = "gfx/interface/illustrations/men_at_arms_big/crocodiles.dds"
+	}
+
+	desc = {
+		#Werewolves
+		triggered_desc = {
+			trigger = { POD_is_werewolf_trigger = yes }
+			desc = fera_recruit_beastborn_decision_desc_werewolf
+		}
+
+		#Bubasti
+		triggered_desc = {
+			trigger = {
+				OR = {
+					AND = {
+						POD_is_bastet_trigger = yes
+						has_faith = faith:bubasti
+					}
+					uses_cairo_bast_main_reward = yes
+				}
+			}
+			desc = fera_recruit_beastborn_decision_desc_bubasti
+		}
+		#Bastet
+		triggered_desc = {
+			trigger = { POD_is_bastet_trigger = yes NOT = { has_faith = faith:bubasti } }
+			desc = fera_recruit_beastborn_decision_desc_bastet
+		}
+
+		#Mokole
+		triggered_desc = {
+			trigger = { POD_is_mokole_trigger = yes }
+			desc = fera_recruit_beastborn_decision_desc_mokole
+		}
+	}
+
+	is_shown = {
+		OR = {
+			has_trait = fera
+			uses_cairo_bast_main_reward = yes
+		}
+		is_playable_character = yes
+	}
+	
+	is_valid = {
+		is_imprisoned = no
+		has_contagious_deadly_disease_trigger = no
+		trigger_if = {
+			limit = { has_faith = faith:bubasti }
+			custom_tooltip = {
+				text = fera_recruit_beastborn_decision_bubasti_requirement
+				is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:bubasti_objective_decision }
+			}
+		}
+	}
+	cost = { 
+		prestige = {
+			if = { 
+				limit = { is_ai = no }
+				value = 250
+			}
+			else = { value = 0 }
+		}
+	}
+	cooldown = { years = 20 }
+	
+	effect = {
+		custom_tooltip = fera_recruit_beastborn_decision_effect
+		trigger_event = POD_fera_beastborn.10
+	}
+	
+
+	ai_check_interval = 36
+	ai_potential = {
+		highest_held_title_tier >= tier_duchy
+		OR = {
+			number_of_knights < max_number_of_knights
+			AND = {
+				has_trait = beast_born
+				any_child = {
+					count <= 3
+					is_alive = yes
+				}
+			}
+			any_knight = { prowess < 8 }
+		}
+	}
+	ai_will_do = { base = 100 }
+}

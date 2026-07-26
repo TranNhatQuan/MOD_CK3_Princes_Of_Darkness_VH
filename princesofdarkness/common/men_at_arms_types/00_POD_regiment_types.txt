@@ -1,0 +1,6845 @@
+﻿# standard costs
+@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+@cultural_maa_extra_ai_score = 25 # Equivalent to having 2.5 extra regiments beyond what the code scoring would indicate (see NEGATIVE_SCORE_PER_EXISTING_REGIMENT)
+
+@high_maint_mult = 3
+
+@POD_ghoul_maa_recruitment_cost = 95
+@POD_ghoul_maa_low_maint_cost = 0.45
+@POD_ghoul_maa_high_maint_cost = @[POD_ghoul_maa_low_maint_cost * high_maint_mult]
+
+@POD_gargoyle_maa_recruitment_cost = 85
+@POD_gargoyle_maa_low_maint_cost = 0.35
+@POD_gargoyle_maa_high_maint_cost = @[POD_gargoyle_maa_low_maint_cost * high_maint_mult]
+
+@skirmisher_recruitment_cost = 45
+@skirmisher_low_maint_cost = 0.15
+@skirmisher_high_maint_cost = @[skirmisher_low_maint_cost * high_maint_mult]
+
+@bowmen_recruitment_cost = 55
+@bowmen_low_maint_cost = 0.2
+@bowmen_high_maint_cost = @[bowmen_low_maint_cost * high_maint_mult]
+
+@pikemen_recruitment_cost = 75
+@pikemen_low_maint_cost = 0.3
+@pikemen_high_maint_cost = @[pikemen_low_maint_cost * high_maint_mult]
+
+@heavy_infantry_recruitment_cost = 90
+@heavy_infantry_low_maint_cost = 0.4
+@heavy_infantry_high_maint_cost = @[heavy_infantry_low_maint_cost * high_maint_mult]
+
+@light_cavalry_recruitment_cost = 85
+@light_cavalry_low_maint_cost = 0.35
+@light_cavalry_high_maint_cost = @[light_cavalry_low_maint_cost * high_maint_mult]
+
+@heavy_cavalry_recruitment_cost = 200
+@heavy_cavalry_low_maint_cost = 0.7
+@heavy_cavalry_high_maint_cost = @[heavy_cavalry_low_maint_cost * high_maint_mult]
+
+@siege_weapons_recruitment_cost = 60
+@siege_weapons_low_maint_cost = 0.1
+@siege_weapons_high_maint_cost = @[siege_weapons_low_maint_cost * high_maint_mult]
+
+@horse_archers_recruitment_cost = @[skirmisher_recruitment_cost * 3]
+@horse_archers_low_maint_cost = @[skirmisher_low_maint_cost * 3]
+@horse_archers_high_maint_cost = @[skirmisher_high_maint_cost * 3]
+
+@archers_recruitment_cost = 55
+@archers_low_maint_cost = 0.2
+@archers_high_maint_cost = @[archers_low_maint_cost * high_maint_mult]
+
+@crossbowmen_recruitment_cost = @[archers_recruitment_cost * 1.6]
+@crossbowmen_low_maint_cost = @[archers_low_maint_cost * 1.5]
+@crossbowmen_high_maint_cost = @[archers_high_maint_cost * 1.5]
+
+@provisions_cost_infantry_cheap = 5
+@provisions_cost_infantry_moderate = 9
+@provisions_cost_infantry_expensive = 15
+@provisions_cost_infantry_bankrupting = 17
+
+@provisions_cost_cavalry_cheap = 9
+@provisions_cost_cavalry_moderate = 17
+@provisions_cost_cavalry_expensive = 23
+@provisions_cost_cavalry_bankrupting = 32
+
+@provisions_cost_special_cheap = 8
+@provisions_cost_special_moderate = 14
+@provisions_cost_special_expensive = 20
+@provisions_cost_special_bankrupting = 26
+
+# Ghoul #
+
+#Now feels a niche as a small size elite good against "mortals"
+ghouls = {
+	type = POD_ghoul_maa
+
+	can_recruit = { 
+		OR = {
+			POD_is_any_kind_of_ghoul_trigger = yes
+			#AND = {
+			dynasty ?= {
+				has_dynasty_perk = ashen_nobles_legacy_3
+			}
+			#NOT = { faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_selfcontrol } }		
+			#NOT = { faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_instinct } }		
+			#}
+		}
+	}
+
+	damage = 55
+	toughness = 50
+	pursuit = 10
+	screen = 25
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		pikemen = 0.5
+		skirmishers = 0.5
+	}
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = 50 
+	icon = ghouls
+}
+
+szlachta = {
+	type = POD_ghoul_maa
+
+	can_recruit = {
+		has_perk = rend_the_osseous_frame_perk
+		POD_is_willing_to_commit_heinous_acts_trigger = yes
+	}
+	
+	damage = 38
+	toughness = 35
+	pursuit = 0
+	screen = 24
+	
+	buy_cost = { gold = @[POD_ghoul_maa_recruitment_cost * 1.1 ] }
+	low_maintenance_cost = { gold = @[POD_ghoul_maa_low_maint_cost * 1.1 ] }
+	high_maintenance_cost = { gold = @[POD_ghoul_maa_high_maint_cost * 1.1 ] }
+	provision_cost = @provisions_cost_infantry_bankrupting
+	
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		POD_ghoul_maa = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 100 
+	icon = szlachta
+}
+
+vozhd = {
+	type = POD_ghoul_maa
+	
+	can_recruit = {
+		OR = {
+			has_perk = graft_life_to_life_perk
+			any_active_accolade = {
+				accolade_attribute_level = {
+				type = tzimisce_fleshcrafter_attribute
+				level >= 3
+				}
+			}
+			any_directly_owned_province = { has_building_with_flag = building_unlocks_vozhd }
+		}
+		POD_is_willing_to_commit_heinous_acts_trigger = yes
+	}	
+	
+	damage = 220
+	toughness = 35
+	pursuit = 0
+	screen = 0
+	siege_tier = 3
+	siege_value = 0.4
+	
+	terrain_bonus = {
+		forest = { damage = -50 }
+		hills = { damage = -100 }
+		mountains = { damage = -150 }
+	}
+	
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		POD_ghoul_maa = 1
+	}	
+
+	buy_cost = { gold = @[POD_ghoul_maa_recruitment_cost * 4] }
+	low_maintenance_cost = { gold = @[POD_ghoul_maa_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[POD_ghoul_maa_high_maint_cost * 2.4] }
+	provision_cost = @provisions_cost_cavalry_bankrupting
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = 100 
+	icon = vozhd
+}
+
+ghouled_cavalry = {
+	type = POD_ghoul_maa
+	
+	damage = 80
+	toughness = 50
+	pursuit = 50
+	screen = 0
+	
+	can_recruit = {
+	OR = {	
+		POD_is_any_kind_of_ghoul_trigger = yes
+		dynasty ?= { has_dynasty_perk = ashen_knights_legacy_3 }
+		any_active_accolade = {
+			accolade_attribute_level = {			
+			type = ghoul_taskmaster_attribute
+			level >= 3
+			}
+		}		
+	}
+	}
+	
+	terrain_bonus = {
+		plains = { damage = 40 }
+		drylands = { damage = 40 }
+		hills = { damage = -30 }
+		mountains = { damage = -50 }
+		desert_mountains = { damage = -50 }
+		wetlands = { damage = -55 toughness = -45 pursuit = -50 }
+	}
+
+	counters = {
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		archers = 1
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = 100 
+	icon = heavy_cavalry
+	fallback_in_hired_troops_if_unlocked = yes
+}
+
+serpentis_monsters = { # Typhonic Beasts
+	type = POD_ghoul_maa
+	
+	can_recruit = { 
+		OR = {
+			has_trait = serpentisadvanced
+			has_perk = mother_of_monsters_perk
+		}
+	}
+	
+	damage = 25
+	toughness = 20
+	pursuit = 5
+	screen = 10
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+	}
+	
+	buy_cost = { gold = @POD_ghoul_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @POD_ghoul_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @POD_ghoul_maa_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = POD_ai_weight_swarm }	
+	icon = serpentis_monsters
+}
+
+# Gargoyle #
+
+gargoyle_warriors = {
+	type = POD_gargoyle_maa
+
+	can_recruit = {
+		OR = {
+			dynasty ?= { has_dynasty_perk = gargoyle_legacy_1 }
+			AND = {
+				dynasty ?= {
+					has_dynasty_perk = tremere_legacy_1
+				}
+				#has_trait = bloodsorceryadvanced
+				is_tremere_trigger = yes				
+			}
+			is_banpaia_trigger = yes
+			any_active_accolade = { 
+				accolade_attribute_level = {
+				type = gargoyles_master_attribute
+				level >= 3
+				}
+			}
+			any_directly_owned_province = { has_building_with_flag = building_allows_high_tier_gargoyle_maa }
+		}
+	}
+	
+	pursuit = 40
+	screen = 20
+	
+	damage = 13
+	toughness = 30
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		POD_fera_maa = 1
+		POD_ghoul_maa = 2
+	}
+
+	buy_cost = { gold = @POD_gargoyle_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @POD_gargoyle_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @POD_gargoyle_maa_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = 100 
+	icon = gargoyles_3
+}
+
+gargoyle_sentinels = {
+	type = POD_gargoyle_maa
+
+	can_recruit = {
+		OR = {
+			dynasty ?= {
+				has_dynasty_perk = gargoyle_legacy_1
+			}
+			AND = {
+				dynasty ?= {
+					has_dynasty_perk = tremere_legacy_1
+				}
+				#has_trait = bloodsorceryadvanced
+				is_tremere_trigger = yes				
+			}
+			is_banpaia_trigger = yes
+			any_directly_owned_province = { has_building_with_flag = building_allows_medium_tier_gargoyle_maa }
+		}
+	}
+	
+	pursuit = 5
+	screen = 10
+	
+	damage = 15
+	toughness = 35
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+		POD_ghoul_maa = 2
+	}
+	
+	buy_cost = { gold = @POD_gargoyle_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @[POD_gargoyle_maa_low_maint_cost * 0.9] }
+	high_maintenance_cost = { gold = @[POD_gargoyle_maa_high_maint_cost * 0.9] }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = 100 
+	icon = gargoyles
+}
+
+gargoyle_scouts = {
+	type = POD_gargoyle_maa
+
+	can_recruit = {
+		OR = {
+			dynasty ?= {
+				has_dynasty_perk = gargoyle_legacy_1
+			}
+			AND = {
+				dynasty ?= {
+					has_dynasty_perk = tremere_legacy_1
+				}
+				#has_trait = bloodsorceryadvanced
+				is_tremere_trigger = yes				
+			}
+			is_banpaia_trigger = yes
+			any_directly_owned_province = { has_building_with_flag = building_allows_medium_tier_gargoyle_maa }
+		}
+	}
+	
+	pursuit = 45
+	screen = 25
+	
+	damage = 10
+	toughness = 20
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+		skirmishers = 0.5
+		POD_ghoul_maa = 1
+	}
+
+	buy_cost = { gold = @[POD_gargoyle_maa_recruitment_cost * 0.65] }
+	low_maintenance_cost = { gold = @[POD_gargoyle_maa_low_maint_cost * 0.65] }
+	high_maintenance_cost = { gold = @[POD_gargoyle_maa_high_maint_cost * 0.65] }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = 100 
+	icon = gargoyles_2
+}
+
+gargoyle_razorbats = {
+	type = POD_gargoyle_maa
+	
+	can_recruit = {
+		OR = {
+			dynasty ?= {
+				has_dynasty_perk = gargoyle_legacy_1
+			}
+			AND = {
+				dynasty ?= {
+					has_dynasty_perk = tremere_legacy_1
+				}
+				#has_trait = bloodsorceryadvanced
+				is_tremere_trigger = yes				
+			}
+			is_banpaia_trigger = yes
+			any_directly_owned_province = { has_building_with_flag = building_allows_low_tier_gargoyle_maa }
+		}
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}		
+	}
+	
+	damage = 6
+	toughness = 6
+	pursuit = 5
+	screen = 5
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	buy_cost = { gold = @[POD_gargoyle_maa_recruitment_cost * 0.5] }
+	low_maintenance_cost = { gold = @[POD_gargoyle_maa_low_maint_cost * 0.5] }
+	high_maintenance_cost = { gold = @[POD_gargoyle_maa_high_maint_cost * 0.5] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+	
+	ai_quality = { value = POD_ai_weight_swarm }
+	
+	stack = 250
+	icon = razorbats
+}
+
+# Vampire #
+
+#Repurposed as stronger (but less size) skirmishers for vamps that cost prestige
+massvampires = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		is_vampire_trigger = yes
+		NOT = { faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_selfcontrol } }		
+		NOT = { faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_instinct } }		
+	}
+	
+	damage = 25
+	toughness = 35
+	pursuit = 30
+	screen = 0
+	
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+	}
+
+	buy_cost = { prestige = skirmisher_recruitment_cost }
+	low_maintenance_cost = { prestige = skirmisher_low_maint_cost }
+	high_maintenance_cost = { prestige = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+	max_sub_regiments = 3		
+	stack = 50
+	ai_quality = { 
+		value = 10
+		
+		if = {
+			limit = {
+				OR = { 
+					has_trait = callous
+					has_trait = sadistic
+					is_tzimisce_trigger = yes
+				}
+			}
+			add = 25
+		}
+	} 
+	icon = massvampires
+}       
+
+#To give an use to this now otherwise useless doctrine
+massghouls_maa = {
+	type = POD_ghoul_maa
+
+	can_recruit = { 
+		is_vampire_trigger = yes
+		faith = { has_doctrine = doctrine_vampireghouling_mass } 
+	}
+	
+	damage = 7
+	toughness = 16
+	pursuit = 5
+	screen = 16
+	
+	counters = {
+	}
+
+	buy_cost = { prestige = skirmisher_recruitment_cost }
+	low_maintenance_cost = { prestige = skirmisher_low_maint_cost }
+	high_maintenance_cost = { prestige = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = 25}
+	icon = skirmishers
+}    
+
+thinbloods = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		dynasty ?= {
+			has_dynasty_perk = caitiff_legacy_4
+		}	
+	}
+
+	damage = 7
+	toughness = 9
+	pursuit = 10
+	screen = 16
+
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 175
+	ai_quality = { value = 50}
+	icon = massvampires
+}                                    
+
+# Dead (Should probably have their own maa catagory)
+
+hidden = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = oblivionadvanced
+			has_trait = necromancyadvanced
+			
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = numina_via_necromantiae_5_perk
+			has_perk = numina_necromancy_3_perk
+		}
+	}
+	
+	damage = 40
+	toughness = 40
+	pursuit = 25
+	screen = 20
+	
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+		skirmishers = 0.5
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2.5] }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = POD_ai_weight_undeads }
+	icon = zombu
+}
+
+walker = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = oblivionadvanced
+			has_trait = necromancyadvanced
+			
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = sever_soul_perk
+			has_perk = numina_via_necromantiae_5_perk
+			has_perk = numina_necromancy_3_perk
+			
+			any_active_accolade = {
+				accolade_attribute_level = {
+				type = cappadocian_necromancer_attribute
+				level >= 3
+				}
+			}			
+		}
+	}
+	
+	damage = 10
+	toughness = 25
+	pursuit = 15
+	screen = 10
+	
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5] }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 125
+	ai_quality = { value = POD_ai_weight_undeads }
+	icon = zombu
+}
+
+shambler = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = oblivionadvanced
+			has_trait = necromancyadvanced
+			
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = sever_soul_perk
+			has_perk = numina_via_necromantiae_5_perk
+			has_perk = numina_necromancy_3_perk
+		}
+	}
+	
+	damage = 10
+	toughness = 15
+	pursuit = 10
+	screen = 0
+	
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 175
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = zombu
+}
+
+skeletons = { # Bone soldiers
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = oblivionadvanced
+			has_trait = necromancyadvanced
+			
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = sever_soul_perk
+			has_perk = numina_via_necromantiae_5_perk
+			has_perk = numina_necromancy_3_perk
+		}
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}		
+	}
+	
+	damage = 5
+	toughness = 5
+	pursuit = 0
+	screen = 10
+	
+	counters = {
+		light_cavalry = 0.5
+		skirmishers = 0.5
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost + 0] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost + 0] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost + 0] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 300
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = skeletons
+}
+
+dragons_teeth = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			is_sorcerer_trigger = yes
+			has_trait = mage
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = sever_soul_perk
+		}
+	}
+	
+	damage = 30
+	toughness = 15
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.2] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.2] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.2] }
+	provision_cost = @provisions_cost_infantry_cheap
+		
+	allowed_in_hired_troops = no
+	
+	stack = 75
+	ai_quality = { value = POD_ai_weight_undeads }
+	icon = skeletons
+}
+
+# Magical Constructs
+
+golems = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = mage
+			has_perk = animantis_perk
+			has_perk = animate_the_unmoving_perk
+			has_perk = lore_animate_perk
+			has_perk = shantars_loom_perk
+			any_equipped_character_artifact = { has_variable = cauldron_of_gruffydd }
+			dynasty ?= {
+				has_dynasty_modifier = ashkenazic_modifier
+			}
+			domicile ?= { has_domicile_parameter = golems_unlock_parameter }			
+		}
+	}
+	
+	damage = 20
+	toughness = 40
+	pursuit = 0
+	screen = 50
+
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+		skirmishers = 1
+	}
+
+	#era_bonus = {
+	#	culture_era_late_medieval = {
+	#		damage = 5
+	#	}
+	#	culture_era_dark_fantastic = {
+	#		damage = 10
+	#		toughness = 5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = 15
+	#		toughness = 10
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = 20
+	#		toughness = 10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = pod_ai_weight_constructs }
+	icon = golems
+}
+
+guardians = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = mage
+			has_perk = lore_animate_perk
+			any_equipped_character_artifact = { has_variable = cauldron_of_gruffydd }
+			dynasty ?= {
+				has_dynasty_modifier = ashkenazic_modifier
+			}
+		}
+	}
+	
+	damage = 10
+	toughness = 25
+	pursuit = 0
+	screen = 30
+
+	counters = {
+		light_cavalry = 0.5
+		pikemen = 0.5
+		skirmishers = 1
+	}
+
+	#era_bonus = {
+	#	culture_era_late_medieval = {
+	#		damage = 5
+	#	}
+	#	culture_era_dark_fantastic = {
+	#		damage = 10
+	#		toughness = 5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = 15
+	#		toughness = 10
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = 20
+	#		toughness = 10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = pod_ai_weight_constructs }
+	icon = golems
+}
+
+homunculus = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		OR = {
+			has_trait = mage
+			has_perk = lore_animate_perk
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_homunculus }
+			any_equipped_character_artifact = { has_variable = cauldron_of_gruffydd }
+			has_perk = numina_via_geniorum_2_perk
+		}
+	}
+	
+	damage = 5
+	toughness = 15
+	pursuit = 10
+	screen = 5
+
+	counters = {
+		light_cavalry = 1
+		skirmishers = 2
+	}
+
+	#era_bonus = {
+	#	culture_era_late_medieval = {
+	#		damage = 5
+	#	}
+	#	culture_era_dark_fantastic = {
+	#		damage = 10
+	#		toughness = 5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = 15
+	#		toughness = 10
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = 20
+	#		toughness = 10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 125
+	ai_quality = { value = pod_ai_weight_constructs }
+	icon = golems
+}
+
+# Humanoid Bygone
+
+ghul = {
+	type = POD_bygones_maa
+	
+	can_recruit = {
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_ghul }
+			has_perk = numina_via_geniorum_4_perk
+		}
+	}
+	
+	damage = 30
+	toughness = 40
+	pursuit = 0
+	screen = 30
+
+	counters = {
+		heavy_infantry = 0.5
+		skirmishers = 1
+	}
+
+	#era_bonus = {
+	#	culture_era_dark_fantastic = {
+	#		damage = -5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = -10
+	#		toughness = -5
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = -20
+	#		toughness = -10
+	#	}
+	#}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	max_sub_regiments = 5
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	icon = ghouls
+}
+
+harpy = {
+	type = POD_bygones_maa
+	
+	can_recruit = {
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_harpy }
+			has_perk = numina_via_geniorum_2_perk
+		}
+	}
+	
+	damage = 5
+	toughness = 5
+	pursuit = 40
+	screen = 5
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	#era_bonus = {
+	#	culture_era_dark_fantastic = {
+	#		damage = -5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = -10
+	#		toughness = -5
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = -20
+	#		toughness = -10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	max_sub_regiments = 5
+		
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	icon = bowmen
+}
+
+seabishop = {
+	type = POD_bygones_maa
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_seabishop }
+	}
+	
+	damage = 15
+	toughness = 10
+	pursuit = 0
+	screen = 10
+
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+		pikemen = 0.5
+	}
+	
+	terrain_bonus = {
+		desert = { damage = -30 toughness = -40 pursuit = -20 }
+		desert_mountains = { damage = -30 toughness = -40 pursuit = -20 }
+		drylands = { damage = -30 toughness = -40 pursuit = -20 }
+		oasis = { damage = 10 toughness = 10 pursuit = 10 }
+		wetlands = { damage = 10 toughness = 10 pursuit = 10 }
+		floodplains = { damage = 10 toughness = 10 pursuit = 10 }
+	}
+
+	#era_bonus = {
+	#	culture_era_dark_fantastic = {
+	#		damage = -5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = -10
+	#		toughness = -5
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = -20
+	#		toughness = -10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	max_sub_regiments = 5
+		
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	icon = seabishop
+}
+
+vodayany = {
+	type = POD_bygones_maa
+	
+	can_recruit = {
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_vodayany }
+			has_perk = numina_via_geniorum_2_perk
+		}
+	}
+	
+	damage = 10
+	toughness = 15
+	pursuit = 0
+	screen = 10
+
+	counters = {
+		heavy_infantry = 1
+		skirmishers = 1
+	}
+	
+	terrain_bonus = {
+		desert = { damage = -30 toughness = -40 pursuit = -10 }
+		desert_mountains = { damage = -30 toughness = -40 pursuit = -10 }
+		drylands = { damage = -30 toughness = -40 pursuit = -10 }
+		oasis = { damage = 10 toughness = 10 pursuit = 10 }
+		wetlands = { damage = 10 toughness = 10 pursuit = 10 }
+		floodplains = { damage = 10 toughness = 10 pursuit = 10 }
+	}
+
+	#era_bonus = {
+	#	culture_era_dark_fantastic = {
+	#		damage = -5
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		damage = -10
+	#		toughness = -5
+	#	}
+	#	culture_era_final_nights = {
+	#		damage = -20
+	#		toughness = -10
+	#	}
+	#}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	max_sub_regiments = 5
+		
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	icon = shades
+}
+
+sirens = {
+	type = POD_bygones_maa
+	
+	can_recruit = {
+		OR = {
+			OR = {
+				is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_seabishop }
+				is_target_in_variable_list = { name = umbra_maa_list target = flag:bygone_sea_serpent }
+			}
+			has_perk = numina_via_geniorum_2_perk
+		}
+	}
+	
+	damage = 20
+	toughness = 5
+	pursuit = 40
+	screen = 5
+
+	counters = {
+		heavy_infantry = 0.5
+		pikemen = 0.5
+		skirmishers = 1
+	}
+	
+	terrain_bonus = {
+		desert = { damage = -20 toughness = -30 pursuit = -40 }
+		desert_mountains = { damage = -20 toughness = -30 pursuit = -40 }
+		drylands = { damage = -20 toughness = -30 pursuit = -40 }
+		oasis = { damage = 10 toughness = 10 pursuit = 10 }
+		wetlands = { damage = 10 toughness = 10 pursuit = 10 }
+		floodplains = { damage = 10 toughness = 10 pursuit = 10 }
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5] }
+	provision_cost = @provisions_cost_infantry_cheap
+	max_sub_regiments = 5
+		
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	icon = sirens
+}
+
+
+
+# Wraith #
+
+shades = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			has_perk = night_shades_perk
+			has_perk = renvoyer_baka_perk
+			dynasty ?= { has_dynasty_perk = lasombra_legacy_2 }
+
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+		}
+	}	
+	
+	damage = 10
+	toughness = 5
+	pursuit = 30
+	screen = 10
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		POD_wraith_maa = 1
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+wraiths = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			AND = { 
+				has_trait = wraith
+				NOT = { has_trait = spectre }
+			}
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = bind_the_dead_perk
+			any_equipped_character_artifact = { has_variable = book_ghosts_variable }			
+		}
+	}	
+	
+	damage = 5
+	toughness = 20
+	pursuit = 10
+	screen = 25
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		archers = 1
+		skirmishers = 1
+	}
+	
+	buy_cost = { piety = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+spectres = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+			AND = {
+				has_character_modifier = catharsis_modifier
+				has_perk = shadow_call_perk
+			}
+			has_perk = reler_baka_perk
+			has_perk = army_of_souls_perk
+			has_perk = arcana_command_the_dead_perk
+			has_perk = lore_command_the_dead_perk
+			has_perk = call_the_khaibit_perk
+			house ?= { has_house_modifier = house_kuntilanak_improved_modifier }
+			any_equipped_character_artifact = { has_variable = ghost_shackles_variable }			
+		}	
+	}	
+	
+	damage = 10
+	toughness = 15
+	pursuit = 30
+	screen = 0
+	
+	counters = {
+		POD_wraith_maa = 2
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = spectres
+}
+
+the_reavers_of_ur = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+		has_perk = call_forth_the_reavers_of_ur_perk
+		house ?= { has_house_modifier = house_kuntilanak_improved_modifier }
+		}
+	}	
+	
+	damage = 25
+	toughness = 5
+	pursuit = 80
+	screen = 5
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 2
+		light_cavalry = 2
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = tindlehounds
+}
+
+unwholesome_nightmare_inducing_ghost = {
+	type = POD_wraith_maa
+	
+	damage = 2
+	toughness = 10
+	pursuit = 2
+	screen = 15
+	
+	can_recruit = {
+		has_trait = kueijin
+		religion = religion:deviltigers_religion
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		archers = 1
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 0.75 ] }	provision_cost = @provisions_cost_cavalry_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 10}
+	icon = shades
+}
+
+unrighteous_cult_leading_ghost = {
+	type = POD_wraith_maa
+	
+	damage = 40
+	toughness = 30
+	pursuit = 40
+	screen = 40
+	
+	can_recruit = {
+		has_trait = kueijin
+		religion = religion:deviltigers_religion
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+soldiers_of_the_emperor = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		OR = {
+		religion = religion:yellow_springs_religion
+		house ?= { has_house_modifier = house_kuntilanak_improved_modifier }
+		}
+	}	
+	
+	damage = 25
+	toughness = 10
+	pursuit = 10
+	screen = 30
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		archer_cavalry = 2
+		archers = 2
+	}
+
+	buy_cost = { piety = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+bureaucrats_of_jade_palace = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		religion = religion:yellow_springs_religion
+	}	
+	
+	damage = 15
+	toughness = 20
+	pursuit = 10
+	screen = 20
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 2
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+demon_jailer = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		religion = religion:yellow_springs_religion
+	}	
+	
+	damage = 30
+	toughness = 30
+	pursuit = 10
+	screen = 15
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_spirit_maa = 2
+	}
+
+	buy_cost = { piety = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+shadow_beasts = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		always = no
+	}	
+	
+	damage = 10
+	toughness = 10
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = { }
+
+	counters = { }
+
+	buy_cost = { gold = 0 }
+	low_maintenance_cost = { gold = 0 }
+	high_maintenance_cost = { gold = 0 }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = 50 }
+	icon = shades
+}
+
+hungry_shade = {
+	type = POD_wraith_maa
+	
+	can_recruit = {
+		always = no
+	}	
+	
+	damage = 60
+	toughness = 40
+	pursuit = 20
+	screen = 20
+	
+	terrain_bonus = { }
+
+	counters = { }
+
+	buy_cost = { gold = 0 }
+	low_maintenance_cost = { gold = 0 }
+	high_maintenance_cost = { gold = 0 }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 50 }
+	icon = shades
+}
+# Plasmic #
+
+phantasies = {
+	type = POD_plasmic_maa
+	
+	can_recruit = { 
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:phantasies }
+			has_perk = ectoplasmic_generation_5_perk
+		}
+	}
+	
+	damage = 4
+	toughness = 5
+	pursuit = 5
+	screen = 5
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 250
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = tindlehounds
+}
+
+deliriums = {
+	type = POD_plasmic_maa
+	
+	can_recruit = {
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:deliriums }
+			has_perk = ectoplasmic_generation_5_perk
+		}
+	}
+	
+	damage = 10
+	toughness = 25
+	pursuit = 0
+	screen = 15
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 1
+		light_cavalry = 1
+		archer_cavalry = 1
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = tindlehounds
+}
+
+legendaries = {
+	type = POD_plasmic_maa
+	
+	damage = 275
+	toughness = 80
+	pursuit = 50
+	screen = 0
+	
+	can_recruit = {
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:legendaries }
+			has_perk = ectoplasmic_generation_5_perk
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		pikemen = 2
+	}
+
+	buy_cost = { piety = war_elephant_recruitment_cost }
+	low_maintenance_cost = { gold = war_elephant_low_maint_cost }
+	high_maintenance_cost = { gold = war_elephant_high_maint_cost }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 35
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+angelics = {
+	type = POD_plasmic_maa
+	
+	damage = 100
+	toughness = 350
+	pursuit = 0
+	screen = 20
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:angelics }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		POD_demonic_maa = 3
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 4] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 5] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 25
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+demonics = {
+	type = POD_plasmic_maa
+	
+	damage = 350
+	toughness = 100
+	pursuit = 20
+	screen = 0
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:demonics }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 4] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 5] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 25
+	ai_quality = { value = 10}
+	icon = angelics
+	max_sub_regiments = 3
+}
+
+archangelics = {
+	type = POD_plasmic_maa
+	
+	damage = 310
+	toughness = 450
+	pursuit = 0
+	screen = 70
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:archangelics }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		POD_demonic_maa = 3
+	}
+	
+	allowed_in_hired_troops = no
+		
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 3] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 3] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	stack = 10
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+archdemonics = {
+	type = POD_plasmic_maa
+	
+	damage = 450
+	toughness = 310
+	pursuit = 70
+	screen = 0
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:archdemonics }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 3] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 3] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 10
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+djinn = {
+	type = POD_plasmic_maa
+	
+	damage = 380
+	toughness = 380
+	pursuit = 35
+	screen = 35
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:djinn }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		POD_faerie_maa = 2
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 3] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 3] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 10
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+wyrds = {
+	type = POD_plasmic_maa
+	
+	damage = 750
+	toughness = 50
+	pursuit = 0
+	screen = 0
+	
+	siege_value = 0.1
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:wyrds }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		skirmishers = 2
+		heavy_infantry = 2
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 3.5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 5] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 10
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+ailerons = {
+	type = POD_plasmic_maa
+	
+	damage = 20
+	toughness = 35
+	pursuit = 25
+	screen = 25
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_ailerons }
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 10}
+	icon = shades
+}
+
+cerements = {
+	type = POD_plasmic_maa
+	
+	damage = 1
+	toughness = 125
+	pursuit = 0
+	screen = 50
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_cerements }
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 10}
+	icon = shades
+}
+
+kraken = {
+	type = POD_plasmic_maa
+	
+	damage = 1500
+	toughness = 150
+	pursuit = 0
+	screen = 0
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_kraken }
+	}
+	
+	terrain_bonus = {
+		desert = { damage = -1000 toughness = -100 pursuit = -20 }
+		desert_mountains = { damage = -1000 toughness = -100 pursuit = -20 }
+		drylands = { damage = -500 toughness = -50 pursuit = -20 }
+		oasis = { damage = 200 toughness = 200 pursuit = 10 }
+		wetlands = { damage = 100 toughness = 100 pursuit = 10 }
+		floodplains = { damage = 100 toughness = 100 pursuit = 10 }
+	}
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 5] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 7.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 7.5] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 5
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+mourners = {
+	type = POD_plasmic_maa
+	
+	damage = 350
+	toughness = 350
+	pursuit = 35
+	screen = 35
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_mourners }
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		POD_plasmic_maa = 2
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 10] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 10] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 10] }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 1
+	
+	allowed_in_hired_troops = no
+		
+	stack = 35
+	ai_quality = { value = 10}
+	icon = angelics
+}
+
+shroudrippers = {
+	type = POD_plasmic_maa
+	
+	damage = 20
+	toughness = 15
+	pursuit = 30
+	screen = 10
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_shroudrippers }
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_spirit_maa = 3
+		POD_chimera_maa = 3
+		POD_plasmic_maa = 3
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 10}
+	icon = shades
+}
+
+tindelhounds = {
+	type = POD_plasmic_maa
+	
+	can_recruit = {
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}
+		OR = {
+			is_target_in_variable_list = { name = umbra_maa_list target = flag:whistimmu_tindelhounds }
+			has_perk = ectoplasmic_generation_5_perk
+		}
+	}
+	
+	damage = 10
+	toughness = 25
+	pursuit = 0
+	screen = 15
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		archers = 3
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = tindlehounds
+}
+
+# Fae #
+
+sidhe_wild_hunt = {
+	type = POD_faerie_maa
+	
+	damage = 150
+	toughness = 80
+	pursuit = 95
+	screen = 0
+	
+	can_recruit = {
+		OR = {
+			has_trait = kithain
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+		}
+	}
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -10 }
+		mountains = { damage = -50 }
+		desert_mountains = { damage = -50 }
+		wetlands = { damage = -80 toughness = -15 pursuit = -20 }
+	}
+
+	counters = {
+		heavy_infantry = 0.5
+		pikemen = 0.5
+		skirmishers = 1
+		POD_bygones_maa = 1
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -30 toughness = -10 }
+		harsh_winter = { damage = -60 toughness = -30 }
+	}
+
+	buy_cost = { gold = cataphract_recruitment_cost }
+	low_maintenance_cost = { gold = cataphract_low_maint_cost }
+	high_maintenance_cost = { gold = cataphract_high_maint_cost }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 5
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 100}
+	icon = sidhes
+}
+
+troll_berserkers = {
+	type = POD_faerie_maa
+	
+	damage = 40
+	toughness = 40
+	pursuit = 10
+	screen = 5
+	
+	can_recruit = {
+		OR = {
+			has_trait = kithain
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 2
+		pikemen = 2
+	}
+
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_special_bankrupting
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = trolls
+}
+
+nuckelavee = {
+	type = POD_faerie_maa
+	
+	damage = 35
+	toughness = 20
+	pursuit = 50
+	screen = 20
+		
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			has_perk = unseelie_faerie_kin_perk
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+		}
+	}
+	
+	terrain_bonus = {
+		desert = { damage = -40 toughness = -40 pursuit = -40 }
+		desert_mountains = { damage = -40 toughness = -40 pursuit = -40 }
+		drylands = { damage = -40 toughness = -40 pursuit = -40 }
+		oasis = { damage = 20 toughness = 20 pursuit = 20 }
+		wetlands = { damage = 20 toughness = 20 pursuit = 20 }
+		floodplains = { damage = 20 toughness = 20 pursuit = 20 }
+	}
+
+	counters = {
+		light_cavalry = 2
+	}
+
+	buy_cost = { gold = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = light_cavalry
+}
+
+duergar = {
+	type = POD_faerie_maa
+	
+	damage = 50
+	toughness = 30
+	pursuit = 0
+	screen = 20
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+		}
+	}
+	
+	terrain_bonus = {
+		mountains = { damage = 15 toughness = 30 }
+		desert_mountains = { damage = 15 toughness = 30 }
+		hills = { damage = 15 toughness = 15 }
+	}
+
+	counters = {
+		heavy_infantry = 2
+	}
+
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+		
+	allowed_in_hired_troops = no
+	stack = 75
+	ai_quality = { value = 100}
+	icon = heavy_infantry
+}
+
+skoggra = {
+	type = POD_faerie_maa
+	
+	damage = 30
+	toughness = 40
+	pursuit = 0
+	screen = 0
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			has_perk = faerie_kin_perk
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+		}
+	}
+	
+	terrain_bonus = {
+		forest = { damage = 20 toughness = 20 }
+		jungle = { damage = 20 toughness = 20 }
+		taiga = { damage = 20 toughness = 20 }
+	}
+
+	counters = {
+		skirmishers = 2
+	}
+
+	buy_cost = { gold = crossbowmen_recruitment_cost }
+	low_maintenance_cost = { gold = crossbowmen_low_maint_cost }
+	high_maintenance_cost = { gold = crossbowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = bowmen
+}
+
+ovinniks = {
+	type = POD_faerie_maa
+	
+	damage = 30
+	toughness = 35
+	pursuit = 0
+	screen = 20
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			has_perk = faerie_kin_perk
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+			dynasty ?= {has_dynasty_perk = ceilican_legacy_5 }
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_fera_maa = 2
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = animalism_animals
+}
+
+brownies = {
+	type = POD_faerie_maa
+	
+	damage = 15
+	toughness = 20
+	pursuit = 20
+	screen = 20
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+			has_perk = faerie_kin_perk
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		light_cavalry = 0.5
+		heavy_infantry = 0.5
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = pikemen
+}
+
+night_elves = {
+	type = POD_faerie_maa
+	
+	damage = 15
+	toughness = 20
+	pursuit = 30
+	screen = 30
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+			has_perk = unseelie_faerie_kin_perk
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_cavalry = 0.5
+		heavy_infantry = 0.5
+		pikemen = 0.5
+	}
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = bowmen
+}
+
+goblins = {
+	type = POD_faerie_maa
+	
+	damage = 22
+	toughness = 24
+	pursuit = 60
+	screen = 0
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+			has_perk = unseelie_faerie_kin_perk
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_chimera_maa = 2
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = skirmishers
+}
+
+malicious_faerie = {
+	type = POD_faerie_maa
+	
+	damage = 15
+	toughness = 5
+	pursuit = 30
+	screen = 0
+	
+	can_recruit = {
+		OR = {
+			has_trait = fae
+			has_trait = changeling
+			#faith = { has_doctrine = special_concord_of_iron_and_silver_doctrine }
+			has_perk = unseelie_faerie_kin_perk
+		}
+	}
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 125
+	ai_quality = { value = 100}
+	icon = skirmishers
+}
+
+giants = {
+	type = POD_faerie_maa
+	
+	damage = 50
+	toughness = 170
+	pursuit = 5
+	screen = 30
+	
+	can_recruit = {
+		is_target_in_variable_list = { name = umbra_maa_list target = flag:giants }
+	}
+	
+	counters = {
+		skirmishers = 3
+	}
+	
+	buy_cost = { gold = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	max_sub_regiments = 5
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 100}
+	icon = heavy_infantry
+}
+
+# Chimera #
+
+nervosa = {
+	type = POD_chimera_maa
+	
+	damage = 250
+	toughness = 100
+	pursuit = 0
+	screen = 0
+	
+	siege_value = 0.1
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		light_cavalry = 0.5
+		heavy_cavalry = 0.5
+		pikemen = 0.5
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { piety = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_bankrupting
+	max_sub_regiments = 3
+	
+	allowed_in_hired_troops = no
+		
+	stack = 25
+	ai_quality = { value = 10}
+	icon = nervosa
+}
+
+monster_under_the_bed = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	damage = 15
+	toughness = 20
+	pursuit = 5
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_faerie_maa = 3
+	}
+
+	buy_cost = { piety = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	max_sub_regiments = 10
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 10}
+	icon = monster_under_the_bed
+}
+
+nocnitsa = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	damage = 350
+	toughness = 50
+	pursuit = 20
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		skirmishers = 1
+		archer_cavalry = 1
+		archers = 1
+	}
+
+	buy_cost = { piety = war_elephant_recruitment_cost }
+	low_maintenance_cost = { gold = war_elephant_low_maint_cost }
+	high_maintenance_cost = { gold = war_elephant_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 25
+	ai_quality = { value = 10}
+	icon = nocnitsa
+}
+
+sprites = {
+	type = POD_chimera_maa
+	
+	can_recruit = { 
+		OR = {
+			has_trait = fae
+		}
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}		
+	}
+	
+	damage = 4
+	toughness = 3
+	pursuit = 3
+	screen = 3
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		archer_cavalry = 2
+		archers = 2
+	}
+
+	buy_cost = { piety = @[skirmisher_recruitment_cost * 0.75] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 0.45] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 0.45] }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = sprites
+}
+
+monsters = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}	
+	
+	damage = 30
+	toughness = 15
+	pursuit = 80
+	screen = 10
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		skirmishers = 2
+	}
+	
+	buy_cost = { piety = horse_archers_recruitment_cost }
+	low_maintenance_cost = { gold = horse_archers_low_maint_cost }
+	high_maintenance_cost = { gold = horse_archers_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 10}
+	icon = monsters
+}
+
+feral_chimera = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	damage = 50
+	toughness = 40
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 5 toughness = 5 }
+		taiga = { damage = 5 toughness = 5 }
+		jungle = { damage = 5 toughness = 5 }
+		
+		hills = { damage = 10 }
+		mountains = { damage = 10 pursuit = 10 }
+		desert_mountains = { damage = 10 pursuit = 20 }
+		wetlands = { damage = 10 toughness = 5 pursuit = 20 screen = 20 }
+	}
+
+	counters = {
+	}
+	
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	max_sub_regiments = 5
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 10}
+	icon = animalism_animals
+}
+
+urban_legends = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	damage = 10
+	toughness = 150
+	pursuit = 0
+	screen = 100
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+	}
+
+	#era_bonus = {
+	#	culture_era_early_medieval = {
+	#		damage = 5
+	#		toughness = 2
+	#	}
+	#	culture_era_high_medieval = {
+	#		toughness = 4
+	#	}
+	#	culture_era_late_medieval = {
+	#		toughness = 6
+	#	}
+	#	culture_era_dark_fantastic = {
+	#		toughness = 8
+	#	}
+	#	culture_era_gothic_victorian = {
+	#		toughness = 10
+	#	}
+	#	culture_era_final_nights = {
+	#		toughness = 20
+	#	}
+	#}
+	
+	buy_cost = { piety = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_expensive
+	max_sub_regiments = 5
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 10}
+	icon = shades
+}
+
+tarrkel = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		OR = {
+			has_title = title:d_underbridge
+			has_title = title:k_underbridge
+			has_title = title:e_underbridge
+		}
+	}
+	
+	damage = 20
+	toughness = 10
+	pursuit = 30
+	screen = 30
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 125
+	ai_quality = { value = 10 }
+	icon = demons
+}
+
+fire_salamanders = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}		
+	}
+	
+	damage = 5
+	toughness = 5
+	pursuit = 10
+	screen = 5
+	
+	terrain_bonus = {
+		drylands = { damage = 5 }
+		desert = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 5 }
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -3 }
+		harsh_winter = { damage = -5 toughness = -2 }
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 200
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = snakes
+}
+
+mist_dragons = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+	}
+	
+	damage = 20
+	toughness = 25
+	pursuit = 0
+	screen = 10
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	buy_cost = { piety = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+	max_sub_regiments = 10
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = 10}
+	icon = wyverns
+}
+
+firebirds = {
+	type = POD_chimera_maa
+	
+	can_recruit = {
+		has_trait = fae
+		trigger_if = {
+			limit = {
+				is_ai = yes 
+			}
+			max_military_strength < 1500
+		}			
+	}
+	
+	damage = 5
+	toughness = 5
+	pursuit = 5
+	screen = 10
+	
+	terrain_bonus = {
+		hills = { damage = 5 }
+		mountains = { damage = 5 pursuit = 5 }
+		desert_mountains = { damage = 5 pursuit = 10 }
+	}
+
+	buy_cost = { piety = @[skirmisher_recruitment_cost * 0.75] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 0.75] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 0.75] }
+	provision_cost = @provisions_cost_special_cheap
+	
+	allowed_in_hired_troops = no
+		
+	stack = 150
+	ai_quality = { value = POD_ai_weight_swarm }
+	icon = bats
+}
+
+# KJ ##
+## Kuei Jin and Wu Tian have Twilight (elite, small size, costly) and Midnight (weak, big size, cheap) MaA types
+
+twilight_light_footmen_maa = {
+	type = skirmishers
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+	
+	damage = 55
+	toughness = 70
+	pursuit = 55
+	screen = 55
+	
+	terrain_bonus = {
+		forest = { damage = 20 toughness = 10 }
+		taiga = { damage = 20 toughness = 10 }
+		jungle = { damage = 20 toughness = 10 }
+	}
+
+	counters = {
+		heavy_infantry = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = 100 
+	icon = skirmishers
+}
+
+midnight_light_footmen_maa = {
+	type = skirmishers
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+	
+	damage = 5
+	toughness = 6
+	pursuit = 5
+	screen = 10
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100 
+	icon = skirmishers
+}
+
+twilight_archers_maa = {
+	type = archers
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 120
+	toughness = 55
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 15 toughness = 10 }
+		forest = { toughness = 10 screen = 15 }
+		taiga = { toughness = 10 screen = 15 }
+	}
+
+	counters = {
+		skirmishers = 2
+		POD_animals_maa = 1
+	}
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = bowmen
+}
+
+midnight_archers_maa = {
+	type = archers
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 10
+	toughness = 4
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = bowmen
+}
+
+twilight_light_horsemen_maa = {
+	type = light_cavalry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 135
+	toughness = 110
+	pursuit = 185
+	screen = 180
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+	}
+	
+	counters = {
+		archers = 2
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -10 toughness = -15 }
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = { 
+		value = 100
+	}
+	icon = light_cavalry
+}
+
+midnight_light_horsemen_maa = {
+	type = light_cavalry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 11
+	toughness = 6
+	pursuit = 13
+	screen = 10
+	
+	terrain_bonus = {
+		hills = { damage = -5 }
+		mountains = { damage = -10 pursuit = -20 }
+		desert_mountains = { damage = -10 pursuit = -20 }
+		wetlands = { damage = -10 toughness = -10 pursuit = -30 screen = -30 }
+		
+	}
+	
+	counters = {
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -5 toughness = -5 }
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = { 
+		value = 100
+	}
+	icon = light_cavalry
+}
+
+twilight_pikemen_maa = {
+	type = pikemen
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 70
+	toughness = 80
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { toughness = 25 }
+		desert_mountains = { toughness = 25 }
+		hills = { toughness = 20 }
+	}
+
+	counters = {
+		light_cavalry = 2
+		heavy_cavalry = 2
+		camel_cavalry = 2
+		elephant_cavalry = 2
+	}
+
+	buy_cost = { gold = @[pikemen_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[pikemen_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[pikemen_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = 100
+	icon = pikemen
+}
+
+midnight_pikemen_maa = {
+	type = pikemen
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 8
+	toughness = 11
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		hills = { toughness = 3 }
+	}
+
+	counters = {
+		light_cavalry = 1
+	}
+
+	buy_cost = { gold = @[pikemen_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[pikemen_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[pikemen_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100
+	icon = pikemen
+}
+
+twilight_armored_footmen_maa = {
+	type = heavy_infantry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 120
+	toughness = 77
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		pikemen = 2
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = 100
+	icon = heavy_infantry
+}
+
+midnight_armored_footmen_maa = {
+	type = heavy_infantry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 13
+	toughness = 10
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100
+	icon = heavy_infantry
+}
+
+twilight_armored_horsemen_maa = {
+	type = heavy_cavalry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 250
+	toughness = 90
+	pursuit = 60
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 50 }
+		drylands = { damage = 50 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		archers = 2
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -10 toughness = -5 }
+		harsh_winter = { damage = -20 toughness = -10 }
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.5]  }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	stack = 25
+	ai_quality = 100 
+	icon = heavy_cavalry
+}
+
+midnight_armored_horsemen_maa = {
+	type = heavy_cavalry
+	
+	can_recruit = {
+		POD_can_recruit_basic_eastern_maa = yes
+	}
+		
+	damage = 35
+	toughness = 15
+	pursuit = 10
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -10 toughness = -5 }
+		harsh_winter = { damage = -20 toughness = -10 }
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 0.75 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 0.75]  }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 0.75 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	stack = 100
+	ai_quality = 100 
+	icon = heavy_cavalry
+}
+
+ban_ren_guei = {
+	type = heavy_infantry
+	
+	can_recruit = {
+		has_trait = kueijin
+		religion = religion:deviltigers_religion
+	}
+	
+	damage = 40
+	toughness = 40
+	pursuit = 10
+	screen = 20
+
+	counters = {
+		pikemen = 2
+		skirmishers = 2
+	}
+	
+	buy_cost = { piety = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 75
+	ai_quality = { value = 100}
+	icon = shades
+}
+
+#yulan_jin = {
+#	type = skirmishers
+#	
+#	can_recruit = {
+#		has_trait = kueijin
+#		trigger_if = {
+#			limit = {
+#				is_ai = yes 
+#			}
+#			max_military_strength < 1500
+#		}			
+#	}
+#	
+#	damage = 10
+#	toughness = 5
+#	pursuit = 0
+#	screen = 0
+#
+#	counters = {
+#		archers = 2
+#	}
+#	
+#	buy_cost = { prestige = bowmen_recruitment_cost }
+#	low_maintenance_cost = { prestige = bowmen_low_maint_cost }
+#	high_maintenance_cost = { prestige = bowmen_high_maint_cost }
+#	provision_cost = @provisions_cost_infantry_cheap
+#	
+#	allowed_in_hired_troops = no
+#		
+#	stack = 150
+#	ai_quality = { value = 100}
+#	icon = shades
+#}
+## Vampire core
+## Vampires have access to all base MaA types but worse than vanilla ones (lower stats, costlier or less numerous)
+
+mob_maa = {
+	type = skirmishers
+	
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 5
+	toughness = 12
+	pursuit = 8
+	screen = 11
+	
+	terrain_bonus = {
+		forest = { damage = 4 toughness = 6 }
+		taiga = { damage = 4 toughness = 6 }
+		jungle = { damage = 4 toughness = 6 }
+	}
+
+	counters = {
+	}
+	
+	holy_order_fallback = yes
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 0.8 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 0.8 ] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 0.8 ] }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 100
+	ai_quality = 10
+	icon = skirmishers
+}
+
+poachers_maa = {
+	type = archers
+
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 25
+	toughness = 5
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 10 toughness = 4 }
+		forest = { toughness = 4 screen = 4 }
+		taiga = { toughness = 4 screen = 4 }
+	}
+
+	counters = {
+		skirmishers = 1
+		POD_animals_maa = 1
+	}
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	holy_order_fallback = yes
+	
+	stack = 100
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = bowmen
+}
+
+outriders_maa = {
+	type = light_cavalry
+
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 20
+	toughness = 15
+	pursuit = 30
+	screen = 30
+	
+	terrain_bonus = {
+		plains = { damage = 15 }
+		drylands = { damage = 15 }
+		hills = { damage = -5 }
+		mountains = { damage = -10 pursuit = -20 }
+		desert_mountains = { damage = -15 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -30 screen = -30 }
+	}
+	
+	counters = {
+		archers = 1
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -5 toughness = -2 }
+	}
+	
+	holy_order_fallback = yes
+	
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.5] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.5] }
+	provision_cost = @provisions_cost_cavalry_cheap
+
+	stack = 100
+	ai_quality = { 
+		value = 100
+	}
+	icon = light_cavalry
+}
+
+rabble_maa = {
+	type = pikemen
+
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 15
+	toughness = 24
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { toughness = 12 }
+		desert_mountains = { toughness = 12 }
+		hills = { toughness = 8 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	holy_order_fallback = yes
+	
+	stack = 100
+	ai_quality = 100
+	icon = pikemen
+}
+
+retainers_maa = {
+	type = heavy_infantry
+
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 32
+	toughness = 22
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.5] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.5] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+	
+	stack = 100
+	ai_quality = 100
+	icon = heavy_infantry
+}
+
+disgraced_nobles_maa = {
+	type = heavy_cavalry
+
+	can_recruit = {
+		POD_can_recruit_basic_vampire_maa = yes
+	}
+	
+	damage = 100
+	toughness = 35
+	pursuit = 20
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		archers = 1
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -10 toughness = -5 }
+		harsh_winter = { damage = -20 toughness = -10 }
+	}
+
+	buy_cost = { gold = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	stack = 35
+	ai_quality = 100 
+	icon = heavy_cavalry
+}
+
+
+
+
+## Mummies core
+## Mummies have elite but small sized core troops. Also especially good in Egypt like terrain
+
+neteru_slingers = {
+	type = archers
+	
+	can_recruit = {
+		POD_can_recruit_basic_mummy_maa = yes
+	}
+			
+	damage = 35
+	toughness = 20
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		floodplains = { damage = 15 toughness = 10 }
+		desert_mountains = { damage = 5 toughness = 10}
+		desert = { damage = 5 toughness = 6 }
+		drylands = { damage = 5 toughness = 6 }
+	}
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 50
+	ai_quality = { 
+		value = 100
+	}
+ 	icon = bowmen
+}
+
+neteru_medjay = {
+	type = skirmishers
+	
+	can_recruit = {
+		POD_can_recruit_basic_mummy_maa = yes
+	}
+		
+	damage = 20
+	toughness = 35
+	pursuit = 10
+	screen = 30
+	
+	allowed_in_hired_troops = no
+	
+	terrain_bonus = {
+		floodplains = { damage = 10 toughness = 15 }
+		desert_mountains = { damage = 10 toughness = 15 }
+		desert = { damage = 10 toughness = 15 }
+		drylands = { damage = 5 toughness = 6 }
+	}
+	
+	counters = {
+		heavy_infantry = 1
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 50
+	ai_quality = 100 
+	icon = skirmishers
+}
+
+neteru_khopesh = {
+	type = heavy_infantry
+	
+	can_recruit = {
+		POD_can_recruit_basic_mummy_maa = yes
+	}
+		
+	damage = 55
+	toughness = 40
+	pursuit = 0
+	screen = 0
+
+	terrain_bonus = {
+		floodplains = { damage = 15 toughness = 10 }
+		desert_mountains = { damage = 5 toughness = 6 }
+		desert = { damage = 5 toughness = 6 }
+		drylands = { damage = 5 toughness = 6 }
+	}
+	
+	counters = {
+		pikemen = 1
+		skirmishers = 1
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100
+	
+	icon = heavy_infantry
+}
+
+neteru_tomb_guard = {
+	type = pikemen
+	
+	can_recruit = {
+		POD_can_recruit_basic_mummy_maa = yes
+	}
+		
+	damage = 30
+	toughness = 50
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		floodplains = { damage = 5 toughness = 20 }
+		desert_mountains = { damage = 5 toughness = 20 }
+		desert = { damage = 5 toughness = 20 }
+		drylands = { damage = 5 toughness = 10 }
+	}
+	
+	allowed_in_hired_troops = no
+	
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 50
+	ai_quality = 100
+	icon = pikemen
+}
+
+## Mummy special MaA are Ushabti constructs, starting off not very good but able to be buffed by the corresponding Hekau lifestyle tree
+
+lesser_ushabti_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_mummy_maa = yes
+	}
+		
+	damage = 5
+	toughness = 8
+	pursuit = 7
+	screen = 5
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100 
+	icon = golems
+}
+
+medium_ushabti_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_mummy_maa = yes
+	}
+		
+	damage = 11
+	toughness = 13
+	pursuit = 12
+	screen = 20
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 100 
+	icon = golems
+}
+
+overseer_ushabti_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_mummy_maa = yes
+	}
+		
+	damage = 28
+	toughness = 30
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		skirmishers = 1
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 100
+	icon = golems
+}
+
+great_ushabti_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_mummy_maa = yes
+	}
+		
+	damage = 150
+	toughness = 100
+	pursuit = 40
+	screen = 0
+
+	buy_cost = { gold = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 25
+	ai_quality = 100 
+	icon = golems
+}
+
+guard_ushabti_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_mummy_maa = yes
+	}
+		
+	damage = 100
+	toughness = 110
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = 100
+	icon = golems
+}
+
+## Wu T'ian special MaA, the similar to Ushabti but more aggresive in nature(more damage, less health)
+
+terracottan_fodder_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_wu_tian_maa = yes
+	}
+		
+	damage = 8
+	toughness = 5
+	pursuit = 7
+	screen = 5
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100 
+	icon = golems
+}
+
+terracottan_warriors_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_wu_tian_maa = yes
+	}
+		
+	damage = 14
+	toughness = 10
+	pursuit = 12
+	screen = 20
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 100 
+	icon = golems
+}
+
+terracottan_scouts_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_wu_tian_maa = yes
+	}
+		
+	damage = 35
+	toughness = 25
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		skirmishers = 1
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 100
+	icon = golems
+}
+
+terracottan_knights_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_wu_tian_maa = yes
+	}
+		
+	damage = 190
+	toughness = 70
+	pursuit = 40
+	screen = 0
+
+	buy_cost = { gold = heavy_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 25
+	ai_quality = 100 
+	icon = golems
+}
+
+terracottan_guards_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		POD_can_recruit_special_wu_tian_maa = yes
+	}
+		
+	damage = 75
+	toughness = 180
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+
+	allowed_in_hired_troops = no
+
+	stack = 25
+	ai_quality = 100
+	icon = golems
+}
+
+### Demons core
+### Demons have numerous but weak core
+
+## Cultists are in the other file, skirmishers core
+
+flagellants_maa = {
+	type = pikemen
+
+	can_recruit = {
+		POD_can_recruit_basic_demon_maa = yes
+	}
+
+	damage = 18
+	toughness = 5
+	pursuit = 0
+	screen = 0
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = 100
+	icon = pikemen
+}
+
+chanters_cultists = {
+	type = archers
+
+	can_recruit = {
+		POD_can_recruit_basic_demon_maa = yes
+	}
+	
+	damage = 20
+	toughness = 5
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		light_cavalry = 2
+		heavy_cavalry = 2
+		camel_cavalry = 2
+		archer_cavalry = 2
+		elephant_cavalry = 2
+	}
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 200
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = bowmen
+}
+
+### Fae core
+### Fae core is very specialized
+
+silver_hunters = {
+	type = archers
+	
+	damage = 20
+	toughness = 10
+	pursuit = 0
+	screen = 0
+
+	can_recruit = {
+		POD_can_recruit_basic_fae_maa = yes
+	}
+	
+	terrain_bonus = {
+		forest = { toughness = 10 damage = 10 }
+		taiga = { toughness = 10 damage = 10 }
+	}
+	
+	allowed_in_hired_troops = no
+
+	counters = {
+		POD_fera_maa = 2
+		POD_animals_maa = 2
+	}
+
+	buy_cost = { gold = bowmen_recruitment_cost }
+	low_maintenance_cost = { gold = bowmen_low_maint_cost }
+	high_maintenance_cost = { gold = bowmen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 100
+	ai_quality = { 
+		value = 100
+	}
+}
+
+coffin_makers = {
+	type = pikemen
+	
+	damage = 15
+	toughness = 15
+	pursuit = 0
+	screen = 0
+
+	can_recruit = {
+		POD_can_recruit_basic_fae_maa = yes
+	}
+	#	
+	allowed_in_hired_troops = no
+
+	terrain_bonus = {
+		mountains = { toughness = 12 damage = 10 }
+		desert_mountains = { toughness = 12 damage = 10 }
+		hills = { toughness = 8 damage = 10 }
+	}
+
+	counters = {
+		POD_gargoyle_maa = 2
+		POD_ghoul_maa = 2
+		POD_vampire_maa = 2
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { gold = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = pikemen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 100
+	ai_quality = 100
+	icon = pikemen
+}
+
+guardian_angels = {
+	type = skirmishers
+	
+	damage = 8
+	toughness = 10
+	pursuit = 10
+	screen = 16
+
+	can_recruit = {
+		POD_can_recruit_basic_fae_maa = yes
+	}
+	#	
+	allowed_in_hired_troops = no
+
+	terrain_bonus = {
+		plains = { damage = 6 toughness = 10 }
+		floodplains = { damage = 6 toughness = 10 }
+	}
+
+	counters = {
+		POD_demonic_maa = 2
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+
+	stack = 100
+	ai_quality = 100 
+	icon = skirmishers
+}
+
+unfettered_phantoms = {
+	type = light_cavalry
+	
+	damage = 15
+	toughness = 10
+	pursuit = 30
+	screen = 30
+
+	can_recruit = {
+		POD_can_recruit_basic_fae_maa = yes
+	}
+	
+	allowed_in_hired_troops = no
+	
+	terrain_bonus = {
+		plains = { damage = 25 }
+		drylands = { damage = 25 }
+	}
+	
+	counters = {
+		POD_plasmic_maa = 2
+		POD_wraith_maa = 2
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = light_cavalry_recruitment_cost }
+	low_maintenance_cost = { gold = light_cavalry_low_maint_cost }
+	high_maintenance_cost = { gold = light_cavalry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 100
+	ai_quality = { 
+		value = 100
+	}
+	icon = light_cavalry
+}
+
+## Vampire special troops, knightly orders, low troops count, recruited in very specific instances
+
+#Toreador knights of Salianna, very fast (because toreador duh)
+vigiles_francia_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_toreador_trigger = yes
+		culture = { has_cultural_pillar = language_french } #Excludes Occitan, which we want since those are Northern France's knights
+	}
+
+	damage = 65
+	toughness = 35
+	pursuit = 70
+	screen = 40
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 1
+		heavy_cavalry = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+#Esclarmonde mixed knightly order
+faydits_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		culture = culture:occitan
+	}
+	
+	damage = 130
+	toughness = 70
+	pursuit = 100
+	screen = 105
+	
+	terrain_bonus = {
+		plains = { damage = 15 }
+		drylands = { damage = 15 }
+		hills = { damage = -5 }
+		mountains = { damage = -10 pursuit = -20 }
+		desert_mountains = { damage = -15 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -30 screen = -30 }
+	}
+	
+	counters = {
+		archers = 1
+		heavy_cavalry = 1
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 2.5 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 2.5] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 2.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 40
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+#Guillaume' company of ghouls+vamps+mercenaries. Works for everyone around France and Iberia
+centuries_epines_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		OR = {
+		capital_province = { geographical_region = world_europe_west_francia }
+		capital_province = { geographical_region = world_europe_west_iberia }
+		}
+	}
+	
+	damage = 150
+	toughness = 110
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 3 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 3 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 3 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 40
+	ai_quality = 100
+	icon = massvampires
+}
+
+#Virtuous spanish knights
+white_company_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		capital_province = { geographical_region = world_europe_west_iberia }
+		is_infernalist_trigger = no
+		is_baali_trigger = no	
+	}
+	
+	damage = 100
+	toughness = 90
+	pursuit = 70
+	screen = 70
+	
+	terrain_bonus = {
+		plains = { damage = 15 }
+		drylands = { damage = 15 }
+		hills = { damage = -5 }
+		mountains = { damage = -10 pursuit = -20 }
+		desert_mountains = { damage = -15 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -30 screen = -30 }
+	}
+	
+	counters = {
+		archers = 1
+		skirmishers = 1
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 40
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+#English cainite order dedicated to protecting women
+fellowship_lady_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		capital_province = { geographical_region = world_europe_west_britannia }
+		is_female = yes
+	}
+
+	damage = 50
+	toughness = 35
+	pursuit = 30
+	screen = 30
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 1
+		heavy_cavalry = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+#Demons hunters
+#Blood hunted in England and by the Toreador
+order_chanticleer_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_infernalist_trigger = no
+		is_baali_trigger = no
+		capital_province = { geographical_region = world_europe_south } 
+		is_toreador_trigger = no
+	}
+	
+	damage = 88
+	toughness = 105
+	pursuit = 0
+	screen = 35
+	
+	terrain_bonus = {
+		mountains = { toughness = 12 }
+		desert_mountains = { toughness = 12 }
+		hills = { toughness = 8 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+		POD_demonic_maa = 2
+	}
+
+	buy_cost = { gold = @[pikemen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[pikemen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[pikemen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+#Secret knightly order of ghouls
+dispossessed_maa = {
+	type = POD_ghoul_maa
+
+	can_recruit = { 
+		POD_is_any_kind_of_ghoul_trigger = yes
+	}
+
+	damage = 100
+	toughness = 110
+	pursuit = 30
+	screen = 50
+	
+	buy_cost = { gold = @[POD_ghoul_maa_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[POD_ghoul_maa_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[POD_ghoul_maa_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	
+	counters = {
+		POD_vampire_maa = 2
+	}
+	
+	stack = 25
+	ai_quality = 100 
+	icon = ghouls
+}
+
+#Via Adversarius knightly order, ends up TMR, anti demons
+order_star_morning_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		OR = {
+			has_faith = faith:manusnigrum
+			has_faith = faith:viaadversarius
+			has_faith = faith:viapeccati
+			has_faith = faith:viavoluptuous
+		}
+		is_infernalist_trigger = no
+		is_baali_trigger = no	
+	}
+	
+	damage = 190
+	toughness = 90
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+	
+	allowed_in_hired_troops = no
+
+
+	counters = {
+		POD_demonic_maa = 2
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+		
+	stack = 25
+	ai_quality = 100 
+	icon = massvampires
+}
+
+#malkavian knightly order
+order_crooked_cross_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_malkavian_trigger = yes	
+	}
+	
+	damage = 75
+	toughness = 40
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 10 toughness = 4 }
+		forest = { toughness = 4 screen = 4 }
+		taiga = { toughness = 4 screen = 4 }
+	}
+
+	counters = {
+		skirmishers = 1
+		POD_faerie_maa = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = massvampires
+}
+
+#the best of the best of vampiric MaA really, but very rare access
+order_bitter_ashes_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		OR = {
+			has_trait = POD_grail_knight
+			#These characters aren't grail knights but are closely associated to the order and could call upon them
+			this = character:791999
+			this = character:791955
+			this = character:505083
+		}
+		is_infernalist_trigger = no
+		is_baali_trigger = no	
+	}
+	
+	damage = 650
+	toughness = 500
+	pursuit = 175
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_demonic_maa = 5 #Basically anathema to demons
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 4 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 4] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 4 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 10
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##collective name for the via retributio, which is basically an holy order road of heaven p56
+order_of_vengeance_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		has_faith = faith:viavindicta
+	}
+	
+	damage = 115
+	toughness = 90
+	pursuit = 50
+	screen = 0
+	
+	counters = {
+		archers = 1
+		skirmishers = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.8 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+##nosferatu leper knights
+leper_knights_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:roadofheaven_religion
+		is_nosferatu_trigger = yes
+	}
+	
+	damage = 150
+	toughness = 60
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		POD_animals_maa = 2
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.8 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+##Salubri holy order
+the_unblooded_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_salubri_trigger = yes
+		is_infernalist_trigger = no
+	}
+	
+	damage = 150
+	toughness = 150
+	pursuit = 30
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		POD_demonic_maa = 1
+		POD_gargoyle_maa = 1
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Ashirra holy order
+mahgrib_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:ashirra_religion
+		is_infernalist_trigger = no
+	}
+	
+	damage = 100
+	toughness = 70
+	pursuit = 90
+	screen = 30
+	
+	terrain_bonus = {
+		desert = { damage = 30 pursuit = 40 }
+		desert_mountains = { damage = 15 pursuit = 20 }
+		oasis = { damage = 30 pursuit = 40 }
+	}
+	
+	counters = {
+		POD_chimera_maa = 2
+		POD_demonic_maa = 2
+		POD_faerie_maa = 2
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.7 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.7] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.7 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	
+	allowed_in_hired_troops = no
+
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+##Ashirra influenced brotherhood
+banu_sasan_maa = {
+	type = skirmishers
+	
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:ashirra_religion
+		is_infernalist_trigger = no
+	}
+	
+	damage = 18
+	toughness = 14
+	pursuit = 6
+	screen = 10
+
+	terrain_bonus = {
+		hills = { damage = 5 toughness = 10 screen = 20 }
+		desert_mountains = { damage = 5 toughness = 20 screen = 30 }
+	}
+
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.1] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.1] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.1] }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = { value = 50 }
+	icon = skirmishers
+}
+
+##road of the beast wardens of holy sites
+the_wardens_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:roadofbeast_religion
+		is_infernalist_trigger = no
+	}
+
+	damage = 70
+	toughness = 65
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 30 toughness = 40 }
+	}
+
+	counters = {
+		POD_faerie_maa = 2
+		POD_fera_maa = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 3 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 3]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 3 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##road of humanity holy order
+order_twilight_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:roadofhumanity_religion
+		is_infernalist_trigger = no
+	}
+	
+	damage = 70
+	toughness = 120
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { toughness = 12 }
+		desert_mountains = { toughness = 12 }
+		hills = { toughness = 8 }
+	}
+
+	counters = {
+		POD_vampire_maa = 1
+	}
+
+	buy_cost = { gold = @[pikemen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[pikemen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[pikemen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+##No presentation needed
+knights_black_cross_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_ventrue_trigger = yes
+		culture = { has_cultural_pillar = heritage_central_germanic }
+	}
+	
+	damage = 130
+	toughness = 220
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		POD_ghoul_maa = 1
+		POD_vampire_maa = 1
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Mithras' order
+knights_avalon_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		faith = faith:viamithras
+	}
+	
+	damage = 130
+	toughness = 150
+	pursuit = 0 #Honorable and chivalrous knights don't pursue defeated foes
+	screen = 50 #...but defend their comrades if things go wrong
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		POD_chimera_maa = 2
+		POD_fera_maa = 2
+		POD_faerie_maa = 2
+		POD_bygones_maa = 2
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Basically vampire brigands, guide to high clans
+woodwose_savages_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		OR = {
+			has_faith = faith:viafurores
+			has_faith = faith:vialiberatio
+			has_faith = faith:viaquiritare
+		}
+	}
+
+	damage = 50
+	toughness = 50
+	pursuit = 50
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 30 toughness = 40 }
+	}
+
+	counters = {
+		skirmishers = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Al Ashrad's order of sorcerers knights, Guide Low Clans
+knights_shroud_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_assamite_trigger = yes	
+		NOT = { has_faith = faith:pathofrighteousness }		
+	}
+	
+	damage = 70
+	toughness = 55
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_demonic_maa = 1
+		POD_vampire_maa = 1
+		POD_chimera_maa = 2
+	}
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = { 
+		value = 100
+	}
+	
+	icon = massvampires
+}
+
+##ventrue knightly order, basically antitribu before the antitribu, LS p88
+knights_blood_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_ventrue_trigger = yes
+	}
+	
+	damage = 90
+	toughness = 125
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		light_cavalry = 1
+		skirmishers = 1
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 2 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+##Warrior vampire women of the einherjar
+valkyries_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		has_faith = faith:viaeinherjar
+	}
+	
+	damage = 100
+	toughness = 80
+	pursuit = 25
+	screen = 25
+	
+	counters = {
+		POD_vampire_maa = 1
+		POD_ghoul_maa = 1
+		POD_fera_maa = 1
+	}
+	
+	winter_bonus = {
+		normal_winter = { damage = 30 toughness = 10 }
+		harsh_winter = { damage = 60 toughness = 30 }
+	}	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.8 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+#hospitalers ghouls
+order_rose_sable_maa = {
+	type = POD_ghoul_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		religion = religion:roadofkings_religion
+	}
+
+	damage = 80
+	toughness = 100
+	pursuit = 50
+	screen = 50
+	
+	buy_cost = { gold = @[POD_ghoul_maa_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[POD_ghoul_maa_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[POD_ghoul_maa_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	counters = {
+		light_cavalry = 2
+		heavy_cavalry = 2
+	}
+	
+	allowed_in_hired_troops = no
+
+	
+	stack = 25
+	ai_quality = 100 
+	icon = ghouls
+}
+
+##cainite heresy
+knights_rose_sable_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		faith = faith:viacain
+	}
+	
+	damage = 145
+	toughness = 110
+	pursuit = 75
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		skirmishers = 1
+		pikemen = 1
+		light_cavalry = 1
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.8] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Osirian
+disciples_anubis_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		faith = { has_doctrine_parameter = osirian_maa }
+		uses_cairo_disciples_main_reward = no
+	}
+	
+	damage = 90
+	toughness = 90
+	pursuit = 50
+	screen = 0
+	
+	terrain_bonus = {
+		desert = { damage = 30 pursuit = 40 }
+		floodplains = { damage = 15 pursuit = 20 }
+		oasis = { damage = 30 pursuit = 40 }
+	}
+	
+	counters = {
+		POD_vampire_maa = 2
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.8] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	
+	allowed_in_hired_troops = no
+
+	
+	ai_quality = { 
+		value = 100
+		if = {
+			limit = { has_trait = fera }
+			add = -30
+		}
+	}
+	icon = massvampires
+}
+
+disciples_anubis_maa_upgraded = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		uses_cairo_disciples_main_reward = yes		
+	}
+	
+	damage = 90
+	toughness = 90
+	pursuit = 50
+	screen = 0
+	
+	terrain_bonus = {
+		drylands = { damage = 20 pursuit = 20 }
+		desert = { damage = 40 pursuit = 40 }
+		desert_mountains = { damage = 20 pursuit = 10 }
+		floodplains = { damage = 25 pursuit = 20 }
+		oasis = { damage = 40 pursuit = 40 }
+	}
+	
+	counters = {
+		POD_vampire_maa = 2
+		POD_ghoul_maa = 2
+		POD_demonic_maa = 2
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.9 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.9] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.9 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	
+	allowed_in_hired_troops = no
+
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+
+warrior_setites_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		faith = { has_doctrine = special_doctrine_set_pillars_kindred }				
+	}
+
+	damage = 60
+	toughness = 40
+	pursuit = 35
+	screen = 35
+	
+	terrain_bonus = {
+		desert = { damage = 15 toughness = 20 }
+		floodplains = { damage = 15 toughness = 20 }
+		oasis = { damage = 15 toughness = 20 }
+	}
+
+	counters = {
+		POD_chimera_maa = 1
+		POD_faerie_maa = 1
+		POD_fera_maa = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+##Iberia by night and dark ages europe
+lions_rodrigo_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		capital_province = { geographical_region = world_europe_west_iberia }
+		NOT = {
+			religion = religion:ashirra_religion
+			religion = religion:roadofblood_religion
+		}
+	}
+	
+	damage = 105
+	toughness = 70
+	pursuit = 65
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 15 toughness = 10 }
+		plains = { damage = 10 }
+		drylands = { damage = 10 }
+		mountains = { damage = -8 pursuit = -10 }
+		desert_mountains = { damage = -12 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -20 screen = -20 }
+	}
+	
+	counters = {
+		skirmishers = 1
+		light_cavalry = 2
+	}
+
+	winter_bonus = {
+	}
+	
+	allowed_in_hired_troops = no
+
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 1.8] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+##Ravnos war caste
+ravnos_kshatriya_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		capital_province = { geographical_region = world_india }
+		is_ravnos_trigger = yes
+	}
+	
+	damage = 95
+	toughness = 95
+	pursuit = 65
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 15 toughness = 10 }
+		plains = { damage = 10 }
+		drylands = { damage = 10 }
+		jungle = { damage = 20 }
+		mountains = { damage = -8 pursuit = -10 }
+		desert_mountains = { damage = -12 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -20 screen = -20 }
+	}
+	
+	counters = {
+		heavy_cavalry = 2
+		elephant_cavalry = 2
+	}
+
+	winter_bonus = {
+	}
+	
+	allowed_in_hired_troops = no
+
+
+	buy_cost = { gold = @[light_cavalry_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[light_cavalry_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[light_cavalry_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+##Lamia warriors, so that capp and lilin have a MaA
+lamia_warmaidens_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		OR = {
+			religion = religion:roadoflilith_religion
+			AND = {
+			is_cappadocian_trigger = yes
+			is_giovanni_trigger = no
+			}
+		}
+	}
+	
+	damage = 120
+	toughness = 60
+	pursuit = 50
+	screen = 0
+	
+	counters = {
+		heavy_infantry = 1
+	}
+	
+	winter_bonus = {
+	}	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.7 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.7 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.7 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+#Libellus sanguinus II p96/97
+agitators_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_brujah_trigger = yes	
+	}
+
+	damage = 68
+	toughness = 30
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 15 toughness = 20 }
+	}
+
+	counters = {
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+#Mostly to give the Lasombra access to a vampire maa even outside of iberia
+corsairs_lasombra_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_lasombra_trigger = yes	
+	}
+
+	damage = 45
+	toughness = 45
+	pursuit = 20
+	screen = 20
+	
+	terrain_bonus = {
+		floodplains = { damage = 15 toughness = 10 }
+		oasis = { damage = 15 toughness = 10 }
+		wetlands = { damage = 15 toughness = 10 }
+	}
+
+	counters = {
+		archers = 1
+		skirmishers = 1
+	}
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.7 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.7]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.7 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+#Spoils of war p24
+knights_jordi_alfama_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		faith = { is_POD_christian_religion_trigger = yes }
+		is_lasombra_trigger = yes			
+	}
+
+	damage = 30
+	toughness = 70
+	pursuit = 0
+	screen = 30
+	
+	terrain_bonus = {
+		plains = { toughness = 8 }
+		hills = { toughness = 12 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+	}
+
+	buy_cost = { gold = @[pikemen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[pikemen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[pikemen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = 100 
+	icon = pikemen
+}
+
+salubri_warriors_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_salubri_trigger = yes
+		is_infernalist_trigger = no
+	}
+	
+	damage = 70
+	toughness = 85
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		POD_vampire_maa = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.5 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+web_assassins_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		has_faith = faith:pathofrighteousness
+	}
+
+	damage = 70
+	toughness = 25
+	pursuit = 50
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		POD_vampire_maa = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100 
+	icon = massvampires
+}
+
+tmr_column_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:talmahera_religion
+	}
+	
+	damage = 90
+	toughness = 90
+	pursuit = 50
+	screen = 0
+	
+	counters = {
+		skirmishers = 1
+		archers = 1
+	}
+	
+	winter_bonus = {
+	}	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.8 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}
+
+#Wuzho in first edition ravnos book but modernized
+ravnos_purified_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		is_ravnos_trigger = yes
+	}
+	
+	damage = 70
+	toughness = 30
+	pursuit = 20
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 10 }
+		drylands = { damage = 10 }
+		forest = { damage = 10 }
+	}
+	
+	counters = {
+		POD_fera_maa = 1
+		POD_vampire_maa = 1
+		POD_spirit_maa = 1
+		POD_bygones_maa = 1
+	}
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	stack = 50
+	
+	ai_quality = { 
+		value = 100
+	}
+	icon = massvampires
+}
+
+anda_jagun_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		POD_is_vampire_trigger = yes
+		has_faith = faith:viayasaq
+	}
+	
+	damage = 75
+	toughness = 70
+	pursuit = 80
+	screen = 60
+	
+	terrain_bonus = {
+		steppe = { damage = 55 }
+		plains = { damage = 20 }
+		drylands = { damage = 20 }
+		jungle = { damage = -20 pursuit = -20 }
+		wetlands = { damage = -30 pursuit = -30 }
+		mountains = { damage = -30 pursuit = -30 }
+		desert_mountains = { damage = -30 pursuit = -30 }
+	}
+
+	counters = {
+		skirmishers = 1
+		heavy_infantry = 1
+	}
+
+	buy_cost = { gold = @[horse_archers_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[horse_archers_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[horse_archers_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+
+	stack = 100
+	
+	ai_quality = { 
+		value = 200
+	}
+	icon = massvampires
+}
+
+
+## kuei jin special troops, dharma based
+
+#DT p25
+twice_crimson_tigers_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			AND = {
+				OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+				}
+			religion = religion:deviltigers_religion
+			}
+			AND = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:road_horizon_victory_objective_decision
+				}
+			religion = religion:roadofunexaminedhorizons_religion			
+			}	
+		}
+	}
+
+	damage = 71
+	toughness = 25
+	pursuit = 50
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 15 }
+	}
+
+	counters = {
+		skirmishers = 1
+		POD_demonic_maa = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+##Other DT only troops are spirits and wraiths so elsewhere in the files 
+
+## Akuma are in the other file with three generics + specialist per yomi hell
+
+#TD 
+polong_maa = {
+	type = POD_construct_maa
+	
+	can_recruit = {
+		religion = religion:thrashingdragons_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 10
+	toughness = 20
+	pursuit = 0
+	screen = 50
+
+	counters = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 100
+	ai_quality = { value = pod_ai_weight_constructs }
+	icon = golems
+}
+
+#TD
+hungry_red_dragons_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			AND = {
+				OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+				}
+			religion = religion:thrashingdragons_religion
+			}
+			AND = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:road_horizon_victory_objective_decision
+				}
+			religion = religion:roadofunexaminedhorizons_religion			
+			}				
+		}
+	}
+	
+	damage = 70
+	toughness = 70
+	pursuit = 20
+	screen = 20
+	
+	counters = {
+		archers = 2
+		horse_archers = 2
+	}
+	
+	terrain_bonus = {
+		jungle = { damage = 20 toughness = 20 }
+	}	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.3 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.3 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.3 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = { 
+		value = 300
+
+	if = { # Makes Piyau uses the MaA she created instead of vanilla cultural while not adding the cultural file to PoD
+		limit = { this = character:791113 }
+		add = 1000
+	}
+
+	}
+	
+	icon = massvampires
+}
+
+#Shadow war
+wayang_kulit_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:thrashingdragons_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+
+	damage = 37
+	toughness = 37
+	pursuit = 50
+	screen = 50
+	
+	terrain_bonus = {
+		jungle = { pursuit = 20 screen = 20 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		elephant_cavalry = 3
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.7 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.7]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.7 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = { 
+		value = 300
+
+	if = { # Makes Piyau uses the MaA she created instead of vanilla cultural while not adding the cultural file to PoD
+		limit = { this = character:791113 }
+		add = 1000
+	}
+
+	}
+	icon = massvampires
+}
+
+#RD
+#Shadow war
+lianfang_maa = { 
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:resplendentcranes_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 35 
+	toughness = 35
+	pursuit = 0
+	screen = 0
+
+	buy_cost = { prestige = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+		
+	counters = {
+		pikemen = 1
+		skirmishers = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Shadow war
+triumphant_hares_maa = {
+	type = POD_vampire_maa
+	
+	can_recruit = { 
+		OR = {
+			AND = {
+				OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+				}
+			religion = religion:resplendentcranes_religion
+			}
+			AND = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:road_horizon_victory_objective_decision
+				}
+			religion = religion:roadofunexaminedhorizons_religion			
+			}				
+		}
+	}	
+	
+	damage = 10
+	toughness = 11
+	pursuit = 5
+	screen = 5
+
+	counters = {
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost / 1.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost / 1.5]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost / 1.5 ] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	allowed_in_hired_troops = no
+
+	stack = 150
+	ai_quality = 50 
+	icon = massvampires
+}
+
+#fanon based on their bodhisvata
+majestic_warriors_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:resplendentcranes_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}	
+	
+	damage = 120
+	toughness = 120
+	pursuit = 70
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		skirmishers = 1
+		pikemen = 1
+		light_cavalry = 1
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.8 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.8] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.8 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+		
+	stack = 25
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#TW
+dark_jade_lovers_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			AND = {
+				OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+				}
+			religion = religion:thousandwhispers_religion
+			}
+			AND = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:road_horizon_victory_objective_decision
+				}
+			religion = religion:roadofunexaminedhorizons_religion			
+			}				
+		}
+	}
+
+	damage = 85
+	toughness = 35
+	pursuit = 55
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 35
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#TW
+still_earth_flowers_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:thousandwhispers_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}	
+	}
+
+	damage = 55
+	toughness = 55
+	pursuit = 15
+	screen = 25
+	
+	terrain_bonus = {
+		mountains = { damage = 15 toughness = 20 }
+		desert_mountains = { damage = 15 toughness = 20 }
+		hills = { damage = 15 toughness = 20 }
+	}
+
+	counters = {
+		archers = 2
+		light_cavalry = 2
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#TW
+jade_mask_ghost_killers_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = {
+		religion = religion:thousandwhispers_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+		
+	pursuit = 50
+	screen = 30
+
+	damage = 45
+	toughness = 45
+
+	counters = {
+		POD_ghoul_maa = 2
+		POD_plasmic_maa = 2
+		POD_wraith_maa = 3
+	}
+
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 2] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 2] }
+	provision_cost = @provisions_cost_infantry_moderate
+	
+	allowed_in_hired_troops = no
+		
+	stack = 50
+	ai_quality = { value = 300}
+	icon = massvampires
+}
+
+#BF
+#Shadow war
+xiang_qi_masters_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = {
+		religion = religion:boneflowers_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 60
+	toughness = 60
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 10 toughness = 4 }
+		forest = { toughness = 4 damage = 10 }
+		taiga = { toughness = 4 damage = 10 }
+	}
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+
+	buy_cost = { gold = @[bowmen_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[bowmen_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[bowmen_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+
+	stack = 50
+	ai_quality = { 
+		value = 300
+	}
+	
+	icon = massvampires
+}
+
+#BF, fanon based on their arhat
+black_pearl_masters_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		religion = religion:boneflowers_religion
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 125
+	toughness = 125
+	pursuit = 50 
+	screen = 50 
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -75 }
+		desert_mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#BF, just a chapter name used for fanon
+keepers_black_metal_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			AND = {
+				OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+				}
+			religion = religion:boneflowers_religion
+			}
+			AND = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:road_horizon_victory_objective_decision
+				}
+			religion = religion:roadofunexaminedhorizons_religion			
+			}				
+		}
+	}
+	
+	damage = 90
+	toughness = 170
+	pursuit = 0
+	screen = 0
+	
+	counters = {
+		archers = 2
+		horse_archers = 1
+	}
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 3 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 3 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 3 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 40
+	ai_quality = 300
+	icon = massvampires
+}
+
+#FRP, named after their founder
+kataragama_chosen_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:flameoftherisingphoenix
+			faith = faith:thegreatclans
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 80
+	toughness = 80
+	pursuit = 25
+	screen = 25
+	
+	counters = {
+		POD_vampire_maa = 1
+		POD_demonic_maa = 1
+	}
+	
+	winter_bonus = {
+	}	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.7 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.7 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.7 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 300
+	icon = massvampires
+}
+
+#FRP, based on a title name for them
+jade_warriors_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:flameoftherisingphoenix
+			faith = faith:thegreatclans
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+
+	damage = 40
+	toughness = 40
+	pursuit = 25
+	screen = 25
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 1
+		heavy_cavalry = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.2 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.2] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.2 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Based on a unique discipline power for the FRP
+lotus_mist_warriors_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:flameoftherisingphoenix
+			faith = faith:thegreatclans
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+
+	damage = 60
+	toughness = 60
+	pursuit = 15
+	screen = 10
+	
+	terrain_bonus = {
+		forest = { damage = 20 toughness = 30 }
+		jungle = { damage = 20 toughness = 30 }
+	}
+
+	counters = {
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 3 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 3]  }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 3 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Face of the gods also gets cultists on the other file
+#Named after the founding mytho
+children_sita_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:faceofthegods
+			faith = faith:faceofthegoddess
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 145
+	toughness = 145
+	pursuit = 80
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		hills = { damage = -20 }
+		mountains = { damage = -20 }
+		desert_mountains = { damage = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		skirmishers = 1
+		pikemen = 1
+		light_cavalry = 1
+	}
+
+	buy_cost = { gold = @[heavy_cavalry_recruitment_cost * 2 ] }
+	low_maintenance_cost = { gold = @[heavy_cavalry_low_maint_cost * 2] }
+	high_maintenance_cost = { gold = @[heavy_cavalry_high_maint_cost * 2 ] }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	allowed_in_hired_troops = no
+
+		
+	stack = 25
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Face of the gods, named after the celestial tribe
+celestial_guard_maa = { 
+	type = heavy_infantry
+
+	can_recruit = { 
+		OR = {
+			faith = faith:faceofthegods
+			faith = faith:faceofthegoddess
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 15 
+	toughness = 45
+	pursuit = 0
+	screen = 40
+
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+		
+	counters = {
+		pikemen = 1
+		skirmishers = 1
+	}
+	
+	allowed_in_hired_troops = no
+
+	stack = 100
+	ai_quality = 300 
+	icon = heavy_infantry
+}
+
+#Inward way/focus, a term in their lexicon for knight 
+kabalyeru_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:inwardway
+			faith = faith:inwardfocus
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+
+	damage = 42
+	toughness = 42
+	pursuit = 30
+	screen = 30
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+	}
+
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_cavalry_moderate
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Named after one of their unique powers, IW/IF
+fighting_cloud_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		OR = {
+			faith = faith:inwardway
+			faith = faith:inwardfocus
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	damage = 70
+	toughness = 50
+	pursuit = 25
+	screen = 25
+	
+	counters = {
+		POD_vampire_maa = 1
+		POD_fera_maa = 1
+	}
+	
+	
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.2 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.2 ] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.2 ] }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+
+
+	stack = 50
+	ai_quality = 300
+	icon = massvampires
+}
+
+#Named after one of their unique powers, IW/IF
+illusion_shattering_maa = {
+	type = POD_vampire_maa
+	
+	damage = 13
+	toughness = 13
+	pursuit = 10
+	screen = 13
+	
+	can_recruit = { 
+		OR = {
+			faith = faith:inwardway
+			faith = faith:inwardfocus
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	counters = {
+		POD_spirit_maa = 2
+		POD_plasmic_maa = 2
+		POD_wraith_maa = 2
+		POD_demonic_maa = 2
+		POD_faerie_maa = 2
+	}
+		
+	allowed_in_hired_troops = no
+	
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost  }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 100
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Spirit of the living earth has two spirits as MaA in other files 
+#This one is named after their founder
+disciples_riyan_maa = {
+	type = POD_vampire_maa
+	
+	damage = 30
+	toughness = 35
+	pursuit = 30
+	screen = 30
+	
+	can_recruit = { 
+		OR = {
+			faith = faith:spiritlivingearth
+			faith = faith:kinofizanami
+		}
+		OR = {
+			has_trait = kueijin
+			has_trait = dhampyr
+		}
+	}
+	
+	terrain_bonus = {
+		taiga = { damage = 15 toughness = 20 }
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = 10 toughness = 10 }
+		harsh_winter = { damage = 20 toughness = 20 }
+	}	
+	
+	allowed_in_hired_troops = no
+	
+	buy_cost = { gold = @[skirmisher_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[skirmisher_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[skirmisher_high_maint_cost * 1.5 ] }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 100
+	ai_quality = 300 
+	icon = massvampires
+}
+
+heaven_hell_legion_maa = { 
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		this = character:793356
+	}
+	
+	damage = 95 
+	toughness = 95
+	pursuit = 50
+	screen = 50
+
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 1.5 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 1.5] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 1.5 ] }	
+	provision_cost = @provisions_cost_infantry_moderate
+		
+	counters = {
+		POD_vampire_maa = 2
+	}
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 300 
+	icon = massvampires
+}
+
+#Tzimisce objective reward
+dragon_fiends_maa = {
+	type = POD_vampire_maa
+
+	can_recruit = { 
+		house ?= { has_house_modifier = land_for_dragons_modifier }
+	} 
+	
+	damage = 130
+	toughness = 150
+	pursuit = 20
+	screen = 0
+
+	counters = {
+		POD_ghoul_maa = 2
+		POD_vampire_maa = 1
+		heavy_infantry = 1
+	}
+
+	buy_cost = { gold = @[heavy_infantry_recruitment_cost * 3 ] }
+	low_maintenance_cost = { gold = @[heavy_infantry_low_maint_cost * 3] }
+	high_maintenance_cost = { gold = @[heavy_infantry_high_maint_cost * 3] }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	allowed_in_hired_troops = no
+
+	stack = 50
+	ai_quality = 100
+	icon = massvampires
+}

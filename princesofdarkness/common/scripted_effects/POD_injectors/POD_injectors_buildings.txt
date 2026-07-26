@@ -1,0 +1,1027 @@
+﻿
+# character scope (to make the building requirement triggers work)
+POD_building_injector_haven = {
+##### Generic buildings from vanilla (TODO: overhaul main building)
+	if = {
+		limit = { always = $CHECK_MAIN_BUILDING$ }
+		
+		$EFFECT$ = { BUILDING = camp_main_01 }
+		$EFFECT$ = { BUILDING = camp_main_02 }
+		$EFFECT$ = { BUILDING = camp_main_03 }
+		$EFFECT$ = { BUILDING = camp_main_04 }
+		$EFFECT$ = { BUILDING = camp_main_05 }
+		$EFFECT$ = { BUILDING = camp_main_06 }
+	}
+
+##### Vanilla buildings, still used for indep hunters and fallback for weird cross splat breaking stuff players do
+	if = {
+		limit = { building_requirement_generic_haven = $HAS_REQUIRED_SPLAT$ }
+		
+		$EFFECT$ = { BUILDING = supply_tent_01 }
+		$EFFECT$ = { BUILDING = supply_tent_02 }
+		$EFFECT$ = { BUILDING = supply_tent_03 }
+		$EFFECT$ = { BUILDING = supply_tent_04 }
+		$EFFECT$ = { BUILDING = supply_tent_05 }
+		$EFFECT$ = { BUILDING = supply_tent_06 }
+		$EFFECT$ = { BUILDING = supply_tent_sutler }
+		$EFFECT$ = { BUILDING = supply_tent_mender }
+		$EFFECT$ = { BUILDING = supply_tent_smithy }
+		$EFFECT$ = { BUILDING = supply_tent_arsenal }
+		$EFFECT$ = { BUILDING = supply_tent_reserve_provisions }
+		$EFFECT$ = { BUILDING = supply_tent_reserve_water }
+		$EFFECT$ = { BUILDING = supply_tent_climbing_gear }
+		$EFFECT$ = { BUILDING = supply_tent_subdued_gear }
+		
+		$EFFECT$ = { BUILDING = barber_tent_01 }
+		$EFFECT$ = { BUILDING = barber_tent_02 }
+		$EFFECT$ = { BUILDING = barber_tent_03 }
+		$EFFECT$ = { BUILDING = barber_tent_04 }
+		$EFFECT$ = { BUILDING = barber_tent_05 }
+		$EFFECT$ = { BUILDING = barber_tent_06 }
+		$EFFECT$ = { BUILDING = barber_tent_surgeons_tools }
+		$EFFECT$ = { BUILDING = barber_tent_dentists_tools }
+		$EFFECT$ = { BUILDING = barber_tent_torturers_tools }
+		$EFFECT$ = { BUILDING = barber_tent_reference_corpus }
+		$EFFECT$ = { BUILDING = barber_tent_morticians_tools }
+		
+		$EFFECT$ = { BUILDING = baggage_train_01 }
+		$EFFECT$ = { BUILDING = baggage_train_02 }
+		$EFFECT$ = { BUILDING = baggage_train_03 }
+		$EFFECT$ = { BUILDING = baggage_train_04 }
+		$EFFECT$ = { BUILDING = baggage_train_05 }
+		$EFFECT$ = { BUILDING = baggage_train_06 }
+		$EFFECT$ = { BUILDING = baggage_train_ample_steeds }
+		$EFFECT$ = { BUILDING = baggage_train_porters }
+		$EFFECT$ = { BUILDING = baggage_train_trackers }
+		$EFFECT$ = { BUILDING = baggage_train_kennel }
+		$EFFECT$ = { BUILDING = baggage_train_siege_engineers }
+		$EFFECT$ = { BUILDING = baggage_train_shrine }
+		$EFFECT$ = { BUILDING = baggage_train_scribes }
+		$EFFECT$ = { BUILDING = baggage_train_bartering_grounds }
+		$EFFECT$ = { BUILDING = baggage_train_proof_of_claims }
+		$EFFECT$ = { BUILDING = baggage_train_ransom_cages }
+		$EFFECT$ = { BUILDING = baggage_train_negotiators }
+		$EFFECT$ = { BUILDING = baggage_train_ascetics }
+		$EFFECT$ = { BUILDING = baggage_train_pleasure_tents }
+		
+		$EFFECT$ = { BUILDING = mess_tent_01 }
+		$EFFECT$ = { BUILDING = mess_tent_02 }
+		$EFFECT$ = { BUILDING = mess_tent_03 }
+		$EFFECT$ = { BUILDING = mess_tent_04 }
+		$EFFECT$ = { BUILDING = mess_tent_05 }
+		$EFFECT$ = { BUILDING = mess_tent_06 }
+		$EFFECT$ = { BUILDING = mess_tent_herbalists }
+		$EFFECT$ = { BUILDING = mess_tent_brewers }
+		$EFFECT$ = { BUILDING = mess_tent_curers }
+		$EFFECT$ = { BUILDING = mess_tent_bakers }
+		$EFFECT$ = { BUILDING = mess_tent_cooks }
+		
+		$EFFECT$ = { BUILDING = camp_fire_01 }
+		$EFFECT$ = { BUILDING = camp_fire_02 }
+		$EFFECT$ = { BUILDING = camp_fire_03 }
+		$EFFECT$ = { BUILDING = camp_fire_04 }
+		$EFFECT$ = { BUILDING = camp_fire_05 }
+		$EFFECT$ = { BUILDING = camp_fire_06 }
+		$EFFECT$ = { BUILDING = camp_fire_trailing_musicians }
+		$EFFECT$ = { BUILDING = camp_fire_wandering_poets }
+		$EFFECT$ = { BUILDING = camp_fire_capering_fools }
+		$EFFECT$ = { BUILDING = camp_fire_libations_for_the_lost }
+		$EFFECT$ = { BUILDING = camp_fire_local_hangers_on }
+		$EFFECT$ = { BUILDING = camp_fire_future_dreams }
+		$EFFECT$ = { BUILDING = camp_fire_nightly_debates }
+		$EFFECT$ = { BUILDING = camp_fire_juicy_rumors }
+		
+		$EFFECT$ = { BUILDING = proving_grounds_01 }
+		$EFFECT$ = { BUILDING = proving_grounds_02 }
+		$EFFECT$ = { BUILDING = proving_grounds_03 }
+		$EFFECT$ = { BUILDING = proving_grounds_04 }
+		$EFFECT$ = { BUILDING = proving_grounds_05 }
+		$EFFECT$ = { BUILDING = proving_grounds_06 }
+		$EFFECT$ = { BUILDING = proving_grounds_horse_run }
+		$EFFECT$ = { BUILDING = proving_grounds_camel_run }
+		$EFFECT$ = { BUILDING = proving_grounds_elephantry_reserve }
+		$EFFECT$ = { BUILDING = proving_grounds_nightly_barding_drills }
+		$EFFECT$ = { BUILDING = proving_grounds_life_in_the_saddle }
+		$EFFECT$ = { BUILDING = proving_grounds_the_stump }
+		$EFFECT$ = { BUILDING = proving_grounds_personal_bouts }
+		$EFFECT$ = { BUILDING = proving_grounds_training_circle }
+		$EFFECT$ = { BUILDING = proving_grounds_mock_battle_drills }
+		$EFFECT$ = { BUILDING = proving_grounds_lockwagon }
+		$EFFECT$ = { BUILDING = proving_grounds_martial_study }
+		$EFFECT$ = { BUILDING = proving_grounds_the_stick_game }
+		$EFFECT$ = { BUILDING = proving_grounds_bodyguard_drills }
+		
+		$EFFECT$ = { BUILDING = camp_perimeter_01 }
+		$EFFECT$ = { BUILDING = camp_perimeter_02 }
+		$EFFECT$ = { BUILDING = camp_perimeter_03 }
+		$EFFECT$ = { BUILDING = camp_perimeter_04 }
+		$EFFECT$ = { BUILDING = camp_perimeter_05 }
+		$EFFECT$ = { BUILDING = camp_perimeter_06 }
+		$EFFECT$ = { BUILDING = camp_perimeter_good_siting }
+		$EFFECT$ = { BUILDING = camp_perimeter_fixed_layout }
+		$EFFECT$ = { BUILDING = camp_perimeter_extra_watch }
+		$EFFECT$ = { BUILDING = camp_perimeter_palisade }
+		$EFFECT$ = { BUILDING = camp_perimeter_ditch }
+		$EFFECT$ = { BUILDING = camp_perimeter_camp_hygiene }
+	}
+	
+##### Inquisitor buildings
+	if = {
+		limit = { building_requirement_inquisitor = $HAS_REQUIRED_SPLAT$ }
+		
+		# Knights of Acre (main)
+		$EFFECT$ = { BUILDING = knights_acre_01 }
+		$EFFECT$ = { BUILDING = knights_acre_02 }
+		$EFFECT$ = { BUILDING = knights_acre_03 }
+		$EFFECT$ = { BUILDING = knights_acre_04 }
+		$EFFECT$ = { BUILDING = knights_acre_05 }
+		$EFFECT$ = { BUILDING = knights_acre_06 }
+		# Knights of Acre (internal)
+		$EFFECT$ = { BUILDING = knights_acre_calatrava }
+		$EFFECT$ = { BUILDING = knights_acre_helena }
+		$EFFECT$ = { BUILDING = knights_acre_templars }
+		$EFFECT$ = { BUILDING = knights_acre_catherine }
+		$EFFECT$ = { BUILDING = knights_acre_thomas }
+		$EFFECT$ = { BUILDING = knights_acre_teutonic }
+		$EFFECT$ = { BUILDING = knights_acre_livonia }
+		$EFFECT$ = { BUILDING = knights_acre_hospitalers }
+		
+		# Sisters of St. John (main)
+		$EFFECT$ = { BUILDING = sisters_john_01 }
+		$EFFECT$ = { BUILDING = sisters_john_02 }
+		$EFFECT$ = { BUILDING = sisters_john_03 }
+		$EFFECT$ = { BUILDING = sisters_john_04 }
+		$EFFECT$ = { BUILDING = sisters_john_05 }
+		$EFFECT$ = { BUILDING = sisters_john_06 }
+		$EFFECT$ = { BUILDING = sisters_john_041 }
+		$EFFECT$ = { BUILDING = sisters_john_042 }
+		$EFFECT$ = { BUILDING = sisters_john_043 }
+		# Sisters of St. John (internal)
+		$EFFECT$ = { BUILDING = sisters_john_healing_ritual }
+		$EFFECT$ = { BUILDING = sisters_john_torturers_tools }
+		$EFFECT$ = { BUILDING = sisters_john_thoughts_prayers }
+		
+		# Oculi Dei (main)
+		$EFFECT$ = { BUILDING = oculi_dei_01 }
+		$EFFECT$ = { BUILDING = oculi_dei_02 }
+		$EFFECT$ = { BUILDING = oculi_dei_03 }
+		$EFFECT$ = { BUILDING = oculi_dei_04 }
+		$EFFECT$ = { BUILDING = oculi_dei_05 }
+		$EFFECT$ = { BUILDING = oculi_dei_06 }
+		# Oculi Dei (internal)
+		$EFFECT$ = { BUILDING = oculi_dei_spying_bards }
+		$EFFECT$ = { BUILDING = oculi_dei_wandering_poets }
+		$EFFECT$ = { BUILDING = oculi_dei_capering_fools }
+		$EFFECT$ = { BUILDING = oculi_dei_traps }
+		$EFFECT$ = { BUILDING = oculi_dei_local_hangers_on }
+		$EFFECT$ = { BUILDING = oculi_dei_local_recruits }
+		$EFFECT$ = { BUILDING = oculi_dei_nightly_debates }
+		
+		# House von Murnau (main)
+		$EFFECT$ = { BUILDING = von_murnau_01 }
+		$EFFECT$ = { BUILDING = von_murnau_02 }
+		$EFFECT$ = { BUILDING = von_murnau_03 }
+		$EFFECT$ = { BUILDING = von_murnau_04 }
+		$EFFECT$ = { BUILDING = von_murnau_05 }
+		$EFFECT$ = { BUILDING = von_murnau_06 }
+		$EFFECT$ = { BUILDING = von_murnau_041 }
+		$EFFECT$ = { BUILDING = von_murnau_042 }
+		$EFFECT$ = { BUILDING = von_murnau_043 }
+		# House von Murnau (internal)
+		$EFFECT$ = { BUILDING = von_murnau_brewers }
+		$EFFECT$ = { BUILDING = von_murnau_contacts }
+		$EFFECT$ = { BUILDING = von_murnau_cooks }
+		
+		# Red Order (main)
+		$EFFECT$ = { BUILDING = red_order_01 }
+		$EFFECT$ = { BUILDING = red_order_02 }
+		$EFFECT$ = { BUILDING = red_order_03 }
+		$EFFECT$ = { BUILDING = red_order_04 }
+		$EFFECT$ = { BUILDING = red_order_05 }
+		$EFFECT$ = { BUILDING = red_order_06 }
+		# Red Order (internal)
+		$EFFECT$ = { BUILDING = red_order_herbalists }
+		$EFFECT$ = { BUILDING = red_order_siege_engineers }
+		$EFFECT$ = { BUILDING = red_order_shrine }
+		$EFFECT$ = { BUILDING = red_order_library }
+		$EFFECT$ = { BUILDING = red_order_ransom_cages }
+		$EFFECT$ = { BUILDING = red_order_shared_quarters }
+	}
+	
+##### vampblood buildings
+	if = {
+		limit = { domicile_building_requirement_vamp_blood = $HAS_REQUIRED_SPLAT$ }
+				
+		$EFFECT$ = { BUILDING = haven_defenses_01 }
+		$EFFECT$ = { BUILDING = haven_defenses_02 }
+		$EFFECT$ = { BUILDING = haven_defenses_03 }
+		$EFFECT$ = { BUILDING = haven_defenses_04 }
+		$EFFECT$ = { BUILDING = haven_defenses_05 }
+		$EFFECT$ = { BUILDING = haven_defenses_06 }
+		$EFFECT$ = { BUILDING = haven_defenses_live_entertainment }
+		$EFFECT$ = { BUILDING = haven_defenses_rumormonger }
+		$EFFECT$ = { BUILDING = haven_defenses_capering_fools }
+		$EFFECT$ = { BUILDING = haven_defenses_traps }
+		$EFFECT$ = { BUILDING = haven_defenses_brutish_guards }
+		$EFFECT$ = { BUILDING = haven_defenses_workforce }
+		$EFFECT$ = { BUILDING = haven_defenses_majordomo }
+
+		$EFFECT$ = { BUILDING = servant_quarters_01 }
+		$EFFECT$ = { BUILDING = servant_quarters_02 }
+		$EFFECT$ = { BUILDING = servant_quarters_03 }
+		$EFFECT$ = { BUILDING = servant_quarters_04 }
+		$EFFECT$ = { BUILDING = servant_quarters_05 }
+		$EFFECT$ = { BUILDING = servant_quarters_06 }
+		$EFFECT$ = { BUILDING = servant_quarters_041 }
+		$EFFECT$ = { BUILDING = servant_quarters_042 }
+		$EFFECT$ = { BUILDING = servant_quarters_043 }
+		$EFFECT$ = { BUILDING = servant_quarters_0411 }
+		$EFFECT$ = { BUILDING = servant_quarters_0421 }
+		$EFFECT$ = { BUILDING = servant_quarters_0431 }
+		$EFFECT$ = { BUILDING = servant_quarters_healing_ritual }
+		$EFFECT$ = { BUILDING = servant_quarters_torturers_tools }
+		$EFFECT$ = { BUILDING = servant_quarters_stocked_supplies }
+
+		$EFFECT$ = { BUILDING = vampire_stable_01 }
+		$EFFECT$ = { BUILDING = vampire_stable_02 }
+		$EFFECT$ = { BUILDING = vampire_stable_03 }
+		$EFFECT$ = { BUILDING = vampire_stable_04 }
+		$EFFECT$ = { BUILDING = vampire_stable_05 }
+		$EFFECT$ = { BUILDING = vampire_stable_06 }
+		$EFFECT$ = { BUILDING = vampire_stable_kennel }
+		$EFFECT$ = { BUILDING = vampire_stable_stable }
+		$EFFECT$ = { BUILDING = vampire_stable_trackers }
+		$EFFECT$ = { BUILDING = vampire_stable_beast_burden }
+
+		$EFFECT$ = { BUILDING = vampire_military_order_01 }
+		$EFFECT$ = { BUILDING = vampire_military_order_02 }
+		$EFFECT$ = { BUILDING = vampire_military_order_03 }
+		$EFFECT$ = { BUILDING = vampire_military_order_04 }
+		$EFFECT$ = { BUILDING = vampire_military_order_05 }
+		$EFFECT$ = { BUILDING = vampire_military_order_06 }
+		$EFFECT$ = { BUILDING = vampire_military_order_021 }
+		$EFFECT$ = { BUILDING = vampire_military_order_031 }
+		$EFFECT$ = { BUILDING = vampire_military_order_041 }
+		$EFFECT$ = { BUILDING = vampire_military_order_051 }
+		$EFFECT$ = { BUILDING = vampire_military_order_061 }
+		$EFFECT$ = { BUILDING = vampire_military_ghoul_quarters }
+		$EFFECT$ = { BUILDING = vampire_military_training_grounds }
+		$EFFECT$ = { BUILDING = vampire_military_war_planning }
+		$EFFECT$ = { BUILDING = vampire_military_mercenary_contracts }
+		$EFFECT$ = { BUILDING = vampire_military_our_cause_1 }
+		$EFFECT$ = { BUILDING = vampire_military_our_cause_2 }
+		$EFFECT$ = { BUILDING = vampire_military_our_cause_3 }
+
+		$EFFECT$ = { BUILDING = vampire_caravan_01 }
+		$EFFECT$ = { BUILDING = vampire_caravan_02 }
+		$EFFECT$ = { BUILDING = vampire_caravan_03 }
+		$EFFECT$ = { BUILDING = vampire_caravan_04 }
+		$EFFECT$ = { BUILDING = vampire_caravan_05 }
+		$EFFECT$ = { BUILDING = vampire_caravan_06 }
+		$EFFECT$ = { BUILDING = vampire_caravan_021 }
+		$EFFECT$ = { BUILDING = vampire_caravan_031 }
+		$EFFECT$ = { BUILDING = vampire_caravan_041 }
+		$EFFECT$ = { BUILDING = vampire_caravan_051 }
+		$EFFECT$ = { BUILDING = vampire_caravan_061 }
+		$EFFECT$ = { BUILDING = vampire_caravan_local_contacts }
+		$EFFECT$ = { BUILDING = vampire_caravan_bartering_grounds }
+		$EFFECT$ = { BUILDING = vampire_caravan_blood_dolls }
+		$EFFECT$ = { BUILDING = vampire_caravan_defenses }
+
+		$EFFECT$ = { BUILDING = vampire_ambassador_01 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_02 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_03 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_04 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_05 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_06 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_021 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_031 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_041 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_051 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_061 }
+		$EFFECT$ = { BUILDING = vampire_ambassador_poets }
+		$EFFECT$ = { BUILDING = vampire_ambassador_team }
+		$EFFECT$ = { BUILDING = vampire_ambassador_foreign_contacts }
+		$EFFECT$ = { BUILDING = vampire_ambassador_musicians }
+
+		$EFFECT$ = { BUILDING = vampire_cult_01 }
+		$EFFECT$ = { BUILDING = vampire_cult_02 }
+		$EFFECT$ = { BUILDING = vampire_cult_03 }
+		$EFFECT$ = { BUILDING = vampire_cult_04 }
+		$EFFECT$ = { BUILDING = vampire_cult_05 }
+		$EFFECT$ = { BUILDING = vampire_cult_06 }
+		$EFFECT$ = { BUILDING = vampire_cult_021 }
+		$EFFECT$ = { BUILDING = vampire_cult_031 }
+		$EFFECT$ = { BUILDING = vampire_cult_041 }
+		$EFFECT$ = { BUILDING = vampire_cult_051 }
+		$EFFECT$ = { BUILDING = vampire_cult_061 }
+		$EFFECT$ = { BUILDING = vampire_cult_acolytes }
+		$EFFECT$ = { BUILDING = vampire_cult_cells }
+		$EFFECT$ = { BUILDING = vampire_cult_last_rites }
+		$EFFECT$ = { BUILDING = vampire_cult_sheperd }
+
+
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_01 }
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_02 }
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_03 }
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_04 }
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_05 }
+		$EFFECT$ = { BUILDING = vampire_tzimisce_fleshcrafting_laboratory_06 }
+	}
+	
+##### KJ buildings
+	if = {
+		limit = { domicile_building_requirement_kj = $HAS_REQUIRED_SPLAT$ }
+		
+		$EFFECT$ = { BUILDING = kj_center_direction_01 }
+		$EFFECT$ = { BUILDING = kj_center_direction_02 }
+		$EFFECT$ = { BUILDING = kj_center_direction_03 }
+		$EFFECT$ = { BUILDING = kj_center_direction_04 }
+		$EFFECT$ = { BUILDING = kj_center_direction_05 }
+		$EFFECT$ = { BUILDING = kj_center_direction_06 }
+		$EFFECT$ = { BUILDING = kj_center_direction_031 }
+		$EFFECT$ = { BUILDING = kj_center_direction_041 }
+		$EFFECT$ = { BUILDING = kj_center_direction_051 }
+		$EFFECT$ = { BUILDING = kj_center_direction_061 }
+		$EFFECT$ = { BUILDING = kj_center_direction_students }
+		$EFFECT$ = { BUILDING = kj_center_direction_hermits }
+		$EFFECT$ = { BUILDING = kj_center_direction_masters }
+
+		$EFFECT$ = { BUILDING = kj_south_direction_01 }
+		$EFFECT$ = { BUILDING = kj_south_direction_02 }
+		$EFFECT$ = { BUILDING = kj_south_direction_03 }
+		$EFFECT$ = { BUILDING = kj_south_direction_04 }
+		$EFFECT$ = { BUILDING = kj_south_direction_05 }
+		$EFFECT$ = { BUILDING = kj_south_direction_06 }
+		$EFFECT$ = { BUILDING = kj_south_direction_031 }
+		$EFFECT$ = { BUILDING = kj_south_direction_041 }
+		$EFFECT$ = { BUILDING = kj_south_direction_051 }
+		$EFFECT$ = { BUILDING = kj_south_direction_061 }
+		$EFFECT$ = { BUILDING = kj_south_direction_warmasters }
+		$EFFECT$ = { BUILDING = kj_south_direction_firebirds }
+		$EFFECT$ = { BUILDING = kj_south_direction_generals }
+		
+		$EFFECT$ = { BUILDING = kj_east_direction_01 }
+		$EFFECT$ = { BUILDING = kj_east_direction_02 }
+		$EFFECT$ = { BUILDING = kj_east_direction_03 }
+		$EFFECT$ = { BUILDING = kj_east_direction_04 }
+		$EFFECT$ = { BUILDING = kj_east_direction_05 }
+		$EFFECT$ = { BUILDING = kj_east_direction_06 }
+		$EFFECT$ = { BUILDING = kj_east_direction_031 }
+		$EFFECT$ = { BUILDING = kj_east_direction_041 }
+		$EFFECT$ = { BUILDING = kj_east_direction_051 }
+		$EFFECT$ = { BUILDING = kj_east_direction_061 }
+		$EFFECT$ = { BUILDING = kj_east_direction_provocateurs }
+		$EFFECT$ = { BUILDING = kj_east_direction_farmers }
+		$EFFECT$ = { BUILDING = kj_east_direction_harvesters }
+
+		$EFFECT$ = { BUILDING = kj_west_direction_01 }
+		$EFFECT$ = { BUILDING = kj_west_direction_02 }
+		$EFFECT$ = { BUILDING = kj_west_direction_03 }
+		$EFFECT$ = { BUILDING = kj_west_direction_04 }
+		$EFFECT$ = { BUILDING = kj_west_direction_05 }
+		$EFFECT$ = { BUILDING = kj_west_direction_06 }
+		$EFFECT$ = { BUILDING = kj_west_direction_031 }
+		$EFFECT$ = { BUILDING = kj_west_direction_041 }
+		$EFFECT$ = { BUILDING = kj_west_direction_051 }
+		$EFFECT$ = { BUILDING = kj_west_direction_061 }
+		$EFFECT$ = { BUILDING = kj_west_direction_messengers }
+		$EFFECT$ = { BUILDING = kj_west_direction_spies }
+		$EFFECT$ = { BUILDING = kj_west_direction_assassins }
+		
+		$EFFECT$ = { BUILDING = kj_north_direction_01 }
+		$EFFECT$ = { BUILDING = kj_north_direction_02 }
+		$EFFECT$ = { BUILDING = kj_north_direction_03 }
+		$EFFECT$ = { BUILDING = kj_north_direction_04 }
+		$EFFECT$ = { BUILDING = kj_north_direction_05 }
+		$EFFECT$ = { BUILDING = kj_north_direction_06 }
+		$EFFECT$ = { BUILDING = kj_north_direction_031 }
+		$EFFECT$ = { BUILDING = kj_north_direction_041 }
+		$EFFECT$ = { BUILDING = kj_north_direction_051 }
+		$EFFECT$ = { BUILDING = kj_north_direction_061 }
+		$EFFECT$ = { BUILDING = kj_north_direction_magistrates }
+		$EFFECT$ = { BUILDING = kj_north_direction_executioners }
+		$EFFECT$ = { BUILDING = kj_north_direction_judges }
+	}	
+	
+##### Mummy buildings
+	if = {
+		limit = { domicile_building_requirement_mummy = $HAS_REQUIRED_SPLAT$ }
+			
+		$EFFECT$ = { BUILDING = mummy_thanatology_library_01 }	
+		$EFFECT$ = { BUILDING = mummy_library_01 }
+
+		$EFFECT$ = { BUILDING = mummy_library_01a }
+		$EFFECT$ = { BUILDING = mummy_library_02a }
+		$EFFECT$ = { BUILDING = mummy_library_03a }
+		$EFFECT$ = { BUILDING = mummy_library_04a }
+		$EFFECT$ = { BUILDING = mummy_library_05a }
+		
+		$EFFECT$ = { BUILDING = mummy_library_01b }
+		$EFFECT$ = { BUILDING = mummy_library_02b }
+		$EFFECT$ = { BUILDING = mummy_library_03b }
+		$EFFECT$ = { BUILDING = mummy_library_04b }
+		$EFFECT$ = { BUILDING = mummy_library_05b }
+
+		$EFFECT$ = { BUILDING = mummy_library_01c }
+		$EFFECT$ = { BUILDING = mummy_library_02c }
+		$EFFECT$ = { BUILDING = mummy_library_03c }
+		$EFFECT$ = { BUILDING = mummy_library_04c }
+		$EFFECT$ = { BUILDING = mummy_library_05c }
+
+		$EFFECT$ = { BUILDING = mummy_library_trapped_bookcase }
+		$EFFECT$ = { BUILDING = mummy_library_recipe_book }
+		$EFFECT$ = { BUILDING = mummy_library_workshop }
+		$EFFECT$ = { BUILDING = mummy_library_celestial_chorus }
+		$EFFECT$ = { BUILDING = mummy_library_clay_molder }
+		$EFFECT$ = { BUILDING = mummy_library_underworld_entry }
+		$EFFECT$ = { BUILDING = mummy_library_ren_study_room }
+
+
+		$EFFECT$ = { BUILDING = mummy_memorandum_01 }
+
+		$EFFECT$ = { BUILDING = mummy_memorandum_01a }
+		$EFFECT$ = { BUILDING = mummy_memorandum_02a }
+		$EFFECT$ = { BUILDING = mummy_memorandum_03a }
+		$EFFECT$ = { BUILDING = mummy_memorandum_04a }
+		$EFFECT$ = { BUILDING = mummy_memorandum_05a }
+		
+		$EFFECT$ = { BUILDING = mummy_memorandum_01b }
+		$EFFECT$ = { BUILDING = mummy_memorandum_02b }
+		$EFFECT$ = { BUILDING = mummy_memorandum_03b }
+		$EFFECT$ = { BUILDING = mummy_memorandum_04b }
+		$EFFECT$ = { BUILDING = mummy_memorandum_05b }
+
+		$EFFECT$ = { BUILDING = mummy_memorandum_01c }
+		$EFFECT$ = { BUILDING = mummy_memorandum_02c }
+		$EFFECT$ = { BUILDING = mummy_memorandum_03c }
+		$EFFECT$ = { BUILDING = mummy_memorandum_04c }
+		$EFFECT$ = { BUILDING = mummy_memorandum_05c }
+
+		$EFFECT$ = { BUILDING = mummy_memorandum_trapped_doorway }
+		$EFFECT$ = { BUILDING = mummy_memorandum_visiting_room }
+		$EFFECT$ = { BUILDING = mummy_memorandum_relic_showcase }
+		$EFFECT$ = { BUILDING = mummy_memorandum_neteru_priest }
+		
+
+		$EFFECT$ = { BUILDING = mummy_connections_01 }
+
+		$EFFECT$ = { BUILDING = mummy_connections_01a }
+		$EFFECT$ = { BUILDING = mummy_connections_02a }
+		$EFFECT$ = { BUILDING = mummy_connections_03a }
+		$EFFECT$ = { BUILDING = mummy_connections_04a }
+		$EFFECT$ = { BUILDING = mummy_connections_05a }
+		
+		$EFFECT$ = { BUILDING = mummy_connections_01b }
+		$EFFECT$ = { BUILDING = mummy_connections_02b }
+		$EFFECT$ = { BUILDING = mummy_connections_03b }
+		$EFFECT$ = { BUILDING = mummy_connections_04b }
+		$EFFECT$ = { BUILDING = mummy_connections_05b }
+
+		$EFFECT$ = { BUILDING = mummy_connections_01c }
+		$EFFECT$ = { BUILDING = mummy_connections_02c }
+		$EFFECT$ = { BUILDING = mummy_connections_03c }
+		$EFFECT$ = { BUILDING = mummy_connections_04c }
+		$EFFECT$ = { BUILDING = mummy_connections_05c }
+
+		$EFFECT$ = { BUILDING = mummy_connections_trapped_entry }
+		$EFFECT$ = { BUILDING = mummy_connections_wealthy_connections }
+		$EFFECT$ = { BUILDING = mummy_connections_torture_tools_ready }
+		$EFFECT$ = { BUILDING = mummy_connections_connections_to_local_thiefs }
+		$EFFECT$ = { BUILDING = mummy_connections_connections_to_local_blacksmith }
+		$EFFECT$ = { BUILDING = mummy_connections_connections_to_local_huntperson }
+		$EFFECT$ = { BUILDING = mummy_connections_connections_to_local_buyers }
+		
+
+		$EFFECT$ = { BUILDING = mummy_private_guard_01 }
+
+		$EFFECT$ = { BUILDING = mummy_private_guard_01a }
+		$EFFECT$ = { BUILDING = mummy_private_guard_02a }
+		$EFFECT$ = { BUILDING = mummy_private_guard_03a }
+		$EFFECT$ = { BUILDING = mummy_private_guard_04a }
+		$EFFECT$ = { BUILDING = mummy_private_guard_05a }
+		
+		$EFFECT$ = { BUILDING = mummy_private_guard_01b }
+		$EFFECT$ = { BUILDING = mummy_private_guard_02b }
+		$EFFECT$ = { BUILDING = mummy_private_guard_03b }
+		$EFFECT$ = { BUILDING = mummy_private_guard_04b }
+		$EFFECT$ = { BUILDING = mummy_private_guard_05b }
+
+		$EFFECT$ = { BUILDING = mummy_private_guard_01c }
+		$EFFECT$ = { BUILDING = mummy_private_guard_02c }
+		$EFFECT$ = { BUILDING = mummy_private_guard_03c }
+		$EFFECT$ = { BUILDING = mummy_private_guard_04c }
+		$EFFECT$ = { BUILDING = mummy_private_guard_05c }
+
+		$EFFECT$ = { BUILDING = mummy_private_guard_always_ready_guard }
+		$EFFECT$ = { BUILDING = mummy_private_guard_engineer_room }
+		$EFFECT$ = { BUILDING = mummy_private_guard_commander_room }
+		$EFFECT$ = { BUILDING = mummy_private_guard_animal_breeding_ground }
+		$EFFECT$ = { BUILDING = mummy_private_guard_effigy_center }
+		$EFFECT$ = { BUILDING = mummy_private_guard_underworld_embassy }
+		$EFFECT$ = { BUILDING = mummy_private_guard_high_umbra_connections }
+
+		
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_01 }
+
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_01a }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_02a }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_03a }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_04a }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_05a }
+		
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_01b }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_02b }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_03b }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_04b }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_05b }
+
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_01c }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_02c }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_03c }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_04c }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_05c }
+
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_protected_ground }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_neteru_head_porter }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_neteru_head_groom }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_neteru_kennel_person }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_neteru_witness }
+		$EFFECT$ = { BUILDING = mummy_neteru_corner_neteru_person_haggler }
+	}	
+
+##### Mokole buildings
+	if = {
+		limit = { domicile_building_requirement_mokole = $HAS_REQUIRED_SPLAT$ }
+
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_01 }
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_02 }
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_03 }
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_04 }
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_05 }
+		$EFFECT$ = { BUILDING = mokole_main_meditation_chamber_06 }
+
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_01 }
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_02 }
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_03 }
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_04 }
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_05 }
+		$EFFECT$ = { BUILDING = mokole_main_dragon_obelisk_06 }
+
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_01 }
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_02 }
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_03 }
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_04 }
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_05 }
+		$EFFECT$ = { BUILDING = mokole_main_legendary_armory_06 }
+
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_01 }
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_02 }
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_03 }
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_04 }
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_05 }
+		$EFFECT$ = { BUILDING = mokole_main_summoning_array_06 }
+
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_01 }
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_02 }
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_03 }
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_04 }
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_05 }
+		$EFFECT$ = { BUILDING = mokole_dream_hollow_06 }
+
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_01 }
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_02 }
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_03 }
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_04 }
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_05 }
+		$EFFECT$ = { BUILDING = mokole_luxurious_cushions_06 }
+
+		$EFFECT$ = { BUILDING = mokole_dream_wards_01 }
+		$EFFECT$ = { BUILDING = mokole_dream_wards_02 }
+		$EFFECT$ = { BUILDING = mokole_dream_wards_03 }
+		$EFFECT$ = { BUILDING = mokole_dream_wards_04 }
+		$EFFECT$ = { BUILDING = mokole_dream_wards_05 }
+		$EFFECT$ = { BUILDING = mokole_dream_wards_06 }
+
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_01 }
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_02 }
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_03 }
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_04 }
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_05 }
+		$EFFECT$ = { BUILDING = mokole_form_stabilizers_06 }
+
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_01 }
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_02 }
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_03 }
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_04 }
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_05 }
+		$EFFECT$ = { BUILDING = mokole_nightmare_amplifiers_06 }
+
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_01 }
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_02 }
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_03 }
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_04 }
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_05 }
+		$EFFECT$ = { BUILDING = mokole_dynastic_records_06 }
+
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_01 }
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_02 }
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_03 }
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_04 }
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_05 }
+		$EFFECT$ = { BUILDING = mokole_ancient_studies_06 }
+
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_01 }
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_02 }
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_03 }
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_04 }
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_05 }
+		$EFFECT$ = { BUILDING = mokole_tidal_pool_06 }
+
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_01 }
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_02 }
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_03 }
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_04 }
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_05 }
+		$EFFECT$ = { BUILDING = mokole_luminous_pool_06 }
+
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_01 }
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_02 }
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_03 }
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_04 }
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_05 }
+		$EFFECT$ = { BUILDING = mokole_umbral_messengers_06 }
+
+		$EFFECT$ = { BUILDING = mokole_purified_waters_01 }
+		$EFFECT$ = { BUILDING = mokole_purified_waters_02 }
+		$EFFECT$ = { BUILDING = mokole_purified_waters_03 }
+		$EFFECT$ = { BUILDING = mokole_purified_waters_04 }
+		$EFFECT$ = { BUILDING = mokole_purified_waters_05 }
+		$EFFECT$ = { BUILDING = mokole_purified_waters_06 }
+
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_01 }
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_02 }
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_03 }
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_04 }
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_05 }
+		$EFFECT$ = { BUILDING = mokole_unseen_protections_06 }
+
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_01 }
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_02 }
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_03 }
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_04 }
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_05 }
+		$EFFECT$ = { BUILDING = mokole_spirit_offerings_06 }
+
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_01 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_02 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_03 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_04 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_05 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_net_06 }
+
+
+
+
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_01 }
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_02 }
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_03 }
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_04 }
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_05 }
+		$EFFECT$ = { BUILDING = mokole_spawning_grounds_06 }
+
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_01 }
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_02 }
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_03 }
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_04 }
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_05 }
+		$EFFECT$ = { BUILDING = mokole_lofty_bedchambers_06 }
+
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_01 }
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_02 }
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_03 }
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_04 }
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_05 }
+		$EFFECT$ = { BUILDING = mokole_spirit_guides_06 }
+
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_01 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_02 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_03 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_04 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_05 }
+		$EFFECT$ = { BUILDING = mokole_hallowed_shrines_06 }
+
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_01 }
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_02 }
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_03 }
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_04 }
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_05 }
+		$EFFECT$ = { BUILDING = mokole_hunting_parties_06 }
+
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_01 }
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_02 }
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_03 }
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_04 }
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_05 }
+		$EFFECT$ = { BUILDING = mokole_clutch_guidance_06 }
+
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_01 }
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_02 }
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_03 }
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_04 }
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_05 }
+		$EFFECT$ = { BUILDING = mokole_suchid_hatchery_06 }
+
+		$EFFECT$ = { BUILDING = mokole_sun_forge_01 }
+		$EFFECT$ = { BUILDING = mokole_sun_forge_02 }
+		$EFFECT$ = { BUILDING = mokole_sun_forge_03 }
+		$EFFECT$ = { BUILDING = mokole_sun_forge_04 }
+		$EFFECT$ = { BUILDING = mokole_sun_forge_05 }
+		$EFFECT$ = { BUILDING = mokole_sun_forge_06 }
+
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_01 }
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_02 }
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_03 }
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_04 }
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_05 }
+		$EFFECT$ = { BUILDING = mokole_solar_smelters_06 }
+
+		$EFFECT$ = { BUILDING = mokole_material_supplier_01 }
+		$EFFECT$ = { BUILDING = mokole_material_supplier_02 }
+		$EFFECT$ = { BUILDING = mokole_material_supplier_03 }
+		$EFFECT$ = { BUILDING = mokole_material_supplier_04 }
+		$EFFECT$ = { BUILDING = mokole_material_supplier_05 }
+		$EFFECT$ = { BUILDING = mokole_material_supplier_06 }
+
+		$EFFECT$ = { BUILDING = mokole_sun_lens_01 }
+		$EFFECT$ = { BUILDING = mokole_sun_lens_02 }
+		$EFFECT$ = { BUILDING = mokole_sun_lens_03 }
+		$EFFECT$ = { BUILDING = mokole_sun_lens_04 }
+		$EFFECT$ = { BUILDING = mokole_sun_lens_05 }
+		$EFFECT$ = { BUILDING = mokole_sun_lens_06 }
+
+		$EFFECT$ = { BUILDING = mokole_apprentice_01 }
+		$EFFECT$ = { BUILDING = mokole_apprentice_02 }
+		$EFFECT$ = { BUILDING = mokole_apprentice_03 }
+		$EFFECT$ = { BUILDING = mokole_apprentice_04 }
+		$EFFECT$ = { BUILDING = mokole_apprentice_05 }
+		$EFFECT$ = { BUILDING = mokole_apprentice_06 }
+
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_01 }
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_02 }
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_03 }
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_04 }
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_05 }
+		$EFFECT$ = { BUILDING = mokole_spirit_infuser_06 }
+
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_01 }
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_02 }
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_03 }
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_04 }
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_05 }
+		$EFFECT$ = { BUILDING = mokole_sunforged_outfitter_06 }
+
+
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_01 }
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_02 }
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_03 }
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_04 }
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_05 }
+		$EFFECT$ = { BUILDING = mokole_dragonguard_chambers_06 }
+
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_01 }
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_02 }
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_03 }
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_04 }
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_05 }
+		$EFFECT$ = { BUILDING = mokole_saurian_sanctum_06 }
+
+		$EFFECT$ = { BUILDING = mokole_halls_valor_01 }
+		$EFFECT$ = { BUILDING = mokole_halls_valor_02 }
+		$EFFECT$ = { BUILDING = mokole_halls_valor_03 }
+		$EFFECT$ = { BUILDING = mokole_halls_valor_04 }
+		$EFFECT$ = { BUILDING = mokole_halls_valor_05 }
+		$EFFECT$ = { BUILDING = mokole_halls_valor_06 }
+
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_01 }
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_02 }
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_03 }
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_04 }
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_05 }
+		$EFFECT$ = { BUILDING = mokole_kinfolk_barracks_06 }
+
+		$EFFECT$ = { BUILDING = mokole_beast_dens_01 }
+		$EFFECT$ = { BUILDING = mokole_beast_dens_02 }
+		$EFFECT$ = { BUILDING = mokole_beast_dens_03 }
+		$EFFECT$ = { BUILDING = mokole_beast_dens_04 }
+		$EFFECT$ = { BUILDING = mokole_beast_dens_05 }
+		$EFFECT$ = { BUILDING = mokole_beast_dens_06 }
+
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_01 }
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_02 }
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_03 }
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_04 }
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_05 }
+		$EFFECT$ = { BUILDING = mokole_edifice_mastery_06 }
+
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_01 }
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_02 }
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_03 }
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_04 }
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_05 }
+		$EFFECT$ = { BUILDING = mokole_treasure_vaults_06 }
+
+
+		$EFFECT$ = { BUILDING = mokole_hall_stories_01 }
+		$EFFECT$ = { BUILDING = mokole_hall_stories_02 }
+		$EFFECT$ = { BUILDING = mokole_hall_stories_03 }
+		$EFFECT$ = { BUILDING = mokole_hall_stories_04 }
+		$EFFECT$ = { BUILDING = mokole_hall_stories_05 }
+		$EFFECT$ = { BUILDING = mokole_hall_stories_06 }
+
+		$EFFECT$ = { BUILDING = mokole_songs_old_01 }
+		$EFFECT$ = { BUILDING = mokole_songs_old_02 }
+		$EFFECT$ = { BUILDING = mokole_songs_old_03 }
+		$EFFECT$ = { BUILDING = mokole_songs_old_04 }
+		$EFFECT$ = { BUILDING = mokole_songs_old_05 }
+		$EFFECT$ = { BUILDING = mokole_songs_old_06 }
+
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_01 }
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_02 }
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_03 }
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_04 }
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_05 }
+		$EFFECT$ = { BUILDING = mokole_chorus_revelry_06 }
+
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_01 }
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_02 }
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_03 }
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_04 }
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_05 }
+		$EFFECT$ = { BUILDING = mokole_ballads_kin_06 }
+
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_01 }
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_02 }
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_03 }
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_04 }
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_05 }
+		$EFFECT$ = { BUILDING = mokole_hymns_legends_06 }
+
+		$EFFECT$ = { BUILDING = mokole_verses_unity_01 }
+		$EFFECT$ = { BUILDING = mokole_verses_unity_02 }
+		$EFFECT$ = { BUILDING = mokole_verses_unity_03 }
+		$EFFECT$ = { BUILDING = mokole_verses_unity_04 }
+		$EFFECT$ = { BUILDING = mokole_verses_unity_05 }
+		$EFFECT$ = { BUILDING = mokole_verses_unity_06 }
+
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_01 }
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_02 }
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_03 }
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_04 }
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_05 }
+		$EFFECT$ = { BUILDING = mokole_melodies_destruction_06 }
+	}
+
+##### Demons buildings
+	if = {
+		limit = { domicile_building_requirement_demon = $HAS_REQUIRED_SPLAT$ }
+	
+		$EFFECT$ = { BUILDING = abbadon_throne_01 }
+		$EFFECT$ = { BUILDING = abbadon_throne_02 }
+		$EFFECT$ = { BUILDING = abbadon_throne_03 }
+		$EFFECT$ = { BUILDING = abbadon_throne_04 }
+		$EFFECT$ = { BUILDING = abbadon_throne_05 }
+		$EFFECT$ = { BUILDING = abbadon_throne_06 }
+		$EFFECT$ = { BUILDING = abbadon_throne_fifth }
+		$EFFECT$ = { BUILDING = abbadon_throne_lord_wrath }
+		$EFFECT$ = { BUILDING = abbadon_throne_black_blood_tribe }
+		$EFFECT$ = { BUILDING = abbadon_throne_thrall_strength }
+		$EFFECT$ = { BUILDING = abbadon_throne_vampire_thrall }
+		
+		$EFFECT$ = { BUILDING = dagon_throne_01 }
+		$EFFECT$ = { BUILDING = dagon_throne_02 }
+		$EFFECT$ = { BUILDING = dagon_throne_03 }
+		$EFFECT$ = { BUILDING = dagon_throne_04 }
+		$EFFECT$ = { BUILDING = dagon_throne_05 }
+		$EFFECT$ = { BUILDING = dagon_throne_06 }
+		$EFFECT$ = { BUILDING = dagon_throne_041 }
+		$EFFECT$ = { BUILDING = dagon_throne_042 }
+		$EFFECT$ = { BUILDING = dagon_throne_043 }
+		$EFFECT$ = { BUILDING = dagon_throne_lord_of_genhinnom }
+		$EFFECT$ = { BUILDING = dagon_throne_lord_of_shanmukha }
+		$EFFECT$ = { BUILDING = dagon_throne_that_withstands_lightning }
+		
+		$EFFECT$ = { BUILDING = asmodeus_throne_01 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_02 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_03 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_04 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_05 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_06 }
+		$EFFECT$ = { BUILDING = asmodeus_throne_lord_of_anthropomancy }
+		$EFFECT$ = { BUILDING = asmodeus_throne_fear_humanity }
+		$EFFECT$ = { BUILDING = asmodeus_throne_rome_china }
+		
+		$EFFECT$ = { BUILDING = azrael_throne_01 }
+		$EFFECT$ = { BUILDING = azrael_throne_02 }
+		$EFFECT$ = { BUILDING = azrael_throne_03 }
+		$EFFECT$ = { BUILDING = azrael_throne_04 }
+		$EFFECT$ = { BUILDING = azrael_throne_05 }
+		$EFFECT$ = { BUILDING = azrael_throne_06 }
+		$EFFECT$ = { BUILDING = azrael_throne_041 }
+		$EFFECT$ = { BUILDING = azrael_throne_042 }
+		$EFFECT$ = { BUILDING = azrael_throne_043 }
+		$EFFECT$ = { BUILDING = azrael_throne_angel_shadows }
+		$EFFECT$ = { BUILDING = azrael_throne_heitsi_eibib }
+		$EFFECT$ = { BUILDING = azrael_throne_scarecrow }
+		
+		$EFFECT$ = { BUILDING = belial_throne_01 }
+		$EFFECT$ = { BUILDING = belial_throne_02 }
+		$EFFECT$ = { BUILDING = belial_throne_03 }
+		$EFFECT$ = { BUILDING = belial_throne_04 }
+		$EFFECT$ = { BUILDING = belial_throne_05 }
+		$EFFECT$ = { BUILDING = belial_throne_06 }
+		$EFFECT$ = { BUILDING = belial_throne_shang_cultists }
+		$EFFECT$ = { BUILDING = belial_throne_elite_cults }
+		$EFFECT$ = { BUILDING = belial_throne_unlimited_hatred }
+		
+		$EFFECT$ = { BUILDING = tower_of_pride_01 }
+		$EFFECT$ = { BUILDING = treasury_of_avarice_01 }
+		$EFFECT$ = { BUILDING = pit_of_wrath_01 }
+		$EFFECT$ = { BUILDING = hall_of_gluttony_01 }
+		$EFFECT$ = { BUILDING = inn_of_lust_01 }
+		$EFFECT$ = { BUILDING = house_of_sloth_01 }
+		$EFFECT$ = { BUILDING = department_of_envy_01 }
+	}
+	
+##### Wraith buildings
+	# (placeholder, converted from the old haunt domicile)
+	if = {
+		limit = { domicile_building_requirement_wraith = $HAS_REQUIRED_SPLAT$ }
+
+		$EFFECT$ = { BUILDING = haunt_main_01 }
+		$EFFECT$ = { BUILDING = haunt_main_02 }
+		$EFFECT$ = { BUILDING = haunt_main_03 }
+		$EFFECT$ = { BUILDING = haunt_main_04 }
+		$EFFECT$ = { BUILDING = haunt_main_05 }
+
+		$EFFECT$ = { BUILDING = haunt_argos_01 }
+		$EFFECT$ = { BUILDING = haunt_argos_02 }
+		$EFFECT$ = { BUILDING = haunt_argos_03 }
+
+		$EFFECT$ = { BUILDING = haunt_castigate_01 }
+		$EFFECT$ = { BUILDING = haunt_castigate_02 }
+		$EFFECT$ = { BUILDING = haunt_castigate_03 }
+
+		$EFFECT$ = { BUILDING = haunt_embody_01 }
+		$EFFECT$ = { BUILDING = haunt_embody_02 }
+		$EFFECT$ = { BUILDING = haunt_embody_03 }
+
+		$EFFECT$ = { BUILDING = haunt_fatalism_01 }
+		$EFFECT$ = { BUILDING = haunt_fatalism_02 }
+		$EFFECT$ = { BUILDING = haunt_fatalism_03 }
+
+		$EFFECT$ = { BUILDING = haunt_inhabit_01 }
+		$EFFECT$ = { BUILDING = haunt_inhabit_02 }
+		$EFFECT$ = { BUILDING = haunt_inhabit_03 }
+
+		$EFFECT$ = { BUILDING = haunt_keening_01 }
+		$EFFECT$ = { BUILDING = haunt_keening_02 }
+		$EFFECT$ = { BUILDING = haunt_keening_03 }
+
+		$EFFECT$ = { BUILDING = haunt_moliate_01 }
+		$EFFECT$ = { BUILDING = haunt_moliate_02 }
+		$EFFECT$ = { BUILDING = haunt_moliate_03 }
+
+		$EFFECT$ = { BUILDING = haunt_outrage_01 }
+		$EFFECT$ = { BUILDING = haunt_outrage_02 }
+		$EFFECT$ = { BUILDING = haunt_outrage_03 }
+
+		$EFFECT$ = { BUILDING = haunt_pandemonium_01 }
+		$EFFECT$ = { BUILDING = haunt_pandemonium_02 }
+		$EFFECT$ = { BUILDING = haunt_pandemonium_03 }
+
+		$EFFECT$ = { BUILDING = haunt_phantasm_01 }
+		$EFFECT$ = { BUILDING = haunt_phantasm_02 }
+		$EFFECT$ = { BUILDING = haunt_phantasm_03 }
+
+		$EFFECT$ = { BUILDING = haunt_pupperty_01 }
+		$EFFECT$ = { BUILDING = haunt_pupperty_02 }
+		$EFFECT$ = { BUILDING = haunt_pupperty_03 }
+
+		$EFFECT$ = { BUILDING = haunt_usury_01 }
+		$EFFECT$ = { BUILDING = haunt_usury_02 }
+		$EFFECT$ = { BUILDING = haunt_usury_03 }
+
+		$EFFECT$ = { BUILDING = haunt_flux_01 }
+		$EFFECT$ = { BUILDING = haunt_flux_02 }
+		$EFFECT$ = { BUILDING = haunt_flux_03 }
+
+		$EFFECT$ = { BUILDING = haunt_intimation_01 }
+		$EFFECT$ = { BUILDING = haunt_intimation_02 }
+		$EFFECT$ = { BUILDING = haunt_intimation_03 }
+
+		$EFFECT$ = { BUILDING = haunt_mnemosynis_01 }
+		$EFFECT$ = { BUILDING = haunt_mnemosynis_02 }
+		$EFFECT$ = { BUILDING = haunt_mnemosynis_03 }
+	}
+}

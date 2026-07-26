@@ -1,0 +1,1625 @@
+﻿###TRIGGER LIST
+
+# Whether to show WIP content.
+# Set to always = no for Steam builds, always = yes for Patron builds.
+show_devbuild_content = {
+	always = yes
+}
+
+POD_disabled_content_trigger = {
+	always = no
+}
+
+# praise Him
+is_the_storyteller = {
+	this = character:POD_wraith_01
+}
+
+POD_is_landless_playable_for_splat = {
+	OR = {
+		domicile_building_requirement_vamp_blood = yes
+		building_requirement_inquisitor = yes
+		# indep hunters (generic buildings)
+		AND = {
+			POD_is_supehunter_trigger = yes 
+			NOT = { has_trait = shih }
+		}
+		domicile_building_requirement_kj = yes
+		domicile_building_requirement_mummy = yes
+		domicile_building_requirement_mokole = yes
+		domicile_building_requirement_demon = yes
+		# fallback for edge cases
+		AND = {
+			POD_is_mortal_trigger = yes
+			is_ai = no
+		}
+	}
+}
+
+## is_vampire_trigger (etc..) are located in 00_POD_crime_triggers.txt 
+
+POD_is_infernalist_trigger = {
+	custom_tooltip = POD_should_not_be_infernalist_tt
+	OR = {
+		POD_is_demonic_trigger = yes
+		has_trait = fomori
+		has_trait = banemummy
+		has_trait = asekh_sen 
+		has_trait = spectre
+		has_trait = wukuei
+	}
+}
+
+POD_is_demonic_trigger = {
+	OR = {
+		has_trait = demon 
+		has_trait = baali 
+		has_trait = witch
+		has_character_flag = access_to_investiture
+	}
+}
+
+POD_is_akuma_trigger = {
+	POD_middle_kingdom_splat_trigger = yes
+	OR = {
+		has_trait = wukuei
+		has_trait = witch # TODO YK: replace with defiled
+		faith = { has_doctrine = special_doctrine_allied_to_yomi_wan_hostility }
+		has_character_modifier = yama_king_modifier
+	}
+}
+
+POD_is_oblivion_servant_trigger = {
+	OR = {
+		has_trait = spectre
+		faith = { has_doctrine = special_doctrine_allied_to_oblivion_hostility }
+	}
+}
+
+has_POD_religion_group = {
+	OR = {
+		is_in_family = rf_kindred
+		is_in_family = rf_hunters
+		is_in_family = rf_ignorance
+		is_in_family = rf_gaia
+		is_in_family = rf_wyrm		
+		is_in_family = rf_mummies
+		is_in_family = rf_wraiths
+		is_in_family = rf_kueijin
+		is_in_family = rf_demons
+		is_in_family = rf_fae
+	}
+}
+
+has_POD_kindred_religion_group = {
+	is_in_family = rf_kindred
+}
+
+has_POD_hunters_religion_group = {
+	is_in_family = rf_hunters
+}
+
+has_POD_ignorance_religion_group = {
+	is_in_family = rf_ignorance
+}
+
+has_POD_mummies_religion_group = {
+	is_in_family = rf_mummies
+}
+
+has_POD_public_vamp_blood_trigger = {
+	has_POD_vamp_blood_trigger = yes
+}
+
+POD_can_be_drained_as_prisoner_trigger = {
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = demon }
+	NOT = { has_trait = automaton }
+}
+
+POD_can_be_vamphunted_scheme_trigger = {
+	NOT = { has_trait = fera }
+	NOT = { has_trait = vampire }
+	NOT = { has_trait = fae }
+	NOT = { has_trait = demon }
+	NOT = { has_trait = mummy }
+	NOT = { has_trait = automaton }
+	NOT = { has_trait = mage }
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = alien }
+	NOT = { has_trait = zombu }
+}
+
+POD_can_be_ghouled_scheme_trigger = {
+	NOT = { has_trait = ghoul }
+	NOT = { has_trait = vampire }
+	NOT = { has_trait = fae }
+	NOT = { has_trait = demon }
+	NOT = { has_trait = mummy }
+	NOT = { has_trait = automaton }
+	NOT = { has_trait = mage }
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = alien }
+	NOT = { has_trait = kueijin }
+	NOT = { has_trait = dhampyr }
+	NOT = { has_trait = dhampir }
+	NOT = { has_trait = zombu }
+	trigger_if = {
+		limit = { POD_splat_mixing_haight_mode = no }
+		NOT = { has_trait = fera }
+	}
+}
+
+POD_can_be_ghouled_azhi_dahaka_scheme_trigger = {
+	NOR = {
+		has_trait = ghoul
+		has_trait = vampire
+		has_trait = fae # also spirit-beings, like demons or wraiths
+		has_trait = demon
+		has_trait = automaton
+		has_trait = wraith
+		has_trait = spirit
+		has_trait = zombu
+	}
+	#KJ with >5 Dharma handled via is_valid_showing_failures_only in interactions
+}
+
+POD_can_embrace = {
+	$SIRE$ = {
+		#is_vampire_trigger = yes # checked elsewhere
+		is_adult = yes
+		is_vampgeneration16_trigger = no
+		NOT = { has_trait = abomination }
+		trigger_if = {
+			limit = { has_trait = setite }
+			POD_can_setite_be_embraced_trigger = yes
+		}
+		trigger_if = { 
+			limit = { POD_is_thinblooded_trigger = yes }
+			NOT = { has_trait = thinbloodalchemydiscipline }
+		}
+		trigger_if = {
+			# Characters who cannot embrace
+			limit = {
+				OR = {
+					this = character:791232 # Catubodua
+				}
+			}
+			custom_tooltip = {
+				text = POD_this_character_cannot_embrace
+				always = no
+			}
+		}
+	}
+	$CHILDE$ = {
+		is_adult = yes
+		# better to check elsewhere since some abilities let you embrace other splats (like wraiths)
+		#POD_can_be_embraced_scheme_trigger = yes
+		POD_is_clone_trigger = no
+		NOT = { has_character_modifier = boon_of_anubis_perk_modifier }
+	}
+	custom_description = {
+		object = $CHILDE$
+		text = "blood_is_holy"
+		$CHILDE$ = {
+			NOR = {
+				POD_has_true_faith_trigger = yes
+				has_trait = orison_sanguine
+			}
+		}
+	}
+	trigger_if = {
+		# Characters who only embrace women
+		limit = {
+			OR = {
+				$SIRE$ = character:791706 # Adisa
+			}
+			$CHILDE$ = { is_female = no }
+		}
+		$SIRE$ = {
+			custom_tooltip = {
+				text = POD_this_character_only_embraces_women
+				always = no
+			}
+		}
+	}
+}
+
+POD_can_be_embraced_scheme_trigger = {
+	NOT = { has_trait = vampire }
+	NOT = { has_trait = fae }
+	NOT = { has_trait = demon }
+	NOT = { has_trait = mummy }
+	NOT = { has_trait = automaton }
+	#NOT = { has_trait = mage }
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = alien }
+	NOT = { has_trait = kueijin }
+	NOT = { has_trait = dhampyr }
+	#NOT = { has_trait = dhampir }
+	NOT = { has_trait = zombu }
+	NOT = { has_perk = frozen_river_perk }
+}
+
+POD_can_be_herd_trigger = {
+	OR = {
+		has_trait = mortal
+		has_trait = ghoul
+		has_trait = revenant
+		has_trait = kinfolk	
+		has_trait = changeling	
+		has_trait = kinain
+		has_trait = dhampir
+	}
+}
+
+has_POD_vampire_clan_trigger = {
+	has_trait = vampclan
+}
+
+vampgeneration_less_or_equal_to_trigger = {
+	custom_description = {
+		text = vampgeneration_less_or_equal_to
+		value = $LEVEL$
+		has_trait = vampgeneration
+		has_trait_rank = {
+			trait = vampgeneration
+			rank <= $LEVEL$
+		}
+	}
+}
+
+has_POD_longevity_trigger = {
+	OR = {
+		POD_is_mage_trigger = yes
+		POD_is_revenant_trigger = yes
+		has_trait = dhampyr
+		has_trait = laham
+		has_perk = kami_longevity_perk
+	}
+}
+
+POD_is_unholy_trigger = {
+	has_supernatural_race_trigger = yes
+	POD_is_supehunter_trigger = no
+	trigger_if = {
+		limit = { has_global_variable = fae_is_holy }
+		NOT = { has_trait = fae }
+		NOT = { has_trait = changeling }
+	}
+}
+
+has_POD_vampire_generation_trigger = {
+	has_trait = vampgeneration
+}
+
+has_predator_type_trigger = {
+	OR = {
+		has_trait = predatortype_consensualist
+		any_secret = { 
+			secret_type = secret_predatortype_consensualist
+		}
+		has_trait = predatortype_familias
+		any_secret = { 
+			secret_type = secret_predatortype_familias
+		}		
+		has_trait = predatortype_cultist
+		any_secret = { 
+			secret_type = secret_predatortype_cultist
+		}			
+		has_trait = predatortype_bloodleech 
+		any_secret = { 
+			secret_type = secret_predatortype_bloodleech 
+		}
+		has_trait = predatortype_alleycat 
+		any_secret = { 
+			secret_type = secret_predatortype_alleycat
+		}	
+		has_trait = predatortype_bedlamite
+		any_secret = { 
+			secret_type = secret_predatortype_bedlamite
+		}	
+		has_trait = predatortype_cauchemar
+		any_secret = { 
+			secret_type = secret_predatortype_cauchemar
+		}	
+		has_trait = predatortype_cenobite
+		any_secret = { 
+			secret_type = secret_predatortype_cenobite
+		}		
+		has_trait = predatortype_footpad
+		any_secret = { 
+			secret_type = secret_predatortype_footpad
+		}	
+		has_trait = predatortype_gentry
+		any_secret = { 
+			secret_type = secret_predatortype_gentry
+		}	
+		has_trait = predatortype_graverobber
+		any_secret = { 
+			secret_type = secret_predatortype_graverobber
+		}		
+		has_trait = predatortype_phlebotomist
+		any_secret = { 
+			secret_type = secret_predatortype_phlebotomist
+		}		
+		has_trait = predatortype_siren
+		any_secret = { 
+			secret_type = secret_predatortype_siren
+		}		
+		has_trait = predatortype_farmer
+		any_secret = { 
+			secret_type = secret_predatortype_farmer
+		}
+		has_trait = predatortype_extortionist
+		any_secret = { 
+			secret_type = secret_predatortype_extortionist
+		}		
+	}
+}
+
+has_prey_exclusion_trigger = {
+	OR = {
+		any_secret = { secret_type = secret_prey_young_men }
+		any_secret = { secret_type = secret_prey_young_women }		
+		any_secret = { secret_type = secret_prey_middle_aged_men }
+		any_secret = { secret_type = secret_prey_middle_aged_women }
+		any_secret = { secret_type = secret_prey_old_men }
+		any_secret = { secret_type = secret_prey_old_women }
+		any_secret = { secret_type = secret_prey_martial }
+		any_secret = { secret_type = secret_prey_diplomacy }
+		any_secret = { secret_type = secret_prey_stewardship }
+		any_secret = { secret_type = secret_prey_intrigue }
+		any_secret = { secret_type = secret_prey_learning }
+		any_secret = { secret_type = secret_prey_lustful }
+		any_secret = { secret_type = secret_prey_greedy }
+		any_secret = { secret_type = secret_prey_lazy }
+		any_secret = { secret_type = secret_prey_wrathful }
+		any_secret = { secret_type = secret_prey_vengeful }
+		any_secret = { secret_type = secret_prey_arrogant }
+		any_secret = { secret_type = secret_prey_gluttonous }
+		any_secret = { secret_type = secret_prey_chaste }
+		any_secret = { secret_type = secret_prey_generous }
+		any_secret = { secret_type = secret_prey_diligent }
+		any_secret = { secret_type = secret_prey_forgiving }
+		any_secret = { secret_type = secret_prey_compassionate }
+		any_secret = { secret_type = secret_prey_humble }
+		any_secret = { secret_type = secret_prey_temperate }
+		any_secret = { secret_type = secret_prey_melancholic }
+		any_secret = { secret_type = secret_prey_lunatic }
+		any_secret = { secret_type = secret_prey_possessed }
+		any_secret = { secret_type = secret_prey_good_physique }
+		any_secret = { secret_type = secret_prey_bad_physique }
+		any_secret = { secret_type = secret_prey_good_intelligence }
+		any_secret = { secret_type = secret_prey_bad_intelligence }
+		any_secret = { secret_type = secret_prey_good_appearance }
+		any_secret = { secret_type = secret_prey_bad_appearance }
+		any_secret = { secret_type = secret_prey_fecund }
+		any_secret = { secret_type = secret_prey_dwarf }
+		any_secret = { secret_type = secret_prey_giant }
+		any_secret = { secret_type = secret_prey_albino }
+	}	
+}
+
+has_painful_vampire_bite_trigger = {
+	is_hecata_trigger = yes
+}
+
+has_any_blood_potency_modifier = {
+	OR = {
+		has_character_modifier = bloodpotency0_modifier
+		has_character_modifier = bloodpotency1_modifier
+		has_character_modifier = bloodpotency2_modifier
+		has_character_modifier = bloodpotency3_modifier
+		has_character_modifier = bloodpotency4_modifier
+		has_character_modifier = bloodpotency5_modifier
+		has_character_modifier = bloodpotency6_modifier
+		has_character_modifier = bloodpotency7_modifier
+		has_character_modifier = bloodpotency8_modifier
+		has_character_modifier = bloodpotency9_modifier
+		has_character_modifier = bloodpotency10_modifier	
+	}
+}
+
+has_masquerade_risk_trigger = {
+	OR = {
+		has_character_modifier = masquerade0_modifier 
+		has_character_modifier = masquerade1_modifier 
+		has_character_modifier = masquerade2_modifier 
+		has_character_modifier = masquerade3_modifier 
+		has_character_modifier = masquerade4_modifier 
+		has_character_modifier = masquerade5_modifier 
+		has_trait = exposed
+	}
+}
+
+POD_has_any_blood_hunger_modifier = {
+	OR = {
+		has_character_modifier = bloodhunger0_modifier
+		has_character_modifier = bloodhunger1_modifier
+		has_character_modifier = bloodhunger2_modifier
+		has_character_modifier = bloodhunger3_modifier
+		has_character_modifier = bloodhunger4_modifier
+		has_character_modifier = bloodhunger5_modifier
+		has_character_modifier = bloodhunger1_monomi_modifier
+		has_character_modifier = bloodhunger2_monomi_modifier
+		has_character_modifier = bloodhunger3_monomi_modifier
+		has_character_modifier = bloodhunger4_monomi_modifier
+		has_character_modifier = bloodhunger5_monomi_modifier
+	}
+}
+
+has_blood_surge_active_trigger = {
+	OR = {
+		has_blood_surge_prowess_active_trigger = yes
+		has_blood_surge_martial_active_trigger = yes
+		has_blood_surge_health_active_trigger = yes
+		has_blood_surge_diplomacy_active_trigger = yes
+		has_blood_surge_stewardship_active_trigger = yes
+		has_blood_surge_intrigue_active_trigger = yes
+		has_blood_surge_learning_active_trigger = yes
+	}
+}
+
+has_blood_surge_martial_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_martial_10_modifier
+		has_character_modifier = blood_surge_martial_9_modifier
+		has_character_modifier = blood_surge_martial_8_modifier
+		has_character_modifier = blood_surge_martial_7_modifier
+		has_character_modifier = blood_surge_martial_6_modifier
+		has_character_modifier = blood_surge_martial_5_modifier
+		has_character_modifier = blood_surge_martial_4_modifier
+		has_character_modifier = blood_surge_martial_3_modifier
+		has_character_modifier = blood_surge_martial_2_modifier
+		has_character_modifier = blood_surge_martial_1_modifier
+	}
+}
+
+has_blood_surge_prowess_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_prowess_10_modifier
+		has_character_modifier = blood_surge_prowess_9_modifier
+		has_character_modifier = blood_surge_prowess_8_modifier
+		has_character_modifier = blood_surge_prowess_7_modifier
+		has_character_modifier = blood_surge_prowess_6_modifier
+		has_character_modifier = blood_surge_prowess_5_modifier
+		has_character_modifier = blood_surge_prowess_4_modifier
+		has_character_modifier = blood_surge_prowess_3_modifier
+		has_character_modifier = blood_surge_prowess_2_modifier
+		has_character_modifier = blood_surge_prowess_1_modifier
+	}
+}
+
+has_blood_surge_diplomacy_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_diplomacy_10_modifier
+		has_character_modifier = blood_surge_diplomacy_9_modifier
+		has_character_modifier = blood_surge_diplomacy_8_modifier
+		has_character_modifier = blood_surge_diplomacy_7_modifier
+		has_character_modifier = blood_surge_diplomacy_6_modifier
+		has_character_modifier = blood_surge_diplomacy_5_modifier
+		has_character_modifier = blood_surge_diplomacy_4_modifier
+		has_character_modifier = blood_surge_diplomacy_3_modifier
+		has_character_modifier = blood_surge_diplomacy_2_modifier
+		has_character_modifier = blood_surge_diplomacy_1_modifier
+	}
+}
+
+has_blood_surge_stewardship_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_stewardship_10_modifier
+		has_character_modifier = blood_surge_stewardship_9_modifier
+		has_character_modifier = blood_surge_stewardship_8_modifier
+		has_character_modifier = blood_surge_stewardship_7_modifier
+		has_character_modifier = blood_surge_stewardship_6_modifier
+		has_character_modifier = blood_surge_stewardship_5_modifier
+		has_character_modifier = blood_surge_stewardship_4_modifier
+		has_character_modifier = blood_surge_stewardship_3_modifier
+		has_character_modifier = blood_surge_stewardship_2_modifier
+		has_character_modifier = blood_surge_stewardship_1_modifier
+	}
+}
+
+has_blood_surge_intrigue_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_intrigue_10_modifier
+		has_character_modifier = blood_surge_intrigue_9_modifier
+		has_character_modifier = blood_surge_intrigue_8_modifier
+		has_character_modifier = blood_surge_intrigue_7_modifier
+		has_character_modifier = blood_surge_intrigue_6_modifier
+		has_character_modifier = blood_surge_intrigue_5_modifier
+		has_character_modifier = blood_surge_intrigue_4_modifier
+		has_character_modifier = blood_surge_intrigue_3_modifier
+		has_character_modifier = blood_surge_intrigue_2_modifier
+		has_character_modifier = blood_surge_intrigue_1_modifier
+	}
+}
+
+has_blood_surge_learning_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_learning_10_modifier
+		has_character_modifier = blood_surge_learning_9_modifier
+		has_character_modifier = blood_surge_learning_8_modifier
+		has_character_modifier = blood_surge_learning_7_modifier
+		has_character_modifier = blood_surge_learning_6_modifier
+		has_character_modifier = blood_surge_learning_5_modifier
+		has_character_modifier = blood_surge_learning_4_modifier
+		has_character_modifier = blood_surge_learning_3_modifier
+		has_character_modifier = blood_surge_learning_2_modifier
+		has_character_modifier = blood_surge_learning_1_modifier
+	}
+}
+
+has_blood_surge_health_active_trigger = {
+	OR = {
+		has_character_modifier = blood_surge_health_10_modifier
+		has_character_modifier = blood_surge_health_9_modifier
+		has_character_modifier = blood_surge_health_8_modifier
+		has_character_modifier = blood_surge_health_7_modifier
+		has_character_modifier = blood_surge_health_6_modifier
+		has_character_modifier = blood_surge_health_5_modifier
+		has_character_modifier = blood_surge_health_4_modifier
+		has_character_modifier = blood_surge_health_3_modifier
+		has_character_modifier = blood_surge_health_2_modifier
+		has_character_modifier = blood_surge_health_1_modifier
+	}
+}
+
+is_in_torpor_trigger = {
+	has_trait = torpor
+}
+
+can_bloodbond_trigger = {
+# REGENT is bonder, THRALL is bonded. Must input these values when calling the trigger.
+	NAND = {
+		$REGENT$ = { has_trait = tremere }
+		has_global_variable = POD_tremere_bane_change
+	}
+	$REGENT$ = {
+		is_vampire_trigger = yes
+		is_adult = yes
+		POD_is_thinblooded_trigger = no
+	}
+	$THRALL$ = {
+		has_POD_vamp_blood_trigger = yes
+		NOT = { has_character_flag = blood_bonded }
+		is_unbondable_trigger = no
+		NOT = { has_character_modifier = POD_vinculum_modifier }
+	}
+}
+
+POD_is_wild_trigger = {
+	faith = { has_doctrine_parameter = city_aversion }
+}
+
+has_orison_trigger = {
+	OR = {
+		has_trait = orison_compass
+		has_trait = orison_innocent
+		has_trait = orison_noah
+		has_trait = orison_vigilance
+		has_trait = orison_penitent
+		has_trait = orison_years
+		has_trait = orison_hierophant
+		has_trait = orison_sanguine
+		has_trait = orison_talespinner
+	}
+}
+
+POD_is_clone_trigger = {
+	has_trait = mindless_clone
+}
+
+POD_is_not_clone_trigger = { # Avoid complex trigger
+	POD_is_clone_trigger = no
+}
+
+has_POD_vampire_discipline_trigger = {
+	any_character_trait = { has_trait_flag = discipline }
+}
+
+can_be_shih_trigger = {
+	OR = {
+		father ?= { has_trait = shih }
+		mother ?= { has_trait = shih }
+		liege ?= { has_trait = shih }
+	}
+}
+
+POD_has_buildings_as_mortal_trigger = {
+	OR = {
+		NOT = { has_game_rule = world_of_monsters }
+		AND = {
+			is_child_of_supehunter_trigger = yes
+			NOT = { has_trait = turnedhunter }
+		}
+		is_a_neteru = yes
+		is_a_cultist = yes
+	}
+}
+
+can_hold_title_as_mortal_trigger = {
+	OR = {
+		POD_has_buildings_as_mortal_trigger = yes
+		#is_ai = no # TODO MORTAL
+	}
+}
+
+has_murder_consecuence_trigger = {
+	trigger_if = {
+		limit = { 
+			$VICTIM$ = {
+				has_trait = mortal
+			} 
+		}
+		$MURDERER$ = { 
+			OR = { 
+				has_supernatural_race_trigger = no
+				religion = religion:calomenasforsaken_religion
+			}
+		}
+	}
+	NOT = { POD_custom_incompatible_splats_trigger = { ACTOR = $MURDERER$ RECIPIENT = $VICTIM$ } }
+}
+
+POD_light_splat_trigger = { # And no more inqui faction
+	OR = {
+		has_trait = supehunter
+		has_trait = shemsuheru
+		has_trait = cabiri
+		has_trait = wutian
+		trigger_if = {
+			limit = { has_trait = mortal }
+			OR = {
+				religion = { has_POD_hunters_religion_group = yes }
+				any_relation = {
+					type = worshipped_reborn
+					OR = {
+						has_trait = shemsuheru
+						has_trait = cabiri
+					}
+				}
+				trigger_if = {
+					limit = { NOT = { has_game_rule = world_of_monsters } } # Can mortal not be innocent?
+					religion = { has_POD_religion_group = no }
+				}
+			}
+		}
+	}
+}
+
+POD_day_background_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				POD_is_vampire_trigger = yes
+				is_kueijin_trigger = yes
+			}
+		}
+		POD_sunny_again_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { has_POD_fae_blood_trigger = yes }
+		OR = {
+			faith = { has_doctrine = doctrine_fae_morality_seelie }
+			has_trait = supehunter
+		}
+	}
+	trigger_else = {
+		OR = {
+			has_trait = corax
+			has_trait = mokole
+			POD_light_splat_trigger = yes
+		}
+		# TODO YK: give nighttime graphics to evil mokole (once nighttime domicile graphics are procedural)
+		#POD_is_wyrm_servant_trigger = no
+		#POD_is_infernalist_trigger = no
+	}
+}
+
+POD_eat_human_food_trigger = {
+	NOR = {
+		has_trait = automaton
+		has_trait = spirit
+		AND = {
+			has_trait = vampire
+			NOT = { has_trait_with_flag = humanity_feast_flag }
+		}
+		AND = {
+			has_trait = wraith
+			NOT = { has_perk = materialize_perk }
+		}
+	}
+}
+
+POD_is_unable_to_surge_trigger = {
+	OR = {
+		has_character_modifier = POD_intimations_of_mortality_power_modifier
+		has_character_modifier = armor_of_diamond_serenity_modifier
+		has_character_modifier = spell_intimations_of_mortality_modifier
+	}
+}
+
+POD_has_bloodloss_modifier_trigger = {
+	OR = {
+		has_character_modifier = slightbloodloss_modifier
+		has_character_modifier = smallbloodloss_modifier
+		has_character_modifier = majorbloodloss_modifier
+		has_character_modifier = catastrophicbloodloss_modifier
+	}
+}
+
+
+POD_has_any_gnosis_modifier = {
+	OR ={
+		has_character_modifier = POD_gnosis_0_modifier
+		has_character_modifier = POD_gnosis_1_modifier
+		has_character_modifier = POD_gnosis_2_modifier
+		has_character_modifier = POD_gnosis_3_modifier
+		has_character_modifier = POD_gnosis_4_modifier
+		has_character_modifier = POD_gnosis_5_modifier
+	}
+}
+
+POD_is_muslim_gp = {
+    OR = {
+	    has_character_flag = gp_ald
+        has_character_flag = gp_rumi
+		has_character_flag = gp_baba
+		has_character_flag = gp_arabi
+		has_character_flag = gp_khaldun
+		has_character_flag = gp_timur
+		#has_character_flag = gp_nagash #?
+		has_character_flag = gp_dawla
+		has_character_flag = gp_rundi
+		has_character_flag = gp_bedreddin
+		has_character_flag = gp_alauddin
+		has_character_flag = gp_taymiyyah
+		has_character_flag = gp_sikandar
+		has_character_flag = gp_ertugrul
+		has_character_flag = gp_traore
+		has_character_flag = gp_shadhili
+		has_character_flag = gp_sayyida
+		has_character_flag = gp_battuta
+		has_character_flag = gp_saadi
+		has_character_flag = gp_ibrahim
+		has_character_flag = gp_othman
+		has_character_flag = gp_mahri
+		has_character_flag = gp_gulbadan
+		has_character_flag = gp_haci
+		has_character_flag = gp_malik
+		has_character_flag = gp_shajar
+		has_character_flag = gp_shahuir
+		has_character_flag = gp_khatib
+	    has_character_flag = gp_tusi
+		has_character_flag = gp_sahili
+		has_character_flag = gp_dilshad
+		has_character_flag = gp_jamal
+		has_character_flag = gp_kermani
+		has_character_flag = gp_jami
+		has_character_flag = gp_zafar
+	}
+}
+
+POD_fear_the_sun_trigger = {
+	custom_tooltip = {
+		text = POD_fear_the_sun_trigger_tooltip
+
+		OR = {
+			POD_is_vampire_trigger = yes
+			is_kueijin_trigger = yes
+		}
+		NOR = {
+			POD_sunny_again_trigger = yes
+			POD_immune_to_sun_damage_trigger = yes
+		}
+	}
+}
+
+# can stay in sunlight indefinitely
+# for immunity to sun-based damage, see POD_immune_to_sun_damage_trigger
+POD_sunny_again_trigger = {
+	OR = {
+		has_trait = golconda
+		has_trait = azhi_dahaka
+		has_trait = dharma10
+		has_character_modifier = spell_benedicto_vitae_modifier
+		AND = {
+			has_global_variable = sunny_wankuei
+			has_trait = kueijin
+		}
+		any_equipped_character_artifact = {
+			has_variable = day_armor
+		}		
+	}
+}
+
+POD_is_tremere_main_faith_trigger = {
+	OR = {
+		AND = {
+			has_global_variable = tremere_cama_variable
+			has_faith = faith:camahumanity
+		}
+		AND = {
+			has_global_variable = tremere_sabbat_variable
+			has_religion = religion:sabbat_religion
+		}
+		has_faith = faith:tremerecode
+	}
+}
+
+POD_can_be_possessed_trigger = {
+	POD_can_be_possessed_basic_trigger = yes
+	NOT = { has_trait = fomori }
+	NOT = { has_trait = drone }
+	NOT = { has_trait = gorgon }
+	NOT = { has_trait = kami }
+}
+
+POD_can_be_possessed_basic_trigger = {
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = demon }
+	NOT = { has_trait = nagah }
+	NOT = { has_trait = corax }
+	NOT = { has_trait = kueijin }
+	NOT = { has_trait = hsien }
+	NOT = { has_trait = mummy }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = phyla }
+}
+
+POD_give_delirium_trigger = {
+	OR = {
+		has_character_modifier = POD_werewolf_form_crinos_modifier
+		has_character_modifier = POD_ajaba_form_crinos_modifier
+		has_character_modifier = POD_ananasi_form_lilian_modifier
+		has_character_modifier = POD_ananasi_form_pithus_modifier
+		has_character_modifier = POD_apis_form_minotaur_modifier
+		has_character_modifier = POD_bastet_form_crinos_modifier
+		has_character_modifier = POD_mokole_form_archid_modifier
+		has_character_modifier = POD_nagah_form_azhi_dahaka_modifier
+		has_character_modifier = POD_rokea_form_gladius_modifier
+		has_character_modifier = POD_rokea_form_chasmus_modifier
+		has_perk = fomori_horror_perk
+		has_perk = gorgon_horror_perk
+		has_perk = kami_horror_perk
+	}
+}
+
+POD_give_reduced_delirium_trigger = {
+	OR = {
+		has_character_modifier = POD_corax_form_crinos_modifier
+		has_character_modifier = POD_gurahl_form_crinos_modifier
+		has_character_modifier = POD_nuwisha_form_manabozho_modifier
+		has_character_modifier = POD_ratkin_form_crinos_modifier
+		has_character_modifier = POD_rokea_form_grabrus_modifier
+	}
+}
+
+POD_bypass_immunity_to_the_delirium_trigger = {
+	OR = {
+		has_perk = fomori_horror_perk
+		has_perk = gorgon_horror_perk
+		has_perk = kami_horror_perk
+		has_perk = ancient_terror_perk #Mokole
+		any_equipped_character_artifact = { has_variable = churjurocs_tusk prev = { can_benefit_from_artifact = prev } }
+	}
+}
+
+POD_immunity_to_the_delirium_trigger = {
+	OR = {
+		has_main_supernatural_race_trigger = yes
+		has_trait = kinfolk
+		has_trait = automaton
+		has_perk = arcana_inviolate_soul_perk
+		has_perk = opened_eyes_perk
+		has_perk = fomori_immunity_to_the_delirium_perk
+		has_perk = kami_immunity_to_the_delirium_perk
+		has_trait = gorgon
+		has_trait = drone
+		has_perk = miracle_of_protection_perk
+	}
+}
+
+POD_can_have_sex_basic_trigger = {
+	NOT = { has_trait = automaton }
+	trigger_if = {
+		limit = { num_of_relation_possessed_target = 0 }
+		trigger_if = {
+			limit = { NOT = { has_trait = risen } }
+			NOT = { has_trait = wraith }
+		}
+		NOT = { has_trait = spirit }
+	}
+	POD_is_not_clone_trigger = yes
+	effective_age >= 16
+}
+
+POD_can_have_sex_trigger = {
+	$CHARACTER_1$ = { POD_can_have_sex_basic_trigger = yes }
+	$CHARACTER_2$ = { POD_can_have_sex_basic_trigger = yes }
+	trigger_if = {
+		limit = { $CHARACTER_1$ = { has_character_modifier = oath_of_truehearts_modifier } }
+		$CHARACTER_2$ = { save_temporary_scope_as = lover_2 }
+		$CHARACTER_1$ = { 
+			has_opinion_modifier = {
+				modifier = oath_of_truehearts_opinion
+				target = scope:lover_2
+			}
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER_2$ = { has_character_modifier = oath_of_truehearts_modifier } }
+		$CHARACTER_1$ = { save_temporary_scope_as = lover_1 }
+		$CHARACTER_2$ = { 
+			has_opinion_modifier = {
+				modifier = oath_of_truehearts_opinion
+				target = scope:lover_1
+			}
+		}
+	}
+}
+
+POD_opposing_doctrine_change_trigger = {
+	NOT = { this = $CHARACTER$ }
+	NOT = { 
+		has_dread_level_towards = {
+			target = $CHARACTER$
+			level = 2
+		} 
+	}
+	is_imprisoned = no
+	OR = { 
+		opinion = {
+			target = $CHARACTER$
+			value < 0
+		}
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = ventrue }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = toreador }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = tremere }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = brujah }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = nosferatu }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = gangrel }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = malkavian }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = lasombra }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = tzimisce }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = ravnos }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = hecata }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = setite }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = assamite }
+		POD_opposing_clan_doctrine_change_trigger = { CLAN = salubri }
+	}
+}
+
+POD_opposing_clan_doctrine_change_trigger = {
+	is_$CLAN$_trigger = yes
+	faith = {
+		has_variable = doctrine_$CLAN$
+		OR = {
+			var:doctrine_$CLAN$ = flag:doctrine_$CLAN$_crime
+			var:doctrine_$CLAN$ = flag:doctrine_$CLAN$_shunned
+		}
+	}
+}
+
+POD_opposing_doctrine_thorns_vote_trigger = {
+	OR = {
+		passed_voted_doctine_value < 10
+		AND = {
+			OR = {
+				has_trait = caitiff
+				has_trait = custom_bloodline
+			}
+			faith:camahumanity = {
+				OR = {
+					is_target_in_variable_list = { 
+						name = final_doctrine_list 
+						target = doctrine:doctrine_vampirethinblood_crime
+					}
+					is_target_in_variable_list = { 
+						name = final_doctrine_list 
+						target = doctrine:doctrine_vampirethinblood_shunned
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_can_add_stress_trait_trigger = {
+	custom_tooltip = {
+		text = can_add_stress_trait_tooltip
+		trigger_if = {
+			limit = { scope:trait = trait:drunkard }
+			can_be_drunkard = yes
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:hashishiyah }
+			can_be_hashishiyah = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:rakish }
+			can_be_rakish = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:reclusive }
+			can_be_reclusive = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:irritable }
+			can_be_irritable = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:flagellant }
+			can_be_flagellant = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:profligate }
+			can_be_profligate = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:improvident }
+			can_be_improvident = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:contrite }
+			can_be_contrite = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:comfort_eater }
+			can_be_comfort_eater = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:inappetetic }
+			can_be_inappetetic = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:journaller }
+			can_be_journaller = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:confider }
+			can_be_confider = yes 
+		}
+		trigger_if = {
+			limit = { scope:trait = trait:athletic }
+			can_be_athletic = yes 
+		}
+	}
+}
+
+POD_splat_can_hunt_trigger = {
+	OR = {
+		AND = {
+			is_vampire_trigger = no
+			is_kueijin_trigger = no
+		}
+		has_trait = lifestyle_hunter
+		faith = { has_doctrine_parameter = can_hunt }
+		building_enables_hunt_trigger = yes
+		dynasty ?= { has_dynasty_perk = kj_fuxi_legacy_2 }
+	}
+}
+
+POD_splat_can_host_tournaments_trigger = {
+	trigger_if = {
+		limit = { has_game_rule = pod_tournament_restrictions_fewer }
+		POD_eat_human_food_trigger = yes
+		POD_fear_the_sun_trigger = no
+	}
+	trigger_else_if = {
+		limit = { has_game_rule = pod_tournament_restrictions_none }
+		always = yes
+	}
+	trigger_else = {
+		OR = {
+			has_POD_fae_blood_trigger = yes
+			POD_is_generic_hunter_trigger = yes
+			is_mortal_trigger = yes
+		}
+	}
+}
+
+# character scope
+POD_character_has_coronations = {
+	faith = { POD_faith_has_coronations = yes }
+}
+
+# faith scope
+# TODO: need to do proper maintenance when switching faiths
+POD_faith_has_coronations = {
+	always = no # TODO: disabled for now
+	has_ach_dlc_trigger = yes
+	OR = {
+		religion = { is_in_family = rf_fae }
+		#religion = religion:roadofkings_religion
+		this = faith:viaregalis
+	}
+}
+
+POD_is_primogen_trigger = {
+	OR = {
+		has_court_position = brujah_primogen_court_position
+		has_court_position = cappadocian_primogen_court_position
+		has_court_position = lasombra_primogen_court_position
+		has_court_position = toreador_primogen_court_position
+		has_court_position = tzimisce_primogen_court_position
+		has_court_position = ventrue_primogen_court_position
+		has_court_position = assamite_primogen_court_position
+		has_court_position = gangrel_primogen_court_position
+		has_court_position = malkavian_primogen_court_position
+		has_court_position = nosferatu_primogen_court_position
+		has_court_position = ravnos_primogen_court_position
+		has_court_position = setite_primogen_court_position
+		has_court_position = tremere_primogen_court_position
+		has_court_position = salubri_primogen_court_position
+		has_court_position = gargoyle_primogen_court_position
+	}	
+}
+
+POD_is_archon_trigger = {
+	OR = {
+		has_court_position = praetor_court_position
+		has_court_position = alastor_court_position
+		has_court_position = dogcatcher_court_position
+		has_court_position = doppelganger_court_position
+		has_court_position = josian_court_position
+		has_court_position = quaesitor_court_position
+	}
+}
+
+POD_splat_can_inquihunt_trigger = {
+	OR = {
+		has_trait = supehunter
+		POD_is_gantenbein_trigger = yes
+		faith = { has_doctrine_parameter = find_the_lair_active }
+		faith = { has_doctrine = doctrine_fae_agenda_constantinian }
+	}
+	trigger_if = {
+		limit = { POD_splat_mixing_haight_mode = no }
+		is_infernalist_trigger = no
+	}
+}
+
+POD_valid_target_for_inquihunt_trigger = {
+	OR = {
+		$HUNTED$ = {
+			OR = {
+				is_vampire_trigger = yes 
+				has_trait = kueijin
+				is_demon_trigger = yes
+				AND = {
+					has_trait = fera
+					OR = {
+						$HUNTER$ = { NOT = { has_faith = faith:qorjin_baghatur } }
+						is_werewolf_trigger = no
+					}
+				}
+			}
+		}
+		AND = {
+			$HUNTER$ = {
+				is_fae_trigger = no
+			}
+			$HUNTED$ = {
+				is_fae_trigger = yes
+			}
+		}			
+	}
+}
+
+POD_trait_change_valid_trigger = {
+	custom_tooltip = {
+		text = TRAIT_CHANGE_WINDOW_OPPOSITE_TRAIT
+		NOT = {
+			any_in_list = {
+				variable = trait_to_change_list
+				root = { NOT = { has_trait = prev } }
+				is_opposite_of_trait = scope:trait
+			}
+		}
+		NOT = {
+			any_character_trait = {
+				root = {
+					NOT = {
+						is_target_in_variable_list = {
+							name = trait_to_change_list 
+							target = prev
+						} 
+					} 
+				}
+				is_opposite_of_trait = scope:trait
+			}
+		}
+	}
+	trigger_if = { limit = { scope:player.var:reweaving_ability = flag:flowers_of_flesh } 
+		custom_tooltip = {
+			text = TRAIT_CHANGE_WINDOW_FLOWERS_OF_FLESH_LIMIT
+			NOT = {
+				any_in_list = {
+					variable = trait_to_change_list
+					NOT = { THIS = scope:trait }
+					count >= scope:player.shintai_flowers_of_flesh_limit
+				}
+			}
+		}
+	}
+	scope:player = {
+		trigger_if = { 
+			limit = { 
+				root = { 
+					NOR = { 
+						is_animantis_trigger = yes 
+						has_character_flag = optional_child
+					} 
+				}
+			}
+			POD_knows_true_name_of_trait_trigger = { TRAIT = scope:trait }
+		}
+	}
+}
+
+POD_has_true_faith_trigger = {
+	custom_description = {
+		text = POD_has_true_faith
+		OR = {
+			has_trait = truefaith
+			has_trait = beatific
+		}
+	}
+}
+
+POD_fae_not_vulnerable_to_cold_iron_trigger = {
+	has_trait = fae
+	has_global_variable = POD_cold_iron_rendered_inert_flag
+}
+
+POD_changeling_no_soul_death_from_cold_iron_trigger = {
+	has_trait = changeling
+	has_global_variable = POD_cold_iron_rendered_inert_flag
+}
+
+POD_can_get_infected_wounds_trigger = {
+	# Is not immune to disease
+	#OR = {
+		##### old bloodsorcery
+		#has_character_modifier = malady_modifier
+		NOT = { has_character_flag = immune_to_disease }
+	#}
+}
+
+POD_has_injury_or_main_trait_trigger = {
+	OR = {
+		has_trait = scarred
+		has_trait = disfigured
+		
+		has_trait = blind
+		has_trait = one_eyed
+		has_trait = maimed
+		has_trait = one_legged
+		has_trait = eunuch_1
+	
+		POD_health_has_superficial_wound_trigger = yes
+	}
+}
+
+POD_knight_should_leave_due_to_loyalty_trigger = {
+	$EMPLOYER$ = { save_temporary_scope_as = employer }
+	save_temporary_scope_as = knight
+	is_landed = no
+	opinion = {
+		target = scope:employer
+		value < POD_loyalty_opinion
+	}
+	NOR = {
+		# Servitude
+		scope:employer = { has_strong_hook = prev }
+		POD_has_subservient_relationship_to = {
+			TARGET = scope:employer
+		}
+		var:ward_to_oath ?= scope:employer
+		is_hostage = yes
+
+		# Camaraderie
+		is_spouse_of = scope:employer
+		has_relation_coterie_member = scope:employer
+		has_relation_friend = scope:employer
+		has_relation_soulmate = scope:employer
+		has_relation_human_companion = scope:employer
+
+		# Event characters
+		has_character_flag = blocked_from_leaving
+		has_character_flag = courtier_staying_for_claim
+		has_variable = stewardship_duty_1062_employer
+
+		# Employment (using courtier_allowed_to_leave_trigger as inspiration)
+		is_councillor_of = scope:employer
+		is_diarch = yes
+		AND = {
+			exists = inspiration
+			inspiration = {	exists = inspiration_sponsor }
+		}
+		scope:employer = { pressing_claim_of_character_trigger = { CHARACTER = scope:knight } }
+	}
+}
+
+POD_has_subservient_relationship_to = {
+	OR = {
+		has_relation_herd_owner = $TARGET$
+		has_relation_dreamer_owner = $TARGET$
+		has_relation_ghoul_domitor = $TARGET$
+		has_relation_necromancer = $TARGET$
+		has_relation_possessesing_wraith = $TARGET$
+		has_relation_demonic_master = $TARGET$
+		has_relation_diabolist = $TARGET$
+	}
+}
+
+POD_has_powerful_control_via_hook_on = {
+	OR = {
+		has_hook_of_type = { target = $TARGET$  type = strong_bloodoath_hook }
+		has_hook_of_type = { target = $TARGET$  type = soul_bond_hook }
+		has_hook_of_type = { target = $TARGET$  type = true_name_hook }
+		has_hook_of_type = { target = $TARGET$  type = conditioning_hook }
+		has_hook_of_type = { target = $TARGET$  type = mindless_clone_hook }
+		POD_has_automaton_hook_on = { TARGET = $TARGET$ }
+	}
+}
+
+# TODO CLONE
+POD_has_automaton_hook_on = {
+	OR = {
+		has_hook_of_type = { target = $TARGET$  type = effigy_hook }
+		has_hook_of_type = { target = $TARGET$  type = animantis_hook }
+	}
+}
+
+has_criminal_splat_trigger = {
+	OR = {
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = vampirism_illegal } 
+			$RECIPIENT$ = { has_trait = vampire }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = vampireghouling_illegal } 
+			$RECIPIENT$ = { 
+				OR = {
+					has_trait = ghoul
+					has_trait = revenant
+				}
+			}
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = fera_illegal } 
+			$RECIPIENT$ = {
+				OR = {
+					has_trait = fera 
+					has_trait = kinfolk 
+				}
+			}
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = magicraft_illegal } 
+			$RECIPIENT$ = { has_trait = mage }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = haunting_illegal } 
+			$RECIPIENT$ = { has_trait = wraith }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = glamour_illegal } 
+			$RECIPIENT$ = { has_POD_fae_blood_trigger = yes }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = supehunting_illegal } 
+			$RECIPIENT$ = { has_trait = supehunter }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = undying_illegal } 
+			$RECIPIENT$ = { has_trait = mummy }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = demonic_illegal } 
+			$RECIPIENT$ = { has_trait = demon  }
+		}
+		AND = {
+			$ACTOR$.faith = { has_doctrine_parameter = kueijin_illegal } 
+			$RECIPIENT$ = { has_POD_kj_blood_trigger = yes }
+		}
+	}
+}
+
+has_pet_to_call_trigger = {
+	OR = {
+		any_owned_story = { story_type = POD_story_pet_dragon }
+		any_owned_story = { story_type = POD_story_pet_unicorn }
+		any_owned_story = { story_type = POD_story_pet_pegasus }
+		any_owned_story = { story_type = story_cycle_martial_lifestyle_warhorse }
+		any_owned_story = { story_type = story_cycle_pet_dog }
+		any_owned_story = { story_type = story_cycle_pet_cat }
+		has_character_modifier = exotic_pet_wolf
+		has_character_modifier = exotic_pet_bear
+		has_character_modifier = exotic_pet_lion
+		has_character_modifier = exotic_pet_tiger
+		has_character_modifier = prison_pet_rat_modifier
+		has_character_modifier = prison_pet_cockroach_modifier
+	}
+}
+
+POD_is_willing_to_kill_trigger = {
+	POD_is_on_golconda_trigger = no
+}
+
+POD_is_willing_to_commit_heinous_acts_trigger = {
+	POD_is_on_golconda_trigger = no
+}
+
+# regiment scope
+POD_maa_regiment_requires_heinous_acts = {
+	OR = {
+		is_maa_type = szlachta
+		is_maa_type = vozhd
+	}
+}
+
+POD_splat_can_become_kinfolk = {
+	NOT = { has_trait = fera }
+	trigger_if = {
+		limit = { POD_splat_mixing_haight_mode = no }
+		NOT = { has_trait = vampire }
+		NOT = { has_trait = ghoul }
+		NOT = { has_trait = wraith }
+		NOT = { has_trait = fae }
+		NOT = { has_trait = demon }
+		NOT = { has_trait = mummy }
+		NOT = { has_trait = kueijin }
+		NOT = { has_trait = dhampyr }
+		NOT = { has_trait = spirit }
+		NOT = { has_trait = zombu }
+		NOT = { has_trait = asekh_sen }
+	}
+}
+
+POD_splat_can_become_kinain = {
+	NOT = { has_trait = fae }
+	NOT = { has_trait = changeling }
+	trigger_if = {
+		limit = { POD_splat_mixing_haight_mode = no }
+		NOT = { has_trait = vampire }
+		NOT = { has_trait = ghoul }
+		NOT = { has_trait = wraith }
+		NOT = { has_trait = demon }
+		NOT = { has_trait = mummy }
+		NOT = { has_trait = kueijin }
+		NOT = { has_trait = dhampyr }
+		NOT = { has_trait = spirit }
+		NOT = { has_trait = zombu }
+		NOT = { has_trait = asekh_sen }
+	}
+}
+
+POD_has_chosen_kai_maa = {
+	OR = {
+		has_character_flag = POD_ronin_hatamoto_flag
+		has_character_flag = POD_ronin_flag
+		has_character_flag = POD_yumihiki_flag
+		has_character_flag = POD_yumihiki_riders_flag
+		has_character_flag = POD_sojutsuka_flag
+		has_character_flag = POD_sojutsuka_riders_flag
+		has_character_flag = POD_teppo_gunners_flag
+	}
+}
+
+POD_is_mindless_clone_of_type = {
+	var:clone_type ?= $TYPE$
+}
+
+POD_has_no_mindless_clone_of_type = {
+	custom_tooltip = {
+		text = POD_has_no_mindless_clone_of_type_tt
+		any_relation = {
+			count = 0
+			type = mindless_clone_servant
+			var:clone_type ?= $TYPE$
+		}
+	}
+}
+
+# Trait scope
+POD_is_commander_trait = {
+	OR = {
+		POD_is_vanilla_commander_trait = yes
+		this = trait:leading_front
+		this = trait:teachings
+		this = trait:hun_tactics
+		this = trait:swift_movement
+		this = trait:samiel_follower
+		this = trait:shadow_warrior
+		this = trait:faithful_warrior
+		this = trait:shadow_reconquista_warrior
+		this = trait:caitiff_warrior
+	}
+}
+
+POD_is_vanilla_commander_trait = {
+	OR = {
+		has_trait_category = commander
+		has_trait_category = winter_commander
+	}
+}
+
+#Shih
+POD_qiao_elder_penalty_trigger = {
+	has_character_modifier = higher_shih_modifier
+}
+
+POD_can_train_any_shih_trigger = {
+	is_target_in_global_variable_list = {
+		name = unavailable_unique_decisions
+		target = flag:rediscover_kung_yis_training_style_objective_decision
+	}
+}
+
+POD_increased_shih_training_skill_limit_trigger = {
+	is_target_in_global_variable_list = {
+		name = unavailable_unique_decisions
+		target = flag:continuing_kung_yi_legacy_objective_decision
+	}
+}
+
+POD_can_setite_be_embraced_trigger = {
+	NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:ending_the_snake_objective_decision } }
+}
+
+POD_is_in_middle_kingdom_trigger = {
+	location ?= { 
+		POD_province_is_in_middle_kingdom_trigger = yes
+	}
+}
+POD_province_is_in_middle_kingdom_trigger = {
+	custom_description = {
+		text = POD_province_is_in_middle_kingdom_trigger
+		OR = {
+			geographical_region = world_india 
+			geographical_region = world_burma
+			geographical_region = world_tibet
+			geographical_region = world_steppe_east
+			geographical_region = world_steppe_tarim
+			geographical_region = world_asia
+		}
+	}
+}
+
+POD_is_yang_dharma_trigger = {
+	OR = {
+		faith = { has_doctrine = doctrine_enlightenment_virtues_direction_east }
+	}
+}
+
+POD_has_any_vanilla_relation_trigger = {
+	OR = {
+		num_of_relation_potential_friend > 0
+		num_of_relation_friend > 0
+		num_of_relation_best_friend > 0
+		num_of_relation_potential_rival > 0
+		num_of_relation_rival > 0
+		num_of_relation_nemesis > 0
+		num_of_relation_potential_lover > 0
+		num_of_relation_lover > 0
+		num_of_relation_soulmate > 0
+	}
+}
+
+POD_will_resurrect_as_wraith = {
+	OR = {
+		exists = var:marked_for_return
+		has_perk = fc_arm_r_necrotic_arm_perk
+		has_perk = fc_arm_l_necrotic_arm_perk
+	}
+	can_convert_to_wraith_trigger = yes
+}

@@ -1,0 +1,1359 @@
+﻿###Generic
+
+#POD_strict_taxation_tax_collector = {
+#	tax_factor = 0.25
+#
+#	is_valid = {
+#		scope:liege.culture = {
+#			has_innovation  = innovation_hereditary_rule
+#		}
+#	}
+#
+#	liege_modifier = {
+#		domain_tax_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = -30
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#
+#legacy_rights_protected_tax_collector = {
+#	tax_factor = 0.10
+#	levies_factor = 0.10
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 5
+#	}
+#
+#	flag = religiously_protected
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#domain_revocation_rights_protected_tax_collector = {
+#	tax_factor = 0.10
+#	levies_factor = 0.10
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 5
+#	}
+#
+#	flag = vassal_contract_cannot_revoke_titles
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#guaranteed_council_tax_collector = {
+#	tax_factor = 0.10
+#	levies_factor = 0.10
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 5
+#	}
+#
+#	flag = can_demand_council_seat
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#POD_tributary_tax_collector = {
+#	tax_factor = -0.75
+#	levies_factor = -0.75
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 15
+#	}
+#
+#	flag = vassal_contract_cannot_revoke_titles
+#	flag = religiously_protected
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#POD_hard_control_tax_collector = {
+#	tax_factor = 0.25
+#	levies_factor = 0.25
+#
+#	is_valid = {
+#		scope:liege.culture = {
+#			has_innovation  = innovation_heraldry
+#		}
+#	}
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = -35
+#	}
+#
+#	flag = vassal_all_wars_banned
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+##show_of_force_tax_collector = {
+##	tax_factor = 0.2
+##	levies_factor = 0.2
+##
+##	is_shown = {
+##		scope:liege = {
+##			is_gangrel_trigger = yes
+##		}
+##	}
+##	is_vassal_valid = {
+##		scope:vassal = { is_gangrel_trigger = yes }
+##		custom_tooltip = {
+##			text = show_of_force_tax_collector_tt
+##		scope:vassal = { prowess <= scope:tax_collector.prowess }
+##		}
+##	}
+##	
+##	is_valid = {
+##	}
+##
+##	liege_modifier = {
+##	}
+##
+##	vassal_modifier = {
+##	
+##	}
+##
+##	ai_will_do = {
+##		value = 0
+##	}
+##}
+#
+####Vampires
+#
+#blood_tithe_required_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_vampire_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_vampire_trigger = yes }
+#	}
+#	
+#	vassal_modifier = {
+#		opinion_of_liege = -15
+#	}
+#
+#	flag = blood_tithe_can_be_demanded
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+#progeny_rights_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_vampire_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_vampire_trigger = yes }
+#	}
+#	
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = -15
+#	}
+#
+#	flag = progeny_rights_none
+#
+#	ai_will_do = {
+#		value = 0
+#		#if = {
+#		#	limit = {
+#		#		scope:liege = {
+#		#			ai_greed >= 75 # The AI has to be very greedy
+#		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+#		#		}
+#		#	}
+#		#	add = 2
+#		#}
+#	}
+#}
+#
+##rose_treaty_tax_collector = {
+##	tax_factor = 0.2
+##	levies_factor = 0.2
+##
+##	is_shown = {
+##		scope:liege = {
+##			has_title = title:e_avalon
+##			has_faith = faith:viamithras
+##			is_vampire_trigger = yes			
+##		}
+##	}
+##	
+##	is_vassal_valid = {
+##		scope:vassal = { is_vampire_trigger = yes }
+##	}
+##	
+##	is_valid = {
+##	}
+##
+##	liege_modifier = {
+##	}
+##
+##	vassal_modifier = {
+##		opinion_of_liege = 15
+##	}
+##
+##	flag = religiously_protected
+##
+##	ai_will_do = {
+##		value = 50
+##		#if = {
+##		#	limit = {
+##		#		scope:liege = {
+##		#			ai_greed >= 75 # The AI has to be very greedy
+##		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+##		#		}
+##		#	}
+##		#	add = 2
+##		#}
+##	}
+##}
+#
+##roaming_court_tax_collector = {
+##	tax_factor = 0.1
+##	levies_factor = 0.1
+##
+##	is_shown = {
+##		scope:liege = {
+##			has_title = title:e_fiefs_of_the_black_cross
+##			is_vampire_trigger = yes
+##		}
+##	}
+##	
+##	is_vassal_valid = {
+##		scope:vassal = { is_vampire_trigger = yes }
+##	}
+##
+##	liege_modifier = {
+##		cowed_vassal_levy_contribution_mult = 0.01
+##	}
+##
+##	vassal_modifier = {
+##		
+##	}
+##
+##
+##	ai_will_do = {
+##		value = 50
+##		#if = {
+##		#	limit = {
+##		#		scope:liege = {
+##		#			ai_greed >= 75 # The AI has to be very greedy
+##		#			ai_compassion <= 0 # And not kind enough to have qualms about it
+##		#		}
+##		#	}
+##		#	add = 2
+##		#}
+##	}
+##}
+#
+##ravnos_war_machine_tax_collector = {
+##	tax_factor = -0.5
+##
+##	is_shown = {
+##		scope:liege = {
+##			has_title = title:e_ravnos
+##			is_ravnos_trigger = yes
+##		}
+##	}
+##	
+##	is_vassal_valid = {
+##		scope:vassal = { is_ravnos_trigger = yes }
+##	}
+##	liege_modifier = {
+##		knight_limit = 1
+##	}
+##
+##	vassal_modifier = {
+##		knight_limit = -1
+##	}
+##
+##	#Only 1 for the AI, to have an initial push but not cripple itself later on
+##	ai_will_do = {
+##		value = 0
+##		if = {
+##			limit = {
+##				scope:num_slots_with_obligation = 0 
+##
+##			}
+##			add = 50
+##		}		
+##	}
+##}
+#
+##free_state_tax_collector = {
+##	tax_factor = -0.75
+##	levies_factor = -0.75
+##	
+##	is_shown = {
+##		scope:liege = {
+##			OR = {
+##			has_faith = faith:viafurores
+##			has_faith = faith:vialiberatio
+##			has_faith = faith:freeanarch
+##			has_faith = faith:bloodtribe
+##			}
+##		}
+##	}
+##	
+##	is_vassal_valid = {
+##		custom_tooltip = {
+##			text = need_anarch_vassal_tt
+##			
+##		scope:vassal = {
+##			OR = {
+##			has_faith = faith:viafurores
+##			has_faith = faith:vialiberatio
+##			has_faith = faith:freeanarch
+##			has_faith = faith:bloodtribe
+##			}
+##		}
+##		}
+##	}
+##		
+##	liege_modifier = {
+##	}
+##
+##	vassal_modifier = {
+##		advantage = 5
+##		men_at_arms_maintenance = -0.2
+##		ai_boldness = 25
+##		ai_war_chance = 2
+##		ai_war_cooldown = -0.5		
+##	}
+##
+##	flag = vassal_contract_cannot_revoke_titles
+##	flag = vassal_contract_cheaper_religious_war
+##	
+##	ai_will_do = {
+##		value = 0
+##	}
+##}
+#
+##cult_tax_collector = {
+##	is_shown = {
+##		scope:liege.faith = {
+##			has_doctrine = tenet_ashen_faith
+##		}
+##	}
+##
+##	is_vassal_valid = {
+##		custom_tooltip = {
+##			text = vassal_should_same_faith_tt
+##
+##			scope:vassal.faith = scope:liege.faith 
+##		}
+##	}
+##
+##	tax_factor = -0.15
+##	levies_factor = -0.15
+##	
+##	liege_modifier = {
+##		monthly_piety_gain_mult = 0.01
+##	}
+##	
+##	vassal_modifier = {
+##	}
+##
+##	flag = vassal_contract_cannot_revoke_titles
+##
+##	ai_will_do = {
+##		value = 10
+##	}
+##}
+#
+##the_pyramid_tax_collector = {
+##	is_shown = {
+##		scope:liege.faith = {
+##			has_doctrine = tenet_the_pyramid
+##		}
+##	}
+##
+##	is_vassal_valid = {
+##		custom_tooltip = {
+##			text = vassal_should_have_pyramid_tt
+##
+##			scope:vassal.faith = {
+##				has_doctrine = tenet_the_pyramid
+##			}		
+##		}
+##	}
+##	
+##	tax_factor = 0.25
+##	levies_factor = 0.25
+##	
+##	liege_modifier = {
+##		maa_damage_mult = 0.01
+##	}
+##	
+##	vassal_modifier = {
+##		monthly_prestige = -0.2
+##		monthly_income_mult = -0.25
+##		levy_size = -0.25
+##		maa_damage_mult = -0.25
+##	}
+##
+##	ai_will_do = {
+##		value = 50
+##	}
+##}
+#
+##tzimisce_hospitality_tax_collector = {
+##	is_shown = {
+##		scope:liege = {
+##			is_tzimisce_trigger = yes
+##		}
+##	}
+##
+##	is_vassal_valid = {
+##	}
+##	
+##	tax_factor = 1
+##	levies_factor = 1
+##	
+##	liege_modifier = {
+##	}
+##	
+##	vassal_modifier = {
+##		opinion_of_liege = -100
+##	}
+##	
+##	flag = vassal_all_wars_banned
+##
+##	ai_will_do = {
+##		value = 0
+##	}
+##}
+#
+##family_business_tax_collector = {
+##	is_shown = {
+##		scope:liege = {
+##			is_giovanni_trigger = yes
+##		}
+##	}
+##
+##	is_vassal_valid = {
+##		scope:vassal = {
+##			is_giovanni_trigger = yes
+##		}
+##	}
+##	
+##	tax_factor = 1
+##	
+##	liege_modifier = {
+##	}
+##	
+##	vassal_modifier = {
+##	}
+##	
+##	flag = vassal_contract_cannot_revoke_titles
+##	
+##	ai_will_do = {
+##		value = 50
+##	}
+##}
+#
+#
+##eternal_senate_tax_collector = {
+##	is_shown = {
+##		scope:liege = {
+##			has_faith = faith:eternalsenate
+##		}
+##	}
+##	
+##	is_vassal_valid = {
+##		scope:vassal = { is_vampire_trigger = yes }
+##	}
+##	
+##	tax_factor = 0.2
+##	levies_factor = 0.2
+##	
+##	liege_modifier = {
+##	}
+##	
+##	vassal_modifier = {
+##		opinion_of_liege = 10
+##	}
+##		
+##	ai_will_do = {
+##		value = 50
+##	}
+##}
+#
+##Kuei jin
+#
+#POD_frontier_region_tax_collector = {
+#	tax_factor = -1
+#	levies_factor = -1
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_kueijin_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#	}
+#	
+#	liege_modifier = {
+#		maa_damage_mult = 0.01
+#		men_at_arms_recruitment_cost = 0.02
+#		men_at_arms_maintenance = 0.02
+#	}
+#
+#	vassal_modifier = {
+#		men_at_arms_maintenance = -0.1
+#		men_at_arms_recruitment_cost = -0.1
+#		opinion_of_liege = 10
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+#
+#POD_tightened_bureaucracy_tax_collector = {
+#	tax_factor = 0.25
+#	levies_factor = 0.25
+#	
+#	is_shown = {
+#		scope:liege = {
+#			is_kueijin_trigger = yes
+#		}
+#	}
+#		
+#	is_vassal_valid = {
+#		custom_tooltip = {
+#			text = POD_tightened_bureaucracy_tax_collector_tt
+#		scope:vassal = { stewardship <= scope:tax_collector.stewardship }
+#		}
+#	}
+#	
+#	is_valid = {
+#	}
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#	
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+#
+#POD_core_region_tax_collector = {
+#	tax_factor = 0.5
+#	levies_factor = 0.5
+#
+#	is_shown = {
+#		# scope:num_slots_with_obligation = 0
+#		scope:liege = { is_kueijin_trigger = yes }
+#	}
+#	
+#	is_valid = {
+#		custom_tooltip = POD_core_region_tax_collector_tt
+#	}
+#	
+#	is_vassal_valid = {
+#	}
+#	
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {
+#	}
+#
+#	ai_will_do = {
+#		value = 50		
+#	}
+#}
+#
+#POD_mandate_of_hell_tax_collector = {
+#	tax_factor = -1
+#	levies_factor = -1
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_kueijin_trigger = yes
+#		}
+#	}
+#	
+#	is_valid = {
+#	}
+#
+#	liege_modifier = {
+#		domain_tax_mult = 0.01
+#		levy_size = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = -30
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+# hunters
+
+#POD_clerical_oversight_tax_collector = {
+#	tax_factor = 0.1
+#	levies_factor = 0.1
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		monthly_piety_gain_mult = 0.1
+#	}
+#
+#	flag = vassal_all_wars_banned
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+#
+#
+#POD_popular_donations_tax_collector = {
+#	tax_factor = 1
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {		
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_popular_recruits_tax_collector = {
+#	levies_factor = 1
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#
+#	liege_modifier = {
+#	}
+#
+#	vassal_modifier = {		
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_training_center_tax_collector = {
+#	tax_factor = 0.1
+#	levies_factor = 0.25
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#	
+#	liege_modifier = {
+#		maa_damage_mult = 0.01
+#		maa_toughness_mult = 0.01
+#		men_at_arms_recruitment_cost = 0.02
+#		men_at_arms_maintenance = 0.02
+#	}
+#
+#	vassal_modifier = {
+#		men_at_arms_maintenance = -0.1
+#		men_at_arms_recruitment_cost = -0.1
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+#
+#
+#POD_fortress_center_tax_collector = {
+#	tax_factor = 0.1
+#	levies_factor = 0.5
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#	
+#	liege_modifier = {
+#		monthly_war_income_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		levy_size = 0.2
+#		fort_level = 1
+#		controlled_province_advantage = 5
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_consolidation_effort_tax_collector = {
+#	tax_factor = 0.25
+#	levies_factor = 0.25
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_supehunter_trigger = yes
+#		}
+#	}
+#	
+#	is_vassal_valid = {
+#		scope:vassal = { is_supehunter_trigger = yes }
+#	}
+#	
+#	liege_modifier = {
+#		development_growth_factor = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		development_growth_factor = 0.05
+#		monthly_county_control_growth_factor = 0.5
+#		county_opinion_add = 10
+#	}
+#
+#	ai_will_do = {
+#		value = 100
+#	}
+#}
+
+###Demons
+
+#POD_infernal_pact_tax_collector = {
+#	tax_factor = 0.25
+#	levies_factor = 0.25
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#	}
+#
+#	ai_will_do = {
+#		value = 10
+#	}
+#}
+#
+#POD_faith_pact_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.02
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#		monthly_piety_gain_mult = -0.5
+#	}
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_obedience_pact_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#		levy_size = -0.3
+#	}
+#	
+#	flag = vassal_all_wars_banned
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_iron_pact_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#		POD_demonic_maa_damage_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#		men_at_arms_maintenance = 0.5
+#		men_at_arms_recruitment_cost = 0.5		
+#	}
+#	
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_gold_pact_tax_collector = {
+#	tax_factor = 0.5
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#		domain_tax_mult = -0.35	
+#	}
+#	
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+
+#POD_glory_pact_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_demon_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.01
+#		monthly_prestige_gain_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		stress_gain_mult = 0.2
+#		monthly_prestige_gain_mult = -0.5
+#	}
+#	
+#
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_seru_court_tax_collector = {
+#	levies_factor = -0.2
+#	tax_factor = -0.2
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_mummy_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		monthly_county_control_growth_add = 0.1
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 10
+#		levy_size = 0.2
+#		domain_tax_mult = 0.2
+#	}
+#	
+#	flag = religiously_protected
+#	
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+#
+#
+#POD_kenbet_court_tax_collector = {
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_mummy_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		stress_loss_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = 5
+#		levy_size = 0.1
+#		domain_tax_mult = 0.1
+#	}
+#		
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#POD_djadjat_court_tax_collector = {
+#	levies_factor = 0.2
+#	tax_factor = 0.2
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_mummy_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		levy_maintenance = -0.01
+#	}
+#
+#	vassal_modifier = {
+#		opinion_of_liege = -10
+#		levy_size = -0.2
+#		domain_tax_mult = -0.2
+#	}
+#	
+#	flag = vassal_all_wars_banned
+#	
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+
+#POD_nomarch_oversight_tax_collector = {
+#	levies_factor = -0.5
+#	tax_factor = -0.5
+#
+#	is_shown = {
+#		scope:liege = {
+#			is_mummy_trigger = yes
+#		}
+#	}
+#	
+#	liege_modifier = {
+#		build_piety_cost = -0.01
+#		build_prestige_cost = -0.01
+#		build_gold_cost = -0.01
+#	}
+#
+#	vassal_modifier = {
+#		levy_size = -0.5
+#	}
+#		
+#	ai_will_do = {
+#		value = 0
+#	}
+#}
+
+#jizya_special_rights_tax_collector = {
+#	is_valid = {
+#		scope:liege.faith = {
+#			has_doctrine_parameter = unlock_jizya_contract
+#		}
+#	}
+#
+#	is_vassal_valid = {
+#		custom_description = {
+#			text = vassal_has_the_wrong_religion
+#			subject = scope:vassal
+#			NOT = { scope:vassal.religion = scope:liege.religion }
+#		}
+#	}
+#
+#	tax_factor = 0.5
+#	levies_factor = -0.75
+#
+#	vassal_modifier = {
+#		monthly_prestige = -0.2
+#	}
+#
+#	flag = vassal_contract_cannot_revoke_titles
+#	flag = religiously_protected
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#		if = {
+#			limit = {
+#				scope:num_slots_with_obligation = 0 # And only if we don't have Jizya already
+#
+#				scope:liege = {
+#					OR = {
+#						# The AI has at least this many vassals to warrant Jizya being used
+#						any_vassal = {
+#							count >= tax_obligation_half_of_slot
+#							government_has_flag = government_is_clan
+#							NOT = { religion = scope:liege.religion }
+#						}
+#
+#						# Or a large enough portion of their vassals are of another religion
+#						any_vassal = {
+#							percent >= 0.25
+#							government_has_flag = government_is_clan
+#							NOT = { religion = scope:liege.religion }
+#						}
+#					}
+#				}
+#			}
+#			add = 5
+#		}
+#	}
+#}
+#
+#iqta_special_rights_tax_collector = {
+#	tax_factor = -0.2
+#	levies_factor = -0.2
+#
+#	liege_modifier = {
+#		#men_at_arms_maintenance = -0.01
+#		#men_at_arms_recruitment_cost = -0.01
+#		maa_damage_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		men_at_arms_maintenance = -0.1
+#		men_at_arms_recruitment_cost = -0.1
+#		opinion_of_liege = 15
+#	}
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#
+#		scope:liege = {
+#			if = {
+#				limit = {
+#					OR = {
+#						AND = {
+#							ai_greed <= 0 # The AI shouldn't be greedy, since they won't care in that case
+#							ai_compassion >= 0 # The AI has to the somewhat compassionate to consider being nice to their vassals
+#						}
+#					}
+#				}
+#				if = {
+#					limit = { # Increase the score a lot if there are several vassal who REALLY doesn't like their liege
+#						any_vassal = {
+#							count >= tax_obligation_half_of_slot
+#							opinion = {
+#								target = scope:liege
+#								value <= -80
+#							}
+#						}
+#					}
+#					add = 4
+#				}
+#				else_if = {
+#					limit = { # Increase it only slightly if the vassals only somewhat dislike their liege
+#						any_vassal = {
+#							count >= tax_obligation_half_of_slot
+#							opinion = {
+#								target = scope:liege
+#								value <= -40
+#							}
+#						}
+#					}
+#					add = 2
+#				}
+#			}
+#		}
+#	}
+#}
+#
+#ghazi_special_rights_tax_collector = {
+#	is_vassal_valid = {
+#		custom_description = {
+#			text = vassal_has_the_wrong_faith
+#			subject = scope:vassal
+#			scope:vassal.faith = scope:liege.faith
+#		}
+#	}
+#
+#	levies_factor = -0.2
+#
+#	liege_modifier = {
+#		monthly_piety_gain_mult = 0.02
+#		monthly_war_income_mult = 0.01
+#	}
+#
+#	vassal_modifier = {
+#		monthly_piety_gain_mult = 0.1
+#		monthly_war_income_mult = 0.05
+#		#levy_size = 0.1
+#	}
+#
+#	flag = vassal_contract_cheaper_religious_war
+#	flag = vassal_contract_increase_prestige_cb_cost
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#
+#		if = {
+#			limit = {
+#				scope:liege = {
+#					ai_has_warlike_personality = yes # AI should like wars to use Ghazi
+#					ai_zeal >= 0
+#					any_vassal = {
+#						count >= {
+#							value = scope:num_vassal_slots
+#							divide = 100
+#							multiply = 90
+#						}
+#						faith = scope:liege.faith
+#					}
+#				}
+#			}
+#			add = 2
+#		}
+#	}
+#}
+#
+#### FP3 Tax Decrees
+#deqhan_special_rights_tax_collector = {
+#	is_shown = {
+#		has_fp3_dlc_trigger = yes
+#	}
+#	is_valid = {
+#		scope:liege.culture = { has_cultural_parameter = unlock_tax_obligation_deqhan }
+#	}
+#	tax_factor = 0.15
+#	levies_factor = 0.15
+#
+#	liege_modifier = {
+#		monthly_prestige_gain_mult = -0.02
+#	}
+#
+#	vassal_modifier = {
+#		monthly_prestige_gain_mult = 0.2
+#	}
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#		add = 2
+#	}
+#}
+#
+#maguh_special_rights_tax_collector = {
+#	is_shown = {
+#		has_fp3_dlc_trigger = yes
+#	}
+#
+#	is_valid = {
+#		scope:liege = {
+#			dynasty ?= {
+#				has_dynasty_perk = fp3_khvarenah_legacy_4
+#			}
+#		}
+#	}
+#
+#	tax_factor = -0.1
+#
+#	liege_modifier = {
+#		development_growth_factor = 0.01
+#	}
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#		add = 1
+#	}
+#}
+#
+#muqata_special_rights_tax_collector = {
+#	is_shown = {
+#		has_fp3_dlc_trigger = yes
+#	}
+#
+#	tax_factor = -0.3
+#	levies_factor = -0.3
+#
+#	liege_modifier = {
+#		monthly_prestige = 0.1
+#	}
+#
+#	vassal_modifier = {
+#		development_growth_factor = 0.1
+#		opinion_of_liege = 30
+#	}
+#
+#	ai_will_do = {
+#		value = tax_obligation_base_ai_will_do
+#	}
+#}
+

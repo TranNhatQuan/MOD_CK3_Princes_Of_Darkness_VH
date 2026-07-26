@@ -1,0 +1,259 @@
+﻿namespace = POD_summon
+
+POD_summon.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.200.t 
+	desc =  POD_summon.10.desc	
+	theme = presence
+	right_portrait = scope:actor
+	left_portrait = scope:recipient
+
+	immediate = {
+		scope:actor = { save_scope_as = attacker }
+		scope:recipient = { save_scope_as = defender }
+		scope:recipient = { save_scope_as = target }
+		every_scheme = {
+			limit = {
+				scheme_type = PODsummon
+				scheme_target_character = scope:defender
+			}
+			save_scope_as = summon_scheme
+		}
+	}
+
+	option = { #start the summons
+		name = POD_summon.10.option.a
+		duel = {
+			skills = { diplomacy intrigue }
+			value = scope:recipient.intrigue
+			10 = { #critical success
+				desc = POD_summon.10.crit_success.desc 
+				scope:summon_scheme = { add_scheme_progress = 5 }
+				set_local_variable = summon_crit_success
+				trigger_event = POD_summon.11
+			}
+			40 = { #success
+				desc = POD_summon.10.success_desc
+				max = 70
+				POD_entrance_attacker_modifier = yes
+				POD_entrance_attacker_tt_effect = yes
+				set_local_variable = summon_success
+				trigger_event = POD_summon.11
+			}
+			40 = { #failure
+				desc = POD_summon.10.failure_desc
+				min = 10
+				POD_entrance_defender_modifier = yes
+				POD_entrance_defender_tt_effect = yes
+				scope:defender = {
+					set_variable = {
+						name = immune_to_summon_from_actor
+						value = scope:attacker
+						years = 10
+					}
+				}
+				scope:summon_scheme = { end_scheme = yes }
+				set_local_variable = summon_failure
+				trigger_event = POD_summon.500
+			}
+			10 = { #botch
+				desc = POD_summon.10.botch_desc
+				set_local_variable = summon_botch
+				scope:defender = {
+					set_variable = {
+						name = immune_to_summon_from_actor
+						value = scope:attacker
+						years = 50
+					}
+				}
+				scope:summon_scheme = { end_scheme = yes }
+				trigger_event = POD_summon.500
+			}
+		}
+	}
+
+	option = { #cancel summons
+		name = POD_summon.10.option.b
+		scope:summon_scheme = { end_scheme = yes }
+	}
+}
+
+POD_summon.11 = { #success desc
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.200.t 	
+	theme = presence
+	right_portrait = scope:actor
+	left_portrait = scope:recipient
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = local_var:summon_crit_success }
+				desc = POD_summon.11.desc.crit_success
+			}
+			triggered_desc = {
+				trigger = { exists = local_var:summon_success }
+				desc = POD_summon.11.desc.success
+			}
+		}
+		desc = POD_summon.11.desc
+	}
+	option = { #OK
+		name = POD_summon.11.option.a
+	}
+}
+
+# Scheme Success, Summoner Notified
+
+POD_summon.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.300.t
+	desc =  POD_summon.300.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_summon.300.option.a
+		
+		if = {
+			limit = {
+				scope:scheme.scheme_target_character = { 
+					is_vampire_trigger = yes
+					opinion = {
+						target = scope:scheme.scheme_owner
+						value < 30
+					}
+				}
+			}
+			scope:scheme.scheme_target_character = {
+				add_opinion = {
+					target = scope:scheme.scheme_owner
+					#opinion = -200
+					modifier = summoned_me_opinion
+				}
+			}
+		}
+		
+		scope:scheme.scheme_target_character = {
+			set_employer = scope:scheme.scheme_owner
+			return_to_court = yes
+			add_character_flag = {
+				flag = blocked_from_leaving
+				years = 5
+			}
+			trigger_event = POD_summon.400
+		}
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_summon.300.option.a.tt.beast
+		}
+	}		
+}
+
+# Sceme Success, Summoned Notified
+
+POD_summon.400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.400.t
+	desc =  POD_summon.400.desc		
+	theme = presence
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_summon.400.option.a
+		add_character_flag = {
+			flag = blocked_from_leaving
+			years = 5
+		}		
+	}
+	
+	after = {
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+# Scene Failure, Summoner Notified
+
+POD_summon.500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.500.t	
+	theme = presence
+	right_portrait = scope:actor
+	left_portrait = scope:target
+
+	desc = {
+		desc = POD_summon.500.desc
+		triggered_desc = {
+			trigger = { exists = local_var:summon_failure }
+			desc = POD_summon.500.desc.summon_failure
+		}
+		triggered_desc = {
+			trigger = { exists = local_var:summon_botch }
+			desc = POD_summon.500.desc.summon_botch
+		}
+	}
+	
+
+	option = {
+		name = POD_summon.500.option.a
+		scope:target = {
+			trigger_event = POD_summon.600
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_summon.500.option.a.tt.beast
+		}
+	}
+}
+
+# Scene Failure, Summoning Target Notified
+
+POD_summon.600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_summon.600.t
+	desc =  POD_summon.600.desc		
+	theme = presence
+	right_portrait = scope:actor
+	left_portrait = scope:target
+
+	immediate = {
+		if = {
+			limit = {
+				scope:target = { 
+					is_vampire_trigger = yes 
+					opinion = {
+						target = scope:actor
+						value < 30
+					}
+				}
+			}
+			scope:target = {
+				add_opinion = {
+					target = scope:actor
+					#opinion = -200
+					modifier = summoned_me_opinion
+				}
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_summon.600.option.a
+		add_stress = minor_stress_gain
+		ai_chance = {
+			base = 100
+		}			
+	}
+}
+

@@ -1,0 +1,2148 @@
+﻿namespace = podkueijin
+
+podkueijin.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.300.t
+	desc = podkueijin.300.desc
+
+	theme = vampire
+	
+	option = {
+		name = podkueijin.300.a	
+		
+		trigger_event = podkueijin.310	
+	}
+	
+	option = {
+		name = podkueijin.300.b
+		
+		add_prestige = -200
+		
+		add_character_flag = kj_education_demon_hunter_flag				
+
+		trigger_event = podkueijin.310	
+	}
+
+	option = {
+		name = podkueijin.300.c
+		
+		trigger = {
+			has_faith = faith:thousandhells_emma_o
+		}
+		
+		add_piety = -200
+		
+		trigger_event = podkueijin.351
+	}
+	
+	after = {		
+	}
+}
+
+podkueijin.310 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.300.t
+	desc = podkueijin.310.desc
+
+	theme = vampire
+	
+	
+	option = {
+		name = podkueijin.310.a	
+		
+		if = {
+			limit = {
+				has_faith = faith:the_passion_bloodflowers
+			}
+			custom_tooltip = passion_bloodflowers_extra_cost_tt
+			add_piety = -150
+		}
+		
+		add_character_flag = kj_education_young_man_flag					
+	}
+	
+	option = {
+		name = podkueijin.310.b
+
+		if = {
+			limit = {
+				has_faith = faith:the_passion_bloodflowers
+			}
+			custom_tooltip = passion_bloodflowers_extra_cost_tt
+			add_piety = -150
+		}
+		
+		add_character_flag = kj_education_middle_age_man_flag				
+	}
+
+	option = {
+		name = podkueijin.310.c
+
+		if = {
+			limit = {
+				has_faith = faith:the_passion_bloodflowers
+			}
+			custom_tooltip = passion_bloodflowers_extra_cost_tt
+			add_piety = -150
+		}
+		
+		add_character_flag = kj_education_old_man_flag					
+	}
+	
+	option = {
+		name = podkueijin.310.d
+		
+		add_character_flag = kj_education_young_woman_flag				
+	}	
+	
+	option = {
+		name = podkueijin.310.e
+		
+		add_character_flag = kj_education_middle_age_woman_flag				
+	}
+
+	option = {
+		name = podkueijin.310.f
+		
+		add_character_flag = kj_education_old_woman_flag				
+	}
+	
+	after = {
+		trigger_event = podkueijin.321	
+	}
+}
+
+# Choose beauty 
+podkueijin.321 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.300.t
+	desc = podkueijin.321.desc
+	theme = vampire 
+
+	# beauty 3
+	option = {
+		name = podkueijin.321.a
+		
+		add_prestige = major_prestige_loss
+		
+		add_character_flag = kj_adopt_beauty_3
+		
+		trigger_event = podkueijin.322
+	}
+	
+	# beauty 2
+	option = {
+		name = podkueijin.321.b
+
+		add_prestige = medium_prestige_loss
+		
+		add_character_flag = kj_adopt_beauty_2
+		
+		trigger_event = podkueijin.322
+	}
+
+	# beauty 1
+	option = {
+		name = podkueijin.321.c
+		
+		add_prestige = minor_prestige_loss
+		
+		add_character_flag = kj_adopt_beauty_1
+		
+		trigger_event = podkueijin.322
+	}
+	
+	# next
+	option = {
+		name = podkueijin.321.d
+		
+		trigger_event = podkueijin.322
+	}
+}
+
+# Choose intellect 
+podkueijin.322 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.300.t
+	desc = podkueijin.322.desc
+	theme = vampire 
+
+	# intellect 3
+	option = {
+		name = podkueijin.322.a
+		
+		add_prestige = major_prestige_loss
+		
+		add_character_flag = kj_adopt_intellect_3
+		
+		trigger_event = podkueijin.323
+	}
+	
+	# intellect 2
+	option = {
+		name = podkueijin.322.b
+		
+		add_prestige = medium_prestige_loss
+		
+		add_character_flag = kj_adopt_intellect_2
+		
+		trigger_event = podkueijin.323
+	}
+
+	# intellect 1
+	option = {
+		name = podkueijin.322.c
+		
+		add_prestige = minor_prestige_loss
+		
+		add_character_flag = kj_adopt_intellect_1
+		
+		trigger_event = podkueijin.323
+	}
+	
+	# next
+	option = {
+		name = podkueijin.321.d
+		
+		trigger_event = podkueijin.323
+	}
+}
+
+# Choose physique 
+podkueijin.323 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.300.t
+	desc = podkueijin.323.desc
+	theme = vampire 
+
+	# physique 3
+	option = {
+		name = podkueijin.323.a
+		
+		add_prestige = major_prestige_loss
+		
+		add_character_flag = kj_adopt_physique_3
+		
+		custom_tooltip = kj_education_wait_tt
+		
+		trigger_event = { 
+			id = podkueijin.350
+			months = { 2 6 }
+		}
+	}
+	
+	# physique 2
+	option = {
+		name = podkueijin.323.b
+		
+		add_prestige = medium_prestige_loss
+		
+		add_character_flag = kj_adopt_physique_2
+		
+		custom_tooltip = kj_education_wait_tt
+		
+		trigger_event = { 
+			id = podkueijin.350
+			months = { 2 6 }
+		}		
+	}
+
+	# physique 1
+	option = {
+		name = podkueijin.321.c
+		
+		add_prestige = minor_prestige_loss
+		
+		add_character_flag = kj_adopt_physique_1
+		
+		custom_tooltip = kj_education_wait_tt
+		
+		trigger_event = { 
+			id = podkueijin.350
+			months = { 2 6 }
+		}	
+	}
+	
+	# next
+	option = {
+		name = podkueijin.321.d
+		
+		custom_tooltip = kj_education_wait_tt
+		
+		trigger_event = { 
+			id = podkueijin.350
+			months = { 2 6 }
+		}	
+	}
+}
+
+podkueijin.350 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.350.t
+	desc = podkueijin.350.desc
+	theme = dynasty 
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = idle
+	}	
+
+	immediate = {
+		hidden_effect = {
+		if = {
+			limit = {
+				OR = {
+					has_character_flag = kj_education_young_man_flag
+					has_character_flag = kj_education_young_woman_flag
+				}
+			}
+		
+		create_character = {
+			location = root.capital_province
+			age = 18
+			culture = root.culture
+			faith = root.faith
+			trait = kueijin
+			trait = dharma1
+			
+			gender_female_chance = {
+				value = 50
+				if = {
+					limit = { root = { has_character_flag = kj_education_young_man_flag } }
+					add = -50
+				}
+				if = {
+					limit = { root = { has_character_flag = kj_education_young_woman_flag } }
+					add = 50
+				}
+			}
+			diplomacy = { 5 10 }
+			martial = { 5 10 }
+			stewardship = { 5 10 }
+			intrigue = { 5 10 }
+			learning = { 5 10 }
+			prowess = { 5 10 }
+			
+			random_traits = yes
+
+			dynasty = none
+			save_scope_as = optional_child
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_young_man_flag } }
+			remove_character_flag = kj_education_young_man_flag
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_young_woman_flag } }
+			remove_character_flag = kj_education_young_woman_flag
+		}
+				
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_3 } }
+			remove_character_flag = kj_adopt_beauty_3
+			
+			scope:optional_child = {
+				add_trait = beauty_good_3
+				
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_2 } }
+			remove_character_flag = kj_adopt_beauty_2
+			
+			scope:optional_child = {
+				add_trait = beauty_good_2
+						
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_1 } }
+			remove_character_flag = kj_adopt_beauty_1
+			
+			scope:optional_child = {
+				add_trait = beauty_good_1
+					
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_3 } }
+			remove_character_flag = kj_adopt_intellect_3
+			
+			scope:optional_child = {
+				add_trait = intellect_good_3
+							
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_2 } }
+			remove_character_flag = kj_adopt_intellect_2
+			
+			scope:optional_child = {
+				add_trait = intellect_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_1 } }
+			remove_character_flag = kj_adopt_intellect_1
+			
+			scope:optional_child = {
+				add_trait = intellect_good_1
+							
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_3 } }
+			remove_character_flag = kj_adopt_physique_3
+			
+			scope:optional_child = {
+				add_trait = physique_good_3
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_2 } }
+			remove_character_flag = kj_adopt_physique_2
+			
+			scope:optional_child = {
+				add_trait = physique_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_1 } }
+			remove_character_flag = kj_adopt_physique_1
+			
+			scope:optional_child = {
+				add_trait = physique_good_1
+								
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_demon_hunter_flag } }
+			remove_character_flag = kj_education_demon_hunter_flag
+
+			scope:optional_child = {
+				add_trait = turnedhunter
+				
+				random_list = {
+					25 = {
+						add_trait = lifestyle_blademaster
+						add_trait_xp = {
+							trait = lifestyle_blademaster
+							value = 35
+						}						
+					}
+					25 = {
+						add_trait = lifestyle_mystic
+						add_trait_xp = {
+							trait = lifestyle_mystic
+							value = 35
+						}	
+					}	
+					25 = {
+						add_trait = lifestyle_hunter
+						add_trait_xp = {
+							trait = lifestyle_hunter
+							track = hunter
+							value = 35
+						}					
+					}
+					25 = {
+						add_trait = tourney_participant
+						add_trait_xp = {
+						trait = tourney_participant
+						track = bow
+						value = 35
+						}						
+					}	
+				}					
+			}
+		}			
+		}
+		
+		else_if = {
+			limit = {
+				OR = {
+					has_character_flag = kj_education_old_woman_flag
+					has_character_flag = kj_education_old_man_flag					
+				}
+			}
+		
+		create_character = {
+			location = root.capital_province
+			age = 65
+			culture = root.culture
+			faith = root.faith
+			trait = kueijin
+			trait = dharma1
+			
+			gender_female_chance = {
+				value = 50
+				if = {
+					limit = { root = { has_character_flag = kj_education_old_man_flag } }
+					add = -50
+				}
+				if = {
+					limit = { root = { has_character_flag = kj_education_old_woman_flag } }
+					add = 50
+				}
+			}
+			diplomacy = { 5 10 }
+			martial = { 5 10 }
+			stewardship = { 5 10 }
+			intrigue = { 5 10 }
+			learning = { 5 10 }
+			prowess = { 5 10 }
+			
+			random_traits = yes
+
+			dynasty = none
+			save_scope_as = optional_child
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_old_man_flag } }
+			remove_character_flag = kj_education_old_man_flag
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_old_woman_flag } }
+			remove_character_flag = kj_education_old_woman_flag
+		}
+				
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_3 } }
+			remove_character_flag = kj_adopt_beauty_3
+			
+			scope:optional_child = {
+				add_trait = beauty_good_3
+				
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_2 } }
+			remove_character_flag = kj_adopt_beauty_2
+			
+			scope:optional_child = {
+				add_trait = beauty_good_2
+						
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_1 } }
+			remove_character_flag = kj_adopt_beauty_1
+			
+			scope:optional_child = {
+				add_trait = beauty_good_1
+						
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_3 } }
+			remove_character_flag = kj_adopt_intellect_3
+			
+			scope:optional_child = {
+				add_trait = intellect_good_3
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_2 } }
+			remove_character_flag = kj_adopt_intellect_2
+			
+			scope:optional_child = {
+				add_trait = intellect_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_1 } }
+			remove_character_flag = kj_adopt_intellect_1
+			
+			scope:optional_child = {
+				add_trait = intellect_good_1
+							
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_3 } }
+			remove_character_flag = kj_adopt_physique_3
+			
+			scope:optional_child = {
+				add_trait = physique_good_3
+									
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_2 } }
+			remove_character_flag = kj_adopt_physique_2
+			
+			scope:optional_child = {
+				add_trait = physique_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_1 } }
+			remove_character_flag = kj_adopt_physique_1
+			
+			scope:optional_child = {
+				add_trait = physique_good_1
+									
+			}
+		}
+		if = {
+			limit = { root = { has_character_flag = kj_education_demon_hunter_flag } }
+			remove_character_flag = kj_education_demon_hunter_flag
+
+			scope:optional_child = {
+				add_trait = turnedhunter
+				
+				random_list = {
+					25 = {
+						add_trait = lifestyle_blademaster
+						add_trait_xp = {
+							trait = lifestyle_blademaster
+							value = 35
+						}						
+					}
+					25 = {
+						add_trait = lifestyle_mystic
+						add_trait_xp = {
+							trait = lifestyle_mystic
+							value = 35
+						}	
+					}	
+					25 = {
+						add_trait = lifestyle_hunter
+						add_trait_xp = {
+							trait = lifestyle_hunter
+							track = hunter
+							value = 35
+						}					
+					}
+					25 = {
+						add_trait = tourney_participant
+						add_trait_xp = {
+						trait = tourney_participant
+						track = bow
+						value = 35
+						}						
+					}	
+				}					
+			}
+		}			
+		}		
+		
+		else = {
+		
+		create_character = {
+			location = root.capital_province
+			age = 40
+			culture = root.culture
+			faith = root.faith
+			trait = kueijin
+			trait = dharma1
+			
+			gender_female_chance = {
+				value = 50
+				if = {
+					limit = { root = { has_character_flag = kj_education_middle_age_man_flag } }
+					add = -50
+				}
+				if = {
+					limit = { root = { has_character_flag = kj_education_middle_age_woman_flag } }
+					add = 50
+				}
+			}
+			diplomacy = { 5 10 }
+			martial = { 5 10 }
+			stewardship = { 5 10 }
+			intrigue = { 5 10 }
+			learning = { 5 10 }
+			prowess = { 5 10 }
+			
+			random_traits = yes
+
+			dynasty = none
+			save_scope_as = optional_child
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_middle_age_man_flag } }
+			remove_character_flag = kj_education_middle_age_man_flag
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_education_middle_age_woman_flag } }
+			remove_character_flag = kj_education_middle_age_woman_flag
+		}
+				
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_3 } }
+			remove_character_flag = kj_adopt_beauty_3
+			
+			scope:optional_child = {
+				add_trait = beauty_good_3
+				
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_2 } }
+			remove_character_flag = kj_adopt_beauty_2
+			
+			scope:optional_child = {
+				add_trait = beauty_good_2
+							
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_beauty_1 } }
+			remove_character_flag = kj_adopt_beauty_1
+			
+			scope:optional_child = {
+				add_trait = beauty_good_1
+						
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_3 } }
+			remove_character_flag = kj_adopt_intellect_3
+			
+			scope:optional_child = {
+				add_trait = intellect_good_3
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_2 } }
+			remove_character_flag = kj_adopt_intellect_2
+			
+			scope:optional_child = {
+				add_trait = intellect_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_intellect_1 } }
+			remove_character_flag = kj_adopt_intellect_1
+			
+			scope:optional_child = {
+				add_trait = intellect_good_1
+							
+			}
+		}
+		
+		if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_3 } }
+			remove_character_flag = kj_adopt_physique_3
+			
+			scope:optional_child = {
+				add_trait = physique_good_3
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_2 } }
+			remove_character_flag = kj_adopt_physique_2
+			
+			scope:optional_child = {
+				add_trait = physique_good_2
+								
+			}
+		}
+		else_if = {
+			limit = { root = { has_character_flag = kj_adopt_physique_1 } }
+			remove_character_flag = kj_adopt_physique_1
+			
+			scope:optional_child = {
+				add_trait = physique_good_1
+								
+			}
+		}
+		if = {
+			limit = { root = { has_character_flag = kj_education_demon_hunter_flag } }
+			remove_character_flag = kj_education_demon_hunter_flag
+
+			scope:optional_child = {
+				add_trait = turnedhunter
+				
+				random_list = {
+					25 = {
+						add_trait = lifestyle_blademaster
+						add_trait_xp = {
+							trait = lifestyle_blademaster
+							value = 35
+						}						
+					}
+					25 = {
+						add_trait = lifestyle_mystic
+						add_trait_xp = {
+							trait = lifestyle_mystic
+							value = 35
+						}	
+					}	
+					25 = {
+						add_trait = lifestyle_hunter
+						add_trait_xp = {
+							trait = lifestyle_hunter
+							track = hunter
+							value = 35
+						}					
+					}
+					25 = {
+						add_trait = tourney_participant
+						add_trait_xp = {
+						trait = tourney_participant
+						track = bow
+						value = 35
+						}						
+					}	
+				}					
+			}
+		}			
+		}		
+
+		}
+	}
+	
+	# Adopt
+	option = {
+		name = podkueijin.350.a			
+
+		hidden_effect = {
+			scope:optional_child = {
+				if = {
+					limit = { root = { is_male = yes } }
+					set_father = root
+					set_house = father.house
+				}
+				else = {
+					set_mother = root
+					set_house = mother.house
+				}
+				
+				POD_kueijin_initialization_effect = yes
+			}
+		
+			reverse_add_opinion = {
+				target = scope:optional_child
+				modifier = hired_me_opinion
+			}
+		}
+		
+		#trigger_event = {
+		#	on_action = kueijin_personalty_education_random_pulse
+		#	days = 1
+		#}
+		#trigger_event = podkueijin.400
+		trigger_event = podkueijin.401
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+podkueijin.351 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.350.t
+	desc = podkueijin.351.desc
+	theme = dynasty 
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = flirtation
+	}	
+
+	immediate = {
+		hidden_effect = {
+		
+		create_character = {
+			location = root.capital_province
+			age = 20
+			culture = culture:japanese
+			faith = faith:thousandhells_emma_o
+			trait = kueijin
+			trait = dharma1		
+			gender_female_chance = 100
+
+			diplomacy = { 5 10 }
+			martial = { 5 10 }
+			stewardship = { 5 10 }
+			intrigue = { 5 10 }
+			learning = { 5 10 }
+			prowess = { 5 10 }
+			
+			random_traits = yes
+
+			random_traits_list = {
+				count = 1
+				beauty_good_1 = { weight = { base = 50 } }
+				beauty_good_2 = { weight = { base = 25 } }
+				beauty_good_3 = { weight = { base = 10 } }
+			}
+
+
+			random_traits_list = {
+				count = { 0 1 }
+				physique_good_1 = { weight = { base = 50 } }
+				physique_good_2 = { weight = { base = 10 } }
+				physique_good_3 = { weight = { base = 1 } }
+			}
+	
+			dynasty = none
+			save_scope_as = optional_child
+			
+			after_creation = {
+				add_character_flag = {
+					flag = POD_portrait_no_hat_flag
+				}
+				add_character_flag = {
+					flag = POD_portrait_no_crown_flag
+				}				
+			}
+		}		
+		scope:optional_child = {
+			character:793488 = {
+				save_scope_as = dummyshikome
+			}
+			copy_inheritable_appearance_from = scope:dummyshikome
+
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_muslim_01_common_flag
+		}
+		}	
+	}
+	
+	# Adopt
+	option = {
+		name = podkueijin.350.a			
+
+		hidden_effect = {
+			scope:optional_child = {
+				if = {
+					limit = { root = { is_male = yes } }
+					set_father = root
+					set_house = father.house
+				}
+				else = {
+					set_mother = root
+					set_house = mother.house
+				}
+				
+				POD_kueijin_initialization_effect = yes
+			}
+		
+			reverse_add_opinion = {
+				target = scope:optional_child
+				modifier = hired_me_opinion
+			}
+		}
+		
+		#trigger_event = {
+		#	on_action = kueijin_personalty_education_random_pulse
+		#	days = 1
+		#}
+		#trigger_event = podkueijin.400
+		trigger_event = podkueijin.401
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+# Dharma education
+# (deprecated since yin/yang modifiers were removed)
+podkueijin.400 = {
+	type = character_event
+	orphan = yes
+	content_source = dlc_POD
+	title = podkueijin.400.t
+	desc = podkueijin.400.desc
+
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = worry
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		scope:optional_child = { is_alive = yes }
+	}
+	
+	immediate = {
+		scope:optional_child = { 
+			if = {
+				limit = { has_trait = dharma0 } 
+				remove_trait = dharma0
+				add_trait_force_tooltip = dharma1
+			}
+			if = {
+				limit = { NOT = { has_faith = root.faith } }
+				set_character_faith = root.faith
+			}			
+		}
+	}
+	
+	option = {
+		name = podkueijin.400.a
+		
+		# scope:optional_child = {
+		# 	add_character_modifier = {
+		# 		modifier = temporary_yang_imbalance_modifier
+		# 		years = 20
+		# 	}
+		# }
+
+	}
+	
+	option = {
+		name = podkueijin.400.b
+		
+		# scope:optional_child = {
+		# 	add_character_modifier = {
+		# 		modifier = temporary_yin_imbalance_modifier
+		# 		years = 20
+		# 	}
+		# }	
+	}
+	option = {
+		name = podkueijin.400.c
+		
+		scope:optional_child = {
+			add_prestige = 100
+		}	
+	}
+	
+	after = {
+		trigger_event = {
+			id = podkueijin.401
+			days = 10
+		}	
+	}
+}
+
+podkueijin.401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.401.t
+	desc = podkueijin.401.desc
+
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = personality_bold
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		scope:optional_child = { is_alive = yes }
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podkueijin.401.a
+		
+		scope:optional_child = {
+			add_diplomacy_skill = 5
+			add_intrigue_skill = -5
+		}			
+	}
+	
+	option = {
+		name = podkueijin.401.b
+		
+		scope:optional_child = {
+			add_stewardship_skill = 5
+			add_martial_skill = -5
+		}	
+	}
+	
+	option = {
+		name = podkueijin.401.c
+		
+		scope:optional_child = {
+			add_martial_skill = 5
+			add_learning_skill = -5
+		}
+	}
+
+	option = {
+		name = podkueijin.401.d
+		
+		scope:optional_child = {
+			add_learning_skill = 5
+			add_stewardship_skill = -5
+		}
+	}
+
+	option = {
+		name = podkueijin.401.e
+		
+		scope:optional_child = {
+			add_intrigue_skill = 5
+			add_diplomacy_skill = -5
+		}
+	}	
+	after = {
+		trigger_event = {
+			id = podkueijin.402
+			days = 10
+		}	
+	}
+}
+
+podkueijin.402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.402.t
+	desc = podkueijin.402.desc
+
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = worry
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		scope:optional_child = { is_alive = yes }
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podkueijin.402.a
+		
+		add_character_modifier = {
+			modifier = helpful_diplomat_childe_modifier
+			years = 1
+		}
+	}
+	
+	option = {
+		name = podkueijin.402.b
+		
+		add_character_modifier = {
+			modifier = helpful_steward_childe_modifier
+			years = 1
+		}	
+	}
+	
+	option = {
+		name = podkueijin.402.c
+		
+		add_character_modifier = {
+			modifier = helpful_intrigue_childe_modifier
+			years = 1
+		}
+	}
+	
+	after = {
+		trigger_event = {
+			id = podkueijin.403
+			days = 10
+		}	
+	}
+}
+
+podkueijin.403 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.403.t
+	desc = podkueijin.403.desc
+
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	
+	right_portrait = {
+		character = scope:optional_child
+		animation = personality_zealous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		scope:optional_child = { is_alive = yes }
+	}
+	
+	immediate = {
+	}
+	
+	# Study completed
+	option = {
+		name = podkueijin.403.a
+		
+		scope:optional_child = { 
+			if = {
+				limit = { has_trait = dharma1 } 
+				remove_trait = dharma1
+				add_trait_force_tooltip = dharma2
+			}
+			if = {
+				limit = { NOT = { has_faith = root.faith } }
+				set_character_faith = root.faith
+			}			
+		}
+	}
+}
+
+#podkueijin.404 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.403.t
+#	desc = podkueijin.403.desc
+#
+#	theme = vampire
+#	left_portrait = {
+#		character = root
+#		animation = idle
+#	}
+#	
+#	right_portrait = {
+#		character = scope:optional_child
+#		animation = idle
+#	}
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { is_alive = yes }
+#	}
+#	
+#	immediate = {
+#		if = {
+#			limit = { has_trait = dharma3 } 
+#			remove_trait = dharma3
+#			add_trait = dharma3
+#		}
+#	}
+#	
+#	# Study completed
+#	option = {
+#		name = podkueijin.403.a
+#		
+#		scope:optional_child = { 
+#			add_character_flag = study_completed
+#			random_list = {
+#				1 = {
+#					add_trait = education_intrigue_5
+#				}
+#				1 = {
+#					add_trait = education_diplomacy_5
+#				}
+#				1 = {
+#					add_trait = education_learning_5
+#				}
+#				1 = {
+#					add_trait = education_stewardship_5
+#				}
+#				1 = {
+#					add_trait = education_martial_5
+#				}
+#				1 = {
+#					add_trait = education_martial_prowess_5
+#				}
+#			}
+#		}
+#	}
+#}
+
+# Personality education
+
+#podkueijin.501 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = brave
+#				has_trait = craven
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.501.a
+#		
+#		scope:optional_child = { add_trait = brave }
+#	}
+#	
+#	option = {
+#		name = podkueijin.501.b
+#		
+#		scope:optional_child = { add_trait = craven}
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.502 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = calm
+#				has_trait = wrathful
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.502.a
+#		
+#		scope:optional_child = { add_trait = calm}
+#	}
+#	
+#	option = {
+#		name = podkueijin.502.b
+#		
+#		scope:optional_child = { add_trait = wrathful}
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.503 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = chaste
+#				has_trait = lustful
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.503.a
+#		
+#		scope:optional_child = { add_trait = chaste }
+#	}
+#	
+#	option = {
+#		name = podkueijin.503.b
+#		
+#		scope:optional_child = { add_trait = lustful }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.504 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = content
+#				has_trait = ambitious
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.504.a
+#		
+#		scope:optional_child = { add_trait = content }
+#	}
+#	
+#	option = {
+#		name = podkueijin.504.b
+#		
+#		scope:optional_child = { add_trait = ambitious }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.505 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = diligent
+#				has_trait = lazy
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.505.a
+#		
+#		scope:optional_child = { add_trait = diligent }
+#	}
+#	
+#	option = {
+#		name = podkueijin.505.b
+#		
+#		scope:optional_child = { add_trait = lazy }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.506 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = fickle
+#				has_trait = stubborn
+#				has_trait = eccentric
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.506.a
+#		
+#		scope:optional_child = { add_trait = fickle }
+#	}
+#	
+#	option = {
+#		name = podkueijin.506.a
+#		
+#		scope:optional_child = { add_trait = eccentric }
+#	}
+#	
+#	option = {
+#		name = podkueijin.506.b
+#		
+#		scope:optional_child = { add_trait = stubborn }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.507 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = forgiving
+#				has_trait = vengeful
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.507.a
+#		
+#		scope:optional_child = { add_trait = vengeful }
+#	}
+#	
+#	option = {
+#		name = podkueijin.507.b
+#		
+#		scope:optional_child = { add_trait = forgiving }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.508 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = generous
+#				has_trait = greedy
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.508.a
+#		
+#		scope:optional_child = { add_trait = generous }
+#	}
+#	
+#	option = {
+#		name = podkueijin.508.b
+#		
+#		scope:optional_child = { add_trait = greedy }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.509 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = gregarious
+#				has_trait = shy
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.509.a
+#		
+#		scope:optional_child = { add_trait = gregarious }
+#	}
+#	
+#	option = {
+#		name = podkueijin.509.b
+#		
+#		scope:optional_child = { add_trait = shy }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.510 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = honest
+#				has_trait = deceitful
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.510.a
+#		
+#		scope:optional_child = { add_trait = honest }
+#	}
+#	
+#	option = {
+#		name = podkueijin.510.b
+#		
+#		scope:optional_child = { add_trait = deceitful }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.511 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = humble
+#				has_trait = arrogant
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.511.a
+#		
+#		scope:optional_child = { add_trait = humble }
+#	}
+#	
+#	option = {
+#		name = podkueijin.511.b
+#		
+#		scope:optional_child = { add_trait = arrogant }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.512 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = just
+#				has_trait = arbitrary
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.512.a
+#		
+#		scope:optional_child = { add_trait = just }
+#	}
+#	
+#	option = {
+#		name = podkueijin.512.b
+#		
+#		scope:optional_child = { add_trait = arbitrary }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.513 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = patient
+#				has_trait = impatient
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.513.a
+#		
+#		scope:optional_child = { add_trait = patient }
+#	}
+#	
+#	option = {
+#		name = podkueijin.513.b
+#		
+#		scope:optional_child = { add_trait = impatient }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.514 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = temperate
+#				has_trait = gluttonous
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.514.a
+#		
+#		scope:optional_child = { add_trait = temperate }
+#	}
+#	
+#	option = {
+#		name = podkueijin.514.b
+#		
+#		scope:optional_child = { add_trait = gluttonous }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.515 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = trusting
+#				has_trait = paranoid
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.515.a
+#		
+#		scope:optional_child = { add_trait = trusting }
+#	}
+#	
+#	option = {
+#		name = podkueijin.515.b
+#		
+#		scope:optional_child = { add_trait = paranoid }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.516 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = zealous
+#				has_trait = cynical
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.516.a
+#		
+#		scope:optional_child = { add_trait = zealous }
+#	}
+#	
+#	option = {
+#		name = podkueijin.516.b
+#		
+#		scope:optional_child = { add_trait = cynical }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}
+#
+#podkueijin.517 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podkueijin.500.t
+#	desc = podkueijin.500.desc
+#
+#	theme = vampire
+#	left_portrait = root
+#	right_portrait = scope:optional_child
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	trigger = {
+#		scope:optional_child = { 
+#			NOR = { 
+#				has_trait = compassionate
+#				has_trait = callous
+#				has_trait = sadistic
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = podkueijin.517.a
+#		
+#		scope:optional_child = { add_trait = compassionate }
+#	}
+#	
+#	option = {
+#		name = podkueijin.517.b
+#		
+#		scope:optional_child = { add_trait = callous }
+#	}
+#	
+#	option = {
+#		name = podkueijin.517.c
+#		
+#		scope:optional_child = { add_trait = sadistic }
+#	}
+#	
+#	option = {
+#		name = podkueijin.500.skip
+#	}
+#	
+#	after = {
+#		trigger_event = {
+#			on_action = kueijin_personalty_education_random_pulse
+#			days = { 30 60 }
+#		}
+#	}
+#}

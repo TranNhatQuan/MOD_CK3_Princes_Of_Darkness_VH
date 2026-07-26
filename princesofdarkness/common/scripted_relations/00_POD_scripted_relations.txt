@@ -1,0 +1,263 @@
+﻿### Clone ###
+
+mindless_clone_master = {
+	corresponding = mindless_clone_servant
+	opinion = 100
+	special_guest = yes
+}
+
+mindless_clone_servant = {
+	corresponding = mindless_clone_master
+	opinion = 50
+}
+
+### Automaton ###
+
+effigy_creator = {
+    corresponding = effigy_character
+	opinion = 1000
+	special_guest = yes
+}
+
+effigy_character = {
+    corresponding = effigy_creator
+	opinion = 5
+}
+
+animantis_creator = {
+    corresponding = effigy_character
+	opinion = 1000
+	special_guest = yes
+}
+
+animantis_character = {
+    corresponding = effigy_creator
+	opinion = 5
+}
+
+manifestation_creator = {
+    corresponding = manifestation_character
+	opinion = 1000
+	special_guest = yes
+}
+
+manifestation_character = {
+    corresponding = manifestation_creator
+	opinion = 5
+}
+
+### Minion ###
+
+ghoul_domitor = {
+    corresponding = ghoul_thrall
+	opinion = 100
+	special_guest = yes
+}
+
+ghoul_thrall = {
+    corresponding = ghoul_domitor
+}
+
+demonic_master = {
+    corresponding = demonic_thrall
+	opinion = 30
+	special_guest = yes
+	title_grant_target = yes
+
+	#modifier = {
+	#	name = "demonic_master"
+	#	prowess = 5
+	#}
+}
+
+demonic_thrall = {
+    corresponding = demonic_master
+	opinion = 5
+	title_grant_target = yes
+}
+
+necromancer = {
+    corresponding = bound_wraith
+}
+
+bound_wraith = {
+    corresponding = necromancer
+}
+
+diabolist = {
+    corresponding = bound_demon
+}
+
+bound_demon = {
+    corresponding = diabolist
+}
+
+herd_owner = {
+    corresponding = herd_member
+	opinion = 30
+	special_guest = yes
+}
+
+herd_member = {
+    corresponding = herd_owner
+}
+
+dreamer_owner = {
+    corresponding = dreamer_member
+	opinion = 30
+	special_guest = yes
+}
+
+dreamer_member = {
+    corresponding = dreamer_owner
+}
+
+### Worshipper ###
+
+worshipped_reborn = {
+    corresponding = worshipping_neteru
+	opinion = 30
+	special_guest = yes
+	title_grant_target = yes
+}
+
+worshipping_neteru = {
+    corresponding = worshipped_reborn
+	opinion = 5
+	title_grant_target = yes
+}
+
+worshipped_demon = {
+    corresponding = worshipping_cultist
+	opinion = 30
+	special_guest = yes
+	title_grant_target = yes
+
+	#modifier = {
+	#	name = "worshipped_demon"
+	#	monthly_piety_gain_mult = -0.1
+	#}
+}
+
+worshipping_cultist = {
+    corresponding = worshipped_demon
+	opinion = 5
+	title_grant_target = yes
+
+	#modifier = {
+	#	name = "worshipping_cultist"
+	#	monthly_dynasty_prestige = 0.1
+	#}
+}
+
+### Misc ###
+
+dominate_owner = {
+    corresponding = dominate_target
+}
+
+dominate_target = {
+    corresponding = dominate_owner
+}
+
+fascinate_owner = {
+    corresponding = fascinate_target
+}
+
+fascinate_target = {
+    corresponding = fascinate_owner
+}
+
+heart_of_darkness_owner = {
+    corresponding = heart_of_darkness_heartless
+    hidden = yes
+}
+
+heart_of_darkness_heartless = {
+    corresponding = heart_of_darkness_owner
+	hidden = yes
+}
+
+possessesing_wraith = {
+    corresponding = possessed_target
+	opinion = 5
+}
+
+possessed_target = {
+    corresponding = possessesing_wraith
+}
+
+life_warden = {
+    corresponding = warded_patient
+	opinion = 30
+	special_guest = yes
+}
+
+warded_patient = {
+    corresponding = life_warden
+	opinion = 5
+}
+
+umbra_employer = {
+    corresponding = umbra_explorer
+	opinion = 10
+}
+
+umbra_explorer = {
+    corresponding = umbra_employer
+	opinion = 5
+}
+
+coterie_member = {
+	corresponding = coterie_member
+}
+
+human_companion = {
+    corresponding = spirit_companion
+}
+
+spirit_companion = {
+    corresponding = human_companion
+}
+
+fetter_owner = {
+    corresponding = fetter
+}
+
+fetter = {
+    corresponding = fetter_owner
+}
+
+ashen_ambassadorial_patron = {
+    corresponding = ashen_ambassadorial_patron
+	
+	opinion = 30
+	
+	title_grant_target = no
+}
+
+#ashen_ambassador = {
+#    corresponding = ashen_ambassadorial_patron
+#	
+#	opinion = 30
+#	
+#	title_grant_target = no
+#}
+
+known_true_name = {
+	corresponding = true_name_knower
+}
+
+true_name_knower = {
+	corresponding = known_true_name
+}
+
+innocent_tormentor = {
+	corresponding = innocent_tormented
+	opinion = -50
+}
+
+innocent_tormented = {
+	corresponding = innocent_tormentor
+	opinion = -50
+}

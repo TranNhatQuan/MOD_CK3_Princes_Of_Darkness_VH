@@ -1,0 +1,518 @@
+﻿namespace = POD_fae_maintenance
+
+POD_fae_maintenance.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_fae_maintenance.1.t
+	desc = POD_fae_maintenance.1.desc
+
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+	
+	trigger = {
+		is_alive = yes
+		has_trait = kinain
+		NOT = { has_trait = fera }
+	}
+	
+	option = {
+		name = POD_fae_maintenance.1.option.a	
+		
+		remove_trait = kinain
+		
+		if = {
+			limit = { POD_splat_mixing_haight_mode = no }
+			POD_cease_being_ghoul_effect = yes
+		}
+		remove_trait = revenant
+		
+		if = {
+			limit = { has_trait = supehunter }
+			hidden_effect = { 
+				remove_trait = supehunter
+				save_temporary_scope_as = is_sanbenito
+			}
+		}
+	
+		add_trait_force_tooltip = changeling
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+			
+		POD_fae_initialization_effect = yes
+		POD_realm_initiation_effect = yes
+		POD_character_fae_art_initialization_effect = yes
+		POD_character_fae_lifestyle_initialization_effect = yes
+		POD_fae_dynasty_trait_assign_effect = yes
+
+		hidden_effect = {
+			if = {
+				limit = { exists = scope:is_sanbenito }
+				add_trait = supehunter
+				set_character_faith = faith:sanbenito
+			}
+		}
+		
+		if = {
+			limit = {
+				exists = mother
+				mother = {
+					is_landed = yes
+					primary_heir ?= { has_trait = kinain }
+					is_ai = yes
+				}
+			}
+			mother = { set_designated_heir = prev }
+		}
+		else_if = {
+			limit = {
+				exists = father
+				father = {
+					is_landed = yes
+					primary_heir ?= { has_trait = kinain }
+					is_ai = yes
+				}
+			}
+			father = { set_designated_heir = prev }
+		}	
+	}
+}
+
+POD_fae_maintenance.3 = {
+	hidden = yes
+
+	trigger = {
+		has_POD_fae_blood_trigger = yes
+	}
+	
+	immediate = {
+		POD_realm_initiation_effect = yes
+		POD_character_fae_art_initialization_effect = yes
+		POD_character_fae_lifestyle_initialization_effect = yes
+		POD_fae_dynasty_trait_assign_effect = yes
+	}
+}
+
+POD_fae_maintenance.4 = {
+	hidden = yes
+	
+	immediate = {
+		POD_fae_dynasty_trait_assign_effect = yes
+	}
+}
+
+POD_fae_maintenance.10 = {
+	scope = none
+	hidden = yes
+	
+	immediate = {
+		religion:winter_court_religion = {
+			every_faith = {
+				add_doctrine = doctrine_winter_time
+			}
+		}
+		trigger_event = {
+			id = POD_fae_maintenance.11
+			days = days_until_next_month
+		}
+	}
+}
+
+POD_fae_maintenance.11 = {
+	scope = none
+	hidden = yes
+
+	trigger = {
+		NOT = { has_global_variable = end_seasons_rotate }
+	}
+	
+	immediate = {
+		religion:winter_court_religion = {
+			every_faith = {
+				remove_doctrine = doctrine_winter_time
+			}
+		}
+		religion:spring_court_religion = {
+			every_faith = {
+				add_doctrine = doctrine_spring_time
+			}
+		}
+		
+		trigger_event = {
+			id = POD_fae_maintenance.12
+			months = 3
+		}
+		
+		trigger_event = {
+			id = POD_fae_maintenance.13
+			months = 6
+		}
+		
+		trigger_event = {
+			id = POD_fae_maintenance.14
+			months = 9
+		}
+		
+		trigger_event = {
+			id = POD_fae_maintenance.11
+			years = 1
+		}
+	}
+}
+
+POD_fae_maintenance.12 = {
+	scope = none
+	hidden = yes
+
+	trigger = {
+		NOT = { has_global_variable = end_seasons_rotate }
+	}
+	
+	immediate = {
+		religion:spring_court_religion = {
+			every_faith = {
+				remove_doctrine = doctrine_spring_time
+			}
+		}
+		religion:summer_court_religion = {
+			every_faith = {
+				add_doctrine = doctrine_summer_time
+			}
+		}
+	}
+}
+
+POD_fae_maintenance.13 = {
+	scope = none
+	hidden = yes
+
+	trigger = {
+		NOT = { has_global_variable = end_seasons_rotate }
+	}
+	
+	immediate = {
+		religion:summer_court_religion = {
+			every_faith = {
+				remove_doctrine = doctrine_summer_time
+			}
+		}
+		religion:autumn_court_religion = {
+			every_faith = {
+				add_doctrine = doctrine_autumn_time
+			}
+		}
+	}
+}
+
+POD_fae_maintenance.14 = {
+	scope = none
+	hidden = yes
+
+	trigger = {
+		NOT = { has_global_variable = end_seasons_rotate }
+	}
+	
+	immediate = {
+		religion:autumn_court_religion = {
+			every_faith = {
+				remove_doctrine = doctrine_autumn_time
+			}
+		}
+		religion:winter_court_religion = {
+			every_faith = {
+				add_doctrine = doctrine_winter_time
+			}
+		}
+	}
+}
+
+
+# Shattering
+POD_fae_maintenance.20 = {
+	hidden = yes
+	scope = none
+	
+	trigger = {
+		NOT = { has_global_variable = shattering_prevented }
+	}
+	
+	on_trigger_fail = {
+	}
+	
+	immediate = {
+		every_living_character = {
+			limit = { 
+				has_trait = fae 
+				NOT = { has_trait = phyla }
+				NOT = { has_trait = hsien }
+			}
+			trigger_event = POD_fae_maintenance.21
+		}
+		every_living_character = {
+			limit = { has_trait = changeling }
+			trigger_event = POD_fae_maintenance.22
+		}
+		set_global_variable = {
+			name = fae_era
+			value = 3 # Shattering
+		}
+		if = {
+			limit = { exists = struggle:seasons_struggle }
+			struggle:seasons_struggle = {
+				end_struggle = struggle_seasons_ending_outsider_decision
+			}
+			disable_patron_council_effect = yes
+		}
+		
+		random_ruler = {
+			limit = { has_POD_fae_blood_trigger = yes }
+			create_artifact_eye_of_opening_effect = { OWNER = this }
+		}
+		random_ruler = {
+			limit = { has_POD_fae_blood_trigger = yes }
+			create_artifact_waystone_effect = { OWNER = this }
+		}
+		random_ruler = {
+			limit = { has_POD_fae_blood_trigger = yes }
+			create_artifact_changestone_effect = { OWNER = this }
+		}
+		random_ruler = {
+			limit = { has_POD_fae_blood_trigger = yes }
+			create_artifact_shadowstone_effect = { OWNER = this }
+		}
+	}
+}
+
+POD_fae_maintenance.21 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_fae_maintenance.21.t
+	desc = POD_fae_maintenance.21.desc
+	theme = fae
+	left_portrait = root
+	
+	immediate = {
+		custom_tooltip = patron_council_disabled
+	}
+
+	option = {
+		name = POD_fae_maintenance.21.d
+		
+		trigger = { has_trait = immortal }
+		
+		ai_chance = {
+			base = 1000
+		}
+		custom_tooltip = {
+			text = "POD_fae_maintenance.21.d.tt"
+		}
+	}	
+
+	option = {
+		name = POD_fae_maintenance.21.a
+		remove_trait = fae
+		add_trait = changeling
+		add_character_modifier = POD_desprete_for_immortality
+		
+		random_courtier_or_guest = {
+			limit = { has_trait = mortal }
+			death = { 
+				death_reason = death_souleaten 
+				killer = root
+			}
+		}
+		
+		ai_chance = {
+			base = 100
+			modifier = {
+				add = -99
+				is_ruler = yes
+			}
+			modifier = {
+				factor = 0
+				this = character:POD_fae_character_08
+			}
+		}
+	}
+
+	option = {
+		name = POD_fae_maintenance.21.b
+		trigger = {
+			is_imprisoned = no
+		}
+		# bandaid fix to make sure characters in arcadia don't end up with titular/hof titles
+		every_held_title = {
+			limit = {
+				OR = {
+					is_titular = yes
+					is_head_of_faith = yes
+				}
+			}
+			prev = { destroy_title = prev }	
+		}
+		POD_long_depose_effect = yes
+		POD_send_to_arcadia_effect = yes
+		
+		if = {
+			limit = {
+				is_landed = yes 
+			}
+			random_neighboring_and_across_water_top_liege_realm_owner = {
+					limit = {
+						NOT = { has_trait = fae }
+						NOT = { has_trait = changeling }
+					}
+				save_temporary_scope_as = canon_inheritor
+				}
+			POD_transfer_all_titles_to_character = {
+				CHARACTER = scope:canon_inheritor
+			}
+		}			
+		
+		trigger_event = {
+			id = POD_fae_maintenance.23
+			days = 10
+		}
+		
+		ai_chance = {
+			base = 90
+			modifier = {
+				add = -89
+				is_ruler = no
+			}
+			modifier = {
+				factor = 0
+				this = character:POD_fae_character_08
+			}
+		}
+	}
+
+	option = {
+		name = POD_fae_maintenance.21.c
+		depose_effect = { DEPOSER = root }
+        POD_enter_torpor_effect = yes
+		add_trait = lunatic_1
+		add_trait = reclusive
+		add_character_flag = POD_do_not_disturb_flag
+		
+		if = {
+			limit = { this = character:POD_fae_character_08 }
+			change_first_name = "Meilseoir"
+		}
+
+		if = {
+			limit = {
+				is_landed = yes 
+			}
+			random_neighboring_and_across_water_top_liege_realm_owner = {
+					limit = {
+						NOT = { has_trait = fae }
+						NOT = { has_trait = changeling }
+					}
+				save_temporary_scope_as = canon_inheritor
+				}
+			POD_transfer_all_titles_to_character = {
+				CHARACTER = scope:canon_inheritor
+			}
+		}
+		
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = -9
+				is_ruler = no
+			}
+		}
+	}
+	
+}
+
+POD_fae_maintenance.22 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_fae_maintenance.22.t
+	desc = POD_fae_maintenance.22.desc
+	theme = fae
+	left_portrait = root
+
+	option = {
+		name = POD_fae_maintenance.22.a
+	}
+}
+
+POD_fae_maintenance.23 = {
+	hidden = yes
+	
+	trigger = {
+		is_ruler = yes #How is that supposed to proc since depose is used earlier? Keeping it just in case but ignoring this event
+	}
+
+	immediate = {
+		random_courtier_or_guest = {
+			limit = { 
+				has_POD_fae_blood_trigger = yes 
+				NOT = { has_trait = torpor }
+			}
+			alternative_limit = { NOT = { has_trait = torpor } }
+			save_temporary_scope_as = usurper
+		}
+		create_title_and_vassal_change = {
+			type = usurped
+			save_scope_as = change
+			add_claim_on_loss = yes
+		}
+		every_held_title = {
+			change_title_holder = {
+				holder = scope:usurper
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+		POD_long_depose_effect = yes
+		
+		trigger_event = {
+			id = POD_fae_maintenance.23
+			days = 10
+		}
+	}
+}
+
+POD_fae_maintenance.30 = {
+	hidden = yes
+	scope = none
+	
+	trigger = {
+		global_var:fae_era = 3
+	}
+	
+	immediate = {
+		set_global_variable = {
+			name = fae_era
+			value = 4 # Interregnum
+		}
+		every_player = {
+			limit = { has_POD_fae_blood_trigger = yes }
+			trigger_event = POD_fae_maintenance.31
+		}
+	}
+}
+
+POD_fae_maintenance.31 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_fae_maintenance.31.t
+	desc = POD_fae_maintenance.31.desc
+	theme = fae
+	left_portrait = root
+
+	option = {
+		trigger = { has_trait = fae }
+		name = POD_fae_maintenance.31.a
+	}
+
+	option = {
+		trigger = { NOT = { has_trait = fae } }
+		name = POD_fae_maintenance.31.b
+	}
+}

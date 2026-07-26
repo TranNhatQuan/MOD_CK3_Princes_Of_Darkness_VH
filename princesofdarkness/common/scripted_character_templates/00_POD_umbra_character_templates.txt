@@ -1,0 +1,120 @@
+﻿
+POD_enemy_wraith_character = {
+	age = { 16 1000 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = wraith
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 15 30 }
+	
+	after_creation = {
+		set_immortal_age = { 16 90 }
+		add_trait_xp = {
+			trait = wraith
+			track = fetter_resolved
+			value = 10
+		}
+		
+		POD_wraith_initialization_effect = yes
+		POD_arcanoi_initiation_effect = yes
+	}
+}
+
+POD_enemy_spectre_character = {
+	age = { 16 1000 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = wraith
+	trait = spectre
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 20 35 }
+	
+	after_creation = {
+		set_immortal_age = { 16 90 }
+		add_stress = 350
+	}
+}
+
+POD_enemy_fae_character = {
+	age = { 16 1000 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = fae
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 20 40 }
+	
+	after_creation = {
+		set_immortal_age = { 16 90 }
+		POD_fae_initialization_effect = yes
+	}
+}
+
+POD_enemy_demon_character = {
+	age = { 16 1000 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = demon
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 30 60 }
+	
+	after_creation = {
+		set_immortal_age = { 16 90 }
+		POD_demon_initialization_effect = yes
+	}
+}
+
+POD_enemy_alien_character = {
+	age = { 16 90 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = alien
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 30 50 }
+	
+	after_creation = {
+		add_trait = chulorviosis # TODO: other alien?
+	}
+}
+
+POD_enemy_mage_character = {
+	age = { 16 90 }
+	culture = location.culture
+	faith = faith:wyrmbound
+	gender_female_chance = 50
+	dynasty = none
+	trait = mage
+	trait = lifestyle_blademaster
+	random_traits = yes
+	prowess = { 20 40 }
+}
+
+POD_wraith_character = {
+	age = { 16 1000 }
+	culture = location.culture
+	faith = faith:malfean
+	gender_female_chance = 50
+	dynasty = none
+	trait = wraith
+	random_traits = yes
+	
+	after_creation = {
+		set_immortal_age = { 16 90 }
+		POD_wraith_initialization_effect = yes
+		POD_arcanoi_initiation_effect = yes
+	}
+}

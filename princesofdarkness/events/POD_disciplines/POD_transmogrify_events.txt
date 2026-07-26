@@ -1,0 +1,123 @@
+﻿namespace = POD_transmogrify
+
+#Changing Immortal Age
+POD_transmogrify.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_transmogrify.100.t
+	desc = POD_transmogrify.100.desc
+
+	theme = vicissitude
+
+	left_portrait = {
+		character = scope:recipient
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_edit_visual_age"
+		container = "custom_widgets_container"
+	}
+	
+	immediate = {
+		save_scope_value_as = {
+			name  = original_age
+			value = scope:recipient.effective_age
+		}
+	}
+
+	option = {
+		name = POD_transmogrify.100.option.a
+	}
+}
+
+#Study Anatomy Journey: Pick Trait
+POD_transmogrify.500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_transmogrify.500.t
+	desc = POD_transmogrify.500.desc
+	theme = vicissitude
+
+	left_portrait = {
+		character = scope:actor
+		animation = personality_rational
+	}
+
+	right_portrait = {
+		character = scope:recipient
+		animation = prisondungeon
+	}
+	
+	widget = {
+		gui = "POD_event_window_widget_learn_true_names"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		scope:recipient = {
+			save_scope_as = cant_select_multiple_traits # jank to make the event widget work
+			every_character_trait = {
+				limit = { POD_can_study_anatomy_trait = { SCHOLAR = scope:actor } }
+				scope:actor = {
+					add_to_variable_list = {
+						name   = potential_traits
+						target = prev
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_transmogrify.500.a
+		scope:actor = {
+			if = {
+				limit = { any_in_list = { variable = selected_traits count = 1 } }
+				every_in_list = {
+					variable = selected_traits
+					prev = { POD_start_anatomy_study_journey_effect = { TRAIT = prev } }
+				}
+			}
+			if = {
+				limit = { scope:actor != scope:recipient }
+				POD_torture_interaction_effect = yes
+			}
+		}
+	}
+	
+	option = {
+		name = POD_transmogrify.500.b
+	}
+
+	after = {
+		scope:actor = {
+			clear_variable_list = potential_traits
+			clear_variable_list = selected_traits
+		}
+	}
+}
+
+#Study Anatomy Journey: Finish
+POD_transmogrify.501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_transmogrify.501.t
+	desc = POD_transmogrify.501.desc
+
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+
+	theme = vicissitude
+	
+	option = {
+		name = POD_transmogrify.501.a
+		
+		custom_tooltip = {
+			text = POD_transmogrify.501.a.tt
+			POD_learn_anatomy_trait = { TRAIT = var:current_journey.var:target_trait }
+		}
+		POD_end_journey_effect = yes
+	}
+}

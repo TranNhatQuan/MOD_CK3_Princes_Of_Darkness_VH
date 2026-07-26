@@ -1,0 +1,253 @@
+﻿#### Local Types ####
+@administration_1 = "gfx/interface/icons/culture_innovations/innovation_administration_01.dds"
+@administration_2 = "gfx/interface/icons/culture_innovations/innovation_administration_02.dds"
+@administration_3 = "gfx/interface/icons/culture_innovations/innovation_administration_03.dds"
+@civil_construction_1 = "gfx/interface/icons/culture_innovations/innovation_civil_construction_01.dds"
+@civil_construction_2 = "gfx/interface/icons/culture_innovations/innovation_civil_construction_02.dds"
+@leadership_1 = "gfx/interface/icons/culture_innovations/innovation_leadership_01.dds"
+@leadership_2 = "gfx/interface/icons/culture_innovations/innovation_leadership_02.dds"
+@raised_banner = "gfx/interface/icons/culture_innovations/innovation_raised_banner.dds"
+@fortifications = "gfx/interface/icons/culture_innovations/innovation_fortifications.dds"
+@siege_weapons = "gfx/interface/icons/culture_innovations/innovation_siege_weapons.dds"
+@levy_building = "gfx/interface/icons/culture_innovations/innovation_levy_building.dds"
+@maa_01 = "gfx/interface/icons/culture_innovations/innovation_maa_01.dds"
+@maa_02 = "gfx/interface/icons/culture_innovations/innovation_maa_02.dds"
+@weapons_and_armor_01 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_01.dds"
+@weapons_and_armor_02 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_02.dds"
+@knight = "gfx/interface/icons/culture_innovations/innovation_knight.dds"
+@hird = "gfx/interface/icons/culture_innovations/innovation_hird.dds"
+@longboats = "gfx/interface/icons/culture_innovations/innovation_longboats.dds"
+@majesty_01 = "gfx/interface/icons/culture_innovations/innovation_majesty_01.dds"
+@majesty_02 = "gfx/interface/icons/culture_innovations/innovation_majesty_02.dds"
+@majesty_03 = "gfx/interface/icons/culture_innovations/innovation_majesty_03.dds"
+@nobility_01 = "gfx/interface/icons/culture_innovations/innovation_nobility_01.dds"
+@nobility_02 = "gfx/interface/icons/culture_innovations/innovation_nobility_02.dds"
+@nobility_03 = "gfx/interface/icons/culture_innovations/innovation_nobility_03.dds"
+@nobility_04 = "gfx/interface/icons/culture_innovations/innovation_nobility_04.dds"
+@misc_inventions = "gfx/interface/icons/culture_innovations/innovation_misc_inventions.dds"
+
+@camel = "gfx/interface/icons/culture_innovations/innovation_camel.dds"
+@elephant = "gfx/interface/icons/culture_innovations/innovation_elephant.dds"
+@special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
+@special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
+
+#culture_group_military
+innovation_tenaille = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon = @fortifications
+
+	county_modifier = {
+		additional_fort_level = 1
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_trunnions = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon = @siege_weapons
+	
+	maa_upgrade = {
+		type = bombard
+		siege_value = 0.5
+	}
+}
+
+innovation_professional_officers = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon = @levy_building
+		
+	character_modifier = {
+		advantage = 5
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_early_modern_military = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon = @leadership_2
+	
+	character_modifier = {
+		men_at_arms_cap = 2
+		men_at_arms_limit = 6
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_standardized_pikes = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon = @weapons_and_armor_01
+	
+	maa_upgrade = {
+		type = pikemen
+		damage = 1
+		toughness = 1
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_musketmen = {
+	group = culture_group_military
+	culture_era = culture_era_dark_fantastic
+	icon =  @maa_01
+	
+	unlock_maa = musketmen
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+#culture_group_civic
+innovation_early_modern_administration = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @majesty_01
+	
+	character_modifier = {
+		vassal_limit = 5
+		tax_slot_add = 1
+	}
+	
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_land_clearance = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @civil_construction_1
+		
+	character_modifier = {
+		holding_build_speed = -0.15
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_constitution = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @nobility_03
+	
+	character_modifier = {
+		direct_vassal_opinion = -5
+		monthly_prestige_gain_per_happy_powerful_vassal_add = 1
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_absolute_rulership = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @leadership_1
+	
+	character_modifier = {
+		direct_vassal_opinion = -10
+		domain_limit = 1
+	}
+}
+
+innovation_textile_manufactory = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @majesty_03
+	
+	character_modifier = {
+		domain_tax_mult = 0.05
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+innovation_renaissance_thought = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @nobility_02
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.1
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+
+innovation_separation_of_powers = {
+	group = culture_group_civic
+	culture_era = culture_era_dark_fantastic
+	icon = @administration_1
+
+	county_modifier = {
+		development_growth_factor = 0.1
+	}
+	
+	character_modifier = {
+		direct_vassal_opinion = -5
+	}
+
+	flag = global_regular
+	flag = dark_fantastic_era_regular
+}
+
+#culture_group_regional
+ innovation_spanish_square = {
+	group = culture_group_regional
+	culture_era = culture_era_dark_fantastic
+	region = world_europe_west_iberia
+	icon = @maa_01
+	
+	maa_upgrade = {
+		type = musketmen
+		damage = 1
+		toughness = 2
+	}
+
+	flag = global_regional
+	flag = dark_fantastic_era_regional
+}
+
+innovation_new_world = {
+	group = culture_group_regional
+	culture_era = culture_era_dark_fantastic
+	region = world_europe_west
+	icon = @administration_1
+	
+	character_modifier = {
+		domain_tax_mult = 0.2
+		monthly_prestige_gain_mult = 0.1
+	}
+
+	flag = global_regional
+	flag = dark_fantastic_era_regional
+}
+
+innovation_the_mughals = {
+	group = culture_group_regional
+	culture_era = culture_era_dark_fantastic
+	region = world_india
+	icon = @nobility_04
+	
+	character_modifier = {
+		different_culture_opinion = 5
+	}
+
+	flag = global_regional
+	flag = dark_fantastic_era_regional
+}

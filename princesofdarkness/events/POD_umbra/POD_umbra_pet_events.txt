@@ -1,0 +1,1250 @@
+﻿namespace = POD_umbra_pet
+
+### Dragon ###
+
+#Name your dragon
+POD_umbra_pet.101 = {
+	type = character_event
+	title = POD_umbra_pet.101.t
+	desc = POD_umbra_pet.101.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_low_key_positive"
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_text"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = story_cycle_dragon_name
+				default = cat_name_mite
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = {
+		name = pet_animal.0001.a
+	}
+
+	after = {
+		remove_character_flag = is_naming_dragon
+
+		if = {
+			# We entered custom text into the pop up
+			limit = { NOT = { has_variable = story_cycle_dragon_name } }
+			set_variable = {
+				name = story_cycle_dragon_name
+				value = flag:custom
+			}
+		}
+	}
+}
+
+#Random encounter, get some presige
+POD_umbra_pet.111 = {
+	type = character_event
+	title = POD_umbra_pet.111.t
+	desc = POD_umbra_pet.111.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+
+	cooldown = { years = 15 }
+
+	option = { #thank you!
+		name = POD_umbra_pet.111.a
+		add_prestige = 10
+	}
+}
+
+#Your dragon charms a vassal
+POD_umbra_pet.112 = {
+	type = character_event
+	title = POD_umbra_pet.112.t
+	desc = POD_umbra_pet.112.desc
+	theme = pet
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = {
+		character = scope:vassal
+		animation = happiness
+	}
+
+	cooldown = { years = 15 }
+	
+	trigger = {
+		any_vassal = {
+			is_available_ai = yes
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				is_available_ai = yes
+			}
+			weight = {
+				base = 50
+				ai_value_modifier = {
+					ai_compassion = 1
+				}
+			}
+			save_scope_as = vassal
+		}
+	}
+
+	option = {
+		name = POD_umbra_pet.112.a
+		scope:vassal = {
+			add_opinion = {
+				modifier = respect_opinion
+				target = root
+				opinion = 20
+			}
+		}
+	}
+}
+
+#Your dragon brun some stuff D:
+POD_umbra_pet.113 = {
+	type = character_event
+	title = POD_umbra_pet.113.t
+	desc = POD_umbra_pet.113.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+
+	cooldown = { years = 15 }
+
+	immediate = {
+		random_owned_story = {
+			limit = {
+				story_type = POD_story_pet_dragon
+			}
+			save_scope_as = story
+		}
+		remove_short_term_gold = medium_gold_value
+	}
+
+	option = {
+		name = POD_umbra_pet.113.a
+	}
+
+	option = {
+		name = POD_umbra_pet.113.b
+		show_as_tooltip = {
+			remove_dragon_story_modifiers_effect = yes
+		}
+		scope:story = {
+			hidden_effect = { end_story = yes }
+		}
+	}
+}
+
+#You pet your dragon
+POD_umbra_pet.121 = {
+	type = character_event
+	title = POD_umbra_pet.121.t
+	desc = POD_umbra_pet.121.desc
+	theme = pet
+	override_background = {
+		reference = sitting_room
+	}
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	
+	weight_multiplier = {
+		base = 1
+		modifier = { #No blockage, so the decision is available, but very unlikely with repetition
+			add = -0.9
+			has_character_flag = had_umbra_pet_121_event
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = had_umbra_pet_121_event
+			years = 10
+		}
+	}
+
+	option = {
+		name = pet_animal.6001.a
+		add_stress = minor_stress_loss
+	}
+}
+
+#You pet your dragon v.2
+POD_umbra_pet.122 = {
+	type = character_event
+	title = POD_umbra_pet.121.t
+	desc = POD_umbra_pet.122.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	
+	weight_multiplier = {
+		base = 1
+		modifier = { #No blockage, so the decision is available, but very unlikely with repetition
+			add = -0.9
+			has_character_flag = had_umbra_pet_122_event
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = had_umbra_pet_122_event
+			years = 10
+		}
+	}
+
+	option = {
+		name = pet_animal.6001.a
+		add_stress = minor_stress_loss
+	}
+}
+
+#Bygone must bygone
+POD_umbra_pet.199 = {
+	type = character_event
+	title = POD_umbra_pet.199.t
+	desc = POD_umbra_pet.199.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = sadness
+	}
+	artifact = {
+		position = lower_right_portrait
+		target = scope:newly_created_artifact
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_prison"
+		create_artifact_animal_hide_effect = {
+			OWNER = root
+			HUNTER = root
+			LEGENDARY = yes
+			ANIMAL = flag:dragon
+		}
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_name = artifact_animal_hide_name_dragon } }
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_description = artifact_bygone_desc } }
+	}
+
+	option = {
+		name = POD_umbra_pet.199.a
+		if = {
+			limit = { exists = scope:newly_created_artifact }
+			hidden_effect = { destroy_artifact = scope:newly_created_artifact }
+		}
+		hidden_effect = {  # secret reward
+			add_character_modifier = { modifier = blessed_by_great_celestial_dragons_modifier years = 5 } 
+			add_character_flag = released_your_dragon
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	option = {
+		name = pet_animal.0199.b
+		remove_short_term_gold = { 10 20 }
+		show_as_tooltip = {
+			scope:newly_created_artifact = { set_owner = root }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	after = {
+		show_as_tooltip = {
+			remove_dragon_story_modifiers_effect = yes
+		}
+		scope:story = {
+			hidden_effect = { end_story = yes }
+		}
+		remove_character_flag = dragon_is_dying
+	}
+}
+
+### Unicorn ###
+
+#Name your unicorn
+POD_umbra_pet.201 = {
+	type = character_event
+	title = POD_umbra_pet.201.t
+	desc = POD_umbra_pet.201.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_low_key_positive"
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_text"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = story_cycle_unicorn_name
+				default = cat_name_mite
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = {
+		name = pet_animal.0001.a
+	}
+
+	after = {
+		remove_character_flag = is_naming_unicorn
+
+		if = {
+			# We entered custom text into the pop up
+			limit = { NOT = { has_variable = story_cycle_unicorn_name } }
+			set_variable = {
+				name = story_cycle_unicorn_name
+				value = flag:custom
+			}
+		}
+	}
+}
+
+#Pay gold to get a better modifier
+POD_umbra_pet.211 = {
+	type = character_event
+	title = POD_umbra_pet.211.t
+	desc = POD_umbra_pet.211.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = root
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		NOR = { 
+			has_character_modifier = unicorn_strength_modifier
+			has_character_modifier = unicorn_agility_modifier
+			has_character_modifier = unicorn_endurance_modifier
+			has_character_modifier = unicorn_fierceness_modifier
+		}
+		minor_gold_value_trigger = yes
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				has_royal_court = yes
+				employs_court_position = master_of_horse_court_position
+				any_court_position_holder = {
+					type = master_of_horse_court_position
+					is_available_ai_adult = yes
+				}
+			}
+			random_court_position_holder = {
+				type = master_of_horse_court_position
+				limit = { is_available_ai_adult = yes }
+				save_scope_as = m_horse
+			}
+		}
+	}
+
+	option = { #Strength
+		name = POD_umbra_pet.211.a
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = unicorn_strength_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Agility
+		name = POD_umbra_pet.211.b
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = unicorn_agility_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Endurance
+		name = POD_umbra_pet.211.c
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = unicorn_endurance_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Fierceness
+		name = POD_umbra_pet.211.d
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = unicorn_fierceness_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {	#Master of Horse
+		name = POD_umbra_pet.211.f
+		trigger = {
+			exists = scope:m_horse
+		}
+		custom_tooltip = POD_umbra_pet.211.f.tt
+		scope:m_horse = {
+			add_opinion = {
+				target = root
+				modifier = pleased_opinion
+				opinion = 15
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				50 = {	# nothing happens
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 4
+						factor = 0.1
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 3
+						factor = 0.2
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 2
+						factor = 0.3
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 1
+						factor = 0.5
+					}
+					send_interface_toast = {
+						title = POD_umbra_pet.211.f.failure
+						left_icon = scope:m_horse
+						custom_tooltip = POD_umbra_pet.211.f.failure.tt
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = unicorn_strength_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = unicorn_agility_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = unicorn_endurance_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = unicorn_fierceness_modifier
+						years = 5
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	option = { #Nah
+		name = POD_umbra_pet.211.e
+		custom_tooltip = POD_umbra_pet.211.e.tt
+		ai_chance = {
+			base = 0
+			ai_value_modifier = {
+				ai_greed = 0.75
+			}
+		}
+	}
+}
+ 
+#Stress reduction or prowess
+POD_umbra_pet.212 = {
+	type = character_event
+	title = POD_umbra_pet.212.t
+	desc = POD_umbra_pet.212.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		stress > medium_stress_gain
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 0.25
+			stress > 75
+		}
+	}
+
+	immediate = {
+	}
+
+	option = { #Practice cool battle stuff
+		name = POD_umbra_pet.212.a
+		add_character_modifier = {
+			modifier = unicorn_practice_modifier
+			years = 5
+		}
+		stress_impact = {
+			base = minor_stress_gain
+			diligent = medium_stress_impact_loss
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_energy = 0.5
+			}
+		}
+	}
+
+	option = { #Ride leisurely
+		name = POD_umbra_pet.212.b
+		stress_impact = {
+			base = medium_stress_loss
+			lazy = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_rationality = 0.5
+			}
+		}
+	}
+}
+
+#Another horse-enthusiast compliments your horse
+POD_umbra_pet.213 = {
+	type = character_event
+	title = POD_umbra_pet.213.t
+	desc = POD_umbra_pet.213.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = {
+		character = scope:horse_vassal
+		animation = happiness
+	}
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		any_vassal = {
+			is_available_healthy_ai_adult = yes
+			OR = {
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+				has_lifestyle = martial_lifestyle
+				has_court_position = master_of_horse_court_position
+			}
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				is_available_healthy_ai_adult = yes
+				is_powerful_vassal = yes
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				has_court_position = master_of_horse_court_position
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				is_powerful_vassal = yes
+				has_lifestyle = martial_lifestyle
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				has_lifestyle = martial_lifestyle
+			}
+			save_scope_as = horse_vassal
+		}
+	}
+
+	option = { #Let them ride
+		name = POD_umbra_pet.213.a
+		reverse_add_opinion = {
+			target = scope:horse_vassal
+			modifier = friendliness_opinion
+			opinion = 20
+		}
+		if = {
+			limit = { #They can't handle the horse
+				has_character_modifier = unicorn_fierceness_modifier
+				scope:horse_vassal = {
+					prowess < medium_skill_rating
+				}
+			}
+			random = {
+				chance = 50
+				scope:horse_vassal = {
+					increase_wounds_effect = { REASON = horse_riding_accident }
+				}
+			}
+			custom_tooltip = POD_umbra_pet.213.a.tt
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_compassion = 0.5
+			}
+
+		}
+	}
+
+	option = { #Don't let them ride
+		name = POD_umbra_pet.213.b
+		add_prestige = medium_prestige_gain
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_vengefulness = 0.25
+				ai_greed = 0.25
+			}
+
+		}
+	}
+}
+
+#Bygone must bygone
+POD_umbra_pet.299 = {
+	type = character_event
+	title = POD_umbra_pet.299.t
+	desc = POD_umbra_pet.299.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = sadness
+	}
+	artifact = {
+		position = lower_right_portrait
+		target = scope:newly_created_artifact
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_prison"
+		create_artifact_animal_hide_effect = {
+			OWNER = root
+			HUNTER = root
+			LEGENDARY = yes
+			ANIMAL = flag:unicorn
+		}
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_name = artifact_animal_hide_name_unicorn } }
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_description = artifact_bygone_desc } }
+	}
+
+	option = {
+		name = POD_umbra_pet.299.a
+		if = {
+			limit = { exists = scope:newly_created_artifact }
+			hidden_effect = { destroy_artifact = scope:newly_created_artifact }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	option = {
+		name = pet_animal.0199.b
+		remove_short_term_gold = { 10 20 }
+		show_as_tooltip = {
+			scope:newly_created_artifact = { set_owner = root }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	after = {
+		show_as_tooltip = {
+			remove_unicorn_story_modifiers_effect = yes
+		}
+		scope:story = {
+			hidden_effect = { end_story = yes }
+		}
+		remove_character_flag = unicorn_is_dying
+	}
+}
+
+### Pegasus ###
+
+#Name your pegasus
+POD_umbra_pet.301 = {
+	type = character_event
+	title = POD_umbra_pet.301.t
+	desc = POD_umbra_pet.301.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_low_key_positive"
+	}
+
+	widget = {
+		gui = "event_window_widget_enter_text"
+		container = "dynamic_birth_name"
+		controller = {
+			type = text
+			data = {
+				key = story_cycle_pegasus_name
+				default = cat_name_mite
+			}
+		}
+		setup_scope = {
+			root = { save_scope_as = text_target }
+		}
+	}
+
+	option = {
+		name = pet_animal.0001.a
+	}
+
+	after = {
+		remove_character_flag = is_naming_pegasus
+
+		if = {
+			# We entered custom text into the pop up
+			limit = { NOT = { has_variable = story_cycle_pegasus_name } }
+			set_variable = {
+				name = story_cycle_pegasus_name
+				value = flag:custom
+			}
+		}
+	}
+}
+
+#Pay gold to get a better modifier
+POD_umbra_pet.311 = {
+	type = character_event
+	title = POD_umbra_pet.311.t
+	desc = POD_umbra_pet.311.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = root
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		NOR = { 
+			has_character_modifier = pegasus_strength_modifier
+			has_character_modifier = pegasus_agility_modifier
+			has_character_modifier = pegasus_endurance_modifier
+			has_character_modifier = pegasus_fierceness_modifier
+		}
+		minor_gold_value_trigger = yes
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				has_royal_court = yes
+				employs_court_position = master_of_horse_court_position
+				any_court_position_holder = {
+					type = master_of_horse_court_position
+					is_available_ai_adult = yes
+				}
+			}
+			random_court_position_holder = {
+				type = master_of_horse_court_position
+				limit = { is_available_ai_adult = yes }
+				save_scope_as = m_horse
+			}
+		}
+	}
+
+	option = { #Strength
+		name = POD_umbra_pet.311.a
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = pegasus_strength_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Agility
+		name = POD_umbra_pet.311.b
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = pegasus_agility_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Endurance
+		name = POD_umbra_pet.311.c
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = pegasus_endurance_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Fierceness
+		name = POD_umbra_pet.311.d
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = pegasus_fierceness_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {	#Master of Horse
+		name = POD_umbra_pet.311.f
+		trigger = {
+			exists = scope:m_horse
+		}
+		custom_tooltip = POD_umbra_pet.311.f.tt
+		scope:m_horse = {
+			add_opinion = {
+				target = root
+				modifier = pleased_opinion
+				opinion = 15
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				50 = {	# nothing happens
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 4
+						factor = 0.1
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 3
+						factor = 0.2
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 2
+						factor = 0.3
+					}
+					modifier = {
+						scope:m_horse.aptitude:master_of_horse_court_position = 1
+						factor = 0.5
+					}
+					send_interface_toast = {
+						title = POD_umbra_pet.311.f.failure
+						left_icon = scope:m_horse
+						custom_tooltip = POD_umbra_pet.311.f.failure.tt
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = pegasus_strength_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = pegasus_agility_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = pegasus_endurance_modifier
+						years = 5
+					}
+				}
+				5 = {	#Your master of the horse makes your horse better
+					add_character_modifier = {
+						modifier = pegasus_fierceness_modifier
+						years = 5
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	option = { #Nah
+		name = POD_umbra_pet.311.e
+		custom_tooltip = POD_umbra_pet.311.e.tt
+		ai_chance = {
+			base = 0
+			ai_value_modifier = {
+				ai_greed = 0.75
+			}
+		}
+	}
+}
+
+#Stress reduction or prowess
+POD_umbra_pet.312 = {
+	type = character_event
+	title = POD_umbra_pet.312.t
+	desc = POD_umbra_pet.312.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		stress > medium_stress_gain
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 0.25
+			stress > 75
+		}
+	}
+
+	immediate = {
+	}
+
+	option = { #Practice cool battle stuff
+		name = POD_umbra_pet.312.a
+		add_character_modifier = {
+			modifier = pegasus_practice_modifier
+			years = 5
+		}
+		stress_impact = {
+			base = minor_stress_gain
+			diligent = medium_stress_impact_loss
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_energy = 0.5
+			}
+		}
+	}
+
+	option = { #Ride leisurely
+		name = POD_umbra_pet.312.b
+		stress_impact = {
+			base = medium_stress_loss
+			lazy = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_rationality = 0.5
+			}
+		}
+	}
+}
+
+#Another horse-enthusiast compliments your horse
+POD_umbra_pet.313 = {
+	type = character_event
+	title = POD_umbra_pet.313.t
+	desc = POD_umbra_pet.313.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = {
+		character = scope:horse_vassal
+		animation = happiness
+	}
+
+	cooldown = { years = 5 }
+	
+	trigger = {
+		any_vassal = {
+			is_available_healthy_ai_adult = yes
+			OR = {
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+				has_lifestyle = martial_lifestyle
+				has_court_position = master_of_horse_court_position
+			}
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				is_available_healthy_ai_adult = yes
+				is_powerful_vassal = yes
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				has_court_position = master_of_horse_court_position
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				is_powerful_vassal = yes
+				has_lifestyle = martial_lifestyle
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				any_owned_story = {
+					story_type = story_cycle_martial_lifestyle_warhorse
+				}
+			}
+			alternative_limit = {
+				is_available_healthy_ai_adult = yes
+				has_lifestyle = martial_lifestyle
+			}
+			save_scope_as = horse_vassal
+		}
+	}
+
+	option = { #Let them ride
+		name = POD_umbra_pet.313.a
+		reverse_add_opinion = {
+			target = scope:horse_vassal
+			modifier = friendliness_opinion
+			opinion = 20
+		}
+		if = {
+			limit = { #They can't handle the horse
+				has_character_modifier = pegasus_fierceness_modifier
+				scope:horse_vassal = {
+					prowess < medium_skill_rating
+				}
+			}
+			random = {
+				chance = 50
+				scope:horse_vassal = {
+					increase_wounds_effect = { REASON = horse_riding_accident }
+				}
+			}
+			custom_tooltip = POD_umbra_pet.313.a.tt
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_compassion = 0.5
+			}
+
+		}
+	}
+
+	option = { #Don't let them ride
+		name = POD_umbra_pet.313.b
+		add_prestige = medium_prestige_gain
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_vengefulness = 0.25
+				ai_greed = 0.25
+			}
+
+		}
+	}
+}
+
+#Bygone must bygone
+POD_umbra_pet.399 = {
+	type = character_event
+	title = POD_umbra_pet.399.t
+	desc = POD_umbra_pet.399.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = sadness
+	}
+	artifact = {
+		position = lower_right_portrait
+		target = scope:newly_created_artifact
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_prison"
+		create_artifact_animal_hide_effect = {
+			OWNER = root
+			HUNTER = root
+			LEGENDARY = yes
+			ANIMAL = flag:unicorn
+		}
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_name = artifact_animal_hide_name_pegasus } }
+		hidden_effect_new_object = { scope:newly_created_artifact = { set_artifact_description = artifact_bygone_desc } }
+	}
+
+	option = {
+		name = POD_umbra_pet.399.a
+		if = {
+			limit = { exists = scope:newly_created_artifact }
+			hidden_effect = { destroy_artifact = scope:newly_created_artifact }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	option = {
+		name = pet_animal.0199.b
+		remove_short_term_gold = { 10 20 }
+		show_as_tooltip = {
+			scope:newly_created_artifact = { set_owner = root }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	after = {
+		show_as_tooltip = {
+			remove_pegasus_story_modifiers_effect = yes
+		}
+		scope:story = {
+			hidden_effect = { end_story = yes }
+		}
+		remove_character_flag = pegasus_is_dying
+	}
+}
+
+### Alicorn ###
+
+POD_umbra_pet.400 = {
+	type = character_event
+	title = POD_umbra_pet.400.t
+	desc = POD_umbra_pet.400.desc
+	theme = martial_chivalry_focus
+	override_background = {
+		reference = courtyard
+	}
+	left_portrait = root
+	
+	trigger = {
+		NOT = { has_character_flag = had_umbra_pet_400_event }
+		any_owned_story = {
+			story_type = POD_story_pet_unicorn
+		}
+		any_owned_story = {
+			story_type = POD_story_pet_pegasus
+		}
+	}
+
+	immediate = {
+		add_character_flag = had_umbra_pet_400_event
+	}
+
+	option = {
+		name = POD_umbra_pet.400.a
+		trigger = {
+			OR = {
+				AND = {
+					any_owned_story = {
+						story_type = POD_story_pet_unicorn
+						var:unicorn_gender = flag:female
+					}
+					any_owned_story = {
+						story_type = POD_story_pet_pegasus
+						var:pegasus_gender = flag:male
+					}
+				}
+				AND = {
+					any_owned_story = {
+						story_type = POD_story_pet_unicorn
+						var:unicorn_gender = flag:male
+					}
+					any_owned_story = {
+						story_type = POD_story_pet_pegasus
+						var:pegasus_gender = flag:female
+					}
+				}
+			}
+		}
+		add_character_modifier = alicorn_story_modifier 
+	}
+
+	option = {
+		name = POD_umbra_pet.400.b
+		trigger = { always = no }
+		fallback = yes
+	}
+}

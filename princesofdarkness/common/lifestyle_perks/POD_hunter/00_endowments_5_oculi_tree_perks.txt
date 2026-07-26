@@ -1,0 +1,149 @@
+﻿oculi_shepherd_perk = {
+	lifestyle = endowments_lifestyle
+	tree = oculi
+	position = { 0 0 }
+	icon = oculi_shepherd
+	
+	can_be_picked = {
+		OR = {
+			has_lay_order_no_murnau_dynasty_trigger = yes
+			dynasty ?= { has_dynasty_modifier = support_from_oculi_dei_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = oculi_sight_perk }
+			}
+			multiply = 0
+		}
+	}
+	effect = {
+		custom_description_no_bullet = { 
+			text = oculi_shepherd_perk_text
+		}		
+		if = {
+			limit = { 
+				has_lay_order_no_murnau_dynasty_trigger = no 
+				dynasty ?= { NOT = { has_dynasty_modifier = support_from_oculi_dei_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = oculi_only_text
+			}
+		}
+	}
+}
+
+oculi_sight_perk = {
+	lifestyle = endowments_lifestyle
+	tree = oculi
+	position = { 1.5 0 }
+	icon = oculi_sight
+
+	can_be_picked = {
+		OR = {
+			has_lay_order_no_murnau_dynasty_trigger = yes
+			dynasty ?= { has_dynasty_modifier = support_from_oculi_dei_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = oculi_shepherd_perk }
+			}
+			multiply = 0
+		}
+	}
+	
+	character_modifier = {
+		enemy_hostile_scheme_success_chance_add = -15
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = oculi_sight_perk_text
+		}
+		if = {
+			limit = { 
+				has_lay_order_no_murnau_dynasty_trigger = no 
+				dynasty ?= { NOT = { has_dynasty_modifier = support_from_oculi_dei_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = oculi_only_text
+			}
+		}
+	}
+}
+
+oculi_liturgy_perk = {
+	lifestyle = endowments_lifestyle
+	tree = oculi
+	position = { 0 1.25 }
+	icon = oculi_liturgy
+	
+	parent = oculi_shepherd_perk
+	parent = oculi_sight_perk
+
+	effect = {
+		custom_description_no_bullet = { 
+			text = oculi_liturgy_perk_text
+		}
+	}
+}
+
+oculi_trust_perk = {
+	lifestyle = endowments_lifestyle
+	tree = oculi
+	position = { 1.5 1.25 }
+	icon = oculi_trust
+	
+	parent = oculi_shepherd_perk
+	parent = oculi_sight_perk
+	
+	character_modifier = {
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = oculi_trust_perk_text
+		}
+	}	
+}
+
+oculi_wine_perk = {
+	lifestyle = endowments_lifestyle
+	tree = oculi
+	position = { 0.75 2.5 }
+	icon = oculi_wine
+	
+	parent = oculi_liturgy_perk
+	parent = oculi_trust_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = oculi_wine_perk_text
+		}		
+		add_trait_force_tooltip = oculi_wine
+	}
+}

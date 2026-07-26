@@ -1,0 +1,305 @@
+﻿POD_has_wrong_wound_trait = {
+	save_temporary_scope_value_as = {
+		name  = trait_xp
+		value = POD_health_track_percentage
+	}
+	trigger_if = {
+		limit = { scope:trait_xp >= POD_wound_3_xp_threshold }
+		NOT = { has_trait = wounded_3 }
+	}
+	trigger_else_if = {
+		limit = { scope:trait_xp >= POD_wound_2_xp_threshold }
+		NOT = { has_trait = wounded_2 }
+	}
+	trigger_else_if = {
+		limit = { scope:trait_xp >= POD_wound_1_xp_threshold }
+		NOT = { has_trait = wounded_1 }
+	}
+	trigger_else_if = {
+		limit = { scope:trait_xp >= 1 }
+		NOT = { has_trait = POD_wounded }
+	}
+	trigger_else = { has_trait = wounded }
+}
+
+POD_health_has_any_wound_trigger = {
+	custom_description = {
+		text = POD_health_has_any_wound_trigger
+		POD_total_damage_boxes >= 1
+	}
+}
+POD_health_has_superficial_wound_trigger = {
+	custom_description = {
+		text = POD_health_has_superficial_wound_trigger
+		POD_superficial_damage_boxes >= 1
+	}
+}
+POD_health_has_aggravated_wound_trigger = {
+	custom_description = {
+		text = POD_health_has_aggravated_wound_trigger
+		POD_aggravated_damage_boxes >= 1
+	}
+}
+
+POD_can_be_healed_trigger = {
+	NOT = { has_trait_with_flag = can_not_cure }
+	NOT = { has_character_modifier = eye_of_sakhmet_modifier }
+	NOT = { has_character_modifier = thin_blood_perk_modifier }
+	NOT = { has_character_modifier = ritual_infirm_inert_modifier }
+	NOT = { has_character_modifier = nar_iman_modifier }
+	NOT = { has_character_modifier = POD_mokole_tame_sunbeam_modifier }
+}
+
+POD_can_naturally_heal_trigger = {
+	#POD_can_be_healed_trigger = yes # already checked in the health on_action
+	trigger_if = {
+		limit = { has_trait_with_flag = cannot_heal_naturally }
+		has_perk = investiture_regeneration_perk
+	}
+	trigger_else = { always = yes }
+}
+
+POD_has_clay_man_protection = {
+	any_equipped_character_artifact = {
+		has_variable = clay_man_protection
+		prev = { can_benefit_from_artifact = prev }
+	}
+}
+
+# need to pass DEATH_REASON
+POD_has_immunity_to_damage_type = {
+	trigger_if = {
+		limit = { POD_is_death_by_fire = { DEATH_REASON = $DEATH_REASON$ } }
+		POD_immune_to_fire_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $DEATH_REASON$ = flag:death_sun }
+		POD_immune_to_sun_damage_trigger = yes
+	}
+	trigger_else = {
+		always = no
+	}
+}
+
+# need to pass DEATH_REASON
+POD_damage_type_is_aggravated = {
+	OR = {
+		POD_is_death_by_fire = { DEATH_REASON = $DEATH_REASON$ }
+		AND = {
+			$DEATH_REASON$ = flag:death_sun
+			POD_takes_sun_damage_as_superficial = no
+		}
+		$DEATH_REASON$ = flag:death_lightning
+		$DEATH_REASON$ = flag:death_self_mutilation
+		$DEATH_REASON$ = flag:death_duel_aggravated
+		$DEATH_REASON$ = flag:death_consequence_of_pact
+		AND = {
+			$DEATH_REASON$ = flag:death_silver
+			POD_weak_to_silver_trigger = yes
+		}
+		AND = {
+			$DEATH_REASON$ = flag:death_gold
+			POD_weak_to_gold_trigger = yes
+		}
+		$DEATH_REASON$ = flag:death_sea_creatures
+		$DEATH_REASON$ = flag:death_balefire
+		$DEATH_REASON$ = flag:death_fleshcrafting
+		trigger_if = {
+			limit = { exists = scope:wound_attacker }
+			POD_applies_superficial_as_aggravated_damage = {
+				ATTACKER = scope:wound_attacker
+				VICTIM = this
+			}
+		}
+		#$DEATH_REASON$ = flag:death_drained_of_quintessence # hmm. maybe too harsh
+	}
+}
+
+# need to pass DEATH_REASON
+POD_damage_type_is_soakable = {
+	trigger_if = {
+		limit = { POD_damage_type_is_aggravated = { DEATH_REASON = $DEATH_REASON$ } }
+		POD_can_soak_aggravated_damage = yes
+	}
+	trigger_else = {
+		NOR = {
+			$DEATH_REASON$ = flag:death_treatment
+			$DEATH_REASON$ = flag:death_self_mutilation
+		}
+	}
+	NOT = { $DEATH_REASON$ = flag:death_drained_of_quintessence }
+}
+
+POD_can_soak_aggravated_damage = {
+	OR = {
+		has_character_modifier = demon_arts_infernal_fortitude_modifier
+		has_character_modifier = mokole_undying_body_character_modifier
+		has_character_modifier = dragons_ichor_temp_modifier
+		has_character_modifier = autumns_armor_modifier2
+	}
+}
+
+POD_applies_superficial_as_aggravated_damage = {
+	$VICTIM$ = { save_temporary_scope_as = victim }
+	$ATTACKER$ = {
+		OR = {
+			has_character_modifier = demon_arts_infernal_glory_modifier
+			has_character_modifier = POD_talons_of_the_plague_crow_modifier
+			any_equipped_character_artifact = {
+				has_variable = blade_of_the_kings
+				var:artifact_power >= scope:victim.prowess
+			}
+			any_equipped_character_artifact = {
+				has_variable = black_gloves
+			}
+			any_equipped_character_artifact = {
+				has_variable = sword_of_nul
+			}
+			any_equipped_character_artifact = {
+				has_variable = dragon_night
+			}
+			any_equipped_character_artifact = {
+				has_variable = ainkurn
+			}
+			any_equipped_character_artifact = {
+				has_variable = star_shower_blade
+			}			
+			any_equipped_character_artifact = {
+				has_variable = ayr_sword
+			}
+			any_equipped_character_artifact = {
+				has_variable = dagger_thorns
+			}
+			any_equipped_character_artifact = {
+				has_variable = bow_of_yi
+			}			
+			any_equipped_character_artifact = {
+				has_variable = sword_of_dracula
+			}
+			any_equipped_character_artifact = {
+				has_variable = emma_o_blade
+			}
+			any_equipped_character_artifact = {
+				has_variable = taming_sari
+			}
+			any_equipped_character_artifact = {
+				has_variable = bronze_labrys
+			}	
+			any_equipped_character_artifact = {
+				has_variable = threefold_axe
+			}	
+			any_equipped_character_artifact = {
+				has_variable = jade_arrows
+			}	
+			any_equipped_character_artifact = {
+				has_variable = judgment_hammer
+			}
+			any_equipped_character_artifact = {
+				has_variable = sword_of_troile
+			}	
+			any_equipped_character_artifact = {
+				has_variable = sword_of_samiel
+			}
+			any_equipped_character_artifact = {
+				has_variable = sword_stars
+			}
+			any_equipped_character_artifact = {
+				has_variable = crones_tongue
+			}
+			AND = {
+				any_equipped_character_artifact = {
+					has_variable = unicorn_ire
+				}
+				scope:victim = {
+					faith = { has_doctrine = wyrm_tainted_doctrine }
+				}
+			}			
+			AND = {
+				any_equipped_character_artifact = {
+					OR = {
+						has_variable = grand_klaive
+						has_variable = yuri_klaive
+					}
+				}
+				scope:victim = {
+					NOT = {	has_trait = werewolf }
+				}
+			}
+			AND = {
+				any_equipped_character_artifact = {
+					has_variable = ivory_bow
+				}				
+				scope:victim = {
+					OR = {
+						has_trait = vampire
+						has_trait = werewolf
+					}
+				}
+			}
+			AND = {
+				any_equipped_character_artifact = {
+					has_variable = flagrum_passion
+				}				
+				scope:victim = {
+					OR = {
+						has_trait = vampire
+						has_trait = demon
+					}
+				}
+			}	
+			AND = {
+				OR = {
+				any_equipped_character_artifact = {
+					has_variable = sword_arthur
+				}
+				any_equipped_character_artifact = {
+					has_variable = eternal_love
+				}
+				}				
+				scope:victim = {
+					has_trait = vampire
+				}
+			}
+			AND = {
+				any_equipped_character_artifact = {
+					has_variable = sword_of_shu_mo_pan
+				}				
+				scope:victim = {
+					has_trait = fera
+				}
+			}			
+			AND = {
+				has_character_modifier = archid_ancient_strength_modifier
+				scope:victim = {
+					OR = {
+						POD_weak_to_silver_trigger = yes
+						POD_weak_to_gold_trigger = yes
+					}
+				}
+			}
+			AND = {
+				any_equipped_character_artifact = { has_variable = toomler_femur }
+				scope:victim = { has_trait = vampire }
+			}
+		}
+	}
+}
+
+
+POD_weak_to_silver_trigger = {
+	has_trait = fera
+	NOR = {
+		has_trait = ananasi
+		has_trait = corax
+		has_trait = nuwisha
+	}
+	NOT = { any_equipped_character_artifact = { has_variable = wyrmflesh prev = { can_benefit_from_artifact = prev } } }
+}
+
+POD_weak_to_gold_trigger = {
+	OR = {
+		has_trait = mokole
+		has_trait = corax
+	}
+	NOT = { any_equipped_character_artifact = { has_variable = wyrmflesh prev = { can_benefit_from_artifact = prev } } }
+}

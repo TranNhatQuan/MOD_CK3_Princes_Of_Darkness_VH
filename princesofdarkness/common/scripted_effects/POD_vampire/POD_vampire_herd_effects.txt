@@ -1,0 +1,340 @@
+﻿POD_create_herd_effect = {
+	hidden_effect = {
+		random_list = {
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_learning_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_warrior_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_merchant_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_intrigue_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_diplomat_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_young_man_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_young_woman_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_middle_aged_man_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_middle_aged_woman_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_old_woman_character
+					save_scope_as = herd
+				}
+			}
+			1 = {
+				create_character = {
+					location = root.capital_province
+					template = POD_herd_old_man_character
+					save_scope_as = herd
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_trait = ventrue
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_lustful } }
+				scope:herd = { add_trait = lustful }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_greedy } }
+				scope:herd = { add_trait = greedy }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_lazy } }
+				scope:herd = { add_trait = lazy }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_wrathful } }
+				scope:herd = { add_trait = wrathful }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_greedy } }
+				scope:herd = { add_trait = vengeful }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_arrogant } }
+				scope:herd = { add_trait = arrogant }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_gluttonous } }
+				scope:herd = { add_trait = gluttonous }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_chaste } }
+				scope:herd = { add_trait = chaste }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_generous } }
+				scope:herd = { add_trait = generous }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_diligent } }
+				scope:herd = { add_trait = diligent }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_forgiving } }
+				scope:herd = { add_trait = forgiving }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_compassionate } }
+				scope:herd = { add_trait = compassionate }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_humble } }
+				scope:herd = { add_trait = humble }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_temperate } }
+				scope:herd = { add_trait = temperate }
+			}
+			if = {
+				limit = {any_secret = { secret_type = secret_prey_melancholic } }
+				scope:herd = { add_trait = depressed_1 }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_lunatic } }
+				scope:herd = { add_trait = lunatic_1 }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_possessed } }
+				scope:herd = { add_trait = possessed_1 }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_good_physique } }
+				scope:herd = { 
+					random_list = {
+						6 = {
+							add_trait = strong
+						}
+						3 = {
+							add_trait = physique_good_1
+						}
+						2 = {
+							add_trait = physique_good_2
+						}
+						1 = {
+							add_trait = physique_good_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_bad_physique } }
+				scope:herd = { 
+					random_list = {
+						3 = {
+							add_trait = weak
+						}
+						3 = {
+							add_trait = spindly
+						}
+						3 = {
+							add_trait = physique_bad_1
+						}
+						2 = {
+							add_trait = physique_bad_2
+						}
+						1 = {
+							add_trait = physique_bad_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_good_intelligence } }
+				scope:herd = { 
+					random_list = {
+						12 = {
+							add_trait = shrewd
+						}
+						3 = {
+							add_trait = intellect_good_1
+						}
+						2 = {
+							add_trait = intellect_good_2
+						}
+						1 = {
+							add_trait = intellect_good_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_bad_intelligence } }
+				scope:herd = { 
+					random_list = {
+						6 = {
+							add_trait = dull
+						}
+						3 = {
+							add_trait = intellect_bad_1
+						}
+						2 = {
+							add_trait = intellect_bad_2
+						}
+						1 = {
+							add_trait = intellect_bad_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = {any_secret = {secret_type = secret_prey_good_appearance } }
+				scope:herd = { 
+					random_list = {
+						6 = {
+							add_trait = beauty_good_1
+						}
+						2 = {
+							add_trait = beauty_good_2
+						}
+						1 = {
+							add_trait = beauty_good_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_bad_appearance } }
+				scope:herd = { 
+					random_list = {
+						6 = {
+							add_trait = beauty_bad_1
+						}
+						2 = {
+							add_trait = beauty_bad_2
+						}
+						1 = {
+							add_trait = beauty_bad_3
+						}
+					}
+				}
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_fecund } }
+				scope:herd = { add_trait = fecund }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_dwarf } }
+				scope:herd = { add_trait = dwarf }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_giant } }
+				scope:herd = { add_trait = giant }
+			}
+			if = {
+				limit = { any_secret = { secret_type = secret_prey_albino } }
+				scope:herd = { add_trait = albino }
+			}
+		}
+		
+		if = {
+			limit = { exists = scope:herd }
+			scope:herd = { set_to_lowborn = yes }
+			POD_herdify_effect = { TARGET = scope:herd }
+		}
+	}
+}
+
+POD_herdify_effect = {
+	save_scope_as = herd_owner
+	add_hook = {
+		type   = herd_hook
+		target = $TARGET$
+	}
+	$TARGET$ = {
+		save_scope_as = herdmember
+		POD_set_resonance_effect = yes
+		set_relation_herd_owner  = scope:herd_owner
+
+		if = {
+			limit = { NOT = { is_courtier_of = scope:herd_owner } }
+			scope:herd_owner = { add_courtier = prev }
+			hidden_effect = {
+				return_to_court = yes
+			}
+		}
+		add_character_flag = blocked_from_leaving
+		
+		# Herd automation event
+		trigger_event = POD_herd_automation.100
+	}
+	if = {
+		limit = {
+			is_ai = no
+			$TARGET$ = { has_character_flag = POD_resonance_acute_flag }
+		}
+		set_global_variable = pod_achiev_vamptutorial # Achievement: True Blood
+	}
+}
+
+POD_remove_herd_effect = {
+	if = {
+		limit = { $TARGET$ = { POD_is_mortal_trigger = yes } }
+		POD_minimal_risk_of_increasing_masquerade_exposure = yes
+	}
+	POD_remove_herd_no_masquerade_effect = { TARGET = $TARGET$ }
+}
+
+POD_remove_herd_no_masquerade_effect = {
+	remove_hook = {
+		target = $TARGET$
+		type   = herd_hook
+	}
+	$TARGET$ = {
+		remove_relation_herd_owner = prev
+		remove_character_flag = blocked_from_leaving
+	}
+}

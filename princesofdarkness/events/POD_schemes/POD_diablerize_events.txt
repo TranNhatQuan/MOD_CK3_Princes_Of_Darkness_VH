@@ -1,0 +1,3569 @@
+﻿namespace = POD_diablerize
+
+scripted_trigger POD_diablerie_scheme_100_trigger = {
+	any_scheme = {
+		scheme_type = diablerize
+		scheme_target_character = {
+			this = scope:defender
+		}
+	}
+}
+
+POD_diablerize.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.100.t
+	desc =  POD_diablerize.100.desc		
+	theme = vampire
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:scheme.scheme_target_character
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	
+		scope:scheme.scheme_target_character = {
+			save_scope_as = defender	
+		}
+		
+		scope:scheme.scheme_owner= {
+			save_scope_as = attacker
+		}
+		
+		scope:defender = {
+			location = { save_scope_as = diablerie_location }
+			#capital_province = { save_scope_as = diablerie_location }
+		}
+	}
+	
+# Proceed with the Attack
+	option = {
+		name = POD_diablerize.100.option.a
+		custom_tooltip = POD_diablerize.100.option.a.tt
+		scope:defender = {
+			trigger_event = {
+				id = POD_diablerize.200
+				days = 7
+			}
+		}
+		POD_hunger_rouse_check_effect = yes 
+		POD_willpower_rouse_check_effect = yes
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.100.option.a.tt.beast
+		}
+		
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 2
+				is_diablerist_trigger = yes
+			}
+			modifier = {
+				factor = 1.5
+				has_trait = ambitious
+			}			
+		}
+	}
+
+# Give up	
+	option = {
+		name = POD_diablerize.100.option.b
+		
+		stress_impact = {
+			ambitious = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}		
+			
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.100.option.b.tt.beast
+		}
+		
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 2
+				has_trait = compassionate
+			}	
+			modifier = {
+				factor = 1.25
+				has_trait = craven
+			}	
+			modifier = {
+				factor = 1.5
+				is_diablerist_trigger = no
+			}
+		}
+	}
+
+	after = {
+		trigger_event = {
+			id = POD_diablerize.3000
+			days = 150
+		}
+	}
+}
+
+# Scheme failed due to success chance
+POD_diablerize.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.101.t
+	desc =  POD_diablerize.101.desc		
+	theme = vampire
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	
+	lower_right_portrait = {
+		character = scope:scheme.scheme_target_character
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:scheme.scheme_target_character = {
+			save_scope_as = defender	
+		}
+		
+		scope:scheme.scheme_owner= {
+			save_scope_as = attacker
+		}
+		
+		# scope:defender = {
+		# 	location = { save_scope_as = diablerie_location }
+		# 	#capital_province = { save_scope_as = diablerie_location }
+		# }
+	}
+
+# Give up
+	option = {
+		name = POD_diablerize.101.option.a
+		
+		stress_impact = {
+			ambitious = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}		
+			
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.101.option.a.tt.beast
+		}
+	}
+}
+
+POD_diablerize.600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.600.t
+	desc =  POD_diablerize.600.desc		
+	theme = diablerie
+	left_portrait = {
+		character = scope:attacker
+		animation = rage
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = severelywounded
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+
+		scope:defender = {
+			save_scope_as = victim	
+		}
+		
+		scope:victim = {
+			#POD_clear_resonance_effect = yes
+			if = {
+				limit = {
+					NOT = {	has_character_flag = POD_resonance_negligible_flag }
+					NOT = {	has_character_flag = POD_resonance_fleeting_flag }
+					NOT = {	has_character_flag = POD_resonance_intense_flag }
+					NOT = {	has_character_flag = POD_resonance_acute_flag }
+					NOT = {	has_character_flag = choleric_resonance }
+					NOT = {	has_character_flag = melancholic_resonance }
+					NOT = {	has_character_flag = phlegmatic_resonance }
+					NOT = {	has_character_flag = sanguine_resonance }
+				}
+				POD_set_resonance_effect = yes
+			}
+		}			
+	}	
+	
+	# diablerize them
+	option = {
+		name = POD_diablerize.600.option.a
+		custom_tooltip = POD_diablerize.600.option.a.tt
+		
+		POD_drain_victim_effect = { VICTIM = scope:defender }
+		
+		if = {
+			limit = {
+				exists = scope:scheme_discovered
+				scope:victim = { 
+					NOT = { has_character_modifier = sentenced_court_blood_modifier }
+				}				
+			}
+			murder_consequences_known_or_exposed_effect = {
+				MURDERER = scope:murderer
+				VICTIM = scope:victim
+				POV = root
+			}
+		}
+	
+		scope:scheme = {
+			end_scheme = yes
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.600.option.a.tt.beast
+		}
+
+		ai_chance = {
+			base = 90
+			
+			modifier = {
+				factor = 1.5
+				has_trait = vengeful
+			}	
+			modifier = {
+				factor = 3
+				has_trait = wrathful
+			}	
+			
+			modifier = {
+				factor = 3
+				has_trait = ambitious
+			}	
+			
+			modifier = {
+				factor = 5
+				is_diablerist_trigger = yes
+			}
+			
+			modifier = {
+				factor = 0.1
+				has_trait = compassionate
+			}
+			modifier = {
+				factor = 0.1
+				faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_instinct }
+			}
+			modifier = {
+				factor = 0.1
+				faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_selfcontrol }
+			}			
+			modifier = {
+				factor = 5
+				faith = {
+						has_doctrine = doctrine_vampirediablerie_accepted
+				}
+			}			
+			modifier = {
+				factor = 0.5
+				faith = {
+						has_doctrine = doctrine_vampirediablerie_crime
+				}
+			}	
+			modifier = {
+				factor = 0.7
+				faith = {
+						has_doctrine = doctrine_vampirediablerie_shunned
+				}
+			}			
+		}
+	}
+
+	option = {
+		name = POD_diablerize.600.option.c
+		
+		scope:attacker = {
+			save_scope_as = murderer	
+		}
+		
+		hidden_effect = {
+			scope:victim = {
+				murder_success_kill_effect = { REASON = death_mysterious }
+			}
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.600.option.c.tt.beast
+		}	
+	
+		scope:scheme = {
+			end_scheme = yes
+		}		
+	}
+	
+	option = {
+		name = POD_diablerize.600.option.b
+		
+		stress_impact = {
+			ambitious = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}		
+		
+		hidden_effect = {
+			random = {
+				chance = 10
+				stress_impact = {
+					compassionate = medium_stress_impact_loss
+				}			
+			}
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.600.option.b.tt.beast
+		}
+
+		hidden_effect = {
+			scope:defender = {
+				trigger_event = {
+					id = POD_diablerize.650
+					days = 7
+				}
+			}
+		}
+		
+		scope:scheme = {
+			end_scheme = yes
+		}
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 2
+				has_trait = forgiving
+			}	
+			modifier = {
+				factor = 1.25
+				has_trait = arbitrary
+			}
+			modifier = {
+				factor = 1.25
+				has_trait = compassionate
+			}	
+			modifier = {
+				factor = 1.1
+				is_diablerist_trigger = no
+			}
+			modifier = {
+				factor = 1.1
+				faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_selfcontrol }
+			}	
+			modifier = {
+				factor = 0.1
+				faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_instinct }
+			}			
+			modifier = {
+				factor = 0.1
+				faith = {
+						has_doctrine = doctrine_vampirediablerie_crime
+				}
+			}	
+			modifier = {
+				factor = 1.1
+				faith = {
+						has_doctrine = doctrine_vampirediablerie_shunned
+				}
+			}				
+		}	
+		
+	}	
+	
+}
+
+POD_diablerize.650 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.650.t
+	desc =  POD_diablerize.650.desc
+	
+	theme = vampire
+	
+	left_portrait = {
+		character = scope:attacker
+		animation = sadness
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = severelywounded
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_diablerize.650.option.a
+	}
+}
+
+# POD_diablerize.700 = {
+	# type = character_event
+	# content_source = dlc_POD
+	# title = POD_diablerize.700.t
+	# desc =  POD_diablerize.700.desc		
+	# theme = diablerie
+	# left_portrait = {
+		# character = scope:attacker
+		# animation = rage
+	# }
+
+	# right_portrait = {
+		# character = scope:defender
+		# animation = shock
+	# }
+	
+	#widget = {
+	#	gui = "POD_shader_event_blood"
+	#	container = "background_shader_vfx_container"
+	#}
+	# immediate = {
+			
+	# }
+	
+	# option = {
+		# name = POD_diablerize.700.option.a
+	# }
+# }
+
+#POD_diablerize.800 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = POD_diablerize.800.t
+#	desc =  POD_diablerize.800.desc		
+#	theme = diablerie
+#
+#	left_portrait = {
+#		character = root
+#		animation = fear
+#	}
+#
+#	right_portrait = {
+#		character = scope:unconquered_soul
+#		animation = rage
+#	}
+#	
+#	widget = {
+#		gui = "POD_shader_event_blood"
+#		container = "background_shader_vfx_container"
+#	}
+#
+#	immediate = {
+#		remove_character_flag = POD_in_unconquered_soul_event
+#	}
+#	
+#	# Resist 
+#	option = {
+#		name = POD_diablerize.800.option.a
+#
+#		stress_impact = {
+#			base = major_stress_gain
+#		}		
+#		random_list = {
+#			25 = {
+#				POD_diablerie_unconquered_soul_get_partial_personality_effect = yes
+#			}
+#			10 = {
+#				POD_diablerie_unconquered_soul_get_whole_personality_effect = yes
+#			}
+#		}
+#		if = {
+#			limit = {
+#				NOT = {
+#					has_trait = possessed_1
+#					has_trait = possessed_genetic
+#				}
+#			}
+#			random = {
+#				chance = 25
+#				add_trait = possessed_1
+#			}		
+#		}		
+#	}
+#	
+#	# Give In 
+#	option = {
+#		name = POD_diablerize.800.option.b
+#		
+#		POD_diablerie_unconquered_soul_get_whole_personality_effect = yes
+#		if = {
+#			limit = {
+#				NOT = {
+#					has_trait = possessed_1
+#					has_trait = possessed_genetic
+#				}
+#			}
+#			random = {
+#				chance = 50
+#				add_trait = possessed_1
+#			}		
+#		}
+#	}	
+#}
+
+POD_diablerize.800 = {
+	type = character_event
+	hidden = yes
+
+
+	immediate = {
+		#Personality, can add more trait grouping events easily
+		random_list = {
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.801
+					days = 3
+				}
+				modifier = {
+					scope:unconquered_soul = {
+						NOR = {
+							has_trait = arrogant
+							has_trait = ambitious
+							has_trait = wrathful
+						}
+					}
+					factor = 0
+				}
+			}
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.802
+					days = 3
+				}
+				modifier = {
+					scope:unconquered_soul = {
+						NOR = {
+							has_trait = content
+							has_trait = humble
+							has_trait = temperate
+						}
+					}
+					factor = 0
+				}
+			}	
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.803
+					days = 3
+				}
+				modifier = {
+					scope:unconquered_soul = {
+						NOR = {
+							has_trait = callous
+							has_trait = sadistic
+							has_trait = deceitful
+						}
+					}
+					factor = 0
+				}
+			}
+			5 = { #fallback
+				trigger_event = {
+					id = POD_diablerize.804
+					days = 3
+				}
+			}			
+		}
+		
+		#Faith
+		#Just skip if already same faith
+		random_list = {
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.805
+					days = 30
+				}
+				modifier = {
+					faith = scope:unconquered_soul.faith 
+					factor = 0
+				}
+			}
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.806
+					days = 30
+				}
+				modifier = {
+					faith = scope:unconquered_soul.faith 
+					factor = 0
+				}
+			}	
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.807
+					days = 30
+				}
+				modifier = {
+					faith = scope:unconquered_soul.faith 
+					factor = 0
+				}
+			}
+			0 = { #fallback if same faith
+				modifier = {
+					faith = scope:unconquered_soul.faith 
+					add = 10
+				}
+			}			
+		}
+
+		#Face, name, nickname
+		random_list = {
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.808
+					days = 60
+				}
+			}
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.809
+					days = 60
+				}
+			}	
+			10 = {
+				trigger_event = {
+					id = POD_diablerize.810
+					days = 60
+				}
+			}			
+		}		
+	}
+	
+}
+
+POD_diablerize.801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.801.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.801.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+
+		add_character_modifier = {
+			modifier = broken_authority_modifier
+			years = 15
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_get_partial_personality_effect = yes
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+
+POD_diablerize.802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.802.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.802.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+
+		add_legitimacy = -450
+		
+		add_character_modifier = {
+			modifier = generic_legitimacy_debuff_modifier
+			years = 15
+		}	
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+		
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_get_partial_personality_effect = yes
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+POD_diablerize.803 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.803.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		random_courtier ?= {
+			limit = {
+				prowess <= 25 #Not a too important character that could defend itself
+				POD_is_available_for_events = yes
+			}
+			pod_death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}			
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.803.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+		
+		add_tyranny = 100		
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_get_partial_personality_effect = yes
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+POD_diablerize.804 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.804.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {	
+		random_powerful_vassal  ?= {
+			limit = {
+			}
+		save_temporary_scope_as = gifted_vassal
+		}
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.804.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+		
+		random_powerful_vassal  ?= {
+			limit = {
+			}
+			add_opinion = {
+				target = root
+				opinion = -100
+				modifier = hate_opinion
+			}
+		}		
+
+		random_powerful_vassal  ?= {
+			limit = {
+			}
+			add_hook  = {
+				target = root
+				type = favor_hook
+			}
+		}	
+		
+		pay_short_term_gold  = {
+			target = scope:gifted_vassal
+			gold = 250
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_get_partial_personality_effect = yes
+
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+#Faith
+POD_diablerize.805 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.805.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {	
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.805.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+		
+		add_piety = -500
+		
+		add_piety_level = -1
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		if = {
+			limit = {
+				NOT = { faith = scope:unconquered_soul.faith }
+			}
+			set_character_faith = scope:unconquered_soul.faith
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+POD_diablerize.806 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.806.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {	
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.806.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+		
+		add_character_modifier = {
+			modifier = complete_same_faith_generic_debuff_modifier
+			years = 10
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		if = {
+			limit = {
+				NOT = { faith = scope:unconquered_soul.faith }
+			}
+			set_character_faith = scope:unconquered_soul.faith
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+
+POD_diablerize.807 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.800.t
+	desc =  POD_diablerize.807.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {	
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.807.option.a
+
+		stress_impact = {
+			base = major_stress_gain
+		}		
+		
+		every_realm_county = { 
+			limit = {
+				holder = root
+			}
+			set_county_faith = scope:unconquered_soul.faith
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.801.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		if = {
+			limit = {
+				NOT = { faith = scope:unconquered_soul.faith }
+			}
+			set_character_faith = scope:unconquered_soul.faith
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+#face, name etc
+POD_diablerize.808 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.808.t
+	desc =  POD_diablerize.808.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		remove_character_flag = POD_in_unconquered_soul_event		
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.808.option.a
+
+		stress_impact = {
+			base = massive_stress_gain
+		}		
+		
+		add_character_modifier = {
+			modifier = drained_troops_modifier
+			years = 15
+		}
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.808.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_change_appearance_effect = yes
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+POD_diablerize.809 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.808.t
+	desc =  POD_diablerize.809.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		remove_character_flag = POD_in_unconquered_soul_event		
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.808.option.a
+
+		stress_impact = {
+			base = massive_stress_gain
+		}
+
+		add_prestige = -500
+		
+		POD_masquerade_exposure_increase_multiple_effect = { AMOUNT = 5 }
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.808.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_change_appearance_effect = yes
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+
+POD_diablerize.810 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.808.t
+	desc =  POD_diablerize.810.desc		
+	theme = diablerie
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	right_portrait = {
+		character = scope:unconquered_soul
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		remove_character_flag = POD_in_unconquered_soul_event		
+
+		random_directly_owned_province = {
+			limit = {
+				has_holding_type = castle_holding
+			}	
+			save_scope_as = targetprovince
+		}
+	}
+	
+	# Resist 
+	option = {
+		name = POD_diablerize.808.option.a
+
+		stress_impact = {
+			base = massive_stress_gain
+		}
+		
+		custom_tooltip = {
+			text = POD_diablerize.808.tt
+			scope:targetprovince = {
+				POD_remove_common_building_effect = yes
+			}
+		}
+		
+		remove_short_term_gold = 200
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}
+	
+	# Give In 
+	option = {
+		name = POD_diablerize.808.option.b
+		
+		stress_impact = {
+			base = minor_stress_gain
+		}		
+
+		POD_diablerie_unconquered_soul_change_appearance_effect = yes
+		
+		custom_tooltip = unconquered_soul_in_progress_tt
+
+	}	
+}
+
+#POD_diablerize.810 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = POD_diablerize.810.t
+#	desc =  POD_diablerize.810.desc		
+#	theme = diablerie
+#
+#	left_portrait = {
+#		character = root
+#		animation = worry
+#	}
+#	
+#	widget = {
+#		gui = "POD_shader_event_blood"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	option = {
+#		name = POD_diablerize.810.option.a
+#		
+#		custom_tooltip = POD_diablerize.810.option.a.tt
+#		show_as_tooltip = { POD_diablerie_unconquered_soul_get_whole_personality_effect = yes }
+#	}
+#}
+#
+POD_diablerize.2000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = murder_outcome.2000.t
+	desc = murder_outcome.2000.desc
+	theme = murder_scheme
+	orphan = yes
+
+	left_portrait = scope:target
+
+	trigger = {
+		scope:target = { is_alive = no }
+	}
+
+	immediate = {
+		custom_tooltip = murder_outcome.2000.a.tt
+	}
+
+	option = {
+		name = murder_outcome.2000.a
+	}
+}
+
+POD_diablerize.3000 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				scope:attacker = {
+					POD_diablerie_scheme_100_trigger = yes
+				}
+			}
+			trigger_event = {
+				id = POD_diablerize.4000
+				days = 7
+			}
+		}
+	}
+}
+
+POD_diablerize.4000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.4000.t
+	desc =  POD_diablerize.4000.desc		
+	theme = vampire
+	
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+
+	right_portrait = {
+		character = scope:defender
+		animation = idle
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	# End scheme 
+	option = {
+		name = POD_diablerize.4000.option.a
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+	
+
+#The defender chooses an option, but the duel is then rerooted to be seen to the player, who is most likely to be the attacker
+POD_diablerize.200 	= {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.200.t
+	desc =  POD_diablerize.200.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = scheme
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	#Flee!
+	option = {
+		name = POD_diablerize.200.option.a
+		#trigger = {
+		#	POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		#}
+		custom_tooltip = POD_diablerize.200.option.a.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.a.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_small_risk_of_increasing_masquerade_exposure = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = martial }
+		}
+		
+		hidden_effect = {
+			scope:attacker = { 
+				POD_small_risk_of_increasing_masquerade_exposure = yes
+			}
+		}
+		scope:defender = { 
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = blink_perk 
+						has_trait = celerityadvanced 
+						has_trait = temporisadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.a.tt.blink
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = traversal_perk 
+						has_trait = celerityadvanced 
+						has_trait = temporisadvanced 
+						has_trait = flightadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.a.tt.traversal
+			}
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = soaring_leap_perk
+						has_trait = potenceadvanced 
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.a.tt.soaring_leap
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = uncanny_grip_perk
+						has_trait = potenceadvanced 
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.a.tt.uncanny_grip
+			}				
+		}
+		
+			scope:attacker = {
+					trigger_event = {
+						id = POD_diablerize.250
+						days = 1
+					}
+				} 
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 2
+				has_trait = craven
+			}	
+			modifier = {
+				factor = 0.1
+				has_trait = brave
+			}	
+			modifier = {
+				factor = 2
+				has_education_martial_trigger = yes
+			}
+			modifier = {
+				factor = 5
+				has_trait = celerityadvanced
+			}
+			modifier = {
+				factor = 5
+				has_trait = temporisadvanced 
+			}
+			modifier = {
+				factor = 5
+				has_trait = flightadvanced
+			}
+			modifier = {
+				factor = 2.5
+				has_trait = potenceadvanced
+			}		
+			}
+		}
+	# #Hide!
+	option = {
+		name = POD_diablerize.200.option.b
+		#trigger = {
+		#	POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		#}
+		custom_tooltip = POD_diablerize.200.option.b.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.b.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_small_risk_of_increasing_masquerade_exposure = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = intrigue }
+		}
+		
+		scope:defender = { 
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = cloak_of_shadows_perk 
+						has_trait = obfuscateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.b.tt.cloak_of_shadows
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = silence_of_death_perk
+						has_trait = obfuscateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.b.tt.silence_of_death
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = unseen_passage_perk 
+						has_trait = obfuscateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.b.tt.unseen_passage
+			}		
+			if = {
+				limit = {
+					OR = {
+						has_perk = vanish_perk 
+						has_trait = obfuscateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.b.tt.vanish
+			}
+			
+		}
+		
+		scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.251
+					days = 1
+				}
+			} 
+			
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = craven
+			}	
+			
+			modifier = {
+				factor = 2
+				has_trait = paranoid
+			}
+			
+			modifier = {
+				factor = 2
+				has_education_intrigue_trigger = yes
+			}
+			
+			modifier = {
+				factor = 0.1
+				has_trait = brave
+			}	
+			
+			modifier = {
+				factor = 5
+				has_trait = obfuscateadvanced
+			}
+									
+			modifier = {
+				factor = 3
+				has_trait = oblivionadvanced
+			}								
+			
+		}
+	}
+
+# Presence Entrancement Diplomacy Duel
+
+	option = {
+		name = POD_diablerize.200.option.c
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+				has_perk = entrancement_perk
+				has_trait = presenceadvanced
+			}
+			scope:attacker = {
+				is_unbondable_trigger = no
+				NOT = { has_character_modifier = POD_vinculum_modifier }
+			}
+		}
+		custom_tooltip = POD_diablerize.200.option.c.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.c.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = diplomacy }
+		}
+		
+		scope:defender = { 
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = entrancement_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.entrancement
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = majesty_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.majesty
+			}
+			
+		}
+				
+		scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.252
+					days = 1
+				}
+			} 
+			
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = gregarious
+			}
+			modifier = {
+				factor = 3
+				has_trait = beauty_good 
+			}			
+			modifier = {
+				factor = 2
+				has_trait = diplomat
+			}
+			modifier = {
+				factor = 2
+				has_trait = charming
+			}
+			modifier = {
+				factor = 1.5
+				has_trait = compassionate
+			}
+			modifier = {
+				factor = 1.1
+				has_trait = trusting
+			}
+			modifier = {
+				factor = 0.1
+				has_trait = shy
+			}
+			modifier = {
+				factor = 0.1
+				has_trait = reclusive
+			}
+			modifier = {
+				factor = 0.1
+				has_trait = craven
+			}
+			modifier = {
+				factor = 0.1
+				has_trait = paranoid
+			}
+			modifier = {
+				factor = 2
+				has_education_diplomacy_trigger = yes
+			}
+			modifier = {
+				factor = 0.1
+				has_trait = brave
+			}	
+			modifier = {
+				factor = 5
+				has_trait = presenceadvanced
+			}
+						
+		}
+	}
+
+
+# Dominate Mesmerism Stewardship Duel
+
+	option = {
+		name = POD_diablerize.200.option.d
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+				has_perk = mesmerize_perk
+				has_perk = submerged_directive_perk
+				has_perk = rationalize_perk
+				has_perk = terminal_decree_perk
+				has_trait = dominateadvanced
+			}
+			scope:attacker = {
+				is_unbondable_trigger = no
+				NOT = { has_character_modifier = POD_vinculum_modifier }
+			}
+			##### old bloodsorcery
+			#scope:attacker = { NOT = { has_character_flag = song_of_jupiter } }
+		}
+		custom_tooltip = POD_diablerize.200.option.d.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.d.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = stewardship }
+		}
+		
+		scope:defender = { 
+
+			if = {
+				limit = {
+					OR = {
+						has_perk = mesmerize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.mesmerize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = submerged_directive_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.submerged_directive
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = rationalize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.rationalize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = terminal_decree_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.terminal_decree
+			}
+		}
+
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.253
+							days = 7
+						}
+					}	
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 5
+				has_trait = arrogant
+			}
+			modifier = {
+				factor = 2
+				has_trait = ambitious
+			}			
+			modifier = {
+				factor = 2
+				has_trait = diplomat
+			}
+
+			modifier = {
+				factor = 2
+				has_education_stewardship_trigger = yes
+			}	
+			modifier = {
+				factor = 5
+				has_trait = dominateadvanced
+			}
+		}
+	}	
+
+# Protean Shapeshift Learning Duel
+
+	option = {
+		name = POD_diablerize.200.option.e
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			has_trait = proteanadvanced
+		}
+		custom_tooltip = POD_diablerize.200.option.e.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.e.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = learning }
+		}
+
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.254
+					days = 7
+						}
+					}	
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 5
+				has_trait = deceitful
+			}
+			modifier = {
+				factor = 2
+				has_trait = patient
+			}			
+			modifier = {
+				factor = 2
+				has_trait = lifestyle_hunter
+			}
+
+			modifier = {
+				factor = 2
+				has_education_learning_trigger = yes
+			}	
+			modifier = {
+				factor = 10
+				has_trait = proteanadvanced
+			}
+		
+		}
+	}
+
+
+# Animalism martial Duel
+
+	option = {
+		name = POD_diablerize.200.option.g
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			has_trait = animalismadvanced
+		}
+		custom_tooltip = POD_diablerize.200.option.g.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.g.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = martial }
+		}
+
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.255
+					days = 7
+						}
+					}	
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 5
+				has_trait = callous
+			}
+			modifier = {
+				factor = 2
+				has_trait = wrathful
+			}			
+			modifier = {
+				factor = 2
+				has_trait = lifestyle_hunter
+			}
+
+			modifier = {
+				factor = 2
+				has_education_martial_trigger = yes
+			}	
+			modifier = {
+				factor = 10
+				has_trait = animalismadvanced
+			}
+		
+		}
+	}	
+	
+# Blood sorcery learning Duel
+
+	option = {
+		name = POD_diablerize.200.option.h
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			has_trait = bloodsorceryadvanced
+		}
+		custom_tooltip = POD_diablerize.200.option.h.tt
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.200.option.h.tt.beast
+		}
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		if = {
+			limit = {
+				has_blood_surge_active_trigger = no
+			}
+			POD_blood_surge_effect = { STAT = learning }
+		}
+
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.256
+					days = 7
+						}
+					}	
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 5
+				has_trait = patient
+			}
+			modifier = {
+				factor = 2
+				has_trait = calm
+			}			
+			modifier = {
+				factor = 2
+				has_trait = scholar
+			}
+
+			modifier = {
+				factor = 2
+				has_education_learning_trigger = yes
+			}	
+			modifier = {
+				factor = 10
+				has_trait = bloodsorceryadvanced
+			}
+		
+		}
+	}		
+}
+
+#The defender chooses to flee, duel
+POD_diablerize.250 	= {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.250.t
+	desc =  POD_diablerize.250.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = scheme
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	#Chase, martial duel
+	option = {
+		 name = POD_diablerize.250.option.a	
+		 
+		duel = {
+			skill = martial
+			value = scope:defender.martial
+			desc = POD_diablerize.200.option.a.desc
+			13 = {
+				desc = POD_diablerize.250.option.a.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5 
+				}
+				modifier = {
+					add = 2
+					scope:attacker = { has_trait = celerityadvanced }
+				} 
+				modifier = {
+					add = 2
+					scope:attacker = { has_trait = temporisadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:attacker = { has_trait = flightadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:attacker = {
+						OR = {
+							has_perk = blink_perk 
+							has_trait = celerityadvanced
+							has_trait = temporisadvanced
+							has_trait = flightadvanced							
+						}
+					}
+				}
+				modifier = {
+					add = 2
+					scope:attacker = { 
+						OR = {
+							has_perk = traversal_perk 
+							has_trait = celerityadvanced 
+							has_trait = temporisadvanced
+							has_trait = flightadvanced
+						}	
+					}
+				}
+				modifier = {
+					add = 1
+					scope:attacker = { 
+						OR = {
+							has_perk = soaring_leap_perk 
+							has_trait = potenceadvanced
+						}
+					}
+				}
+				modifier = {
+					add = 1
+					scope:attacker = { 
+						OR = {
+							has_perk = uncanny_grip_perk 
+							has_trait = potenceadvanced
+						}
+					}
+				}
+				
+				custom_tooltip = POD_diablerize.250.option.a.tt.attacker_wins
+				
+				hidden_effect = {
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			}
+
+
+			13 = {
+				desc = POD_diablerize.250.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = celerityadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = temporisadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = flightadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:defender = { 
+						OR = {
+							has_perk = blink_perk 
+							has_trait = celerityadvanced 
+							has_trait = temporisadvanced 
+							has_trait = flightadvanced 
+						}	
+					}
+				}
+				modifier = {
+					add = 2
+					scope:defender = { 
+						OR = {
+							has_perk = traversal_perk 
+							has_trait = celerityadvanced 
+							has_trait = temporisadvanced 
+							has_trait = flightadvanced 
+						}	
+					}
+				}
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = potenceadvanced }
+				}
+				modifier = {
+					add = 1
+					scope:defender = { 
+						OR = {
+							has_perk = soaring_leap_perk 
+							has_trait = potenceadvanced 
+						}	
+					}
+				}
+				modifier = {
+					add = 1
+					scope:defender = { 
+						OR = {
+							has_perk = uncanny_grip_perk 
+							has_trait = potenceadvanced 
+						}	
+					}
+				}
+				
+				custom_tooltip = POD_diablerize.250.option.a.tt.defender_wins
+
+				send_interface_toast = {
+					title = POD_diablerize.250.option.a.toast
+					left_icon = root
+					right_icon = scope:defender
+					add_stress = medium_stress_gain
+				}	
+								
+				scope:attacker = {
+					scope:scheme = {
+						end_scheme = yes
+						}
+					}	
+
+				scope:defender = {
+					add_opinion = {
+					target = scope:attacker
+					opinion = -200
+					modifier = hate_opinion
+					}
+				}					
+			 }
+
+		 }	
+	}
+	
+	option = {
+		 name = POD_diablerize.250.option.b		
+
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+					}
+				}
+		scope:defender = {
+			add_opinion = {
+				target = scope:attacker
+				opinion = -200
+				modifier = hate_opinion
+				}
+			}		
+			
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.250.option.b.tt.beast
+		}
+	}
+	
+}
+		
+#The defender chooses to hide, duel
+POD_diablerize.251 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.251.t
+	desc =  POD_diablerize.251.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = scheme
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	#Hide, intrigue duel
+	option = {
+		 name = POD_diablerize.251.option.a	
+		 
+		duel = {
+			skill = intrigue
+			value = scope:defender.intrigue
+			desc = POD_diablerize.251.option.a.desc
+
+			13 = {
+				desc = POD_diablerize.251.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				modifier = {
+					add = 2
+					scope:attacker = { has_trait = obfuscateadvanced }
+				}
+				
+				modifier = {
+					add = 2
+					scope:attacker = { 
+						OR = {
+							has_perk = cloak_of_shadows_perk
+							has_trait = obfuscateadvanced
+						}	
+					}
+				}
+				
+				modifier = {
+					add = 2
+					scope:attacker = { 
+						OR = {
+							has_perk = silence_of_death_perk
+							has_trait = obfuscateadvanced
+						}	
+					}
+				}
+				
+				modifier = {
+					add = 1
+					scope:attacker = { 
+						OR = {
+							has_perk = unseen_passage_perk
+							has_trait = obfuscateadvanced
+						}	
+					}
+				}
+				
+				modifier = {
+					add = 1
+					scope:attacker = { 
+						OR = {
+							has_perk = vanish_perk
+							has_trait = obfuscateadvanced
+						}	
+					}
+				}
+				
+				custom_tooltip = POD_diablerize.251.option.a.tt.attacker_wins
+				
+				hidden_effect = {
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			}
+			
+			13 = {
+				desc = POD_diablerize.251.option.a.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5 
+				}
+				
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = oblivionadvanced }
+				}
+				
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = auspexadvanced }
+				}
+				
+				modifier = {
+					add = 1
+					scope:defender = { 
+						OR = {
+							has_perk = heightened_senses_perk
+							has_trait = auspexadvanced
+						}
+					}
+				}
+				
+				modifier = {
+					add = 1
+					scope:defender = { 
+						OR = {
+							has_perk = sense_the_unseen_perk
+							has_trait = auspexadvanced
+						}
+					}
+				}
+				
+				
+				custom_tooltip = POD_diablerize.251.option.a.tt.defender_wins
+				
+				send_interface_toast = {
+					title = POD_diablerize.250.option.a.toast
+					left_icon = root
+					right_icon = scope:defender
+					add_stress = medium_stress_gain
+				}	
+
+				scope:attacker = {
+					scope:scheme = {
+						end_scheme = yes
+						}
+					}
+				scope:defender = {
+					add_opinion = {
+					target = scope:attacker
+					opinion = -200
+					modifier = hate_opinion
+					}
+				}		
+			}
+		}
+	}
+	
+	option = {
+		 name = POD_diablerize.251.option.b		
+
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+					}
+				}
+		scope:defender = {
+			add_opinion = {
+				target = scope:attacker
+				opinion = -200
+				modifier = hate_opinion
+				}
+			}		
+			
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.250.option.b.tt.beast
+		}
+	}
+	
+}	
+
+#The defender chooses to presence, duel
+POD_diablerize.252 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.252.t
+	desc =  POD_diablerize.252.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = scheme
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = flirtation
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	
+		name = POD_diablerize.252.option.a	
+		
+		duel = {
+			skill = diplomacy
+			value = scope:defender.diplomacy
+			desc = POD_diablerize.252.option.a.desc
+
+			13 = {
+				desc = POD_diablerize.252.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+
+				modifier = {
+					add = 5
+					scope:attacker = { has_trait = fortitudeadvanced }
+				}
+				modifier = {
+					add = 5
+					scope:attacker = { 
+						OR = {
+							has_perk = unswayable_mind_perk
+							has_trait = fortitudeadvanced
+						}
+					}
+				}
+				modifier = {
+					add = 2
+					scope:attacker = { 
+						OR = {
+							has_perk = fortify_the_inner_facade_perk 
+							has_trait = fortitudeadvanced
+						}
+					}
+				}
+				
+				custom_tooltip = POD_diablerize.252.option.a.tt.attacker_wins
+				
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			
+			13 = {
+				desc = POD_diablerize.252.option.a.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5 
+				}
+				
+				modifier = {
+					add = 5
+					scope:defender = { 
+						OR = {
+							has_perk = majesty_perk
+							has_trait = presenceadvanced
+						}	
+					}
+				}
+				modifier = {
+					add = 5
+					scope:defender = { has_trait = presenceadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:defender = { 
+						OR = {
+							has_perk = entrancement_perk
+							has_trait = presenceadvanced
+						}	
+					}
+				}				
+				custom_tooltip = POD_diablerize.252.option.a.tt.defender_wins
+					
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.350
+							days = 7
+						}
+					}
+				}
+				
+			}
+		}
+}		
+
+#The defender won the presence duel, punishment
+POD_diablerize.350 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.350.t
+	
+	desc = POD_diablerize.350.desc.success
+
+	theme = presence
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = flirtation
+	}
+	
+	option = {
+		name = POD_diablerize.350.option.a.success
+			scope:defender = {
+				add_prestige = 500
+			}
+		
+		scope:attacker = {
+			add_opinion = {
+				target = scope:defender
+				modifier = entrancement_opinion
+			}
+			add_prestige = -500
+		}
+		custom_tooltip = POD_diablerize.350.option.a.success.tt
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+	
+}
+
+#The defender chooses to dominate : duel 
+
+POD_diablerize.253 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.253.t
+	
+	desc = POD_diablerize.253.desc
+	theme = vampire
+	
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_callous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	
+		name = POD_diablerize.253.option.a	
+	
+	
+		duel = {
+			skill = stewardship
+			value = scope:defender.stewardship
+			desc = POD_diablerize.253.option.a.desc
+
+			13 = {
+				desc = POD_diablerize.253.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+
+			 custom_tooltip = POD_diablerize.253.option.a.tt.attacker_wins
+
+				 modifier = {
+					 add = 2
+					 scope:defender = { has_trait = fortitudeadvanced }
+				 }
+				 modifier = {
+					 add = 2
+					 scope:attacker = { 
+						 OR = {
+							 has_perk = unswayable_mind_perk
+							 has_trait = fortitudeadvanced
+						 }
+					 }
+				 }
+				 modifier = {
+					 add = 2
+					 scope:attacker = { 
+						 OR = {
+							 has_perk = fortify_the_inner_facade_perk 
+							 has_trait = fortitudeadvanced
+						 }
+					 }
+				 }
+				
+					scope:attacker = {
+						 trigger_event = {
+							id = POD_diablerize.1000
+							 days = 7
+						 }
+					 }
+				 }
+					
+			 13 = {
+				 desc = POD_diablerize.253.option.a.failure
+
+				 compare_modifier = {
+					 value = scope:duel_value
+					 multiplier = -0.5 
+				 }
+
+				modifier = {
+					add = 2
+					scope:defender = { has_trait = dominateadvanced }
+				}
+				modifier = {
+					add = 2
+					scope:defender = { 
+						OR = {
+							has_perk = compel_perk
+							has_trait = dominateadvanced
+						}	
+					}
+				}
+				modifier = {
+					add = 2
+					scope:defender = { 
+						OR = {
+							has_perk = mesmerize_perk
+							has_trait = dominateadvanced
+						}	
+					}
+				}
+			
+				 custom_tooltip = POD_diablerize.253.option.a.tt.defender_wins
+				
+					save_scope_value_as = {
+						name = diablerie_mesmerize_duel
+						value = flag:defender_won
+					}	
+					 scope:defender = {
+						 trigger_event = {
+							 id = POD_diablerize.425
+							 days = 1
+						 }
+					 }
+				 }	
+			}
+		}
+}
+
+#The defender chooses to shapeshift by protean, duel
+POD_diablerize.254 	= {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.254.t
+	desc =  POD_diablerize.254.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = scheme
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = schadenfreude
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	#Shapeshift, learning duel
+	option = {
+		 name = POD_diablerize.254.option.a	
+		 
+		duel = {
+			skill = learning
+			value = scope:defender.learning
+			desc = POD_diablerize.254.option.a.desc
+			13 = {
+				desc = POD_diablerize.254.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5 
+				}
+				modifier = {
+					add = 10
+					scope:attacker = { has_trait = auspexadvanced }
+				}
+				
+				custom_tooltip = POD_diablerize.254.option.a.tt.attacker_wins
+				
+				hidden_effect = {
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			}
+
+
+			13 = {
+				desc = POD_diablerize.254.option.a.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					add = 10
+					scope:defender = { has_trait = obfuscateadvanced }
+				}
+				
+				custom_tooltip = POD_diablerize.254.option.a.tt.defender_wins
+
+				send_interface_toast = {
+					title = POD_diablerize.254.option.a.toast
+					left_icon = root
+					right_icon = scope:defender
+					add_stress = medium_stress_gain
+				}	
+								
+				scope:attacker = {
+					scope:scheme = {
+						end_scheme = yes
+						}
+					}	
+
+				scope:defender = {
+					add_opinion = {
+					target = scope:attacker
+					opinion = -200
+					modifier = hate_opinion
+					}
+				}					
+			 }
+
+		 }	
+	}
+	
+	option = {
+		 name = POD_diablerize.254.option.b		
+
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+					}
+				}
+		scope:defender = {
+			add_opinion = {
+				target = scope:attacker
+				opinion = -200
+				modifier = hate_opinion
+				}
+			}		
+			
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.250.option.b.tt.beast
+		}
+	}
+	
+}
+
+
+#The defender chooses to animalism, duel
+POD_diablerize.255 	= {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.255.t
+	desc =  POD_diablerize.255.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_callous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	#Animalism, martial duel
+	option = {
+		 name = POD_diablerize.255.option.a	
+		 
+		duel = {
+			skill = martial
+			value = scope:defender.martial
+			desc = POD_diablerize.255.option.a.desc
+			13 = {
+				desc = POD_diablerize.255.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5 
+				}
+				modifier = {
+					add = 10
+					scope:attacker = { has_trait = fortitudeadvanced }
+				}
+				
+				custom_tooltip = POD_diablerize.255.option.a.tt.attacker_wins
+				
+				hidden_effect = {
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			}
+
+
+			13 = {
+				desc = POD_diablerize.255.option.a.failure
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					add = 10
+					scope:defender = { has_trait = proteanadvanced }
+				}
+				
+				custom_tooltip = POD_diablerize.255.option.a.tt.defender_wins
+
+				scope:attacker = {
+					scope:scheme = {
+						end_scheme = yes
+						}
+					}
+
+				scope:attacker = {
+					death = {
+						death_reason = death_wolves
+						killer = scope:defender
+						}
+					}
+								
+					
+			 }
+
+		 }	
+	}
+	
+	option = {
+		 name = POD_diablerize.255.option.b		
+
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+					}
+				}
+				
+		scope:attacker = {
+			add_stress = massive_stress_gain
+				}
+				
+		scope:defender = {
+			add_opinion = {
+				target = scope:attacker
+				opinion = -200
+				modifier = hate_opinion
+				}
+			}		
+			
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.255.option.b.tt.beast
+		}
+	}
+	
+}	
+
+
+#The defender chooses to blood sorcery, duel
+POD_diablerize.256 	= {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.256.t
+	desc =  POD_diablerize.256.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_callous
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	#Blood sorcery, learning duel
+	option = {
+		 name = POD_diablerize.256.option.a	
+		 
+		duel = {
+			skill = learning
+			value = scope:defender.learning
+			desc = POD_diablerize.256.option.a.desc
+			13 = {
+				desc = POD_diablerize.256.option.a.success
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5 
+				}
+				modifier = {
+					add = 10
+					scope:attacker = { has_trait = bloodsorceryadvanced }
+				}
+				
+				custom_tooltip = POD_diablerize.256.option.a.tt.attacker_wins
+				
+				hidden_effect = {
+					scope:attacker = {
+						trigger_event = {
+							id = POD_diablerize.1000
+							days = 7
+						}
+					}
+				}
+			}
+
+
+			13 = {
+				desc = POD_diablerize.256.option.a.failure
+				trigger = { scope:attacker = { POD_immune_to_fire_trigger = no } }
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					add = 10
+					scope:defender = { has_trait = diligent }
+				}
+				
+				if = {
+					limit = { POD_has_a_beast_trigger = yes }
+					custom_tooltip = POD_diablerize.256.option.a.tt.defender_wins
+				}
+
+				scope:attacker = {
+					scope:scheme = {
+						end_scheme = yes
+						}
+					}
+
+				scope:attacker = {
+					pod_death = {
+						death_reason = death_burned
+						killer = scope:defender
+						}
+					}
+								
+					
+			 }
+
+		 }	
+	}
+	
+	option = {
+		 name = POD_diablerize.256.option.b		
+
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+					}
+				}
+				
+		scope:attacker = {
+			add_stress = massive_stress_gain
+				}
+				
+		scope:defender = {
+			add_opinion = {
+				target = scope:attacker
+				opinion = -200
+				modifier = hate_opinion
+				}
+			}		
+			
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_diablerize.256.option.b.tt.beast
+		}
+	}
+	
+}	
+
+# The defender won the dominate duel, choose punishment
+
+POD_diablerize.425 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.425.t
+	
+	desc = POD_diablerize.425.desc.success
+
+	theme = dominate
+	
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = idle
+	}
+	
+	option = {
+		name = POD_diablerize.425.option.a
+
+		POD_willpower_regain_check_effect = yes
+		custom_tooltip = POD_diablerize.425.option.a.tt
+		hidden_effect = {
+			save_scope_value_as = {
+				name = diablerie_mesmerize_command
+				value = flag:leave
+			}
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.400
+					days = 7
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = forgiving
+			}
+			
+			modifier = {
+				factor = 2
+				has_trait = compassionate
+			}
+		}
+	}	
+	
+	option = {
+		name = POD_diablerize.425.option.b
+		trigger = {
+			OR = {
+				has_perk = submerged_directive_perk
+				has_perk = rationalize_perk
+				has_trait = dominateadvanced
+			}
+		}
+		POD_willpower_regain_check_effect = yes
+		custom_tooltip = POD_diablerize.425.option.b.tt
+		hidden_effect = {
+			save_scope_value_as = {
+				name = diablerie_mesmerize_command
+				value = flag:favor
+			}
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.400
+					days = 7
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = ambitious
+			}
+			modifier = {
+				factor = 2
+				has_trait = arrogant
+			}
+			modifier = {
+				factor = 2
+				has_trait = schemer
+			}
+			
+			modifier = {
+				factor = 2
+				has_education_intrigue_trigger = yes
+			}
+		}
+	}		
+
+	option = {
+		name = POD_diablerize.425.option.e
+		trigger = {
+			is_ruler = yes
+			is_playable_character = yes
+			OR = {
+				has_perk = submerged_directive_perk
+				has_perk = rationalize_perk
+				has_trait = dominateadvanced
+			}
+		}
+		POD_willpower_regain_check_effect = yes
+		custom_tooltip = POD_diablerize.425.option.e.tt
+		hidden_effect = {
+			save_scope_value_as = {
+				name = diablerie_mesmerize_command
+				value = flag:prison
+			}
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.400
+					days = 7
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = just
+			}
+			modifier = {
+				factor = 2
+				has_trait = torturer
+			}
+			modifier = {
+				factor = 2
+				has_trait = sadistic
+			}
+		}
+	}	
+	
+	option = {
+		name = POD_diablerize.425.option.c
+		trigger = {
+			scope:diablerie_mesmerize_duel = flag:defender_won
+			OR = {
+				has_perk = terminal_decree_perk
+				has_trait = dominateadvanced
+			}
+		}
+		POD_willpower_regain_check_effect = yes
+		custom_tooltip = POD_diablerize.425.option.c.tt
+		hidden_effect = {
+			save_scope_value_as = {
+				name = diablerie_mesmerize_command
+				value = flag:die
+			}
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.400
+					days = 7
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 50
+			
+			modifier = {
+				factor = 2
+				has_trait = wrathful
+			}
+			
+			modifier = {
+				factor = 2
+				has_trait = vengeful
+			}
+		}
+	}		
+					
+}
+
+#The defender won the dominate duel, you are punished
+
+POD_diablerize.400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.400.t
+	
+	desc = {
+		triggered_desc = {
+			trigger = { scope:diablerie_mesmerize_duel = flag:defender_won }	
+			desc = POD_diablerize.400.desc.success
+		}
+		triggered_desc = {
+			trigger = { scope:diablerie_mesmerize_command = flag:leave }
+				desc = POD_diablerize.400.desc.leave
+		}
+		triggered_desc = {
+			trigger = { scope:diablerie_mesmerize_command = flag:favor }
+				desc = POD_diablerize.400.desc.favor
+		}
+		triggered_desc = {
+			trigger = { scope:diablerie_mesmerize_command = flag:prison }
+				desc = POD_diablerize.400.desc.prison
+		}
+		triggered_desc = {
+			trigger = { scope:diablerie_mesmerize_command = flag:die  }
+				desc = POD_diablerize.400.desc.die
+		}
+	}	
+
+	theme = dominate
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_diablerize.400.option.a.success
+		trigger = {
+			scope:diablerie_mesmerize_duel = flag:defender_won
+		}
+		
+		scope:attacker = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+		
+		if = { 
+			limit = {
+				scope:diablerie_mesmerize_command = flag:favor
+			}
+			scope:defender = {
+				POD_dominate_effect = { TARGET = scope:attacker }
+			}
+			#custom_tooltip = POD_diablerize.400.desc.favor.tt
+		}
+		
+		if = { 
+			limit = {
+				scope:diablerie_mesmerize_command = flag:prison
+			}
+			scope:defender = {
+				imprison = {
+					target = scope:attacker
+					type = dungeon
+				}		
+			}
+		}
+		
+		if = { 
+			limit = {
+				scope:diablerie_mesmerize_command = flag:die
+			}
+			scope:attacker = {
+				death = {
+					death_reason = death_sun
+				}
+			}
+		}
+	}
+		
+}
+
+
+#The final duel
+POD_diablerize.1000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.1000.t
+	desc =  POD_diablerize.1000.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}		
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		 name = POD_diablerize.1000.option.a	
+		
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = scope:attacker
+			SC_ATTACKER = scope:attacker
+			SC_DEFENDER = scope:defender
+			FATALITY = no
+			FIXED = no
+			LOCALE = throne_room
+			OUTPUT_EVENT = POD_diablerize.1001
+			INVALIDATION_EVENT = tribal.1022
+			}			
+	}
+	
+}
+
+#Who won the final duel?
+POD_diablerize.1001 = {
+	hidden = yes
+
+	immediate = {
+		# If any clothes were stripped, put 'em back on.
+		single_combat_clean_shirtlessness_effect = {
+			ATTACKER = scope:attacker
+			DEFENDER = scope:defender
+		}
+		# Did scope:attacker win?
+		if = {
+			limit = { scope:sc_victor = scope:attacker }
+			# Apply effects; we do this separately so that there's not a weird day's delay.
+			#fp1_tbc_non_lethal_results_effect = yes
+			# And send out the ending events.
+			
+			#Reroot to the old diablerie finish
+			scope:attacker = {
+				trigger_event = {
+					id = POD_diablerize.600
+					days = 1
+				}
+			}
+			
+			#The defender isn't warned yet, it's an AI anyway so far
+			#scope:defender = {
+			#	trigger_event = {
+			#		id = fp1_tbc.0121
+			#		days = 1
+			#	}
+			#}
+		}
+		# Or was it scope:defender?
+		else_if = {
+			limit = { scope:sc_victor = scope:defender }
+			# If scope:attacker is still alive, they gain stress.
+			#if = {
+			#	limit = {
+			#		scope:attacker = { is_alive = yes }
+			#	}
+			#	fp1_tbc_actor_defeated_effect = { TBC_LOSER = scope:attacker }
+			#}
+			# And send out the ending events.
+			
+			#scope:attacker = {
+			#	trigger_event = {
+			#		id = 
+			#		days = 1
+			#	}
+			#}
+			
+			#The defender will choose what to do with the loser
+			scope:defender = {
+				trigger_event = POD_diablerize.601
+				}
+			}
+	}	
+}
+
+#The defender won the final duel, what to do with the attacker?
+#For now they will just kill you
+POD_diablerize.601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.601.t
+	desc =  POD_diablerize.601.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:attacker
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}		
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		 name = POD_diablerize.601.option.a	
+		
+			scope:attacker = {
+				 death = {
+	        		 death_reason = death_fight
+					 killer = scope:defender
+	        	 }
+			 }
+		 }					
+}
+
+#You got caught doing diablerie on a prisoner 
+POD_diablerize.602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_diablerize.602.t
+	desc =  POD_diablerize.602.desc		
+	theme = vampire
+	
+	cooldown = { days = 15 }
+	
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		NOT = { has_trait = diablerist }
+		NOT = { has_perk = fomori_deception_perk }
+	}
+
+	option = {
+		 name = POD_diablerize.602.option.a	
+		
+		random_secret = {
+			limit = {
+				secret_type = secret_diablerist
+			}
+			remove_secret = yes
+		}
+		add_trait = diablerist	
+	}
+
+	option = {
+		 name = POD_diablerize.602.option.b
+		
+		remove_short_term_gold = {
+			value = 200
+			multiply = var:diablere_sum
+		}
+		add_prestige = {
+			value = -250
+			multiply = var:diablere_sum
+		}
+		add_stress = {
+			value = medium_stress_gain
+			multiply = var:diablere_sum
+		}
+	}
+
+	option = {
+		 name = POD_diablerize.602.option.c	
+		
+		add_tyranny = {
+			value = 40
+			multiply = var:diablere_sum
+		}
+	}
+	
+	after = {
+		remove_variable = diablere_sum
+	}
+}	

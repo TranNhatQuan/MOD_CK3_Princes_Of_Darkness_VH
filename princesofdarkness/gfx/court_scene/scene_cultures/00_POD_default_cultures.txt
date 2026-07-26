@@ -1,0 +1,232 @@
+﻿steppe = {
+	trigger = {
+		POD_uses_steppe_throne_room = yes
+	}
+}
+
+chinese = {
+	trigger = {
+		POD_uses_chinese_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+	}
+}
+
+japanese = {
+	trigger = {
+		POD_uses_japanese_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+	}
+}
+
+southeast_asia = {
+	trigger = {
+		POD_uses_SEA_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+		POD_uses_japanese_throne_room = no
+	}
+}
+
+mediterranean = {
+	trigger = {
+		POD_uses_mediterranean_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+		POD_uses_japanese_throne_room = no
+		POD_uses_SEA_throne_room = no
+	}
+}
+
+mena = {
+	trigger = {
+		POD_uses_mena_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+		POD_uses_japanese_throne_room = no
+		POD_uses_SEA_throne_room = no
+		POD_uses_mediterranean_throne_room = no
+	}
+}
+
+western = {
+	trigger = {
+		POD_uses_western_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+		POD_uses_japanese_throne_room = no
+		POD_uses_SEA_throne_room = no
+		POD_uses_mediterranean_throne_room = no
+		POD_uses_mena_throne_room = no
+	}
+}
+
+indian = {
+	trigger = {
+		# used as the fallback since it doesn't require any DLC
+		#POD_uses_indian_throne_room = yes
+		POD_can_use_non_CFP_throne_rooms = yes
+		
+		POD_uses_steppe_throne_room = no
+		POD_uses_chinese_throne_room = no
+		POD_uses_japanese_throne_room = no
+		POD_uses_SEA_throne_room = no
+		POD_uses_mediterranean_throne_room = no
+		POD_uses_mena_throne_room = no
+		POD_uses_western_throne_room = no
+	}
+}
+
+## CFP
+papal = {
+	trigger = {
+		POD_CFP_has_graphical_papal_culture_group_trigger = yes
+		POD_CFP_has_graphical_byzantine_culture_group_trigger = no
+	}
+}
+
+hre = {
+	trigger = {
+		POD_CFP_has_graphical_hre_culture_group_trigger = yes
+	}
+}
+
+byzantine = {
+	trigger = {
+		POD_CFP_has_graphical_byzantine_culture_group_trigger = yes
+		OR = {
+			faith = { is_POD_christian_religion_trigger = yes }
+			faith = { is_POD_michaelite_religion_trigger = yes }
+		}
+	}
+}
+
+byzantine_mena = {
+	trigger = {
+		POD_CFP_has_graphical_byzantine_culture_group_trigger = yes
+		faith = { is_POD_muslim_religion_trigger = yes }
+	}
+}
+
+byzantine_pagan = {
+	trigger = {
+		POD_CFP_has_graphical_byzantine_culture_group_trigger = yes
+		faith = { is_POD_christian_religion_trigger = no }
+		faith = { is_POD_muslim_religion_trigger = no }
+	}
+}
+
+norse = {
+	trigger = {
+		POD_CFP_has_graphical_norman_culture_group_trigger = no
+		POD_CFP_has_graphical_norse_culture_group_trigger = yes
+		NOT = { religion = religion:codeoftremere_religion }
+		#has_government = tribal_government
+		#exists = capital_province
+		#capital_province = { geographical_region = world_europe_north }
+	}
+}
+
+norman = {
+	trigger = {
+		POD_CFP_has_graphical_norman_culture_group_trigger = yes
+	}
+}
+
+goidelic = {
+	trigger = {
+		POD_CFP_has_graphical_goidelic_culture_group_trigger = yes
+	}
+}
+
+iberian = {
+	trigger = {
+		POD_CFP_has_graphical_iberian_culture_group_trigger = yes
+		POD_CFP_has_graphical_papal_culture_group_trigger = no
+		faith = { is_POD_muslim_religion_trigger = no }
+	}
+}
+
+andalusian = {
+	trigger = {
+		POD_CFP_has_graphical_iberian_culture_group_trigger = yes
+		faith = { is_POD_muslim_religion_trigger = yes }
+	}
+}
+
+west_african = {
+	trigger = {
+		POD_CFP_has_graphical_west_african_culture_group_trigger = yes
+		faith = { is_POD_muslim_religion_trigger = no }
+	}
+}
+
+east_african = {
+	trigger = {
+		POD_CFP_has_graphical_east_african_culture_group_trigger = yes
+		faith = { is_POD_muslim_religion_trigger = no }
+	}
+}
+
+# Not currently in use 
+
+#coven = {
+#	trigger = {
+#		exists = global_var:coven_court_enabled
+#		has_graphical_coven_court_trigger = yes
+#	}
+#}
+#
+#catacomb = {
+#	trigger = {
+#		exists = capital_county
+#		capital_county.culture = {
+#			has_graphical_catacomb_culture_trigger = yes
+#		}
+#	}
+#}
+#
+#cavern = {
+#	trigger = {
+#		exists = capital_county
+#		capital_county.culture = {
+#			has_graphical_cavern_culture_trigger = yes
+#		}
+#	}
+#}
+#
+#undercity = {
+#	trigger = {
+#		exists = capital_county
+#		capital_county.culture = {
+#			has_graphical_undercity_culture_trigger = yes
+#		}
+#	}
+#}
+#
+#flesh = {
+#	trigger = {
+#		exists = capital_county
+#		capital_county.culture = {
+#			has_graphical_flesh_culture_trigger = yes
+#		}
+#	}
+#}
+
+chinese_alt = { 
+	trigger = {
+		always = no # This is by design, we don't want an ahistorical throne room to spawn for players, in the future we might add a game rule though
+	}
+}

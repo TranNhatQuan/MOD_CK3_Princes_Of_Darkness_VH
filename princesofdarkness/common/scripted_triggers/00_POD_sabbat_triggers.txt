@@ -1,0 +1,148 @@
+﻿POD_can_be_cardinal_candidate_trigger = {
+	religion = religion:sabbat_religion
+	POD_is_sabbat_regent_trigger = no
+	POD_is_cardinal_trigger = no
+	has_trait = vampire
+	NOT = { has_trait = torpor }
+	NOT = { has_trait = excommunicated }
+	is_alive = yes
+}
+
+POD_is_sabbat_regent_trigger = {
+	custom_description = {
+		text = is_sabbat_regent
+		religion:sabbat_religion.var:regent ?= this
+	}
+}
+
+POD_liege_is_sabbat_regent_trigger = {
+	custom_tooltip = {
+		text = liege_is_sabbat_regent
+		NOT = { this = liege }
+		OR = {
+			religion:sabbat_religion.var:regent ?= liege
+			religion:sabbat_religion.var:regent ?= liege.liege
+			religion:sabbat_religion.var:regent ?= liege.liege.liege
+		}
+	}
+}
+
+POD_is_cardinal_trigger = {
+	custom_description = {
+		text = is_cardinal
+		religion:sabbat_religion = {
+			is_target_in_variable_list = { 
+				name = cardinals
+				target = prev
+			}
+		}
+	}
+}
+
+POD_is_black_hand_trigger = {
+	has_character_modifier = black_hand_membership_modifier
+}
+
+POD_is_sabbat_region_trigger = {
+	save_temporary_scope_value_as = { 
+		name = region_loca 
+		value = flag:$REGION$ 
+	}
+	custom_tooltip = {
+		text = cardinal_sabbat_region_tt
+		religion:sabbat_religion = {
+			any_in_list = {
+				variable = cardinals
+				var:cardinal_region = flag:$REGION$
+			}
+		}
+	}
+}
+
+POD_potential_sabbat_region_trigger = {
+	custom_tooltip = {
+		text = sabbat_$REGION$_tt
+		any_county_in_region = {
+			region = $REGION$
+			percent >= 0.33
+			POD_is_sabbat_county_trigger = yes
+		}
+	}
+}
+
+POD_is_sabbat_county_trigger = {
+	OR = {
+		religion = religion:sabbat_religion
+		holder = { religion = religion:sabbat_religion }
+	}
+}
+
+POD_war_region_have_cardinal_trigger = {
+	trigger_if = {
+		limit = { scope:attacker = { POD_is_sabbat_regent_trigger = no } }
+		switch = {
+			trigger = scope:attacker.var:cardinal_region
+			flag:POD_region_greece = { capital_province = { geographical_region = POD_region_greece } }
+			flag:custom_sub_saharan_africa_immediate = { capital_province = { geographical_region = custom_sub_saharan_africa_immediate } }
+			flag:ghw_region_balkans = { capital_province = { geographical_region = ghw_region_balkans } }
+			flag:ghw_region_baltic = { capital_province = { geographical_region = ghw_region_baltic } }
+			flag:ghw_region_central_european = { capital_province = { geographical_region = ghw_region_central_european } }
+			flag:ghw_region_russia = { capital_province = { geographical_region = ghw_region_russia } }
+			flag:world_africa_north = { capital_province = { geographical_region = world_africa_north } }
+			flag:world_asia_minor = { capital_province = { geographical_region = world_asia_minor } }
+			flag:world_europe_north = { capital_province = { geographical_region = world_europe_north } }
+			flag:world_europe_south_italy = { capital_province = { geographical_region = world_europe_south_italy } }
+			flag:world_europe_west_britannia = { capital_province = { geographical_region = world_europe_west_britannia } }
+			flag:world_europe_west_francia = { capital_province = { geographical_region = world_europe_west_francia } }
+			flag:world_europe_west_germania = { capital_province = { geographical_region = world_europe_west_germania } }
+			flag:world_europe_west_iberia = { capital_province = { geographical_region = world_europe_west_iberia } }
+			flag:world_india = { capital_province = { geographical_region = world_india } }
+			flag:world_middle_east = { capital_province = { geographical_region = world_middle_east } }
+			flag:world_steppe = { capital_province = { geographical_region = world_steppe } }
+		}
+	}
+}
+
+POD_title_region_have_cardinal_trigger = {
+	trigger_if = {
+		limit = { scope:actor = { POD_is_sabbat_regent_trigger = no } }
+		switch = {
+			trigger = scope:actor.var:cardinal_region
+			flag:POD_region_greece = { title_capital_county.title_province = { geographical_region = POD_region_greece } }
+			flag:custom_sub_saharan_africa_immediate = { title_capital_county.title_province = { geographical_region = custom_sub_saharan_africa_immediate } }
+			flag:ghw_region_balkans = { title_capital_county.title_province = { geographical_region = ghw_region_balkans } }
+			flag:ghw_region_baltic = { title_capital_county.title_province = { geographical_region = ghw_region_baltic } }
+			flag:ghw_region_central_european = { title_capital_county.title_province = { geographical_region = ghw_region_central_european } }
+			flag:ghw_region_russia = { title_capital_county.title_province = { geographical_region = ghw_region_russia } }
+			flag:world_africa_north = { title_capital_county.title_province = { geographical_region = world_africa_north } }
+			flag:world_asia_minor = { title_capital_county.title_province = { geographical_region = world_asia_minor } }
+			flag:world_europe_north = { title_capital_county.title_province = { geographical_region = world_europe_north } }
+			flag:world_europe_south_italy = { title_capital_county.title_province = { geographical_region = world_europe_south_italy } }
+			flag:world_europe_west_britannia = { title_capital_county.title_province = { geographical_region = world_europe_west_britannia } }
+			flag:world_europe_west_francia = { title_capital_county.title_province = { geographical_region = world_europe_west_francia } }
+			flag:world_europe_west_germania = { title_capital_county.title_province = { geographical_region = world_europe_west_germania } }
+			flag:world_europe_west_iberia = { title_capital_county.title_province = { geographical_region = world_europe_west_iberia } }
+			flag:world_india = { title_capital_county.title_province = { geographical_region = world_india } }
+			flag:world_middle_east = { title_capital_county.title_province = { geographical_region = world_middle_east } }
+			flag:world_steppe = { title_capital_county.title_province = { geographical_region = world_steppe } }
+		}
+	}
+}
+
+POD_is_sabbat_regent_region_trigger = {
+	religion:sabbat_religion.var:regent ?= {
+		var:cardinal_region = flag:$REGION$
+	}
+}
+
+POD_is_sabbat_my_region_trigger = {
+	var:cardinal_region ?= flag:$REGION$
+}
+
+POD_has_higher_sabbat_status_trigger = {
+	custom_description = {
+		text = has_higher_sabbat_status
+		object = $CHARACTER$
+		sabbat_status > $CHARACTER$.sabbat_status
+	}
+}

@@ -1,0 +1,134 @@
+﻿namespace = POD_show_known_true_names_events
+
+#events for displaying known ren and showing what you can do with them
+#POD_show_known_true_names_events.100 = main menu and shows known and unknown ren
+#POD_show_known_true_names_events.110 = shows info on plants and fungi
+#POD_show_known_true_names_events.130 = shows info on animals
+#POD_show_known_true_names_events.140 = shows info on metals
+
+POD_show_known_true_names_events.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_show_known_true_names_events.100.t 	
+	
+	theme = mummy
+	override_background = { reference = shader_event_deep_umbra }
+	
+	widget = {
+		gui = "POD_shader_event_deep_umbra"
+		container = "background_shader_vfx_container"
+	}
+	
+	# left_portrait = {
+	# 	character = root
+	# 	animation = thinking
+	# }
+
+	desc = POD_show_known_true_names_events.100.desc
+
+	option = {
+		name = POD_show_known_true_names_events.100.option.a #OK
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.100.option.b #learn more about plants
+		trigger_event = POD_show_known_true_names_events.110
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.100.option.d #learn more about animals
+		trigger_event = POD_show_known_true_names_events.130
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.100.option.e #learn more about metals
+		trigger_event = POD_show_known_true_names_events.140
+	}
+}
+
+POD_show_known_true_names_events.110 = { #plants and fungi
+	type = character_event
+	content_source = dlc_POD
+	title = POD_show_known_true_names_events.110.t 
+	desc = 	POD_show_known_true_names_events.110.desc 
+	theme = mummy
+	override_background = { reference = shader_event_deep_umbra }
+	
+	widget = {
+		gui = "POD_shader_event_deep_umbra"
+		container = "background_shader_vfx_container"
+	}
+	
+	# left_portrait = {
+	# 	character = root
+	# 	animation = thinking
+	# }
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.a # Exit
+		
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.b #return to main menu
+		trigger_event = POD_show_known_true_names_events.100
+	}
+}
+
+POD_show_known_true_names_events.130 = { #animals
+	type = character_event
+	content_source = dlc_POD
+	title = POD_show_known_true_names_events.130.t 
+	desc = 	POD_show_known_true_names_events.130.desc
+	theme = mummy
+	override_background = { reference = shader_event_deep_umbra }
+	
+	widget = {
+		gui = "POD_shader_event_deep_umbra"
+		container = "background_shader_vfx_container"
+	}
+	
+	# left_portrait = {
+	# 	character = root
+	# 	animation = thinking
+	# }
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.a # Exit
+		
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.b #return to main menu
+		trigger_event = POD_show_known_true_names_events.100
+	}
+}
+
+POD_show_known_true_names_events.140 = { #metals
+	type = character_event
+	content_source = dlc_POD
+	title = POD_show_known_true_names_events.140.t 
+	desc = 	POD_show_known_true_names_events.140.desc
+	theme = mummy
+	override_background = { reference = shader_event_deep_umbra }
+	
+	widget = {
+		gui = "POD_shader_event_deep_umbra"
+		container = "background_shader_vfx_container"
+	}
+	
+	# left_portrait = {
+	# 	character = root
+	# 	animation = thinking
+	# }
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.a # Exit
+		
+	}
+
+	option = {
+		name = POD_show_known_true_names_events.110.option.b #return to main menu
+		trigger_event = POD_show_known_true_names_events.100
+	}
+}

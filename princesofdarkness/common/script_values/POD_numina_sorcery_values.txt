@@ -1,0 +1,158 @@
+﻿POD_sorcery_success_chance = {
+	value = 15
+	add = learning
+	if = { limit = { ROOT != scope:target } subtract = scope:target.learning }
+
+	multiply = {
+		value = {
+			value = POD_numina_sorcery_perk_amount
+			divide = 50
+			add = 1
+		}
+	}
+
+	if = { 
+		limit = { 
+			scope:target = { has_perk = wisdom_of_isis_perk }
+			ROOT != scope:target
+		} 
+		divide = 2 
+	}
+
+	min = 0
+	max = 99
+}
+POD_sorcery_success_chance_negated = {
+	value = POD_sorcery_success_chance
+    	multiply = -1
+}
+POD_numina_sorcery_perk_amount = {
+	add = sorcery_lifestyle_perk_points
+	add = "this.perks_in_tree(numina_alchemy)"
+	add = "this.perks_in_tree(numina_conjuration)"
+	add = "this.perks_in_tree(numina_conveyance)"
+	add = "this.perks_in_tree(numina_divination)"
+	add = "this.perks_in_tree(numina_enchantment)"
+	add = "this.perks_in_tree(numina_ephemera)"
+	add = "this.perks_in_tree(numina_fascination)"
+	add = "this.perks_in_tree(numina_fortune)"
+	add = "this.perks_in_tree(numina_healing)"
+	add = "this.perks_in_tree(numina_hellfire)"
+	add = "this.perks_in_tree(numina_illusion)"
+	add = "this.perks_in_tree(numina_necromancy)"
+	add = "this.perks_in_tree(numina_oneiromancy)"
+	add = "this.perks_in_tree(numina_quintessence_manipulation)"
+	add = "this.perks_in_tree(numina_shadows)"
+	add = "this.perks_in_tree(numina_shapeshifting)"
+	add = "this.perks_in_tree(numina_weather_control)"
+}
+
+POD_numina_sorcery_alchemy_skill_potion_requirement = 15
+
+POD_numina_sorcery_additional_perk_cost = {
+	value = 0
+	if = {
+		limit = { has_variable = POD_numina_sorcery_additional_perk_cost }
+		add = var:POD_numina_sorcery_additional_perk_cost
+	}
+}
+
+POD_numina_sorcery_perk_cost_per_tree = {
+	if = {
+		limit = { has_game_rule = pod_sorcery_additional_cost_per_path_1 }
+		value = 1
+	}
+	else_if = {
+		limit = { has_game_rule = pod_sorcery_additional_cost_per_path_2 }
+		value = 2
+	}
+	else = {
+		value = 0
+	}
+}
+
+##### Bestial Form levels
+
+POD_shapeshift_bestial_form_points = {
+	value = 0
+	switch = {
+		trigger = has_perk
+		numina_shapeshifting_6_perk = { value = 15 } # +5
+		numina_shapeshifting_5_perk = { value = 10 } # +2
+		numina_shapeshifting_4_perk = { value = 8 }  # +4
+		numina_shapeshifting_3_perk = { value = 4 }  # +2
+		numina_shapeshifting_2_perk = { value = 2 }  # +2
+	}
+	if = { limit = { has_variable = POD_bestial_form_claws } subtract = var:POD_bestial_form_claws }
+	if = { limit = { has_variable = POD_bestial_form_horns } subtract = var:POD_bestial_form_horns }
+	if = { limit = { has_variable = POD_bestial_form_eyes } subtract = var:POD_bestial_form_eyes }
+	if = { limit = { has_variable = POD_bestial_form_hide } subtract = var:POD_bestial_form_hide }
+	if = { limit = { has_variable = POD_bestial_form_wings } subtract = var:POD_bestial_form_wings }
+}
+
+POD_shapeshift_bestial_form_claws_scale = {
+	value = 1
+	if = { limit = { has_variable = POD_bestial_form_claws } value = var:POD_bestial_form_claws }
+}
+POD_shapeshift_bestial_form_horns_scale = {
+	value = 1
+	if = { limit = { has_variable = POD_bestial_form_horns } value = var:POD_bestial_form_horns }
+}
+POD_shapeshift_bestial_form_eyes_scale = {
+	value = 1
+	if = { limit = { has_variable = POD_bestial_form_eyes } value = var:POD_bestial_form_eyes }
+}
+POD_shapeshift_bestial_form_hide_scale = {
+	value = 1
+	if = { limit = { has_variable = POD_bestial_form_hide } value = var:POD_bestial_form_hide }
+}
+POD_shapeshift_bestial_form_wings_scale = {
+	value = 1
+	if = { limit = { has_variable = POD_bestial_form_wings } value = var:POD_bestial_form_wings }
+}
+
+##### Spell costs
+# using splat-agnostic values ("mana bar" goes from 0-10)
+# character scope
+
+# Conjuration
+sorcery_summon_pet_cost = 2
+sorcery_summon_artifact_cost = 4
+sorcery_summon_character_cost = 5
+sorcery_summon_demon_cost = 5
+
+# Conveyance
+sorcery_personal_teleport_cost = 2
+sorcery_army_teleport_cost = 3
+
+# Divination
+sorcery_scry_for_secrets_cost = 2
+sorcery_scry_for_schemes_cost = 3
+sorcery_predict_schemes_cost = 4
+
+# Ephemera
+sorcery_false_chiminage_cost = 5
+
+# Fascination
+sorcery_entrance_cost = 3
+sorcery_popular_love_cost = 5
+sorcery_enthrall_cost = 4
+
+# Fortune
+sorcery_curse_cost = 3
+sorcery_bless_cost = 4
+sorcery_dowsing_cost = 4
+
+# Healing
+sorcery_cure_cost = 2
+sorcery_heal_cost = 2
+
+# Oneiromancy
+sorcery_invade_dreams_cost = 2
+
+# Weather Control
+sorcery_send_flow_cost = 5
+sorcery_send_storm_cost = 5
+sorcery_send_earthquake_cost = 5
+sorcery_send_flood_cost = 5
+sorcery_send_drought_cost = 5

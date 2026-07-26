@@ -1,0 +1,82 @@
+﻿l_english:
+  combat_event.0003.t:0 "Bất Bại"
+  combat_event.0003.desc.opening:0 "Một trăm trận, một trăm chiến thắng!"
+  combat_event.0003.desc.commander:0 "Với chiến thắng mới nhất trước [enemy_commander.GetTitledFirstName] và binh lính của [enemy_commander.GetHerHis],"
+  combat_event.0003.desc.no_commander:0 "Với chiến thắng mới nhất trong trận chiến"
+  combat_event.0003.desc.ending:0 "Cuối cùng Ta đã đạt được cột mốc trọng đại này.\n\nChưa từng thua trận nào, lâu nay vẫn có những lời đồn rằng Ta bất bại, một lực lượng vô đối mà không ai có thể đánh bại. Giờ đây, dường như điều đó thực sự có thể là sự thật..."
+  combat_event.0003.desc.alt_ending:0 "Cuối cùng Ta đã đạt được cột mốc trọng đại này.\n\nVới mỗi trận thắng, những lời đồn về uy lực của Ta càng lớn. Giờ đây khi thành tích của Ta vượt cả truyền thuyết, Ta có thể tự hào là bất bại, một lực lượng vô đối mà không ai có thể khuất phục."
+  combat_event.0003.a:0 "Hãy lan truyền tài năng của ta khắp nơi!"
+  combat_event.0003.b:0 "Ta không được kiêu ngạo. Chỉ một mũi tên lạc là đủ."
+  combat_event.0003.b.zealous:0 "Ta chỉ là [ROOT.Char.GetFaith.HighGodNamePossessive] [ROOT.Char.Custom('signature_weapon')], chỉ thực hiện ý muốn của [ROOT.Char.GetFaith.WarGodHerHis|U]."
+
+  combat_event.0004.t:0 "Hạ Gục Khổng Lồ"
+  combat_event.0004.desc:0 "[enemy_commander.Custom2('MyCharacterIntroduction', ROOT.Char)|U] là một vị thống soái huyền thoại, nổi tiếng khắp thế giới vì đã chinh chiến hơn một trăm trận trong cuộc đời của [enemy_commander.GetHerHis] mà không để thua một trận nào.\n\nMặc dù vậy, ta đã đánh bại [enemy_commander.GetHerHim] trên chiến trường ngày hôm nay và chứng minh cho cả thế giới thấy rằng [enemy_commander.GetSheHe] không phải là bất bại!"
+  combat_event.0004.a:0 "Ngay cả huyền thoại cũng gục ngã trước [ROOT.Char.Custom('signature_weapon')] của ta!"
+  combat_event.0004.b:0 "Nếu [enemy_commander.GetSheHe] có thể bị đánh bại, thì ta cũng vậy."
+  combat_event.0004.b.zealous:0 "Ta cảm tạ [ROOT.GetCharacter.GetFaith.WarGodName] vì đã hạ nhục [enemy_commander.GetWomanMan] đó."
+
+  combat_event.0005.t:0 "Hạ Gục Khổng Lồ"
+  combat_event.0005.desc:0 "Hôm nay điều không tưởng đã xảy ra — Ta bị đánh bại trong trận chiến bởi [friendly_commander.Custom2('MyCharacterIntroduction', ROOT.Char)]! Ta thực sự nghĩ rằng mình không thể thua, nhưng giờ đây Ta đã bị hạ gục và nhún nhường.\n\nDanh tiếng của Ta vẫn còn phần nào, dù [friendly_commander.GetFirstName] đã lấy đi một phần vinh quang và danh tiếng của Ta."
+  combat_event.0005.a:0 "[friendly_commander.GetSheHe|U] xứng đáng được công nhận vì đã đánh bại một kẻ như Ta."
+  combat_event.0005.b:0 "Không thể chấp nhận! [friendly_commander.GetSheHe|U] sẽ hối hận vì đã đụng đến ta!"
+  combat_event.0005.message:0 "Tức giận vì thất bại của [enemy_commander.GetHerHis] trong trận chiến, [enemy_commander.GetTitledFirstName] đã thề sẽ trả thù ta!"
+
+ # Combatants Taken Prisoner
+  combat_event.1002.pow_message.t:0 "Binh Sĩ Địch Bị Bắt"
+  combat_event.1002.pow_message.desc.single:2 "Quân đội của Ngài đã bắt được [primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U]"
+  combat_event.1002.pow_message.desc.double:2 "Quân đội của Ngài đã bắt được [primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [secondary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)]"
+  combat_event.1002.pow_message.desc.multiple:2 "Quân đội của Ngài đã bắt được [primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [ROOT.Var('num_other_relevant_captured_combatants').GetValue|V0] người khác"
+  combat_event.1002.pow_message.desc.end:0 "sau khi chiến thắng trận [combat_location.GetName]!"
+
+  combat_event.1003.pow_message.t:0 "Binh Sĩ Đồng Minh Bị Bắt"
+  combat_event.1003.pow_message.desc.single:1 "[primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U] bị bắt làm [prisoner_of_war|E]"
+  combat_event.1003.pow_message.desc.double:1 "[primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [secondary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)] bị bắt làm [prisoners_of_war|E]"
+  combat_event.1003.pow_message.desc.multiple:1 "[primary_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [ROOT.Var('num_other_relevant_captured_combatants').GetValue|V0] người khác bị bắt làm [prisoners_of_war|E]"
+  combat_event.1003.pow_message.desc.end:1 "bởi kẻ thù [combat_winner.GetTitledFirstName] sau trận [battle|E] ở [combat_location.GetName]!"
+
+  combat_event.1004.pow_message.t:0 "[ROOT.Char.Custom2('RelationToMeShort', primary_prisoner)|U] Bị Bắt"
+  combat_event.1004.pow_message.desc.end:1 "bởi [combat_winner.Custom2('YourCharacterIntroduction', ROOT.Char)] sau khi [combat_winner.GetSheHe] thắng trận [battle|E] ở [combat_location.GetName]!"
+
+  combat_event.1005.pow_toast.t:1 "Binh Sĩ Địch Bị Bắt"
+  combat_event.1005.pow_toast.desc:2 "Quân đội của Ngài đã bắt [valuable_prisoner.Custom2('NamePossessiveCharacterIntroduction', primary_combat_loser)] làm [prisoner_of_war|E] trong trận [battle|E] ở [combat_location.GetName]!"
+  combat_event.1005.pow_toast.desc.primary:2 "Quân đội của Ngài đã bắt kẻ thù [valuable_prisoner.GetTitledFirstName] làm [prisoner_of_war|E] trong trận [battle|E] ở [combat_location.GetName]!"
+  combat_event.1006.pow_toast.t:1 "Người Thừa Kế Bị Bắt"
+  combat_event.1006.pow_toast.desc:2 "[combat_winner.GetTitledFirstName] đã bắt [valuable_prisoner.Custom2('YourCharacterIntroduction', ROOT.Char)] làm [prisoner_of_war|E] sau trận [battle|E] ở [combat_location.GetName]!"
+  combat_event.1007.pow_toast.t:0 "$combat_event.1005.pow_toast.t$"
+  combat_event.1007.pow_toast_primary.t:0 "Lãnh Đạo Quân Địch Bị Bắt"
+  combat_event.1007.pow_toast.desc:1 "[combat_winner.GetTitledFirstName] đã bắt [valuable_prisoner.Custom2('NamePossessiveCharacterIntroduction', primary_combat_loser)] làm [prisoner_of_war|E] sau trận [battle|E] ở [combat_location.GetName]!"
+  combat_event.1007.pow_toast.desc.primary:2 "[combat_winner.GetTitledFirstName] đã bắt kẻ thù [valuable_prisoner.GetTitledFirstName] làm [prisoner_of_war|E] sau trận [battle|E] ở [combat_location.GetName]!"
+
+ # Combatants Slain
+  combat_event.1012.slain_message.t:0 "Binh Sĩ Địch Bị Giết"
+  combat_event.1012.slain_message.desc.single:3 "Quân đội của Ngài đã giết [primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U]"
+  combat_event.1012.slain_message.desc.double:3 "Quân đội của Ngài đã giết [primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [secondary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)]"
+  combat_event.1012.slain_message.desc.multiple:3 "Quân đội của Ngài đã giết [primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [ROOT.Var('num_other_relevant_slain_combatants').GetValue|V0] người khác"
+  combat_event.1012.slain_message.desc.end:1 "trong trận [battle|E] ở [combat_location.GetName]!"
+
+  combat_event.1013.slain_message.t:0 "Binh Sĩ Đồng Minh Bị Giết"
+  combat_event.1013.slain_message.desc.single:1 "[primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U] đã bị"
+  combat_event.1013.slain_message.desc.double:1 "[primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [secondary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)] đã bị"
+  combat_event.1013.slain_message.desc.multiple:1 "[primary_deceased.Custom2('YourCharacterIntroduction', ROOT.Char)|U] và [ROOT.Var('num_other_relevant_slain_combatants').GetValue|V0] người khác đã bị"
+  combat_event.1013.slain_message.desc.end:1 "giết trong trận [battle|E] ở [combat_location.GetName]!"
+
+  combat_event.1014.slain_message.t:1 "[ROOT.Char.Custom2('RelationToMeShort', primary_deceased)|U] Bị Giết Trong Trận Chiến"
+
+ # Slain/captured knight event strings for use in battle events (after the battle).
+  combatant_captured_in_battle_friendly_player:1 "Ngài đã bắt được [TARGET_CHARACTER.GetUINameNoTooltip] sau trận chiến!"
+  combatant_captured_in_battle_friendly:0 "[CHARACTER.GetUINameNoTooltip] đã bắt [TARGET_CHARACTER.GetUINameNoTooltip] sau trận chiến!"
+  combatant_captured_in_battle_enemy_player:1 "Ngài đã bị [CHARACTER.GetUINameNoTooltip] bắt sau trận chiến!"
+  combatant_captured_in_battle_enemy:0 "[TARGET_CHARACTER.GetUINameNoTooltip] đã bị [CHARACTER.GetUINameNoTooltip] bắt sau trận chiến!"
+
+  combatant_killed_in_battle_friendly_player:1 "Ngài đã giết [TARGET_CHARACTER.GetUINameNoTooltip] khi [TARGET_CHARACTER.GetSheHe] rút lui khỏi trận chiến!"
+  combatant_killed_in_battle_friendly:0 "[CHARACTER.GetUINameNoTooltip] đã giết [TARGET_CHARACTER.GetUINameNoTooltip] khi [CHARACTER.GetSheHe] rút lui khỏi trận chiến!"
+  combatant_killed_in_battle_enemy_player:1 "Ngài đã bị giết bởi [CHARACTER.GetUINameNoTooltip] trong lúc rút lui!"
+  combatant_killed_in_battle_enemy:0 "[TARGET_CHARACTER.GetUINameNoTooltip] đã bị giết bởi [CHARACTER.GetUINameNoTooltip] trong lúc rút lui!"
+
+  combatant_killed_in_battle_no_killer_friendly_player:1 "Một trong những binh sĩ của Ngài đã giết [TARGET_CHARACTER.GetUINameNoTooltip] khi [TARGET_CHARACTER.GetSheHe] rút lui khỏi trận chiến!"
+  combatant_killed_in_battle_no_killer_friendly:1 "Một trong những binh sĩ của chúng ta đã giết [TARGET_CHARACTER.GetUINameNoTooltip] khi [TARGET_CHARACTER.GetSheHe] rút lui khỏi trận chiến!"
+  combatant_killed_in_battle_no_killer_enemy_player:1 "Ngài đã bị giết bởi một binh sĩ địch trong lúc rút lui!"
+  combatant_killed_in_battle_no_killer_enemy:0 "[TARGET_CHARACTER.GetUINameNoTooltip] đã bị giết bởi một binh sĩ địch trong lúc rút lui!"
+
+
+

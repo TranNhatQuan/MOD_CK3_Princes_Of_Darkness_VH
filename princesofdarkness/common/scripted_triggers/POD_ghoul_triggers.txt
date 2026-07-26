@@ -1,0 +1,80 @@
+﻿POD_is_bound_ghoul_trigger = {
+	has_trait = ghoul
+	num_of_relation_ghoul_domitor >= 1
+}
+POD_is_masterless_ghoul_trigger = {
+	has_trait = ghoul
+	num_of_relation_ghoul_domitor = 0
+}
+POD_is_bound_ghoul_of = {
+	has_trait = ghoul
+	has_relation_ghoul_domitor = $DOMITOR$
+}
+
+# task_contract scope
+POD_ghoul_mission_can_be_finished = {
+	save_temporary_scope_as = ghoul_contract
+	task_contract_employer ?= { is_alive = yes }
+	task_contract_taker = {
+		POD_is_bound_ghoul_of = { DOMITOR = prev.task_contract_employer }
+		# safeguard since contract scopes don't get deleted immediately after invalidation
+		any_character_active_contract = { scope:ghoul_contract ?= this }
+	}
+	POD_contract_has_not_expired = yes
+}
+
+POD_has_ghoul_rebellion_strength_trigger = {
+	save_temporary_scope_value_as = {
+		name = required_rebellion_strength
+		value = $VALUE$
+	}
+	custom_tooltip = {
+		text = POD_has_ghoul_rebellion_strength_trigger
+		POD_ghoul_objective_rebellion_strength >= $VALUE$
+	}
+}
+
+# argument: GENERATION
+POD_can_beg_for_ghouldom_from_generation = {
+	save_temporary_scope_value_as = {
+		name = needed_prestige_level
+		value = {
+			switch = {
+				trigger = $GENERATION$
+				3 = { value = 5 }
+				4 = { value = 5 }
+				5 = { value = 4 }
+				6 = { value = 4 }
+				7 = { value = 3 }
+				8 = { value = 3 }
+				9 = { value = 2 }
+				10 = { value = 2 }
+				fallback = { value = 1 }
+			}
+		}
+	}
+	save_temporary_scope_value_as = {
+		name = needed_total_skills
+		value = {
+			value = 10
+			switch = {
+				trigger = $GENERATION$
+				3 = { multiply = 10 }
+				4 = { multiply = 9 }
+				5 = { multiply = 8 }
+				6 = { multiply = 7 }
+				7 = { multiply = 6 }
+				8 = { multiply = 5 }
+				9 = { multiply = 4 }
+				10 = { multiply = 3 }
+				11 = { multiply = 2 }
+				fallback = { value = 1 }
+			}
+		}
+	}
+	prestige_level >= scope:needed_prestige_level
+	custom_tooltip = {
+		text = POD_beg_for_vitae_interaction_needed_total_skills
+		sum_of_all_skills_value >= scope:needed_total_skills
+	}
+}

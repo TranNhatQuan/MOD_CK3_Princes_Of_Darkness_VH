@@ -1,0 +1,77 @@
+﻿macro = {
+	description = "Return the flag name for the player's current Journey's type"
+	definition = "PlayerJourneyID"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('journey_type').GetFlagKey"
+}
+
+macro = {
+	description = "Return the flag name for the scoped Journey's type"
+	definition = "ScopedJourneyID"
+	replace_with = "Scope.Var('journey_type').GetFlagKey"
+}
+
+macro = {
+	description = "Return the flag name for the player's current Journey's phase"
+	definition = "PlayerJourneyPhase"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('phase').GetFlagKey"
+}
+
+macro = {
+	description = "Return the value of the player's current Journey's progress"
+	definition = "PlayerJourneyProgress"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('total_progress').GetValue"
+}
+
+macro = {
+	description = "Return a Province link to the player's current Journey's destination"
+	definition = "PlayerJourneyDestination"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('destination').Province"
+}
+
+macro = {
+	description = "Return a Character link to the player's current Journey's target"
+	definition = "PlayerJourneyTarget"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('target').Char"
+}
+
+macro = {
+	description = "Return an Artifact link to the player's current Journey's target"
+	definition = "PlayerJourneyArtifact"
+	replace_with = "GetPlayer.MakeScope.Var('current_journey').Var('target_artifact').Artifact"
+}
+
+macro = {
+	description = "Base macro for checking how many years this Journey has left to go (s is the planning speed script value, p is the current progress)"
+	definition = "JourneyYearsLeftBase(s,p)"
+	replace_with = "GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('total_progress',MakeScopeValue(p)).AddScope('monthly',MakeScopeValue(GetPlayer.MakeScope.ScriptValue(s))).ScriptValue('journey_progress_years')"
+}
+
+macro = {
+	description = "Base macro for checking how many months this Journey has left to go (s is the planning speed script value, p is the current progress)"
+	definition = "JourneyMonthsLeftBase(s,p)"
+	replace_with = "GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('total_progress',MakeScopeValue(p)).AddScope('monthly',MakeScopeValue(GetPlayer.MakeScope.ScriptValue(s))).ScriptValue('journey_progress_months')"
+}
+
+macro = {
+	description = "How many years does this Journey have left to go if starting from 0? (need to pass the planning speed script value as s)"
+	definition = "JourneyYearsLeft(s)"
+	replace_with = "JourneyYearsLeftBase(s,'(CFixedPoint)0')"
+}
+
+macro = {
+	description = "How many months does this Journey have left to go if starting from 0? (need to pass the planning speed script value as s)"
+	definition = "JourneyMonthsLeft(s)"
+	replace_with = "JourneyMonthsLeftBase(s,'(CFixedPoint)0')"
+}
+
+macro = {
+	description = "How many years does this Journey have left to go for the player? (need to pass the planning speed script value as s)"
+	definition = "JourneyYearsLeftCurrent(s)"
+	replace_with = "JourneyYearsLeftBase(s,GetPlayer.MakeScope.Var('current_journey').Var('total_progress').GetValue)"
+}
+
+macro = {
+	description = "How many months does this Journey have left to go for the player? (need to pass the planning speed script value as s)"
+	definition = "JourneyMonthsLeftCurrent(s)"
+	replace_with = "JourneyMonthsLeftBase(s,GetPlayer.MakeScope.Var('current_journey').Var('total_progress').GetValue)"
+}

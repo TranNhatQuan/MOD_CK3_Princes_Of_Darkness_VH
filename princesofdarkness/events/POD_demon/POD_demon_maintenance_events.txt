@@ -1,0 +1,364 @@
+﻿namespace = POD_demon_maintenance
+
+POD_demon_maintenance.1 = {
+	hidden = yes
+
+	trigger = {
+		POD_splat_has_access_to_arcana = yes
+	}
+
+	immediate = {
+		POD_yearly_cultist_xp_pulse = yes
+		POD_ai_ritual_of_sundered_soul_pulse_effect = yes
+	}
+}
+
+# needs scope:demon (the demon) saved on the TopScope
+POD_demon_maintenance.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_demon_maintenance.2.t
+	desc = POD_demon_maintenance.2.desc
+	theme = demon
+
+	override_background = { reference = shader_event_ritual }
+	
+	widget = {
+		gui = "POD_shader_event_ritual"
+		container = "background_shader_vfx_container"
+	}
+
+	left_portrait = {
+		character = root
+		animation = throne_room_bow_1
+		camera = camera_event_center_pointing_right
+	}
+
+	right_portrait = {
+		character = scope:demon
+	}
+
+	option = {
+		name = POD_demon_maintenance.2.a
+		set_character_faith = scope:demon.faith
+
+		ai_chance = { base = 100 }
+	}
+
+	option = {
+		name = POD_demon_maintenance.2.b
+		
+		ai_chance = { base = 0 }
+	}
+}
+
+# a demon broke free from binding
+# needs scope:demon (the demon) saved on the TopScope
+POD_demon_maintenance.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_demon_maintenance.3.t
+	desc = POD_demon_maintenance.3.desc
+	theme = demon
+
+	override_background = { reference = shader_event_ritual }
+	
+	widget = {
+		gui = "POD_shader_event_ritual"
+		container = "background_shader_vfx_container"
+	}
+
+	left_portrait = {
+		character = scope:demon
+	}
+	
+	immediate = {
+		scope:demon = {
+			set_relation_rival = {
+				target = prev
+				reason = rival_diabolist
+			}
+			add_opinion = {
+				target = prev
+				modifier = POD_demon_binding_opinion
+				opinion = -100
+			}
+		}
+		if = {
+			limit = { has_relation_bound_demon = scope:demon }
+			remove_relation_bound_demon = scope:demon
+		}
+		POD_refund_investiture = yes
+		add_investiture_lifestyle_perk_points = {
+			value = scope:demon.var:diabolist_perks_gained
+			multiply = -1
+		}
+	}
+
+	option = {
+		trigger = { scope:demon = { POD_is_available = yes } }
+		name = POD_demon_maintenance.3.a
+		custom_tooltip = POD_demon_maintenance.3.a.tt
+	}
+
+	option = {
+		trigger = { scope:demon = { POD_is_available = no } }
+		name = POD_demon_maintenance.3.b
+	}
+}
+
+POD_demon_maintenance.4 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_demon_maintenance.3.t # reuse
+	desc = POD_demon_maintenance.4.desc
+	theme = demon
+
+	override_background = { reference = shader_event_ritual }
+	
+	widget = {
+		gui = "POD_shader_event_ritual"
+		container = "background_shader_vfx_container"
+	}
+
+	left_portrait = {
+		character = scope:demon
+	}
+	
+	trigger = {
+		scope:recipient = {
+			POD_demon_can_sabotage = { DIABOLIST = root }
+		}
+	}
+	
+	immediate = {
+		scope:recipient = { save_scope_as = demon }
+	}
+
+	option = {
+		name = POD_demon_maintenance.3.a
+		custom_tooltip = POD_demon_maintenance.3.a.tt
+	}
+}
+
+# # Sacrifice to Great Demon
+# POD_demon_maintenance.40 = {
+# 	type = character_event
+# 	content_source = dlc_POD
+# 	title = POD_demon_maintenance.40.t
+# 	desc = POD_demon_maintenance.40.desc
+# 	theme = demon
+
+# 	left_portrait = {
+# 		character = root
+# 		animation = personality_honorable
+# 	}
+	
+# 	immediate = {
+# 		save_scope_as = actor
+# 	}
+
+# 	option = {
+# 		name = POD_demon_maintenance.40.option.abaddon
+		
+# 		set_variable = {
+# 			name = great_demon
+# 			value = flag:abaddon
+# 		}
+		
+# 		custom_tooltip = POD_infernalist_sacrifice_to_great_demon_decision_custom
+# 		show_as_tooltip = {
+# 			random_list = {
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_prisoner_interaction_desc
+# 					add_character_modifier = lesser_abaddon_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_holding_interaction_desc
+# 					add_character_modifier = greater_abaddon_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_region_interaction_desc
+# 					add_character_modifier = potent_abaddon_buff_modifier
+# 				}
+# 			}
+# 		}
+# 	}
+
+# 	option = {
+# 		name = POD_demon_maintenance.40.option.asmodeus
+		
+# 		set_variable = {
+# 			name = great_demon
+# 			value = flag:asmodeus
+# 		}
+		
+# 		custom_tooltip = POD_infernalist_sacrifice_to_great_demon_decision_custom
+# 		show_as_tooltip = {
+# 			random_list = {
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_prisoner_interaction_desc
+# 					add_character_modifier = lesser_asmodeus_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_holding_interaction_desc
+# 					add_character_modifier = greater_asmodeus_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_region_interaction_desc
+# 					add_character_modifier = potent_asmodeus_buff_modifier
+# 				}
+# 			}
+# 		}
+# 	}
+
+# 	option = {
+# 		name = POD_demon_maintenance.40.option.azrael
+		
+# 		set_variable = {
+# 			name = great_demon
+# 			value = flag:azrael
+# 		}
+		
+# 		custom_tooltip = POD_infernalist_sacrifice_to_great_demon_decision_custom
+# 		show_as_tooltip = {
+# 			random_list = {
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_prisoner_interaction_desc
+# 					add_character_modifier = lesser_azrael_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_holding_interaction_desc
+# 					add_character_modifier = greater_azrael_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_region_interaction_desc
+# 					add_character_modifier = potent_azrael_buff_modifier
+# 				}
+# 			}
+# 		}
+# 	}
+
+# 	option = {
+# 		name = POD_demon_maintenance.40.option.belial
+		
+# 		set_variable = {
+# 			name = great_demon
+# 			value = flag:belial
+# 		}
+		
+# 		custom_tooltip = POD_infernalist_sacrifice_to_great_demon_decision_custom
+# 		show_as_tooltip = {
+# 			random_list = {
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_prisoner_interaction_desc
+# 					add_character_modifier = lesser_belial_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_holding_interaction_desc
+# 					add_character_modifier = greater_belial_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_region_interaction_desc
+# 					add_character_modifier = potent_belial_buff_modifier
+# 				}
+# 			}
+# 		}
+# 	}
+
+# 	option = {
+# 		name = POD_demon_maintenance.40.option.dagon
+		
+# 		set_variable = {
+# 			name = great_demon
+# 			value = flag:dagon
+# 		}
+		
+# 		custom_tooltip = POD_infernalist_sacrifice_to_great_demon_decision_custom
+# 		show_as_tooltip = {
+# 			random_list = {
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_prisoner_interaction_desc
+# 					add_character_modifier = lesser_dagon_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_holding_interaction_desc
+# 					add_character_modifier = greater_dagon_buff_modifier
+# 				}
+# 				1 = {
+# 					show_chance = no
+# 					desc = POD_infernalist_sacrifice_region_interaction_desc
+# 					add_character_modifier = potent_dagon_buff_modifier
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+
+# Insolent Thrall Player
+POD_demon_maintenance.70 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_demon_maintenance.70.t
+	desc = POD_demon_maintenance.70.desc
+	theme = demon
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:demon
+		animation = anger
+	}
+	
+	immediate = { 
+		scope:demon = { 
+			if = {
+				limit = { is_imprisoned = yes }
+				release_from_prison = yes
+			}
+		} 
+	}
+
+	option = {
+		name = POD_demon_maintenance.70.option.a
+		
+		duel = {
+			skill = learning
+			target = scope:demon
+			50 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = low_positive_duel_skill_multiplier
+				}
+				add_prestige = minor_prestige_loss
+			}
+			50 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = high_negative_duel_skill_multiplier 
+				}
+				death = { 
+					death_reason = death_souleaten 
+					killer = scope:demon
+				}
+			}
+		}
+	}
+}

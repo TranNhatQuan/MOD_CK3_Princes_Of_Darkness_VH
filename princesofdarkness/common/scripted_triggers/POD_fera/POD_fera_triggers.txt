@@ -1,0 +1,285 @@
+﻿
+POD_has_fera_type = {
+	OR = {
+		has_trait = $TRAIT$
+		var:fera_type ?= $TRAIT$
+	}
+}
+
+POD_has_access_to_fera_gifts = {
+	POD_has_fera_type = { TRAIT = $TRAIT$ }
+	POD_splat_has_access_to_any_fera_gifts = yes
+}
+
+POD_splat_has_access_to_any_fera_gifts = {
+	OR = {
+		has_trait = fera
+		has_trait = kinfolk
+		has_trait = abomination
+	}
+}
+
+POD_has_inheritable_fera_type = {
+	POD_has_fera_type = { TRAIT = $TRAIT$ }
+	POD_splat_has_any_fera_genetics = yes
+}
+
+POD_splat_has_any_fera_genetics = {
+	OR = {
+		has_trait = fera
+		has_trait = kinfolk
+	}
+}
+
+
+POD_splat_is_valid_for_fera_shapeshifting = {
+	OR = {
+		has_trait = fera
+		has_trait = abomination
+		has_trait = spirit
+	}
+}
+
+POD_should_have_fera_type_variable = {
+	NOT = { has_trait = fera }
+	OR = {
+		has_trait = kinfolk
+		has_trait = abomination
+		has_trait = spirit
+	}
+}
+
+POD_has_any_inheritable_fera_type = {
+	OR = {
+		has_trait_with_flag = fera_type
+		AND = {
+			#exists = this
+			#is_alive = yes
+			exists = var:fera_type
+			POD_splat_has_any_fera_genetics = yes
+		}
+	}
+}
+
+
+
+POD_fera_can_pick_pack_totem = {
+	OR = {
+		POD_is_werewolf_trigger = yes
+		POD_is_bastet_trigger = yes
+		POD_is_mokole_trigger = yes
+	}
+	POD_fera_coterie_has_pack_totem = no
+}
+
+
+POD_fera_coterie_has_pack_totem = {
+	var:coterie ?= { has_variable = coterie_totem }
+}
+
+POD_fera_coterie_has_gaian_totem = {
+	var:coterie ?= {
+		OR = {
+			var:coterie_totem ?= flag:falcon_totem_modifier
+			var:coterie_totem ?= flag:grandfatherthunder_totem_modifier
+			var:coterie_totem ?= flag:stag_totem_modifier
+			var:coterie_totem ?= flag:fenris_totem_modifier
+			var:coterie_totem ?= flag:pegasus_totem_modifier
+			var:coterie_totem ?= flag:cockroach_totem_modifier
+			var:coterie_totem ?= flag:raven_totem_modifier
+			var:coterie_totem ?= flag:rat_totem_modifier
+			var:coterie_totem ?= flag:bonyscrap_totem_modifier
+			var:coterie_totem ?= flag:hatii_totem_modifier
+			var:coterie_totem ?= flag:butterfly_totem_modifier
+			var:coterie_totem ?= flag:king_cats_totem_modifier
+			var:coterie_totem ?= flag:king_beasts_totem_modifier
+			var:coterie_totem ?= flag:mantis_totem_modifier
+			var:coterie_totem ?= flag:mistress_catkind_totem_modifier
+			var:coterie_totem ?= flag:whispers_totem_modifier
+			var:coterie_totem ?= flag:dragon_totem_modifier
+			var:coterie_totem ?= flag:agni_totem_modifier
+			var:coterie_totem ?= flag:finch_totem_modifier
+			var:coterie_totem ?= flag:horseshoe_crab_totem_modifier
+			var:coterie_totem ?= flag:scarab_totem_modifier
+			var:coterie_totem ?= flag:snake_doctor_totem_modifier
+			var:coterie_totem ?= flag:whiptail_lizard_totem_modifier
+			var:coterie_totem ?= flag:narukami_totem_modifier
+			var:coterie_totem ?= flag:tsukiyomi_totem_modifier
+			var:coterie_totem ?= flag:susanowo_totem_modifier
+		}
+	}
+}
+
+POD_fera_coterie_has_wyrm_totem = {
+	var:coterie ?= {
+		OR = {
+			var:coterie_totem ?= flag:whippoorwill_totem_modifier
+			var:coterie_totem ?= flag:kirijama_totem_modifier
+			var:coterie_totem ?= flag:greendragon_totem_modifier
+			var:coterie_totem ?= flag:bat_totem_modifier
+			var:coterie_totem ?= flag:hakaken_totem_modifier
+			var:coterie_totem ?= flag:darkfungus_totem_modifier
+			var:coterie_totem ?= flag:relshab_totem_modifier
+			var:coterie_totem ?= flag:glouogh_totem_modifier
+		}
+	}
+}
+
+
+POD_fera_has_breed_trigger = {
+	has_trait = breed
+}
+
+POD_fera_has_lunar_auspice_trigger = {
+	has_trait = lunar_auspice
+}
+
+POD_fera_has_pryio_trigger = {
+	has_trait = pryio
+}
+
+POD_fera_has_solar_auspice_trigger = {
+	has_trait = solar_auspice
+}
+
+
+POD_fera_is_long_lived_trigger = {
+	has_trait = fera
+
+	OR = {
+		has_trait = immortal
+		POD_has_fera_type = { TRAIT = trait:mokole }
+		POD_has_fera_type = { TRAIT = trait:rokea }
+	}
+}
+
+##################
+#### Religion ####
+##################
+
+POD_fera_is_bonegnawer = {
+	OR = {
+		has_religion = religion:bonegnawer_religion
+		has_faith = faith:maneaters
+	}
+}
+
+POD_fera_is_shadowlord = {
+	OR = {
+		has_religion = religion:shadowlord_religion
+		has_faith = faith:masks
+		has_faith = faith:societyofnidhogg
+	}
+}
+
+POD_fera_is_hakken = {
+	OR = {
+		has_faith = faith:hakken
+		has_faith = faith:ebon_centipede
+	}
+}
+
+POD_fera_is_silentstrider = {
+	OR = {
+		has_religion = religion:silentstrider_religion
+		has_faith = faith:eatersofthedead
+	}
+}
+
+POD_fera_is_stargazer = {
+	OR = {
+		has_religion = religion:stargazer_religion
+		has_faith = faith:metasticbirth
+		has_faith = faith:ouroboroans
+	}
+}
+
+POD_fera_is_warderofmen = {
+	OR = {
+		has_religion = religion:warderofmen_religion
+		has_faith = faith:boli_zouhisze
+	}
+}
+
+POD_fera_is_ceilican = {
+	OR = {
+		has_faith = faith:ceilican
+		has_faith = faith:hellcats
+	}
+}
+
+#Unused
+POD_fera_is_saurian = {
+	OR = {
+		has_religion = religion:saurian_religion
+		has_faith = faith:mnetics
+	}
+}
+
+
+#######################
+#### Spirit Quests ####
+#######################
+
+POD_has_all_spirit_quest_artifacts = {
+	POD_has_all_common_quest_artifacts = yes
+	POD_has_all_masterwork_quest_artifacts = yes
+	POD_has_all_famed_quest_artifacts = yes
+	POD_has_all_illustrious_quest_artifacts = yes
+}
+
+POD_has_all_common_quest_artifacts = {
+	any_character_artifact = { has_variable = lepers_rags }
+	any_character_artifact = { has_variable = trail_branch }
+	any_character_artifact = { has_variable = feather_of_the_waters }
+	any_character_artifact = { has_variable = heart_of_fire }
+	any_character_artifact = { has_variable = stone_of_wealth }
+
+	trigger_if = {
+		limit = { POD_is_mokole_trigger = yes }
+		any_character_artifact = { has_variable = dragon_crystal }
+		any_character_artifact = { has_variable = hatchlings_tail }
+		any_character_artifact = { has_variable = egg_basket }
+	}
+}
+
+POD_has_all_masterwork_quest_artifacts = {
+	any_character_artifact = { has_variable = fish_swatter }
+	any_character_artifact = { has_variable = leaf_armor }
+	any_character_artifact = { has_variable = bent_vine }
+	any_character_artifact = { has_variable = gnostic_bag }
+	any_character_artifact = { has_variable = spirit_jar }
+	any_character_artifact = { has_variable = seeing_boomerang }
+	any_character_artifact = { has_variable = kurdaitcha }
+	any_character_artifact = { has_variable = warshell }
+	any_character_artifact = { has_variable = beggars_mantle }
+	
+	trigger_if = {
+		limit = { POD_is_werewolf_trigger = yes }
+		any_character_artifact = { has_variable = horn_of_distress }
+	}
+}
+
+POD_has_all_famed_quest_artifacts = {
+	any_character_artifact = { has_variable = tokoyanga }
+
+	trigger_if = {
+		limit = { 
+			OR = {
+				POD_is_mokole_trigger = yes
+				POD_is_corax_trigger = yes
+			}
+		}
+		any_character_artifact = { has_variable = mirror_amaterasu_omikami }
+	}
+}
+
+POD_has_all_illustrious_quest_artifacts = {
+
+	trigger_if = {
+		limit = { POD_is_mokole_trigger = yes }
+		any_character_artifact = { has_variable = echo_of_ages }
+		any_character_artifact = { has_variable = bowl_of_mnesis }
+	}
+
+}

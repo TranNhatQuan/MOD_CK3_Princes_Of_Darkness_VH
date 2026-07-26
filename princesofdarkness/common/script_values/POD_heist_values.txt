@@ -1,0 +1,293 @@
+﻿suspicion_min = 0
+suspicion_max = 100
+suspicion_range = 25
+
+suspicion_threshold_1 = 25
+suspicion_threshold_2 = 50
+suspicion_threshold_3 = 75
+
+minor_suspicion_value   =  5
+major_suspicion_value   = 10
+massive_suspicion_value = 15
+extreme_suspicion_value = 25
+
+heist_negative_modifier_duration = 10
+
+heist_node_gold_loss = {
+	value = -15
+	# value = 0
+	# subtract = minor_gold_value
+}
+heist_node_prestige_loss = {
+	value = -25
+	#value = miniscule_prestige_loss
+}
+heist_node_piety_loss = {
+	value = -25
+	#value = miniscule_piety_loss
+}
+
+### Flat values since this is just a side goal
+heist_side_objective_minor_gold_value   = 10
+heist_side_objective_major_gold_value   = 25
+heist_side_objective_massive_gold_value = 50
+
+heist_side_objective_minor_gold_capped_value = {
+	value = heist_side_objective_minor_gold_value
+	max = gold
+}
+heist_side_objective_major_gold_capped_value = {
+	value = heist_side_objective_major_gold_value
+	max = gold
+}
+heist_side_objective_massive_gold_capped_value = {
+	value = heist_side_objective_massive_gold_value
+	max = gold
+}
+
+### Scaling values since this is a major goal
+heist_main_objective_minor_gold_value = {
+	value = minor_gold_value
+}
+heist_main_objective_major_gold_value = {
+	value = minor_gold_value
+	multiply = 2
+}
+heist_main_objective_massive_gold_value = {
+	value = minor_gold_value
+	multiply = 5
+}
+
+heist_main_objective_minor_gold_capped_value = {
+	value = heist_main_objective_minor_gold_value
+	max = gold
+}
+heist_main_objective_major_gold_capped_value = {
+	value = heist_main_objective_major_gold_value
+	max = gold
+}
+heist_main_objective_massive_gold_capped_value = {
+	value = heist_main_objective_massive_gold_value
+	max = gold
+}
+
+
+artifact_heist_cost_mult = 0.5
+
+minor_artifact_heist_prestige_value = {
+	value = minor_buy_claim_prestige_value
+	multiply = artifact_heist_cost_mult
+}
+medium_artifact_heist_prestige_value = {
+	value = medium_buy_claim_prestige_value
+	multiply = artifact_heist_cost_mult
+}
+major_artifact_heist_prestige_value = {
+	value = major_buy_claim_prestige_value
+	multiply = artifact_heist_cost_mult
+}
+massive_artifact_heist_prestige_value = {
+	value = massive_buy_claim_prestige_value
+	multiply = artifact_heist_cost_mult
+}
+minor_artifact_heist_prestige_loss = {
+	value = 0
+	subtract = minor_artifact_heist_prestige_value
+}
+medium_artifact_heist_prestige_loss = {
+	value = 0
+	subtract = medium_artifact_heist_prestige_value
+}
+major_artifact_heist_prestige_loss = {
+	value = 0
+	subtract = major_artifact_heist_prestige_value
+}
+massive_artifact_heist_prestige_loss = {
+	value = 0
+	subtract = massive_artifact_heist_prestige_value
+}
+
+master_infiltrator_suspicion_offset      = -25
+skilled_infiltrator_suspicion_offset     = -15
+infiltration_experience_suspicion_offset =  -5
+infiltration_small_perk_suspicion_offset =  -5
+infiltration_medium_perk_suspicion_offset =  -10
+
+wary_of_infiltrators_suspicion_offset    =  20
+
+infiltration_experience_max_stacks = 5
+heists_needed_for_level_up = 3
+
+starting_suspicion = {
+	value = suspicion_min
+	if = {
+		limit = { has_character_modifier = master_infiltrator_modifier }
+		add = master_infiltrator_suspicion_offset
+	}
+	if = {
+		limit = { has_character_modifier = skilled_infiltrator_modifier }
+		add = skilled_infiltrator_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = journeying_the_iron_bridge_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = silent_stalking_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = ricepaper_walk_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { uses_cairo_bast_alternate_reward = yes }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = waxwork_monster_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = investiture_bond_breaking_perk }
+		add = skilled_infiltrator_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = numina_shadows_1_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = numina_shadows_3_perk }
+		add = infiltration_small_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = numina_shadows_6_perk }
+		add = infiltration_medium_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = fc_arm_r_extra_pinky_perk }
+		add = infiltration_medium_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_perk = fc_arm_l_extra_pinky_perk }
+		add = infiltration_medium_perk_suspicion_offset
+	}
+	if = {
+		limit = { has_variable = infiltration_experience_modifier_stacks }
+		add = {
+			value = infiltration_experience_suspicion_offset
+			multiply = var:infiltration_experience_modifier_stacks
+		}
+	}
+	if = {
+		limit = { any_relation = { type = spirit_companion var:spirit_type = flag:spirit_harpy } }
+		add = {
+            value = {
+                every_relation = {
+					type = spirit_companion
+					limit = { is_alive = yes var:spirit_type = flag:spirit_harpy }
+					if = {
+						limit = { POD_spirit_rank = 5 }
+						add = -10
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 4 }
+						add = -8
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 3 }
+						add = -6
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 2 }
+						add = -4
+					}
+					else = { add = -2 }
+				}
+            }
+        }
+	}
+	if = {
+		limit = {
+			has_variable = current_heist
+			var:current_heist = {
+				has_variable = court_owner
+				var:court_owner = { has_character_modifier = wary_of_infiltrators_modifier }
+			}
+		}
+		add = wary_of_infiltrators_suspicion_offset
+	}
+}
+
+heist_node_stress_gain = 15
+
+heist_stat_duel_difficulty = {
+	value = 10
+	add = {
+		value = heist_suspicion_level
+		multiply = 10
+	}
+}
+
+heist_prowess_duel_difficulty = {
+	value = 15
+	add = {
+		value = heist_suspicion_level
+		multiply = 15
+	}
+}
+
+# Higher difficulty for non-deadly events since the consequences are easier to deal with
+heist_suspicion_event_1_difficulty = 20
+heist_suspicion_event_2_difficulty = 30
+heist_suspicion_event_3_difficulty = 40
+
+heist_suspicion_event_1_deadly_difficulty = 15
+heist_suspicion_event_2_deadly_difficulty = 20
+heist_suspicion_event_3_deadly_difficulty = 25
+
+heist_event_prestige_gain_1 = 50
+heist_event_prestige_gain_2 = 100
+heist_event_prestige_gain_3 = 150
+
+heist_event_prestige_loss_1 = -100
+heist_event_prestige_loss_2 = -200
+heist_event_prestige_loss_3 = -300
+
+heist_suspicion_level = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = current_heist
+			var:current_heist = { has_variable = suspicion }
+		}
+		add = {
+			value = var:current_heist.var:suspicion
+			min = suspicion_min
+			max = suspicion_max
+			divide = suspicion_range
+			ceiling = yes
+		}
+	}
+}
+
+pod_suspicion_arrow_position = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = current_heist
+			var:current_heist = {
+				has_variable = suspicion
+				var:suspicion > 0
+			}
+		}
+		if = {
+			limit = { var:current_heist.var:suspicion >= suspicion_max }
+			add = suspicion_range
+		}
+		else = {
+			add = var:current_heist.var:suspicion
+			modulo = suspicion_range
+		}
+	}
+}

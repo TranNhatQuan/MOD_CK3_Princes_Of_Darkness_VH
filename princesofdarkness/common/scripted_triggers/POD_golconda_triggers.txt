@@ -1,0 +1,119 @@
+﻿POD_is_hungerless_trigger = {
+	# only one trait with the flag for now
+	# and checking for the trait itself is (presumably) a hash table lookup. O(1) instead of O(n)
+	#has_trait_with_flag = hungerless_flag
+	has_trait = golconda
+	POD_splat_has_hunger_exclusively = yes
+}
+
+POD_has_infinite_blood_trigger = {
+	OR = {
+		POD_is_hungerless_trigger = yes
+		any_character_artifact = { has_variable = blood_horn }
+		has_trait_with_flag = infinite_blood_flag
+	}
+	POD_splat_has_hunger_exclusively = yes
+}
+
+# GUI only, for determining whether to show/hide red beast dialogue
+# for frenzy, use cant_frenzy_trigger
+POD_has_a_beast_trigger = {
+	has_POD_vamp_blood_trigger = yes
+	NOR = {
+		has_trait = golconda
+		has_trait = azhi_dahaka
+		has_character_modifier = heart_of_darkness_modifier
+		has_trait = POD_grail_knight	
+		has_character_modifier = ritual_purge_the_inner_demon_modifier
+		has_character_flag = suppressed_beast_flag
+	}
+}
+
+POD_suppress_clan_curse_trigger = {
+	OR = {
+		has_trait = golconda
+		has_trait = azhi_dahaka
+		has_trait = POD_grail_knight
+		has_character_flag = suppressed_clan_curse_flag
+	}
+}
+
+POD_suppress_visual_clan_curse_trigger = {
+	OR = {
+		POD_suppress_clan_curse_trigger = yes
+		has_perk = investiture_uncanny_beauty_perk
+		has_character_flag = stay_uncursed_after_losing_golconda
+	}
+	trigger_if = {
+		limit = { is_gargoyle_trigger = yes }
+		has_game_rule = POD_uncursed_gargoyles_human
+	}
+}
+
+# for graphics purposes only
+POD_suppress_nosferatu_portrait_modifiers_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				is_nosferatu_trigger = yes
+				is_gargoyle_trigger = yes
+			}
+		}
+		POD_suppress_visual_clan_curse_trigger = yes
+	}
+	trigger_else = {
+		has_character_flag = suppress_nosferatu_genes
+	}
+}
+
+# for in-game mechanical purposes
+POD_is_good_looking_as_nosferatu_trigger = {
+	OR = {
+		POD_suppress_visual_clan_curse_trigger = yes
+		is_mnemachien_trigger = yes
+	}
+}
+
+POD_knows_about_golconda_trigger = {
+	OR = {
+		has_character_flag = knows_about_golconda
+		is_salubri_trigger = yes
+		POD_has_golconda_trait_trigger = yes
+		any_character_artifact = {
+			has_variable = golconda_lore
+		}
+	}
+}
+
+POD_knows_about_golconda_coterie_trigger = {
+	OR = {
+		POD_knows_about_golconda_trigger = yes
+		var:coterie ?= {
+			any_in_list = {
+				variable = members
+				POD_knows_about_golconda_trigger = yes
+			}
+		}
+	}
+}
+
+POD_is_on_golconda_trigger = {
+	OR = {
+		POD_has_golconda_trait_trigger = yes
+		POD_is_on_golconda_journey_trigger = yes
+	}
+}
+
+POD_has_golconda_trait_trigger = {
+	OR = {
+		has_trait = golconda
+		has_trait = golconda_seeker
+	}
+}
+
+POD_is_on_golconda_journey_trigger = {
+	OR = {
+		POD_is_on_journey_trigger = { TYPE = golconda_2 }
+		POD_is_on_journey_trigger = { TYPE = golconda_3 }
+	}
+}

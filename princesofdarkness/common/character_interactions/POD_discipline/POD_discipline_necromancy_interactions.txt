@@ -1,0 +1,349 @@
+﻿# POD_find_wraith_interaction = {
+# 	category = interaction_category_vampire
+# 	icon = POD_wraith_interaction
+# 	desc = POD_find_wraith_interaction_desc
+
+# 	ai_frequency = 0
+
+# 	is_shown = {
+# 		scope:actor = scope:recipient
+# 		scope:actor = { has_necromancy_trigger = yes }
+# 		scope:actor = {
+# 			OR = {
+# 				has_perk = ns_shroudsight_perk
+# 				has_perk = ns_caul_of_the_neverborn_perk
+# 			}
+# 		}
+# 	}
+
+# 	is_valid_showing_failures_only = {
+# 		scope:actor = {
+# 			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+# 		}
+# 	}
+
+# 	#cooldown = { years = 1 }
+
+# 	on_accept = {
+# 		scope:actor = {
+# 			POD_hunger_rouse_check_effect = yes
+# 			trigger_event = {
+# 				id = POD_find_wraith.100
+# 				days = { 1 14 }
+# 			}
+# 		}
+# 	}
+
+# 	ai_will_do = {
+# 		base = 0
+# 	}
+# }
+
+POD_necromancy_gui_interaction = {
+	category = interaction_category_vampire
+	icon = POD_necromancy_interaction
+	common_interaction = yes
+	#interface_priority = 84
+	
+	is_shown = {
+		scope:actor = {
+			has_necromancy_trigger = yes
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+	}
+	on_accept = {
+		custom_tooltip = open_ns_menu
+		
+		scope:actor = {
+			POD_open_necromagic_gui = { TARGET = scope:recipient }
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_degulo_interaction = {
+	category = interaction_category_vampire
+	icon = POD_necromancy_interaction
+	common_interaction = yes
+	cooldown = { years = 1 }
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = { is_imprisoned_by = scope:actor }
+		scope:actor = { has_necromancy_trigger = yes }
+		scope:actor = { has_perk = ns_degulo_perk }
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	# this needs a send_option for every trait in POD_trait_injector_disciplines
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = animalismdiscipline } }
+		is_valid = { scope:actor = { has_trait = animalismdiscipline } }
+		flag = animalism
+		localization = trait_animalism
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = proteandiscipline } }
+		is_valid = { scope:actor = { has_trait = proteandiscipline } }
+		flag = protean
+		localization = trait_protean
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = serpentisdiscipline } }
+		is_valid = { scope:actor = { has_trait = serpentisdiscipline } }
+		flag = serpentis
+		localization = trait_serpentis
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = abombwediscipline } }
+		is_valid = { scope:actor = { has_trait = abombwediscipline } }
+		flag = abombwe
+		localization = trait_abombwe
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = spiritusdiscipline } }
+		is_valid = { scope:actor = { has_trait = spiritusdiscipline } }
+		flag = spiritus
+		localization = trait_spiritus
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = flightdiscipline } }
+		is_valid = { scope:actor = { has_trait = flightdiscipline } }
+		flag = flight
+		localization = trait_flight
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = potencediscipline } }
+		is_valid = { scope:actor = { has_trait = potencediscipline } }
+		flag = potence
+		localization = trait_potence
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = celeritydiscipline } }
+		is_valid = { scope:actor = { has_trait = celeritydiscipline } }
+		flag = celerity
+		localization = trait_celerity
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = vicissitudediscipline } }
+		is_valid = { scope:actor = { has_trait = vicissitudediscipline } }
+		flag = vicissitude
+		localization = trait_vicissitude
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = valerendiscipline } }
+		is_valid = { scope:actor = { has_trait = valerendiscipline } }
+		flag = valeren
+		localization = trait_valeren
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = fortitudediscipline } }
+		is_valid = { scope:actor = { has_trait = fortitudediscipline } }
+		flag = fortitude
+		localization = trait_fortitude
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = obfuscatediscipline } }
+		is_valid = { scope:actor = { has_trait = obfuscatediscipline } }
+		flag = obfuscate
+		localization = trait_obfuscate
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = obtenebrationdiscipline } }
+		is_valid = { scope:actor = { has_trait = obtenebrationdiscipline } }
+		flag = obtenebration
+		localization = trait_obtenebration
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = necromancydiscipline } }
+		is_valid = { scope:actor = { has_trait = necromancydiscipline } }
+		flag = necromancy
+		localization = trait_necromancy
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = chimerstrydiscipline } }
+		is_valid = { scope:actor = { has_trait = chimerstrydiscipline } }
+		flag = chimerstry
+		localization = trait_chimerstry
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = visceratikadiscipline } }
+		is_valid = { scope:actor = { has_trait = visceratikadiscipline } }
+		flag = visceratika
+		localization = trait_visceratika
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = bardodiscipline } }
+		is_valid = { scope:actor = { has_trait = bardodiscipline } }
+		flag = bardo
+		localization = trait_bardo
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = riftdiscipline } }
+		is_valid = { scope:actor = { has_trait = riftdiscipline } }
+		flag = rift
+		localization = trait_rift
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = auspexdiscipline } }
+		is_valid = { scope:actor = { has_trait = auspexdiscipline } }
+		flag = auspex
+		localization = trait_auspex
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = dominatediscipline } }
+		is_valid = { scope:actor = { has_trait = dominatediscipline } }
+		flag = dominate
+		localization = trait_dominate
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = temporisdiscipline } }
+		is_valid = { scope:actor = { has_trait = temporisdiscipline } }
+		flag = temporis
+		localization = trait_temporis
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = dementationdiscipline } }
+		is_valid = { scope:actor = { has_trait = dementationdiscipline } }
+		flag = dementation
+		localization = trait_dementation
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = melpomineediscipline } }
+		is_valid = { scope:actor = { has_trait = melpomineediscipline } }
+		flag = melpominee
+		localization = trait_melpominee
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = mytherceriadiscipline } }
+		is_valid = { scope:actor = { has_trait = mytherceriadiscipline } }
+		flag = mytherceria
+		localization = trait_mytherceria
+	}
+	
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = bloodsorcerydiscipline } }
+		is_valid = { scope:actor = { has_trait = bloodsorcerydiscipline } }
+		flag = bloodsorcery
+		localization = trait_bloodsorcery
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = presencediscipline } }
+		is_valid = { scope:actor = { has_trait = presencediscipline } }
+		flag = presence
+		localization = trait_presence
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = daimoniondiscipline } }
+		is_valid = { scope:actor = { has_trait = daimoniondiscipline } }
+		flag = daimonion
+		localization = trait_daimonion
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = quietusdiscipline } }
+		is_valid = { scope:actor = { has_trait = quietusdiscipline } }
+		flag = quietus
+		localization = trait_quietus
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = kaidiscipline } }
+		is_valid = { scope:actor = { has_trait = kaidiscipline } }
+		flag = kai
+		localization = trait_kai
+	}
+	send_option = {
+		is_shown = { scope:recipient = { has_trait = thinbloodalchemydiscipline } }
+		is_valid = { scope:actor = { has_trait = thinbloodalchemydiscipline } }
+		flag = thinbloodalchemy
+		localization = trait_thinbloodalchemy
+	}
+	
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:animalism ?= yes
+				scope:protean ?= yes
+				scope:serpentis ?= yes
+				scope:abombwe ?= yes
+				scope:spiritus ?= yes
+				scope:flight ?= yes
+				scope:potence ?= yes
+				scope:celerity ?= yes
+				scope:vicissitude ?= yes
+				scope:valeren ?= yes
+				scope:fortitude ?= yes
+				scope:obfuscate ?= yes
+				scope:obtenebration ?= yes
+				scope:necromancy ?= yes
+				scope:chimerstry ?= yes
+				scope:visceratika ?= yes
+				scope:bardo ?= yes
+				scope:rift ?= yes
+				scope:auspex ?= yes
+				scope:dominate ?= yes
+				scope:temporis ?= yes
+				scope:dementation ?= yes
+				scope:melpominee ?= yes
+				scope:mytherceria ?= yes
+				scope:bloodsorcery ?= yes
+				scope:presence ?= yes
+				scope:daimonion ?= yes
+				scope:quietus ?= yes
+				scope:kai ?= yes
+				scope:thinbloodalchemy ?= yes
+			}
+		}
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			save_scope_as = target
+		}
+		scope:actor = {
+			save_scope_value_as = {
+				name = execution_beheaded
+				value = yes
+			}
+			save_scope_as = ai_diablerie_of_prisoner
+			POD_execute_prisoner_effects = yes
+			execute_prisoner_effect = {
+				VICTIM = scope:recipient
+				EXECUTIONER = scope:actor
+			}
+			random_list = {
+				0 = {
+					modifier = { add = POD_necromagic_success_chance }
+					send_interface_toast = {
+						title = POD_shared_loca_success
+						
+						POD_trait_injector_disciplines = {
+							EFFECT = POD_degulo_effect
+						}
+					}
+				}
+				100 = {
+					modifier = { add = POD_necromagic_success_chance_negated }
+					send_interface_toast = {
+						title = POD_shared_loca_failure
+						POD_static_stress_gain = { COUNT = 50 }
+					}
+				}
+			}
+			add_stress = 150
+		}
+	}
+	
+	auto_accept = yes
+}

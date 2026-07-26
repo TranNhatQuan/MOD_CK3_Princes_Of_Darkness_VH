@@ -1,0 +1,2007 @@
+﻿POD_spread_legitimacy = {
+	court_position_types = { 
+		ventrue_primogen_court_position 
+		lasombra_primogen_court_position 
+		tzimisce_primogen_court_position
+		toreador_primogen_court_position
+		brujah_primogen_court_position
+		hidden_minister_of_rites_court_position
+		minister_of_rites_court_position
+		master_rite_court_position
+		talesinger_court_position
+		master_challenges_court_position
+		minister_dragons_court_position
+		quaesitor_court_position
+		imperial_chancellor_court_position
+		seline_oracle_court_position
+		sun_herald_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	monthly_legitimacy_add = 0.1
+		}
+		poor = {
+		 	monthly_legitimacy_add = 0.2
+		}
+		average = {
+		 	monthly_legitimacy_add = 0.3
+		}
+		good = {
+		 	monthly_legitimacy_add = 0.5
+		}
+		excellent = {
+		 	monthly_legitimacy_add = 1
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 0
+		
+		if = {
+			limit = {			
+				legitimacy <= 500
+			}
+			add = 10 
+		}
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_tribute_collecting = {
+	court_position_types = { 
+		gangrel_primogen_court_position 
+		brujah_primogen_court_position 
+		assamite_primogen_court_position
+		toreador_primogen_court_position
+		hidden_minister_of_shen_court_position
+		minister_of_shen_court_position
+		minister_dragons_court_position
+		imperial_envoy_court_position
+		master_taghairm_court_position
+		solar_salvager_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	vassal_tax_contribution_mult = 0.02
+		}
+		poor = {
+		 	vassal_tax_contribution_mult = 0.03
+		}
+		average = {
+		 	vassal_tax_contribution_mult = 0.05
+		}
+		good = {
+		 	vassal_tax_contribution_mult = 0.1
+		}
+		excellent = {
+		 	vassal_tax_contribution_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 20
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_war_preparations = {
+	court_position_types = { 
+		tzimisce_primogen_court_position 
+		ravnos_primogen_court_position
+		gargoyle_primogen_court_position
+		hidden_minister_of_war_court_position
+		minister_of_war_court_position
+		first_oni_court_position
+		minister_swords_court_position
+		imperial_envoy_court_position
+		hanshii_arbiter_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	vassal_levy_contribution_mult = 0.02
+		}
+		poor = {
+		 	vassal_levy_contribution_mult = 0.03
+		}
+		average = {
+		 	vassal_levy_contribution_mult = 0.05
+		}
+		good = {
+		 	vassal_levy_contribution_mult = 0.1
+		}
+		excellent = {
+		 	vassal_levy_contribution_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_vassal_handler = {
+	court_position_types = { 
+		ventrue_primogen_court_position
+		ravnos_primogen_court_position
+		setite_primogen_court_position
+		lasombra_primogen_court_position
+		lord_of_misrule_court_position
+		hidden_minister_of_jade_court_position
+		minister_of_jade_court_position
+		minister_eagles_court_position
+		master_taghairm_court_position
+		ashirra_qadi_court_position
+		wallow_warden_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	vassal_limit = 1
+		}
+		poor = {
+		 	vassal_limit = 2
+		}
+		average = {
+		 	vassal_limit = 3
+		}
+		good = {
+		 	vassal_limit = 5
+		}
+		excellent = {
+		 	vassal_limit = 10
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 0
+		#The AI will never need this
+		#if = {
+		#	limit = {
+		#		OR = {
+		#			monthly_character_income < monthly_court_position_task_cost_double
+		#			is_at_war = yes
+		#		}
+		#	}
+		#	add = -100 #to force the switch to default task, the ai_will_do must be negative
+		#}
+	}
+}
+
+POD_home_seneschal = {
+	court_position_types = { 
+		cappadocian_primogen_court_position
+		salubri_primogen_court_position
+		nosferatu_primogen_court_position
+		tremere_primogen_court_position
+		malkavian_primogen_court_position
+		setite_primogen_court_position
+		hidden_minister_of_jade_court_position
+		minister_of_jade_court_position
+		minister_dust_court_position
+		strategoi_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	domain_tax_mult = 0.01
+		}
+		poor = {
+		 	domain_tax_mult = 0.02
+		}
+		average = {
+		 	domain_tax_mult = 0.03
+		}
+		good = {
+		 	domain_tax_mult = 0.04
+		}
+		excellent = {
+		 	domain_tax_mult = 0.05
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_home_defender = {
+	court_position_types = { 
+		gargoyle_primogen_court_position
+		hidden_minister_of_war_court_position
+		hidden_minister_of_hushed_lanterns_court_position
+		first_oni_court_position
+		wyrm_foe_court_position
+		minister_aurochs_court_position
+		brujah_warmaster_court_position
+		dogcatcher_court_position
+		warleader_taklah_court_position
+		crested_purifier_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	independent_primary_defender_advantage_add = 1
+		}
+		poor = {
+		 	independent_primary_defender_advantage_add = 2
+		}
+		average = {
+		 	independent_primary_defender_advantage_add = 3
+		}
+		good = {
+		 	independent_primary_defender_advantage_add = 4
+		}
+		excellent = {
+		 	independent_primary_defender_advantage_add = 5
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_home_builder = {
+	court_position_types = { 
+		cappadocian_primogen_court_position
+		salubri_primogen_court_position
+		tremere_primogen_court_position
+		malkavian_primogen_court_position
+		hidden_minister_of_the_garden_court_position
+		minister_of_the_garden_court_position
+		gatekeeper_court_position
+		minister_dust_court_position
+		imperial_minister_court_position
+		wallow_warden_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	build_gold_cost = -0.01
+			build_prestige_cost = -0.01
+			build_piety_cost = -0.01
+		}
+		poor = {
+		 	build_gold_cost = -0.02
+			build_prestige_cost = -0.02
+			build_piety_cost = -0.02
+		}
+		average = {
+		 	build_gold_cost = -0.03
+			build_prestige_cost = -0.03
+			build_piety_cost = -0.03
+		}
+		good = {
+		 	build_gold_cost = -0.04
+			build_prestige_cost = -0.04
+			build_piety_cost = -0.04
+		}
+		excellent = {
+		 	build_gold_cost = -0.05
+			build_prestige_cost = -0.05
+			build_piety_cost = -0.05
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_stress_relief = {
+	court_position_types = { 
+		aphrodisiac_celebrant_court_position
+		hidden_minister_of_the_garden_court_position
+		minister_of_the_garden_court_position
+		hanshii_arbiter_court_position
+		sun_herald_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	stress_loss_mult = 0.05
+		}
+		poor = {
+		 	stress_loss_mult = 0.1
+		}
+		average = {
+		 	stress_loss_mult = 0.15
+		}
+		good = {
+		 	stress_loss_mult = 0.2
+		}
+		excellent = {
+		 	stress_loss_mult = 0.25
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_spread_prestige = {
+	court_position_types = { 
+		aphrodisiac_celebrant_court_position
+		hidden_minister_of_shen_court_position
+		minister_of_shen_court_position
+		gatekeeper_court_position
+		talesinger_court_position
+		master_challenges_court_position
+		minister_aurochs_court_position
+		imperial_chancellor_court_position
+		guardian_yava_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	monthly_prestige_gain_per_legitimacy_level_mult = 0.01
+		}
+		poor = {
+		 	monthly_prestige_gain_per_legitimacy_level_mult = 0.02
+		}
+		average = {
+		 	monthly_prestige_gain_per_legitimacy_level_mult = 0.03
+		}
+		good = {
+		 	monthly_prestige_gain_per_legitimacy_level_mult = 0.04
+		}
+		excellent = {
+		 	monthly_prestige_gain_per_legitimacy_level_mult = 0.05
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_spread_piety = {
+	court_position_types = { 
+		lord_of_misrule_court_position
+		hidden_minister_of_rites_court_position
+		minister_of_rites_court_position
+		master_rite_court_position
+		court_seer_court_position
+		josian_court_position
+		seline_oracle_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	monthly_piety_gain_per_legitimacy_level_mult = 0.01
+		}
+		poor = {
+		 	monthly_piety_gain_per_legitimacy_level_mult = 0.02
+		}
+		average = {
+		 	monthly_piety_gain_per_legitimacy_level_mult = 0.03
+		}
+		good = {
+		 	monthly_piety_gain_per_legitimacy_level_mult = 0.04
+		}
+		excellent = {
+		 	monthly_piety_gain_per_legitimacy_level_mult = 0.05
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_help_schemes = {
+	court_position_types = { 
+		hidden_minister_of_hushed_lanterns_court_position
+		nosferatu_primogen_court_position
+		minister_eagles_court_position
+		doppelganger_court_position
+		tribunes_court_position
+		guardian_yava_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	owned_hostile_scheme_success_chance_add = 2
+		}
+		poor = {
+		 	owned_hostile_scheme_success_chance_add = 4
+		}
+		average = {
+		 	owned_hostile_scheme_success_chance_add = 6
+		}
+		good = {
+		 	owned_hostile_scheme_success_chance_add = 8
+		}
+		excellent = {
+		 	owned_hostile_scheme_success_chance_add = 10
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_champions = {
+	court_position_types = { 
+		gangrel_primogen_court_position
+		assamite_primogen_court_position
+		wyrm_foe_court_position
+		alastor_court_position
+		lictor_court_position
+		warleader_taklah_court_position
+		fell_knight_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	knight_limit = 1
+		}
+		poor = {
+		 	knight_limit = 2
+		}
+		average = {
+		 	knight_limit = 3
+		}
+		good = {
+		 	knight_limit = 4
+		}
+		excellent = {
+		 	knight_limit = 5
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_retinue = {
+	court_position_types = { 
+		brujah_warmaster_court_position
+		minister_swords_court_position
+		minister_of_war_court_position
+		alastor_court_position
+		fell_knight_court_position
+		imperial_minister_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+		 	men_at_arms_cap = 1
+		}
+		poor = {
+		 	men_at_arms_cap = 2
+		}
+		average = {
+		 	men_at_arms_cap = 3
+		}
+		good = {
+		 	men_at_arms_cap = 4
+		}
+		excellent = {
+		 	men_at_arms_cap = 5
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_plasmic = {
+	court_position_types = { 
+		underworld_ambassador_court_position
+		yin_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_plasmic_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_plasmic_maa_damage_mult = 0.1
+			POD_plasmic_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_plasmic_maa_damage_mult = 0.1
+			POD_plasmic_maa_pursuit_mult = 0.1
+			POD_plasmic_maa_toughness_mult = 0.1
+			POD_plasmic_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_plasmic_maa_damage_mult = 0.15
+			POD_plasmic_maa_pursuit_mult = 0.15
+			POD_plasmic_maa_toughness_mult = 0.15
+			POD_plasmic_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_plasmic_maa_damage_mult = 0.2
+			POD_plasmic_maa_pursuit_mult = 0.2
+			POD_plasmic_maa_toughness_mult = 0.2
+			POD_plasmic_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_wraith = {
+	court_position_types = { 
+		underworld_ambassador_court_position
+		yin_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_wraith_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_wraith_maa_damage_mult = 0.1
+			POD_wraith_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_wraith_maa_damage_mult = 0.1
+			POD_wraith_maa_pursuit_mult = 0.1
+			POD_wraith_maa_toughness_mult = 0.1
+			POD_wraith_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_wraith_maa_damage_mult = 0.15
+			POD_wraith_maa_pursuit_mult = 0.15
+			POD_wraith_maa_toughness_mult = 0.15
+			POD_wraith_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_wraith_maa_damage_mult = 0.2
+			POD_wraith_maa_pursuit_mult = 0.2
+			POD_wraith_maa_toughness_mult = 0.2
+			POD_wraith_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_demonic = {
+	court_position_types = { 
+		underworld_ambassador_court_position
+		yin_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_demonic_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_demonic_maa_damage_mult = 0.1
+			POD_demonic_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_demonic_maa_damage_mult = 0.1
+			POD_demonic_maa_pursuit_mult = 0.1
+			POD_demonic_maa_toughness_mult = 0.1
+			POD_demonic_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_demonic_maa_damage_mult = 0.15
+			POD_demonic_maa_pursuit_mult = 0.15
+			POD_demonic_maa_toughness_mult = 0.15
+			POD_demonic_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_demonic_maa_damage_mult = 0.2
+			POD_demonic_maa_pursuit_mult = 0.2
+			POD_demonic_maa_toughness_mult = 0.2
+			POD_demonic_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_spirit = {
+	court_position_types = { 
+		umbra_ambassador_court_position
+		yang_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_spirit_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_spirit_maa_damage_mult = 0.1
+			POD_spirit_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_spirit_maa_damage_mult = 0.1
+			POD_spirit_maa_pursuit_mult = 0.1
+			POD_spirit_maa_toughness_mult = 0.1
+			POD_spirit_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_spirit_maa_damage_mult = 0.15
+			POD_spirit_maa_pursuit_mult = 0.15
+			POD_spirit_maa_toughness_mult = 0.15
+			POD_spirit_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_spirit_maa_damage_mult = 0.22
+			POD_spirit_maa_pursuit_mult = 0.22
+			POD_spirit_maa_toughness_mult = 0.2
+			POD_spirit_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_bygone = {
+	court_position_types = { 
+		umbra_ambassador_court_position
+		yang_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_bygones_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_bygones_maa_damage_mult = 0.1
+			POD_bygones_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_bygones_maa_damage_mult = 0.1
+			POD_bygones_maa_pursuit_mult = 0.1
+			POD_bygones_maa_toughness_mult = 0.1
+			POD_bygones_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_bygones_maa_damage_mult = 0.15
+			POD_bygones_maa_pursuit_mult = 0.15
+			POD_bygones_maa_toughness_mult = 0.15
+			POD_bygones_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_bygones_maa_damage_mult = 0.2
+			POD_bygones_maa_pursuit_mult = 0.2
+			POD_bygones_maa_toughness_mult = 0.2
+			POD_bygones_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_chimera = {
+	court_position_types = { 
+		trod_wayfarer_court_position
+		yang_ambassador_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_chimera_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_chimera_maa_damage_mult = 0.1
+			POD_chimera_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_chimera_maa_damage_mult = 0.1
+			POD_chimera_maa_pursuit_mult = 0.1
+			POD_chimera_maa_toughness_mult = 0.1
+			POD_chimera_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_chimera_maa_damage_mult = 0.15
+			POD_chimera_maa_pursuit_mult = 0.15
+			POD_chimera_maa_toughness_mult = 0.15
+			POD_chimera_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_chimera_maa_damage_mult = 0.2
+			POD_chimera_maa_pursuit_mult = 0.2
+			POD_chimera_maa_toughness_mult = 0.2
+			POD_chimera_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+POD_organize_faerie = {
+	court_position_types = { 
+		trod_wayfarer_court_position
+	}
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.5
+	}
+
+	employee_modifier = {
+		monthly_prestige = minor_court_position_task_prestige_salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			POD_faerie_maa_damage_mult = 0.05
+		}
+		poor = {
+			POD_faerie_maa_damage_mult = 0.1
+			POD_faerie_maa_pursuit_mult = 0.1
+		}
+		average = {
+			POD_faerie_maa_damage_mult = 0.1
+			POD_faerie_maa_pursuit_mult = 0.1
+			POD_faerie_maa_toughness_mult = 0.1
+			POD_faerie_maa_screen_mult = 0.1
+		}
+		good = {
+			POD_faerie_maa_damage_mult = 0.15
+			POD_faerie_maa_pursuit_mult = 0.15
+			POD_faerie_maa_toughness_mult = 0.15
+			POD_faerie_maa_screen_mult = 0.15
+		}
+		excellent = {
+			POD_faerie_maa_damage_mult = 0.2
+			POD_faerie_maa_pursuit_mult = 0.2
+			POD_faerie_maa_toughness_mult = 0.2
+			POD_faerie_maa_screen_mult = 0.2
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					is_at_war = yes
+				}
+			}
+			add = -100 #to force the switch to default task, the ai_will_do must be negative
+		}
+	}
+}
+
+
+POD_manage_estate = {
+	court_position_types = { majordomo_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+	}
+
+	employee_modifier = {
+		monthly_prestige = 1
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {}
+		poor = {
+			domicile_monthly_gold_mult = 0.02
+			domicile_monthly_prestige_mult = 0.02
+			domicile_monthly_piety_mult = 0.02
+		}
+		average = {
+			domicile_monthly_gold_mult = 0.05
+			domicile_monthly_prestige_mult = 0.05
+			domicile_monthly_piety_mult = 0.05
+		}
+		good = {
+			domicile_monthly_gold_mult = 0.1
+			domicile_monthly_prestige_mult = 0.1
+			domicile_monthly_piety_mult = 0.1
+		}
+		excellent = {
+			domicile_monthly_gold_mult = 0.15
+			domicile_monthly_prestige_mult = 0.15
+			domicile_monthly_piety_mult = 0.15
+		}
+	}
+
+	is_shown = {}
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = { value = 0 }
+}
+
+#Ashirra
+POD_imam_sanctuary = {
+	court_position_types = { ashirra_imam_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+	}
+
+	employee_modifier = {
+		monthly_prestige = 1
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			county_opinion_add = 4
+		}
+		poor = {
+			county_opinion_add = 8
+		}
+		average = {
+			county_opinion_add = 12
+		}
+		good = {
+			county_opinion_add = 16
+		}
+		excellent = {
+			county_opinion_add = 20
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 0
+	}
+}
+POD_imam_sadaqah = {
+	court_position_types = { ashirra_imam_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost_double
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+	}
+
+	employee_modifier = {
+		monthly_piety = 1
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			monthly_piety = 0.1
+		}
+		poor = {
+			monthly_piety = 0.25
+		}
+		average = {
+			monthly_piety = 0.5
+		}
+		good = {
+			monthly_piety = 0.8
+		}
+		excellent = {
+			monthly_piety = 1
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = {
+		if = {
+			limit = { uses_cairo_imam_reward = yes }
+			custom_tooltip = POD_imam_sadaqah_cairo_tooltip
+		}
+	}
+	on_end = { }
+	on_yearly = {
+		random = {
+			chance = {
+				value = 5
+				add = {
+					value = "aptitude(ashirra_imam_court_position)"
+					multiply = 0.5
+				}
+			}
+			if = {
+				limit = { 
+					scope:liege = {
+						uses_cairo_imam_reward = yes
+						any_realm_county = { NOT = { religion = religion:ashirra_religion } }
+					}
+				}
+				scope:liege = {
+					send_interface_message = {
+						type = event_generic_good
+						title = court_imam_sadaqah_cairo_effect_title
+						right_icon = prev
+			
+						random_realm_county = {
+							limit = { NOT = { religion = religion:ashirra_religion } }
+							set_county_faith = scope:liege.faith
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = {
+			add = ai_zeal
+		}
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost_double
+					piety >= 2000
+				}
+			}
+			add = -1000
+		}
+	}
+}
+POD_qadi_judge = {
+	court_position_types = { ashirra_qadi_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		piety = 0.25
+	}
+
+	employee_modifier = {
+		monthly_piety = 1
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			stress_gain_mult = -0.02
+		}
+		poor = {
+			stress_gain_mult = -0.04
+		}
+		average = {
+			stress_gain_mult = -0.06
+		}
+		good = {
+			stress_gain_mult = -0.08
+		}
+		excellent = {
+			stress_gain_mult = -0.1
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { }
+
+	on_start = {
+		if = {
+			limit = { uses_cairo_qadi_reward = yes }
+			custom_tooltip = POD_qadi_judge_cairo_tooltip
+		}
+	}
+	on_end = { }
+	on_yearly = {
+		random = {
+			chance = {
+				value = 5
+				add = {
+					value = "aptitude(ashirra_qadi_court_position)"
+					multiply = 0.5
+				}
+			}
+			if = {
+				limit = { 
+					scope:liege = {
+						uses_cairo_qadi_reward = yes
+						any_realm_county = { de_jure_drifting_towards = scope:liege.primary_title }
+					}
+				}
+				scope:liege = {
+					send_interface_message = {
+						type = event_generic_good
+						title = court_qadi_judge_cairo_effect_title
+						right_icon = prev
+			
+						random_realm_county = {
+							limit = { de_jure_drifting_towards = scope:liege.primary_title }
+							change_de_jure_drift_progress = {
+								target = scope:liege.primary_title
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = 10
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost
+					stress <= 70
+				}
+			}
+			add = -1000
+		}
+	}
+}
+POD_ulama_teachings = {
+	court_position_types = { ashirra_ulama_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = 1
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			cultural_head_fascination_mult = 0.02
+		}
+		poor = {
+			cultural_head_fascination_mult = 0.04
+		}
+		average = {
+			cultural_head_fascination_mult = 0.06
+		}
+		good = {
+			cultural_head_fascination_mult = 0.08
+		}
+		excellent = {
+			cultural_head_fascination_mult = 0.1
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = { 
+		custom_tooltip = {
+			text = POD_ulama_teachings_requirement
+			scope:liege = {
+				culture = {
+					exists = culture_head
+					culture_head = prev
+				}
+			}
+		}
+	}
+
+	on_start = {
+		if = {
+			limit = { uses_cairo_ulama_reward = yes }
+			custom_tooltip = POD_ulama_teachings_cairo_tooltip
+		}
+	}
+	on_end = { }
+	on_yearly = {
+		random = {
+			chance = {
+				value = 5
+				add = {
+					value = "aptitude(ashirra_ulama_court_position)"
+					multiply = 0.5
+				}
+			}
+			if = {
+				limit = { 
+					scope:liege = {
+						uses_cairo_ulama_reward = yes
+						has_a_bad_stress_coping_trait_trigger = yes
+					}
+				}
+				scope:liege = {
+					send_interface_message = {
+						type = event_generic_good
+						title = court_ulama_teachings_cairo_effect_title
+						right_icon = prev
+			
+						POD_remove_stress_traits_no_stress_effect = yes
+					}
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = 10
+		if = {
+			limit = {
+				monthly_character_income < monthly_court_position_task_cost
+			}
+			add = -1000
+		}
+	}
+}
+POD_ulama_learning = {
+	court_position_types = { ashirra_ulama_court_position }
+
+	cost = {
+		round = no
+		gold = {
+			add = {
+				value = monthly_court_position_task_cost_double
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+		prestige = 0.25
+	}
+
+	employee_modifier = {
+		monthly_prestige = 0.5
+		monthly_lifestyle_xp_gain_mult = 0.2
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = POD_ulama_learning_tooltip_requirement
+			NAND = {
+				has_trait = theologian
+				has_trait = scholar
+			}
+		}
+	}
+
+	on_start = {
+		custom_tooltip = POD_ulama_learning_tooltip
+	}
+
+	on_yearly = {
+		random = {
+			chance = {
+				value = 5
+				add = {
+					value = "aptitude(ashirra_ulama_court_position)"
+					multiply = 0.65
+				}
+			}
+			if = {
+				limit = { NOT = { has_trait = theologian } }
+				court_ulama_study_theology = yes
+			}
+			else = {
+				court_ulama_study_scholarship = yes 
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+	}
+}
+
+POD_mullah_warriors = {
+	court_position_types = { ashirra_mullah_court_position }
+
+	cost = {
+		round = no
+		piety = {
+			add = 0.5
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+	}
+
+	employee_modifier = {
+		monthly_prestige = 0.5
+		monthly_piety = 0.5
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			holy_order_hire_cost_mult = -0.05
+			zealot_levy_contribution_mult = 0.01
+		}
+		poor = {
+			holy_order_hire_cost_mult = -0.1
+			zealot_levy_contribution_mult = 0.02
+		}
+		average = {
+			holy_order_hire_cost_mult = -0.15
+			zealot_levy_contribution_mult = 0.05
+		}
+		good = {
+			holy_order_hire_cost_mult = -0.2
+			zealot_levy_contribution_mult = 0.10
+		}
+		excellent = {
+			holy_order_hire_cost_mult = -0.25
+			zealot_levy_contribution_mult = 0.15
+		}
+	}
+
+
+	on_start = { }
+	on_end = { }
+
+	ai_will_do = {
+		value = 10
+		if = {
+			limit = {
+				monthly_character_income < monthly_court_position_task_cost
+			}
+			add = -1000
+		}
+	}
+}
+POD_mullah_zealots = {
+	court_position_types = { ashirra_mullah_court_position }
+
+	# Monthly cost for the task
+	cost = {
+		round = no
+		piety = {
+			add = 0.5
+			add = {
+				value = monthly_court_position_task_cost
+				desc = COURT_POSITION_TASK_COST_BREAKDOWN_BASE
+				format = "BASE_VALUE_FORMAT_DECIMALS_PLUS_NEGATIVE"
+			}
+		}
+	}
+
+	employee_modifier = {
+	}
+	
+	base_employer_modifier = {
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			domain_tax_same_faith_mult = 0.05
+			zealot_same_faith_opinion = 2
+		}
+		poor = {
+			domain_tax_same_faith_mult = 0.1
+			zealot_same_faith_opinion = 3
+		}
+		average = {
+			domain_tax_same_faith_mult = 0.15
+			zealot_same_faith_opinion = 5
+		}
+		good = {
+			domain_tax_same_faith_mult = 0.2
+			zealot_same_faith_opinion = 7
+		}
+		excellent = {
+			domain_tax_same_faith_mult = 0.25
+			zealot_same_faith_opinion = 10
+		}
+	}
+
+	is_shown = {  }
+	is_valid_showing_failures_only = {}
+
+	on_start = {
+		if = {
+			limit = { uses_cairo_mullah_reward = yes }
+			custom_tooltip = POD_mullah_zealots_cairo_tooltip
+		}
+	}
+	on_end = { }
+	on_yearly = {
+		random = {
+			chance = {
+				value = 5
+				add = {
+					value = "aptitude(ashirra_mullah_court_position)"
+					multiply = 0.5
+				}
+			}
+			if = {
+				limit = { 
+					scope:liege = {
+						uses_cairo_mullah_reward = yes
+						OR = {
+							has_trait = cynical
+							any_courtier = { has_trait = cynical }
+							any_vassal = { has_trait = cynical }
+						}
+					}
+				}
+				court_mullah_zealots_cairo_effect = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = 50
+		if = {
+			limit = {
+				OR = {
+					monthly_character_income < monthly_court_position_task_cost
+					has_trait = cynical
+				}
+			}
+			add = -1000
+		}
+	}
+}

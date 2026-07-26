@@ -1,0 +1,1836 @@
+﻿POD_divide_interaction = {
+	category = interaction_category_fera
+	common_interaction = yes
+	icon = POD_werewolf_interaction
+
+	is_shown = {
+		scope:actor = { has_perk = divide_perk }
+		scope:actor != scope:recipient
+		scope:recipient = { is_landed = yes }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = POD_divide_interaction_desc
+	
+	cost = { piety = 150 }
+	
+	cooldown = { months = 6 }
+
+	on_accept = {
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = divide_modifier
+				years = 5
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -10
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		piety > 250
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 48
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 45
+			scope:actor = {
+			    is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_inspiration_interaction = {
+	category = interaction_category_fera
+	icon = POD_werewolf_interaction
+
+	is_shown = {
+		scope:actor = {
+			OR = {
+				has_perk = inspiration_perk
+				has_perk = pack_tactics_perk
+				has_perk = strength_will_perk
+			}
+		}
+		scope:actor != scope:recipient
+		scope:recipient = {
+			OR = {
+				has_trait = werewolf
+				has_trait = kinfolk
+			}
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = POD_inspiration_interaction_desc
+	
+	cost = { prestige = 50 }
+	
+	cooldown = { months = 6 }
+
+	on_accept = {
+	
+		if = {
+			limit = {
+				scope:actor = {
+					has_perk = strength_will_perk
+				}
+			}
+			scope:recipient = {
+				add_character_modifier = {
+					modifier = strength_will_modifier
+					years = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:actor = {
+					has_perk = pack_tactics_perk
+				}
+			}
+			scope:recipient = {
+				add_character_modifier = {
+					modifier = pack_tactics_modifier
+					years = 5
+				}
+			}
+		}
+		else = {
+			scope:recipient = {
+				add_character_modifier = {
+					modifier = werewolf_inspiration_modifier
+					years = 5
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = gift_opinion
+				opinion = 15
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		prestige > 250
+	}
+	ai_targets = {
+		ai_recipients = peer_vassals
+		ai_recipients = courtiers
+		max = 10
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 100
+	}
+}
+
+POD_primal_song_interaction = {
+	category = interaction_category_fera
+	icon = POD_werewolf_interaction
+
+	is_shown = {
+		scope:actor = { has_perk = primal_song_perk }
+		scope:actor = scope:recipient
+	}
+
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = POD_primal_song_interaction_desc
+	
+	cost = { prestige = 100 }
+	cooldown = { years = 5 }
+	
+
+	on_accept = {
+		scope:actor = {
+			trigger_event = POD_werewolves.1
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		prestige > 250
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 100
+	}
+}
+
+POD_break_the_bonds_interaction = {
+	category = interaction_category_fera
+	desc = POD_break_the_bonds_interaction_desc
+	icon = POD_werewolf_interaction
+
+	cooldown = { years = 2 }
+
+	is_shown = {
+		scope:actor = { has_perk = release_from_bondage_perk }
+		scope:actor != scope:recipient
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		scope:recipient = { has_hook = scope:actor }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+			send_interface_toast = {
+				title =  msg_dismiss_hook_interaction_title
+				left_icon = scope:actor
+				right_icon = scope:recipient
+				
+				scope:recipient = {
+					remove_hook = { target = scope:actor }
+					add_opinion = {
+						target = scope:actor
+						modifier = lost_strong_hook_opinion
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_shared_strength_interaction = {
+	category = interaction_category_fera
+	desc = POD_shared_strength_interaction_desc
+	icon = POD_werewolf_interaction
+
+	send_options_exclusive = no
+
+	is_shown = {
+		scope:actor = { has_perk = shared_strength_perk }
+		scope:actor != scope:recipient
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_diplomacy_gain_modifier } }
+		}
+		flag = diplomacy
+		localization = diplomacy
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_martial_gain_modifier } }
+		}
+		flag = martial
+		localization = martial
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_stewardship_gain_modifier } }
+		}
+		flag = stewardship
+		localization = stewardship
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_intrigue_gain_modifier } }
+		}
+		flag = intrigue
+		localization = intrigue
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_learning_gain_modifier } }
+		}
+		flag = learning
+		localization = learning
+	}
+	
+	send_option = {
+		is_valid = {
+			scope:recipient = { NOT = { has_character_modifier = shared_strength_prowess_gain_modifier } }
+		}
+		flag = prowess
+		localization = prowess
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 2 }
+			switch = {
+				trigger = yes
+				scope:diplomacy = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_diplomacy_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_diplomacy_loss_modifier
+						years = 5
+					}
+				}
+				scope:martial = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_martial_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_martial_loss_modifier
+						years = 5
+					}
+				}
+				scope:stewardship = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_stewardship_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_stewardship_loss_modifier
+						years = 5
+					}
+				}
+				scope:intrigue = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_intrigue_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_intrigue_loss_modifier
+						years = 5
+					}
+				}
+				scope:learning = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_learning_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_learning_loss_modifier
+						years = 5
+					}
+				}
+				scope:prowess = {
+					scope:recipient = {
+						add_character_modifier = {
+							modifier = shared_strength_prowess_gain_modifier
+							years = 5
+						}
+					}
+					add_character_modifier = {
+						modifier = shared_strength_prowess_loss_modifier
+						years = 5
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = pleased_opinion
+				opinion = 25
+			}
+		}
+	}
+
+	auto_accept = yes
+
+	#ai_potential = {
+	#	# The basic requirements
+	#	is_imprisoned = no
+	#	is_landed = yes
+	#
+	#	is_knight = no
+	#	number_of_knights > 0
+	#	primary_title.tier > tier_barony
+	#}
+	#ai_targets = {
+	#	ai_recipients = peer_vassals
+	#	ai_recipients = courtiers
+	#	max = 10
+	#}
+	ai_frequency = 0
+	ai_will_do = {
+		base = 0
+		
+	#	modifier = {
+	#		add = 100
+	#		scope:recipient = {
+	#			scope:prowess = yes
+	#			is_knight_of = scope:actor
+	#		}
+	#	}
+	}
+}
+
+POD_storyteller_interaction = {
+	category = interaction_category_fera
+	desc = POD_storyteller_interaction_desc
+	icon = POD_werewolf_interaction
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = { has_perk = storyteller_perk }
+		scope:actor = scope:recipient
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = { POD_gift_cost_effect = { COUNT = 1 } }
+		scope:recipient = {
+			custom_tooltip = POD_storyteller_interaction.tt
+			trigger_event = { on_action = on_yearly_events }
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_unleash_storm_of_mothers_wrath_interaction = {
+	category = interaction_category_fera
+	desc = POD_unleash_storm_of_mothers_wrath_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 5 }
+	cost = { piety = 1500 }
+	
+	auto_accept = yes
+
+	is_shown = {
+		scope:actor = { has_perk = storm_of_mothers_wrath_perk }
+		scope:actor != scope:recipient
+		scope:recipient = { is_landed = yes }
+		scope:recipient.highest_held_title_tier > tier_barony
+		scope:actor = { NOT = { target_is_liege_or_above = scope:recipient } }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		custom_tooltip = POD_unleash_storm_of_mothers_wrath_interaction.tt
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+			duel = {
+				skill = learning
+				target = scope:recipient
+			
+				50 = {
+					desc = POD_unleash_storm_of_mothers_wrath_interaction.duel.success
+					
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					custom_tooltip = POD_unleash_storm_of_mothers_wrath_interaction.duel.tt.attacker_wins
+					
+					
+					hidden_effect = {
+						scope:recipient = {
+							send_interface_toast = {
+								title = POD_unleash_storm_of_mothers_wrath_interaction_recipient_toast
+								left_icon = scope:recipient
+								right_icon = scope:actor
+							}
+							every_sub_realm_county = {
+								add_county_modifier = {
+									modifier = storm_of_mothers_wrath_modifier
+									years = 5
+								}
+							}
+							add_opinion = {
+								target = scope:actor
+								modifier = POD_unleash_storm_of_mothers_wrath_in_my_realm
+							}
+						}
+						
+						scope:actor = {
+							send_interface_toast = {
+								title = POD_unleash_storm_of_mothers_wrath_interaction_actor_toast
+								left_icon = scope:actor
+								right_icon = scope:recipient
+							}
+						}
+					}
+				}
+				
+				50 = {
+					desc = POD_unleash_storm_of_mothers_wrath_interaction.duel.failure
+
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					
+					modifier = {
+						add = 10
+						scope:recipient = {
+							has_trait = obtenebrationadvanced
+						}
+					}
+					modifier = {
+						add = 5
+						scope:recipient = {
+							has_trait = truefaith
+						}
+					}
+					modifier = {
+						add = 10
+						scope:recipient = {
+							has_trait = beatific
+						}
+					}
+					
+					custom_tooltip = POD_unleash_storm_of_mothers_wrath_interaction.duel.tt.attacker_lost
+					hidden_effect = {
+						scope:actor = {
+							send_interface_toast = {
+								title = POD_unleash_storm_of_mothers_wrath_interaction_failed_toast
+								left_icon = scope:actor
+								right_icon = scope:recipient
+							}
+						}
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+    }
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		piety > 1500
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 360
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+			    is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+		    factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+	}
+}
+
+POD_tagalong_interaction = {
+	category = interaction_category_fera
+	desc = POD_tagalong_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cost = { prestige = major_prestige_value }
+	cooldown = { years = 5 }
+
+	is_shown = {
+		scope:actor = { has_perk = tagalong_perk }
+		scope:actor != scope:recipient
+		scope:recipient = { has_trait = werewolf }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		custom_tooltip = {
+			text = "He_must_be_my_friend"
+			scope:recipient = {
+				OR = {
+					has_relation_lover = scope:actor
+					has_relation_friend = scope:actor
+					has_relation_best_friend = scope:actor
+					has_relation_soulmate = scope:actor
+					scope:actor = {
+						AND = {
+							has_strong_hook = scope:recipient
+							has_usable_hook = scope:recipient
+						}
+					}
+				}
+			}
+		}
+		scope:actor = { NOT = { is_at_war_with = scope:recipient } }
+		scope:recipient = { is_imprisoned = no }
+		NOT = { scope:recipient.religion = scope:actor.religion }
+		scope:recipient = { NOT = { religion = religion:blackspiraldancer_religion } } # Such a friend!
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			if = {
+				limit = {
+					NOR = {
+						has_relation_lover = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_best_friend = scope:recipient
+						has_relation_soulmate = scope:recipient
+					}
+				}
+				use_hook = scope:recipient
+			}
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					OR = {
+						religion = religion:blackfury_religion
+						religion = religion:redtalon_religion
+					}
+				}
+			}
+			scope:actor = {
+				add_character_modifier = {
+					modifier = pegasus_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = { scope:recipient = { POD_fera_is_bonegnawer = yes } }
+			scope:actor = {
+				add_character_modifier = {
+					modifier = rat_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = { scope:recipient = { religion = religion:fianna_religion } }
+			scope:actor = {
+				add_character_modifier = {
+					modifier = stag_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = { scope:recipient = { religion = religion:getoffenris_religion } }
+			scope:actor = {
+				add_character_modifier = {
+					modifier = fenris_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = { scope:recipient = { POD_fera_is_warderofmen = yes } }
+			scope:actor = {
+				add_character_modifier = {
+					modifier = cockroach_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = { scope:recipient = { POD_fera_is_shadowlord = yes } }
+			scope:actor = {
+				add_character_modifier = {
+					modifier = grandfatherthunder_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					OR = {
+						POD_fera_is_silentstrider = yes
+						religion = religion:childofgaia_religion
+					}
+				}
+			}
+			scope:actor = {
+				add_character_modifier = {
+					modifier = owl_totem_modifier
+					years = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					OR = {
+						religion = religion:silverfang_religion
+						POD_fera_is_stargazer = yes
+					}
+				}
+			}
+			scope:actor = {
+				add_character_modifier = {
+					modifier = falcon_totem_modifier
+					years = 5
+				}
+			}
+		}
+		scope:actor = {
+			add_opinion = {
+				target = scope:recipient
+				modifier = gift_opinion
+				opinion = 25
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = liege
+	}
+	ai_targets = {
+		ai_recipients = neighboring_rulers
+		ai_recipients = peer_vassals
+		max = 10
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 0
+		
+		opinion_modifier = {
+			opinion_target = scope:recipient
+			multiplier = -0.25
+		}
+		modifier = {
+		    add = 50
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+	}
+}
+
+POD_beg_interaction = {
+	category = interaction_category_fera
+	desc = POD_beg_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 1 }
+	cost = { prestige = minor_prestige_value }
+
+	is_shown = {
+		scope:actor = { has_perk = beg_perk }
+		scope:actor != scope:recipient
+		scope:recipient = { is_playable_character = yes }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_at_war_with = scope:recipient } }
+		scope:recipient = { is_imprisoned = no }
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:actor = {
+			duel = {
+				skill = diplomacy
+				target = scope:recipient
+			
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					random_list = {
+						20 = {
+							scope:recipient = {
+								pay_short_term_gold = {
+									target = scope:actor
+									gold = minor_gold_value
+								}
+							}
+						}
+						55 = {
+							scope:recipient = {
+								pay_short_term_gold = {
+									target = scope:actor
+									gold = medium_gold_value
+								}
+							}
+						}
+						20 = {
+							scope:recipient = {
+								pay_short_term_gold = {
+									target = scope:actor
+									gold = major_gold_value
+								}
+							}
+						}
+						5 = {
+							scope:recipient = {
+								pay_short_term_gold = {
+									target = scope:actor
+									gold = massive_gold_value
+								}
+							}
+						}
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+				}
+			}
+		}
+		scope:actor = {
+			add_opinion = {
+				target = scope:recipient
+				modifier = gift_opinion
+				opinion = 25
+			}
+		}
+	}
+	
+	ai_min_reply_days = 0
+	ai_max_reply_days = 0
+	
+	ai_accept = {
+		base = 0 # Try to make it 0 for most interactions
+		
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1.0
+			desc = AI_OPINION_REASON
+		}
+	}
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = liege
+	}
+	ai_targets = {
+		ai_recipients = neighboring_rulers
+		ai_recipients = peer_vassals
+		max = 10
+	}
+	ai_frequency = 72
+	ai_will_do = {
+		base = 0
+		
+		opinion_modifier = {
+			opinion_target = scope:recipient
+			multiplier = -0.25
+		}
+		modifier = {
+		    add = 50
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_riot_interaction = {
+	category = interaction_category_fera
+	desc = POD_riot_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = riot_perk }
+		scope:actor != scope:recipient
+		scope:recipient = { is_landed = yes }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { NOT = { is_at_war_with = scope:recipient } }
+		scope:recipient = { is_imprisoned = no }
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:actor = {
+			duel = {
+				skill = diplomacy
+				target = scope:recipient
+			
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					scope:recipient.capital_county = {
+						title_create_faction  = {
+							type = peasant_faction
+							target = scope:recipient
+						}
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = neighboring_rulers
+		max = 10
+	}
+	ai_frequency = 90
+	ai_will_do = {
+		base = 0
+		
+		opinion_modifier = {
+			opinion_target = scope:recipient
+			multiplier = -0.25
+		}
+		modifier = {
+		    add = 50
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_airitechs_daughters_interaction = {
+	category = interaction_category_fera
+	desc = POD_airitechs_daughters_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown_against_recipient = { years = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = airitechs_daughters_perk }
+		scope:actor != scope:recipient
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:recipient = { has_main_supernatural_race_trigger = no }
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_description = {
+				object = scope:actor
+				text = is_courtier_or_vassal_of
+				OR = {
+					is_courtier_of = scope:actor
+					is_vassal_of = scope:actor
+				}
+			}
+		}
+		scope:recipient = { is_imprisoned = no }
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = POD_werewolf_form_crinos_modifier
+				years = 1
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = gift_opinion
+				opinion = 15
+			}
+		}
+	}
+	
+	auto_accept = yes
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		number_of_knights > 0
+		primary_title.tier > tier_barony
+	}
+	ai_targets = {
+		ai_recipients = peer_vassals
+		ai_recipients = courtiers
+		max = 10
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 100
+			scope:recipient = {
+				is_knight_of = scope:actor
+			}
+		}
+	}
+}
+
+POD_shadow_pack_interaction = {
+	category = interaction_category_fera
+	desc = POD_shadow_pack_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 20 }
+
+	is_shown = {
+		scope:actor = { has_perk = shadow_pack_perk }
+		scope:actor = scope:recipient
+		scope:actor = { POD_is_clone_trigger = no }
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_gnosis_for_gift = { COUNT = 5 }
+			custom_tooltip = {
+				text = POD_has_less_than_5_shadowy_duplicates_tt
+				any_relation = {
+					count < 5
+					type = mindless_clone_servant
+					var:clone_type ?= flag:shadowy_duplicate
+				}
+			}
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		custom_tooltip = POD_shadow_pack_interaction.tt
+		scope:actor = {
+			trigger_event = POD_werewolves.2
+		}
+    }
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		
+		piety > 800
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 360
+	ai_will_do = {
+		base = 5
+		
+		modifier = {
+		    add = 10
+			is_at_war = yes
+		}
+	}
+}
+
+POD_renew_the_cycle_interaction = {
+	category = interaction_category_fera
+	desc = POD_renew_the_cycle_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = renew_the_cycle_perk }
+		scope:actor != scope:recipient
+		scope:recipient = {
+			OR = {
+				has_trait = vampire
+				has_trait = kueijin
+				has_trait = ghoul
+				has_trait = revenant
+				has_trait = risen
+				has_trait = mummy
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 3 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 3 }
+		}
+		scope:actor = {
+			duel = {
+				skill = learning
+				target = scope:recipient
+			
+				5 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					execute_opinion_effect = { VICTIM = scope:recipient EXECUTIONER = scope:actor }
+					scope:recipient = {
+						pod_death_no_killer = {
+							death_reason = death_old_age
+						}
+					}
+				}
+				95 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 120
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+			    is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_thought_form_of_the_twelve_ministers_interaction = {
+	category = interaction_category_fera
+	desc = POD_thought_form_of_the_twelve_ministers_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 5 }
+
+	is_shown = {
+		scope:actor = { has_perk = thought_form_of_the_twelve_ministers_perk }
+		scope:actor = scope:recipient
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		scope:actor = { NOT = { has_character_modifier = POD_thought_form_of_the_twelve_ministers_modifier } }
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = { POD_gift_cost_effect = { COUNT = 1 } }
+		scope:actor = {
+			add_character_modifier = {
+				modifier = POD_thought_form_of_the_twelve_ministers_modifier
+				years = 5
+			}
+		}
+    }
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+POD_burning_scars_interaction = {
+	category = interaction_category_fera
+	desc = POD_burning_scars_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 5 }
+	
+	is_shown = {
+		scope:actor = { has_perk = burning_scars_perk }
+		scope:actor != scope:recipient
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			POD_gift_cost_effect = { COUNT = 1 }
+			
+			POD_increase_wounds_effect = { COUNT = POD_base_fire_damage REASON = fire }
+		}
+		scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_balefire_damage REASON = balefire } }
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+POD_dumpster_diving_interaction = {
+	category = interaction_category_fera
+	desc = POD_dumpster_diving_interaction_desc
+	
+	cooldown = { months = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = dumpster_diving_perk }
+		scope:actor = scope:recipient
+		OR = {
+			POD_teleport_interaction_army_is_shown_trigger = yes
+			POD_teleport_interaction_travel_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_army_is_shown_trigger = yes }
+		is_valid = {
+			POD_teleport_interaction_army_is_valid_trigger = yes
+			scope:recipient.location.county = { development_level > 15 }
+		}
+		flag = teleport_army
+		localization = POD_teleport_army
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_travel_trigger = yes }
+		is_valid = { scope:actor.current_travel_plan.next_destination_province.county = { development_level > 15 } }
+		flag = teleport_travel
+		localization = POD_teleport_travel
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:actor = {
+			duel = {
+				skill = learning
+				value = 20
+			
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					switch = {
+						trigger = yes
+						scope:teleport_army   = { POD_teleport_army_interaction_effect   = yes }
+						scope:teleport_travel = { POD_teleport_travel_interaction_effect = yes }
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					
+					add_stress = minor_stress_impact_gain
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_home_in_all_lands_perk_interaction = {
+	category = interaction_category_fera
+	desc = POD_home_in_all_lands_perk_interaction_desc
+	
+	use_diplomatic_range = no
+	cooldown = { months = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = home_in_all_lands_perk }
+		scope:actor = scope:recipient
+		OR = {
+			POD_teleport_interaction_army_is_shown_trigger = yes
+			POD_teleport_interaction_travel_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_has_enough_gnosis_for_gift = { COUNT = 1 }
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_army_is_shown_trigger = yes }
+		is_valid = {
+			POD_teleport_interaction_army_is_valid_trigger = yes
+			scope:recipient.location.county = { development_level < 20 }
+		}
+		flag = teleport_army
+		localization = POD_teleport_army
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_travel_trigger = yes }
+		is_valid = { scope:actor.current_travel_plan.next_destination_province.county = { development_level < 20 } }
+		flag = teleport_travel
+		localization = POD_teleport_travel
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:actor = {
+			duel = {
+				skill = martial
+				value = 10
+			
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					switch = {
+						trigger = yes
+						scope:teleport_army   = { POD_teleport_army_interaction_effect   = yes }
+						scope:teleport_travel = { POD_teleport_travel_interaction_effect = yes }
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					
+					add_stress = minor_stress_impact_gain
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_storm_winds_slash_interaction = {
+	category = interaction_category_fera
+	desc = POD_storm_winds_slash_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 2 }
+	cooldown_against_recipient = { years = 6 }
+	
+	is_shown = {
+		scope:actor = { has_perk = storm_winds_slash_perk }
+		scope:actor != scope:recipient
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		scope:actor = { 
+			custom_tooltip = {
+				text = POD_storm_winds_slash_interaction_requirement
+				any_equipped_character_artifact = {
+					artifact_type = katana
+					prev = { can_benefit_from_artifact = prev }
+				}
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			POD_gift_cost_effect = { COUNT = 1 }
+
+			scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_wound_damage REASON = fight } }
+			if = {
+				limit = {
+					scope:actor = {
+						any_equipped_character_artifact = {
+							artifact_type = katana
+							prev = { can_benefit_from_artifact = prev }
+							has_variable = thunder_inoue
+						}
+					}
+				}
+				scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_lightning_damage REASON = lightning } }
+			}
+
+
+			duel = {
+				skill = prowess
+				target = scope:recipient
+			
+				10 = {
+					compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+					trigger = { any_equipped_character_artifact = { artifact_type = katana prev = { can_benefit_from_artifact = prev } rarity = illustrious } }
+
+					scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_triple_wound_damage REASON = fight } }
+				}
+				20 = {
+					compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+					trigger = { any_equipped_character_artifact = { artifact_type = katana prev = { can_benefit_from_artifact = prev } OR = { rarity = illustrious rarity = famed } } }
+					
+					scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_double_wound_damage REASON = fight } }
+				}
+				40 = {
+					trigger = { any_equipped_character_artifact = { artifact_type = katana prev = { can_benefit_from_artifact = prev } OR = { rarity = illustrious rarity = famed rarity = masterwork } } }
+					
+					scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_wound_damage REASON = fight } }
+				}
+				60 = {
+					compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+POD_dark_of_night_interaction = {
+	category = interaction_category_fera
+	desc = POD_dark_of_night_interaction_desc
+	icon = POD_werewolf_interaction
+	
+	cooldown = { years = 5 }
+	cost = { prestige = 200 }
+	
+	is_shown = {
+		scope:actor = { has_perk = dark_of_night_perk }
+		scope:actor != scope:recipient
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } }
+		scope:recipient = { NOT = { is_at_war_with = scope:recipient } }
+		trigger_if = {
+			limit = { scope:recipient = { is_knight = yes } }
+			scope:recipient = { liege_or_court_owner = { NOT = { is_at_war_with = scope:actor } } }
+		}
+		custom_tooltip = {
+			text = target_in_duel_tooltip
+			scope:recipient = { NOT = { has_variable = engaged_in_single_combat } }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			POD_gift_cost_effect = { COUNT = 2 }
+			
+			duel = {
+				skills = { martial prowess } 
+				target = scope:recipient
+			
+				30 = {
+					desc = POD_dark_of_night_interaction_success
+					compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+
+					scope:recipient = { add_character_modifier = { modifier = dark_of_night_perk_modifier years = 5 } }
+					
+					hidden_effect = {
+						send_interface_toast = {
+							title = POD_dark_of_night_interaction_success
+							left_icon = scope:actor
+							right_icon = scope:recipient
+						}
+					}
+				}
+				
+				70 = {
+					compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+					hidden_effect = {
+						send_interface_toast = {
+							title = POD_shared_loca_failure
+							left_icon = scope:actor
+							right_icon = scope:recipient
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+
+POD_moon_bridge_interaction = {
+	category = interaction_category_fera
+	icon = POD_werewolf_interaction
+	common_interaction = yes
+	desc = POD_moon_bridge_interaction_desc
+	
+	cooldown = { months = 1 }
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			OR = {
+				has_trait = werewolf
+				uses_cairo_caern_main_reward = yes
+			}
+		}
+		OR = {
+			POD_teleport_interaction_army_is_shown_trigger = yes
+			POD_teleport_interaction_travel_trigger = yes
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_teleport_interaction_travel_trigger = no }
+			POD_teleport_interaction_army_is_valid_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_gnosis_for_gift = { COUNT = 1 }
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_army_is_shown_trigger = yes }
+		is_valid = {
+			POD_teleport_interaction_army_is_valid_trigger = yes
+			trigger_if = {
+				limit = {
+					NOT = { scope:recipient.location = { has_building_with_flag = caern } }
+					scope:actor = { uses_cairo_caern_main_reward = no }
+				}
+				scope:actor = { has_perk = gate_of_the_moon_perk }
+			}
+		}
+		flag = teleport_army
+		localization = POD_teleport_army
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_travel_trigger = yes }
+		is_valid = {
+			trigger_if = {
+				limit = {
+					NOT = { scope:actor.current_travel_plan.next_destination_province = { has_building_with_flag = caern } }
+					scope:actor = { uses_cairo_caern_main_reward = no }
+				}
+				scope:actor = { has_perk = gate_of_the_moon_perk }
+			}
+		}
+		flag = teleport_travel
+		localization = POD_teleport_travel
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = 1 }
+		}
+		scope:actor = {
+			duel = {
+				skill = learning
+				value = 10
+			
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					
+					switch = {
+						trigger = yes
+						scope:teleport_army   = { POD_teleport_army_interaction_effect   = yes }
+						scope:teleport_travel = { POD_teleport_travel_interaction_effect = yes }
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					
+					add_stress = minor_stress_impact_gain
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_blooding_fury_interaction = {
+	category = interaction_category_fera
+	icon = POD_werewolf_interaction
+	desc = POD_blooding_fury_interaction_desc
+
+	is_shown = {
+		scope:actor = { has_perk = blooding_fury_perk }
+		scope:actor = scope:recipient
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_is_not_full_on_energy_including_vessels = yes }
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			increase_wounds_effect = { REASON = bloodloss }
+		}
+		scope:recipient = {
+			POD_gnosis_income_effect = { COUNT = 3 }
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	
+	ai_will_do = {
+		base = 0
+	}
+}

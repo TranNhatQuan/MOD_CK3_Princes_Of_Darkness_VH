@@ -1,0 +1,485 @@
+﻿
+masquerade_bar_gui = {
+	scope = character
+	is_shown = {
+		POD_splat_has_masquerade_trigger = yes
+	}
+}
+
+blood_hunger_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_hunger_exclusively = yes
+		POD_has_infinite_blood_trigger = no
+	}
+}
+
+blood_hunger_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			bloodhunger0_modifier = { POD_save_tooltip = { LOC = bloodhunger0_modifier } }
+			bloodhunger1_modifier = { POD_save_tooltip = { LOC = bloodhunger1_modifier } }
+			bloodhunger2_modifier = { POD_save_tooltip = { LOC = bloodhunger2_modifier } }
+			bloodhunger3_modifier = { POD_save_tooltip = { LOC = bloodhunger3_modifier } }
+			bloodhunger4_modifier = { POD_save_tooltip = { LOC = bloodhunger4_modifier } }
+			bloodhunger5_modifier = { POD_save_tooltip = { LOC = bloodhunger5_modifier } }
+			bloodhunger1_monomi_modifier = { POD_save_tooltip = { LOC = bloodhunger1_monomi_modifier } }
+			bloodhunger2_monomi_modifier = { POD_save_tooltip = { LOC = bloodhunger2_monomi_modifier } }
+			bloodhunger3_monomi_modifier = { POD_save_tooltip = { LOC = bloodhunger3_monomi_modifier } }
+			bloodhunger4_monomi_modifier = { POD_save_tooltip = { LOC = bloodhunger4_monomi_modifier } }
+			bloodhunger5_monomi_modifier = { POD_save_tooltip = { LOC = bloodhunger5_monomi_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_hunger_hud
+		}
+	}
+}
+
+masqurade_exposure_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			masquerade0_modifier = { POD_save_tooltip = { LOC = masquerade0_modifier } }
+			masquerade1_modifier = { POD_save_tooltip = { LOC = masquerade1_modifier } }
+			masquerade2_modifier = { POD_save_tooltip = { LOC = masquerade2_modifier } }
+			masquerade3_modifier = { POD_save_tooltip = { LOC = masquerade3_modifier } }
+			masquerade4_modifier = { POD_save_tooltip = { LOC = masquerade4_modifier } }
+			masquerade5_modifier = { POD_save_tooltip = { LOC = masquerade5_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_masquerade_hud
+		}
+	}
+}
+
+resolve_meters_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_resolve_exclusively = yes
+	}
+}
+
+pathos_meters_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_pathos_exclusively = yes
+	}
+}
+
+pathos_value_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			pathos5_modifier = { POD_save_tooltip = { LOC = pathos5_modifier } }
+			pathos4_modifier = { POD_save_tooltip = { LOC = pathos4_modifier } }
+			pathos3_modifier = { POD_save_tooltip = { LOC = pathos3_modifier } }
+			pathos2_modifier = { POD_save_tooltip = { LOC = pathos2_modifier } }
+			pathos1_modifier = { POD_save_tooltip = { LOC = pathos1_modifier } }
+			pathos0_modifier = { POD_save_tooltip = { LOC = pathos0_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_pathos_hud
+		}
+	}
+}
+
+angst_meters_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_angst_exclusively = yes
+	}
+}
+
+angst_value_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			angst5_modifier = { POD_save_tooltip = { LOC = angst5_modifier } }
+			angst4_modifier = { POD_save_tooltip = { LOC = angst4_modifier } }
+			angst3_modifier = { POD_save_tooltip = { LOC = angst3_modifier } }
+			angst2_modifier = { POD_save_tooltip = { LOC = angst2_modifier } }
+			angst1_modifier = { POD_save_tooltip = { LOC = angst1_modifier } }
+			angst0_modifier = { POD_save_tooltip = { LOC = angst0_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_saved_modifier_tooltip
+		}
+	}
+}
+
+gnosis_meters_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_gnosis_exclusively = yes
+	}
+}
+
+gnosis_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			POD_gnosis_5_modifier = { POD_save_tooltip = { LOC = POD_gnosis_5_modifier } }
+			POD_gnosis_4_modifier = { POD_save_tooltip = { LOC = POD_gnosis_4_modifier } }
+			POD_gnosis_3_modifier = { POD_save_tooltip = { LOC = POD_gnosis_3_modifier } }
+			POD_gnosis_2_modifier = { POD_save_tooltip = { LOC = POD_gnosis_2_modifier } }
+			POD_gnosis_1_modifier = { POD_save_tooltip = { LOC = POD_gnosis_1_modifier } }
+			POD_gnosis_0_modifier = { POD_save_tooltip = { LOC = POD_gnosis_0_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_gnosis_hud
+		}
+	}
+}
+
+gnosis_bar_hint = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_trait = fera }
+			open_interaction_window = {
+				interaction = POD_fera_shapeshift_interaction
+				actor = root
+				recipient = root
+			}
+		}
+	}
+}
+
+glamour_meters_show = {
+	scope = character
+	
+	is_shown = {
+		POD_splat_has_glamour_exclusively = yes
+	}
+}
+
+glamour_show_tooltip = {
+	scope = character
+	
+	effect = {
+		switch = {
+			trigger = has_character_modifier
+			glamour5_modifier = { POD_save_tooltip = { LOC = glamour5_modifier } }
+			glamour4_modifier = { POD_save_tooltip = { LOC = glamour4_modifier } }
+			glamour3_modifier = { POD_save_tooltip = { LOC = glamour3_modifier } }
+			glamour2_modifier = { POD_save_tooltip = { LOC = glamour2_modifier } }
+			glamour1_modifier = { POD_save_tooltip = { LOC = glamour1_modifier } }
+			glamour0_modifier = { POD_save_tooltip = { LOC = glamour0_modifier } }
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = pod_glamour_hud
+		}
+	}
+}
+
+resource_hint_close = {
+	scope = character
+	effect = {
+		remove_variable = resource_hint_window
+
+		POD_clear_resource_hint_vars_effect = yes
+	}
+}
+
+resource_hint_prisoners = {
+	scope = character
+	is_shown = {
+		has_prisoners = yes
+	}
+}
+
+resource_hint_artifacts = {
+	scope = character
+	is_shown = {
+		any_character_artifact = { 
+			has_variable = max_energy_stored
+		}
+	}
+}
+
+masquerade_bar_hint = {
+	scope = character
+	effect = {
+		open_interaction_window = {
+			interaction = POD_cover_masquerade_interaction
+			actor = root
+			recipient = root
+		}
+	}
+}
+
+blood_hunger_hint = {
+	scope = character
+	is_shown = {
+		var:resource_hint_window ?= flag:blood
+	}
+	effect = {
+		set_variable = {
+			name  = resource_hint_window
+			value = flag:blood
+		}
+
+		POD_clear_resource_hint_vars_effect = yes
+
+		every_in_global_list = {
+			variable = journey_GUI_list
+			limit = { var:journey_type = flag:hunt_in_capital }
+			prev = {
+				set_variable = {
+					name  = hunt_in_capital_story
+					value = prev
+				}
+			}
+		}
+		ordered_relation = {
+			type = herd_member
+			limit = { drinkable_blood_left > 0 }
+			order_by = drinkable_blood_left
+			position = 0
+			prev = {
+				set_variable = {
+					name  = suggested_herdmember
+					value = prev
+				}
+			}
+		}
+
+		ordered_prisoner = {
+			limit = { 
+				has_trait = vampire
+				is_adult = yes
+				POD_is_thinblooded_trigger = no
+			}
+			order_by = {
+				value = resonance_rating_value
+				if = { limit = { has_character_flag = POD_was_drunk_from } divide = 10 }
+			}
+			position = 0
+			prev = {
+				set_variable = {
+					name  = suggested_prisoner
+					value = prev
+				}
+			}
+		}
+	}
+}
+
+blood_hunger_hint_vampire = {
+	scope = character
+	is_shown = {
+		has_trait = vampire
+	}
+}
+blood_hunger_hint_ghoul = {
+	scope = character
+	is_shown = {
+		has_trait = ghoul
+	}
+}
+blood_hunger_hint_ghoul_safe = {
+	scope = character
+	is_shown = {
+		var:suggested_prisoner ?= {
+			NOT = { has_character_flag = POD_was_drunk_from }
+		}
+	}
+}
+blood_hunger_hint_revenant = {
+	scope = character
+	is_shown = {
+		OR = {
+			has_trait = revenant
+			has_trait = dhampir
+		}
+		NOT = { has_trait = ghoul }
+	}
+}
+
+blood_hunger_hint_journey = {
+	scope = character
+	is_shown = {
+		var:current_journey ?= {
+			var:journey_type = flag:hunt_in_capital
+		}
+	}
+}
+
+blood_hunger_hint_passive_regen = {
+	scope = character
+	is_shown = {
+		OR = {
+			has_trait = dhampir
+			has_trait = revenant
+		}
+	}
+}
+
+blood_hunger_hint_herd_available = {
+	scope = character
+	is_shown = {
+		# You have any herd member (tell player to wait for blood to replenish)
+		num_of_relation_herd_member > 0
+	}
+}
+
+blood_hunger_hint_herd_mortal = {
+	scope = character
+	is_shown = {
+		trigger_if = {
+			limit = { is_vampire_trigger = yes }
+			POD_has_potential_mortal_herd_trigger = yes
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+	effect = {
+		POD_save_potential_mortal_herd_effect = yes
+		open_interaction_window = {
+			interaction = POD_herdify_mortal_interaction
+			actor = root
+			recipient = scope:potential_mortal_herd
+		}
+	}
+}
+
+blood_hunger_hint_ghoul_bound = {
+	scope = character
+	is_shown = {
+		POD_is_bound_ghoul_trigger = yes
+	}
+}
+
+blood_hunger_hint_ghoul_independent = {
+	scope = character
+	is_shown = {
+		POD_is_masterless_ghoul_trigger = yes
+	}
+}
+
+blood_hunger_revenant_hint = {
+	scope = character
+	is_shown = {
+		var:resource_hint_window ?= flag:blood
+		has_trait = revenant
+		NOT = { has_trait = ghoul }
+	}
+	effect = {
+		set_variable = {
+			name  = resource_hint_window
+			value = flag:blood
+		}
+
+		POD_clear_resource_hint_vars_effect = yes
+	}
+}
+
+glamour_hint = {
+	scope = character
+	is_shown = {
+		var:resource_hint_window ?= flag:glamour
+	}
+	effect = {
+		set_variable = {
+			name  = resource_hint_window
+			value = flag:glamour
+		}
+
+		POD_clear_resource_hint_vars_effect = yes
+	}
+}
+
+glamour_hint_passive_regen = {
+	scope = character
+	is_shown = {
+		has_passive_glamour_regen_trigger = yes
+	}
+}
+
+glamour_hint_dreamers = {
+	scope = character
+	is_shown = {
+		POD_has_potential_dreamer_trigger = yes
+	}
+	effect = {
+		POD_save_potential_dreamer_effect = yes
+		open_interaction_window = {
+			interaction = POD_musing_mortal_interaction
+			actor = root
+			recipient = scope:potential_dreamer
+		}
+	}
+}
+
+chi_hint = {
+	scope = character
+	is_shown = {
+		var:resource_hint_window ?= flag:chi
+	}
+	effect = {
+		if = {
+			limit = { has_trait = hsien }
+			set_variable = { name = resource_hint_window value = flag:glamour }
+		}
+		else = {
+			set_variable = { name = resource_hint_window value = flag:chi }
+		}
+
+		POD_clear_resource_hint_vars_effect = yes
+	}
+}
+
+resolve_hint = {
+	scope = character
+	# is_shown = {
+	# 	var:resource_hint_window ?= flag:resolve
+	# }
+	effect = {
+		open_interaction_window = {
+			interaction = POD_revelations_interaction
+			actor = root
+			recipient = root
+		}
+		# set_variable = {
+		# 	name  = resource_hint_window
+		# 	value = flag:resolve
+		# }
+		# POD_clear_resource_hint_vars_effect = yes
+	}
+}
+
+# resolve_hint_revelation = {
+# 	is_valid = {
+# 		has_perk = arcana_revelation_perk
+# 	}
+# 	effect = {
+# 		open_interaction_window = {
+# 			interaction = POD_revelations_interaction
+# 			actor = root
+# 			recipient = root
+# 		}
+# 	}
+# }

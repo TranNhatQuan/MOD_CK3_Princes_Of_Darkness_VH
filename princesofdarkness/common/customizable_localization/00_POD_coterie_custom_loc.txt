@@ -1,0 +1,625 @@
+﻿PODCoterie = {
+	type = character
+
+	text = {
+		localization_key = POD_coterie_concept
+	}
+}
+
+PODCoterieNoTooltip = {
+	type = character
+
+	text = {
+		trigger = {
+			var:coterie ?= {
+				any_in_list = {
+					variable = members
+					count >= coterie_harem_target_size
+					OR = {
+						has_relation_lover = root
+						has_relation_soulmate = root
+					}
+				}
+			}
+		}
+		localization_key = POD_coterieloc_harem
+	}
+
+	text = {
+		trigger = {
+			religion = religion:sabbat_religion
+		}
+		localization_key = POD_coterieloc_sabbat
+	}
+
+	text = {
+		trigger = {
+			religion = religion:talmahera_religion
+		}
+		localization_key = POD_coterieloc_tmr
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				faith = faith:freeanarch
+				faith = faith:camaanarchs
+			}
+		}
+		localization_key = POD_coterieloc_anarch
+	}
+
+	text = {
+		trigger = {
+			faith = faith:viahyron
+			is_baali_trigger = yes
+		}
+		localization_key = POD_coterieloc_baali_hyron
+	}
+
+	text = {
+		trigger = {
+			faith = { has_doctrine = doctrine_fera_beast_courts }
+		}
+		localization_key = POD_coterieloc_beastcourts
+	}
+
+	text = {
+		trigger = {
+			POD_is_supehunter_trigger = yes
+		}
+		localization_key = POD_coterieloc_hunter
+	}
+
+	text = {
+		trigger = {
+			POD_is_demon_trigger = yes
+		}
+		localization_key = POD_coterieloc_demon
+	}
+
+	text = {
+		trigger = {
+			POD_is_mage_trigger = yes
+		}
+		localization_key = POD_coterieloc_mage
+	}
+
+	text = {
+		trigger = {
+			has_trait = spectre
+		}
+		localization_key = POD_coterieloc_spectre
+	}
+
+	text = {
+		trigger = {
+			POD_is_wraith_trigger = yes
+		}
+		localization_key = POD_coterieloc_wraith
+	}
+
+	text = {
+		trigger = {
+			is_baali_trigger = yes
+		}
+		localization_key = POD_coterieloc_baali
+	}
+
+	text = {
+		trigger = {
+			POD_can_participate_in_vampire_politics = yes
+		}
+		localization_key = POD_coterieloc_vampire
+	}
+
+	text = {
+		trigger = {
+			POD_is_entomos_trigger = yes
+		}
+		localization_key = POD_coterieloc_entomos
+	}
+
+	text = {
+		trigger = {
+			POD_is_nagah_trigger = yes
+		}
+		localization_key = POD_coterieloc_nagah
+	}
+
+	text = {
+		trigger = {
+			POD_is_kitsune_trigger = yes
+		}
+		localization_key = POD_coterieloc_kitsune
+	}
+
+	text = {
+		trigger = {
+			POD_is_ratkin_trigger = yes
+		}
+		localization_key = POD_coterieloc_ratkin
+	}
+
+	text = {
+		trigger = {
+			POD_is_bastet_trigger = yes
+		}
+		localization_key = POD_coterieloc_bastet
+	}
+
+	text = {
+		trigger = {
+			POD_has_fera_type = { TRAIT = trait:mokole }
+		}
+		localization_key = POD_coterieloc_mokole
+	}
+	
+	text = {
+		trigger = {
+			OR = {
+				POD_splat_is_fera_trigger = yes
+				has_trait = kinfolk
+			}
+		}
+		localization_key = POD_coterieloc_werewolf
+	}
+
+	text = {
+		trigger = {
+			has_trait = redcap
+		}
+		localization_key = POD_coterieloc_redcap
+	}
+
+	text = {
+		trigger = {
+			has_POD_fae_blood_trigger = yes
+		}
+		localization_key = POD_coterieloc_fae
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				has_trait = kueijin
+				has_trait = dhampyr
+			}
+		}
+		localization_key = POD_coterieloc_kueijin
+	}
+
+	text = {
+		trigger = {
+			POD_is_mummy_trigger = yes
+		}
+		localization_key = POD_coterieloc_mummy
+	}
+	
+	text = {
+		localization_key = POD_coterieloc_generic
+	}
+}
+
+PODGetCoterieName = {
+	type = character
+	
+	text = {
+		trigger = {
+			POD_has_coterie_trigger = no
+		}
+		localization_key = POD_coteriename_error
+	}
+	
+	text = {
+		trigger = {
+			var:coterie = {
+				has_variable = custom_name
+			}
+		}
+		localization_key = POD_coteriename_custom
+	}
+	
+	text = {
+		trigger = {
+			var:coterie = {
+				POD_is_canon_coterie = yes
+			}
+		}
+		localization_key = POD_coteriename_canon
+	}
+	
+	text = {
+		localization_key = POD_coteriename_default
+	}
+}
+
+PODGetDefaultCoterieName = {
+	type = character
+	
+	text = {
+		trigger = {
+			var:coterie = {
+				POD_is_canon_coterie = yes
+			}
+		}
+		localization_key = POD_coteriename_canon
+	}
+	
+	text = {
+		localization_key = POD_coteriename_default
+	}
+}
+
+PODGetCoterieNameFromStory = {
+	type = all
+	
+	text = {
+		trigger = {
+			has_variable = custom_name
+		}
+		localization_key = POD_coteriename_custom_story
+	}
+	
+	text = {
+		trigger = {
+			POD_is_canon_coterie = yes
+		}
+		localization_key = POD_coteriename_canon_story
+	}
+	
+	text = {
+		localization_key = POD_coteriename_default_story
+	}
+}
+
+PODGetCoterieBreakdown = {
+	type = character
+	
+	text = {
+		localization_key = POD_COTERIE_BREAKDOWN
+	}
+}
+
+PODCoterieTravelStatus = {
+	type = character
+	
+	text = {
+		trigger = {
+			POD_has_coterie_trigger = no
+		}
+		localization_key = POD_coterietravel_none
+	}
+	
+	text = {
+		trigger = {
+			POD_has_coterie_members_trigger = no
+		}
+		localization_key = POD_coterietravel_empty
+	}
+	
+	text = {
+		trigger = {
+			has_variable = traveling_with_coterie
+		}
+		localization_key = POD_coterietravel_yes
+	}
+	
+	text = {
+		localization_key = POD_coterietravel_no
+	}
+}
+
+PODCoterieTravelStatusFlavor = {
+	type = character
+	
+	text = {
+		trigger = {
+			POD_has_coterie_members_trigger = no
+		}
+		localization_key = POD_coterietravel_none_flavor
+	}
+	
+	text = {
+		trigger = {
+			has_variable = traveling_with_coterie
+		}
+		localization_key = POD_coterietravel_yes_flavor
+	}
+	
+	text = {
+		localization_key = POD_coterietravel_no_flavor
+	}
+}
+
+PODCoterieTravelStatusGUI = {
+	type = character
+	
+	text = {
+		trigger = {
+			var:current_journey ?= { NOT = { exists = var:destination } }
+		}
+		localization_key = POD_coterietravel_gui_nodestination
+	}
+	
+	text = {
+		trigger = {
+			exists = involved_activity
+		}
+		localization_key = POD_journey_requirements_noactivity_gui
+	}
+	
+	text = {
+		trigger = {
+			exists = current_travel_plan
+		}
+		localization_key = POD_journey_requirements_notravel_generic_gui
+	}
+	
+	text = {
+		trigger = {
+			is_adult = no
+		}
+		localization_key = POD_journey_requirements_adult_gui
+	}
+	
+	text = {
+		trigger = {
+			is_imprisoned = yes
+		}
+		localization_key = POD_journey_requirements_noprison_gui
+	}
+	
+	text = {
+		trigger = {
+			is_in_army = yes
+		}
+		localization_key = POD_journey_requirements_noarmy_gui
+	}
+	
+	text = {
+		trigger = {
+			POD_is_not_trapped_in_umbra_trigger = no
+		}
+		localization_key = POD_journey_requirements_umbra_gui
+	}
+	
+	text = {
+		trigger = {
+			POD_has_coterie_trigger = no
+		}
+		localization_key = POD_coterietravel_gui_none
+	}
+	
+	text = {
+		trigger = {
+			POD_has_coterie_members_trigger = no
+		}
+		localization_key = POD_coterietravel_gui_empty
+	}
+	
+	text = {
+		localization_key = POD_coterietravel_gui
+	}
+}
+
+PODCoterieTravelStatusGUISimplified = {
+	type = character
+	
+	text = {
+		trigger = {
+			POD_has_coterie_trigger = no
+		}
+		localization_key = POD_coterietravel_gui_none
+	}
+	
+	text = {
+		trigger = {
+			POD_has_coterie_members_trigger = no
+		}
+		localization_key = POD_coterietravel_gui_empty
+	}
+	
+	text = {
+		localization_key = POD_coterietravel_gui
+	}
+}
+
+PODCoterieIntroFlavor = {
+	type = character
+	random_valid = yes
+	
+	text = {
+		trigger = { has_trait = ambitious }
+		localization_key = POD_coterieflavor_ambitious_1
+	}
+	
+	text = {
+		trigger = { has_trait = arbitrary }
+		localization_key = POD_coterieflavor_arbitrary_1
+	}
+	
+	text = {
+		trigger = { has_trait = arrogant }
+		localization_key = POD_coterieflavor_arrogant_1
+	}
+	text = {
+		trigger = { has_trait = arrogant }
+		localization_key = POD_coterieflavor_arrogant_2
+	}
+	
+	text = {
+		trigger = { has_trait = brave }
+		localization_key = POD_coterieflavor_brave_1
+	}
+	
+	text = {
+		trigger = { has_trait = callous }
+		localization_key = POD_coterieflavor_callous_1
+	}
+	
+	text = {
+		trigger = { has_trait = calm }
+		localization_key = POD_coterieflavor_calm_1
+	}
+	
+	text = {
+		trigger = { has_trait = chaste }
+		localization_key = POD_coterieflavor_chaste_1
+	}
+	
+	text = {
+		trigger = { has_trait = compassionate }
+		localization_key = POD_coterieflavor_compassionate_1
+	}
+	
+	text = {
+		trigger = { has_trait = content }
+		localization_key = POD_coterieflavor_content_1
+	}
+	
+	text = {
+		trigger = { has_trait = craven }
+		localization_key = POD_coterieflavor_craven_1
+	}
+	
+	text = {
+		trigger = { has_trait = cynical }
+		localization_key = POD_coterieflavor_cynical_1
+	}
+	
+	text = {
+		trigger = { has_trait = deceitful }
+		localization_key = POD_coterieflavor_deceitful_1
+	}
+	
+	text = {
+		trigger = { has_trait = diligent }
+		localization_key = POD_coterieflavor_diligent_1
+	}
+	
+	text = {
+		trigger = { has_trait = eccentric }
+		localization_key = POD_coterieflavor_eccentric_1
+	}
+	
+	text = {
+		trigger = { has_trait = fickle }
+		localization_key = POD_coterieflavor_fickle_1
+	}
+	
+	text = {
+		trigger = { has_trait = forgiving }
+		localization_key = POD_coterieflavor_forgiving_1
+	}
+	
+	text = {
+		trigger = { has_trait = generous }
+		localization_key = POD_coterieflavor_generous_1
+	}
+	
+	text = {
+		trigger = { has_trait = gluttonous }
+		localization_key = POD_coterieflavor_gluttonous_1
+	}
+	
+	text = {
+		trigger = { has_trait = greedy }
+		localization_key = POD_coterieflavor_greedy_1
+	}
+	
+	text = {
+		trigger = { has_trait = gregarious }
+		localization_key = POD_coterieflavor_gregarious_1
+	}
+	
+	text = {
+		trigger = { has_trait = honest }
+		localization_key = POD_coterieflavor_honest_1
+	}
+	
+	text = {
+		trigger = { has_trait = humble }
+		localization_key = POD_coterieflavor_humble_1
+	}
+	
+	text = {
+		trigger = { has_trait = impatient }
+		localization_key = POD_coterieflavor_impatient_1
+	}
+	text = {
+		trigger = { has_trait = impatient }
+		localization_key = POD_coterieflavor_impatient_2
+	}
+	
+	text = {
+		trigger = { has_trait = just }
+		localization_key = POD_coterieflavor_just_1
+	}
+	
+	text = {
+		trigger = { has_trait = lazy }
+		localization_key = POD_coterieflavor_lazy_1
+	}
+	
+	text = {
+		trigger = { has_trait = lustful }
+		localization_key = POD_coterieflavor_lustful_1
+	}
+	
+	text = {
+		trigger = { has_trait = paranoid }
+		localization_key = POD_coterieflavor_paranoid_1
+	}
+	
+	text = {
+		trigger = { has_trait = patient }
+		localization_key = POD_coterieflavor_patient_1
+	}
+	
+	text = {
+		trigger = { has_trait = sadistic }
+		localization_key = POD_coterieflavor_sadistic_1
+	}
+	
+	text = {
+		trigger = { has_trait = shy }
+		localization_key = POD_coterieflavor_shy_1
+	}
+	
+	text = {
+		trigger = { has_trait = stubborn }
+		localization_key = POD_coterieflavor_stubborn_1
+	}
+	
+	text = {
+		trigger = { has_trait = temperate }
+		localization_key = POD_coterieflavor_temperate_1
+	}
+	
+	text = {
+		trigger = { has_trait = trusting }
+		localization_key = POD_coterieflavor_gluttonous_1
+	}
+	
+	text = {
+		trigger = { has_trait = vengeful }
+		localization_key = POD_coterieflavor_vengeful_1
+	}
+	
+	text = {
+		trigger = { has_trait = wrathful }
+		localization_key = POD_coterieflavor_wrathful_1
+	}
+	
+	text = {
+		trigger = { has_trait = zealous }
+		localization_key = POD_coterieflavor_zealous_1
+	}
+	
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = POD_coterieflavor_generic_1
+	}
+}

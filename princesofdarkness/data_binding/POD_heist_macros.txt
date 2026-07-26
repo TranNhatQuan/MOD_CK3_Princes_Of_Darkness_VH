@@ -1,0 +1,59 @@
+﻿macro = {
+	description = "Return the current heist (Scope type)"
+	definition = "CurrentHeist"
+	replace_with = "GetPlayer.MakeScope.Var('current_heist')"
+}
+
+macro = {
+	description = "Return the court owner being targeted by the heist"
+	definition = "CurrentHeistTarget"
+	replace_with = "GetPlayer.MakeScope.Var('current_heist').Var('court_owner').Char"
+}
+
+macro = {
+	description = "Return the current location node in the current heist (Scope type)"
+	definition = "CurrentHeistLocation"
+	replace_with = "GetPlayer.MakeScope.Var('current_heist').Var('current_location')"
+}
+
+macro = {
+	description = "Return the X coordinate of the scoped Node a a float"
+	definition = "ScopedNodeX"
+	replace_with = "FixedPointToFloat(Scope.Var('coord_x').GetValue)"
+}
+
+macro = {
+	description = "Return the Y coordinate of the scoped Node as a float"
+	definition = "ScopedNodeY"
+	replace_with = "FixedPointToFloat(Scope.Var('coord_y').GetValue)"
+}
+
+macro = {
+	description = "Return the X coordinate of the scoped Line's starting point as a float"
+	definition = "ScopedLineX1"
+	replace_with = "FixedPointToFloat(Scope.Var('start_node').Var('coord_x').GetValue)"
+}
+
+macro = {
+	description = "Return the Y coordinate of the scoped Line's starting point as a float"
+	definition = "ScopedLineY1"
+	replace_with = "FixedPointToFloat(Scope.Var('start_node').Var('coord_y').GetValue)"
+}
+
+macro = {
+	description = "Return the X coordinate of the scoped Line's end point as a float"
+	definition = "ScopedLineX2"
+	replace_with = "FixedPointToFloat(Scope.Var('end_node').Var('coord_x').GetValue)"
+}
+
+macro = {
+	description = "Return the Y coordinate of the scoped Line's end point as a float"
+	definition = "ScopedLineY2"
+	replace_with = "FixedPointToFloat(Scope.Var('end_node').Var('coord_y').GetValue)"
+}
+
+macro = {
+	description = "Position of the current Suspicion value on the Suspicion bar subsection"
+	definition = "SuspicionArrowPosition"
+	replace_with = "FixedPointToInt(GetPlayer.MakeScope.ScriptValue('pod_suspicion_arrow_position'))"
+}

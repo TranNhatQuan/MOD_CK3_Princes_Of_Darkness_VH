@@ -1,0 +1,387 @@
+﻿POD_save_fera_type_as = {
+	random_character_trait = {
+		limit = { has_trait_flag = fera_type }
+		save_scope_as = $SAVE_AS$
+	}
+	if = {
+		limit = { NOT = { exists = scope:$SAVE_AS$ } }
+		var:fera_type ?= { save_scope_as = $SAVE_AS$ }
+	}
+}
+
+POD_set_fera_type = {
+	set_variable = {
+		name  = fera_type
+		value = $TRAIT$
+	}
+}
+
+POD_save_fera_shape_effect = {
+	random_character_trait = {
+		limit = { has_trait_flag = fera_type }
+		prev = { POD_set_fera_type = { TRAIT = prev } }
+	}
+}
+
+POD_remove_fera_on_embrace_effect = {
+	if = {
+		limit = { has_trait = fera }
+
+		POD_trait_injector_fera = { EFFECT = POD_remove_trait }
+		
+		POD_shapeshift_revert_all_effect = yes
+	}
+}
+
+POD_revert_fera_to_kinfolk_effect = {
+	if = {
+		limit = { has_trait = fera }
+
+		POD_trait_injector_fera = { EFFECT = POD_remove_trait }
+		
+		POD_shapeshift_revert_all_effect = yes
+		
+		add_trait = kinfolk
+		add_trait = gnosis
+		
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+	}
+}
+
+
+
+
+
+POD_fera_initialization_effect = {
+	switch = {
+		trigger = has_trait
+		werewolf = { POD_werewolf_initialization_effect = yes }
+		#ajaba = { POD_ajaba_initialization_effect = yes }
+		#ananasi = { POD_ananasi_initialization_effect = yes }
+		#apis = { POD_apis_initialization_effect = yes }
+		bastet = { POD_bastet_initialization_effect = yes }
+		#camazotz = { POD_camazotz_initialization_effect = yes }
+		#corax = { POD_corax_initialization_effect = yes }
+		#grondr = { POD_grondr_initialization_effect = yes }
+		#gurahl = { POD_gurahl_initialization_effect = yes }
+		#kitsune = { POD_kitsune_initialization_effect = yes }
+		mokole = { POD_mokole_initialization_effect = yes }
+		#nagah = { POD_nagah_initialization_effect = yes }
+		#nuwisha = { POD_nuwisha_initialization_effect = yes }
+		#ratkin = { POD_ratkin_initialization_effect = yes }
+		#rokea = { POD_rokea_initialization_effect = yes }
+	}
+
+	POD_initialize_energy_modifier = yes
+	if = {
+		limit = { NOT = { has_character_flag = immune_to_disease } }
+		POD_remove_disease_traits_effect = yes
+		add_character_flag = immune_to_disease
+	}
+	if = {
+		limit = { is_landed = yes }
+		POD_set_fera_tribe_government_effect = yes
+	}
+	POD_fera_assign_ancestor_language_effect = yes
+	if = {
+		limit = { POD_splat_can_have_wyrm_taint = yes }
+		set_variable = { name = wyrm_taint value = 0 }
+	}
+}
+
+POD_werewolf_initialization_effect = {
+	#Faith
+	if = {
+		limit = {
+			top_liege ?= { has_trait = shemsuheru }
+			has_relation_worshipped_reborn = top_liege
+		}
+		set_character_faith = faith:silentstrider
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				religion = { is_in_family = rf_wyrm }
+				religion = { is_in_family = rf_gaia }
+				POD_has_valid_splat_agnostic_faith = yes
+			}
+		}
+		POD_character_werewolf_faith_initialization_effect = yes
+	}
+	#Breed
+	if = {
+		limit = { POD_fera_has_breed_trigger = no }
+		
+		# Assign Breed at Random
+		random_list = {
+			20 = { add_trait = beast_born }
+			80 = {
+				trigger = { NOT = { has_religion = religion:redtalon_religion } }
+				add_trait = homid_born
+			}
+		}
+	}
+	#Auspice
+	if = {
+		limit = { POD_fera_has_lunar_auspice_trigger = no }
+		
+		# Assign Auspice at Day of Month
+		if = {
+			limit = { current_day <= 3 }
+			add_trait = ragabash
+		}
+		else_if = {
+			limit = { current_day <= 9 }
+			add_trait = theurge
+		}
+		else_if = {
+			limit = { current_day <= 15 }
+			add_trait = philodox
+		}
+		else_if = {
+			limit = { current_day <= 21 }
+			add_trait = galliard
+		}
+		else_if = {
+			limit = { current_day <= 27 }
+			add_trait = ahroun
+		}
+		else = {
+			add_trait = ragabash
+		}
+	}
+}
+
+POD_bastet_initialization_effect = {
+	#Faith
+	if = {
+		limit = {
+			top_liege ?= { has_trait = shemsuheru }
+			has_relation_worshipped_reborn = top_liege
+		}
+		set_character_faith = faith:bubasti
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				religion = { is_in_family = rf_wyrm }
+				religion = { is_in_family = rf_gaia }
+				POD_has_valid_splat_agnostic_faith = yes
+			}
+		}
+		POD_character_bastet_faith_initialization_effect = yes
+	}
+	#Breed
+	if = {
+		limit = { POD_fera_has_breed_trigger = no }
+		
+		# Assign Breed at Random
+		random_list = {
+			10 = { add_trait = beast_born }
+			10 = { add_trait = homid_born }
+		}
+	}
+	#Pryio
+	if = {
+		limit = { POD_fera_has_pryio_trigger = no }
+		
+		# Assign Pryio at Random
+		random_list = {
+			20 = { add_trait = pryio_twilight }
+			20 = { add_trait = pryio_daylight  }
+			20 = { add_trait = pryio_night }
+		}
+	}
+}
+
+POD_mokole_initialization_effect = {
+	#Stream
+	POD_assign_mokole_stream_effect = yes
+	#Faith
+	if = {
+		limit = {
+			top_liege ?= { has_trait = shemsuheru }
+			has_relation_worshipped_reborn = top_liege
+		}
+		set_character_faith = faith:children_sobek
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				religion = { is_in_family = rf_wyrm }
+				religion = { is_in_family = rf_gaia }
+				POD_has_valid_splat_agnostic_faith = yes
+			}
+		}
+		POD_character_mokole_faith_initialization_effect = yes
+	}
+	#Breed
+	if = {
+		limit = { POD_fera_has_breed_trigger = no }
+		
+		#Assign Breed at Random
+		random_list = {
+			10 = { add_trait = beast_born }
+			10 = { add_trait = homid_born }
+		}
+	}
+	#Auspice
+	if = {
+		limit = { POD_fera_has_solar_auspice_trigger = no }
+		if = {
+			limit = { 
+				OR = {
+					POD_mokole_is_makara_trigger = yes
+					POD_mokole_is_zhong_lung_trigger = yes
+				}
+			}
+			if = {
+				limit = { 
+					current_month >= 1
+					current_month < 3
+				}
+				if = { limit = { POD_mokole_is_makara_trigger = yes } add_trait = vasanta }
+				else = { add_trait = tung_chun }
+			}
+			else_if = {
+				limit = {
+					current_month >= 3
+					current_month < 6
+				}
+				if = { limit = { POD_mokole_is_makara_trigger = yes } add_trait = grisma }
+				else = { add_trait = nam_hsia }
+			}
+			if = {
+				limit = { 
+					current_month >= 6
+					current_month < 9
+				}
+				if = { limit = { POD_mokole_is_makara_trigger = yes } add_trait = zarad }
+				else = { add_trait = sai_chau }
+			}
+			else = {
+				if = { limit = { POD_mokole_is_makara_trigger = yes } add_trait = hemanta }
+				else = { add_trait = pei_tung }
+			}
+		}
+
+		else = {
+			random_list = {
+				50 = { add_trait = rising_sun }
+				50 = { add_trait = noonday_sun }
+				50 = { add_trait = setting_sun }
+				50 = { add_trait = midnight_sun }
+				50 = { add_trait = shrouded_sun }
+				50 = { add_trait = decorated_sun }
+				25 = { add_trait = eclipsed_sun }
+			}
+		}
+	}
+
+	#Archid Options
+	if = {
+		limit = { is_ai = yes }
+		POD_mokole_assign_archid_options_effect = yes
+	}
+	else = {
+		clear_variable_list = chosen_archid_options #Let players choose their own when playing historical characters
+		trigger_event = { id = POD_mokole.100 days = 3 }
+	}
+
+	#Suchid form if player was a child and became a mokole on adulthood
+	if = {
+		limit = { is_ai = no NOT = { has_variable = suchid_form } }
+		trigger_event = POD_chargen.2633
+	}
+	POD_assign_mokole_archid_colour_effect = yes
+}
+
+
+
+POD_kinfolk_initialization_effect = {
+	if = {
+		limit = {
+			OR = {
+				religion = { is_in_family = rf_wyrm }
+				religion = { is_in_family = rf_gaia }
+			}
+		}
+		random = {
+			chance = 10
+			add_trait = gnosis
+			POD_initialize_energy_modifier = yes
+			POD_resonance_increase_intensity_effect = yes
+		}
+	}
+	if = {
+		limit = { NOT = { exists = var:fera_type } }
+		random_list = {
+			1 = {
+				trigger = { real_mother ?= { POD_has_any_inheritable_fera_type = yes } }
+				modifier = {
+					# make sure a player's children inherit the player's changing breed
+					real_father ?= {
+						is_ai = no
+						POD_has_any_inheritable_fera_type = yes
+					}
+					factor = 0
+				}
+				real_mother = { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+				POD_set_fera_type = { TRAIT = scope:fera_type }
+			}
+			1 = {
+				trigger = { real_father ?= { POD_has_any_inheritable_fera_type = yes } }
+				modifier = {
+					# make sure a player's children inherit the player's changing breed
+					real_mother ?= {
+						is_ai = no
+						POD_has_any_inheritable_fera_type = yes
+					}
+					factor = 0
+				}
+				real_father = { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+				POD_set_fera_type = { TRAIT = scope:fera_type }
+			}
+		}
+	}
+	if = {
+		limit = {
+			is_adult = yes
+			NOT = { exists = var:fera_type }
+			liege_or_court_owner ?= { POD_has_any_inheritable_fera_type = yes }
+		}
+		liege_or_court_owner = { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+		POD_set_fera_type = { TRAIT = scope:fera_type }
+	}
+	# safeguard: become garou kinfolk by default
+	if = {
+		limit = { NOT = { exists = var:fera_type } }
+		POD_set_fera_type = { TRAIT = trait:werewolf }
+	}
+
+	#if mokole, assign stream
+	if = {
+		limit = { POD_has_inheritable_fera_type = { TRAIT = trait:mokole } }
+		POD_assign_mokole_stream_effect = yes
+	}
+
+	if = {
+		limit = { is_landed = yes }
+		POD_set_fera_tribe_government_effect = yes
+	}
+}
+
+POD_fera_assign_ancestor_language_effect = {
+	if = {
+		limit = { POD_has_spirit_ancestor_language_trigger = no }
+		switch = {
+			trigger = has_trait
+
+			werewolf = { learn_language = language_ancestor_werewolf }
+			bastet = { learn_language = language_ancestor_bastet }
+			mokole = { learn_language = language_ancestor_mokole }
+
+			fallback = {}
+		}
+	}
+}

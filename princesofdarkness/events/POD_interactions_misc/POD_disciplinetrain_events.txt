@@ -1,0 +1,3994 @@
+﻿namespace = POD_disciplinetrain
+
+POD_disciplinetrain.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_disciplinetrain.100.t
+	desc =  POD_disciplinetrain.100.desc		
+	theme = vampire
+	left_portrait = {
+		character = scope:disciplinetrainer
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:disciplinetrainee
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.a
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = potence }
+				NOT = { has_trait = potenceadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = potence 
+					has_trait = potenceadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = choleric_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = potence 
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.b
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = celerity }
+				NOT = { has_trait = celerityadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = celerity 
+					has_trait = celerityadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = choleric_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = celerity
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.c
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = fortitude }
+				NOT = { has_trait = fortitudeadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = fortitude
+					has_trait = fortitudeadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = fortitude
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.d
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = animalism }
+				NOT = { has_trait = animalismadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = animalism 
+					has_trait = animalismadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = animalism 
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.e
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = auspex }
+				NOT = { has_trait = auspexadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = auspex
+					has_trait = auspexadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = auspex
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.f
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = dominate }
+				NOT = { has_trait = dominateadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = dominate
+					has_trait = dominateadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = dominate
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.g
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = presence }
+				NOT = { has_trait = presenceadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = presence
+					has_trait = presenceadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = sanguine_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = presence
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.h
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = obfuscate }
+				NOT = { has_trait = obfuscateadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = obfuscate
+					has_trait = obfuscateadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = obfuscate
+		}
+	}	
+	
+	option = {
+		name = POD_disciplinetrain.100.option.i
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = protean }
+				NOT = { has_trait = proteanadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = protean
+					has_trait = proteanadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = protean
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.j
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = vicissitudediscipline }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				has_trait = vicissitudediscipline
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = choleric_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = vicissitude
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.k
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = oblivion }
+				NOT = { has_trait = oblivionadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = oblivion
+					has_trait = oblivionadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = oblivion
+		}
+	}	
+	
+	option = {
+		name = POD_disciplinetrain.100.option.l
+
+		trigger = {
+			OR = {
+				AND = {
+					scope:disciplinetrainee = {
+						NOT = { has_trait = bloodsorcery }
+						NOT = { has_trait = bloodsorceryadvanced }
+					}
+				}
+				AND = {
+					scope:disciplinetrainer = { has_koldunic_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_koldunic_bloodmagic_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_sadhana_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_sadhana_bloodmagic_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_akhu_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_akhu_bloodmagic_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_dur_an_ki_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_dur_an_ki_bloodmagic_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_thaumaturgy_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_thaumaturgy_bloodmagic_trigger = no }
+				}
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = bloodsorcery
+					has_trait = bloodsorceryadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = sanguine_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = bloodsorcery
+
+			#Teaching the paths that the trainer knows
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_koldunic_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_koldunic_bloodmagic_trigger = no }
+				}
+				add_character_flag = has_koldunic_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.koldunic
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_sadhana_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_sadhana_bloodmagic_trigger = no }
+				}
+				add_character_flag = has_sadhana_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.sadhana
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_akhu_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_akhu_bloodmagic_trigger = no }
+				}
+				add_character_flag = has_akhu_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.akhu
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_dur_an_ki_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_dur_an_ki_bloodmagic_trigger = no }
+				}
+				add_character_flag = has_dur_an_ki_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.duranki
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_thaumaturgy_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = {
+						has_thaumaturgy_bloodmagic_trigger = no
+						can_learn_thaumaturgy_bloodmagic_trigger_visible = yes
+					}
+				}
+				add_character_flag = has_thaumaturgy_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.thaumaturgy
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_sielanic_thaumaturgy_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = {
+						has_sielanic_thaumaturgy_bloodmagic_trigger = no
+						can_learn_sielanic_thaumaturgy_bloodmagic_trigger_visible = yes
+					}
+				}
+				add_character_flag = has_sielanic_thaumaturgy_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.sielanic_thaumaturgy
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_sihr_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = {
+						has_sihr_bloodmagic_trigger = no
+						can_learn_sihr_bloodmagic_trigger_visible = yes
+					}
+				}
+				add_character_flag = has_sihr_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.sihr
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_abyssal_mysticism_bloodmagic_trigger = yes }
+					scope:disciplinetrainee = { has_abyssal_mysticism_bloodmagic_trigger = no }
+				}
+				add_character_flag = has_abyssal_mysticism_bloodmagic_flag
+				custom_tooltip = POD_disciplinetrain.100.option.l.abyssal_mysticism
+			}
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.m
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = chimerstry }
+				NOT = { has_trait = chimerstryadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = chimerstry
+					has_trait = chimerstryadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = chimerstry
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.n
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = daimonion }
+				NOT = { has_trait = daimonionadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = daimonion
+					has_trait = daimonionadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = sanguine_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = daimonion
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.o
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = obtenebration }
+				NOT = { has_trait = obtenebrationadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = obtenebration
+					has_trait = obtenebrationadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = obtenebration
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.p
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = serpentis }
+				NOT = { has_trait = serpentisadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = serpentis
+					has_trait = serpentisadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = serpentis
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.q
+
+		trigger = {
+			OR = {
+				AND = {
+					scope:disciplinetrainee = {
+						NOT = { has_trait = necromancy }
+						NOT = { has_trait = necromancyadvanced }
+					}
+				}
+				AND = {
+					scope:disciplinetrainer = { has_giovanni_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_giovanni_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_cappadocian_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_cappadocian_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_harbinger_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_harbinger_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_lamia_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_lamia_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_nagaraja_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_nagaraja_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_impundulu_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_impundulu_necromancy_trigger = no }
+				}
+				AND = {
+					scope:disciplinetrainer = { has_rosselini_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_rosselini_necromancy_trigger = no }
+				}
+
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = necromancy
+					has_trait = necromancyadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = necromancy
+
+			#Teaching the paths that the trainer knows
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_giovanni_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_giovanni_necromancy_trigger = no }
+				}
+				add_character_flag = has_giovanni_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.giovanni
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_cappadocian_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_cappadocian_necromancy_trigger = no }
+				}
+				add_character_flag = has_cappadocian_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.cappadocian
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_harbinger_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_harbinger_necromancy_trigger = no }
+				}
+				add_character_flag = has_harbinger_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.harbinger
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_lamia_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_lamia_necromancy_trigger = no }
+				}
+				add_character_flag = has_lamia_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.lamia
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_nagaraja_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_nagaraja_necromancy_trigger = no }
+				}
+				add_character_flag = has_nagaraja_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.nagaraja
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_impundulu_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_impundulu_necromancy_trigger = no }
+				}
+				add_character_flag = has_impundulu_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.impundulu
+			}
+			if = {
+				limit = {
+					scope:disciplinetrainer = { has_rosselini_necromancy_trigger = yes }
+					scope:disciplinetrainee = { has_rosselini_necromancy_trigger = no }
+				}
+				add_character_flag = has_rosselini_necromancy_flag
+				custom_tooltip = POD_disciplinetrain.100.option.q.rosselini
+			}
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.r
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = abombwe }
+				NOT = { has_trait = abombweadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = abombwe
+					has_trait = abombweadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = abombwe
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.s
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = visceratika }
+				NOT = { has_trait = visceratikaadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = visceratika
+					has_trait = visceratikaadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = visceratika
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.t
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = temporis }
+				NOT = { has_trait = temporisadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = temporis
+					has_trait = temporisadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = temporis
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.u
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = dementation }
+				NOT = { has_trait = dementationadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = dementation
+					has_trait = dementationadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = dementation
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.v
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = melpominee }
+				NOT = { has_trait = melpomineeadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = melpominee
+					has_trait = melpomineeadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = melpominee
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.w
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = spiritus }
+				NOT = { has_trait = spiritusadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_points > 0
+					animal_lifestyle_xp > 999
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = spiritus
+					has_trait = spiritusadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = spiritus
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.x
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = valeren }
+				NOT = { has_trait = valerenadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = valeren
+					has_trait = valerenadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = choleric_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = valeren
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.y
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = quietus }
+				NOT = { has_trait = quietusadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = quietus
+					has_trait = quietusadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = sanguine_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = quietus
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.z
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = mytherceria }
+				NOT = { has_trait = mytherceriaadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = mytherceria
+					has_trait = mytherceriaadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = phlegmatic_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = mytherceria
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.bardo
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = bardo }
+				NOT = { has_trait = bardoadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = bardo
+					has_trait = bardoadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			if = {
+				limit = { has_trait = wight }
+				remove_trait = wight
+			}
+			add_trait = bardo
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.flight
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = flight }
+				NOT = { has_trait = flightadvanced }
+				can_learn_flight_trigger = yes
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = flight
+					has_trait = flightadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = flight
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.kai
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = kai }
+				NOT = { has_trait = kaiadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = kai
+					has_trait = kaiadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = sanguine_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = kai
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.rift
+
+		trigger = {
+			scope:disciplinetrainee = {
+				NOT = { has_trait = rift }
+				NOT = { has_trait = riftadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = rift
+					has_trait = riftadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle }
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		scope:disciplinetrainee = {
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+			add_trait = rift
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.end
+		save_scope_as = no_teach
+	}
+
+	after = {
+		if = {
+			limit = { 
+				has_perk = firebringer_perk
+				NOT = { exists = scope:no_teach }
+			}
+			add_prestige = major_prestige_gain
+			dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+		}
+	}
+}
+
+POD_disciplinetrain.150 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_disciplinetrain.150.t
+	desc =  POD_disciplinetrain.150.desc		
+	theme = fae
+	left_portrait = {
+		character = scope:disciplinetrainer
+		animation = personality_honorable
+	}
+	
+	right_portrait = {
+		character = scope:disciplinetrainee
+		animation = personality_bold
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = trait_art_chicanery
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_chicanery_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = chicanery }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_common_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_chicanery
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_legerdemain
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_legerdemain_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = legerdemain }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_common_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_legerdemain
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_primal
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_primal_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = primal }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_common_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_primal
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_soothsay
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_soothsay_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = soothsay }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_common_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_soothsay
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_wayfare
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_wayfare_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = wayfare }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_common_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_wayfare
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_aphrodesia
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_aphrodesia_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = aphrodesia }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_rare_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_aphrodesia
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_kryos
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_kryos_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = kryos }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_rare_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_kryos
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_metamorphosis
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_metamorphosis_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = metamorphosis }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_rare_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_metamorphosis
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_pyretics
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_pyretics_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = pyretics }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_rare_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_pyretics
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_chronos
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_chronos_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = chronos }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_chronos
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_dream_craft
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_dream_craft_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = dream_craft }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_dream_craft
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_naming
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_naming_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = naming }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_naming
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_sovereign
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_sovereign_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = sovereign }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_sovereign
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_infusion
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_infusion_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = infusion }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_infusion
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_tale_craft
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_tale_craft_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = tale_craft }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_kith_arts_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_tale_craft
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_petros
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_petros_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = petros }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_slivers_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_petros
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_aquis
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_aquis_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = aquis }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_slivers_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_aquis
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_pyros
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_pyros_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = pyros }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_slivers_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_pyros
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_stratus
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_stratus_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = stratus }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_slivers_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_stratus
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_verdage
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_verdage_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = verdage }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_slivers_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_verdage
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_tieh_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_tieh_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = tieh_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_tieh_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_lin_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_lin_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = lin_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_lin_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_shui_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_shui_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = shui_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_shui_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_hou_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_hou_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = hou_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_hou_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_di_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_di_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = di_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_di_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	option = {
+		name = trait_art_nei_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_nei_tan_advanced
+			}
+			scope:disciplinetrainee = {
+				NOT = { has_trait = nei_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			add_wu_tan_lifestyle_perk_points = -1
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		scope:disciplinetrainee = {
+			add_trait = art_nei_tan
+			add_opinion = {
+				target = scope:disciplinetrainer
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.end
+		save_scope_as = no_teach
+	}
+
+	after = {
+		if = {
+			limit = { 
+				NOT = { exists = scope:no_teach }
+				has_POD_vamp_blood_trigger = yes
+			}	
+			POD_hunger_rouse_check_effect = yes
+		}
+
+		if = {
+			limit = { 
+				has_perk = firebringer_perk
+				NOT = { exists = scope:no_teach }
+			}
+			add_prestige = major_prestige_gain
+			dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+		}
+	}
+}
+
+POD_disciplinetrain.200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_disciplinetrain.100.t
+	desc =  POD_disciplinetrain.100.desc_mass		
+	theme = vampire
+	
+	left_portrait = {
+		character = scope:disciplinetrainer
+		animation = personality_honorable
+	}
+
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.a
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = potence }
+				NOT = { has_trait = potenceadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = potence 
+					has_trait = potenceadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = choleric_lifestyle
+			DISCIPLINE = potence
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.b
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = celerity }
+				NOT = { has_trait = celerityadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = celerity 
+					has_trait = celerityadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = choleric_lifestyle
+			DISCIPLINE = celerity
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.c
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = fortitude }
+				NOT = { has_trait = fortitudeadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = fortitude
+					has_trait = fortitudeadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = fortitude
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.d
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = animalism }
+				NOT = { has_trait = animalismadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = animalism 
+					has_trait = animalismadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = animal_lifestyle
+			DISCIPLINE = animalism
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.e
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = auspex }
+				NOT = { has_trait = auspexadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = auspex
+					has_trait = auspexadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = auspex
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.f
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = dominate }
+				NOT = { has_trait = dominateadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = dominate
+					has_trait = dominateadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = dominate
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.g
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = presence }
+				NOT = { has_trait = presenceadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = presence
+					has_trait = presenceadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = sanguine_lifestyle
+			DISCIPLINE = presence
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.h
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = obfuscate }
+				NOT = { has_trait = obfuscateadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = obfuscate
+					has_trait = obfuscateadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = obfuscate
+		}
+	}	
+	
+	option = {
+		name = POD_disciplinetrain.100.option.i
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = protean }
+				NOT = { has_trait = proteanadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = protean
+					has_trait = proteanadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = animal_lifestyle
+			DISCIPLINE = protean
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.j
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = vicissitudediscipline }
+
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				has_trait = vicissitudediscipline
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = choleric_lifestyle
+			DISCIPLINE = vicissitude
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.k
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = oblivion }
+				NOT = { has_trait = oblivionadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = oblivion
+					has_trait = oblivionadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = oblivion
+		}
+	}	
+	
+	option = {
+		name = POD_disciplinetrain.100.option.l
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = bloodsorcery }
+				NOT = { has_trait = bloodsorceryadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = bloodsorcery
+					has_trait = bloodsorceryadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = sanguine_lifestyle
+			DISCIPLINE = bloodsorcery
+		}
+	}	
+
+	option = {
+		name = POD_disciplinetrain.100.option.m
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = chimerstry }
+				NOT = { has_trait = chimerstryadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = chimerstry
+					has_trait = chimerstryadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = chimerstry
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.n
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = daimonion }
+				NOT = { has_trait = daimonionadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = daimonion
+					has_trait = daimonionadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = sanguine_lifestyle
+			DISCIPLINE = daimonion
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.o
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = obtenebration }
+				NOT = { has_trait = obtenebrationadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = obtenebration
+					has_trait = obtenebrationadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = obtenebration
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.p
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = serpentis }
+				NOT = { has_trait = serpentisadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = serpentis
+					has_trait = serpentisadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = animal_lifestyle
+			DISCIPLINE = serpentis
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.q
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = necromancy }
+				NOT = { has_trait = necromancyadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = necromancy
+					has_trait = necromancyadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		while = {
+			count = melancholy_lifestyle_perk_half_points
+			custom_tooltip = {
+				text = POD_train_necromancy
+				random_in_list = {
+					list = disciplinetrainee
+					limit = { has_necromancy_trigger = no }
+					add_opinion = {
+						target = prev
+						modifier = mentored_me_opinion
+					}
+					add_trait = necromancy
+					#Teaching the paths that the trainer knows
+					if = {
+						limit = {
+							prev = { has_giovanni_necromancy_trigger = yes }
+							has_giovanni_necromancy_trigger = no
+						}
+						add_character_flag = has_giovanni_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_cappadocian_necromancy_trigger = yes }
+							has_cappadocian_necromancy_trigger = no
+						}
+						add_character_flag = has_cappadocian_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_harbinger_necromancy_trigger = yes }
+							has_harbinger_necromancy_trigger = no
+						}
+						add_character_flag = has_harbinger_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_lamia_necromancy_trigger = yes }
+							has_lamia_necromancy_trigger = no
+						}
+						add_character_flag = has_lamia_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_nagaraja_necromancy_trigger = yes }
+							has_nagaraja_necromancy_trigger = no
+						}
+						add_character_flag = has_nagaraja_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_impundulu_necromancy_trigger = yes }
+							has_impundulu_necromancy_trigger = no
+						}
+						add_character_flag = has_impundulu_necromancy_flag
+					}
+					if = {
+						limit = {
+							prev = { has_rosselini_necromancy_trigger = yes }
+							has_rosselini_necromancy_trigger = no
+						}
+						add_character_flag = has_rosselini_necromancy_flag
+					}
+					prev = { subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle } }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.r
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = abombwe }
+				NOT = { has_trait = abombweadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = abombwe
+					has_trait = abombweadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = animal_lifestyle
+			DISCIPLINE = abombwe
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.s
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = visceratika }
+				NOT = { has_trait = visceratikaadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = visceratika
+					has_trait = visceratikaadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = visceratika
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.t
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = temporis }
+				NOT = { has_trait = temporisadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = temporis
+					has_trait = temporisadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = temporis
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.u
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = dementation }
+				NOT = { has_trait = dementationadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = dementation
+					has_trait = dementationadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = dementation
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.v
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = melpominee }
+				NOT = { has_trait = melpomineeadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = melpominee
+					has_trait = melpomineeadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = melpominee
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.w
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = spiritus }
+				NOT = { has_trait = spiritusadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_points > 0
+					animal_lifestyle_xp > 999
+
+				}
+				OR = {
+					has_trait = spiritus
+					has_trait = spiritusadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = animal_lifestyle
+			DISCIPLINE = spiritus
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.x
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = valeren }
+				NOT = { has_trait = valerenadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					choleric_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = valeren
+					has_trait = valerenadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = choleric_lifestyle
+			DISCIPLINE = valeren
+		}
+	}
+
+	option = {
+		name = POD_disciplinetrain.100.option.y
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = quietus }
+				NOT = { has_trait = quietusadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = quietus
+					has_trait = quietusadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = sanguine_lifestyle
+			DISCIPLINE = quietus
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.z
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = mytherceria }
+				NOT = { has_trait = mytherceriaadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = mytherceria
+					has_trait = mytherceriaadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = phlegmatic_lifestyle
+			DISCIPLINE = mytherceria
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.bardo
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = bardo }
+				NOT = { has_trait = bardoadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = bardo
+					has_trait = bardoadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		while = {
+			count = melancholy_lifestyle_perk_half_points
+			custom_tooltip = {
+				text = POD_train_bardo
+				random_in_list = {
+					list = disciplinetrainee
+					limit = { has_bardo_trigger = no }
+					add_opinion = {
+						target = prev
+						modifier = mentored_me_opinion
+					}
+					add_trait = bardo
+					remove_trait = wight
+					prev = { subtract_thousand_xp_effect = { LIFESTYLE = melancholy_lifestyle } }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.flight
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = flight }
+				NOT = { has_trait = flightadvanced }
+				can_learn_flight_trigger = yes
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = flight
+					has_trait = flightadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		while = {
+			count = animal_lifestyle_perk_half_points
+			custom_tooltip = {
+				text = POD_train_flight
+				random_in_list = {
+					list = disciplinetrainee
+					limit = { can_learn_flight_trigger = yes }
+					add_opinion = {
+						target = prev
+						modifier = mentored_me_opinion
+					}
+					add_trait = flight
+					prev = { subtract_thousand_xp_effect = { LIFESTYLE = animal_lifestyle } }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.kai
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = kai }
+				NOT = { has_trait = kaiadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = kai
+					has_trait = kaiadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = sanguine_lifestyle
+			DISCIPLINE = kai
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.rift
+
+		trigger = {
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = rift }
+				NOT = { has_trait = riftadvanced }
+			}
+			scope:disciplinetrainer = {
+				OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+				OR = {
+					has_trait = rift
+					has_trait = riftadvanced
+				}
+			}	
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = major_stress_gain
+			}
+		}
+		
+		POD_masstrain_discipline_effect = {
+			LIFESTYLE = melancholy_lifestyle
+			DISCIPLINE = rift
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.end
+		save_scope_as = no_teach
+	}
+
+	after = {
+		if = {
+			limit = { NOT = { exists = scope:no_teach } }
+			if = {
+				limit = { has_perk = firebringer_perk }
+				add_prestige = major_prestige_gain
+				dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+			}
+			if = {
+				limit = { 
+					OR = {
+						choleric_lifestyle_perk_half_points > 0
+						OR = {
+					phlegmatic_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+						OR = {
+					sanguine_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+						OR = {
+					melancholy_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+						OR = {
+					animal_lifestyle_perk_half_points > 0
+					has_perk = cycle_of_the_midgard_serpent_perk
+				}
+						has_perk = cycle_of_the_midgard_serpent_perk
+					}
+				}
+				trigger_event = POD_disciplinetrain.200
+			}
+		}
+	}
+}
+
+POD_disciplinetrain.250 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_disciplinetrain.150.t
+	desc =  POD_disciplinetrain.150.desc_mass		
+	theme = fae
+	left_portrait = {
+		character = scope:disciplinetrainer
+		animation = personality_honorable
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = trait_art_chicanery
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_chicanery_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = chicanery }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = common_arts_lifestyle
+			TRAIT = chicanery
+		}
+	}
+
+	option = {
+		name = trait_art_legerdemain
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_legerdemain_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = legerdemain }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = common_arts_lifestyle
+			TRAIT = legerdemain
+		}
+	}
+
+	option = {
+		name = trait_art_primal
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_primal_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = primal }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = common_arts_lifestyle
+			TRAIT = primal
+		}
+	}
+
+	option = {
+		name = trait_art_soothsay
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_soothsay_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = soothsay }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = common_arts_lifestyle
+			TRAIT = soothsay
+		}
+	}
+
+	option = {
+		name = trait_art_wayfare
+
+		trigger = {
+			scope:disciplinetrainer = {
+				common_arts_lifestyle_perk_points >= 1
+				has_trait = art_wayfare_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = wayfare }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = common_arts_lifestyle
+			TRAIT = wayfare
+		}
+	}
+
+	option = {
+		name = trait_art_aphrodesia
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_aphrodesia_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = aphrodesia }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = rare_arts_lifestyle
+			TRAIT = aphrodesia
+		}
+	}
+
+	option = {
+		name = trait_art_kryos
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_kryos_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = kryos }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = rare_arts_lifestyle
+			TRAIT = kryos
+		}
+	}
+
+	option = {
+		name = trait_art_metamorphosis
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_metamorphosis_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = metamorphosis }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = rare_arts_lifestyle
+			TRAIT = metamorphosis
+		}
+	}
+
+	option = {
+		name = trait_art_pyretics
+
+		trigger = {
+			scope:disciplinetrainer = {
+				rare_arts_lifestyle_perk_points >= 1
+				has_trait = art_pyretics_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = pyretics }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = rare_arts_lifestyle
+			TRAIT = pyretics
+		}
+	}
+
+	option = {
+		name = trait_art_chronos
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_chronos_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = chronos }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = chronos
+		}
+	}
+
+	option = {
+		name = trait_art_dream_craft
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_dream_craft_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = dream_craft }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = dream_craft
+		}
+	}
+
+	option = {
+		name = trait_art_naming
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_naming_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = naming }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = naming
+		}
+	}
+
+	option = {
+		name = trait_art_sovereign
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_sovereign_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = sovereign }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = sovereign
+		}
+	}
+
+	option = {
+		name = trait_art_infusion
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_infusion_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = infusion }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = infusion
+		}
+	}
+
+	option = {
+		name = trait_art_tale_craft
+
+		trigger = {
+			scope:disciplinetrainer = {
+				kith_arts_lifestyle_perk_points >= 1
+				has_trait = art_tale_craft_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = tale_craft }
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_art_effect = {
+			LIFESTYLE = kith_arts_lifestyle
+			TRAIT = tale_craft
+		}
+	}
+
+	option = {
+		name = trait_art_petros
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_petros_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = petros }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_silver_effect = {
+			LIFESTYLE = slivers_lifestyle
+			TRAIT = petros
+		}
+	}
+
+	option = {
+		name = trait_art_aquis
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_aquis_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = aquis }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_silver_effect = {
+			LIFESTYLE = slivers_lifestyle
+			TRAIT = aquis
+		}
+	}
+
+	option = {
+		name = trait_art_pyros
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_pyros_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = pyros }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_silver_effect = {
+			LIFESTYLE = slivers_lifestyle
+			TRAIT = pyros
+		}
+	}
+
+	option = {
+		name = trait_art_stratus
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_stratus_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = stratus }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_silver_effect = {
+			LIFESTYLE = slivers_lifestyle
+			TRAIT = stratus
+		}
+	}
+
+	option = {
+		name = trait_art_verdage
+
+		trigger = {
+			scope:disciplinetrainer = {
+				slivers_lifestyle_perk_points >= 1
+				has_trait = art_verdage_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = verdage }
+				POD_splat_has_access_to_slivers = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_silver_effect = {
+			LIFESTYLE = slivers_lifestyle
+			TRAIT = verdage
+		}
+	}
+
+	option = {
+		name = trait_art_tieh_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_tieh_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = tieh_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = tieh_tan
+		}
+	}
+
+	option = {
+		name = trait_art_lin_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_lin_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = lin_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = lin_tan
+		}
+	}
+
+	option = {
+		name = trait_art_shui_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_shui_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = shui_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = shui_tan
+		}
+	}
+
+	option = {
+		name = trait_art_hou_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_hou_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = hou_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = hou_tan
+		}
+	}
+
+	option = {
+		name = trait_art_di_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_di_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = di_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = di_tan
+		}
+	}
+
+	option = {
+		name = trait_art_nei_tan
+
+		trigger = {
+			scope:disciplinetrainer = {
+				wu_tan_lifestyle_perk_points >= 1
+				has_trait = art_nei_tan_advanced
+			}
+			any_in_list = {
+				list = disciplinetrainee
+				NOT = { has_trait = nei_tan }
+				POD_splat_has_access_to_wu_tan = yes
+			}
+		}
+		
+		scope:disciplinetrainer = {
+			stress_impact = {
+				base = medium_stress_gain
+			}			
+		}
+		
+		POD_masstrain_wu_tan_effect = {
+			LIFESTYLE = wu_tan_lifestyle
+			TRAIT = nei_tan
+		}
+	}
+	
+	option = {
+		name = POD_disciplinetrain.100.option.end
+		save_scope_as = no_teach
+	}
+
+	after = {
+		if = {
+			limit = { NOT = { exists = scope:no_teach } }
+			if = {
+				limit = { has_perk = firebringer_perk }
+				add_prestige = major_prestige_gain
+				dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+			}
+			if = {
+				limit = { 
+					OR = {
+						common_arts_lifestyle_perk_points >= 1
+						rare_arts_lifestyle_perk_points >= 1
+						kith_arts_lifestyle_perk_points >= 1
+						slivers_lifestyle_perk_points >= 1
+						wu_tan_lifestyle_perk_points >= 1
+					}
+				}
+				trigger_event = POD_disciplinetrain.250
+			}
+		}
+	}
+}

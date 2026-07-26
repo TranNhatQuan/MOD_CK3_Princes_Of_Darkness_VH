@@ -1,0 +1,302 @@
+﻿the_joining_perk = {
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 0 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 1 }
+	}
+
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_melancholy_interest_trigger = yes
+			}
+			add = 1989
+		}
+		if = {
+			limit = {
+				has_focus = melancholy_rift_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+
+	character_modifier = {
+		owned_scheme_secrecy_add = 5
+		hostile_scheme_phase_duration_add = -10
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = the_joining_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 1 }
+	}
+}
+
+glimpse_of_the_pain_perk = { #Unlocks character interaction that lowers targets advantage and prowess
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 1 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 2 }
+	}
+
+	parent = the_joining_perk
+
+	effect = {
+		custom_description_no_bullet = {
+			text = glimpse_of_the_pain_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 2 }
+	}
+}
+
+crossing_the_iron_bridge_perk = { #C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\events\stress_events\stress_threshold_events.txt & C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\events\POD_disciplines\POD_rift.txt
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 2 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 3 }
+	}
+
+	parent = glimpse_of_the_pain_perk
+
+	effect = {
+		custom_description_no_bullet = {
+			text = crossing_the_iron_bridge_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 3 }
+	}
+}
+
+journeying_the_iron_bridge_perk = { #START WITH MORE SUSPICION C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\script_values\POD_heist_values.txt
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 3 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 4 }
+	}
+
+	parent = crossing_the_iron_bridge_perk
+
+	character_modifier = {
+		POD_terrain_heist_suspicion_advantage = infiltration_small_perk_suspicion_offset
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = journeying_the_iron_bridge_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 4 }
+	}
+}
+
+passing_the_inner_realm_perk = { #Adds a character interaction modifier toggle C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\character_interactions\POD_discipline\00_POD_discipline_rift_interactions.txt C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\modifiers\00_POD_rift_modifiers.txt
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 4 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 5 }
+	}
+
+	parent = journeying_the_iron_bridge_perk
+
+	effect = {
+		custom_description_no_bullet = {
+			text = passing_the_inner_realm_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 5 }
+	}
+}
+
+riftadvanced_perk = {
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 5 }
+	icon = trait_rift
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 6 }
+	}
+
+	parent = passing_the_inner_realm_perk
+
+	effect = {
+		remove_trait = rift
+		add_trait_force_tooltip = riftadvanced
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 6 }
+	}
+}
+
+rift_collection_perk = { # Unlocks artifact claims and makes them 15% cheaper C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\script_values\00_lifestyle_values.txt & C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\character_interactions\00_artifact_interactions.txt
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 0 6 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 7 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = rift_collection_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 7 }
+	}
+}
+
+rift_transport_perk = {
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 2 6 }
+	icon = node_melancholy
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 7 }
+	}
+
+	character_modifier = {
+		steal_back_artifact_scheme_phase_duration_add = -35
+		#max_steal_back_artifact_schemes_add = 1 (maybe together too strong? made scheme phase from -20 to -35 to compensate)
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = rift_transport_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 7 }
+	}
+}
+
+eyes_of_a_thief_perk = { #80% faster artifact journey C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\common\script_values\POD_journey_values
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 0 7 }
+	icon = node_melancholy
+	parent = rift_collection_perk
+
+	can_be_picked = {
+		has_perk = rift_collection_perk
+		has_perk = rift_transport_perk
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 8 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = eyes_of_a_thief_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 8 }
+	}
+}
+
+doorway_to_hell_perk = { #Unlocks teleport character interaction
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 2 7 }
+	icon = node_melancholy
+	parent = rift_transport_perk
+
+	can_be_picked = {
+		has_perk = rift_collection_perk
+		has_perk = rift_transport_perk
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 8 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = doorway_to_hell_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 8 }
+	}
+}
+
+touch_of_sin_perk = { #Unlocks Abduction
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 0 8 }
+	icon = node_melancholy
+	parent = eyes_of_a_thief_perk
+
+	can_be_picked = {
+		has_perk = eyes_of_a_thief_perk
+		has_perk = doorway_to_hell_perk
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 9 }
+	}
+
+	character_modifier = {
+		abduct_scheme_phase_duration_add = -25
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = touch_of_sin_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 9 }
+	}
+}
+
+rift_gateway_perk = { #Upgrades passing the inner realm
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 2 8 }
+	icon = node_melancholy
+	parent = doorway_to_hell_perk
+
+	can_be_picked = {
+		has_perk = eyes_of_a_thief_perk
+		has_perk = doorway_to_hell_perk
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 9 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = rift_gateway_perk_effect
+		}
+		if = {
+			limit = { has_character_modifier = passing_the_inner_realm_modifier }
+			remove_character_modifier = passing_the_inner_realm_modifier
+			add_character_modifier = rift_gateway_modifier
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 9 }
+	}
+}
+
+rift_imprison_perk = { #Prisoners have next to no chance of leaving your prison & special option in character resisting imprisonment C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\events\prison_events\prison_events.txt & C:\Documents\GitHub\princesofdarknessmod-for-ck3\dev\devpod\events\POD_imprison\POD_imprison.txt
+	lifestyle = melancholy_lifestyle
+	tree = rift
+	position = { 1 9 }
+	icon = trait_rift
+
+	parent = touch_of_sin_perk
+	parent = rift_gateway_perk
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = rift LEVEL = 10 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = rift_imprison_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = rift LEVEL = 10 }
+	}
+}

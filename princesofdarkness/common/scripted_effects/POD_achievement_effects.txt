@@ -1,0 +1,224 @@
+﻿POD_achiev_feratutorial_check = {
+	if = {
+		limit = { is_ai = no }
+		set_global_variable = pod_achiev_feratutorial # Achievement: Respect My Authority
+	}
+}
+
+POD_achiev_mummytutorial_check = {
+	if = {
+		limit = {
+			scope:owner ?= {
+				is_ai = no
+				POD_is_mummy_trigger = yes
+				scope:crafter ?= this
+			}
+		}
+		set_global_variable = pod_achiev_mummytutorial # Achievement: DIY
+	}
+}
+
+POD_achiev_coterietutorial_check = {
+	if = {
+		limit = {
+			var:coterie ?= {
+				POD_is_canon_coterie = no
+				any_in_list = {
+					variable = members
+					is_ai = no
+				}
+			}
+			POD_coterie_at_max_size_trigger = yes
+		}
+		set_global_variable = pod_achiev_coterietutorial # Achievement: By Our Powers Combined...
+	}
+}
+
+POD_achiev_helena2_check = {
+	if = {
+		limit = {
+			OR = {
+				root = { is_ai = no }
+				scope:target = { is_ai = no }
+			}
+			# need to check twice because relationship on_actions aren't commutative. paradox pls
+			OR = {
+				AND = {
+					root = character:790179 # Helena
+					scope:target = character:790309 # Menele
+				}
+				AND = {
+					root = character:790309 # Menele
+					scope:target = character:790179 # Helena
+				}
+			}
+		}
+		set_global_variable = pod_achiev_helena2 # Achievement: A Fitting Start for this Fanfiction
+	}
+}
+
+# need to pass $CRAFTER$
+#POD_achiev_myprecious_initialize = {
+#	if = {
+#		limit = {
+#			scope:owner = {
+#				is_ai = no
+#				POD_is_mummy_trigger = no
+#			}
+#			$CRAFTER$ ?= {
+#				NOT = { this = scope:owner }
+#				POD_is_mummy_trigger = yes
+#				has_relation_soulmate = scope:owner
+#			}
+#		}
+#		add_character_flag = valid_for_achiev_myprecious
+#	}
+#}
+#
+## need to pass $CRAFTER$
+#POD_achiev_myprecious_check = {
+#	if = {
+#		limit = { has_character_flag = valid_for_achiev_myprecious }
+#		remove_character_flag = valid_for_achiev_myprecious
+#		set_global_variable = pod_achiev_myprecious # Achievement: My Precious
+#	}
+#}
+
+POD_achiev_camilla_check = {
+	barony.holder = {
+		if = {
+			limit = {
+				this = character:790101
+				is_ai = no
+			}
+			set_global_variable = pod_achiev_camilla # Achievement: All Roads Lead To Me
+		}
+	}
+}
+
+POD_achiev_aristotle_check = {
+	if = {
+		limit = {
+			scope:employee = { has_character_flag = POD_is_aristotle }
+			scope:liege = { is_ai = no }
+		}
+		set_global_variable = pod_achiev_aristotle # Achievement: Ambition Erudition
+	}
+}
+
+POD_achiev_nomnom_initialize = {
+	if = {
+		limit = {
+			is_ai = no
+			POD_is_vampire_trigger = yes
+			has_trait = vampgeneration
+			has_trait_rank = {
+				trait = vampgeneration
+				rank >= 13
+			}
+		}
+		add_character_flag = valid_for_achiev_nomnom
+	}
+}
+
+POD_achiev_nomnom_clear_flag = {
+	if = {
+		limit = { has_character_flag = valid_for_achiev_nomnom }
+		remove_character_flag = valid_for_achiev_nomnom
+	}
+}
+
+POD_achiev_nomnom_check = {
+	if = {
+		limit = {
+			is_ai = no
+			has_character_flag = valid_for_achiev_nomnom
+			POD_is_vampire_trigger = yes
+			has_trait = vampgeneration
+			has_trait_rank = {
+				trait = vampgeneration
+				rank <= 4
+			}
+		}
+		remove_character_flag = valid_for_achiev_nomnom
+		set_global_variable = pod_achiev_nomnom # Achievement: Ate My Way Up The Ladder
+	}
+}
+
+POD_achiev_wheelofages_check = {
+	if = {
+		limit = {
+			is_ai = no
+			
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:reckoning_war_of_shame_objective_decision
+			}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:reckoning_dragon_river_war_objective_decision
+			}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akuma_buff_wheel_prevented
+			}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:political_instability_wheel_prevented
+			}
+		}
+		set_global_variable = pod_achiev_wheelofages # Achievement: Snag in the Wheel
+	}
+}
+
+POD_achiev_absalon_check = {
+	if = {
+		limit = {
+			this = character:790117
+			is_ai = no
+			has_character_modifier = absalon_svantevit_reborn
+			has_character_modifier = drakonskyr_reborn_modifier
+			has_character_modifier = shemaziel_reborn_modifier
+			has_trait = fomori
+			OR = {
+				has_character_modifier = tremere_reborn_modifier
+				has_character_modifier = saulot_reborn_modifier
+				has_character_modifier = tzimisce_reborn_modifier
+			}
+		}
+		set_global_variable = pod_achiev_absalon # Achievement: Getting Crowded In Here
+	}
+}
+
+POD_achiev_morningstar_check = {
+	if = {
+		limit = {
+			is_ai = no
+			has_character_flag = POD_is_the_lamb
+		}
+		set_global_variable = pod_achiev_morningstar # Achievement: Morning Star
+	}
+}
+
+POD_achiev_redlist_eligibility_check = {
+	if = {
+		limit = {
+			POD_provoke_vatican_completed_trigger = yes
+			NOT = { has_game_rule = age_of_inquisition_difficulty_hard }
+		}
+		# for naughty players who switch game rules while inquisitors are spawning
+		set_global_variable = pod_achiev_redlist_unavailable
+	}
+}
+
+POD_achiev_redlist_check = {
+	if = {
+		limit = {
+			is_ai = no
+			has_trait = forever_indomitable
+			has_game_rule = age_of_inquisition_difficulty_hard
+			NOT = { has_global_variable = pod_achiev_redlist_unavailable }
+		}
+		set_global_variable = pod_achiev_redlist # Achievement: Bragging Rights
+	}
+}

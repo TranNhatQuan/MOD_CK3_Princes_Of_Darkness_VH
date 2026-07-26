@@ -1,0 +1,149 @@
+﻿mass_torture_num_of_prisoners = {
+    value = 0
+    every_prisoner = {
+		limit = {
+			NOT = { has_character_modifier = recently_tortured }
+			NOT = { has_character_flag = is_being_tortured }
+			is_adult = yes
+		}
+		add = 1
+	}
+}
+
+mass_torture_piety_gain = {
+	value = 0
+	
+	if = {
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine = tenet_exaltation_of_pain
+					has_doctrine_parameter = torturing_prisoners_grants_piety
+				}
+			}
+		}
+		add = medium_piety_gain
+	}
+	else_if = {
+		limit = {
+			# Divine Retribution cancels out faith-based penalties
+			NOT = { has_perk = divine_retribution_perk }
+		}
+		add = medium_piety_loss
+	}
+
+	multiply = mass_torture_num_of_prisoners
+}
+
+# refer to POD_mass_demand_payment_interaction in common\character_interactions\00_POD_qol_interactions.txt
+mass_payment_num_of_characters = {
+	value = 0
+	every_hooked_character = {
+		limit = { POD_can_demand_payment_trigger = yes }
+		add = 1
+	}
+}
+
+mass_payment_total_gold = {
+	value = 0
+	every_hooked_character = {
+		limit = { POD_can_demand_payment_trigger = yes }
+
+		if = {
+			limit = { gold > golden_obligation_value }
+			add = golden_obligation_value
+		}
+		else = {
+			add = {
+				value = gold
+				floor = yes
+			}
+		}
+	}
+}
+
+#mass_conversion_num_of_characters = {
+#	value = 0
+#	if = {
+#		limit = { scope:house = yes }
+#		scope:actor.house = {
+#			every_house_member = {
+#				limit = {
+#					scope:actor = {
+#						is_character_interaction_valid = {
+#							recipient = prev
+#							interaction = demand_conversion_interaction
+#						}
+#					}
+#				}
+#				add = 1
+#			}
+#		}
+#	}
+#	if = {
+#		limit = { scope:courtier = yes }
+#		scope:actor = {
+#			every_courtier = {
+#				limit = {
+#					scope:actor = {
+#						is_character_interaction_valid = {
+#							recipient = prev
+#							interaction = ask_for_conversion_courtier_interaction
+#						}
+#					}
+#				}
+#				add = 1
+#			}
+#		}
+#	}
+#	if = {
+#		limit = { scope:fellow_vassal = yes }
+#		scope:actor = {
+#			every_vassal = {
+#				limit = {
+#					scope:actor = {
+#						is_character_interaction_valid = {
+#							recipient = prev
+#							interaction = demand_conversion_vassal_ruler_interaction
+#						}
+#					}
+#				}
+#				add = 1
+#			}
+#		}
+#	}
+#	else_if = {
+#		limit = { scope:below_vassal = yes }
+#		scope:actor = {
+#			every_vassal_or_below = {
+#				limit = {
+#					scope:actor = {
+#						is_character_interaction_valid = {
+#							recipient = prev
+#							interaction = demand_conversion_vassal_ruler_interaction
+#						}
+#					}
+#				}
+#				add = 1
+#			}
+#		}
+#	}
+#	if = {
+#		limit = { scope:neteru = yes }
+#		scope:actor = {
+#			every_relation = {
+#				type = worshipping_neteru
+#				limit = {
+#					scope:actor = {
+#						is_character_interaction_valid = {
+#							recipient = prev
+#							interaction = POD_ask_neteru_for_conversion_interaction
+#						}
+#					}
+#				}
+#				add = 1
+#			}
+#		}
+#	}
+#}
+#

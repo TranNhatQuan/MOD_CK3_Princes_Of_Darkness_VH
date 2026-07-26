@@ -1,0 +1,150 @@
+﻿tears_of_the_martyr_perk = {
+	lifestyle = faith_lifestyle
+	tree = spiritus
+	position = { 0 0 }
+	icon = node_learning
+
+	can_be_picked = {
+		has_trait = supehunter
+		OR = {
+			faith = faith:shadowinquisition
+			faith = { has_doctrine_parameter = access_to_holy_arts }
+		}
+		OR = {
+			has_contemplative_order_dynasty_trigger = yes
+			has_mendicant_order_dynasty_trigger = yes
+			POD_has_true_faith_trigger = yes
+		}
+	}
+
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+	
+	character_modifier = {
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = tears_of_the_martyr_perk_effect
+		}
+		if = {
+			limit = {
+				has_contemplative_order_dynasty_trigger = no
+				has_mendicant_order_dynasty_trigger = no
+				POD_has_true_faith_trigger = no
+			}
+			custom_description_no_bullet = { 
+				text = SPIRITUS_NOT_PRIMARY_TEXT
+			}
+		}
+		if = {
+			limit = {
+				NAND = {
+					OR = {
+						faith = { has_doctrine_parameter = access_to_holy_arts }
+						faith = faith:shadowinquisition
+					}
+					has_trait = supehunter
+				}
+			}
+			custom_description_no_bullet = { 
+				text = SHADOW_INQUISITION_ONLY_TEXT
+			}
+		}
+	}
+}
+
+touch_of_peace_perk = {
+	lifestyle = faith_lifestyle
+	tree = spiritus
+	position = { 0 1.25 }
+	icon = node_learning
+	
+	parent = tears_of_the_martyr_perk
+	
+	character_modifier = {
+		epidemic_resistance = 5
+		epidemic_travel_danger = -5
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = touch_of_peace_perk_effect
+		}
+	}
+}
+
+aura_of_sanctity_perk = {
+	lifestyle = faith_lifestyle
+	tree = spiritus
+	position = { 0 2.5 }
+	icon = node_learning
+	
+	parent = touch_of_peace_perk
+	
+	character_modifier = {
+		prowess_no_portrait = 10
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = aura_of_sanctity_perk_effect
+		}
+	}
+}
+
+restoration_perk = {
+	lifestyle = faith_lifestyle
+	tree = spiritus
+	position = { 0 3.75 }
+	icon = node_learning
+	
+	parent = aura_of_sanctity_perk
+	
+	character_modifier = {
+		epidemic_resistance = 5
+		epidemic_travel_danger = -5
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = restoration_perk_effect
+		}
+	}
+}
+
+judgement_of_heaven_perk = {
+	lifestyle = faith_lifestyle
+	tree = spiritus
+	position = { 0 5 }
+	icon = ha_spiritus_mastery
+	
+	parent = restoration_perk
+	
+	character_modifier = {
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = judgement_of_heaven_perk_effect
+		}
+		add_trait_force_tooltip = ha_spiritus_mastery
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			add_trait = truefaith
+		}
+	}
+}

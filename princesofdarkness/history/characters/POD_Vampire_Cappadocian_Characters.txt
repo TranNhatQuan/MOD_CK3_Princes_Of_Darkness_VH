@@ -1,0 +1,7276 @@
+﻿#Cappadocian base template
+
+# id = {
+	# name = "namechar"
+	# dynasty_house = house_
+	# culture = "greek"
+	# religion = "viaossium"
+	# trait = "educationchar"
+	# trait = "vampire"
+	# trait = "cappadocian"
+	# trait = "personality1"		
+	# trait = "personality2"
+	# trait = "personality3"
+	# trait = "other1"
+	# trait = "other2"	
+	# trait = "pther3"
+	# trait = "other4"
+	# trait = "auspex"
+	# trait = "fortitude"
+	# trait = "necromancy"
+	# father = fathercharid
+	# female = no
+	# give_nickname = nick_	
+	# disallow_random_traits = yes
+	
+	# 1.1.1 = {
+		# birth = yes
+		# effect = {
+			# add_character_flag = immune_to_disease
+
+			# add_trait = vampgenerationx
+	
+			# #add_phlegmatic_lifestyle_xp = 20000
+			# #add_melancholy_lifestyle_xp = 20000
+			
+			# set_immortal_age = x
+		# }				
+	# }
+	
+	# 799.1.1 = {
+	# }
+
+	# 1229.1.1 = {	
+	# }
+
+	# 2005.1.1 = {	
+	# }		
+	
+	# 2200.1.1 = {
+		# death = yes 
+	# }			
+# }
+
+#Cappadocius
+
+505017 = {
+	name = "Cappadocius"
+	dynasty = 10000005	
+	culture = "enochian"
+	religion = "viadivinitatis"
+	trait = "education_learning_3"
+	stewardship = 10
+	learning = 30
+	intrigue = 5
+	diplomacy = 5
+	prowess = 100
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arrogant"		
+	trait = "zealous"
+	trait = "callous"
+	trait = "dominateadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "obfuscateadvanced"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "potenceadvanced"
+	trait = "vampgeneration3"
+	father = 505004
+	female = no
+	give_nickname = nick_the_theologian
+	disallow_random_traits = yes
+	
+	40.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_phlegmatic_lifestyle_xp = 30000
+			#add_melancholy_lifestyle_xp = 30000
+			
+			set_immortal_age = 70
+		}	
+			add_trait = torpor
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}			
+	}	
+	
+	100.1.1 = {
+		death = {
+			death_reason = death_disappearance 
+		}
+	}	
+
+	# 1444.12.4 = {
+		# death = {
+			# death_reason = death_diablerie
+			# killer = 505018
+			# }
+	# }			
+}
+
+
+# House Giovanni
+
+505018 = {
+	name = "Augustus_Giovanni"
+	dna = 505018_augustusgiovanni
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_stewardship_3"
+	stewardship = 7
+	learning = 15
+	intrigue = 10
+	diplomacy = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "ambitious"		
+	trait = "deceitful"
+	trait = "greedy"
+	trait = "disloyal"	
+	trait = "family_first"
+	trait = "auspexadvanced"
+	trait = "celerity"
+	trait = "potenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	trait = "fortitude"
+	trait = "obfuscate"
+	trait = "presence"
+	trait = "bloodsorceryadvanced"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_the_patriarch
+	disallow_random_traits = yes
+	
+	1005.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+	    	add_character_flag = POD_bald_look_flag
+			add_character_flag = POD_no_beard_flag			
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 60
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+			assign_sepulchre_path_effect = { LEVEL = 5 RITUAL = yes} 
+
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+			assign_path_of_blood_path_effect = { LEVEL = 3 } 
+			assign_movement_of_the_mind_effect = { LEVEL = 3 }
+			assign_lures_of_flames_effect = { LEVEL = 3 }		
+		}			
+			add_pressed_claim = title:d_venice
+	}
+
+	1229.1.1 = {	
+		effect = {
+			learn_language = language_latin
+		} 	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	1500.1.1 = {	
+		effect = {
+			add_secret = {
+				type = secret_diablerist
+			}
+			add_character_modifier = pseudo_third_modifier
+		}
+	}
+
+	2005.1.1 = {		
+	}		
+	
+	2010.1.1 = {
+		death = {
+			death_reason = death_murder
+				killer = 710501
+				}
+	}				
+}
+
+791036 = {
+# Prince of Pisa
+	name = "Petrus_Iovalis_Pisanus"
+	dynasty_house = house_giovanni
+	dna = 791036_petrus
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_stewardship_4"
+	stewardship = 6
+	intrigue = 10
+	learning = 9
+	diplomacy = 11
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "ambitious"		
+	trait = "vengeful"
+	trait = "greedy"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "dominate"
+	trait = "potence"
+	father = 505018
+	female = no
+	give_nickname = nick_wronged_patrician
+	disallow_random_traits = yes
+	
+	1026.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 2500
+			
+			set_immortal_age = 33
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_08_flag
+            add_character_flag = POD_portrait_male_beard_western_01_flag	
+			assign_sepulchre_path_effect = { LEVEL = 1 RITUAL = no} 
+			assign_ash_path_effect = { LEVEL = 3 RITUAL = no} 			
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505018 }
+			}
+		effect = {
+			learn_language = language_latin
+		} 				
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+		
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}
+	
+	2005.1.1 = {		
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790141 = {
+	name = "Claudius_Giovanni"
+	dna = 790141_claudius
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_intrigue_3"
+	stewardship = 8
+	intrigue = 4
+	diplomacy = 5	
+	learning = 11
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "stubborn"
+	trait = "ambitious"
+	trait = "obfuscate"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	father = 505018
+	female = no
+	give_nickname = nick_augustus_right_hand
+	disallow_random_traits = yes
+	
+	1035.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_mena_04_flag
+			add_character_flag = POD_no_beard_flag			
+			set_immortal_age = 48
+
+			assign_sepulchre_path_effect = { LEVEL = 5 RITUAL = no} 	
+		}				
+	}	
+	
+	1229.1.1 = {	
+		effect = { 
+			set_relation_rival = { reason = rival_historical target = character:790140  }
+			}
+		effect = {
+			learn_language = language_latin
+		} 	
+	}	
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+		effect = {
+			remove_trait = vampgeneration5
+			add_trait = vampgeneration4
+			add_secret = {
+				type = secret_diablerist
+				}
+			}		
+	}
+		
+	1689.1.1 = {
+		death = {
+			death_reason = death_murder
+				killer = 505018
+				}
+	}				
+}
+
+792355 = {
+	name = "Marianna"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_3"
+	learning = 8
+	stewardship = 6
+	diplomacy = 8
+	martial = 7
+	intrigue = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "beauty_good_1"
+	trait = "diligent"		
+	trait = "vengeful"
+	trait = "patient"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	trait = "fortitude"
+	trait = "bloodsorcery"
+	father = 790141
+	female = yes
+	give_nickname = nick_ashur_vengeance
+	disallow_random_traits = yes
+	
+	1444.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 25
+			
+			add_character_flag = has_cappadocian_necromancy_flag	
+			assign_sepulchre_path_effect = { LEVEL = 4 RITUAL = no} 
+			assign_ash_path_effect = { LEVEL = 4 RITUAL = no} 	
+
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+			assign_path_of_blood_path_effect = { LEVEL = 1 } #becomes 4 in modern			
+			#Spirit manipulation 3 in modern
+			#Green path 2 in modern
+		}				
+	}
+	
+	1444.1.5 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790535 = {
+	name = "Justus_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viamercator"
+	trait = "education_stewardship_4"
+	learning = 7
+	stewardship = 3
+	diplomacy = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "diligent"		
+	trait = "humble"
+	trait = "gregarious"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790141
+	female = no
+	give_nickname = nick_hanseatic_ambassador
+	disallow_random_traits = yes
+	
+	1070.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 30
+		}
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 20
+            }
+		}	
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+                trait = ashen_adventurer
+				track = ashen_ambassador
+                value = 10
+            }
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = {
+			learn_language = language_central_germanic
+		} 		
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790144 = {
+	name = "Ignazio_Giovanni"
+	dna = 790144_ignazio_giovanni
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viatyrannus"
+	trait = "education_martial_prowess_4"
+	intrigue = 7
+	stewardship = 7
+	prowess = 10
+	martial = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_bad_1"
+	trait = "strong"
+	trait = "callous"		
+	trait = "content"
+	trait = "honest"
+	trait = "one_eyed"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "dominate"
+	trait = "celerity"
+	father = 505018
+	female = no
+	disallow_random_traits = yes
+	give_nickname=nick_family_muscle
+	
+	1025.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_western_09_flag
+			
+			POD_give_permanent_injury_effect = { TRAIT = one_eyed }
+			
+			set_immortal_age = 25
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2016.1.1 = {
+		death = { 
+			death_reason = death_murder 
+			}
+	}			
+}
+
+792358 = {
+	name = "Diego_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_diplomacy_3"
+	intrigue = 8
+	stewardship = 8
+	diplomacy = 7
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "patient"		
+	trait = "gregarious"
+	trait = "calm"
+	trait = "potenceadvanced"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790144
+	female = no
+	disallow_random_traits = yes
+	give_nickname = nick_family_mediator
+	
+	1421.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 22
+		}				
+	}
+
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes
+	}			
+}
+
+791479 = {
+	name = "Yannis_Lu_Grico"
+	dynasty_house = house_giovanni
+	dna = 791479_yannis
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	learning = 6
+	intrigue = 6
+	diplomacy = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"		
+	trait = "deceitful"
+	trait = "content"
+	trait = "auspex"
+	trait = "presence"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790141
+	give_nickname = nick_the_soothsayer
+	female = no
+	disallow_random_traits = yes
+	
+	1055.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+			
+			set_immortal_age = 51
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 70
+            }
+		}
+
+		effect = {
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_western_09_flag
+			add_character_flag = POD_portrait_male_beard_western_10_flag		
+		}			
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792356 = {
+#One liner sire of Genevra
+	name = "Del_Georgio"
+	dynasty_house = house_giovanni
+	culture = "sicilian"
+	religion = "viaossium"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 7
+	stewardship = 6
+	trait = "trusting"		
+	trait = "patient"
+	trait = "content"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 791479
+	female = no
+	disallow_random_traits = yes
+	
+	1326.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 55
+		}				
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792357 = {
+	name = "Genevra"
+	dna = 792357_genevra
+	dynasty_house = house_giovanni
+	culture = "sicilian"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 7
+	stewardship = 10
+	intrigue = 6
+	diplomacy = 13
+	trait = "deceitful"		
+	trait = "callous"
+	trait = "ambitious"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 792356
+	female = yes
+	give_nickname = nick_ruthless_outsider
+	disallow_random_traits = yes
+	
+	1426.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			set_immortal_age = 27
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_05_flag
+			assign_sepulchre_path_effect = { LEVEL = 3 RITUAL = no} 		
+		}				
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	1999.1.1 = {
+		death = {
+			death_reason = death_diablerie
+		}
+	}		
+			
+}
+
+791480 = {
+	name = "Amina_da_Palermo"
+	dynasty_house = house_giovanni
+	dna = 791480_amina
+	culture = "egyptian"
+	religion = "viamercator"
+	trait = "education_stewardship_4"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	learning = 10
+	stewardship = 8
+	diplomacy = 6
+	trait = "diligent"		
+	trait = "temperate"
+	trait = "greedy"
+	trait = "dominate"
+	trait = "potence"
+	trait = "presence"
+	trait = "necromancy"
+	trait = "lifestyle_herbalist"
+	father = 791479
+	give_nickname = nick_silk_princess
+	female = yes
+	disallow_random_traits = yes
+	
+	1075.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 18
+		}
+
+		effect = {
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_mena_01_flag	
+			assign_ash_path_effect = { LEVEL = 2 RITUAL = no} 				
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_israelite
+			learn_language = language_greek
+			learn_language = language_italian
+		}	
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 45
+            }
+		}		
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790406 = {
+#One liner sire of Pietro
+	name = "Vincenzo_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_diplomacy_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arrogant"		
+	trait = "callous"
+	trait = "content"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "dominate"
+	trait = "potence"
+	trait = "necromancy"
+	mother = 791480
+	female = no
+	disallow_random_traits = yes
+	
+	1095.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 30
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792104 = {
+#DA Europe, Tyre
+	name = "Fiorello_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_stewardship_3"
+	learning = 9
+	stewardship = 7
+	diplomacy = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "calm"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "fortitude"
+	trait = "necromancy"
+	give_nickname = nick_calculating_taskmaster
+	father = 790406
+	female = no
+	disallow_random_traits = yes
+	
+	1126.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 41
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 505095
+	}	
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793059 = {
+#DA CN Ravnos p86
+	name = "Nicolo_Corvino"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_diplomacy_2"
+	learning = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "greedy"		
+	trait = "gregarious"
+	trait = "calm"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 792104
+	female = no
+	disallow_random_traits = yes
+	
+	1138.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 38
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790142 = {
+	name = "Pietro_Giovanni"
+	dna = 790142_pietro_giovanni
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viamercator"
+	trait = "education_stewardship_2"
+	stewardship = 9
+	diplomacy = 3
+	intrigue = 2
+	learning = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "fickle"
+	trait = "lazy"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790406
+	female = no
+	give_nickname = nick_weak_overseer
+	disallow_random_traits = yes
+	
+	1115.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_m_hair_fp4_western_07_bald_flag
+			
+			set_immortal_age = 46
+
+			assign_sepulchre_path_effect = { LEVEL = 4 RITUAL = no} 
+			assign_bone_path_effect = { LEVEL = 1 RITUAL = no} 
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	1915.1.1 = {
+		death = {
+			death_reason = death_disappearance
+				}
+	}					
+}
+
+792276 = {
+#Giovanni modern novel p27
+	name = "Catherine_Giovanni"
+	dna = 792276_catherine
+	dynasty_house = house_giovanni
+	culture = "sicilian"
+	religion = "viaossium"
+	trait = "education_intrigue_4"
+	stewardship = 11
+	diplomacy = 14
+	intrigue = 4
+	learning = 12
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "greedy"		
+	trait = "zealous"
+	trait = "deceitful"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790142
+	female = yes
+	give_nickname = nick_babylonian_giovanni
+	disallow_random_traits = yes
+	
+	1146.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_western_07_flag
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 32
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	1578.1.1 = {
+		death = {
+			death_reason = death_murder
+				}
+	}					
+}
+
+792277 = {
+#Giovanni modern novel p28
+	name = "Marco_Gracchus_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "sicilian"
+	religion = "viaossium"
+	trait = "education_diplomacy_1"
+	stewardship = 6
+	diplomacy = 5
+	intrigue = 5
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "craven"		
+	trait = "cynical"
+	trait = "fickle"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	mother = 792276
+	female = no
+	disallow_random_traits = yes
+	
+	1178.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 41
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	1570.1.1 = {
+		death = {
+			death_reason = death_murder
+				}
+	}					
+}
+
+793034 = {
+#CN DA Setite Aquileia court
+	name = "Alonso_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "sicilian"
+	religion = "viamercator"
+	trait = "education_diplomacy_2"
+	stewardship = 6
+	diplomacy = 6
+	intrigue = 6
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "gregarious"		
+	trait = "cynical"
+	trait = "deceitful"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 792277
+	female = no
+	disallow_random_traits = yes
+	
+	1190.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration12
+			
+			set_immortal_age = 28
+		}				
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790407 = {
+#One liner sire of Markus Musa
+	name = "Guisseppi_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viamercator"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "forgiving"		
+	trait = "zealous"
+	trait = "shy"
+	trait = "architect"
+	trait = "auspex"
+	trait = "obfuscate"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790141
+	female = no
+	disallow_random_traits = yes
+	
+	1055.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 45
+		}				
+	}
+
+	1355.1.1 = {
+		death = {
+			death_reason = death_disappearance 
+		} 
+	}				
+}
+
+790143 = {
+	name = "Markus_Musa_Giovanni"
+	dna = 790143_markusmusa
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	diplomacy = 6
+	stewardship = 11
+	learning = 0
+	intrigue = 9
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "physique_good_3" # mountain of a man p19 of DA CN Capp and repeated often
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "callous"
+	trait = "scholar"
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancyadvanced"
+	father = 790407
+	female = no
+	give_nickname = nick_unrelenting_loyalist
+	disallow_random_traits = yes
+	
+	1115.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_indian_01_flag
+			add_character_flag = POD_portrait_male_beard_fp1_02_flag
+			add_character_flag = POD_portrait_male_beard_western_01_flag
+				
+			set_immortal_age = 30
+		}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+			add_character_flag = has_cappadocian_necromancy_flag
+			assign_sepulchre_path_effect = { LEVEL = 5 RITUAL = yes } 
+			assign_ash_path_effect = { LEVEL = 5 RITUAL = no} 	
+			assign_bone_path_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 			
+		} 			
+	}	
+	
+	1235.1.1 = {
+		death = {
+			death_reason = death_execution
+			killer = 790341
+			}
+	}				
+}
+
+791790 = {
+#Da Companion Constantinople
+	name = "Matelda_Giovanni"
+	dynasty_house = house_giovanni
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "stubborn"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790143
+	female = yes
+	give_nickname = nick_latin_prize
+	disallow_random_traits = yes
+	
+	1158.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+				
+			set_immortal_age = 32
+		}				
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790325
+		}	
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+# House Lazarene
+
+#Has a physical description in DA CN p261
+710501 = {
+	name = "Lazarus"
+	dynasty_house = house_lazarene
+	dna = 710501_lazarus
+	culture = "hebrew"
+	religion = "followersoflazarus"
+	trait = "education_intrigue_4"
+	intrigue = 10
+	stewardship = 6
+	learning = 17
+	diplomacy = 9	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"		
+	trait = "wrathful"
+	trait = "ambitious"
+	trait = "deceitful"	
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "serpentis"
+	trait = "celerityadvanced"
+	trait = "dominate"
+	trait = "obfuscate"
+	trait = "potenceadvanced"
+	trait = "presenceadvanced"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_faithless_son
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_sanguine_lifestyle_xp = 10000
+			#add_melancholy_lifestyle_xp = 10000
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 40
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp1_04_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 			
+		}		
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+		add_trait = torpor
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+			learn_language = language_ancient_egyptian
+			learn_language = language_enochian
+		} 			
+	}
+	
+	1230.1.4 = {
+		employer = 710502
+		}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791352 = {
+#V20 DA Companion
+	name = "Gudrunn"
+	dna = 791352_gudrunn
+	dynasty_house = house_lazarene
+	culture = "norse"
+	religion = "viaaesigard"
+	trait = "education_learning_3"
+	learning = 5
+	diplomacy = 6
+	intrigue = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "callous"
+	trait = "content"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	father = 710501
+	female = yes
+	give_nickname = nick_contrary_volva
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_02_flag
+	
+			#add_melancholy_lifestyle_xp = 10000
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 				
+			
+			set_immortal_age = 25
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 80
+            }
+		}		
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+710502 = {
+	name = "Angelique"
+	dna = 710502_angelique
+	dynasty_house = house_lazarene
+	culture = "egyptian"
+	religion = "followersoflazarus"
+	trait = "education_diplomacy_3"
+	stewardship = 12
+	learning = 8
+	intrigue = 9
+	diplomacy = 6	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "humble"
+	trait = "patient"
+	trait = "necromancyadvanced"
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	trait = "animalism"
+	trait = "auspexadvanced"
+	trait = "celerityadvanced"
+	trait = "obfuscateadvanced"
+	trait = "serpentis"
+	trait = "beauty_good_1"					
+	father = 710501
+	female = yes
+	give_nickname = nick_guardian_of_the_necropoli
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_02_flag
+
+			add_trait = vampgeneration5
+	
+			#add_melancholy_lifestyle_xp = 10000
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+			set_immortal_age = 30
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+		set_relation_friend = { reason = friend_generic_history target = character:710501  }
+			}
+	}
+
+	1229.1.1 = {
+		effect = {
+		set_relation_rival = { reason = rival_historical target = character:790143 }
+			}
+		effect = {
+			learn_language = language_ancient_egyptian
+		} 
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 35
+			}
+		}		
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791237 = {
+#In Burgundy, used as prince of Nevers in game
+	name = "Margot"
+	dynasty_house = house_lazarene
+	culture = "egyptian"
+	religion = "followersoflazarus"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "deceitful"
+	trait = "diligent"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	trait = "serpentisadvanced"
+	trait = "auspexadvanced"
+	father = 710501
+	female = yes
+	give_nickname = nick_eyes_of_lazarus
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_sanguine_lifestyle_xp = 10000
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 
+			
+			set_immortal_age = 36
+		}	
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+# House Japhet
+
+790020 = {
+	name = "Japhet"
+	dynasty_house = house_japhet
+	dna = 790020_japhet
+	culture = "assyrian"
+	religion = "viaossium"
+	trait = "education_stewardship_2"
+	learning = 15
+	stewardship = 10
+	intrigue = 6
+	diplomacy = 5
+	prowess = 0
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "humble"
+	trait = "honest"
+	trait = "loyal"	
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "necromancyadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "animalismadvanced"
+	trait = "celerityadvanced"
+	trait = "presenceadvanced"
+	trait = "fortitude"
+	trait = "obfuscateadvanced"
+	trait = "potenceadvanced"
+	trait = "proteanadvanced"
+	trait = "valeren" #Obeah in his sheet
+	trait = "chimerstry"
+	trait = "obtenebrationadvanced"
+	trait = "serpentis"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_faithful_son
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			
+			#add_phlegmatic_lifestyle_xp = 10000
+			#add_sanguine_lifestyle_xp = 10000
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 23
+		}
+		
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_01_flag				
+		}
+		effect = {
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+		}	
+		effect = {
+			assign_weather_controlpath_effect = { LEVEL = 5 } #Weather Control
+			assign_rego_elementum_path_effect = { LEVEL = 5 } #Elemental Mastery
+			assign_lures_of_flames_effect = { LEVEL = 1 }
+			assign_movement_of_the_mind_effect = { LEVEL = 3 }
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 			
+		}
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+		}
+		effect = {
+			reverse_add_opinion = {
+				modifier = respect_opinion
+				target = character:790537
+				opinion = 80
+			}
+		}	 		
+	}	
+	
+	1444.1.1 = {
+		death = {
+			death_reason = death_diablerie
+				killer = 790141
+				}
+	}			
+}
+
+790021 = {
+	name = "Constancia"
+	dna = 790021_constancia
+	dynasty_house = house_japhet
+	culture = "mycenean"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	stewardship = 12
+	learning = 8
+	intrigue = 8
+	diplomacy = 10	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "paranoid"
+	trait = "callous"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "obfuscateadvanced"
+	trait = "celerityadvanced"
+	trait = "beauty_good_1"					
+	father = 790020
+	female = yes
+	give_nickname = nick_the_oracle_of_bones
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 31
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_bald_look_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 			
+		}	
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+		} 		
+	}
+
+	2005.1.1 = {
+		add_trait = torpor
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791272 = {
+#Used as prince of Velay in game
+	name = "Vate"
+	dynasty_house = house_japhet
+	culture = "breton"
+	religion = "pathoftheeightfoldwheel"
+	trait = "education_learning_4"
+	stewardship = 8
+	learning = 6
+	intrigue = 5
+	diplomacy = 10	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "gregarious"
+	trait = "callous"
+	trait = "dominateadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "animalism"
+	trait = "celerity"
+	trait = "chimerstry"
+	trait = "presence"
+	trait = "protean"
+	trait = "potence"
+	trait = "mytherceria"
+	trait = "dementation"
+	trait = "theologian"
+	mother = 790021
+	female = no
+	give_nickname = nick_mortitian_cainite 
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 36
+		}
+	}
+	
+	799.1.1 = {
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:791269 }
+			}
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 40
+            }
+		}	
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }		
+			add_character_flag = has_rosselini_necromancy_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes}
+			assign_ash_path_effect = { LEVEL = 2 RITUAL = no}	
+		}			
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793011 = {
+	name = "Liliana"
+	dynasty_house = house_japhet
+	culture = "lombard"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	martial = 5
+	stewardship = 7
+	prowess = 6
+	learning = 8
+	diplomacy = 7
+	intrigue = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arbitrary"
+	trait = "deceitful"
+	trait = "callous"
+	trait = "necromancyadvanced"
+	trait = "presence"
+	trait = "dominate"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "disfigured"
+	father = 791272
+	give_nickname = nick_wearer_triple_faced_mask
+	female = yes
+	disallow_random_traits = yes
+	
+	718.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_phlegmatic_lifestyle_xp = 2500
+			
+			set_immortal_age = 39
+			
+			add_character_flag = has_harbinger_necromancy_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 	
+			assign_skull_path_effect = { LEVEL = 3 }			
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+		add_trait = torpor
+	}	
+	
+	2005.1.1 = {
+		remove_trait = cappadocian
+		remove_trait = torpor
+		add_trait = harbingersofskulls
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791406 = {
+#One liner sire of Aliyyah
+	name = "Lonas"
+	dynasty_house = house_japhet
+	culture = "greek"
+	religion = "viaossium"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "wrathful"		
+	trait = "honest"
+	trait = "impatient"
+	trait = "presence"
+	trait = "auspex"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	father = 791272
+	female = no
+	disallow_random_traits = yes
+	
+	651.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+				
+			set_immortal_age = 62
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+		}
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791407 = {
+#Cordoba, Sevilla
+	name = "Aliyyah"
+	dynasty_house = house_japhet
+	culture = "maghrebi"
+	religion = "viaconsuasor"
+	trait = "education_intrigue_3"
+	intrigue = 5
+	stewardship = 6
+	learning = 8
+	diplomacy = 10
+	prowess = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "presence"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	father = 791406
+	give_nickname = nick_whisper_death
+	female = yes
+	disallow_random_traits = yes
+	
+	843.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 
+			
+			set_immortal_age = 28
+		}
+	}
+
+	1229.1.1 = {	
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:791391 }
+			}
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792070 = {
+#Darkening Skies
+	name = "Elisheba_bint_Aliyyah"
+	dynasty_house = house_japhet
+	culture = "sephardi"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	intrigue = 3
+	learning = 8
+	stewardship = 8
+	diplomacy = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "content"		
+	trait = "diligent"
+	trait = "humble"
+	trait = "presence"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	mother = 791407
+	give_nickname = nick_dutiful_student
+	female = yes
+	disallow_random_traits = yes
+	
+	987.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+				
+			set_immortal_age = 29
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791929 = {
+#One liner sire of Julianna
+#Also a character in DA CN Capp, chap19
+	name = "Andel"
+	dynasty_house = house_japhet
+	culture = "lombard"
+	religion = "followersoflazarus"
+	trait = "education_learning_3"
+	learning = 8
+	intrigue = 3
+	stewardship = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "patient"
+	trait = "protean"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	mother = 791407
+	female = no
+	disallow_random_traits = yes
+	
+	1001.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+				
+			set_immortal_age = 39
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792237 = {
+#One liner sire of Margaret
+	name = "Wechsel"
+	dynasty_house = house_japhet
+	culture = "hungarian"
+	religion = "pathofthewheel"
+	trait = "education_learning_2"
+	learning = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "just"		
+	trait = "patient"
+	trait = "compassionate"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 791929
+	female = no
+	disallow_random_traits = yes
+	
+	1061.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+				
+			set_immortal_age = 51
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792238 = {
+#House of Tremere
+	name = "Margaret_Vasa"
+	dynasty_house = house_japhet
+	culture = "hungarian"
+	religion = "viaossium"
+	trait = "education_diplomacy_3"
+	learning = 10
+	diplomacy = 7
+	intrigue = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "patient"
+	trait = "calm"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 792237
+	give_nickname = nick_graverobber_envoy
+	female = yes
+	disallow_random_traits = yes
+	
+	1145.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+				
+			set_immortal_age = 19
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792156 = {
+#One liner sire of Laura
+	name = "Gianni"
+	dynasty_house = house_japhet
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_learning_2"
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "compassionate"		
+	trait = "greedy"
+	trait = "patient"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 791929
+	female = no
+	disallow_random_traits = yes
+	
+	1052.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+				
+			set_immortal_age = 51
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792157 = {
+#Road of the Beast
+	name = "Laura_di_Salerno"
+	dna = 792157_laura_di_salerno
+	dynasty_house = house_japhet
+	culture = "lombard"
+	religion = "viabestiae"
+	trait = "education_learning_3"
+	stewardship = 8
+	intrigue = 5
+	diplomacy = 6
+	learning = 4
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 792156
+	give_nickname = nick_beast_scholar
+	female = yes
+	disallow_random_traits = yes
+	
+	1097.1.1 = {
+        birth = yes
+        effect = {
+            add_character_flag = immune_to_disease
+
+            add_trait = vampgeneration11
+				
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no}
+            
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_f_hair_fp3_iranian_02_flag
+                       
+            set_immortal_age = 25
+        }                
+    }
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofthebeast"
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791986 = {
+#Prince of Oxford (BI Casualties)
+	name = "Alfonse_di_Padua"
+	dynasty_house = house_japhet
+	culture = "lombard"
+	religion = "viamercator"
+	trait = "education_stewardship_3"
+	learning = 5
+	stewardship = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"		
+	trait = "zealous"
+	trait = "humble"
+	trait = "presence"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 791929
+	give_nickname = nick_the_oddity
+	female = no
+	disallow_random_traits = yes
+	
+	1125.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+				
+			set_immortal_age = 41
+		}
+	}
+
+	1229.1.1 = {	
+	}	
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791930 = {
+#Ashen Cults
+	name = "Julianna_Trevani"
+	dynasty_house = house_japhet
+	dna = 791930_julianna
+	culture = "italian"
+	religion = "followersoflazarus"
+	trait = "education_learning_4"
+	learning = 5
+	intrigue = 9
+	diplomacy = 12
+	stewardship = 12
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "deceitful"
+	trait = "protean"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 791929
+	give_nickname = nick_chosen_of_lazarus
+	female = yes
+	disallow_random_traits = yes
+	
+	1141.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			
+			set_immortal_age = 19
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_01_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 			
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 30
+			}
+		}		
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791408 = {
+#Sevilla
+	name = "Jakeem_ibn_Aliyyah"
+	dynasty_house = house_japhet
+	culture = "andalusian"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	learning = 7
+	intrigue = 6
+	stewardship = 5
+	diplomacy = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "vengeful"		
+	trait = "paranoid"
+	trait = "patient"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancyadvanced"
+	trait = "animalism"
+	trait = "dominate"
+	mother = 791407
+	give_nickname = nick_lurker_crypt
+	female = no
+	disallow_random_traits = yes
+	
+	1013.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+				
+			set_immortal_age = 54
+		}
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 55
+            }
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:791407 }
+			}
+	}
+
+	1451.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 790366
+			}
+	}			
+}
+
+791864 = {
+#FbN
+	name = "Nefesh"
+	dynasty_house = house_japhet
+	culture = "french"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "callous"		
+	trait = "paranoid"
+	trait = "stubborn"
+	trait = "obfuscate"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	father = 791408
+	give_nickname = nick_last_breath
+	female = no
+	disallow_random_traits = yes
+	
+	1039.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+				
+			set_immortal_age = 34
+		}
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 15
+            }
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 791046
+		}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790240 = {
+#Prince of Smyrna
+	name = "Nicomedes"
+	dynasty_house = house_japhet
+	culture = "greek"
+	religion = "viaequitum"
+	trait = "education_martial_3"
+	prowess = 8
+	martial = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "honest"		
+	trait = "diligent"
+	trait = "callous"
+	trait = "celerityadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancy"
+	trait = "auspex"
+	mother = 790021
+	female = no
+	give_nickname = nick_guardian_of_nicaea	
+	disallow_random_traits = yes
+	
+	900.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 19
+		}				
+	}
+	
+	1229.1.1 = {	
+	effect = {
+	  set_relation_friend = { reason = friend_generic_history target = character:790004	 }
+	 }
+		effect = {
+			add_trait = unyielding_defender
+			add_trait_xp = {
+                trait = unyielding_defender
+                value = 35
+            }
+		}		 
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791267 = {
+#Prince of Saintes (used as prince of Montaigu in game)
+	name = "Angelus"
+	dynasty_house = house_japhet
+	culture = "greek"
+	religion = "viachristi"
+	trait = "education_learning_2"
+	intrigue = 7
+	stewardship = 8
+	diplomacy = 6
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "calm"
+	trait = "zealous"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	father = 790240
+	female = no
+	give_nickname = nick_the_fraud
+	disallow_random_traits = yes
+	
+	926.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 52
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofredemption"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790534 = {
+	name = "Thomas_Beckett_Camden"
+	dynasty_house = house_japhet
+	dna = 790534_camden
+	culture = "english"
+	religion = "viamithras"
+	trait = "education_learning_4"
+	learning = 10
+	stewardship = 15
+	intrigue = 11
+	diplomacy = 17	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "patient"		
+	trait = "calm"
+	trait = "zealous"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "celerity"
+	trait = "dominate"
+	trait = "obfuscateadvanced"
+	trait = "presence"
+	mother = 790021
+	sexuality = homosexual
+	female = no	
+	give_nickname = nick_the_gentleman
+	disallow_random_traits = yes
+	
+	731.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 40
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_03_flag	
+			#add_character_flag = POD_portrait_fantasy_helm_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 			
+		}		
+	}
+	
+	799.1.1 = {
+		effect = { 
+			set_relation_soulmate = { reason = soulmate_professed_love target = character:505071 }
+			}
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		} 
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 70
+			}
+		}		
+	}	
+	
+	2005.1.1 = {
+		remove_trait = cappadocian
+		add_trait = harbingersofskulls
+		effect = {
+			remove_trait = vampgeneration6
+			add_trait = vampgeneration5
+			add_secret = {
+				type = secret_diablerist
+				}
+			}
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790963 = {
+	name = "Maria_Asuncion"
+	dynasty_house = house_japhet
+	culture = "castilian"
+	religion = "viadolorosa"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 8
+	diplomacy = 7
+	stewardship = 6
+	trait = "content"		
+	trait = "brave"
+	trait = "shy"
+	trait = "theologian"
+	trait = "beatific"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	father = 790534
+	female = yes
+	give_nickname = nick_fates_pawn
+	disallow_random_traits = yes
+	
+	920.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 28
+			
+            add_character_flag = POD_no_cappadocian_look_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1680.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 790140
+			}
+	}			
+}
+
+791381 = {
+#Prince of Girona
+	name = "Harpalion"
+	dynasty_house = house_japhet
+	culture = "catalan"
+	religion = "viachristi"
+	trait = "education_stewardship_3"
+	learning = 8
+	stewardship = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "zealous"
+	trait = "just"
+	trait = "theologian"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "presence"
+	trait = "necromancy"
+	mother = 790963
+	female = no
+	give_nickname = nick_stjames_convert
+	disallow_random_traits = yes
+	
+	1028.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 39
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791942 = {
+#One liner sire of Simon
+	name = "Raymonde_Roussel"
+	dynasty_house = house_japhet
+	culture = "norman"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	learning = 1
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "compassionate"		
+	trait = "zealous"
+	trait = "just"
+	trait = "scholar"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 791381
+	female = yes
+	disallow_random_traits = yes
+	
+	1051.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 32
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791943 = {
+#Ashen Cults
+	name = "Simon_Rigaud"
+	dynasty_house = house_japhet
+	culture = "french"
+	religion = "viaossium"
+	trait = "education_stewardship_2"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_bad_1"
+	trait = "physique_good_1"
+	trait = "content"		
+	trait = "diligent"
+	trait = "humble"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	give_nickname = nick_the_spiritician
+	mother = 791942
+	female = no
+	disallow_random_traits = yes
+	
+	1116.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 31
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1230.1.4 = {
+		employer = 790975
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790966 = {
+#One liner sire of Garinol
+	name = "Jervais"
+	dynasty_house = house_japhet
+	culture ="french"
+	religion = "viapenaculum"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "trusting"
+	trait = "content"		
+	trait = "calm"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "dominate"
+	trait = "necromancy"
+	mother = 790963
+	female = no
+	disallow_random_traits = yes
+	
+	980.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 50
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790967 = {
+	name = "Garinol"
+	dna = 790967_garinol
+	dynasty_house = house_japhet
+	culture ="czech"
+	religion = "viachristi"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 8
+	stewardship = 6
+	intrigue = 7
+	trait = "callous"		
+	trait = "cynical"
+	trait = "shy"
+	trait = "torturer"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 790966
+	female = no
+	give_nickname = nick_cynical_abbot
+	disallow_random_traits = yes
+	
+	1099.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 22
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            #add_character_flag = POD_portrait_male_hair_western_01_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_tonsure_flag
+			add_character_flag = POD_monk_robe_flag
+            add_character_flag = POD_no_beard_flag	
+            add_character_flag = POD_no_cappadocian_look_flag	
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 			
+		}		
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1495.1.1 = {
+		death = {
+			death_reason = death_disappearance
+			}
+	}			
+}
+
+791912 = {
+#FbN
+	name = "Anastasie"
+	dynasty_house = house_japhet
+	culture ="occitan"
+	religion = "viachristi"
+	trait = "education_learning_3"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "diligent"
+	trait = "shy"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "obfuscate"
+	trait = "necromancy"
+	father = 790967
+	female = no
+	give_nickname = nick_consilio_nemausus
+	disallow_random_traits = yes
+	
+	1129.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			set_immortal_age = 33
+		}				
+	}
+	
+	1229.1.1 = {	
+	}
+
+	1230.1.4 = {	
+		employer = 791257
+	}		
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791482 = {
+#Christoff's Coterie
+	name = "Serena"
+	dynasty_house = house_japhet
+	dna = 791482_serena
+	culture ="czech"
+	religion = "viaprometheus"
+	trait = "education_learning_3"
+	prowess = 6
+	diplomacy = 6
+	intrigue = 12
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "just"		
+	trait = "diligent"
+	trait = "shy"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "necromancy"
+	trait = "beauty_good_1"				
+	father = 790967
+	female = yes
+	give_nickname = nick_reluctant_adventurer
+	disallow_random_traits = yes
+	
+	1129.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 23
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_02_flag
+            add_character_flag = POD_no_cappadocian_look_flag	
+			add_character_flag = POD_deathly_pale_skin_flag
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 			
+		}		
+	}
+	
+	1229.1.1 = {	
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:790802 }
+		}		
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+791162 = {
+#Mogadishu
+	name = "Eriz"
+	dynasty_house = house_japhet
+	culture = "basque"
+	religion = "viacommunitas"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "gregarious"		
+	trait = "diligent"
+	trait = "fickle"
+	trait = "celerity"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 790967
+	female = no
+	give_nickname = nick_far_from_home
+	disallow_random_traits = yes
+	
+	1131.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 36
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791389 = {
+#Lisbon
+	name = "Nyssa"
+	dynasty_house = house_japhet
+	culture = "portuguese"
+	religion = "viaossium"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"		
+	trait = "temperate"
+	trait = "zealous"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 791162
+	female = yes
+	disallow_random_traits = yes
+	
+	1158.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 58
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House Byzar
+
+790405 = {
+	name = "Byzar"
+	dynasty_house = house_byzar
+	dna = 790405_byzar
+	culture = "mycenean"
+	religion = "viacommunitas"
+	trait = "education_learning_4"
+	stewardship = 10
+	learning = 11
+	intrigue = 8
+	diplomacy = 3	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "vengeful"		
+	trait = "stubborn"
+	trait = "deceitful"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "dominateadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "potenceadvanced"
+	trait = "protean"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_byzantium_architect
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_phlegmatic_lifestyle_xp = 10000
+			#add_sanguine_lifestyle_xp = 10000
+												
+			
+			set_immortal_age = 23
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_03_flag
+            add_character_flag = POD_no_cappadocian_look_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 			
+		}				
+	}
+	
+	799.1.1 = {
+		add_pressed_claim = title:c_byzantion
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+			add_trait = golconda_seeker
+			add_trait_xp = { trait = golconda_seeker value = 15 }
+		}		
+	}
+
+	1229.1.1 = {	
+		add_trait = torpor
+	}	
+	
+	1230.1.4 = {
+		employer = 505098
+		}	
+	
+	1450.1.1 = {
+		religion = "viahumanitatis"
+		remove_trait = torpor
+		name = "Mahatma"	
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793083 = {
+	name = "Alexia_Theusa"
+	dynasty_house = house_byzar
+	culture = "classical_greek"
+	religion = "viahumanitatis"
+	learning = 8
+	intrigue = 9
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "wrathful"
+	trait = "stubborn"
+	trait = "obfuscate"
+	trait = "necromancyadvanced"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	trait = "presence"
+	trait = "vicissitude"
+	give_nickname = nick_mistress_death
+	father = 790405
+	female = yes
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 58
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1204.10.16 = {	
+		death = {
+			death_reason = death_duel
+			killer = 710501
+		}
+	}			
+}
+
+790404 = {
+# One liner sire of Amalia
+	name = "Kyros_of_Antioch"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "viadolorosa"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "humble"
+	trait = "impatient"
+	trait = "theologian"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	father = 790405
+	female = no
+	disallow_random_traits = yes
+	
+	300.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 35
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 			
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791787 = {
+# Fratres Plaga, DAV20 Comp
+	name = "Holiman"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "pathofthewheel"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "callous"
+	trait = "theologian"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	father = 790404
+	give_nickname = nick_fratres_plaga
+	female = no
+	disallow_random_traits = yes
+	
+	578.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 33
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 			
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791788 = {
+# Fratres Plaga, DAV20 Comp
+	name = "Gentilman"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "pathofthewheel"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "patient"
+	trait = "callous"
+	trait = "theologian"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	father = 790404
+	give_nickname = nick_fratres_plaga
+	female = no
+	disallow_random_traits = yes
+	
+	578.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 33
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+791789 = {
+# Fratres Plaga, DAV20 Comp
+	name = "Carnifex"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "pathofthewheel"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "stubborn"
+	trait = "callous"
+	trait = "theologian"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	father = 790404
+	give_nickname = nick_fratres_plaga
+	female = no
+	disallow_random_traits = yes
+	
+	578.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 33
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790403 = {
+	name = "Amalia_of_Thrace"
+	dna = 790403_amalia_of_thrace
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "viapenaculum"
+	trait = "education_diplomacy_2"
+	learning = 12
+	diplomacy = 8
+	intrigue = 9
+	stewardship = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "callous"		
+	trait = "trusting"
+	trait = "patient"
+	trait = "torturer"
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "presence"
+	trait = "fortitude"
+	trait = "potence"
+	father = 790404
+	female = yes
+	give_nickname = nick_the_penitent
+	disallow_random_traits = yes
+	
+	400.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_f_hair_ep3_byzantine_01_flag
+			
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 25
+			
+            add_character_flag = POD_no_cappadocian_look_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+
+	1458.1.1 = {
+		death = {
+			death_reason = death_murder 
+			}
+	}			
+}
+
+790408 = {
+# sire of Apacia and Khurshid
+	name = "Malenchaenos"
+	dynasty_house = house_byzar
+	culture = "classical_greek"
+	religion = "viaossium"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 8
+	trait = "arbitrary"
+	trait = "diligent"
+	trait = "trusting"
+	trait = "lifestyle_poet"
+	trait = "auspex"
+	trait = "presenceadvanced"
+	trait = "dominateadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	father = 790405
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 50
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 				
+		
+			add_trait_xp = {
+				trait = lifestyle_poet
+				value = 15
+			}
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+		add_trait = torpor
+	}	
+	
+	2005.1.1 = {
+		remove_trait = cappadocian
+		remove_trait = torpor
+		add_trait = harbingersofskulls
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791040 = {
+# One liner sire of Penelope
+	name = "Baldassare"
+	dynasty_house = house_byzar
+	culture = "macedonian"
+	religion = "viaossium"
+	trait = "education_intrigue_1"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arbitrary"
+	trait = "lustful"
+	trait = "callous"
+	trait = "auspex"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancy"
+	father = 790408
+	female = no
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 47
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1101.1.1 = {	
+		death = {
+			death_reason = death_murder
+			}
+	}				
+}
+
+792022 = {
+# Leader of the women of david, High Clans
+	name = "Antikleia"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_3"
+	learning = 8
+	intrigue = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"
+	trait = "vengeful"
+	trait = "gregarious"
+	trait = "necromancyadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	father = 791040
+	give_nickname = nick_lady_david
+	female = yes
+	disallow_random_traits = yes
+	
+	457.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 36
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1230.1.4 = {
+		employer = 790155
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791892 = {
+# FbN
+	name = "Hieronymus"
+	dynasty_house = house_byzar
+	culture = "frankish"
+	religion = "viachristi"
+	trait = "education_intrigue_3"
+	learning = 10
+	intrigue = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"
+	trait = "zealous"
+	trait = "callous"
+	trait = "auspex"
+	trait = "necromancyadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "fortitudeadvanced"
+	father = 791040
+	give_nickname = nick_callous_pilgrim
+	female = no
+	disallow_random_traits = yes
+	
+	256.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 46
+		}
+		effect = {
+			add_trait = pilgrim
+			add_trait_xp = {
+                trait = pilgrim
+                value = 55
+            }
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 				
+		}		
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1230.1.4 = {
+		employer = 505072
+		}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791845 = {
+# FbN
+	name = "Eleazar"
+	dynasty_house = house_byzar
+	culture = "castilian"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	learning = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "diligent"
+	trait = "zealous"
+	trait = "callous"
+	trait = "torpor"
+	trait = "auspex"
+	trait = "dominateadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "fortitudeadvanced"
+	father = 791040
+	give_nickname = nick_holy_martyr
+	female = no
+	disallow_random_traits = yes
+	
+	359.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 51
+		}				
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1230.1.4 = {
+		employer = 791254
+		}
+	
+	1450.1.3 = {
+		remove_trait = torpor
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791230 = {
+#Prince of Dijon
+	name = "Benignus"
+	dynasty_house = house_byzar
+	culture = "roman"
+	religion = "viacaeli"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"
+	trait = "zealous"
+	trait = "compassionate"
+	trait = "theologian"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	trait = "presenceadvanced"
+	trait = "dominateadvanced"
+	trait = "obfuscateadvanced"
+	father = 791040
+	give_nickname = nick_the_affable
+	female = no
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 49
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no } 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791041 = {
+	name = "Penelope"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	stewardship = 2
+	learning = 8
+	intrigue = 8
+	diplomacy = 6	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"
+	trait = "deceitful"
+	trait = "callous"
+	trait = "scholar"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancyadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	father = 791040
+	sexuality = heterosexual
+	give_nickname = nick_scholar_of_hamburg
+	female = yes
+	disallow_random_traits = yes
+	
+	540.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 26
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 				
+		}				
+	}
+	
+	799.1.1 = {
+		effect = {
+			set_relation_soulmate = { reason = soulmate_professed_love target = character:790152 }
+			}
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_central_germanic
+			learn_language = language_latin
+		} 		
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792818 = {
+#One liner sire of Anelio
+	name = "Der_Notarius"
+	dynasty_house = house_byzar
+	culture = "franconian"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	learning = 7	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"
+	trait = "diligent"
+	trait = "patient"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	trait = "obfuscate"
+	mother = 791041
+	female = no
+	disallow_random_traits = yes
+	
+	1102.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 62
+		}				
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+		} 		
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792819 = {
+#Aachen
+#Disappears with Ana in 1226, maybe killed by Giovanni, unconfirmed sightings of him and Ana in 20th century
+	name = "Aniello_de_la_Santa_Croce"
+	dynasty_house = house_byzar
+	dna = 792819_aniello
+	culture = "italian"
+	religion = "viahumanitatis"
+	trait = "education_learning_3"
+	learning = 8
+	intrigue = 8
+	stewardship = 7
+	diplomacy = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "paranoid"
+	trait = "vengeful"
+	trait = "patient"
+	trait = "lifestyle_physician"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	give_nickname = nick_eternal_fugitive
+	father = 792818
+	female = no
+	disallow_random_traits = yes
+	
+	1130.1.10 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+            add_character_flag = has_scripted_appearance		
+			#add_phlegmatic_lifestyle_xp = 5000
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_03_flag
+            add_character_flag = POD_male_empty_flag			
+			set_immortal_age = 26
+		}				
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_central_germanic
+		} 		
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790536 = {
+	name = "Khurshid"
+	dynasty_house = house_byzar
+	culture = "persian"
+	religion = "followersoflazarus"
+	trait = "education_martial_4"
+	martial = 9
+	stewardship = 6
+	prowess = 7
+	learning = 9
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arbitrary"
+	trait = "deceitful"
+	trait = "gregarious"
+	trait = "diplomat"
+	trait = "strategist"
+	trait = "necromancyadvanced"
+	trait = "presence"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "celerity"
+	trait = "fortitudeadvanced"
+	trait = "potence"
+	trait = "protean"
+	trait = "disfigured"
+	father = 790408
+	give_nickname = nick_wearer_sun_mask
+	female = no
+	disallow_random_traits = yes
+	
+	680.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 2500
+			
+			set_immortal_age = 50
+			
+			add_character_flag = has_harbinger_necromancy_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 	
+			assign_skull_path_effect = { LEVEL = 5 }					
+			}	
+		effect = {
+			add_trait = flexible_leader
+			add_trait_xp = {
+                trait = flexible_leader
+                value = 35
+            }
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+		add_trait = torpor #might be active as a lazarene since he fled the feast and entered the shadowlands later than others
+	}	
+	
+	2005.1.1 = {
+		remove_trait = cappadocian
+		remove_trait = torpor
+		add_trait = harbingersofskulls
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790220 = {
+#Queen of Sibir
+	name = "Apacia"
+	dna = 790220_apacia
+	dynasty_house = house_byzar
+	culture = "saka"
+	religion = "pathofthewheel"
+	trait = "education_martial_prowess_3"
+	prowess = 8
+	learning = 5
+	stewardship = 10
+	martial = 11
+	intrigue = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "physique_good_1"
+	trait = "wrathful"
+	trait = "vengeful"		
+	trait = "trusting"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "obfuscate"
+	trait = "presence"
+	trait = "scaly"
+	father = 790408
+	sexuality = bisexual
+	female = yes
+	give_nickname = nick_the_queenoftombs
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			#add_character_flag = "POD_consumption_look_flag"
+			#add_character_flag = "POD_typhus_look_flag"		
+			POD_give_permanent_injury_effect = { TRAIT = scarred }
+			add_character_flag = POD_scarred_skin_battle_3_flag
+			add_character_flag = POD_bane_skin_flag
+			add_character_flag = POD_portrait_serpent_eyes_flag
+			add_character_flag = POD_portrait_monster_snekfangs_teeth_flag
+			add_character_flag = POD_portrait_f_hair_sp4_mena_01_flag
+			
+			add_trait = vampgeneration6
+	
+			#add_sanguine_lifestyle_xp = 10000
+			
+			set_immortal_age = 19
+		}				
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 55
+            }
+			add_character_flag = has_giovanni_necromancy_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 	
+			assign_sepulchre_path_effect = { LEVEL = 4 RITUAL = no}
+			assign_ash_path_effect = { LEVEL = 4 RITUAL = no}			
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = {
+			add_character_flag = POD_bane_skin_flag
+			learn_language = language_greek
+		} 		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+		effect = {
+			set_relation_lover = { reason = lover_history target = character:790114 }
+		}			
+	}
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792178 = {
+	name = "Rudori"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "pathofthewheel"
+	trait = "education_learning_3"
+	learning = 7
+	stewardship = 5
+	martial = 10
+	intrigue = 3
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "trusting"
+	trait = "content"	
+	trait = "torpor"
+	trait = "patient"
+	trait = "presence"
+	trait = "auspex"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "animalism"
+	mother = 790220
+	female = no
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = "POD_consumption_look_flag"	
+			POD_give_permanent_injury_effect = { TRAIT = scarred }
+			add_character_flag = "POD_typhus_look_flag"
+			add_character_flag = "POD_pale_skin_look_flag"
+
+			add_trait = vampgeneration7
+	
+			#add_sanguine_lifestyle_xp = 10000
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 	
+			
+			set_immortal_age = 58
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 790020
+		}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790784 = {
+	name = "Troglodytia"
+	dynasty_house = house_byzar
+	culture = "greek"
+	religion = "viadolorosa"
+	trait = "education_stewardship_2"
+	dna = 790784_troglodytia
+	stewardship = 7
+	diplomacy = 0
+	learning = 7
+	intrigue = 10
+	prowess = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "beauty_bad_3"
+	trait = "content"
+	trait = "humble"
+	trait = "shy"
+	trait = "necromancy"
+	trait = "fortitude"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "obfuscate"
+	father = 790408
+	female = yes
+	disallow_random_traits = yes
+	
+	500.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_character_flag = "POD_bald_look_flag"
+			add_character_flag = "POD_consumption_look_flag"	
+			POD_give_permanent_injury_effect = { TRAIT = scarred }
+			add_character_flag = "POD_typhus_look_flag"
+			add_character_flag = "POD_pale_skin_look_flag"
+			
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 50
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_no_hair_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 				
+		}			
+	}
+
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+# House Premascine
+
+790140 = {
+	name = "Ambrogino_Giovanni"
+	dna = 790140_ambrogino
+	dynasty_house = house_premascine
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_intrigue_4"
+	learning = 10
+	intrigue = 9
+	stewardship = 4
+	diplomacy = 3
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "cynical"
+	trait = "disloyal"	
+	trait = "scholar"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "bloodsorceryadvanced"
+	trait = "potenceadvanced"
+	trait = "necromancyadvanced"
+	mother = 790021
+	female = no
+	give_nickname = nick_ambition_personified
+	disallow_random_traits = yes
+	
+	1045.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_fp1_05_flag
+			add_character_flag = POD_portrait_male_hair_northern_01_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag			
+			set_immortal_age = 55
+			
+			add_character_flag = has_cappadocian_necromancy_flag
+			add_character_flag = POD_no_beard_flag			
+		}	
+		effect = {
+			add_character_flag = {
+				#Fact
+				flag = has_thaumaturgy_bloodmagic_flag
+			}
+		}	
+		effect = {
+			assign_path_of_blood_path_effect = { LEVEL = 5 } #Path of Blood
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 } #Spirit Manipulation
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 
+			assign_ash_path_effect = { LEVEL = 5 RITUAL = no} 
+			assign_bone_path_effect = { LEVEL = 5 RITUAL = yes} 
+						
+		}	
+			
+	}
+
+	1229.1.1 = {	
+		effect = {
+			learn_language = language_greek
+			learn_language = language_enochian
+			learn_language = language_french
+		} 		
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+		
+	#Potential secret issue
+	1500.1.1 = {
+		effect = {
+			remove_trait = vampgeneration6
+			add_trait = vampgeneration5
+			
+			add_secret = { 
+				type = secret_diablerist
+			}
+		}		
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+
+790161 = {
+	name = "Lucretia_Giovanni"
+	dna = 790161_lucretia
+	dynasty_house = house_premascine
+	culture = "cisalpine"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	stewardship = 7
+	learning = 6
+	intrigue = 11
+	diplomacy = 5	
+	martial = 15
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "brave"		
+	trait = "diligent"		
+	trait = "content"
+	trait = "lifestyle_mystic"
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790140
+	female = yes
+	give_nickname = nick_reckless_occultist	
+	disallow_random_traits = yes
+	
+	1205.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_rtt_02_flag
+			add_character_flag = POD_portrait_no_hat_flag			
+			set_immortal_age = 21
+		}		
+			
+	}
+
+	1229.1.1 = {	
+		effect = {
+	  set_relation_friend = { reason = friend_generic_history target = character:790140 	 }
+		}
+		effect = {
+			learn_language = language_latin
+		} 			
+	}
+	
+	1444.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+		
+	#Potential secret issue
+	1500.1.1 = {
+		effect = {
+			remove_trait = vampgeneration7
+			add_trait = vampgeneration6
+			
+			add_secret = { 
+				type = secret_diablerist
+			}
+		}		
+	}
+	
+	2005.1.1 = {	
+		effect = {
+			remove_trait = vampgeneration7
+			add_trait = vampgeneration6
+			
+			add_secret = { 
+				type = secret_diablerist
+			}
+		}
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+# House Harbingers of Skulls
+
+790533 = {
+	name = "Unre"
+	dna = 790533_unre
+	dynasty_house = house_harbingersofskulls
+	culture = "classical_greek"
+	religion = "viaossium"
+	trait = "education_martial_prowess_3"
+	learning = 13
+	intrigue = 11
+	diplomacy = 7
+	prowess = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "wrathful"		
+	trait = "vengeful"
+	trait = "sadistic"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "presence"
+	trait = "dominateadvanced"
+	trait = "obfuscate"
+	trait = "protean"
+	#trait = "disfigured"
+	father = 790020
+	female = yes	
+	give_nickname = nick_keeper_of_the_golgotha
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_f_hair_ep3_byzantine_03_common_flag
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 25
+			
+			add_character_flag = has_harbinger_necromancy_flag	
+			add_character_flag = has_giovanni_necromancy_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 	
+			assign_ash_path_effect = { LEVEL = 5 RITUAL = yes}
+			assign_bone_path_effect = { LEVEL = 5 RITUAL = yes}			
+		}				
+	}
+	
+	799.1.1 = {
+		add_trait = torpor
+		add_character_flag = POD_portrait_fantasy_helm_flag
+	}
+
+	1229.1.1 = {	
+	}
+
+	1445.1.1 = {
+		remove_trait = "cappadocian"
+		add_trait = "harbingersofskulls"
+	}
+	2005.1.1 = {
+		remove_trait = torpor
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House Lamia
+
+790537 = {
+#Lamia dies early 18th century, CB G revised p23	
+	name = "Lamia"
+	dynasty_house = house_lamia
+	dna = 790537_lamia
+	culture = "persian"
+	religion = "derechlilit"
+	trait = "education_learning_4"
+	intrigue = 9
+	diplomacy = 1
+	stewardship = 13
+	learning = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"	
+	trait = "patient"	
+	trait = "zealous"	
+	prowess = 10
+	trait = "fortitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "celerityadvanced"
+	trait = "presenceadvanced"
+	father = 710501
+	female = yes
+	give_nickname = nick_dark_priestess
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_sanguine_lifestyle_xp = 10000
+			
+			set_immortal_age = 30
+		
+		add_character_flag = has_scripted_appearance
+		add_character_flag = POD_portrait_female_hair_fp2_iberian_muslim_02_flag
+
+		assign_nightshade_path_effect = { LEVEL = 5 RITUAL = yes}
+		assign_path_of_the_twilight_garden_effect = { LEVEL = 5 RITUAL = yes}			
+		}
+	}
+	
+	799.1.1 = {	
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:710501 }
+			}
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+		} 		
+	}
+
+	1703.12.4 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 505018
+			}
+	}		
+}
+
+792828 = {
+#One liner sire of Ana
+	name = "Alanaris"
+	dynasty_house = house_lamia
+	culture = "greek"
+	religion = "derechlilit"
+	trait = "education_martial_prowess_2"
+	prowess = 8
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "trusting"	
+	trait = "patient"	
+	trait = "temperate"	
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	trait = "celerityadvanced"
+	trait = "necromancy"
+	mother = 790537
+	female = yes
+	disallow_random_traits = yes
+	
+	358.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 42
+
+			assign_nightshade_path_effect = { LEVEL = 3 RITUAL = no}
+			assign_path_of_the_twilight_garden_effect = { LEVEL = 5 RITUAL = yes}				
+		}				
+	}
+	
+	799.1.1 = {	
+	}
+
+
+	1131.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 790141
+			}
+	}		
+}
+
+792829 = {
+#Aachen
+#Ana's fate is tied to Aniello's. Whoever saw her, all accounts overlap in a single fact: no one has ever heard her say a single word. Various theories have arisen about the two. Some say that they are changellings, of a sort which cannot speak. Others say that they are the spirits of Aniello and Ana, cursed by the Giovanni to dwell among the Kindred forever. No one knows for certain.
+	name = "Ana_Soracha"
+	dynasty_house = house_lamia
+	dna = 792829_ana
+	culture = "ashkenazi"
+	religion = "viahumanitatis"
+	trait = "education_martial_prowess_3"
+	learning = 8
+	stewardship = 7
+	diplomacy = 7
+	intrigue = 11
+	martial = 9
+	prowess = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"	
+	trait = "patient"	
+	trait = "forgiving"	
+	trait = "potence"
+	trait = "auspex"
+	trait = "necromancy"
+	mother = 792828
+	give_nickname = nick_white_gold
+	female = yes
+	disallow_random_traits = yes
+	
+	1116.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_muslim_01_flag
+            add_character_flag = has_scripted_appearance	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 21
+		}				
+	}
+	
+	1229.1.1 = {	
+		effect = { 
+			set_relation_soulmate = { reason = soulmate_professed_love target = character:792819 }
+			}	
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791426 = {
+#Warden of Erciyes
+	name = "Qalhara"
+	dynasty_house = house_lamia
+	culture = "nubian"
+	religion = "derechlilit"
+	trait = "education_martial_prowess_4"
+	prowess = 8
+	stewardship = 5
+	diplomacy = 7
+	learning = 6
+	martial = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "physique_good_1"
+	trait = "brave"	
+	trait = "patient"	
+	trait = "diligent"
+	trait = "loyal"
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	trait = "celerityadvanced"
+	trait = "necromancyadvanced"
+	mother = 793020
+	female = yes
+	give_nickname = nick_protector_erciyes
+	disallow_random_traits = yes
+	
+	604.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 36
+		}				
+	}
+	
+	799.1.1 = {	
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 100
+            }
+		assign_nightshade_path_effect = { LEVEL = 3 RITUAL = no}
+		assign_path_of_the_twilight_garden_effect = { LEVEL = 3 RITUAL = no}				
+		}
+		effect = {
+			set_relation_best_friend = { reason = best_friend_counsel_and_support target = character:790021 } 
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+
+	1359.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+793020 = {
+#sire of Qolhara, p142 of DA CN cappdocian
+	name = "Indira"
+	dynasty_house = house_lamia
+	culture = "ethiopian"
+	religion = "derechlilit"
+	trait = "education_diplomacy_3"
+	prowess = 10
+	intrigue = 7
+	diplomacy = 6
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "honest"	
+	trait = "patient"	
+	trait = "compassionate"
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	trait = "celerity"
+	trait = "auspex"
+	trait = "necromancyadvanced"
+	mother = 790537
+	female = yes
+	disallow_random_traits = yes
+	
+	418.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+
+			assign_nightshade_path_effect = { LEVEL = 2 RITUAL = no}
+			assign_path_of_the_twilight_garden_effect = { LEVEL = 3 RITUAL = no}	
+		
+			set_immortal_age = 28
+		}				
+	}
+	
+	799.1.1 = {		
+	}
+
+	1229.1.1 = {	
+	}
+
+	1318.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+792013 = {
+#Guide High Clans
+	name = "Medea"
+	dynasty_house = house_lamia
+	culture = "greek"
+	religion = "derechlilit"
+	trait = "education_learning_3"
+	prowess = 8
+	stewardship = 9
+	diplomacy = 8
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "diligent"	
+	trait = "patient"	
+	trait = "zealous"	
+	trait = "presence"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	mother = 791426
+	female = yes
+	disallow_random_traits = yes
+	
+	691.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+
+			assign_nightshade_path_effect = { LEVEL = 1 RITUAL = no}
+			assign_path_of_the_twilight_garden_effect = { LEVEL = 5 RITUAL = no}	
+		
+			set_immortal_age = 32
+		}				
+	}
+	
+	799.1.1 = {	
+	}
+
+	1229.1.1 = {	
+	}
+
+	1386.1.3 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+791295 = {
+	name = "Hippolyta"
+        dna = 791295_hippolyta
+	dynasty_house = house_lamia 
+	culture = "classical_greek"
+	religion = "derechlilit"
+	trait = "education_martial_prowess_4"
+	prowess = 5
+	intrigue = 8
+	learning = 5
+	martial = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "physique_good_1"
+	trait = "brave"	
+	trait = "deceitful"	
+	trait = "zealous"	
+	trait = "paragon"
+	trait = "fortitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "celerityadvanced"
+	trait = "auspexadvanced"
+	trait = "necromancy"
+	mother = 790537
+	female = yes
+	give_nickname = nick_feared_renegade
+	disallow_random_traits = yes
+	
+	95.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_sanguine_lifestyle_xp = 10000
+			
+			set_immortal_age = 28
+		}		
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_byzantine_02_flag				
+		}		
+	}
+	
+	799.1.1 = {	
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 100
+            }
+		}	
+		effect = {
+			add_trait = tourney_participant
+			add_trait_xp = {
+                trait = tourney_participant
+				track = bow
+                value = 100
+            }		
+		}			
+	}
+
+	1229.1.1 = {	
+	}
+
+	1459.12.4 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+#PoD lore char
+793299 = {
+	name = "Shailaja"
+        dna = 793299_Shailaja
+	dynasty_house = house_lamia 
+	culture = "uriankhai"
+	religion = "viaossium"
+	trait = "education_martial_prowess_4"
+	prowess = 8
+	intrigue = 8
+	learning = 5
+	martial = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "brave"	
+	trait = "compassionate"	
+	trait = "zealous"	
+	trait = "fortitudeadvanced"
+	trait = "potence"
+	trait = "celerityadvanced"
+	trait = "necromancy"
+	mother = 791295
+	female = yes
+	give_nickname = nick_tigerbane
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+				
+			set_immortal_age = 23
+		}		
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_02_flag				
+		}		
+	}
+	
+	799.1.1 = {	
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 35
+            }
+		}				
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_best_friend = { reason = best_friend_counsel_and_support target = character:793280 } 
+		}			
+	}
+
+	1325.11.5 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+792061 = {
+#Cainite heresy
+	name = "Artemisia"
+	dynasty_house = house_lamia 
+	culture = "macedonian"
+	religion = "viacain"
+	trait = "education_learning_3"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "fickle"	
+	trait = "lustful"	
+	trait = "zealous"	
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "presenceadvanced"
+	trait = "auspexadvanced"
+	mother = 791295
+	female = yes
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_sanguine_lifestyle_xp = 10000
+
+			assign_nightshade_path_effect = { LEVEL = 4 RITUAL = no}
+			assign_path_of_the_twilight_garden_effect = { LEVEL = 2 RITUAL = no}	
+			
+			set_immortal_age = 22
+		}			
+	}
+	
+	799.1.1 = {	
+	}
+
+	1229.1.1 = {	
+	}
+
+	1523.2.6 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+# House Putanesca
+
+790538 = {
+	name = "Lorenzo_Putanesca"
+	dynasty_house = house_putanesca
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "wrathful"	
+	trait = "deceitful"	
+	trait = "gregarious"	
+	trait = "auspex"
+	trait = "dominate"
+	trait = "fortitudeadvanced"
+	trait = "potenceadvanced"
+	father = 790144
+	female = no
+	disallow_random_traits = yes
+	
+	1600.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_choleric_lifestyle_xp = 10000
+			
+			set_immortal_age = 30
+		}				
+	}
+	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790539 = {
+	name = "Julietta_Putanesca"
+	dynasty_house = house_putanesca
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_martial_prowess_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "wrathful"	
+	trait = "impatient"	
+	trait = "vengeful"	
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "dominate"
+	trait = "potenceadvanced"
+	father = 790538
+	female = yes
+	disallow_random_traits = yes
+	
+	1800.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 20
+		}				
+	}
+	
+	2005.1.1 = {	
+		effect = { 
+			set_relation_rival = { reason = rival_historical target = character:790538 }
+			}
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House Rothstein
+
+790540 = {
+#Modern prince of Las Vegas
+	name = "Shlomo_Rothstein"
+	dynasty_house = house_rothstein
+	culture = "italian"
+	religion = "derechchaim"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "intellect_good_1"
+	trait = "callous"	
+	trait = "ambitious"	
+	trait = "deceitful"
+	trait = "auspex"	
+	trait = "necromancyadvanced"
+	trait = "fortitude"
+	trait = "potence"
+	mother = 790539
+	female = no
+	disallow_random_traits = yes
+	
+	1911.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+
+			add_character_flag = has_giovanni_necromancy_flag
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no}
+			assign_bone_path_effect = { LEVEL = 1 RITUAL = no}	
+			
+			set_immortal_age = 48
+		}				
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+# House Dunsirn
+
+790712 = {
+	name = "Evan_Dunsirn"
+	dynasty_house = house_dunsirn
+	culture = "scottish"
+	religion = "viamercator"
+	trait = "education_stewardship_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "greedy"
+	trait = "ambitious"	
+	trait = "deceitful"	
+	trait = "obfuscateadvanced"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "auspex"
+	father = 790407
+	female = no
+	disallow_random_traits = yes
+	
+	1745.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 30
+		}				
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790713 = {
+	name = "Albert_Dunsirn"
+	dynasty_house = house_dunsirn
+	culture = "scottish"
+	religion = "viamercator"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arrogant"
+	trait = "diligent"		
+	trait = "craven"
+	trait = "obfuscate"
+	trait = "potence"
+	trait = "auspex"
+	father = 790712
+	female = no
+	disallow_random_traits = yes
+	
+	1876.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 30
+		}				
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House mlawatu
+
+791159 = {
+#Mogadishu
+	name = "Mla_Watu"
+	dna = 791159_mla_watu
+	dynasty_house = house_mlawatu
+	culture = "nupe"
+	religion = "laibon"
+	trait = "education_learning_3"
+	learning = 3
+	intrigue = 7
+	diplomacy = 5
+	stewardship = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"
+	trait = "content"
+	trait = "honest"	
+	trait = "reclusive"
+	trait = "presenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "obfuscateadvanced"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_inhumane_scholar
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+			add_character_flag = POD_portrait_no_hair_flag
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 	
+			
+			#add_melancholy_lifestyle_xp = 20000
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 43
+							
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+		}		
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+799917 = {
+#Mogadishu
+	name = "Chidimma"
+	# dna = 799917_chidimma
+	dynasty_house = house_mlawatu
+	culture = "nupe"
+	religion = "laibon"
+	trait = "education_learning_3"
+	learning = 5
+	intrigue = 2
+	diplomacy = 5
+	stewardship = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "patient"
+	trait = "calm"
+	trait = "craven"
+	trait = "necromancyadvanced"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "obfuscate"
+	trait = "vampgeneration5"
+	trait = "lifestyle_herbalist"
+	father = 791159
+	female = yes
+	give_nickname = nick_shunned_ghostwalker
+	disallow_random_traits = yes
+	
+	672.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 
+			
+			set_immortal_age = 20
+							
+		}	
+	}
+	
+	999.1.1 = {
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+				trait = lifestyle_physician
+				value = 55
+			}
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+#House al-mawt
+
+792044 = {
+	name = "Humuusa"
+	dynasty_house = house_almawt
+	culture = "assyrian"
+	religion = "tariqelatham"
+	trait = "education_learning_3"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "stubborn"		
+	trait = "gluttonous"
+	trait = "wrathful"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "vampgeneration4"
+	trait = "torpor"
+	father = 505017
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 10000
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 	
+			
+			set_immortal_age = 36
+		}	
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790020
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792045 = {
+#Actual historical character
+	name = "Enheduanna"
+	dynasty_house = house_almawt
+	culture = "assyrian"
+	religion = "viacaeli"
+	trait = "education_learning_4"
+	stewardship = 10
+	diplomacy = 10
+	learning = 4
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "stubborn"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "lifestyle_poet"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	give_nickname = nick_embodiment_ningal
+	father = 792044
+	female = yes
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 	
+			
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 41
+		
+			add_trait_xp = {
+				trait = lifestyle_poet
+				value = 60
+			}
+		}	
+	}	
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790964 = {
+#One liner sire of Drenis
+	name = "Asushunamir"
+	dynasty_house = house_almawt
+	culture = "persian"
+	religion = "tariqelatham"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "stubborn"		
+	trait = "arbitrary"
+	trait = "chaste"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "potenceadvanced"
+	mother = 792045
+	female = no
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 	
+			
+			set_immortal_age = 30
+		}	
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790965 = {
+	name = "Drenis"
+	dynasty_house = house_almawt
+	culture = "greek"
+	religion = "viadolorosa"
+	dna = 790965_drenis
+	trait = "education_diplomacy_2"
+	stewardship = 14
+	diplomacy = 8
+	learning = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"		
+	trait = "chaste"
+	trait = "diligent"
+	trait = "depressed_1"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "celerity"
+	trait = "potence"
+	trait = "fortitude"
+	trait = "presence"
+	trait = "vicissitude"
+	trait = "valeren"
+	father = 790964
+	sexuality = asexual
+	give_nickname = nick_charnel_maid
+	female = yes
+	disallow_random_traits = yes
+	
+	190.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 19
+			
+			#add_melancholy_lifestyle_xp = 10000
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_byzantine_02_flag
+			add_character_flag = has_giovanni_necromancy_flag
+            add_character_flag = POD_no_cappadocian_look_flag	
+			assign_ash_path_effect = { LEVEL = 4 RITUAL = no} 
+			assign_sepulchre_path_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes}
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no}	
+			#cadaverous animation 4
+		}			
+	}
+
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_arabic
+		} 		
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+791071 = {
+#One liner sire of Ishaq Ibn Khayrat
+	name = "Khayrat"
+	dynasty_house = house_almawt
+	culture = "tocharian"
+	religion = "tariqelatham"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "compassionate"		
+	trait = "calm"
+	trait = "chaste"
+	trait = "presence"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	mother = 790965
+	female = no
+	disallow_random_traits = yes
+	
+	878.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 	
+			
+			set_immortal_age = 52
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791072 = {
+#Baghdad
+	name = "Ishaq_Ibn_Khayrat"
+	dynasty_house = house_almawt
+	culture = "persian"
+	religion = "tariqelatham"
+	trait = "education_learning_3"
+	learning = 0
+	diplomacy = 6
+	stewardship = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "compassionate"		
+	trait = "just"
+	trait = "diligent"
+	trait = "presenceadvanced"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "necromancy"
+	father = 791071
+	give_nickname = nick_the_physician
+	female = no
+	disallow_random_traits = yes
+	
+	946.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+				
+			set_immortal_age = 48
+		}	
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 100
+            }
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no } 				
+		}		
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791334 = {
+#Conspiracies
+	name = "Fasih"
+	dynasty_house = house_almawt
+	culture = "levantine"
+	religion = "tariqelatham"
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "paranoid"
+	trait = "zealous"
+	trait = "compassionate"
+	trait = "scholar"	
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "fortitudeadvanced"
+	give_nickname = nick_master_of_fates
+	mother = 790965
+	female = no
+	disallow_random_traits = yes
+	
+	210.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 	
+			
+			set_immortal_age = 38
+		}				
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {	
+	}		
+	
+	1358.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 505018
+			}
+	}			
+}
+
+791346 = {
+#Bath
+	name = "Erebus"
+	dynasty_house = house_almawt
+	culture = "greek"
+	religion = "viaossium"
+	trait = "education_intrigue_3"
+	learning = 10
+	intrigue = 3
+	diplomacy = 9
+	stewardship = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"
+	trait = "patient"
+	trait = "zealous"
+	trait = "schemer"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscateadvanced"
+	trait = "auspexadvanced"
+	father = 791334
+	give_nickname = nick_fate_conspirator
+	female = no
+	disallow_random_traits = yes
+	
+	398.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+				
+			set_immortal_age = 36
+
+			add_character_flag = has_harbinger_necromancy_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 	
+			assign_skull_path_effect = { LEVEL = 3 }				
+		}				
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {
+		remove_trait = cappadocian
+		remove_trait = torpor
+		add_trait = harbingersofskulls
+		give_nickname = nick_wearer_pantalone_mask
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792494 = {
+#has the Vathi, Book of Storytellers secrets
+	name = "Kylon"
+	dynasty_house = house_almawt
+	culture = "greek"
+	religion = "viaossium"
+	trait = "education_learning_2"
+	learning = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arrogant"
+	trait = "patient"
+	trait = "paranoid"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscateadvanced"
+	trait = "auspex"
+	father = 791346
+	female = no
+	disallow_random_traits = yes
+	
+	426.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+				
+			set_immortal_age = 51
+			
+			add_character_flag = has_harbinger_necromancy_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 3 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 	
+			assign_skull_path_effect = { LEVEL = 1 }				
+		}				
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {	
+	}	
+	
+	1539.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}			
+}
+
+791335 = {
+#Conspiracies
+	name = "Orfeo"
+	dynasty_house = house_almawt
+	culture = "greek"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"
+	trait = "diligent"
+	trait = "shy"
+	trait = "scholar"
+	trait = "necromancyadvanced"
+	trait = "fortitude"
+	trait = "auspex"
+	father = 791334
+	female = no
+	disallow_random_traits = yes
+	
+	819.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 	
+			
+			set_immortal_age = 19
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#House hecata
+
+
+790155 = {
+#Prince of Athens
+	name = "Dionysius"
+	dna = 790155_dionysius
+	dynasty_house = house_hecata
+	culture = "classical_greek"
+	religion = "viahumanitatis"
+	trait = "education_learning_4"
+	stewardship = 8
+	learning = 3
+	intrigue = 2
+	diplomacy = 8	
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "temperate"
+	trait = "compassionate"	
+	trait = "scholar"
+	trait = "presenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "auspexadvanced"
+	trait = "potenceadvanced"
+	father = 790020
+	female = no
+	give_nickname = nick_exemplar_of_humanity
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			#add_character_flag = POD_portrait_no_hat_flag
+			#add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_portrait_hermetic_mage_hood_male_flag
+			add_character_flag = POD_ep3_byzantine_era1_low_nobles_cloak_flag
+			add_trait = vampgeneration5
+	
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 30
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = no} 				
+		}		
+	}
+
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+		} 		
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791452 = {
+#One liner sire of Kazimierz
+	name = "Ungol"
+	dynasty_house = house_hecata
+	culture = "polish"
+	religion = "viacaeli"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "calm"		
+	trait = "temperate"
+	trait = "compassionate"	
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	father = 790155
+	female = no
+	disallow_random_traits = yes
+	
+	821.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 4 RITUAL = no} 	
+			
+			set_immortal_age = 51
+		}
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791453 = {
+#Krakow
+	name = "Kazimierz"
+	dynasty_house = house_hecata
+	culture = "polish"
+	religion = "viacaeli"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	learning = 10
+	stewardship = 7
+	intrigue = 4
+	trait = "impatient"		
+	trait = "shy"
+	trait = "zealous"	
+	trait = "theologian"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancy"
+	trait = "quietus" 
+	father = 791452
+	give_nickname = nick_the_silent
+	female = no
+	disallow_random_traits = yes
+	
+	965.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+				
+			set_immortal_age = 40
+		}
+	}
+
+	1229.1.1 = {
+	}
+		
+	1291.1.1 = {	
+		add_trait = torpor
+	}		
+	
+	1617.1.1 = {
+		death = {
+			death_reason = death_burned
+			}
+	}			
+}
+
+791222 = {
+# "Prince" of Chateaudun
+	name = "Narkissos"
+	dynasty_house = house_hecata
+	culture = "macedonian"
+	religion = "viadivinitatis"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "lunatic_1"
+	trait = "deceitful"		
+	trait = "sadistic"
+	trait = "arrogant"
+	trait = "obfuscateadvanced"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	father = 790155
+	give_nickname = nick_archegos_katakhthon
+	female = no
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 58
+		}				
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 60
+            }
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 			
+		}		
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791290 = {
+#Used as prince of Bastia in game
+	name = "Aurelius_Flavius_Iovianus"
+	dna = 791290_aurelius_flavius_iovianus
+	dynasty_house = house_hecata
+	culture = "roman"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	diplomacy = 8
+	stewardship = 9
+	learning = 2
+	intrigue = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "shy"		
+	trait = "vengeful"
+	trait = "paranoid"	
+	trait = "scholar"
+	trait = "auspex"
+	trait = "presenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "necromancyadvanced"
+	trait = "obfuscateadvanced"
+	trait = "dominateadvanced"
+	father = 791222
+	female = no
+	give_nickname = nick_hiding_ancestor
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_byzantine_02_flag
+	
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 25
+			
+			add_character_flag = has_giovanni_necromancy_flag
+			assign_corpse_in_the_monster_effect = { LEVEL = 1 RITUAL = no} 
+			assign_sepulchre_path_effect = { LEVEL = 1 RITUAL = no} 	
+			assign_ash_path_effect = { LEVEL = 5 RITUAL = no} 
+			assign_bone_path_effect = { LEVEL = 5 RITUAL = yes} 				
+		}
+	}
+
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791376 = {
+#Lorraine
+	name = "Pierre_de_Joinville"
+	dynasty_house = house_hecata
+	culture = "french"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "trusting"
+	trait = "diligent"	
+	trait = "scholar"
+	trait = "auspex"
+	trait = "proteanadvanced"
+	trait = "fortitude"
+	trait = "necromancy"
+	father = 791290
+	female = no
+	give_nickname = nick_goldsmith_of_saints
+	disallow_random_traits = yes
+	
+	1075.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 51
+		}
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = forging
+                value = 60
+            }
+			add_trait_xp = {
+                trait = pod_crafter
+				track = enhancing
+                value = 60
+            }			
+		}			
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#House rusenko
+
+505091 = {
+#Prince of Sofia
+	name = "Bela_Rusenko"
+	dna = 505091_belarusenko
+	dynasty_house = house_rusenko
+	culture = "bulgarian"
+	religion = "viaquiritare"
+	trait = "education_learning_3"
+	diplomacy = 12
+	intrigue = 6
+	stewardship = 15
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "gluttonous"		
+	trait = "deceitful"
+	trait = "sadistic"
+	trait = "lunatic_1"
+	trait = "torturer"
+	trait = "beauty_good_1"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "necromancyadvanced"
+	trait = "dominateadvanced"
+	mother = 790403
+	female = no
+	give_nickname = nick_herald_of_kupala
+	disallow_random_traits = yes
+	
+	1044.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration7
+	
+			
+			set_immortal_age = 30
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+            add_character_flag = POD_no_cappadocian_look_flag	
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 				
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = { 
+			set_relation_rival = { reason = rival_historical target = character:790403  }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		} 	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#most prominent appearance in DA CN Tzimisce
+792179 = {
+	name = "Ladislav"
+	dynasty_house = house_rusenko
+	culture = "bulgarian"
+	religion = "viapeccati"
+	trait = "education_stewardship_3"
+	diplomacy = 10
+	intrigue = 5
+	stewardship = 5
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "zealous"		
+	trait = "lustful"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "necromancy"
+	trait = "fortitude"
+	give_nickname = nick_diligent_hedonist
+	father = 505091
+	female = no
+	disallow_random_traits = yes
+	
+	1126.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration8
+	
+			
+			set_immortal_age = 30
+		}	
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# DA CN Tzimisce
+795149 = {
+	name = "Erika"
+	dynasty_house = house_rusenko
+	culture = "bulgarian"
+	religion = "viapeccati"
+	trait = "education_diplomacy_2"
+	diplomacy = 7
+	intrigue = 8
+	stewardship = 5
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "beauty_good_1"
+	trait = "content"		
+	trait = "lustful"
+	trait = "gregarious"
+	trait = "auspex"
+	trait = "necromancy"
+	trait = "fortitude"
+	father = 792179
+	female = yes
+	disallow_random_traits = yes
+	
+	1155.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 22
+		}	
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House Caias
+
+792043 = {
+	name = "Caias_Koine"
+	dynasty_house = house_caias
+	culture = "mycenean"
+	religion = "viaossium"
+	trait = "education_stewardship_3"
+	learning = 10
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "content"		
+	trait = "zealous"
+	trait = "stubborn"
+	trait = "fortitude"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	trait = "potenceadvanced"
+	trait = "necromancyadvanced"
+	trait = "vampgeneration4"
+	father = 505017
+	female = no
+	give_nickname = nick_the_zealous_son
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 45
+		}		
+	}	
+	
+	100.1.1 = {
+		death = {
+			death_reason = death_duel
+				killer = 710501
+				}
+	}				
+}
+
+792112 = {
+#JbN
+#Becomes a harbinger of skulls, lore of the bloodlines
+	name = "Abraham"
+	dna = 792112_abraham
+	dynasty_house = house_caias
+	culture = "sephardi"
+	religion = "derechchaim"
+	trait = "education_learning_4"
+	intrigue = 6
+	diplomacy = 3
+	stewardship = 3
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "patient"		
+	trait = "zealous"
+	trait = "stubborn"
+	trait = "scholar"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	trait = "celerity"
+	trait = "fortitudeadvanced"
+	trait = "obfuscate"
+	trait = "obtenebration"
+	father = 792043
+	female = no
+	give_nickname = nick_unrelenting_scholar
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_m_hair_fp4_mena_02_bald_flag
+			
+			#add_phlegmatic_lifestyle_xp = 5000			
+			set_immortal_age = 57
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+		add_character_flag = has_harbinger_necromancy_flag			
+		add_character_flag = POD_portrait_m_hair_fp4_mena_02_bald_flag
+	
+		assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+		assign_graves_decay_effect = { LEVEL = 5 RITUAL = yes} 	
+		assign_skull_path_effect = { LEVEL = 5 } 	
+		}
+	}	
+	
+	2005.1.1 = {
+		effect = {
+		remove_trait = cappadocian
+		remove_trait = torpor
+		add_trait = harbingersofskulls
+		give_nickname = nick_wearer_gatto_mask
+		}
+	}			
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793018 = {
+#p104 da clan novel cappdocian
+	name = "Kiril"
+	dynasty_house = house_caias
+	culture = "armenian"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	diplomacy = 4
+	stewardship = 5
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "calm"		
+	trait = "shy"
+	trait = "stubborn"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscate"
+	father = 792043
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration5
+			#add_phlegmatic_lifestyle_xp = 5000			
+			set_immortal_age = 45
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = yes} 
+			assign_graves_decay_effect = { LEVEL = 2 RITUAL = no} 				
+		}		
+	}	
+	
+	1229.1.1 = {			
+	}	
+	
+	2005.1.1 = {
+	}			
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793019 = {
+#p104 da clan novel cappdocian
+	name = "Taddeusz"
+	dynasty_house = house_caias
+	culture = "armenian"
+	religion = "viaossium"
+	trait = "education_stewardship_3"
+	intrigue = 4
+	stewardship = 6
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "impatient"		
+	trait = "shy"
+	trait = "zealous"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "potence"
+	trait = "necromancyadvanced"
+	trait = "fortitude"
+	trait = "presenceadvanced"
+	father = 792043
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration5
+			#add_phlegmatic_lifestyle_xp = 5000			
+			set_immortal_age = 39
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = no} 				
+		}		
+	}	
+	
+	1229.1.1 = {			
+	}	
+	
+	2005.1.1 = {
+	}			
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792113 = {
+#One liner sire of Marcus
+	name = "Theophilus"
+	dynasty_house = house_caias
+	culture = "macedonian"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "callous"		
+	trait = "patient"
+	trait = "stubborn"
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscateadvanced"
+	father = 792112
+	female = no
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 36
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no} 				
+		}		
+	}	
+	
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793280 = {
+#POD lore char
+	name = "Fu_Jiezi"
+	dynasty_house = house_caias
+	dna = 793280_fu
+	culture = "han"
+	religion = "viaossium"
+	trait = "education_learning_4"
+	intrigue = 11
+	diplomacy = 8
+	stewardship = 8
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "deceitful"		
+	trait = "content"
+	trait = "patient"
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscateadvanced"
+	father = 792113
+	give_nickname = nick_bane_khotans
+	female = no
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 45
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 5 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = no} 				
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp1_07_flag
+            add_character_flag = POD_portrait_male_beard_steppe_02_flag
+		}				
+	}	
+	
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792114 = {
+#JbN
+	name = "Marcus"
+	dynasty_house = house_caias
+	culture = "roman"
+	religion = "viatyrannus"
+	trait = "education_martial_3"
+	martial = 6
+	intrigue = 5
+	learning = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "callous"		
+	trait = "cynical"
+	trait = "stubborn"
+	trait = "animalism"
+	trait = "celerity"
+	trait = "auspex"
+	trait = "necromancyadvanced"
+	trait = "fortitudeadvanced"
+	trait = "obfuscate"
+	trait = "potence"
+	trait = "presence"
+	trait = "protean"
+	father = 792113
+	give_nickname = nick_ruthless_atheist
+	female = no
+	disallow_random_traits = yes
+	
+	120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 31
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790121 }
+
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 5 RITUAL = no} 	
+		}
+	}	
+	
+	1230.1.4 = {	
+		employer = 505168
+	}	
+
+	1500.1.1 = {
+		add_trait = torpor
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793017 = {
+#p76 of DA clan novel cappadocian, helps the Giovanni early on
+	name = "Nepotian_of_Galatia"
+	dynasty_house = house_caias
+	culture = "greek"
+	religion = "viaconsuasor"
+	trait = "education_learning_3"
+	learning = 7
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "gregarious"		
+	trait = "patient"
+	trait = "fickle"
+	trait = "auspex"
+	trait = "necromancy"
+	trait = "fortitude"
+	trait = "obfuscate"
+	father = 792114
+	female = no
+	disallow_random_traits = yes
+	
+	875.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration8
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 55
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+		}
+	}	
+	
+	1230.1.4 = {	
+	}	
+
+	1500.1.1 = {
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792115 = {
+#JbN
+	name = "Adam"
+	dynasty_house = house_caias
+	culture = "sephardi"
+	religion = "viacaeli"
+	trait = "education_learning_3"
+	intrigue = 8
+	stewardship = 5
+	diplomacy = 6
+	learning = 4
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "diligent"		
+	trait = "trusting"
+	trait = "theologian"
+	trait = "fickle"
+	trait = "auspex"
+	trait = "necromancy"
+	trait = "fortitude"
+	trait = "obfuscate"
+	trait = "presence"
+	give_nickname = nick_frustrated_theologian
+	father = 792112
+	female = no
+	disallow_random_traits = yes
+	
+	813.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 36
+			
+			assign_corpse_in_the_monster_effect = { LEVEL = 2 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 				
+		}		
+	}	
+	
+	1229.1.1 = {	
+	}	
+	
+	1459.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+					
+}
+
+# House Rossellini
+
+792359 = {
+	name = "Baldesar_Rossellini"
+	dynasty_house = house_rosselini
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_stewardship_3"
+	learning = 8
+	intrigue = 8
+	stewardship = 5
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "sadistic"		
+	trait = "ambitious"
+	trait = "greedy"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790140
+	female = no
+	give_nickname = nick_family_monster
+	disallow_random_traits = yes
+	
+	1446.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 30
+		}		
+			
+	}
+	
+	1447.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+792360 = {
+#Embrace date changed for CK3 reasons
+	name = "Rosaura_Rossellini"
+	dynasty_house = house_rosselini
+	culture = "italian"
+	religion = "viaossium"
+	trait = "education_learning_3"
+	learning = 6
+	intrigue = 9
+	stewardship = 6
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "calm"		
+	trait = "shy"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "necromancyadvanced"
+	father = 792359
+	female = yes
+	give_nickname = nick_ethereal_necromancer
+	disallow_random_traits = yes
+	
+	1466.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 30
+		}		
+			
+	}
+	
+	1467.1.1 = {
+		remove_trait = cappadocian
+		add_trait = giovanni
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+795412 = {
+#Typhon: V5 - Trails of Ash and Bone
+	name = "Hel_Bla"
+	dna = 795412_helbla
+	dynasty_house = house_lazarene
+	culture = "norse"
+	religion = "viaeinherjar"
+	trait = "education_learning_3"
+	martial = 2
+	diplomacy = 10
+	learning = 8
+	intrigue = 10
+	stewardship = 7
+	prowess = 17
+	trait = "vampire"
+	trait = "cappadocian"
+	trait = "arrogant"
+	trait = "ambitious"
+	trait = "zealous"
+	trait = "fortitude"
+	trait = "auspexadvanced"
+	trait = "necromancyadvanced"
+	trait = "theologian"
+	mother = 791352
+	female = yes
+	give_nickname = nick_death_blue
+	disallow_random_traits = yes
+	
+	299.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag
+	
+			assign_corpse_in_the_monster_effect = { LEVEL = 4 RITUAL = no} 
+			assign_graves_decay_effect = { LEVEL = 3 RITUAL = no}
+			
+			set_immortal_age = 19
+		}
+			
+	}
+	
+	799.1.1 = {
+	}
+		
+	1229.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}

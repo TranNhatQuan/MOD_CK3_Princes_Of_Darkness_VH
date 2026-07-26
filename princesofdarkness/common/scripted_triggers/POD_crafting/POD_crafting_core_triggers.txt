@@ -1,0 +1,484 @@
+﻿
+POD_enabled_node = {
+	NOT = { is_target_in_variable_list = { name = disabled_nodes target = flag:$NODE$ } }
+}
+
+POD_node_is_starting = {
+	OR = {
+		var:node_type ?= flag:starting_node_crown
+		var:node_type ?= flag:starting_node_armor
+		var:node_type ?= flag:starting_node_weapon
+		var:node_type ?= flag:starting_node_regalia
+		var:node_type ?= flag:starting_node_amulet
+		var:node_type ?= flag:starting_node_lungin
+		var:node_type ?= flag:starting_node_arrows_of_the_sun
+		var:node_type ?= flag:starting_node_thunder_dart
+		var:node_type ?= flag:starting_node_edge_of_the_sun
+		var:node_type ?= flag:starting_node_blade_of_the_kings
+		
+	}
+}
+
+POD_artifact_can_be_enhanced = {
+	custom_tooltip = { text = POD_artifact_can_be_enhanced artifact_enhance_amount < artifact_enhance_limit }
+	OR = {
+		has_variable = mokole_dinosaur
+		NOT = { artifact_type = animal }
+	}
+}
+
+
+##Add new nodes here
+POD_node_requirement = {
+	switch = {
+		trigger = $FLAG$
+		flag:basic_node_durability_bonus = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:basic_node_decorations = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:basic_node_general_improvment = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+		}
+
+		
+		flag:node_sun_spark = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_sun_ray = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_sun_flame = {
+			$OWNER$ = { gold >= POD_crafting_node_minor_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+			$ARTIFACT$ = { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_sun_breath = {
+			$OWNER$ = { gold >= POD_crafting_node_medium_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+			$ARTIFACT$ = { POD_crafting_artifact_durability_req = { VALUE = 30 } }
+		}
+		
+		flag:node_strengthening_chant= { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+
+		flag:node_soulforge = {
+			$OWNER$ = {
+				custom_tooltip = { text = "POD_crafting_minigame_soulforge_requirement"
+					any_prisoner = {
+						count >= 1
+						has_trait = wraith
+					}
+				}
+			}
+		}
+		flag:node_fetish_smith = {
+			$OWNER$ = {
+				custom_tooltip = { 
+					text = "POD_crafting_minigame_fetish_smith_requirement"
+					OR = {
+						num_of_relation_spirit_companion >= 1
+						any_prisoner = { count >= 1 has_trait = spirit }
+					}
+				}
+			}
+			$ARTIFACT$ = {
+				custom_tooltip = { 
+					text = "POD_crafting_minigame_fetish_smith_requirement_2"
+					NOT = { has_variable = fetish_artifact }
+				}
+			}
+		}
+		flag:node_frost_facsimile = { $CRAFTER$ = { POD_has_enough_glamour_for_fae_art = { AMOUNT = 2 } } }
+		flag:node_horrid_blade = {
+			custom_tooltip = { text = "POD_only_weapons" $ARTIFACT$ = { artifact_slot_type = primary_armament } }
+			$CRAFTER$ = { POD_has_enough_blood_for_discipline = { AMOUNT = 2 } }
+		}
+	
+		flag:node_reweave_common = { $CRAFTER$ = { POD_has_enough_splat_agnostic_energy_reserves = { AMOUNT = 2 } } PREV = { num_common_artifact_pieces_trigger = { VALUE = 3 } } }
+		flag:node_reweave_masterwork = { $CRAFTER$ = { POD_has_enough_splat_agnostic_energy_reserves = { AMOUNT = 4 } } PREV = { num_masterwork_artifact_pieces_trigger = { VALUE = 3 } } }
+		flag:node_reweave_famed = { $CRAFTER$ = { POD_has_enough_splat_agnostic_energy_reserves = { AMOUNT = 6 } } PREV = { num_famed_artifact_pieces_trigger = { VALUE = 3 } } }
+		flag:node_reweave_illustrious = { $CRAFTER$ = { POD_has_enough_splat_agnostic_energy_reserves = { AMOUNT = 8 } } PREV = { num_illustrious_artifact_pieces_trigger = { VALUE = 3 } } }
+
+		flag:node_ectoplasmic_artifact = { $CRAFTER$ = { piety >= 250 stress_level < 3 } }
+
+
+		flag:node_mummy_ward = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 2 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_mummy_talisman = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 5 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_mummy_full_talisman = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 5 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_mummy_inner_strength = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 5 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_mummy_veil = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 3 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+		flag:node_mummy_whisper = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_sekhem_for_hekau = { AMOUNT = 4 } }
+			$ARTIFACT$ ?= { POD_crafting_artifact_durability_req = { VALUE = 20 } }
+		}
+
+		flag:node_create_object = {
+			$CRAFTER$ = { 
+				trigger_if = { limit = { has_perk = lore_mold_earth_perk } POD_has_enough_resolve_for_power = { COUNT = 2 } }
+				trigger_else = { POD_has_enough_resolve_for_power = { COUNT = 3 } }
+			}
+		}
+
+		flag:node_shards_of_granite = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_suns_wisdom = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_cleansing_sun = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_beast_rampage = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_inscribed_legacy = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_chaos_element = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_sun_scales = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_sunstones = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+		}
+		flag:node_turtle_blessing = {
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		flag:node_dragon_scale = {
+			trigger_if = {
+				limit = { $ARTIFACT$ = { artifact_max_durability >= 180 } }
+				PREV = { num_illustrious_artifact_pieces_trigger = { VALUE = 1 } }
+			}
+			trigger_else_if = {
+				limit = { $ARTIFACT$ = { artifact_max_durability >= 120 } }
+				PREV = { num_famed_artifact_pieces_trigger = { VALUE = 1 } }
+			}
+			trigger_else_if = {
+				limit = { $ARTIFACT$ = { artifact_max_durability >= 60 } }
+				PREV = { num_masterwork_artifact_pieces_trigger = { VALUE = 1 } }
+			}
+			trigger_else = { PREV = { num_common_artifact_pieces_trigger = { VALUE = 1 } } }
+		}
+		flag:node_helios_blaze = {
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+			$ARTIFACT$ = { POD_crafting_artifact_durability_req = { VALUE = 50 } }
+		}
+
+		flag:node_ascending_flame = {
+			trigger_if = {
+				limit = { $ARTIFACT$ = { OR = { has_artifact_modifier = ascending_flame_damage_4_modifier has_artifact_modifier = ascending_flame_toughness_4_modifier has_artifact_modifier = ascending_flame_siege_4_modifier } } }
+				custom_tooltip = { text = POD_crafting_max_node_session always = no }
+			}
+			trigger_else = {
+				trigger_if = {
+					limit = { $ARTIFACT$ = { OR = { has_artifact_modifier = ascending_flame_damage_3_modifier has_artifact_modifier = ascending_flame_toughness_3_modifier has_artifact_modifier = ascending_flame_siege_3_modifier } } }
+					$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 6 } }
+					PREV = { num_illustrious_artifact_pieces_trigger = { VALUE = 2 } }
+				}
+				trigger_else_if = {
+					limit = { $ARTIFACT$ = { OR = { has_artifact_modifier = ascending_flame_damage_2_modifier has_artifact_modifier = ascending_flame_toughness_2_modifier has_artifact_modifier = ascending_flame_siege_2_modifier } } }
+					$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 4 } }
+					PREV = { num_famed_artifact_pieces_trigger = { VALUE = 2 } }
+				}
+				trigger_else_if = {
+					limit = { $ARTIFACT$ = { OR = { has_artifact_modifier = ascending_flame_damage_1_modifier has_artifact_modifier = ascending_flame_toughness_1_modifier has_artifact_modifier = ascending_flame_siege_1_modifier } } }
+					$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } }
+					PREV = { num_masterwork_artifact_pieces_trigger = { VALUE = 2 } }
+				}
+				trigger_else = {
+					$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+					PREV = { num_common_artifact_pieces_trigger = { VALUE = 2 } }
+				}
+			}
+		}
+		
+
+		flag:node_body_arsenal = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+			$CRAFTER$ = { POD_has_enough_blood_for_discipline = { AMOUNT = 1 } }
+		}
+		
+
+		#ENHANCING
+		flag:node_the_forgers_hammer = { $CRAFTER$ = { POD_has_enough_blood_for_discipline = { AMOUNT = 2 } } }
+		flag:node_aid_from_spirits = { $CRAFTER$ = { POD_has_enough_blood_for_discipline = { AMOUNT = 1 } } }
+		flag:node_sword_of_the_righteous = { $CRAFTER$ = { POD_has_enough_blood_for_discipline = { AMOUNT = 3 } } }
+		flag:node_rune = { $CRAFTER$ = { NOT = { has_character_modifier = glamour0_modifier } } }
+		flag:node_bless = { $CRAFTER$ = { piety >= 250 } }
+		flag:node_sorcerers_blade = { $CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } } }
+		flag:node_impress = {
+			$OWNER$ = {
+				custom_tooltip = { text = "POD_crafting_minigame_soulforge_requirement"
+					any_prisoner = {
+						count >= 1
+						has_trait = wraith
+					}
+				}
+			}
+		}
+		flag:node_strengthen = { $CRAFTER$ = { POD_has_enough_pathos_for_arcanos = { AMOUNT = 2 } } }
+		flag:node_empower_jade = { $CRAFTER$ = { POD_has_enough_pathos_for_arcanos = { AMOUNT = 1 } } }
+		flag:node_conforma = {
+			$CRAFTER$ = {
+				trigger_if = { limit = { has_perk = scinde_perk } POD_has_enough_blood_for_discipline = { AMOUNT = 2 } }
+				trigger_else = { POD_has_enough_blood_for_discipline = { AMOUNT = 3 } }
+			}
+		}
+
+		flag:node_enchantment_attribute = {
+			$CRAFTER$ = { stress_level <= 3 }
+			trigger_if = { limit = { $CRAFTER$ = { has_perk = numina_enchantment_6_perk } } }
+			trigger_else_if = { limit = { $CRAFTER$ = { has_perk = numina_enchantment_5_perk } } custom_tooltip = { text = POD_crafting_minigame_too_many_enchantment_2 NOT = { var:enchantment_value ?= 2 } } }
+			trigger_else = { custom_tooltip = { text = POD_crafting_minigame_too_many_enchantment_1 NOT = { has_variable = enchantment_value } } }
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+		}
+
+		flag:node_enchantment_enhance_general_improvment = {
+			$CRAFTER$ = { stress_level <= 3 } $OWNER$ = { gold >= POD_crafting_node_minor_gold_value }
+		}
+		flag:node_enchantment_enhance_durability = { $CRAFTER$ = { stress_level <= 3 } $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_enchantment_enhance_attribute = {
+			$CRAFTER$ = { stress_level <= 3 }
+			trigger_if = { limit = { $CRAFTER$ = { has_perk = numina_enchantment_6_perk } } custom_tooltip = { text = POD_crafting_minigame_too_many_enchantment_2 NOT = { var:enchantment_value ?= 2 } } }
+			trigger_else = { custom_tooltip = { text = POD_crafting_minigame_too_many_enchantment_1 NOT = { has_variable = enchantment_value } } }
+			$OWNER$ = { gold >= POD_crafting_node_minor_gold_value }
+		}
+
+		flag:node_bloodstones = {
+			$OWNER$ = { gold >= POD_crafting_node_tiny_gold_value }
+		}
+		flag:node_see_the_form = {
+			$ARTIFACT$ = {
+				NOR = { 
+					rarity = illustrious
+					rarity = famed
+				}
+			}
+			PREV = { POD_crafting_has_artifact_shards_matching_rarity = { VALUE = 1 ARTIFACT = $ARTIFACT$ } }
+		}
+		flag:node_dream_the_form = {
+			$ARTIFACT$ = {
+				NOT = { rarity = illustrious }
+			}
+			PREV = { POD_crafting_has_artifact_shards_matching_rarity = { VALUE = 2 ARTIFACT = $ARTIFACT$ } }
+		}
+		flag:node_shape_the_form = { PREV = { POD_crafting_has_artifact_shards_matching_rarity = { VALUE = 3 ARTIFACT = $ARTIFACT$ } } }
+		
+		flag:node_dragon_kings_invocation = {
+			$OWNER$ = { gold >= POD_crafting_node_minor_gold_value }
+			$CRAFTER$ = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+
+
+		#BREWING
+		flag:basic_node_sweetener = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:basic_node_longevity = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:basic_node_long_effects = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+
+		flag:node_mild_poison = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_simple_elixir = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_simple_philtre = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_potion_of_resilience = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_simple_tonic = {
+			$OWNER$ = {
+				trigger_if = { limit = { has_perk = water_of_life_perk } gold >= POD_crafting_node_tiny_gold_value }
+				trigger_else = { gold >= POD_crafting_node_minor_gold_value }
+			}
+		}
+
+		flag:node_drink_of_seven_days_rest = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_philosophers_stone = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_panacea = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+
+		flag:node_alchemy_antidepresants = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_alchemy_aphrodisiac = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_alchemy_poison = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_alchemy_antibiotics = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_alchemy_stimulant = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+		flag:node_alchemy_health_booster = { $OWNER$ = { gold >= POD_crafting_node_minor_gold_value } }
+
+		flag:node_pearlshell_of_healing = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_box_of_rice = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_matre_medicine = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_snake_herbs = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+		flag:node_swimmers_medicine = { $OWNER$ = { gold >= POD_crafting_node_tiny_gold_value } }
+
+		flag:node_alchemy_immortal = {
+			$OWNER$ = { gold >= POD_crafting_node_medium_gold_value }
+			$CRAFTER$ = {
+				has_trait_xp = {
+					trait = pod_crafter
+					track = brewing
+					value >= 70
+				}
+			}
+		}
+
+		flag:node_alchemy_vampire = {
+			$OWNER$ = {
+				custom_tooltip = { text = "POD_crafting_minigame_alchemy_vampire_requirement"
+					any_prisoner = {
+						count >= 1
+						has_trait = vampire
+					}
+				}
+			}
+		}
+		flag:node_alchemy_skill_diplomacy = {
+			POD_macro_for_alchemy_skill = { OWNER = $OWNER$ SKILL = diplomacy }
+		}
+		flag:node_alchemy_skill_martial = {
+			POD_macro_for_alchemy_skill = { OWNER = $OWNER$ SKILL = martial }
+		}
+		flag:node_alchemy_skill_stewardship = {
+			POD_macro_for_alchemy_skill = { OWNER = $OWNER$ SKILL = stewardship }
+		}
+		flag:node_alchemy_skill_intrigue = {
+			POD_macro_for_alchemy_skill = { OWNER = $OWNER$ SKILL = intrigue }
+		}
+		flag:node_alchemy_skill_learning = {
+			POD_macro_for_alchemy_skill = { OWNER = $OWNER$ SKILL = learning }
+		}
+		fallback = {  }
+	}
+}
+
+
+#########################
+#### Artifact Shards ####
+#########################
+
+POD_crafting_has_artifact_shards_matching_rarity = {
+	trigger_if = {
+		limit = { $ARTIFACT$ = { rarity = illustrious } }
+		num_illustrious_artifact_pieces_trigger = { VALUE = $VALUE$ }
+	}
+	trigger_else_if = {
+		limit = { $ARTIFACT$ = { rarity = famed } }
+		num_famed_artifact_pieces_trigger = { VALUE = $VALUE$ }
+	}
+	trigger_else_if = {
+		limit = { $ARTIFACT$ = { rarity = masterwork } }
+		num_masterwork_artifact_pieces_trigger = { VALUE = $VALUE$ }
+	}
+	trigger_else = { num_common_artifact_pieces_trigger = { VALUE = $VALUE$ } }
+}
+
+num_common_artifact_pieces_trigger = {
+	custom_description = {
+		text = has_common_artifact_pieces
+		value = $VALUE$
+		common_artifact_piece_reserve >= $VALUE$
+	}
+}
+num_masterwork_artifact_pieces_trigger = {
+	custom_description = {
+		text = has_masterwork_artifact_pieces
+		value = $VALUE$
+		masterwork_artifact_piece_reserve >= $VALUE$
+	}
+}
+num_famed_artifact_pieces_trigger = {
+	custom_description = {
+		text = has_famed_artifact_pieces
+		value = $VALUE$
+		famed_artifact_piece_reserve >= $VALUE$
+	}
+}
+num_illustrious_artifact_pieces_trigger = {
+	custom_description = {
+		text = has_illustrious_artifact_pieces
+		value = $VALUE$
+		illustrious_artifact_piece_reserve >= $VALUE$
+	}
+}
+
+########################
+#### Artifact Power ####
+########################
+#Any node not defined in the following triggers has a default value of 1
+POD_crafting_artifact_power_tier_2_node = {
+	OR = {
+		#Mokole
+		scope:story.var:node_type ?= flag:node_sun_ray
+		scope:story.var:node_type ?= flag:node_turtle_blessing
+		scope:story.var:node_type ?= flag:node_see_the_form
+		scope:story.var:node_type ?= flag:node_shards_of_granite
+		scope:story.var:node_type ?= flag:node_suns_wisdom
+		scope:story.var:node_type ?= flag:node_cleansing_sun
+		scope:story.var:node_type ?= flag:node_beast_rampage
+		scope:story.var:node_type ?= flag:node_inscribed_legacy
+		scope:story.var:node_type ?= flag:node_chaos_element
+		scope:story.var:node_type ?= flag:node_sun_scales
+	}
+}
+POD_crafting_artifact_power_tier_3_node = {
+	OR = {
+		#Mokole
+		scope:story.var:node_type ?= flag:node_sun_flame
+		scope:story.var:node_type ?= flag:node_dragon_scale
+		scope:story.var:node_type ?= flag:node_dream_the_form
+
+		#General
+		scope:story.var:node_type ?= flag:node_fetish_smith
+	}
+}
+POD_crafting_artifact_power_tier_4_node = {
+	OR = {
+		#Mokole
+		scope:story.var:node_type ?= flag:node_sun_breath
+		scope:story.var:node_type ?= flag:node_helios_blaze
+		scope:story.var:node_type ?= flag:node_shape_the_form
+		scope:story.var:node_type ?= flag:node_ascending_flame
+	}
+}
+
+
+##############
+#### Misc ####
+##############
+
+POD_crafting_artifact_durability_req = {
+	trigger_if = {
+		limit = { NOT = { has_variable = no_crafting_durability_cost } }
+		custom_tooltip = {
+			text = POD_crafting_minigame_too_low_durability 
+			artifact_max_durability >= $VALUE$
+		}
+	}
+}
+
+POD_macro_for_alchemy_skill = {
+	$OWNER$ = {
+		custom_tooltip = { text = POD_crafting_minigame_node_alchemy_skill_$SKILL$_requirement
+			any_prisoner = {
+				count >= 1
+				$SKILL$ >= POD_numina_sorcery_alchemy_skill_potion_requirement
+			}
+		}
+		gold >= 2000 # Not subjected to discount
+	}
+}

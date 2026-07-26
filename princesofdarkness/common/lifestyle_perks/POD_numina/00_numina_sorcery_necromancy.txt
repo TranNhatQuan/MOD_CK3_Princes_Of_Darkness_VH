@@ -1,0 +1,100 @@
+﻿numina_necromancy_1_perk = {
+	position = { 0 0 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = node_sanguine
+	
+	can_be_picked = { POD_has_enough_perk_points_for_new_path = yes }
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_1_perk_effect }
+		POD_numina_sorcery_perk_point_check = yes
+	}
+}
+numina_necromancy_2_perk = {
+	position = { 0 1.25 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = node_sanguine
+	
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_2_perk_effect }
+	}
+
+	parent = numina_necromancy_1_perk
+}
+numina_necromancy_3_perk = {
+	position = { 0 2.5 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = node_sanguine
+
+	character_modifier = {
+		POD_terrain_necromancy_wraith_advantage = 2
+	}
+	
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_3_perk_effect }
+	}
+
+	parent = numina_necromancy_2_perk
+}
+numina_necromancy_4_perk = {
+	position = { 0 3.75 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = node_sanguine
+
+	character_modifier = {
+		POD_terrain_necromancy_wraith_min_combat_roll = 0.15
+		POD_terrain_necromancy_wraith_max_combat_roll = 0.15
+		POD_terrain_necromancy_wraith_advantage = 2
+	}
+	
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_4_perk_effect }
+	}
+
+	parent = numina_necromancy_3_perk
+}
+numina_necromancy_5_perk = { 
+	position = { 0 5 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = trait_sorcerer
+
+	character_modifier = {
+		POD_wraith_maa_damage_mult = 0.25
+		POD_wraith_maa_toughness_mult = 0.25
+		POD_terrain_necromancy_wraith_min_combat_roll = 0.15
+		POD_terrain_necromancy_wraith_max_combat_roll = 0.15
+		POD_terrain_necromancy_wraith_advantage = 2
+	
+	}
+	
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_5_perk_effect }
+	}
+
+	parent = numina_necromancy_4_perk
+}
+numina_necromancy_6_perk = {
+	position = { 0 6.15 }
+	lifestyle = sorcery_lifestyle
+	tree = numina_necromancy
+	icon = trait_sorcerer
+
+	character_modifier = {
+		POD_wraith_maa_damage_mult = 0.5
+		POD_wraith_maa_toughness_mult = 0.5
+		POD_terrain_necromancy_wraith_min_combat_roll = 5
+		POD_terrain_necromancy_wraith_max_combat_roll = 5
+		POD_terrain_necromancy_wraith_advantage = 5
+	
+	}
+
+	can_be_picked = { pod_sorcery_6th_perk_requirement = { PATH = necromancy } }
+	effect = {
+		custom_description_no_bullet = { text = numina_necromancy_6_perk_effect }
+		pod_sorcery_6th_perk_check = { PATH = necromancy }
+	}
+}

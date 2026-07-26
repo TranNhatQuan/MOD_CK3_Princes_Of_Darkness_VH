@@ -1,0 +1,160 @@
+﻿frozen_river_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 0 }
+	icon = node_learning
+	
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_trait = shih
+			}
+			add = 1989
+		}
+		if = {
+			limit = {
+				has_focus = qiao_chien_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+
+	character_modifier = {
+		negate_prowess_penalty_add = 2
+		negate_health_penalty_add = 1
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = frozen_river_perk_effect
+		}
+	}
+}
+
+stolen_serpent_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 1.25 }
+	icon = node_learning
+
+	parent = frozen_river_perk
+	
+	character_modifier = {
+		prowess_per_stress_level = 3
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = stolen_serpent_perk_effect
+		}
+	}	
+}
+
+celestial_barrier_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 2.5 }
+	icon = node_learning
+
+	parent = stolen_serpent_perk
+	
+	character_modifier = {
+		enemy_hostile_scheme_success_chance_add = -5
+		enemy_personal_scheme_success_chance_add = -5
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = celestial_barrier_perk_effect
+		}	
+	}
+}
+
+clutch_of_the_wan_kuei_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 3.75 }
+	icon = node_learning
+
+	parent = celestial_barrier_perk
+	
+	character_modifier = {
+		prowess_no_portrait = 1
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = clutch_of_the_wan_kuei_perk_effect
+		}	
+	}
+}
+
+bite_of_the_mu_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 5 }
+	icon = node_learning
+
+	parent = clutch_of_the_wan_kuei_perk
+
+	character_modifier = {
+		prowess_no_portrait = 1
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = bite_of_the_mu_perk_effect
+		}
+	}
+}
+
+righteous_hungry_spirit_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 6.25 }
+	icon = node_learning
+
+	can_be_picked = { }	
+
+	parent = bite_of_the_mu_perk
+
+	character_modifier = {
+		prowess_no_portrait = 1
+	}
+
+	effect = {
+		POD_qiao_elder_penalty_effect = { QIAO = chien }
+		custom_description_no_bullet = {
+			text = righteous_hungry_spirit_perk_effect
+		}
+	}
+}
+
+demon_eating_techniquet_perk = {
+	lifestyle = qiao_lifestyle
+	tree = chien
+	position = { 0 7.5 }
+	icon = year_of_lotus
+
+	can_be_picked = { }	
+
+	parent = righteous_hungry_spirit_perk
+
+	character_modifier = {
+		prowess_no_portrait = 3
+	}
+
+	effect = {
+		POD_qiao_elder_penalty_effect = { QIAO = chien }
+		custom_description_no_bullet = {
+			text = demon_eating_techniquet_perk_effect
+		}
+	}
+}

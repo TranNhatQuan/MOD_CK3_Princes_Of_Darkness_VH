@@ -1,0 +1,121 @@
+﻿
+#TODO Wyrm: figure out this mess
+
+POD_is_gaia_servant_trigger = {
+	OR = {
+		religion = { is_in_family = rf_gaia }
+		POD_is_gaia_splat_trigger = yes
+	}
+}
+
+POD_is_not_gaia_servant_trigger = { # for complex trigger
+	NOT = { religion = { is_in_family = rf_gaia } }
+	POD_is_not_gaia_splat_trigger = yes
+}
+
+POD_is_gaia_splat_trigger = {
+	has_trait = kami
+}
+
+POD_is_not_gaia_splat_trigger = { # for complex trigger
+	NOT = { has_trait = kami }
+}
+
+POD_is_wyld_servant_trigger = {
+	OR = {
+		faith = { has_doctrine = doctrine_fera_triat_alignment_wyld }
+		POD_is_wyld_splat_trigger = yes
+	}
+}
+
+POD_is_not_wyld_servant_trigger = { # for complex trigger
+	NOT = { faith = { has_doctrine = doctrine_fera_triat_alignment_wyld } }
+	POD_is_not_wyld_splat_trigger = yes
+}
+
+POD_is_wyld_splat_trigger = {
+	OR = {
+		AND = {
+			OR = {
+				has_trait = changeling
+				has_trait = fae
+			}
+			NOR = {
+				has_trait = phyla
+				has_trait = hsien
+			}
+		}
+		has_trait = gorgon
+	}
+}
+
+POD_is_not_wyld_splat_trigger = { # for complex trigger
+	trigger_if = {
+		limit = { 
+			NOT = { has_trait = hsien } 
+			NOT = { has_trait = phyla }
+		}
+		NOT = { has_trait = changeling } 
+		NOT = { has_trait = fae }
+	}
+	NOT = { has_trait = gorgon }
+}
+
+POD_is_weaver_servant_trigger = {
+	OR = {
+		faith = { has_doctrine = doctrine_fera_triat_alignment_weaver }
+		POD_is_weaver_splat_trigger = yes
+	}
+}
+
+POD_is_not_weaver_servant_trigger = { # for complex trigger
+	NOT = { faith = { has_doctrine = doctrine_fera_triat_alignment_weaver } }
+	POD_is_not_weaver_splat_trigger = yes
+}
+
+POD_is_weaver_splat_trigger = {
+	OR = {
+		has_trait = drone
+		has_trait = entomos
+	}
+}
+
+POD_is_not_weaver_splat_trigger = { # for complex trigger
+	NOT = { has_trait = drone }
+	NOT = { has_trait = entomos }
+}
+
+POD_is_wyrm_servant_trigger = {
+	OR = {
+		religion = { is_in_family = rf_wyrm }
+		has_faith = faith:viatantabus
+		POD_is_unknowing_wyrm_servant_trigger = yes
+		POD_is_wyrm_splat_trigger = yes
+	}
+}
+
+#For characters that don't directly serve the wyrm
+POD_is_unknowing_wyrm_servant_trigger = {
+	faith = { has_doctrine = wyrm_tainted_doctrine }
+	NOT = { has_faith = faith:viatantabus }
+}
+
+POD_is_not_wyrm_servant_trigger = { # for complex trigger
+	NOT = { religion = { is_in_family = rf_wyrm } }
+	NOT = { faith = { has_doctrine = wyrm_tainted_doctrine } }
+	POD_is_not_wyrm_splat_trigger = yes
+}
+
+POD_is_wyrm_splat_trigger = {
+	OR = {
+		has_trait = fomori
+		has_trait = banemummy
+		has_trait = asekh_sen
+	}
+}
+
+POD_is_not_wyrm_splat_trigger = { # for complex trigger
+	NOT = { has_trait = fomori }
+	NOT = { has_trait = banemummy }
+	NOT = { has_trait = asekh_sen }
+}

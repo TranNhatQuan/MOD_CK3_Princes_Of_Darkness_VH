@@ -1,0 +1,307 @@
+﻿namespace = POD_debug
+
+# # Show the character's real prowess value
+# POD_debug.1 = {
+# 	type = character_event
+# 	content_source = dlc_POD
+	
+# 	theme = vampire
+# 	override_background = { reference = shader_event_hypertrip }
+
+# 	title = POD_debug.1.t
+# 	desc = POD_debug.1.desc
+	
+# 	left_portrait = {
+# 		character = root
+# 		animation = sword_coup_degrace
+# 	}
+	
+# 	widget = {
+# 		gui = "POD_shader_event_hypertrip"
+# 		container = "background_shader_vfx_container"
+# 	}
+
+# 	immediate = {
+# 		POD_save_real_prowess = yes
+# 	}
+
+# 	option = {
+# 		name = POD_debug.1.a
+# 	}
+# }
+
+# Portrait Shader Playground
+POD_debug.2 = {
+	type = character_event
+	content_source = dlc_POD
+	
+	theme = toreador
+	override_background = { reference = colorpicker }
+
+	title = POD_debug.2.t
+	desc = POD_debug.2.desc
+
+	immediate = {
+		if = {
+			limit = { NOT = { exists = scope:recipient } }
+			save_scope_as = recipient
+		}
+	}
+	
+	left_portrait = {
+		character = scope:recipient
+		animation = personality_zealous
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_portrait_shaders"
+		container = "custom_widgets_container"
+	}
+
+	option = {
+		name = POD_debug.2.a
+	}
+}
+
+# shadertest
+POD_debug.3 = {
+	type = character_event
+	content_source = dlc_POD
+	
+	theme = toreador
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+	
+	override_background = {
+		trigger = { scope:bg = flag:unmoored }
+		reference = shader_event_unmoored
+	}
+	override_background = {
+		trigger = { scope:bg = flag:kaleidoscope }
+		reference = shader_event_kaleidoscope
+	}
+	override_background = {
+		trigger = { scope:bg = flag:hypertrip }
+		reference = shader_event_hypertrip
+	}
+	override_background = {
+		trigger = { scope:bg = flag:deep_umbra }
+		reference = shader_event_deep_umbra
+	}
+	override_background = {
+		trigger = { scope:bg = flag:yomi }
+		reference = shader_event_yomi
+	}
+	override_background = {
+		trigger = { scope:bg = flag:blood }
+		reference = shader_event_blood
+	}
+	override_background = {
+		trigger = { scope:bg = flag:gold }
+		reference = shader_event_gold
+	}
+	override_background = {
+		trigger = { scope:bg = flag:ritual }
+		reference = shader_event_ritual
+	}
+	override_background = {
+		trigger = { scope:bg = flag:vortex }
+		reference = shader_event_hypertrip # placeholder since the colors fit well enough
+	}
+	
+	widgets = {
+		widget = {
+			is_shown = { scope:bg = flag:unmoored }
+			gui = "POD_shader_event_unmoored"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:kaleidoscope }
+			gui = "POD_shader_event_kaleidoscope"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:hypertrip }
+			gui = "POD_shader_event_hypertrip"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:deep_umbra }
+			gui = "POD_shader_event_deep_umbra"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:yomi }
+			gui = "POD_shader_event_yomi"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:blood }
+			gui = "POD_shader_event_blood"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:gold }
+			gui = "POD_shader_event_gold"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:ritual }
+			gui = "POD_shader_event_ritual"
+			container = "background_shader_vfx_container"
+		}
+		widget = {
+			is_shown = { scope:bg = flag:vortex }
+			gui = "POD_shader_event_vortex"
+			container = "background_shader_vfx_container"
+		}
+	}
+
+	title = POD_debug_event_shaders_interaction
+	desc  = blank_line
+	
+	left_portrait = {
+		character = scope:actor
+		hide_info = yes
+	}
+	
+	right_portrait = {
+		trigger = { scope:actor != scope:recipient }
+		character = scope:recipient
+		hide_info = yes
+	}
+	
+	immediate = {
+		if = {
+			limit = { NOT = { exists = scope:bg } }
+			save_scope_value_as = {
+				name  = bg
+				value = flag:yomi
+			}
+		}
+	}
+
+	option = {
+		name = POD_debug.3.a
+		save_scope_value_as = {
+			name = bg
+			value = flag:unmoored
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.b
+		save_scope_value_as = {
+			name  = bg
+			value = flag:kaleidoscope
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.c
+		save_scope_value_as = {
+			name  = bg
+			value = flag:hypertrip
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.d
+		save_scope_value_as = {
+			name  = bg
+			value = flag:deep_umbra
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.e
+		save_scope_value_as = {
+			name  = bg
+			value = flag:yomi
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.f
+		save_scope_value_as = {
+			name  = bg
+			value = flag:blood
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.g
+		save_scope_value_as = {
+			name  = bg
+			value = flag:gold
+		}
+		trigger_event = POD_debug.3
+	}
+
+	option = {
+		name = POD_debug.3.h
+		save_scope_value_as = {
+			name  = bg
+			value = flag:ritual
+		}
+		trigger_event = POD_debug.3
+	}
+	option = {
+		name = POD_debug.3.i
+		save_scope_value_as = {
+			name  = bg
+			value = flag:vortex
+		}
+		trigger_event = POD_debug.3
+	}
+	
+	option = {
+		name = BACK_LABEL
+	}
+}
+
+# test event for checking which houses don't have clothing colors set
+# meant to be used with the debug event button that copies event text to the clipboard
+POD_debug.4 = {
+	type = character_event
+	content_source = dlc_POD
+	orphan = yes
+	
+	theme = vampire
+
+	title = blank_line
+	desc = POD_debug.4.desc
+	
+	immediate = {
+		every_living_character = {
+			limit = {
+				# for grabbing historical characters only (for best results, run at the start of the game)
+				has_any_nickname = yes
+				# uncomment and set other conditions if needed
+				#has_trait = kueijin
+				house ?= { NOT = { has_variable = POD_portrait_clothing_1_r } }
+			}
+			house = {
+				root = {
+					add_to_variable_list = {
+						name = color_houses
+						target = prev
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = blank_line
+	}
+	
+	after = {
+		clear_variable_list = color_houses
+	}
+}

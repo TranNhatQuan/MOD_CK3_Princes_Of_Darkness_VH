@@ -1,0 +1,298 @@
+﻿flight_1_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 1.5 0 }
+	icon = node_animal
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 1 }
+	}
+
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_animal_interest_trigger = yes
+			}
+			add = 1989
+		}
+		if = {
+			limit = {
+				has_focus = animal_flight_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+
+	character_modifier = {
+		max_combat_roll = 2 #Simulating potential of ambush on the unprepared from the sky batman style
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_1_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 1 }
+	}
+}
+
+flight_2_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 2.5 1 }
+	icon = node_animal
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 2 }
+	}
+
+	parent = flight_1_perk
+
+	character_modifier = { #Lower odds of certain negative survey events (Flight is great for surveying your domain safely)
+		#diplomatic_range_mult = 0.10 #originally was thinking better odds hunting until had the surveying idea
+		character_travel_safety = 5
+		character_travel_speed = 5
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_2_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 2 }
+	}
+}
+
+flight_3_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 1.5 2 }
+	icon = node_animal
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 3 }
+	}
+
+	parent = flight_2_perk
+
+	character_modifier = {
+		enemy_hostile_scheme_success_chance_add = -5 #You can now effectively use it in a pinch to escape assasination attempts
+		character_travel_safety_mult = 0.1
+		character_travel_speed_mult = 0.2
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_3_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 3 }
+	}
+}
+
+flight_4_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 0.5 3 }
+	icon = node_animal
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 4 }
+	}
+
+	parent = flight_3_perk
+
+	character_modifier = {
+		prowess = 3 #You can now utilise it effectively in combat
+		diplomatic_range_mult = 0.10 #With newfound ability to use flight effectively you can reach further locations quicker and safer
+		character_travel_safety = 5
+		character_travel_speed = 10
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_4_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 4 }
+	}
+}
+
+flightadvanced_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 1.5 4 }
+	icon = trait_flightadvanced
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 6 }
+	}
+
+	parent = flight_4_perk
+
+	effect = {
+		remove_trait = flight
+		add_trait_force_tooltip = flightadvanced
+		custom_description_no_bullet = {
+			text = flightadvanced_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 6 }
+	}
+}
+
+flight_6_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 0.5 5 }
+	icon = node_animal
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 7 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_6_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 7 }
+	}
+}
+
+flight_7_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 0 5.75 }
+	icon = node_animal
+
+	parent = flight_6_perk
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 7 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_7_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 7 }
+	}
+}
+
+flight_8_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 0.5 6.5 }
+	icon = node_animal
+
+	parent = flight_7_perk
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 8 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_8_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 8 }
+	}
+}
+
+flight_9_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 2.5 5 }
+	icon = node_animal
+	parent = flight_8_perk
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		has_perk = flight_8_perk
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 9 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_9_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 9 }
+	}
+}
+
+flight_10_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 3 5.75 }
+	icon = node_animal
+
+	parent = flight_9_perk
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 9 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_10_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 9 }
+	}
+}
+
+flight_11_perk = {
+	lifestyle = animal_lifestyle
+	tree = animal_flight
+	position = { 2.5 6.5 }
+	icon = trait_flightadvanced
+
+	parent = flight_10_perk
+
+	character_modifier = {
+		prowess = 1
+		diplomatic_range_mult = 0.15
+		character_travel_speed_mult = 0.05
+	}
+
+	can_be_picked = {
+		POD_can_obtain_discipline_of_level_trigger = { DISCIPLINE = flight LEVEL = 10 }
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = flight_11_perk_effect
+		}
+		POD_can_obtain_discipline_of_level_effect = { DISCIPLINE = flight LEVEL = 10 }
+	}
+}

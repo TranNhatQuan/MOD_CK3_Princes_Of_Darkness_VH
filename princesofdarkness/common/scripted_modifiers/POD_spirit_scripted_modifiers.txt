@@ -1,0 +1,152 @@
+﻿
+
+POD_spirit_pact_acceptance_modifier = {
+
+	#Fera Rank
+	modifier = {
+		add = 10
+		scope:actor = { POD_fera_rank_value = 2 }
+		desc = ACTOR_FERA_RANK_REASON
+	}
+	modifier = {
+		add = 15
+		scope:actor = { POD_fera_rank_value = 3 }
+		desc = ACTOR_FERA_RANK_REASON
+	}
+	modifier = {
+		add = 20
+		scope:actor = { POD_fera_rank_value = 4 }
+		desc = ACTOR_FERA_RANK_REASON
+	}
+	modifier = {
+		add = 25
+		scope:actor = { POD_fera_rank_value = 5 }
+		desc = ACTOR_FERA_RANK_REASON
+	}
+	modifier = {
+		add = 30
+		scope:actor = { POD_fera_rank_value = 6 }
+		desc = ACTOR_FERA_RANK_REASON
+	}
+
+	#Wyrm Totem
+	modifier = {
+		add = 10
+		scope:actor = { has_character_modifier = glouogh_totem_modifier }
+		desc = GLOUOGH_TOTEM_REASON
+	}
+
+	#Urge Taint
+	modifier = {
+		add = 10
+		scope:actor = { has_perk = bane_stomach_perk }
+		desc = BANE_STOMACH_REASON
+	}
+	
+
+	#Mokole
+	modifier = {
+		add = 10
+		scope:actor = { has_perk = command_spirit_perk }
+		desc = COMMAND_SPIRIT_REASON
+	}
+
+	modifier = {
+		add = 5
+		scope:actor = { dynasty ?= { has_dynasty_perk = gumagan_legacy_1 } }
+		desc = GUMAGAN_LEGACY_1_REASON
+	}
+
+	modifier = {
+		add = {
+			value = 5
+			if = {
+				limit = { scope:actor.domicile ?= { has_domicile_building_or_higher = mokole_spirit_guides_02 } }
+				add = 5
+			}
+			if = {
+				limit = { scope:actor.domicile ?= { has_domicile_building_or_higher = mokole_spirit_guides_04 } }
+				add = 5
+			}
+			if = {
+				limit = { scope:actor.domicile ?= { has_domicile_building_or_higher = mokole_spirit_guides_06 } }
+				add = 5
+			}
+		}
+		scope:actor.domicile ?= { has_domicile_building_or_higher = mokole_spirit_guides_01 }
+		desc = SPIRIT_GUIDES_REASON
+	}
+	
+
+	#Blood Magic
+	modifier = {
+		add = 20 #Bit higher since vamps have a debuff to acceptance
+		scope:actor = { has_perk = voice_of_command_perk }
+		desc = VOICE_OF_COMMAND_REASON
+	}
+
+	#Sorcery
+	modifier = {
+		add = 5
+		scope:actor = { has_perk = numina_ephemera_3_perk }
+		desc = NUMINA_EPHEMERA_3_REASON
+	}
+	modifier = {
+		add = 5
+		scope:actor = { has_perk = numina_ephemera_4_perk }
+		desc = NUMINA_EPHEMERA_4_REASON
+	}
+	modifier = {
+		add = 5
+		scope:actor = { has_perk = numina_ephemera_5_perk }
+		desc = NUMINA_EPHEMERA_5_REASON
+	}
+	modifier = {
+		add = 10
+		scope:actor = { has_perk = numina_ephemera_6_perk }
+		desc = NUMINA_EPHEMERA_6_REASON
+	}
+
+
+	#KJ Soul Arts
+	modifier = {
+		add = 10
+		scope:actor = { has_perk = soul_arts_summon_wilding_spirit_perk }
+		desc = SUMMON_WILDLING_SPIRIT_REASON
+	}
+
+	#Wutian Objective
+	modifier = {
+		add = 20
+		scope:actor = { has_character_modifier = wutian_ninth_immortal }
+		desc = WUTIAN_NINTH_IMMORTAL_REASON
+	}
+
+	#Artifacts
+	modifier = {
+		add = 5
+		scope:actor = { any_equipped_character_artifact = { has_variable = spirit_net prev = { can_benefit_from_artifact = prev } } }
+		desc = SPIRIT_NET_REASON
+	}
+}
+
+
+learn_language_scheme_spirit_success = {
+	modifier = {
+		add = -10
+		scope:target = { has_trait = spirit }
+		desc = SPIRIT_LANGUAGE_REASON
+	}
+
+	modifier = {
+		add = -15
+		scope:target = { POD_spirit_uses_corrupting_voice_language_trigger = yes }
+		desc = SPIRIT_CORRUPTING_VOICE_REASON
+	}
+
+	modifier = {
+		add = -30
+		scope:target = { POD_spirit_uses_tainted_speech_language_trigger = yes }
+		desc = SPIRIT_TAINTED_SPEECH_REASON
+	}
+}

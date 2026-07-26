@@ -1,0 +1,412 @@
+﻿namespace = pod1230objectives_mummy
+
+pod1230objectives_mummy.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.1.t
+	desc = pod1230objectives_mummy.1.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.1.a
+		custom_tooltip = ending_the_snake_objective_decision_effect1
+		custom_tooltip = ending_the_snake_objective_decision_effect2
+		if = {
+			limit = { has_trait = shemsuheru }
+			custom_tooltip = POD_unlocks_next_objective
+		}
+
+		
+		hidden_effect = {
+			every_independent_ruler = {
+				limit = {
+					has_trait = setite
+				}
+				add_character_modifier = {
+					modifier = broken_authority_modifier
+					years = 200
+				}
+			}
+		}
+		root.dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+	}
+}
+
+pod1230objectives_mummy.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.2.t
+	desc = pod1230objectives_mummy.2.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.2.a
+		faith:ishmaelite = { add_doctrine = special_doctrine_land_of_faith_controlled }
+		faith:code_of_horus = { add_doctrine = special_doctrine_land_of_faith_controlled }
+		add_character_modifier = land_of_faith_modifier
+		custom_tooltip = POD_unlocks_next_objective
+	}
+}
+
+pod1230objectives_mummy.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.3.t
+	desc = pod1230objectives_mummy.3.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.3.a
+		custom_tooltip = ending_the_serpent_objective_decision_effect1
+		add_internal_flag = dangerous
+
+		set_global_variable = {
+			name = the_end_of_the_world
+			value = yes
+		}
+	}
+}
+
+pod1230objectives_mummy.4 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.4.t
+	desc = pod1230objectives_mummy.4.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.4.a
+		while = {
+			count = 10
+			culture:ancient_egyptian = { add_random_innovation = yes }
+		}
+		custom_tooltip = keeping_the_roots_safe_objective_decision_effect1
+		custom_tooltip = keeping_the_roots_safe_objective_decision_effect2
+	}
+}
+
+pod1230objectives_mummy.5 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.5.t
+	desc = pod1230objectives_mummy.5.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.5.a
+		add_character_modifier = oblivions_most_loved_modifier
+		every_living_character = {
+			limit = { has_trait = shemsuheru }
+			add_character_modifier = oblivions_most_hated_modifier
+		}
+		custom_tooltip = POD_unlocks_next_objective
+	}
+}
+
+pod1230objectives_mummy.6 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.6.t
+	desc = pod1230objectives_mummy.6.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.6.a
+		custom_tooltip = last_meal_before_midnight_objective_decision_effect1
+		add_internal_flag = dangerous
+
+		set_global_variable = {
+			name = the_end_of_the_world
+			value = yes
+		}
+	}
+}
+
+pod1230objectives_mummy.7 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.7.t
+	desc = pod1230objectives_mummy.7.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.7.a
+		POD_mummy_initialization_shemsu_heru_effect = yes
+	}
+}
+
+pod1230objectives_mummy.8 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.8.t
+	desc = pod1230objectives_mummy.8.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.8.a
+		custom_tooltip = POD_unlocks_next_objectives
+		custom_tooltip = {
+			text = ending_the_hunt_objective_decision_effect1
+			every_living_character = {
+				limit = { has_trait = cabiri }
+				add_character_modifier = cabiri_secured_future_modifier
+			}
+		}
+	}
+}
+
+pod1230objectives_mummy.9 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.9.t
+	desc = pod1230objectives_mummy.9.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.9.a
+		custom_tooltip = new_theourgia_arts_objective_decision_effect1
+	}
+}
+
+pod1230objectives_mummy.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.10.t
+	desc = pod1230objectives_mummy.10.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.10.a
+		custom_tooltip = {
+			text = secure_hades_objective_decision_effect1
+			every_living_character = {
+				limit = { has_trait = cabiri faith = faith:cabiri }
+				add_character_modifier = cabiri_secured_future_modifier
+			}
+		}
+	}
+}
+
+pod1230objectives_mummy.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.11.t
+	desc = pod1230objectives_mummy.11.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.11.a
+		faith:cabiri = { add_doctrine = special_doctrine_land_of_faith_controlled }
+		add_character_modifier = pneuma_foci_modifier
+		custom_tooltip = contunuing_greek_tradition_decision_effect1
+	}
+}
+
+pod1230objectives_mummy.12 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.12.t
+	desc = pod1230objectives_mummy.12.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.12.a
+		add_character_modifier = wutian_protector_of_knowledge_modifier
+		#POD_change_wheel_of_ages_progress = { VALUE = -50 }
+		add_trait_xp = { trait = integrity value = 20 }
+	}
+}
+
+pod1230objectives_mummy.13 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.13.t
+	desc = pod1230objectives_mummy.13.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.13.a
+		add_character_modifier = wutian_protector_of_people_modifier
+		#POD_change_wheel_of_ages_progress = { VALUE = -50 }
+		add_trait_xp = { trait = integrity value = 20 }
+	}
+}
+
+pod1230objectives_mummy.14 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.14.t
+	desc = pod1230objectives_mummy.14.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.14.a
+		add_character_modifier = wutian_protector_of_shen_modifier
+		#POD_change_wheel_of_ages_progress = { VALUE = -50 }
+		add_trait_xp = { trait = integrity value = 20 }
+	}
+}
+
+pod1230objectives_mummy.15 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.15.t
+	desc = pod1230objectives_mummy.15.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+		#POD_change_wheel_of_ages_progress = { VALUE = -50 }
+		add_character_modifier = wutian_ninth_immortal
+		add_trait_xp = { trait = integrity value = 100 }
+	}
+
+	option = {
+		name = pod1230objectives_mummy.15.a
+	}
+
+	option = {
+		name = pod1230objectives_mummy.15.b
+		death = { death_reason = death_hundred_clouds }
+	}
+}
+
+pod1230objectives_mummy.16 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_mummy.16.t
+	desc = pod1230objectives_mummy.16.desc
+	theme = stewardship_duty_focus
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+
+	option = {
+		name = pod1230objectives_mummy.16.a
+		add_character_modifier = nomenclature_master_modifier
+	}
+}

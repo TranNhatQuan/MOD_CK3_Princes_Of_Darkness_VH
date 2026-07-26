@@ -1,0 +1,145 @@
+﻿namespace = POD_umbra_kj
+
+POD_umbra_kj.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_kj.1001.t
+	desc = POD_umbra_kj.1001.desc
+	
+	left_portrait = root
+	theme = spirit_world
+	
+	cooldown = { years = 10 }
+	
+	trigger = {
+		is_kueijin_trigger = yes
+		NOT = { has_character_modifier = dah_modifier }
+		NOT = { has_dharma_greater_than_trigger = { LEVEL = 6 } }
+	}
+
+	option = {
+		name = POD_umbra_kj.1001.a
+		add_character_modifier = {
+			modifier = dah_modifier 
+			years = 10
+		}
+		trigger_event = { on_action = spirit_travel_movement_end_pulse }
+	}
+}
+
+POD_umbra_kj.1002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_kj.1002.t
+	desc = {
+		desc = POD_umbra_kj.1002.desc_opening
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = dharma9 
+						has_trait = dharma10
+					}
+				}
+				desc = POD_umbra_kj.1002.desc_high
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = dharma8
+						has_trait = dharma7
+						has_trait = dharma6
+					}
+					OR = {
+						AND = {
+							has_variable = spirit_location
+							in_underworld_trigger = { LOCATION = var:spirit_location }
+						}
+						AND = {
+							has_variable = umbra_stationed_realm
+							in_underworld_trigger = { LOCATION = var:umbra_stationed_realm.var:name }
+						}
+					}
+				}
+				desc = POD_umbra_kj.1002.desc_yin
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = dharma8
+						has_trait = dharma7
+						has_trait = dharma6
+					}
+				}
+				desc = POD_umbra_kj.1002.desc_yang
+			}
+			desc = POD_umbra_kj.1002.desc_low
+		}
+		desc = POD_umbra_kj.1002.desc_ending
+	}
+	
+	left_portrait = root
+	theme = spirit_wilds
+	
+	option = {
+		name = POD_umbra_kj.1002.a
+		add_character_modifier = { 
+			modifier = dah_modifier 
+			years = 1
+		}
+	}
+}
+
+POD_umbra_kj.1004 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.1221.t
+	desc = podkueijin.1221.desc
+	
+	left_portrait = root
+	theme = shadowlands
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 1
+			religion = religion:boneflowers_religion
+		}
+	}
+	
+	option = {
+		name = podkueijin.1221.a
+		
+		add_character_modifier = {
+			modifier = wisdom_of_black_pearl_mistress_modifier
+			years = 2
+		}
+	}
+}
+
+POD_umbra_kj.1005 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podkueijin.1311.t
+	desc = podkueijin.1311.desc
+	
+	left_portrait = root
+	theme = spirit_wilds
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 1
+			religion = religion:thrashingdragons_religion
+		}
+	}
+	
+	option = {
+		name = podkueijin.1311.a
+		
+		add_character_modifier = {
+			modifier = knowledge_of_thousand_cranes_mother_modifier
+			years = 2
+		}
+	}
+}

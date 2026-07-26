@@ -1,0 +1,856 @@
+﻿template POD_flat_icon_shadow {
+	glow = {
+		color = { 0.0 0.0 0.0 0.5 }
+		glow_radius = 3
+		glow_generation_rules = {
+			glow_alpha_mask = 0
+			glow_blur_passes = 1
+			glow_texture_downscale = 1.5f
+			glow_ignore_inside_pixels = no
+		}
+	}
+}
+
+types PODTypes
+{
+	type pod_resonance_display = hbox
+	{
+		visible = "[And( Not( IsPauseMenuShown ), And(Or(Not(IsObserver), GetPlayer.IsValid), IsDefaultGUIMode))]"
+
+		# Choleric Resonance
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_choleric_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_negligible_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/choleric_resonance_icon_01.dds"
+			tooltip = "CHOLERIC_RESONANCE_01_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_choleric_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_fleeting_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/choleric_resonance_icon_02.dds"
+			tooltip = "CHOLERIC_RESONANCE_02_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_choleric_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_intense_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/choleric_resonance_icon_03.dds"
+			tooltip = "CHOLERIC_RESONANCE_03_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_choleric_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_acute_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/choleric_resonance_icon_04.dds"
+			tooltip = "CHOLERIC_RESONANCE_04_TT"
+		}
+
+		# Phlegmatic Resonance
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_phlegmatic_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_negligible_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/phlegmatic_resonance_icon_01.dds"
+			tooltip = "PHLEGMATIC_RESONANCE_01_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_phlegmatic_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_fleeting_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/phlegmatic_resonance_icon_02.dds"
+			tooltip = "PHLEGMATIC_RESONANCE_02_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_phlegmatic_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_intense_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/phlegmatic_resonance_icon_03.dds"
+			tooltip = "PHLEGMATIC_RESONANCE_03_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_phlegmatic_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_acute_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/phlegmatic_resonance_icon_04.dds"
+			tooltip = "PHLEGMATIC_RESONANCE_04_TT"
+		}
+
+		# Melancholy Resonance
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_melancholy_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_negligible_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/melancholy_resonance_icon_01.dds"
+			tooltip = "MELANCHOLY_RESONANCE_01_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_melancholy_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_fleeting_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/melancholy_resonance_icon_02.dds"
+			tooltip = "MELANCHOLY_RESONANCE_02_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_melancholy_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_intense_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/melancholy_resonance_icon_03.dds"
+			tooltip = "MELANCHOLY_RESONANCE_03_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_melancholy_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_acute_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/melancholy_resonance_icon_04.dds"
+			tooltip = "MELANCHOLY_RESONANCE_04_TT"
+		}
+
+		# Sanguine Resonance
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_sanguine_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_negligible_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sanguine_resonance_icon_01.dds"
+			tooltip = "SANGUINE_RESONANCE_01_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_sanguine_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_fleeting_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sanguine_resonance_icon_02.dds"
+			tooltip = "SANGUINE_RESONANCE_02_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_sanguine_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_intense_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sanguine_resonance_icon_03.dds"
+			tooltip = "SANGUINE_RESONANCE_03_TT"
+		}
+
+		icon = {
+			visible = "[And( Or( GetScriptedGui('scry_the_soul_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GetScriptedGui('is_herd_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).AddScope('player',GetPlayer.MakeScope).End )), And( GetScriptedGui('has_sanguine_resonance_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End ), GetScriptedGui('has_resonance_acute_gui').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )))]"
+			size = { 20 20 }
+			texture = "gfx/interface/icons/character_status/sanguine_resonance_icon_04.dds"
+			tooltip = "SANGUINE_RESONANCE_04_TT"
+		}
+	}
+	
+	type pod_ventrue_warning_display = hbox
+	{
+		visible = "[And( And( And( Not( IsPauseMenuShown ), And(Or(Not(IsObserver), GetPlayer.IsValid), IsDefaultGUIMode)), Not(ObjectsEqual(Character.MakeScope, GetPlayer.MakeScope)) ), GetScriptedGui('is_ventrue_clan_curse_applicable_gui').IsShown(GuiScope.SetRoot(Character.MakeScope).AddScope('actor',GetPlayer.MakeScope).End) )]"
+		
+		icon = {
+			visible = "[GetScriptedGui('fits_feeding_restrictions_gui').IsShown(GuiScope.SetRoot(Character.MakeScope ).AddScope('actor',GetPlayer.MakeScope).End)]"
+			size = { 24 24 }
+			texture = "gfx/interface/icons/point_of_interest_types/_visited.dds"
+			tooltip = "POD_feeding_restriction_valid"
+		}
+		
+		icon = {
+			visible = "[Not( GetScriptedGui('fits_feeding_restrictions_gui').IsShown(GuiScope.SetRoot(Character.MakeScope ).AddScope('actor',GetPlayer.MakeScope).End) )]"
+			size = { 24 24 }
+			texture = "gfx/interface/icons/symbols/icon_warning.dds"
+			tooltip = "POD_feeding_restriction_invalid"
+		}
+	}
+
+	type pod_journey_icon = widget
+	{
+		size = { 45 45 }
+		alwaystransparent = yes
+
+		highlight_icon = {
+			name = "default_journey_icon"
+			visible = "[And( Not(Scope.Var('target_trait').IsSet), Not(Scope.Var('target_artifact').IsSet) )]"
+			size = { 45 45 }
+			alwaystransparent = yes
+			texture = "[GetCultureInnovationType(Concatenate(ScopedJourneyID,'_icon')).GetIcon]"
+			block "effect" {}
+		}
+		highlight_icon = {
+			name = "artifact_journey_icon_bg"
+			visible = "[And( Not(Scope.Var('target_trait').IsSet), Scope.Var('target_artifact').IsSet )]"
+			size = { 100% 100% }
+			parentanchor = top
+			alwaystransparent = yes
+			texture = "gfx/interface/icons/artifact/artifact_bg.dds"
+			frame = "[Scope.Var('target_artifact').Artifact.GetIconFrame]"
+			framesize = { 240 240 }
+			block "effect" {}
+		}
+		highlight_icon = {
+			name = "artifact_journey_icon"
+			visible = "[And( Not(Scope.Var('target_trait').IsSet), Scope.Var('target_artifact').IsSet )]"
+			size = { 90% 90% }
+			parentanchor = center
+			alwaystransparent = yes
+			texture = "[Scope.Var('target_artifact').Artifact.GetIcon]"
+			frame = "[Scope.Var('target_artifact').Artifact.GetIconFrame]"
+			framesize = { 240 240 }
+			block "effect" {}
+		}
+		highlight_icon = {
+			name = "trait_journey_icon"
+			visible = "[And( Scope.Var('target_trait').IsSet, Not(Scope.Var('target_artifact').IsSet) )]"
+			size = { 45 45 }
+			alwaystransparent = yes
+			texture = "[Scope.Var('target_trait').Trait.GetIcon(GetPlayer)]"
+			block "effect" {}
+		}
+	}
+
+	type pod_fake_event_button = button_event_standard
+	{
+		name = "pod_fake_event_button"
+		size = { 500 36 }
+
+		default_clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_select"
+
+		icon = {
+			texture = "gfx/interface/buttons/button_event.dds"
+			alpha = 1
+			spriteType = Corneredtiled
+			spriteborder = { 3 3 }
+			framesize = { 249 78 }
+			size = { 100% 100% }
+
+			modify_texture = {
+				name = "mask"
+				texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+				spriteType = Corneredtiled
+				spriteborder_left = 40
+				spriteborder_right = 40
+				blend_mode = alphamultiply
+			}
+		}
+
+		# Trick to not have the option text steal tooltips from the trait/skill grid
+		hbox = {
+			block "button_tooltip"
+			{
+			}
+
+			block "option_tooltip_position"
+			{
+				using = tooltip_ws
+				tooltip_offset = { -80 0 }
+			}
+
+			# Wider tooltips for the effects
+			tooltipwidget = {
+				using = DefaultTooltipWidget
+			}
+		}
+
+		modify_texture = {
+			name = "mask"
+			texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+			spriteType = Corneredtiled
+			spriteborder_left = 40
+			spriteborder_right = 40
+			blend_mode = alphamultiply
+		}
+
+		### BUTTON CONTENT ####
+		hbox = {
+			margin = { 5 0 }
+
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				margin = { 5 0 }
+				alwaystransparent = yes
+				
+				block "button_text" {
+					raw_text = "INSERT TEXT"
+				}
+				autoresize = no
+				default_format = "#high"
+				align = center|nobaseline
+				fontsize_min = 12
+			}
+		}
+	}
+
+	type pod_shader_event_widget = widget
+	{
+		size = { 100% 100% }
+		#layoutpolicy_horizontal = expanding
+		#layoutpolicy_vertical = expanding
+		alwaystransparent = yes
+		
+		icon = {
+			size = { 100% 100% }
+			block "texture" {
+				texture = "gfx/interface/window_event/mask_event_image.dds"
+			}
+			shaderfile = "gfx/FX/POD_shaders/POD_event_shaders.shader"
+			block "effect_name" {
+				effectname = "Unmoored"
+			}
+
+			# block "modify_texture" {
+			# 	modify_texture = {
+			# 		texture = "gfx/interface/window_event/mask_event_image.dds"
+			# 		blend_mode = alphamultiply
+			# 	}
+			# }
+		}
+	}
+
+	type pod_sdf_shader_event_widget = widget {
+		size = { 100% 100% }
+		alwaystransparent = yes
+		
+		icon = {
+			size = { 100% 100% }
+			texture = "gfx/interface/illustrations/event_scenes/pod_velvet.dds"
+			
+			shaderfile = "gfx/FX/POD_shaders/POD_sdf_shaders.shader"
+			effectname = "PODSDFLoadingScreen"
+			
+			block "shader_properties" {
+				spriteborder_left = 1.0 # background (black) opacity
+
+				# first SDF
+				modify_texture = {
+					texture = "gfx/interface/sdf/sdf_pod.dds"
+					blend_mode = normal
+					rotate_uv = 0.9 # scale (SpriteTranslateRotateUVAndAlpha[1].z)
+					spriteborder_left = 0.42 # uv x offset (SpriteBorder[1].x)
+					spriteborder_top  = 0.06 # uv y offset (SpriteBorder[1].y)
+				}
+
+				# second SDF
+				modify_texture = {
+					texture = "gfx/interface/sdf/sdf_ankh.dds"
+					blend_mode = normal
+					rotate_uv = 0.9 # scale (SpriteTranslateRotateUVAndAlpha[2].z)
+					spriteborder_left = 0.42 # uv x offset (SpriteBorder[2].x)
+					spriteborder_top  = 0.06 # uv y offset (SpriteBorder[2].y)
+				}
+
+				# color properties
+				modify_texture = {
+					blend_mode = normal
+					spriteborder_left  = 1.0 # exponent for R channel (SpriteBorder[3].x)
+					spriteborder_top   = 1.0 # exponent for G channel (SpriteBorder[3].y)
+					spriteborder_right = 5.0 # exponent for B channel (SpriteBorder[3].z)
+					# multiplier for R/G/B channels (alpha is discarded) (SpriteModifyTexturesColors[3])
+					color = { 1.0 0.0 0.25 1.0 }
+				}
+			}
+
+			# modify_texture = {
+			# 	texture = "gfx/interface/component_masks/mask_scratches.dds"
+			# 	spriteType = Corneredtiled
+			# 	blend_mode = alphamultiply
+			# 	texture_density = 4
+			# 	alpha = 0.3
+			# }
+			
+			# Default mask from type event_window_background_widget in event_windows.gui
+			modify_texture = {
+				texture = "gfx/interface/window_event/mask_event_image_large.dds"
+				blend_mode = alphamultiply
+				loop = no
+			}
+			
+			# Default masks from fullscreen_event.gui
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_fade_struggle_illustration.dds"
+				blend_mode = alphamultiply
+				alpha = 0.9
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_fade_horizontal_short.dds"
+				mirror = horizontal
+				blend_mode = alphamultiply
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_fade_textured_vertical_up.dds"
+				translate_uv = { 0 -0.05 }
+				blend_mode = alphamultiply
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_fade_textured_vertical_down.dds"
+				translate_uv = { 0 0.05 }
+				blend_mode = alphamultiply
+			}
+		}
+	}
+	
+	type sect_symbol_big = button_group {
+		flowcontainer = {
+			margin = { 3 4 }
+			direction = vertical
+			spacing = -1
+			ignoreinvisible = yes
+			widget = {
+				size = { 86 94 }
+				icon = {
+					name = "faith_icon"
+					parentanchor = center
+					size = { 86 86 }
+					block "symbol" { texture = "gfx/interface/icons/traits/patron.dds" }
+					using = tooltip_se
+					tooltipwidget = {
+						faith_tooltip = {}
+					}
+					state = {
+						name = "faith_view_refresh"
+						using = Animation_Refresh_FadeOut
+					}
+					state = {
+						using = Animation_Refresh_FadeIn
+					}
+				}
+			}
+		}
+	}
+	
+	type button_edict = button_standard {
+ 		size = { 540 45 }
+		tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End)]"
+		visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End)]"
+		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End)]"
+		onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End)]"
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+			block "size_illustration" {
+				size = { 250 43 }
+			}
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 250 100 }
+				mirror = horizontal
+				block "texture" { text = "" }
+				alpha = 0.7
+				using = Mask_Rough_Edges
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+ 		hbox = {
+ 			margin = { 20 0 }
+ 			margin_right = 10
+ 			text_single = {
+ 				layoutpolicy_horizontal = growing
+ 				name = "title"
+				block "edict_title" { text = "" }
+ 				visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End)]"
+ 				default_format = "#clickable"
+ 				align = nobaseline
+ 			}
+ 			text_single = {
+ 				layoutpolicy_horizontal = growing
+ 				name = "title2"
+ 				block "edict_title" { text = "" }
+ 				visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End))]"
+ 				block "default_format" {
+ 					default_format = "#low"
+ 				}
+ 				align = nobaseline
+ 			}
+ 			highlight_icon = {
+ 				size = { 30 30 }
+ 				name = "not_possible"
+ 				texture = "gfx/interface/icons/symbols/icon_cross.dds"
+ 				visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(Religion.MakeScope).AddScope('player',GetPlayer.MakeScope).End))]"
+ 			}
+ 		}
+	}
+	type button_character_edict = button_standard {
+ 		size = { 540 45 }
+		tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+			block "size_illustration" {
+				size = { 250 43 }
+			}
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 250 100 }
+				mirror = horizontal
+				block "texture" { text = "" }
+				alpha = 0.7
+				using = Mask_Rough_Edges
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+ 		hbox = {
+ 			margin = { 20 0 }
+ 			margin_right = 10
+ 			text_single = {
+ 				layoutpolicy_horizontal = growing
+ 				name = "title"
+				block "edict_title" { text = "" }
+ 				visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ 				default_format = "#clickable"
+ 				align = nobaseline
+ 			}
+ 			text_single = {
+ 				layoutpolicy_horizontal = growing
+ 				name = "title2"
+ 				block "edict_title" { text = "" }
+ 				visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+ 				block "default_format" {
+ 					default_format = "#low"
+ 				}
+ 				align = nobaseline
+ 			}
+ 			highlight_icon = {
+ 				size = { 30 30 }
+ 				name = "not_possible"
+ 				texture = "gfx/interface/icons/symbols/icon_cross.dds"
+ 				visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+ 			}
+ 		}
+	}
+	
+	type widget_sect_member_item = widget {
+		size = { 200 180 }
+		vbox = {
+			background = {
+				using = Background_Area_With_Header
+			}
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				spacing = 5
+				portrait_head_small = {}
+				vbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					margin_right = 10
+					hbox = {
+						layoutpolicy_horizontal = expanding
+						margin_top = 4
+						text_single = {
+							layoutpolicy_horizontal = expanding
+							text = "[Character.GetUINameNoTooltip]"
+							using = Font_Size_Medium
+							autoresize = no
+							fontsize_min = 13
+							align = nobaseline
+							max_width = 280
+						}
+						expand = {}
+						hbox_skills_grid_character_model = {}
+					}
+					hbox = {
+						layoutpolicy_horizontal = expanding
+						vbox = {
+							layoutpolicy_horizontal = expanding
+							margin_top = 3
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								text_single = {
+									name = "character_relation"
+									layoutpolicy_horizontal = expanding
+									text = "[Character.GetRelationToString(GetPlayer)]"
+									tooltip = "EXTENDED_RELATIONS_TOOLTIP"
+									default_format = "#low"
+									autoresize = no
+									fontsize_min = 13
+									align = nobaseline
+									max_width = 350
+								}
+								expand = {}
+							}
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								text_single = {
+									layoutpolicy_horizontal = expanding
+									block "member_title" { text = "SABBAT_WINDOW_CARDINALS_REGION" }
+								}
+								expand = {}
+							}
+						}
+						vbox = {
+							layoutpolicy_vertical = expanding
+							margin_left = 10
+							hbox = {
+								coa_dynasty_tiny = {
+									datacontext = "[Character.GetHouse.GetDynasty]"
+									size = { 28 35 }
+								}
+								vbox = {
+									margin_top = 5
+									hbox = {
+										visible = "[Character.PlayerHasHooksOrHookableSecrets]"
+										spacer = {
+											size = { 8 0 }
+										}
+										
+										icon = {
+											name = "hook"
+											size = { 25 25 }
+											framesize = { 40 40 }
+											texture = "gfx/interface/icons/portraits/hook_secret.dds"
+											frame = "[Character.GetHookOrHookableSecretsFrame]"
+											tooltip = "[Character.HookTooltip]"
+										}
+									}
+								}
+							}
+						}
+					}
+					expand = {}
+				}
+			}
+			
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				margin = { 10 10 }
+				spacing = 5
+				background = {
+					using = Background_Area_Dark
+				}
+				vbox = {
+					name = "info_text"
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					text_single = {
+						visible = "[And( Character.IsAlive, Not( Character.IsImprisoned ) )]"
+						layoutpolicy_horizontal = expanding
+						text = "CHARACTER_LOCATION_TOOLTIP"
+						align = nobaseline
+					}
+					text_single = {
+						visible = "[And( Character.IsAlive, Character.IsImprisoned )]"
+						layoutpolicy_horizontal = expanding
+						text = "CHARACTER_IMPRISONED_TOOLTIP"
+						align = nobaseline
+					}
+					expand = {}
+				}
+			}
+			
+			expand = {}
+		}
+	}
+	
+	type POD_situation_mini_map_mode = mini_map_mode {
+		parentanchor = bottom|left
+		widgetanchor = bottom|right
+		position = { -250 -25 }
+
+		blockoverride "widget_size"
+		{
+			size = { 360 60 }
+		}
+
+		blockoverride "map_mode_buttons"
+		{
+			icon_button_mapmode = {
+				blockoverride "mm_datacontext"
+				{
+					datacontext = "[GetMapMode( 'realms' )]"
+				}
+				blockoverride "mm_button"
+				{
+					onclick = "[GetScriptedGui('pod_reset_title_name').Execute(GuiScope.End)]"
+					onclick = "[GetVariableSystem.Clear('pod_mapmode_gui_glow')]"
+				}
+			}
+
+			icon_button_mapmode = {
+				blockoverride "mm_datacontext"
+				{
+					datacontext = "[GetMapMode( 'situation' )]"
+				}
+				blockoverride "mm_button"
+				{
+					onclick = "[GetScriptedGui('pod_reset_title_name').Execute(GuiScope.End)]"
+					onclick = "[GetVariableSystem.Clear('pod_mapmode_gui_glow')]"
+				}
+			}
+			
+			icon_button_mapmode = {
+				blockoverride 'mm_datacontext'
+				{
+					datacontext = "[GetMapMode( 'pod_splats' )]"
+				}
+
+				blockoverride "mm_glow"
+				{
+					visible = "[GetVariableSystem.HasValue('pod_mapmode_gui_glow','pod_splats')]"
+				}
+
+				blockoverride "mm_icon"
+				{
+					down = "[GetVariableSystem.HasValue('pod_mapmode_gui_glow','pod_splats')]"
+					texture = "gfx/interface/icons/faith_doctrine_groups/doctrine_vampirism.dds"
+				}
+
+				blockoverride "mm_button"
+				{
+					tooltip = "MAPMODE_POD_SPLATS"
+					down = "[GetVariableSystem.HasValue('pod_mapmode_gui_glow','pod_splats')]"
+
+					onclick = "[GetScriptedGui('pod_reset_title_name').Execute(GuiScope.End)]"
+					onclick = "[SetMapMode('pod_splats')]"
+					onclick = "[GetVariableSystem.Set('pod_mapmode_gui_glow','pod_splats')]"
+					onclick = "[GetScriptedGui('pod_splat_map').Execute(GuiScope.End)]"
+				}
+			}
+		}
+	}
+	
+	type pod_ternary_graph = widget
+	{
+		# the Y value determines the triangle's height
+		# X value should the length of a side, meaning: height * ( 2 / sqrt(3) )
+		block "graph_size" { size = { 389 336 } }
+		
+		widget = {
+			# the triangle from the shader covers 75% of the texture's height
+			# so this widget gets extended past its parent to compensate
+			size = { 100% 133% }
+			parentanchor = top|hcenter
+			alwaystransparent = yes
+			
+			background = {
+				# color of the texture is irrelevant, this just needs to be an opaque pixel
+				# the actual color gets set by the shader, via the first modify_texture
+				texture = "gfx/interface/colors/black.dds"
+				shaderfile = "gfx/FX/POD_shaders/POD_shaders_with_inputs.shader"
+				effectname = "PODTernaryGraph"
+				
+				block "graph_properties" {
+					spriteborder_left   = 10 # number of divisions
+					spriteborder_top    = 0.006  # line thickness (as UV)
+					spriteborder_right  = 0.0025 # line feathering (as UV)
+					spriteborder_bottom = 1.0 # domainwarp strength
+					
+					modify_texture = {
+						color = { 1.0 0.9 0.8 0.85 } # color of lines
+						# should the lines in the center get thinner?
+						# (interpolation factor, 0.0 to turn off)
+						spriteborder_left = 0.75
+					}
+				}
+				
+				block "graph_alphamultiply" {
+					# further modify_texture blocks can add transparency
+					# (colors get discarded)
+					
+					modify_texture = {
+						texture = "gfx/interface/component_masks/mask_scratches.dds"
+						blend_mode = alphamultiply
+						spriteType = corneredTiled
+						texture_density = 2
+						#alpha = 0.6
+					}
+					
+					modify_texture = {
+						texture = "gfx/interface/component_masks/mask_clouds.dds"
+						blend_mode = alphamultiply
+						spriteType = corneredTiled
+						alpha = 0.3
+					}
+				}
+			}
+		}
+		
+		widget = {
+			size = { 100% 100% }
+			# scoot a bit so the nodes are centered
+			# this means the icons can't have proper tooltips
+			block "icon_offset" { position = { -20 -20 } }
+			
+			icon = {
+				position = { 50% 0.5% }
+				block "icon_n_texture" {
+					texture = "gfx/interface/_debug/icon_placeholder_02.dds"
+				}
+				block "icon_size" { size = { 40 40 } }
+				block "icon_tint" { color = { 0.15 0.15 0.15 0.85 } }
+				
+				glow = {
+					block "glowcolor" { color = { 1.0 0.9 0.8 0.65 } }
+					block "glowsize" { glow_radius = 6 }
+					glow_generation_rules = {
+						glow_alpha_mask = 0
+						glow_blur_passes = 1
+						glow_texture_downscale = 1.5f
+						glow_ignore_inside_pixels = no
+					}
+				}
+			}
+			
+			icon = {
+				position = { 0.5% 99.5% }
+				block "icon_sw_texture" {
+					texture = "gfx/interface/_debug/icon_placeholder_02.dds"
+				}
+				block "icon_size" { size = { 40 40 } }
+				block "icon_tint" { color = { 0.15 0.15 0.15 0.85 } }
+				
+				glow = {
+					block "glowcolor" { color = { 1.0 0.9 0.8 0.65 } }
+					block "glowsize" { glow_radius = 6 }
+					glow_generation_rules = {
+						glow_alpha_mask = 0
+						glow_blur_passes = 1
+						glow_texture_downscale = 1.5f
+						glow_ignore_inside_pixels = no
+					}
+				}
+			}
+			
+			icon = {
+				position = { 99.5% 99.5% }
+				block "icon_se_texture" {
+					texture = "gfx/interface/_debug/icon_placeholder_02.dds"
+				}
+				block "icon_size" { size = { 40 40 } }
+				block "icon_tint" { color = { 0.15 0.15 0.15 0.85 } }
+				
+				glow = {
+					block "glowcolor" { color = { 1.0 0.9 0.8 0.65 } }
+					block "glowsize" { glow_radius = 6 }
+					glow_generation_rules = {
+						glow_alpha_mask = 0
+						glow_blur_passes = 1
+						glow_texture_downscale = 1.5f
+						glow_ignore_inside_pixels = no
+					}
+				}
+			}
+		}
+	}
+	
+	# lazy fix for removed vanilla GUI element (remove if no longer needed)
+	type button_active_marker = icon {
+		parentanchor = top|hcenter
+		position = { 0 -5 }
+		texture = "gfx/interface/buttons/button_sort_toggle.dds"
+		framesize = { 36 36 }
+		size = { 24 24 }
+		frame = 1
+
+		using = Master_Button_Modify_Texture
+		blockoverride "master_color_frame" {
+			frame = 1
+		}
+	}
+}

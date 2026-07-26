@@ -1,0 +1,531 @@
+﻿
+########################
+#### Initialization ####
+########################
+POD_spirit_initialization_effect = {
+	POD_remove_disease_traits_effect = yes
+	POD_remove_supernatural_disease_traits_effect = yes
+	add_character_flag = immune_to_disease
+
+	POD_spirit_assign_rank_effect = yes
+	POD_assign_spirit_language_effect = yes
+	if = {
+		limit = { faith = { is_spirit_faith_trigger = no } }
+		if = {
+			limit = { religion = { is_in_family = rf_gaia } }
+			set_character_faith = faith:velvet_brood
+		}
+		else = {
+			set_character_faith = faith:wyrmbound
+		}
+	}
+	if = {
+		limit = { has_variable = fera_pre_ancestor_rank }
+		remove_variable = fera_pre_ancestor_rank
+	}
+}
+
+
+POD_spirit_assign_rank_effect = {
+	force_character_skill_recalculation = yes
+	add_trait_xp = { trait = spirit value = -100 }
+	add_trait_xp = { trait = spirit value = POD_spirit_initial_rank }
+	if = {
+		limit = { scope:is_summoned_spirit ?= yes }
+		add_trait_xp = { trait = spirit value = POD_spirit_summoner_boost_xp }
+	}
+}
+
+
+POD_assign_spirit_language_effect = {
+	if = {
+		limit = { POD_spirit_uses_harmony_language_trigger = yes }
+		learn_language = language_harmonys_melody
+	}
+	else_if = {
+		limit = { POD_spirit_uses_conflict_language_trigger = yes }
+		learn_language = language_conflicts_drum
+	}
+	else_if = {
+		limit = { POD_spirit_uses_artisan_language_trigger = yes }
+		learn_language = language_artisans_anthem
+	}
+	else_if = {
+		limit = { POD_spirit_uses_sedition_language_trigger = yes }
+		learn_language = language_seditions_lullaby
+	}
+	else_if = {
+		limit = { POD_spirit_uses_wisdom_language_trigger = yes }
+		learn_language = language_wisdoms_hymn
+	}
+	else_if = {
+		limit = { POD_spirit_uses_wyrmspeak_language_trigger = yes }
+		learn_language = language_wyrmspeak
+	}
+	else_if = {
+		limit = { POD_spirit_uses_corrupting_voice_language_trigger = yes }
+		learn_language = language_corrupting_voice
+	}
+	else_if = {
+		limit = { POD_spirit_uses_tainted_speech_language_trigger = yes }
+		learn_language = language_tainted_speech
+	}
+	else_if = {
+		limit = {
+			POD_spirit_uses_ancestor_language_trigger = yes
+			POD_has_spirit_ancestor_language_trigger = no
+		}
+		switch = {
+			trigger = var:spirit_type
+
+			flag:spirit_werewolf = { learn_language = language_ancestor_werewolf }
+			flag:spirit_bastet = { learn_language = language_ancestor_bastet }
+			flag:spirit_mokole = { learn_language = language_ancestor_mokole }
+		}
+	}
+}
+
+
+POD_save_and_apply_dead_spirit_form_effect = {
+	save_scope_as = dead_spirit
+	POD_flag_injector_spirit_type = {
+		EFFECT = POD_save_spirit_form_as_scope_value
+	}
+	character:POD_wraith_01 = {
+		trigger_event = {
+			id = POD_spirit_maintenance.02
+			days = 1
+		}
+	}
+}
+
+# this is dumb but ck3 doesn't let us save flags in scope values from an existing variable or scope_value
+POD_save_spirit_form_as_scope_value = {
+	if = {
+		limit = { var:spirit_type = flag:$FLAG$ }
+		save_scope_value_as = {
+			name = spirit_type
+			value = flag:$FLAG$
+		}
+	}
+}
+
+POD_apply_spirit_form_from_scope_value = {
+	if = {
+		limit = { scope:spirit_type = flag:$FLAG$ }
+		set_dead_character_variable = {
+			name = $FLAG$
+			years = 500
+		}
+	}
+}
+
+
+##################
+#### Spawning ####
+##################
+
+####All of these are saved as scope:spawned_spirit after creation
+####If you want to use these as duel opponents, make sure you add prowess to them after spawning them in your effects
+####If you add to a spirit's stats or traits right after spawning them, make sure to run "POD_spirit_assign_rank_effect" on them again
+
+POD_spawn_random_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_random_spirit_effect_tooltip
+		random_list = {
+			70 = { POD_spawn_gaian_spirit_effect = yes }
+			30 = { POD_spawn_bane_spirit_effect = yes }
+		}
+	}
+}
+
+POD_spawn_friendly_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_friendly_spirit_effect_tooltip
+		if = {
+			limit = { POD_is_wyrm_servant_trigger = yes }
+			POD_spawn_bane_spirit_effect = yes
+		}
+		else = { POD_spawn_gaian_spirit_effect = yes }
+	}
+}
+
+POD_spawn_hostile_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_hostile_spirit_effect_tooltip
+		if = {
+			limit = { POD_is_wyrm_servant_trigger = no }
+			POD_spawn_bane_spirit_effect = yes
+		}
+		else = { POD_spawn_gaian_spirit_effect = yes }
+	}
+}
+
+POD_spawn_gaian_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_gaian_spirit_effect_tooltip
+		random_list = {
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_rabbit_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_deer_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_bat_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_rooster_template } }
+
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_tiger_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_rhino_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_bear_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_porcupine_template } }
+
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_ant_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_bull_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_vulture_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_stone_template } }
+
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_fox_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_mouse_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_chameleon_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_raccoon_template } }
+
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_crow_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_monkey_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_toad_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_tree_template } }
+		}
+	}
+}
+
+
+POD_spawn_bane_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_bane_spirit_effect_tooltip
+		random_list = {
+			20 = {
+				trigger = { scope:spawning_character ?= { POD_is_mokole_trigger = no } } #Mokole should only encounter these through their unique content
+				POD_spawn_spirit_effect = { TEMPLATE = spirit_innocent_template }
+			}
+			20 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_drattosi_template } }
+			20 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_ooralath_template } }
+			20 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_nocturna_template } }
+			20 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_raptor_template } }
+			20 = {
+				trigger = { scope:spawning_character ?= { is_ai = no } } #useless for AI
+				POD_spawn_spirit_effect = { TEMPLATE = spirit_harpy_template }
+			}
+			20 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_rotwalker_template } }
+
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_seeder_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_dreammaker_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_nihilach_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_shatteredhart_template } }
+
+			5 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_smog_template } }
+			5 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_balefire_template } }
+			5 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_sludge_template } }
+			5 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_toxin_template } }
+		}
+	}
+}
+
+POD_spawn_elemental_bane_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_elemental_bane_spirit_effect_tooltip
+		random_list = {
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_smog_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_balefire_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_sludge_template } }
+			10 = { POD_spawn_spirit_effect = { TEMPLATE = spirit_toxin_template } }
+		}
+	}
+}
+
+POD_spawn_ancestor_spirit_effect = {
+	custom_tooltip = {
+		text = POD_spawn_ancestor_spirit_effect_tooltip
+		random_list = {
+			10 = { trigger = { has_trait = werewolf } POD_spawn_spirit_effect = { TEMPLATE = spirit_werewolf_template } }
+			10 = { trigger = { has_trait = bastet } POD_spawn_spirit_effect = { TEMPLATE = spirit_bastet_template } }
+			10 = { trigger = { has_trait = mokole } POD_spawn_spirit_effect = { TEMPLATE = spirit_mokole_template } }
+		}
+	}
+}
+
+#The actual spawning. You should very rarely, if ever use this directly. Use the effects above instead
+POD_spawn_spirit_effect = {
+	if = {
+		limit = { NOT = { exists = scope:spawning_character } }
+		save_scope_as = spawning_character
+	}
+	create_character = {
+		location = this.location
+		template = $TEMPLATE$
+	}
+	if = {
+		limit = { scope:spirit_spawn_notification ?= no }
+	}
+	else = {
+		hidden_effect_new_object = {
+			send_interface_message = {
+				type = POD_spirit_message
+				desc = POD_spawn_spirit_effect_desc
+				left_icon = scope:spawned_spirit
+			}
+		}
+	}
+	if = {
+		limit = { scope:is_summoned_spirit ?= yes }
+		scope:spawned_spirit = { POD_summoned_spirit_summoner_boost_effect = yes }
+	}
+	if = {
+		limit = { scope:malfeas_bane ?= yes }
+		add_diplomacy_skill = 1
+		add_martial_skill = 1
+		add_stewardship_skill = 1
+		add_intrigue_skill = 1
+		add_learning_skill = 1
+		add_prowess_skill = 3
+	}
+}
+
+
+POD_summoned_spirit_summoner_boost_effect = {
+	hidden_effect = {
+		while = {
+			count = POD_spirit_summoner_boost_stats
+			POD_add_random_skill_point_no_prowess_effect = yes
+		}
+	}
+	#Do NOT run POD_spirit_assign_rank_effect here again
+}
+
+#For easily removing a spirit that was spawned for a single event
+POD_despawn_spirit_effect = {
+	hidden_effect_new_object = {
+		scope:spawned_spirit = { death = { death_reason = death_returned_umbra } }
+	}
+}
+
+
+
+POD_become_ancestor_spirit_effect = {
+	save_temporary_scope_value_as = { name = saved_immortal_age value = POD_visual_age }
+	hidden_effect = {
+		save_scope_as = ancestor_spirit
+		switch = {
+			trigger = has_trait
+
+			werewolf = { set_variable = { name = spirit_type value = flag:spirit_werewolf } }
+			bastet = { set_variable = { name = spirit_type value = flag:spirit_bastet } }
+			mokole = { set_variable = { name = spirit_type value = flag:spirit_mokole } }
+
+			fallback = { set_variable = { name = spirit_type value = flag:spirit_werewolf } }
+		}
+		set_variable = { name = fera_pre_ancestor_rank value = POD_fera_rank_value }
+		POD_remove_splat_traits_effect = yes
+	}
+	POD_release_effect = yes
+	if = {
+		limit = { is_ruler = yes }
+		depose = yes # guaranteed depose since spirits aren't playable
+	}
+	add_trait_force_tooltip = spirit
+	hidden_effect = {
+		set_immortal_age = scope:saved_immortal_age
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		POD_remove_supernatural_relation_effect = yes
+		POD_remove_spouse_relation_effect = yes
+		POD_end_pregnancy = yes
+		POD_remove_physical_coping_strategies = yes
+		POD_side_effects_from_changing_splats = yes
+		POD_spirit_initialization_effect = yes
+		POD_clear_all_relations = { TYPE = lover }
+		POD_clear_all_relations = { TYPE = soulmate }
+		every_claim = { scope:ancestor_spirit = { remove_claim = prev } }
+		every_claimed_artifact = { scope:ancestor_spirit = { remove_claim = prev } }
+		set_focus = no
+
+		#Remove spirit companions
+		every_relation = {
+			type = spirit_companion
+
+			remove_relation_human_companion = prev
+			save_scope_as = spirit
+			trigger_event = { id = POD_spirit_maintenance.04 days = 1 }
+		}
+		POD_remove_spirit_pact_modifiers = yes
+		if = {
+			limit = { POD_has_coterie_trigger = yes }
+			POD_leave_coterie_effect = yes
+		}
+		trigger_event = { id = POD_spirit_maintenance.03 years = { 5 15 } }
+	}
+	every_close_family_member = {
+		send_interface_message = {
+			type = POD_spirit_message
+			desc = spirit_relative_became_ancestor
+			left_icon = scope:ancestor_spirit
+		}
+	}
+}
+
+
+
+##################
+#### Gameplay ####
+##################
+
+POD_learn_spirit_language_effect = {
+	if = {
+		limit = { $TARGET$ = { POD_spirit_uses_harmony_language_trigger = yes } }
+		learn_language = language_harmonys_melody
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_conflict_language_trigger = yes } }
+		learn_language = language_conflicts_drum
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_artisan_language_trigger = yes } }
+		learn_language = language_artisans_anthem
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_sedition_language_trigger = yes } }
+		learn_language = language_seditions_lullaby
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_wisdom_language_trigger = yes } }
+		learn_language = language_wisdoms_hymn
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_wyrmspeak_language_trigger = yes } }
+		learn_language = language_wyrmspeak
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_corrupting_voice_language_trigger = yes } }
+		learn_language = language_corrupting_voice
+	}
+	else_if = {
+		limit = { $TARGET$ = { POD_spirit_uses_tainted_speech_language_trigger = yes } }
+		learn_language = language_tainted_speech
+	}
+
+	if = {
+		limit = { POD_splat_can_have_wyrm_taint = yes $TARGET$ = { POD_is_wyrm_spirit_trigger = yes } }
+		POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_medium_value }
+	}
+}
+
+POD_form_spirit_pact_effect = {
+	set_relation_spirit_companion = $TARGET$
+	if = {
+		limit = {
+			is_playable_character = yes
+			NOT = { is_employer_of = $TARGET$ }
+		}
+		add_courtier = $TARGET$
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			$TARGET$ = { POD_is_ancestor_spirit_trigger = no }
+		}
+		$TARGET$ = { add_character_flag = ai_spirit }
+	}
+
+	if = {
+		limit = { POD_splat_can_have_wyrm_taint = yes $TARGET$ = { has_faith = faith:wyrmbound } } #to catch wyrm ancestors
+		POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_massive_value }
+	}
+}
+
+POD_update_spirit_pact_modifiers = {
+	POD_remove_spirit_pact_modifiers = yes
+	POD_add_spirit_pact_modifiers = yes
+}
+
+POD_remove_spirit_pact_modifier_instances = {
+	if = {
+		limit = { has_character_modifier = $FLAG$_pact_modifier }
+		remove_all_character_modifier_instances = $FLAG$_pact_modifier
+	}
+}
+
+POD_remove_spirit_pact_modifiers = {
+	POD_flag_injector_spirit_type = {
+		EFFECT = POD_remove_spirit_pact_modifier_instances
+	}
+}
+
+POD_add_spirit_pact_modifiers = {
+	hidden_effect = {
+		if = {
+			limit = { num_of_relation_spirit_companion >= 1 }
+			every_relation = {
+				type = spirit_companion
+				limit = { is_alive = yes }
+				
+				save_scope_value_as = {
+					name = modifier_stacks
+					value = POD_spirit_rank
+				}
+
+				POD_flag_injector_spirit_type = {
+					EFFECT = POD_add_matching_spirit_pact_modifier
+				}
+			}
+		}
+	}
+}
+
+POD_add_matching_spirit_pact_modifier = {
+	if = {
+		limit = { var:spirit_type = flag:$FLAG$ }
+		every_relation = {
+			type = human_companion
+			
+			while = {
+				count = scope:modifier_stacks
+				add_character_modifier = $FLAG$_pact_modifier
+			}
+		}
+	}
+}
+
+# for the sidebar
+POD_save_spirit_pact_for_tooltip = {
+	if = {
+		limit = { POD_has_spirit_type = { TYPE = $FLAG$ } }
+		save_scope_value_as = {
+			name  = saved_tooltip
+			value = flag:$FLAG$_pact_modifier
+		}
+		POD_error_suppression_unused_flag = { FLAG = $FLAG$_pact_modifier }
+	}
+}
+
+
+POD_spirit_wyrm_possession_effect = {
+	$SPIRIT$ = { save_scope_as = spirit }
+	$TARGET$ = {
+		save_scope_as = target
+		add_trait_force_tooltip = fomori
+		custom_tooltip = {
+			text = POD_spirit_wyrm_possession_effect_tooltip
+			add_possessedpower_lifestyle_perk_points = scope:spirit.POD_spirit_wyrm_possession_power
+		}
+		
+		if = {
+			limit = { scope:spirit.POD_spirit_wyrm_possession_power >= POD_spirit_possession_strong_threshold }
+			add_character_modifier = { modifier = spirit_strong_possession_modifier years = 30 }
+		}
+		else_if = {
+			limit = {
+				scope:spirit.POD_spirit_wyrm_possession_power <= POD_spirit_possession_weak_threshold
+				scope:spirit.POD_spirit_wyrm_possession_power >= POD_spirit_possession_very_weak_threshold
+			}
+			add_character_modifier = { modifier = spirit_weak_possession_modifier years = 30 }
+		}
+		else_if = {
+			limit = { scope:spirit.POD_spirit_wyrm_possession_power <= 6 }
+			add_character_modifier = { modifier = spirit_very_weak_possession_modifier years = 30 }
+		}
+	}
+	scope:spirit = { death = { death_reason = death_disappearance } }
+}

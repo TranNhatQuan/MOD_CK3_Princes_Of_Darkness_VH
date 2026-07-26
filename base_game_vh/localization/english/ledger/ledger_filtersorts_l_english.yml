@@ -1,0 +1,938 @@
+﻿l_english:
+
+ # reverse button
+  LEDGER_SORT_BY: "#T $SORT_BY$[Select_CString( LedgerWindow.GetSortOrder, 'Tăng dần', 'Giảm dần' )]\n#!#I Nhấp để chuyển đổi#!"
+ # active sorting order, creates two loc keys for ascending and descending orders
+  ACTIVE_SORTING_LEDGER: "#low Sắp xếp theo:#! #clickable [Localize(Concatenate(OrderLedgerOption.GetKey, Select_CString(LedgerWindow.GetSortOrder, '_least', '_most')))]#!"
+ 
+ # shared locs
+  any_filter: "Bất kỳ"
+  all_filter_option: "$any_filter_option$" # yes, any is all
+  your_filter_option: "$CHARACTER_NAME_MY_CAPITALIZED$"
+  most_sort: "Nhiều nhất"
+  least_sort: "Ít nhất"
+  fewest_sort: "Ít nhất"
+  highest_sort: "Cao nhất"
+  lowest_sort: "Thấp nhất"
+  player_realms_filter_option: "Lãnh địa của Ngài"
+  players_only_filter_option: "Chỉ Ngài"
+ 
+ 
+  sort_by: "Sắp xếp theo" # same as SORT_BY but without :
+ # standalone sorting buttons, usually reusing dropdown names
+  BUTTON_SORT_LEDGER: "$sort_by$ [Localize(Concatenate('sort_l_', PdxGuiWidget.GetName))]" # we concatenate so we don't end up localizeing simple terms like 'date' or 'counties'
+ # dropdown items. Using GetKey to reuse them instead of having 40 identical options for titles
+  DROP_SORT_LEDGER: "[Localize(Concatenate('sort_l_', OrderLedgerOption.GetKey))]"
+ # some standalones need more detailed tooltips, so we replace them like this
+  EXTRA_SORT_LEDGER: "$sort_by$ [Localize(Concatenate('sort_tt_', PdxGuiWidget.GetName))]"
+ 
+ ### Wars
+  sort_l_date: "Thời gian"
+  sort_l_attacker_strength: "Bên tấn công"
+  sort_l_defender_strength: "Bên phòng thủ"
+  sort_l_total_strength: "Tổng số [soldiers|e]"
+  sort_l_total_casualties: "Tổng tổn thất"
+ 
+ # active sorting order
+ # I think capitalizing them looks better and helps separate the words
+ # trying to keep these shorter, omitting some words on occasiton, and more natural sounding: 'older' isntead of 'most age'
+ # avoiding |e concepts for the active button so their tooltisp don't get in the way
+ # the dropdown is more spacious, so tooltips there aren't an issue
+ 
+  attacker_strength_most: "$most_sort$ $sort_l_attacker_strength$"
+  attacker_strength_least: "$fewest_sort$ $sort_l_attacker_strength$"
+ 
+  defender_strength_most: "$most_sort$ $sort_l_defender_strength$"
+  defender_strength_least: "$fewest_sort$ $sort_l_defender_strength$"
+ 
+  total_strength_most: "$most_sort$ $game_concept_soldiers$"
+  total_strength_least: "$fewest_sort$ $game_concept_soldiers$"
+ 
+  total_casualties_least: "$least_sort$ $sort_l_total_casualties$"
+  total_casualties_most: "$most_sort$ $sort_l_total_casualties$"
+ 
+ # date order is flipped
+  date_most: "Lâu nhất"
+  date_least: "Gần đây $most_sort$"
+ 
+ ### filters
+  ongoing_wars_type: "$type$"
+  ongoing_wars_type_all: "$all_filter_option$"
+ 
+  ongoing_wars_type_civil: "Nội chiến"
+  ongoing_wars_type_religious: "Tôn giáo"
+ 
+  ongoing_wars_relation: "$relation_filter_category$"
+  ongoing_wars_relation_all: "$all_filter_option$"
+  ongoing_wars_relation_yours: "$your_filter_option$"
+  ongoing_wars_relation_realm: "$realm_relation_filter$"
+  ongoing_wars_relation_top_realm: "$top_realm_relation_filter$"
+  ongoing_wars_relation_players: "$OUTLINER_PLAYERS$"
+ 
+  ongoing_wars_relation_neighbors: "Láng giềng"
+  ongoing_wars_relation_pvp: "Ngài đối đầu Ngài"
+ 
+
+ ### artifacts
+ # dropdown
+  sort_l_rarity: "[rarity|e]"
+  sort_l_kills: "Số mạng hạ được"
+  sort_l_claimants: "[claimants|e]"
+  sort_l_duration: "[durability|e]"
+  sort_l_age: "Niên đại"
+  sort_l_distance: "Khoảng cách"
+ 
+ # active
+  rarity_most: "Hiếm nhất"
+  rarity_least: "$least_sort$ hiếm"
+ 
+  kills_most: "$most_sort$ Số mạng"
+  kills_least: "$fewest_sort$ Số mạng"
+ 
+  claimants_most: "$most_sort$ Người có yêu sách"
+  claimants_least: "$fewest_sort$ Người có yêu sách"
+ 
+  duration_most: "$most_sort$ Bền bỉ"
+  duration_least: "$least_sort$ Bền bỉ"
+ 
+  distance_most: "$least_sort$ Xa xôi"
+  distance_least: "$most_sort$ Xa xôi"
+ 
+  age_most: "Cổ xưa nhất"
+  age_least: "Mới nhất"
+
+ # value tooltips  
+  LEDGER_ARTIFACT_AGE: "Số năm tuổi"
+  LEDGER_ARTIFACTS_CLAIMANTS: "[Concept('artifact_claim', Localize('game_concept_claimants'))|e]"
+  LEDGER_ARTIFACTS_HOUSE_CLAIMANTS: "[Concept('house_artifact_claim', 'Yêu sách Gia tộc')|e]"
+  LEDGER_ARTIFACTS_KILLS: "Số mạng bảo vật đã hạ"
+ 
+ 
+ # filters
+  artifacts_rarity: "$game_concept_rarity$"
+  artifact_type_category: "$type$"
+  artifacts_rarity_common: "Tầm thường"
+ 
+  artifacts_rarity_all: "$all_filter_option$"
+  artifacts_rarity_masterwork: "$masterwork$"
+  artifacts_rarity_famed: "$famed$"
+  artifacts_rarity_illustrious: "$illustrious$"
+  artifacts_unique: "Độc bản"
+  artifacts_unique_any: "$any_filter$"
+  artifacts_unique_unique: "$artifacts_unique$"
+  artifacts_personal: "$personal_filter_category$"
+  artifacts_personal_all: "$all_filter_option$"
+  artifacts_personal_helmet: "$helmet$"
+  artifacts_personal_regalia: "$regalia$"
+  artifacts_personal_armor: "$armor$"
+  artifacts_personal_primary_armament: "$primary_armament$"
+  artifacts_personal_miscellaneous: "$miscellaneous$"
+  artifacts_personal_journal: "$journal$"
+  artifacts_personal_none: "$NONE$"
+  artifacts_court: "$game_concept_court$"
+  artifacts_court_all: "$all_filter_option$"
+  artifacts_court_throne: "$throne$"
+  artifacts_court_wall_big: "$wall_big$"
+  artifacts_court_wall_small: "$wall_small$"
+  artifacts_court_furniture: "sẽ bị loại bỏ"
+  artifacts_court_sculpture: "$sculpture$"
+  artifacts_court_pedestal: "$pedestal$"
+  artifacts_court_book: "$book$"
+  artifacts_court_none: "$NONE$"
+  artifacts_relation: "$relation_filter_category$"
+  artifacts_relation_all: "$all_filter_option$"
+  artifacts_relation_top_realm: "$top_realm_relation_filter$"
+  artifacts_relation_your_realm: "$realm_relation_filter$"
+  artifacts_relation_court: "$court_relation_filter$"
+  artifacts_relation_your_house: "$game_concept_house$"
+  artifacts_relation_player_owned: "Ngài"
+  artifacts_diplo_range: "$range_filter$"
+  artifacts_diplo_range_any: "$any_filter$"
+  artifacts_diplo_range_inside: "$in_range_filter$"
+  artifacts_diplo_range_outside: "$not_in_range_filter$"
+
+ ### characters 
+ ### Rich
+ 
+  sort_l_gold: "[gold|e]"
+  sort_l_gold_balance: "Tổng [income|e]"
+  sort_l_realm_size: "[realm_size|e]"
+  SORT_L_BUILDINGS_REALM: "$sort_by$ tổng số [buildings|e]\ntrên tất cả các [counties|e] của [realm|e]"
+  sort_l_average_development: "[development|e]"
+  SORT_L_AVG_DEVELOPMENT_CHARACTER: "$sort_by$ trung bình [development|e]\ntrên tất cả các [counties|e] của [realm|e]"
+  sort_l_treasury: "[treasury|e]"
+  sort_l_treasury_balance: "Cán cân [treasury|e]"
+ 
+ # active
+  gold_most: "$most_sort$ $game_concept_gold$"
+  gold_least: "$least_sort$ $game_concept_gold$"
+
+  gold_balance_most: "$most_sort$ $game_concept_income$"
+  gold_balance_least: "$least_sort$ $game_concept_income$"
+
+  realm_size_most: "$game_concept_realm$ lớn nhất"
+  realm_size_least: "$game_concept_realm$ nhỏ nhất"
+
+  buildings_most: "$most_sort$ $game_concept_buildings$"
+  buildings_least: "$fewest_sort$ $game_concept_buildings$"
+
+  average_development_most: "$most_sort$ Phát triển"
+  average_development_least: "$least_sort$ Phát triển"
+
+  treasury_most: "$game_concept_treasury$ lớn nhất"
+  treasury_least: "$game_concept_treasury$ nhỏ nhất"
+
+  treasury_balance_most: "$game_concept_treasury$ $game_concept_income$ $highest_sort$"
+  treasury_balance_least: "$game_concept_treasury$ $game_concept_income$ $least_sort$"
+ 
+ # filters
+  LEDGER_FILTER_RULERS_ONLY: "@titles_icon! Chỉ những người có thực ấp"
+ 
+  rich_relation: "$relation_filter$"
+  rich_relation_all: "$all_filter_option$"
+  rich_relation_your_realm: "$realm_relation_filter$"
+  rich_relation_top_realm: "$top_realm_relation_filter$"
+  rich_diplo_range: "$range_filter$"
+  rich_diplo_range_any: "$any_filter$"
+  rich_diplo_range_inside: "$in_range_filter$"
+  rich_diplo_range_outside: "$not_in_range_filter$"
+  rich_religion: "$game_concept_religion$"
+  rich_religion_all: "$all_filter_option$"
+  rich_religion_your_faith: "$your_filter_option$ $game_concept_faith$"
+  rich_religion_your_religion: "$your_filter_option$ $game_concept_religion$"
+  rich_culture: "$game_concept_culture$"
+  rich_culture_all: "$all_filter_option$"
+  rich_culture_your_culture: "$your_filter_option$ $game_concept_culture$"
+  rich_culture_your_heritage: "$your_filter_option$ $game_concept_heritage$"
+  rich_dynasty: "$game_concept_dynasty$"
+  rich_dynasty_all: "$all_filter_option$"
+  rich_dynasty_your_house: "$your_filter_option$ $game_concept_house$"
+  rich_dynasty_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+
+  rich_ruler: "$game_concept_ruler$"
+  rich_ruler_all: "$all_filter_option$"
+  rich_ruler_any_ruler: "$any_filter$"
+  rich_ruler_landed_ruler: "$game_concept_landed$"
+  rich_ruler_landless_ruler: "$game_concept_unlanded$"
+  rich_ruler_no_ruler: "$not_ruler_filter_option$"
+ 
+  rich_players_only: "$OUTLINER_PLAYERS$"
+  rich_players_only_no: "$any_filter$"
+  rich_players_only_yes: "$players_only_filter_option$"
+ 
+
+ # Strong
+  sort_l_commander_traits: "[traits|e] Thống lĩnh"
+  sort_l_military_strength: "Binh lính"
+  sort_l_men_at_arms: "[men_at_arms|e]"
+  sort_l_army_power: "Binh uy"
+  strong_army_power: "" # the buttons checks for an empty loc key and only then shows the tooltip
+  strong_army_power_tt: "Tổng [damage|e] và [toughness|e] của các [armies|e] dưới quyền điều khiển của [ruler|e] này"
+  sort_l_knights: "[knights|e]"
+  sort_l_knight_effectiveness: "[knight_effectiveness|e]"
+  sort_l_dread: "[dread|e]"
+  sort_l_prisoners: "[prisoners|e]"
+  sort_l_herd: "[herd|e]"
+ 
+  commander_traits_most: "$most_sort$ $game_concept_traits$ Chỉ huy"
+  commander_traits_least: "$fewest_sort$ $game_concept_traits$ Chỉ huy"
+  military_strength_most: "$most_sort$ Binh lính"
+  military_strength_least: "$fewest_sort$ Binh lính"
+  men_at_arms_most: "$most_sort$ $game_concept_men_at_arms$"
+  men_at_arms_least: "$fewest_sort$ $game_concept_men_at_arms$"
+  army_power_most: "$most_sort$ Sức mạnh Quân sự"
+  army_power_least: "$least_sort$ Sức mạnh Quân sự"
+  knights_most: "$most_sort$ $game_concept_knights$"
+  knights_least: "$fewest_sort$ $game_concept_knights$"
+  knight_effectiveness_most: "$most_sort$ $game_concept_knights$ tinh nhuệ"
+  knight_effectiveness_least: "$least_sort$ $game_concept_knights$ tinh nhuệ"
+  dread_most: "$most_sort$ Đáng sợ"
+  dread_least: "$least_sort$ Đáng sợ"
+  prisoners_most: "$most_sort$ $game_concept_prisoners$"
+  prisoners_least: "$fewest_sort$ $game_concept_prisoners$"
+  herd_most: "$most_sort$ $game_concept_herd$"
+  herd_least: "$least_sort$ $game_concept_herd$"
+ 
+ # filters
+  strong_relation: "$relation_filter$"
+  strong_relation_all: "$all_filter_option$"
+  strong_relation_your_realm: "$realm_relation_filter$"
+  strong_relation_top_realm: "$top_realm_relation_filter$"
+  strong_diplo_range: "$range_filter$"
+  strong_diplo_range_any: "$any_filter$"
+  strong_diplo_range_inside: "$in_range_filter$"
+  strong_diplo_range_outside: "$not_in_range_filter$"
+  strong_religion: "$game_concept_religion$"
+  strong_religion_all: "$all_filter_option$"
+  strong_religion_your_faith: "$your_filter_option$ $game_concept_faith$"
+  strong_religion_your_religion: "$your_filter_option$ $game_concept_religion$"
+  strong_culture: "$game_concept_culture$"
+  strong_culture_all: "$all_filter_option$"
+  strong_culture_your_culture: "$your_filter_option$ $game_concept_culture$"
+  strong_culture_your_heritage: "$your_filter_option$ $game_concept_heritage$"
+  strong_dynasty: "$game_concept_dynasty$"
+  strong_dynasty_all: "$all_filter_option$"
+  strong_dynasty_your_house: "$your_filter_option$ $game_concept_house$"
+  strong_dynasty_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+
+  strong_ruler: "$game_concept_ruler$"
+  strong_ruler_all: "$all_filter_option$"
+  strong_ruler_any_ruler: "$any_filter$"
+  strong_ruler_landed_ruler: "$game_concept_landed$"
+  strong_ruler_landless_ruler: "$game_concept_unlanded$"
+  strong_ruler_no_ruler: "$not_ruler_filter_option$"
+ 
+  strong_players_only: "$OUTLINER_PLAYERS$"
+  strong_players_only_no: "$any_filter$"
+  strong_players_only_yes: "$players_only_filter_option$"
+
+ #Pious
+ # standalones
+  sort_l_prestige_level: "[prestige_level|e]"
+  sort_l_piety_level: "[piety_level|e]"
+  sort_l_legitimacy: "[legitimacy|e]"
+  sort_l_influence_level: "[influence_level|e]"
+  sort_l_merit: "[merit|e]"
+  sort_l_mandala_radiance: "[radiance|e]"
+  sort_l_dominance: "[dominance|e]"
+ 
+ # dropdowns
+  sort_l_prestige: "[prestige|e]"
+  sort_l_prestige_gain: "[prestige|e] tăng thêm"
+  sort_l_piety: "[piety|e]"
+  sort_l_piety_gain: "[piety|e] tăng thêm"
+  sort_l_influence: "[influence|e]"
+  sort_l_influence_gain: "[influence|e] tăng thêm"
+  sort_l_merit_gain: "[merit|e] tăng thêm"
+ 
+ # most/least
+ 
+  prestige_level_most: "$most_sort$ Danh tiếng"
+  prestige_level_least: "$least_sort$ Danh tiếng"
+  piety_level_most: "$most_sort$ Sùng đạo"
+  piety_level_least: "$least_sort$ Sùng đạo"
+  legitimacy_most: "$most_sort$ Hợp pháp"
+  legitimacy_least: "$least_sort$ Hợp pháp"
+  influence_level_most: "$most_sort$ Ảnh hưởng"
+  influence_level_least: "$least_sort$ Ảnh hưởng"
+  merit_most: "$most_sort$ Công trạng"
+  merit_least: "$least_sort$ Công trạng"
+  mandala_radiance_most: "$most_sort$ Tỏa sáng"
+  mandala_radiance_least: "$least_sort$ Tỏa sáng"
+  dominance_most: "$most_sort$ Áp đảo"
+  dominance_least: "$least_sort$ Áp đảo"
+ 
+  prestige_most: "$most_sort$ Uy tín"
+  prestige_least: "$least_sort$ Uy tín"
+  prestige_gain_most: "$most_sort$ Nhận $game_concept_prestige$"
+  prestige_gain_least: "$least_sort$ Nhận $game_concept_prestige$"
+  piety_most: "$most_sort$ Mộ đạo"
+  piety_least: "$least_sort$ Mộ đạo"
+  piety_gain_most: "$most_sort$ Nhận $game_concept_piety$"
+  piety_gain_least: "$least_sort$ Nhận $game_concept_piety$"
+  influence_most: "$most_sort$ $game_concept_influence$"
+  influence_least: "$least_sort$ $game_concept_influence$"
+  influence_gain_most: "$most_sort$ Nhận $game_concept_influence$"
+  influence_gain_least: "$least_sort$ Nhận $game_concept_influence$"
+  merit_gain_most: "$most_sort$ Nhận $game_concept_merit$"
+  merit_gain_least: "$least_sort$ Nhận $game_concept_merit$"
+
+ # filters
+  pious_relation: "$relation_filter$"
+  pious_relation_all: "$all_filter_option$"
+  pious_relation_your_realm: "$realm_relation_filter$"
+  pious_relation_top_realm: "$top_realm_relation_filter$"
+  pious_diplo_range: "$range_filter$"
+  pious_diplo_range_any: "$any_filter$"
+  pious_diplo_range_inside: "$in_range_filter$"
+  pious_diplo_range_outside: "$not_in_range_filter$"
+  pious_religion: "$game_concept_religion$"
+  pious_religion_all: "$all_filter_option$"
+  pious_religion_your_faith: "$your_filter_option$ $game_concept_faith$"
+  pious_religion_your_religion: "$your_filter_option$ $game_concept_religion$"
+  pious_culture: "$game_concept_culture$"
+  pious_culture_all: "$all_filter_option$"
+  pious_culture_your_culture: "$your_filter_option$ $game_concept_culture$"
+  pious_culture_your_heritage: "$your_filter_option$ $game_concept_heritage$"
+  pious_dynasty: "$game_concept_dynasty$"
+  pious_dynasty_all: "$all_filter_option$"
+  pious_dynasty_your_house: "$your_filter_option$ $game_concept_house$"
+  pious_dynasty_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+ 
+  pious_ruler: "$game_concept_ruler$"
+  pious_ruler_all: "$all_filter_option$"
+  pious_ruler_any_ruler: "$any_filter$"
+  pious_ruler_landed_ruler: "$game_concept_landed$"
+  pious_ruler_landless_ruler: "$game_concept_unlanded$"
+  pious_ruler_no_ruler: "$not_ruler_filter_option$"
+ 
+  pious_players_only: "$OUTLINER_PLAYERS$"
+  pious_players_only_no: "$any_filter$"
+  pious_players_only_yes: "$players_only_filter_option$"
+ 
+ 
+ ### Houses
+ # dropdown
+  sort_l_num_living_members: "Thành viên còn sống"
+  sort_l_num_dead_members: "Thành viên đã khuất"
+  sort_l_num_rulers: "[rulers|e]"
+  sort_l_num_counties: "[counties|e]"
+  sort_l_unity: "[unity|e]"
+  sort_l_found_date: "Ngày thành lập"
+  sort_l_aspiration_level: "[house_attribute|e]"
+  sort_l_renown_level: "[dynasty_prestige_level|e]"
+  sort_l_renown_gain: "[dynasty_prestige|e] tăng thêm"
+    
+  sort_l_total_military_strength: "[soldiers|e]"
+  sort_l_num_legacies: "[dynasty_perks|e]"
+ 
+ 
+ # most/least
+  num_living_members_most: "$most_sort$ $sort_l_num_living_members$"
+  num_living_members_least: "$fewest_sort$ $sort_l_num_living_members$"
+  num_dead_members_most: "$most_sort$ $sort_l_num_dead_members$"
+  num_dead_members_least: "$fewest_sort$ $sort_l_num_dead_members$"
+  num_rulers_most: "$most_sort$ $game_concept_rulers$"
+  num_rulers_least: "$fewest_sort$ $game_concept_rulers$"
+  num_counties_most: "$most_sort$ $game_concept_counties$"
+  num_counties_least: "$fewest_sort$ $game_concept_counties$"
+  num_legacies_most: "$most_sort$ $game_concept_dynasty_perks$"
+  num_legacies_least: "$fewest_sort$ $game_concept_dynasty_perks$"
+  unity_most: "$most_sort$ Thống nhất"
+  unity_least: "$most_sort$ Phân rã"
+  found_date_most: "Mới nhất"
+  found_date_least: "Cổ xưa nhất"
+  aspiration_level_most: "$highest_sort$ Thuộc tính"
+  aspiration_level_least: "$lowest_sort$ Thuộc tính"
+  total_military_strength_most: "$most_sort$ Binh lính"
+  total_military_strength_least: "$fewest_sort$ Binh lính"
+  renown_level_most: "$most_sort$ Huy hoàng"
+  renown_level_least: "$most_sort$ Mờ nhạt"
+  renown_gain_most: "$most_sort$ Nhận $game_concept_dynasty_prestige$"
+  renown_gain_least: "$least_sort$ Nhận $game_concept_dynasty_prestige$"
+ 
+ #standalone and tips
+  SORT_L_HOUSE_COUNTIES: "$sort_by$ $LEDGER_HOUSE_COUNTIES$"
+  LEDGER_HOUSE_COUNTIES: "Tất cả các [counties|e]\ndưới sự kiểm soát của [house|e]"
+ 
+  SORT_L_HOUSE_STRENGTH: "$sort_by$ $LEDGER_HOUSE_STRENGTH$"
+  LEDGER_HOUSE_STRENGTH: "Tổng số [soldiers|e] của tất cả [rulers|e] thuộc [house|e] này"
+ 
+  LEDGER_HOUSES_NUM_RULERS: "[rulers|e] của [house|e] này"
+  HOUSES_NUM_LIVING_MEMBERS_TT_HEADER: "[DynastyHouse.GetNumberOfMembers|v0] $sort_l_num_living_members$ của [house|e] [DynastyHouse.GetName]"
+ 
+ # Dynasties
+
+  sort_l_num_houses: "[houses|e]"
+  num_houses_most: "$most_sort$ $game_concept_houses$"
+  num_houses_least: "$fewest_sort$ $game_concept_houses$"
+ 
+  SORT_L_DYNASTY_HOUSES: "$sort_by$ $LEDGER_DYNASTY_HOUSES$"
+  LEDGER_DYNASTY_HOUSES: "Các [houses|e] thuộc [dynasty|e] này"
+ 
+  SORT_L_DYNASTY_COUNTIES: "$sort_by$ $LEDGER_DYNASTY_COUNTIES$"
+  LEDGER_DYNASTY_COUNTIES: "Tất cả các [counties|e]\ndưới sự kiểm soát của [dynasty|e]"
+ 
+  DYNASTIES_NUM_LIVING_MEMBERS_TT_HEADER: "[Dynasty.GetNumberOfMembers|v0] $sort_l_num_living_members$ của [dynasty|e] [Dynasty.GetName]"
+ 
+  SORT_L_DYNASTY_STRENGTH: "$sort_by$ $LEDGER_DYNASTY_STRENGTH$"
+  LEDGER_DYNASTY_STRENGTH: "Tổng số [soldiers|e] của tất cả [rulers|e] thuộc [dynasty|e] này"
+ 
+  DYNASTY_HOUSES_TT_HEADER: "[GetDataModelSize(Dynasty.GetDynastyHouses)|v0] [houses|e] của [dynasty|e] [Dynasty.GetName]"
+ 
+  HOUSE_MEMBER_TINY: "[AddTextIf(Not(Character.IsRuler), '#low ')][Character.GetName], #low [Character.GetAge]#!"
+ 
+ 
+ ###
+ # Holdings
+ 
+ # dropdown
+  sort_l_tax: "[tax|e]"
+  sort_l_loot: "[loot|e]"
+  sort_l_levies: "[levies|e]"
+  sort_l_building_slots: "Ô xây dựng [building|e]"
+  sort_l_free_building_slots: "Ô xây dựng [building|e] trống"
+  sort_l_buildings: "[buildings|e]"
+  sort_l_building_levels: "Cấp độ [building|e]"
+  sort_l_development: "[development|e]"
+  sort_l_development_growth: "Thay đổi [development|e]"
+  sort_l_control: "[control|e]"
+  sort_l_popular_opinion: "[county_opinion|e]"
+ 
+ # standalones
+ 
+  sort_tt_total_tax: "Tổng [tax|e] khả dụng\n#low Tổng tất cả các khoản [taxes|e] thu được từ [holdings|e] trong [title|e] này, chưa tính đến phần mà các [vassals|e] sẽ giữ lại cho riêng họ.#!"
+  sort_tt_total_loot: "Tổng [loot|e]"
+  sort_tt_total_levies: "Tổng [levies|e] khả dụng\n#low Tổng tất cả [levies|e] được cung cấp từ các [holdings|e] trong [title|e] này, chưa tính đến các khoản thưởng và phần mà các [vassals|e] sẽ giữ lại cho riêng họ.#!"
+  sort_tt_total_buildings: "Tổng số [buildings|e] $sort_across_all_holdings$"
+  sort_tt_special_buildings: "Tổng số [special_buildings|e] $sort_across_all_holdings$"
+  sort_across_all_holdings: "\ntrên tất cả [holdings|e] thuộc [title|e] này"
+  sort_across_all_counties: "\ntrên tất cả [counties|e] thuộc [title|e] này"
+ 
+  tax_most: "$most_sort$ $game_concept_tax$"
+  tax_least: "$least_sort$ $game_concept_tax$"
+ 
+  loot_most: "$most_sort$ $game_concept_loot$"
+  loot_least: "$least_sort$ $game_concept_loot$"
+ 
+  levies_most: "$most_sort$ $game_concept_levies$"
+  levies_least: "$fewest_sort$ $game_concept_levies$"
+ 
+  building_slots_most: "$most_sort$ ô xây dựng $game_concept_building$"
+  building_slots_least: "$fewest_sort$ ô xây dựng $game_concept_building$"
+ 
+  free_building_slots_most: "$most_sort$ ô trống"
+  free_building_slots_least: "$fewest_sort$ ô trống"
+ 
+  building_levels_most: "$most_sort$ cấp độ $game_concept_building$"
+  building_levels_least: "$fewest_sort$ cấp độ $game_concept_building$"
+ 
+  development_most: "$most_sort$ Phát triển"
+  development_least: "$least_sort$ Phát triển"
+ 
+  development_growth_most: "Tăng trưởng $game_concept_development$"
+  development_growth_least: "Suy giảm $game_concept_development$"
+ 
+  control_most: "$most_sort$ $game_concept_control$"
+  control_least: "$least_sort$ $game_concept_control$"
+ 
+  popular_opinion_most: "$highest_sort$ $game_concept_opinion$"
+  popular_opinion_least: "$lowest_sort$ $game_concept_opinion$"
+
+  provinces_relation: "$relation_filter_category$"
+  provinces_relation_all: "$all_filter_option$"
+  provinces_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  provinces_relation_your_realm: "$realm_relation_filter$"
+  provinces_relation_top_realm: "$top_realm_relation_filter$"
+  provinces_relation_player_domains: "Trực hạt của Ngài"
+  provinces_relation_player_realms: "$player_realms_filter_option$"
+  provinces_looted: "Đã bị cướp phá"
+  provinces_looted_any: "$any_filter$"
+  provinces_looted_yes: "$provinces_looted$"
+  provinces_looted_no: "Chưa bị cướp phá"
+  provinces_ongoing_construction: "Công trình đang thi công"
+  provinces_ongoing_construction_any: "$any_filter$"
+  provinces_ongoing_construction_yes: "Đang thi công"
+  provinces_ongoing_construction_no: "$NONE$"
+  provinces_special_buildings: "Công trình đặc biệt"
+  provinces_special_buildings_all: "$all_filter_option$"
+  provinces_special_buildings_special_building: "Công trình đặc biệt"
+  provinces_special_buildings_empty_special_building_slot: "Ô đặc biệt trống"
+  provinces_special_buildings_great_building: "Công trình vĩ đại"
+  provinces_special_buildings_empty_great_building_slot: "Ô vĩ đại trống"
+  provinces_special_buildings_duchy_building: "Công trình Công quốc"
+  provinces_special_buildings_empty_duchy_building_slot: "Ô Công quốc trống"
+  provinces_can_build: "Có thể xây dựng"
+  provinces_can_build_any: "$any_filter$"
+  provinces_can_build_can_construct: "Có thể xây mới"
+  provinces_can_build_can_upgrade: "Có thể nâng cấp"
+
+ ### counties
+
+  sort_l_holdings: "Tổng số [holdings|e]"
+  sort_l_baronies: "Tổng số [baronies|e]"
+  sort_l_total_tax: "Tổng [tax|e]"
+  sort_l_total_loot: "Tổng [loot|e]"
+  sort_l_total_levies: "Tổng [levies|e]"
+  sort_l_total_buildings: "Tổng số [buildings|e]"
+  sort_l_total_building_slots: "Tổng ô xây dựng [buildings|e]"
+  sort_l_total_special_slots: "Tổng ô [special_building|e]"
+  sort_l_special_buildings: "Tổng số [special_buildings|e]"
+  sort_l_number_of_claimants: "[claimants|e]"
+ 
+  holdings_most: "$most_sort$ $game_concept_holdings$"
+  holdings_least: "$least_sort$ $game_concept_holdings$"
+ 
+  baronies_most: "$most_sort$ $game_concept_baronies$"
+  baronies_least: "$least_sort$ $game_concept_baronies$"
+ 
+  total_tax_most: "$tax_most$"
+  total_tax_least: "$tax_least$"
+ 
+  total_loot_most: "$loot_most$"
+  total_loot_least: "$loot_least$"
+ 
+  total_levies_most: "$levies_most$"
+  total_levies_least: "$levies_least$"
+ 
+  total_buildings_most: "$buildings_most$"
+  total_buildings_least: "$buildings_least$"
+ 
+  total_building_slots_most: "$most_sort$ ô xây dựng $game_concept_buildings$"
+  total_building_slots_least: "$fewest_sort$ ô xây dựng $game_concept_buildings$"
+ 
+  total_special_slots_most: "$most_sort$ ô đặc biệt"
+  total_special_slots_least: "$fewest_sort$ ô đặc biệt"
+ 
+  special_buildings_most: "$most_sort$ $game_concept_special_buildings$"
+  special_buildings_least: "$fewest_sort$ $game_concept_special_buildings$"
+ 
+  number_of_claimants_most: "$most_sort$ $game_concept_claimants$"
+  number_of_claimants_least: "$fewest_sort$ $game_concept_claimants$"
+ 
+  counties_relation: "$relation_filter$"
+  counties_relation_all: "$all_filter_option$"
+  counties_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  counties_relation_your_realm: "$realm_relation_filter$"
+  counties_relation_your_house: "$your_filter_option$ $game_concept_house$"
+  counties_relation_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+  counties_relation_top_realm: "$top_realm_relation_filter$"
+  counties_relation_player_realms: "$player_realms_filter_option$"
+  counties_faith: "$game_concept_faith$"
+  counties_faith_all: "$all_filter_option$"
+  counties_faith_yours: "$your_filter_option$"
+  counties_culture: "$game_concept_culture$"
+  counties_culture_all: "$all_filter_option$"
+  counties_culture_yours: "$your_filter_option$"
+ 
+  counties_created: "Đã thành lập"
+  counties_created_all: "$any_filter$"
+  counties_created_existing: "$YES$"
+  counties_created_not_existing: "$NO$"
+ 
+  counties_landed: "$game_concept_landed$"
+  counties_landed_all: "$any_filter$"
+  counties_landed_landed: "$YES$"
+  counties_landed_unlanded: "$NO$"
+ 
+ ### Titles
+ 
+  sort_l_de_facto_counties: "[counties|e]"
+ 
+  sort_tt_de_facto_counties: "$sort_l_de_facto_counties$"
+  sort_tt_holdings: "$sort_l_holdings$"
+  sort_tt_development: "$LEDGER_AVERAGE_DEVELOPMENT$$sort_across_all_counties$"
+  sort_tt_control: "$LEDGER_AVERAGE_CONTROL$$sort_across_all_counties$"
+  sort_tt_popular_opinion: "$LEDGER_AVERAGE_POPULAR_OPINION$$sort_across_all_counties$"
+  sort_tt_number_of_claimants: "$sort_l_number_of_claimants$"
+ 
+  de_facto_counties_most: "$most_sort$ $game_concept_counties$"
+  de_facto_counties_least: "$least_sort$ $game_concept_counties$"
+ 
+  LEDGER_AVERAGE_DEVELOPMENT: "Phát triển trung bình"
+  LEDGER_AVERAGE_CONTROL: "Kiểm soát trung bình"
+  LEDGER_AVERAGE_POPULAR_OPINION: "Dân ý trung bình"
+ 
+  TOTAL_TITLE_COUNTIES_TT: "Tổng số [counties|e] [Select_CString(Title.GetHolder.IsValid, 'thực tế', 'theo luật')] trong [Title.GetNameNoTierNoTooltip]"
+  DEJURE_TITLE_COUNTIES_TT: "Tổng cộng [Title.GetNumberOfDeJureCounties|v0] [counties|e] [de_jure|e] trong [Title.GetNameNoTierNoTooltip]\n[Title.GetNumberOfDeFactoCounties|v0] Quận thực tế\n#low Các giá trị được hiển thị cho các [counties|e] [de_jure|e] của nó"
+  DEFACTO_TITLE_COUNTIES_TT: "Tổng cộng [Title.GetNumberOfDeFactoCounties|v0] Quận thực tế trong [Title.GetNameNoTierNoTooltip]\n[Title.GetNumberOfDeJureCounties|v0] [counties|e] [de_jure|e]\n#low Các giá trị được hiển thị cho các Quận thực tế của nó"
+
+ 
+  duchies_relation: "$relation_filter$"
+  duchies_relation_all: "$all_filter_option$"
+  duchies_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  duchies_relation_your_realm: "$realm_relation_filter$"
+  duchies_relation_your_house: "$your_filter_option$ $game_concept_house$"
+  duchies_relation_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+  duchies_relation_top_realm: "$top_realm_relation_filter$"
+  duchies_relation_player_realms: "$player_realms_filter_option$"
+  duchies_faith: "$game_concept_faith$"
+  duchies_faith_all: "$all_filter_option$"
+  duchies_faith_yours: "$your_filter_option$"
+  duchies_culture: "$game_concept_culture$"
+  duchies_culture_all: "$all_filter_option$"
+  duchies_culture_yours: "$your_filter_option$"
+ 
+  duchies_created: "Đã thành lập"
+  duchies_created_all: "$any_filter$"
+  duchies_created_existing: "$YES$"
+  duchies_created_not_existing: "$NO$"
+ 
+  duchies_landed: "$game_concept_landed$"
+  duchies_landed_all: "$any_filter$"
+  duchies_landed_landed: "$YES$"
+  duchies_landed_unlanded: "$NO$"
+
+  kingdoms_relation: "$relation_filter$"
+  kingdoms_relation_all: "$all_filter_option$"
+  kingdoms_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  kingdoms_relation_your_realm: "$realm_relation_filter$"
+  kingdoms_relation_your_house: "$your_filter_option$ $game_concept_house$"
+  kingdoms_relation_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+  kingdoms_relation_top_realm: "$top_realm_relation_filter$"
+  kingdoms_relation_player_realms: "$player_realms_filter_option$"
+  kingdoms_faith: "$game_concept_faith$"
+  kingdoms_faith_all: "$all_filter_option$"
+  kingdoms_faith_yours: "$your_filter_option$"
+  kingdoms_culture: "$game_concept_culture$"
+  kingdoms_culture_all: "$all_filter_option$"
+  kingdoms_culture_yours: "$your_filter_option$"
+ 
+  kingdoms_created: "Đã thành lập"
+  kingdoms_created_all: "$any_filter$"
+  kingdoms_created_existing: "$YES$"
+  kingdoms_created_not_existing: "$NO$"
+
+  empires_relation: "$relation_filter$"
+  empires_relation_all: "$all_filter_option$"
+  empires_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  empires_relation_your_realm: "$realm_relation_filter$"
+  empires_relation_your_house: "$your_filter_option$ $game_concept_house$"
+  empires_relation_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+  empires_relation_top_realm: "$top_realm_relation_filter$"
+  empires_relation_player_realms: "$player_realms_filter_option$"
+  empires_faith: "$game_concept_faith$"
+  empires_faith_all: "$all_filter_option$"
+  empires_faith_yours: "$your_filter_option$"
+  empires_culture: "$game_concept_culture$"
+  empires_culture_all: "$all_filter_option$"
+  empires_culture_yours: "$your_filter_option$"
+ 
+  empires_created: "Đã thành lập"
+  empires_created_all: "$any_filter$"
+  empires_created_existing: "$YES$"
+  empires_created_not_existing: "$NO$"
+
+  hegemonies_relation: "$relation_filter$"
+  hegemonies_relation_all: "$all_filter_option$"
+  hegemonies_relation_your_domain: "$your_filter_option$ $game_concept_domain$"
+  hegemonies_relation_your_realm: "$realm_relation_filter$"
+  hegemonies_relation_your_house: "$your_filter_option$ $game_concept_house$"
+  hegemonies_relation_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+  hegemonies_relation_top_realm: "$top_realm_relation_filter$"
+  hegemonies_relation_player_realms: "$player_realms_filter_option$"
+  hegemonies_faith: "$game_concept_faith$"
+  hegemonies_faith_all: "$all_filter_option$"
+  hegemonies_faith_yours: "$your_filter_option$"
+  hegemonies_culture: "$game_concept_culture$"
+  hegemonies_culture_all: "$all_filter_option$"
+  hegemonies_culture_yours: "$your_filter_option$"
+ 
+  hegemonies_created: "Đã thành lập"
+  hegemonies_created_all: "$any_filter$"
+  hegemonies_created_existing: "$YES$"
+  hegemonies_created_not_existing: "$NO$"
+
+ # Faiths
+ # dropdown
+  sort_l_counties: "[counties|e]"
+  sort_l_counties_change: "Thay đổi [county|e]"
+  sort_l_followers: "Tín đồ"
+  sort_l_rulers: "[rulers|e]"
+  sort_l_sinners: "Kẻ tội đồ"
+  sort_l_virtuous: "Bậc đức hạnh"
+  sort_l_holy_wars: "[holy_wars|e]"
+  sort_l_controlled_holy_sites: "[holy_sites|e] kiểm soát"
+  sort_l_fervor: "[fervor|e]"
+  sort_l_strength: "Tổng số [soldiers|e]"
+ 
+ # standalones
+ 
+  sort_tt_counties: "Các [counties|e] của [faith|e] này"
+  sort_tt_counties_change: "Thay đổi về [counties|e] do [Concept('convert_county', 'Chuyển đổi')|e]"
+  sort_tt_followers: "Tất cả tín đồ của [faith|e] này"
+  sort_tt_rulers: "[rulers|e]"
+  sort_tt_sinners: "Các [rulers|e] tội lỗi\nNhững [rulers|e] có ít nhất một [Concept('sin', 'Đặc điểm Tội lỗi')|e]"
+  sort_tt_virtuous: "Các [rulers|e] đức độ\nNhững người không bị vấy bẩn bởi [sin|E] và có ít nhất một [Concept('virtue', 'Đặc điểm Đức độ')|e]"
+  sort_tt_holy_wars: "Các cuộc [holy_wars|e] của [faith|e] này"
+  sort_tt_controlled_holy_sites: "Các [holy_sites|e] đang được kiểm soát"
+  sort_tt_fervor: "[fervor|e]"
+ 
+  FAITHS_COUNTIES_TT: "Các [counties|e] thuộc [Faith.GetAdjectiveNoTooltip]"
+  FAITHS_COUNTIES_CHANGE_TT: "[Faith.GetNameNoTooltip] sẽ [Select_CString(GreaterThan_int32(Faith.GetCountiesChange, '(int32)-1'), 'nhận', 'mất')] [Faith.GetCountiesChange|=+] [counties|e]\n\n[Faith.GetCountiesGain|+] [counties|e] đang được [Concept('convert_county', 'Cải đạo')|e] sang [Faith.GetNameNoTooltip]\n[Faith.GetCountiesLoss|-] [counties|e] [Faith.GetAdjectiveNoTooltip] đang được [Concept('convert_county', 'Cải đạo')|e] sang [faith|e] khác"
+ 
+  FAITHS_FOLLOWERS_TT: "Tất cả [Faith.GetAdherentNamePluralNoTooltip]"
+  FAITHS_RULERS_TT: "Các [rulers|e] thuộc [Faith.GetAdjectiveNoTooltip]"
+  FAITHS_SINNERS_TT: "Những [rulers|e] [Faith.GetAdjectiveNoTooltip] tội lỗi"
+  FAITHS_VIRTUOUS_TT: "Những [rulers|e] [Faith.GetAdjectiveNoTooltip] đức hạnh"
+  FAITHS_TOTAL_STRENGTH_TT: "Tổng binh lực [soldiers|e]\ncủa tất cả [rulers|e] thuộc [Faith.GetAdjectiveNoTooltip]"
+  SORT_FAITHS_TOTAL_STRENGTH: "$sort_by$ Tổng số [soldiers|e]\ncủa tất cả [rulers|e] thuộc [faith|e] này"
+ 
+ 
+  FAITH_CONTROLLED_HOLY_SITES: "[Faith.GetNumberOfControlledHolySites] #low /[Faith.GetNumberOfHolySites]#!"
+  FAITH_CONTROLLED_HOLY_SITES_TT: "[Faith.GetAdherentNamePluralNoTooltip] kiểm soát [Faith.GetNumberOfControlledHolySites|0v] trên tổng số [Faith.GetNumberOfHolySites] [holy_sites|e] của họ"
+ 
+ # most/least
+  counties_most: "$most_sort$ $game_concept_counties$"
+  counties_least: "$fewest_sort$ $game_concept_counties$"
+ 
+  counties_change_most: "$game_concept_county$ tăng thêm"
+  counties_change_least: "$game_concept_county$ mất đi"
+ 
+  followers_most: "$most_sort$ Người theo"
+  followers_least: "$fewest_sort$ Người theo"
+ 
+  rulers_most: "$most_sort$ $game_concept_rulers$"
+  rulers_least: "$fewest_sort$ $game_concept_rulers$"
+ 
+  sinners_most: "$most_sort$ Kẻ tội lỗi"
+  sinners_least: "$fewest_sort$ Kẻ tội lỗi"
+ 
+  virtuous_most: "$most_sort$ Bậc Cầm quyền đức độ"
+  virtuous_least: "$fewest_sort$ Bậc Cầm quyền đức độ"
+ 
+  holy_wars_most: "$most_sort$ $game_concept_holy_wars$"
+  holy_wars_least: "$fewest_sort$ $game_concept_holy_wars$"
+ 
+  controlled_holy_sites_most: "$most_sort$ $game_concept_holy_sites$"
+  controlled_holy_sites_least: "$fewest_sort$ $game_concept_holy_sites$"
+ 
+  fervor_most: "$most_sort$ $game_concept_fervor$"
+  fervor_least: "$least_sort$ $game_concept_fervor$"
+ 
+  strength_most: "$most_sort$ $game_concept_soldiers$"
+  strength_least: "$fewest_sort$ $game_concept_soldiers$"
+
+ # filters
+ 
+  faiths_my_religion: "$game_concept_religion$ của Ngài"
+  faiths_my_religion_any: "$any_filter$"
+  faiths_my_religion_yes: "$YES$"
+  faiths_my_religion_no: "$NO$"
+  faiths_organized: "Đã có tổ chức"
+  faiths_organized_any: "$any_filter$"
+  faiths_organized_yes: "$YES$"
+  faiths_organized_no: "$NO$"
+  faiths_head_of_faith: "Giáo chủ của $game_concept_faith$"
+  faiths_head_of_faith_any: "$any_filter$"
+  faiths_head_of_faith_yes: "$YES$"
+  faiths_head_of_faith_no: "$NO$"
+  faiths_player_faith: "$game_concept_faith$ của Ngài"
+  faiths_player_faith_any: "$any_filter$"
+  faiths_player_faith_yes: "$YES$"
+  faiths_player_faith_no: "$NO$"
+ 
+ # Religions
+ 
+  sort_l_number_of_faiths: "[faiths|e]"
+ 
+  SORT_RELIGIONS_LEDGER: "$sort_by$ [Localize(Concatenate('sort_religions_', PdxGuiWidget.GetName))]"
+ 
+  sort_religions_number_of_faiths: "Tất cả [faiths|e] thuộc [religion|e] này"
+  sort_religions_counties: "[counties|e] thuộc [religion|e] này"
+  sort_religions_counties_change: "$sort_tt_counties_change$"
+  sort_religions_followers: "$sort_l_followers$"
+  sort_religions_rulers: "$sort_l_rulers$"
+  sort_religions_sinners: "$sort_tt_sinners$"
+  sort_religions_virtuous: "$sort_tt_virtuous$"
+  sort_religions_holy_wars: "[holy_wars|e] của tất cả [faiths|e] trong [religion|e] này"
+  sort_religions_controlled_holy_sites: "$sort_tt_controlled_holy_sites$"
+  sort_religions_total_strength: "Tổng binh lực [soldiers|e]\ncủa tất cả [rulers|e] thuộc [religion|e] này"
+ 
+  number_of_faiths_most: "$most_sort$ $game_concept_faiths$"
+  number_of_faiths_least: "$fewest_sort$ $game_concept_faiths$"
+ 
+  RELIGION_COUNTIES_TT: "Các [counties|e] thuộc [Religion.GetAdjectiveNoTooltip]"
+  RELIGION_COUNTIES_CHANGE_TT: "[Religion.GetNameNoTooltip] sẽ [Select_CString(GreaterThan_int32(Religion.GetCountiesChange, '(int32)-1'), 'nhận', 'mất')] [Religion.GetCountiesChange|=+] [counties|e]\n\n[Religion.GetCountiesGain|+] [counties|e] đang được [Concept('convert_county', 'Cải đạo')|e] sang [Religion.GetNameNoTooltip]\n[Religion.GetCountiesLoss|-] [counties|e] [Religion.GetAdjectiveNoTooltip] đang được [Concept('convert_county', 'Cải đạo')|e] sang [religion|e] khác"
+ 
+  RELIGION_FOLLOWERS_TT: "Tất cả [Religion.GetAdherentNamePluralNoTooltip]"
+  RELIGION_RULERS_TT: "Các [rulers|e] thuộc [Religion.GetAdjectiveNoTooltip]"
+  RELIGION_SINNERS_TT: "Những [rulers|e] [Religion.GetAdjectiveNoTooltip] tội lỗi"
+  RELIGION_VIRTUOUS_TT: "Những [rulers|e] [Religion.GetAdjectiveNoTooltip] đức hạnh"
+  RELIGION_TOTAL_STRENGTH_TT: "Tổng binh lực [soldiers|e]\ncủa tất cả [rulers|e] thuộc [Religion.GetAdjectiveNoTooltip]"
+ 
+  RELIGION_CONTROLLED_HOLY_SITES: "[Religion.GetNumberOfControlledHolySites] #low /[Religion.GetNumberOfHolySites]#!"
+  RELIGION_CONTROLLED_HOLY_SITES_TT: "[Religion.GetAdherentNamePluralNoTooltip] kiểm soát [Religion.GetNumberOfControlledHolySites|0v] trên tổng số [Religion.GetNumberOfHolySites] [holy_sites|e] của họ"
+
+  religions_player_religion: "$game_concept_religion$ của Ngài"
+  religions_player_religion_any: "$any_filter$"
+  religions_player_religion_yes: "$YES$"
+  religions_player_religion_no: "$NO$"
+ 
+ 
+ ### Cultures
+ 
+  sort_l_traditions: "[traditions|e]"
+  sort_l_characters: "[characters|e]"
+  sort_l_acceptance: "[cultural_acceptance|e]"
+  sort_l_creation_date: "Ngày hình thành"
+  sort_l_innovations: "[innovations|e]"
+ 
+  SORT_CULTURES_LEDGER: "$sort_by$ [Localize(Concatenate('sort_cultures_', PdxGuiWidget.GetName))]"
+  sort_cultures_characters: "Tất cả nhân vật thuộc [culture|e] này"
+  sort_cultures_counties_change: "Thay đổi về [counties|e] do [Concept('promote_culture', 'Thúc đẩy Văn hóa')|e]"
+  sort_cultures_average_development: "[development|e] trung bình\nTrên tất cả các [counties|e] thuộc [culture|e] này"
+  sort_cultures_acceptance: "[cultural_acceptance|e] đối với [culture|e] của Ngài"
+  sort_cultures_total_strength: "Tổng số [soldiers|e]\ncủa tất cả [rulers|e] thuộc [culture|e] này"
+ 
+  traditions_most: "$most_sort$ $game_concept_traditions$"
+  traditions_least: "$fewest_sort$ $game_concept_traditions$"
+ 
+  characters_most: "$most_sort$ $game_concept_characters$"
+  characters_least: "$fewest_sort$ $game_concept_characters$"
+ 
+  acceptance_most: "$most_sort$ Chấp nhận"
+  acceptance_least: "$least_sort$ Chấp nhận"
+ 
+  creation_date_most: "Cổ xưa nhất"
+  creation_date_least: "Mới nhất"
+ 
+  innovations_most: "$most_sort$ $game_concept_innovations$"
+  innovations_least: "$fewest_sort$ $game_concept_innovations$"
+ 
+  CULTURE_COUNTIES_CHANGE_TT: "[Culture.GetNameNoTooltip] [culture|e] sẽ [Select_CString(GreaterThan_int32(Culture.GetCountiesChange, '(int32)-1'), 'nhận', 'mất')] [Culture.GetCountiesChange|=+] [counties|e]\n\n[Culture.GetCountiesGain|+] [counties|e] đang được [Concept('promote_culture', 'Thay đổi')|e] sang [Culture.GetNameNoTooltip]\n[Culture.GetCountiesLoss|-] [counties|e] [Culture.GetNameNoTooltip] đang được [Concept('promote_culture', 'Thay đổi')|e] sang [culture|e] khác"
+  CULTURES_TOTAL_STRENGTH_TT: "Tổng binh lực [soldiers|e]\ncủa tất cả các [rulers|e] [Culture.GetNameNoTooltip]"
+ 
+  LEDGER_CULTURES_COUNTIES: "[counties|e]"
+  LEDGER_CULTURES_CHARACTERS: "Tất cả nhân vật [Culture.GetNameNoTooltip]"
+  LEDGER_CULTURES_RULERS: "Các [rulers|e] [Culture.GetNameNoTooltip]"
+  LEDGER_CULTURES_AVERAGE_DEVELOPMENT: "[development|e] trung bình trên tất cả các [counties|e] [Culture.GetNameNoTooltip]\n#low Điều này ảnh hưởng đến tiến trình [innovation|e]#!"
+
+  cultures_heritage: "$game_concept_heritage$"
+  cultures_heritage_any: "$any_filter$"
+  cultures_heritage_yours: "$your_filter_option$"
+  cultures_player_cultures: "Văn hóa của Ngài"
+  cultures_player_cultures_any: "$any_filter$"
+  cultures_player_cultures_players: "$OUTLINER_PLAYERS$"
+  cultures_era: "Thời đại"
+  cultures_era_any: "$any_filter$"
+  cultures_era_tribal: "Bộ lạc"
+  cultures_era_early_medieval: "Sơ kỳ Trung cổ"
+  cultures_era_high_medieval: "Trung kỳ Trung cổ"
+  cultures_era_late_medieval: "Hậu kỳ Trung cổ"
+
+
+### UNUSED
+
+  relations_relation: "$relation_filter$"
+  relations_relation_all: "$all_filter_option$"
+  relations_relation_your_realm: "$realm_relation_filter$"
+  relations_relation_top_realm: "$top_realm_relation_filter$"
+  relations_diplo_range: "$range_filter$"
+  relations_diplo_range_any: "$any_filter$"
+  relations_diplo_range_inside: "$in_range_filter$"
+  relations_diplo_range_outside: "$not_in_range_filter$"
+  relations_religion: "$game_concept_religion$"
+  relations_religion_all: "$all_filter_option$"
+  relations_religion_your_faith: "$your_filter_option$ $game_concept_faith$"
+  relations_religion_your_religion: "$your_filter_option$ $game_concept_religion$"
+  relations_culture: "$game_concept_culture$"
+  relations_culture_all: "$all_filter_option$"
+  relations_culture_your_culture: "$your_filter_option$ $game_concept_culture$"
+  relations_culture_your_heritage: "$your_filter_option$ $game_concept_heritage$"
+  relations_dynasty: "$game_concept_dynasty$"
+  relations_dynasty_all: "$all_filter_option$"
+  relations_dynasty_your_house: "$your_filter_option$ $game_concept_house$"
+  relations_dynasty_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+
+  killers_relation: "$relation_filter$"
+  killers_relation_all: "$all_filter_option$"
+  killers_relation_your_realm: "$realm_relation_filter$"
+  killers_relation_top_realm: "$top_realm_relation_filter$"
+  killers_diplo_range: "$range_filter$"
+  killers_diplo_range_any: "$any_filter$"
+  killers_diplo_range_inside: "$in_range_filter$"
+  killers_diplo_range_outside: "$not_in_range_filter$"
+  killers_religion: "$game_concept_religion$"
+  killers_religion_all: "$all_filter_option$"
+  killers_religion_your_faith: "$your_filter_option$ $game_concept_faith$"
+  killers_religion_your_religion: "$your_filter_option$ $game_concept_religion$"
+  killers_culture: "$game_concept_culture$"
+  killers_culture_all: "$all_filter_option$"
+  killers_culture_your_culture: "$your_filter_option$ $game_concept_culture$"
+  killers_culture_your_heritage: "$your_filter_option$ $game_concept_heritage$"
+  killers_dynasty: "$game_concept_dynasty$"
+  killers_dynasty_all: "$all_filter_option$"
+  killers_dynasty_your_house: "$your_filter_option$ $game_concept_house$"
+  killers_dynasty_your_dynasty: "$your_filter_option$ $game_concept_dynasty$"
+
+  killers_ruler: "$game_concept_ruler$"
+  killers_ruler_all: "$all_filter_option$"
+  killers_ruler_any_ruler: "$any_filter$"
+  killers_ruler_landed_ruler: "$game_concept_landed$"
+  killers_ruler_landless_ruler: "$game_concept_unlanded$"
+  killers_ruler_no_ruler: "$not_ruler_filter_option$"
+
+  killers_players_only: "$OUTLINER_PLAYERS$"
+  killers_players_only_no: "$any_filter$"
+  killers_players_only_yes: "$players_only_filter_option$"

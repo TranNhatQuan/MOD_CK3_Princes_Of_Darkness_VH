@@ -1,0 +1,72 @@
+﻿
+
+POD_skuldfulfilled_interaction = {
+	category = interaction_category_vampire
+	#common_interaction = yes
+	#interface_priority = 90
+	scheme = PODskuldfulfilled
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = {
+  			OR = {
+				POD_is_revenant_trigger = yes
+				POD_is_ghoul_trigger = yes
+			}
+		}
+		scope:actor = {
+			has_trait = oblivionadvanced
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			can_start_scheme = {
+				type = PODskuldfulfilled
+				target_character = scope:recipient
+			}
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = PODskuldfulfilled
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_PODskuldfulfilled_approved
+		}
+
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_hunger_rouse_check_effect = yes
+		}
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = PODskuldfulfilled
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -1,0 +1,1182 @@
+﻿
+# Effects in this file copy various things from scope:cloned_character into current scope
+
+#POD_remove_vanilla_traits_effect - removes vanilla not physical traits
+#POD_remove_physical_traits_effect - removes vanilla congenital traits and various traits affecting physical condition in one way or another
+#POD_remove_vanilla_secrets_effect - removes vanilla secrets
+#POD_remove_supernatural_secrets_effect - removes POD secrets
+#POD_copy_vanilla_traits_effect - copies vanilla not physical traits
+#POD_copy_physical_traits_effect - copies vanilla congenital traits and various traits affecting physical condition in one way or another
+#POD_copy_vanilla_secrets_effect - copies vanilla secrets
+#POD_copy_supernatural_secrets_effect - copies POD secrets
+#POD_copy_physical_appearance_effect - copies physical appearance, right now immortal age is set to 30 by default
+#POD_copy_base_skills_effect - copies base skills, should be used before traits, modifiers and perks are copied
+#POD_copy_supernatural_lifestyle_perks_effect - copies POD lifestyle perks
+#POD_copy_vanilla_lifestyle_perks_effect - copies vanilla lifestyle perks
+#POD_copy_vampire_modifiers_effect - copies POD vampire modifiers, such as blood potency, hunger, and masquerade exposure
+
+POD_flag_as_mindless_clone = {
+	add_trait = mindless_clone
+	set_variable = {
+		name  = clone_type
+		value = $TYPE$
+	}
+}
+
+# scoped to the clone. assumes that scope:cloned_character is on the TopScope
+POD_add_mindless_clone_relation = {
+	set_relation_mindless_clone_master = scope:cloned_character
+	
+}
+
+# scoped to the clone. assumes that scope:cloned_character is on the TopScope
+POD_add_mindless_clone_hook_and_relation = {
+	POD_add_mindless_clone_relation = yes
+	scope:cloned_character = {
+		add_hook = {
+			target = prev
+			type = mindless_clone_hook
+		}
+	}
+}
+
+POD_create_shadow_twin_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_copy_vampire_modifiers_effect = yes
+			POD_copy_supernatural_secrets_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name = { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:shadow_twin }
+			add_character_modifier = shadow_twin_modifier
+			give_nickname = nick_shadow_twin
+			POD_add_mindless_clone_hook_and_relation = yes
+			add_character_flag = blocked_from_leaving
+		}
+	}
+}
+
+POD_create_mirror_duplicate_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_copy_vampire_modifiers_effect = yes
+			POD_copy_supernatural_secrets_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:mirror_duplicate }
+			add_character_modifier = mirror_duplicate_modifier
+			give_nickname = nick_mirror_duplicate
+			POD_add_mindless_clone_hook_and_relation = yes
+			add_character_flag = blocked_from_leaving
+		}
+	}
+}
+
+POD_create_shadowy_duplicate_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:shadowy_duplicate }
+			add_character_modifier = shadowy_duplicate_modifier
+			give_nickname = nick_shadowy_duplicate
+			POD_add_mindless_clone_hook_and_relation = yes
+			add_character_flag = blocked_from_leaving
+		}
+	}
+	
+}
+
+POD_create_phantom_shadow_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		location = scope:cloned_character.location
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			add_trait = wraith
+			add_trait = shadow
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_remove_wrong_supernatural_traits_on_new_character = yes
+			invert_personality_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name = { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:phantom_shadow }
+			add_character_modifier = phantom_shadow_modifier
+			give_nickname = nick_phantom_shadow
+			POD_add_mindless_clone_relation = yes # no hook
+			
+			POD_wraith_initialization_effect = yes
+		}
+	}
+	
+}
+
+POD_create_separated_khaibit_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			add_trait = wraith
+			add_trait = shadow
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_remove_mummy_traits_effect = yes
+			invert_personality_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:separated_khaibit }
+			add_character_modifier = separated_khaibit_modifier
+			give_nickname = nick_separated_khaibit
+			POD_add_mindless_clone_hook_and_relation = yes
+			add_character_flag = blocked_from_leaving
+			
+			POD_wraith_initialization_effect = yes
+		}
+	}
+	
+}
+
+POD_create_separated_shadow_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = separated_shadow
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			add_trait = wraith
+			add_trait = shadow
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			invert_personality_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+
+			POD_start_shadow = yes
+			if = {
+				limit = { scope:cloned_character = { has_trait = ferryman } }
+				add_character_modifier = pasiphae_modifier
+				give_nickname = nick_pasiphae
+				POD_add_mindless_clone_relation = yes # no hook
+			}
+			else = {
+				POD_flag_as_mindless_clone = { TYPE = flag:separated_shadow }
+				add_character_modifier = separated_shadow_modifier
+				give_nickname = nick_separated_shadow
+				add_character_flag = blocked_from_leaving
+				POD_add_mindless_clone_hook_and_relation = yes
+				add_hook = {
+					target = scope:cloned_character
+					type = separated_psyche_hook
+				}
+			}
+			
+			POD_wraith_initialization_effect = yes
+		}
+	}
+}
+
+POD_create_manifestation_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = new_clone # TODO CLONE
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:new_clone = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:new_clone
+			}
+			add_trait = automaton
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			remove_trait = wraith
+			POD_remove_wraith_traits_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			
+			set_sexuality = asexual
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			#set_relation_manifestation_creator = scope:cloned_character
+			POD_add_mindless_clone_hook_and_relation = yes # TODO CLONE: maybe need to refactor automata too
+			add_character_flag = blocked_from_leaving
+			add_character_flag = immune_to_disease
+			#POD_flag_as_mindless_clone = { TYPE = flag:manifestation }
+		}
+	}
+}
+
+POD_create_shadow_self_effect = {
+	save_scope_as = cloned_character
+	 
+	create_character = {
+		save_scope_as = $SAVE_AS$
+		age = scope:cloned_character.age
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:$SAVE_AS$ = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:$SAVE_AS$
+			}
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_copy_vampire_modifiers_effect = yes
+			POD_copy_supernatural_secrets_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name =  { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_flag_as_mindless_clone = { TYPE = flag:shadow_self }
+			add_character_modifier = shadow_self_modifier
+			give_nickname = nick_shadow_self
+			POD_add_mindless_clone_hook_and_relation = yes
+			add_character_flag = blocked_from_leaving
+		}
+	}
+}
+
+POD_create_next_hotei_effect = {
+	save_scope_as = cloned_character
+	
+	random_relation = {
+		type = worshipped_reborn
+		save_scope_as = idol_mummy
+	}
+	every_relation = {
+		type = demonic_master
+		add_to_list = demonic_masters
+	}
+	
+	create_character = {
+		save_scope_as = new_clone
+		age = 0
+		faith = scope:cloned_character.faith
+		culture = scope:cloned_character.culture
+		gender = scope:cloned_character
+		random_traits = no
+		dynasty = none
+		employer = scope:cloned_character
+	}
+	hidden_effect_new_object = {
+		scope:new_clone = {
+			POD_copy_base_skills_effect = {
+				CLONED_CHAR = scope:cloned_character
+				CLONE = scope:new_clone
+			}
+			copy_traits = scope:cloned_character
+			POD_clear_invalid_clone_traits = yes
+			POD_copy_supernatural_secrets_effect = yes
+			POD_copy_trait_xp_for_clone_effect = yes
+			POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+			change_first_name = { template_character = scope:cloned_character }
+			POD_copy_physical_appearance_effect = yes
+			POD_copy_vanilla_lifestyle_perks_effect = yes
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_set_parent_effect = { PARENT = scope:cloned_character }
+			add_character_flag = blocked_from_leaving
+			
+			POD_initialize_energy_modifier = yes
+			
+			if = {
+				limit = { exists = scope:idol_mummy }
+				set_relation_worshipped_reborn = scope:idol_mummy
+			}
+			every_in_list = {
+				list = demonic_masters
+				prev = { POD_become_demonic_thrall_of = { DEMON = prev } }
+			}
+		}
+		if = {
+			limit = { is_ruler = yes }
+			set_designated_heir = scope:new_clone
+		}
+	}
+}
+
+POD_yearly_pulse_clone_maintenance_effect = {
+	save_scope_as = cloned_character
+	
+	every_relation = {
+		type = mindless_clone_servant
+		
+		clear_traits = yes
+		
+		switch = {
+			trigger = var:clone_type
+			
+			flag:shadow_twin = {
+				copy_traits = scope:cloned_character
+				POD_clone_maintenance_effect = yes
+			}
+			flag:mirror_duplicate = {
+				copy_traits = scope:cloned_character
+				POD_clone_maintenance_effect = yes
+			}
+			flag:shadowy_duplicate = {
+				copy_traits = scope:cloned_character
+				POD_clone_maintenance_effect = yes
+			}
+			flag:phantom_shadow = {
+				add_trait = wraith
+				add_trait = shadow
+				copy_traits = scope:cloned_character
+				POD_remove_wrong_supernatural_traits_on_new_character = yes
+				POD_clone_maintenance_effect = yes
+			}
+			flag:separated_khaibit = {
+				add_trait = wraith
+				add_trait = shadow
+				copy_traits = scope:cloned_character
+				POD_remove_mummy_traits_effect = yes
+				invert_personality_effect = yes
+				POD_clone_maintenance_effect = yes
+			}
+			flag:separated_shadow = {
+				add_trait = wraith
+				add_trait = shadow
+				copy_traits = scope:cloned_character
+				invert_personality_effect = yes
+				POD_clone_maintenance_effect = yes
+				POD_start_shadow = yes
+			}
+			flag:shadow_self = {
+				copy_traits = scope:cloned_character
+				POD_clone_maintenance_effect = yes
+			}
+		}
+	}
+}
+
+POD_clone_maintenance_effect = {
+	add_trait = mindless_clone
+	POD_copy_trait_xp_for_clone_effect = yes
+	POD_clear_invalid_clone_traits = yes
+	POD_remove_supernatural_perks_effect = yes
+	POD_remove_vanilla_perk_points_effect = yes
+	POD_copy_vanilla_lifestyle_perks_effect = yes
+	POD_copy_supernatural_lifestyle_perks_effect = yes
+	POD_refresh_physical_appearance_effect = yes
+	POD_copy_sexuality_effect = { ORIGIN = scope:cloned_character }
+}
+
+
+POD_create_dummyclone_effect = {
+	create_character = {
+		save_scope_as = dummyclone
+		age = $CHARACTER$.POD_visual_age
+		intrigue = 0	
+		prowess = 0	
+		martial = 0
+		stewardship = 0
+		diplomacy = 0
+		learning = 0
+		faith = $CHARACTER$.faith
+		culture = $CHARACTER$.culture
+		gender = $CHARACTER$
+		random_traits = no
+		dynasty = none
+		employer = character:POD_wraith_01
+	}
+}
+
+POD_remove_dummyclone_effect = {
+	clear_traits = yes
+	POD_disappearance_effect = yes
+}
+
+
+POD_clear_invalid_clone_traits = {
+	# Remove wound traits that were copied from the original, and apply the proper ones
+	POD_trait_injector_wound = { EFFECT = POD_remove_trait }
+	POD_refresh_health_track = yes
+}
+
+# Remove vanilla traits that affect personality in one way or another
+POD_remove_vanilla_traits_effect = {
+	every_character_trait = {
+		limit = {
+			OR = {
+				has_trait_category = personality
+				has_trait_category = education
+				has_trait_category = childhood
+				has_trait_category = commander
+				has_trait_category = winter_commander
+				has_trait_category = lifestyle
+				has_trait_category = court_type
+				has_trait_category = fame
+			}
+		}
+		prev = { remove_trait = prev }
+	}
+}
+
+# Remove vanilla congenital traits and various traits affecting physical condition in one way or another
+POD_remove_physical_traits_effect = {
+	every_character_trait = {
+		limit = { 
+			OR = { 
+				has_trait_category = health
+				has_trait_flag = reweaving_physical_trait
+			}
+		}
+		save_temporary_scope_as = this_trait
+		prev = { remove_trait = prev }
+	}
+}
+
+POD_remove_personality_traits_effect = {
+	save_temporary_scope_as = this_character
+	every_character_trait = {
+		limit = { has_trait_category = personality }
+		save_temporary_scope_as = this_trait
+		scope:this_character = { remove_trait = scope:this_trait }
+	}
+}
+
+# Remove vanilla secrets
+POD_remove_vanilla_secrets_effect = {
+	POD_secret_injector_vanilla = { EFFECT = POD_remove_secret }
+}
+
+# Removes POD secrets
+POD_remove_supernatural_secrets_effect = {
+	POD_secret_injector_supernatural = { EFFECT = POD_remove_secret }
+}
+
+#Copy physical traits
+POD_copy_physical_traits_effect = {
+	save_scope_as = trait_receiver
+	scope:cloned_character = {
+		every_character_trait = {
+			limit = {
+				OR = {
+					has_trait_category = health
+					has_trait_flag = reweaving_physical_trait
+				}
+				NOT = { this = trait:pregnant } # no.
+			}
+			scope:trait_receiver = {
+				add_trait = prev
+			}
+		}
+	}
+}
+
+POD_copy_secret_to_clone = {
+	if = {
+		limit = {
+			scope:cloned_character = {
+				any_secret = { secret_type = $SECRET$ }
+			}
+		}
+		add_secret = {
+			type = $SECRET$
+		}
+	}
+}
+
+#Copy vanilla secrets
+POD_copy_vanilla_secrets_effect = {
+	POD_secret_injector_vanilla = { EFFECT = POD_copy_secret_to_clone }
+}
+
+#Copy POD secrets
+POD_copy_supernatural_secrets_effect = {
+	POD_secret_injector_supernatural = { EFFECT = POD_copy_secret_to_clone }
+}
+
+POD_copy_flag_to_clone = {
+	if = {
+		limit = { scope:cloned_character = { has_character_flag = $FLAG$ } }
+		add_character_flag = $FLAG$
+	}
+}
+
+#Copy physical appearance
+POD_copy_physical_appearance_effect = {
+	POD_refresh_physical_appearance_effect = yes
+	copy_inheritable_appearance_from = scope:cloned_character
+	
+	# hair
+	POD_flag_injector_hairstyle = { EFFECT = POD_copy_flag_to_clone }
+	POD_flag_injector_haircolor = { EFFECT = POD_copy_flag_to_clone }
+	POD_flag_injector_beard     = { EFFECT = POD_copy_flag_to_clone }
+	
+	# clothes
+	POD_flag_injector_clothing  = { EFFECT = POD_copy_flag_to_clone }
+	POD_flag_injector_headgear  = { EFFECT = POD_copy_flag_to_clone }
+	POD_flag_injector_cloak     = { EFFECT = POD_copy_flag_to_clone }
+	POD_flag_injector_legwear   = { EFFECT = POD_copy_flag_to_clone }
+}
+
+POD_refresh_physical_appearance_effect = {
+	if = {
+		limit = { is_immortal = yes }
+		set_immortal_age = scope:cloned_character.POD_visual_age
+	}
+}
+
+#Copy base skills
+POD_copy_base_skills_effect = {
+	$CLONE$ = {
+		POD_copy_base_martial_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+		POD_copy_base_intrigue_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+		POD_copy_base_learning_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+		POD_copy_base_diplomacy_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+		POD_copy_base_stewardship_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+		POD_copy_base_prowess_effect = { CLONED_CHAR = $CLONED_CHAR$ }
+	}
+}
+
+POD_copy_base_martial_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_martial_effect = yes
+		}
+		POD_set_base_martial_effect = { VALUE = scope:base_martial }
+	}
+}
+
+POD_copy_base_intrigue_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_intrigue_effect = yes
+		}
+		POD_set_base_intrigue_effect = { VALUE = scope:base_intrigue }
+	}
+}
+
+POD_copy_base_learning_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_learning_effect = yes
+		}
+		POD_set_base_learning_effect = { VALUE = scope:base_learning }
+	}
+}
+
+POD_copy_base_diplomacy_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_diplomacy_effect = yes
+		}
+		POD_set_base_diplomacy_effect = { VALUE = scope:base_diplomacy }
+	}
+}
+
+POD_copy_base_stewardship_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_stewardship_effect = yes
+		}
+		POD_set_base_stewardship_effect = { VALUE = scope:base_stewardship }
+	}
+}
+
+POD_copy_base_prowess_effect = {
+	hidden_effect = {
+		$CLONED_CHAR$ = {
+			POD_get_base_prowess_effect = yes
+		}
+		POD_set_base_prowess_effect = { VALUE = scope:base_prowess }
+	}
+}
+
+POD_get_base_skill_effect = {
+	hidden_effect = {
+		if = { limit = { $SKILL$ >= POD_$SKILL$_cap } add_character_modifier = save_real_$SKILL$_negate_modifier }
+		while = {
+			limit = { $SKILL$ >= POD_$SKILL$_cap }
+			add_character_modifier = save_real_$SKILL$_modifier
+			force_character_skill_recalculation = yes
+		}
+		save_scope_value_as = { name = saved_skill value = $SKILL$ }
+		add_$SKILL$_skill = -10000
+		force_character_skill_recalculation = yes
+		save_scope_value_as = { name = modifier_skill value = $SKILL$ }
+		save_scope_value_as = { name = base_$SKILL$ value = 0 }
+		while = {
+			limit = { $SKILL$ < scope:saved_skill }
+			add_$SKILL$_skill = 1
+			force_character_skill_recalculation = yes
+			save_scope_value_as = { name = base_$SKILL$ value = { value = scope:base_$SKILL$ add = 1 } }
+		}
+		remove_character_modifier = save_real_$SKILL$_negate_modifier
+		remove_all_character_modifier_instances = save_real_$SKILL$_modifier
+		force_character_skill_recalculation = yes
+	}
+}
+
+POD_get_base_diplomacy_effect = {
+	POD_get_base_skill_effect = { SKILL = diplomacy }
+}
+
+POD_get_base_martial_effect = {
+	POD_get_base_skill_effect = { SKILL = martial }
+}
+
+POD_get_base_stewardship_effect = {
+	POD_get_base_skill_effect = { SKILL = stewardship }
+}
+
+POD_get_base_intrigue_effect = {
+	POD_get_base_skill_effect = { SKILL = intrigue }
+}
+
+POD_get_base_learning_effect = {
+	POD_get_base_skill_effect = { SKILL = learning }
+}
+
+POD_get_base_prowess_effect = {
+	POD_get_base_skill_effect = { SKILL = prowess }
+}
+
+POD_set_base_skill_effect = {
+	hidden_effect = {
+		add_$SKILL$_skill = -10000
+		add_$SKILL$_skill = $VALUE$
+		force_character_skill_recalculation = yes
+	}
+}
+
+POD_set_base_diplomacy_effect = {
+	POD_set_base_skill_effect = { SKILL = diplomacy VALUE = $VALUE$ }
+}
+
+POD_set_base_martial_effect = {
+	POD_set_base_skill_effect = { SKILL = martial VALUE = $VALUE$ }
+}
+
+POD_set_base_stewardship_effect = {
+	POD_set_base_skill_effect = { SKILL = stewardship VALUE = $VALUE$ }
+}
+
+POD_set_base_intrigue_effect = {
+	POD_set_base_skill_effect = { SKILL = intrigue VALUE = $VALUE$ }
+}
+
+POD_set_base_learning_effect = {
+	POD_set_base_skill_effect = { SKILL = learning VALUE = $VALUE$ }
+}
+
+POD_set_base_prowess_effect = {
+	POD_set_base_skill_effect = { SKILL = prowess VALUE = $VALUE$ }
+}
+#Copy POD-specific perks
+POD_copy_supernatural_lifestyle_perks_effect = {
+	# Vampire Disciplines
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = abombwe }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = animalism }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = auspex }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = bardo }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = bloodsorcery }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = celerity }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chimerstry }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = daimonion }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = dementation }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = dominate }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = fortitude }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = kai }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = melpominee }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = mytherceria }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = obfuscate }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = obtenebration }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = potence }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = presence }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = protean }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = rift }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = serpentis }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = animal_spiritus }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = animal_flight }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = temporis }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = thinbloodalchemy }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = vicissitude }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = visceratika }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = fleshcrafting }
+	
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = common_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = cappadocian_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = giovanni_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = harbinger_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = impundulu_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = lamia_necromancy }
+	# POD_copy_lifestyle_to_clone = { LIFESTYLE = nagaraja_necromancy }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = sorcerer_quietus }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = vizier_quietus }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = warrior_quietus }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = healer_valeren }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = warrior_valeren }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = watcher_valeren }
+	
+	# Hunter lifestyles
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = truefaith }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = patris }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = filius }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = spiritus }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = ritae }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = investitures }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = psalms }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = legacies }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = blessings }
+	
+	# Shih Qiao
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = i_shen }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = mo_kung }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = yu_an }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = feng }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shi }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chien }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = long_ling }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = meng }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = zhu_mao }
+	
+	# Mummy Hekau
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = alchemy }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = amulets }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = celestial }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = effigy }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = necromancy }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = nomenclature }
+	
+	# Wu'Tian Tan
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = feng_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = lung_tan }
+	
+	# Wraith Arcanoi
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = argos }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = castigate }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = embody }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = fatalism }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = inhabit }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = keening }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = lifeweb }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = moliate }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = outrage }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = pandemonium }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = phantasm }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = puppetry }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = usury }
+	
+	# Forbidden Arcanoi
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = flux }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = intimation }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = mnemosynis }
+	
+	# Jade Arcanoi
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chains_of_the_emperor }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = way_of_the_scholar }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = way_of_the_farmer }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = way_of_the_artisan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = way_of_the_merchant }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = way_of_the_soul }
+	
+	# Misc. Arcanoi
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = fascinate }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = serendipity }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = behest }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = connaissance }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = displace }
+	
+	# Fae Realms
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_actor }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_fae }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_prop }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_nature }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_scene }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = realm_time }
+
+	# Fae Arts
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chicanery }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = legerdemain }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = soothsay }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = wayfare }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = aphrodesia } 
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = kryos }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = metamorphosis }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = pyretics }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chronos }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = dream_craft }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = naming }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = sovereign }
+	
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = infusion }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = tale_craft }
+
+	# Inanimae Slivers
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = petros }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = aquis }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = pyros }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = stratus }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = verdage }
+
+	# Hsien Wu Tan
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = tieh_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = lin_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shui_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = hou_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = di_tan }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = nei_tan }
+	
+	# TODO: should clones have access to these?
+	# - Lores
+	# - Arcana
+	# - Investments
+	# - Possessed Powers
+	# - Gifts
+	# - Charms
+	
+	copy_sorcery_effect = yes
+	copy_theurgy_effect = yes
+	copy_psi_effect = yes
+
+	# KJ Arts
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = devil_fist }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = black_wind }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = iron_mountain }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = demon_regalia }
+	POD_copy_demon_arts_level_to_clone = { ART = devil_fist }
+	POD_copy_demon_arts_level_to_clone = { ART = black_wind }
+	POD_copy_demon_arts_level_to_clone = { ART = iron_mountain }
+	POD_copy_demon_arts_level_to_clone = { ART = demon_regalia }
+
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_ghost_arts }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_heavenly_arts }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_beast_arts }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_devil_arts }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_dragon_tear }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = the_hell_weaving }
+
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = feng_shui }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = obligation }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = tapestry }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = prana }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = kiai }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = tzu_wei }
+
+	# Should clones has shintai?
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_ash_and_flames }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_blood }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_bone }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_devotion }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_flesh }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_illusion }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_jade }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_poxes }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_storms }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = shintai_smoke }
+}
+
+POD_copy_demon_arts_level_to_clone = {
+	if = {
+		limit = {
+			scope:cloned_character = {
+				has_character_modifier = demon_arts_$ART$_modifier
+				save_temporary_scope_value_as = {
+					name = modifier_stack
+					value = demon_arts_$ART$_modifier_stacks
+				}
+			}
+		}
+		save_scope_value_as = {
+			name = while_count
+			value = {
+				value = scope:modifier_stack
+				subtract = demon_arts_$ART$_modifier_stacks
+			}
+		}
+		while = {
+			count = scope:while_count
+			add_perk = demon_arts_$ART$_perk
+		}
+	}
+}
+
+#Copy vanilla perks
+POD_copy_vanilla_lifestyle_perks_effect = {
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = foreign_affairs }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = majesty }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = family }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = strategy }
+	# can't assign absolute control to landless characters
+	#POD_copy_lifestyle_to_clone = { LIFESTYLE = authority }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = chivalry }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = wealth }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = domain }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = duty }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = skulduggery }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = temptation }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = intimidation }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = medicine }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = scholarship }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = theology }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = wayfarer }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = surveyor }
+	POD_copy_lifestyle_to_clone = { LIFESTYLE = voyager }
+}
+
+POD_copy_modifier_to_clone = {
+	if = {
+		limit = {
+			scope:cloned_character = {
+				has_character_modifier = $MODIFIER$
+			}
+		}
+		add_character_modifier = $MODIFIER$
+	}
+}
+
+#Copy vampire modifiers
+POD_copy_vampire_modifiers_effect = {
+	POD_modifier_injector_masquerade	= { EFFECT = POD_copy_modifier_to_clone }
+	POD_modifier_injector_hunger		= { EFFECT = POD_copy_modifier_to_clone }
+	POD_modifier_injector_bloodpotency	= { EFFECT = POD_copy_modifier_to_clone }
+}
+
+POD_copy_sexuality_effect = {
+	if = {
+		limit = { $ORIGIN$ = { has_sexuality = asexual } }
+		set_sexuality = asexual
+	}
+	else_if = {
+		limit = { $ORIGIN$ = { has_sexuality = bisexual } }
+		set_sexuality = bisexual
+	}
+	else_if = {
+		limit = { $ORIGIN$ = { has_sexuality = heterosexual } }
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						is_female = yes
+						$ORIGIN$ = { is_female = yes } 
+					}
+					AND = {
+						is_female = no
+						$ORIGIN$ = { is_female = no } 
+					}
+				}
+			}
+			set_sexuality = heterosexual
+		}
+		else = {
+			set_sexuality = homosexual
+		}
+	}
+	else_if = {
+		limit = { $ORIGIN$ = { has_sexuality = homosexual } }
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						is_female = yes
+						$ORIGIN$ = { is_female = yes } 
+					}
+					AND = {
+						is_female = no
+						$ORIGIN$ = { is_female = no } 
+					}
+				}
+			}
+			set_sexuality = homosexual
+		}
+		else = {
+			set_sexuality = heterosexual
+		}
+	}
+}
+
+POD_custom_copy_vanilla_traits_effect = {
+	save_scope_as = trait_receiver
+	$ORIGIN$ = {
+		every_character_trait = {
+			limit = {
+				OR = {
+					has_trait_category = personality
+					has_trait_category = education
+					has_trait_category = childhood
+					has_trait_category = commander
+					has_trait_category = winter_commander
+					has_trait_category = lifestyle
+					has_trait_category = court_type
+					has_trait_category = fame
+				}
+			}
+			scope:trait_receiver = {
+				add_trait = prev
+			}
+		}
+	}
+}
+
+invert_personality_effect = {
+	save_scope_as = inverted_character
+	every_character_trait = {
+		limit = { has_trait_category = personality }
+		add_to_list = traits_to_invert
+	}
+	every_in_list = {
+		list = traits_to_invert
+		scope:inverted_character = {
+			remove_trait = prev
+		}
+		random_opposite_trait = {
+			scope:inverted_character = {
+				add_trait_force_tooltip = prev
+			}
+		}
+	}
+}
+
+POD_copy_personality_effect = {
+	save_scope_as = origin
+	$TARGET$ = {
+		every_character_trait = {
+			limit = { has_trait_category = personality }
+			scope:origin = { add_trait = PREV }
+		}
+	}
+}

@@ -1,0 +1,166 @@
+﻿steel_skin_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 0 }
+	icon = node_learning
+	
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_trait = shih
+			}
+			add = 1989
+		}
+		if = {
+			limit = {
+				has_focus = qiao_mo_kung_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+
+	character_modifier = {
+		negate_prowess_penalty_add = 3
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = steel_skin_perk_effect
+		}
+	}
+}
+
+dragons_speed_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 1.25 }
+	icon = node_learning
+
+	parent = steel_skin_perk
+	
+	character_modifier = {
+		character_travel_speed_mult = 0.2
+		movement_speed = 0.2
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = dragons_speed_perk_effect
+		}
+	}	
+}
+
+tigers_strength_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 2.5 }
+	icon = node_learning
+
+	parent = dragons_speed_perk
+	
+	character_modifier = {
+		prowess_no_portrait = 5
+		advantage = 4
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = tigers_strength_perk_effect
+		}	
+	}
+}
+
+celestial_eyes_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 3.75 }
+	icon = node_learning
+
+	parent = tigers_strength_perk
+	
+	character_modifier = {
+		prowess_no_portrait = 2
+		intrigue = 1
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = celestial_eyes_perk_effect
+		}	
+	}
+}
+
+body_of_the_dragon_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 5 }
+	icon = node_learning
+
+	parent = celestial_eyes_perk
+
+	character_modifier = {
+		diplomacy = 1
+		martial = 1
+		stewardship = 1
+		intrigue = 1
+		learning = 1
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = body_of_the_dragon_perk_effect
+		}
+	}
+}
+
+ten_ox_strength_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 6.25 }
+	icon = node_learning
+
+	can_be_picked = { }	
+
+	parent = body_of_the_dragon_perk
+
+	character_modifier = {
+		prowess_no_portrait = 8
+		advantage = 6
+	}
+
+	effect = {
+		POD_qiao_elder_penalty_effect = { QIAO = mo_kung }
+		custom_description_no_bullet = {
+			text = ten_ox_strength_perk_effect
+		}
+	}
+}
+
+diamond_body_perk = {
+	lifestyle = qiao_lifestyle
+	tree = mo_kung
+	position = { 0 7.5 }
+	icon = year_of_lotus
+
+	can_be_picked = { }	
+
+	parent = ten_ox_strength_perk
+
+	character_modifier = {
+		negate_prowess_penalty_add = 10
+	}
+
+	effect = {
+		POD_qiao_elder_penalty_effect = { QIAO = mo_kung }
+		custom_description_no_bullet = {
+			text = diamond_body_perk_effect
+		}
+	}
+}

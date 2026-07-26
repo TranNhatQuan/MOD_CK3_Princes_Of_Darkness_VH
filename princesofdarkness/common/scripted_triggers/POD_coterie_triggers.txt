@@ -1,0 +1,446 @@
+﻿# Character scope
+
+POD_has_coterie_trigger = {
+	custom_tooltip = {
+		text = POD_has_coterie_trigger_tt
+		exists = var:coterie
+	}
+}
+
+POD_has_coterie_members_trigger = {
+	custom_tooltip = {
+		text = POD_has_coterie_members_trigger_tt
+		var:coterie ?= {
+			variable_list_size = {
+				name = members
+				value > 1
+			}
+		}
+	}
+}
+
+POD_has_coterie_players_trigger = {
+	var:coterie ?= {
+		any_in_list = {
+			variable = members
+			is_ai = no
+		}
+	}
+}
+
+POD_has_coterie_members_present_trigger = {
+	save_temporary_scope_as = coterie_leader
+	var:coterie ?= {
+		any_in_list = {
+			variable = members
+			count > 0
+			NOT = { this = scope:coterie_leader }
+			POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+		}
+	}
+}
+
+POD_is_in_same_coterie_trigger = {
+	exists = var:coterie
+	$TARGET$ = { exists = var:coterie }
+	var:coterie = $TARGET$.var:coterie
+}
+
+# For checking if a character is participating in someone else's journey
+# Use in that character's scope. TARGET is the Journey leader (e.g. root, for Journey events)
+POD_is_in_same_journey_trigger = {
+	OR = {
+		$TARGET$ = { has_variable = traveling_with_coterie }
+		this = $TARGET$
+	}
+	OR = {
+		current_travel_plan ?= { this = $TARGET$.current_travel_plan }
+		NOT = { exists = $TARGET$.current_travel_plan }
+	}
+}
+
+POD_coterie_at_max_size_trigger = {
+	coterie_size >= coterie_max_size
+}
+
+POD_is_valid_coterie_member_trigger = {
+	is_adult = yes
+	POD_is_not_incapable = yes
+	POD_is_not_unreachable_trigger = yes
+}
+
+# for character interactions (needs scope:actor)
+POD_coterie_interaction_requirements_trigger = {
+	custom_tooltip = {
+		text = POD_coterie_disabled_on_travel_phase_tt
+		scope:actor = {
+			NOT = { has_character_flag = POD_is_in_travel_phase }
+		}
+	}
+}
+
+# pass the variable containing the journey ID as VAR
+POD_already_has_seek_knowledge_trait_trigger = {
+	trigger_if = {
+		limit = { $VAR$ = flag:seek_knowledge_true_faith }
+		OR = {
+			has_trait = truefaith
+			has_trait = beatific
+		}
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_animalism }
+		has_trait = animalismdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_auspex }
+		has_trait = auspexdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_celerity }
+		has_trait = celeritydiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_dominate }
+		has_trait = dominatediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_fortitude }
+		has_trait = fortitudediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_obfuscate }
+		has_trait = obfuscatediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_potence }
+		has_trait = potencediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_presence }
+		has_trait = presencediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_protean }
+		has_trait = proteandiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_abombwe }
+		has_trait = abombwediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_bardo }
+		has_trait = bardodiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_kai }
+		has_trait = kaidiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_rift }
+		has_trait = riftdiscipline
+	}
+	# trigger_else_if = {
+	# 	limit = { $VAR$ = flag:seek_knowledge_bloodsorcery }
+	# 	has_trait = bloodsorcerydiscipline
+	# }
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_chimerstry }
+		has_trait = chimerstrydiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_daimonion }
+		has_trait = daimoniondiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_dementation }
+		has_trait = dementationdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_melpominee }
+		has_trait = melpomineediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_mytherceria }
+		has_trait = mytherceriadiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_obtenebration }
+		has_trait = obtenebrationdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_quietus }
+		has_trait = quietusdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_serpentis }
+		has_trait = serpentisdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_spiritus }
+		has_trait = spiritusdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_temporis }
+		has_trait = temporisdiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_valeren }
+		has_trait = valerendiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_vicissitude }
+		has_trait = vicissitudediscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_visceratika }
+		has_trait = visceratikadiscipline
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_thaumaturgy }
+		has_thaumaturgy_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_sielanic_thaumaturgy }
+		has_sielanic_thaumaturgy_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_dur_an_ki }
+		has_dur_an_ki_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_akhu }
+		has_akhu_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_sadhana }
+		has_sadhana_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_koldunic }
+		has_koldunic_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_sihr }
+		has_sihr_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_abyssal_mysticism }
+		has_abyssal_mysticism_bloodmagic_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_cappadocian }
+		has_cappadocian_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_giovanni }
+		has_giovanni_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_harbinger }
+		has_harbinger_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_impundulu }
+		has_impundulu_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_lamia }
+		has_lamia_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_nagaraja }
+		has_nagaraja_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_rosselini }
+		has_rosselini_necromancy_trigger = yes
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_chicanery }
+		has_trait = chicanery
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_legerdemain }
+		has_trait = legerdemain
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_primal }
+		has_trait = primal
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_soothsay }
+		has_trait = soothsay
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_wayfare }
+		has_trait = wayfare
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_aphrodesia }
+		has_trait = aphrodesia
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_kryos }
+		has_trait = kryos
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_metamorphosis }
+		has_trait = metamorphosis
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_pyretics }
+		has_trait = pyretics
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_chronos }
+		has_trait = chronos
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_dream_craft }
+		has_trait = dream_craft
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_naming }
+		has_trait = naming
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_sovereign }
+		has_trait = sovereign
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_infusion }
+		has_trait = infusion
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_tale_craft }
+		has_trait = tale_craft
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_aquis }
+		has_trait = aquis
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_petros }
+		has_trait = petros
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_pyros }
+		has_trait = pyros
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_stratus }
+		has_trait = stratus
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_verdage }
+		has_trait = verdage
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_di_tan }
+		has_trait = di_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_hou_tan }
+		has_trait = hou_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_lin_tan }
+		has_trait = lin_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_shui_tan }
+		has_trait = shui_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_tieh_tan }
+		has_trait = tieh_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_nei_tan }
+		has_trait = nei_tan
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_feng_shui }
+		has_trait = chi_art_feng_shui
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_obligation }
+		has_trait = chi_art_obligation
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_tapestry }
+		has_trait = chi_art_tapestry
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_kiai }
+		has_trait = chi_art_kiai
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_prana }
+		has_trait = chi_art_prana
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_tzu_wei }
+		has_trait = chi_art_tzu_wei
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_psychic }
+		has_trait = psychic
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_sorcery }
+		has_trait = sorcerer
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:seek_knowledge_theurgy }
+		has_trait = theurgist
+	}
+	trigger_else_if = {
+		limit = {
+			OR = {
+				$VAR$ = flag:seek_knowledge_demonology
+				$VAR$ = flag:seek_knowledge_demonology_baali
+			}
+		}
+		has_trait = demonology
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_actor }
+		has_trait = realm_actor
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_fae }
+		has_trait = realm_fae
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_prop }
+		has_trait = realm_prop
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_nature }
+		has_trait = realm_nature
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_scene }
+		has_trait = realm_scene
+	}
+	trigger_else_if = {
+		limit = { $VAR$ = flag:realm_mastery_time }
+		has_trait = realm_time
+	}
+	trigger_else = { always = no }
+}
+
+# Story scope
+POD_is_canon_coterie = {
+	exists = var:canon_coterie
+}
+
+# Secret scope
+POD_is_useful_ability_secret = {
+	OR = {
+		secret_type = secret_sorcerer
+		secret_type = secret_unbondable
+	}
+}

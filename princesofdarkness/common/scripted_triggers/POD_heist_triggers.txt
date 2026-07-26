@@ -1,0 +1,100 @@
+﻿
+##### Global scope
+
+POD_heist_is_hostile_trigger = {
+	$HEIST$ = {
+		OR = {
+			has_variable = force_hostile
+			POD_custom_incompatible_splats_trigger = {
+				ACTOR = story_owner
+				RECIPIENT = var:court_owner
+			}
+		}
+	}
+}
+
+##### Character scope
+
+POD_is_on_heist_trigger = {
+	has_variable = current_heist
+}
+
+POD_has_scouted_heist_trigger = {
+	var:current_journey ?= {
+		has_variable = scouted_heist
+	}
+}
+
+POD_heist_found_all_keys_trigger = {
+	var:current_heist ?= {
+		var:keys_found >= var:keys_required
+	}
+}
+
+POD_can_cause_heist_bankruptcy_trigger = {
+	# is the world ready?
+	always = no
+}
+
+POD_respawns_outside_heist_on_death_trigger = {
+	OR = {
+		has_trait = mummy
+		has_trait = demon
+		has_perk = sleep_of_the_hero_perk
+		has_perk = rebirthing_perk
+		has_perk = draught_of_phoenix_blood_perk
+	}
+}
+
+##### Artifact scope
+
+POD_heist_artifact_should_be_double_locked = {
+	rarity = illustrious
+}
+
+##### Story scope
+
+POD_heist_is_node_connected_trigger = {
+	$TARGET$ = { save_temporary_scope_as = target_node }
+	any_in_list = {
+		variable = lines
+		OR = {
+			var:start_node = scope:target_node
+			var:end_node   = scope:target_node
+		}
+	}
+}
+
+POD_heist_is_node_potential_start = {
+	has_variable = potential_start
+}
+
+POD_heist_is_node_potential_exit = {
+	has_variable = potential_exit
+	NOT = { has_variable = type }
+}
+
+POD_heist_is_node_potential_objective = {
+	has_variable = potential_objective
+	NOT = { has_variable = type }
+}
+
+POD_heist_is_node_uninitialized_side_objective = {
+	has_variable = side_objective
+	NOT = { has_variable = type }
+}
+
+POD_heist_is_node_exit_trigger = {
+	var:type ?= flag:node_exit
+}
+
+POD_heist_uses_suspicion_trigger = {
+	has_variable = suspicion
+}
+
+POD_heist_is_paused_trigger = {
+	OR = {
+		has_variable = paused_for_node_event
+		has_variable = paused_for_suspicion_event
+	}
+}

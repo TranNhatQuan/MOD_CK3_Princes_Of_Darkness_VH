@@ -1,0 +1,2858 @@
+﻿
+# restore_the_dream = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_the_dream_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# OR = {
+			# faith = faith:viaarchangeli
+			# is_toreador_trigger = yes
+			# this = character:790104
+			# this = character:790114
+			# this = character:505156
+			# }
+		# is_vampire_trigger = yes	
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_dream.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_thessalonika	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_the_dream_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_dream = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_dream
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+witching_lands = {
+	picture = {
+		reference = "gfx/interface/illustrations/event_scenes/forestgraveyard.dds"
+	}
+
+	desc = witching_lands_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		OR = {
+		house = house:house_lhiannan
+		faith = faith:pathoftheeightfoldwheel
+		faith = faith:baobhansith
+		}
+		is_vampire_trigger = yes	
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:e_lhiannan.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 1000
+		realm_size >= 50
+		completely_controls = title:k_ireland	
+		completely_controls = title:k_wales
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = witching_lands_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_lhiannan = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	hidden_effect = {
+		set_primary_title_to = title:e_lhiannan
+	}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_the_black_cross = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_the_black_cross_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_ventrue_trigger = yes
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_fiefs_of_the_black_cross.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# completely_controls = title:k_saxony
+		# completely_controls = title:k_lotharingia
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_the_black_cross_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_fiefs_of_the_black_cross = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_fiefs_of_the_black_cross
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_the_voivodate = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_the_voivodate_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_tzimisce_trigger = yes 
+		# is_vampire_trigger = yes	
+		# NOT = {
+			# faith = { religion_tag = sabbat_religion }
+		# }
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_voivodate.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# completely_controls = title:k_moldavia
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_the_voivodate_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_voivodate = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_voivodate
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_the_sea_of_shadows = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_the_sea_of_shadows_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_lasombra_trigger = yes 
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_sea_of_shadows.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_sicily
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_the_sea_of_shadows_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_sea_of_shadows = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_sea_of_shadows
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+
+# restore_avalon = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_avalon_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = faith:viamithras
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_avalon.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_england
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_avalon_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_avalon = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_avalon
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_love = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_love_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_toreador_trigger = yes
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_love.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_france
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_love_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_love = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_love
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_midgard = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_midgard_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = faith:viaeinherjar
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_midgard.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# completely_controls = title:k_norway
+		# completely_controls = title:k_sweden
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_midgard_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_midgard = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_midgard
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_ashirra = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_ashirra_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# OR = {
+			# faith = faith:tariqelalaam
+			# faith = faith:tariqelbedouin
+			# faith = faith:tariqelharb
+			# faith = faith:tariqelsama
+			# faith = faith:tariqelumma
+			# faith = faith:sheperdsofislam			
+			# }
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_ashirra.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_arabia
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_ashirra_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_ashirra = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_ashirra
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_alamut = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_alamut_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_assamite_trigger = yes
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_assamites.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# completely_controls = title:k_persia
+		# completely_controls = title:k_daylam
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_alamut_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_assamites = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_assamites
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_erciyes = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_erciyes_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		OR = {
+			is_giovanni_trigger = yes
+			is_cappadocian_trigger = yes
+		}
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_erciyes.holder
+		}
+		POD_bookmark_is_birth_of_sects = yes
+	}
+
+	is_valid = {	
+		prestige >= 500
+		completely_controls = title:k_anatolia
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_erciyes_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_erciyes = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_giovanni = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_giovanni_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		OR = {
+			is_giovanni_trigger = yes
+			is_cappadocian_trigger = yes
+		}
+		OR = {
+			house = house:house_giovanni
+			house = house:house_premascine
+		}	
+		POD_bookmark_is_in_1230 = yes
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_giovanni.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		completely_controls = title:c_venezia
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_giovanni_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_giovanni = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_ravnos = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_ravnos_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_ravnos_trigger = yes	
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_ravnos.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50			
+		# completely_controls = title:k_gujarat
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_ravnos_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_ravnos = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_ravnos
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_setite = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_setite_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_setite_trigger = yes	
+		# NOT = { this = character:790512 }
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_setite.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50			
+		# completely_controls = title:k_egypt
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_setite_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_setite = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_setite
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_talmahera = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_talmahera_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		OR = {
+			faith = faith:manusnigrum
+			faith = faith:talmahera
+			faith = faith:pathofthescorchedheart
+			faith = faith:pathofselffocus
+			faith = faith:derechlilit
+			faith = faith:viafaciendi
+			faith = faith:viaspinae
+			faith = faith:viacalantica				
+		}
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:e_talmahera.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 50
+		OR = {	
+		completely_controls = title:k_himalaya
+		completely_controls = title:k_armenia
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_talmahera_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_talmahera = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	hidden_effect = {
+		set_primary_title_to = title:e_talmahera
+	}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_obertus = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_obertus_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_tzimisce_trigger = yes
+		faith = faith:viacaeli	
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_obertus.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25		
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_obertus_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_obertus = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_moloch = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_moloch_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		faith = faith:viahyron	
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_moloch.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25		
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_moloch_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_moloch = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_azaneal = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_azaneal_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_baali_trigger = yes	
+		NOT = {
+		faith = faith:viahyron	
+		}
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_angellisater.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25		
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_azaneal_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_angellisater = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_web = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_web_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_assamite_trigger = yes	
+		# faith = faith:pathofrighteousness		
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_webofknives.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25		
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_web_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_webofknives = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_lost_tribe = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_lost_tribe_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_assamite_trigger = yes	
+		faith = faith:roadofahuramazda
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_losttribe.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25		
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_lost_tribe_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_losttribe = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_olives = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_olives_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_salubri_trigger = yes	
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_olives.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25	
+		completely_controls = title:d_palestine			
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_olives_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_olives = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_see_of_nod = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_see_of_nod_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = { religion_tag = bloodgnosticism_religion }					
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_seeofnod.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25	
+		# completely_controls = title:k_venice	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_see_of_nod_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_seeofnod = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_tremere = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_tremere_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_tremere_clan_or_bloodline_trigger = yes					
+		is_vampire_trigger = yes		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:e_tremere.holder
+		}		
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 50
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_tremere_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_tremere = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	hidden_effect = {
+		set_primary_title_to = title:e_tremere
+	}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_curtain = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_curtain_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# OR = {
+		# is_nosferatu_trigger = yes	
+		# has_faith = faith:viatantabus
+		# }					
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_shadow_curtain.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_opolye			
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_curtain_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_shadow_curtain = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_shadow_curtain
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_crescent = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_crescent_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# OR = {
+			# faith = faith:tariqelalaam
+			# faith = faith:tariqelbedouin
+			# faith = faith:tariqelharb
+			# faith = faith:tariqelsama
+			# faith = faith:tariqelumma
+			# }					
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_midnight_crescent.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25	
+		# completely_controls = title:k_andalusia					
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_crescent_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_midnight_crescent = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_feral = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_feral_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_gangrel_trigger = yes				
+		# is_vampire_trigger = yes
+		# NOT = { religion = religion:camarilla_religion }
+		# NOT = { religion = religion:sabbat_religion }
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_feral_horde.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25					
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_feral_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_feral_horde = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_eastern = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_eastern_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_ventrue_trigger = yes			
+		# is_vampire_trigger = yes		
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_eastern_lords.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+		# completely_controls = title:k_hungary			
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_eastern_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_eastern_lords = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_thunder = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_thunder_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_kueijin_trigger = yes			
+		# is_vampire_trigger = yes
+		# faith = faith:flameoftherisingphoenix										
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_infinite_thunder.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_orissa			
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_thunder_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_infinite_thunder = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_infinite_thunder
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+#restore_scarlet = {
+#	picture = {
+#		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+#	}
+#
+#
+#	desc = restore_scarlet_desc
+#	decision_group_type = major
+#
+#	ai_check_interval = 120
+#
+#	is_shown = {
+#		is_landed = yes
+#		is_kueijin_trigger = yes								
+#		NOT = {
+#			exists = title:e_golden_courts.holder
+#		}									
+#		NOT = {  #Can be redone if the Title is destroyed again.
+#			exists = title:e_scarlet_dragon.holder
+#		}
+#	}
+#
+#	is_valid = {	
+#		prestige >= 500
+#		realm_size >= 50
+#		completely_controls = title:k_pagan			
+#	}
+#
+#	is_valid_showing_failures_only = {
+#		is_capable_adult = yes
+#		is_imprisoned = no
+#		is_independent_ruler = yes
+#		is_at_war = no
+#	}
+#
+#	effect = {
+#	custom_tooltip = restore_scarlet_effect_tooltip
+#
+#	save_scope_as = scoped_ruler
+#		create_title_and_vassal_change = {
+#			type = created
+#			save_scope_as = change
+#			add_claim_on_loss = no
+#		}
+#
+#	title:e_scarlet_dragon = {
+#		change_title_holder = {
+#			holder = scope:scoped_ruler
+#			change = scope:change
+#		}
+#	}
+#	resolve_title_and_vassal_change = scope:change
+#	hidden_effect = {
+#		set_primary_title_to = title:e_scarlet_dragon
+#	}
+#	if = { 
+#		limit = { NOT = { has_government = august_court_government } }
+#		change_government = august_court_government
+#		hidden_effect = {
+#			every_vassal_or_below = {
+#				limit = {
+#					has_trait = kueijin
+#				}
+#				POD_change_government_if_landed = { GOVERNMENT = august_court_government }
+#			}
+#		}
+#	}
+#	}
+#	
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}
+
+# restore_celestial = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_celestial_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_kueijin_trigger = yes						
+		# is_vampire_trigger = yes
+		# faith = faith:faceofthegods													
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_celestial_tribe.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_celestial_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_celestial_tribe = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_golden = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_golden_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# culture = culture:occitan						
+		# is_vampire_trigger = yes
+		# is_toreador_trigger = yes
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_golden_cross.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+		# completely_controls = title:k_aquitaine	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_golden_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_golden_cross = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_grand = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_grand_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# is_vampire_trigger = yes
+		# is_ventrue_trigger = yes
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_grand_court.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+		# completely_controls = title:k_france
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_grand_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_grand_court = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_timisoara = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_timisoara_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_vampire_trigger = yes
+		faith = faith:viaprometheus
+		capital_province = {
+			geographical_region = world_europe_east
+		}		
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_timisoara_banat.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:k_eastern_lords
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_timisoara_effect_tooltip
+
+	save_scope_as = scoped_ruler
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	title:k_timisoara_banat = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_anda = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_anda_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = faith:viayasaq				
+		# is_vampire_trigger = yes									
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:e_anda.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 50
+		# completely_controls = title:k_otuken	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_anda_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:e_anda = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# hidden_effect = {
+		# set_primary_title_to = title:e_anda
+	# }
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_golconda = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_golconda_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_salubri_trigger = yes			
+		is_vampire_trigger = yes									
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_golconda.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:d_racakonda	
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_golconda_effect_tooltip
+
+	save_scope_as = scoped_ruler
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_golconda = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# restore_livonia = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_livonia_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = faith:viabestiae			
+		# is_vampire_trigger = yes									
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_ferals_livonia.holder
+		# }
+		# NOT = { religion = religion:camarilla_religion }
+		# NOT = { religion = religion:sabbat_religion }	
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+		# completely_controls = title:d_lithuanians	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_livonia_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_ferals_livonia = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# restore_reconquista = {
+	# picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	# desc = restore_reconquista_desc
+	# decision_group_type = major
+
+	# ai_check_interval = 120
+
+	# is_shown = {
+		# is_landed = yes
+		# NOT = {
+			# faith = faith:tariqelalaam
+			# faith = faith:tariqelbedouin
+			# faith = faith:tariqelharb
+			# faith = faith:tariqelsama
+			# faith = faith:tariqelumma
+			# }			
+		# is_vampire_trigger = yes
+		# is_lasombra_trigger = yes	
+		# NOT = {  #Can be redone if the Title is destroyed again.
+			# exists = title:k_shadow_reconquista.holder
+		# }
+	# }
+
+	# is_valid = {	
+		# prestige >= 500
+		# realm_size >= 25
+		# completely_controls = title:d_castilla	
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_capable_adult = yes
+		# is_imprisoned = no
+		# is_independent_ruler = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+	# custom_tooltip = restore_reconquista_effect_tooltip
+
+	# save_scope_as = scoped_ruler
+		# create_title_and_vassal_change = {
+			# type = created
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+
+	# title:k_shadow_reconquista = {
+		# change_title_holder = {
+			# holder = scope:scoped_ruler
+			# change = scope:change
+		# }
+	# }
+	# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# ai_potential = {
+		# always = yes
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+restore_red_order = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_red_order_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_red_order.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		AND = {
+			completely_controls = title:c_pisa
+			completely_controls = title:c_firenze
+			completely_controls = title:c_siena
+		}
+		
+		custom_tooltip = {
+			text = restore_redorder_tooltip	
+			OR = {
+				dynasty = dynasty:13000001
+				any_vassal = { dynasty = dynasty:13000001 }
+			}
+		}
+		
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_red_order_tooltip
+	if = {
+		limit = { dynasty = dynasty:13000001 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000001 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_red_order = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_knights_of_acre = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = restore_knights_of_acre_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_knights_of_acre.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:d_cyprus
+		
+		custom_tooltip = {
+			text = restore_acre_tooltip	
+			
+			OR = {
+				dynasty = dynasty:13000002
+				any_vassal = { dynasty = dynasty:13000002 }
+			}
+		}
+		
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+				
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_knights_of_acre_tooltip
+	
+	
+	if = {
+		limit = { dynasty = dynasty:13000002 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000002 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_knights_of_acre = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_sisters_of_st_john = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	desc = restore_sisters_of_st_john_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_sisters_of_st_john.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:d_norfolk
+		
+		custom_tooltip = {
+			text = restore_sisters_tooltip	
+			
+			OR = {
+				dynasty = dynasty:13000003
+				any_vassal = { dynasty = dynasty:13000003 }
+			}
+		}
+		
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+				
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_sisters_of_st_john_tooltip
+	
+	
+	if = {
+		limit = { dynasty = dynasty:13000003 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000003 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_sisters_of_st_john = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_house_murnau = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	desc = restore_house_murnau_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_house_murnau.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:d_bavaria
+		custom_tooltip = {
+			text = restore_murnau_tooltip	
+			
+			OR = {
+				dynasty = dynasty:13000004
+				any_vassal = { dynasty = dynasty:13000004 }
+			}
+		}
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+				
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_house_murnau_tooltip
+	
+	
+	if = {
+		limit = { dynasty = dynasty:13000004 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000004 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_house_murnau = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_oculi_dei = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	desc = restore_oculi_dei_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_oculi_dei.holder
+		}
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		completely_controls = title:d_flanders
+		
+		custom_tooltip = {
+			text = restore_oculidei_tooltip		
+			OR = {
+				dynasty = dynasty:13000005
+				any_vassal = { dynasty = dynasty:13000005 }
+			}
+		}
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+				
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_oculi_dei_tooltip
+	
+	if = {
+		limit = { dynasty = dynasty:13000005 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000005 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_oculi_dei = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+restore_sword_of_st_james = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	desc = restore_sword_of_st_james_desc
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:k_sword_of_st_james.holder
+		}
+		dynasty = dynasty:13000006	
+	}
+
+	is_valid = {	
+		prestige >= 500
+		realm_size >= 25
+		AND = {
+			completely_controls = title:c_asturias_de_oviedo
+			completely_controls = title:c_asturias_de_santillana
+			completely_controls = title:c_viscaya	
+		}
+		#custom_tooltip = {
+		#	text = restore_stjames_tooltip
+		#	OR = {
+		#		dynasty = dynasty:13000006
+		#		any_vassal = { dynasty = dynasty:13000006 }
+		#	}
+		#}
+		OR = {
+			AND = {
+				is_independent_ruler = no
+				liege = {
+					faith = faith:shadowinquisition
+					highest_held_title_tier >= tier_empire
+				}
+			}
+			is_independent_ruler = yes
+		}
+				
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	custom_tooltip = restore_sword_of_st_james_tooltip
+	
+	
+	if = {
+		limit = { dynasty = dynasty:13000006 }
+		save_scope_as = scoped_ruler
+	}
+	else = {
+		random_vassal = {
+			limit = { dynasty = dynasty:13000006 }
+			save_scope_as = scoped_ruler
+		}
+	}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_sword_of_st_james = {
+		change_title_holder = {
+			holder = scope:scoped_ruler
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

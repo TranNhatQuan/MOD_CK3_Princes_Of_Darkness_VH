@@ -1,0 +1,434 @@
+﻿
+POD_aura_absorption_perk_interaction = {
+	category = interaction_category_vampire
+	icon = POD_mytherceria_interaction
+	desc = POD_aura_absorption_perk_interaction_desc
+	
+	cooldown = { months = 6 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_mytherceria_trigger = yes }
+		scope:actor = { has_perk = aura_absorption_perk }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = { POD_discipline_cost_effect = { COUNT = 1 } }
+		scope:recipient = {
+			custom_tooltip = POD_aura_absorption_perk_interaction_desc
+			hidden_effect = {
+				POD_clear_resonance_effect = yes
+				POD_set_resonance_effect = yes
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_steal_the_mind_perk_interaction = {
+	category = interaction_category_vampire
+	icon = POD_mytherceria_interaction
+	desc = POD_steal_the_mind_perk_interaction_desc
+	
+	cooldown = { years = 3 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_mytherceria_trigger = yes }
+		scope:actor = { has_perk = steal_the_mind_perk }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = POD_steal_the_mind_perk_interaction_cost }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:diplomacy ?= yes
+				scope:martial ?= yes
+				scope:stewardship ?= yes
+				scope:intrigue ?= yes
+				scope:learning ?= yes
+			}
+		}
+	}
+
+	send_options_exclusive = no
+	
+	send_option = {
+		flag = diplomacy
+	}
+	
+	send_option = {
+		flag = martial
+	}
+	
+	send_option = {
+		flag = stewardship
+	}
+	
+	send_option = {
+		flag = intrigue
+	}
+	
+	send_option = {
+		flag = learning
+	}
+	
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = {
+			POD_discipline_cost_effect = { COUNT = POD_steal_the_mind_perk_interaction_cost }
+		}
+		scope:actor = {
+			duel = {
+				skill = intrigue
+				target = scope:recipient
+				30 = {
+					desc = POD_shared_loca_success
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					scope:recipient = {
+						if = {
+							limit = { scope:diplomacy = yes }
+							add_character_modifier = {
+								modifier = steal_the_mind_diplomacy_loss_modifier
+								years = 5
+							}
+						}
+						if = {
+							limit = { scope:martial = yes }
+							add_character_modifier = {
+								modifier = steal_the_mind_martial_loss_modifier
+								years = 5
+							}
+						}
+						if = {
+							limit = { scope:stewardship = yes }
+							add_character_modifier = {
+								modifier = steal_the_mind_stewardship_loss_modifier
+								years = 5
+							}
+						}
+						if = {
+							limit = { scope:intrigue = yes }
+							add_character_modifier = {
+								modifier = steal_the_mind_intrigue_loss_modifier
+								years = 5
+							}
+						}
+						if = {
+							limit = { scope:learning = yes }
+							add_character_modifier = {
+								modifier = steal_the_mind_learning_loss_modifier
+								years = 5
+							}
+						}
+					}
+				}
+				70 = {
+					desc = POD_shared_loca_failure
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					scope:actor = {
+						add_prestige = -100
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+	}
+	
+	auto_accept = yes
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 120
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+				is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_basilisks_touch_perk_interaction = {
+	category = interaction_category_vampire
+	icon = POD_mytherceria_interaction
+	desc = POD_basilisks_touch_perk_interaction_desc
+	
+	cooldown = { years = 5 }
+	cost = { piety = major_piety_value }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_mytherceria_trigger = yes }
+		scope:actor = { has_perk = basilisks_touch_perk }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 5 }
+		}
+		scope:recipient = {
+			POD_is_not_incorporeal_spirit = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = { POD_discipline_cost_effect = { COUNT = 5 } }
+		scope:actor = {
+			duel = {
+				skill = intrigue
+				target = scope:recipient
+				5 = {
+					desc = POD_shared_loca_success
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					scope:recipient = {
+						add_trait = incapable
+						add_character_flag = POD_stoneskin_form_flag
+						POD_depose_effect = yes
+					}
+				}
+				95 = {
+					desc = POD_shared_loca_failure
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 120
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+				is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+			factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}
+
+POD_stone_travel_perk_interaction = {
+	category = interaction_category_vampire
+	icon = POD_mytherceria_interaction
+	desc = POD_stone_travel_perk_interaction_desc
+	
+	use_diplomatic_range = no
+	cooldown = { months = 1 }
+
+	is_shown = {
+		scope:actor = { has_perk = stone_travel_perk }
+		scope:actor = { has_mytherceria_trigger = yes }
+		OR = {
+			POD_teleport_interaction_army_is_shown_trigger = yes
+			POD_teleport_interaction_travel_trigger = yes
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_teleport_interaction_travel_trigger = no }
+			POD_teleport_interaction_army_is_valid_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		custom_tooltip = {
+			text = POD_stone_travel_perk_interaction_tt
+			scope:actor.location = {
+				NOT = { terrain = oasis }
+				NOT = { terrain = wetlands }
+				NOT = { terrain = floodplains }
+			}
+		}
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_army_is_shown_trigger = yes }
+		is_valid = {
+			POD_teleport_interaction_army_is_valid_trigger = yes
+			custom_tooltip = {
+				text = POD_stone_travel_perk_interaction_tt2
+				scope:recipient.location = {
+					NOT = { terrain = oasis }
+					NOT = { terrain = wetlands }
+					NOT = { terrain = floodplains }
+				}
+			}
+		}
+		flag = teleport_army
+		localization = POD_teleport_army
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_travel_trigger = yes }
+		is_valid = {
+			custom_tooltip = {
+				text = POD_stone_travel_perk_interaction_tt3
+				scope:actor.current_travel_plan.next_destination_province ?= {
+					NOT = { terrain = oasis }
+					NOT = { terrain = wetlands }
+					NOT = { terrain = floodplains }
+				}
+			}
+		}
+		flag = teleport_travel
+		localization = POD_teleport_travel
+	}
+
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = { POD_discipline_cost_effect = { COUNT = 1 } }
+		scope:actor = {
+			switch = {
+				trigger = yes
+				scope:teleport_army = {
+					duel = {
+						skill = learning
+						value = 10
+					
+						50 = {
+							compare_modifier = {
+								value = scope:duel_value
+								multiplier = high_positive_duel_skill_multiplier
+							}
+							
+							POD_teleport_army_interaction_effect = yes
+						}
+						50 = {
+							compare_modifier = {
+								value = scope:duel_value
+								multiplier = low_negative_duel_skill_multiplier
+							}
+							
+							add_stress = minor_stress_impact_gain
+						}
+					}
+				}
+				scope:teleport_travel = {
+					POD_teleport_travel_interaction_effect = yes
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

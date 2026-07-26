@@ -1,0 +1,505 @@
+﻿
+POD_create_coterie_effect = {
+	create_story = {
+		type = POD_story_coterie
+		save_scope_as = coterie
+	}
+
+	save_scope_as = root_char
+	
+	hidden_effect_new_object = {
+		scope:coterie = {
+			POD_create_coa_dummy_character = {
+				EMPLOYER = character:POD_wraith_01
+				SAVE_AS = coa_dummy
+			}
+			scope:coa_dummy.house = {
+				set_coa = scope:root_char.house
+			}
+
+			set_variable = {
+				name = root_char
+				value = scope:root_char
+			}
+			set_variable = {
+				name = coa_dummy
+				value = scope:coa_dummy	
+			}
+		}
+	
+		POD_join_coterie_effect = yes
+	}
+}
+
+# need to pass coterie as a scope
+POD_join_coterie_effect = {
+	save_temporary_scope_as = new_coterie_member
+	
+	scope:coterie = {
+		every_in_list = {
+			variable = members
+			set_relation_coterie_member = scope:new_coterie_member
+			send_interface_toast = {
+				title = POD_new_coterie_member_title
+				left_icon = scope:new_coterie_member
+				custom_tooltip = POD_new_coterie_member_tt
+			}
+		}
+		add_to_variable_list = {
+			name = members
+			target = prev
+		}
+		every_in_list = {
+			variable = members
+			POD_refresh_coterie_modifiers = yes
+		}
+	}
+	
+	set_variable = {
+		name = coterie
+		value = scope:coterie
+	}
+
+	POD_assign_coterie_modifiers_when_joining = yes
+
+	POD_achiev_coterietutorial_check = yes
+}
+
+# For intialization (canon coteries) only. Doesn't show an interface toast.
+POD_create_canon_coterie_effect = {
+	if = {
+		limit = { is_alive = yes }
+
+		save_scope_as = root_char
+
+		create_story = {
+			type = POD_story_coterie
+			save_scope_as = coterie
+		}
+		
+		hidden_effect_new_object = {
+			scope:coterie = {
+				POD_create_coa_dummy_character = {
+					EMPLOYER = character:POD_wraith_01
+					SAVE_AS = coa_dummy
+				}
+
+				scope:coa_dummy.house = {
+					set_coa = $COA_KEY$
+				}
+
+				set_variable = {
+					name = root_char
+					value = scope:root_char
+				}
+				set_variable = {
+					name = coa_dummy
+					value = scope:coa_dummy	
+				}
+				add_to_variable_list = {
+					name = members
+					target = scope:root_char
+				}
+				set_variable = {
+					name = canon_coterie
+					value = flag:$NAME$
+				}
+			}
+	
+			set_variable = {
+				name = coterie
+				value = scope:coterie
+			}
+			
+			POD_error_suppression_unused_flag = { FLAG = $NAME$ }
+		}
+	}
+}
+
+POD_create_canon_coterie_default_coa_effect = {
+	POD_create_canon_coterie_effect = {
+		NAME = $NAME$
+		COA_KEY = scope:root_char.house
+	}
+}
+
+# For initialization (canon coteries) only. Doesn't show an interface toast.
+# Scope is a character who already has a coterie.
+# Need to pass TARGET (the character about to join)
+POD_add_to_canon_coterie_effect = {
+	if = {
+		limit = {
+			is_alive = yes
+			$TARGET$ = { is_alive = yes }
+		}
+
+		$TARGET$ = { save_temporary_scope_as = new_coterie_member }
+		var:coterie = {
+			every_in_list = {
+				variable = members
+				set_relation_coterie_member = scope:new_coterie_member
+			}
+			add_to_variable_list = {
+				name = members
+				target = scope:new_coterie_member
+			}
+		}
+		scope:new_coterie_member = {
+			set_variable = {
+				name = coterie
+				value = prev.var:coterie
+			}
+		}
+	}
+}
+
+POD_set_coterie_colorscheme = {
+	if = {
+		limit = { is_alive = yes }
+		var:coterie ?= {
+			$EFFECT$ = yes
+		}
+	}
+}
+
+POD_leave_coterie_with_rivalry_effect = {
+	if = {
+		# Incapable members (e.g. in torpor) don't become rivals
+		limit = {
+			POD_is_valid_coterie_member_trigger = yes
+			$RIVAL$ = { in_diplomatic_range = prev }
+		}
+		
+		if = {
+			limit = {
+				NOT = { has_relation_rival = $RIVAL$ }
+				NOT = { has_relation_nemesis = $RIVAL$ }
+			}
+			set_relation_rival = $RIVAL$
+		}
+		else = {
+			set_relation_nemesis = $RIVAL$
+		}
+	}
+
+	custom_tooltip = {
+		text = POD_leave_coterie_tt
+		POD_leave_coterie_effect = yes
+	}
+}
+
+POD_leave_coterie_effect = {
+	save_scope_as = old_coterie_member
+
+	if = {
+		limit = { coterie_size = 1 }
+		save_scope_value_as = {
+			name  = disband_coterie
+			value = yes
+		}
+	}
+	
+	POD_clear_coterie_hooks_when_leaving = yes
+	
+	every_relation = {
+		type = coterie_member
+		send_interface_toast = {
+			title = POD_coterie_member_left_title
+			left_icon = scope:old_coterie_member
+			custom_tooltip = POD_coterie_member_left_tt
+		}
+		prev = {
+			remove_relation_coterie_member = prev
+		}
+	}
+	var:coterie = {
+		remove_list_variable = {
+			name = members
+			target = prev
+		}
+		every_in_list = {
+			variable = members
+			POD_refresh_coterie_modifiers = yes
+		}
+		if = {
+			limit = { exists = scope:disband_coterie }
+			end_story = yes
+		}
+	}
+	remove_variable = coterie
+
+	POD_clear_coterie_modifiers_when_leaving = yes
+}
+
+POD_disband_coterie_effect = {
+	var:coterie ?= {
+		end_story = yes
+	}
+	# safeguard for rare edge cases
+	if = {
+		limit = { has_variable = coterie }
+		remove_variable = coterie
+	}
+}
+
+
+# Modifier efffects
+
+POD_assign_coterie_modifiers_when_joining = {
+	POD_fera_add_pack_totem_modifiers_coterie_effect = yes
+}
+
+# for a single member
+POD_refresh_coterie_modifiers = {
+	if = {
+		limit = { POD_psi_synergy_strength > 0 }
+		POD_reapply_scaling_character_modifier = { MODIFIER = psi_synergy_coterie_stress_buff }
+	}
+	else = {
+		POD_remove_character_modifier = { MODIFIER = psi_synergy_coterie_stress_buff }
+	}
+	POD_shintai_of_devotion_refresh_coterie_effect = yes
+}
+
+POD_refresh_coterie_modifiers_for_all_members = {
+	hidden_effect = {
+		POD_refresh_coterie_modifiers = yes
+		every_relation = {
+			type = coterie_member
+			POD_refresh_coterie_modifiers = yes
+		}
+	}
+}
+
+# coterie relations still exist when this effect is called
+POD_clear_coterie_hooks_when_leaving = {
+	POD_clear_shintai_of_devotion_hooks = yes
+	every_relation = {
+		type = coterie_member
+		POD_remove_mutual_hook_of_type = {
+			TYPE = vinculum_hook
+			TARGET = prev
+		}
+	}
+}
+
+# coterie relations no longer exist when this effect is called
+POD_clear_coterie_modifiers_when_leaving = {
+	POD_modifier_injector_coterie = { EFFECT = POD_remove_character_modifier }
+}
+
+
+# Run this before every "skill check" during Journey events
+# The best Coterie member for each stat gets saved as a scope:
+### scope:diplomacy_duelist
+### scope:martial_duelist
+### scope:stewardship_duelist
+### scope:intrigue_duelist
+### scope:learning_duelist
+### scope:prowess_duelist
+POD_save_coterie_duelists = {
+	POD_save_coterie_duelists_macro = {
+		EXCLUDE_ROOT = no
+		FORCE = no
+	}
+}
+
+# Same as above, but don't save the player if possible
+POD_save_coterie_duelists_except_root = {
+	POD_save_coterie_duelists_macro = {
+		EXCLUDE_ROOT = yes
+		FORCE = no
+	}
+}
+
+# Same as POD_save_coterie_duelists, but it saves Coterie members regardless of whether they're traveling with you
+POD_force_save_coterie_duelists = {
+	POD_save_coterie_duelists_macro = {
+		EXCLUDE_ROOT = no
+		FORCE = yes
+	}
+}
+
+POD_save_coterie_duelists_macro = {
+	hidden_effect = {
+		if = {
+			limit = {
+				has_variable = coterie
+				trigger_if = {
+					limit = { NOT = { always = $FORCE$ } }
+					has_variable = traveling_with_coterie
+				}
+				POD_has_coterie_members_trigger = yes
+			}
+			save_temporary_scope_as = coterie_leader
+			var:coterie = {
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = diplomacy
+					position = 0
+					save_scope_as = diplomacy_duelist
+				}
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = martial
+					position = 0
+					save_scope_as = martial_duelist
+				}
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = stewardship
+					position = 0
+					save_scope_as = stewardship_duelist
+				}
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = intrigue
+					position = 0
+					save_scope_as = intrigue_duelist
+				}
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = learning
+					position = 0
+					save_scope_as = learning_duelist
+				}
+				ordered_in_list = {
+					variable = members
+					limit = {
+						trigger_if = {
+							limit = { always = $EXCLUDE_ROOT$ }
+							NOT = { this = scope:coterie_leader }
+						}
+						trigger_if = {
+							limit = { NOT = { always = $FORCE$ } }
+							POD_is_in_same_journey_trigger = { TARGET = scope:coterie_leader }
+						}
+					}
+					order_by = prowess
+					position = 0
+					save_scope_as = prowess_duelist
+				}
+			}
+		}
+		else = {
+			save_scope_as = diplomacy_duelist
+			save_scope_as = martial_duelist
+			save_scope_as = stewardship_duelist
+			save_scope_as = intrigue_duelist
+			save_scope_as = learning_duelist
+			save_scope_as = prowess_duelist
+		}
+	}
+}
+
+# Secret scope
+POD_reveal_secret_to_coterie_effect = {
+	save_temporary_scope_as = coterie_secret
+	secret_owner = {
+		var:coterie ?= {
+			every_in_list = {
+				variable = members
+				scope:coterie_secret = { reveal_to = prev }
+			}
+		}
+	}
+}
+
+POD_vaulderie_effect = {
+	custom_tooltip = vaulderie_decision_effect
+	
+	send_interface_toast = {
+		type = event_toast_effect_good
+		title = POD_vaulderie_toast
+		
+		var:coterie ?= {
+			every_in_list = {
+				variable = members
+				limit = {
+					has_vampire_blood_race_trigger = yes
+				}
+				if = {
+					limit = { NOT = { has_character_modifier = POD_vinculum_modifier } }
+					add_character_modifier = POD_vinculum_modifier
+				}
+				POD_side_effects_from_becoming_unbondable = yes
+				hidden_effect = {
+					every_relation = {
+						type = coterie_member
+						limit = {
+							has_vampire_blood_race_trigger = yes
+							is_unbondable_trigger = no
+							prev = {
+								NOR = {
+									# Overwrite weak hooks, but not strong hooks
+									has_strong_hook = prev
+									has_hook_of_type = {
+										target = prev
+										type = vinculum_hook
+									}
+								}
+							}
+						}
+						prev = {
+							remove_hook = { target = prev }
+							add_hook = {
+								target = prev
+								type = vinculum_hook
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

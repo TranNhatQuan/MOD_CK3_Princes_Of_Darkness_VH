@@ -1,0 +1,197 @@
+﻿macro = {
+	description = "Return true if nothing blocks visibility of sidebar windows (e.g. switching characters)"
+	definition = "IsSidebarVisibilityValid"
+	replace_with = "And( Not( IsPauseMenuShown ), And(Or(Not(IsObserver), GetPlayer.IsValid), IsDefaultGUIMode))"
+}
+
+macro = {
+	description = "Returns an artifact that was saved as a variable on Charon"
+	definition = "GetPODArtifact(link)"
+	replace_with = "GetScriptedCharacterByHistoryID('POD_wraith_01').MakeScope.Var(link).Artifact"
+}
+
+macro = {
+	description = "Returns an artifact's colorized name that was saved as a variable on Charon"
+	definition = "GetPODArtifactName(link)"
+	replace_with = "GetScriptedCharacterByHistoryID('POD_wraith_01').MakeScope.Var(link).Artifact.Custom('ColorizedArtifactName')"
+}
+
+macro = {
+	description = "Returns an artifact's colorized name that was saved as a variable on Charon. If it doesn't exist, return a fallback string"
+	definition = "GetPODArtifactNameWithFallback(link,fallback)"
+	replace_with = "Select_CString( GetScriptedCharacterByHistoryID('POD_wraith_01').MakeScope.Var(link).IsSet, GetScriptedCharacterByHistoryID('POD_wraith_01').MakeScope.Var(link).Artifact.Custom('ColorizedArtifactName'), fallback )"
+}
+
+macro = {
+	description = "Returns true if the DLC in this datacontext is PoD"
+	definition = "DLCIsPOD"
+	replace_with = "EqualTo_string(Dlc.GetName,Localize('dlc_POD'))"
+}
+
+macro = {
+	description = "Returns true if a DLC is enabled. Makes sure the PoD 'DLC' always shows up as enabled even though it technically isn't"
+	definition = "PODDLCIsEnabled"
+	replace_with = "Or(Dlc.IsEnabled,DLCIsPOD)"
+}
+
+macro = {
+	description = "Returns true if a trait shouldn't have stars in its icon (based on trait level). Data_binding macro since SGUIs are slower"
+	definition = "HideTraitStars"
+	replace_with = "Or4( ObjectsEqual(Trait.GetGroup, GetTraitGroup('fera').Self), ObjectsEqual(Trait.Self, GetTrait('mummy').Self), ObjectsEqual(Trait.Self, GetTrait('integrity').Self), ObjectsEqual(Trait.Self, GetTrait('demonology').Self))"
+}
+
+macro = {
+	description = "Return true if the Scripted GUI 'text' is shown, passing the scoped Trait as the root"
+	definition = "TraitGuiIsShown(text)"
+	replace_with = "GetScriptedGui(text).IsShown(GuiScope.SetRoot(Trait.MakeScope).End)"
+}
+
+macro = {
+	description = "Return true if the player has selected this trait in the Ruler Designer"
+	definition = "HasRDTrait(text)"
+	replace_with = "RulerDesignerWindow.HasTrait(GetTrait(text).Self)"
+}
+
+macro = {
+	description = "Return true if has trait with discipline acess in Ruler Designer Window"
+	definition = "HasDisciplineAcessTrait"
+	replace_with = "Or4( HasRDTrait('vampire'), HasRDTrait('ghoul'), HasRDTrait('revenant'), HasRDTrait('risen') )"
+}
+
+macro = {
+	description = "Return true if has fera trait in Ruler Designer Window"
+	definition = "HasFeraTrait"
+	replace_with = "Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(HasRDTrait('werewolf'), HasRDTrait('ajaba')), HasRDTrait('bastet')), HasRDTrait('corax')), HasRDTrait('gurahl')), HasRDTrait('kitsune')), HasRDTrait('mokole')), HasRDTrait('nagah')), HasRDTrait('nuwisha')), HasRDTrait('ratkin')), HasRDTrait('rokea')), HasRDTrait('apis')), HasRDTrait('camazotz')), HasRDTrait('grondr'))"
+}
+
+macro = {
+	description = "Return true if has splat trait in Ruler Designer Window"
+	definition = "HasSplatTrait"
+	replace_with = "Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(Or(HasRDTrait('use_ingame_chargen'), HasRDTrait('vampire')), HasRDTrait('ghoul')), HasRDTrait('revenant')), HasRDTrait('kueijin')), HasRDTrait('supehunter')), HasRDTrait('mage')), HasRDTrait('demon')), HasRDTrait('fae')), HasRDTrait('changeling')), HasRDTrait('wraith')), HasRDTrait('mummy')), HasFeraTrait), HasRDTrait('entomos'))"
+}
+
+macro = {
+	description = "Returns the player's stress as an int32 (for the HUD). Hides stress changes due to static_stress calculations"
+	definition = "PODGetStressProgress"
+	replace_with = "FixedPointToFloat(GetPlayer.MakeScope.ScriptValue('POD_stress_progress_gui'))"
+}
+
+macro = {
+	description = "Returns the player's stress level as an int32 (for the HUD). Hides stress changes due to static_stress calculations"
+	definition = "PODGetStressLevel"
+	replace_with = "FixedPointToInt(GetPlayer.MakeScope.ScriptValue('POD_stress_level_gui'))"
+}
+
+macro = {
+	description = "Return true if Beast lines (red text) should show up for the player"
+	definition = "PlayerHasBeast"
+	replace_with = "GetScriptedGui('has_a_beast_gui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)"
+}
+
+macro = {
+	description = "Return true if the Shattering happened"
+	definition = "DidShatteringHappen"
+	replace_with = "GetScriptedGui('POD_shattering_sgui').IsShown(GuiScope.End)"
+}
+
+macro = {
+	description = "Show the localized name of the Umbra Realm belonging to the flag, with a tooltip showing its description"
+	definition = "UmbraGlossary(flag)"
+	replace_with = "Glossary(Localize(Concatenate('umbra_realm_', flag)), Concatenate3('umbra_realm_', flag, '_desc'))"
+}
+
+macro = {
+	description = "Like UmbraGlossary, but instead of the Realm's default name, the link shows up as a custom string (loc)."
+	definition = "UmbraGlossaryLocalized(flag,loc)"
+	replace_with = "Glossary(loc, Concatenate3('umbra_realm_', flag, '_desc'))"
+}
+
+macro = {
+	description = "Displays the health track box at index i for character c. Indices start at 1 and are CFixedPoint"
+	definition = "WoundBox(i,c)"
+	replace_with = "GetScriptedGui( 'POD_show_wound_box' ).BuildTooltip( GuiScope.SetRoot( c ).AddScope( 'index', MakeScopeValue( i ) ).End )"
+}
+
+macro = {
+	description = "Displays the health track box at index i for the character who's the current root scope. Indices start at 1 and are CFixedPoint"
+	definition = "TraitWoundBox(i)"
+	replace_with = "WoundBox(i,ROOT.Char.MakeScope)"
+}
+
+macro = {
+	description = "Displays the health track box at index i for the character who's the current datacontext. Indices start at 1 and are CFixedPoint"
+	definition = "CharacterWoundBox(i)"
+	replace_with = "WoundBox(i,Character.MakeScope)"
+}
+
+macro = {
+	description = "Displays the splat-agnostic energy value i (a number from 0-10) as an appropriate splat-specific energy amount. i is CFixedPoint"
+	definition = "PlayerEnergy(i)"
+	replace_with = "GetScriptedGui('POD_splat_energy_cost').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('value',MakeScopeValue(i)).End)"
+}
+
+macro = {
+	description = "Displays the splat-agnostic energy value v (a number from 0-10) as an appropriate splat-specific energy amount. v is the name of a script_value"
+	definition = "PlayerEnergyValue(v)"
+	replace_with = "PlayerEnergy(GetPlayer.MakeScope.ScriptValue(v))"
+}
+
+macro = {
+	description = "Displays the blood value i (a number from 0-5) as an appropriate splat-specific energy amount. i is CFixedPoint"
+	definition = "PlayerBlood(i)"
+	replace_with = "GetScriptedGui('POD_splat_blood_cost').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('value',MakeScopeValue(i)).End)"
+}
+
+macro = {
+	description = "Displays the blood value v (a number from 0-5) as an appropriate splat-specific energy amount. v is the name of a script_value"
+	definition = "PlayerBloodValue(v)"
+	replace_with = "PlayerBlood(GetPlayer.MakeScope.ScriptValue(v))"
+}
+
+macro = {
+	description = "Returns true if this bookmark character should use golden special effects"
+	definition = "BookmarkCharacterGlowsGold"
+	replace_with = "Or4(BookmarkCharacter.GetGovernmentType.IsType('inquisition_government'), BookmarkCharacter.GetGovernmentType.IsType('cell_government'), BookmarkCharacter.GetGovernmentType.IsType('cult_government'), BookmarkCharacter.GetGovernmentType.IsType('household_government'))"
+}
+
+macro = {
+	description = "Returns true if this bookmark character should use green special effects"
+	definition = "BookmarkCharacterGlowsGreen"
+	replace_with = "BookmarkCharacter.GetGovernmentType.IsType('fera_tribe_government')"
+}
+
+macro = {
+	description = "Returns true if this bookmark character should use red special effects"
+	definition = "BookmarkCharacterGlowsRed"
+	replace_with = "Not(Or(BookmarkCharacterGlowsGold,BookmarkCharacterGlowsGreen))"
+}
+
+macro = {
+	description = "Returns the portrait environment that the Ruler Designer should use for the body (based on if nighttime lighting was toggled)"
+	definition = "RDLightingBody"
+	replace_with = "Select_CString( VariableSystem.Exists('rd_night'), 'POD_environment_hud', 'environment_body' )"
+}
+
+macro = {
+	description = "Returns the portrait environment that the Ruler Designer should use for the head (based on if nighttime lighting was toggled)"
+	definition = "RDLightingHead"
+	replace_with = "Select_CString( VariableSystem.Exists('rd_night'), 'POD_environment_hud', 'environment_head' )"
+}
+
+macro = {
+	description = "Sets up the Fleshcrafting perks from the selected layer for the Fleshcrafting GUI"
+	definition = "SelectFleshcraftLayer(text)"
+	replace_with = "ScriptedGui.Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'layer', MakeScopeFlag(text) ).End )"
+}
+
+macro = {
+	description = "Removes the perk from the selected layer for the Fleshcrafting GUI"
+	definition = "ClearFleshcraftLayer(text)"
+	replace_with = "GetScriptedGui('POD_fleshcrafting_clear_layer_perk').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'layer', MakeScopeFlag(text) ).End )"
+}
+
+macro = {
+	description = "Returns true if the player is currently editing this layer in the Fleshcrafting GUI"
+	definition = "IsFleshcraftLayerSelected(text)"
+	replace_with = "EqualTo_string( text, GetPlayer.MakeScope.Var('fc_selected_layer').GetFlagKey )"
+}

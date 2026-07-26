@@ -1,0 +1,198 @@
+﻿nocturne_power_effect = {
+    save_temporary_scope_as  = victim
+    random_list = {
+	    5 = {
+		    if = {
+			    limit = {
+				    $NOCTURNE_USER$ = {
+				        NOT = { has_perk = the_darkness_within_perk }
+						NOT = { has_trait = obtenebrationadvanced }
+					}
+				}
+			    add_character_modifier = nocturne_drained_stamina_modifier
+                $NOCTURNE_USER$ = {
+                    add_piety = -10
+				}				
+			}
+			else_if = {
+			    limit = {
+				    $NOCTURNE_USER$ = {
+					    AND = {
+						    OR = {
+							    has_trait = obtenebrationadvanced
+								has_perk = the_darkness_within_perk
+							}
+							NOT = { has_perk = devour_all_hope_perk }
+						}
+						trigger_if = {
+							limit = { POD_is_on_golconda_trigger = yes }
+							scope:victim = {
+								NOT = { POD_will_die_from_feeding_trigger = { AMOUNT = 1 } }
+							}
+						}
+					}
+				}
+				$NOCTURNE_USER$ = {
+					POD_drink_from_victim_effect = {
+						AMOUNT = 1
+						VICTIM = scope:victim
+					}
+				}
+			    add_character_modifier = darkness_within_drained_stamina_modifier
+				$NOCTURNE_USER$ = {
+                    add_piety = -15
+				}	
+			}
+			else_if = {
+			    limit = {
+				    $NOCTURNE_USER$ = {
+				        has_perk = devour_all_hope_perk
+						trigger_if = {
+							limit = { POD_is_on_golconda_trigger = yes }
+							scope:victim = {
+								NOT = { POD_will_die_from_feeding_trigger = { AMOUNT = 2 } }
+							}
+						}
+					}
+				}
+				$NOCTURNE_USER$ = {
+					POD_drink_from_victim_effect = {
+						AMOUNT = 2
+						VICTIM = scope:victim
+					}
+				}
+			    add_character_modifier = devour_all_hope_drained_stamina_modifier
+				$NOCTURNE_USER$ = {
+                    add_piety = -25
+				}	
+			}
+			
+			
+			modifier = {
+			    add = 10
+				stewardship < 5
+			}
+			modifier = {
+			    add = 10
+				stewardship < 10
+			}
+			modifier = {
+			    add = 10
+			    OR = {
+				    has_perk = the_darkness_within_perk
+					has_trait = obtenebrationadvanced
+				}
+			}
+			modifier = {
+			    add = 15
+				has_perk = devour_all_hope_perk
+			}
+		}
+		10 = {
+		    
+			modifier = {
+			    add = 10
+				stewardship > 15
+			}
+			modifier = {
+			    add = 10
+				stewardship > 20
+			}
+            modifier = {
+                add = 5
+				has_trait = fortitude
+			}
+ 			modifier = {
+                add = 20
+				has_trait = fortitudeadvanced
+			}
+			modifier = {
+			    add = 10
+				has_trait = truefaith
+			}
+			modifier = {
+			    add = 20
+				has_trait = beatific
+			}
+			modifier = {
+			    add = 5
+				has_trait = obtenebration
+			}
+			modifier = {
+			    add = 10
+				has_trait = obtenebrationadvanced
+			}
+		}
+	}
+	
+	$NOCTURNE_USER$ = {
+		if = {
+			limit = {
+				NOT = { has_character_flag = POD_used_disciplines_in_battle_flag }
+			}
+			add_character_flag = POD_used_disciplines_in_battle_flag
+		}
+	}
+}
+
+phobia_power_effect = {
+	if = {
+		limit = { NOT = { has_perk = bloodlust_perk } }
+		if = {
+			limit = {
+				dread < 20
+			}
+			add_character_modifier = phobia_1_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 40
+			}
+			add_character_modifier = phobia_2_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 60
+			}
+			add_character_modifier = phobia_3_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 80
+			}
+			add_character_modifier = phobia_4_modifier
+		}
+		else = {
+			add_character_modifier = phobia_5_modifier
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				dread < 20
+			}
+			add_character_modifier = bloodlust_1_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 40
+			}
+			add_character_modifier = bloodlust_2_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 60
+			}
+			add_character_modifier = bloodlust_3_modifier
+		}
+		else_if = {
+			limit = {
+				dread < 80
+			}
+			add_character_modifier = bloodlust_4_modifier
+		}
+		else = {
+			add_character_modifier = bloodlust_5_modifier
+		}
+	}
+}

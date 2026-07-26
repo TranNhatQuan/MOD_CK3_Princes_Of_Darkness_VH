@@ -1,0 +1,48 @@
+﻿namespace = POD_hazimel_wisdom
+
+POD_hazimel_wisdom.001 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_hazimel_wisdom.001.t
+	desc = POD_hazimel_wisdom.001.desc
+	theme = vampire
+	
+	left_portrait = {
+	    character = scope:seeker
+		animation = stress
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_hazimel_wisdom.001.option.a
+		custom_tooltip = POD_hazimel_wisdom.001.option.a.tt
+		
+		add_character_modifier = wisdom_of_hazimel_modifier
+		add_prestige = 300
+		hidden_effect = {
+			POD_give_permanent_injury_effect = { TRAIT = one_eyed }
+		}
+	}
+	
+	option = {
+	    name = POD_hazimel_wisdom.001.option.b
+		custom_tooltip = POD_hazimel_wisdom.001.option.b.tt
+		
+		add_character_modifier = wisdom_of_hazimel_modifier
+		add_prestige = 300
+		hidden_effect = {
+			POD_give_permanent_injury_effect = { TRAIT = one_legged }
+		}
+	}
+	
+	option = {
+	    name = POD_hazimel_wisdom.001.option.c
+		custom_tooltip = POD_hazimel_wisdom.001.option.c.tt
+		
+		add_prestige = -200
+	}
+}

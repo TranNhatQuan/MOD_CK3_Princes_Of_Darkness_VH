@@ -1,0 +1,711 @@
+﻿namespace = POD_ghoul_maintenance
+
+POD_ghoul_maintenance.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_contact_fellow_ghouls_decision
+	desc = POD_contact_fellow_ghouls_decision_desc
+	theme = vampire
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		create_character = {
+			location = root.capital_province
+			trait = ghoul
+			culture = ROOT.culture
+			faith = ROOT.faith
+
+			#Education
+			random_traits_list = {
+				count = 1
+				education_diplomacy_3 = { weight = { base = 20 } }
+				education_diplomacy_4 = { weight = { base = 10 } }
+			}
+
+			random_traits = yes
+			diplomacy = { 6 7 }
+
+			gender_female_chance = 50
+
+			save_scope_as = dispossessed
+
+			after_creation = {
+				POD_become_ghoul_effect = yes
+				random_list = {
+					20 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 10 } }
+					16 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 9 } }
+					12 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 8 } }
+					8 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 7 } }
+					4 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 6 } }
+					1 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 5 } }
+				}
+			}
+		}
+		create_character = {
+			location = root.capital_province
+			trait = ghoul
+			culture = ROOT.culture
+			faith = ROOT.faith
+
+			#Education
+			random_traits_list = {
+				count = 1
+				education_martial_3 = { weight = { base = 20 } }
+				education_martial_prowess_3 = { weight = { base = 20 } }
+				education_martial_4 = { weight = { base = 10 } }
+				education_martial_prowess_4 = { weight = { base = 10 } }
+			}
+
+			random_traits = yes
+			martial = { 6 7 }
+			prowess = { 10 20 }
+
+			gender_female_chance = 50
+
+			save_scope_as = folch_cutthroats
+
+			after_creation = {
+				POD_become_ghoul_effect = yes
+				random_list = {
+					20 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 10 } }
+					16 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 9 } }
+					12 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 8 } }
+					8 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 7 } }
+					4 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 6 } }
+					1 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 5 } }
+				}
+			}
+		}
+		create_character = {
+			location = root.capital_province
+			trait = ghoul
+			culture = ROOT.culture
+			faith = ROOT.faith
+
+			#Education
+			random_traits_list = {
+				count = 1
+				education_learning_3 = { weight = { base = 20 } }
+				education_learning_4 = { weight = { base = 10 } }
+			}
+
+			random_traits = yes
+			learning = { 6 7 }
+
+			gender_female_chance = 50
+
+			save_scope_as = oder_of_st_panteleimon
+
+			after_creation = {
+				POD_become_ghoul_effect = yes
+				random_list = {
+					20 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 10 } }
+					16 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 9 } }
+					12 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 8 } }
+					8 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 7 } }
+					4 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 6 } }
+					1 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 5 } }
+				}
+			}
+		}
+		create_character = {
+			location = root.capital_province
+			trait = ghoul
+			culture = ROOT.culture
+			faith = ROOT.faith
+
+			#Education
+			random_traits_list = {
+				count = 1
+				education_intrigue_3 = { weight = { base = 20 } }
+				education_intrigue_4 = { weight = { base = 10 } }
+			}
+
+			random_traits = yes
+			intrigue = { 6 7 }
+
+			gender_female_chance = 50
+
+			save_scope_as = haqims_assassins
+
+			after_creation = {
+				POD_become_ghoul_effect = yes
+				random_list = {
+					20 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 10 } }
+					16 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 9 } }
+					12 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 8 } }
+					8 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 7 } }
+					4 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 6 } }
+					1 = { POD_ghoul_new_generation_ingested_effect = { GENERATION = 5 } }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_ghoul_maintenance.1.a
+
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:contact_the_dispossessed_objective_decision
+			}
+		}
+
+		custom_tooltip = POD_contact_fellow_ghouls_decision_effect1
+
+		send_interface_message = {
+			title = POD_contact_fellow_ghouls_decision
+			type = event_prowess_good
+			left_icon = scope:dispossessed
+			add_courtier = scope:dispossessed
+		}
+		hidden_effect = {
+			scope:folch_cutthroats = { death = { death_reason = death_disappearance } }
+			scope:oder_of_st_panteleimon = { death = { death_reason = death_disappearance } }
+			scope:haqims_assassins = { death = { death_reason = death_disappearance } }
+		}
+	}
+
+	option = {
+		name = POD_ghoul_maintenance.1.b
+
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:contact_the_folch_cutthroats_objective_decision
+			}
+		}
+
+		custom_tooltip = POD_contact_fellow_ghouls_decision_effect1
+
+		send_interface_message = {
+			title = POD_contact_fellow_ghouls_decision
+			type = event_prowess_good
+			left_icon = scope:folch_cutthroats
+			add_courtier = scope:folch_cutthroats
+		}
+		hidden_effect = {
+			scope:dispossessed = { death = { death_reason = death_disappearance } }
+			scope:oder_of_st_panteleimon = { death = { death_reason = death_disappearance } }
+			scope:haqims_assassins = { death = { death_reason = death_disappearance } }
+		}
+	}
+
+	option = {
+		name = POD_ghoul_maintenance.1.c
+
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:contact_the_order_of_st_panteleimon_objective_decision
+			}
+		}
+
+		custom_tooltip = POD_contact_fellow_ghouls_decision_effect1
+
+		send_interface_message = {
+			title = POD_contact_fellow_ghouls_decision
+			type = event_prowess_good
+			left_icon = scope:oder_of_st_panteleimon
+			add_courtier = scope:oder_of_st_panteleimon
+		}
+		hidden_effect = {
+			scope:dispossessed = { death = { death_reason = death_disappearance } }
+			scope:folch_cutthroats = { death = { death_reason = death_disappearance } }
+			scope:haqims_assassins = { death = { death_reason = death_disappearance } }
+		}
+	}
+
+	option = {
+		name = POD_ghoul_maintenance.1.d
+
+		trigger = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:contact_the_haqims_assassins_objective_decision
+			}
+		}
+
+		custom_tooltip = POD_contact_fellow_ghouls_decision_effect1
+
+		send_interface_message = {
+			title = POD_contact_fellow_ghouls_decision
+			type = event_prowess_good
+			left_icon = scope:haqims_assassins
+			add_courtier = scope:haqims_assassins
+		}
+		hidden_effect = {
+			scope:dispossessed = { death = { death_reason = death_disappearance } }
+			scope:folch_cutthroats = { death = { death_reason = death_disappearance } }
+			scope:oder_of_st_panteleimon = { death = { death_reason = death_disappearance } }
+		}
+	}
+
+	option = {
+		name = POD_ghoul_maintenance.1.back
+		remove_decision_cooldown = POD_contact_fellow_ghouls_decision
+		add_prestige = 150
+		hidden_effect = {
+			scope:dispossessed = { death = { death_reason = death_disappearance } }
+			scope:folch_cutthroats = { death = { death_reason = death_disappearance } }
+			scope:oder_of_st_panteleimon = { death = { death_reason = death_disappearance } }
+			scope:haqims_assassins = { death = { death_reason = death_disappearance } }
+		}
+	}
+}
+
+POD_ghoul_maintenance.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_ghoul_maintenance.2.t
+	desc = POD_ghoul_maintenance.2.desc
+	theme = vampire
+
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		POD_is_ghoul_trigger = yes
+		NOT = { has_variable = POD_highest_generation_ingested }
+		NOT = { has_character_flag = charjoin_become_ghoul_flag }
+	}
+
+	option = {
+		name = trait_vampgeneration4
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 4 }
+	}
+
+	option = {
+		name = trait_vampgeneration5
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 5 }
+	}
+
+	option = {
+		name = trait_vampgeneration6
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 6 }
+	}
+
+	option = {
+		name = trait_vampgeneration7
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 7 }
+	}
+
+	option = {
+		name = trait_vampgeneration8
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 8 }
+	}
+
+	option = {
+		name = trait_vampgeneration9
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 9 }
+	}
+
+	option = {
+		name = trait_vampgeneration10
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 10 }
+	}
+
+	option = {
+		name = trait_vampgeneration11
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 11 }
+	}
+
+	option = {
+		name = trait_vampgeneration12
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 12 }
+	}
+
+	option = {
+		name = trait_vampgeneration13
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 13 }
+	}
+
+	after = {
+		POD_lose_inaccessible_discipline_perks_effect = yes
+	}
+}
+
+# Fallback in case you chose to become a bound ghoul in the character creator but failed to pick a master in time
+# (masterless ghoul setup)
+POD_ghoul_maintenance.3 = {
+	hidden = yes
+	
+	trigger = {
+		POD_is_ghoul_trigger = yes
+		POD_is_bound_ghoul_trigger = no
+		NOT = { has_character_flag = charjoin_become_ghoul_flag }
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					NOR = {
+						religion = { is_in_family = rf_kindred }
+						POD_has_valid_splat_agnostic_faith = yes
+					}
+					# Character generator sets you to Via Humanitatis by default
+					# make sure you still get to choose your faith in that case
+					AND = {
+						has_character_flag = POD_used_character_generator
+						has_faith = faith:viahumanitatis
+					}
+				}
+			}
+			# set a vampire religion beforehand so the masquerade modifier gets initialized properly in POD_become_ghoul_effect
+			POD_character_revenant_faith_initialization_effect = yes
+			trigger_event = POD_chargen.710
+		}
+	
+		POD_become_ghoul_effect = yes
+		
+		# If you managed to roll no disciplines (unlucky!), get Potence as a consolation prize
+		if = {
+			limit = { has_POD_vampire_discipline_trigger = no }
+			add_trait = potence
+		}
+	
+		if = {
+			limit = { POD_has_illegal_government_trigger = yes }
+			POD_adopt_correct_government_effect = yes
+		}
+		
+		trigger_event = {
+			id = POD_ghoul_maintenance.2
+			days = 1
+		}
+	}
+}
+
+# die after a failed ghoul mission if your domitor had low opinion
+# on a 1-day delay because otherwise the game crashes
+# "it just works" - todd howard
+POD_ghoul_maintenance.4 = {
+	hidden = yes
+	
+	immediate = {
+		pod_death = {
+			death_reason = death_murder
+			killer = scope:domitor
+		}
+		# hidden clause: if you had a resurrection ability, become a masterless ghoul after you "die"
+		# because your domitor left you for dead
+		hidden_effect = {
+			if = {
+				limit = { is_alive = yes }
+				POD_clear_bound_ghoul_variables_and_relations = yes
+			}
+		}
+	}
+}
+
+POD_ghoul_maintenance.100 = {
+	hidden = yes
+
+	trigger = {
+		is_ai = yes
+		POD_is_ghoul_trigger = yes
+	}
+
+    immediate = {
+		POD_cease_being_ghoul_effect = yes
+		if = {
+			limit = { has_POD_race_trigger = no }
+			add_trait = mortal
+			if = {
+				limit = { can_hold_title_as_mortal_trigger = no }
+				POD_depose_effect = yes
+			}
+		}
+
+		if = {
+			limit = {
+				age > 99
+				is_immortal = no
+				NOt = { has_trait = revenant }
+			}
+			death = { death_reason = death_old_age }
+		}
+	}
+}
+
+# POD_ghoul_maintenance.200 = {
+	# hidden = yes
+
+	# trigger = {
+		# is_adult = no
+		# has_POD_race_trigger = no
+		# NOT = { has_character_flag = had_POD_character_initialization }
+# #		OR = {
+# #			mother = {
+# #				exists = this
+# #				OR = {
+# #					POD_is_ghoul_trigger = yes
+# #					POD_is_revenant_trigger = yes
+# #					POD_is_thinblooded_trigger = yes
+# #				}
+# #			}
+# #			root.father = {
+# #				exists = this
+# #				OR = {
+# #					POD_is_ghoul_trigger = yes
+# #					POD_is_revenant_trigger = yes
+# #					POD_is_thinblooded_trigger = yes
+# #				}
+# #			}
+# #			real_father = {
+# #				exists = this
+# #				OR = {
+# #					POD_is_ghoul_trigger = yes
+# #					POD_is_revenant_trigger = yes
+# #					POD_is_thinblooded_trigger = yes
+# #				}
+# #			}
+# #
+# #		}
+	# }
+
+    # immediate = {
+
+	# if = {
+		# limit = {
+			# has_POD_race_trigger = no
+			# NOT = { has_character_flag = had_POD_character_initialization }
+			# OR = {
+				# AND = {
+					# exists = mother
+					# mother = {
+						# OR = {
+							# POD_is_ghoul_trigger = yes
+							# POD_is_revenant_trigger = yes
+							# POD_is_thinblooded_trigger = yes
+						# }
+					# }
+				# }
+				# AND = {
+					# exists = father
+					# father = {
+						# OR = {
+							# POD_is_ghoul_trigger = yes
+							# POD_is_revenant_trigger = yes
+							# POD_is_thinblooded_trigger = yes
+						# }
+					# }
+				# }
+				# AND = {
+					# exists = real_father
+					# real_father = {
+						# OR = {
+							# POD_is_ghoul_trigger = yes
+							# POD_is_revenant_trigger = yes
+							# POD_is_thinblooded_trigger = yes
+						# }
+					# }
+				# }
+			# }
+		# }
+
+			# add_character_flag = POD_had_ghoul_parents
+
+			# random = {
+				# chance = 0
+
+				# modifier = {
+					# add = 5
+					# AND = {
+						# exists = mother
+						# mother = {
+							# POD_is_zadruga_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 5
+					# AND = {
+						# exists = real_father
+						# real_father = {
+							# POD_is_zadruga_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 5
+					# AND = {
+						# exists = mother
+						# mother = {
+						# POD_is_szlachta_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 5
+					# AND = {
+						# exists = real_father
+						# real_father = {
+						# POD_is_szlachta_trigger= yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 45
+					# AND = {
+						# exists = mother
+						# mother = {
+						# POD_is_thinblooded_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 45
+					# AND = {
+						# exists = real_father
+						# real_father = {
+						# POD_is_thinblooded_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 40
+					# AND = {
+						# exists = mother
+						# mother = {
+						# POD_is_revenant_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 40
+					# AND = {
+						# exists = real_father
+						# real_father = {
+						# POD_is_revenant_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 20
+					# AND = {
+						# exists = mother
+						# mother = {
+						# POD_is_ghoul_trigger = yes
+						# }
+					# }
+				# }
+				# modifier = {
+					# add = 20
+					# AND = {
+						# exists = real_father
+						# real_father = {
+						# POD_is_ghoul_trigger = yes
+						# }
+					# }
+				# }
+
+				# add_character_flag = POD_will_become_revenant
+				# trigger_event = { id = POD_ghoul_maintenance.300 }
+			# }
+		# }
+		# if = {
+			# limit = {
+				# NOT = { has_character_flag = POD_will_become_revenant }
+			# }
+			# add_trait = mortal
+
+			# random = {
+				# chance = 1
+				# add_trait = psychic
+				# POD_resonance_increase_intensity_effect = yes
+			# }
+		# }
+	# }
+# }
+
+POD_ghoul_maintenance.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_ghoul_maintenance.300.t
+	desc = POD_ghoul_maintenance.300.desc
+
+	theme = vampire
+	right_portrait = root
+
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+#	trigger = {
+#		has_character_flag = POD_will_become_revenant
+#	}
+
+	option = {
+		name = POD_ghoul_maintenance.300.option.a
+
+		hidden_effect = { remove_trait = mortal }
+		add_trait = revenant
+
+		if = {
+			limit = {
+				POD_is_supehunter_trigger = no
+				POD_splat_is_fera_trigger = no
+			}
+			if = {
+				limit = {
+					NOT = { religion = { is_in_family = rf_kindred } }
+				}
+				POD_character_revenant_faith_initialization_effect = yes
+			}
+			if = {
+				limit = {
+					has_masquerade_risk_trigger = no
+					POD_splat_has_masquerade_trigger = yes
+				}
+				POD_character_masquerade_initialization_effect = yes
+			}
+		}
+		POD_character_revenant_discipline_initialization_effect = yes
+		if = {
+			limit = { POD_has_any_blood_hunger_modifier = no }
+			add_character_modifier = bloodhunger0_modifier
+		}
+
+		if = {
+			limit = { has_any_blood_potency_modifier = no }
+			add_character_modifier = bloodpotency0_modifier
+		}
+
+		add_character_flag = "had_POD_character_initialization"
+
+	}
+}
+
+POD_ghoul_maintenance.500 = {
+	hidden = yes
+
+	trigger = {
+		is_immortal = yes
+		age <= 21
+	}
+
+	immediate = {
+		set_age = age
+		set_immortal_age = age
+	}
+}

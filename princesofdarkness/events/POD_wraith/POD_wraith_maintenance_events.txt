@@ -1,0 +1,588 @@
+﻿namespace = POD_wraith_maintenance
+
+POD_wraith_maintenance.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_wraith_maintenance.1.t
+	desc = POD_wraith_maintenance.1.desc
+
+	theme = wraith
+	left_portrait = root
+	
+	trigger = {
+		#Otherwise, the starting fetters clog up the artifact ledger since there are quite a lot of wraiths spawned in umbral courts
+		OR = {
+			is_ai = no
+			top_liege ?= { is_ai = no }
+			years_from_game_start >= 2
+		}
+	}
+
+	option = { # hatred
+		name = POD_wraith_maintenance.1.a
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = hatred } } }
+		add_character_flag = chosen_hatred
+		ai_chance = {
+			base = 20
+							
+		}
+	}
+	option = { # love
+		name = POD_wraith_maintenance.1.b
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = love } } }
+		add_character_flag = chosen_love
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # greed
+		name = POD_wraith_maintenance.1.c
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = greed } } }
+		add_character_flag = chosen_greed
+		ai_chance = {
+			base = 20
+							
+		}
+	}
+	option = { # creativity
+		name = POD_wraith_maintenance.1.d
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = creativity } } }
+		add_character_flag = chosen_creativity
+		ai_chance = {
+			base = 20
+					
+		}
+	}
+	option = { # compassion
+		name = POD_wraith_maintenance.1.e
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = compassion } } }
+		add_character_flag = chosen_compassion
+		ai_chance = {
+			base = 20
+			
+		}
+	}
+	option = { # lust
+		name = POD_wraith_maintenance.1.f
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = lust } } }
+		add_character_flag = chosen_lust
+		ai_chance = {
+			base = 20
+						
+		}
+	}
+	option = { # justice
+		name = POD_wraith_maintenance.1.g
+		trigger = { NOT = { POD_has_fetter_of_type = { TYPE = justice } } }
+		add_character_flag = chosen_justice
+		ai_chance = {
+			base = 20
+						
+		}
+	}
+	after = {
+		
+		trigger_event = POD_wraith_maintenance.11
+	}
+}
+POD_wraith_maintenance.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_wraith_maintenance.11.t
+	desc = POD_wraith_maintenance.11.desc
+
+	theme = wraith
+	left_portrait = root
+	
+	option = { # 1
+		name = POD_wraith_maintenance.11.a
+		trigger = { free_fetter_points >= 1 }
+		POD_create_fetter_from_type_flag = { LEVEL = 1 }
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # 2
+		name = POD_wraith_maintenance.11.b
+		trigger = { free_fetter_points >= 2 }
+		POD_create_fetter_from_type_flag = { LEVEL = 2 }
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # 3
+		name = POD_wraith_maintenance.11.c
+		trigger = { free_fetter_points >= 3 }
+		POD_create_fetter_from_type_flag = { LEVEL = 3 }
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # 4
+		name = POD_wraith_maintenance.11.d
+		trigger = { free_fetter_points >= 4 }
+		POD_create_fetter_from_type_flag = { LEVEL = 4 }
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # 5
+		name = POD_wraith_maintenance.11.e
+		trigger = { free_fetter_points >= 5 }
+		POD_create_fetter_from_type_flag = { LEVEL = 5 }
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # Nervermind
+		name = POD_wraith_maintenance.11.f
+	}
+	after = {
+		remove_character_flag = chosen_hatred
+		remove_character_flag = chosen_love
+		remove_character_flag = chosen_greed
+		remove_character_flag = chosen_creativity
+		remove_character_flag = chosen_compassion
+		remove_character_flag = chosen_lust
+		remove_character_flag = chosen_justice
+		if = { limit = { NOT = { free_fetter_points = 0 } }
+			trigger_event = POD_wraith_maintenance.1
+		}
+	}
+}
+
+POD_wraith_maintenance.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_wraith_maintenance.2.t
+	desc = POD_wraith_maintenance.2.desc
+
+	theme = wraith
+	left_portrait = root
+	trigger = {
+		has_trait = shadow
+	}
+	immediate = {
+		custom_tooltip = {
+			text = POD_wraith_maintenance.2.i
+			random_in_list = {
+				variable = owned_fetter_list
+				limit = { var:level >= 1 }
+				save_scope_as = fetter
+			}
+		}
+	}
+	option = { # Yes, We don't need it.
+		name = POD_wraith_maintenance.2.a
+		if = { limit = { scope:fetter.var:level = 1 }  
+			scope:fetter.var:object = { POD_destroy_fetter = yes }
+		}
+		else = {
+			scope:fetter.var:object = {
+				POD_increase_fetter_level = { VALUE = 1 ACTION = subtract }
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { # Yes, We don't need it.
+		name = POD_wraith_maintenance.2.b
+		if = { limit = { has_perk = tainted_relic_perk } POD_static_stress_gain = { COUNT = 150 } }
+		else = { POD_static_stress_gain = { COUNT = 100 } }
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+POD_wraith_maintenance.3 = {
+	hidden = yes
+	
+	immediate = {
+		POD_static_stress_gain = { COUNT = 80 }
+	}
+}
+
+# POD_wraith_maintenance.4 = {
+# 	hidden = yes
+	
+# 	immediate = {
+# 		create_character = {
+# 			faith = root.faith
+# 			culture = root.culture
+# 			gender_female_chance = root.var:character_creator_sex
+# 			age = root.var:character_creator_age
+# 			diplomacy = root.var:character_creator_diplomacy
+# 			martial = root.var:character_creator_martial
+# 			stewardship = root.var:character_creator_stewardship
+# 			intrigue = root.var:character_creator_intrigue
+# 			learning = root.var:character_creator_learning
+# 			prowess = root.var:character_creator_prowess
+# 			random_traits = no
+# 			trait = automaton
+# 			dynasty = none
+# 			employer = root
+# 			save_scope_as = effigy_character
+# 		}
+# 		POD_remove_character_creator_variable_effect = yes
+# 		add_hook = {
+# 			target = scope:effigy_character
+# 			type = manifestation_hook
+# 		}
+# 		scope:effigy_character = { 
+# 			set_relation_manifestation_creator = ROOT
+# 			add_character_flag = had_POD_character_initialization
+# 			add_character_flag = blocked_from_leaving
+# 			add_character_flag = immune_to_disease
+# 			set_sexuality = asexual
+# 		}
+		
+# 		hidden_effect = { scope:effigy_character = { force_character_skill_recalculation = yes } }
+# 		trigger_event = podmummy.3100
+# 	}
+# }
+
+
+# POD_wraith_maintenance.10 = {
+# 	hidden = yes
+	
+# 	trigger = {
+# 		has_trait = wraith
+# 		NOT = { has_trait = risen }
+# 		num_of_relation_necromancer = 0
+# 	}
+	
+# 	immediate = {
+# 		if = {
+# 			limit = { is_in_umbra_trigger = no }
+# 			send_interface_toast = {
+# 				title = POD_wraith_maintenance
+# 				left_icon = root
+# 				POD_willpower_rouse_check_effect = yes
+# 				custom_tooltip = POD_wraith_maintenance.tt
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				has_variable = spirit_location
+# 				var:spirit_location = flag:shadowlands
+# 				NOT = { has_character_modifier = temporary_fetter_modifier }
+# 			}
+# 			random = {
+# 				chance = {
+# 					value = 0
+# 					add = unset_fetter_point
+# 				}
+# 				send_interface_toast = {
+# 					title = POD_wraith_maintenance
+# 					left_icon = root
+# 					POD_willpower_rouse_check_effect = yes
+# 					custom_tooltip = shadowlands_fetter_maintenance_tooltip
+# 				}
+# 				trigger_event = POD_wraith_maintenance.21 # Reuse event
+# 			}
+# 		}
+# 	}
+# }
+
+POD_wraith_maintenance.20 = {
+	hidden = yes
+	
+	trigger = {
+		has_character_modifier = caul_modifier
+	}
+	
+	immediate = {
+		add_character_modifier = traveling_underworld_modifier
+		POD_umbra_send_effect = { LOCATION = flag:shadowlands }
+		POD_arcanoi_initiation_effect = yes
+		POD_enter_torpor_effect = yes
+	}
+}
+
+#POD_wraith_maintenance.21 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = POD_wraith_maintenance.21.t
+#	desc = POD_wraith_maintenance.21.desc
+#	theme = wraith
+#	
+#	trigger = {
+#		not_has_fetter_trigger = yes
+#	}
+#	
+#	immediate = {
+#		if = { 
+#			limit = { has_character_modifier = caul_modifier }
+#			remove_character_modifier = caul_modifier
+#			remove_trait = torpor
+#		}
+#		POD_send_to_dark_kingdom_effect = yes
+#	}
+#
+#	option = {
+#		name = POD_wraith_maintenance.21.option.a
+#	}
+#	
+#	option = {
+#		trigger = { culture_has_east_asian_heritage_pillar_trigger = yes }
+#		name = POD_wraith_maintenance.21.option.b
+#		
+#		add_internal_flag = special
+#		
+#		add_character_modifier = trapped_in_yomi_modifier
+#		POD_umbra_send_effect = { LOCATION = flag:yomi_wan }
+#		trigger_event = {
+#			id = POD_wraith_maintenance.22
+#			months = { 2 5 }
+#		}
+#		
+#		ai_chance = {
+#			base = 20
+#			modifier = {
+#				add = 5
+#				num_sinful_traits >= 1
+#			}
+#			modifier = {
+#				add = 10
+#				num_sinful_traits >= 2
+#			}
+#			modifier = {
+#				add = 15
+#				num_sinful_traits >= 3
+#			}
+#			modifier = {
+#				add = 20
+#				num_sinful_traits >= 4
+#			}
+#			modifier = {
+#				add = 25
+#				num_sinful_traits >= 5
+#			}
+#			modifier = {
+#				factor = 0
+#				is_ruler = yes
+#			}
+#		}
+#	}
+#}
+
+#POD_wraith_maintenance.22 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = POD_wraith_maintenance.22.t
+#	desc = POD_wraith_maintenance.22.desc
+#	theme = wraith
+#
+#	option = {
+#		name = POD_wraith_maintenance.22.option.a
+#		POD_become_kueijin_effect = yes
+#	}
+#
+#	option = {
+#		name = POD_wraith_maintenance.22.option.b
+#		POD_send_to_dark_kingdom_effect = yes
+#	}
+#}
+
+POD_wraith_maintenance.30 = {
+	hidden = yes
+	
+	trigger = {
+		is_ai = no
+		has_trait = wraith
+		NOT = { has_trait = spectre }
+		NOT = { has_trait = ferryman }
+		NOT = { has_trait = shadow }
+	}
+	
+	immediate = {
+		remove_character_flag = dark_passion_start_a_hostile_scheme_flag
+		remove_character_flag = dark_passion_start_a_seduction_flag
+		remove_character_flag = dark_passion_start_a_war_flag
+		remove_character_flag = dark_passion_raise_tyranny_flag
+		remove_character_flag = dark_passion_exceeding_the_domain_limit_flag
+		remove_character_flag = dark_passion_exceeding_the_vassal_limit_flag
+		remove_character_flag = dark_passion_blackmail_flag
+		remove_character_flag = dark_passion_revoke_title_flag
+		remove_character_flag = dark_passion_execute_prisoner_flag
+		remove_character_flag = dark_passion_banish_prisoner_flag
+
+		random_list = {
+			pick = 3
+			unique = yes
+
+			10 = { add_character_flag = dark_passion_start_a_hostile_scheme_flag }
+			10 = { add_character_flag = dark_passion_start_a_seduction_flag }
+			10 = { add_character_flag = dark_passion_start_a_war_flag }
+			10 = { add_character_flag = dark_passion_raise_tyranny_flag }
+			10 = { add_character_flag = dark_passion_exceeding_the_domain_limit_flag }
+			10 = { add_character_flag = dark_passion_exceeding_the_vassal_limit_flag }
+			10 = { add_character_flag = dark_passion_blackmail_flag }
+			10 = { add_character_flag = dark_passion_revoke_title_flag }
+			10 = { add_character_flag = dark_passion_execute_prisoner_flag }
+			10 = { add_character_flag = dark_passion_banish_prisoner_flag }
+			10 = { trigger = { has_perk = nullify_thorns_perk } }
+			10 = { trigger = { dynasty ?= { has_dynasty_perk = wraith_legacy_1 } } }
+		}
+	}
+}
+
+POD_wraith_maintenance.31 = {
+	hidden = yes
+	
+	trigger = {
+		is_ai = no
+		has_trait = wraith
+		NOT = { has_trait = spectre }
+		NOT = { has_trait = ferryman }
+		NOT = { has_trait = shadow }
+		has_perk = devils_dare_perk
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					has_character_flag = devils_dare_spend_gold_flag
+					has_character_flag = devils_dare_spend_prestige_flag
+					has_character_flag = devils_dare_spend_piety_flag
+				}
+			}
+			add_stress = monumental_stress_gain
+		
+			remove_character_flag = devils_dare_spend_gold_flag
+			remove_character_flag = devils_dare_spend_prestige_flag
+			remove_character_flag = devils_dare_spend_piety_flag
+		}
+
+		random_list = {
+			10 = { add_character_flag = devils_dare_spend_gold_flag }
+			10 = { add_character_flag = devils_dare_spend_prestige_flag }
+			10 = { add_character_flag = devils_dare_spend_piety_flag }
+			10 = { trigger = { has_perk = nullify_thorns_perk } }
+		}
+	}
+}
+
+POD_wraith_maintenance.40 = {
+	hidden = yes
+	
+	trigger = {
+		stress_level < 3
+		has_trait = torpor
+		has_trait = wraith
+		NOT = { has_trait = spectre }
+		NOT = { has_trait = ferryman }
+		NOT = { has_trait = shadow }
+		has_perk = nightmares_perk
+	}
+	
+	immediate = {
+		add_stress = medium_stress_impact_gain
+		trigger_event = {
+			id = POD_wraith_maintenance.40
+			years = 1
+		}
+	}
+}
+
+POD_wraith_maintenance.50 = {
+	hidden = yes
+	
+	immediate = {
+		random_list = {
+			1 = {
+				gain_illustrious_artifact_pieces_effect = { VALUE = 1 }
+			}
+			9 = {
+				gain_famed_artifact_pieces_effect = { VALUE = 1 }
+			}
+			35 = {
+				gain_masterwork_artifact_pieces_effect = { VALUE = 1 }
+			}
+			55 = {
+				gain_common_artifact_pieces_effect = { VALUE = 1 }
+			}
+		}
+		trigger_event = {
+			id = POD_wraith_maintenance.50
+			years = 5
+		}
+	}
+}
+
+POD_wraith_maintenance.60 = {
+	hidden = yes
+	
+	immediate = {
+		create_artifact_true_jade_effect = { OWNER = root }
+		hidden_effect_new_object = { 
+			scope:newly_created_artifact = { 
+				set_variable = wraith_jade 
+			}
+		}
+		trigger_event = {
+			id = POD_wraith_maintenance.60
+			years = 5
+		}
+	}
+}
+
+POD_wraith_maintenance.70 = {
+	hidden = yes
+	
+	immediate = {
+		create_artifact_white_jade_effect = { OWNER = root }
+		trigger_event = {
+			id = POD_wraith_maintenance.70
+			years = 3
+		}
+	}
+}
+
+POD_wraith_maintenance.80 = {
+	hidden = yes
+	
+	immediate = {
+		create_summoned_historical_artifact_effect = yes
+		hidden_effect_new_object = { 
+			scope:newly_created_artifact = {
+				set_artifact_name = artifact_summoned_historical_unique_artifact_name
+				set_artifact_rarity = common
+				set_variable = summoned_artifact
+			}
+		}
+	}
+}
+
+POD_wraith_maintenance.81 = {
+	hidden = yes
+	
+	immediate = {
+		trigger_event = POD_wraith_maintenance.80
+		trigger_event = {
+			id = POD_wraith_maintenance.81
+			years = 3
+		}
+	}
+}
+
+#POD_wraith_maintenance.90 = {
+#	hidden = yes
+#	
+#	immediate = {
+#		POD_create_manifestation_effect = yes
+#		scope:manifestation ?= { save_scope_as = effigy_character }
+#		trigger_event = podmummy.3100
+#	}
+#}
+
+POD_wraith_maintenance.100 = {
+	hidden = yes
+	
+	immediate = {
+		POD_send_to_dark_kingdom_effect = yes
+	}
+}

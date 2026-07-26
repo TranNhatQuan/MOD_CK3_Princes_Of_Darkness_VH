@@ -1,0 +1,151 @@
+﻿sisters_gospel_perk = {
+	lifestyle = endowments_lifestyle
+	tree = sisters
+	position = { 0 0 }
+	icon = sisters_gospel
+	
+	can_be_picked = {
+		OR = {
+			has_mendicant_order_dynasty_trigger = yes
+			dynasty ?= { has_dynasty_modifier = support_from_sister_of_stjohn_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = sisters_lux_perk }
+			}
+			multiply = 0
+		}
+	}
+	effect = {
+		custom_description_no_bullet = { 
+			text = sisters_gospel_perk_text
+		}
+		if = {
+			limit = { 
+				has_mendicant_order_dynasty_trigger = no 
+				dynasty ?= { NOT = { has_dynasty_modifier = support_from_sister_of_stjohn_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = sisters_only_text
+			}
+		}
+	}
+}
+
+sisters_lux_perk = {
+	lifestyle = endowments_lifestyle
+	tree = sisters
+	position = { 1.5 0 }
+	icon = sisters_lux
+
+	can_be_picked = {
+		OR = {
+			has_mendicant_order_dynasty_trigger = yes
+			dynasty ?= { has_dynasty_modifier = support_from_sister_of_stjohn_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = sisters_gospel_perk }
+			}
+			multiply = 0
+		}
+	}
+	character_modifier = {
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = sisters_lux_perk_text
+		}
+		if = {
+			limit = {
+				has_mendicant_order_dynasty_trigger = no 
+				dynasty ?= { NOT = { has_dynasty_modifier = support_from_sister_of_stjohn_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = sisters_only_text
+			}
+		}
+	}
+}
+
+sisters_chorale_perk = {
+	lifestyle = endowments_lifestyle
+	tree = sisters
+	position = { 0 1.25 }
+	icon = sisters_chorale
+	
+	parent = sisters_gospel_perk
+	parent = sisters_lux_perk
+
+	character_modifier = {
+	}
+	effect = {
+		custom_description_no_bullet = { 
+			text = sisters_chorale_perk_text
+		}
+	}
+}
+
+sisters_hosanna_perk = {
+	lifestyle = endowments_lifestyle
+	tree = sisters
+	position = { 1.5 1.25 }
+	icon = sisters_hosanna
+	
+	parent = sisters_gospel_perk
+	parent = sisters_lux_perk
+	
+	character_modifier = {
+		stress_gain_mult = -0.2
+		stress_loss_mult = 0.2
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = sisters_hosanna_perk_text
+		}
+	}
+}
+
+sisters_oratorio_perk = {
+	lifestyle = endowments_lifestyle
+	tree = sisters
+	position = { 0.75 2.5 }
+	icon = sisters_oratorio
+	
+	parent = sisters_chorale_perk
+	parent = sisters_hosanna_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = sisters_oratorio_perk_text
+		}		
+		add_trait_force_tooltip = sisters_oratorio		
+	}
+}

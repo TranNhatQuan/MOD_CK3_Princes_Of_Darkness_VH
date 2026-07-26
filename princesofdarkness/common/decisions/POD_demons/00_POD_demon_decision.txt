@@ -1,0 +1,77 @@
+﻿sin_conversion_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+
+	desc = sin_conversion_decision_desc
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+	cooldown = { days = 30 }
+
+	cost = {
+		piety = {
+			value = realm_county_to_convert_value
+			multiply = 50
+		}
+	}
+
+	is_shown = {
+		is_landed = yes
+		has_character_modifier = sin_dragon_trainer_modifier
+	}
+
+	is_valid = {
+		religion = religion:demons_religion
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		save_temporary_scope_as = demon
+
+		custom_tooltip = sin_conversion_decision_effect_tooltip
+
+		every_realm_county = {
+			set_county_faith = scope:demon.faith
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_improve_ritual_of_sundered_soul_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_earthbound.dds"
+	}
+
+	decision_group_type = major
+	ai_check_interval = 240
+
+	cooldown = { years = 10 }
+
+	is_shown = {
+		has_trait = demon
+		OR = {
+			has_character_modifier = ritual_of_sundered_soul_unstable_modifier
+			has_character_modifier = ritual_of_sundered_soul_semi_stable_modifier
+			has_character_modifier = ritual_of_sundered_soul_modifier
+			trigger_if = { limit = { has_perk = lore_unspeakable_survivor_perk } has_character_modifier = ritual_of_sundered_soul_stabilized_modifier }
+		}
+	}
+
+	is_valid = {
+		arcana_lifestyle_perk_points >= sundered_soul_improve_cost
+	}
+
+	effect = {
+		POD_change_ritual_of_sundered_soul_effect = { COUNT = 1 }
+		save_scope_value_as = { name = cost value = { value = sundered_soul_improve_cost multiply = -1 } }
+		add_arcana_lifestyle_perk_points = scope:cost
+	}
+}

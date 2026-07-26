@@ -1,0 +1,86 @@
+﻿
+conversion_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = conversion_decision_desc
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+	cooldown = { days = 30 }
+	
+	cost = {		
+		piety = {
+			value = realm_county_to_convert_value
+			multiply = 50
+		}
+	}
+
+	is_shown = {
+		is_landed = yes
+		OR = {
+			has_perk = conversion_perk 
+			has_trait = beatific
+		}	
+	}
+		
+	is_valid = {
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		save_temporary_scope_as = inquisitor
+		
+		custom_tooltip = conversion_decision_effect_tooltip
+	
+		every_realm_county = { 
+			set_county_faith = scope:inquisitor.faith
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+reclusion_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = reclusion_decision_desc
+	decision_group_type = pod_splat
+	ai_check_interval = 0
+
+	cooldown = { days = 180 }
+	
+	cost = {		
+		piety = 250
+	}
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		has_trait = truefaith
+	}
+
+	effect = {
+		save_temporary_scope_as = inquisitor
+		
+		custom_tooltip = reclusion_decision_effect_tooltip
+
+		trigger_event = PODinquisition.9999
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

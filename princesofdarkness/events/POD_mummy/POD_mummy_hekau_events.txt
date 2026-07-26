@@ -1,0 +1,133 @@
+﻿namespace = POD_mummy_hekau
+
+####################
+# 100 - Chattel copy modifier
+# 200 - Separate Khaibit
+##################
+
+POD_mummy_hekau.201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mummy_hekau.201.t
+	desc = POD_mummy_hekau.201.desc
+	theme = mummy
+
+	left_portrait = {
+		character = root
+		animation = personality_bold 
+	}
+
+	option = {
+		name = POD_mummy_hekau.201.option.a
+		custom_tooltip = POD_mummy_hekau.201.option.a.tt
+		
+		duel = {
+			skill = learning
+			value = 20
+			desc = POD_mummy_hekau.201.option.a.desc
+		
+			50 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = high_positive_duel_skill_multiplier
+				}
+				
+				custom_tooltip = POD_mummy_hekau.201.option.a.tt.success
+				
+				hidden_effect = {
+					POD_create_separated_khaibit_effect = { SAVE_AS = separated_khaibit }
+					trigger_event = {
+						id = POD_mummy_hekau.202
+						days = 2
+					}
+				}
+			}    
+			
+			50 = {
+
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = low_negative_duel_skill_multiplier
+				}
+				
+				custom_tooltip = POD_mummy_hekau.201.option.a.tt.failure
+				
+				hidden_effect = {
+					trigger_event = {
+						id = POD_mummy_hekau.203
+						days = 2
+					}
+				}
+			}
+		}
+		add_piety = -800
+	}
+
+	option = {
+		name = POD_mummy_hekau.201.option.b
+		custom_tooltip = POD_mummy_hekau.201.option.b.tt
+		remove_interaction_cooldown = POD_hekau_separate_khaibit_interaction
+	}
+}
+
+POD_mummy_hekau.202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mummy_hekau.202.t
+	desc = POD_mummy_hekau.202.desc
+	theme = mummy
+
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:separated_khaibit
+		animation = idle
+	}
+
+	option = {
+		name = POD_mummy_hekau.202.option.a
+		custom_tooltip = POD_mummy_hekau.202.option.a.tt
+	}
+}
+
+POD_mummy_hekau.203 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mummy_hekau.203.t
+	desc = POD_mummy_hekau.203.desc
+	theme = mummy
+
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+
+	option = {
+		name = POD_mummy_hekau.203.option.a
+		custom_tooltip = POD_mummy_hekau.203.option.a.tt
+		
+		add_stress = major_stress_gain
+	}
+}
+
+POD_mummy_hekau.204 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mummy_hekau.204.t
+	desc = POD_mummy_hekau.204.desc
+	theme = mummy
+
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+
+	option = {
+		name = POD_mummy_hekau.204.option.a
+		custom_tooltip = POD_mummy_hekau.204.option.a.tt
+		
+		add_stress = monumental_stress_gain
+	}
+}

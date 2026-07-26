@@ -1,0 +1,824 @@
+﻿# ARGS
+# RITUAL - ID/NAME OF RITUAL
+# RITUAL TIME - IN DAYS HOW LONG CASTING IS.
+POD_bloodmagic_ritual_start = {
+	custom_tooltip = {
+		text = POD_START_CASTING_RITUAL
+		POD_start_targeted_journey_effect = {
+			TYPE	= ritual_blood_sorcery_casting
+			MONTHLY = ritual_blood_sorcery_casting
+			TARGET  = scope:target
+		}
+		var:current_journey ?= {
+			set_variable = { name = ritual value = flag:$RITUAL$ }
+			set_variable = { name = ritual_monthly_progress value = $RITUAL_SPEED$ }
+		}
+	}
+	
+
+	custom_tooltip = POD_bloodmagic_ritual_start_tt
+	show_as_tooltip = { POD_$RITUAL$_cast_effect = { TARGET = scope:target } }
+}
+
+POD_bloodmagic_ritual_location_start = {
+	custom_tooltip = {
+		text = POD_START_CASTING_RITUAL
+		POD_start_targeted_journey_effect = {
+			TYPE	= ritual_blood_sorcery_casting
+			MONTHLY = ritual_blood_sorcery_casting
+			TARGET  = scope:target
+		}
+		var:current_journey ?= {
+			set_variable = { name = ritual value = flag:$RITUAL$ }
+			set_variable = { name = ritual_monthly_progress value = $RITUAL_SPEED$ }
+			set_variable = { name = destination value = $LOCATION$ }
+		}
+	}
+	
+
+	custom_tooltip = POD_bloodmagic_ritual_start_tt
+	show_as_tooltip = { POD_$RITUAL$_cast_effect = { TARGET = scope:target } }
+}
+
+POD_bloodmagic_default_failure_with_toast = {
+	send_interface_toast = {
+		title = POD_shared_loca_failure
+		POD_bloodmagic_default_failure_effect = yes
+	}
+}
+
+POD_bloodmagic_default_failure_effect = {
+	POD_static_stress_gain = { COUNT = 50 }
+}
+
+
+# AKHU RITUALS
+POD_typhons_brew_cast_effect = {
+	remove_short_term_gold = 125
+	$TARGET$ = { POD_blood_income_effect = { COUNT = 2 } }
+}
+POD_inscribe_the_book_of_set_cast_effect = {
+	remove_short_term_gold = 125
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_inscribe_the_book_of_set_modifier years = 20 } }
+}
+POD_dreams_of_duat_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	duel = {
+		skill = diplomacy
+		target = $TARGET$
+		50 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = high_positive_duel_skill_multiplier
+			}
+			$TARGET$ = {  add_character_modifier = { modifier = ritual_dreams_of_duat_modifier years = 30 } }
+		}
+		50 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = low_negative_duel_skill_multiplier
+			}
+		}
+	}
+}
+POD_linked_soul_elixir_cast_effect = {
+	remove_short_term_gold = 250
+	$TARGET$ = { add_character_modifier = { modifier = ritual_linked_soul_elixir_modifier years = 20 } }
+}
+POD_scorpions_sending_cast_effect = {
+	remove_short_term_gold = 250
+	POD_static_stress_gain = { COUNT = 40 }
+	POD_commit_murder_effect = yes
+	$TARGET$ = { add_character_modifier = { modifier = ritual_scorpions_sending_modifier years = 20 } }
+}
+POD_severing_sand_cast_effect = {
+	custom_tooltip = POD_bloodmagic_require_ritual_inscribe_the_book_of_set_modifier
+	remove_short_term_gold = 250
+	$TARGET$ = {
+		if = { limit = { has_trait = demon } POD_send_to_abyss_effect = yes }
+		else_if = { limit = { has_trait = fae } POD_send_to_arcadia_effect = yes }
+		else_if = { limit = { has_trait = wraith } POD_send_to_dark_kingdom_effect = yes }
+		else = {
+			add_character_flag = { flag = lost_duel days = 1 } # bypass duel event
+			PREV = {
+				imprison = {
+					target = $TARGET$
+					type = dungeon
+				}
+			}
+		}
+	}
+}
+POD_summon_sebau_cast_effect = {
+	custom_tooltip = POD_bloodmagic_require_ritual_inscribe_the_book_of_set_modifier
+	remove_short_term_gold = 250
+	$TARGET$ = {
+		if = { limit = { is_playable_character = yes }
+			spawn_army = {
+				men_at_arms = { type = sebau stacks = 1 }
+				location = capital_province
+				name = summoned_army
+			}
+		}
+		else = {
+			custom_tooltip = POD_bloodmagic_must_be_landed
+		}
+	}
+}
+POD_warding_cippus_cast_effect = {
+	custom_tooltip = POD_bloodmagic_require_ritual_inscribe_the_book_of_set_modifier
+	remove_short_term_gold = 250
+	$TARGET$ = { add_character_modifier = { modifier = ritual_warding_cippus_modifier years = 30 } }
+}
+# DUR AN KI RITUALS
+POD_horoscope_cast_effect = {
+	remove_short_term_gold = 125
+	$TARGET$ = {
+		random_list = {
+			1 = { add_character_modifier = { modifier = ritual_horoscope_diplomacy_modifier years = 10 } }
+			1 = { add_character_modifier = { modifier = ritual_horoscope_martial_modifier years = 10 } }
+			1 = { add_character_modifier = { modifier = ritual_horoscope_stewardship_modifier years = 10 } }
+			1 = { add_character_modifier = { modifier = ritual_horoscope_intrigue_modifier years = 10 } }
+			1 = { add_character_modifier = { modifier = ritual_horoscope_learning_modifier years = 10 } }
+		}
+	}
+}
+POD_warding_baptism_cast_effect = {
+	remove_short_term_gold = 125
+	$TARGET$ = { add_character_modifier = { modifier = ritual_warding_baptism_modifier years = 20 } }
+}
+POD_bind_the_heavens_cast_effect = {
+	remove_short_term_gold = 125
+	$TARGET$ = { location = { county = { add_county_modifier = { modifier = ritual_bind_the_heavens_modifier years = 20 } } } }
+}
+POD_bull_of_heaven_cast_effect = {
+	remove_short_term_gold = 125
+	$TARGET$ = { add_character_modifier = { modifier = ritual_bull_of_heaven_modifier years = 20 } }
+}
+POD_kudurru_cast_effect = {
+	remove_short_term_gold = 250
+	$TARGET$ = { add_character_modifier = { modifier = ritual_kudurru_modifier years = 20 } }
+}
+POD_apsu_portal_cast_effect = {
+	remove_short_term_gold = 250
+	$TARGET$ = { add_character_modifier = { modifier = ritual_apsu_portal_modifier years = 10 } }
+}
+POD_liliths_vengeance_cast_effect = {
+	remove_short_term_gold = 500
+	add_prestige = -500
+	add_piety = -500
+	POD_discipline_cost_effect = { COUNT = bs_ritual_liliths_vengeance_cost }
+	$TARGET$ = {
+		custom_tooltip = POD_liliths_vengeance_cast_effect_tt
+		random_list = {
+			1 = { modifier = { has_celerity_trigger = no add = -1 } POD_decrease_discipline_celerity_effect = yes }
+			1 = { modifier = { has_potence_trigger = no add = -1 } POD_decrease_discipline_potence_effect = yes }
+			1 = { modifier = { has_fortitude_trigger = no add = -1 } POD_decrease_discipline_fortitude_effect = yes }
+			1 = { modifier = { has_auspex_trigger = no add = -1 } POD_decrease_discipline_auspex_effect = yes }
+			1 = { modifier = { has_presence_trigger = no add = -1 } POD_decrease_discipline_presence_effect = yes }
+		}
+	}
+}
+#THAUMATURGY RITUALS
+POD_brand_of_the_paramour_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_brand_of_the_paramour_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_brand_of_the_paramour_modifier years = 20 } }
+}
+POD_encrypt_missive_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_encrypt_missive_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_encrypt_missive_modifier years = 20 } }
+}
+POD_impressive_visage_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_impressive_visage_modifier years = 10 } }
+}
+POD_the_imps_affliction_cast_effect = {
+	POD_static_stress_gain = { COUNT = 30 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_the_imps_affliction_modifier years = 10 } }
+}
+POD_purge_the_inner_demon_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	remove_short_term_gold = 125
+	add_piety = -250
+	add_prestige = -250
+	POD_discipline_cost_effect = { COUNT = bs_ritual_purge_the_inner_demon_cost }
+	custom_tooltip = POD_BEAST_you_will_regret_that
+	$TARGET$ = { add_character_modifier = { modifier = ritual_purge_the_inner_demon_modifier years = 10 } }
+}
+POD_rebirth_of_mortal_vanity_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = { POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 2 } }
+}
+POD_the_scribe_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_the_scribe_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_the_scribe_modifier years = 10 } }
+}
+
+POD_blood_mead_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_blood_mead_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_blood_mead_modifier years = 10 } }
+}
+POD_bureaucratic_condemnation_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_bureaucratic_condemnation_cost }
+	$TARGET$ = { add_stress = 50 }
+}
+POD_impassable_trail_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_impassable_trail_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_impassable_trail_modifier years = 10 } }
+}
+POD_jinx_cast_effect = {
+	POD_static_stress_gain = { COUNT = 35 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_jinx_modifier years = 10 } }
+}
+POD_mourning_life_curse_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_mourning_life_curse_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_mourning_life_curse_modifier years = 10 } }
+}
+POD_steps_of_the_terrified_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_steps_of_the_terrified_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_steps_of_the_terrified_modifier years = 10 } }
+}
+POD_trima_cast_effect = {
+	POD_static_stress_gain = { COUNT = 30 }
+	$TARGET$ = { POD_masquerade_exposure_decrease_multiple_effect = { AMOUNT = 4 } }
+}
+
+POD_blood_allergy_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_blood_allergy_cost }
+	$TARGET$ = { POD_splat_agnostic_energy_drain = { COUNT = 10 } }
+}
+POD_cleansing_of_the_flesh_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_cleansing_of_the_flesh_cost }
+	custom_tooltip = ritual_cleansing_of_the_flesh_tt
+	$TARGET$ = { POD_remove_disease_traits_effect = yes POD_remove_supernatural_disease_traits_effect = yes }
+}
+POD_the_curse_belated_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_the_curse_belated_cost }
+	$TARGET$ = { add_character_modifier = ritual_the_curse_belated_modifier set_variable = { name = the_curse_belated_caster value = ROOT } }
+}
+POD_infirm_inert_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_infirm_inert_cost }
+	POD_commit_murder_effect = yes
+	$TARGET$ = { add_character_modifier = { modifier = ritual_infirm_inert_modifier years = 10 } }
+}
+POD_return_of_the_heart_cast_effect = {
+	POD_static_stress_gain = { COUNT = 40 }
+	remove_short_term_gold = 250
+	add_piety = -500
+	add_prestige = -500
+	POD_discipline_cost_effect = { COUNT = bs_ritual_return_of_the_heart_cost }
+	$TARGET$ = { add_character_modifier = extra_life_1_modifier }
+}
+POD_stolen_kisses_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_stolen_kisses_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_stolen_kisses_modifier years = 10 } }
+}
+
+POD_court_of_hallowed_truth_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_court_of_hallowed_truth_cost }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_court_of_hallowed_truth_modifier years = 20 } }
+}
+POD_sculpting_the_perfect_servant_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_sculpting_the_perfect_servant_cost }
+	$TARGET$ = {
+		custom_tooltip = POD_sculpting_the_perfect_servant_cast_effect
+		set_variable = { name = character_creator_type value = flag:perfect_servant }
+		set_variable = { name = character_creator_points value = 20 }
+	}
+}
+POD_severed_hand_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_severed_hand_cost }
+	$TARGET$ = {
+		random_list = {
+			1 = { POD_give_permanent_injury_effect = { TRAIT = one_eyed } }
+			1 = { POD_give_permanent_injury_effect = { TRAIT = one_legged } }
+			1 = { POD_give_permanent_injury_effect = { TRAIT = maimed } }
+		}
+	}
+}
+POD_stone_of_the_true_form_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_stone_of_the_true_form_cost }
+	$TARGET$ = {
+		POD_shapeshift_revert_all_effect = yes
+		add_character_modifier = { modifier = ritual_stone_of_the_true_form_modifier years = 20 }
+	}
+}
+
+POD_pierce_the_veil_cast_effect = {
+	$TARGET$ = { add_character_modifier = { modifier = ritual_pierce_the_veil_modifier years = 50 } }
+}
+POD_eyes_of_the_abyss_cast_effect = {
+	$TARGET$ = { add_character_modifier = { modifier = ritual_eyes_of_the_abyss_modifier years = 10 } }
+}
+POD_the_heart_that_beats_in_silence_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = {
+		if = { limit = { is_playable_character = yes }
+			spawn_army = {
+				men_at_arms = { type = shadow_beasts stacks = 5 }
+				location = capital_province
+				name = summoned_army
+			}
+		}
+	}
+}
+POD_feed_the_darkness_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_feed_the_darkness_modifier years = 10 } }
+}
+POD_abyssal_threads_cast_effect = {
+	POD_static_stress_gain = { COUNT = 50 }
+	$TARGET$ = {
+		every_knight = {
+			add_character_modifier = { modifier = ritual_abyssal_threads_modifier years = 10 }
+		}
+	}
+	if = {
+		limit = { NOT = { $TARGET$ = root } }
+		add_hook = {
+			type = obligation_hook
+			target = $TARGET$
+			years = 10
+		}
+	}
+}
+POD_calling_the_hungry_shade_cast_effect = {
+	POD_static_stress_gain = { COUNT = 50 }
+	$TARGET$ = {
+		if = { limit = { is_playable_character = yes }
+			spawn_army = {
+				men_at_arms = { type = hungry_shade stacks = 5 }
+				location = capital_province
+				name = summoned_army
+			}
+		}
+	}
+}
+POD_reflections_of_hollow_revelation_cast_effect = {
+	POD_static_stress_gain = { COUNT = 75 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_reflections_of_hollow_revelation_modifier years = 15 } }
+}
+POD_maw_of_ahriman_cast_effect = {
+	POD_static_stress_gain = { COUNT = 75 }
+	$TARGET$ = { add_character_modifier = { modifier = ritual_maw_of_ahriman_modifier years = 10 } }
+}
+POD_commune_with_the_abyss_cast_effect = {
+	POD_static_stress_gain = { COUNT = 100 }
+	$TARGET$ = { custom_tooltip = POD_commune_with_the_abyss_cast_tt trigger_event = POD_commune_with_the_abyss.001 }
+}
+POD_ahrimans_wight_cast_effect = {
+	POD_static_stress_gain = { COUNT = 100 }
+	$TARGET$ = { add_prowess_skill = 2 }
+}
+POD_cry_that_slays_light_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	$TARGET$ = {
+		location = {
+			duchy = {
+				every_de_jure_county = {
+					add_county_modifier = {
+						modifier = ritual_cry_that_slays_light_modifier
+						years = 20
+					}
+					holder = {
+						if = {
+							limit = { NOT = { is_in_list = county_owners } }
+							add_to_list = county_owners
+						}
+					}
+				}
+			}
+		}
+	}
+	every_in_list = {
+		list = county_owners
+		if = {
+			limit = {
+				has_relation_rival = ROOT
+				NOT = { has_relation_nemesis = ROOT }
+				can_set_relation_nemesis_trigger = { CHARACTER = ROOT }
+			}
+			set_relation_nemesis = {
+				reason = nemesis_downgrade_from_rival
+				copy_reason = rival
+				target = ROOT
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { has_relation_rival = ROOT }
+			}
+			set_relation_rival = {
+				target = ROOT
+				reason = rival_grave_insult
+			}
+		}
+	}
+}
+POD_lord_aludians_claim_cast_effect = {
+	POD_static_stress_gain = { COUNT = 75 }
+	$TARGET$ = {
+		location = {
+			county = {
+				every_county_province = {
+					POD_remove_common_building_effect = yes
+				}
+				add_county_modifier = ritual_lord_aludians_claim_modifier
+			}
+		}
+	}
+}
+
+#SADHANA
+POD_armor_of_diamond_serenity_cast_effect = {
+	POD_static_stress_gain = { COUNT = 75 }
+	$TARGET$ = {
+		add_character_modifier = { modifier = armor_of_diamond_serenity_modifier years = 10 }
+	}
+}
+POD_animaa_cast_effect = {
+	POD_static_stress_gain = { COUNT = 125 }
+	$TARGET$ = {
+		add_character_modifier = { modifier = animaa_modifier years = 10 }
+	}
+}
+POD_destinys_call_cast_effect = {
+	POD_static_stress_gain = { COUNT = 150 }
+	$TARGET$ = {
+		custom_tooltip = {
+			text = POD_destinys_call_cast_effect_tt
+			create_character = {
+				location = root.location
+				age = 18
+				culture = root.culture
+				faith = root.faith
+				
+				gender_female_chance = 50
+				diplomacy = { 10 20 }
+				martial = { 10 20 }
+				stewardship = { 10 20 }
+				intrigue = { 10 20 }
+				learning = { 10 20 }
+				prowess = { 10 20 }
+				trait = mortal
+				random_traits = yes
+
+				dynasty = none
+				save_scope_as = optional_child
+			}
+			add_courtier = scope:optional_child
+			scope:optional_child = { hidden_effect = { return_to_court = yes } }
+		}
+	}
+}
+POD_warded_womb_cast_effect = {
+	POD_static_stress_gain = { COUNT = 200 }
+	remove_short_term_gold = 250
+	$TARGET$ = {
+		add_character_modifier = { modifier = warded_womb_modifier years = 25 }
+	}
+}
+POD_transcendentally_satisfying_body_filling_cast_effect = {
+	$TARGET$ = {
+		death = { death_reason = death_execution killer = ROOT }
+	}
+	add_stress = -500
+	add_character_modifier = { modifier = transcendentally_satisfying_body_filling_modifier years = 25 }
+}
+
+#Sihr
+POD_touch_of_allah_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	add_piety = -25
+	$TARGET$ = {
+		random_character_artifact = {
+			limit = {
+				ep1_artifact_is_court_artifact_trigger = no
+				ROOT = { can_benefit_from_artifact = PREV }
+				NOT = { has_variable = touch_of_allah_var }
+			}
+			add_artifact_modifier = artifact_monthly_piety_2_modifier
+			save_scope_as = newly_created_artifact
+		}
+		scope:newly_created_artifact = {
+			set_variable = touch_of_allah_var
+		}
+	}
+}
+POD_mask_of_allah_cast_effect = {
+	POD_static_stress_gain = { COUNT = 25 }
+	add_piety = -50
+	$TARGET$ = {
+		POD_masquerade_exposure_decrease_effect = yes
+		add_character_modifier = { modifier = mask_of_allah_modifier years = 10 }
+	}
+}
+POD_ward_against_djinn_cast_effect = {
+	add_piety = -100
+	$TARGET$ = {
+		add_character_modifier = { modifier = ward_against_djinn_modifier years = 10 }
+	}
+}
+POD_allahs_blessing_cast_effect = {
+	add_piety = -250
+	add_character_modifier = { modifier = allahs_blessing_character_modifier years = 15 }
+	$TARGET$ = {
+		add_character_modifier = { modifier = allahs_blessing_character_modifier years = 15 }
+	}
+}
+POD_dampen_the_keening_cast_effect = {
+	add_piety = -6
+	$TARGET$ = {
+		add_piety = 9
+	}
+}
+
+#Sielanic Thaumaturgy
+POD_become_one_with_the_land_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_become_one_with_the_land_cost }
+	$TARGET$ = { add_character_modifier = { modifier = become_one_with_the_land_modifier years = 10 } }
+}
+POD_soul_of_the_land_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_soul_of_the_land_cost }
+	$TARGET$ = { add_character_modifier = { modifier = soul_of_the_land_modifier years = 10 } }
+}
+POD_touch_the_protectors_mind_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bs_ritual_touch_the_protectors_mind_cost }
+	$TARGET$ = { add_character_modifier = { modifier = touch_the_protectors_mind_modifier years = 10 } }
+}
+
+#Koldunic
+add_next_genius_loci_perk = {
+	if = {
+		limit = { has_koldunic_bloodmagic_trigger = yes }
+		if = {
+			limit = { has_perk = genius_loci_4_perk }
+			add_perk = genius_loci_5_perk
+		}
+		else_if = {
+			limit = { has_perk = genius_loci_3_perk }
+			add_perk = genius_loci_4_perk
+		}
+		else_if = {
+			limit = { has_perk = genius_loci_2_perk }
+			add_perk = genius_loci_3_perk
+		}
+		else_if = {
+			limit = { has_perk = genius_loci_1_perk }
+			add_perk = genius_loci_2_perk
+		}
+		else = { add_perk = genius_loci_1_perk }
+	}
+}
+
+
+POD_master_of_the_domain_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = transylvania_t1_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = transylvania } }
+		$TARGET$ = { add_dread = 30 }
+	}
+	else = {
+		$TARGET$ = { add_dread = 15 }
+	}
+}
+POD_truth_in_water_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = black_sea_t1_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = black_sea } }
+		$TARGET$ = { add_character_modifier = { modifier = truth_in_water_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = truth_in_water_modifier years = 15 } }
+	}
+}
+POD_reawakening_the_dead_water_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = black_sea_t1_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = black_sea } }
+		$TARGET$ = { add_stress = -50 }
+	}
+	else = {
+		$TARGET$ = { add_stress = -25 }
+	}
+}
+POD_autumns_armor_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bialowieza_t2_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = bialowieza } }
+		$TARGET$ = { add_character_modifier = { modifier = autumns_armor_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = autumns_armor_modifier years = 15 } }
+	}
+}
+POD_concentrated_vitae_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = black_sea_t2_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = black_sea } }
+		$TARGET$ = { add_character_modifier = { modifier = concentrated_vitae_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = concentrated_vitae_modifier years = 15 } }
+	}
+}
+POD_invoke_lesser_sign_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = well_t3_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = well } }
+		$TARGET$ = { 
+			while = {
+				count = 2
+				random_list = {
+					10 = { add_character_modifier = { modifier = invoke_lesser_sign_diplomacy years = 10 } }
+					10 = { add_character_modifier = { modifier = invoke_lesser_sign_martial years = 10 } }
+					10 = { add_character_modifier = { modifier = invoke_lesser_sign_stewardship years = 10 } }
+					10 = { add_character_modifier = { modifier = invoke_lesser_sign_intrigue years = 10 } }
+					10 = { add_character_modifier = { modifier = invoke_lesser_sign_learning years = 10 } }
+				}
+			}
+		}
+	}
+	else = {
+		$TARGET$ = {
+			random_list = {
+				10 = { add_character_modifier = { modifier = invoke_lesser_sign_diplomacy years = 10 } }
+				10 = { add_character_modifier = { modifier = invoke_lesser_sign_martial years = 10 } }
+				10 = { add_character_modifier = { modifier = invoke_lesser_sign_stewardship years = 10 } }
+				10 = { add_character_modifier = { modifier = invoke_lesser_sign_intrigue years = 10 } }
+				10 = { add_character_modifier = { modifier = invoke_lesser_sign_learning years = 10 } }
+			}
+		}
+	}
+}
+POD_rouse_the_elemental_spirit_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bialowieza_t2_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = bialowieza } }
+		$TARGET$ = { add_character_modifier = { modifier = rouse_the_elemental_spirit_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = rouse_the_elemental_spirit_modifier years = 15 } }
+	}
+}
+POD_conjure_spirit_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = bialowieza_t3_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = bialowieza } }
+		$TARGET$ = {
+			POD_spawn_random_spirit_effect = yes
+			
+			custom_tooltip = {
+				text = POD_conjure_spirit_cast_effect_tooltip
+				scope:spawned_spirit ?= { add_opinion = { target = root modifier = loyalty_opinion opinion = 50 } }
+			}
+		}
+	}
+	else = {
+		$TARGET$ = { POD_spawn_random_spirit_effect = yes }
+	}
+}
+POD_invoke_greater_sign_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = well_t4_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = well } }
+		$TARGET$ = {
+			add_character_modifier = { modifier = invoke_greater_sign_modifier2 years = 10 }
+			custom_tooltip = POD_invoke_greater_sign_cast_effect_tooltip
+			if = {
+				limit = { has_perk = restless_medias_perk }
+				add_character_modifier = { modifier = invoke_greater_sign_transylvania_modifier years = 10 }
+			}
+			if = {
+				limit = { has_perk = pontos_axeinos_perk }
+				add_character_modifier = { modifier = invoke_greater_sign_black_sea_modifier years = 10 }
+			}
+			if = {
+				limit = { has_perk = the_white_tower_perk }
+				add_character_modifier = { modifier = invoke_greater_sign_bialowieza_modifier years = 10 }
+			}
+			if = {
+				limit = { has_perk = reap_the_well_perk }
+				add_character_modifier = { modifier = invoke_greater_sign_enoch_modifier years = 10 }
+			}
+			if = {
+				limit = { has_perk = hunger_of_the_void_perk }
+				add_character_modifier = { modifier = invoke_greater_sign_well_modifier years = 10 }
+			}
+		}
+	}
+	else = {
+		$TARGET$ = {
+			add_character_modifier = { modifier = invoke_greater_sign_modifier years = 10 }
+			custom_tooltip = POD_invoke_greater_sign_cast_effect_tooltip
+			if = {
+				limit = { has_5_level_of_koldunic_trigger = yes }
+				random_list = {
+					10 = {
+						trigger = { has_perk = restless_medias_perk }
+						add_character_modifier = { modifier = invoke_greater_sign_transylvania_modifier years = 10 }
+					}
+					10 = {
+						trigger = { has_perk = pontos_axeinos_perk }
+						add_character_modifier = { modifier = invoke_greater_sign_black_sea_modifier years = 10 }
+					}
+					10 = {
+						trigger = { has_perk = the_white_tower_perk }
+						add_character_modifier = { modifier = invoke_greater_sign_bialowieza_modifier years = 10 }
+					}
+					10 = {
+						trigger = { has_perk = reap_the_well_perk }
+						add_character_modifier = { modifier = invoke_greater_sign_enoch_modifier years = 10 }
+					}
+					10 = {
+						trigger = { has_perk = hunger_of_the_void_perk }
+						add_character_modifier = { modifier = invoke_greater_sign_well_modifier years = 10 }
+					}
+				}
+			}
+		}
+	}
+}
+POD_merging_of_souls_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = transylvania_t3_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = transylvania } }
+		$TARGET$ = {
+			if = {
+				limit = { NOT = { has_variable = merging_of_souls_modifier_stacks } }
+				while = {
+					count = 3
+					POD_add_modifier_and_track_stacks = { TYPE = character MODIFIER = merging_of_souls_modifier }
+					POD_add_random_skill_point_no_prowess_effect = yes
+				}
+			}
+			else_if = {
+				limit = { var:merging_of_souls_modifier_stacks ?= 1 }
+				while = {
+					count = 2
+					POD_add_modifier_and_track_stacks = { TYPE = character MODIFIER = merging_of_souls_modifier }
+					POD_add_random_skill_point_no_prowess_effect = yes
+				}
+			}
+			else = {
+				POD_add_modifier_and_track_stacks = { TYPE = character MODIFIER = merging_of_souls_modifier }
+				POD_add_random_skill_point_no_prowess_effect = yes
+			}
+		}
+	}
+	else = {
+		$TARGET$ = {
+			POD_add_modifier_and_track_stacks = { TYPE = character MODIFIER = merging_of_souls_modifier }
+			POD_add_random_skill_point_no_prowess_effect = yes
+		}
+	}
+}
+POD_ties_that_bind_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = transylvania_t2_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = transylvania } }
+		$TARGET$ = { add_character_modifier = { modifier = ties_that_bind_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = ties_that_bind_modifier years = 15 } }
+	}
+}
+POD_beyond_the_wall_of_death_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = enoch_t4_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = enoch } }
+		add_blood_magic_lifestyle_perk_points = 2
+		execute_prisoner_effect = {
+			VICTIM = $TARGET$
+			EXECUTIONER = root
+		}
+	}
+	else = {
+		add_blood_magic_lifestyle_perk_points = 1
+		execute_prisoner_effect = {
+			VICTIM = $TARGET$
+			EXECUTIONER = root
+		}
+	}
+}
+POD_earths_embrace_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = enoch_t2_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = enoch } }
+		$TARGET$ = { add_character_modifier = { modifier = earths_embrace_modifier2 years = 15 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = earths_embrace_modifier years = 15 } }
+	}
+}
+POD_nemesis_of_the_living_earth_cast_effect = {
+	POD_discipline_cost_effect = { COUNT = well_t4_cost }
+	if = {
+		limit = { can_cast_empowered_kraina = { KRAINA = well } }
+		$TARGET$ = { add_character_modifier = { modifier = nemesis_of_the_living_earth_modifier2 years = 5 } }
+	}
+	else = {
+		$TARGET$ = { add_character_modifier = { modifier = nemesis_of_the_living_earth_modifier years = 5 } }
+	}
+}

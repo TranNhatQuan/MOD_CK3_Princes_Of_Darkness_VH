@@ -1,0 +1,543 @@
+﻿POD_character_fae_kith_initiation_effect = {
+		
+	#Am I lost in the void?
+	if = {
+		limit = { 
+			NOT = { exists = location }
+			NOT = { # Can't set move non-courtier Merc Commander to pool
+				AND = {
+					primary_title.tier = tier_duchy
+					is_playable_character = no
+				}
+			}
+		}
+
+		#Oops, no good! Go someplace.
+		random_independent_ruler = {
+			limit = {
+				exists = capital_province
+				capital_province = { local_pool_is_full_trigger = no }
+			}
+			alternative_limit = { exists = capital_province }
+			capital_province = { save_scope_as = destination }
+		}
+		
+		move_to_pool_at = scope:destination
+	}
+		
+	if = {
+		limit = { exists = location }
+		if = {
+			limit = { location = { geographical_region = world_europe } }
+			random_list = {
+				53 = { add_trait = sidhe }
+				5 = { add_trait = boggan }
+				1 = { 
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_ireland }
+					}
+					add_trait = clurichaun 
+				}
+				5 = { add_trait = eshu }
+				1 = {
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_scotland }
+					}
+					add_trait = ghilledhu 
+				}
+				5 = { 
+					modifier = {
+						add = 25
+						location = { geographical_region = world_europe_west_germania }
+					}
+					add_trait = nocker 
+				}
+				1 = { 
+					modifier = {
+						add = 10
+						location = { geographical_region = custom_wales }
+					}
+					add_trait = piskey 
+				}
+				5 = { 
+					modifier = {
+						add = 10
+						location = { geographical_region = POD_region_seasons_struggle }
+					}
+					add_trait = pooka 
+					POD_assign_random_pooka_affinity_effect = yes
+				}
+				5 = { 
+					modifier = {
+						add = 50
+						location = { geographical_region = world_europe_north }
+					}
+					add_trait = troll 
+				}
+				5 = { 
+					modifier = {
+						add = 50
+						location = { geographical_region = world_europe_west_britannia }
+					}
+					add_trait = redcap 
+				}
+				1 = { 
+					trigger = { location = { is_riverside_province = yes } }
+					add_trait = riverhag 
+				}
+				1 = { 
+					modifier = {
+						add = 50
+						location = { geographical_region = POD_region_greece }
+					}
+					modifier = {
+						add = 25
+						location = { geographical_region = world_europe_south_east }
+					}
+					modifier = {
+						add = 25
+						location = { geographical_region = world_europe_south_italy }
+					}
+					add_trait = satyr 
+					POD_assign_random_portrait_horn_effect = yes
+					add_character_flag = POD_portrait_no_hat_flag
+				}
+				5 = { 
+					modifier = {
+						add = 50
+						location = { geographical_region = world_europe_east }
+					}
+					add_trait = sluagh 
+				}
+				1 = { add_trait = swanmaiden }
+				1 = { 
+					modifier = {
+						add = 10
+						location = { geographical_region = world_europe_west_germania }
+					}
+					add_trait = wichtel 
+				}
+				5 = { 
+					trigger = { has_trait = fae }
+					modifier = {
+						add = 50
+						location = { geographical_region = world_europe_south_east }
+					}
+					modifier = {
+						add = 50
+						location = { geographical_region = world_europe_south_italy }
+					}		
+					random_list = {
+						10 = { add_trait = glome }
+						10 = { add_trait = kubera }
+						10 = { add_trait = ondine }
+						10 = { add_trait = paroseme }
+						10 = { add_trait = solimond }
+						10 = { add_trait = mannikin }
+					}
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { location = { geographical_region = world_asia_minor } }
+			random_list = {
+				20 = { add_trait = sidhe }
+				1 = { add_trait = boggan }
+				1 = { add_trait = clurichaun }
+				1 = { add_trait = eshu }
+				1 = { add_trait = ghilledhu }
+				1 = { add_trait = nocker }
+				1 = { add_trait = piskey }
+				1 = { 
+					add_trait = pooka 
+					POD_assign_random_pooka_affinity_effect = yes
+				}
+				1 = { add_trait = troll }
+				1 = { add_trait = redcap }
+				1 = { 
+					trigger = { location = { is_riverside_province = yes } }
+					add_trait = riverhag 
+				}
+				30 = { 
+					add_trait = satyr 
+					POD_assign_random_portrait_horn_effect = yes
+					add_character_flag = POD_portrait_no_hat_flag
+				}
+				1 = { add_trait = sluagh }
+				1 = { add_trait = swanmaiden }
+				1 = { add_trait = wichtel }
+				30 = { 
+					trigger = { has_trait = fae }
+					random_list = {
+						10 = { add_trait = glome }
+						10 = { add_trait = kubera }
+						10 = { add_trait = ondine }
+						10 = { add_trait = paroseme }
+						10 = { add_trait = solimond }
+						10 = { add_trait = mannikin }
+					}
+				}
+				5 = { 
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_greater_armenia }
+					}
+					add_trait = ifrit 
+				}
+				5 = {
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_greater_armenia }
+					}				
+					add_trait = lilin 
+				}		
+				5 = { 
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_greater_armenia  }
+					}
+					add_trait = qareen 
+				}
+				5 = {
+					modifier = {
+						add = 20
+						location = { geographical_region = custom_greater_armenia }
+					}
+					add_trait = shaytan 
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { location = { geographical_region = world_middle_east } }
+			random_list = {
+				25 = { add_trait = ifrit }
+				25 = { add_trait = lilin }		
+				25 = { add_trait = qareen }
+				25 = { add_trait = shaytan }
+				5 = { 
+					trigger = { has_trait = fae }
+					random_list = {
+						10 = { add_trait = glome }
+						10 = { add_trait = kubera }
+						10 = { add_trait = ondine }
+						10 = { add_trait = paroseme }
+						10 = { add_trait = solimond }
+						10 = { add_trait = mannikin }
+					}
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { location = { geographical_region = world_africa } }
+			random_list = {
+				10 = { add_trait = biloko }
+				10 = { add_trait = djedi }
+				10 = { add_trait = kuino }
+				10 = { add_trait = obambo }
+				10 = { add_trait = okubili }
+				5 = { add_trait = boggan }
+				1 = { add_trait = clurichaun }
+				25 = { add_trait = eshu }
+				1 = { add_trait = ghilledhu }
+				1 = { add_trait = nocker }
+				1 = { add_trait = piskey }
+				1 = { 
+					add_trait = pooka
+					POD_assign_random_pooka_affinity_effect = yes 
+				}
+				1 = { add_trait = satyr }
+				1 = { add_trait = sluagh }
+				5 = { add_trait = troll }
+				1 = { 
+					modifier = {
+						add = 24
+						location = { geographical_region = world_africa_north }
+					}
+					add_trait = ifrit 
+				}
+				1 = { 
+					modifier = {
+						add = 24
+						location = { geographical_region = world_africa_north }
+					}
+					add_trait = lilin 
+				}		
+				1 = { 
+					modifier = {
+						add = 24
+						location = { geographical_region = world_africa_north }
+					}
+					add_trait = qareen 
+				}
+				1 = { 
+					modifier = {
+						add = 24
+						location = { geographical_region = world_africa_north }
+					}
+					add_trait = shaytan 
+				}
+				10 = { 
+					trigger = { has_trait = fae }
+					random_list = {
+						10 = { add_trait = glome }
+						10 = { add_trait = kubera }
+						10 = { add_trait = ondine }
+						10 = { add_trait = paroseme }
+						10 = { add_trait = solimond }
+						10 = { add_trait = mannikin }
+					}
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { 
+				location = { geographical_region = world_steppe } 
+			}
+			if = {
+				limit = { has_trait = changeling }
+				if = {
+					limit = { has_global_variable = hsien_fae }
+					remove_trait = changeling
+					add_trait = fae
+				}
+				random_list = {
+					10 = { add_trait = fuhsi }
+					10 = { add_trait = hanumen }
+					10 = { add_trait = hengpo }
+					5 = { add_trait = houchi }
+					5 = { add_trait = komuko }
+					10 = { add_trait = nyan }
+					5 = { add_trait = suijen }
+					10 = { add_trait = tanuki }
+					5 = { add_trait = chuihyu }
+					5 = { add_trait = chujung }
+				}
+			}
+			else = {
+				random_list = {
+					10 = { add_trait = glome }
+					10 = { add_trait = kubera }
+					10 = { add_trait = ondine }
+					10 = { add_trait = paroseme }
+					10 = { add_trait = solimond }
+					10 = { add_trait = mannikin }
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { 
+				location = { geographical_region = world_india } 
+			}
+			if = {
+				limit = { has_trait = changeling }
+				if = {
+					limit = { has_global_variable = hsien_fae }
+					remove_trait = changeling
+					add_trait = fae
+				}
+				random_list = {
+					10 = { add_trait = fuhsi }
+					10 = { add_trait = hanumen }
+					10 = { add_trait = hengpo }
+					5 = { add_trait = houchi }
+					5 = { add_trait = komuko }
+					10 = { add_trait = nyan }
+					5 = { add_trait = suijen }
+					10 = { add_trait = tanuki }
+					5 = { add_trait = chuihyu }
+					5 = { add_trait = chujung }
+				}
+			}
+			else = {
+				random_list = {
+					10 = { add_trait = glome }
+					10 = { add_trait = kubera }
+					10 = { add_trait = ondine }
+					10 = { add_trait = paroseme }
+					10 = { add_trait = solimond }
+					10 = { add_trait = mannikin }
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { 
+				location = { geographical_region = world_tibet } 
+			}
+			if = {
+				limit = { has_trait = changeling }
+				if = {
+					limit = { has_global_variable = hsien_fae }
+					remove_trait = changeling
+					add_trait = fae
+				}
+				random_list = {
+					10 = { add_trait = fuhsi }
+					10 = { add_trait = hanumen }
+					10 = { add_trait = hengpo }
+					5 = { add_trait = houchi }
+					5 = { add_trait = komuko }
+					10 = { add_trait = nyan }
+					5 = { add_trait = suijen }
+					10 = { add_trait = tanuki }
+					5 = { add_trait = chuihyu }
+					5 = { add_trait = chujung }
+				}
+			}
+			else = {
+				random_list = {
+					10 = { add_trait = glome }
+					10 = { add_trait = kubera }
+					10 = { add_trait = ondine }
+					10 = { add_trait = paroseme }
+					10 = { add_trait = solimond }
+					10 = { add_trait = mannikin }
+				}
+			}
+		}
+		
+		else_if = {
+			limit = { 
+				location = { geographical_region = world_burma } 
+			}
+			if = {
+				limit = { has_trait = changeling }
+				if = {
+					limit = { has_global_variable = hsien_fae }
+					remove_trait = changeling
+					add_trait = fae
+				}
+				random_list = {
+					10 = { add_trait = fuhsi }
+					10 = { add_trait = hanumen }
+					10 = { add_trait = hengpo }
+					5 = { add_trait = houchi }
+					5 = { add_trait = komuko }
+					10 = { add_trait = nyan }
+					5 = { add_trait = suijen }
+					10 = { add_trait = tanuki }
+					5 = { add_trait = chuihyu }
+					5 = { add_trait = chujung }
+				}
+			}
+			else = {
+				random_list = {
+					10 = { add_trait = glome }
+					10 = { add_trait = kubera }
+					10 = { add_trait = ondine }
+					10 = { add_trait = paroseme }
+					10 = { add_trait = solimond }
+					10 = { add_trait = mannikin }
+				}
+			}
+		}
+		
+		else = {
+			add_trait = sidhe
+		}	
+	}
+	else = { # For merc
+		add_trait = sidhe
+	}	
+}
+
+POD_custom_copy_kith_traits_effect = {
+	$ORIGIN$ = {
+		switch = {
+			trigger = has_trait
+			sidhe = { prev = { add_trait = sidhe } }
+			boggan = { prev = { add_trait = boggan } }
+			clurichaun = { prev = { add_trait = clurichaun } }
+			eshu = { prev = { add_trait = eshu } }
+			ghilledhu = { prev = { add_trait = ghilledhu } }
+			nocker = { prev = { add_trait = nocker } }
+			piskey = { prev = { add_trait = piskey } }
+			pooka = { 
+				prev = { 
+					add_trait = pooka
+					POD_assign_random_pooka_affinity_effect = yes 
+				} 
+			}
+			troll = { prev = { add_trait = troll } }
+			redcap = { prev = { add_trait = redcap } }
+			riverhag = { prev = { add_trait = riverhag } }
+			satyr = { 
+				prev = {
+					add_trait = satyr 
+					POD_assign_random_portrait_horn_effect = yes
+					add_character_flag = POD_portrait_no_hat_flag
+				}
+			}
+			sluagh = { prev = { add_trait = sluagh } }
+			swanmaiden = { prev = { add_trait = swanmaiden } }
+			wichtel = { prev = { add_trait = wichtel } }
+			ifrit = { prev = { add_trait = ifrit } }
+			lilin = { prev = { add_trait = lilin } }
+			qareen = { prev = { add_trait = qareen } }
+			shaytan = { prev = { add_trait = shaytan } }
+			biloko = { prev = { add_trait = biloko } }
+			djedi = { prev = { add_trait = djedi } }
+			kuino = { prev = { add_trait = kuino } }
+			obambo = { prev = { add_trait = obambo } }
+			okubili = { prev = { add_trait = okubili } }
+			chuihyu = { prev = { if = { limit = { has_trait = changeling } add_trait = chuihyu } } } # how?
+			chujung = { prev = { if = { limit = { has_trait = changeling } add_trait = chujung } } } # how?
+			fuhsi = { prev = { if = { limit = { has_trait = changeling } add_trait = fuhsi } } } # how?
+			hanumen = { prev = { if = { limit = { has_trait = changeling } add_trait = hanumen } } } # how?
+			hengpo = { prev = { if = { limit = { has_trait = changeling } add_trait = hengpo } } } # how?
+			houchi = { prev = { if = { limit = { has_trait = changeling } add_trait = houchi } } } # how?
+			komuko = { prev = { if = { limit = { has_trait = changeling } add_trait = komuko } } } # how?
+			nyan = { prev = { if = { limit = { has_trait = changeling } add_trait = nyan } } } # how?
+			suijen = { prev = { if = { limit = { has_trait = changeling } add_trait = suijen } } } # how?
+			tanuki = { prev = { if = { limit = { has_trait = changeling } add_trait = tanuki } } } # how?
+			glome = { prev = { if = { limit = { has_trait = fae } add_trait = glome } } }
+			kubera = { prev = { if = { limit = { has_trait = fae } add_trait = kubera } } }
+			ondine = { prev = { if = { limit = { has_trait = fae } add_trait = ondine } } }
+			paroseme = { prev = { if = { limit = { has_trait = fae } add_trait = paroseme } } }
+			solimond = { prev = { if = { limit = { has_trait = fae } add_trait = solimond } } }
+			mannikin = { prev = { if = { limit = { has_trait = fae } add_trait = mannikin } } }
+		}
+	}
+}
+
+POD_assign_random_pooka_affinity_effect = {
+	random_list = {
+		1 = { add_character_modifier = POD_pooka_wolf_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_hyena_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_cat_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_raven_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_falcon_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_bear_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_fox_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_crocodile_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_snake_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_coyote_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_rat_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_deer_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_shark_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_bovine_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_horse_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_bat_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_boar_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_spider_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_beetle_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_crab_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_ape_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_bee_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_ant_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_mantis_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_millipede_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_turtle_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_scorpion_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_butterfly_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_rabbit_affinity_modifier }
+		1 = { add_character_modifier = POD_pooka_fish_affinity_modifier }
+	}
+}

@@ -1,0 +1,823 @@
+﻿#POD diablerie effects
+
+POD_diablerie_effect = {
+	save_scope_as = diablerist
+	$VICTIM$ = { save_scope_as = victim }
+	
+	POD_diablerie_piety_loss_effect = yes
+
+	stress_impact = {
+		ambitious = major_stress_impact_loss
+		compassionate = major_stress_impact_gain
+	}
+
+	POD_diablerie_V5_effect = yes	
+	POD_diablerie_gain_disciplines_effect = yes
+	POD_bloodpotency_increase_effect = yes
+
+	if = {	
+		limit = { exists = scope:ai_diablerie_of_prisoner }
+		pod_diablerie_specific_death_effect = { VICTIM = scope:victim }
+	}
+	else = {
+		$VICTIM$ = {
+			death = {
+				death_reason = death_diablerie
+				killer = scope:diablerist
+			}
+		}
+		POD_give_diablerist_secret_or_trait_effect = yes
+	}
+
+	POD_diablerie_unconquered_soul_effect = { VICTIM = $VICTIM$ }
+}
+
+POD_queue_diablerie_suspicion_event = {
+	hidden_effect = {
+		if = {
+			limit = {
+				$VICTIM$ = { is_vampire_trigger = yes } # safeguard
+				NOT = { has_trait = diablerist } 
+				NOT = { has_perk = fomori_deception_perk }
+			}
+			set_variable = {
+				name = diablere_sum
+				value = {
+					value = 1
+					if = {
+						limit = { exists = var:diablere_sum }
+						add = var:diablere_sum
+					}
+				}
+				days = 16
+			}
+			random = {
+				chance = 40 
+				
+				trigger_event = {
+					id = POD_diablerize.602
+					days = 15
+				}
+			
+				modifier = {
+					add  = -20
+					has_trait = obfuscateadvanced
+				}
+			}
+		}
+	}
+}
+
+POD_give_diablerist_secret_or_trait_effect = {
+	if = {
+		limit = {
+			is_vampire_trigger = yes
+			is_diablerist_trigger = no
+		}
+		add_secret = { type = secret_diablerist }
+	}
+
+    if = {
+        limit = { POD_is_on_golconda_trigger = yes }
+        custom_tooltip = POD_golconda_diablerie_alert
+        POD_lose_golconda_effect = yes
+    }
+}
+
+POD_diablerie_V5_effect = {
+	if = {
+		limit = {
+			scope:victim = { has_trait = vampgeneration1 }
+		}
+		death = { death_reason = death_suicide }
+		show_as_tooltip = {
+			death = { death_reason = death_suicide }
+			death = { death_reason = death_suicide }
+			death = { death_reason = death_suicide }
+			death = { death_reason = death_suicide }
+			death = { death_reason = death_suicide }
+			death = { death_reason = death_suicide }
+		}
+	}	
+
+	else_if = {
+		limit = {
+			is_vampgeneration3_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 3 }
+	}	
+	
+	else_if = {
+		limit = {
+			is_vampgeneration4_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 4 }
+	}		
+
+	else_if = {
+		limit = {
+			is_vampgeneration5_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 5 }
+	}		
+
+	else_if = {
+		limit = {
+			is_vampgeneration6_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 6 }
+	}
+
+	else_if = {
+		limit = {
+			is_vampgeneration7_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 7 }
+	}	
+
+	else_if = {
+		limit = {
+			is_vampgeneration8_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 8 }
+	}	
+
+	else_if = {
+		limit = {
+			is_vampgeneration9_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 9 }
+	}
+	
+	else_if = {
+		limit = {
+			is_vampgeneration10_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 10 }
+	}		
+
+	else_if = {
+		limit = {
+			is_vampgeneration11_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 11 }
+	}	
+
+	else_if = {
+		limit = {
+			is_vampgeneration12_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 12 }
+	}	
+
+	else_if = {
+		limit = {
+			is_vampgeneration13_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 13 }
+	}
+
+	else_if = {
+		limit = {
+			is_vampgeneration14_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 14 }
+	}
+
+	else_if = {
+		limit = {
+			is_vampgeneration15_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 15 }
+	}
+	
+	else_if = {
+		limit = {
+			is_vampgeneration16_trigger = yes
+		}
+		POD_diablerie_V5_gen_raise_effect = { GEN = 16 }
+	}
+}
+
+POD_diablerie_V5_gen_raise_effect = {		
+	if = {
+		limit = {
+			scope:victim = { 
+				has_trait = vampgeneration
+				has_trait_rank = {
+					trait = vampgeneration
+					rank < $GEN$
+				}
+			}
+		}
+		change_trait_rank = {
+			trait = vampgeneration
+			rank = -1
+		}
+	}
+	POD_achiev_nomnom_check = yes
+}
+
+POD_diablerie_piety_loss_effect = {	
+	if = {
+		limit = {
+			scope:victim = {	
+				has_character_modifier = sentenced_court_blood_modifier
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = sanctioned_diableries
+			}
+			scope:victim = {	
+				OR = {
+					has_trait = craven
+					has_trait = arbitrary
+					faith = {
+						faith_hostility_level = {
+						target = scope:diablerist.faith
+						value = 3
+						}
+					}	
+					}	
+				}
+			}
+		add_piety = minor_piety_loss
+	}
+
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = sanctioned_diableries
+			}
+			scope:victim = {	
+				OR = {
+					has_trait = just
+					has_trait = brave
+					faith = {
+						faith_hostility_level = {
+						target = scope:diablerist.faith
+						value = 0
+						}
+					}	
+					}	
+				}
+			}
+		add_piety = massive_piety_loss
+	}		
+	
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = vampirediablerie_illegal
+			}
+		}
+		add_piety = massive_piety_loss
+	}
+	
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = vampirediablerie_shunned
+			}
+		}
+		add_piety = massive_piety_loss
+	}	
+
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = vampirediablerie_accepted
+			}
+		}
+		add_piety = major_piety_loss
+	}
+	
+}
+
+POD_diablerie_gain_disciplines_effect = {
+	if = {
+		limit = { scope:diablerist = { POD_blocked_from_learning_trigger = no } }
+
+		# Chance to learn Blood Sorcery Traditions if diablerist already knows Blood Sorcery
+		if = {
+			limit = {
+				scope:diablerist = { has_bloodsorcery_trigger = yes }
+				scope:victim = { has_bloodsorcery_trigger = yes }
+			}
+
+			scope:diablerist = {
+				POD_learn_targets_known_bloodmagic_paths = {
+					TARGET = scope:victim
+					CHANCE = 10
+				}
+			}
+		}
+
+		# Chance to learn Necromancy paths if diablerist already knows Necromancy
+		if = {
+			limit = {
+				scope:diablerist = { has_necromancy_trigger = yes }
+				scope:victim = { has_necromancy_trigger = yes }
+			}
+
+			scope:diablerist = {
+				POD_learn_targets_known_necromancy_paths = {
+					TARGET = scope:victim
+					CHANCE = 10
+				}
+			}
+		}
+		
+		# Actual discipline assignment
+		POD_trait_injector_disciplines = { EFFECT = POD_diablerie_roll_discipline }
+	}
+}
+
+POD_diablerie_roll_discipline = {
+	if = {
+		limit = { scope:diablerist = { NOT = { has_trait = $TRAIT$discipline } } }
+		
+		if = {
+			limit = { scope:victim = { has_trait = $TRAIT$ } }
+			
+			scope:diablerist = {
+				POD_diablerie_gain_discipline = {
+					CHANCE = 5
+					TRAIT = $TRAIT$
+				}
+			}
+		}
+		
+		if = {
+			limit = { scope:victim = { has_trait = $TRAIT$advanced } }
+			
+			scope:diablerist = {
+				POD_diablerie_gain_discipline = {
+					CHANCE = 10
+					TRAIT = $TRAIT$
+				}
+			}
+		}
+	}
+}
+
+POD_diablerie_gain_discipline = {
+	random = {
+		chance = $CHANCE$
+		
+		add_trait = $TRAIT$
+		
+		if = {
+			limit = { trait:$TRAIT$ = trait:bloodsorcery }
+			POD_learn_targets_known_bloodmagic_paths = {
+				TARGET = scope:victim
+				CHANCE = 100
+			}
+		}
+		else_if = {
+			limit = { trait:$TRAIT$ = trait:necromancy }
+			POD_learn_targets_known_necromancy_paths = {
+				TARGET = scope:victim
+				CHANCE = 100
+			}
+		}
+	}
+}
+
+POD_learn_targets_known_bloodmagic_paths = {
+	if = {
+		limit = {
+			$TARGET$ = { has_thaumaturgy_bloodmagic_trigger = yes }
+			has_thaumaturgy_bloodmagic_trigger = no
+			can_learn_thaumaturgy_bloodmagic_trigger_visible = yes
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_thaumaturgy_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_sielanic_thaumaturgy_bloodmagic_trigger = yes }
+			has_sielanic_thaumaturgy_bloodmagic_trigger = no
+			can_learn_sielanic_thaumaturgy_bloodmagic_trigger_visible = yes
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_sielanic_thaumaturgy_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_dur_an_ki_bloodmagic_trigger = yes }
+			has_dur_an_ki_bloodmagic_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_dur_an_ki_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_akhu_bloodmagic_trigger = yes }
+			has_akhu_bloodmagic_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_akhu_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_sadhana_bloodmagic_trigger = yes }
+			has_sadhana_bloodmagic_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_sadhana_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_koldunic_bloodmagic_trigger = yes }
+			has_koldunic_bloodmagic_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_koldunic_bloodmagic_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_sihr_bloodmagic_trigger = yes }
+			has_sihr_bloodmagic_trigger = no
+			can_learn_sihr_bloodmagic_trigger_visible = yes
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_sihr_bloodmagic_effect = yes
+		}
+	}
+}
+
+POD_learn_targets_known_necromancy_paths = {
+	if = {
+		limit = {
+			$TARGET$ = { has_cappadocian_necromancy_trigger = yes }
+			has_cappadocian_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_cappadocian_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_giovanni_necromancy_trigger = yes }
+			has_giovanni_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_giovanni_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_harbinger_necromancy_trigger = yes }
+			has_harbinger_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_harbinger_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_impundulu_necromancy_trigger = yes }
+			has_impundulu_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_impundulu_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_lamia_necromancy_trigger = yes }
+			has_lamia_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_lamia_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_nagaraja_necromancy_trigger = yes }
+			has_nagaraja_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_nagaraja_necromancy_effect = yes
+		}
+	}
+	if = {
+		limit = {
+			$TARGET$ = { has_rosselini_necromancy_trigger = yes }
+			has_rosselini_necromancy_trigger = no
+		}
+		random = {
+			chance = $CHANCE$
+			POD_learn_rosselini_necromancy_effect = yes
+		}
+	}
+}
+
+pod_diablerie_specific_death_effect = {
+	add_secret = {
+		type = secret_diablerist_specific
+		target = $VICTIM$
+	}
+	random_secret = {
+		limit = {
+			secret_type = secret_diablerist_specific
+			secret_target = $VICTIM$
+		}
+		save_scope_as = target_secret
+	}
+	POD_give_diablerist_specific_secret_context_effect = { SECRET = scope:target_secret }
+	POD_save_diablerist_specific_secret_relations = {
+		VICTIM = $VICTIM$
+		DIABLERIST = scope:diablerist
+		SECRET = scope:target_secret
+	}
+	# fake death reason
+	$VICTIM$ = {
+		if = {
+			limit = { scope:diablerist.faith = { has_doctrine = tenet_human_sacrifice } }
+			death = {
+				death_reason = death_sacrificed_to_gods
+				killer = scope:diablerist
+			}
+		}
+		else = {
+			death = {
+				death_reason = death_execution
+				killer = scope:diablerist
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:target_secret.var:known_diablerie
+			OR = {
+				is_independent_ruler = yes
+				scope:diablerist.liege.faith ?= { has_doctrine_parameter = vampirediablerie_accepted }
+			}
+		}
+		random_secret = {
+			limit = {
+				secret_type = secret_diablerist_specific
+				secret_target = $VICTIM$
+			}
+			# weird stuff happens when you expose your own secrets
+			expose_secret = $VICTIM$
+		}
+	}
+}
+
+# run before actually killing the other character
+POD_give_diablerist_specific_secret_context_effect = {
+	hidden_effect_new_object = {
+		$SECRET$ = {
+			if = {
+				limit = { secret_owner = { has_execute_reason = prev.secret_target } }
+				set_variable = justified_execution
+			}
+			if = {
+				limit = { secret_owner.faith = { has_doctrine = doctrine_vampirediablerie_accepted } }
+				set_variable = known_diablerie
+			}
+		}
+	}
+}
+
+POD_save_diablerist_specific_secret_relations = {
+	$VICTIM$ = {
+		# Victim's family & spouse hates executioner
+		every_close_family_member = {
+			limit = {
+				this != $DIABLERIST$
+				opinion = { target = $VICTIM$ value > low_negative_opinion }
+			}
+			$SECRET$ = {
+				add_to_variable_list = {
+					name = secret_victim_family_list
+					target = prev
+				}
+			}
+		}
+		every_spouse = {
+			limit = {
+				this != $DIABLERIST$
+			}
+			$SECRET$ = {
+				add_to_variable_list = {
+					name = secret_victim_family_list
+					target = prev
+				}
+			}
+		}
+		
+		# Victim's friends and lovers
+		every_relation = {
+			type = friend
+			limit = {
+				NOR = {
+					this = $DIABLERIST$
+					$SECRET$ = {
+						is_target_in_variable_list = {
+							name = secret_victim_family_list
+							target = prev
+						}
+					}
+				}
+			}
+			$SECRET$ = {
+				add_to_variable_list = {
+					name = secret_victim_friend_list
+					target = prev
+				}
+			}
+		}
+		every_relation = {
+			type = lover
+			limit = {
+				NOR = {
+					this = $DIABLERIST$
+					$SECRET$ = {
+						is_target_in_variable_list = {
+							name = secret_victim_family_list
+							target = prev
+						}
+						is_target_in_variable_list = {
+							name = secret_victim_friend_list
+							target = prev
+						}
+					}
+				}
+			}
+			$SECRET$ = {
+				add_to_variable_list = {
+					name = secret_victim_lover_list
+					target = prev
+				}
+			}
+		}
+	}
+}
+
+# arguments:
+# VICTIM
+# REASON (either victim_family, victim_lover, or victim_friend, used in POD_secrets.0201)
+POD_queue_diablerie_specific_revenge_event = {
+	hidden_effect = {
+		random = {
+			chance = 50
+			modifier = {
+				factor = 2
+				has_trait = wrathful
+			}
+			modifier = {
+				factor = 2
+				has_trait = vengeful
+			}
+			modifier = {
+				factor = 2
+				OR = {
+					is_parent_of = $VICTIM$
+					is_child_of = $VICTIM$
+				} 	
+			}
+			save_scope_as = $REASON$
+			trigger_event = {
+				id = POD_secrets.0201
+				days = 15
+			}
+		}
+	}
+}
+
+POD_diablerie_specific_opinion_known_effect = {
+	$SECRET$ = {
+		every_in_list = {
+			variable = secret_victim_family_list
+			limit = { is_alive = yes }
+			hidden_effect = {
+				if = { 
+					limit = { exists = prev.var:justified_execution }
+					remove_opinion = { 
+						target = $DIABLERIST$
+						modifier = executed_close_family
+					}
+				}
+				else = {
+					remove_opinion = {
+						target = $DIABLERIST$
+						modifier = executed_close_family_crime
+					}
+				}
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirediablerie_illegal } }
+				add_opinion = {
+					target = $DIABLERIST$
+					modifier = diablerized_close_family_opinion_crime
+				}
+			}
+			else = {
+				add_opinion = {
+					target = $DIABLERIST$	
+					modifier = diablerized_close_family_opinion
+				}
+			}
+			POD_queue_diablerie_specific_revenge_event = {
+				VICTIM = $VICTIM$
+				REASON = victim_family
+			}
+		}
+		every_in_list = {
+			variable = secret_victim_lover_list
+			limit = { is_alive = yes }
+			hidden_effect = {
+				remove_opinion = { 
+					target = $DIABLERIST$
+					modifier = executed_close_relation_opinion
+				}
+			}
+			if = {
+				limit = { 
+					OR = {
+						faith = { has_doctrine_parameter = vampirediablerie_illegal }
+						NOT = { exists = prev.var:justified_execution }
+					}
+				}
+				add_opinion = {
+					target = $DIABLERIST$
+					modifier = diablerized_close_relation_opinion_crime
+				}
+			}
+			else = {
+				add_opinion = {
+					target = $DIABLERIST$	
+					modifier = diablerized_close_relation_opinion
+				}
+			}
+			POD_queue_diablerie_specific_revenge_event = {
+				VICTIM = $VICTIM$
+				REASON = victim_lover
+			}
+		}
+		every_in_list = {
+			variable = secret_victim_friend_list
+			limit = { is_alive = yes }
+			hidden_effect = {
+				remove_opinion = {
+					target = $DIABLERIST$
+					modifier = executed_close_relation_opinion
+				}
+			}
+			if = {
+				limit = { 
+					OR = {
+						faith = { has_doctrine_parameter = vampirediablerie_illegal }
+						NOT = { exists = prev.var:justified_execution }
+					}
+				}
+				add_opinion = {
+					target = $DIABLERIST$
+					modifier = diablerized_close_relation_opinion_crime
+				}
+			}
+			else = {
+				add_opinion = {
+					target = $DIABLERIST$	
+					modifier = diablerized_close_relation_opinion
+				}
+			}
+			POD_queue_diablerie_specific_revenge_event = {
+				VICTIM = $VICTIM$
+				REASON = victim_friend
+			}
+		}
+	}
+	$VICTIM$ = {
+		set_death_reason = {
+			death_reason = death_diablerie
+			killer = $DIABLERIST$
+		}
+	}
+}

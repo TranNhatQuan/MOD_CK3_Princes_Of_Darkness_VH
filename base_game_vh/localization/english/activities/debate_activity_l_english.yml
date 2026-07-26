@@ -1,0 +1,106 @@
+﻿l_english:
+ ### SETUP
+  activity_debate: "Tranh biện"
+  activity_debate_plural: "Các cuộc tranh biện"
+  activity_debate_destination_selection: "Ngài chỉ có thể tổ chức $activity_debate$ tại một [capital|E] thuộc về Ngài, [movement_leader|E] của Ngài, [liege|E] của Ngài hoặc [GetTitleByKey('h_china').GetName]."
+  activity_debate_selection_tooltip: "Tổ chức [GetActivityType('activity_debate').GetName] để tranh giành quyền lực chính trị — giành quyền kiểm soát cho bản thân hoặc phong trào của Ngài $activity_debate_host_rewards$"
+  activity_debate_desc: "Công lao, ảnh hưởng, #EMP quyền lực#! — tất cả đều trở nên vô nghĩa nếu Ngài không thể đưa ra những lập luận xác đáng cho bản thân và chính nghĩa của mình.\n\nHãy kêu gọi một cuộc tranh biện để thuyết phục người khác rằng Ngài xứng đáng có nhiều quyền lực hơn, hoặc thách thức một phong trào khác nhằm đưa phong trào của Ngài vào thế thuận lợi hơn."
+  activity_debate_host_desc: "$activity_debate_host_rewards$$activity_debate_guest_rewards$"
+  activity_debate_host_rewards: "\n$BULLET_WITH_TAB$[movement_power_i] [movement_power|E]\n$BULLET_WITH_TAB$[influence_i|E] [influence|E]\n$BULLET_WITH_TAB$[merit_i|E] [merit|E]"
+  activity_debate_guest_desc: "\n$BULLET_WITH_TAB$Có thể nhận được [disciples|E]\n$BULLET_WITH_TAB$Có thể tăng [trait_level_track_xp|E] của đặc tính [GetTrait('confucian_education').GetName( GetNullCharacter )]"
+  activity_debate_guest_rewards: "\n$BULLET_WITH_TAB$Người tham gia có thể nhận [trait_level_track_xp|E] của đặc tính [GetTrait('confucian_education').GetName( GetNullCharacter )]\n$BULLET_WITH_TAB$Người tham gia có thể trở thành một [elder|E]"
+  debate_base_cost: "Chi phí cơ bản"
+  activity_debate_predicted_cost: "Chi phí dự kiến"
+
+  activity_debate_host_an_a: "a"
+
+ # Province Selection
+  activity_debate_province_kaifeng_palace_desc: "#P ++ $building_type_kaifeng_palace_01$#!"
+  activity_debate_province_desc_leader_capital_desc: "#P + [capital|E] của [GetSituation('dynastic_cycle').GetParticipantGroupByCharacter(host.Self).MakeScope.Var('movement_leader').Char.GetShortUIName|U] ( [movement_leader|E] của Ngài )#!"
+  activity_debate_province_desc_liege_capital_desc: "#P + [capital|E] của [liege|E] của Ngài#!"
+  debate_location_validity_desc: "Không phải là [capital|E] thuộc về Ngài, [movement_leader|E] của Ngài, [liege|E] của Ngài hoặc [GetTitleByKey('h_china').GetName]"
+
+ ### TOOLTIPS
+  activity_debate_guest_help_text: "Mọi [activity_guests|E] được mời sẽ theo dõi hoặc tham gia tranh biện. Những lập luận thành công sẽ mang lại [movement_power|E], hoặc làm suy giảm quyền lực của một phong trào khác. Tham dự tranh biện là cơ hội tốt để giành [merit|E], nâng cao [trait_level_track_xp|E] của đặc tính [GetTrait('confucian_education').GetName( GetNullCharacter )], và có khả năng giành được một [elder|E]"
+  reached_disciple_limit: "Ngài đã đạt đến số lượng môn đồ tối đa"
+  is_already_the_favored_movement: "[GetPlayer.Custom('GetMyMovementNoTooltip')] đã là [favored_movement|E]"
+  is_already_leader_and_favored_movement: "[GetPlayer.Custom('GetMyMovementNoTooltip')] đã là [favored_movement|E] và [GetPlayer.GetShortUIName] là [movement_leader|E] của nó"
+  gained_many_disciples: "Nhận được [disciple_3.GetShortUIName|U], [disciple_2.GetShortUIName] và [disciple_1.GetShortUIName|U] làm [disciples|E]"
+  gained_few_disciples: "Nhận được [disciple_2.GetShortUIName|U] và [disciple_1.GetShortUIName] làm [disciples|E]"
+  gained_one_disciple: "Nhận được [disciple_1.GetShortUIName|U] làm [disciple|E]"
+  gained_new_elder_tt: "Đã có được [guest.MakeScope.Var('new_elder').Char.GetFirstName] làm trưởng lão"
+  activity_window_character_honorary_guest_leader: "[Concept('movement_leader','Lãnh Đạo Bị Thách Thức')|E]\n[Character.GetShortUINameNoTooltip|U]"
+
+ ### GUEST INVITE RULES
+  activity_invite_rule_debate_movement_members: "Thành viên [GetPlayer.Custom('GetMyMovement')]"
+  activity_invite_rule_debate_movement_other_members: "Thành viên phong trào khác"
+  movement_leader_for_host: "Lãnh đạo phong trào"
+  movement_leader_desc_for_host: "Lãnh đạo bị thách thức của [GetPlayer.Custom('GetMyMovement')]"
+  movement_leader: "Lãnh đạo phong trào bị thách thức"
+  ACTIVITY_GUEST_IS_IMPERIAL_REASON: "Hoạt động là $debate_type_favor$"
+ ### PHASES
+  debate_phase_discussion: "Chuẩn bị"
+  debate_phase_discussion_desc: "Các giảng đường trở nên sôi động với những cuộc thảo luận nhã nhặn, khi các nhà tranh biện cố gắng suy đoán lập trường nào là chiến lược nhất."
+  debate_phase_debate: "Tranh biện"
+  debate_phase_debate_desc: "Thời khắc cho cuộc tranh biện trật tự đã đến. Chỉ có trí tuệ sắc bén nhất mới giành phần thắng."
+
+ ### OPTIONS
+  debate_type_leadership: "Tranh biện $Movement$"
+  debate_type_leadership_desc: "$EFFECT_LIST_BULLET$ Tranh biện với các thành viên phong trào của Ngài để trở thành [movement_leader|E]\n\n#weak Bằng trí tuệ hay mưu lược, ta sẽ là người nắm quyền.#!"
+  debate_type_favor: "Tranh biện Hoàng gia"
+  debate_type_favor_desc: "$EFFECT_LIST_BULLET$ Tranh biện với một phong trào khác trước mặt [son_of_heaven|E] để khiến [GetPlayer.Custom('GetMyMovementNoTooltip')] trở thành [favored_movement|E]\n\n#weak Một con thuyền cần được lèo lái bởi thủy thủ phù hợp.#!"
+
+  debate_option_books: "$adult_education_option_books$"
+  debate_books_bad: "$adult_education_books_bad$"
+  debate_books_bad_desc: "$EFFECT_LIST_BULLET$Giảm chi phí [gold|E]\n\n#weak Ta mang theo kiến thức của mình ở mọi nơi. Chỉ những kẻ thiếu tự tin mới cần ẩn mình sau lập luận của học giả khác.#!"
+  debate_books_normal: "Cuộn sách và ghi chép"
+  debate_books_normal_desc: "$EFFECT_LIST_BULLET$Tăng nhẹ tỷ lệ thành công của Hoạt động\n\n#weak Ta chỉ cần những văn bản và chú giải cốt lõi để bảo vệ lập luận của mình.#!"
+  debate_books_good: "$adult_education_books_good$"
+  debate_books_good_desc: "$EFFECT_LIST_BULLET$Tăng tỷ lệ thành công của Hoạt động\n\n#weak Ta sẽ mang theo cả một kho tàng tri thức để gây ấn tượng với khách mời và củng cố lập luận của mình#!"
+
+  debate_argument_major_decrease_desc: "#N #bold Giảm mạnh#!#! #V Cơ hội thành công#! của Ngài"
+  debate_argument_moderate_decrease_desc: "#N Giảm vừa#! #V Cơ hội thành công#! của Ngài"
+  debate_argument_moderate_increase_desc: "#P Tăng vừa#! #V Cơ hội thành công#! của Ngài"
+  debate_argument_major_increase_desc: "#P #bold Tăng mạnh#!#! #V Cơ hội thành công#! của Ngài"
+
+  tgp_dynastic_cycle_decision_event.crowd_approval_desc: "\n\nKhán giả gật đầu tán thành."
+  tgp_dynastic_cycle_decision_event.crowd_disapproval_desc: "\n\nKhán giả lắc đầu không đồng tình."
+
+ ### CONCLUSION
+  activity_debate_conclusion_desc_leadership_winner: "Cuộc tranh biện giành quyền lãnh đạo [GetPlayer.Custom('GetMyMovement')] đã kết thúc, và ta được tuyên bố là người chiến thắng!"
+  activity_debate_conclusion_desc_leadership_loser: "Kế hoạch của ta đã thất bại, và [Activity.MakeScope.Var('challenged_movement_leader').Char.GetFirstNameNoTooltip] vẫn tiếp tục là lãnh đạo của [GetPlayer.Custom('GetMyMovement')]."
+  activity_debate_conclusion_desc_leadership_challenged_loser: "[Activity.MakeScope.Var('debate_winner').Char.GetFirstNameNoTooltip] được tuyên bố là người lãnh đạo của [GetPlayer.Custom('GetMyMovement')] bất chấp mọi nỗ lực của ta."
+  activity_debate_conclusion_desc_favor_winner: "Cuộc tranh biện nhằm giành ân sủng của [ROOT.Char.GetTopLiege.GetTitleAsNamePossessiveNoTooltip] đã kết thúc, với [GetPlayer.Custom('GetMyMovement')] được tuyên bố là bên chiến thắng!"
+  activity_debate_conclusion_desc_favor_loser: "Ta đã không thành công trong việc giành được ân sủng của [ROOT.Char.GetTopLiege.GetTitleAsNamePossessiveNoTooltip] cho [GetPlayer.Custom('GetMyMovement')]. Lần sau ta sẽ phải cố gắng hơn nữa."
+  debate_conclusion_fallback: "[GetActivityType( 'activity_debate' ).GetName] đã đi đến hồi kết."
+
+ # Rewards
+  debate_become_movement_leader_reward_title: "Đoạt quyền lãnh đạo"
+  debate_become_movement_leader_reward: "[debate_winner.GetShortUIName] đã chiến thắng cuộc tranh biện và trở thành [movement_leader|E] mới của [debate_winner.Custom('GetMyMovement')]"
+  debate_remain_movement_leader_reward_title: "Bảo vệ quyền lãnh đạo"
+  debate_remain_movement_leader_reward: "[debate_winner.GetShortUIName] đã chiến thắng cuộc tranh biện và tiếp tục là [movement_leader|E] của [debate_winner.Custom('GetMyMovement')]"
+  debate_increase_movement_power_reward_title: "Phong trào được củng cố"
+  debate_increase_movement_power_reward: "Nhận được [movement_power|E]"
+  debate_loss_cost_title: "Thua tranh biện"
+  debate_loss_cost: "Tổn thất"
+  debate_host_rewards_title: "Tổ chức tranh biện"
+  debate_guest_rewards_title: "Tham dự tranh biện"
+
+ # Pulse Actions
+  apa_movement_ridiculed_title: "[second.GetShortUIName|U] đã chế giễu phong trào của [first.GetShortUINamePossessive|U]."
+  apa_debate_brought_huangdi_gift_title: "$apa_brought_huangdi_gift_title$"
+  apa_debate_entrant_disagreement_title: "$apa_entrant_disagreement_title$"
+  apa_debate_found_disciple_title: "$apa_found_disciple_title$"
+  apa_debate_fruitful_debate_title: "$apa_impressed_teacher_title$"
+
+  DEBATE_PROGRESS_TITLE_TT: "#T Cục diện tranh biện#!"
+  DEBATE_PROGRESS_GENERAL_TT: "$DEBATE_PROGRESS_TITLE_TT$\nMột cuộc tranh biện được đánh giá dựa trên màn thể hiện của từng người tham gia. Ai có thể thuyết phục khán giả hiệu quả nhất sẽ có nhiều khả năng được tuyên bố là người chiến thắng."
+  DEBATE_PROGRESS_YOU_TT: "$DEBATE_PROGRESS_TITLE_TT$\nKhả năng [Activity.MakeScope.Var('debate_contender').Char.GetShortUIName] [CharAreIs(Character)] chiến thắng cuộc tranh biện"
+  DEBATE_PROGRESS_OPPONENT_TT: "$DEBATE_PROGRESS_TITLE_TT$\nKhả năng [Activity.MakeScope.Var('challenged_movement_leader').Char.GetShortUIName] [CharAreIs( Activity.MakeScope.Var('challenged_movement_leader').Char )] chiến thắng cuộc tranh biện và tiếp tục nắm quyền"
+  DEBATE_PROGRESS_MARKER_1_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('debate_contender').Char.GetShortUIName|U] sẽ giành chiến thắng"
+  DEBATE_PROGRESS_MARKER_2_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('debate_contender').Char.GetShortUIName|U] [CharAreIs(Activity.MakeScope.Var('debate_contender').Char )] được đánh giá rất cao về khả năng chiến thắng"
+  DEBATE_PROGRESS_MARKER_3_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('debate_contender').Char.GetShortUIName|U] [CharAreIs(Activity.MakeScope.Var('debate_contender').Char )] được đánh giá nhỉnh hơn về khả năng chiến thắng"
+  DEBATE_PROGRESS_MARKER_4_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('debate_contender').Char.GetShortUIName|U] và [Activity.MakeScope.Var('challenged_movement_leader').Char.GetShortUIName] có cơ hội chiến thắng ngang nhau"
+  DEBATE_PROGRESS_MARKER_5_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('challenged_movement_leader').Char.GetShortUIName|U] [CharAreIs( Activity.MakeScope.Var('challenged_movement_leader').Char )] được đánh giá nhỉnh hơn về khả năng chiến thắng"
+  DEBATE_PROGRESS_MARKER_6_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('challenged_movement_leader').Char.GetShortUIName|U] [CharAreIs( Activity.MakeScope.Var('challenged_movement_leader').Char )] được đánh giá rất cao về khả năng chiến thắng"
+  DEBATE_PROGRESS_MARKER_7_TT: "$DEBATE_PROGRESS_TITLE_TT$\n[Activity.MakeScope.Var('challenged_movement_leader').Char.GetShortUIName|U] sẽ giành chiến thắng"

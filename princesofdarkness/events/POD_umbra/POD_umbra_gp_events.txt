@@ -1,0 +1,964 @@
+﻿namespace = POD_umbra_gp
+
+POD_umbra_gp.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.101.t
+	desc = POD_umbra_gp.101.desc
+	
+	left_portrait = root
+	right_portrait = character:POD_wraith_04
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_gp.101.a
+		
+		add_character_flag = coruroc_quest
+	}
+
+	option = {
+		name = POD_umbra_gp.101.b
+	}
+}
+
+POD_umbra_gp.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.102.t
+	desc = POD_umbra_gp.102.desc
+	
+	left_portrait = root
+	right_portrait = character:POD_spirit_01
+	theme = umbra_expedition
+
+	option = {
+		name = POD_umbra_gp.102.a
+		
+		add_character_flag = aidan_farwatcher_quest
+	}
+
+	option = {
+		name = POD_umbra_gp.102.b
+	}
+}
+
+POD_umbra_gp.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.103.t
+   	desc = POD_umbra_gp.103.desc
+	theme = greatperson 
+	left_portrait = {
+		character = scope:gp_aristotle
+		animation = personality_rational
+	}
+	
+	immediate = {		
+		create_character = {
+			name = "Aristotle" 
+			age = 62 
+			gender = male
+			dynasty = none
+			learning = 0
+			diplomacy = 5
+			intrigue = 2
+			stewardship = 6
+			faith = faith:innocence
+			culture = culture:classical_greek
+			trait = education_learning_4
+			trait = intellect_good_3
+			trait = diligent
+			trait = patient
+			trait = gregarious
+			trait = scholar
+			trait = theologian
+			trait = lifestyle_poet
+			trait = lifestyle_physician
+			trait = lifestyle_mystic
+			trait = wraith
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = gp_aristotle
+			after_creation = {
+				set_age = current_year
+				change_age = 322
+				add_trait_xp = {
+					trait = lifestyle_mystic
+					value = 100
+				}
+				add_trait_xp = {
+					trait = wraith
+					track = fetter_resolved
+					value = 90
+				}
+				give_nickname = nick_philosopher
+				add_character_flag = POD_great_person_flag
+				add_trait = historical_character
+				add_character_flag = POD_is_aristotle # for achievement 29
+				POD_set_resonance_effect = yes
+				if = {
+					limit = { has_ep1_dlc_trigger = yes }
+					create_inspiration = book_inspiration
+				}
+				POD_wraith_initialization_effect = yes
+				POD_arcanoi_initiation_effect = yes
+			}
+		}
+		
+		add_to_global_variable_list = {
+			name = special_character_list
+			target = flag:spawned_gp_aristotle
+		}
+	
+		play_music_cue = "mx_cue_positive_effect"	
+	}
+	
+	option = {
+		name = POD_umbra_gp.103.a
+		add_courtier = scope:gp_aristotle
+		
+		hidden_effect = {
+			POD_masquerade_exposure_increase_effect = yes
+		
+			scope:gp_aristotle = {
+				add_character_flag = {
+					flag = blocked_from_leaving
+					years = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.103.b
+		
+		scope:gp_aristotle = { death = { death_reason = death_disappearance } }
+	}
+}
+
+POD_umbra_gp.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.104.t
+   	desc = POD_umbra_gp.104.desc
+	theme = greatperson 
+	left_portrait = {
+		character = scope:gp_hypatia
+		animation = personality_rational
+	}
+	
+	immediate = {		
+		create_character = {
+			template = spirit_human_template
+			name = "Hypatia" 
+			age = 45 
+			gender = female
+			dynasty = none
+			faith = faith:velvet_brood
+			culture = culture:greek
+			learning = 9
+			stewardship = 3
+			intrigue = 5
+			trait = education_learning_4
+			trait = intellect_good_3
+			trait = beauty_good_3
+			trait = gregarious 
+			trait = diligent 
+			trait = patient 
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = gp_hypatia
+			after_creation = {
+				set_age = current_year
+				change_age = -415
+				add_character_flag = POD_great_person_flag
+				add_trait = historical_character
+				POD_set_resonance_effect = yes
+			}
+		}
+		
+		add_to_global_variable_list = {
+			name = special_character_list
+			target = flag:spawned_gp_hypatia
+		}		
+	
+		play_music_cue = "mx_cue_positive_effect"	
+	}
+	
+	option = {
+		name = POD_umbra_gp.104.a
+		add_courtier = scope:gp_hypatia
+	
+		hidden_effect = {
+			POD_masquerade_exposure_increase_effect = yes
+		
+			scope:gp_hypatia = {
+				add_character_flag = {
+					flag = blocked_from_leaving
+					years = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.104.b
+		
+		scope:gp_hypatia = { death = { death_reason = death_disappearance } }
+	}
+}
+
+POD_umbra_gp.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.105.t
+   	desc = POD_umbra_gp.105.desc
+	theme = greatperson 
+	left_portrait = {
+		character = scope:gp_mahfuz_alam
+		animation = personality_rational
+	}
+	
+	immediate = {		
+		create_character = {
+			name = "Mahfuz_Alam" 
+			age = 30
+			gender = male
+			dynasty = none
+			faith = faith:protesters
+			culture = culture:levantine
+			martial = 3
+			intrigue = 8
+			stewardship = 8
+			prowess = 10
+			trait = education_martial_3
+			trait = zealous
+			trait = brave
+			trait = ambitious
+			trait = holy_warrior
+			trait = wraith
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = gp_mahfuz_alam
+			after_creation = {
+				set_age = current_year
+				change_age = -1101
+				add_character_flag = POD_great_person_flag
+				add_trait = historical_character
+				POD_set_resonance_effect = yes
+				add_trait_xp = {
+					trait = wraith
+					track = fetter_resolved
+					value = 50
+				}
+				POD_wraith_initialization_effect = yes
+				POD_arcanoi_initiation_effect = yes
+			}
+		}
+		
+		add_to_global_variable_list = {
+			name = special_character_list
+			target = flag:spawned_gp_mahfuz_alam
+		}
+	
+		play_music_cue = "mx_cue_positive_effect"	
+	}
+	
+	option = {
+		name = POD_umbra_gp.105.a
+		add_courtier = scope:gp_mahfuz_alam
+	
+		hidden_effect = {
+			POD_masquerade_exposure_increase_effect = yes
+		
+			scope:gp_mahfuz_alam = {
+				add_character_flag = {
+					flag = blocked_from_leaving
+					years = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.105.b
+		
+		scope:gp_mahfuz_alam = { death = { death_reason = death_disappearance } }
+	}
+}
+
+POD_umbra_gp.106 = {
+	hidden = yes
+
+	immediate = {
+		create_character = {
+			name = "Grey" 
+			age = 18
+			gender_female_chance = {
+				value = 50
+				if = {
+					limit = { root = { is_attracted_to_men = yes } }
+					add = -50
+				}
+				if = {
+					limit = { root = { is_attracted_to_women = yes } }
+					add = 50
+				}
+			}
+			dynasty = none
+			faith = root.faith
+			culture = root.culture
+			trait = alien
+			trait = education_learning_5
+			employer = root	
+			save_scope_as = gp_grey
+			after_creation = {
+				set_age = { 1000 3000 }
+				POD_set_resonance_effect = yes
+				add_character_flag = easter_egg_character
+				
+				random_list = {
+					50 = {
+						# Stellaris nano bot version https://stellaris.paradoxwikis.com/L-Cluster#Gray
+						add_trait = automaton
+						set_immortal_age = 18
+						add_trait = beauty_good_3
+						add_trait = albino
+					}
+					50 = {
+						# Ka Luon version https://whitewolf.fandom.com/wiki/Ka_Luon
+						add_trait = intellect_good_3
+						add_trait = infertile
+						add_trait = weak
+						add_trait = psychic
+						add_trait = sorcerer
+						add_trait = immortal
+						set_immortal_age = 18
+						add_character_flag = POD_ka_luon_form_flag
+						add_character_flag = POD_grey_skin_flag
+						add_character_flag = POD_no_beard_flag
+						add_character_flag = POD_portrait_no_hat_flag
+						add_character_flag = POD_temple_robes_clothes_flag
+						add_character_flag = POD_ep3_byzantine_era2_roy_cloak_flag
+						random_list = {
+							20 = { 
+								add_trait = administrator 
+								add_trait = governor
+								add_trait_xp = {
+									trait = governor
+									value = 100
+								}
+								add_trait = administrative_court_2 
+							}
+							20 = { 
+								add_trait = architect 
+								add_trait = military_engineer
+								add_trait = tourney_participant
+								add_trait_xp = {
+									trait = tourney_participant
+									track = wit
+									value = 100
+								}
+							}
+							20 = { 
+								add_trait = scholar 
+								add_trait = theologian
+								add_trait = lifestyle_mystic
+								add_trait_xp = {
+									trait = lifestyle_mystic
+									value = 100
+								}
+							}
+							20 = { 
+								add_trait = overseer 
+								add_trait = logistician 
+								add_trait = warlike_court_2 
+							}
+							20 = { 
+								add_trait = whole_of_body
+								add_trait = lifestyle_herbalist
+								add_trait = lifestyle_physician
+								add_trait_xp = {
+									trait = lifestyle_physician
+									value = 100
+								}
+							}
+						}						
+					}
+				}
+			}
+		}
+		
+		add_to_global_variable_list = {
+			name = special_character_list
+			target = flag:spawned_gp_grey
+		}
+		
+		scope:gp_grey = { 
+			add_character_modifier = life_warden_modifier 
+			save_scope_as = recipient
+		}
+	
+		send_interface_message = {
+			type = event_generic_neutral
+			title = msg_recruited_guest_to_court_interaction_title
+			
+			right_icon = scope:gp_grey
+
+			custom_tooltip = msg_recruited_guest_to_court_interaction_message
+		}
+	}
+}
+
+#muses
+#Powerful effects because you can only have one per character, and you must find the court of the muses first
+POD_umbra_gp.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.107.t
+   	desc = POD_umbra_gp.107.desc
+	theme = greatperson 
+	
+	immediate = {		
+	}
+	
+	option = {
+		name = POD_umbra_gp.107.a
+		
+		trigger_event = POD_umbra_gp.108
+	}
+	
+	option = {
+		name = POD_umbra_gp.107.b
+		
+		trigger_event = POD_umbra_gp.109	
+	}
+}
+
+POD_umbra_gp.108 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.108.t
+   	desc = POD_umbra_gp.108.desc
+	theme = greatperson 
+	
+	immediate = {		
+	}
+	
+	option = {
+		name = POD_umbra_gp.108.a
+		
+		trigger = {
+			NOT = { has_trait = lifestyle_poet }
+		}
+		
+		add_trait = lifestyle_poet
+	}
+	
+	option = {
+		name = POD_umbra_gp.108.b
+		
+		add_learning_skill = 1
+	}
+	
+	option = {
+		name = POD_umbra_gp.108.c
+		
+		add_diplomacy_lifestyle_perk_points = 1
+	}
+
+	option = {
+		name = POD_umbra_gp.108.d
+		
+		trigger = {
+			NOT = { has_trait = athletic }
+		}
+		
+		add_trait = athletic
+	}	
+	
+	option = {
+		name = POD_umbra_gp.108.e
+		
+		capital_province ?= {
+			add_province_modifier = extra_building_slot
+		}
+	}
+
+	option = {
+		name = POD_umbra_gp.108.f
+		
+		trigger = {
+			has_royal_court = yes
+		}
+		
+		change_current_court_grandeur = 100
+	}
+
+	option = {
+		name = POD_umbra_gp.108.g
+		
+		add_intrigue_skill = 1
+	}
+	
+	option = {
+		name = POD_umbra_gp.108.h
+		
+		trigger = {
+			NOT = { has_trait = physique_good }
+			NOT = { has_trait = physique_bad }
+		}				
+		add_trait = physique_good_1
+	}	
+
+	option = {
+		name = POD_umbra_gp.108.i
+		
+		add_prestige = 350
+		
+		add_character_modifier = romance_great_painting_gift_modifier	
+	}	
+}
+
+POD_umbra_gp.109 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.109.t
+   	desc = POD_umbra_gp.109.desc
+	theme = greatperson 
+	
+	immediate = {		
+	}
+	
+	option = {
+		name = POD_umbra_gp.109.a
+		
+		if = {
+			limit = {
+				NOT = { has_trait = beauty_good }
+				NOT = { has_trait = beauty_bad }
+			}
+			add_trait = beauty_good_1
+		}
+		else = {
+			add_diplomacy_skill = 1
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.109.b
+
+		if = {
+			limit = {
+				NOT = { has_trait = journaller }
+			}
+			add_trait = journaller
+		}
+		else = {
+			add_stress = -1000
+		}		
+	}
+	
+	option = {
+		name = POD_umbra_gp.109.c
+
+		add_piety = 500		
+	}	
+	
+	option = {
+		name = POD_umbra_gp.109.d
+		
+		trigger = {
+			NOT = { root.culture ?= { has_cultural_tradition = tradition_life_is_just_a_joke } }
+		}
+		
+		root.culture ?= { 		
+			add_culture_tradition = tradition_life_is_just_a_joke
+		}
+	}		
+
+	option = {
+		name = POD_umbra_gp.109.e
+		
+		capital_county ?= {
+			change_development_level = 5
+		}
+	}
+
+	option = {
+		name = POD_umbra_gp.109.f
+		
+		add_prowess_skill = 5
+	}
+
+	option = {
+		name = POD_umbra_gp.109.g
+		
+		add_stewardship_skill = 1
+	}	
+	
+	option = {
+		name = POD_umbra_gp.109.h
+		
+		add_intrigue_lifestyle_perk_points = 1
+	}
+
+	option = {
+		name = POD_umbra_gp.109.i
+		
+		add_dread = 100
+	}		
+}
+
+POD_umbra_gp.110 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.110.t
+   	desc = POD_umbra_gp.110.desc
+	theme = greatperson 
+
+	artifact = {
+        target = scope:elemental_armor
+        position = lower_left_portrait
+    }	
+	
+	immediate = {	
+		create_artifact_elemental_armor_effect = { OWNER = root }
+		random_character_artifact = {
+			limit = {
+				has_variable = elemental_armor
+				}
+		save_scope_as = elemental_armor
+		}		
+	}
+	
+	option = {
+		name = POD_umbra_gp.110.a
+	}
+	
+}
+
+POD_umbra_gp.111 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.110.t
+   	desc = POD_umbra_gp.111.desc
+	theme = greatperson 
+
+	artifact = {
+        target = scope:elemental_armor
+        position = lower_left_portrait
+    }	
+	
+	immediate = {	
+		random_character_artifact = {
+			limit = {
+				has_variable = elemental_armor
+				}
+		save_scope_as = elemental_armor
+		}		
+	}
+	
+	option = {
+		name = POD_umbra_gp.111.a
+		
+		add_stress = major_stress_gain
+		
+		scope:elemental_armor = {
+		set_variable = elemental_armorimproved
+		#save_scope_as = epic
+		save_scope_value_as = {
+			name = elemental_armorimproved
+			value = yes
+		}
+		add_artifact_modifier = artifact_army_damage_mult_2_modifier
+		}		
+			
+	}
+
+	option = {
+		name = POD_umbra_gp.111.b
+	}	
+}
+
+POD_umbra_gp.112 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.110.t
+   	desc = POD_umbra_gp.112.desc
+	theme = greatperson 
+
+	artifact = {
+        target = scope:elemental_armor
+        position = lower_left_portrait
+    }	
+	
+	immediate = {	
+		random_character_artifact = {
+			limit = {
+				has_variable = elemental_armor
+				}
+		save_scope_as = elemental_armor
+		}		
+	}
+	
+	option = {
+		name = POD_umbra_gp.112.a
+		
+		add_stress = major_stress_gain
+		
+		scope:elemental_armor = {
+		set_variable = elemental_armorimproved2
+		#save_scope_as = epic
+		save_scope_value_as = {
+			name = elemental_armorimproved2
+			value = yes
+		}
+		add_artifact_modifier = artifact_monthly_prestige_10_modifier
+		}		
+			
+	}
+
+	option = {
+		name = POD_umbra_gp.111.b
+	}	
+}
+
+POD_umbra_gp.113 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.110.t
+   	desc = POD_umbra_gp.113.desc
+	theme = greatperson 
+
+	artifact = {
+        target = scope:elemental_armor
+        position = lower_left_portrait
+    }	
+	
+	immediate = {	
+		random_character_artifact = {
+			limit = {
+				has_variable = elemental_armor
+				}
+		save_scope_as = elemental_armor
+		}		
+	}
+	
+	option = {
+		name = POD_umbra_gp.113.a
+		
+		add_stress = major_stress_gain
+		
+		scope:elemental_armor = {
+		set_variable = elemental_armorfinished
+		#save_scope_as = epic
+		save_scope_value_as = {
+			name = elemental_armorfinished
+			value = yes
+		}
+		add_artifact_modifier = artifact_men_at_arms_toughness_2_modifier
+		}		
+			
+	}
+
+	option = {
+		name = POD_umbra_gp.111.b
+	}	
+}
+
+#grand hall explorer
+POD_umbra_gp.114 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.114.t
+   	desc = POD_umbra_gp.114.desc
+	theme = greatperson 
+	left_portrait = {
+		character = scope:gp_explorer
+		animation = personality_rational
+	}
+	
+	immediate = {		
+		create_character = {
+			template = spirit_human_template
+			name = "Theotime" 
+			age = 35 
+			gender_female_chance = 50
+			dynasty = none
+			faith = faith:velvet_brood
+			culture = culture:macedonian
+			learning = 4
+			stewardship = 8
+			intrigue = 1
+			trait = education_learning_4
+			trait = gregarious 
+			trait = diligent 
+			trait = patient 
+			random_traits = no		
+			location = root.capital_province	
+			save_scope_as = gp_explorer
+			after_creation = {
+				set_age = current_year
+				change_age = 150
+				add_character_flag = POD_great_person_flag
+				POD_set_resonance_effect = yes
+				add_character_modifier = skilled_umbra_explorer_modifier
+				add_trait = lifestyle_traveler
+				add_trait_xp = {
+					trait = lifestyle_traveler
+					track = danger 
+					value = 75
+				}
+				add_trait_xp = {
+					trait = lifestyle_traveler
+					track = travel 
+					value = 50
+				}				
+			}
+		}	
+	
+		play_music_cue = "mx_cue_positive_effect"	
+	}
+	
+	option = {
+		name = POD_umbra_gp.114.a
+		
+		add_prestige = -200
+		add_courtier = scope:gp_explorer
+	
+		hidden_effect = {
+			POD_masquerade_exposure_increase_effect = yes
+		
+			scope:gp_explorer = {
+				add_character_flag = {
+					flag = blocked_from_leaving
+					years = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.114.b
+		
+		scope:gp_explorer = { death = { death_reason = death_disappearance } }
+	}
+}
+
+#heaven, true faith only
+POD_umbra_gp.115 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.115.t
+   	desc = POD_umbra_gp.115.desc
+	theme = faith 
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	
+	immediate = {			
+		play_music_cue = "mx_cue_positive_effect"	
+	}
+	
+	option = {
+		name = POD_umbra_gp.115.a
+		
+		add_stress = -100
+		
+		if = {
+			limit = {
+				has_trait = truefaith
+			}
+			add_faith_lifestyle_perk_points = 2
+		}
+		
+		POD_remove_disease_traits_effect = yes
+		if = { limit = { POD_health_has_superficial_wound_trigger = yes } POD_heal_superficial_wound_effect = { COUNT = POD_base_heal_value } }
+		if = { limit = { has_trait = disfigured } remove_trait = disfigured }
+		if = { limit = { has_trait = scarred } remove_trait = scarred }
+		add_character_modifier = { modifier = theurgy_soothe_pain_modifier years = 10 }
+		#Yes, also intended to remove permanent scarring and such
+	}
+}
+
+POD_umbra_gp.116 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_umbra_gp.116.t
+   	desc = POD_umbra_gp.116.desc
+	theme = greatperson 
+	
+	immediate = {		
+	}
+	
+	option = {
+		name = POD_umbra_gp.116.a
+		
+		add_learning_skill = -2
+		
+		capital_county = {
+			change_development_level = 1
+			add_county_modifier = {
+			   modifier = great_builder_modifier
+			   years = 5
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.116.b
+		
+		add_learning_skill = -3
+		
+		capital_county = {
+			change_development_level = 2
+			add_county_modifier = {
+			   modifier = great_builder_modifier
+			   years = 20
+			}
+		}
+	}
+	
+	option = {
+		name = POD_umbra_gp.116.c
+
+		add_learning_skill = -5
+		
+		capital_county = {
+			change_development_level = 3
+			add_county_modifier = {
+			   modifier = massive_construction_efforts_modifier
+			   years = 20
+			}
+		}
+		
+	}
+
+	option = {
+		name = POD_umbra_gp.116.d
+		
+		add_learning_skill = -7
+		
+		capital_county = {
+			change_development_level = 5
+			add_county_modifier = {
+			   modifier = massive_construction_efforts_modifier
+			   years = 20
+			}
+		}
+		capital_province ?= {
+			add_province_modifier = extra_building_slot
+		}
+		
+	}	
+	
+	option = {
+		name = POD_umbra_gp.116.e
+		
+	}
+
+}
+
+

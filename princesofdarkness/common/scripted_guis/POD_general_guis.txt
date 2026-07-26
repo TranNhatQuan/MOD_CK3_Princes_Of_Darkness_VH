@@ -1,0 +1,917 @@
+﻿splat_initiation_gui = {
+	scope = character
+	effect = {
+		if = {
+			limit = {
+				exists = this
+				is_alive = yes
+			}
+			trigger_event = POD_character_initialization.1
+		}
+	}
+}
+
+incompatible_building_clean_gui = {
+	scope = character
+	saved_scopes = { province }
+	
+	is_valid = {
+		is_ai = yes
+		scope:province = { has_ongoing_construction = no }
+	}
+	
+	effect = {
+		scope:province = { POD_remove_incompatible_building_effect = yes }
+	}
+}
+
+construct_tribal_holding = {
+	scope = province
+	
+	is_valid = {
+		POD_barons_are_disabled = no
+		barony_controller = { prestige >= 500 }
+	}
+	
+	effect = {
+		barony_controller = { add_prestige = -500 }
+		begin_create_holding = {
+			type = tribal_holding
+			refund_cost = { prestige = 500 }
+		}
+	}
+}
+
+can_construct_tribal_holding = {
+	scope = character
+	
+	is_shown = {
+		OR = { 
+			has_government = tribal_government
+			has_government = fera_tribe_government
+		}
+	}
+}
+
+can_replace_workaround = {
+	scope = character
+	
+	saved_scopes = { holder }
+	
+	is_shown = {
+		scope:holder = { 
+			is_vassal_or_below_of = root
+		}
+	}
+
+}
+
+pod_feudal_gov = {
+	scope = character
+	
+	is_shown = {
+		government_has_flag = government_is_feudal
+	}
+}
+
+POD_show_character_skills = {
+	scope = character
+	
+	is_shown = {
+		POD_has_caine_character_sheet = no
+	}
+}
+
+POD_hide_vanilla_religions = {
+	scope = religion
+	is_shown = {
+		has_POD_religion_group = yes
+		trigger_if = {
+			limit = {
+				OR = {
+					this = religion:camarilla_religion
+					this = religion:sabbat_religion
+					this = religion:modernanarch_religion
+					this = religion:ursine_religion #to hide it from character creator as well
+				}
+			}
+			POD_reached_endgame_date_trigger = { YEAR = 1450 }
+		}
+		trigger_if = {
+			limit = { this = religion:ghoul_religion }
+			always = no
+		}
+	}
+}
+
+POD_hide_modern_faiths = {
+	scope = faith
+	is_shown = {
+		trigger_if = {
+			limit = {
+				OR = {
+					this = faith:strike_force_zero
+					this = faith:ten_mandates_of_hell
+				}
+			}
+			current_year > 1990
+		}
+		trigger_if = {
+			limit = {
+				this = faith:sanbenito
+			}
+			current_year > 1658
+		}
+		trigger_if = {
+			limit = {
+				this = { is_patron_faith_trigger = yes } #Hijacked to always hide patron faiths
+			}
+			POD_bookmark_is_patron_war = yes
+		}
+		trigger_if = {
+			limit = { this = faith:pathofheliopolis }
+			has_global_variable = pathofheliopolis_active
+		}
+		trigger_if = { #Hide Gurahl faiths until splat is fully implemented
+			limit = {
+				OR = {
+					this = faith:riverkeepers
+					this = faith:icestalkers
+				}
+			}
+			always = no
+		}
+		trigger_if = { #Hide Ghoul Faith
+			limit = { this = faith:unmastered }
+			always = no
+		}
+	}
+}
+
+# need to pass scope:new_faith
+POD_hide_invalid_faiths = {
+	scope = character
+	is_shown = {
+		trigger_if = {
+			limit = { 
+				exists = this
+				NOT = { has_variable = invalid_faiths_shown }
+			}
+			NOT = { POD_has_illegal_religion_custom_trigger = { CHARACTER = root FAITH = scope:new_faith } }
+		}
+		trigger_else = { always = yes }
+	}
+}
+
+POD_hide_invalid_faiths_button = {
+	scope = character
+	is_shown = {
+		NOT = { has_variable = invalid_faiths_shown }
+	}
+	effect = {
+		if = {
+			limit = { has_variable = invalid_faiths_shown }
+			remove_variable = invalid_faiths_shown
+		}
+	}
+}
+
+POD_show_invalid_faiths_button = {
+	scope = character
+	is_shown = {
+		has_variable = invalid_faiths_shown
+	}
+	effect = {
+		if = {
+			limit = { NOT = { has_variable = invalid_faiths_shown } }
+			set_variable = invalid_faiths_shown
+		}
+	}
+}
+
+
+### Title Banner ###
+
+is_supehunter_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_supehunter_trigger = yes
+	}
+}
+
+is_mummy_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_mummy_trigger = yes
+		POD_is_supehunter_trigger = no
+	}
+}
+
+is_demon_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_demon_trigger = yes
+	}
+}
+
+is_werewolf_owner = {
+	scope = character
+	
+	is_shown = {
+		OR = {
+			POD_splat_is_fera_trigger = yes
+			AND = {
+				has_trait = kinfolk
+				OR = { 
+					religion = { is_in_family = rf_gaia } 
+					religion = { is_in_family = rf_wyrm } 
+				}
+			}
+		}
+		POD_is_supehunter_trigger = no
+	}
+}
+
+should_display_inventory = {
+	scope = character
+	
+	is_shown = {
+		is_the_storyteller = no
+	}
+}
+
+is_artifact_unavailable = {
+	scope = artifact
+
+	is_shown = {
+		POD_artifact_is_unavailable_trigger = yes
+	}
+}
+
+should_display_artifact_owner = {
+	scope = artifact
+
+	is_shown = {
+		artifact_owner ?= { is_the_storyteller = no }
+	}
+}
+
+should_display_artifact_creator = {
+	scope = artifact
+
+	is_shown = {
+		creator ?= { is_the_storyteller = no }
+	}
+}
+
+title_belongs_to_storyteller = {
+	scope = landed_title
+
+	is_shown = {
+		holder ?= { is_the_storyteller = yes }
+	}
+}
+
+is_fae_owner = {
+	scope = character
+	
+	is_shown = {
+		OR = {
+			POD_is_fae_trigger = yes
+			AND = {
+				OR = {
+					has_trait = changeling
+					has_trait = kinain
+				}
+				religion = { is_in_family = rf_fae } 
+			}
+		}
+		POD_is_supehunter_trigger = no
+	}
+}
+
+is_mage_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_mage_trigger = yes
+		POD_is_supehunter_trigger = no
+	}
+}
+
+is_wraith_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_wraith_trigger = yes
+		POD_is_supehunter_trigger = no
+	}
+}
+
+is_entomos_owner = {
+	scope = character
+	
+	is_shown = {
+		POD_is_entomos_trigger = yes
+	}
+}
+
+is_default_owner = {
+	scope = character
+	
+	is_shown = {
+		NOR = {
+			POD_is_demon_trigger = yes
+			POD_is_mummy_trigger = yes
+			POD_is_supehunter_trigger = yes
+			POD_splat_is_fera_trigger = yes
+			AND = {
+				has_trait = kinfolk
+				OR = { 
+					religion = { is_in_family = rf_gaia } 
+					religion = { is_in_family = rf_wyrm } 
+				}
+			}
+			POD_is_fae_trigger = yes
+			AND = {
+				OR = {
+					has_trait = changeling
+					has_trait = kinain
+				}
+				religion = { is_in_family = rf_fae } 
+			}
+			POD_is_mage_trigger = yes
+			POD_is_wraith_trigger = yes
+		}
+	}
+}
+
+### Minion ###
+
+should_see_minions_gui = {
+	scope = character
+	is_shown = {
+		OR = {
+			trigger_if = {
+				limit = { is_alive = yes }
+				POD_has_coterie_trigger = yes
+			}
+			num_of_relation_ghoul_thrall > 0
+			num_of_relation_bound_wraith > 0
+			num_of_relation_bound_demon > 0
+			num_of_relation_known_true_name > 0
+			num_of_relation_possessed_target > 0
+			num_of_relation_spirit_companion > 0
+			num_of_relation_human_companion > 0
+			num_of_relation_innocent_tormentor > 0
+			num_of_relation_herd_member > 0
+			num_of_relation_dreamer_member > 0
+			num_of_relation_heart_of_darkness_heartless > 0
+			num_of_relation_effigy_character > 0
+			num_of_relation_animantis_character > 0
+			num_of_relation_manifestation_character > 0
+			num_of_relation_fetter > 0
+			num_of_relation_ghoul_domitor > 0
+			num_of_relation_mindless_clone_servant > 0
+		}
+	}
+}
+
+should_see_cultists_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_worshipping_cultist > 0
+	}
+}
+
+should_see_neterus_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_worshipping_neteru > 0
+	}
+}
+
+has_ghouls_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_ghoul_thrall > 0
+	}
+}
+
+has_domitor_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_ghoul_domitor > 0
+	}
+}
+
+has_wraiths_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_bound_wraith > 0
+	}
+}
+
+has_demons_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_bound_demon > 0
+	}
+}
+
+knows_true_names_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_known_true_name > 0
+	}
+}
+
+has_possesses_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_possessed_target > 0
+	}
+}
+
+has_dominates_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_dominate_target > 0
+	}
+}
+
+has_fascinates_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_fascinate_target > 0
+	}
+}
+
+has_spirits_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_spirit_companion > 0
+	}
+}
+
+has_human_companion_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_human_companion > 0
+	}
+}
+
+has_innocent_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_innocent_tormentor > 0
+	}
+}
+
+has_herd_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_herd_member > 0
+	}
+}
+
+has_dreamer_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_dreamer_member > 0
+	}
+}
+
+has_thrall_gui = {
+	scope = character
+	is_shown = {
+		num_of_relation_demonic_thrall > 0
+	}
+}
+
+has_stolen_hearts_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_heart_of_darkness_heartless > 0
+	}
+}
+
+has_mindless_clone_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_mindless_clone_servant > 0
+	}
+}
+
+has_effigies_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_effigy_character > 0
+	}
+}
+
+has_animantis_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_animantis_character > 0
+	}
+}
+
+has_manifestation_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_manifestation_character > 0
+	}
+}
+
+has_fetter_gui = {
+	scope = character 
+	is_shown = {
+		num_of_relation_fetter > 0
+	}
+}
+
+mass_command_thrall_gold_gui = {
+	scope = character 
+	is_shown = {
+		any_relation = {
+			type = worshipping_cultist
+			NOT = { has_relation_possessed_target = root }
+		}
+	}
+	is_valid = {
+		arcana_lifestyle_perk_points >= 1
+	}
+	effect = {
+		show_as_tooltip = {
+			add_arcana_lifestyle_perk_points = {
+				value = 0
+				add = arcana_lifestyle_perk_points
+				max = mass_command_gold_potential_target_value
+				multiply = -1
+			}
+			add_gold = mass_command_gold_value
+		}
+		ordered_relation = {
+			type = worshipping_cultist
+			limit = { 
+				gold > 0
+				NOT = { has_relation_possessesing_wraith = root }
+			}
+			order_by = gold
+			max = mass_command_gold_thrall_list_max_size
+			run_interaction = {
+				interaction = POD_command_thrall_gold_interaction
+				actor = root
+				recipient = this
+				execute_threshold = accept
+			}
+		}
+	}
+}
+
+mass_command_thrall_release_gui = {
+	scope = character 
+	is_shown = {
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = mass_thrall_release_valid
+			has_character_flag = chance_of_redemption_flag
+		}
+	}
+	effect = {
+		every_relation = {
+			type = worshipping_cultist
+			limit = { NOT = { has_relation_possessesing_wraith = root } }
+			root = {
+				if = {
+					limit = { has_relation_demonic_thrall = prev }
+					remove_relation_demonic_thrall = prev
+				}
+				remove_relation_worshipping_cultist = prev
+			}
+		}
+	}
+}
+
+has_a_beast_gui = {
+	scope = character
+	is_shown = {
+		POD_has_a_beast_trigger = yes
+	}
+}
+
+is_on_golconda_gui = {
+	scope = character
+	is_shown = {
+		POD_is_on_golconda_trigger = yes
+	}
+}
+
+is_wraith = {
+	scope = character
+	
+	is_shown = {
+		POD_is_wraith_trigger = yes
+	}
+}
+
+on_equip_cursed_artifact = {
+	scope = artifact
+	saved_scopes = { player }
+
+	effect = {
+		if = {
+			limit = { artifact_owner = scope:player }
+
+			if = {
+				limit = {
+					has_variable = biblia_negra
+					NOT = {
+						any_in_list = {
+							variable = cursed_characters
+							this = scope:player
+						}
+					}
+				}
+				# on a delay since otherwise adding all the edge cases for royal court buttons is messy
+				scope:player = {
+					trigger_event = {
+						id = POD_maintenance.666
+						days = 1
+					}
+				}
+			}
+		}
+	}
+}
+
+is_modern = {
+	scope = character
+	
+	is_shown = {
+		culture = { has_cultural_era_or_later = culture_era_final_nights }
+	}
+}
+
+POD_chargen_faith_select = {
+	scope = character
+	effect = {
+		set_variable = {
+			name  = chargen_faith_selection
+			value = scope:selection
+		}
+	}
+}
+
+POD_idle_pose_gui = {
+	scope = character
+	is_shown = {
+		var:custom_idle ?= scope:flag
+	}
+	effect = {
+		if = {
+			limit = { var:custom_idle ?= scope:flag }
+			POD_clear_custom_idle_animation = yes
+		}
+		else = {
+			POD_set_custom_idle_animation = { FLAG = scope:flag }
+		}
+	}
+}
+
+POD_edit_age = {
+	scope = character
+	is_valid = {
+		trigger_if = {
+			limit = { scope:delta < 0 }
+			age > 16
+		}
+	}
+	effect = {
+		set_age = {
+			value = age
+			add = scope:delta
+			min = 16
+		}
+	}
+}
+
+POD_edit_visual_age = {
+	scope = character
+	is_valid = {
+		trigger_if = {
+			limit = { scope:delta < 0 }
+			effective_age > 16
+		}
+	}
+	effect = {
+		set_immortal_age = {
+			value = effective_age
+			add = scope:delta
+			min = 16
+		}
+	}
+}
+
+POD_set_age = {
+	scope = character
+	effect = { set_age = scope:age }
+}
+
+POD_set_visual_age = {
+	scope = character
+	effect = { set_immortal_age = scope:age }
+}
+
+POD_house_display = {
+	scope = character
+	effect = {
+		every_in_list = {
+			variable = color_houses
+			save_scope_as = color_house
+			prev = {
+				custom_tooltip = POD_house_display_tt
+			}
+		}
+	}
+}
+
+POD_show_ghoul_domitor = {
+	# global scope, since this would also display the ghoul's name if it were scoped to them
+	saved_scopes = { ghoul }
+	effect = {
+		hidden_effect = {
+			scope:ghoul = {
+				random_relation = {
+					type = ghoul_domitor
+					save_scope_as = domitor
+				}
+			}
+		}
+		custom_description_no_bullet = {
+			text = target_character_getfirstname
+			object = scope:domitor
+		}
+	}
+}
+
+POD_show_jerusalem_influence_modifiers = {
+	scope = character
+	effect = {
+		title:c_jerusalem = {
+			switch = {
+				trigger = has_county_modifier
+				jerusalem_christian_influence_1 = { POD_save_tooltip = { LOC = jerusalem_christian_influence_1 } }
+				jerusalem_christian_influence_2 = { POD_save_tooltip = { LOC = jerusalem_christian_influence_2 } }
+				jerusalem_christian_influence_3 = { POD_save_tooltip = { LOC = jerusalem_christian_influence_3 } }
+				jerusalem_christian_influence_4 = { POD_save_tooltip = { LOC = jerusalem_christian_influence_4 } }
+				jerusalem_christian_influence_5 = { POD_save_tooltip = { LOC = jerusalem_christian_influence_5 } }
+			}
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = POD_sidebar_saved_modifier_flag
+		}
+			
+		title:c_jerusalem = {
+			switch = {
+				trigger = has_county_modifier
+				jerusalem_muslim_influence_1 = { POD_save_tooltip = { LOC = jerusalem_muslim_influence_1 } }
+				jerusalem_muslim_influence_2 = { POD_save_tooltip = { LOC = jerusalem_muslim_influence_2 } }
+				jerusalem_muslim_influence_3 = { POD_save_tooltip = { LOC = jerusalem_muslim_influence_3 } }
+				jerusalem_muslim_influence_4 = { POD_save_tooltip = { LOC = jerusalem_muslim_influence_4 } }
+				jerusalem_muslim_influence_5 = { POD_save_tooltip = { LOC = jerusalem_muslim_influence_5 } }
+			}
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = POD_sidebar_saved_modifier_flag
+		}
+			
+		title:c_jerusalem = {
+			switch = {
+				trigger = has_county_modifier
+				jerusalem_jewish_influence_1 = { POD_save_tooltip = { LOC = jerusalem_jewish_influence_1 } }
+				jerusalem_jewish_influence_2 = { POD_save_tooltip = { LOC = jerusalem_jewish_influence_2 } }
+				jerusalem_jewish_influence_3 = { POD_save_tooltip = { LOC = jerusalem_jewish_influence_3 } }
+				jerusalem_jewish_influence_4 = { POD_save_tooltip = { LOC = jerusalem_jewish_influence_4 } }
+				jerusalem_jewish_influence_5 = { POD_save_tooltip = { LOC = jerusalem_jewish_influence_5 } }
+			}
+		}
+		if = {
+			limit = { exists = scope:saved_tooltip }
+			custom_tooltip = POD_sidebar_saved_modifier_flag
+		}
+		
+		custom_tooltip = POD_jerusalem_widget_tooltip
+	}
+}
+
+POD_list_all_book_of_nod_fragments = {
+	# no scope
+	effect = {
+		POD_display_linked_artifact_and_owner = { LINK = chronicle_of_shadows1 }
+		POD_display_linked_artifact_and_owner = { LINK = chronicle_of_shadows2 }
+		POD_display_linked_artifact_and_owner = { LINK = chronicle_of_secrets1 }
+		POD_display_linked_artifact_and_owner = { LINK = chronicle_of_secrets2 }
+		POD_display_linked_artifact_and_owner = { LINK = first_of_times1 }
+		POD_display_linked_artifact_and_owner = { LINK = first_of_times2 }
+		POD_display_linked_artifact_and_owner = { LINK = coming_of_lilith1 }
+		POD_display_linked_artifact_and_owner = { LINK = coming_of_lilith2 }
+		POD_display_linked_artifact_and_owner = { LINK = liliths_magick1 }
+		POD_display_linked_artifact_and_owner = { LINK = liliths_magick2 }
+		POD_display_linked_artifact_and_owner = { LINK = temptation_of_caine1 }
+		POD_display_linked_artifact_and_owner = { LINK = temptation_of_caine2 }
+		POD_display_linked_artifact_and_owner = { LINK = zillahs_tale1 }
+		POD_display_linked_artifact_and_owner = { LINK = zillahs_tale2 }
+		POD_display_linked_artifact_and_owner = { LINK = tale_of_the_crone1 }
+		POD_display_linked_artifact_and_owner = { LINK = tale_of_the_crone2 }
+		POD_display_linked_artifact_and_owner = { LINK = tale_of_the_first_city1 }
+		POD_display_linked_artifact_and_owner = { LINK = tale_of_the_first_city2 }
+	}
+}
+
+POD_list_all_baizetu_fragments = {
+	# no scope
+	effect = {
+		every_artifact = {
+			limit = { has_variable = baizetu_fragment }
+			custom_tooltip = POD_display_artifact_and_owner
+		}
+	}
+}
+
+POD_list_all_incunabulum_kupalam_fragments = {
+	# no scope
+	effect = {
+		every_artifact = {
+			limit = { has_variable = incunabulum_fragment }
+			custom_tooltip = POD_display_artifact_and_owner
+		}
+	}
+}
+
+noop_gui = {}
+
+always_yes_gui = { is_shown = { always = yes } }
+always_no_gui  = { is_shown = { always = no } }
+
+# pod_relocate_base_skills_init = {
+# 	scope = character
+# 	effect = {
+# 		set_variable = { name = pod_relocate_base_skills_points value = 0 }
+# 		POD_get_base_martial_effect = yes
+# 		POD_get_base_intrigue_effect = yes
+# 		POD_get_base_diplomacy_effect = yes
+# 		POD_get_base_learning_effect = yes
+# 		POD_get_base_stewardship_effect = yes
+# 		set_variable = { name = my_base_diplomacy value = scope:base_diplomacy }
+# 		set_variable = { name = my_base_martial value = scope:base_martial }
+# 		set_variable = { name = my_base_stewardship value = scope:base_stewardship }
+# 		set_variable = { name = my_base_intrigue value = scope:base_intrigue }
+# 		set_variable = { name = my_base_learning value = scope:base_learning }
+# 	}
+# }
+# pod_relocate_base_skills_initnt = {
+# 	effect = {
+# 		remove_variable = POD_open_skill_relocation
+# 		remove_variable = my_base_diplomacy
+# 		remove_variable = my_base_martial
+# 		remove_variable = my_base_stewardship
+# 		remove_variable = my_base_intrigue
+# 		remove_variable = my_base_learning
+# 		remove_variable = pod_relocate_base_skills_points
+# 	}
+# }
+# pod_relocate_base_skills = {
+# 	is_valid = {
+# 		trigger_if = { limit = { scope:skill = 1 scope:delta < 0 } var:my_base_diplomacy >= 1 }
+# 		trigger_if = { limit = { scope:skill = 2 scope:delta < 0 } var:my_base_martial >= 1 }
+# 		trigger_if = { limit = { scope:skill = 3 scope:delta < 0 } var:my_base_stewardship >= 1 }
+# 		trigger_if = { limit = { scope:skill = 4 scope:delta < 0 } var:my_base_intrigue >= 1 }
+# 		trigger_if = { limit = { scope:skill = 5 scope:delta < 0 } var:my_base_learning >= 1 }
+
+# 		trigger_if = { limit = { scope:delta > 0 } var:pod_relocate_base_skills_points > 0 }
+		
+# 	}
+# 	effect = {
+# 		switch = {
+# 			trigger = scope:skill
+# 			1 = { add_diplomacy_skill = scope:delta change_variable = { name = my_base_diplomacy add = scope:delta } }
+# 			2 = { add_martial_skill = scope:delta change_variable = { name = my_base_martial add = scope:delta } }
+# 			3 = { add_stewardship_skill = scope:delta change_variable = { name = my_base_stewardship add = scope:delta } }
+# 			4 = { add_intrigue_skill = scope:delta change_variable = { name = my_base_intrigue add = scope:delta } }
+# 			5 = { add_learning_skill = scope:delta change_variable = { name = my_base_learning add = scope:delta } }
+# 		}
+
+# 		change_variable = {
+# 			name = pod_relocate_base_skills_points
+# 			subtract = scope:delta
+# 		}
+# 	}
+# }

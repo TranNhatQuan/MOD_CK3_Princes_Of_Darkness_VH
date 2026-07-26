@@ -1,0 +1,183 @@
+﻿
+convert_to_government_interaction = {
+	category = interaction_category_vassal
+	common_interaction = yes
+	
+	desc = convert_to_government_interaction_desc
+	icon = icon_contract_modification_single
+	
+	is_shown = {
+		scope:actor = { is_landed = yes }
+		scope:recipient = { is_landed = yes }
+		NOT = { scope:recipient = { has_same_government = scope:actor } }
+		scope:actor.liege = scope:recipient
+		POD_can_convert_government_trigger = {
+			ACTOR = scope:recipient
+			RECIPIENT = scope:actor
+		}
+	}
+	
+	on_accept = {
+		scope:actor = {
+			if = {
+				limit = { liege = { has_government = infernal_court_government } }
+				change_government = infernal_court_government
+			}
+			if = {
+				limit = { liege = { has_government = traditions_government } }
+				change_government = traditions_government
+			}
+			if = {
+				limit = { liege = { has_government = august_court_government } }
+				change_government = august_court_government
+			}
+			if = {
+				limit = { liege = { has_government = dark_kingdom_government } }
+				change_government = dark_kingdom_government
+			}
+			if = {
+				limit = { liege = { has_government = household_government } }
+				change_government = household_government
+			}
+			if = {
+				limit = { liege = { has_government = fera_tribe_government } }
+				POD_set_fera_tribe_government_effect = yes
+			}
+			else = {
+				every_held_title = {
+					limit = { tier <= tier_county }
+					title_province = {
+						if = {
+							limit = { has_holding_type = tribal_holding }
+							# set_local_variable = {
+							# 	name = pod_building_level
+							# 	value = combined_building_level
+							# 	days = 1
+							# }
+							POD_replace_tribal_holding_effect = yes
+							# while = {
+							# 	limit = { local_var:pod_building_level > 1 }
+							# 	generate_building = yes
+							# 	change_local_variable = {
+							# 		name = pod_building_level
+							# 		subtract = 1
+							# 	}
+							# }
+							# remove_local_variable = pod_building_level
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_min_reply_days = 0
+	ai_max_reply_days = 0
+	
+	ai_frequency = 60
+	
+	ai_targets = {
+		ai_recipients = liege
+	}
+	
+	ai_will_do = {
+		base = 100
+	}
+}
+
+demand_conversion_government_interaction = {
+	category = interaction_category_vassal
+	common_interaction = yes
+	
+	desc = demand_conversion_government_interaction_desc
+	icon = icon_contract_modification_single
+	
+	is_shown = {
+		scope:actor = { is_landed = yes }
+		scope:recipient = { is_landed = yes }
+		NOT = { scope:recipient = { has_same_government = scope:actor } }
+		scope:recipient.liege = scope:actor
+		POD_can_convert_government_trigger = {
+			ACTOR = scope:actor
+			RECIPIENT = scope:recipient
+		}
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			if = {
+				limit = { liege = { has_government = infernal_court_government } }
+				change_government = infernal_court_government
+			}
+			if = {
+				limit = { liege = { has_government = traditions_government } }
+				change_government = traditions_government
+			}
+			if = {
+				limit = { liege = { has_government = august_court_government } }
+				change_government = august_court_government
+			}
+			if = {
+				limit = { liege = { has_government = dark_kingdom_government } }
+				change_government = dark_kingdom_government
+			}
+			if = {
+				limit = { liege = { has_government = household_government } }
+				change_government = household_government
+			}
+			if = {
+				limit = { liege = { has_government = fera_tribe_government } }
+				POD_set_fera_tribe_government_effect = yes
+			}
+			else = {
+				every_held_title = {
+					limit = { tier <= tier_county }
+					title_province = {
+						if = {
+							limit = { has_holding_type = tribal_holding }
+							# set_local_variable = {
+							# 	name = pod_building_level
+							# 	value = combined_building_level
+							# 	days = 1
+							# }
+							POD_replace_tribal_holding_effect = yes
+							# while = {
+							# 	limit = { local_var:pod_building_level > 1 }
+							# 	generate_building = yes
+							# 	change_local_variable = {
+							# 		name = pod_building_level
+							# 		subtract = 1
+							# 	}
+							# }
+							# remove_local_variable = pod_building_level
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_min_reply_days = 0
+	ai_max_reply_days = 0
+	
+	ai_frequency = 60
+	
+	ai_targets = {
+		ai_recipients = peer_vassals
+		max = 10
+	}
+	
+	ai_will_do = {
+		base = 100
+		modifier = {
+			factor = 0
+			scope:recipient = {
+				is_ai = no
+			}
+		}
+	}
+}

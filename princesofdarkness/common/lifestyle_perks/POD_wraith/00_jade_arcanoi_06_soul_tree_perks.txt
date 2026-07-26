@@ -1,0 +1,117 @@
+﻿arcanoi_coax_perk = {
+	lifestyle = jade_arcanoi_lifestyle
+	tree = soul
+	position = { 0 0 }
+	icon = node_soul_arts
+
+	can_be_picked = {
+		has_trait = wraith
+		religion = religion:yellow_springs_religion
+	}
+
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				has_focus = way_of_the_soul_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = arcanoi_coax_perk_effect
+		}
+	}
+}
+
+nullify_thorns_perk = {
+	lifestyle = jade_arcanoi_lifestyle
+	tree = soul
+	position = { 0 1.25 }
+	icon = node_soul_arts
+	
+	parent = arcanoi_coax_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = nullify_thorns_perk_effect
+		}
+	}
+}
+
+give_higher_passions_perk = {
+	lifestyle = jade_arcanoi_lifestyle
+	tree = soul
+	position = { 0 2.5 }
+	icon = node_soul_arts
+	
+	parent = nullify_thorns_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = give_higher_passions_perk_effect
+		}
+	}
+}
+
+alter_demeanor_perk = {
+	lifestyle = jade_arcanoi_lifestyle
+	tree = soul
+	position = { 0 3.75 }
+	icon = node_soul_arts
+	
+	parent = give_higher_passions_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = alter_demeanor_perk_effect
+		}
+	}
+}
+
+inner_peace_perk = {
+	lifestyle = jade_arcanoi_lifestyle
+	tree = soul
+	position = { 0 5 }
+	icon = trait_oblivionadvanced
+	
+	parent = alter_demeanor_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = inner_peace_perk_effect
+		}
+		# if = { 
+		# 	limit = { has_perk = spectre_prestige_perk }
+		# 	add_character_modifier = spectre_prestige_modifier
+		# }
+		# if = { 
+		# 	limit = { has_perk = dark_allies_perk }
+		# 	add_character_modifier = dark_allies_modifier
+		# }
+		# if = { 
+		# 	limit = { has_perk = shadow_traits_perk }
+		# 	add_character_modifier = shadow_traits_modifier
+		# }
+		# if = { 
+		# 	limit = { has_perk = infamy_perk }
+		# 	add_character_modifier = infamy_modifier
+		# }
+		# if = { 
+		# 	limit = { has_perk = honeyed_tongue_perk }
+		# 	add_character_modifier = honeyed_tongue_modifier
+		# }
+		# if = { 
+		# 	limit = { has_perk = shadowed_face_perk }
+		# 	add_character_modifier = shadowed_face_modifier
+		# }
+	}
+}

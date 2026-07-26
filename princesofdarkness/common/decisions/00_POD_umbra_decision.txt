@@ -1,0 +1,69 @@
+﻿
+pet_dragon_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+
+	decision_group_type = pod_splat
+	desc = pet_dragon_decision_desc
+	selection_tooltip = pet_dragon_decision_tooltip
+
+	ai_check_interval = 0
+
+	cooldown = { days = 1825 }
+
+	is_shown = {
+		any_owned_story = {
+			story_type = POD_story_pet_dragon
+			exists = story_owner.var:story_cycle_dragon_name
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available = yes
+	}
+
+	effect = {
+		custom_tooltip = pet_decision_effect_tooltip
+
+		trigger_event = {
+			on_action = story_cycle_dragon_pet_decision_on_actions
+		}
+	}
+}
+
+return_to_earth_decision = {
+	title = action_can_return_to_earth
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	selection_tooltip = action_can_return_to_earth_label
+	desc = action_can_return_to_earth_desc
+	confirm_text = action_can_return_to_earth_click
+
+	is_shown = {
+		has_variable = spirit_location
+		NOT = { var:spirit_location = flag:earth }
+		NOT = { in_shadow_realm_trigger = { LOCATION = var:spirit_location } }
+		POD_is_currently_in_umbra_expedition_trigger = no
+		POD_is_not_trapped_in_umbra_trigger = yes
+		NOT = { has_trait = wraith }
+	}
+
+	effect = {
+		custom_tooltip = umbra_place_earth_tooltip
+		set_variable = { name = spirit_destination value = flag:earth }
+		show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = flag:earth } }
+		if = {
+			limit = { POD_umbra_bypass_trigger = { LOCATION = flag:earth } }
+			trigger_event = { on_action = spirit_travel_movement_end_pulse }
+		}
+		else = {
+			trigger_event = { on_action = spirit_travel_movement_start_pulse }
+		}
+	}
+}

@@ -1,0 +1,370 @@
+﻿POD_create_umbra_location = {
+	create_story = {
+		type = POD_story_umbra_gui
+		save_scope_as = newly_created_realm
+	}
+	
+	hidden_effect_new_object = {
+		scope:newly_created_realm = {
+			set_variable = {
+				name = name
+				value = $NAME$
+			}
+			
+			if = {
+				limit = { in_astral_reaches_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:astral_reaches }
+			}
+			else_if = {
+				limit = { in_deep_umbra_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:deep_umbra }
+			}
+			else_if = {
+				limit = { in_dreaming_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:dreaming }
+			}
+			else_if = {
+				limit = { in_spirit_wilds_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:spirit_wilds }
+			}
+			else_if = {
+				limit = { in_underworld_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:underworld }
+			}
+			else_if = {
+				limit = { in_zone_trigger = { LOCATION = $NAME$ } }
+				set_variable = { name = type value = flag:zone }
+			}
+			else = {
+				set_variable = { name = type value = flag:penumbra }
+			}
+			
+			switch = {
+				trigger = $NAME$
+				flag:earth = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_periphery }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_glen }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_blight }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_broken_lands }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_hellhole }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_broken_mirror }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_earth }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_manipulate_the_gauntlet }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_manipulate_the_shroud }
+				}
+				flag:astral_plane = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_learning_train_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_learning_train_next }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_learning_train_end }
+				}
+				flag:vulgate = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_diplomacy_train_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_diplomacy_train_next }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_diplomacy_train_end }
+				}
+				flag:spires = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_intrigue_train_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_intrigue_train_next }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_intrigue_train_end }
+				}
+				flag:inventium = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_search_invention_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_search_invention_end }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_search_innovation_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_search_innovation_end }
+				}
+				flag:epiphamy = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_stewardship_train_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_stewardship_train_next }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_stewardship_train_end }
+				}
+				flag:battleground = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_martial_train_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_martial_train_next }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_martial_train_end }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_gain_commander_trait }
+				}
+				flag:shadowlands = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_shadowlands }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_dark_kingdom }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_recruit_wraith }
+					#add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_haunt } THERE IS NO HAUNT
+				}
+				flag:tempest = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_end }
+				}
+				flag:sea_of_shadow = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_end }
+				}
+				flag:stormwall = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_start }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_collect_artifact_pieces_end }
+				}
+				flag:swar = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:night_markets = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:mantaqat_khayal = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:dark_kingdom_of_iron = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_charon }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_onyx_tower }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_veinous_stair }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_seat }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:dark_kingdom_of_wire = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:dark_kingdom_of_clay = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:dark_kingdom_of_ivory = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:dark_kingdom_of_obsidian = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:dark_kingdom_of_jade = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_yuhuang }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_jade_palace }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:dark_kingdom_of_sand = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_hire_artificer }
+				}
+				flag:shard_realm_of_prime = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_gaia_possesion }
+				}
+				flag:court_of_eshtarra = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_eshtarra }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_eternal_grace_of_eshtarras }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_sokhta = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_sokhta }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_shining_klaive_of_sokhta }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_katanka_sonnak = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_katanka_sonnak }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_radiant_blade_of_katanka_sonnak }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_mitanu = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_mitanu }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_mercurial_mask_of_mitanu }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_hakahe = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_hakahe }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_burning_mask_of_hakahe }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_tambiyah = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_tambiyah }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_radiant_dress_of_tambiyah }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_nerigal = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_nerigal }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_burning_horns_of_nerigal }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_rorg = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_rorg }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_ruinous_talons_of_rorg }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_zarok = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_zarok }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_imperious_crown_of_zarok }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_lu_bat = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_lu_bat }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_eternal_wings_of_lu_bat }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_ruatma = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_ruatma }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_shadowed_stave_of_ruatma }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_shantar = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_shantar }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_dancing_loom_of_shantar }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:court_of_meros = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_commune_meros }
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_whispering_ankh_of_meros }
+					set_variable = { name = grace value = 0 }
+				}
+				flag:weaver_reaches = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_weaver_possesion }
+				}
+				flag:wyld_reaches = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_wyld_possesion }
+				}
+				flag:great_chasm = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_caliburn }
+				}
+				flag:pod_realm_labyrinth = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:well_of_the_void = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:calumn = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:central_duchy = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:maeljin_duchies = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:border_duchies = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:earth_pit = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:elemental_duchies = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:black_spiral_labyrinth = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_wyrm }
+				}
+				flag:abyss = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_bow_to_demon }
+					# add_to_variable_list = { name = umbra_actions_list target = flag:umbra_learn_new_lore }
+				}
+				flag:oblivion = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_oblivion }
+				}
+				flag:isle_of_eurydice = {
+					add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_seat_of_fate }
+				}
+			}
+		}
+		
+		add_to_variable_list = {
+			name = known_umbra_realms_list
+			target = scope:newly_created_realm
+		}
+	}
+}
+
+POD_create_umbra_realm_effect = {
+	if = {
+		limit = { 
+			NOT = { POD_umbra_realm_known_trigger = { NAME = flag:$REALM$ } }
+		}
+		custom_tooltip = {
+			text = umbra_realm_$REALM$
+			POD_create_umbra_location = { NAME = flag:$REALM$ }
+		}
+	}
+}
+
+################
+### Explorer ###
+################
+
+POD_assign_umbra_explorer_effect = {
+	if = {
+		limit = { this = $TARGET$ }
+		if = {
+			limit = { has_variable = umbra_stationed_realm }
+			POD_remove_umbra_explorer_effect = { TARGET = $TARGET$ }
+		}
+	}
+	else_if = { 
+		limit = { has_relation_umbra_explorer = $TARGET$ }
+		POD_remove_umbra_explorer_effect = { TARGET = $TARGET$ }
+	}
+	else = {
+		set_relation_umbra_explorer = $TARGET$
+	}
+	$TARGET$ = {
+		set_variable = { name = umbra_exploration_progress value = $VALUE$ }
+		set_variable = { name = umbra_stationed_realm value = root.var:local_umbra_realm }
+	}
+	root.var:local_umbra_realm = { set_variable = { name = explorer value = $TARGET$ } }
+	set_variable = { name = local_umbra_explorer value = $TARGET$ }
+}
+
+POD_swap_umbra_explorer_effect = {
+	var:local_umbra_explorer = {
+		save_scope_value_as = {
+			name = saved_progress
+			value = var:umbra_exploration_progress
+		}
+	}
+	if = { 
+		limit = { $TARGET$ = { has_variable = umbra_stationed_realm } }
+		$TARGET$.var:umbra_stationed_realm = { set_variable = { name = explorer value = root.var:local_umbra_explorer } }
+		var:local_umbra_explorer = {
+			set_variable = { name = umbra_exploration_progress value = $TARGET$.var:umbra_exploration_progress }
+			set_variable = { name = umbra_stationed_realm value = $TARGET$.var:umbra_stationed_realm }
+		}
+	}
+	else = {
+		POD_remove_umbra_explorer_effect = { TARGET = var:local_umbra_explorer }
+	}
+	POD_assign_umbra_explorer_effect = { TARGET = $TARGET$ VALUE = scope:saved_progress }
+}
+
+POD_remove_umbra_explorer_effect = {
+	if = {
+		limit = { NOT = { this = $TARGET$ } }
+		remove_relation_umbra_explorer = $TARGET$
+	}
+	$TARGET$ = {
+		remove_variable = umbra_exploration_progress
+		var:umbra_stationed_realm = { remove_variable = explorer }
+		remove_variable = umbra_stationed_realm
+	}
+}
+
+POD_dismiss_umbra_explorer_effect = {
+	$TARGET$ = { POD_umbra_remove_discovery_effect = yes }
+	POD_remove_umbra_explorer_effect = { TARGET = $TARGET$ }
+}
+
+
+POD_free_from_abyss_effect = {
+	if = { 
+		limit = { has_character_modifier = trapped_in_abyss_modifier }
+		if = { 
+			limit = { is_ai = no }
+			add_piety = -10000
+		}
+		remove_trait = torpor
+		remove_variable = spirit_location
+		remove_character_modifier = trapped_in_abyss_modifier
+		POD_setup_ritual_of_sundered_soul_effect = yes
+	}
+}
+
+POD_send_to_abyss_effect = {
+	if = { limit = { NOT = { has_global_variable = abyss_broken } } 
+		POD_release_effect = yes
+		if = {
+			limit = { is_ai = yes }
+			POD_long_depose_effect = yes
+		}
+		add_character_modifier = trapped_in_abyss_modifier
+		POD_umbra_send_effect = { LOCATION = flag:abyss }
+		trigger_event = POD_umbra_lost.104
+	}
+}

@@ -1,0 +1,125 @@
+﻿POD_set_temporary_scope_value_from_trigger = {
+	trigger_if = {
+		limit = {
+			$TRIGGER$
+		}
+		save_temporary_scope_value_as = {
+			name = $NAME$
+			value = yes
+		}
+	}
+	trigger_else = {
+		save_temporary_scope_value_as = {
+			name = $NAME$
+			value = no
+		}
+	}
+}
+
+# save a localization key to be used later
+# e.g. with custom_tooltip = POD_saved_tooltip
+POD_save_temporary_tooltip = {
+	save_temporary_scope_value_as = {
+		name = saved_tooltip
+		value = flag:$LOC$
+	}
+}
+
+# For comparing the current date with something that isn't formatted like YYYY.MM.DD
+# e.g. variables or scope values
+POD_compare_current_date_with_value = {
+	save_temporary_scope_value_as = {
+		name  = date_for_comparison
+		value = current_date
+	}
+	scope:date_for_comparison $COMPARATOR$ $VALUE$
+}
+
+POD_can_receive_landed_titles = {
+	trigger_if = {
+		limit = { faith = { has_doctrine = doctrine_spiritual_head } }
+		NOT = { any_held_title = { is_head_of_faith = yes } }
+	}
+	trigger_if = {
+		limit = { is_ruler = yes }
+		primary_title = {
+			is_mercenary_company = no
+			is_holy_order = no
+		}
+	}
+	trigger_else = {
+		is_diarch = no
+	}
+	NOT = { has_faith = faith:viaservilis }
+}
+
+# title scope
+POD_title_can_receive_county_modifiers = {
+	custom_tooltip = {
+		# for is_valid_showing_failures_only
+		text = POD_title_cannot_receive_county_modifiers
+		tier >= tier_county
+		is_titular = no
+		is_landless_type_title = no
+	}
+}
+
+POD_character_supports_you_for_objectives = {
+	OR = {
+		this = $CHARACTER$
+		has_relation_friend = $CHARACTER$
+		has_relation_best_friend = $CHARACTER$
+		has_relation_soulmate = $CHARACTER$
+		has_relation_coterie_member = $CHARACTER$
+	}
+}
+
+POD_ai_has_conqueror_personality = {
+	AND = {
+		POD_has_conqueror_ai_game_rule = yes
+		is_independent_ruler = yes
+		is_ai = yes # safeguard
+	}
+}
+
+is_councillor_with_position_skill = {
+	custom_description = {
+		text = is_councillor_with_position_skill_tooltip
+		value = $SKILL$
+		OR = {
+			AND = {
+				has_council_position = councillor_chancellor
+				diplomacy >= $SKILL$
+			}
+			AND = {
+				has_council_position = councillor_steward
+				stewardship >= $SKILL$
+			}
+			AND = {
+				has_council_position = councillor_marshal
+				martial >= $SKILL$
+			}
+			AND = {
+				has_council_position = councillor_spymaster
+				intrigue >= $SKILL$
+			}
+			AND = {
+				has_council_position = councillor_court_chaplain
+				learning >= $SKILL$
+			}
+		}
+	}
+}
+
+
+### For injectors
+
+POD_has_trait_xp = {
+	trigger_if = {
+		limit = { has_trait = $TRAIT$ }
+		has_trait_xp = {
+			trait = $TRAIT$
+			value >= $VALUE$
+		}
+	}
+}

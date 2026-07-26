@@ -1,0 +1,414 @@
+﻿
+POD_fera_weather_magic_interaction = {
+	category = interaction_category_fera
+	icon = POD_fera_interaction
+	desc = POD_fera_weather_magic_interaction_desc
+	common_interaction = yes
+	interface_priority = 100
+	options_heading = POD_fera_weather_magic_interaction_options_heading
+	
+
+	is_shown = {
+		scope:actor = {
+			OR = {
+				has_perk = flood_the_land_perk
+				has_perk = call_the_tides_perk
+				has_perk = anger_of_the_wani_perk
+				has_perk = divine_wind_perk
+				uses_cairo_sobek_main_reward = yes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+		scope:recipient = { exists = location }
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = POD_fera_weather_magic_interaction_cost } }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_options_exclusive = no
+
+	#County
+	send_option = {
+		is_shown = {
+			NOR = {
+				scope:duchy = yes
+				scope:kingdom = yes
+				scope:empire = yes
+			}
+		}
+		is_valid = { always = yes }
+		flag = county
+		localization = county
+	}
+	#Duchy
+	send_option = {
+		is_shown = {
+			NOR = {
+				scope:county = yes
+				scope:kingdom = yes
+				scope:empire = yes
+			}
+		}
+		is_valid = { 
+			scope:actor = {
+				OR = {
+					has_perk = age_of_beasts_perk
+					has_perk = divine_wind_perk
+					uses_cairo_sobek_main_reward = yes
+				}
+			}
+		}
+		flag = duchy
+		localization = duchy
+	}
+	#Kingdom
+	send_option = {
+		is_shown = {
+			NOR = {
+				scope:county = yes
+				scope:duchy = yes
+				scope:empire = yes
+			}
+		}
+		is_valid = { scope:actor = { has_perk = age_of_sleep_perk } }
+		flag = kingdom
+		localization = kingdom
+	}
+	#Empire
+	send_option = {
+		is_shown = {
+			NOR = {
+				scope:county = yes
+				scope:duchy = yes
+				scope:kingdom = yes
+			}
+		}
+		is_valid = { scope:actor = {  has_perk = age_of_kings_perk } }
+		flag = empire
+		localization = empire
+	}
+
+
+
+	#Flood
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				OR = {
+					has_perk = flood_the_land_perk
+					has_perk = call_the_tides_perk
+					uses_cairo_sobek_main_reward = yes
+				}
+			}
+			NOR = {
+				scope:greater_flood = yes
+				scope:nourishing_tide = yes
+				scope:storm = yes
+				scope:blizzard = yes
+			}
+		}
+		flag = flood
+		localization = pod_weather_flood
+	}
+	#Greater Flood
+	send_option = {
+		is_shown = {
+			scope:actor = { POD_can_use_greater_flood = yes }
+			NOR = {
+				scope:flood = yes
+				scope:nourishing_tide = yes
+				scope:storm = yes
+				scope:blizzard = yes
+			}
+		}
+		flag = greater_flood
+		localization = pod_weather_greater_flood
+	}
+	#Nourishing Tide
+	send_option = {
+		is_shown = {
+			scope:actor = { any_equipped_character_artifact = { has_variable = pearls_flood_ebb prev = { can_benefit_from_artifact = prev } } }
+			NOR = {
+				scope:flood = yes
+				scope:greater_flood = yes
+				scope:storm = yes
+				scope:blizzard = yes
+			}
+		}
+		flag = nourishing_tide
+		localization = pod_weather_nourishing_tide
+	}
+	#Storm
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				OR = {
+					has_perk = anger_of_the_wani_perk
+					has_perk = divine_wind_perk
+				}
+			}
+			NOR = {
+				scope:flood = yes
+				scope:greater_flood = yes
+				scope:nourishing_tide = yes
+				scope:blizzard = yes
+			}
+		}
+		flag = storm
+		localization = pod_weather_storm
+	}
+	#Blizzard
+	send_option = {
+		is_shown = {
+			scope:actor = { has_perk = anger_of_the_wani_perk }
+			NOR = {
+				scope:flood = yes
+				scope:greater_flood = yes
+				scope:nourishing_tide = yes
+				scope:storm = yes
+			}
+		}
+		flag = blizzard
+		localization = pod_weather_blizzard
+	}
+	
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:county ?= yes
+				scope:duchy ?= yes
+				scope:kingdom ?= yes
+				scope:empire ?= yes
+			}
+			OR = {
+				scope:flood ?= yes
+				scope:greater_flood ?= yes
+				scope:nourishing_tide ?= yes
+				scope:storm ?= yes
+				scope:blizzard ?= yes
+			}
+		}
+	}
+
+	on_accept = {
+		switch = {
+			trigger = yes
+			scope:flood				= { save_scope_value_as = { name = weather_type   value = flag:pod_weather_flood } }
+			scope:greater_flood		= { save_scope_value_as = { name = weather_type   value = flag:pod_weather_greater_flood } }
+			scope:storm				= { save_scope_value_as = { name = weather_type   value = flag:pod_weather_storm } }
+			scope:blizzard			= { save_scope_value_as = { name = weather_type   value = flag:pod_weather_blizzard } }
+			scope:nourishing_tide = {
+				if = {
+					limit = { scope:actor = { faith = { has_doctrine_parameter = ignore_fera_dev_requirements } } }
+					save_scope_value_as = { name = weather_type   value = flag:pod_weather_nourishing_tide }
+				}
+				else = { save_scope_value_as = { name = weather_type   value = flag:pod_weather_nourishing_tide_no_dev }  }
+			}
+		}
+		
+
+		scope:actor = {
+			POD_gift_cost_effect = { COUNT = POD_fera_weather_magic_interaction_cost }
+			
+			switch = {
+				trigger = yes
+				scope:county	= { POD_setup_weather_magic_counties_from_title = { TITLE = scope:recipient.location.county } }
+				scope:duchy		= { POD_setup_weather_magic_counties_from_title = { TITLE = scope:recipient.location.duchy } }
+				scope:kingdom	= { POD_setup_weather_magic_counties_from_title = { TITLE = scope:recipient.location.kingdom } }
+				scope:empire	= { POD_setup_weather_magic_counties_from_title = { TITLE = scope:recipient.location.empire } }
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						scope:flood = yes
+						scope:greater_flood = yes
+					}
+					has_perk = flood_the_land_perk
+					has_perk = call_the_tides_perk
+				}
+				POD_weather_magic_effect = { MONTHS = 96 } #8 years
+			}
+			else = { POD_weather_magic_effect = { MONTHS = POD_weather_default_duration } } #5 years
+		}
+
+		if = {
+			limit = { 
+				scope:actor = { has_character_modifier = susanowo_totem_modifier }
+				scope:storm = yes
+				scope:recipient = { is_at_war_with = scope:actor }
+			}
+			scope:recipient = {
+				POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_lightning_damage REASON = lightning }
+				every_knight = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_lightning_damage REASON = lightning } }
+			}
+		}
+	}
+
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+
+POD_spawn_flaying_plague_interaction = {
+	category = interaction_category_fera
+	icon = POD_ratkin_interaction
+	desc = POD_spawn_flaying_plague_interaction_desc
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = {
+			has_character_flag = weaponized_flaying_plague
+		}
+		scope:recipient = {
+			exists = location
+			location = { is_sea_province = no }
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	auto_accept = yes
+
+	cooldown = { years = 10 }
+	cost = { gold = 100 }
+	
+	send_option = {
+		flag = minor
+		localization = spawn_epidemic_interaction
+	}
+	send_option = {
+		flag = major
+		localization = spawn_major_epidemic_interaction
+	}
+	send_option = {
+		flag = apocalyptic
+		localization = spawn_apocalyptic_epidemic_interaction
+	}
+
+	on_accept = {
+		custom_tooltip = POD_spawn_flaying_plague_interaction.tt
+		scope:actor = {
+			POD_commit_heinous_act_effect = yes
+			
+			duel = {
+				skill = intrigue
+				value = scope:recipient.location.epidemic_resistance
+				80 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					custom_tooltip = POD_spawn_flaying_plague_interaction_success
+					switch = {
+						trigger = yes
+						scope:minor = {
+							scope:recipient.location = {
+								create_epidemic_outbreak = {
+									type = flaying_plague
+									intensity = minor
+								}
+							}
+						}
+						scope:major = {
+							scope:recipient.location = {
+								create_epidemic_outbreak = {
+									type = flaying_plague
+									intensity = major
+								}
+							}
+						}
+						scope:apocalyptic = {
+							scope:recipient.location = {
+								create_epidemic_outbreak = {
+									type = flaying_plague
+									intensity = apocalyptic
+								}
+							}
+						}
+					}
+					hidden_effect = {
+						send_interface_toast = {
+							title = POD_spawn_flaying_plague_actor_toast
+							left_icon = scope:actor
+							right_icon = scope:recipient
+							custom_tooltip = POD_spawn_flaying_plague_actor_toast.desc
+						}
+					}
+					
+				}
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					custom_tooltip = POD_spawn_flaying_plague_interaction_failure
+					hidden_effect = {
+						send_interface_toast = {
+							title = POD_spawn_flaying_plague_failure_toast
+							left_icon = scope:actor
+							right_icon = scope:recipient
+							custom_tooltip = POD_spawn_flaying_plague_failure_toast.desc
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_inflict_flaying_plague_interaction = {
+	category = interaction_category_fera
+	desc = POD_inflict_flaying_plague_interaction_desc
+	icon = POD_ratkin_interaction
+	
+	is_shown = {
+		scope:actor = { has_character_flag = weaponized_flaying_plague }
+		scope:recipient = { NOT = { has_trait = flaying_plague } }
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = fera
+				has_trait = kinfolk
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = { scope:actor != scope:recipient }
+			scope:recipient = {
+				is_imprisoned_by = scope:actor
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+
+	on_accept = {
+		scope:recipient = {
+			add_trait = flaying_plague
+			trigger_event = {
+				id = POD_epidemic.1402
+				days = { bubonic_plague_min_recovery_time bubonic_plague_max_recovery_time }
+			}
+		}
+	}
+	
+	auto_accept = yes
+}

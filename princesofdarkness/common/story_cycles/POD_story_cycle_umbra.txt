@@ -1,0 +1,75 @@
+﻿# just for GUI purposes
+POD_story_umbra_gui = {
+
+	on_setup = {
+	}
+
+	on_end = {
+	}
+
+	on_owner_death = {
+		end_story = yes
+	}
+	
+	effect_group = {
+		days = { 365 3650 }
+		chance = 1
+
+		triggered_effect = {
+			trigger = {
+				NOT = { var:name = flag:earth }
+			}
+			effect = {
+				add_to_variable_list = { name = umbra_actions_list target = flag:umbra_place_vista }
+			}
+		}
+	}
+	
+	effect_group = {
+		days = 365
+
+		triggered_effect = {
+			trigger = {
+				is_target_in_variable_list = { name = umbra_actions_list target = flag:umbra_place_vista }
+			}
+			effect = {
+				remove_list_variable = { name = umbra_actions_list target = flag:umbra_place_vista }
+			}
+		}
+	}
+}
+
+POD_story_umbra_map = {
+	on_end = {
+		every_in_list = {
+			variable = nodes
+			end_story = yes
+		}
+
+		every_in_list = {
+			variable = lines
+			end_story = yes
+		}
+	}
+	
+    on_owner_death = {
+        if = {
+            limit = { story_owner = { exists = player_heir } }
+            make_story_owner = story_owner.player_heir
+        }
+        else = {
+            end_story = yes
+        }
+    }
+}
+
+POD_story_umbra_node = {
+	on_setup = {
+		set_variable = {
+			name = include
+			value = no
+		}
+	}
+}
+
+POD_story_umbra_line = {}

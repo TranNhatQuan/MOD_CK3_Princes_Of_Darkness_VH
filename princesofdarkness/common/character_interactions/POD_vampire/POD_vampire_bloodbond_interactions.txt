@@ -1,0 +1,175 @@
+﻿# POD Schemes
+# Blood Bond, for simplicity sake it is a major hook that lasts 6 months
+# Thaumaturge
+
+POD_bloodbond_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority = 88
+	scheme = PODbloodbond
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		can_bloodbond_trigger = {
+			REGENT = scope:actor
+			THRALL = scope:recipient
+		}
+		scope:actor = {
+			NOT = {
+				has_hook_of_type = {
+					target = scope:recipient
+					type = strong_bloodoath_hook
+				}
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		#POD_strong_mental_defenses_trigger = yes
+		scope:actor = {
+			can_start_scheme = {
+				type = PODbloodbond
+				target_character = scope:recipient
+			}
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		scope:recipient = {
+			is_ruler = no
+			is_adult = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = PODbloodbond
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_POD_bloodbond_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = PODbloodbond
+					target_character = scope:recipient
+				}
+			}
+		}
+		scope:actor = {
+			if = {
+				limit = {
+					OR = {
+						has_relation_best_friend = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_lover = scope:recipient
+					}
+				}
+				stress_impact = {
+					compassionate = medium_stress_impact_gain
+				}
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirebloodoath_illegal } }
+				add_piety = major_piety_loss
+			}
+			else_if = {
+				limit = { faith = { has_doctrine_parameter = vampirebloodoath_shunned } }
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_bond_prisoner_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	interface_priority = 88
+	desc = POD_bond_prisoner_interaction_desc
+	icon = POD_bloodbond_interaction
+	cooldown = { months = 6 }
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = { is_imprisoned_by = scope:actor }
+		can_bloodbond_trigger = {
+			REGENT = scope:actor
+			THRALL = scope:recipient
+		}
+		scope:actor = {
+			NOT = {
+				has_hook_of_type = {
+					target = scope:recipient
+					type = strong_bloodoath_hook
+				}
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+		}
+		scope:recipient = {
+			is_adult = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+
+	on_accept = {
+		scope:actor = {
+			if = {
+				limit = {
+					OR = {
+						has_relation_best_friend = scope:recipient
+						has_relation_friend = scope:recipient
+						has_relation_lover = scope:recipient
+					}
+				}
+				stress_impact = {
+					compassionate = medium_stress_impact_gain
+				}
+			}
+			if = {
+				limit = { faith = { has_doctrine_parameter = vampirebloodoath_illegal } }
+				add_piety = major_piety_loss
+			}
+			else_if = {
+				limit = { faith = { has_doctrine_parameter = vampirebloodoath_shunned } }
+				add_piety = medium_piety_loss
+			}
+		}
+		POD_bloodbond_effect = {
+			REGENT = scope:actor
+			THRALL = scope:recipient
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

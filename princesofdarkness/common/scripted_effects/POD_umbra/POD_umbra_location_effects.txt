@@ -1,0 +1,1874 @@
+﻿POD_umbra_send_effect = {
+	if = {
+		limit = { has_variable = spirit_location } 
+		POD_change_umbra_modifier_effect = { START = var:spirit_location END = $LOCATION$ }
+	}
+	else = {
+		POD_initiate_umbra_modifier_effect = { LOCATION = $LOCATION$ }
+	}
+	
+	if = {
+		limit = { 
+			$LOCATION$ = flag:earth 
+			has_variable = spirit_location
+		}
+		remove_variable = spirit_location
+	}
+	else = {
+		set_variable = { name = spirit_location value = $LOCATION$ }
+	}
+	if = {
+		limit = { has_variable = spirit_destination }
+		remove_variable = spirit_destination
+	}
+}
+
+POD_umbra_travel_effect = {
+	if = {
+		limit = { NOT = { has_variable = spirit_location } }
+		pay_for_spirit_travel_effect = { END = $LOCATION$ }
+	}
+	POD_umbra_send_effect = { LOCATION = $LOCATION$ }
+}
+
+# Realm
+POD_umbra_set_neighboring_realm_known_effect = {
+	hidden_effect = {
+		random = {
+			chance = 1
+			POD_create_umbra_realm_effect = { REALM = null_zone }
+		}
+		random = {
+			chance = 1
+			POD_create_umbra_realm_effect = { REALM = mirror_zone }
+		}
+		if = {
+			limit = { in_dreaming_trigger = { LOCATION = $LOCATION$ } } 
+			random = {
+				chance = 1
+				POD_create_umbra_realm_effect = { REALM = tenebrous_realm }
+			}
+		}
+		if = {
+			limit = { 
+				has_trait = mage
+				current_date >= 1999.1.1
+			} 
+			random = {
+				chance = 1
+				POD_create_umbra_realm_effect = { REALM = hive_realm }
+			}
+		}
+	}
+	
+	switch = {
+		trigger = $LOCATION$
+
+		flag:earth = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = chimare }
+			if = {
+				limit = { current_date >= 1940.1.1 }
+				POD_create_umbra_realm_effect = { REALM = digital_web }
+			}
+			if = {
+				limit = { has_trait = fera }
+				POD_create_umbra_realm_effect = { REALM = court_of_eshtarra }
+			}
+			if = {
+				limit = { has_access_to_deep_umbra_trigger = yes }
+				POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+			}
+			if = {
+				limit = { has_POD_fae_blood_trigger = yes }
+				POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			}
+			if = {
+				limit = { 
+					location = { 
+						OR = {
+							has_building_or_higher = chaw_gully_mine_01
+							has_any_special_mine_trigger = yes
+						}
+					}
+				}
+				POD_create_umbra_realm_effect = { REALM = hollow_worlds }
+			}
+			if = {
+				limit = { has_trait = mage }
+				POD_create_umbra_realm_effect = { REALM = demesne }
+			}
+			POD_create_umbra_realm_effect = { REALM = calumn }
+		}
+
+		flag:astral_plane = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = vulgate }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_stargazers }
+		}
+		
+		flag:vulgate = {
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = spires }
+			POD_create_umbra_realm_effect = { REALM = grand_hall }
+		}
+		
+		flag:grand_hall = {
+			POD_create_umbra_realm_effect = { REALM = vulgate }
+		}
+
+		flag:spires = {
+			POD_create_umbra_realm_effect = { REALM = vulgate }
+			POD_create_umbra_realm_effect = { REALM = epiphamy }
+			POD_create_umbra_realm_effect = { REALM = elemental_courts }
+			POD_create_umbra_realm_effect = { REALM = the_court_of_the_muses }
+			POD_create_umbra_realm_effect = { REALM = inventium }
+			
+		}
+		
+		flag:inventium = {
+			POD_create_umbra_realm_effect = { REALM = spires }
+		}
+
+		flag:epiphamy = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = spires }
+			POD_create_umbra_realm_effect = { REALM = heaven }
+			POD_create_umbra_realm_effect = { REALM = city_of_brass }
+		}
+		
+		flag:city_of_brass = {
+			POD_create_umbra_realm_effect = { REALM = epiphamy }
+		}
+
+		flag:elemental_courts = {
+			POD_create_umbra_realm_effect = { REALM = spires }
+		}
+
+		flag:the_court_of_the_muses = {
+			POD_create_umbra_realm_effect = { REALM = spires }
+		}
+
+		flag:spirit_wilds = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+			POD_create_umbra_realm_effect = { REALM = atrocity_realm }
+			POD_create_umbra_realm_effect = { REALM = battleground }
+			POD_create_umbra_realm_effect = { REALM = erebus }
+			POD_create_umbra_realm_effect = { REALM = flux_realm }
+			POD_create_umbra_realm_effect = { REALM = hy_brasil }
+			POD_create_umbra_realm_effect = { REALM = legendary_realm }
+			POD_create_umbra_realm_effect = { REALM = pangaea }
+			POD_create_umbra_realm_effect = { REALM = summer_country }
+			POD_create_umbra_realm_effect = { REALM = wolfhome }
+			POD_create_umbra_realm_effect = { REALM = xi_wang_chin } #Realm of the Nagah and Mokole TBD later when more relevant
+			POD_create_umbra_realm_effect = { REALM = heavenly_flower_garden } #Forbidden realm of the Wu Keng, TBD when (and if) more relevant at one point
+			POD_create_umbra_realm_effect = { REALM = umi }
+
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = cyberrealm }
+			}
+			if = {
+				limit = { POD_middle_kingdom_splat_trigger = yes }
+				POD_create_umbra_realm_effect = { REALM = mountains_of_heaven }
+				POD_create_umbra_realm_effect = { REALM = tiger_lands }
+			}
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_dark_fantastic } }
+				POD_create_umbra_realm_effect = { REALM = scar }
+			}
+			if = {
+				limit = { religion = religion:blackfury_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_black_furies }
+			}
+			if = {
+				limit = { POD_fera_is_bonegnawer = yes }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_bone_gnawers }
+			}
+			if = {
+				limit = { religion = religion:childofgaia_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_children_of_gaia }
+			}
+			if = {
+				limit = { religion = religion:fianna_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_fianna }
+			}
+			if = {
+				limit = { religion = religion:getoffenris_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_get_of_fenris }
+			}
+			if = {
+				limit = { POD_fera_is_warderofmen = yes }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_glass_walkers }
+			}
+			if = {
+				limit = { religion = religion:redtalon_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_red_talons }
+			}
+			if = {
+				limit = { POD_fera_is_shadowlord = yes }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_shadow_lords }
+			}
+			if = {
+				limit = { POD_fera_is_stargazer = yes }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_stargazers }
+			}
+			if = {
+				limit = { religion = religion:silverfang_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_silver_fangs }
+			}
+			if = {
+				limit = { faith = faith:siberakh }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_uktena }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_croatan }
+			}
+			if = {
+				limit = { religion = religion:silverfang_religion }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_silver_fangs }
+			}
+			if = {
+				limit = { religion = religion:blackspiraldancer_religion }
+				POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+			}
+			if = {
+				limit = { POD_fera_is_silentstrider = yes }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_silent_striders }
+			}
+			if = {
+				limit = { has_trait = werewolf }
+				POD_create_umbra_realm_effect = { REALM = wolfhome }
+			}
+			if = {
+				limit = { has_trait = corax }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_corax }
+			}
+			if = {
+				limit = { has_trait = nuwisha }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_nuwisha }
+			}
+			if = {
+				limit = { has_trait = mokole }
+				POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_bunyip }
+			}
+		}
+		
+		flag:calumn = {
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+			POD_create_umbra_realm_effect = { REALM = atrocity_realm }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_dark_fantastic } }
+				POD_create_umbra_realm_effect = { REALM = scar }
+			}
+		}
+
+		flag:heavenly_flower_garden = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:xi_wang_chin = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:atrocity_realm = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = calumn }
+		}
+
+		flag:battleground = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:cyberrealm = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			if = {
+				limit = { current_date >= 1940.1.1 }
+				POD_create_umbra_realm_effect = { REALM = digital_web }
+			}
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_bone_gnawers }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_glass_walkers }
+		}
+
+		flag:erebus = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:flux_realm = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:hy_brasil = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_fianna }
+			POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+			if = {
+				limit = { global_var:fae_era < 3 }
+				POD_create_umbra_realm_effect = { REALM = arcadia }
+			}
+		}
+		
+		flag:legendary_realm = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+		}
+		
+		flag:mountains_of_heaven = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:pangaea = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+			POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:scar = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+		}
+
+		flag:summer_country = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:tiger_lands = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:umi = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:wolfhome = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_black_furies = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_bone_gnawers = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = cyberrealm }
+			}
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_glass_walkers }
+		}
+
+		flag:the_homeland_of_the_children_of_gaia = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_fianna = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			if = {
+				limit = { 
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+						has_trait = kinain
+						has_trait = kiasyd
+						has_trait = maeghar
+						has_perk = faerie_kin_perk
+					}
+				}
+				POD_create_umbra_realm_effect = { REALM = hy_brasil }
+			}
+		}
+
+		flag:the_homeland_of_the_get_of_fenris = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_glass_walkers = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = cyberrealm }
+			}
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_bone_gnawers }
+		}
+
+		flag:the_homeland_of_the_red_talons = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_shadow_lords = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_stargazers = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:the_homeland_of_the_silver_fangs = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_uktena = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+			POD_create_umbra_realm_effect = { REALM = galunlati }
+			POD_create_umbra_realm_effect = { REALM = abyss }
+		}
+		
+		flag:galunlati = {
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_uktena }
+		}
+
+		flag:the_homeland_of_the_wendigo = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = weaver_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyld_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyrm_reaches }
+			POD_create_umbra_realm_effect = { REALM = pangaea }
+			POD_create_umbra_realm_effect = { REALM = legendary_realm }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_uktena }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_croatan }
+		}
+		
+		flag:the_former_homeland_of_the_white_howlers = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = pangaea }
+			if = {
+				limit = { 
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+						has_trait = kinain
+						has_trait = kiasyd
+						has_trait = maeghar
+						has_perk = faerie_kin_perk
+					}
+				}
+				POD_create_umbra_realm_effect = { REALM = hy_brasil }
+			}
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+			POD_create_umbra_realm_effect = { REALM = black_spiral_labyrinth }
+			POD_create_umbra_realm_effect = { REALM = erebus }
+		}
+
+		flag:the_homeland_of_the_bunyip = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = dreamtime }
+		}
+
+		flag:the_homeland_of_the_croatan = {
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:the_homeland_of_the_silent_striders = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+		
+		flag:the_homeland_of_the_corax = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+
+		flag:the_homeland_of_the_nuwisha = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+		}
+
+		flag:shadowlands = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = epiphamy }
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_return_perk_effect = yes
+			if = {
+				limit = { has_trait = mummy }
+				POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_sand }
+			}
+		}
+			
+		flag:tempest = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = sunless_sea }
+			POD_create_umbra_realm_effect = { REALM = dis }
+			POD_create_umbra_realm_effect = { REALM = islands_of_flint }
+			POD_create_umbra_realm_effect = { REALM = mirrorlands }
+			POD_create_umbra_realm_effect = { REALM = neter_khertet }
+			POD_create_umbra_realm_effect = { REALM = pod_realm_labyrinth }
+			POD_create_umbra_realm_effect = { REALM = abyss }
+		}
+		
+		flag:sea_of_shadow = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = sunless_sea }
+			POD_create_umbra_realm_effect = { REALM = dis }
+			POD_create_umbra_realm_effect = { REALM = islands_of_flint }
+			POD_create_umbra_realm_effect = { REALM = mirrorlands }
+			POD_create_umbra_realm_effect = { REALM = neter_khertet }
+			POD_create_umbra_realm_effect = { REALM = pod_realm_labyrinth }	
+			POD_create_umbra_realm_effect = { REALM = abyss }
+		}
+		
+		flag:stormwall = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = sunless_sea }
+			POD_create_umbra_realm_effect = { REALM = dis }
+			POD_create_umbra_realm_effect = { REALM = islands_of_flint }
+			POD_create_umbra_realm_effect = { REALM = mirrorlands }
+			POD_create_umbra_realm_effect = { REALM = neter_khertet }
+			POD_create_umbra_realm_effect = { REALM = pod_realm_labyrinth }
+			POD_create_umbra_realm_effect = { REALM = abyss }
+		}
+		
+		flag:mirrorlands = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = island_below_the_sea }
+		}
+		
+		flag:island_below_the_sea = {
+			POD_create_umbra_realm_effect = { REALM = mirrorlands }
+			POD_create_umbra_realm_effect = { REALM = abyss }
+			POD_create_umbra_realm_effect = { REALM = oblivion }
+		}
+		
+		flag:dis = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = pod_realm_labyrinth }
+		}
+		
+		flag:swar = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+		
+		flag:night_markets = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+		
+		flag:mantaqat_khayal = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+		
+		flag:islands_of_flint = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+		}
+		
+		flag:river_of_death = {
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+			POD_create_umbra_realm_effect = { REALM = isle_of_sorrows }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_iron }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_clay }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_ivory }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_jade }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_obsidian }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_sand }
+			POD_create_umbra_realm_effect = { REALM = swar }
+			POD_create_umbra_realm_effect = { REALM = night_markets }
+			POD_create_umbra_realm_effect = { REALM = mantaqat_khayal }
+			POD_create_umbra_realm_effect = { REALM = isle_of_eurydice }
+		}
+		
+		flag:sunless_sea = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = far_shore }
+			POD_create_umbra_realm_effect = { REALM = weeping_bay }
+		}
+		
+		flag:far_shore = {
+			POD_create_umbra_realm_effect = { REALM = sunless_sea }
+		}
+
+		flag:weeping_bay = {
+			POD_create_umbra_realm_effect = { REALM = sunless_sea }
+			POD_create_umbra_realm_effect = { REALM = sea_of_souls }
+		}
+		
+		flag:sea_of_souls = {
+			POD_create_umbra_realm_effect = { REALM = weeping_bay }
+			POD_create_umbra_realm_effect = { REALM = isle_of_sorrows }
+		}
+		
+		flag:isle_of_sorrows = {
+			POD_create_umbra_realm_effect = { REALM = sea_of_souls }
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_iron }
+			if = {
+				limit = { current_date >= 1946.1.1 }
+				POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_wire }
+			}
+		}
+		
+		flag:dark_kingdom_of_iron = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = isle_of_sorrows }
+		}
+
+		flag:isle_of_eurydice = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+		}
+
+		flag:neter_khertet = {
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_iron }
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_sand }
+		}
+
+		flag:first_city = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+
+		flag:dark_kingdom_of_wire = {
+			POD_create_umbra_realm_effect = { REALM = isle_of_sorrows }
+		}
+
+		flag:dark_kingdom_of_clay = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+		}
+
+		flag:dark_kingdom_of_ivory = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+		
+		flag:dark_kingdom_of_obsidian = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+		}
+
+		flag:dark_kingdom_of_jade = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = feng_tu }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+
+		flag:feng_tu = {
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_jade }
+		}
+
+		flag:dark_kingdom_of_sand = {
+			POD_create_umbra_realm_effect = { REALM = river_of_death }
+			POD_create_umbra_realm_effect = { REALM = fields_of_aaru }
+			POD_create_umbra_realm_effect = { REALM = neter_khertet }
+		}
+
+		flag:fields_of_aaru = {
+			POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_sand }
+		}
+
+		flag:pod_realm_labyrinth = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = well_of_the_void }
+			POD_create_umbra_realm_effect = { REALM = dis }
+		}
+
+		flag:well_of_the_void = {
+			POD_create_umbra_realm_effect = { REALM = pod_realm_labyrinth }
+			POD_create_umbra_realm_effect = { REALM = oblivion }
+		}
+
+		flag:oblivion = {
+		}
+
+		flag:abyss = {
+			if = {
+				limit = { current_date < 1605.1.1 }
+				POD_create_umbra_realm_effect = { REALM = sea_of_shadow }
+			}
+			else_if = {
+				limit = { current_date < 1999.1.1 }
+				POD_create_umbra_realm_effect = { REALM = tempest }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = stormwall }
+			}
+			POD_create_umbra_realm_effect = { REALM = island_below_the_sea }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_uktena }
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+		}
+		
+		flag:aetherial_realm = {
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+			
+			POD_create_umbra_realm_effect = { REALM = court_of_eshtarra }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+			POD_create_umbra_realm_effect = { REALM = court_of_mitanu }
+			POD_create_umbra_realm_effect = { REALM = court_of_hakahe }
+			POD_create_umbra_realm_effect = { REALM = court_of_tambiyah }
+			POD_create_umbra_realm_effect = { REALM = court_of_nerigal }
+			POD_create_umbra_realm_effect = { REALM = court_of_rorg }
+			POD_create_umbra_realm_effect = { REALM = court_of_zarok }
+			POD_create_umbra_realm_effect = { REALM = court_of_lu_bat }
+			POD_create_umbra_realm_effect = { REALM = court_of_ruatma }
+			POD_create_umbra_realm_effect = { REALM = court_of_shantar }
+			POD_create_umbra_realm_effect = { REALM = court_of_meros }
+			
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:first_horizon = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon } #Mage stuff will wait for mages
+
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_correspondence }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_life }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_forces }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_matter }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_time }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_spirit }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_mind }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_entropy }
+			
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shard_realm_of_prime = {
+			POD_create_umbra_realm_effect = { REALM = court_of_eshtarra }
+
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = moon }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			if = {
+				limit = { global_var:fae_era < 3 }
+				POD_create_umbra_realm_effect = { REALM = arcadia } #Shade Realm of the Moon
+			}
+		}
+		
+		flag:moon = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = darkside_moon_base }
+			}
+			if = {
+				limit = { current_date >= 1893.1.1 }
+				POD_create_umbra_realm_effect = { REALM = victoria_station }
+			}
+		}
+		
+		flag:darkside_moon_base = {
+			POD_create_umbra_realm_effect = { REALM = moon }
+		}
+
+		flag:victoria_station = {
+			POD_create_umbra_realm_effect = { REALM = moon }
+		}
+
+		flag:court_of_eshtarra = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:court_of_sokhta = {
+			POD_create_umbra_realm_effect = { REALM = moon }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+			POD_create_umbra_realm_effect = { REALM = weaver_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyld_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyrm_reaches }
+		}
+		
+		flag:true_horizon = {
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+			POD_create_umbra_realm_effect = { REALM = far_horizon }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_infinity }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_correspondence }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_life }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_forces }
+			
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = autochthonia }
+				POD_create_umbra_realm_effect = { REALM = gernsback_continuum }
+				POD_create_umbra_realm_effect = { REALM = moreauvia }
+			}
+			POD_create_umbra_realm_effect = { REALM = horizon }
+			POD_create_umbra_realm_effect = { REALM = balador }
+			POD_create_umbra_realm_effect = { REALM = midrealm }
+			if = {
+				limit = { current_date >= 1400.1.1 }
+				POD_create_umbra_realm_effect = { REALM = red_donjon }
+			}
+			POD_create_umbra_realm_effect = { REALM = yenosia }
+		}
+		
+		flag:autochthonia = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+		}
+
+		flag:balador = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+		}
+
+		flag:gernsback_continuum = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+		}
+
+		flag:midrealm = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = null_zone }
+		}
+
+		flag:moreauvia = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+		}
+
+		flag:red_donjon = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+		}
+
+		flag:yenosia = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			if = {
+				limit = { current_date >= 1700.1.1 }
+				POD_create_umbra_realm_effect = { REALM = null_b }		#Way too early for that
+			}
+		}
+		
+		flag:null_b = {
+			POD_create_umbra_realm_effect = { REALM = yenosia }
+		}
+
+		flag:horizon = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = concordia }
+		}
+		
+		flag:concordia = {
+			if = {
+				limit = { current_date >= 1450.1.1 }
+				POD_create_umbra_realm_effect = { REALM = horizon }
+			}
+		}
+
+		flag:shard_realm_of_infinity = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = sun }
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+		}
+		
+		flag:sun = {
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_infinity }
+		}
+
+		flag:court_of_katanka_sonnak = {
+			POD_create_umbra_realm_effect = { REALM = sun }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_infinity }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+			POD_create_umbra_realm_effect = { REALM = weaver_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyld_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyrm_reaches }
+		}
+		
+		flag:shard_realm_of_correspondence = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = mercury }
+			POD_create_umbra_realm_effect = { REALM = court_of_mitanu }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_correspondence }
+		}
+		
+		flag:mercury = {
+			POD_create_umbra_realm_effect = { REALM = court_of_mitanu }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_correspondence }
+			POD_create_umbra_realm_effect = { REALM = mus }
+		}
+		
+		flag:mus = {
+			POD_create_umbra_realm_effect = { REALM = mercury }
+			if = {
+				limit = { current_date >= 1450.1.1 }
+				POD_create_umbra_realm_effect = { REALM = fors_collegis_mercuris }
+			}
+		}
+		
+		flag:fors_collegis_mercuris = {
+			POD_create_umbra_realm_effect = { REALM = mus }
+		}
+
+		flag:court_of_mitanu = {
+			POD_create_umbra_realm_effect = { REALM = mercury }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_correspondence }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_correspondence = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_correspondence }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:court_of_hakahe = {
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+
+		flag:shard_realm_of_life = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = venus }
+			POD_create_umbra_realm_effect = { REALM = court_of_tambiyah }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_life }
+			POD_create_umbra_realm_effect = { REALM = seasonal_realms }
+		}
+		
+		flag:venus = {
+			POD_create_umbra_realm_effect = { REALM = court_of_tambiyah }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_life }
+		}
+		
+		flag:seasonal_realms = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_life }
+		}
+
+		flag:court_of_tambiyah = {
+			POD_create_umbra_realm_effect = { REALM = venus }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_life }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_life = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_life }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:shard_realm_of_forces = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = mars }
+			POD_create_umbra_realm_effect = { REALM = court_of_nerigal }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_forces }
+			POD_create_umbra_realm_effect = { REALM = doissetep }
+		}
+		
+		flag:mars = {
+			POD_create_umbra_realm_effect = { REALM = court_of_nerigal }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_forces }
+		}
+
+		flag:court_of_nerigal = {
+			POD_create_umbra_realm_effect = { REALM = mars }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_forces }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_forces = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_forces }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:far_horizon = {
+			POD_create_umbra_realm_effect = { REALM = true_horizon }
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		}
+
+		flag:court_of_rorg = {
+			POD_create_umbra_realm_effect = { REALM = far_horizon }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shard_realm_of_matter = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = jupiter }
+			POD_create_umbra_realm_effect = { REALM = court_of_zarok }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_matter }
+		}
+		
+		flag:jupiter = {
+			POD_create_umbra_realm_effect = { REALM = court_of_zarok }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_matter }
+		}
+
+		flag:court_of_zarok = {
+			POD_create_umbra_realm_effect = { REALM = jupiter }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_matter }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+
+		flag:shade_realm_of_matter = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_matter }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+			POD_create_umbra_realm_effect = { REALM = hollow_worlds }
+		}
+		
+		flag:shard_realm_of_time = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = saturn }
+			POD_create_umbra_realm_effect = { REALM = court_of_lu_bat }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_time }
+		}
+		
+		flag:saturn = {
+			POD_create_umbra_realm_effect = { REALM = court_of_lu_bat }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_time }
+		}
+
+		flag:court_of_lu_bat = {
+			POD_create_umbra_realm_effect = { REALM = saturn }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_time }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_time = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_time }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:shard_realm_of_spirit = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = uranus }
+			POD_create_umbra_realm_effect = { REALM = court_of_ruatma }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_spirit }
+		}
+		
+		flag:uranus = {
+			POD_create_umbra_realm_effect = { REALM = court_of_ruatma }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_spirit }
+		}
+
+		flag:court_of_ruatma = {
+			POD_create_umbra_realm_effect = { REALM = uranus }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_spirit }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_spirit = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_spirit }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:shard_realm_of_mind = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = neptune }
+			POD_create_umbra_realm_effect = { REALM = court_of_shantar }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_mind }
+		}
+		
+		flag:neptune = {
+			POD_create_umbra_realm_effect = { REALM = court_of_shantar }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_mind }
+		}
+
+		flag:court_of_shantar = {
+			POD_create_umbra_realm_effect = { REALM = neptune }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_mind }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_mind = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_mind }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:shard_realm_of_entropy = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = pluto }
+			POD_create_umbra_realm_effect = { REALM = court_of_meros }
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_entropy }
+		}
+		
+		flag:pluto = {
+			POD_create_umbra_realm_effect = { REALM = court_of_meros }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_entropy }
+			POD_create_umbra_realm_effect = { REALM = cerberus }
+		}
+		
+		flag:cerberus = {
+			POD_create_umbra_realm_effect = { REALM = pluto }
+		}
+
+		flag:court_of_meros = {
+			POD_create_umbra_realm_effect = { REALM = pluto }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_entropy }
+			POD_create_umbra_realm_effect = { REALM = aetherial_realm }
+		}
+		
+		flag:shade_realm_of_entropy = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_entropy }
+			POD_create_umbra_realm_effect = { REALM = first_horizon }
+		}
+		
+		flag:weaver_reaches = {
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+		}
+		
+		flag:wyld_reaches = {
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+		}
+		
+		flag:wyrm_reaches = {
+			POD_create_umbra_realm_effect = { REALM = court_of_katanka_sonnak }
+			POD_create_umbra_realm_effect = { REALM = court_of_sokhta }
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_wendigo }
+		}
+		
+		flag:deep_umbra = {
+			POD_create_umbra_realm_effect = { REALM = far_horizon }
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = copernicus_research_center }
+			}
+			POD_create_umbra_realm_effect = { REALM = heaven }
+			POD_create_umbra_realm_effect = { REALM = qlippoth }
+
+			POD_create_umbra_realm_effect = { REALM = weaver_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyld_reaches }
+			POD_create_umbra_realm_effect = { REALM = wyrm_reaches }
+
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_matter }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_time }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_spirit }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_mind }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_entropy }
+		}
+		
+		flag:central_duchy = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+			POD_create_umbra_realm_effect = { REALM = black_spiral_labyrinth }
+			POD_create_umbra_realm_effect = { REALM = abyss }
+			POD_create_umbra_realm_effect = { REALM = calumn }
+			
+			POD_create_umbra_realm_effect = { REALM = maeljin_duchies }
+			POD_create_umbra_realm_effect = { REALM = earth_pit }
+			POD_create_umbra_realm_effect = { REALM = elemental_duchies }
+		}
+		
+		flag:maeljin_duchies = {
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+			POD_create_umbra_realm_effect = { REALM = border_duchies }
+		}
+		
+		flag:border_duchies = {
+			POD_create_umbra_realm_effect = { REALM = maeljin_duchies }
+		}
+		
+		flag:earth_pit = {
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+		}
+		
+		flag:elemental_duchies = {
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+		}
+		
+		flag:black_spiral_labyrinth = {
+			POD_create_umbra_realm_effect = { REALM = central_duchy }
+			POD_create_umbra_realm_effect = { REALM = the_former_homeland_of_the_white_howlers }
+		}
+		
+		flag:copernicus_research_center = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		}
+
+		# flag:paradox_realms = {
+		# 	POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		# }
+
+		flag:heaven = {
+			POD_create_umbra_realm_effect = { REALM = epiphamy }
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		}
+
+		flag:dreamtime = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_bunyip }
+		}
+
+		flag:chimare = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:demesne = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:near_dreaming = {
+			POD_create_umbra_realm_effect = { REALM = dreamtime }
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = vale_of_mists }
+			POD_create_umbra_realm_effect = { REALM = slumbering_oceans }
+			POD_create_umbra_realm_effect = { REALM = the_homeland_of_the_stargazers }
+			POD_create_umbra_realm_effect = { REALM = blotkeldur }
+			POD_create_umbra_realm_effect = { REALM = wyldweir }
+			POD_create_umbra_realm_effect = { REALM = great_chasm }
+			POD_create_umbra_realm_effect = { REALM = lake_of_sorrows }
+			POD_create_umbra_realm_effect = { REALM = rivers_of_phantasia }
+			POD_create_umbra_realm_effect = { REALM = seas_of_dream }
+			POD_create_umbra_realm_effect = { REALM = dream_burrow }
+			POD_create_umbra_realm_effect = { REALM = madness_realm }
+			POD_create_umbra_realm_effect = { REALM = meridianus }
+			POD_create_umbra_realm_effect = { REALM = spawning_fields }
+			POD_create_umbra_realm_effect = { REALM = maharaurava }
+		}
+		
+		flag:far_dreaming = {
+			POD_create_umbra_realm_effect = { REALM = vale_of_mists }
+			POD_create_umbra_realm_effect = { REALM = slumbering_oceans }
+			POD_create_umbra_realm_effect = { REALM = kureksarra }
+			POD_create_umbra_realm_effect = { REALM = rubezhal }
+			POD_create_umbra_realm_effect = { REALM = capecia }
+			POD_create_umbra_realm_effect = { REALM = irrgarten }
+			POD_create_umbra_realm_effect = { REALM = arike }
+			POD_create_umbra_realm_effect = { REALM = hieronymus_continuum }
+			POD_create_umbra_realm_effect = { REALM = arawns_forge }
+			POD_create_umbra_realm_effect = { REALM = great_dream_forest }
+			POD_create_umbra_realm_effect = { REALM = splintered_mountains }
+			POD_create_umbra_realm_effect = { REALM = mistweir }
+			POD_create_umbra_realm_effect = { REALM = spawning_fields }
+		}
+		
+		flag:deep_dreaming = {
+			if = {
+				limit = { global_var:fae_era < 3 }
+				POD_create_umbra_realm_effect = { REALM = arcadia }
+			}
+			else = {
+				POD_create_umbra_realm_effect = { REALM = myrmitown }
+				POD_create_umbra_realm_effect = { REALM = the_tunnels }
+				POD_create_umbra_realm_effect = { REALM = balloon }
+			}
+			POD_create_umbra_realm_effect = { REALM = vale_of_mists }
+			POD_create_umbra_realm_effect = { REALM = slumbering_oceans }
+			POD_create_umbra_realm_effect = { REALM = wastelands }
+			POD_create_umbra_realm_effect = { REALM = brobdingnag }
+			POD_create_umbra_realm_effect = { REALM = great_engine }
+			POD_create_umbra_realm_effect = { REALM = fin_bheara }
+			POD_create_umbra_realm_effect = { REALM = mistweir }
+			POD_create_umbra_realm_effect = { REALM = sea_of_silver }
+		}
+		
+		flag:arcadia = {
+			POD_create_umbra_realm_effect = { REALM = sea_of_silver }
+			POD_create_umbra_realm_effect = { REALM = distant_cities }
+			POD_create_umbra_realm_effect = { REALM = hy_brasil }
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_prime }
+		}
+		
+		flag:kingdom_of_dan = {
+			POD_create_umbra_realm_effect = { REALM = sea_of_silver }
+		}
+
+		flag:kureksarra = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:rubezhal = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:capecia = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:irrgarten = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:arike = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = snail_graveyards }
+		}
+
+		flag:myrmitown = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+			if = {
+				limit = { global_var:fae_era > 2 }
+				POD_create_umbra_realm_effect = { REALM = the_tunnels }
+			}
+		}
+
+		flag:the_tunnels = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+			if = {
+				limit = { global_var:fae_era > 2 }
+				POD_create_umbra_realm_effect = { REALM = myrmitown }
+			}
+		}
+
+		flag:balloon = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:vale_of_mists = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = mistweir }
+		}
+		
+		flag:fields_behind = {
+			POD_create_umbra_realm_effect = { REALM = vale_of_mists }
+			POD_create_umbra_realm_effect = { REALM = bullydale_wastes }
+		}
+		
+		flag:bullydale_wastes = {
+			POD_create_umbra_realm_effect = { REALM = fields_behind }
+			POD_create_umbra_realm_effect = { REALM = low_dukedoms }
+		}
+		
+		flag:low_dukedoms = {
+			POD_create_umbra_realm_effect = { REALM = bullydale_wastes }
+			POD_create_umbra_realm_effect = { REALM = splintered_mountains }
+		}
+
+		flag:blotkeldur = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:wastelands = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:hieronymus_continuum = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:wyldweir = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:brobdingnag = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:arawns_forge = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:great_dream_forest = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = discordant_woods }
+			POD_create_umbra_realm_effect = { REALM = sea_of_sorrow }
+			POD_create_umbra_realm_effect = { REALM = forest_of_lies }
+		}
+
+		flag:discordant_woods = {
+			POD_create_umbra_realm_effect = { REALM = great_dream_forest }
+		}
+
+		flag:great_chasm = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:great_engine = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:lake_of_sorrows = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			POD_create_umbra_realm_effect = { REALM = distant_cities }
+		}
+
+		flag:sea_of_sorrow = {
+			POD_create_umbra_realm_effect = { REALM = great_dream_forest }
+		}
+
+		flag:rivers_of_phantasia = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:seas_of_dream = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:slumbering_oceans = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:splintered_mountains = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = middlemarch }
+			POD_create_umbra_realm_effect = { REALM = chakravada }
+			POD_create_umbra_realm_effect = { REALM = low_dukedoms }
+		}
+
+		flag:middlemarch = {
+			POD_create_umbra_realm_effect = { REALM = splintered_mountains }
+		}
+
+		flag:chakravada = {
+			POD_create_umbra_realm_effect = { REALM = splintered_mountains }
+		}
+
+		flag:goblin_market = {
+			POD_create_umbra_realm_effect = { REALM = fin_bheara }
+		}
+
+		flag:distant_cities = {
+			POD_create_umbra_realm_effect = { REALM = lake_of_sorrows }
+			if = {
+				limit = { global_var:fae_era < 3 }
+				POD_create_umbra_realm_effect = { REALM = arcadia }
+			}
+		}
+
+		flag:fin_bheara = {
+			POD_create_umbra_realm_effect = { REALM = mistweir }
+			POD_create_umbra_realm_effect = { REALM = goblin_market }
+		}
+
+		flag:mistweir = {
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+			POD_create_umbra_realm_effect = { REALM = fin_bheara }
+		}
+
+		flag:dream_burrow = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:madness_realm = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:meridianus = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:sea_of_silver = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+			if = {
+				limit = { global_var:fae_era < 3 }
+				POD_create_umbra_realm_effect = { REALM = arcadia }
+			}
+			POD_create_umbra_realm_effect = { REALM = winterweir }
+			POD_create_umbra_realm_effect = { REALM = kingdom_of_dan }
+		}
+
+		flag:snail_graveyards = {
+			POD_create_umbra_realm_effect = { REALM = arike }
+		}
+
+		flag:spawning_fields = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+			POD_create_umbra_realm_effect = { REALM = far_dreaming }
+		}
+
+		flag:tenebrous_realm = {
+			POD_create_umbra_realm_effect = { REALM = deep_dreaming }
+		}
+
+		flag:winterweir = {
+			POD_create_umbra_realm_effect = { REALM = sea_of_silver }
+			POD_create_umbra_realm_effect = { REALM = forest_of_lies }
+		}
+
+		flag:forest_of_lies = {
+			POD_create_umbra_realm_effect = { REALM = great_dream_forest }
+		}
+
+		flag:maharaurava = {
+			POD_create_umbra_realm_effect = { REALM = near_dreaming }
+		}
+
+		flag:digital_web = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = cyberrealm }
+			}
+		}
+
+		flag:hollow_worlds = {
+			POD_create_umbra_realm_effect = { REALM = shade_realm_of_matter }
+		}
+
+		flag:mirror_zone = {
+			POD_create_umbra_realm_effect = { REALM = astral_plane }
+			POD_create_umbra_realm_effect = { REALM = spirit_wilds }
+			POD_create_umbra_realm_effect = { REALM = shadowlands }
+		}
+
+		flag:null_zone = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = midrealm }
+		}
+
+		flag:yomi_wan = {
+			POD_create_umbra_realm_effect = { REALM = earth }
+			POD_create_umbra_realm_effect = { REALM = kakuri }
+			if = {
+				limit = { culture = { has_cultural_era_or_later = culture_era_final_nights } }
+				POD_create_umbra_realm_effect = { REALM = wicked_city }
+			}
+			POD_create_umbra_realm_effect = { REALM = hell_of_burrowing_maggots }
+			POD_create_umbra_realm_effect = { REALM = hell_of_being_skinned_alive }
+			POD_create_umbra_realm_effect = { REALM = hell_of_boiling_oil }
+			POD_create_umbra_realm_effect = { REALM = hell_of_bitter_truth }
+			if = {
+				limit = { current_date < 1301.1.1 }
+				POD_create_umbra_realm_effect = { REALM = hell_of_spiked_chains }
+			}
+		}
+		
+		flag:kakuri = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:wicked_city = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+			POD_create_umbra_realm_effect = { REALM = cyberrealm }
+		}
+
+		flag:hell_of_burrowing_maggots = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:hell_of_being_skinned_alive = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:hell_of_boiling_oil = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:hell_of_bitter_truth = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:hell_of_spiked_chains = {
+			POD_create_umbra_realm_effect = { REALM = yomi_wan }
+		}
+
+		flag:qlippoth = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		}
+
+		flag:doissetep = {
+			POD_create_umbra_realm_effect = { REALM = shard_realm_of_forces }
+		}
+
+		flag:hive_realm = {
+			POD_create_umbra_realm_effect = { REALM = deep_umbra }
+		}
+	}
+}
+
+POD_return_perk_effect = {
+	if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_europe
+					geographical_region = world_asia_minor
+				}
+			}
+		}
+		POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_iron }
+	}
+	else_if = { 
+		limit = { capital_province ?= { geographical_region = world_africa } }
+		POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_ivory }
+	}
+	else_if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_tibet
+					geographical_region = world_steppe
+				}
+			}
+		}
+		POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_jade }
+	}
+	else_if = { 
+		limit = { capital_province ?= { geographical_region = world_india } }
+		POD_create_umbra_realm_effect = { REALM = swar }
+	}
+	else_if = { 
+		limit = { capital_province ?= { geographical_region = world_burma } }
+		POD_create_umbra_realm_effect = { REALM = night_markets }
+	}
+	else_if = { 
+		limit = { 
+			capital_province ?= {
+				OR = {
+					geographical_region = world_middle_east
+					geographical_region = world_middle_east_persia
+				}
+			} 
+		}
+		POD_create_umbra_realm_effect = { REALM = mantaqat_khayal }
+	}
+	else = { 
+		POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_clay }
+		POD_create_umbra_realm_effect = { REALM = dark_kingdom_of_obsidian }
+	}
+}
+
+POD_return_to_destination_action_effect = {
+	if = { 
+		limit = { 
+			location = {
+				OR = {
+					geographical_region = world_europe
+					geographical_region = world_asia_minor
+				}
+			}
+		}
+		POD_return_to_destination_effect = { REALM = dark_kingdom_of_iron }
+	}
+	else_if = { 
+		limit = { location = { geographical_region = world_africa } }
+		POD_return_to_destination_effect = { REALM = dark_kingdom_of_ivory }
+	}
+	else_if = { 
+		limit = { 
+			location = {
+				OR = {
+					geographical_region = world_tibet
+					geographical_region = world_steppe
+				}
+			}
+		}
+		POD_return_to_destination_effect = { REALM = dark_kingdom_of_jade }
+	}
+	else_if = { 
+		limit = { location = { geographical_region = world_india } }
+		POD_return_to_destination_effect = { REALM = swar }
+	}
+	else_if = { 
+		limit = { location = { geographical_region = world_burma } }
+		POD_return_to_destination_effect = { REALM = night_markets }
+	}
+	else_if = { 
+		limit = { 
+			location = {
+				OR = {
+					geographical_region = world_middle_east
+					geographical_region = world_middle_east_persia
+				}
+			} 
+		}
+		POD_return_to_destination_effect = { REALM = mantaqat_khayal }
+	}
+	else = {
+		random_list = {
+			50 = {
+				POD_return_to_destination_effect = { REALM = dark_kingdom_of_clay }
+			}
+			50 = {
+				POD_return_to_destination_effect = { REALM = dark_kingdom_of_obsidian }
+			}
+		}
+	}
+}
+
+POD_return_to_destination_effect = {
+	POD_create_umbra_realm_effect = { REALM = $REALM$ }
+	set_variable = { name = spirit_destination value = flag:$REALM$ }
+	show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = flag:$REALM$ } }
+	if = {
+		limit = { POD_umbra_bypass_trigger = { LOCATION = flag:$REALM$ } }
+		trigger_event = { on_action = spirit_travel_movement_end_pulse }
+	}
+	else = {
+		trigger_event = { on_action = spirit_travel_movement_start_pulse }
+	}
+}
+
+# Umbra Modifier
+POD_add_umbra_modifier_effect = {
+	if = {
+		limit = { in_astral_reaches_trigger = { LOCATION = $LOCATION$ } }
+		add_character_modifier = traveling_astral_reaches_modifier
+	}
+	else_if = {
+		limit = { in_spirit_wilds_trigger = { LOCATION = $LOCATION$ } }
+		add_character_modifier = traveling_spirit_wilds_modifier
+	}
+	else_if = {
+		limit = { in_underworld_trigger = { LOCATION = $LOCATION$ } }
+		add_character_modifier = traveling_underworld_modifier
+	}
+	else_if = {
+		limit = { in_dreaming_trigger = { LOCATION = $LOCATION$ } }
+		add_character_modifier = traveling_dreaming_modifier
+	}
+	else_if = {
+		limit = { in_deep_umbra_trigger = { LOCATION = $LOCATION$ } }
+		add_character_modifier = traveling_deep_umbra_modifier
+	}
+}
+
+POD_remove_umbra_modifier_effect = {
+	if = {
+		limit = { has_character_modifier = traveling_astral_reaches_modifier }
+		remove_character_modifier = traveling_astral_reaches_modifier
+	}
+	if = {
+		limit = { has_character_modifier = traveling_spirit_wilds_modifier }
+		remove_character_modifier = traveling_spirit_wilds_modifier
+	}
+	if = {
+		limit = { has_character_modifier = traveling_underworld_modifier }
+		remove_character_modifier = traveling_underworld_modifier
+	}
+	if = {
+		limit = { has_character_modifier = traveling_dreaming_modifier }
+		remove_character_modifier = traveling_dreaming_modifier
+	}
+	if = {
+		limit = { has_character_modifier = traveling_deep_umbra_modifier }
+		remove_character_modifier = traveling_deep_umbra_modifier
+	}
+}
+
+POD_change_umbra_modifier_effect = {
+	if = {
+		limit = { in_astral_reaches_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_astral_reaches_trigger = { LOCATION = $END$ } } }
+			remove_character_modifier = traveling_astral_reaches_modifier
+			POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_spirit_wilds_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_spirit_wilds_trigger = { LOCATION = $END$ } } }
+			remove_character_modifier = traveling_spirit_wilds_modifier
+			POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_underworld_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_underworld_trigger = { LOCATION = $END$ } } }
+			remove_character_modifier = traveling_underworld_modifier
+			POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_dreaming_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_dreaming_trigger = { LOCATION = $END$ } } }
+			remove_character_modifier = traveling_dreaming_modifier
+			POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_deep_umbra_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_deep_umbra_trigger = { LOCATION = $END$ } } }
+			remove_character_modifier = traveling_deep_umbra_modifier
+			POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_penumbra_trigger = { LOCATION = $START$ } }
+		if = {
+			limit = { NOT = { in_penumbra_trigger = { LOCATION = $END$ } } }
+			POD_initiate_umbra_modifier_effect = { LOCATION = $END$ }
+		}
+	}
+	else_if = {
+		limit = { in_zone_trigger = { LOCATION = $START$ } }
+	}
+	else = {
+		POD_add_umbra_modifier_effect = { LOCATION = $END$ }
+	}
+}
+
+POD_initiate_umbra_modifier_effect = {
+	POD_add_umbra_modifier_effect = { LOCATION = $LOCATION$ }
+	if = {
+		limit = { 
+			has_POD_shapeshifted_form_trigger = yes 
+			NOR = { 
+				has_perk = lore_step_beyond_the_veil_perk
+				has_perk = aspect_of_duat_perk
+				has_perk = grasp_the_beyond_perk
+			}
+		}
+		POD_shapeshift_revert_effect = yes
+	}
+	if = {
+		limit = { has_character_modifier = reversa_of_fortune_perk_modifier }
+		remove_character_modifier = reversa_of_fortune_perk_modifier
+	}
+}

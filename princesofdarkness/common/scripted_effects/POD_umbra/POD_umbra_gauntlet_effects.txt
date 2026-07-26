@@ -1,0 +1,569 @@
+﻿POD_strengthening_the_wall_effect = {
+	custom_tooltip = POD_strengthening_the_wall_effect.tt
+	location = { POD_increase_gauntlet_modifier_effect = yes }
+}
+
+POD_weakening_the_wall_effect = {
+	custom_tooltip = POD_weakening_the_wall_effect.tt
+	location = { POD_decrease_gauntlet_modifier_effect = yes }
+}
+
+POD_strengthening_the_gauntlet_effect = {
+	custom_tooltip = POD_strengthening_the_gauntlet_effect.tt
+	location = { POD_increase_gauntlet_modifier_effect = yes }
+}
+
+POD_weakening_the_gauntlet_effect = {
+	custom_tooltip = POD_weakening_the_gauntlet_effect.tt
+	location = { POD_decrease_gauntlet_modifier_effect = yes }
+}
+
+POD_tear_down_the_gauntlet_effect = {
+	POD_clean_gauntlet_modifier_effect = yes
+	add_province_modifier = {
+		modifier = gauntlet0_modifier 
+		years = 3
+	}
+}
+
+POD_increase_gauntlet_modifier_effect = {
+	if = {
+		limit = { gauntlet_level = 9 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet9_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet10_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 8 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet8_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet9_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 7 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet7_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet8_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 6 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet6_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet7_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 5 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet5_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet6_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 4 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet4_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet5_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 3 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet3_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet4_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 2 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet2_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet3_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 1 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet1_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet2_modifier 
+		}
+	}
+}
+
+POD_decrease_gauntlet_modifier_effect = {
+	if = {
+		limit = { gauntlet_level = 2 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet2_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet1_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 3 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet3_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet2_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 4 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet4_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet3_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 5 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet5_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet4_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 6 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet6_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet5_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 7 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet7_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet6_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 8 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet8_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet7_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 9 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet9_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet8_modifier 
+		}
+	}
+	else_if = {
+		limit = { gauntlet_level = 10 }
+		hidden_effect = {
+			remove_province_modifier = gauntlet10_modifier 
+		}
+		add_province_modifier = {
+			modifier = gauntlet9_modifier 
+		}
+	}
+}
+
+POD_clean_gauntlet_modifier_effect = {
+	if = {
+		limit = { has_province_modifier = gauntlet10_modifier }
+		remove_province_modifier = gauntlet10_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet9_modifier }
+		remove_province_modifier = gauntlet9_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet8_modifier }
+		remove_province_modifier = gauntlet8_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet7_modifier }
+		remove_province_modifier = gauntlet7_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet6_modifier }
+		remove_province_modifier = gauntlet6_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet5_modifier }
+		remove_province_modifier = gauntlet5_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet4_modifier }
+		remove_province_modifier = gauntlet4_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet3_modifier }
+		remove_province_modifier = gauntlet3_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet2_modifier }
+		remove_province_modifier = gauntlet2_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet1_modifier }
+		remove_province_modifier = gauntlet1_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = gauntlet0_modifier }
+		remove_province_modifier = gauntlet0_modifier 
+	}
+}
+
+POD_strengthening_the_shroud_effect = {
+	custom_tooltip = POD_strengthening_the_shroud_effect.tt
+	location = { POD_increase_shroud_modifier_effect = yes }
+}
+
+POD_weakening_the_shroud_effect = {
+	custom_tooltip = POD_weakening_the_shroud_effect.tt
+	location = { POD_decrease_shroud_modifier_effect = yes }
+}
+
+POD_tear_down_the_shroud_effect = {
+	POD_clean_shroud_modifier_effect = yes
+	add_province_modifier = {
+		modifier = shroud0_modifier 
+		years = 3
+	}
+}
+
+POD_increase_shroud_modifier_effect = {
+	if = {
+		limit = { shroud_level = 9 }
+		hidden_effect = {
+			remove_province_modifier = shroud9_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud10_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 8 }
+		hidden_effect = {
+			remove_province_modifier = shroud8_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud9_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 7 }
+		hidden_effect = {
+			remove_province_modifier = shroud7_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud8_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 6 }
+		hidden_effect = {
+			remove_province_modifier = shroud6_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud7_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 5 }
+		hidden_effect = {
+			remove_province_modifier = shroud5_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud6_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 4 }
+		hidden_effect = {
+			remove_province_modifier = shroud4_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud5_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 3 }
+		hidden_effect = {
+			remove_province_modifier = shroud3_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud4_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 2 }
+		hidden_effect = {
+			remove_province_modifier = shroud2_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud3_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 1 }
+		hidden_effect = {
+			remove_province_modifier = shroud1_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud2_modifier 
+		}
+	}
+}
+
+POD_decrease_shroud_modifier_effect = {
+	if = {
+		limit = { shroud_level = 2 }
+		hidden_effect = {
+			remove_province_modifier = shroud2_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud1_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 3 }
+		hidden_effect = {
+			remove_province_modifier = shroud3_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud2_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 4 }
+		hidden_effect = {
+			remove_province_modifier = shroud4_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud3_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 5 }
+		hidden_effect = {
+			remove_province_modifier = shroud5_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud4_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 6 }
+		hidden_effect = {
+			remove_province_modifier = shroud6_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud5_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 7 }
+		hidden_effect = {
+			remove_province_modifier = shroud7_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud6_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 8 }
+		hidden_effect = {
+			remove_province_modifier = shroud8_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud7_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 9 }
+		hidden_effect = {
+			remove_province_modifier = shroud9_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud8_modifier 
+		}
+	}
+	else_if = {
+		limit = { shroud_level = 10 }
+		hidden_effect = {
+			remove_province_modifier = shroud10_modifier 
+		}
+		add_province_modifier = {
+			modifier = shroud9_modifier 
+		}
+	}
+}
+
+POD_clean_shroud_modifier_effect = {
+	if = {
+		limit = { has_province_modifier = shroud10_modifier }
+		remove_province_modifier = shroud10_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud9_modifier }
+		remove_province_modifier = shroud9_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud8_modifier }
+		remove_province_modifier = shroud8_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud7_modifier }
+		remove_province_modifier = shroud7_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud6_modifier }
+		remove_province_modifier = shroud6_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud5_modifier }
+		remove_province_modifier = shroud5_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud4_modifier }
+		remove_province_modifier = shroud4_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud3_modifier }
+		remove_province_modifier = shroud3_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud2_modifier }
+		remove_province_modifier = shroud2_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud1_modifier }
+		remove_province_modifier = shroud1_modifier 
+	}
+	if = {
+		limit = { has_province_modifier = shroud0_modifier }
+		remove_province_modifier = shroud0_modifier 
+	}
+}
+
+
+POD_calm_the_local_spirit_effect = {
+	
+}
+
+
+pay_for_spirit_travel_effect = {
+	if = {
+		limit = {
+			in_underworld_trigger = { LOCATION = $END$ }
+		}
+		if = {
+			limit = { 
+				OR = {
+					has_perk = numina_ephemera_6_perk 
+					has_perk = soul_arts_divinity_key_perk 
+				}
+			}
+		}
+		else_if = {
+			limit = { has_trait = fera }
+			if = {
+				limit = { passing_shroud_gnosis_cost > 0 }
+				send_interface_message = {
+					type = POD_pay_for_spirit_travel
+					title = stepping_sideways_toast
+					left_icon = root
+
+					desc = stepping_sideways_tooltip
+					POD_gift_cost_effect = { COUNT = passing_shroud_gnosis_cost }
+				}
+			}
+		}
+		else = {
+			send_interface_message = {
+				type = POD_pay_for_spirit_travel
+				title = passing_shroud_toast
+				left_icon = root
+				 
+				desc = passing_shroud_tooltip
+				remove_short_term_gold = passing_shroud_cost
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = { 
+				OR = {
+					has_perk = numina_ephemera_6_perk 
+					has_perk = soul_arts_divinity_key_perk 
+				}
+			}
+		}
+		else_if = {
+			limit = { has_trait = kueijin }
+			if = {
+				limit = { passing_gauntlet_gnosis_cost > 0 }
+				send_interface_message = {
+					type = POD_pay_for_spirit_travel
+					title = stepping_sideways_toast
+					left_icon = root
+
+					desc = stepping_sideways_tooltip
+					POD_gift_cost_effect = { COUNT = passing_gauntlet_gnosis_cost }
+				}
+			}
+		}
+		else_if = {
+			limit = { has_trait = fera }
+			if = {
+				limit = { passing_gauntlet_gnosis_cost > 0 }
+				send_interface_message = {
+					type = POD_pay_for_spirit_travel
+					title = stepping_sideways_toast
+					left_icon = root
+
+					desc = stepping_sideways_tooltip
+					POD_gift_cost_effect = { COUNT = passing_gauntlet_gnosis_cost }
+				}
+			}
+		}
+		else = {
+			send_interface_message = {
+				type = POD_pay_for_spirit_travel
+				title = passing_gauntlet_toast
+				left_icon = root
+				 
+				desc = passing_gauntlet_tooltip
+				remove_short_term_gold = passing_gauntlet_cost
+			}
+		}
+	}
+}

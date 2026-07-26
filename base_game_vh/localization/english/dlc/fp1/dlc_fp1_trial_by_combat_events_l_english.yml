@@ -1,0 +1,78 @@
+﻿l_english:
+ # TbC Misc Loc Keys
+ fp1_tbc.0000.t:0 "Phán Quyết Bằng Tỷ Thí"
+
+ # TbC about to begin.
+ fp1_tbc.0001.t:0 "$fp1_tbc.0000.t$: [duel_location.GetBaseNameNoTierNoTooltip]"
+ fp1_tbc.0001.desc.intro:0 "Ta đến địa điểm đã định gần [duel_location.GetBaseNameNoTier] đúng giờ và thấy [champion.GetTitledFirstName] đã chờ sẵn, cùng một nhóm nhỏ nhân chứng."
+ fp1_tbc.0001.desc.recipient_fighting:0 "\n\nBất kể [champion.GetSheHe] có là ai đi chăng nữa, [champion.GetFirstNameNoTooltip] cũng đủ sức để chiến đấu, và sẵn sàng mạo hiểm để gặp ta [champion.GetWomanMan] đối mặt với [actor.GetWomanMan]."
+ fp1_tbc.0001.desc.recipient_has_champion:0 "Vì [recipient.GetTitledFirstName] không đủ sức khỏe để tự mình chiến đấu, [champion.GetFirstNameNoTooltip] đã đồng ý làm quán quân cho [recipient.GetHerHim]."
+ fp1_tbc.0001.desc.outro:0 "\n\nNghi thức diễn ra ngắn gọn. Tất cả chúng ta đều biết vì sao mình có mặt ở đây, và đã qua lâu rồi cái thời nói suông. Vũ khí được trao ra, và đoàn tùy tùng lùi lại quan sát từ khoảng cách an toàn."
+ fp1_tbc.0001.trigger_failure.actor:0 "[trial_by_combat_trial|E] của ta chống lại [recipient.GetFirstNameNoTooltip] đã mất hiệu lực"
+ fp1_tbc.0001.trigger_failure.recipient:0 "[trial_by_combat_trial|E] của ta chống lại [actor.GetFirstNameNoTooltip] đã mất hiệu lực"
+ fp1_tbc.0001.a:0 "Cầu cho [actor.GetWomanMan] xuất sắc nhất giành chiến thắng."
+ fp1_tbc.0001.a.tt:0 "[trial_by_combat|E] bắt đầu!"
+
+ # TbC has invalidated.
+ fp1_tbc.0021.trigger_failure.actor:0 "$fp1_tbc.0001.trigger_failure.actor$"
+ fp1_tbc.0021.trigger_failure.recipient:0 "$fp1_tbc.0001.trigger_failure.recipient$"
+
+ fp1_tbc.0031.opening:0 "[recipient.Custom2('AppropriateGreeting',actor)]"
+ fp1_tbc.0031.desc:0 "Đấu với #EMP ngươi#! ư? Có lẽ ngươi nên giải nghệ để làm hề thì hơn. Không có cơ hội nào trong [recipient.GetFaith.NegativeAfterLife].\n\nCứ tự nhiên tiếp tục gửi thêm những trò đùa vụng về bằng văn bản đến [recipient.GetCapitalLocation.GetTitle.GetNameNoTierNoTooltip]."
+ fp1_tbc.0031.a:0 "Cái đồ [recipient.Custom2('InsultAdjective', SCOPE.sC('actor'))] [recipient.Custom2('InsultNoun', SCOPE.sC('actor'))]!"
+
+ # Scope:actor won a TbC.
+ fp1_tbc.0041.t:0 "$fp1_tbc.0000.t$: Chiến Thắng!"
+ fp1_tbc.0041.desc.intro:0 "Trở về nghỉ ngơi tại [actor.GetCapitalLocation.GetTitle.GetNameNoTierNoTooltip], ta hân hoan trong chiến thắng, [actor.Custom('signature_weapon')] đặt ngang trên đùi.\n\n"
+ fp1_tbc.0041.desc.opponent_died:0 "Máu của [champion.GetTitledFirstNamePossessive] vẫn còn đóng cục trong những rãnh và vết khía mới trên [actor.Custom('SignatureWeaponEndType')], nhắc ta nhớ đến những khoảnh khắc cuối cùng của [recipient.GetWomanMan]."
+ fp1_tbc.0041.desc.opponent_lives.recipient_fighting:0 "Những cơn đau nhức dễ chịu lan khắp cơ thể nhắc ta về từng khoảnh khắc nhỏ trong trận đấu, những thắng lợi lặt vặt và thất bại ác liệt, tất cả dẫn đến thất bại của [recipient.GetTitledFirstNamePossessive]."
+ fp1_tbc.0041.desc.opponent_lives.recipient_has_champion:0 "Trong một thế giới lý tưởng, ta đã có thể giáng đòn kết liễu trực tiếp lên [recipient.GetTitledFirstName]. Đáng tiếc, điều đó đã không xảy ra; việc đánh [champion.GetTitledFirstName] tơi tả cũng đành vậy."
+ fp1_tbc.0041.desc.reward.gold:0 "\n\nMột bao bạc tựa vào ống chân ta, sức nặng đầy thỏa mãn là minh chứng cho công lý được thực thi. Ta đã cho đếm từng đồng một, trước mặt #EMP tất cả mọi người#!, trước khi chúng ta lên đường về nhà."
+ fp1_tbc.0041.desc.reward.weak_hook:0 "\n\nPhải mất hơn một giờ để những lời thề cuối cùng được tuyên đọc trước các nhân chứng. Một ngày nào đó, ta sẽ viện dẫn những lời thề ấy và đòi đủ phần của mình."
+ fp1_tbc.0041.desc.reward.humiliation:0 "\n\nLời xin lỗi dài dòng, sự hạ mình, tất cả đều được chứng kiến bởi đám thi sĩ thuê... thật sự #EMP huy hoàng#!. Có lẽ phải mất nhiều năm [recipient.GetFirstNameNoTooltip] mới gượng dậy nổi sau nỗi nhục này."
+ fp1_tbc.0041.desc.outro:0 "\n\nHôm qua, chúng ta đã đặt tranh chấp trước [actor.GetFaith.PantheonTerm], và [actor.GetFaith.PantheonTerm] đã phán xử sáng suốt."
+ fp1_tbc.0041.a:0 "Công lý đã được thực thi."
+
+ # Scope:actor lost a TbC.
+ fp1_tbc.0051.t:0 "$fp1_tbc.0000.t$: Thất Bại!"
+ fp1_tbc.0051.desc.intro:0 "Sao mọi chuyện lại thành ra thế này? Ta tìm đến [actor.GetFaith.PantheonTerm] để cầu #EMP công lý#!, và đổi lại chỉ là đau khổ cùng nhục nhã. Ta không nói một lời suốt quãng đường trở về [actor.GetCapitalLocation.GetTitle.GetNameNoTierNoTooltip].\n\n"
+ fp1_tbc.0051.desc.opponent_lives.recipient_fighting:0 "Ta không hiểu làm sao [recipient.GetTitledFirstName] có thể đánh bại ta. Ta mới là người #EMP đúng#!. Ta #EMP phải#! thắng — đó mới là ý nghĩa của $game_concept_trial_by_combat$."
+ fp1_tbc.0051.desc.opponent_lives.recipient_has_champion:0 "Trong một trận đấu công bằng ta #EMP rõ ràng#! đã đánh bại [recipient.GetFirstName]! Nguyền rủa [champion.GetTitledFirstName] và những truyền thống cản trở này!"
+ fp1_tbc.0051.desc.outro:0 "\n\nGiờ đây cả thế gian đều coi tranh chấp của chúng ta đã được giải quyết và công lý đã được thực thi."
+ fp1_tbc.0051.a:0 "Hừ, chẳng có công lý nào ở đây cả."
+
+ # Scope:recipient must designate a champion to fight for them.
+ fp1_tbc.0101.t:0 "$fp1_tbc.0000.t$: Chọn Quán Quân"
+ fp1_tbc.0101.desc:0 "Ta đã đồng ý với yêu cầu của [actor.GetTitledFirstNamePossessive] về một $game_concept_trial_by_combat$, nhưng ta không thích hợp để trực tiếp chiến đấu với [actor.GetHerHim].\n\nTruyền thống yêu cầu ta phải chọn một quán quân chiến đấu thay mình, nhưng nên chọn ai?"
+ fp1_tbc.0101.bout_moves_forward:0 "Trận đấu tiếp tục..."
+ fp1_tbc.0101.a:0 "[knight_best.GetTitledFirstNameNoTooltip] là một trong những $knight_culture_player_plural_no_tooltip_lowercase$ vĩ đại nhất của ta!"
+ fp1_tbc.0101.a.tt:0 "[knight_best.GetTitledFirstName] sẽ chiến đấu thay Ngài"
+ fp1_tbc.0101.b:0 "[knight_alternative.GetTitledFirstNameNoTooltip] là một lựa chọn tốt..."
+ fp1_tbc.0101.b.tt:0 "[knight_alternative.GetTitledFirstName] sẽ chiến đấu thay Ngài"
+ fp1_tbc.0101.c:0 "Nghe nói [knight_exotic.GetTitledFirstNameNoTooltip] rất am hiểu chiến đấu?"
+ fp1_tbc.0101.c.tt:0 "[knight_exotic.GetTitledFirstName] sẽ chiến đấu thay Ngài"
+ fp1_tbc.0101.d:0 "Tình yêu của [knight_opinion.GetTitledFirstNameNoTooltip] sẽ bảo vệ ta."
+ fp1_tbc.0101.d.tt:0 "[knight_opinion.GetTitledFirstName] sẽ chiến đấu thay Ngài"
+
+ fp1_ep1_tbc.0101.e:0 "$champion_court_position$ đã được chỉ định của ta, [knight_alternative.GetTitledFirstNameNoTooltip], sẽ đại diện cho ta."
+ fp1_ep1_tbc.0101.e.tt:0 "[knight_alternative.GetTitledFirstName] sẽ chiến đấu thay Ngài"
+
+ # Scope:recipient won a TbC.
+ fp1_tbc.0111.t:0 "$fp1_tbc.0000.t$: Chiến Thắng!"
+ fp1_tbc.0111.desc.intro:0 "[recipient.GetFaith.PantheonTerm|U] đã mỉm cười với ta ngày hôm qua!"
+ fp1_tbc.0111.desc.opponent_died.recipient_fighting:0 "\n\nNhắm mắt lại, ta vẫn cảm nhận được adrenaline cuộn chảy trong huyết quản, cơ bắp còn run lên bởi dư âm trận đấu, đóng băng ở khoảnh khắc sinh mạng của [actor.GetTitledFirstNamePossessive] bị cắt đứt và chiến thắng của ta được đảm bảo."
+ fp1_tbc.0111.desc.opponent_lives.recipient_fighting:0 "\n\nTa không chỉ được đánh [actor.GetFirstName] đến đổ máu vì sự ngạo mạn của [actor.GetHerHis], mà còn chứng minh dứt khoát rằng những lời vu khống của [actor.GetHerHis] hoàn toàn vô căn cứ."
+ fp1_tbc.0111.desc.opponent_lives.recipient_has_champion:0 "\n\nChứng kiến [champion.GetFirstName] đánh [actor.GetFirstName] tơi bời càng ngọt ngào hơn khi biết rằng chiến thắng của [champion.GetHerHis] đã giải trừ mọi trách nhiệm cho ta."
+ fp1_tbc.0111.desc.outro:0 "\n\nCó lẽ kẻ ngốc tiếp theo sẽ suy nghĩ kỹ trước khi thách đấu [recipient.GetTitledFirstNameNicknamedNoTooltip]!"
+ fp1_tbc.0111.a:0 "$fp1_tbc.0041.a$"
+
+ # Scope:recipient lost a TbC.
+ fp1_tbc.0121.t:0 "$fp1_tbc.0000.t$: Thất Bại!"
+ fp1_tbc.0121.desc.intro:0 "[recipient.GetFaith.PantheonTerm|U] đã không mỉm cười với ta ngày hôm qua."
+ fp1_tbc.0121.desc.champion_lives.recipient_fighting:0 "Những cơn đau và vết cắt khắp cơ thể là minh chứng cho điều đó, mỗi vết là một món quà từ [actor.GetFirstNamePossessive] [actor.Custom('signature_weapon')]. Ta thật may mắn khi còn sống."
+ fp1_tbc.0121.desc.champion_lives.recipient_has_champion:0 "Khi ta chọn [champion.GetTitledFirstName], ta đã rất chắc chắn rằng [champion.GetSheHe] sẽ đánh bại [actor.GetTitledFirstName], nhưng giờ [champion.GetSheHe] chỉ may mắn giữ được mạng."
+ fp1_tbc.0121.desc.reward.gold:0 "\n\nKhi [actor.GetFirstNameNoTooltip] nhận lấy bạc của [actor.GetHerHis], [actor.GetSheHe] khăng khăng dừng lại để đếm, từng đồng một, ép chúng ta phải đứng nhìn trong khi tận hưởng vẻ khó chịu của tùy tùng ta."
+ fp1_tbc.0121.desc.reward.weak_hook:0 "\n\nPhải mất như cả giờ đồng hồ để những lời thề nợ cuối cùng được tuyên đọc và đóng dấu trước các nhân chứng. Một ngày nào đó, [actor.GetFirstNameNoTooltip] sẽ quay lại đòi món nợ ấy."
+ fp1_tbc.0121.desc.reward.humiliation:0 "\n\nViệc đọc hết bản "xin lỗi" dài dòng của [actor.GetFirstNamePossessiveNoTooltip] tưởng chừng vô tận, răng ta nghiến chặt khi phải thốt ra từng lời. Đám thi sĩ thuê của [actor.GetHerHis|U] chỉ cười khúc khích phía sau, ghi nhớ từng biểu cảm của ta."
+ fp1_tbc.0121.desc.outro:0 "\n\nChiến thắng đã rơi vào tay một kẻ ngốc và một tên ăn mày."
+ fp1_tbc.0121.a:0 "$fp1_tbc.0051.a$"

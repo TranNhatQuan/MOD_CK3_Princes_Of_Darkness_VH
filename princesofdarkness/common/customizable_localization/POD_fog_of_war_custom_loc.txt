@@ -1,0 +1,115 @@
+﻿
+PODCharacterAge = {
+	type = character
+
+	# TODO: hide age in fog of war (using the player's perspective)
+	
+	text = {
+		trigger = { POD_character_age_is_unknown = yes }
+		localization_key = AGE_UNKNOWN
+	}
+
+	text = {
+        trigger = { POD_character_age_predates_mankind = yes }
+        localization_key = AGE_DINOSAUR
+    }
+
+	text = {
+		trigger = { POD_character_age_predates_history = yes }
+		localization_key = AGE_PREHISTORY
+	}
+
+	text = {
+		trigger = { POD_character_age_is_ancient = yes }
+		localization_key = AGE_ANCIENT
+	}
+
+	text = {
+		localization_key = AGE_VANILLA
+		fallback = yes
+	}
+}
+
+PODCharacterAgeTooltip = {
+	parent = PODCharacterAge
+	suffix = "_TT"
+}
+
+PODCharacterVisualAge = {
+	type = character
+	
+	text = {
+		trigger = { is_alive = no }
+		localization_key = blank_line
+	}
+	
+	text = {
+		localization_key = POD_VISUAL_AGE
+		fallback = yes
+	}
+}
+
+
+@random_outcome_low_ceil = 33
+@random_outcome_medium_ceil = 66
+
+
+PODRandomOutcome = {
+	type = all
+
+	text = {
+		trigger = { POD_show_random_outcomes_as_percentage = yes }
+		localization_key = POD_random_outcome_percentage
+		fallback = yes
+	}
+
+	text = {
+		trigger = { POD_show_random_outcomes_as_uncertain = yes }
+		localization_key = POD_random_outcome_uncertain
+	}
+
+	text = {
+		trigger = {
+			scope:value <= @random_outcome_low_ceil
+		}
+		localization_key = POD_random_outcome_low
+	}
+
+	text = {
+		trigger = {
+			scope:value  > @random_outcome_low_ceil
+			scope:value <= @random_outcome_medium_ceil
+		}
+		localization_key = POD_random_outcome_medium
+	}
+
+	text = {
+		trigger = {
+			scope:value  > @random_outcome_medium_ceil
+		}
+		localization_key = POD_random_outcome_high
+	}
+}
+
+
+# need to pass scope:value
+PODSkill = {
+	type = character
+
+	# TODO: hide skills in fog of war (using the player's perspective)
+	
+	text = {
+		trigger = { POD_has_caine_character_sheet = yes }
+		localization_key = POD_SKILL_YOU_LOSE
+	}
+
+	text = {
+		localization_key = POD_SKILL_VANILLA
+		fallback = yes
+	}
+}
+
+PODSkillTooltip = {
+	parent = PODSkill
+	suffix = "_TT"
+}

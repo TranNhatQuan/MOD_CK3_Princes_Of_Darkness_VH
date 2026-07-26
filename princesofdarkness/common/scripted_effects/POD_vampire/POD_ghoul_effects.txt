@@ -1,0 +1,903 @@
+﻿POD_become_ghoul_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	remove_trait = mortal
+	# if = {
+	# 	limit = { POD_splat_mixing_haight_mode = no }
+	# 	remove_trait = kinfolk
+	# 	remove_trait = gnosis
+	# 	remove_trait = kinain
+	# }
+	
+	add_trait_force_tooltip = ghoul
+	if = {
+		limit = { exists = scope:saved_immortal_age }
+		hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+	}
+	hidden_effect = {
+		POD_remove_energy_modifiers_effect = yes
+		POD_character_masquerade_initialization_effect = yes
+		POD_side_effects_from_changing_splats = yes
+		POD_set_bloodpotency_effect = { POTENCY = 0 }
+		POD_set_hunger_modifier_effect = { AMOUNT = 4 }
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = 13 }
+		if = { # So Historical Ghouls won't get any non-historical disciplines
+			limit = { 
+				has_global_variable = POD_game_after_lobby 
+				NOT = { has_character_flag = POD_ghoul_shouldnt_get_new_disciplines }
+			}
+			POD_trait_injector_disciplines = { EFFECT = POD_roll_for_random_discipline }
+		}
+		add_character_flag = POD_ghoul_shouldnt_get_new_disciplines
+	}
+	if = {
+		limit = { is_ai = no }
+		trigger_event = podintroductions.2002
+	}
+	add_character_flag = { flag = recent_ghoulify days = 280 }
+}
+
+POD_cease_being_ghoul_effect = {
+	if = {
+		limit = { has_trait = ghoul }
+		remove_trait = ghoul
+		hidden_effect = {
+			POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		}
+		POD_lose_inaccessible_discipline_perks_effect = yes
+	}
+}
+
+POD_clear_bound_ghoul_variables = {
+	remove_variable = ghoul_mission_deadline
+	remove_variable = POD_number_of_completed_ghoul_missions
+	
+	remove_character_flag = blocked_from_leaving
+	remove_character_flag = blood_bonded
+	
+	every_character_active_contract = {
+		limit = { has_task_contract_group = POD_ghoul_missions }
+		invalidate_contract = yes
+	}
+	
+	POD_remove_character_modifier = { MODIFIER = POD_domicile_ghoul_modifier_t1 }
+	POD_remove_character_modifier = { MODIFIER = POD_domicile_ghoul_modifier_t2 }
+	POD_remove_character_modifier = { MODIFIER = POD_domicile_ghoul_modifier_t3 }
+	# players also ought to become mortal here if they're at 5 hunger
+	# but i'm not that mean
+}
+
+POD_clear_bound_ghoul_variables_and_relations = {
+	every_relation = {
+		type = ghoul_domitor
+		prev = {
+			remove_relation_ghoul_domitor = prev
+		}
+	}
+	
+	# also triggered by on_remove_relation_ghoul_domitor
+	# doubling up doesn't break anything and clears variables properly in case there was no domitor relation
+	POD_clear_bound_ghoul_variables = yes
+}
+
+POD_side_effects_from_becoming_unbondable = {
+	POD_clear_bound_ghoul_variables_and_relations = yes
+	
+	hidden_effect = {
+		# Remove existing blood oath hooks
+		# every_living_character is slow but that's the only way to do this
+		# probably fine since this interaction is rare and player-only
+		every_living_character = {
+			limit = { has_hook = prev }
+			if = {
+				limit = {
+					OR = {
+						has_hook_of_type = {
+							target = prev
+							type = weak_bloodoath_hook
+						}
+						has_hook_of_type = {
+							target = prev
+							type = strong_bloodoath_hook
+						}
+					}
+				}
+				remove_hook = { target = prev }
+			}
+		}
+	}
+}
+
+POD_become_bound_ghoul_effect = {
+	$DOMITOR$ = { save_scope_as = domitor }
+	if = { 
+		limit = {
+			OR = {
+				AND = {
+					scope:domitor.religion = { is_in_family = rf_kindred }
+					# very incomplete band-aid fix for ghouled splats from azhi dahaka
+					# an actual fix would require a lot more edge case resolution
+					POD_is_mummy_trigger = no
+					POD_splat_is_fera_trigger = no
+					is_kueijin_trigger = no
+				}
+				scope:domitor = { POD_has_valid_splat_agnostic_faith = yes }
+			}
+		}
+		set_character_faith = scope:domitor.faith
+	}
+	else_if = {
+		limit = { POD_can_participate_in_vampire_politics = yes }
+		POD_character_revenant_faith_initialization_effect = yes
+	}
+	POD_clear_resonance_intensity_effect = yes
+	POD_set_resonance_effect = yes
+	if = {
+		limit = {
+			scope:domitor = { has_perk = heavens_gate_perk }
+			has_main_supernatural_race_trigger = no
+		}
+		add_trait_force_tooltip = revenant
+	}
+	if = {
+		limit = { scope:domitor = { has_trait = POD_grail_knight } }
+		custom_tooltip = drink_grail_tt4
+		POD_apply_bonuses_for_ghoul_of_grail_knight = yes
+	}
+
+	if = {
+		limit = { 
+			scope:domitor = { 
+				any_equipped_character_artifact = {
+					has_variable = seal_veddartha
+				}
+			} 			
+		}
+		learn_language = language_aramaic
+		
+		if = {
+			limit = { can_learn_potence_trigger = yes }
+			add_trait = potence
+		}
+		if = {
+			limit = { can_learn_presence_trigger = yes }
+			add_trait = presence
+		}
+		if = {
+			limit = { can_learn_fortitude_trigger = yes }
+			add_trait = fortitude
+		}
+		if = {
+			limit = { can_learn_dominate_trigger = yes }
+			add_trait = dominate
+		}
+		
+		custom_tooltip = seal_veddartha_tt		
+	}
+
+
+	if = { limit = { is_ai = yes } add_character_flag = blocked_from_leaving }
+
+	add_character_flag = blood_bonded
+
+	POD_clear_bound_ghoul_variables_and_relations = yes # To prevent multiple domitors
+	set_relation_ghoul_domitor = scope:domitor
+
+	POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:domitor.POD_vampgeneration }
+
+	scope:domitor = {
+		add_hook = {
+			target = PREV
+			type = strong_bloodoath_hook
+			years = -1
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = vampireghouling_illegal } }
+			add_piety = major_piety_loss
+		}
+		else_if = {
+			limit = { faith = { has_doctrine_parameter = vampireghouling_shunned } }
+			add_piety = medium_piety_loss
+		}
+	}
+
+	if = {
+		limit = { scope:domitor.domicile ?= { has_domicile_parameter = domicile_stronger_ghouls_t3 } }
+		add_character_modifier = POD_domicile_ghoul_modifier_t3
+	}
+	else_if = {
+		limit = { scope:domitor.domicile ?= { has_domicile_parameter = domicile_stronger_ghouls_t2 } }
+		add_character_modifier = POD_domicile_ghoul_modifier_t2
+	}
+	else_if = {
+		limit = { scope:domitor.domicile ?= { has_domicile_parameter = domicile_stronger_ghouls_t1 } }
+		add_character_modifier = POD_domicile_ghoul_modifier_t1
+	}
+	
+	# this pulls double duty by allowing ghouled fera to interact with vampires
+	if = {
+		limit = {
+			OR = {
+				POD_splat_is_fera_trigger = yes
+				POD_is_mummy_trigger = yes
+			}
+		}
+		POD_become_wyrm_servant_effect = yes
+	}
+
+
+	if = {
+		limit = { POD_is_supehunter_trigger = yes }
+		remove_trait = supehunter
+		POD_hunterembrace_effect = yes	
+	}
+
+	if = {
+		limit = {
+			OR = {
+				father ?= { 
+					is_supehunter_trigger = yes
+					NOT = { faith = faith:calomenasforsaken }
+				}
+				mother ?= { 
+					is_supehunter_trigger = yes
+					NOT = { faith = faith:calomenasforsaken }
+				}
+			}
+		}
+		add_trait = disinherited
+	}
+
+	if = {
+		limit = { dynasty ?= { has_variable = POD_kill_upon_being_bound } }
+		death = {
+			death_reason = death_murder
+			killer = scope:domitor
+		}
+	}
+
+	save_scope_as = ghoul
+	if = { # So Historical Ghouls won't get any non-historical disciplines
+		limit = { has_global_variable = POD_game_after_lobby }
+		custom_tooltip = {
+			text = POD_become_bound_ghoul_effect_domitor_disciplines
+			scope:domitor = { POD_trait_injector_disciplines = { EFFECT = POD_roll_for_domitor_discipline } }
+		}
+	}
+	
+	# first mission (won't trigger for AI)
+	# in most cases, you get your first mission in POD_become_ghoul_effect -> podintroductions.2002
+	# this is a fallback for certain edge cases (e.g. when going masterless -> bound)
+	trigger_event = {
+		id = POD_task_contracts.6
+		days = 1
+	}
+}
+
+POD_apply_bonuses_for_ghoul_of_grail_knight = {
+	if = {
+		limit = { NOT = { has_character_modifier = POD_grail_domitor_modifier } }
+		add_character_modifier = POD_grail_domitor_modifier
+	}
+	if = {
+		limit = { NOT = { has_trait = physique_good } }
+		add_trait = physique_good_1
+	}
+}
+
+POD_vitae_dependency_pulse_effect = {
+	if = {
+		limit = {
+			save_temporary_scope_value_as = {
+				name = biyearly_countdown
+				value = {
+					value = current_year
+					modulo = POD_years_to_lose_vitae_passively
+				}
+			}
+			scope:biyearly_countdown = 0
+			years_from_game_start > 1
+		}
+		random = {
+			chance = POD_chance_to_lose_vitae_passively
+			send_interface_message = {
+				title = game_concept_ghoul_vitae_dependency
+				POD_discipline_cost_effect = { COUNT = 1 }
+			}
+		}
+	}
+}
+
+POD_ghoul_drink_from_vampire_effect = {
+	$VAMPIRE$ = { save_scope_as = vampire }
+	if = {
+		limit = { has_trait = ghoul }
+		POD_drink_from_victim_effect = { VICTIM = scope:vampire AMOUNT = 1 }
+	}
+	if = {
+		limit = { POD_can_be_ghouled_scheme_trigger = yes }
+		POD_become_ghoul_effect = yes
+		if = {
+			limit = { POD_is_supehunter_trigger = yes }
+			add_piety_level = -2
+		}
+	}
+
+	POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:vampire.POD_vampgeneration }
+	
+	scope:vampire = {
+		remove_character_flag = POD_was_drunk_from
+		add_character_flag = {
+			flag = POD_was_drunk_from
+			years = POD_duration_for_soft_cooldown_drinking
+		}
+		set_variable = {
+			name = POD_was_drunk_from_times
+			value = {
+				value = 1
+				if = { limit = { var:POD_was_drunk_from_times ?= 1 } value = 2 }
+				if = { limit = { var:POD_was_drunk_from_times ?= 2 } value = 3 }
+			}
+			years = POD_duration_for_soft_cooldown_drinking
+		}
+	}
+	if = { # Yes I know, this will happen even if ghoul that drinks will change. But this is only way to avoid Story Cycles I think. - VecsonON
+		limit = { 
+			scope:vampire = { has_character_flag = POD_was_drunk_from }
+			is_unbondable_trigger = no
+		}
+		custom_tooltip = {
+			text = POD_ghoul_drink_from_vampire_effect_the_same_vampire
+			if = {
+				limit = { scope:vampire.var:POD_was_drunk_from_times ?= 2 }
+				random_list = {
+					1 = { scope:vampire = { release_from_prison = yes } }
+					1 = {}
+				}
+			}
+			else_if = {
+				limit = { scope:vampire.var:POD_was_drunk_from_times ?= 3 }
+				scope:vampire = { release_from_prison = yes }
+				random_list = {
+					1 = { 
+						POD_ghoul_drink_from_vampire_force_submission_effect = { CHANCE = 100 VAMPIRE = scope:vampire }
+					}
+					1 = {
+						pod_death = {
+							death_reason = death_murder
+							killer = scope:vampire
+						}
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			scope:vampire = {
+				OR = {
+					has_trait = dominatediscipline
+					has_trait = presencediscipline
+				}
+				NOT = { has_character_modifier = bloodhunger5_modifier }
+			}
+			POD_has_strong_mental_defenses_trigger = no
+			is_unbondable_trigger = no
+		}
+		custom_tooltip = POD_ghoul_drink_from_vampire_effect_mental_discipline_risk
+		POD_ghoul_drink_from_vampire_force_submission_effect = { CHANCE = POD_chance_for_vampire_to_use_disciplines_during_feeding VAMPIRE = scope:vampire }
+	}
+	if = {
+		limit = { scope:vampire = { has_character_modifier = bloodhunger5_modifier } }
+		scope:vampire = {
+			pod_death = {
+				death_reason = death_bloodloss
+				killer = prev
+			}
+		}
+	}
+}
+
+POD_ghoul_drink_from_vampire_force_submission_effect = {
+	$VAMPIRE$ = { save_scope_as = vampire }
+	if = {
+		limit = { is_unbondable_trigger = no }
+		random = {
+			chance = $CHANCE$
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = POD_ghoul_drink_from_vampire_force_submission_toast
+				left_icon = scope:vampire
+				right_icon = this
+				
+				custom_tooltip = POD_ghoul_drink_from_vampire_force_submission_effect
+				POD_become_bound_ghoul_effect = { DOMITOR = $VAMPIRE$ }
+				$VAMPIRE$ = { 
+					if = {
+						limit = { is_imprisoned = yes }
+						release_from_prison = yes 
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_roll_for_random_discipline = {
+	if = {
+		limit = { NOT = { has_trait = $TRAIT$discipline } }
+		save_scope_value_as = {
+			name = roll_chance
+			value = {
+				switch = {
+					trigger = trait:$TRAIT$
+					trait:potence = { value = 50 }
+					trait:celerity = { value = 50 }
+					trait:fortitude = { value = 50 }
+					trait:animalism = { value = 5 }
+					trait:auspex = { value = 5 }
+					trait:dominate = { value = 5 }
+					trait:presence = { value = 5 }
+					fallback = { value = 0 }
+				}
+			}
+		}
+		random = {
+			chance = scope:roll_chance
+			POD_add_trait_without_event_icon = { TRAIT = trait:$TRAIT$ }
+		}
+	}
+}
+
+POD_roll_for_domitor_discipline = {
+	if = {
+		limit = { 
+			has_trait = $TRAIT$discipline
+			scope:ghoul = { NOT = { has_trait = $TRAIT$discipline } }
+		}
+		save_scope_value_as = {
+			name = roll_chance
+			value = {
+				if = {
+					limit = { trait:$TRAIT$ = { has_trait_flag = discipline_advanced } }
+					value = 40
+				}
+				else = { value = 20 }
+			}
+		}
+		random = {
+			chance = scope:roll_chance
+			scope:ghoul = { 
+				POD_add_trait_without_event_icon = { TRAIT = trait:$TRAIT$ }
+				hidden_effect = {
+					if = {
+						limit = { has_trait = bloodsorcerydiscipline }
+						POD_learn_targets_known_bloodmagic_paths = {
+							TARGET = PREV
+							CHANCE = 100
+						}
+					}
+					if = {
+						limit = { has_trait = necromancydiscipline }
+						POD_learn_targets_known_necromancy_paths = {
+							TARGET = PREV
+							CHANCE = 100
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_init_first_ghoul_mission = {
+	if = {
+		limit = {
+			is_ai = no
+			POD_is_bound_ghoul_trigger = yes
+			# only meant to trigger for characters who don't have a mission yet
+			NOT = { has_variable = ghoul_mission_deadline }
+		}
+		hidden_effect = {
+			POD_gain_random_ghoul_mission = yes
+		}
+	}
+}
+
+POD_gain_random_ghoul_mission = {
+	random_list = {
+		10 = {
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_kill_hunter }
+		}
+		10 = {
+			trigger = {
+				any_relation = {
+					type = ghoul_domitor
+					POD_splat_has_masquerade_trigger = yes
+					OR = {
+						has_character_modifier = masquerade5_modifier
+						has_character_modifier = masquerade4_modifier
+						has_character_modifier = masquerade3_modifier
+					}
+					NOT = { faith = { has_doctrine = doctrine_vampirethemasquerade_none } }
+					masquerade_exposure_level > minimum_masquerade_exposure
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_cover_up_the_masquerade }
+		}
+		10 = {
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_bribe_officials }
+		}
+		10 = {
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_indoctrinate_plant }
+		}
+		10 = {
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_abduct_desirable_mortal }
+		}
+		10 = {
+			trigger = {
+				any_relation = {
+					type = ghoul_domitor
+					any_relation = {
+						type = rival
+						is_landed = yes
+						gold >= 50
+						monthly_character_income > 0.5
+						POD_is_available_for_events = yes
+					}
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_steal_rivals_gold }
+		}
+		10 = {
+			trigger = {
+				any_relation = {
+					type = ghoul_domitor
+					any_relation = {
+						type = rival
+						POD_is_available_for_events = yes
+					}
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_damage_rivals_image }
+		}
+		10 = {
+			trigger = {
+				any_relation = {
+					type = ghoul_domitor
+					any_relation = {
+						type = rival
+						POD_is_available_for_events = yes
+					}
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_slander_rival }
+		}
+		10 = {
+			trigger = {
+				any_close_family_member = {
+					OR = {
+						is_courtier_of = prev
+						is_imprisoned_by = prev
+					}
+					NOT = { has_relation_ghoul_thrall = prev }
+					is_ruler = no
+					POD_is_vampire_trigger = no
+					POD_is_available = yes
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_give_relative_away }
+		}
+		10 = {
+			trigger = {
+				OR = {
+					max_military_strength >= 400 # so this doesn't trigger for weaksauce laamps
+					any_held_title = {
+						title_tier = county
+						is_landless_type_title = no
+						count > 1
+					}
+				}
+				any_relation = {
+					type = ghoul_domitor
+					POD_can_receive_landed_titles = yes
+					trigger_if = {
+						limit = { is_ruler = yes }
+						# shouldn't trigger for domitors who are vassals
+						is_independent_ruler = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 5
+				any_relation = {
+					type = ghoul_domitor
+					is_ruler = no
+				}
+			}
+			POD_ghoul_create_mission = { MISSION = POD_ghoul_mission_expand_domain }
+		}
+	}
+}
+
+POD_ghoul_create_mission = {
+	random_relation = {
+		type = ghoul_domitor
+		save_scope_as = domitor
+		if = {
+			limit = { exists = capital_province }
+			capital_province = { save_scope_as = location }
+		}
+		else_if = {
+			limit = { exists = location }
+			location = { save_scope_as = location }
+		}
+		else = {
+			prev.capital_province = { save_scope_as = location }
+		}
+	}
+	create_task_contract = {
+		task_contract_type = $MISSION$
+		task_contract_tier = 1
+		task_contract_employer = scope:domitor
+		location = scope:location
+		save_scope_as = task_contract
+		# note that these get auto-accepted (in POD_ghoul_mission_task_contract_on_create)
+	}
+	hidden_effect_new_object = {
+		send_interface_message = {
+			title = POD_ghoul_new_mission_message
+			custom_tooltip = POD_ghoul_gain_mission_effect
+		}
+	}
+}
+
+POD_ghoul_mission_task_contract_on_create = {
+	scope:contract = {
+		set_variable = retain_despite_distance
+		POD_setup_timekeeping_vars_for_contract = {
+			YEARS_REMAINING = POD_years_to_gain_new_mission
+		}
+		task_contract_taker = {
+			if = {
+				limit = {
+					NAND = {
+						has_variable = ghoul_mission_deadline
+						var:ghoul_mission_deadline >= scope:contract.var:end_date
+					}
+				}
+				set_variable = {
+					name  = ghoul_mission_deadline
+					value = scope:contract.var:end_date
+				}
+				trigger_event = {
+					id   = POD_task_contracts.5
+					days = POD_days_remaining_for_scoped_task_contract
+				}
+			}
+			# ghoul missions are auto-accepted after creation
+			accept_task_contract = scope:contract
+		}
+	}
+}
+
+POD_ghoul_mission_task_contract_on_completed = {
+	set_variable = do_not_recreate
+	var:target ?= {
+		remove_variable = ghoul_mission_targeted_by
+	}
+}
+
+POD_ghoul_mission_task_contract_on_invalidated = {
+	if = {
+		limit = {
+			NOT = { has_variable = do_not_recreate }
+			task_contract_taker = {
+				POD_is_bound_ghoul_of = { DOMITOR = root.task_contract_employer }
+			}
+		}
+		complete_task_contract = failure_standard
+		hidden_effect = {
+			var:target ?= {
+				remove_variable = ghoul_mission_targeted_by
+				if = {
+					limit = {
+						is_alive = yes
+						is_landed = no
+						trigger_if = {
+							limit = { exists = liege_or_court_owner }
+							liege_or_court_owner != root.task_contract_taker
+						}
+					}
+					POD_disappearance_effect = yes
+				}
+			}
+		}
+	}
+}
+
+# task_contract scope
+POD_ghoul_mission_task_contract_success = {
+	save_scope_as = task_contract
+	task_contract_employer = { save_scope_as = domitor }
+	task_contract_taker = {
+		play_sound_effect = "event:/DLC/EP3/SFX/UI/Contracts/ep3_ui_contracts_success_on_contract"
+		
+		send_interface_message = {
+			type = send_interface_message_good
+			title = POD_ghoul_mission_success_message
+			
+			custom_tooltip = POD_complete_ghoul_mission_effect
+			
+			POD_blood_income_effect = { COUNT = POD_vitae_gained_from_completed_mission }
+			
+			scope:domitor = {
+				add_opinion = {
+					target = prev
+					modifier = pleased_opinion
+					opinion = 10
+				}
+				
+				if = {
+					limit = {
+						NOT = {
+							has_hook_of_type = {
+								type = strong_bloodoath_hook
+								target = prev
+							}
+						}
+					}
+					if = {
+						limit = { has_hook = prev }
+						remove_hook = { target = prev }
+					}
+					add_hook = {
+						type = strong_bloodoath_hook
+						target = prev
+						years = -1
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					has_relation_ashen_ambassadorial_patron = scope:domitor
+					has_trait = ashen_adventurer
+				}
+				add_trait_xp = {
+					trait = ashen_adventurer
+					track = ashen_ambassador
+					value = 1
+				}
+			}
+			
+			##prias bonus
+			if = {
+				limit = {
+					this = character:555022
+					scope:domitor = character:790179
+				}
+				POD_resonance_from_feeding_on_victim_effect = {
+					VICTIM = scope:domitor
+					AMOUNT = 5
+				}
+			}
+			else = {
+				POD_resonance_from_feeding_on_victim_effect = {
+					VICTIM = scope:domitor
+					AMOUNT = POD_vitae_gained_from_completed_mission
+				}
+			}
+			POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:domitor.POD_vampgeneration }
+
+			if = {
+				limit = { var:current_journey ?= { var:journey_type = flag:breaking_the_blond_bond } }
+				POD_add_journey_progress = { AMOUNT = -10 } 
+			}
+			if = {
+				limit = {
+					any_in_list = {
+						variable = paused_journeys
+						count > 0
+						var:journey_type = flag:breaking_the_blond_bond
+						save_temporary_scope_as = journey
+					}
+				}
+				POD_abandon_journey = { JOURNEY = scope:journey }
+				custom_tooltip = POD_complete_ghoul_mission_effect_paused_breaking_bond_abandon
+			}
+
+			POD_set_or_change_variable = { VAR = POD_number_of_completed_ghoul_missions VAL = 1 }
+		}
+	}
+}
+
+# task_contract scope
+POD_ghoul_mission_task_contract_failure = {
+	save_scope_as = task_contract
+	task_contract_employer = { save_scope_as = domitor }
+	
+	task_contract_taker = {
+		play_sound_effect = "event:/DLC/EP3/SFX/UI/Contracts/ep3_ui_contracts_failure_on_contract"
+		
+		send_interface_message = {
+			type = send_interface_message_bad
+			title = POD_ghoul_mission_failure_message
+			
+			custom_tooltip = POD_fail_ghoul_mission_effect
+			
+			set_variable = {
+				name = recently_failed_ghoul_mission
+				value = yes
+				months = POD_cooldown_months_after_failing_mission
+			}
+			
+			scope:domitor = {
+				add_opinion = {
+					target = prev
+					modifier = respect_opinion
+					opinion = -20
+				}
+				if = {
+					limit = {
+						opinion = { target = prev value < 0 }
+					}
+					custom_tooltip = POD_fail_ghoul_mission_effect_risk
+				}
+				if = {
+					limit = {
+						opinion = { target = prev value < -25 }
+					}
+					prev = {
+						# die on a 1-day delay because otherwise the game crashes
+						trigger_event = {
+							id = POD_ghoul_maintenance.4
+							days = 1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_ghoul_new_generation_ingested_effect = {
+	if = {
+		limit = { POD_highest_generation_ingested_value > $GENERATION$ }
+		POD_ghoul_set_max_generation_ingested_effect = { GENERATION = $GENERATION$ }
+	}
+}
+POD_ghoul_set_max_generation_ingested_effect = {
+	custom_description = {
+		text = POD_ghoul_set_max_generation_ingested
+		value = $GENERATION$
+		set_variable = {
+			name = POD_highest_generation_ingested
+			value = $GENERATION$
+		}
+	}
+}
+
+POD_fame_loss_from_begging_for_ghouldom = {
+	add_prestige_level = {
+		value = prestige_level
+		multiply = -1
+	}
+	if = {
+		limit = { POD_is_supehunter_trigger = yes }
+		add_piety_level = -2
+	}
+}
+
+POD_ghoul_increase_rebellion_strength = {
+	save_scope_value_as = {
+		name = increase_value
+		value = $VALUE$
+	}
+	custom_tooltip = {
+		text = POD_ghoul_increase_rebellion_strength
+		POD_set_or_change_variable = { VAR = POD_ghoul_objective_rebellion_strength_additional VAL = $VALUE$ }
+	}
+}

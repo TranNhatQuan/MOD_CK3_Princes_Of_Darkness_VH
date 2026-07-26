@@ -1,0 +1,2672 @@
+﻿POD_artifact_heal_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_artifact_heal_interaction_desc
+	options_heading = POD_artifact_heal_interaction_options_heading
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = healing_artifact
+		}
+	}
+	
+	is_shown = {
+		scope:actor = { any_equipped_character_artifact = { has_variable = healing_artifact } }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			POD_has_injury_or_main_trait_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			POD_can_be_healed_trigger = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = scarred
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = scarred } }
+		}
+		flag = scarred
+		localization = POD_heal_scarred
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = disfigured
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = disfigured } }
+		}
+		flag = disfigured
+		localization = POD_heal_disfigured
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+		flag = wounded
+		localization = POD_heal_wounded
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = blind
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = blind } }
+		}
+		flag = blind
+		localization = POD_heal_blind
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = maimed
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = maimed } }
+		}
+		flag = maimed
+		localization = POD_heal_maimed
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = one_legged
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_legged } }
+		}
+		flag = one_legged
+		localization = POD_heal_one_legged
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = one_eyed
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_eyed } }
+		}
+		flag = one_eyed
+		localization = POD_heal_one_eyed
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = eunuch_1
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = eunuch_1 } }
+		}
+		flag = eunuch
+		localization = POD_heal_eunuch
+	}
+	
+	on_accept = {
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:actor = { POD_commit_heal_effect = yes }
+			scope:recipient = {
+				add_opinion = {
+					target = scope:actor
+					modifier = pleased_opinion
+					opinion = 5
+				}
+			}
+		}
+		scope:recipient = {
+			play_music_cue = "mx_cue_peace_ensues"
+			switch = {
+				trigger = yes
+				scope:scarred = {
+					remove_trait = scarred
+					scope:target = { add_durability = -5 }
+				}
+				scope:disfigured = {
+					remove_trait = disfigured
+					scope:target = { add_durability = -10 }
+				}
+				scope:wounded = {
+					POD_heal_superficial_wound_effect = { COUNT = POD_base_heal_value }
+					scope:target = { add_durability = -5 }
+				}
+				scope:one_eyed = {
+					remove_trait = one_eyed
+					scope:target = { add_durability = -10 }
+				}
+				scope:blind = {
+					remove_trait = blind
+					add_trait = one_eyed
+					scope:target = { add_durability = -10 }
+				}
+				scope:one_legged = {
+					remove_trait = one_legged
+					scope:target = { add_durability = -15 }
+				}
+				scope:maimed = {
+					remove_trait = maimed
+					scope:target = { add_durability = -15 }
+				}
+				scope:eunuch = {
+					remove_trait = eunuch_1
+					scope:target = { add_durability = -15 }
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_lesser_artifact_heal_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_artifact_heal_interaction_desc
+	options_heading = POD_artifact_heal_interaction_options_heading
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = { has_variable = lesser_healing_artifact }
+	}
+	
+	is_shown = {
+		scope:actor = { any_equipped_character_artifact = { has_variable = lesser_healing_artifact } }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = scarred
+				has_trait = disfigured
+			
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			POD_can_be_healed_trigger = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = scarred
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = scarred } }
+		}
+		flag = scarred
+		localization = POD_heal_scarred
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = disfigured
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = disfigured } }
+		}
+		flag = disfigured
+		localization = POD_heal_disfigured
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+		flag = wounded
+		localization = POD_heal_wounded
+	}
+	
+	on_accept = {
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:actor = { POD_commit_heal_effect = yes }
+			scope:recipient = {
+				add_opinion = {
+					target = scope:actor
+					modifier = pleased_opinion
+					opinion = 5
+				}
+			}
+		}
+		scope:recipient = {
+			play_music_cue = "mx_cue_peace_ensues"
+
+			switch = {
+				trigger = yes
+				scope:scarred = {
+					remove_trait = scarred
+					scope:target = { add_durability = -5 }
+				}
+				scope:disfigured = {
+					remove_trait = disfigured
+					scope:target = { add_durability = -10 }
+				}
+				scope:wounded = {
+					POD_heal_superficial_wound_effect = { COUNT = POD_base_heal_value }
+					scope:target = { add_durability = -5 }
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_singing_sword_of_madog_cynydd_interaction = {
+	category = interaction_category_hostile
+	icon = artifact
+	desc = POD_singing_sword_of_madog_cynydd_interaction_desc
+	
+	cooldown = { years = 10 }
+	
+	cost = { prestige = 500 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = singing_sword_of_madog_cynydd } }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			can_start_single_combat_trigger = yes
+			is_immortal = no
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = scope:actor
+				SC_ATTACKER = scope:actor
+				SC_DEFENDER = scope:recipient
+				FATALITY = no
+				FIXED = no
+				LOCALE = throne_room
+				OUTPUT_EVENT = POD_fae_interactions.100
+				INVALIDATION_EVENT = tribal.1022
+			}
+			show_as_tooltip = {
+				random_list = {
+					50 = {
+						show_chance = no
+						scope:actor = {
+							random_equipped_character_artifact = {
+								limit = { has_variable = singing_sword_of_madog_cynydd }
+								add_artifact_modifier = artifact_life_expectancy_40_modifier
+							}
+						}
+						scope:recipient = {
+							death = {
+								death_reason = death_duel
+								killer = scope:actor
+							}
+						}
+					}
+					50 = {
+						show_chance = no
+						scope:actor = {
+							death = {
+								death_reason = death_duel
+								killer = scope:recipient
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_caladbolg_interaction = {
+	category = interaction_category_hostile
+	icon = artifact
+	desc = POD_caladbolg_interaction_desc
+	
+	cooldown = { years = 1 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = caladbolg } }
+		scope:recipient = { is_playable_character = yes }
+		scope:recipient.highest_held_title_tier > tier_barony
+		scope:actor = { NOT = { target_is_liege_or_above = scope:recipient } }
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:recipient = {
+			every_knight = {
+				add_opinion = {
+					target = scope:actor
+					modifier = hurt_opinion
+					opinion = -25
+				}
+				if = {
+					limit = {
+						scope:actor = {
+							prowess_diff = {
+								target = scope:recipient
+								value >= 50
+							}
+						}
+					}
+					increase_wounds_multiple_hostile_effect = { REASON = lightning AMOUNT = 4 ATTACKER = scope:actor }
+				}
+				else_if = {
+					limit = {
+						scope:actor = {
+							prowess_diff = {
+								target = scope:recipient
+								value >= 25
+							}
+						}
+					}
+					increase_wounds_multiple_hostile_effect = { REASON = lightning AMOUNT = 3 ATTACKER = scope:actor }
+				}
+				else_if = {
+					limit = {
+						scope:actor = {
+							prowess_diff = {
+								target = scope:recipient
+								value >= 0
+							}
+						}
+					}
+					increase_wounds_multiple_hostile_effect = { REASON = lightning AMOUNT = 2 ATTACKER = scope:actor }
+				}
+				else = {
+					increase_wounds_multiple_hostile_effect = { REASON = lightning AMOUNT = 1 ATTACKER = scope:actor }
+				}
+			}
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = caladbolg }
+				add_durability = -25
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_red_apple_of_avalon_interaction = {
+	category = interaction_category_hostile
+	desc = POD_red_apple_of_avalon_interaction_desc
+	icon = artifact
+	
+	cooldown_against_recipient = { years = 10 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = red_apple_of_avalon } }
+		POD_hostile_mental_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_poison_vengeance
+				OPINION = 0
+			}
+			add_stress = medium_stress_impact_gain
+			add_character_modifier = {
+				modifier = intrigue_broken_modifier
+				years = 10
+			}
+			random_list = {
+				pick = 3
+				unique = yes
+				10 = {
+					trigger = { can_be_drunkard = yes }
+					add_trait = drunkard
+				}
+				10 = {
+					trigger = { can_be_comfort_eater = yes }
+					add_trait = comfort_eater
+				}
+				10 = {
+					trigger = { can_be_inappetetic = yes }
+					add_trait = inappetetic
+				}
+				10 = {
+					trigger = { can_be_hashishiyah = yes }
+					add_trait = hashishiyah
+				}
+				10 = {
+					trigger = { can_be_rakish = yes }
+					add_trait = rakish
+				}
+				10 = {
+					trigger = { can_be_flagellant = yes }
+					add_trait = flagellant
+				}
+				10 = {
+					trigger = { can_be_profligate = yes }
+					add_trait = profligate
+				}
+				10 = {
+					trigger = { can_be_improvident = yes }
+					add_trait = improvident
+				}
+				10 = {
+					trigger = { can_be_reclusive = yes }
+					add_trait = reclusive
+				}
+				10 = {
+					trigger = { can_be_irritable = yes }
+					add_trait = irritable
+				}
+				10 = {
+					trigger = {
+						NOT = { has_trait = contrite }
+						OR = { # Must have a fitting personality or lifestyle
+							has_trait = deceitful
+							has_trait = schemer
+							has_trait = honest
+							has_trait = trusting
+							has_trait = humble
+						}
+						OR = { # Must have something to feel guilty about / confess to.
+							num_sinful_traits >= 1
+							any_secret = {
+								exists = this
+								can_be_exposed_by = scope:recipient
+							}
+						}
+					}
+					add_trait = contrite
+				}
+				5 = {
+					trigger = { NOT = { has_trait = depressed } }
+					add_trait = depressed_1
+				}
+				5 = {
+					trigger = { NOT = { has_trait = lunatic } }
+					add_trait = lunatic_1
+				}
+				5 = {
+					trigger = { NOT = { has_trait = possessed } }
+					add_trait = possessed_1
+				}
+				1 = {
+					POD_become_stupid_effect = yes
+				}
+			}
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = red_apple_of_avalon }
+				POD_destroy_artifact_side_effect = yes
+				destroy_artifact = this
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_red_apple_of_avalon_murder_interaction = {
+	category = interaction_category_hostile
+	icon = artifact
+	desc = POD_red_apple_of_avalon_murder_interaction_desc
+	
+	cooldown = { years = 10 }
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = red_apple_of_avalon } }
+		scope:recipient = {
+			OR = {
+				num_of_relation_potential_friend > 0
+				num_of_relation_friend > 0
+				num_of_relation_potential_lover > 0
+				num_of_relation_lover > 0
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	populate_recipient_list = {
+		scope:recipient = {
+			every_relation = {
+				type = potential_friend
+				limit = {
+					is_alive = yes
+					POD_is_available = yes
+				}
+				
+				add_to_list = characters
+			}
+			every_relation = {
+				type = friend
+				limit = {
+					is_alive = yes
+					POD_is_available = yes
+				}
+				
+				add_to_list = characters
+			}
+			every_relation = {
+				type = potential_lover
+				limit = {
+					is_alive = yes
+					POD_is_available = yes
+				}
+				
+				add_to_list = characters
+			}
+			every_relation = {
+				type = lover
+				limit = {
+					is_alive = yes
+					POD_is_available = yes
+				}
+				
+				add_to_list = characters
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				modifier = angry_opinion
+				target = scope:actor
+				opinion = -50
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_poison_vengeance
+				OPINION = 0
+			}
+			scope:recipient = {
+				begin_scheme_basic_effect = {
+					SCHEME_TYPE = murder
+					TARGET_TYPE = target_character
+					TARGET_SCOPE = scope:secondary_recipient
+				}
+			}
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = red_apple_of_avalon }
+				POD_destroy_artifact_side_effect = yes
+				destroy_artifact = this
+			}
+		}
+	}
+
+	auto_accept = yes
+}
+
+POD_white_apple_of_avalon_interaction = {
+	category = interaction_category_friendly
+	desc = POD_white_apple_of_avalon_interaction_desc
+	icon = artifact
+
+	cooldown_against_recipient = { years = 10 }
+	
+	is_shown = {
+		scope:actor = { any_equipped_character_artifact = { has_variable = white_apple_of_avalon } }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = drunkard
+				has_trait = flagellant
+				has_trait = comfort_eater
+				has_trait = contrite
+				has_trait = improvident
+				has_trait = inappetetic
+				has_trait = reclusive
+				has_trait = irritable
+				has_trait = rakish
+				has_trait = hashishiyah
+				has_trait = profligate
+				has_trait = possessed_1
+				has_trait = lunatic_1
+				has_trait = depressed_1
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:recipient = {
+				add_opinion = {
+					target = scope:actor
+					modifier = pleased_opinion
+					opinion = 30
+				}
+			}
+		}
+		scope:recipient = {
+			play_music_cue = "mx_cue_peace_ensues"
+
+			remove_trait = drunkard
+			remove_trait = flagellant
+			remove_trait = comfort_eater
+			remove_trait = contrite
+			remove_trait = improvident
+			remove_trait = inappetetic
+			remove_trait = reclusive
+			remove_trait = irritable
+			remove_trait = rakish
+			remove_trait = hashishiyah
+			remove_trait = profligate
+			remove_trait = depressed_1
+			remove_trait = lunatic_1
+			remove_trait = possessed_1
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = white_apple_of_avalon }
+				POD_destroy_artifact_side_effect = yes
+				destroy_artifact = this
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_activate_arrow_of_midnight_sun_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_activate_arrow_of_midnight_sun_interaction_desc
+	
+	target_type = artifact
+	target_filter = recipient_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = arrow_of_midnight_sun
+			var:arrow_of_midnight_sun = no
+		}
+	}
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { is_playable_character = yes }
+		scope:recipient = {
+			any_equipped_character_artifact = {
+				has_variable = arrow_of_midnight_sun
+				var:arrow_of_midnight_sun = no
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:target = {
+			set_variable = {
+				name = arrow_of_midnight_sun
+				value = yes
+			}
+			set_artifact_name = artifact_active_arrow_of_midnight_sun_name
+			custom_tooltip = POD_activate_arrow_of_midnight_sun_interaction_desc
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_deactivate_arrow_of_midnight_sun_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_deactivate_arrow_of_midnight_sun_interaction_desc
+	
+	target_type = artifact
+	target_filter = recipient_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = arrow_of_midnight_sun
+			var:arrow_of_midnight_sun = yes
+		}
+	}
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { is_playable_character = yes }
+		scope:recipient = {
+			any_equipped_character_artifact = {
+				has_variable = arrow_of_midnight_sun
+				var:arrow_of_midnight_sun = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+	
+	on_accept = {
+		scope:target = {
+			set_variable = {
+				name = arrow_of_midnight_sun
+				value = no
+			}
+			set_artifact_name = artifact_arrow_of_midnight_sun_name
+			custom_tooltip = POD_deactivate_arrow_of_midnight_sun_interaction_desc
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_logis_ashes_interaction = {
+	category = interaction_category_hostile
+	desc = POD_logis_ashes_interaction_desc
+	icon = artifact
+	
+	target_type = title
+	target_filter = recipient_domain_titles_including_leases
+	
+	can_be_picked = {
+		scope:target = {
+			POD_title_can_receive_county_modifiers = yes
+		}
+	}
+	
+	is_shown = {
+		scope:recipient = { is_landed = yes }
+		scope:recipient.highest_held_title_tier > tier_barony
+		scope:actor = {
+			any_equipped_character_artifact = {
+				has_variable = logis_ashes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		scope:target = {
+			custom_tooltip = POD_logis_ashes_interaction_desc
+			hidden_effect = {
+				every_de_jure_county = {
+					holder = {
+						if = {
+							limit = {
+								NOT = { this = scope:actor }
+								NOT = {
+									has_opinion_modifier = {
+										target = scope:actor
+										modifier = POD_casted_harmful_weather_magic
+									}
+								}
+							}
+							send_interface_toast = {
+								title = POD_weather_magic_from_enemy_toast
+								left_icon = scope:recipient
+								right_icon = scope:actor
+								custom_tooltip = POD_weather_magic_from_enemy.tt
+								add_opinion = {
+									target = scope:actor
+									modifier = POD_casted_harmful_weather_magic
+								}
+							}
+						}
+					}
+					add_county_modifier = {
+						modifier = POD_county_great_famine_modifier
+						years = 5
+					}
+					change_county_control = -100
+					change_development_level = -5
+				}
+			}
+		}
+		scope:recipient = {
+			progress_towards_rival_effect = {
+				CHARACTER = scope:actor
+				REASON = rival_cast_spell
+				OPINION = 0
+			}
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = logis_ashes }
+				add_durability = -25
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+POD_artiact_teleportation_interaction = {
+	category = interaction_category_hostile
+	icon = artifact
+	desc = POD_artiact_teleportation_interaction_desc
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = teleporting_artiact
+		}
+	}
+
+	is_shown = {
+		scope:actor = { any_equipped_character_artifact = { has_variable = teleporting_artiact } }
+		OR = {
+			POD_teleport_interaction_army_is_shown_trigger = yes
+			POD_teleport_interaction_travel_trigger = yes
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_teleport_interaction_travel_trigger = no }
+			POD_teleport_interaction_army_is_valid_trigger = yes
+		}
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_army_is_shown_trigger = yes }
+		is_valid = { POD_teleport_interaction_army_is_valid_trigger = yes }
+		flag = teleport_army
+		localization = POD_teleport_army
+	}
+	
+	send_option = {
+		is_shown = { POD_teleport_interaction_travel_trigger = yes }
+		flag = teleport_travel
+		localization = POD_teleport_travel
+	}
+
+	on_accept = {
+		switch = {
+			trigger = yes
+			scope:teleport_army   = { POD_teleport_army_interaction_effect   = yes }
+			scope:teleport_travel = { POD_teleport_travel_interaction_effect = yes }
+		}
+		scope:target = { add_durability = -50 }
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_soulforge_interaction = {
+	category = interaction_category_hostile
+	icon = artifact
+	desc = POD_soulforge_interaction_desc
+	
+	cooldown = { years = 5 }
+	cost = { piety = 1500 }
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = soulforge } }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = any_fallen_prisoner
+				any_prisoner = {
+					has_trait = demon
+				}
+			}
+			NOT = { target_is_liege_or_above = scope:recipient }
+		}
+		scope:recipient = {
+			is_playable_character = yes
+			highest_held_title_tier > tier_barony
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	populate_recipient_list = {
+		scope:actor = {
+			every_prisoner = {
+				limit = {
+					has_trait = demon
+				}
+				add_to_list = characters
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			every_vassal_or_below = {
+				every_courtier_or_guest = {
+					limit = {
+						POD_has_guaranteed_resurrection = no
+						has_any_nickname = no
+					}
+					death = {
+						death_reason = death_soulforging
+						killer = scope:actor
+					}
+				}
+				if = {
+					limit = {
+						POD_has_guaranteed_resurrection = no
+						has_any_nickname = no
+					}
+					death = {
+						death_reason = death_soulforging
+						killer = scope:actor
+					}
+				}
+			}
+			every_courtier_or_guest = {
+				limit = {
+					POD_has_guaranteed_resurrection = no
+					has_any_nickname = no
+				}
+				death = {
+					death_reason = death_soulforging
+					killer = scope:actor
+				}
+			}
+			every_sub_realm_county = {
+				add_county_modifier = {
+					modifier = extinguish_life_modifier
+					years = 5
+				}
+			}
+			add_opinion = {
+				target = scope:actor
+				modifier = pod_unleash_extinguish_life_in_my_realm
+			}
+		}
+		execute_opinion_effect = { VICTIM = scope:secondary_recipient EXECUTIONER = scope:actor }
+		scope:secondary_recipient = {
+			death = {
+				death_reason = death_soulforging
+				killer = scope:actor
+			}
+		}
+		scope:actor = {
+			random_equipped_character_artifact = {
+				limit = { has_variable = soulforge }
+				add_durability = -50
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_artifact_shapeshift_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_artifact_shapeshift_interaction_desc
+	options_heading = POD_vampshapeshift_interaction_options_heading
+	
+	cooldown = { months = 1 }
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { any_equipped_character_artifact = { has_variable = beast_cloak } }
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { is_in_umbra_trigger = no }
+	}
+	
+	send_option = {
+		flag = humanoid
+		localization = POD_vampshapeshift_interaction_humanoid
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:wolf
+				}
+			}
+		}
+		flag = wolf
+		localization = POD_vampshapeshift_interaction_wolf
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:boar
+				}
+			}
+		}
+		flag = boar
+		localization = POD_vampshapeshift_interaction_boar
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:lion
+				}
+			}
+		}
+		flag = lion
+		localization = POD_vampshapeshift_interaction_lion
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:giantserpent
+				}
+			}
+		}
+		flag = giantserpent
+		localization = POD_vampshapeshift_interaction_giantserpent
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:rat
+				}
+			}
+		}
+		flag = rat
+		localization = POD_vampshapeshift_interaction_rat
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:bat
+				}
+			}
+		}
+		flag = bat
+		localization = POD_vampshapeshift_interaction_bat
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				any_equipped_character_artifact = {
+					has_variable = beast_cloak
+					var:beast_cloak = flag:snake
+				}
+			}
+		}
+		flag = snake
+		localization = POD_vampshapeshift_interaction_snake
+	}
+
+	on_accept = {
+		scope:recipient = {
+			POD_shapeshift_revert_effect = yes
+		}
+		switch = {
+			trigger = yes
+			scope:humanoid = {}
+			# Low Prowess Shapeshift #
+			scope:wolf = {
+				scope:recipient = {
+					add_character_modifier = POD_shapeshift_form_wolf_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:wolf
+						}
+						add_durability = -25
+					}
+				}
+			}
+			scope:boar = {
+				scope:recipient = {
+					add_character_modifier = POD_shapeshift_form_boar_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:boar
+						}
+						add_durability = -25
+					}
+				}
+			}
+			scope:lion = {
+				scope:recipient = {
+					add_character_modifier = POD_shapeshift_form_lion_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:lion
+						}
+						add_durability = -25
+					}
+				}
+			}
+			# Low Intrigue Shapeshift #
+			scope:giantserpent = {
+				scope:actor = {
+					add_character_modifier = POD_shapeshift_form_giantserpent_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:giantserpent
+						}
+						add_durability = -25
+					}
+				}
+			}
+			scope:rat = {
+				scope:actor = {
+					add_character_modifier = POD_shapeshift_form_rat_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:rat
+						}
+						add_durability = -25
+					}
+				}
+			}
+			scope:bat = {
+				scope:actor = {
+					add_character_modifier = POD_shapeshift_form_bat_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:bat
+						}
+						add_durability = -25
+					}
+				}
+			}
+			scope:snake = {
+				scope:actor = {
+					add_character_modifier = POD_shapeshift_form_snake_modifier
+				}
+				scope:actor = {
+					random_equipped_character_artifact = {
+						limit = {
+							has_variable = beast_cloak
+							var:beast_cloak = flag:snake
+						}
+						add_durability = -25
+					}
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	# ai_targets = {
+		# ai_recipients = self
+	# }
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+		
+		# modifier = {
+			# add = 20
+			# OR = {
+				# scope:wolf = yes
+				# scope:boar = yes
+				# scope:lion = yes
+			# }
+			# is_knight = yes
+			# OR = {
+				# is_at_war = yes
+				# trigger_if = {
+					# limit = { is_independent_ruler = no }
+					# liege = { is_at_war = yes }
+				# }
+			# }
+		# }
+		
+		# modifier = {
+			# add = 20
+			# OR = {
+				# scope:giantserpent = yes
+				# scope:snake = yes
+				# scope:rat = yes
+				# scope:bat = yes
+			# }
+			# is_at_war = no
+			# OR = {
+				# any_scheme = { scheme_skill = intrigue }
+				# has_council_position = councillor_spymaster
+			# }
+		# }
+		
+		# modifier = {
+			# add = 30
+			# scope:humanoid = yes
+			# NOT = { any_scheme = { exists = yes } }
+			# NOT = { any_targeting_scheme = { hostile_scheme_trigger = yes } }
+			# is_at_war = no
+		# }
+	}
+}
+
+POD_offer_seeds_of_pomegranate_interaction = {
+	category = interaction_category_wraith
+	icon = artifact
+	desc = POD_offer_seeds_of_pomegranate_interaction_desc
+	
+	cooldown = { years = 2 }
+	cost = { piety = 750 }
+
+	is_shown = {
+		scope:actor = { any_equipped_character_artifact = { has_artifact_modifier = pomegranate_modifier } }
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = { has_trait = wraith }
+		scope:recipient = { NOT = { has_trait = risen } }
+		scope:recipient = { NOT = { has_trait = spectre } }
+		scope:recipient = { NOT = { has_trait = ferryman } }
+		scope:recipient = { NOT = { has_trait = shadow } }
+		trigger_if = {
+			limit = { scope:actor != scope:recipient }
+			scope:actor = { NOT = { is_at_war_with = scope:recipient } }
+			scope:recipient = {
+				custom_description = {
+					object = scope:actor
+					text = is_courtier_or_vassal_of
+					OR = {
+						is_courtier_of = scope:actor
+						is_vassal_of = scope:actor
+					}
+				}
+				NOT = { has_strong_hook = scope:actor }
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:recipient = {
+			POD_become_risen_effecct = yes
+			POD_conduit_initiation_effect = yes
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_execute_potion_effect_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_execute_potion_effect_interaction_desc
+	options_heading = POD_execute_potion_effect_interaction_desc_options_heading
+
+	common_interaction = yes
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = { has_variable_list = effect_list }
+	}
+	
+	is_shown = {
+		scope:actor = scope:recipient
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = "POD_execute_potion_effect_interaction_invalid"
+				has_any_artifact = yes
+				any_character_artifact = { has_variable_list = effect_list }
+			}
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+			
+	on_accept = {
+		scope:target = {
+			POD_crafting_brewing_effects = { TARGET = scope:recipient }
+		}
+		destroy_artifact = scope:target
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 18
+	ai_will_do = {
+		base = 20
+	}
+}
+
+POD_offer_execute_potion_effect_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_execute_potion_effect_interaction_desc
+	options_heading = POD_execute_potion_effect_interaction_desc_options_heading
+
+	common_interaction = yes
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	can_be_picked_artifact = {
+		scope:target = { has_variable_list = effect_list }
+	}
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_any_artifact = yes
+			any_character_artifact = { has_variable_list = effect_list }
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+			
+	on_accept = {
+		scope:actor = { save_scope_as = potion_giver }
+		scope:target = {
+			POD_crafting_brewing_effects = { TARGET = scope:recipient }
+		}
+		destroy_artifact = scope:target
+	}
+	
+	ai_accept = {
+		base = -25
+		opinion_modifier = { # More likely to accept if Recipient likes the Actor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.3
+			min = 0
+			desc = AI_OPINION_REASON
+		}
+		opinion_modifier = { # Less likely to accept if Recipient dislikes the Actor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1
+			max = 0
+			desc = AI_OPINION_REASON
+		}
+		modifier = { # Say no to rivals
+			add = -100
+			scope:recipient = {
+				has_relation_rival = scope:actor
+				NOT = { has_relation_nemesis = scope:actor }
+			}
+			desc = "ACTOR_RIVAL_TO_ME_REASON"
+		}
+		modifier = { # Say no to nemesis
+			add = -300
+			scope:recipient = {
+				has_relation_nemesis = scope:actor
+			}
+			desc = "ACTOR_NEMESIS_TO_ME_REASON"
+		}
+	}
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 18
+	ai_will_do = {
+		base = 20
+	}
+}
+
+
+
+POD_use_artifact_interaction = {
+	category = interaction_category_friendly
+	icon = artifact
+	desc = POD_use_artifact_interaction_desc
+	common_interaction = yes
+	interface_priority = 100
+	options_heading = POD_use_artifact_interaction_options_heading
+	target_type = artifact
+	target_filter = actor_artifacts
+
+	cooldown = { years = 1 }
+	cooldown_against_recipient = { years = 5 }
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = usable_artifact
+			scope:actor = { can_benefit_from_artifact = prev }
+			trigger_if = {
+				limit = { has_variable = artifact_charges }
+				var:artifact_charges > 0
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_tooltip = {
+				text = POD_use_artifact_interaction_has_artifact_tt
+				has_any_artifact = yes
+				any_character_artifact = {
+					has_variable = usable_artifact
+					scope:actor = { can_benefit_from_artifact = prev }
+				}
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+
+
+		#Artifacts
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = lungin } }
+			scope:actor = scope:recipient
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = arrows_of_the_sun } }
+			scope:actor != scope:recipient
+			scope:recipient = { POD_fear_the_sun_trigger = yes }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = thunder_dart } }
+			scope:actor != scope:recipient
+			scope:recipient = {
+				OR = {
+					is_at_war_with = scope:actor
+					is_at_war_with_liege = scope:actor
+				}
+				is_commanding_army = yes
+			}
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = tokoyanga } }
+			scope:actor = scope:recipient
+			scope:actor = {
+				piety >= 500
+				POD_has_enough_gnosis_for_gift = { COUNT = 2 }
+			}
+			scope:recipient = { has_a_bad_stress_coping_trait_trigger = yes }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = echo_of_ages } }
+			scope:actor = scope:recipient
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 5 } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = bowl_of_mnesis } }
+			scope:recipient = { POD_is_ancestor_spirit_trigger = yes }
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } has_relation_spirit_companion = scope:recipient }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = sun_spear_thrower } }
+			scope:actor != scope:recipient
+			scope:recipient = { POD_fear_the_sun_trigger = yes }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = sword_of_fever } }
+			scope:actor != scope:recipient
+			scope:actor = {
+				POD_has_enough_gnosis_for_gift = { COUNT = 3 }
+				piety >= 500
+			}
+			scope:recipient = { can_contract_disease_trigger = { DISEASE = entoban_plague } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = blowpipe_anamnesis } }
+			scope:actor != scope:recipient
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+			scope:recipient = { POD_is_mokole_trigger = yes }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = wyrm_fang_dagger } }
+			scope:actor != scope:recipient
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 1 } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = goblin_ale } }
+			scope:actor = scope:recipient
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = voidstone } }
+			scope:actor != scope:recipient
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = storm_bottle } }
+			scope:actor = {
+				POD_has_enough_gnosis_for_gift = { COUNT = 3 }
+				piety >= 500
+			}
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = dragons_ichor } }
+			scope:actor = scope:recipient
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = baneklaive } }
+			scope:actor != scope:recipient
+			scope:actor = { piety >= 250 }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = soul_ruby } }
+			scope:actor = scope:recipient
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 5 } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = shadowflame } }
+			scope:actor = scope:recipient
+			POD_teleport_interaction_travel_trigger = yes
+			scope:actor = { POD_has_enough_gnosis_for_gift = { COUNT = 2 } }
+		}
+		trigger_if = {
+			limit = { scope:target ?= { has_variable = phrygian_codex } }
+			scope:actor = scope:recipient
+			scope:actor = { has_koldunic_bloodmagic_trigger = no }
+		}
+	}
+
+	on_accept = {
+		scope:target = {
+			switch = {
+				trigger = has_variable
+
+				lungin = {
+					scope:recipient = { 
+						add_stress = scope:target.mokole_lungin_stress_reduction
+						if = {
+							limit = { NOT = { has_trait = hashishiyah } }
+							random = { chance = 5 add_trait = hashishiyah }
+						}
+					}
+					if = {
+						limit = { var:artifact_charges = 1 }
+						destroy_artifact = scope:target
+					}
+					else = { change_variable = { name = artifact_charges subtract = 1 } }
+				}
+
+				arrows_of_the_sun = {
+					custom_tooltip = use_artifact_arrows_of_the_sun_tooltip
+					scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = mokole_arrows_of_the_sun_damage REASON = sun } }
+					destroy_artifact = scope:target
+				}
+
+				thunder_dart = {
+					custom_tooltip = use_artifact_thunder_dart_tooltip
+					scope:recipient = { commanding_army = { POD_mokole_thunder_dart_effect = { ARTIFACT = scope:target } } }
+					destroy_artifact = scope:target
+				}
+
+				tokoyanga = {
+					scope:actor = {
+						add_piety = -500
+						POD_gift_cost_effect = { COUNT = 2 }
+					}
+					scope:recipient = { POD_remove_stress_traits_no_stress_effect = yes }
+				}
+
+				echo_of_ages = {
+					scope:actor = { POD_gift_cost_effect = { COUNT = 5 } }
+					scope:recipient.culture = { add_random_innovation = yes }
+					scope:target = { change_variable = { name = artifact_charges subtract = 1 } }
+				}
+
+				bowl_of_mnesis = {
+					scope:actor = { POD_gift_cost_effect = { COUNT = 2 } }
+					save_scope_value_as = {
+						name = mnesis_xp
+						value = {
+							value = 250
+							multiply = scope:recipient.POD_spirit_rank
+							if = {
+								limit = { scope:recipient = { is_close_family_of = scope:actor } }
+								multiply = 2
+							}
+						}
+					}
+					scope:recipient = { death = { death_reason = death_souleaten } }
+					scope:actor = {
+						add_mnesis_lifestyle_xp = scope:mnesis_xp
+						if = {
+							limit = { NOT = { has_variable = bowl_of_mnesis_skill_points } }
+							POD_add_random_skill_point_no_prowess_effect = yes
+							set_variable = { name = bowl_of_mnesis_skill_points value = 1 }
+						}
+						else_if = {
+							limit = { var:bowl_of_mnesis_skill_points < 5 }
+							POD_add_random_skill_point_no_prowess_effect = yes
+							change_variable = { name = bowl_of_mnesis_skill_points add = 1 }
+						}
+					}
+				}
+
+				sun_spear_thrower = {
+					custom_tooltip = use_artifact_arrows_of_the_sun_tooltip
+					scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = mokole_arrows_of_the_sun_damage REASON = sun } }
+				}
+
+				sword_of_fever = {
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 3 }
+						add_piety = -500
+						duel = {
+							skill = learning
+							target = scope:recipient
+						
+							40 = {
+								compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+
+								scope:recipient = { 
+									contract_disease_effect = { DISEASE = entoban_plague TREATMENT_EVENT = no }
+								
+									if = {
+										limit = { location ?= { geographical_region = world_africa } }
+										random = {
+											chance = 50
+											location ?= { create_epidemic_outbreak = { type = entoban_plague intensity = minor } }
+										}
+									}
+								}
+							}
+							
+							60 = {
+								compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+
+								send_interface_toast = {
+									title = POD_shared_loca_failure
+									left_icon = scope:actor
+									right_icon = scope:recipient
+
+									add_stress = medium_stress_gain
+								}
+							}
+						}
+					}
+				}
+
+				blowpipe_anamnesis = {
+					scope:actor = { POD_gift_cost_effect = { COUNT = 1 } }
+					scope:recipient = { add_mnesis_lifestyle_perk_points = scope:actor.mokole_mnesis_age_value }
+				}
+
+				wyrm_fang_dagger = {
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 1 }
+						duel = {
+							skill = prowess
+							target = scope:recipient
+							10 = {
+								compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+								scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_double_wound_damage REASON = duel_aggravated } }
+							}
+							30 = {
+								compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+								scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_wound_damage REASON = duel_aggravated } }
+							}
+							60 = {
+								compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+								send_interface_toast = {
+									title = POD_shared_loca_failure
+									left_icon = scope:actor
+									right_icon = scope:recipient
+
+									add_stress = medium_stress_gain
+								}
+							}
+						}
+					}
+				}
+
+				goblin_ale = {
+					scope:actor = {
+						add_stress = medium_stress_loss
+						if = {
+							limit = { NOT = { has_trait = drunkard } }
+							random = { chance = 10 add_trait = drunkard }
+						}
+					}
+					random = {
+						chance = 25
+						destroy_artifact = scope:target
+					}
+				}
+
+				voidstone = {
+					scope:actor = { add_stress = major_stress_gain }
+					scope:recipient = { POD_send_to_malfeas_effect = yes }
+					destroy_artifact = scope:target
+				}
+
+				storm_bottle = {
+					save_scope_value_as = { name = weather_type   value = flag:pod_weather_storm }
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 3 }
+						add_piety = -500
+						POD_setup_weather_magic_counties_from_title = { TITLE = scope:recipient.location.kingdom }
+						POD_weather_magic_effect = { MONTHS = POD_weather_default_duration }
+						every_in_list = {
+							list = weather_rulers
+							if = {
+								limit = { POD_is_wyrm_servant_trigger = no }
+								POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_lightning_damage REASON = lightning }
+							}
+							every_courtier_or_guest = {
+								limit = {
+									is_ruler = no
+									POD_is_wyrm_servant_trigger = no 
+								}
+								POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_lightning_damage REASON = lightning }
+							}
+						}
+					}
+				}
+
+				dragons_ichor = {
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 2 }
+						add_character_modifier = { modifier = dragons_ichor_temp_modifier years = 2 }
+					}
+				}
+
+				baneklaive = {
+					scope:actor = {
+						add_piety = -250
+						duel = {
+							skill = prowess
+							target = scope:recipient
+							10 = {
+								compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+								scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_double_balefire_damage REASON = balefire } }
+								if = {
+									limit = {
+										scope:recipient = {
+											OR = {
+												has_trait = fera
+												has_trait = spirit
+											}
+										}
+									}
+									scope:recipient = { POD_gift_cost_effect = { COUNT = 2 } }
+									scope:actor = { POD_gnosis_income_effect = { COUNT = 2 } }
+								}
+							}
+							30 = {
+								compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+								scope:recipient = { POD_increase_wounds_hostile_effect = { ATTACKER = scope:actor COUNT = POD_base_balefire_damage REASON = balefire } }
+								if = {
+									limit = {
+										scope:recipient = {
+											OR = {
+												has_trait = fera
+												has_trait = spirit
+											}
+										}
+									}
+									scope:recipient = { POD_gift_cost_effect = { COUNT = 2 } }
+									scope:actor = { POD_gnosis_income_effect = { COUNT = 2 } }
+								}
+							}
+							60 = {
+								compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+								send_interface_toast = {
+									title = POD_shared_loca_failure
+									left_icon = scope:actor
+									right_icon = scope:recipient
+
+									add_stress = medium_stress_gain
+								}
+							}
+						}
+					}
+				}
+
+				soul_ruby = {
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 5 }
+						trigger_event = POD_wyrm.1
+					}
+				}
+
+				shadowflame = {
+					scope:actor = {
+						POD_gift_cost_effect = { COUNT = 2 }
+						POD_teleport_travel_interaction_effect = yes
+					}
+				}
+
+				phrygian_codex = {
+					scope:actor = { POD_learn_koldunic_bloodmagic_effect = yes }
+				}
+			}
+		}
+	}
+
+	auto_accept = yes
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+
+
+
+
+POD_breakdown_artifact_interaction = {
+	category = interaction_category_friendly
+	desc = POD_breakdown_artifact_interaction_desc
+	icon = artifact
+
+	target_type = artifact
+	target_filter = recipient_artifacts
+
+	is_shown = {
+		scope:recipient = scope:actor
+		scope:actor = {
+			OR = {
+				has_perk = major_relic_perk #Mummy
+				has_perk = see_the_form_perk #Mokole
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = { has_any_artifact = yes }
+
+		trigger_if = {
+			limit = {
+				exists = scope:target
+				scope:target = { rarity = illustrious }
+			}
+			scope:actor = {
+				trigger_if = {
+					limit = { POD_splat_has_access_to_hekau = yes }
+					has_perk = princely_relic_perk #Mummy
+				}
+				trigger_else = {
+					has_perk = shape_the_form_perk #Mokole
+				}
+			}
+		}
+		trigger_else_if = {
+			limit = {
+				exists = scope:target
+				scope:target = { rarity = famed }
+			}
+			scope:actor = {
+				trigger_if = {
+					limit = { POD_splat_has_access_to_hekau = yes }
+					has_perk = greater_relic_perk #Mummy
+				}
+				trigger_else = {
+					has_perk = dream_the_form_perk #Mokole
+				}
+			}
+		}
+		trigger_else = { always = yes }
+		
+		trigger_if = {
+			limit = { scope:recipient = { POD_deconstruct_artifact_cost > 0 } }
+			scope:recipient = { POD_has_enough_splat_agnostic_energy_reserves = { AMOUNT = POD_deconstruct_artifact_cost } }
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	can_be_picked_artifact = {
+		scope:target = {
+			POD_artifact_is_destructible_by_events_trigger = yes
+		}
+	}
+	
+
+	on_accept = {
+		scope:actor = {
+			if = {
+				limit = { POD_deconstruct_artifact_cost > 0 }
+				POD_splat_agnostic_energy_cost = { COUNT = POD_deconstruct_artifact_cost }
+			}
+			if = {
+				limit = { has_perk = reshape_object_perk }
+				add_short_term_gold = tiny_gold_value
+			}
+			if = {
+				limit = { domicile ?= { has_domicile_parameter = deconstruction_lower_gnosis_t1 } }
+				random = { chance = 50 POD_gnosis_income_effect = { COUNT = 1 } }
+			}
+		}
+		scope:target = {
+			switch = {
+				trigger = rarity
+
+				common = { scope:recipient = { gain_common_artifact_pieces_effect = { VALUE = POD_deconstruct_artifact_amount } } }
+				masterwork = { scope:recipient = { gain_masterwork_artifact_pieces_effect = { VALUE = POD_deconstruct_artifact_amount } } }
+				famed = { scope:recipient = { gain_famed_artifact_pieces_effect = { VALUE = POD_deconstruct_artifact_amount } } }
+				illustrious = { scope:recipient = { gain_illustrious_artifact_pieces_effect = { VALUE = POD_deconstruct_artifact_amount } } }
+			}
+
+			POD_destroy_artifact_side_effect = yes
+			destroy_artifact = this
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+POD_store_energy_interaction = {
+	category = interaction_category_friendly
+	desc = POD_store_energy_interaction_desc
+	options_heading = POD_store_energy_interaction_options_heading
+	icon = artifact
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_character_artifact = {
+				has_variable = max_energy_stored
+				NOT = { has_variable = temporary_vessel }
+				prev = { can_benefit_from_artifact = prev }
+				storable_vessel_empty_energy > 0
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			trigger_if = {
+				limit = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 10
+			}
+			trigger_else = {
+				splat_energy_points_value >= 1
+			}
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = max_energy_stored
+			NOT = { has_variable = temporary_vessel }
+			scope:actor = { can_benefit_from_artifact = prev }
+			storable_vessel_empty_energy > 0
+		}
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 1
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 1 }
+			}
+		}
+		flag = POD_num1
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 2
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 2 }
+			}
+		}
+		flag = POD_num2
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 3
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 3 }
+			}
+		}
+		flag = POD_num3
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 4
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 4 }
+			}
+		}
+		flag = POD_num4
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 5
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 5 }
+			}
+		}
+		flag = POD_num5
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 6
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 6 }
+			}
+		}
+		flag = POD_num6
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 7
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 7 }
+			}
+		}
+		flag = POD_num7
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 8
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 8 }
+			}
+		}
+		flag = POD_num8
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_points_value >= 9
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 9 }
+			}
+		}
+		flag = POD_num9
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 10
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 10 }
+			}
+		}
+		flag = POD_num10
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 20
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 20 }
+			}
+		}
+		flag = POD_num20
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 30
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 30 }
+			}
+		}
+		flag = POD_num30
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 40
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 40 }
+			}
+		}
+		flag = POD_num40
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 50
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 50 }
+			}
+		}
+		flag = POD_num50
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 60
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 60 }
+			}
+		}
+		flag = POD_num60
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 70
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 70 }
+			}
+		}
+		flag = POD_num70
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 80
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 80 }
+			}
+		}
+		flag = POD_num80
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 90
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 90 }
+			}
+		}
+		flag = POD_num90
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				splat_energy_points_value >= 100
+			}
+			trigger_if = {
+				limit = { exists = scope:target }
+				scope:target = { splat_adjusted_storable_vessel_empty_energy >= 100 }
+			}
+		}
+		flag = POD_num100
+	}
+
+	on_accept = {
+		save_scope_value_as = {
+			name  = energy_amount
+			value = POD_num
+		}
+		scope:actor = {
+			save_scope_value_as = {
+				name  = splat_agnostic_energy_amount
+				value = {
+					value = scope:energy_amount
+					multiply = inverse_splat_energy_multiplier
+				}
+			}
+			POD_splat_agnostic_energy_loss = {
+				COUNT = scope:splat_agnostic_energy_amount
+			}
+			POD_store_splat_agnostic_energy_in_specific_vessel = {
+				AMOUNT   = scope:splat_agnostic_energy_amount
+				ARTIFACT = scope:target
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_extract_energy_interaction = {
+	category = interaction_category_friendly
+	desc = POD_extract_energy_interaction_desc
+	options_heading = POD_extract_energy_interaction_desc_options_heading
+	icon = artifact
+	
+	target_type = artifact
+	target_filter = actor_artifacts
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			any_character_artifact = {
+				has_variable = energy_stored
+				prev = { can_benefit_from_artifact = prev }
+				splat_adjusted_usable_vessel_energy >= 1
+			}
+		}
+	}
+	
+	can_be_picked_artifact = {
+		scope:target = {
+			has_variable = energy_stored
+			scope:actor = { can_benefit_from_artifact = prev }
+			splat_adjusted_usable_vessel_energy >= 1
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_is_not_full_on_energy = yes
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 1 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 1
+			}
+		}
+		flag = POD_num1
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 2 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 2
+			}
+		}
+		flag = POD_num2
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 3 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 3
+			}
+		}
+		flag = POD_num3
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 4 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 4
+			}
+		}
+		flag = POD_num4
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 5 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 5
+			}
+		}
+		flag = POD_num5
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 6 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 6
+			}
+		}
+		flag = POD_num6
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 7 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 7
+			}
+		}
+		flag = POD_num7
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 8 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 8
+			}
+		}
+		flag = POD_num8
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 9 }
+			scope:actor = {
+				NOT = { maximum_splat_energy > 10 }
+				splat_energy_deficit >= 9
+			}
+		}
+		flag = POD_num9
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 10 }
+			scope:actor = { splat_energy_deficit >= 10 }
+		}
+		flag = POD_num10
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 20 }
+			scope:actor = { splat_energy_deficit >= 20 }
+		}
+		flag = POD_num20
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 30 }
+			scope:actor = { splat_energy_deficit >= 30 }
+		}
+		flag = POD_num30
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 40 }
+			scope:actor = { splat_energy_deficit >= 40 }
+		}
+		flag = POD_num40
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 50 }
+			scope:actor = { splat_energy_deficit >= 50 }
+		}
+		flag = POD_num50
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 60 }
+			scope:actor = { splat_energy_deficit >= 60 }
+		}
+		flag = POD_num60
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 70 }
+			scope:actor = { splat_energy_deficit >= 70 }
+		}
+		flag = POD_num70
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 80 }
+			scope:actor = { splat_energy_deficit >= 80 }
+		}
+		flag = POD_num80
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 90 }
+			scope:actor = { splat_energy_deficit >= 90 }
+		}
+		flag = POD_num90
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:target ?= { splat_adjusted_usable_vessel_energy >= 100 }
+			scope:actor = { splat_energy_deficit >= 100 }
+		}
+		flag = POD_num100
+	}
+
+	on_accept = {
+		save_scope_value_as = {
+			name  = energy_amount
+			value = POD_num
+		}
+		scope:actor = {
+			save_scope_value_as = {
+				name  = splat_agnostic_energy_amount
+				value = {
+					value = scope:energy_amount
+					multiply = inverse_splat_energy_multiplier
+				}
+			}
+			POD_spend_splat_agnostic_energy_from_specific_vessel = {
+				AMOUNT   = scope:splat_agnostic_energy_amount
+				ARTIFACT = scope:target
+			}
+			POD_splat_agnostic_energy_gain = {
+				COUNT = scope:splat_agnostic_energy_amount
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}

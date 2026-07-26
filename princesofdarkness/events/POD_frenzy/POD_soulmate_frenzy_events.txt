@@ -1,0 +1,872 @@
+﻿namespace = POD_soulmate_frenzy
+
+#First frenzy events, all other events are tied to this one
+POD_soulmate_frenzy.001 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.001.t
+	desc = POD_soulmate_frenzy.001.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = grief 
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	    save_scope_as = frenziedvamp
+		scope:dead_character = {
+		    save_scope_as = lost_soulmate
+		}
+	}
+	
+	trigger = {
+	    is_vampire_trigger = yes
+		cant_frenzy_trigger = no
+		OR = {
+			NOT = { exists = scope:dead_character.killer }
+			NOT = { scope:dead_character.killer = root } # Error: set_relation_rival effect [ Trying to set a relation with ourselves ]
+		}
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.001.option.a
+		custom_tooltip = POD_soulmate_frenzy.001.option.a.tt
+		
+		hidden_effect ={
+            random_list = {
+			    3 = {
+				    trigger_event = {
+                        id = POD_soulmate_frenzy.002
+						days = 2
+					}					
+				}
+				7 = {
+				    trigger_event = {
+                        id = POD_soulmate_frenzy.004
+						days = 2
+					} 
+					show_as_tooltip = {
+						if = {
+							limit = { faith = { has_doctrine_parameter = frenzy_lose_piety } }
+							add_piety = major_piety_loss
+						}
+					}
+					
+					modifier = {
+					   add = 6
+					   has_trait = brujah
+					}
+					modifier = {
+					    add = 2
+						piety_level < 0
+					}
+					modifier = {
+					    add = 2
+						blood_level = 0
+					}
+					modifier = {
+					    add = 1
+						blood_level = 1
+					}
+					modifier = {
+			            factor = 0.5
+				        has_character_modifier = heart_of_darkness_modifier
+			        }
+				}
+			}
+		}
+	}
+	option = {
+	    name = POD_soulmate_frenzy.001.option.b
+		custom_tooltip = POD_soulmate_frenzy.001.option.b.tt
+		
+		hidden_effect = {
+		    random_list = {
+			    4 = {
+				    trigger_event = {
+                        id = POD_soulmate_frenzy.003
+						days = 2
+					}
+					show_as_tooltip = {
+						if = {
+							limit = { faith = { has_doctrine_parameter = frenzy_lose_piety } }
+							add_piety = medium_piety_loss
+						}
+					}
+  					
+					modifier = {
+					    add = 2
+						has_trait = celerity
+					}
+					modifier = {
+					    add = 4
+						has_trait = celerityadvanced
+					}
+					modifier = {
+					    add = 2
+						has_trait = temporis
+					}
+					modifier = {
+					    add = 4
+						has_trait = temporisadvanced
+					}
+					modifier = {
+						add = 2
+						has_trait = flight
+					}
+					modifier = {
+						add = 4
+						has_trait = flightadvanced
+					}
+				}
+				6 = {
+				    trigger_event = {
+                        id = POD_soulmate_frenzy.004
+						days = 2
+					}
+					show_as_tooltip = {
+						if = {
+							limit = { faith = { has_doctrine_parameter = frenzy_lose_piety } }
+							add_piety = major_piety_loss
+						}
+					}
+
+					modifier = {
+					   add = 6
+					   has_trait = brujah
+					}
+					modifier = {
+					    add = 2
+						blood_level = 0
+					}
+					modifier = {
+					    add = 1
+						blood_level = 1
+					}
+					modifier = {
+			            factor = 0.5
+				        has_character_modifier = heart_of_darkness_modifier
+			        }
+				}
+			}
+		}
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.001.option.c
+		custom_tooltip = POD_soulmate_frenzy.001.option.c.tt
+		
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.004
+				days = 2
+			}
+		}
+	}
+}
+
+#Successfully resisted frenzy event chain
+POD_soulmate_frenzy.002 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.002.t
+	desc = POD_soulmate_frenzy.002.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = stress
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.002.option.a
+		custom_tooltip = POD_soulmate_frenzy.002.option.a.tt
+		
+		add_stress = medium_stress_gain
+		
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.102
+				days = 5
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.102 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.102.t
+	desc = POD_soulmate_frenzy.102.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = sadness
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.102.option.a
+		custom_tooltip = POD_soulmate_frenzy.102.option.a.tt
+		
+		add_piety = major_piety_gain
+		
+		add_stress = major_stress_gain
+
+		#if = {
+		#    limit = {
+		#	    NOT = { has_trait = depressed_1 }
+		#	}
+		#	add_trait = depressed_1
+		#}
+	}
+}
+
+#Successfully escape from domain event chain
+POD_soulmate_frenzy.003 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.003.t
+	desc = POD_soulmate_frenzy.003.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = anger 
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.003.option.a
+		custom_tooltip = POD_soulmate_frenzy.003.option.a.tt
+		
+		if = {
+			limit = { faith = { has_doctrine_parameter = frenzy_lose_piety } }
+			add_piety = medium_piety_loss
+		}
+		
+		hidden_effect = {
+		    random_list = {
+			    6 = {
+				    trigger_event = {
+					    id = POD_soulmate_frenzy.103
+						days = 15
+					}
+				}
+				
+				4 = {
+				    trigger_event = {
+					    id = POD_soulmate_frenzy.303
+						days = 15
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.103 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.103.t
+	desc = POD_soulmate_frenzy.103.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.103.option.a
+		custom_tooltip = POD_soulmate_frenzy.103.option.a.tt
+		
+		increase_wounds_no_death_effect = { REASON = fight }
+		add_stress = minor_stress_loss
+		add_piety = minor_piety_loss
+		POD_masquerade_exposure_increase_effect = yes
+		POD_masquerade_exposure_increase_effect = yes
+		scope:frenziedvamp = {
+			if = {
+				limit = {
+					is_ruler = yes
+				}
+				capital_county = {
+					add_county_modifier = {
+						modifier = POD_frenzy_terrified_populace_modifier
+						years = 20
+					}
+				}
+			}
+		}
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.203
+				days = 2
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.203 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.203.t
+	desc = POD_soulmate_frenzy.203.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = sadness
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.203.option.a
+		custom_tooltip = POD_soulmate_frenzy.203.option.a.tt
+		
+		if = {
+		    limit = {
+			    exists = scope:lost_soulmate.killer
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:lost_soulmate.killer
+                REASON = rival_murderer
+				OPINION = default_rival_opinion
+			}
+		}
+		
+		POD_frenzy_effect = yes
+		
+		random_list = {
+			50 = {}
+			
+		    1 = {
+			    add_trait = possessed_1
+				
+				modifier = {
+				    factor = 0
+					has_trait = possessed
+				}
+			}
+			1 = {
+			    add_trait = depressed_1
+				
+				modifier = {
+				    factor = 0
+					has_trait = depressed
+				}
+			}
+			1 = {
+			    add_trait = lunatic_1
+				
+				modifier = {
+				    factor = 0
+					has_trait = lunatic
+				}
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.303 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.303.t
+	desc = POD_soulmate_frenzy.303.desc
+	theme = frenzy #gangrel
+	
+	left_portrait = {
+	    character = scope:frenziedvamp 
+		animation = rage
+	}
+	
+	right_portrait = {
+		character = scope:werewolf_defender
+		animation = idle
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+		is_ruler = yes
+	}
+	
+	immediate = {
+		hidden_effect = {
+			create_character = {
+				location = root.capital_province
+				template = werewolf_generic_evil_character
+				save_scope_as = werewolf_defender
+			}		
+		}
+		
+		scope:werewolf_defender = {
+			hidden_effect = { 
+				add_character_modifier = POD_werewolf_form_crinos_modifier
+				set_variable = {
+					name = signature_weapon
+					value = flag:fangsclaws
+				}
+				add_character_flag = has_scripted_appearance
+			}
+		}
+
+		scope:werewolf_defender = {
+			save_scope_as = defender
+		}
+		
+		root = {
+			save_scope_as = attacker
+		}	
+	
+	    if = {
+		    limit = {
+			    any_vassal_or_below = {
+				    OR = {
+				        has_relation_friend = scope:frenziedvamp
+						has_relation_lover = scope:frenziedvamp
+				    }
+			    }
+		    }
+		    random_vassal_or_below = {
+				limit = {
+				    OR = {
+					    has_relation_friend = scope:frenziedvamp
+					    has_relation_lover = scope:frenziedvamp
+					}
+				}
+				save_scope_as = friend_savior
+		    }
+	    }
+		
+		save_scope_as =	soulmate_frenzy_garou_fight	
+	}
+	option = {
+	    name = POD_soulmate_frenzy.303.option.a
+		custom_tooltip = POD_soulmate_frenzy.303.option.a.tt
+		
+		
+		duel = {
+		    skill = prowess
+		    value = 45
+		    desc = POD_soulmate_frenzy.303.option.a.desc
+			
+		    50 = {
+		        desc = POD_soulmate_frenzy.303.option.a.success
+				
+			    compare_modifier = {
+				    value = scope:duel_value
+				    multiplier = 1.5
+			    }
+					
+				custom_tooltip = POD_soulmate_frenzy.303.option.a.tt.win
+				
+			    hidden_effect = {	
+					trigger_event = {
+					    id = POD_soulmate_frenzy.403
+					    days = 2
+				    }
+			    }
+		    }	
+		  
+		    50 = {
+		        desc = POD_soulmate_frenzy.303.option.a.failure
+
+			    compare_modifier = {
+				    value = scope:duel_value
+				    multiplier = -1.5
+			    }
+					
+				custom_tooltip = POD_soulmate_frenzy.303.option.a.tt.lose
+
+			    hidden_effect = {
+				    if = {
+					    limit = {
+						    exists = scope:friend_savior
+						}
+				        trigger_event = {
+						    id = POD_soulmate_frenzy.603
+						    days = 2
+					    }
+			        }
+					else = {
+					    trigger_event = {
+						    id = POD_soulmate_frenzy.703
+						    days = 2
+					    }  
+					}
+				}
+		    }
+	    }
+		
+		hidden_effect = {
+			scope:werewolf_defender = {
+				death = { death_reason = death_vanished }
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.403 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.403.t
+	desc = POD_soulmate_frenzy.403.desc
+	theme = frenzy
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.403.option.a
+		custom_tooltip = POD_soulmate_frenzy.403.option.a
+		
+		increase_wounds_no_death_effect = { REASON = fight }
+		
+		add_prestige = medium_prestige_gain
+		add_piety = minor_piety_loss
+		add_stress = minor_stress_gain
+		POD_masquerade_exposure_increase_effect = yes
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.503
+				days = 2 
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.503 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.503.t
+	desc = POD_soulmate_frenzy.503.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = stress
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.503.option.a
+		custom_tooltip = POD_soulmate_frenzy.503.option.a.tt
+		
+		POD_frenzy_effect = yes
+		
+		add_stress = medium_stress_gain
+		
+		#if = {
+		#    limit = {
+		#	    NOT = { has_trait = depressed_1 }
+		#	}
+		#	add_trait = depressed_1
+		#}
+		if = {
+		    limit = {
+			    exists = scope:lost_soulmate.killer
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:lost_soulmate.killer
+                REASON = rival_murderer
+				OPINION = default_rival_opinion
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.603 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.603.t
+	desc = POD_soulmate_frenzy.603.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = disbelief
+	}
+	right_portrait = {
+	    character = scope:friend_savior
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+    
+    option = {
+        name = POD_soulmate_frenzy.603.option.a
+		custom_tooltip = POD_soulmate_frenzy.603.option.a.tt
+		
+		scope:frenziedvamp = {
+		    increase_wounds_no_death_effect = { REASON = fight }
+			maimed_in_battle_effect = yes
+			random_list = {
+			    2 = {
+				    POD_enter_torpor_effect = yes
+					POD_depose_effect = yes
+				}
+				25 = {
+				}
+			}
+		}
+		scope:friend_savior = {
+		    increase_wounds_no_death_effect = { REASON = fight }
+			if = {
+				limit = {
+					can_add_hook = {
+						target = scope:frenziedvamp
+						type = lifeboon_hook
+					}
+				}
+				add_hook = {
+					target = scope:frenziedvamp
+					type = lifeboon_hook
+				}
+			}
+		}
+	}	
+}
+
+POD_soulmate_frenzy.703 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.703.t
+	desc = POD_soulmate_frenzy.703.desc
+	theme = frenzy 
+	
+	left_portrait = {
+	    character = scope:frenziedvamp
+		animation = beg
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+    
+    option = {
+        name = POD_soulmate_frenzy.703.option.a
+		custom_tooltip = POD_soulmate_frenzy.703.option.a.tt
+		
+		death = { death_reason = death_disappearance  }
+	}	
+}
+
+#Succumb to frenzy event chain
+POD_soulmate_frenzy.004 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.004.t
+	desc = POD_soulmate_frenzy.004.desc
+	theme = frenzy
+	
+	left_portrait = {
+	    character = scope:frenziedvamp 
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.004.option.a
+		custom_tooltip = POD_soulmate_frenzy.004.option.a.tt
+		
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.104
+				days = 2
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.104 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.104.t
+	desc = POD_soulmate_frenzy.104.desc
+	theme = frenzy
+	
+	left_portrait = {
+	    character = scope:frenziedvamp 
+		animation = rage
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+	    hidden_effect = {
+		    every_courtier_or_guest = {
+			    random_list = {
+				    1 = {
+					    pod_death = {
+						    death_reason = death_murder
+							killer = scope:frenziedvamp
+						}
+						if = {
+						    limit = {
+							    scope:frenziedvamp = {
+								    NOT = { has_trait = murderer }
+								}
+							}
+							scope:frenziedvamp = {
+							    add_trait = murderer
+							}
+						}
+						
+						
+						modifier = {
+						    add = 15
+							prowess < scope:frenziedvamp.prowess
+						}
+					}
+				     
+					25 = {
+					    add_opinion = {
+						    modifier = liege_attempting_to_murder_me_opinion
+							target = scope:frenziedvamp
+						}
+						
+						modifier = {
+						    add = 5
+						    prowess > scope:frenziedvamp.prowess
+						}
+						modifier = {
+						    add = 10
+							POD_has_true_faith_trigger = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+	    name = POD_soulmate_frenzy.104.option.a
+		custom_tooltip = POD_soulmate_frenzy.104.option.a.tt
+		
+		add_piety = major_piety_loss
+		add_stress = major_stress_loss
+		hidden_effect = {
+		    trigger_event = {
+			    id = POD_soulmate_frenzy.204
+				days = 2
+			}
+		}
+	}
+}
+
+POD_soulmate_frenzy.204 = {
+    type = character_event
+	content_source = dlc_POD
+	title = POD_soulmate_frenzy.204.t
+	desc = POD_soulmate_frenzy.204.desc
+	theme = frenzy
+	
+	left_portrait = {
+	    character = scope:frenziedvamp 
+		animation = grief
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+    
+    option = {
+	    name = POD_soulmate_frenzy.204.option.a
+		custom_tooltip = POD_soulmate_frenzy.204.option.a.tt
+		
+		POD_frenzy_effect = yes
+		
+		if = {
+		    limit = {
+			    exists = scope:lost_soulmate.killer
+			}
+			progress_towards_rival_effect = {
+				CHARACTER = scope:lost_soulmate.killer
+                REASON = rival_murderer
+				OPINION = default_rival_opinion
+			}
+		}
+		
+		random_list = {
+			20 = {}
+		
+		    1 = {
+			    trigger = { 
+				    NOT = { has_trait = possessed }
+				}
+			    add_trait = possessed_1
+			}
+			1 = {
+			    trigger = { 
+				    NOT = { has_trait = depressed } 
+				}
+			    add_trait = depressed_1
+			}
+			1 = {
+			    trigger = { 
+				    NOT = { has_trait = lunatic } 
+				}
+			    add_trait = lunatic_1
+			}
+		}
+	}
+}
+	

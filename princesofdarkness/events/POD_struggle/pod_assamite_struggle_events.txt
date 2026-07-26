@@ -1,0 +1,2452 @@
+﻿namespace = pod_assamite_struggle
+
+pod_assamite_struggle.0001 = {
+	hidden = yes
+	scope = none
+
+	trigger = {
+		exists = struggle:assamite_struggle
+	}
+
+	immediate = {		
+		# Activate the catalyst.
+		if = {
+			limit = {
+				exists = global_var:influence_wok
+				global_var:influence_wok >= 5
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_massive_influence_wok }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_wok
+				global_var:influence_wok <= 0
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_no_influence_wok }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_ashirra
+				global_var:influence_ashirra >= 5
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_massive_influence_ashirra }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_ashirra
+				global_var:influence_ashirra <= 0
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_no_influence_ashirra }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_council
+				global_var:influence_council >= 5
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_massive_influence_council }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_council
+				global_var:influence_council <= 0
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_no_influence_council }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_silsila
+				global_var:influence_silsila >= 5
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_massive_influence_silsila }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_silsila
+				global_var:influence_silsila <= 0
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_no_influence_silsila }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_losttribe
+				global_var:influence_losttribe >= 5
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_massive_influence_losttribe }
+		}
+		if = {
+			limit = {
+				exists = global_var:influence_losttribe
+				global_var:influence_losttribe <= 0
+			}
+			struggle:assamite_struggle = { activate_struggle_catalyst = catalyst_no_influence_losttribe }
+		}
+
+		#Simulate the AI doing stuff
+
+		random_list = {
+			40 = { }
+			
+			10 = { 
+				if = {
+					limit = { 
+						exists = global_var:influence_wok 
+						global_var:influence_wok < 5
+						}
+					change_global_variable = {
+						name = influence_wok
+						add = 1
+					}
+				}
+			}
+			
+			10 = { 
+				if = {
+					limit = { exists = global_var:influence_wok }
+					change_global_variable = {
+						name = influence_wok
+						add = -1
+					}
+				}
+			}			
+
+			20 = { 
+				if = {
+					limit = { 
+						exists = global_var:influence_ashirra 
+						global_var:influence_ashirra < 5
+						}
+					change_global_variable = {
+						name = influence_ashirra
+						add = 1
+					}
+				}
+			}
+			
+			5 = { 
+				if = {
+					limit = { exists = global_var:influence_ashirra }
+					change_global_variable = {
+						name = influence_ashirra
+						add = -1
+					}
+				}
+			}
+			
+			10 = { 
+				if = {
+					limit = { 
+						exists = global_var:influence_council 
+						global_var:influence_council < 5
+						}
+					change_global_variable = {
+						name = influence_council
+						add = 1
+					}
+				}
+			}
+			
+			10 = { 
+				if = {
+					limit = { exists = global_var:influence_council }
+					change_global_variable = {
+						name = influence_council
+						add = -1
+					}
+				}
+			}			
+
+			5 = { 
+				if = {
+					limit = { 
+						exists = global_var:influence_silsila 
+						global_var:influence_silsila < 5
+						}
+					change_global_variable = {
+						name = influence_silsila
+						add = 1
+					}
+				}
+			}
+			
+			10 = { 
+				if = {
+					limit = { exists = global_var:influence_silsila }
+					change_global_variable = {
+						name = influence_silsila
+						add = -1
+					}
+				}
+			}
+			
+			5 = { 
+				if = {
+					limit = { 
+						exists = global_var:influence_losttribe 
+						global_var:influence_losttribe < 5
+						}
+					change_global_variable = {
+						name = influence_losttribe
+						add = 1
+					}
+				}
+			}
+			
+			15 = { 
+				if = {
+					limit = { exists = global_var:influence_losttribe }
+					change_global_variable = {
+						name = influence_losttribe
+						add = -1
+					}
+				}
+			}
+		}
+		# Then queue the event up against for a year hence.
+		trigger_event = {
+			id = pod_assamite_struggle.0001
+			years = 1
+		}			
+	}
+}
+
+#Set up for on_action struggle events
+pod_assamite_struggle.0002 = {
+	hidden = yes
+	#scope = struggle
+	type = character_event
+	
+	trigger = {
+		exists = struggle:assamite_struggle
+		character_any_involvement_assamite_struggle_trigger = yes
+	}	
+	
+	immediate = {
+		trigger_event = {
+			on_action = assamite_struggle_on_action_playable_pulse
+			years = 2
+		}		
+		
+		#if = { 
+		#	limit = {
+		#character_any_involvement_assamite_struggle_trigger = yes
+		#	}
+		#				trigger_event = pod_assamite_struggle.1001
+		#}	
+		#every_player = {
+		#		trigger_event = pod_assamite_struggle.1000
+		#}
+		##Starts Assamite events on_action struggle
+		#struggle:assamite_struggle = {
+		#	every_involved_ruler = {
+		#		limit = {
+		#			is_ai = no
+		#			}
+		#		trigger_event = {
+		#			on_action = assamite_struggle_on_action_playable_pulse
+		#			years = 2
+		#		}
+		#		trigger_event = pod_assamite_struggle.1000
+		#	}
+		#}
+		#struggle:assamite_struggle = {
+		#	every_interloper_ruler = {
+		#		limit = {
+		#			is_ai = no
+		#			}
+		#		trigger_event = {
+		#			on_action = assamite_struggle_on_action_playable_pulse
+		#			years = 2
+		#		}
+		#	}
+		#}		
+		trigger_event = {
+			id = pod_assamite_struggle.0002
+			years = { 1 5 }
+		}		
+	}
+}
+
+pod_assamite_struggle.0501 = { # Fullscreen Intro Event
+	type = character_event
+	content_source = dlc_POD
+	window = fullscreen_event
+	title = pod_assamite_struggle.0501.t
+	desc = pod_assamite_struggle.0501.desc
+	theme = realm
+	trigger = { # we need to prevent this from firing for all players when a new player joins in MP
+		is_ai = no
+		NOT = { has_character_flag = pod_assamite_struggle_intro_event_flag }
+		character_any_involvement_assamite_struggle_trigger = yes
+ 	}
+	override_background = { reference = fp2_fullscreen_intro }
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+
+	#widgets = {
+	#	widget = {
+ 	#		gui = "event_window_widget_struggle_info"
+ 	#		container = "dynamic_content_widget"
+ 	#		controller = struggle_info
+ 	#		setup_scope = { struggle:iberian_struggle = { save_scope_as = struggle } }
+	#	}
+	#}
+	immediate = {
+		play_music_cue = "mood_the_samaritan"
+		add_character_flag = pod_assamite_struggle_intro_event_flag
+		save_scope_value_as = {
+			name = start
+			value = yes
+		}
+	}
+	option = {
+		name = pod_assamite_struggle.0501.a
+	}
+}
+
+#Secure Assamite foothold decision ending
+
+pod_assamite_struggle.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.100.t
+	desc = pod_assamite_struggle.100.desc
+	
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = war_over_win
+	}
+
+	trigger = {
+	}
+
+	immediate = {
+		save_scope_as = iberian_footholder
+		every_held_title = {
+			limit = {
+				# Any de jure kingdom of Iberia is completely controlled
+				struggle_secure_assamite_foothold_assamite_kingdom_trigger = yes
+			}
+			add_to_list = iberian_footholder_list
+		}
+		hidden_effect  = {
+			while = {
+				limit = {
+					any_in_list = {
+						list = iberian_footholder_list
+						# Borders held lands in a non-Iberian kingdom you hold
+						any_de_jure_county = {
+							any_title_to_title_neighboring_and_across_water_county = { struggle_secure_assamite_foothold_outsider_kingdom_trigger = yes }
+						}
+						NOT = { is_in_list = iberian_footholder_transfer_list }
+					}
+				}
+				random_in_list = {
+					list = iberian_footholder_list
+					limit = {
+						# Borders held lands in a non-Iberian kingdom you hold
+						any_de_jure_county = {
+							any_title_to_title_neighboring_and_across_water_county = { struggle_secure_assamite_foothold_outsider_kingdom_trigger = yes }
+						}
+						NOT = { is_in_list = iberian_footholder_transfer_list }
+					}
+					random_de_jure_county = {
+						limit = {
+							any_title_to_title_neighboring_and_across_water_county = { struggle_secure_assamite_foothold_outsider_kingdom_trigger = yes }
+						}
+						random_title_to_title_neighboring_and_across_water_county = {
+							limit = { struggle_secure_assamite_foothold_outsider_kingdom_trigger = yes }
+							empire = { save_scope_as = transfer_empire }
+						}
+					}
+					add_to_list = iberian_footholder_transfer_list
+					set_de_jure_liege_title = scope:transfer_empire
+					custom_tooltip = iberian_footholder_transfer_tt
+				}
+			}
+		}
+		show_as_tooltip = {
+			every_in_list = {
+				list = iberian_footholder_transfer_list
+				set_de_jure_liege_title = scope:transfer_empire
+			}
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.100.a
+	}
+
+	after = {
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = { is_ai = no }
+				trigger_event = pod_assamite_struggle.101
+			}
+		}
+		# End Struggle
+		struggle:assamite_struggle = {
+			end_struggle = secure_assamite_foothold_decision_title
+		}
+	}
+}
+
+#Secure foothold decision ending info
+
+pod_assamite_struggle.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.100.t
+	desc =  pod_assamite_struggle.101.desc
+	theme = realm
+	left_portrait = {
+		character = scope:iberian_footholder
+		animation = war_over_win
+	}
+
+	trigger = {
+	}
+
+	immediate = {
+		show_as_tooltip = {
+			every_in_list = {
+				list = iberian_footholder_transfer_list
+				set_de_jure_liege_title = scope:transfer_empire
+			}
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.101.a
+		
+	}
+}
+
+#Lost tribe victory
+pod_assamite_struggle.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.102.t
+	desc = pod_assamite_struggle.102.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = scope:victorious_losttribe
+		animation = personality_zealous
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+
+	option = {
+		name = pod_assamite_struggle.102.a
+			
+		add_choleric_lifestyle_xp = 2000
+		add_sanguine_lifestyle_xp = 2000
+		
+		
+		add_prestige = massive_prestige_value
+		add_prestige_level = 2
+			
+		custom_tooltip = pod_assamite_struggle.102.custom
+	
+		hidden_effect = {		
+		every_living_character = {
+		limit = {
+			is_assamite_trigger = yes
+			NOT = { faith = root.faith }
+			NOT = { has_government = theocracy_government }
+			NOT = { this = this.faith.religious_head }
+		}
+		trigger_event = pod_assamite_struggle.103
+		}
+		}
+		
+		hidden_effect = {
+		every_player = { 
+		limit = {
+			is_assamite_trigger = no
+			NOT = { this = scope:victorious_losttribe }
+			}
+		trigger_event = pod_assamite_struggle.104
+			}
+		}		
+		
+		add_character_flag = victorious_assamite_struggle
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+		if = {
+			limit = {
+				title:e_assamites = {			
+				holder = { NOT = { this = scope:victorious_losttribe } }
+				holder = { character_any_involvement_assamite_struggle_trigger = yes }
+				}
+				}
+				create_title_and_vassal_change = {
+					type = created
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+		
+			title:e_assamites = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+		resolve_title_and_vassal_change = scope:change
+		hidden_effect = { set_primary_title_to = title:e_assamites }
+		}	
+		
+		# End Struggle
+		struggle:assamite_struggle = {
+			end_struggle = losttribe_victory_objective_decision_title
+		}
+		if = {
+			limit = { exists = global_var:influence_wok }
+			remove_global_variable = influence_wok
+		}
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			remove_global_variable = influence_silsila
+		}	
+		if = {
+			limit = { exists = global_var:influence_council }
+			remove_global_variable = influence_council
+		}
+		if = {
+			limit = { exists = global_var:influence_ashirra }
+			remove_global_variable = influence_ashirra
+		}
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			remove_global_variable = influence_losttribe
+		}		
+	}
+}
+
+pod_assamite_struggle.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.102.t
+	desc = pod_assamite_struggle.102.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = scope:victorious_losttribe
+		animation = personality_zealous
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+
+	option = {
+		name = pod_assamite_struggle.103.a
+		trigger = {
+			OR = {
+				is_ai = no
+				NOT = { has_trait = zealous } # Never!
+			}
+		}
+		set_character_faith = faith:cultofzilah
+		every_held_title = {
+			limit = { tier = tier_county }
+			set_county_faith = faith:cultofzilah
+		}
+		ai_chance = {
+			base = 80
+			modifier = { # Where the wind blows, I sail.
+				add = 20
+				has_trait = cynical
+			}
+		}
+	}
+	option = {
+		name = pod_assamite_struggle.103.b
+		ai_chance = {
+			base = 20
+			ai_value_modifier = {
+				ai_zeal = -1.0
+			}
+			modifier = {
+				add = 20
+				has_trait = zealous
+			}
+		}
+	}
+}
+
+pod_assamite_struggle.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.102.t
+	desc = pod_assamite_struggle.102.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = scope:victorious_losttribe
+		animation = personality_zealous
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+
+	option = {
+		name = pod_assamite_struggle.104.a
+	}
+}
+
+
+#Silsila victory
+pod_assamite_struggle.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.105.t
+	desc = pod_assamite_struggle.105.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = scope:victorious_silsila
+		animation = personality_bold
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+
+	option = {
+		name = pod_assamite_struggle.105.a
+			
+		add_character_flag = special_can_buy_claim_perk
+		custom_tooltip = silsila_victory_objective_decision_effect_tooltip
+		add_prestige = massive_prestige_value
+		add_prestige_level = 2
+		
+		hidden_effect = {
+		every_player = { 
+		limit = {
+			NOT = { this = scope:victorious_silsila }
+			}
+		trigger_event = pod_assamite_struggle.106
+			}
+		}		
+		
+		add_character_flag = victorious_assamite_struggle
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+		if = {
+			limit = {
+				title:e_assamites = {			
+				holder = { NOT = { this = scope:victorious_silsila } }
+				holder = { character_any_involvement_assamite_struggle_trigger = yes }
+				}
+				}
+				create_title_and_vassal_change = {
+					type = created
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+		
+			title:e_assamites = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+		resolve_title_and_vassal_change = scope:change
+		hidden_effect = { set_primary_title_to = title:e_assamites }
+		}	
+		
+		# End Struggle
+		struggle:assamite_struggle = {
+			end_struggle = silsila_victory_objective_decision_title
+		}
+		if = {
+			limit = { exists = global_var:influence_wok }
+			remove_global_variable = influence_wok
+		}
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			remove_global_variable = influence_silsila
+		}	
+		if = {
+			limit = { exists = global_var:influence_council }
+			remove_global_variable = influence_council
+		}
+		if = {
+			limit = { exists = global_var:influence_ashirra }
+			remove_global_variable = influence_ashirra
+		}
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			remove_global_variable = influence_losttribe
+		}		
+	}
+}
+
+
+pod_assamite_struggle.106 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.105.t
+	desc = pod_assamite_struggle.105.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = scope:victorious_silsila
+		animation = personality_bold
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+
+	option = {
+		name = pod_assamite_struggle.106.a
+	}
+}
+
+pod_assamite_struggle.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.107.t
+	desc = {
+		first_valid = {
+			desc = pod_assamite_struggle.107.opening
+		}
+		first_valid = { 
+		    triggered_desc = {
+		        trigger = { global_var:influence_wok >= 5 }
+		        desc = pod_assamite_struggle.107.wokdominant
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_wok = 4 }
+		        desc = pod_assamite_struggle.107.wokstrong
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_wok = 3 }
+		        desc = pod_assamite_struggle.107.wokmedium
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_wok = 2 }
+		        desc = pod_assamite_struggle.107.wokmediocre
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_wok = 1 }
+		        desc = pod_assamite_struggle.107.wokweak
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_wok <= 0 }
+		        desc = pod_assamite_struggle.107.woknone
+		    }
+		}
+		first_valid = { 
+		    triggered_desc = {
+		        trigger = { global_var:influence_ashirra >= 5 }
+		        desc = pod_assamite_struggle.107.ashirradominant
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_ashirra = 4 }
+		        desc = pod_assamite_struggle.107.ashirrastrong
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_ashirra = 3 }
+		        desc = pod_assamite_struggle.107.ashirramedium
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_ashirra = 2 }
+		        desc = pod_assamite_struggle.107.ashirramediocre
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_ashirra = 1 }
+		        desc = pod_assamite_struggle.107.ashirraweak
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_ashirra <= 0 }
+		        desc = pod_assamite_struggle.107.ashirranone
+		    }
+		}
+		first_valid = { 
+		    triggered_desc = {
+		        trigger = { global_var:influence_council >= 5 }
+		        desc = pod_assamite_struggle.107.councildominant
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_council = 4 }
+		        desc = pod_assamite_struggle.107.councilstrong
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_council = 3 }
+		        desc = pod_assamite_struggle.107.councilmedium
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_council = 2 }
+		        desc = pod_assamite_struggle.107.councilmediocre
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_council = 1 }
+		        desc = pod_assamite_struggle.107.councilweak
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_council <= 0 }
+		        desc = pod_assamite_struggle.107.councilnone
+		    }
+		}
+		first_valid = { 
+		    triggered_desc = {
+		        trigger = { global_var:influence_silsila >= 5 }
+		        desc = pod_assamite_struggle.107.silsiladominant
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_silsila = 4 }
+		        desc = pod_assamite_struggle.107.silsilastrong
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_silsila = 3 }
+		        desc = pod_assamite_struggle.107.silsilamedium
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_silsila = 2 }
+		        desc = pod_assamite_struggle.107.silsilamediocre
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_silsila = 1 }
+		        desc = pod_assamite_struggle.107.silsilaweak
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_silsila <= 0 }
+		        desc = pod_assamite_struggle.107.silsilanone
+		    }
+		}
+		first_valid = { 
+		    triggered_desc = {
+		        trigger = { global_var:influence_losttribe >= 5 }
+		        desc = pod_assamite_struggle.107.losttribedominant
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_losttribe = 4 }
+		        desc = pod_assamite_struggle.107.losttribestrong
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_losttribe = 3 }
+		        desc = pod_assamite_struggle.107.losttribemedium
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_losttribe = 2 }
+		        desc = pod_assamite_struggle.107.losttribemediocre
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_losttribe = 1 }
+		        desc = pod_assamite_struggle.107.losttribeweak
+		    }
+		    triggered_desc = { 
+		        trigger = { global_var:influence_losttribe <= 0 }
+		        desc = pod_assamite_struggle.107.losttribenone
+		    }
+		}		
+	}
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.a
+		
+		trigger_event = pod_assamite_struggle.108
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.b
+		
+		trigger_event = pod_assamite_struggle.109
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.c
+		
+		trigger_event = pod_assamite_struggle.110
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.d
+		
+		trigger_event = pod_assamite_struggle.111
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.e
+		
+		trigger_event = pod_assamite_struggle.112
+	}
+
+	option = {
+		name = pod_assamite_struggle.107.f
+		
+	}	
+}
+
+pod_assamite_struggle.108 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.108.t
+	desc = pod_assamite_struggle.108.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.a
+
+		custom_tooltip = faction_gain_influence_tt
+		
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.108.b
+
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		custom_tooltip = faction_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.c
+	}	
+}
+
+pod_assamite_struggle.109 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.109.t
+	desc = pod_assamite_struggle.109.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.a
+
+		custom_tooltip = faction_gain_influence_tt
+		
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra }
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.108.b
+
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		custom_tooltip = faction_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra }
+			change_global_variable = {
+				name = influence_ashirra
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.c
+	}	
+}
+
+pod_assamite_struggle.110 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.110.t
+	desc = pod_assamite_struggle.110.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.a
+
+		custom_tooltip = faction_gain_influence_tt
+		
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		if = {
+			limit = { exists = global_var:influence_council }
+			change_global_variable = {
+				name = influence_council
+				add = 1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.108.b
+
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		custom_tooltip = faction_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_council }
+			change_global_variable = {
+				name = influence_council
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.c
+	}	
+}
+
+pod_assamite_struggle.111 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.111.t
+	desc = pod_assamite_struggle.111.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.a
+
+		custom_tooltip = faction_gain_influence_tt
+		
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.108.b
+
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		custom_tooltip = faction_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.c
+	}	
+}
+
+pod_assamite_struggle.112 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.112.t
+	desc = pod_assamite_struggle.112.desc
+	theme = banu_haqim_coa
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.a
+
+		custom_tooltip = faction_gain_influence_tt
+		
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			change_global_variable = {
+				name = influence_losttribe
+				add = 1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.108.b
+
+		add_prestige = -500
+		remove_short_term_gold = 150
+		add_stress = medium_stress_gain
+		
+		custom_tooltip = faction_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			change_global_variable = {
+				name = influence_losttribe
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.108.c
+	}	
+}
+
+#Various events
+
+
+scripted_trigger pod_assamite_struggle_1000_valid_county = {
+	tier = tier_county 						# Only County titles.
+	any_in_de_facto_hierarchy = { 			#
+		exists = title_province				# With at least one Barony...
+	}
+}
+
+#Two guilds have come to an impasse over trade rights.
+pod_assamite_struggle.1000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1000.t
+	desc = pod_assamite_struggle.1000.desc
+	
+	theme = banu_haqim_coa
+	left_portrait = root
+	
+	trigger = {		
+		#Must hold a county with a city in it.
+		any_held_title = {
+			pod_assamite_struggle_1000_valid_county = yes
+		}
+		is_landless_adventurer = no
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+		random_held_title = {
+			limit = {
+				pod_assamite_struggle_1000_valid_county = yes
+			}
+			save_scope_as = heretic_county
+		}
+	}
+
+	#Favor the Wok over the LT
+	option = {
+		name = pod_assamite_struggle.1000.a
+
+		custom_tooltip = wok_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}		
+
+		scope:heretic_county = {
+			add_county_modifier = {
+				modifier = clashing_heretics_modifier
+				days = 3650
+			}
+		}
+	}
+	
+	#Favor the LT over the WoK
+	option = {
+		name = pod_assamite_struggle.1000.b
+
+		custom_tooltip = losttribe_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_losttribe
+				add = 1
+			}
+		}		
+
+		scope:heretic_county = {
+			add_county_modifier = {
+				modifier = clashing_heretics_modifier
+				days = 3650
+			}
+		}
+	}
+
+	#Manipulate each faction to end the conflict
+	option = {
+		name = pod_assamite_struggle.1000.c
+
+		duel = {
+			skill = intrigue
+			value = 15
+		
+			50 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+					min = -49
+				}
+				desc = pod_assamite_struggle.1000.a.success
+				send_interface_toast = {
+					type = event_toast_effect_good
+					left_icon = scope:heretic_county
+					title = pod_assamite_struggle.1000.a.success
+					add_intrigue_lifestyle_xp = 150
+				}
+			}
+			50 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -3.5
+					min = -49
+				}
+				desc = pod_assamite_struggle.1000.a.failure
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					left_icon = scope:heretic_county
+					title = pod_assamite_struggle.1000.a.failure
+					scope:heretic_county = {
+						add_county_modifier = {
+							modifier = clashing_heretics_modifier
+							days = 7300
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#None of them
+	option = {
+		name = pod_assamite_struggle.1000.d
+
+		custom_tooltip = wok_lose_influence_tt
+
+		custom_tooltip = losttribe_lose_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = -1
+			}
+		}
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_losttribe
+				add = -1
+			}
+		}
+		
+		scope:heretic_county = {
+			add_county_modifier = {
+				modifier = clashing_heretics_modifier
+				days = 7300
+			}
+		}
+		scope:heretic_county = {
+			change_county_control = -20
+		}
+
+	}
+}
+
+pod_assamite_struggle.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1001.t
+	desc = pod_assamite_struggle.1001.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		is_landless_adventurer = no
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+
+		#Save the scope of our county for the event.
+		capital_county = {
+			save_scope_as = guild_county
+		}
+	}
+
+	#Negotiate with the Ashirra
+	option = {
+		name = pod_assamite_struggle.1001.a
+
+		duel = {
+			skill = diplomacy
+			value = 15
+		
+			40 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 3.5
+					min = -39
+				}
+				desc = pod_assamite_struggle.1001.a.success
+				send_interface_toast = {
+					type = event_toast_effect_good
+					left_icon = scope:guild_county
+					title = pod_assamite_struggle.1001.a.success
+					add_diplomacy_lifestyle_xp = 150
+				}
+			}
+			60 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -3.5
+					min = -59
+				}
+				desc = pod_assamite_struggle.1001.a.failure
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					left_icon = scope:guild_county
+					title = pod_assamite_struggle.1001.a.failure
+					scope:guild_county = {
+						change_county_control = -50
+					}
+				}
+			}
+		}
+
+		stress_impact = {
+			shy = minor_stress_impact_gain
+		}
+	}
+
+	#Allow the Ashirra to do as they please
+	option = {
+		name = pod_assamite_struggle.1001.b
+
+		scope:guild_county = {
+			change_county_control = -25
+		}
+		
+		custom_tooltip = ashirra_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}		
+
+	}
+	
+	#Bring the hammer
+	option = {
+		name = pod_assamite_struggle.1001.c
+
+		custom_tooltip = ashirra_lose_influence_tt
+
+		add_tyranny = 10
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_ashirra
+				add = -1
+			}
+		}
+
+		stress_impact = {
+			compassionate = medium_stress_impact_gain
+			just = minor_stress_impact_gain
+		}
+
+	}
+}
+
+pod_assamite_struggle.1002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1002.t
+	desc = pod_assamite_struggle.1002.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1002.a
+
+		custom_tooltip = ashirra_gain_influence_tt
+
+		custom_tooltip = silsila_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_ashirra }
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1002.b
+
+		custom_tooltip = wok_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}	
+
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1002.c
+
+		custom_tooltip = council_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_council }
+			change_global_variable = {
+				name = influence_council
+				add = 1
+			}
+		}	
+
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1002.d
+
+		custom_tooltip = losttribe_gain_influence_tt
+
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			change_global_variable = {
+				name = influence_losttribe
+				add = 1
+			}
+		}	
+
+	}
+}
+
+pod_assamite_struggle.1003 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1003.t
+	desc = pod_assamite_struggle.1003.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1003.a
+
+		add_gold = 50
+
+		custom_tooltip = silsila_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1003.b
+		
+		trigger = {
+		OR = {
+			has_trait = sadistic	
+			has_trait = callous
+			}
+		}
+		add_dread = 20
+
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_religion = religion:roadofzarathustra_religion
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}	
+
+		custom_tooltip = silsila_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = -1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1003.c
+		
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_religion = religion:roadofzarathustra_religion
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}	
+
+		custom_tooltip = silsila_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = -1
+			}
+		}
+		
+		custom_tooltip = losttribe_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe }
+			change_global_variable = {
+				name = influence_losttribe
+				add = 1
+			}
+		}		
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1003.d
+		
+		add_prestige = 100
+
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_religion = religion:roadofzarathustra_religion
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -25
+				modifier = insult_opinion
+				}
+			}
+		}	
+
+		custom_tooltip = silsila_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila }
+			change_global_variable = {
+				name = influence_silsila
+				add = -1
+			}
+		}
+	}
+}
+
+pod_assamite_struggle.1004 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1004.t
+	desc = pod_assamite_struggle.1004.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		is_landless_adventurer = no
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1004.a
+
+		add_dread = 20
+
+		custom_tooltip = wok_gain_influence_tt
+	
+		capital_county = {
+			change_development_level = -2
+		}
+	
+		if = {
+			limit = { exists = global_var:influence_wok}
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1004.b
+
+		hidden_effect = {
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_faith = faith:pathofrighteousness
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}	
+		}
+		custom_tooltip = involved_knives_out_tt
+		custom_tooltip = wok_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = -1
+			}
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1004.c
+		
+		trigger = {
+			has_trait = auspexadvanced
+			}
+			
+		custom_tooltip = wok_lose_lot_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok }
+			change_global_variable = {
+				name = influence_wok
+				add = -2
+			}
+		}
+
+		hidden_effect = {
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_faith = faith:pathofrighteousness
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -100
+				modifier = insult_opinion
+				}
+			}
+		}	
+		}
+		custom_tooltip = involved_knives_out_lots_tt		
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1004.d
+		
+		add_prestige = -100
+
+		add_diplomacy_lifestyle_xp = 100
+	}
+}
+
+pod_assamite_struggle.1005 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1005.t
+	desc = pod_assamite_struggle.1005.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1005.a
+
+		remove_short_term_gold = 50
+	
+		custom_tooltip = wok_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok}
+			change_global_variable = {
+				name = influence_wok
+				add = -1
+			}
+		}
+
+		custom_tooltip = losttribe_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe}
+			change_global_variable = {
+				name = influence_losttribe
+				add = -1
+			}
+		}	
+
+		custom_tooltip = council_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_council}
+			change_global_variable = {
+				name = influence_council
+				add = -1
+			}
+		}		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1005.b
+		
+		trigger = {
+			has_trait = obfuscateadvanced
+		}
+
+		add_character_modifier = {
+			modifier = more_vigilant_recistance_modifier
+			years = 10
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1005.c
+		
+		custom_tooltip = council_lose_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_council }
+			change_global_variable = {
+				name = influence_council
+				add = -1
+			}
+		}
+
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					has_faith = faith:viaanima
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}			
+	}
+}
+
+pod_assamite_struggle.1006 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1006.t
+	desc = pod_assamite_struggle.1006.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1006.a
+
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					is_female = yes
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}
+	
+		custom_tooltip = wok_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok}
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}
+
+		custom_tooltip = ashirra_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra}
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}	
+		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1006.b
+	
+		custom_tooltip = silsila_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila}
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}	
+		
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1006.c
+		
+		trigger = {
+			is_female = yes
+		}
+
+		struggle:assamite_struggle = {
+			every_involved_ruler = {
+				limit = {
+					NOT = { this = root }	
+					is_female = no
+				}
+				add_opinion = {
+				target = ROOT
+				opinion = -50
+				modifier = insult_opinion
+				}
+			}
+		}
+	}
+}
+
+pod_assamite_struggle.1007 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1007.t
+	desc = pod_assamite_struggle.1007.desc
+	left_portrait = root
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1007.a
+	
+		custom_tooltip = ashirra_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra}
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}	
+		
+	}
+
+	option = {
+		name = pod_assamite_struggle.1007.b
+	
+		custom_tooltip = council_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_council}
+			change_global_variable = {
+				name = influence_council
+				add = 1
+			}
+		}	
+		
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1007.c
+	
+		custom_tooltip = silsila_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila}
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}	
+		
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1007.d
+	}	
+}
+
+pod_assamite_struggle.1008 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1008.t
+	desc = pod_assamite_struggle.1008.desc
+	left_portrait = root
+	right_portrait = character:790166
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		character:790166 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		NOT = { this = character:790166 }		
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1008.a
+	
+		custom_tooltip = council_gain_lot_influence_tt
+		
+		add_prestige = -100
+		
+		if = {
+			limit = { exists = global_var:influence_council}
+			change_global_variable = {
+				name = influence_council
+				add = 2
+			}
+		}	
+		
+		character:790166 = {
+			add_opinion = {
+				target = root
+				modifier = respect_opinion
+				opinion = 25
+			}	
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.1008.b
+			
+		add_prestige = -100
+		
+		character:790166 = {
+			add_opinion = {
+				target = root
+				modifier = angry_opinion
+				opinion = -25
+			}	
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1008.c
+	
+		custom_tooltip = council_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_council}
+			change_global_variable = {
+				name = influence_council
+				add = 1
+			}
+		}	
+	}
+	
+}
+
+pod_assamite_struggle.1009 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1009.t
+	desc = pod_assamite_struggle.1009.desc
+	left_portrait = root
+	right_portrait = character:790164
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		character:790164 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		NOT = { this = character:790164 }		
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1009.a
+	
+		custom_tooltip = wok_gain_lot_influence_tt
+		
+		remove_short_term_gold = 100
+		
+		if = {
+			limit = { exists = global_var:influence_wok}
+			change_global_variable = {
+				name = influence_wok
+				add = 2
+			}
+		}	
+		
+		character:790164 = {
+			add_opinion = {
+				target = root
+				modifier = respect_opinion
+				opinion = 25
+			}	
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.1009.b
+			
+		add_character_modifier = {
+			modifier = targetted_web_modifier
+			years = 10
+		}
+		
+		character:790166 = {
+			add_opinion = {
+				target = root
+				modifier = angry_opinion
+				opinion = -25
+			}	
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1009.c
+	
+		custom_tooltip = wok_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_wok}
+			change_global_variable = {
+				name = influence_wok
+				add = 1
+			}
+		}	
+	}
+	
+}
+
+pod_assamite_struggle.1010 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1010.t
+	desc = pod_assamite_struggle.1010.desc
+	left_portrait = root
+	right_portrait = character:790530
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		character:790530 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		NOT = { this = character:790530 }		
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1010.a
+	
+		custom_tooltip = silsila_gain_lot_influence_tt
+		
+		add_piety = 100
+		
+		if = {
+			limit = { exists = global_var:influence_silsila}
+			change_global_variable = {
+				name = influence_silsila
+				add = 2
+			}
+		}	
+		
+		character:790530 = {
+			add_opinion = {
+				target = root
+				modifier = respect_opinion
+				opinion = 25
+			}	
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.1010.b
+			
+		add_piety = -100
+		
+		character:790530 = {
+			add_opinion = {
+				target = root
+				modifier = angry_opinion
+				opinion = -25
+			}	
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1010.c
+	
+		custom_tooltip = silsila_gain_influence_tt
+		
+		if = {
+			limit = { exists = global_var:influence_silsila}
+			change_global_variable = {
+				name = influence_silsila
+				add = 1
+			}
+		}	
+	}
+	
+}
+
+pod_assamite_struggle.1011 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1011.t
+	desc = pod_assamite_struggle.1011.desc
+	left_portrait = root
+	right_portrait = character:605110
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		character:605110 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		NOT = { this = character:605110 }		
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1011.a
+	
+		custom_tooltip = ashirra_gain_lot_influence_tt
+		
+		add_character_modifier = {
+			modifier = jamal_levies_modifier
+			years = 15
+		}
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra}
+			change_global_variable = {
+				name = influence_ashirra
+				add = 2
+			}
+		}	
+		
+		character:605110 = {
+			add_opinion = {
+				target = root
+				modifier = respect_opinion
+				opinion = 25
+			}	
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.1011.b
+		
+		character:605110 = {
+			add_opinion = {
+				target = root
+				modifier = angry_opinion
+				opinion = -25
+			}	
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1011.c
+	
+		custom_tooltip = ashirra_gain_influence_tt
+
+		add_character_modifier = {
+			modifier = jamal_levies_modifier
+			years = 5
+		}
+		
+		if = {
+			limit = { exists = global_var:influence_ashirra}
+			change_global_variable = {
+				name = influence_ashirra
+				add = 1
+			}
+		}	
+	}
+	
+}
+
+
+pod_assamite_struggle.1012 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod_assamite_struggle.1012.t
+	desc = pod_assamite_struggle.1012.desc
+	left_portrait = root
+	right_portrait = character:790219
+	theme = banu_haqim_coa
+	
+	trigger = {		
+		character_any_involvement_assamite_struggle_trigger = yes
+		character:790219 = {
+			is_alive = yes
+			NOT = { has_trait = torpor }
+			}
+		NOT = { this = character:790219 }		
+	}
+
+	cooldown = { #this shouldn't fire too often
+		years = 30
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = pod_assamite_struggle.1012.a
+	
+		custom_tooltip = losttribe_gain_lot_influence_tt
+		
+		add_learning_lifestyle_xp = 500
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe}
+			change_global_variable = {
+				name = influence_losttribe
+				add = 2
+			}
+		}	
+		
+		character:790219 = {
+			add_opinion = {
+				target = root
+				modifier = respect_opinion
+				opinion = 25
+			}	
+		}
+	}
+
+	option = {
+		name = pod_assamite_struggle.1012.b
+		
+		character:790219 = {
+			add_opinion = {
+				target = root
+				modifier = angry_opinion
+				opinion = -25
+			}	
+		}
+	}
+	
+	option = {
+		name = pod_assamite_struggle.1012.c
+	
+		custom_tooltip = losttribe_gain_influence_tt
+
+		add_learning_lifestyle_xp = 200
+		
+		if = {
+			limit = { exists = global_var:influence_losttribe}
+			change_global_variable = {
+				name = influence_losttribe
+				add = 1
+			}
+		}	
+	}
+	
+}

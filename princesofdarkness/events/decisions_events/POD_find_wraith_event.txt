@@ -1,0 +1,80 @@
+﻿namespace = POD_find_wraith
+
+POD_find_wraith.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_find_wraith.100.t
+	desc = POD_find_wraith.100.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	right_portrait = {
+		character = scope:wraith_one
+	}
+
+	immediate = {
+		hidden_effect = {
+
+			#Uses a random template so that there is some variety
+			random_list = {
+				25 = {
+					create_character = {
+						location = root.capital_province
+						template = POD_mortal_choleric_character
+						save_scope_as = wraith_one
+					}
+				}
+				25 = {
+					create_character = {
+						location = root.capital_province
+						template = POD_mortal_melancholic_character
+						save_scope_as = wraith_one
+					}
+				}
+				25 = {
+					create_character = {
+						location = root.capital_province
+						template = POD_mortal_phlegmatic_character
+						save_scope_as = wraith_one
+					}
+				}
+				25 = {
+					create_character = {
+						location = root.capital_province
+						template = POD_mortal_sanguine_character
+						save_scope_as = wraith_one
+					}
+				}
+			}
+
+			#Turn mortal into a Wraith and make sure they're in the skinlands so they can be interacted with
+			scope:wraith_one = {
+				POD_become_wraith_effect = yes
+				POD_arcanoi_initiation_effect = yes
+				if = { 
+					limit = { has_character_modifier = caul_modifier }
+					remove_character_modifier = caul_modifier
+					remove_trait = torpor
+				}
+			}
+			add_courtier = scope:wraith_one
+			scope:wraith_one = {
+				hidden_effect = {
+					return_to_court = yes
+				}
+				add_character_flag = {
+					flag = blocked_from_leaving
+					years = 5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_find_wraith.100.option.a
+	}
+}

@@ -1,0 +1,263 @@
+﻿pod_ruler_artifact_map = {
+	effect = {
+		every_barony = {
+			if = {
+				limit = {
+					county.holder = {  
+						any_character_artifact = {
+							rarity = illustrious
+						}
+					}
+				}
+				set_color_from_title = title:d_tuyuhun
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_character_artifact = {
+							rarity = famed
+						}
+					}
+				}
+				set_color_from_title = title:c_amiens
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_character_artifact = {
+							rarity = masterwork
+						}
+					}
+				}
+				set_color_from_title = title:d_baghdad
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_character_artifact = {
+							rarity = common
+						}
+					}
+				}
+				set_color_from_title = title:d_alwa
+			}
+			else = {
+				set_color_from_title = title:k_angara
+			}
+		}
+	}
+}
+
+pod_guest_artifact_map = {
+	effect = {
+		every_barony = {
+			if = {
+				limit = {
+					county.holder = {  
+						any_courtier_or_guest = {
+							any_character_artifact = {
+								rarity = illustrious
+							}
+						}
+					}
+				}
+				set_color_from_title = title:d_tuyuhun
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_courtier_or_guest = {
+							any_character_artifact = {
+								rarity = famed
+							}
+						}
+					}
+				}
+				set_color_from_title = title:c_amiens
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_courtier_or_guest = {
+							any_character_artifact = {
+								rarity = masterwork
+							}
+						}
+					}
+				}
+				set_color_from_title = title:d_baghdad
+			}
+			else_if = {
+				limit = {
+					county.holder = {
+						any_courtier_or_guest = {
+							any_character_artifact = {
+								rarity = common
+							}
+						}
+					}
+				}
+				set_color_from_title = title:d_alwa
+			}
+			else = {
+				set_color_from_title = title:k_angara
+			}
+		}
+	}
+}
+
+
+pod_masquerade_map = {
+	effect = {
+		every_barony = {
+			if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade0_modifier
+					}
+				}
+				set_color_from_title = title:e_color_tremere
+			}
+			else_if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade1_modifier
+					}
+				}
+				set_color_from_title = title:k_persia
+			}
+			else_if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade2_modifier
+					}
+				}
+				set_color_from_title = title:e_color_kueijin
+			}
+			else_if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade3_modifier
+					}
+				}
+				set_color_from_title = title:k_feral_horde
+			}
+			else_if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade4_modifier
+					}
+				}
+				set_color_from_title = title:e_color_brujah
+			}
+			else_if = {
+				limit = {
+					county.holder = { 
+						has_character_modifier = masquerade5_modifier
+					}
+				}
+				set_color_from_title = title:k_zhetysu
+			}
+			else = {
+				set_color_from_title = title:k_angara
+			}
+		}
+	}
+	saved_scopes = { player }
+	is_shown = {
+		exists = scope:player
+		scope:player = { has_POD_public_vamp_blood_trigger = yes }
+	}
+}
+
+pod_fetter_map = {
+	effect = {
+		random_player = {
+			limit = { has_trait = wraith }
+			save_scope_as = observer
+			every_barony = {
+				if = {
+					limit = {
+						barony_controller = { 
+							OR = {
+								AND = {
+									has_variable = fetter_owner
+									var:fetter_owner = scope:observer
+								}
+								any_courtier_or_guest = {
+									AND = {
+										has_variable = fetter_owner
+										var:fetter_owner = scope:observer
+									}
+								}
+							}
+						}
+					}
+					set_color_from_title = title:e_color_vampire
+				}
+				else_if = {
+					limit = {
+						barony_controller = { 
+							OR = { 
+								any_character_artifact = {
+									AND = {
+										has_variable = fetter_owner
+										var:fetter_owner = scope:observer
+									}
+								}
+								any_courtier_or_guest = {
+									any_character_artifact = {
+										AND = {
+											has_variable = fetter_owner
+											var:fetter_owner = scope:observer
+										}
+									}
+								}
+							}
+						}
+					}
+					set_color_from_title = title:c_gyangze
+				}
+				else_if = {
+					limit = {
+						any_this_title_or_de_jure_above = {
+							scope:observer = { 
+								AND = {
+									has_variable = fetter_owner
+									var:fetter_owner = PREV
+								}
+							}
+						}
+					}
+					set_color_from_title = title:k_pagan
+				}
+				else = {
+					set_color_from_title = title:k_angara
+				}
+			}
+		}
+	}
+	saved_scopes = { player }
+	is_shown = {
+		exists = scope:player
+		scope:player = { has_perk = sense_strand_perk }
+	}
+}
+
+pod_reset_title_name = {
+	effect = {
+		POD_mapmode_reset_title_name_effect = yes
+	}
+}
+
+pod_splat_map = {
+	effect = {
+		POD_mapmode_splatmode_effect = yes
+	}
+}
+
+pod_clan_map = {
+	effect = {
+		POD_mapmode_clanmode_effect = yes
+	}
+}

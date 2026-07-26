@@ -1,0 +1,277 @@
+﻿POD_character_kueijin_faith_initialization_effect = {
+	save_temporary_scope_as = kueijin_init
+	random_list = {
+		15 = { set_character_faith = faith:flameoftherisingphoenix }
+		10 = { set_character_faith = faith:faceofthegods }
+		15 = { religion:deviltigers_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		10 = { religion:boneflowers_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		10 = { religion:resplendentcranes_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		15 = { religion:thrashingdragons_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		10 = { religion:thousandwhispers_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		10 = { religion:thousandhells_religion = { random_faith = { scope:kueijin_init = { set_character_faith = prev } } } }
+		10 = { set_character_faith = faith:inwardway }
+		5 = { set_character_faith = faith:wayofthetenthousandscreams }
+	}
+}
+
+POD_kueijin_random_perk_initialization_for_noble_effect = {
+	
+}
+
+POD_become_kueijin_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	POD_save_energy_level_before_splat_change = yes
+	hidden_effect = { POD_remove_splat_traits_effect = yes }
+	add_trait_force_tooltip = kueijin
+	if = {
+		limit = { exists = scope:saved_immortal_age }
+		hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+	}
+	hidden_effect = {
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		POD_remove_supernatural_relation_effect = yes
+		POD_side_effects_from_changing_splats = yes
+	}
+	add_trait = dharma0
+	hidden_effect = {
+		POD_kueijin_initialization_effect = yes
+	}
+	if = {
+		limit = { is_ai = no }
+		trigger_event = podintroductions.5102
+	}
+}
+
+POD_dhampyr_initialization_effect = {
+	if = {
+		limit = {
+			NOR = {
+				religion = { is_in_family = rf_kueijin }
+				POD_has_valid_splat_agnostic_faith = yes
+			}
+		}
+		POD_character_kueijin_faith_initialization_effect = yes
+	}
+	if = {
+		limit = {
+			NOT = { has_character_modifier = joss_modifier }
+		}
+		add_character_modifier = joss_modifier
+	}
+	if = { # Placeholder
+		limit = { has_dharma_trigger = no }
+		POD_set_dharma_effect = yes
+	}
+}
+
+POD_kueijin_initialization_effect = {
+	if = {
+		limit = { has_dharma_trigger = no }
+		POD_set_dharma_effect = yes
+	}
+	if = {
+		limit = {
+			NOR = {
+				religion = { is_in_family = rf_kueijin }
+				POD_has_valid_splat_agnostic_faith = yes
+			}
+		}
+		POD_character_kueijin_faith_initialization_effect = yes
+	}
+	POD_assing_age_modifier_effect = yes
+	add_character_flag = immune_to_disease
+}
+
+POD_kj_ai_adoption_effect = {
+	if = {
+		limit = {
+			$PARENT$ = {
+				is_ai = yes
+				has_trait = kueijin
+				dynasty = dynasty:10000022
+				age > prev.age
+				trigger_if = {
+					limit = { highest_held_title_tier >= tier_county }
+					any_child = { is_alive = yes count < 2 }
+				}
+				trigger_else = {
+					any_child = { is_alive = yes count < 1 }
+				}
+				POD_is_clone_trigger = no
+			}
+		}
+		POD_set_parent_effect = { PARENT = $PARENT$ }
+	}
+}
+
+POD_kj_art_cost_effect = {
+	# bandaid fix to allow arhats to use 100 mental strain abilities without losing dharma
+	# no longer necessary if KJ get a real resource again
+	save_scope_value_as = {
+		name = kj_art_cost
+		value = {
+			value = $COUNT$
+			multiply = chi_cost_multiplier_from_dharma
+			ceiling = yes
+		}
+	}
+	POD_splat_agnostic_energy_cost = {
+		COUNT = scope:kj_art_cost
+	}
+}
+
+POD_soul_arts_perk_cost_effect = {
+	hidden_effect = {
+		save_scope_value_as = {
+			name = cost
+			value = {
+				value = $VALUE$
+				add = -1
+				multiply = -1
+			}
+		}
+		add_soul_arts_lifestyle_perk_points = scope:cost
+	}
+	custom_description_no_bullet = {
+		text = additional_perk_cost_effect
+		value = $VALUE$
+	}
+}
+
+POD_chi_arts_realigning_the_stars_interaction_effect = {
+	if = {
+		limit = { scope:actor = { has_perk = chi_arts_substitution_of_the_twelve_perk } }
+		add_character_modifier = chi_arts_realigning_the_stars_$TYPE$_modifier
+	}
+	else_if = {
+		limit = { scope:actor = { has_perk = chi_arts_reweaving_the_stars_perk } }
+		add_character_modifier = {
+			modifier = chi_arts_realigning_the_stars_$TYPE$_modifier
+			years = 10
+		}
+	}
+	else = {
+		add_character_modifier = {
+			modifier = chi_arts_realigning_the_stars_$TYPE$_modifier
+			years = 5
+		}
+	}
+}
+
+POD_shintai_perk_cost_effect = {
+	if = {
+		limit = {
+			is_ai = no
+		}
+		if = {
+			limit = { has_perk = $PERK$ }
+			hidden_effect = {
+				if = {
+					limit = { $LEVEL$ <= 4 }
+					POD_require_dharma_tooltip_effect = { LEVEL = $LEVEL$ }
+				}
+				else = {
+					if = {
+						limit = { dharma_level < shinta_mastery_dharma_requirement }
+						POD_require_dharma_tooltip_effect = { LEVEL = shinta_mastery_dharma_requirement }
+					}
+				}
+				switch = {
+					trigger = flag:$TYPE$
+					fallback = {
+						POD_increase_wounds_effect = {
+							REASON = self_mutilation
+							COUNT = POD_self_mutilation_base_damage
+						}
+					}
+				}
+				if = {
+					limit = {
+						flag:$TYPE$ = flag:shintai_storms
+						POD_gains_haha_no_fukami_dharma_xp = yes
+					}
+					POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium }
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { $LEVEL$ <= 4 }
+				POD_require_dharma_tooltip_effect = { LEVEL = $LEVEL$ }
+			}
+			else = {
+				if = {
+					limit = { dharma_level < shinta_mastery_dharma_requirement }
+					POD_require_dharma_tooltip_effect = { LEVEL = shinta_mastery_dharma_requirement }
+				}
+			}
+			switch = {
+				trigger = flag:$TYPE$
+				fallback = {
+					POD_increase_wounds_effect = {
+						REASON = self_mutilation
+						COUNT = POD_self_mutilation_base_damage
+					}
+				}
+			}
+			if = {
+				limit = {
+					flag:$TYPE$ = flag:shintai_storms
+					POD_gains_haha_no_fukami_dharma_xp = yes
+				}
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium }
+			}
+		}
+	}
+}
+
+POD_shintai_of_devotion_refresh_coterie_effect = {
+	if = {
+		limit = {
+			any_relation = {
+				type = coterie_member
+				has_perk = shintai_touch_of_the_asura_perk
+			}
+		}
+		add_character_modifier = shintai_touch_of_the_asura_modifier
+	}
+	else = {
+		POD_remove_character_modifier = { MODIFIER = shintai_touch_of_the_asura_modifier }
+	}
+	every_relation = {
+		type = coterie_member
+		limit = {
+			has_perk = shintai_the_shintai_of_devotion_perk
+			NOT = {
+				has_hook_of_type = {
+					type = eternal_loyalty_hook
+					target = prev
+				}
+			}
+		}
+		add_hook = {
+			type = eternal_loyalty_hook
+			target = prev
+		}
+	}
+}
+
+POD_clear_shintai_of_devotion_hooks = {
+	every_relation = {
+		type = coterie_member
+		limit = {
+			has_perk = shintai_the_shintai_of_devotion_perk
+			has_hook_of_type = {
+				type = eternal_loyalty_hook
+				target = prev
+			}
+		}
+		remove_hook = {
+			type = eternal_loyalty_hook
+			target = prev
+		}
+	}
+}

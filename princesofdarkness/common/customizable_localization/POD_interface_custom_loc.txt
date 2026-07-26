@@ -1,0 +1,172 @@
+﻿ventrue_ephorate_support = {
+	type = character
+
+	text = {
+		trigger = { has_character_flag = support_senate_flag }
+		localization_key = support_senate_loc
+	}
+
+	text = {
+		trigger = { has_character_flag = support_eternal_flag }
+		localization_key = support_eternal_loc
+	}
+
+	text = {
+		trigger = { has_character_flag = support_merchants_flag }
+		localization_key = support_merchants_loc
+	}
+
+	text = {
+		trigger = { has_character_flag = support_patricians_flag }
+		localization_key = support_patricians_loc
+	}
+
+	text = {
+		trigger = { has_character_flag = support_knights_flag }
+		localization_key = support_knights_loc
+	}
+}
+
+PODHintWindow = {
+	type = character
+
+	text = {
+		trigger = { var:resource_hint_window ?= flag:blood }
+		localization_key = POD_hint_window_hunger
+	}
+	text = {
+		trigger = { var:resource_hint_window ?= flag:glamour }
+		localization_key = POD_hint_window_glamour
+	}
+	text = {
+		localization_key = POD_hint_window_error
+	}
+}
+
+PODBloodPotencyHint = {
+	type = character
+
+	text = {
+		trigger = { has_any_blood_potency_modifier = yes }
+		localization_key = POD_hint_bloodpotency
+	}
+	text = {
+		localization_key = blank_line
+	}
+}
+
+PODVitaeDependencyHint = {
+	type = character
+
+	text = {
+		trigger = { has_trait = ghoul }
+		localization_key = POD_hint_vitaedependency
+	}
+	text = {
+		localization_key = blank_line
+	}
+}
+
+PODBloodRegenHint = {
+	type = character
+
+	text = {
+		trigger = { has_trait = revenant }
+		localization_key = POD_hunger_window_regen_revenant
+	}
+	text = {
+		trigger = { has_trait = dhampir }
+		localization_key = POD_hunger_window_regen_dhampir
+	}
+}
+
+PODHerdifyHint = {
+	type = character
+
+	text = {
+		trigger = { has_trait = dhampir }
+		localization_key = POD_hunger_window_herdify_dhampir
+	}
+	text = {
+		localization_key = POD_hunger_window_herdify_vampire
+	}
+}
+
+PODMasqueradeHint = {
+	type = character
+
+	text = {
+		trigger = {
+			has_character_modifier = masquerade0_modifier
+		}
+		localization_key = POD_hint_masquerade_maximum
+	}
+	text = {
+		trigger = {
+			is_character_interaction_valid = {
+				recipient = this
+				interaction = POD_cover_masquerade_interaction
+			}
+		}
+		localization_key = POD_hint_masquerade_valid
+	}
+	text = {
+		trigger = { masquerade_exposure_level <= minimum_masquerade_exposure }
+		localization_key = POD_hint_masquerade_invalid_cap
+	}
+	text = {
+		localization_key = POD_hint_masquerade_invalid_cooldown
+	}
+}
+
+PODGlamourRegenHint = {
+	type = character
+
+	text = {
+		trigger = { has_trait = fae }
+		localization_key = POD_glamour_window_regen_fae
+	}
+	text = {
+		trigger = { has_trait = changeling }
+		localization_key = POD_glamour_window_regen_changeling
+	}
+}
+
+# Need to pass color_root (either a character, story_cycle, or dynasty_house)
+PODClothingColors = {
+	type = all
+
+	text = {
+		trigger = {
+			scope:color_root ?= { POD_has_any_clothing_color = yes }
+		}
+		localization_key = POD_clothing_colors
+	}
+
+	text = {
+		localization_key = POD_clothing_colors_none
+	}
+}
+
+PODClothingColorsCoterie = {
+	type = all
+
+	text = {
+		trigger = {
+			has_variable = coterie
+		}
+		localization_key = POD_clothing_colors_coterie
+	}
+
+	text = {
+		localization_key = POD_clothing_colors_none
+	}
+}
+
+PODSavedColor = {
+	type = story
+
+	text = {
+		localization_key = POD_clothing_colors_single
+	}
+}

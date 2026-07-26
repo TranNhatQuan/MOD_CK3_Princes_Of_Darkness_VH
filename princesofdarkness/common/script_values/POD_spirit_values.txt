@@ -1,0 +1,334 @@
+﻿
+#################
+#### Spirits ####
+#################
+POD_spirit_rank_xp_threshold = 25
+
+POD_spirit_rank_xp = {
+	value = 0
+	add = "this.has_trait_xp(spirit)"
+}
+
+POD_spirit_rank = {
+	value = POD_spirit_rank_xp
+	divide = POD_spirit_rank_xp_threshold
+	floor = yes
+	add = 1
+}
+
+POD_spirit_initial_rank = {
+	value = 0
+
+	#Education
+	if = {
+		limit = { has_education_rank_5_trigger = yes }
+		add = 25
+	}
+	else_if = {
+		limit = { has_education_rank_4_trigger = yes }
+		add = 20
+	}
+	else_if = {
+		limit = { has_education_rank_3_trigger = yes }
+		add = 15
+	}
+	else_if = {
+		limit = { has_education_rank_2_trigger = yes }
+		add = 10
+	}
+
+	#Relevant Physical traits
+	if = {
+		limit = { has_trait = beauty_good_3 }
+		add = 15
+	}
+	else_if = {
+		limit = { has_trait = beauty_good_2 }
+		add = 10
+	}
+	else_if = {
+		limit = { has_trait = beauty_good_1 }
+		add = 5
+	}
+	if = {
+		limit = { has_trait = intellect_good_3 }
+		add = 15
+	}
+	else_if = {
+		limit = { has_trait = intellect_good_2 }
+		add = 10
+	}
+	else_if = {
+		limit = { has_trait = intellect_good_1 }
+		add = 5
+	}
+	if = {
+		limit = { has_trait = physique_good_3 }
+		add = 15
+	}
+	else_if = {
+		limit = { has_trait = physique_good_2 }
+		add = 10
+	}
+	else_if = {
+		limit = { has_trait = physique_good_1 }
+		add = 5
+	}
+	if = {
+		limit = { has_trait = shrewd }
+		add = 10
+	}
+	if = {
+		limit = { has_trait = strong }
+		add = 10
+	}
+	if = {
+		limit = { has_trait = berserker }
+		add = 5
+	}
+
+	add = {
+		value = {
+			add = diplomacy
+			add = martial
+			add = stewardship
+			add = intrigue
+			add = learning
+			add = prowess
+
+			multiply = 0.6
+			floor = yes
+		}
+	}
+
+	#Fame and Devotion
+	if = {
+		limit = { prestige_level > 1 }
+		add = {
+			value = prestige_level
+			multiply = 2
+		}
+	}
+	if = {
+		limit = { piety_level > 1 }
+		add = {
+			value = piety_level
+			multiply = 2
+		}
+	}
+
+	#Fera
+	if = {
+		limit = { has_variable = fera_pre_ancestor_rank }
+		add = {
+			value = var:fera_pre_ancestor_rank
+
+			multiply = 2
+		}
+	}
+	
+	max = 100
+}
+
+POD_spirit_summoner_boost_xp = {
+	#Summoner Perks and Effects
+	if = {
+		limit = {
+			scope:spawning_character ?= { has_character_modifier = wutian_ninth_immortal }
+		}
+		add = 15
+	}
+
+	if = {
+		limit = {
+			scope:spawning_character ?= { has_perk = prelude_to_apocalypse_perk }
+		}
+		add = 10
+	}
+
+
+	if = {
+		limit = { scope:spawning_character.domicile ?= { has_domicile_building_or_higher = mokole_spirit_infuser_01 } }
+		if = {
+			limit = {
+				scope:spawning_character.domicile ?= { has_domicile_building = mokole_spirit_infuser_06 }
+			}
+			add = 10
+		}
+		else_if = {
+			limit = { scope:spawning_character.domicile ?= { has_domicile_building = mokole_spirit_infuser_05 } }
+			add = 8
+		}
+		else_if = {
+			limit = { scope:spawning_character.domicile ?= { has_domicile_building = mokole_spirit_infuser_04 } }
+			add = 6
+		}
+		else_if = {
+			limit = { scope:spawning_character.domicile ?= { has_domicile_building = mokole_spirit_infuser_03 } }
+			add = 4
+		}
+		else_if = {
+			limit = { scope:spawning_character.domicile ?= { has_domicile_building = mokole_spirit_infuser_02 } }
+			add = 2
+		}
+		else = { add = 1 }
+	}
+
+	if = {
+		limit = {
+			scope:spawning_character ?= { any_equipped_character_artifact = { has_variable = bane_lantern prev = { can_benefit_from_artifact = prev } } }
+		}
+		add = 5
+	}
+}
+
+POD_spirit_summoner_boost_stats = {
+	value = POD_spirit_summoner_boost_xp
+
+	divide = 3
+	floor = yes
+}
+
+
+POD_ancestor_spirit_chance = {
+	value = 0
+
+	add = {
+		value = POD_fera_rank_value
+		multiply = 5
+	}
+
+	#Extra boost to max rank fera
+	if = {
+		limit = { POD_fera_rank_value = 6 }
+		add = 20
+	}
+
+	if = {
+		limit = { piety_level > 1 }
+		add = {
+			value = piety_level
+			multiply = 3
+		}
+	}
+
+	max = 100
+}
+
+#########################
+#### Human Companion ####
+#########################
+
+POD_spirit_chiminage_gain = {
+	value = 4
+
+
+	if = {
+		limit = { any_relation = { type = human_companion has_perk = mokole_spirit_speech_perk } }
+		multiply = 1.15
+	}
+
+	if = {
+		limit = { any_relation = { type = human_companion dynasty ?= { has_dynasty_perk = gumagan_legacy_1 } } }
+		multiply = 1.25
+	}
+
+
+	if = {
+		limit = { any_relation = { type = human_companion domicile ?= { has_domicile_building = mokole_spirit_guides_06 } } }
+		multiply = 1.25
+	}
+	else_if = {
+		limit = { any_relation = { type = human_companion domicile ?= { has_domicile_building = mokole_spirit_guides_05 } } }
+		multiply = 1.2
+	}
+	else_if = {
+		limit = { any_relation = { type = human_companion domicile ?= { has_domicile_building = mokole_spirit_guides_04 } } }
+		multiply = 1.15
+	}
+	else_if = {
+		limit = { any_relation = { type = human_companion domicile ?= { has_domicile_building = mokole_spirit_guides_03 } } }
+		multiply = 1.1
+	}
+	else_if = {
+		limit = { any_relation = { type = human_companion domicile ?= { has_domicile_building = mokole_spirit_guides_02 } } }
+		multiply = 1.05
+	}
+
+	if = {
+		limit = {
+			any_relation = {
+				type = human_companion
+				any_equipped_character_artifact ?= { has_variable = spirit_jar prev = { can_benefit_from_artifact = prev } }
+			}
+		}
+		multiply = 1.15
+	}
+
+
+	##Keep these at the end
+	if = {
+		limit = { scope:chiminage_mult ?= 3 }
+		multiply = 3
+	}
+	else_if = {
+		limit = { scope:chiminage_mult ?= 2 }
+		multiply = 2
+	}
+}
+
+
+POD_spirit_possession_very_weak_threshold = 4
+POD_spirit_possession_weak_threshold = 6
+POD_spirit_possession_strong_threshold = 9
+
+POD_spirit_wyrm_possession_power = {
+	value = 0
+
+	add = POD_spirit_rank
+
+	if = {
+		limit = { knows_language = language_corrupting_voice }
+		add = 2
+	}
+
+	if = {
+		limit = { var:spirit_type = flag:spirit_seeder }
+		add = POD_spirit_rank
+	}
+
+	if = {
+		limit = { knows_language = language_tainted_speech }
+		add = 4
+	}
+
+	if = {
+		limit = { scope:target.faith = { has_doctrine_parameter = wyrm_possession_power_faith_bonus_t1 } }
+		add = 2
+	}
+	# if = {
+	# 	limit = { scope:target.faith = { has_doctrine_parameter = wyrm_possession_power_faith_bonus_t2 } }
+	# 	add = 4
+	# }
+}
+
+
+##################
+#### Fetishes ####
+##################
+
+POD_equipped_fetish_artifacts_value = {
+	value = 0
+
+	if = {
+		limit = { any_character_artifact = { is_equipped = yes has_variable = fetish_artifact } }
+		add = {
+			value = {
+				every_equipped_character_artifact = {
+					limit = { has_variable = fetish_artifact }
+					add = 1
+				}
+			}
+		}
+	}
+}

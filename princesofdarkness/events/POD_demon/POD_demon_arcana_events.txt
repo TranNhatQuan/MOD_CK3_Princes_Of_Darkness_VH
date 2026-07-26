@@ -1,0 +1,157 @@
+﻿namespace = POD_demon_arcana
+
+scripted_trigger POD_can_pay_for_arsenal = {
+	piety >= 250
+	POD_has_enough_resolve_for_power = { COUNT = 1 }
+}
+
+scripted_effect POD_arsenal_cost_effect = {
+	add_piety = -250
+	POD_resolve_cost_effect = { COUNT = 1 }
+}
+
+POD_demon_arcana.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_demon_arcana.100.t
+	desc = POD_demon_arcana.100.desc
+	theme = demon
+
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	right_portrait = {
+		character = scope:recipient
+		animation = idle
+	}
+
+	option = {
+		name = POD_demon_arcana.100.a
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_claws } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_claws }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.b
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_fangs } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_fangs }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.c
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_gaping_maw } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_gaping_maw }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.d
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_horns } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_horns }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.e
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_lashing_tail } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_lashing_tail }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.f
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_poison } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_poison }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.g
+		trigger = {
+			scope:recipient = {
+				has_character_flag = arsenal_of_the_beast_poison
+				NOT = { has_character_flag = arsenal_of_the_beast_venom_spit }
+			}
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_venom_spit }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.h
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_spines } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_spines }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.i
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_tentacles } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_tentacles }
+	}
+
+	option = {
+		name = POD_demon_arcana.100.j
+		trigger = {
+			scope:recipient = { NOT = { has_character_flag = arsenal_of_the_beast_wings } }
+			POD_can_pay_for_arsenal = yes
+		}
+		show_as_unavailable = { POD_can_pay_for_arsenal = no }
+		
+		POD_arsenal_cost_effect = yes
+		scope:recipient = { add_character_flag = arsenal_of_the_beast_wings }
+	}
+
+	option = {
+		name = POD_change_personality.100.option.c
+		remove_interaction_cooldown = POD_arcana_shapeshift_interaction
+	}
+}

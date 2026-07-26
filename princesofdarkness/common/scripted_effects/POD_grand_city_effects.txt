@@ -1,0 +1,903 @@
+﻿POD_grand_city_initialization_effect = {
+	if = {
+		limit = { rome_has_wrong_holder_trigger = yes }
+		POD_reset_rome_effect = yes
+	}
+	if = {
+		limit = { constantinople_has_wrong_holder_trigger = yes }
+		POD_reset_constantinople_effect = yes
+	}
+	if = {
+		limit = { paris_has_wrong_holder_trigger = yes }
+		POD_reset_paris_effect = yes
+	}
+	if = {
+		limit = { cairo_has_wrong_holder_trigger = yes }
+		POD_reset_cairo_effect = yes
+	}
+	# reset jerusalem regardless, to initialize the buildings
+	POD_reset_jerusalem_effect = yes
+}
+
+POD_add_building_and_expand_slots = {
+	if = {
+		limit = { has_free_building_slot = no }
+		save_scope_value_as = {
+			name  = added_building_slots
+			value = 0
+		}
+		while = {
+			limit = { has_free_building_slot = no }
+			add_province_modifier = extra_building_slot
+			POD_increment_scope_value = { SCOPE = added_building_slots }
+		}
+		add_building = $BUILDING$
+		while = {
+			count = scope:added_building_slots
+			remove_province_modifier = extra_building_slot
+		}
+	}
+	else = {
+		add_building = $BUILDING$
+	}
+}
+
+POD_reset_grand_city_effect = {
+	set_holding_type = grand_city_holding
+	if = {
+		limit = { barony = title:b_roma }
+		POD_reset_rome_effect = yes
+	}
+	if = {
+		limit = { barony = title:b_constantinople }
+		POD_reset_constantinople_effect = yes
+	}
+	if = {
+		limit = { barony = title:b_paris }
+		POD_reset_paris_effect = yes
+	}
+	if = {
+		limit = { barony = title:b_cairo }
+		POD_reset_cairo_effect = yes
+	}
+	if = {
+		limit = { barony = title:b_jerusalem }
+		POD_reset_jerusalem_effect = yes
+	}
+}
+
+POD_reset_grand_cities_on_splat_change = {
+	if = {
+		limit = {
+			has_title = title:c_roma
+			rome_has_wrong_holder_trigger = yes
+		}
+		POD_reset_rome_effect = yes
+	}
+	if = {
+		limit = {
+			has_title = title:c_ile_de_france
+			paris_has_wrong_holder_trigger = yes
+		}
+		POD_reset_paris_effect = yes
+	}
+	if = {
+		limit = {
+			has_title = title:c_cairo
+			cairo_has_wrong_holder_trigger = yes
+		}
+		POD_reset_cairo_effect = yes
+	}
+	#technically, Jerusalem isn't dependent on the splat
+	#however, changing splat often changes your religion too
+	if = {
+		limit = {
+			has_title = title:c_jerusalem
+			jerusalem_has_wrong_holder_trigger = yes
+		}
+		POD_reset_jerusalem_effect = yes
+	}
+}
+
+
+##########################
+######### Rome ###########
+##########################
+
+POD_reset_rome_effect = {
+	title:b_roma = {
+		county = {
+			if = {
+				limit = { has_county_modifier = san_michele_modifier }
+				remove_county_modifier = san_michele_modifier
+			}
+		}
+		title_province = {
+			set_holding_type = tribal_holding
+			set_holding_type = grand_city_holding
+			remove_building = rome_roma_aeterna_01
+			remove_building = rome_roma_aeterna_02
+			remove_building = rome_roma_aeterna_03
+			remove_building = rome_st_peters_city_01
+			remove_building = rome_st_peters_city_02
+			remove_building = rome_st_peters_city_03
+			remove_building = rome_eternal_rome_01
+			remove_building = rome_eternal_rome_02
+			remove_building = rome_eternal_rome_03
+			
+			if = {
+				limit = { building_requirement_roma_aeterna = yes }
+				POD_build_roma_aeterna_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_st_peters_city = yes }
+				POD_build_st_peters_city_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_eternal_rome = yes }
+				POD_build_eternal_rome_effect = yes
+			}
+			else = {
+				POD_build_tribal_rome_effect = yes
+			}
+		}
+	}
+}
+
+POD_build_roma_aeterna_effect = {
+	title:b_roma.title_province = {
+		add_special_building = rome_roma_aeterna_01
+	}
+}
+
+POD_build_st_peters_city_effect = {
+	title:b_roma.title_province = {
+		add_special_building = rome_st_peters_city_01
+		if = {
+			# give the AI the buildings immediately because they're slow at decisions
+			limit = { barony_controller = { is_ai = yes } }
+			POD_build_san_michele_effect = yes
+		}
+	}
+}
+
+POD_build_eternal_rome_effect = {
+	title:b_roma.title_province = {
+		add_special_building = rome_eternal_rome_01
+		add_building = rome_colosseum_01
+		add_building = rome_hadrianstomb_01
+		add_building = rome_aqueduct_01
+		#add_building = rome_pasquino_01 # wasn't unearthed until the 15th century
+	}
+}
+
+# Triggered via decision, not automatically
+POD_build_san_michele_effect = {
+	title:b_roma = {
+		county = {
+			if = {
+				limit = { NOT = { has_county_modifier = san_michele_modifier } }
+				add_county_modifier = san_michele_modifier
+			}
+		}
+		title_province = {
+			# Build rank 1 buildings (minor bonuses)
+			add_building = rome_san_michele_library_01
+			add_building = rome_san_michele_aedificium_01
+			add_building = rome_san_michele_reliquary_01
+			POD_add_building_and_expand_slots = {
+				BUILDING = rome_san_michele_basilica_01
+			}
+			POD_add_building_and_expand_slots = {
+				BUILDING = rome_san_michele_cloisters_01
+			}
+		}
+	}
+}
+
+POD_build_tribal_rome_effect = {
+	title:b_roma.title_province = {
+		set_holding_type = tribal_holding
+		add_building = rome_tiber_01
+	}
+}
+
+
+##########################
+##### Constantinople #####
+##########################
+
+POD_reset_constantinople_effect = {
+	title:b_constantinople = {
+		title_province = {
+			set_holding_type = tribal_holding
+			set_holding_type = grand_city_holding
+			remove_building = constantinople_plundered_constantinople_01
+			remove_building = constantinople_plundered_constantinople_02
+			remove_building = constantinople_plundered_constantinople_03
+			remove_building = constantinople_rebuild_constantinople_01
+			remove_building = constantinople_rebuild_constantinople_02
+			remove_building = constantinople_rebuild_constantinople_03
+			remove_building = constantinople_reform_constantinople_01
+			remove_building = constantinople_reform_constantinople_02
+			remove_building = constantinople_reform_constantinople_03
+			
+			if = {
+				limit = { building_plundered_constantinople = yes }
+				POD_build_plundered_constantinople_effect = yes
+			}
+			else_if = {
+				limit = { building_rebuild_constantinople = yes }
+				POD_build_rebuild_constantinople_effect = yes
+			}
+			else_if = {
+				limit = { building_reform_constantinople = yes }
+				POD_build_reform_constantinople_effect = yes
+			}
+			else = {
+				POD_build_tribal_constantinople_effect = yes
+			}
+		}
+	}
+}
+
+# province scope
+POD_constantinople_gain_plunder_reward = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { exists = var:plundered_$BUILDING$_level }
+				var:plundered_$BUILDING$_level < $LEVEL$
+			}
+		}
+		barony.holder = {
+			$REWARD$
+		}
+		set_variable = {
+			name  = plundered_$BUILDING$_level
+			value = $LEVEL$
+		}
+	}
+	if = {
+		limit = { $LEVEL$ >= 6 }
+		barony.holder = { trigger_event = POD_maintenance.23 }
+	}
+}
+
+POD_constantinople_reset_plundered_building_to_previous_max = {
+	if = {
+		limit = { NOT = { exists = var:plundered_$BUILDING$_level } }
+		set_variable = {
+			name  = plundered_$BUILDING$_level
+			value = 1
+		}
+	}
+	add_building = constantinople_plundered_$BUILDING$_01
+	if = {
+		limit = { var:plundered_$BUILDING$_level >= 2 }
+		add_building = constantinople_plundered_$BUILDING$_02
+		if = {
+			limit = { var:plundered_$BUILDING$_level >= 3 }
+			add_building = constantinople_plundered_$BUILDING$_03
+			if = {
+				limit = { var:plundered_$BUILDING$_level >= 4 }
+				add_building = constantinople_plundered_$BUILDING$_04
+				if = {
+					limit = { var:plundered_$BUILDING$_level >= 5 }
+					add_building = constantinople_plundered_$BUILDING$_05
+					if = {
+						limit = { var:plundered_$BUILDING$_level >= 6 }
+						add_building = constantinople_plundered_$BUILDING$_06
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_build_plundered_constantinople_effect = {
+	title:b_constantinople.title_province = {
+		if = {
+			limit = { NOT = { has_building_or_higher = constantinople_plundered_constantinople_01 } }
+			add_special_building = constantinople_plundered_constantinople_01
+		}
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = great_palace }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = the_hippodrome }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = harbor_of_sophia }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = the_great_bazar }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = hagia_sophia }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = monastery_of_st_myrelaion }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = seraglio_lighthouse }
+		POD_constantinople_reset_plundered_building_to_previous_max = { BUILDING = aqueduct_of_valens }
+	}
+}
+
+POD_build_rebuild_constantinople_effect = {
+	title:b_constantinople.title_province = {
+		add_special_building = constantinople_rebuild_constantinople_01
+		add_building = constantinople_rebuild_great_palace_01
+		add_building = constantinople_rebuild_the_hippodrome_01
+		add_building = constantinople_rebuild_harbor_of_sophia_01
+		add_building = constantinople_rebuild_the_great_bazar_01
+		add_building = constantinople_rebuild_hagia_sophia_01
+		add_building = constantinople_rebuild_monastery_of_st_myrelaion_01
+		add_building = constantinople_rebuild_seraglio_lighthouse_01
+		add_building = constantinople_rebuild_aqueduct_of_valens_01
+	}
+}
+
+POD_build_reform_constantinople_effect = {
+	set_global_variable = { 
+		name = constantinople_lighthouse_character
+		value = title:b_constantinople.barony_controller
+	}
+	title:b_constantinople.title_province = {
+		if = { limit = { has_province_modifier = POD_constantinople_plundered_modifier } 
+			add_special_building = constantinople_reform_constantinople_01
+			add_building = constantinople_reform_great_palace_01
+			add_building = constantinople_reform_the_hippodrome_01
+			add_building = constantinople_reform_harbor_of_sophia_01
+			add_building = constantinople_reform_the_great_bazar_01
+			add_building = constantinople_reform_hagia_sophia_01
+			add_building = constantinople_reform_monastery_of_st_myrelaion_01
+			add_building = constantinople_reform_seraglio_lighthouse_01
+			add_building = constantinople_reform_aqueduct_of_valens_01
+		}
+		else = {
+			add_special_building = constantinople_reform_constantinople_02
+			add_building = constantinople_reform_great_palace_02
+			add_building = constantinople_reform_the_hippodrome_02
+			add_building = constantinople_reform_harbor_of_sophia_02
+			add_building = constantinople_reform_the_great_bazar_02
+			add_building = constantinople_reform_hagia_sophia_02
+			add_building = constantinople_reform_monastery_of_st_myrelaion_02
+			add_building = constantinople_reform_seraglio_lighthouse_02
+			add_building = constantinople_reform_aqueduct_of_valens_02
+		}
+	}
+}
+
+POD_build_tribal_constantinople_effect = {
+	title:b_constantinople.title_province = {
+		set_holding_type = tribal_holding
+	}
+}
+
+
+##########################
+######### Paris ##########
+##########################
+
+POD_reset_paris_effect = {
+	title:b_paris = {
+		title_province = {
+			set_holding_type = tribal_holding
+			set_holding_type = grand_city_holding
+			remove_building = paris_chivalric_01
+			remove_building = paris_chivalric_02
+			remove_building = paris_chivalric_03
+			remove_building = paris_umbral_01
+			remove_building = paris_umbral_02
+			remove_building = paris_umbral_03
+			remove_building = paris_free_01
+			remove_building = paris_free_02
+			remove_building = paris_free_03
+			
+			if = {
+				limit = { building_requirement_chivalric_paris = yes }
+				POD_build_chivalric_paris_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_umbral_paris = yes }
+				POD_build_umbral_paris_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_free_paris = yes }
+				POD_build_free_paris_effect = yes
+			}
+			else = {
+				POD_build_tribal_paris_effect = yes
+			}
+		}
+	}
+}
+
+POD_build_chivalric_paris_effect = {
+	title:b_paris.title_province = {
+		add_special_building = paris_chivalric_01
+		add_building = paris_courts_love_01
+		if = { 
+			limit = { barony_controller = { this = character:505082 } } #Alexander
+			add_building = paris_alexander_court_01
+		}
+		else_if = {
+			limit = { barony_controller = { is_ventrue_trigger = yes } }
+			add_building = paris_grand_court_01
+		}
+		else = { add_building = paris_night_tournaments_01 }
+	}
+}
+
+POD_build_umbral_paris_effect = {
+	title:b_paris.title_province = {
+		add_special_building = paris_umbral_01
+	}
+}
+
+POD_build_free_paris_effect = {
+	title:b_paris.title_province = {
+		add_special_building = paris_free_01
+		if = {
+			limit = { barony_controller = { building_requirement_inquisitor = yes } }
+			add_building = paris_st_dennis_01
+			add_building = paris_knights_templar_01
+			add_building = paris_knights_hospitaller_01
+		}
+		else = {
+			add_building = paris_free_chatelet_01
+			add_building = paris_free_temple_01
+			add_building = paris_free_notre_dame_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = paris_free_cite_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = paris_free_greve_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = paris_free_halles_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = paris_free_carnivals_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = paris_free_louvre_01
+		}
+	}
+}
+
+POD_build_tribal_paris_effect = {
+	title:b_paris.title_province = {
+		set_holding_type = tribal_holding
+	}
+}
+
+
+##########################
+######### Cairo ##########
+##########################
+
+POD_reset_cairo_effect = {
+	title:b_cairo = {
+		title_province = {
+			set_holding_type = tribal_holding
+			set_holding_type = grand_city_holding
+			remove_building = cairo_ancient_01
+			remove_building = cairo_ancient_02
+			remove_building = cairo_ancient_03
+			remove_building = cairo_vampiric_01
+			remove_building = cairo_vampiric_02
+			remove_building = cairo_vampiric_03
+			remove_building = cairo_islamic_01
+			remove_building = cairo_islamic_02
+			remove_building = cairo_islamic_03
+			
+			if = {
+				limit = { building_requirement_ancient_cairo = yes }
+				POD_build_ancient_cairo_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_vampiric_cairo = yes }
+				POD_build_vampiric_cairo_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_islamic_cairo = yes }
+				POD_build_islamic_cairo_effect = yes
+			}
+			else = {
+				POD_build_tribal_cairo_effect = yes
+			}
+		}
+	}
+}
+
+POD_build_ancient_cairo_effect = {
+	if = {
+		limit = { POD_bookmark_has_mummies = yes }
+		title:b_cairo.title_province = {
+			add_special_building = cairo_ancient_01
+		}
+	}
+	else = {
+		title:b_cairo.title_province = {
+			set_holding_type = castle_holding
+		}
+	}
+}
+
+POD_build_vampiric_cairo_effect = {
+	title:b_cairo.title_province = {
+		add_special_building = cairo_vampiric_01
+	}
+}
+
+POD_build_islamic_cairo_effect = {
+	title:b_cairo.title_province = {
+		add_special_building = cairo_islamic_01
+
+		if = {
+			limit = { barony_controller = { has_faith = faith:ikhwan_al_safa } }
+			add_building = cairo_dar_adil_01
+		}
+		add_building = cairo_al_azhar_01
+		add_building = cairo_khan_khalili_01
+		POD_add_building_and_expand_slots = {
+			BUILDING = cairo_citadel_salah_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = cairo_mosque_tulun_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = cairo_mosque_hakim_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = cairo_mosque_hussayn_01
+		}
+	}
+}
+
+POD_build_tribal_cairo_effect = {
+	title:b_cairo.title_province = {
+		set_holding_type = tribal_holding
+	}
+}
+
+
+#####################
+##### Jerusalem #####
+#####################
+
+POD_reset_jerusalem_effect = {
+	#this function gets called by all of the necessary stuff
+	#when called, it created the variables, performs the calculations, and applies the modifiers
+	POD_reload_jerusalem_influence_modifiers = yes
+	
+	title:b_jerusalem = {
+		title_province = {
+			set_holding_type = tribal_holding
+			set_holding_type = grand_city_holding
+			POD_remove_jerusalem_special_building = { BUILDING = jerusalem_christian_holy_sepulcher }
+			POD_remove_jerusalem_special_building = { BUILDING = jerusalem_muslim_dome_rock }
+			POD_remove_jerusalem_special_building = { BUILDING = jerusalem_jewish_third_temple }
+			POD_remove_jerusalem_special_building = { BUILDING = jerusalem_divided_temple_mount_catacombs }
+			
+			if = {
+				limit = { building_requirement_christian_jerusalem = yes }
+				POD_build_christian_jerusalem_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_muslim_jerusalem = yes }
+				POD_build_muslim_jerusalem_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_jewish_jerusalem = yes }
+				POD_build_jewish_jerusalem_effect = yes
+			}
+			else_if = {
+				limit = { building_requirement_divided_jerusalem = yes }
+				POD_build_divided_jerusalem_effect = yes
+			}
+			else = {
+				POD_build_tribal_jerusalem_effect = yes
+			}
+		}
+	}
+}
+
+POD_build_christian_jerusalem_effect = {
+	title:b_jerusalem.title_province = {
+		add_building = jerusalem_christian_holy_sepulcher_01
+
+		add_building = jerusalem_christian_lazarus_01
+		add_building = jerusalem_christian_john_01
+		add_building = jerusalem_christian_sepulchre_01
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_christian_supreme_templar_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_christian_german_mary_01
+		}
+	}
+}
+
+POD_build_muslim_jerusalem_effect = {
+	title:b_jerusalem.title_province = {
+		add_building = jerusalem_muslim_dome_rock_01
+
+		add_building = jerusalem_muslim_damascus_market_01
+		add_building = jerusalem_muslim_zawiya_01
+		add_building = jerusalem_muslim_madrasa_01
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_muslim_al_yaqubi_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_muslim_al_khanqah_salahiyya_01
+		}
+	}
+}
+
+POD_build_jewish_jerusalem_effect = {
+	title:b_jerusalem.title_province = {
+		add_building = jerusalem_jewish_third_temple_01
+
+		add_building = jerusalem_jewish_library_01
+		add_building = jerusalem_jewish_castle_01
+		add_building = jerusalem_jewish_palace_01
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_jewish_pools_01
+		}
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_jewish_synagogue_01
+		}
+	}
+}
+
+POD_build_divided_jerusalem_effect = {
+	title:b_jerusalem.title_province = {
+		add_building = jerusalem_divided_temple_mount_catacombs_01
+
+		add_building = jerusalem_divided_christian_quarter_01
+		add_building = jerusalem_divided_jewish_quarter_01
+		add_building = jerusalem_divided_muslim_quarter_01
+		POD_add_building_and_expand_slots = {
+			BUILDING = jerusalem_divided_armenian_quarter_01
+		}
+	}
+}
+
+POD_build_tribal_jerusalem_effect = {
+	title:b_jerusalem.title_province = {
+		set_holding_type = tribal_holding
+	}
+}
+
+POD_remove_jerusalem_special_building = {
+	if = {
+		limit = { has_building = $BUILDING$_01 }
+		remove_building = $BUILDING$_01
+	}
+	else_if = {
+		limit = { has_building = $BUILDING$_02 }
+		remove_building = $BUILDING$_02
+	}
+	else_if = {
+		limit = { has_building = $BUILDING$_03 }
+		remove_building = $BUILDING$_03
+	}
+	else_if = {
+		limit = { has_building = $BUILDING$_04 }
+		remove_building = $BUILDING$_04
+	}
+}
+
+
+POD_save_jerusalem_influence = {
+	save_scope_value_as = {
+		name  = christian_influence
+		value = POD_jerusalem_christian_influence
+	}
+	save_scope_value_as = {
+		name  = muslim_influence
+		value = POD_jerusalem_muslim_influence
+	}
+	save_scope_value_as = {
+		name  = jewish_influence
+		value = POD_jerusalem_jewish_influence
+	}
+}
+
+# need to have saved the influence scope values beforehand so they can be used by the script_value
+# (scope:christian_influence, scope:muslim_influence, and scope:jewish_influence)
+POD_save_jerusalem_influence_ranks = {
+	save_scope_value_as = {
+		name  = $CHRISTIAN_SAVE_AS$
+		value = POD_jerusalem_christian_influence_rank_preview
+	}
+	save_scope_value_as = {
+		name  = $MUSLIM_SAVE_AS$
+		value = POD_jerusalem_muslim_influence_rank_preview
+	}
+	save_scope_value_as = {
+		name  = $JEWISH_SAVE_AS$
+		value = POD_jerusalem_jewish_influence_rank_preview
+	}
+}
+
+POD_add_jerusalem_influence = {
+	POD_save_jerusalem_influence = yes
+	
+	POD_save_jerusalem_influence_ranks = {
+		CHRISTIAN_SAVE_AS = old_christian_rank
+		MUSLIM_SAVE_AS    = old_muslim_rank
+		JEWISH_SAVE_AS    = old_jewish_rank
+	}
+	
+	save_scope_value_as = {
+		name = $VAR$
+		value = {
+			value = scope:$VAR$
+			add = $VALUE$
+			min = 0
+		}
+	}
+	
+	POD_save_jerusalem_influence_ranks = {
+		CHRISTIAN_SAVE_AS = new_christian_rank
+		MUSLIM_SAVE_AS    = new_muslim_rank
+		JEWISH_SAVE_AS    = new_jewish_rank
+	}
+	
+	# where var:christian_influence, var:muslim_influence, and var:jewish_influence are set
+	title:c_jerusalem = {
+		set_variable = {
+			name  = $VAR$
+			value = scope:$VAR$
+		}
+	}
+	
+	### influence gain/loss tooltip
+	save_scope_value_as = {
+		name  = influence_delta
+		value = $VALUE$
+	}
+	save_scope_value_as = {
+		name = influence_type
+		value = flag:$INFLUENCE_LOC$
+	}
+	if = {
+		limit = { $VALUE$ > 0 }
+		custom_tooltip = jerusalem_influence_gain
+	}
+	else = {
+		custom_tooltip = jerusalem_influence_loss
+	}
+	POD_error_suppression_unused_flag = { FLAG = $INFLUENCE_LOC$ }
+	
+	POD_reapply_jerusalem_modifiers = {
+		OLD_CHRISTIAN_RANK = scope:old_christian_rank
+		OLD_MUSLIM_RANK    = scope:old_muslim_rank
+		OLD_JEWISH_RANK    = scope:old_jewish_rank
+		NEW_CHRISTIAN_RANK = scope:new_christian_rank
+		NEW_MUSLIM_RANK    = scope:new_muslim_rank
+		NEW_JEWISH_RANK    = scope:new_jewish_rank
+	}
+}
+
+POD_add_jerusalem_christian_influence = {
+	POD_add_jerusalem_influence = {
+		VALUE = $VALUE$
+		VAR = christian_influence
+		INFLUENCE_LOC = POD_christian_influence
+	}
+}
+
+POD_add_jerusalem_muslim_influence = {
+	POD_add_jerusalem_influence = {
+		VALUE = $VALUE$
+		VAR = muslim_influence
+		INFLUENCE_LOC = POD_muslim_influence
+	}
+}
+
+POD_add_jerusalem_jewish_influence = {
+	POD_add_jerusalem_influence = {
+		VALUE = $VALUE$
+		VAR = jewish_influence
+		INFLUENCE_LOC = POD_jewish_influence
+	}
+}
+
+
+POD_reload_jerusalem_influence_modifiers = {
+	POD_save_jerusalem_influence = yes
+	
+	POD_save_jerusalem_influence_ranks = {
+		CHRISTIAN_SAVE_AS = christian_rank
+		MUSLIM_SAVE_AS    = muslim_rank
+		JEWISH_SAVE_AS    = jewish_rank
+	}
+	
+	# force reloading by setting the old ranks to something unachievable
+	POD_reapply_jerusalem_modifiers = {
+		OLD_CHRISTIAN_RANK = -1
+		OLD_MUSLIM_RANK    = -1
+		OLD_JEWISH_RANK    = -1
+		NEW_CHRISTIAN_RANK = scope:christian_rank
+		NEW_MUSLIM_RANK    = scope:muslim_rank
+		NEW_JEWISH_RANK    = scope:jewish_rank
+	}
+}
+
+POD_clear_jerusalem_christian_influence_modifiers = {
+	title:c_jerusalem = {
+		POD_remove_county_modifier = { MODIFIER = jerusalem_christian_influence_1 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_christian_influence_2 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_christian_influence_3 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_christian_influence_4 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_christian_influence_5 }
+	}
+}
+
+POD_clear_jerusalem_muslim_influence_modifiers = {
+	title:c_jerusalem = {
+		POD_remove_county_modifier = { MODIFIER = jerusalem_muslim_influence_1 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_muslim_influence_2 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_muslim_influence_3 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_muslim_influence_4 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_muslim_influence_5 }
+	}
+}
+
+POD_clear_jerusalem_jewish_influence_modifiers = {
+	title:c_jerusalem = {
+		POD_remove_county_modifier = { MODIFIER = jerusalem_jewish_influence_1 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_jewish_influence_2 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_jewish_influence_3 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_jewish_influence_4 }
+		POD_remove_county_modifier = { MODIFIER = jerusalem_jewish_influence_5 }
+	}
+}
+
+POD_set_jerusalem_christian_influence_modifier = {
+	switch = {
+		trigger = $RANK$
+		5 = { add_county_modifier = jerusalem_christian_influence_5 }
+		4 = { add_county_modifier = jerusalem_christian_influence_4 }
+		3 = { add_county_modifier = jerusalem_christian_influence_3 }
+		2 = { add_county_modifier = jerusalem_christian_influence_2 }
+		1 = { add_county_modifier = jerusalem_christian_influence_1 }
+	}
+}
+
+POD_set_jerusalem_muslim_influence_modifier = {
+	switch = {
+		trigger = $RANK$
+		5 = { add_county_modifier = jerusalem_muslim_influence_5 }
+		4 = { add_county_modifier = jerusalem_muslim_influence_4 }
+		3 = { add_county_modifier = jerusalem_muslim_influence_3 }
+		2 = { add_county_modifier = jerusalem_muslim_influence_2 }
+		1 = { add_county_modifier = jerusalem_muslim_influence_1 }
+	}
+}
+
+POD_set_jerusalem_jewish_influence_modifier = {
+	switch = {
+		trigger = $RANK$
+		5 = { add_county_modifier = jerusalem_jewish_influence_5 }
+		4 = { add_county_modifier = jerusalem_jewish_influence_4 }
+		3 = { add_county_modifier = jerusalem_jewish_influence_3 }
+		2 = { add_county_modifier = jerusalem_jewish_influence_2 }
+		1 = { add_county_modifier = jerusalem_jewish_influence_1 }
+	}
+}
+
+
+POD_reapply_jerusalem_modifiers = {
+	title:c_jerusalem = {
+		if = {
+			limit = { $OLD_CHRISTIAN_RANK$ != $NEW_CHRISTIAN_RANK$ }
+			POD_clear_jerusalem_christian_influence_modifiers = yes
+			POD_set_jerusalem_christian_influence_modifier = { RANK = $NEW_CHRISTIAN_RANK$ }
+		}
+		if = {
+			limit = { $OLD_MUSLIM_RANK$ != $NEW_MUSLIM_RANK$ }
+			POD_clear_jerusalem_muslim_influence_modifiers = yes
+			POD_set_jerusalem_muslim_influence_modifier = { RANK = $NEW_MUSLIM_RANK$ }
+		}
+		if = {
+			limit = { $OLD_JEWISH_RANK$ != $NEW_JEWISH_RANK$ }
+			POD_clear_jerusalem_jewish_influence_modifiers = yes
+			POD_set_jerusalem_jewish_influence_modifier = { RANK = $NEW_JEWISH_RANK$ }
+		}
+	}
+}

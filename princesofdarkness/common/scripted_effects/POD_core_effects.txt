@@ -1,0 +1,708 @@
+﻿POD_increment_scope_value = {
+	save_scope_value_as = {
+		name = $SCOPE$
+		value = {
+			value = scope:$SCOPE$
+			add = 1
+		}
+	}
+}
+
+POD_decrement_scope_value = {
+	save_scope_value_as = {
+		name = $SCOPE$
+		value = {
+			value = scope:$SCOPE$
+			subtract = 1
+		}
+	}
+}
+
+POD_toggle_variable = {
+	if = {
+		limit = { has_variable = $VAR$ }
+		remove_variable = $VAR$
+	}
+	else = {
+		set_variable = $VAR$
+	}
+}
+
+POD_set_or_change_variable = {
+	if = {
+		limit = { has_variable = $VAR$ }
+		change_variable = {
+			name = $VAR$
+			add = $VAL$
+		}
+	}
+	else = {
+		set_variable = {
+			name = $VAR$
+			value = $VAL$
+		}
+	}
+}
+
+POD_set_scope_value_from_trigger = {
+	if = {
+		limit = {
+			$TRIGGER$
+		}
+		save_scope_value_as = {
+			name = $NAME$
+			value = yes
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name = $NAME$
+			value = no
+		}
+	}
+}
+
+POD_clear_list = {
+	every_in_list = {
+		list = $LIST$
+		remove_from_list = $LIST$
+	}
+}
+
+POD_reapply_scaling_character_modifier = {
+	hidden_effect = {
+		#if = {
+			#limit = { has_character_modifier = $MODIFIER$ }
+			remove_character_modifier = $MODIFIER$
+		#}
+	}
+	add_character_modifier = $MODIFIER$
+}
+
+# save a localization key to be used later
+# e.g. with custom_tooltip = POD_saved_tooltip
+POD_save_tooltip = {
+	save_scope_value_as = {
+		name = saved_tooltip
+		value = flag:$LOC$
+	}
+	POD_error_suppression_unused_flag = { FLAG = $LOC$ }
+}
+
+POD_toggle_flag_with_tooltip = {
+	POD_save_tooltip = { LOC = $FLAG$ }
+	if = {
+		limit = { has_character_flag = $FLAG$ }
+		custom_tooltip = {
+			text = POD_remove_flag_with_tooltip
+			remove_character_flag = $FLAG$
+		}
+	}
+	else = {
+		custom_tooltip = {
+			text = POD_apply_flag_with_tooltip
+			add_character_flag = $FLAG$
+		}
+	}
+}
+
+POD_disappearance_effect = {
+	trigger_event = {
+		id = POD_disappearance.1
+		days = 1
+	}
+}
+
+POD_release_effect = {
+	if = {
+		limit = { is_imprisoned = yes }
+		add_character_flag = {
+			flag = escaped_from_prison_flag
+			days = 1
+		}
+		add_character_flag = { #To make sure you don't get spammed about the release
+			flag = block_for_prison_release_notification
+			days = 1
+		}
+		release_from_prison = yes
+		if = {
+			limit = { is_ruler = no }
+			move_to_pool = yes
+		}
+	}
+}
+
+POD_enter_torpor_effect = {
+	add_trait = torpor
+	every_relation = {
+		type = ghoul_thrall
+		POD_clear_bound_ghoul_variables_and_relations = yes
+	}
+	POD_fleshcrafting_gui_cleanup_on_death = yes
+}
+
+POD_depose_effect = {
+	if = {
+		limit = { is_ruler = yes }
+		# TODO refactor
+		if = {
+			limit = { exists = primary_heir }
+			depose_effect = { DEPOSER = primary_heir }
+		}
+		else_if = {
+			limit = { exists = scope:actor }
+			depose_effect = { DEPOSER = scope:actor }
+		}
+		else = {
+			depose_effect = { DEPOSER = this }
+		}
+	}
+	if = {
+		limit = { 
+			is_imprisoned = no 
+			is_ruler = no
+		}
+		move_to_pool = yes
+	}
+}
+
+POD_long_depose_effect = {
+	POD_prepare_haven_inheritance = yes
+	POD_enter_torpor_effect = yes
+	POD_depose_effect = yes
+	random_landed_ruler = {
+		# bandaid fix since characters in arcadia might keep their titular titles
+		limit = { POD_is_not_trapped_in_umbra_basic_trigger = yes }
+		save_scope_as = new_owner
+	}
+	every_character_artifact = {
+		set_owner = {
+			target = scope:new_owner
+			history = {
+				type = inherited
+				recipient = scope:new_owner
+			}
+		}
+	}
+}
+
+# used when becoming an adventurer
+POD_transfer_all_titles_to_character = {
+	$CHARACTER$ ?= { save_scope_as = inheritor }
+	
+	hidden_effect = {
+		# Transfer landed titles
+		every_held_title = {
+			limit = {
+				is_landless_type_title = no
+				tier > tier_barony
+			}
+			add_to_list = target_titles
+		}
+		create_title_and_vassal_change = {
+			type = granted
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		every_in_list = {
+			list = target_titles
+			change_title_holder_include_vassals = {
+				holder = scope:inheritor
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	}
+}
+
+# since adding a dynasty perk also deducts the cost
+# this effects resets your dynasty prestige to what it was before getting the perk
+# character scope
+POD_add_free_dynasty_perk = {
+	dynasty ?= {
+		save_scope_value_as = {
+			name =  previous_dynasty_prestige
+			value = dynasty_prestige
+		}
+		add_dynasty_perk = $PERK$
+		hidden_effect = {
+			add_dynasty_prestige = {
+				value = scope:previous_dynasty_prestige
+				subtract = dynasty_prestige
+			}
+		}
+	}
+}
+
+POD_adopt_faith = {
+	every_held_title = {
+		limit = { is_head_of_faith = yes }
+		prev = { destroy_title = prev }	
+	}
+	set_character_faith = $FAITH$
+}
+
+POD_run_effect_if_alive = {
+	if = {
+		limit = { is_alive = yes }
+		$EFFECT$ = yes
+	}
+}
+
+POD_change_government_if_landed = {
+	if = {
+		limit = {
+			is_landed = yes
+			NOT = { has_government = $GOVERNMENT$ }
+		}
+		change_government = $GOVERNMENT$
+	}
+}
+
+POD_add_modifier_and_track_stacks = {
+	add_$TYPE$_modifier = $MODIFIER$
+	hidden_effect = {
+		if = {
+			limit = { has_variable = $MODIFIER$_stacks }
+			change_variable = {
+				name = $MODIFIER$_stacks
+				add  = 1
+			}
+		}
+		else = {
+			set_variable = {
+				name  = $MODIFIER$_stacks
+				value = 1
+			}
+		}
+	}
+}
+
+POD_remove_modifier_and_track_stacks = {
+	if = {
+		limit = { has_$TYPE$_modifier = $MODIFIER$ }
+		remove_$TYPE$_modifier = $MODIFIER$
+		hidden_effect = {
+			if = {
+				limit = { has_variable = $MODIFIER$_stacks }
+				change_variable = {
+					name = $MODIFIER$_stacks
+					subtract = 1
+				}
+				if = {
+					limit = { var:$MODIFIER$_stacks <= 0 }
+					remove_variable = $MODIFIER$_stacks
+				}
+			}
+		}
+	}
+}
+
+# For adding a MODIFIER with a duration in MONTHS
+# If MONTHS are 0, the modifier is permanent
+POD_add_character_modifier_permanent_if_0_duration = {
+	if = {
+		limit = { $MONTHS$ = 0 }
+		add_character_modifier = $MODIFIER$
+	}
+	else = {
+		add_character_modifier = {
+			modifier = $MODIFIER$
+			months = $MONTHS$
+		}
+	}
+}
+
+POD_add_county_modifier_permanent_if_0_duration = {
+	if = {
+		limit = { $MONTHS$ = 0 }
+		add_county_modifier = $MODIFIER$
+	}
+	else = {
+		add_county_modifier = {
+			modifier = $MODIFIER$
+			months = $MONTHS$
+		}
+	}
+}
+
+POD_add_province_modifier_permanent_if_0_duration = {
+	if = {
+		limit = { $MONTHS$ = 0 }
+		add_province_modifier = $MODIFIER$
+	}
+	else = {
+		add_province_modifier = {
+			modifier = $MODIFIER$
+			months = $MONTHS$
+		}
+	}
+}
+
+POD_add_character_flag_permanent_if_0_duration = {
+	if = {
+		limit = { $MONTHS$ = 0 }
+		add_character_flag = $FLAG$
+	}
+	else = {
+		add_character_flag = {
+			flag = $FLAG$
+			months = $MONTHS$
+		}
+	}
+}
+
+POD_add_opinion_permanent_if_0_duration = {
+	if = {
+		limit = { $MONTHS$ = 0 }
+		add_opinion = {
+			modifier = $MODIFIER$
+			target = $TARGET$
+		}
+	}
+	else = {
+		add_opinion = {
+			modifier = $MODIFIER$
+			months = $MONTHS$
+			target = $TARGET$
+		}
+	}
+}
+
+POD_coinflip_to_remove_trait = {
+	if = {
+		limit = { has_trait = $TRAIT$ }
+		random = {
+			chance = 50
+			remove_trait = $TRAIT$
+		}
+	}
+}
+
+POD_add_advanced_or_basic_discipline = {
+	if = {
+		limit = { always = $ADVANCED$ }
+		add_trait = $TRAIT$advanced
+	}
+	else = {
+		add_trait = $TRAIT$
+	}
+}
+
+POD_remove_mutual_hook_of_type = {
+	if = {
+		limit = {
+			has_hook_of_type = {
+				type = $TYPE$
+				target = $TARGET$
+			}
+		}
+		remove_hook = {
+			type = $TYPE$
+			target = $TARGET$
+		}
+	}
+	$TARGET$ = {
+		if = {
+			limit = {
+				has_hook_of_type = {
+					type = $TYPE$
+					target = prev
+				}
+			}
+			remove_hook = {
+				type = $TYPE$
+				target = prev
+			}
+		}
+	}
+}
+
+# to make sure existing portrait flags don't get overwritten or removed afterwards
+# use both in the same event (immediate + after blocks)
+POD_apply_temporary_portrait_flag = {
+	if = {
+		limit = { NOT = { has_character_flag = $FLAG$ } }
+		add_character_flag = $FLAG$
+		save_scope_value_as = {
+			name  = $FLAG$
+			value = yes
+		}
+	}
+}
+POD_remove_temporary_portrait_flag = {
+	if = {
+		limit = { exists = scope:$FLAG$ }
+		remove_character_flag = $FLAG$
+	}
+}
+
+# for events, if you don't want to display trait icons in the event option button
+POD_add_trait_without_event_icon = {
+	$TRAIT$ = { save_scope_as = trait }
+	custom_description = {
+		text = add_trait
+		object = scope:trait
+	}
+	hidden_effect = { add_trait = scope:trait }
+}
+
+POD_save_event_as_var = {
+	save_scope_value_as = {
+		name  = $VAR$
+		value = event_id:$ID$
+	}
+	set_variable = {
+		name  = $VAR$
+		value = scope:$VAR$
+	}
+}
+
+# trigger an event with a delay (like trigger_event)
+# but also clears all saved scopes in the process
+#
+# necessary since clear_saved_scope doesn't work in future events of a chain
+# which causes bugs if e.g. an event chain has multiple single combat duels
+#
+# need to pass ID and DAYS
+# only works for character scopes
+POD_clear_topscope_and_trigger_event = {
+	hidden_effect = {
+		POD_save_event_as_var = {
+			VAR = jank_event_id
+			ID = $ID$
+		}
+		set_variable = {
+			name  = jank_event_delay
+			value = $DAYS$
+		}
+		run_interaction = {
+			interaction = POD_trigger_delayed_event_interaction
+			actor = this
+			recipient = this
+			execute_threshold = decline
+		}
+	}
+}
+
+# need to pass SUCCESS_EVENT and FAILURE_EVENT as arguments
+POD_finish_complex_scheme = {
+	save_scope_as = scheme
+	scheme_owner = { save_scope_as = owner }
+	save_scope_value_as = {
+		name = follow_up_event
+		value = event_id:POD_maintenance.1000
+	}
+	save_scope_value_as = {
+		name = pod_scheme_success_event
+		value = event_id:$SUCCESS_EVENT$
+	}
+	save_scope_value_as = {
+		name = pod_scheme_failure_event
+		value = event_id:$FAILURE_EVENT$
+	}
+	if = {
+		limit = {
+			NOT = { exists = scope:suppress_next_event }
+		}
+		scheme_owner = { trigger_event = scheme_critical_moments.0002 }
+	}
+}
+
+# # saves the scoped character's prowess value as scope:real_prowess (even beyond 100)
+# POD_save_real_prowess = {
+# 	hidden_effect = {
+# 		save_scope_value_as = {
+# 			name  = real_prowess
+# 			value = 0
+# 		}
+# 		add_character_modifier = save_real_prowess_negate_modifier
+# 		while = {
+# 			limit = { NOT = { prowess = 0 } }
+# 			add_character_modifier = save_real_prowess_modifier
+# 			force_character_skill_recalculation = yes
+# 			save_scope_value_as = {
+# 				name  = real_prowess
+# 				value = { value = scope:real_prowess add = 1 }
+# 			}
+# 		}
+# 		remove_character_modifier = save_real_prowess_negate_modifier
+# 		remove_all_character_modifier_instances = save_real_prowess_modifier
+# 		force_character_skill_recalculation = yes
+# 	}
+# }
+
+POD_need_perk = {
+	if = { limit = { NOT = { has_perk = $PERK$ } }
+		save_scope_value_as = { name = perk_loca value = flag:$PERK$ }
+		if = { limit = { has_character_flag = flag:$PERK$ } }
+		custom_tooltip = POD_need_perk
+		POD_error_suppression_unused_flag = { FLAG = $PERK$ }
+	}
+}
+
+POD_become_scripted_conqueror = {
+	add_trait_force_tooltip = conqueror
+	add_character_flag = {
+		flag = scripted_conqueror
+		days = 1
+	}
+	create_story = story_conqueror
+}
+
+POD_while_accepting_decimals = {
+	save_scope_value_as = { name = value_decimal value = { value = $VALUE$ modulo = 1 } }
+	save_scope_value_as = { name = value_full value = { value = $VALUE$ subtract = scope:value_decimal } }
+	if = { limit = { $VALUE$ = 1 }
+		$EFFECT$
+	}
+	if = { limit = { $VALUE$ > 1 }
+		while = {
+			count = scope:value_full
+			$EFFECT$
+		}
+	}
+	if = { limit = { NOT = { scope:value_decimal = 0 } }
+		random = {
+			chance = { value = scope:value_decimal multiply = 100 }
+			$EFFECT$
+		}
+	}
+}
+
+POD_clear_all_relations = {
+	every_relation = {
+		type = $TYPE$
+		# double prev to account for one-sided relations
+		prev = { remove_relation_$TYPE$ = prev }
+	}
+}
+
+POD_remove_positive_vanilla_relations = {
+	POD_clear_all_relations = { TYPE = friend }
+	POD_clear_all_relations = { TYPE = best_friend }
+	POD_clear_all_relations = { TYPE = lover }
+	POD_clear_all_relations = { TYPE = soulmate }
+}
+
+POD_remove_negative_vanilla_relations = {
+	POD_clear_all_relations = { TYPE = rival }
+	POD_clear_all_relations = { TYPE = nemesis }
+}
+
+POD_erase_from_existence = {
+	change_first_name = "No_Character"
+	remove_nickname = yes
+	add_diplomacy_skill = -1000
+	add_intrigue_skill = -1000
+	add_learning_skill = -1000
+	add_martial_skill = -1000
+	add_prowess_skill = -1000
+	add_stewardship_skill = -1000
+	hidden_effect = { clear_traits = yes }
+	add_piety = -9999999
+	add_prestige = -9999999
+	depose_effect = { DEPOSER = root }
+	set_to_lowborn = yes
+	move_to_pool = yes
+	set_character_faith = faith:innocence
+	every_claim = { prev = { remove_claim = prev } }
+	every_spouse = { divorce = prev }
+	POD_remove_positive_vanilla_relations = yes
+	POD_remove_negative_vanilla_relations = yes
+	death = { death_reason = death_existence_erased }
+}
+
+# to be used in on_baron_found_or_created_for_title
+POD_spawn_new_baron_for_title = {
+	create_character = {
+		template = pool_repopulate_local_flavor
+		gender = $GENDER$
+		employer = $LIEGE$
+		save_scope_as = new_baron
+	}
+	create_title_and_vassal_change = {
+		type = granted
+		save_scope_as = change
+		add_claim_on_loss = no
+	}
+	$TITLE$ = {
+		change_title_holder = {
+			holder = scope:new_baron
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+	hidden_effect_new_object = {
+		scope:new_baron = {
+			trigger_event = POD_character_initialization.1
+		}
+	}
+}
+
+POD_increase_blademaster_xp = {
+	if = {
+		limit = {
+			has_trait = lifestyle_blademaster
+			has_trait_xp = { trait = lifestyle_blademaster value < 100 }
+		}
+		add_trait_xp = { trait = lifestyle_blademaster value = $VALUE$ }
+	}
+}
+
+POD_add_courtier_safely = {
+	if = {
+		limit = {
+			is_ruler = yes
+			$COURTIER$ = {
+				is_ruler = no
+				NOT = { is_courtier_of = PREV }
+			}
+		}
+		add_courtier = $COURTIER$
+	}
+}
+
+POD_add_random_skill_point_effect = {
+	random_list = {
+		1 = { add_diplomacy_skill = 1 }
+		1 = { add_martial_skill = 1 }
+		1 = { add_stewardship_skill = 1 }
+		1 = { add_intrigue_skill = 1 }
+		1 = { add_learning_skill = 1 }
+		1 = { add_prowess_skill = 1 }
+	}
+}
+
+POD_add_random_skill_point_no_prowess_effect = {
+	random_list = {
+		1 = { add_diplomacy_skill = 1 }
+		1 = { add_martial_skill = 1 }
+		1 = { add_stewardship_skill = 1 }
+		1 = { add_intrigue_skill = 1 }
+		1 = { add_learning_skill = 1 }
+	}
+}
+
+POD_add_lifestyle_xp_matching_education = {
+	if = {
+		limit = { has_trait = education_diplomacy }
+		add_diplomacy_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { OR = { has_trait = education_martial has_trait = education_martial_prowess } }
+		add_martial_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { has_trait = education_stewardship }
+		add_stewardship_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { has_trait = education_intrigue }
+		add_intrigue_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { has_trait = education_learning }
+		add_learning_lifestyle_xp = $VALUE$
+	}
+}

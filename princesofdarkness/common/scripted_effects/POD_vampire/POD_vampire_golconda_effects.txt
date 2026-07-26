@@ -1,0 +1,637 @@
+﻿# separate effects for each toast so that the random_list doesn't show the wrong tooltip
+POD_golconda_mentoring_gain_xp = {
+	send_interface_toast = {
+		title = POD_golconda_mentoring_interaction_toast
+		left_icon = this
+		right_icon = scope:mentee
+		scope:mentee = {
+			if = {
+				limit = { NOT = { has_trait = golconda_seeker } }
+				add_trait = golconda_seeker
+				POD_golconda_seeker_maintenance_effect = yes
+			}
+			add_trait_xp = {
+				trait = golconda_seeker
+				value = $XP$
+			}
+		}
+	}
+}
+
+POD_golconda_mentoring_effect = {
+	$STUDENT$ = { save_scope_as = mentee }
+	random_list = {
+		1 = { POD_golconda_mentoring_gain_xp = { XP = 3 } }
+		1 = { POD_golconda_mentoring_gain_xp = { XP = 4 } }
+		1 = { POD_golconda_mentoring_gain_xp = { XP = 5 } }
+		1 = { POD_golconda_mentoring_gain_xp = { XP = 6 } }
+		1 = { POD_golconda_mentoring_gain_xp = { XP = 7 } }
+	}
+}
+
+POD_achieve_golconda_effect = {
+	if = {
+		limit = { has_trait = golconda_seeker }
+		remove_trait = golconda_seeker
+	}
+	if = {
+		limit = { NOT = { has_trait = golconda } }
+		add_trait = golconda
+	}
+	hidden_effect = {
+		POD_remove_hunger_modifiers_effect = yes
+		add_character_modifier = bloodhunger0_modifier
+		
+		every_relation = {
+			type = herd_member
+			prev = { POD_remove_herd_no_masquerade_effect = { TARGET = prev } }
+		}
+
+		POD_remove_clan_curse_effect = yes
+		
+		POD_abandon_journeys_of_type_effect = { TYPE = golconda_2 }
+
+		if = {
+			limit = {
+				is_ai = no
+				this = character:790236
+			}
+			set_global_variable = pod_achiev_qawiyya # Achievement: Make Peace, not War
+		}
+	}
+}
+
+POD_become_wight_effect = {
+	add_trait = wight
+	add_prestige = massive_prestige_loss
+
+	if = {
+		limit = { has_trait = bardodiscipline }
+		remove_trait = bardo
+		remove_trait = bardoadvanced
+		refund_perks = melancholy_lifestyle
+	}
+
+	if = {
+		limit = { is_kueijin_trigger = yes }
+		hidden_effect = {
+			POD_clean_dharma_effect = yes
+		}
+		add_trait = dharma0
+	}
+
+	hidden_effect = {
+		if = {
+			limit = { has_trait = golconda_seeker }
+			add_trait_xp = { trait = golconda_seeker value = -100 }
+		}
+		POD_remove_positive_vanilla_relations = yes
+	}
+
+	POD_depose_effect = yes
+}
+
+POD_remove_clan_curse_effect = {
+	POD_remove_visual_clan_curse_while_staying_vampire = yes
+	if = {
+		limit = { is_tzimisce_trigger = yes }
+		add_character_modifier = uncursed_tzimisce_modifier
+	}
+	else_if = {
+		limit = { is_chibo_trigger = yes }
+		add_character_modifier = uncursed_chibo_modifier
+	}
+	else_if = {
+		limit = { is_kizoku_trigger = yes }
+		add_character_modifier = uncursed_kizoku_modifier
+	}
+	else_if = {
+		limit = { is_malkavian_trigger = yes }
+		POD_suppress_clan_curse_trait = { TRAIT = trait:lunatic_genetic }
+		POD_suppress_clan_curse_trait = { TRAIT = trait:possessed_genetic }
+		POD_suppress_clan_curse_trait = { TRAIT = trait:depressed_genetic }
+	}
+	else_if = {
+		limit = { is_anh_trigger = yes }
+		every_held_title = {
+			POD_remove_anh_clan_curse = yes
+		}
+	}
+}
+
+POD_remove_visual_clan_curse_while_staying_vampire = {
+	if = {
+		limit = { is_nosferatu_trigger = yes }
+		POD_remove_nosferatu_clan_curse = yes
+	}
+	else_if = {
+		limit = {
+			is_gargoyle_trigger = yes
+			has_game_rule = POD_uncursed_gargoyles_human
+		}
+		POD_remove_gargoyle_clan_curse = yes
+	}
+}
+
+POD_remove_visual_clan_curse_when_switching_splats = {
+	if = {
+		limit = { is_nosferatu_trigger = yes }
+		POD_remove_nosferatu_clan_curse = yes
+		remove_character_flag = had_POD_character_nosferatu_looks
+		
+		add_character_flag = suppress_nosferatu_genes # for keeping nossie genes at 0
+		clear_variable_list = suppressed_visual_clan_curse_traits
+		POD_flag_injector_nosferatu_appearance = {
+			EFFECT = POD_remove_clan_curse_flag
+		}
+	}
+	else_if = {
+		limit = { is_gargoyle_trigger = yes }
+		POD_remove_gargoyle_clan_curse = yes
+		remove_character_flag = had_POD_character_gargoyle_grotesque_looks
+		
+		add_character_flag = suppress_nosferatu_genes # for keeping nossie genes at 0
+		clear_variable_list = suppressed_visual_clan_curse_traits
+		POD_flag_injector_gargoyle_appearance = {
+			EFFECT = POD_remove_clan_curse_flag
+		}
+	}
+}
+
+POD_remove_nosferatu_clan_curse = {
+	if = {
+		# safeguard for lukas
+		limit = { NOT = { has_character_modifier = uncursed_nosferatu_modifier } }
+		add_character_modifier = uncursed_nosferatu_modifier
+	}
+	hidden_effect = {
+		if = {
+			limit = { NOT = { has_trait = beauty_good } }
+			POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_1 }
+			POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_2 }
+			POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_3 }
+			# Normalize Genes
+			add_trait = beauty_good_3
+			remove_trait = beauty_good_3
+		}
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:scaly }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:disfigured }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:spindly }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:hunchbacked }
+		POD_flag_injector_nosferatu_appearance = {
+			EFFECT = POD_suppress_clan_curse_flag
+		}
+	}
+}
+
+POD_remove_gargoyle_clan_curse = {
+	hidden_effect = {
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_1 }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_2 }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:beauty_bad_3 }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:spindly }
+		POD_suppress_visual_clan_curse_trait = { TRAIT = trait:hunchbacked }
+		POD_flag_injector_gargoyle_appearance = {
+			EFFECT = POD_suppress_clan_curse_flag
+		}
+	}
+}
+
+POD_suppress_clan_curse_trait = {
+	if = {
+		limit = { has_trait = $TRAIT$ }
+		add_to_variable_list = {
+			name   = suppressed_clan_curse_traits
+			target = $TRAIT$
+		}
+		remove_trait = $TRAIT$
+	}
+}
+
+POD_suppress_visual_clan_curse_trait = {
+	if = {
+		limit = { has_trait = $TRAIT$ }
+		add_to_variable_list = {
+			name   = suppressed_visual_clan_curse_traits
+			target = $TRAIT$
+		}
+		remove_trait = $TRAIT$
+	}
+}
+
+POD_suppress_clan_curse_flag = {
+	if = {
+		limit = { has_character_flag = $FLAG$ }
+		remove_character_flag = $FLAG$
+		add_character_flag = $FLAG$_disabled
+	}
+}
+
+POD_reapply_clan_curse_effect = {
+	POD_reapply_visual_clan_curse_effect = yes
+	
+	if = {
+		limit = { POD_suppress_clan_curse_trigger = no }
+		
+		POD_remove_character_modifier = { MODIFIER = uncursed_tzimisce_modifier }
+		POD_remove_character_modifier = { MODIFIER = uncursed_chibo_modifier }
+		POD_remove_character_modifier = { MODIFIER = uncursed_kizoku_modifier }
+		
+		if = {
+			limit = {
+				is_anh_trigger = yes
+				# disabled for the AI until we can make them smarter about choosing their domain
+				is_ai = no
+			}
+			every_held_title = {
+				POD_apply_anh_clan_curse = yes
+			}
+		}
+		
+		every_in_list = {
+			variable = suppressed_clan_curse_traits
+			prev = { add_trait = prev }
+		}
+		clear_variable_list = suppressed_clan_curse_traits
+	}
+}
+
+POD_reapply_visual_clan_curse_effect = {
+	if = {
+		limit = {
+			is_nosferatu_trigger = yes
+			POD_suppress_visual_clan_curse_trigger = no
+		}
+		POD_remove_character_modifier = { MODIFIER = uncursed_nosferatu_modifier }
+		hidden_effect = {
+			remove_trait = beauty_good_1
+			remove_trait = beauty_good_2
+			remove_trait = beauty_good_3
+			every_in_list = {
+				variable = suppressed_visual_clan_curse_traits
+				prev = { add_trait = prev }
+			}
+			clear_variable_list = suppressed_visual_clan_curse_traits
+			POD_flag_injector_nosferatu_appearance = {
+				EFFECT = POD_reapply_clan_curse_flag
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			is_gargoyle_trigger = yes
+			POD_suppress_visual_clan_curse_trigger = no
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					any_in_list = {
+						variable = suppressed_visual_clan_curse_traits
+						OR = {
+							this = trait:beauty_bad_1
+							this = trait:beauty_bad_2
+							this = trait:beauty_bad_3
+						}
+					}
+				}
+				remove_trait = beauty_good_1
+				remove_trait = beauty_good_2
+				remove_trait = beauty_good_3
+			}
+			every_in_list = {
+				variable = suppressed_visual_clan_curse_traits
+				prev = { add_trait = prev }
+			}
+			clear_variable_list = suppressed_visual_clan_curse_traits
+			POD_flag_injector_gargoyle_appearance = {
+				EFFECT = POD_reapply_clan_curse_flag
+			}
+		}
+	}
+}
+
+POD_reapply_clan_curse_flag = {
+	if = {
+		limit = { has_character_flag = $FLAG$_disabled }
+		remove_character_flag = $FLAG$_disabled
+		add_character_flag = $FLAG$
+	}
+}
+
+POD_remove_clan_curse_flag = {
+	if = {
+		limit = { has_character_flag = $FLAG$_disabled }
+		remove_character_flag = $FLAG$_disabled
+	}
+}
+
+POD_lose_golconda_effect = {
+	if = {
+		limit = {
+			has_trait = golconda
+		}
+		remove_trait_force_tooltip = golconda
+		add_trait_force_tooltip = golconda_seeker
+		POD_golconda_seeker_maintenance_effect = yes
+		# POD_lose_elder_perks_effect = yes
+		POD_lose_inaccessible_discipline_perks_effect = yes
+		POD_reapply_clan_curse_effect = yes
+		trigger_event = POD_golconda_journey.1000
+	}
+	if = {
+		limit = {
+			OR = {
+				POD_is_on_golconda_journey_trigger = yes
+				AND = {
+					has_trait = golconda_seeker
+					has_trait_xp = { trait = golconda_seeker value > 0 }
+				}
+			}
+		}
+		if = {
+			limit = { POD_is_on_golconda_journey_trigger = yes }
+			POD_abandon_journeys_of_type_effect = { TYPE = golconda_2 }
+		}
+		if = {
+			limit = {
+				has_trait = golconda_seeker
+				has_trait_xp = { trait = golconda_seeker value > 0 }
+			}
+			add_trait_xp = { trait = golconda_seeker value = -100 }
+		}
+		trigger_event = POD_golconda_journey.1001
+	}
+}
+
+POD_commit_murder_effect = {
+	if = {
+		limit = { POD_is_on_golconda_trigger = yes }
+		custom_tooltip = POD_golconda_murder_alert
+		POD_lose_golconda_effect = yes
+	}
+	if = {
+		limit = { has_trait = wraith }
+		POD_pulse_chance_passion = { TYPE = hatred }
+		POD_pulse_dark_passion = { TYPE = dark_passion_kill }
+	}
+}
+
+POD_commit_theft_effect = {
+	if = {
+		limit = { POD_is_on_golconda_trigger = yes }
+		custom_tooltip = POD_golconda_theft_alert
+		POD_lose_golconda_effect = yes
+	}
+	if = {
+		limit = { has_trait = wraith }
+		POD_pulse_dark_passion = { TYPE = dark_passion_steal }
+	}
+	if = {
+		limit = { 
+			POD_splat_can_have_wyrm_taint = yes
+			NOT = { scope:raider ?= this } #don't trigger for raiding
+			NAND = {
+				has_variable = current_heist
+				has_character_flag = heist_theft_committed
+			}
+		}
+		POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_medium_value }
+	}
+	POD_gain_integrity = { VALUE = -1 }
+	if = {
+		limit = { has_variable = current_heist }
+		add_character_flag = { flag = heist_theft_committed days = 30 }
+	}
+}
+
+POD_commit_heinous_act_effect = {
+	if = {
+		limit = { POD_is_on_golconda_trigger = yes }
+		custom_tooltip = POD_golconda_heinous_act_alert
+		POD_lose_golconda_effect = yes
+	}
+	if = {
+		limit = { has_trait = wraith }
+		POD_pulse_dark_passion = { TYPE = dark_passion_cruelity }
+	}
+	if = {
+		limit = { POD_gains_screamer_dharma_xp = yes }
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_very_high }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				POD_gains_deviltigers_dharma_xp = yes
+				POD_gains_inwardfocus_dharma_xp = yes
+				POD_gains_kinofizanami_dharma_xp = yes
+			}
+		}
+		POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_medium }
+	}
+	if = {
+		limit = { POD_splat_can_have_wyrm_taint = yes }
+		POD_change_wyrm_taint_effect = { COUNT = wyrm_taint_medium_value }
+	}
+	POD_gain_integrity = { VALUE = -2 }
+}
+
+POD_commit_heal_effect = {
+	POD_gain_integrity = { VALUE = 3 }
+}
+
+POD_commit_gift_effect = {
+	POD_gain_integrity = { VALUE = 2 }
+}
+
+POD_frenzy_effect = {
+	if = {
+		limit = { POD_is_on_golconda_trigger = yes }
+		custom_tooltip = POD_golconda_frenzy_alert
+		POD_lose_golconda_effect = yes
+	}
+	if = {
+		limit = { has_trait = gangrel }
+		POD_gangrel_frenzy_effect = yes
+	}
+	if = {
+		limit = { faith = { has_doctrine_parameter = frenzy_lose_piety } }
+		add_piety = major_piety_loss
+	}
+}
+
+POD_lose_golconda_in_storyteller_mode_effect = {
+	if = {
+		limit = {
+			is_ai = no
+			POD_harsher_golconda_restrictions = yes
+		}
+		POD_lose_golconda_effect = yes
+	}
+}
+
+POD_golconda_seeker_maintenance_effect = {
+	trigger_event = {
+		id = POD_golconda_journey.3000
+		years = { 5 20 }
+	}
+}
+
+POD_check_and_lose_elder_perk = {
+	if = {
+		limit = {
+			has_perk = $PERK$
+			NOT = { POD_can_pick_elder_perk_trigger = { GEN = $GEN$ } }
+		}
+		remove_perk = $PERK$
+	}
+}
+
+# to be run after losing Golconda
+POD_lose_elder_perks_effect = {
+	custom_tooltip = {
+		text = POD_will_lose_elder_perks
+
+		POD_perk_injector_abombwe_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_animalism_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_auspex_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_bardo_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_celerity_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_chimerstry_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_daimonion_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_dementation_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_dominate_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_animal_flight_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_fortitude_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_melpominee_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_mytherceria_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_serpentis_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_obfuscate_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_obtenebration_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_potence_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_presence_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_kai_elder		        = { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_rift_elder		    = { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_protean_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_quietus_elder			= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_animal_spiritus_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_temporis_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_healer_valeren_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_warrior_valeren_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_watcher_valeren_elder	= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_vicissitude_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		POD_perk_injector_visceratika_elder		= { EFFECT = POD_check_and_lose_elder_perk }
+		
+		if = {
+			limit = { NOT = { has_perk = the_spirit_beast_perk } }
+			POD_modifier_injector_spirit_beast = {
+				EFFECT = POD_remove_character_modifier
+			}
+		}
+	}
+}
+
+# if ADD_MORTAL_TRAIT = yes, also add the mortal trait (if no other splat trait present) and depose
+# if ADD_MORTAL_TRAIT = no, character will end up with no splat trait (will need to be added manually)
+POD_make_vampire_mortal = {
+	hidden_effect = { 
+		set_age = POD_visual_age
+	}
+	POD_shapeshift_revert_all_effect = yes
+	POD_remove_visual_clan_curse_when_switching_splats = yes
+	remove_trait = vampire
+	if = {
+		limit = {
+			$ADD_MORTAL_TRAIT$ = yes
+			any_character_trait = {
+				has_trait_flag = splat
+				NOT = { this = trait:vampire }
+				# no other splat traits left
+				count = 0
+			}
+		}
+		add_trait_force_tooltip = mortal
+		if = {
+			limit = {
+				is_ruler = yes
+				can_hold_title_as_mortal_trigger = no
+			}
+			# not using POD_depose_effect since mortals shouldn't be playable
+			# TODO MORTAL: change to landed mortal handler
+			depose = yes
+		}
+	}
+	POD_remove_wrong_supernatural_traits_on_existing_character = yes
+	hidden_effect = {
+		POD_remove_supernatural_relation_effect = yes
+		POD_side_effects_from_changing_splats = yes
+		POD_remove_child_relation_effect = yes
+		POD_remove_parent_relation_effect = yes
+		POD_character_new_dynasty_based_on_existing_house_effect = yes
+		force_character_skill_recalculation = yes
+		# losing immortality seems to set your health to 2.5 (poor)
+		# so we add a +2.5 health modifier
+		POD_reapply_scaling_character_modifier = {
+			MODIFIER = golconda_second_chance_modifier
+		}
+	}
+}
+
+POD_lose_incompatible_splat_relationships = {
+	# divorce spouses who have an incompatible splat
+	every_spouse = {
+		limit = {
+			POD_custom_incompatible_splats_trigger = {
+				ACTOR = this
+				RECIPIENT = prev
+			}
+		}
+		divorce_effect = {
+			DIVORCER = this
+			DIVORCEE = prev
+		}
+	}
+	
+	# coterie handling
+	# case 1: all coterie members have incompatible splats -> leave coterie
+	if = {
+		limit = {
+			num_of_relation_coterie_member > 0
+			any_relation = {
+				type = coterie_member
+				count = 0
+				NOT = {
+					POD_custom_incompatible_splats_trigger = {
+						ACTOR = this
+						RECIPIENT = prev
+					}
+				}
+			}
+		}
+		POD_leave_coterie_effect = yes
+	}
+	# case 2: at least 1 coterie member is compatible -> kick out the ones who aren't
+	else_if = {
+		limit = {
+			any_relation = {
+				type = coterie_member
+				count > 0
+				NOT = {
+					POD_custom_incompatible_splats_trigger = {
+						ACTOR = this
+						RECIPIENT = prev
+					}
+				}
+			}
+		}
+		every_relation = {
+			type = coterie_member
+			limit = {
+				POD_custom_incompatible_splats_trigger = {
+					ACTOR = this
+					RECIPIENT = prev
+				}
+			}
+			POD_leave_coterie_effect = yes
+		}
+	}
+}

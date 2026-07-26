@@ -1,0 +1,962 @@
+﻿splat_trait = {
+	scope = trait
+	is_shown = { has_trait_flag = splat }
+}
+subsplat_trait = {
+	scope = trait
+	is_shown = { has_trait_flag = subsplat }
+}
+
+show_devbuild_traits = {
+	scope = trait
+	is_shown = {
+		trigger_if = {
+			limit = { show_devbuild_content = no }
+			NOT = { has_trait_flag = devbuild_trait }
+		}
+		trigger_else = {
+			always = yes
+		}
+	}
+}
+
+trait_blocks_landless = {
+	scope = trait
+	is_shown = {
+		has_trait_flag = landless_unavailable
+	}
+}
+
+vamp_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = vamp_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+discipline_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = discipline
+	}
+	is_valid = {}
+	effect = {}
+}
+
+kj_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = kj_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+hunter_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = hunter_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+mummy_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = mummy_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+demon_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = demon_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+fae_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = fae_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+mage_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = mage_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+wraith_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = wraith_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+fera_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = fera_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+entomos_trait = {
+	scope = trait 
+	is_shown = {
+		has_trait_flag = entomos_trait
+	}
+	is_valid = {}
+	effect = {}
+}
+
+trait_change_window_open = {
+	scope = character
+	saved_scopes = { player }
+	is_shown = {
+		scope:player = {
+			has_variable = reweaving_recipient
+		}
+	}
+	effect = {
+		remove_variable = reweaving_recipient
+		remove_variable = reweaving_ability
+	}
+}
+
+is_animantis = {
+	scope = character
+	
+	is_valid = { is_animantis_trigger = yes }
+}
+
+apply_trait_change = {
+	scope = character 
+	saved_scopes = { player }
+	is_shown = {}
+	is_valid = {
+		trigger_if = {
+			limit = { scope:player.var:reweaving_ability ?= flag:gilgul }
+			custom_tooltip = {
+				text = fp1_yearly.1062.d
+				POD_trait_change_value <= 1000
+			}
+			scope:player.gold >= POD_trait_change_value
+		}
+		trigger_else = {
+			scope:player.piety >= POD_trait_change_value
+		}
+		scope:player = {
+			trigger_if = {
+				limit = { exists = var:reweaving_ability }
+				custom_tooltip = {
+					text = has_reweave_cooldown
+					NOT = { has_variable = reweave_cooldown }
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						var:reweaving_ability ?= flag:gilgul
+						var:reweaving_ability ?= flag:naming_art
+					}
+				}
+				POD_has_enough_glamour_for_character_cantrip_interaction_custom = {
+					AMOUNT = 5
+					RECIPIENT = prev
+				}
+			}
+			trigger_else = {
+				POD_has_enough_splat_agnostic_energy_reserves = {
+					AMOUNT = 10
+				}
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable_list = trait_to_change_list }
+			scope:player = {
+				POD_willpower_rouse_check_effect = yes
+				if = {
+					limit = {
+						OR = {
+							var:reweaving_ability ?= flag:gilgul
+							var:reweaving_ability ?= flag:naming_art
+						}
+					}
+					POD_character_cantrip_interaction_cost_custom = {
+						COUNT = 5
+						RECIPIENT = prev
+					}
+				}
+				else = {
+					POD_splat_agnostic_energy_cost = { COUNT = 10 }
+				}
+				
+				if = {
+					limit = { var:reweaving_ability ?= flag:gilgul }
+					remove_short_term_gold = prev.POD_trait_change_value
+				}
+				else = {
+					add_piety = {
+						value = prev.POD_trait_change_value
+						multiply = -1
+					}
+				}
+			}
+			if = {
+				limit = { POD_splat_has_masquerade_trigger = yes }
+				POD_moderate_risk_of_increasing_masquerade_exposure = yes
+			}
+			every_in_list = { 
+				variable = trait_to_change_list
+				root = {
+					if = {
+						limit = { has_trait = prev }
+						remove_trait = prev
+					}
+					else = {
+						add_trait_force_tooltip = prev 
+					}
+				}
+			}
+			clear_variable_list = trait_to_change_list
+			
+			scope:player = {
+				if = {
+					limit = {
+						OR = {
+							var:reweaving_ability ?= flag:gilgul
+							var:reweaving_ability ?= flag:naming_art
+						}
+						realm_time_yearly_cooldown > 0
+					}
+					set_variable = {
+						name = reweave_cooldown
+						value = yes
+						years = realm_time_yearly_cooldown
+					}
+				}
+				else_if = {
+					limit = { var:reweaving_ability ?= flag:vicissitude }
+					set_variable = {
+						name = reweave_cooldown
+						value = yes
+						years = 5
+					}
+				}
+				else_if = {
+					limit = { var:reweaving_ability ?= flag:flowers_of_flesh }
+					if = { limit = { has_perk = shintai_the_shintai_of_flesh_perk } }
+					else_if = {
+						limit = { has_perk = shintai_a_thousand_forms_of_flesh_perk }
+						set_variable = {
+							name = reweave_cooldown
+							value = yes
+							years = 5
+						}
+					}
+					else = {
+						set_variable = {
+							name = reweave_cooldown
+							value = yes
+							years = 10
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							var:reweaving_ability ?= flag:moliate
+							var:reweaving_ability ?= flag:numina_sorcery
+							var:reweaving_ability ?= flag:arcana
+							var:reweaving_ability ?= flag:lore
+							var:reweaving_ability ?= flag:whispers_to_the_body
+						}
+					}
+					set_variable = {
+						name = reweave_cooldown
+						value = yes
+						years = 3
+					}
+				}
+			}
+		}
+		remove_character_flag = physical_trait_only
+		remove_character_flag = optional_child
+		remove_character_flag = exclude_personality_change
+		remove_character_flag = exclude_education_change
+		remove_character_flag = exclude_commander_change
+		remove_character_flag = exclude_lifestyle_change
+		remove_character_flag = exclude_fame_change
+		remove_character_flag = exclude_stress_change
+		remove_character_flag = exclude_health_change
+	}
+}
+
+cancel_trait_change = {
+	scope = character 
+	saved_scopes = { player }
+	is_shown = {}
+	is_valid = {}
+	effect = {
+		if = {
+			limit = { has_variable_list = trait_to_change_list }
+			clear_variable_list = trait_to_change_list
+		}
+		remove_character_flag = physical_trait_only
+		remove_character_flag = optional_child
+		remove_character_flag = exclude_personality_change
+		remove_character_flag = exclude_education_change
+		remove_character_flag = exclude_commander_change
+		remove_character_flag = exclude_lifestyle_change
+		remove_character_flag = exclude_fame_change
+		remove_character_flag = exclude_stress_change
+		remove_character_flag = exclude_health_change
+	}
+}
+
+personality_trait_change = {
+	scope = character 
+	is_shown = {
+		NOT = { has_character_flag = optional_child }
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_personality_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+education_trait_change = {
+	scope = character 
+	is_shown = {
+		NOT = { has_character_flag = optional_child }
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_education_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+commander_trait_change = {
+	scope = character 
+	is_shown = {
+		NOT = { has_character_flag = optional_child }
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_commander_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+lifestyle_trait_change = {
+	scope = character 
+	is_shown = {
+		NOT = { has_character_flag = optional_child }
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_lifestyle_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+fame_trait_change = {
+	scope = character 
+	is_shown = {
+		is_animantis_trigger = no
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_fame_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+stress_trait_change = {
+	scope = character 
+	is_shown = {
+		is_animantis_trigger = no
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_stress_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+health_trait_change = {
+	scope = character 
+	is_shown = {
+		is_animantis_trigger = no
+		NOT = { has_character_flag = physical_trait_only }
+		NOT = { has_character_flag = exclude_health_change }
+	}
+	is_valid = {}
+	effect = {}
+}
+
+physical_trait_change = {
+	scope = character 
+	is_shown = {}
+	is_valid = {}
+	effect = {}
+}
+
+trait_change_personality_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = TRAIT_CHANGE_WINDOW_PERSONALITY_TRAIT_LIMIT
+			trigger_if = {
+				limit = {
+					OR = {
+						AND = {
+							has_trait = scope:trait
+							is_target_in_variable_list = {
+								name = trait_to_change_list 
+								target = scope:trait
+							}
+						}
+						AND = {
+							NOT = { has_trait = scope:trait }
+							NOT = { 
+								is_target_in_variable_list = {
+									name = trait_to_change_list 
+									target = scope:trait
+								}
+							}
+						} 
+					}
+				}
+				POD_current_number_of_personality_traits < personality_trait_limit
+			}
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_education_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		scope:player = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				# has_perk = name_of_skill_perk
+			}
+		}
+		custom_tooltip = {
+			text = TRAIT_CHANGE_WINDOW_EDUCATION_TRAIT_LIMIT
+			trigger_if = {
+				limit = { 
+					OR = {
+						AND = {
+							has_trait = scope:trait
+							is_target_in_variable_list = {
+								name = trait_to_change_list 
+								target = scope:trait
+							}
+						}
+						AND = {
+							NOT = { has_trait = scope:trait }
+							NOT = { 
+								is_target_in_variable_list = {
+									name = trait_to_change_list 
+									target = scope:trait
+								}
+							}
+						} 
+					}
+				}
+				POD_current_number_of_education_traits < 1
+			}
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_commander_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		scope:player = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				# has_perk = name_of_skill_perk
+			}
+		}
+		custom_tooltip = {
+			text = TRAIT_CHANGE_WINDOW_COMMANDER_TRAIT_LIMIT
+			trigger_if = {
+				limit = { 
+					OR = {
+						AND = {
+							has_trait = scope:trait
+							is_target_in_variable_list = {
+								name = trait_to_change_list 
+								target = scope:trait
+							}
+						}
+						AND = {
+							NOT = { has_trait = scope:trait }
+							NOT = { 
+								is_target_in_variable_list = {
+									name = trait_to_change_list 
+									target = scope:trait
+								}
+							}
+						} 
+					}
+				}
+				POD_current_number_of_commander_traits < commander_trait_limit
+			}
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_lifestyle_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		scope:player = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				# has_perk = name_of_skill_perk
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:trait = trait:truefaith
+				POD_splat_mixing_haight_mode = no
+			}
+			is_witch_trigger = no
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_fame_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		}
+	}
+	is_valid = {
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_stress_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		scope:player = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				# has_perk = name_of_the_will_perk
+			}
+		}
+		trigger_if = {
+			limit = { 
+				OR = {
+					AND = {
+						has_trait = scope:trait
+						is_target_in_variable_list = {
+							name = trait_to_change_list 
+							target = scope:trait
+						}
+					}
+					AND = {
+						NOT = { has_trait = scope:trait }
+						NOT = { 
+							is_target_in_variable_list = {
+								name = trait_to_change_list 
+								target = scope:trait
+							}
+						}
+					} 
+				}
+			}
+			POD_can_add_stress_trait_trigger = yes
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_health_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { has_trait = scope:trait }
+			POD_can_be_healed_trigger = yes
+			scope:player = {
+				trigger_if = {
+					limit = { has_trait = mummy }
+					# has_perk = mend_flesh_perk
+				}
+			}
+		}
+		trigger_else = {
+			scope:player = {
+				trigger_if = {
+					limit = { has_trait = mummy }
+					# has_perk = naming_the_bodys_destruction_perk
+				}
+			}
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:eunuch_1 }
+			is_male = yes
+			POD_is_trait_not_permanent_trigger = { TRAIT = eunuch_1 }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:one_eyed }
+			POD_is_trait_not_permanent_trigger = { TRAIT = one_eyed }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:one_legged }
+			POD_is_trait_not_permanent_trigger = { TRAIT = one_legged }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:maimed }
+			POD_is_trait_not_permanent_trigger = { TRAIT = maimed }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:blind }
+			POD_is_trait_not_permanent_trigger = { TRAIT = blind }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:blind }
+			POD_is_trait_not_permanent_trigger = { TRAIT = blind }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:disfigured }
+			POD_is_trait_not_permanent_trigger = { TRAIT = disfigured }
+		}
+		trigger_if = { 
+			limit = { scope:trait = trait:scarred }
+			POD_is_trait_not_permanent_trigger = { TRAIT = scarred }
+		}
+		trigger_if = { 
+			limit = {
+				OR = {
+					scope:trait = trait:measles 
+					scope:trait = trait:dysentery 
+					scope:trait = trait:ergotism 
+				}
+			}
+			has_dlc_feature = legends_of_the_dead
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+trait_change_physical_select = {
+	scope = character 
+	saved_scopes = { trait player }
+	is_shown = {
+		is_target_in_variable_list = {
+			name = trait_to_change_list 
+			target = scope:trait
+		} 
+	}
+	is_valid = {
+		scope:player = {
+			trigger_if = {
+				limit = { has_trait = mummy }
+				# has_perk = whispers_to_the_body_perk
+				# has_perk = name_of_the_attribute_perk
+			}
+		}
+		POD_trait_change_valid_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = trait_to_change_list 
+					target = scope:trait
+				} 
+			}
+			remove_list_variable = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name = trait_to_change_list 
+				target = scope:trait
+			}
+		}
+	}
+}
+
+true_name_trait_select_all = {
+	scope = character
+	effect = {
+		clear_variable_list = selected_traits
+		every_in_list = {
+			variable = potential_traits
+			prev = {
+				add_to_variable_list = {
+					name   = selected_traits
+					target = prev
+				}
+			}
+		}
+	}
+}
+
+true_name_trait_selection = {
+	scope = character
+	saved_scopes = { trait }
+	is_shown = {
+		is_target_in_variable_list = {
+			name   = selected_traits
+			target = scope:trait
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name   = selected_traits
+					target = scope:trait
+				}
+			}
+			remove_list_variable = {
+				name   = selected_traits
+				target = scope:trait
+			}
+		}
+		else = {
+			add_to_variable_list = {
+				name   = selected_traits
+				target = scope:trait
+			}
+		}
+	}
+}
+
+true_name_trait_selection_exclusive = {
+	scope = character
+	saved_scopes = { trait }
+	is_shown = {
+		is_target_in_variable_list = {
+			name   = selected_traits
+			target = scope:trait
+		}
+	}
+	effect = {
+		clear_variable_list = selected_traits
+		add_to_variable_list = {
+			name   = selected_traits
+			target = scope:trait
+		}
+	}
+}
+
+commander_trait = {
+	scope = trait
+	is_shown = {
+		POD_is_commander_trait = yes
+	}
+}

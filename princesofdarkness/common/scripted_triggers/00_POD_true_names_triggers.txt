@@ -1,0 +1,138 @@
+﻿POD_can_learn_true_name_of = {
+	trigger_if = {
+		limit = {
+			OR = {
+				has_perk = command_thought_perk
+				has_perk = saining_perk
+				character:easteregg_flandre ?= this
+			}
+		}
+		# Can learn true names from any splat
+		always = yes
+	}
+	trigger_else_if = {
+		limit = {
+			#OR = {
+				has_perk = numina_via_geniorum_5_perk
+			#}
+		}
+		# Can learn true names from characters that can be banished (Demons, Wraiths, Fae)
+		$TARGET$ = {
+			OR = {
+				POD_is_demon_trigger = yes
+				POD_is_wraith_trigger = yes
+				POD_is_fae_trigger = yes
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			OR = {
+				has_perk = arcana_invocation_of_name_perk
+				has_trait_xp = {
+					trait = demonology
+					value >= 5
+				}
+				POD_can_banish_demons_trigger = yes
+			}
+		}
+		# Can learn true names of Demons
+		$TARGET$ = {
+			POD_is_demon_trigger = yes
+		}
+	}
+	trigger_else = {
+		always = no
+	}
+}
+
+POD_true_name_is_learnable = {
+	NOT = { has_character_flag = ate_his_true_name }
+	NOT = { has_perk = cloud_the_name_perk }
+}
+
+POD_can_study_true_names_trigger = {
+	OR = {
+		POD_splat_has_access_to_hekau_nomenclature = yes
+	}
+}
+POD_can_study_true_names_all_trigger = {
+	OR = {
+		has_perk = saining_perk
+		POD_can_study_true_names_trigger = yes
+	}
+}
+
+POD_can_study_true_name_of_trait_trigger = {
+	OR = {
+		has_trait_flag = reweaving_stress_trait
+		has_trait_flag = reweaving_health_trait
+		has_trait_flag = reweaving_physical_trait
+		has_trait_category = personality
+		trigger_if = {
+			limit = { $SCHOLAR$ = { has_character_modifier = nomenclature_master_modifier } } 
+			OR = {
+				has_trait_category = education
+				has_trait_flag = reweaving_commander_trait
+				has_trait_flag = reweaving_lifestyle_trait
+				has_trait_flag = reweaving_fame_trait
+			}
+		}
+	}
+	$SCHOLAR$ = {
+		NOT = { POD_knows_true_name_of_trait_trigger = { TRAIT = prev } }
+		POD_not_already_on_journey_for_trait_trigger = {
+			TYPE  = study_true_name_trait_journey
+			TRAIT = prev
+		}
+	}
+}
+
+POD_can_study_anatomy_trait = {
+	POD_is_valid_trait_for_study_anatomy_trigger = yes
+	$SCHOLAR$ = {
+		NOT = { POD_knows_anatomy_trait = { TRAIT = prev } }
+		POD_not_already_on_journey_for_trait_trigger = {
+			TYPE  = study_anatomy
+			TRAIT = prev
+		}
+	}
+}
+
+POD_has_higher_true_name_access_trigger = {
+	always = no
+}
+
+POD_know_all_nonstandard_true_names_trigger = {
+	custom_tooltip = {
+		text = POD_know_all_nonstandard_true_names_trigger
+		known_nonstandard_true_names_number >= total_nonstandard_true_names_number
+	}
+}
+
+POD_knows_true_name_of_trigger = {
+	save_temporary_scope_value_as = { name = true_name_scope value = $TARGET$ }
+	custom_tooltip = {
+		text = POD_KNOWS_TRUE_NAME_OF_TRIGGER
+		is_target_in_variable_list = {
+			name = known_true_name_flags
+			target = $TARGET$
+		}
+	}
+}
+
+POD_knows_true_name_of_trait_trigger = {
+	custom_description = {
+		text = POD_knows_true_name_of_trait_trigger_desc
+		object = $TRAIT$
+		is_target_in_variable_list = {
+			name = known_true_name_traits
+			target = $TRAIT$
+		}
+	}
+}
+
+# simple wrapper for now. maybe use a separate variable list in the future?
+POD_knows_anatomy_trait = {
+	POD_knows_true_name_of_trait_trigger = { TRAIT = $TRAIT$ }
+}

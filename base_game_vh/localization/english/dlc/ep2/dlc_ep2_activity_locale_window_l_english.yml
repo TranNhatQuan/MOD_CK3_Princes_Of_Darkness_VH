@@ -1,0 +1,35 @@
+﻿l_english:
+
+  locale_window_your_intent:0 "[intent|e] của Ngài"
+
+  locale_window_guests_header:0 "Khách mời"
+  locale_window_all_guests_button:0 "Tất cả khách mời ([GetDataModelSize(Activity.GetAttendingCharacters)])"
+  locale_window_all_guests_button_tooltip:0 "Hiển thị tất cả [guests|e] tham dự"
+  locale_window_activity_log:0 "Nhật ký Hoạt động"
+  locale_window_activity_log_no_entries:0 "Không có mục nhật ký nào"
+
+  locale_window_enter_locale_tooltip:1 "Vào [ActivityLocale.GetName]\n\n[ActivityLocale.GetDescription]"
+  locale_window_enter_locale_error_not_arrived:0 "@warning_icon! #X Ngài vẫn chưa đến địa điểm diễn ra hoạt động.#!"
+  locale_window_enter_locale_error_no_activity:0 "@warning_icon! #X Không có hoạt động nào.#!"
+  locale_window_enter_locale_error_no_character:0 "@warning_icon! #X Ngài chỉ là người quan sát.#!"
+  locale_window_enter_locale_error_no_locale:0 "@warning_icon!#D Địa điểm không hợp lệ.#!"
+  locale_window_enter_locale_error_no_effect:0 "@warning_icon!#D Không có hiệu ứng nào tại địa điểm này.#!"
+  locale_window_enter_locale_global_cooldown:0 "@warning_icon! Ngài không thể ghé thăm bất kỳ địa điểm nào trong [DATE.GetTimeToDate()]."
+  locale_window_enter_locale_specific_cooldown:0 "@warning_icon! Ngài không thể ghé thăm lại địa điểm này trong [DATE.GetTimeToDate()]."
+  locale_window_enter_locale_auto_select_cooldown:0 "Ngài sẽ tự động ghé thăm một địa điểm sau [DATE.GetTimeToDate()]."
+  locale_window_enter_locale_not_opened_yet:0 "@warning_icon! Địa điểm này sẽ mở sau [DATE.GetTimeToDate()]."
+  locale_window_enter_locale_phase_is_active:0 "@warning_icon! #X Ngài không thể ghé thăm các địa điểm khi giai đoạn hiện tại đang diễn ra.#!"
+
+  locale_window_your_activity_status:0 "Ngài đang $locale_window_your_activity_status_select_hosting_or_attending$ [Activity.GetNameNoTooltip] tại [Activity.GetCurrentPhase.GetLocation.GetNameNoTooltip]$locale_window_your_activity_status_select_special_guest$."
+  locale_window_your_activity_status_select_hosting_or_attending:0 "[SelectLocalization( ObjectsEqual( GetPlayer, Activity.GetHost ), 'locale_window_your_activity_status_hosting', 'locale_window_your_activity_status_attending')]"
+  locale_window_your_activity_status_attending:0 "tham dự hoạt động của [Activity.GetHost.GetShortUINamePossessive]"
+  locale_window_your_activity_status_hosting:0 "chủ trì một"
+  locale_window_your_activity_status_select_special_guest:0 "[SelectLocalization( Activity.IsSpecialGuest( GetPlayer ), 'locale_window_your_activity_status_hosting', '')]"
+  locale_window_your_activity_status_special_guest:1 " với tư cách là [Activity.GetSpecialGuestTypeForCharacter(GetPlayer).GetNameIfHost( Activity.GetHost )]"
+ 
+  locale_window_status_icon_location_tooltip:0 "Ngài đang ở [Activity.GetCurrentPhase.GetLocation.GetName]"
+  locale_window_status_icon_special_guest_tooltip:0 "Ngài là [Activity.GetSpecialGuestTypeForCharacter(GetPlayer).GetNameIfHost( Activity.GetHost )] trong [Activity.GetName]"
+
+  locale_window_widget_current_phase_header:0 "[SelectLocalization( Activity.IsCurrentPhaseActive, 'locale_window_widget_current_phase_active', 'locale_window_widget_current_phase_passive' )]"
+  locale_window_widget_current_phase_passive:0 "#bold Hiện tại#!: #high Đang chờ#! [Activity.GetCurrentPhase.GetPhase.GetName]"
+  locale_window_widget_current_phase_active:0 "#bold Hiện tại#!: #high Đang tham gia#! [Activity.GetCurrentPhase.GetPhase.GetName]"

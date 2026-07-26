@@ -1,0 +1,51 @@
+﻿l_english:
+
+  KNIGHTS_VIEW_FORCE:0 "Ép buộc"
+  KNIGHTS_VIEW_ALLOW:0 "Cho phép"
+  KNIGHTS_VIEW_FORBID:0 "Cấm"
+  KNIGHTS_VIEW_TITLE:1 "$knight_culture_player_plural_no_tooltip$"
+  MAX_KNIGHT_COUNT:2 "$knight_culture_player_plural_no_tooltip$: #high [GetKnightCount( GetPlayer.Self )]/[GetKnightLimit( GetPlayer.Self )]#!"
+  MAX_KNIGHT_TOOLTIP:1 "#T Số lượng tối đa $knight_culture_player_plural_no_tooltip$: [knight_i][GetKnightLimit( GetPlayer.Self )|V]#!\n[GetKnightLimitBreakdown( GetPlayer.Self )]"
+  KNIGHT_EFFECTIVENESS:1 "Hiệu quả của $knight_culture_player_no_tooltip$: #high [GetPlayer.GetKnightEffectiveness|%0]#!"
+  KNIGHT_EFFECTIVENESS_TOOLTIP:2 "#T [knight_effectiveness|E]: [GetPlayer.GetKnightEffectiveness|V%0]#!\nCơ bản: #V 100%#!\n[GetPlayer.GetKnightEffectivenessBreakdown]"
+  KNIGHTS_VIEW_TITLE_FORBID_TT:2 "#T Cấm [Character.GetShortUIName] trở thành $knight_culture_player$#!\n\n[Character.GetShortUIName] sẽ #emphasis không bao giờ#! tham gia [armies|E] của Ngài với tư cách là $knight_culture_player_no_tooltip$. Điều này giúp [Character.GetHerHim] an toàn, tránh tử trận trong [battle|E]."
+  CREATE_ACCOLADE_FORBID_TT: "#T Cấm [CreateAccoladeView.GetSelectedKnight.GetShortUIName] trở thành $knight_culture_player$#!\n\n[CreateAccoladeView.GetSelectedKnight.GetShortUIName] sẽ #emphasis không bao giờ#! tham gia vào [armies|E] của Ngài với tư cách là một $knight_culture_player_no_tooltip$. Điều này giúp giữ cho [CreateAccoladeView.GetSelectedKnight.GetHerHim] an toàn, tránh khỏi cái chết trong [battle|E]."
+  KNIGHTS_VIEW_TITLE_BY_PROWESS_TT:2 "#T Cho phép [Character.GetShortUIName] trở thành $knight_culture_player$#!\n\n[Character.GetShortUIName] có thể tham gia [armies|E] của Ngài với tư cách là $knight_culture_player_no_tooltip$ nếu [prowess|E] của [Character.GetHerHis] nằm trong số những người cao nhất trong [realm|E]"
+  CREATE_ACCOLADE_BY_PROWESS_TT:2 "#T Cho phép [CreateAccoladeView.GetSelectedKnight.GetShortUIName] trở thành $knight_culture_player$#!\n\n[CreateAccoladeView.GetSelectedKnight.GetShortUIName] có thể tham gia [armies|E] của Ngài với tư cách là $knight_culture_player_no_tooltip$ nếu [prowess|E] của [CreateAccoladeView.GetSelectedKnight.GetHerHis] nằm trong số những người cao nhất trong [realm|E]"
+  KNIGHTS_VIEW_TITLE_FORCE_TT:2 "#T Ép buộc [Character.GetShortUIName] trở thành $knight_culture_player$#!\n\n[Character.GetShortUIName] #emphasis bắt buộc#! phải tham gia [armies|E] của Ngài với tư cách là $knight_culture_player_no_tooltip$, bất kể [prowess|E] của [Character.GetHerHis]. [Character.GetSheHe|U] có thể thay thế một $knight_culture_player_no_tooltip$ có Prowess cao hơn."
+  CREATE_ACCOLADE_FORCE_TT: "#T Ép buộc [CreateAccoladeView.GetSelectedKnight.GetShortUIName] trở thành $knight_culture_player$#!\n\n[CreateAccoladeView.GetSelectedKnight.GetShortUIName] #emphasis bắt buộc#! phải tham gia [armies|E] của Ngài với tư cách là $knight_culture_player_no_tooltip$, bất kể [prowess|E] của [CreateAccoladeView.GetSelectedKnight.GetHerHis]. [CreateAccoladeView.GetSelectedKnight.GetSheHe|U] có thể thay thế một $knight_culture_player_no_tooltip$ có Prowess cao hơn."
+  KNIGHTS_CURRENT_MAX:0 "[GetKnightCount( GetPlayer.Self )|V]/[GetKnightLimit( GetPlayer.Self )|V]"
+  KNIGHTS_SUBHEADER:0 "[courtiers|E] và [vassals|E] đủ điều kiện"
+  KNIGHTS_SUBHEADER_LANDLESS_ADVENTURER: "[followers|E] đủ điều kiện"
+
+ ### Knight permissions
+ 
+  knight_singular: "[GetPlayer.Custom('KnightCultureNoTooltip')]"
+  knight_plural: "[GetPlayer.Custom('KnightCulturePluralNoTooltip')]"
+  knight_singular_tt: "[GetPlayer.Custom('KnightCulture')]"
+  knight_plural_tt: "[GetPlayer.Custom('KnightCulturePlural')]"
+  KNIGHT_PERMISSIONS_TITLE: "Đặc quyền của $knight_singular$"
+  KNIGHT_PERMISSIONS_SHORT: "Đặc quyền"
+  KNIGHT_PERMISSIONS_TT: "Quản lý những ai có thể phụng sự với tư cách là một $knight_singular_tt$[AddLocalizationIf(Not( KnightsView.GetKnightPermissions.IsDefault), 'KNIGHT_PERMISSIONS_SET')]"
+  KNIGHT_PERMISSIONS_SET: "\n#warning Một số bộ lọc đang kích hoạt!#!"
+  YOUR_KNIGHT_PERMISSIONS: "Thiết lập quy tắc cho những ai có thể trở thành một $knight_singular_tt$.\nCác $knight_plural$ được [acclaimed|e] hoặc bị Ép buộc sẽ không bị ảnh hưởng."
+ 
+  MINIMUM_PROWESS: "Prowess Tối thiểu"
+  DECREASE_MIN_PROWESS_KP: "Giảm [prowess|e] tối thiểu yêu cầu cho các [knights|e]\n#i Chuột phải để giảm 10"
+  INCREASE_MIN_PROWESS_KP: "Tăng [prowess|e] tối thiểu yêu cầu cho các [knights|e]\n#i Chuột phải để tăng 10"
+  FAMILY_RELATIONS_KP: "Gia đình và Quan hệ"
+  OTHER_CHILDERN_KP: "Những người con khác"
+  WITH_TRAITS_KP: "Đặc điểm"
+  SPOUSES_OF_CHILDERN_KP: "Phu quân/Phu nhân của con cái"
+  COURT_POSITIONS_KP: "Chức vị Triều đình"
+  COURT_POSITIONS_TT: "Cấm các chức vị không chiến đấu.\n[GetCourtPositionType('bodyguard_court_position').GetName] và [GetCourtPositionType('garuda_court_position').GetName] được ngoại lệ và luôn có thể trở thành [knights|e], vì họ được giao phó để hỗ trợ trong các trận chiến"
+ 
+ HBOX_DOCTRINE_FAITH_TT: "#T [FaithDoctrine.GetNameNoTooltip( Faith.Self )]#!\n[FaithDoctrine.GetEffectsDescription( Faith.Self )]\n\n[FaithDoctrine.GetDescription( Faith.Self )|F]"
+  KNIGHT_RESTRICTIONS: "Các hạn chế khác được áp dụng"
+ 
+ # this is can_be_knight_trigger in 00_war_and_peace_triggers.txt
+  KNIGHT_RESTRICTIONS_TT: "#T Hạn chế Hiệp sĩ#!\nChỉ những [vassals|e], [courtiers|e] hoặc [followers|e] trực thuộc mới có thể làm [knights|e].\n[culture|e] hoặc [faith|e] của Ngài quyết định giới tính nào có thể trở thành [knights|e].\n\nMột Hiệp sĩ không thể là:\n - Người chơi, [child|e], [prisoner|e] hoặc người bị [GetTrait('incapable').GetName(GetPlayer.Self)]\n - Thành viên [clergy|e] (trừ khi [faith|e] hoặc [culture|e] cho phép)\n - [master_assassin|e] hoặc bị [GetTrait('blind').GetName(GetPlayer.Self)] (trừ khi [culture|e] cho phép hoặc họ là một [GetTrait('order_member').GetName(GetPlayer.Self)])\n - [diarch|e] hoặc [ceremonial_liege|e]\n - [governor|e] của một [duchy|e] (hoặc [title|e] cao hơn) hoặc [house_head|e] của một [noble_family|e]\n\nCác [traditions|e] văn hóa và sự kiện có thể bãi bỏ một số hạn chế này"
+ 
+  KP_CULTURE_MINIMUM_PROWESS: "@alert_icon! [culture|e] của Ngài yêu cầu ít nhất 12 [prowess|e]"
+  KP_CULTURE_ADMIN_FAMILY_KNIGHTS: "@check_icon! [culture|e] của Ngài bãi bỏ một số hạn chế về giới tính trong các cuộc [wars|e] phòng thủ"
+  KP_CULTURE_HIGH_PROWESS: "@check_icon! [culture|e] của Ngài bãi bỏ hầu hết các hạn chế đối với những [knights|e] có ít nhất 10 [prowess|e]"

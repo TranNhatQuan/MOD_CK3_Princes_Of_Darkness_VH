@@ -1,0 +1,894 @@
+﻿is_patron_faith_trigger = {
+	OR = {
+		this = faith:thirdcaine
+		this = faith:viafvriaimperiosa
+		this = faith:ordovaticinii
+		this = faith:path_of_carnal_desire
+		this = faith:viaofficii
+		this = faith:viaapotheosis
+		this = faith:pathofasakku
+		this = faith:viatartaros
+		this = faith:baobhansith	
+		this = faith:jotunnsvag
+		this = faith:pathofleviathan
+		this = faith:pathofleviathansabbat
+		this = faith:pathoftevoro
+		this = faith:corrupted_hunters_faith
+	}	
+}
+
+is_vanilla_faith_trigger = {
+	OR = {
+		religion = { is_in_family = rf_abrahamic }
+		religion = { is_in_family = rf_eastern }
+		religion = { is_in_family = rf_sinitic }
+		religion = { is_in_family = rf_pagan }
+	}
+}
+
+POD_faith_can_be_heresy_trigger = {
+	religion = { 
+		NOR = {
+			is_in_family = rf_hunters	
+			is_in_family = rf_mummies
+		}
+	}
+}
+
+pod_can_convert_trigger = {
+	pod_convert_trigger = { CHARACTER = scope:recipient FAITH = scope:actor.faith }
+}
+ 
+pod_can_reverse_convert_trigger = {
+	pod_convert_trigger = { CHARACTER = scope:actor FAITH = scope:recipient.faith }
+}
+
+pod_convert_trigger = {	
+	trigger_if = {
+		limit = {
+			NAND = {
+				$FAITH$.religion = { is_in_family = rf_demons }
+				$CHARACTER$ = { is_a_cultist = yes }
+			}
+			$CHARACTER$ = { POD_is_spirit_trigger = no }
+		}
+		pod_convert_splat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+		pod_convert_half_splat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = {
+			$FAITH$.religion = { is_in_family = rf_demons }
+			$CHARACTER$ = {
+				is_a_cultist = no
+				NOT = { has_trait = demon }
+			}
+		}
+		custom_tooltip = {
+			text = demon_faith_requires_cultist_tooltip
+			always = no
+		}
+	}
+	custom_tooltip = {
+		text = spirit_cant_convert_tooltip
+		$CHARACTER$ = { POD_is_spirit_trigger = no }
+	}
+	custom_tooltip = {
+		text = viaservilis_cant_convert_tooltip
+		NOT = { $CHARACTER$.faith = faith:viaservilis } #Via servilis gargoyles can't be converted or given land
+		NOT = { $FAITH$ = faith:viaservilis } #Via servilis gargoyles can't be converted or given land
+	}
+}
+
+pod_convert_splat_trigger = {
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = kueijin } }
+		custom_tooltip = {
+			text = kueijin_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_kueijin }
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = vampire } }
+		custom_tooltip = {
+			text = vamp_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_kindred }
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = fera } }
+		custom_tooltip = {
+			text = fera_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = { is_in_family = rf_gaia }
+				$FAITH$.religion = { is_in_family = rf_wyrm }
+			}
+			$FAITH$ = { is_spirit_faith_trigger = no }
+		}
+		trigger_if = {
+			limit = { $CHARACTER$.religion = { is_in_family = rf_gaia } }
+			$FAITH$.religion = { is_in_family = rf_gaia }
+		}
+		trigger_if = {
+			limit = { $CHARACTER$.religion = { is_in_family = rf_wyrm } }
+			$FAITH$.religion = { is_in_family = rf_wyrm }
+		}
+		pod_convert_fera_subsplat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = supehunter } }
+		custom_tooltip = {
+			text = hunter_cant_follow_you_faith_tooltip
+			$FAITH$.religion = religion:hunters_religion
+		}
+		trigger_if = {
+			limit = { $CHARACTER$ = { has_inquisitor_dynasty_trigger = yes } }
+			$FAITH$ = faith:shadowinquisition # TODO: think about society of leopod
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = mummy } }
+		custom_tooltip = {
+			text = mummy_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_mummies }
+		}
+		pod_convert_mummy_subsplat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = wraith } }
+		custom_tooltip = {
+			text = wraith_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_wraiths }
+		}
+		pod_convert_wraith_subsplat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = fae } }
+		custom_tooltip = {
+			text = fae_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_fae }
+		}
+		pod_convert_fae_subsplat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = demon } }
+		custom_tooltip = {
+			text = demon_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { is_in_family = rf_demons }
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = mage } }
+		custom_tooltip = {
+			text = mage_cant_follow_you_faith_tooltip
+			$FAITH$.religion = { has_POD_religion_group = yes } # Placeholder safeguard
+		}
+	}
+	trigger_if = {
+		limit = {
+		$CHARACTER$ = { has_trait = shih } 
+		}
+	custom_tooltip = {
+		text = faith_conversion_cost_wrong_splat_religion		
+		$FAITH$.religion = { has_POD_religion_group = no } # Placeholder safeguard
+	}	
+	}	
+}
+
+pod_convert_half_splat_trigger = {
+	trigger_if = {
+		limit = {
+			$CHARACTER$ = { POD_is_any_kind_of_ghoul_trigger = yes }
+		}
+		custom_tooltip = {
+			text = ghoul_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = { is_in_family = rf_kindred }
+				$FAITH$.religion = { is_in_family = rf_hunters } # Forsaken
+				AND = {
+					$CHARACTER$ = {
+						OR = {
+							has_trait = kinfolk
+							has_trait = fera
+						}
+					}
+					OR = {
+						$FAITH$.religion = { is_in_family = rf_gaia }
+						$FAITH$.religion = { is_in_family = rf_wyrm }
+					}
+					$FAITH$ = { is_spirit_faith_trigger = no }
+				}
+				AND = {
+					$CHARACTER$ = {
+						OR = {
+							has_trait = kinain
+							has_trait = changeling
+						}
+					}
+					$FAITH$.religion = { is_in_family = rf_fae }
+				}
+				AND = {
+					$CHARACTER$ = { is_a_neteru = yes }
+					$FAITH$.religion = { is_in_family = rf_mummies }
+				}
+			}
+		}
+	}
+	trigger_if = {
+		limit = {
+			$CHARACTER$ = { 	
+				OR = {
+					has_trait = kinain
+					has_trait = changeling
+				}
+			}
+			$CHARACTER$ = { NOT = { has_trait = abomination } }			
+		}
+		custom_tooltip = {
+			text = changeling_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = { is_in_family = rf_fae }
+				AND = {
+					$CHARACTER$ = { has_trait = kinfolk }
+					OR = {
+						$FAITH$.religion = { is_in_family = rf_gaia }
+						$FAITH$.religion = { is_in_family = rf_wyrm }
+					}
+					$FAITH$ = { is_spirit_faith_trigger = no }
+				}
+				AND = {
+					$CHARACTER$ = { POD_is_any_kind_of_ghoul_trigger = yes }
+					OR = {
+						$FAITH$.religion = { is_in_family = rf_kindred }
+						$FAITH$.religion = { is_in_family = rf_hunters } # Forsaken
+					}
+				}
+				AND = {
+					$CHARACTER$ = { is_vampire_trigger = yes }
+					$FAITH$.religion = { is_in_family = rf_kindred }
+				}				
+				AND = {
+					$CHARACTER$ = { is_a_neteru = yes }
+					$FAITH$.religion = { is_in_family = rf_mummies }
+				}
+			}
+		}
+		pod_convert_fae_subsplat_trigger = { CHARACTER = $CHARACTER$ FAITH = $FAITH$ }
+	}
+	trigger_if = {
+		limit = {
+			$CHARACTER$ = { has_trait = kinfolk }
+			$CHARACTER$ = { NOT = { has_trait = abomination } }			
+		}
+		custom_tooltip = {
+			text = kinfolk_cant_follow_you_faith_tooltip
+			OR = {
+				AND = {
+					OR = {
+						$FAITH$.religion = { is_in_family = rf_gaia }
+						$FAITH$.religion = { is_in_family = rf_wyrm }
+					}
+					$FAITH$ = { is_spirit_faith_trigger = no }
+				}
+				AND = {
+					$CHARACTER$ = {
+						OR = {
+							has_trait = kinain
+							has_trait = changeling
+						}
+					}
+					$FAITH$.religion = { is_in_family = rf_fae }
+				}
+				AND = {
+					$CHARACTER$ = { POD_is_any_kind_of_ghoul_trigger = yes }
+					OR = {
+						$FAITH$.religion = { is_in_family = rf_kindred }
+						$FAITH$.religion = { is_in_family = rf_hunters } # Forsaken
+					}
+				}
+				AND = {
+					$CHARACTER$ = { is_a_neteru = yes }
+					$FAITH$.religion = { is_in_family = rf_mummies }
+				}
+			}
+		}
+	}
+}
+
+pod_convert_mummy_subsplat_trigger = {
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = shemsuheru } }
+		$FAITH$ = { 
+			has_doctrine = special_doctrine_against_to_apophis_hostility
+			NOT = { this = faith:cabiri } 
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = banemummy } }
+		$FAITH$ = { has_doctrine = special_doctrine_allied_to_apophis_hostility }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = wukuei } }
+		$FAITH$ = { has_doctrine = special_doctrine_allied_to_yomi_wan_hostility }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = wutian } }
+		$FAITH$ = { has_doctrine = special_doctrine_against_to_yomi_wan_hostility }
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = cabiri } }
+		$FAITH$ = { this = faith:cabiri }
+	}
+}
+
+pod_convert_fae_subsplat_trigger = {
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = glome } }
+		custom_tooltip = {
+			text = glome_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_stones
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = kubera } }
+		custom_tooltip = {
+			text = kubera_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_seeds
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = ondine } }
+		custom_tooltip = {
+			text = ondine_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_tears
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = paroseme } }
+		custom_tooltip = {
+			text = paroseme_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_skies
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = {  has_trait = solimond } }
+		custom_tooltip = {
+			text = solimond_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_flames
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = mannikin } }
+		custom_tooltip = {
+			text = mannikin_cant_follow_you_faith_tooltip
+			$FAITH$ = faith:empire_of_dolls
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = african_kiths } }
+		custom_tooltip = {
+			text = african_kiths_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = religion:ojo_religion
+				$FAITH$.religion = religion:iku_religion
+			}
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = hsien } }
+		custom_tooltip = {
+			text = hsien_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = religion:shinma_religion
+				$FAITH$.religion = religion:mu_religion
+			}
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = jinn } }
+		custom_tooltip = {
+			text = jinn_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = religion:winter_court_religion
+				$FAITH$.religion = religion:spring_court_religion
+				$FAITH$.religion = religion:summer_court_religion
+				$FAITH$.religion = religion:autumn_court_religion
+				$FAITH$.religion = religion:solstice_court_religion
+			}
+			$FAITH$ = { is_inanimate_faith_trigger = no }
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = eshu } }
+		custom_tooltip = {
+			text = eshu_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = religion:winter_court_religion
+				$FAITH$.religion = religion:spring_court_religion
+				$FAITH$.religion = religion:summer_court_religion
+				$FAITH$.religion = religion:autumn_court_religion
+				$FAITH$.religion = religion:solstice_court_religion
+				$FAITH$.religion = religion:ojo_religion
+				$FAITH$.religion = religion:iku_religion
+			}
+			$FAITH$ = { is_inanimate_faith_trigger = no }
+		}
+	}
+	trigger_else_if = {
+		limit = { $CHARACTER$ = { has_trait = kithain } }
+		custom_tooltip = {
+			text = kithain_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$.religion = religion:winter_court_religion
+				$FAITH$.religion = religion:spring_court_religion
+				$FAITH$.religion = religion:summer_court_religion
+				$FAITH$.religion = religion:autumn_court_religion
+				$FAITH$.religion = religion:solstice_court_religion
+			}
+			$FAITH$ = { is_inanimate_faith_trigger = no }
+		}
+	}
+	trigger_else = {}
+}
+	
+pod_convert_fera_subsplat_trigger = {
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = werewolf } }
+		custom_tooltip = {
+			text = werewolf_cant_follow_you_faith_tooltip
+			$FAITH$ = { is_werewolf_faith_trigger = yes }
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = bastet } }
+		custom_tooltip = {
+			text = bastet_cant_convert_tooltip
+			OR = {
+				$CHARACTER$.faith = $FAITH$ #Bastet tribes aren't just "political" like the werewolf tribes. They shouldn't convert at all
+				$FAITH$ = faith:hellcats
+			}
+		}
+		custom_tooltip = {
+			text = bastet_cant_follow_you_faith_tooltip
+			OR = { # Needed for rd faith correction
+				$FAITH$ = { is_bastet_faith_trigger = yes }
+				$FAITH$.religion = religion:wyrm_religion
+			}
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = mokole } }
+		custom_tooltip = {
+			text = mokole_cant_follow_you_faith_tooltip
+			$FAITH$ = { is_mokole_faith_trigger = yes }
+		}
+		trigger_if = {
+			limit = { $CHARACTER$ = { POD_mokole_is_zhong_lung_trigger = yes } }
+			custom_tooltip = {
+				text = zhong_lung_cant_follow_you_faith_tooltip
+				NOT = { $FAITH$ = faith:emerald_memory }
+			}
+		}
+		trigger_if = {
+			limit = { $CHARACTER$ = { POD_mokole_is_zhong_lung_trigger = no } }
+			custom_tooltip = {
+				text = non_zhong_lung_cant_follow_you_faith_tooltip
+				NOT = { $FAITH$ = faith:dragons_zhong_guo }
+			}
+		}
+		
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = gurahl } }
+		custom_tooltip = {
+			text = gurahl_cant_follow_you_faith_tooltip
+			OR = {
+				$FAITH$ = { is_gurahl_faith_trigger = yes }
+				$FAITH$.religion = religion:wyrm_religion
+			}
+		}
+	}
+}
+	
+pod_convert_wraith_subsplat_trigger = {
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = spectre } }
+		custom_tooltip = {
+			text = spectre_cant_follow_you_faith_tooltip
+			$FAITH$.religion = religion:spectre_religion
+		}
+	}
+	trigger_if = {
+		limit = { $CHARACTER$ = { has_trait = ferryman } }
+		custom_tooltip = {
+			text = ferryman_cant_follow_you_faith_tooltip
+			$FAITH$.religion = religion:ferrymen_religion
+		}
+	}
+}
+
+POD_has_wrong_religion_trigger = {
+	NOT = { pod_convert_trigger = { CHARACTER = this FAITH = this.faith } }
+}
+
+POD_has_illegal_religion_trigger = { # the lite version...
+	POD_has_illegal_religion_custom_trigger = { CHARACTER = this FAITH = this.faith }
+}
+
+POD_has_illegal_religion_custom_trigger = {
+	trigger_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_ignorance } }
+		}
+		$CHARACTER$ = { NOT = { has_trait = mortal } }
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_kindred } }
+		}
+		$CHARACTER$ = { has_POD_vamp_blood_trigger = no }
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_kueijin } }
+		}
+		trigger_if = {
+			limit = { $FAITH$ = { religion = religion:thousandhells_religion } }
+			$CHARACTER$ = {
+				POD_has_defiled_liege_trigger = no
+				NOT = { has_trait = kueijin } 
+				NOT = { has_trait = dhampyr }
+			}
+		}
+		trigger_else = {
+			$CHARACTER$ = {
+				NOT = { has_trait = kueijin } 
+				NOT = { has_trait = dhampyr }
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_hunters } }
+		}
+		$CHARACTER$ = { 
+			NOT = { has_trait = supehunter }
+			is_child_of_supehunter_trigger = no
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { 
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+				is_spirit_faith_trigger = no
+			}
+		}
+		$CHARACTER$ = { 
+			NOT = { has_trait = fera }
+			NOT = { has_trait = kinfolk }
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_wraiths } }
+		}
+		$CHARACTER$ = { NOT = { has_trait = wraith } }
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_fae } }
+		}
+		$CHARACTER$ = { has_POD_fae_blood_trigger = no }
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_mummies } }
+		}
+		$CHARACTER$ = { 
+			NOT = { has_trait = mummy } 
+			is_a_neteru = no
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			$FAITH$ = { religion = { is_in_family = rf_demons } }
+		}
+		$CHARACTER$ = { 
+			NOT = { has_trait = demon } 
+			is_a_cultist = no
+		}
+	}
+	trigger_else_if = {
+		limit = { 
+			$FAITH$ = { is_spirit_faith_trigger = yes }
+		}
+		POD_is_spirit_trigger = no
+	}
+	trigger_else = {
+		has_game_rule = world_of_monsters # Allow vanilla religion?
+	}
+}
+
+is_POD_michaelite_religion_trigger = {
+	this = faith:viaarchangeli
+}
+
+is_POD_abrahamic_religion_trigger = {
+	OR = {
+		is_POD_christian_religion_trigger = yes
+		is_POD_muslim_religion_trigger = yes
+		is_POD_jewish_religion_trigger = yes
+	}
+}
+
+is_POD_christian_religion_trigger = {
+	OR = {
+		#religion = religion:christianity_religion
+		
+		# from religion:roadofheaven_religion
+		this = faith:viavindicta
+		this = faith:viapenaculum
+		this = faith:viadolorosa
+		this = faith:viachristi
+		this = faith:pathoftheheavenlyabode
+		this = faith:vianoctis
+		this = faith:viaredemptio
+		
+		# from religion:bloodgnosticism_religion
+		this = faith:viacain
+		this = faith:viapura
+		this = faith:blackmagdalene
+		this = faith:eschatologists
+		this = faith:redtemptation
+		this = faith:thirdcaine
+		this = faith:apostlesthirdcaine
+		this = faith:sanctamater
+		
+		# others
+		this = faith:shadowinquisition
+		this = faith:akritai
+		religion = religion:calomenasforsaken_religion
+		this = faith:crestofthehorn
+		this = faith:orderofourmercifulmother
+		religion = religion:fishers_religion
+		this = { has_doctrine = special_doctrine_fae_constantinians_hostility }
+	}
+}
+
+is_POD_orthodox_religion_trigger = {
+	OR = {
+		#this = faith:orthodox
+		religion = religion:calomenasforsaken_religion
+		this = faith:akritai
+		
+		# from religion:bloodgnosticism_religion
+		this = faith:viacain
+		this = faith:eschatologists
+		this = faith:thirdcaine
+		this = faith:apostlesthirdcaine
+		this = faith:sanctamater
+	}
+}
+
+is_POD_muslim_religion_trigger = {
+	OR = {
+		#religion = religion:islam_religion
+		religion = religion:ashirra_religion
+		this = { has_doctrine = special_doctrine_ashirra_pillars_kindred }
+		religion = religion:roadofblood_religion
+		this = faith:ikhwan_al_safa
+	}
+}
+
+is_POD_jewish_religion_trigger = {
+	OR = {
+		#religion = religion:judaism_religion
+		this = faith:derechchaim
+		this = faith:judge
+	}
+}
+
+is_POD_zoroastrian_religion_trigger = {
+	OR = {
+		#religion = religion:zoroastrianism_religion
+		religion = religion:roadofzarathustra_religion
+	}
+}
+
+is_POD_norse_religion_trigger = {
+	OR = {
+		this = faith:viaeinherjar
+		this = faith:viaaesigard
+		religion = religion:getoffenris_religion
+	}
+}
+
+is_POD_eastern_religion_trigger = {
+	OR = {
+		#religion = { is_in_family = rf_eastern }
+		#religion = { is_in_family = rf_sinitic }
+		#religion = religion:shintoism_religion
+		religion = { is_in_family = rf_kueijin }
+		religion = religion:wutian_religion
+		religion = religion:demon_hunters_religion
+		religion = religion:stargazer_religion
+		religion = religion:shinma_religion
+		religion = religion:mu_religion
+		religion = religion:raktasadhus_religion
+		religion = religion:roadofunexaminedhorizons_religion
+		this = faith:khan
+		this = faith:hakken
+		this = faith:dragons_zhong_guo
+		this = faith:emerald_memory
+		this = faith:ebon_centipede
+		this = faith:metasticbirth
+		this = faith:ouroboroans
+		this = faith:boli_zouhisze
+		this = faith:talmahera
+		# TODO: blood tribe / path of stars
+	}
+}
+
+is_demon_worshipper_religion_trigger = {
+	OR = {
+		religion = religion:demons_religion
+		this = faith:ordomaleficus
+		religion = religion:thousandhells_religion # TODO YK: remove once yama kings are in
+		this = faith:viadiabolis
+		#this = faith:viaquiritare #they are used as creepy sadists, true infernalists are via diabolis
+		#this = faith:viahyron #they are anti infernalist
+		this = faith:pathofstars # TODO YK: remove once yama kings are in
+	}
+}
+
+is_in_crime_doctrine_group_trigger = {
+	OR = {
+		$DOCTRINE$ = doctrine:doctrine_$GROUP$_crime
+		$DOCTRINE$ = doctrine:doctrine_$GROUP$_shunned
+		$DOCTRINE$ = doctrine:doctrine_$GROUP$_accepted
+	}
+}
+
+is_anarch_faith_trigger = {
+	OR = {
+		has_faith = faith:viafurores
+		has_faith = faith:camaanarchs
+		has_faith = faith:freeanarch
+	}
+}
+
+is_inanimate_faith_trigger = {
+	OR = {
+		this = faith:empire_of_stones
+		this = faith:empire_of_seeds
+		this = faith:empire_of_tears
+		this = faith:empire_of_skies
+		this = faith:empire_of_flames
+		this = faith:empire_of_dolls
+	}
+}
+
+is_werewolf_faith_trigger = {
+	OR = {
+		religion = religion:blackfury_religion
+		religion = religion:blackspiraldancer_religion
+		religion = religion:bonegnawer_religion
+		religion = religion:childofgaia_religion
+		religion = religion:fianna_religion
+		religion = religion:getoffenris_religion
+		religion = religion:redtalon_religion
+		religion = religion:shadowlord_religion
+		religion = religion:silentstrider_religion
+		religion = religion:silverfang_religion
+		religion = religion:stargazer_religion
+		religion = religion:warderofmen_religion
+		this = faith:ronin
+		this = faith:siberakh
+		AND = {
+			religion = religion:wyrm_religion
+			NOR = {
+				this = faith:hellcats
+				this = faith:mnetics
+			}
+		}
+	}
+}
+
+is_bastet_faith_trigger = {
+	OR = {
+		religion = religion:feline_religion
+		this = faith:hellcats
+	}
+}
+
+is_mokole_faith_trigger = {
+	OR = {
+		religion = religion:saurian_religion
+		this = faith:mnetics
+	}
+}
+
+is_gurahl_faith_trigger = {
+	religion = religion:ursine_religion
+}
+
+is_spirit_faith_trigger = {
+	OR = {
+		is_gaia_spirit_faith_trigger = yes
+		is_wyrm_spirit_faith_trigger = yes
+	}
+}
+
+is_gaia_spirit_faith_trigger = {
+	this = faith:velvet_brood
+}
+
+is_wyrm_spirit_faith_trigger = {
+	this = faith:wyrmbound
+}
+
+POD_has_matriarchal_faith = {
+	faith = faith:the_passion_bloodflowers
+}
+
+# Character scope
+POD_has_valid_splat_agnostic_faith = {
+	OR = {
+		AND = {
+			religion = religion:demons_religion
+			is_a_cultist = yes
+		}
+		AND = {
+			religion = religion:thousandhells_religion
+			# also works for independent rulers (you are your own liege)
+			POD_has_defiled_liege_trigger = yes
+		}
+	}
+}
+
+# TODO YK: move to yama king triggers
+POD_has_defiled_liege_trigger = {
+	liege ?= {
+		religion = religion:thousandhells_religion
+		# TODO YK: limit to defiled
+		has_trait = witch
+	}
+}
+
+# Character scope
+POD_has_inquisition_faith = {
+	OR = {
+		faith = faith:shadowinquisition
+		faith = { has_doctrine = special_doctrine_mashiach_cometh }
+	}
+}
+
+# Province scope
+POD_is_in_ashirra_faith_region = {
+	OR = {
+		geographical_region = world_middle_east
+		geographical_region = world_africa_north_west
+		geographical_region = world_africa_north_east
+		geographical_region = world_africa_north
+		geographical_region = world_africa_sahara
+	}
+}
+
+# Province scope
+POD_is_in_hellenic_faith_region = {
+	OR = {
+		geographical_region = custom_roman_empire
+		geographical_region = ghw_region_italy
+		geographical_region = POD_region_greece
+	}
+}
+
+# Province scope
+POD_is_in_laibon_faith_region = {
+	OR = {
+		geographical_region = world_africa_west
+		geographical_region = world_africa_east
+	}
+}

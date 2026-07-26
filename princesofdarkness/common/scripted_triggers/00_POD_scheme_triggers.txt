@@ -1,0 +1,72 @@
+﻿build_find_lair_targets_trigger = {
+
+	any_neighboring_top_liege_realm_owner = {
+			count = all
+			trigger_if = {
+			limit = {
+				POD_is_vampire_trigger = yes
+				age < 1000
+				is_ai = yes
+				OR = {
+					diplomacy < 5
+					martial < 5
+					stewardship < 5
+					intrigue < 5
+					learning < 5
+					prowess < 20
+				}
+				root = {
+					highest_held_title_tier >= tier_kingdom
+					can_start_scheme = {
+						target_character = prev
+						type = murder
+					}
+					OR = {
+						diplomacy > 15
+						martial > 15
+						stewardship > 15
+						intrigue > 15
+						learning > 15
+						prowess > 40
+					}
+				}
+			}
+		add_to_temporary_list = find_lair_targets
+		}
+	}
+	
+	any_neighboring_realm_same_rank_owner = {
+			count = all
+			trigger_if = {
+			limit = {
+				POD_is_vampire_trigger = yes
+				age < 1000
+				is_ai = yes
+				OR = {
+					diplomacy < 5
+					martial < 5
+					stewardship < 5
+					intrigue < 5
+					learning < 5
+					prowess < 20
+				}
+				root = {
+					highest_held_title_tier >= tier_county
+					can_start_scheme = {
+						target_character = prev
+						type = murder
+					}
+					OR = {
+						diplomacy > 15
+						martial > 15
+						stewardship > 15
+						intrigue > 15
+						learning > 15
+						prowess > 40
+					}
+				}
+			}
+		add_to_temporary_list = find_lair_targets
+		}
+	}
+}

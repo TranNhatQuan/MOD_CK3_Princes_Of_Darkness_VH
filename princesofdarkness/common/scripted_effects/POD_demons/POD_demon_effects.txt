@@ -1,0 +1,392 @@
+﻿POD_demon_initialization_effect = {
+	hidden_effect = {
+		if = {
+			limit = { NOT = { religion = { is_in_family = rf_demons } } }
+			POD_character_demon_faith_initiation_effect = yes
+		}
+		POD_character_demon_lifestyle_initialization_effect = yes
+	}
+	add_arcana_lifestyle_perk_points = 5
+	POD_initialize_energy_modifier = yes
+	POD_setup_ritual_of_sundered_soul_effect = yes
+	add_character_flag = immune_to_disease
+	add_character_modifier = unknown_eminence_modifier
+	#POD_give_random_demonic_house_effect = yes
+}
+
+POD_become_demon_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	POD_save_energy_level_before_splat_change = yes
+	hidden_effect = { POD_remove_splat_traits_effect = yes }
+	remove_trait = laham
+	remove_trait = nephilim
+	add_trait_force_tooltip = demon
+	if = {
+		limit = { exists = scope:saved_immortal_age }
+		hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+	}
+	hidden_effect = { 
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		POD_remove_supernatural_relation_effect = yes
+		POD_end_pregnancy = yes
+		POD_remove_physical_coping_strategies = yes
+		
+		POD_side_effects_from_changing_splats = yes
+	}
+			
+	POD_demon_initialization_effect = yes
+	
+	if = {
+		limit = { is_ai = no }
+		trigger_event = podintroductions.2402
+	}
+}
+
+POD_nephilim_initialization_effect = {
+	POD_initialize_energy_modifier = yes	
+}
+
+##################
+
+POD_character_demon_faith_initiation_effect = {
+	religion:demons_religion = { random_faith = { save_scope_as = this_faith } }
+	set_character_faith = scope:this_faith
+}
+
+POD_character_demon_lifestyle_initialization_effect = {
+	POD_assign_perk = { PERK = arcana_apocalyptic_form_perk }
+	POD_assign_perk = { PERK = arcana_devour_soul_perk }
+	POD_assign_perk = { PERK = arcana_revelation_perk }
+	POD_assign_perk = { PERK = arcana_enthrall_perk }
+	POD_assign_perk = { PERK = arcana_ravage_perk }
+	POD_assign_perk = { PERK = arcana_inviolate_soul_perk }
+	POD_assign_perk = { PERK = arcana_invocation_of_name_perk }
+	POD_assign_perk = { PERK = arcana_pattern_sense_perk }
+	POD_assign_perk = { PERK = arcana_hardened_flesh_perk }
+	POD_assign_perk = { PERK = arcana_regeneration_perk }
+	POD_assign_perk = { PERK = arcana_divine_potential_perk }
+}
+
+POD_soultaker_effect = {
+	$VICTIM$ = { save_scope_as = soultaker_victim }
+	$EXECUTIONER$ = { save_scope_as = soultaker_executioner }
+	random_equipped_character_artifact = { 
+		limit = { has_variable = soultaker }
+		scope:soultaker_executioner = {
+			POD_store_splat_agnostic_energy_in_specific_vessel = {
+				ARTIFACT = prev
+				AMOUNT   = 10
+			}
+		}
+		if = {
+			limit = { scope:soultaker_victim = { has_trait = demon } }
+            scope:soultaker_victim ?= { POD_crafting_give_modifier_based_on_character = { ARTIFACT = PREV } }
+			scope:soultaker_executioner = { add_character_modifier = soultaker_stress_loss_modifier }
+			# add_artifact_modifier = artifact_monthly_piety_negative_10_modifier
+			random = {
+				chance = var:soultaker_betray
+				scope:soultaker_executioner = {
+					custom_tooltip = soultaker_betray
+					death = {
+						death_reason = death_soultaker
+						killer = scope:soultaker_victim
+					}
+				}
+			}
+			change_variable = { name = soultaker_betray add = { 1 5 } }
+		}
+		else = {
+			add_artifact_modifier = artifact_monthly_lifestyle_xp_1_modifier
+			scope:soultaker_executioner = { add_character_modifier = soultaker_stress_gain_modifier }
+			# add_artifact_modifier = artifact_monthly_piety_negative_1_modifier
+		}
+	}
+}
+
+################## RESOLVE ##################
+
+POD_set_resolve_to_effect = {
+	hidden_effect = { POD_remove_resolve_modifiers_effect = yes }
+	save_scope_value_as = {
+		name = calc
+		value = {
+			value = $RESOLVE$
+			floor = yes
+			min = 0
+			max = 10 # corresponds to maximum_resolve script_value
+		}
+	}
+	switch = {
+		trigger = scope:calc
+		0 = { add_character_modifier = resolve0_modifier }
+		1 = { add_character_modifier = resolve1_modifier }
+		2 = { add_character_modifier = resolve2_modifier }
+		3 = { add_character_modifier = resolve3_modifier }
+		4 = { add_character_modifier = resolve4_modifier }
+		5 = { add_character_modifier = resolve5_modifier }
+		6 = { add_character_modifier = resolve6_modifier }
+		7 = { add_character_modifier = resolve7_modifier }
+		8 = { add_character_modifier = resolve8_modifier }
+		9 = { add_character_modifier = resolve9_modifier }
+		10 = { add_character_modifier = resolve10_modifier }
+	}
+}
+
+POD_resolve_change_effect = {
+	if = {
+		limit = { NOT = { $COUNT$ = 0 } }
+		custom_description = {
+			text = POD_resolve_change_desc
+			value = $COUNT$
+			subject = this
+		}
+		save_scope_value_as = {
+			name = resolve_calc
+			value = {
+				value = resolve_level
+				add = $COUNT$
+			}
+		}
+		POD_set_resolve_to_effect = { RESOLVE = scope:resolve_calc }
+	}
+}
+
+POD_resolve_increase_effect = {
+	POD_resolve_change_effect = { COUNT = $COUNT$ }
+}
+
+POD_resolve_decrease_effect = {
+	save_scope_value_as = {
+		name = resolve_cost
+		value = {
+			value = 0
+			subtract = $COUNT$
+		}
+	}
+	POD_resolve_change_effect = { COUNT = scope:resolve_cost }
+}
+
+POD_resolve_cost_effect = {
+	POD_energy_cost = {
+		COUNT = $COUNT$
+		SPLAT_MAXIMUM_ENERGY = maximum_resolve
+	}
+}
+
+POD_resolve_income_effect = {
+	POD_energy_income = {
+		COUNT = $COUNT$
+		SPLAT_MAXIMUM_ENERGY = maximum_resolve
+	}
+}
+
+POD_lore_energy_cost_effect = {
+	POD_energy_cost = {
+		COUNT = $COUNT$
+		SPLAT_MAXIMUM_ENERGY = maximum_resolve
+	}
+}
+
+POD_lore_energy_income_effect = {
+	POD_energy_income = {
+		COUNT = $COUNT$
+		SPLAT_MAXIMUM_ENERGY = maximum_resolve
+	}
+}
+
+################## CULTIST XP GAIN ##################
+
+POD_yearly_cultist_xp_pulse = {
+	send_interface_message = {
+		type = POD_event_demon
+		title = POD_demon_maintenance.1.t
+		desc = POD_demon_maintenance.1.desc
+		left_icon = root
+		add_arcana_lifestyle_xp = ROOT.arcana_xp_gain_value
+	}
+}
+
+################## RITUAL OF SUNDRED SOUL ##################
+
+POD_setup_ritual_of_sundered_soul_effect = {
+	if = { limit = { has_trait = demon } add_character_modifier = ritual_of_sundered_soul_unstable_modifier }
+}
+POD_change_ritual_of_sundered_soul_effect = {
+	save_scope_value_as = { name = calc value = { value = sundered_soul_level add = $COUNT$ min = 0 max = 5 } }
+	hidden_effect = { POD_remove_sundered_soul_modifiers_effect = yes }
+	switch = {
+		trigger = scope:calc
+		0 = { POD_long_depose_effect = yes POD_send_to_abyss_effect = yes }
+		1 = { add_character_modifier = ritual_of_sundered_soul_unstable_modifier }
+		2 = { add_character_modifier = ritual_of_sundered_soul_semi_stable_modifier }
+		3 = { add_character_modifier = ritual_of_sundered_soul_modifier }
+		4 = { add_character_modifier = ritual_of_sundered_soul_stabilized_modifier }
+		5 = { add_character_modifier = ritual_of_sundered_soul_exalted_modifier }
+	}
+}
+POD_ai_ritual_of_sundered_soul_pulse_effect = {
+	if = { 
+		limit = { 
+			is_ai = yes 
+			num_of_relation_worshipping_cultist >= 10
+			has_trait = demon
+		} 
+		random = {
+			chance = 15
+			POD_change_ritual_of_sundered_soul_effect = { COUNT = 1 }
+		}
+	}
+}
+
+################## DEMONIC HOUSE MODIFIER ##################
+
+POD_setup_demonic_house_modifier_effect = {
+	hidden_effect = { POD_remove_demonic_house_modifiers_effect = yes }
+	switch = {
+		trigger = flag:$HOUSE$
+		flag:namaru = { dynasty ?= { add_dynasty_modifier = namaru_dynasty_modifier } }
+		flag:asharu = { dynasty ?= { add_dynasty_modifier = asharu_dynasty_modifier } }
+		flag:annunaki = { dynasty ?= { add_dynasty_modifier = annunaki_dynasty_modifier } }
+		flag:neberu = { dynasty ?= { add_dynasty_modifier = neberu_dynasty_modifier } }
+		flag:lammasu = { dynasty ?= { add_dynasty_modifier = lammasu_dynasty_modifier } }
+		flag:rabisu = { dynasty ?= { add_dynasty_modifier = rabisu_dynasty_modifier } }
+		flag:halaku = { dynasty ?= { add_dynasty_modifier = halaku_dynasty_modifier } }
+	}
+	POD_error_suppression_unset_flag = { FLAG = $HOUSE$ }
+}
+
+POD_give_random_demonic_house_effect = {
+	random_list = {
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = namaru } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = asharu } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = annunaki } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = neberu } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = lammasu } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = rabisu } }
+		1 = { POD_setup_demonic_house_modifier_effect = { HOUSE = halaku } }
+	}
+}
+
+################## DEMONIC HOUSE MODIFIER ##################
+
+# LEVEL = INT, FOR = INT(1 = any, 2 = demon)
+POD_arcana_perk_check_effect = {
+	save_scope_value_as = { name = calc value = { value = $LEVEL$ subtract = 1 multiply = -1 } }
+	if = { 
+		limit = { NOT = { POD_has_enough_arcana_perk_points = { LEVEL = $LEVEL$ } } } 
+		custom_description_no_bullet = { text = POD_arcana_perk_check_effect_perk value = $LEVEL$ }
+		hidden_effect = { add_arcana_lifestyle_perk_points = scope:calc }
+	}
+	else = {
+		custom_description_no_bullet = { 
+			text = POD_arcana_perk_check_effect_perk_full 
+			value = $LEVEL$
+			add_arcana_lifestyle_perk_points = scope:calc
+		}
+	}
+}
+
+##### Landless
+
+POD_landless_demon_gain_knowledge = {
+	if = {
+		limit = {
+			POD_splat_can_gain_demon_knowledge = yes
+			POD_landless_demon_clues < POD_landless_demon_clues_for_3rd_unlock
+		}
+		
+		# for the custom_tooltip
+		save_scope_value_as = {
+			name = landless_demon_clues_gained
+			value = $COUNT$
+		}
+		custom_tooltip = {
+			text = landless_demon_gain_clues_tt
+			set_variable = {
+				name = landless_demon_clues
+				value = {
+					value = POD_landless_demon_clues
+					add = scope:landless_demon_clues_gained
+					min = 0
+					max = POD_landless_demon_clues_for_3rd_unlock
+				}
+			}
+		}
+		if = {
+			limit = { POD_landless_demon_clues >= POD_landless_demon_clues_for_1st_unlock }
+			trigger_event = POD_demon_flavor.6
+		}
+		if = {
+			limit = { POD_landless_demon_clues >= POD_landless_demon_clues_for_2nd_unlock }
+			trigger_event = POD_demon_flavor.7
+		}
+		if = {
+			limit = { POD_landless_demon_clues >= POD_landless_demon_clues_for_3rd_unlock }
+			trigger_event = POD_demon_flavor.8
+		}
+	}
+}
+
+# assumes that scope:actor is the demon and scope:recipient is the cultist
+POD_landless_demon_gain_random_knowledge = {
+	if = {
+		limit = {
+			POD_splat_can_gain_demon_knowledge = yes
+			POD_landless_demon_clues < POD_landless_demon_clues_for_3rd_unlock
+		}
+		custom_tooltip = {
+			text = landless_demon_might_gain_clues_tt
+			
+			random_list = {
+				50 = {
+					send_interface_toast = {
+						type = event_generic_good
+						title = POD_shared_loca_success
+						left_icon = scope:actor
+						right_icon = scope:recipient
+						
+						POD_landless_demon_gain_knowledge = { COUNT = 1 }
+					}
+					modifier = {
+						add = -10
+						
+						learning >= 20
+					}
+				}
+				30 = {
+					send_interface_toast = {
+						type = event_generic_good
+						title = POD_shared_loca_success
+						left_icon = scope:actor
+						right_icon = scope:recipient
+						
+						POD_landless_demon_gain_knowledge = { COUNT = 2 }
+					}
+					modifier = {
+						add = 10
+						
+						learning >= 15
+					}
+				}
+				20 = {
+					send_interface_toast = {
+						type = event_generic_good
+						title = POD_shared_loca_success
+						left_icon = scope:actor
+						right_icon = scope:recipient
+						
+						POD_landless_demon_gain_knowledge = { COUNT = 3 }
+					}
+					modifier = {
+						add = 10
+						
+						learning >= 20
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,7108 @@
+﻿namespace = POD_spirit_travel
+
+#Flavor umbra events, karde
+
+#Periphery
+
+POD_spirit_travel.1300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1300.t
+	desc = POD_spirit_travel.1300.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+
+	option = {
+		name = POD_spirit_travel.1300.a
+		
+		trigger = { NOT = { has_trait = wrathful } }
+		
+		add_stress = minor_stress_loss
+	}
+
+	option = {
+		name = POD_spirit_travel.1300.b
+		
+		trigger = { has_trait = wrathful }
+		
+		add_stress = minor_stress_gain
+		
+	}
+}
+
+POD_spirit_travel.1301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1301.t
+	desc = POD_spirit_travel.1301.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+
+	option = {
+		name = POD_spirit_travel.1301.a
+		
+		trigger = { NOT = { has_trait = diligent } }
+		
+		add_stress = minor_stress_gain
+	}
+
+	option = {
+		name = POD_spirit_travel.1301.b
+		
+		trigger = { has_trait = diligent }
+		
+		add_stress = minor_stress_loss
+		
+	}
+}
+
+POD_spirit_travel.1302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1302.t
+	desc = POD_spirit_travel.1302.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_callous
+	}
+	theme = spirit_world
+
+	option = {
+		name = POD_spirit_travel.1302.a
+		
+		random_ruler = {
+			add_stress = minor_stress_gain
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.1302.b
+		
+	}
+}
+
+#Shadowlands
+
+POD_spirit_travel.1400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1400.t
+	desc = POD_spirit_travel.1400.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = shadowlands
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:shadowlands }
+		NOT = { has_trait = wraith }		
+	}
+
+	option = {
+		name = POD_spirit_travel.1400.a
+				
+		add_stress = minor_stress_gain
+	}
+
+	option = {
+		name = POD_spirit_travel.1400.b
+		
+		trigger = { has_trait = depressed_1 }
+				
+		add_stress = minor_stress_loss
+	}
+}
+
+POD_spirit_travel.1401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1401.t
+	desc = POD_spirit_travel.1401.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = shadowlands
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:shadowlands }
+	}
+	
+	immediate = {
+		random_culture_global = {
+			limit = {
+				NOT = { this = root.culture }
+			}
+		save_scope_as = randomculture
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.1401.a
+		
+		set_culture = scope:randomculture		
+	}
+
+	option = {
+		name = POD_spirit_travel.1401.b
+		
+	}
+}
+
+POD_spirit_travel.1402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1402.t
+	desc = POD_spirit_travel.1402.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = shadowlands
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:shadowlands }
+	}
+	
+	immediate = {
+	}
+
+	option = {
+		name = POD_spirit_travel.1402.a
+		
+		add_character_modifier = {
+			modifier = dead_insight_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.1402.b
+		
+	}
+}
+
+#Spirit wilds
+
+POD_spirit_travel.1500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1500.t
+	desc = POD_spirit_travel.1500.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_wilds
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:spirit_wilds }
+	}
+
+	option = {
+		name = POD_spirit_travel.1500.a
+				
+		add_character_modifier = {
+			modifier = back_to_nature_modifier
+			years = 5
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.1500.b
+						
+	}
+}
+
+POD_spirit_travel.1501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1501.t
+	desc = POD_spirit_travel.1501.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spirit_wilds
+
+	option = {
+		name = POD_spirit_travel.1501.a
+				
+	duel = {
+	skill = intrigue
+	value = 20
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.1501.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.1501.success
+			left_icon = root
+			
+			if = {
+				limit = {
+					has_trait = werewolf
+				}
+				POD_add_free_dynasty_perk = { PERK = neutral_totems_legacy_4 }
+			}
+			
+			else = {
+				dynasty ?= {
+					add_dynasty_prestige = 1000		
+				}
+			}				
+		}			
+		min = 1	
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.1501.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.1501.failure
+				left_icon = root
+				}	
+		min = 1				
+		}
+	}
+	}
+}
+
+POD_spirit_travel.1502 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1502.t
+	desc = POD_spirit_travel.1502.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_wilds
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:spirit_wilds }
+	}
+
+	option = {
+		name = POD_spirit_travel.1502.a
+				
+		increase_wounds_effect = { REASON = attacked }
+
+	}
+
+	option = {
+		name = POD_spirit_travel.1502.b
+		
+		add_prestige = -100
+						
+	}
+}
+
+#Astral reaches/astral plane
+
+POD_spirit_travel.1600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1600.t
+	desc = POD_spirit_travel.1600.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:astral_plane }
+	}
+
+	option = {
+		name = POD_spirit_travel.1600.a
+				
+		add_character_modifier = {
+			modifier = mind_blown_modifier
+			years = 5
+		}		
+	}
+
+	option = {
+		name = POD_spirit_travel.1600.b
+		
+		add_stress = major_stress_gain
+						
+	}
+}
+
+
+POD_spirit_travel.1601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1601.t
+	desc = POD_spirit_travel.1601.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:astral_plane }
+	}
+
+	option = {
+		name = POD_spirit_travel.1601.a
+				
+		add_learning_skill = 1
+		add_diplomacy_skill = -1
+	}
+
+	option = {
+		name = POD_spirit_travel.1601.b
+						
+	}
+}
+
+POD_spirit_travel.1602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1602.t
+	desc = POD_spirit_travel.1602.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:astral_plane }
+		has_royal_court = yes
+	}
+
+	option = {
+		name = POD_spirit_travel.1602.a
+				
+		random_courtier = {
+			POD_create_random_inspiration_effect = yes
+		}
+		
+		add_stress = medium_stress_gain
+	}
+
+	option = {
+		name = POD_spirit_travel.1602.b
+						
+	}
+}
+
+
+#Vulgate flavor events
+
+POD_spirit_travel.1700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1700.t
+	desc = POD_spirit_travel.1700.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:vulgate }
+		has_ep1_dlc_trigger = yes
+		OR = {
+			NOT = { knows_language = language_punic }
+			NOT = { knows_language = language_ancient_egyptian }
+			NOT = { knows_language = language_coptic }
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.1700.a
+		
+		trigger = {
+			NOT = { knows_language = language_punic }
+		}
+		
+		learn_language	= language_punic
+		add_stress = medium_stress_gain
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.1700.b
+		
+		trigger = {
+			NOT = { knows_language = language_ancient_egyptian }
+		}
+		
+		learn_language	= language_ancient_egyptian
+		add_stress = medium_stress_gain
+						
+	}
+	
+	option = {
+		name = POD_spirit_travel.1700.c
+		
+		trigger = {
+			NOT = { knows_language = language_coptic }
+		}
+		
+		learn_language	= language_coptic
+		add_stress = medium_stress_gain
+						
+	}
+
+	option = {
+		name = POD_spirit_travel.1700.d
+						
+	}	
+}
+
+POD_spirit_travel.1701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1701.t
+	desc = POD_spirit_travel.1701.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:vulgate }
+	}
+
+	option = {
+		name = POD_spirit_travel.1701.a
+		
+		add_learning_skill = -1
+		add_stress = major_stress_loss
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.1701.b
+		
+		add_stress = medium_stress_gain
+						
+	}
+	
+}
+
+POD_spirit_travel.1702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1702.t
+	desc = POD_spirit_travel.1702.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:vulgate }
+	}
+
+	option = {
+		name = POD_spirit_travel.1702.a
+				
+		add_character_modifier = {
+			modifier = mind_blown_modifier
+			years = 5
+		}		
+	}
+
+	option = {
+		name = POD_spirit_travel.1702.b
+		
+		add_character_modifier = {
+			modifier = vulgate_confused_modifier
+			years = 5
+		}						
+	}
+	
+	option = {
+		name = POD_spirit_travel.1702.c
+		
+		add_character_modifier = {
+			modifier = vulgate_understanding_modifier
+			years = 5
+		}						
+	}	
+}
+
+#Stargazer homeland flavor
+
+POD_spirit_travel.1800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1800.t
+	desc = POD_spirit_travel.1800.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_stargazers }
+		POD_fera_is_stargazer = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.1800.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.1801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1801.t
+	desc = POD_spirit_travel.1801.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_stargazers }
+		POD_fera_is_stargazer = yes
+		prestige >= 0	
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.a
+				
+		add_learning_skill = 1
+		add_prestige = -500	
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.b
+				
+		add_intrigue_skill = 1
+		add_prestige = -500	
+	}
+
+	option = {
+		name = POD_spirit_travel.1801.c
+				
+		add_stewardship_skill = 1
+		add_prestige = -500	
+	}
+
+	option = {
+		name = POD_spirit_travel.1801.d
+				
+		add_diplomacy_skill = 1
+		add_prestige = -500	
+	}
+
+	option = {
+		name = POD_spirit_travel.1801.e
+				
+		add_martial_skill = 1
+		add_prestige = -500	
+	}	
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.1802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1802.t
+	desc = POD_spirit_travel.1802.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_stargazers }
+		POD_fera_is_stargazer = no
+	}
+	
+	option = {
+		name = POD_spirit_travel.1802.a
+				
+		add_character_modifier = {
+			modifier = vulgate_confused_modifier
+			years = 5
+		}
+	}
+	
+}
+
+
+#Spires flavor
+
+POD_spirit_travel.1900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1900.t
+	desc = POD_spirit_travel.1900.desc
+	
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:spires }
+	}
+	
+	option = {
+		name = POD_spirit_travel.1900.a
+				
+		trigger = {
+		 OR = {	 
+		 	any_relation = {
+		 		type = lover
+		 		count >= 1
+		 	}
+		 	any_relation = {
+		 		type = soulmate
+		 		count >= 1
+		 	}			
+		 }
+		 }
+		 
+		 custom_tooltip = love_spires_tt
+	}
+	
+	option = {
+		name = POD_spirit_travel.1900.b
+				
+		trigger = {
+		 OR = {	 
+		 	any_relation = {
+		 		type = lover
+		 		count < 1
+		 	}
+		 	any_relation = {
+		 		type = soulmate
+		 		count < 1
+		 	}			
+		 }
+		 }
+		 
+		 add_stress = medium_stress_gain
+		 custom_tooltip = unlove_spires_tt
+		 
+	}	
+}
+
+POD_spirit_travel.1901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1901.t
+	desc = POD_spirit_travel.1901.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:spires }
+	}
+	
+	option = {
+		name = POD_spirit_travel.1901.a
+				
+		trigger = {
+			martial >= 15
+		}
+		 
+		 custom_tooltip = war_spires_tt
+	}
+	
+	option = {
+		name = POD_spirit_travel.1901.b
+				
+		trigger = {
+			martial < 15
+		}
+		 
+		 add_stress = medium_stress_gain
+		 custom_tooltip = unwar_spires_tt
+		 
+	}	
+}
+
+POD_spirit_travel.1902 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.1902.t
+	desc = POD_spirit_travel.1902.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:spires }
+	}
+	
+	option = {
+		name = POD_spirit_travel.1902.a
+				
+		trigger = {
+			learning >= 15
+		}
+		 
+		 custom_tooltip = destiny_spires_tt
+	}
+	
+	option = {
+		name = POD_spirit_travel.1902.b
+				
+		trigger = {
+			learning < 15
+		}
+		 
+		 add_stress = medium_stress_gain
+		 custom_tooltip = undestiny_spires_tt
+		 
+	}	
+}
+
+#Grand Hall flavor
+
+POD_spirit_travel.2000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2000.t
+	desc = POD_spirit_travel.2000.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:grand_hall }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2000.a
+				
+		 add_stress = medium_stress_gain
+	}
+	
+}
+
+POD_spirit_travel.2001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2001.t
+	desc = POD_spirit_travel.2001.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:grand_hall }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2001.a
+				
+		 random_list = {
+			 25 = { add_learning_skill = 1 }
+			 25 = { add_learning_skill = -1 }
+			 25 = { add_stress = minor_stress_gain }
+			 25 = { add_stress = minor_stress_loss }
+		 }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2001.b
+		
+	}	
+	
+}
+
+POD_spirit_travel.2002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2002.t
+	desc = POD_spirit_travel.2002.desc
+	
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:grand_hall }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2002.a
+				
+	}
+	
+	option = {
+		name = POD_spirit_travel.2002.b
+
+		 trigger = {
+			has_trait = arrogant 
+		 }
+
+		add_stress = minor_stress_loss
+	}	
+	
+}
+
+#Mirror Zone flavor
+
+POD_spirit_travel.2100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2100.t
+	desc = POD_spirit_travel.2100.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mirror_zone }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2100.a
+				
+		 add_stress = major_stress_gain
+		 
+		 add_character_modifier = {
+			 modifier = mirror_zone_modifier
+			 years = 5
+		 }
+	}
+
+	option = {
+		name = POD_spirit_travel.2100.b
+	}	
+}
+
+
+POD_spirit_travel.2101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2101.t
+	desc = POD_spirit_travel.2101.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mirror_zone }
+		martial < 20
+	}
+	
+	option = {
+		name = POD_spirit_travel.2101.a
+		
+		 add_stress = major_stress_gain
+		 
+		 add_martial_skill = 5
+		 add_learning_skill = -5
+		 add_diplomacy_skill = -5
+	}
+
+	option = {
+		name = POD_spirit_travel.2101.b
+	}	
+}
+
+POD_spirit_travel.2102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2101.t
+	desc = POD_spirit_travel.2102.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mirror_zone }
+		diplomacy < 20
+	}
+	
+	option = {
+		name = POD_spirit_travel.2101.a
+				
+		 add_stress = major_stress_gain
+		 
+		 add_diplomacy_skill = 5
+		 add_martial_skill = -5
+		 add_learning_skill = -5
+	}
+
+	option = {
+		name = POD_spirit_travel.2101.b
+	}	
+}
+
+#Null Zone flavor #The Null Zone are the paths of the wyck in Dark Ages
+
+POD_spirit_travel.2200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2200.t
+	desc = POD_spirit_travel.2200.desc
+	
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:null_zone }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2200.a
+				
+	}
+	
+}
+
+
+POD_spirit_travel.2201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2201.t
+	desc = POD_spirit_travel.2201.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:null_zone }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2201.a
+		
+		trigger = {
+			has_trait = shy
+		}
+		
+		add_stress = minor_stress_loss	
+	}
+
+
+	option = {
+		name = POD_spirit_travel.2201.b
+		
+		trigger = {
+			NOT = { has_trait = shy }
+		}
+		
+		add_stress = minor_stress_gain	
+	}	
+}
+
+POD_spirit_travel.2202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2202.t
+	desc = POD_spirit_travel.2202.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:null_zone }
+		NOT = { has_trait = athletic }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2202.a
+		
+		random_list = {
+			1 = { add_trait = athletic }
+			99 = {}
+		}
+	}
+
+}
+
+#Ppiphamies flavor
+
+POD_spirit_travel.2300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2300.t
+	desc = POD_spirit_travel.2300.desc
+	
+	left_portrait = {
+		character = root
+		animation = ecstasy
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:epiphamy }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2300.a
+		
+		 add_character_modifier = {
+			 modifier = epiphamie_love_modifier
+			 years = 5
+		 }		
+	}
+
+	option = {
+		name = POD_spirit_travel.2300.b
+		
+	}	
+}
+
+POD_spirit_travel.2301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2301.t
+	desc = POD_spirit_travel.2301.desc
+	
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:epiphamy }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2301.a
+		
+		add_learning_skill    = -1
+		add_diplomacy_skill   = -1
+		add_intrigue_skill    = -1
+		add_martial_skill     = -1
+		add_stewardship_skill = -1	
+	}
+
+	option = {
+		name = POD_spirit_travel.2301.b
+
+	add_stress = major_stress_gain	
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.2301.c
+		
+		trigger = {
+			has_trait = depressed_1
+		}
+		
+	add_stress = minor_stress_loss		
+	}		
+}
+
+POD_spirit_travel.2302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2302.t
+	desc = POD_spirit_travel.2302.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:epiphamy }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2302.a
+		
+		add_prestige = 50	
+	}
+	
+}
+
+
+POD_spirit_travel.2303 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2303.t
+	desc = POD_spirit_travel.2303.desc
+	
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	theme = spires
+	
+	option = {
+		name = POD_spirit_travel.2303.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = forest_crown
+		}
+		}		
+		}
+		
+		create_artifact_forest_crown_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.2303.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = iron_crown
+		}
+		}		
+		}
+		
+		create_artifact_iron_crown_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.2303.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = keystone
+		}
+		}		
+		}
+		
+		create_artifact_keystone_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#Inventium flavor
+
+POD_spirit_travel.2400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2400.t
+	desc = POD_spirit_travel.2400.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:inventium }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2400.a
+		
+		 add_character_modifier = {
+			 modifier = mind_blown_modifier
+			 years = 1
+		 }		
+	}
+
+	option = {
+		name = POD_spirit_travel.2400.b
+		
+		add_prestige = -100
+	}
+
+	option = {
+		name = POD_spirit_travel.2400.c
+		
+		trigger = {
+			has_trait = scholar
+		}
+		
+		add_prestige = 50
+	}	
+}
+
+POD_spirit_travel.2401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2401.t
+	desc = POD_spirit_travel.2401.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:inventium }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2401.a
+		
+		every_character_artifact = {
+			add_durability = 100	
+		}
+	}	
+}
+
+POD_spirit_travel.2402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2402.t
+	desc = POD_spirit_travel.2402.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:inventium }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2402.a
+		
+		remove_short_term_gold = 50
+	}	
+}
+
+#Court Muses flavor
+
+POD_spirit_travel.2500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2500.t
+	desc = POD_spirit_travel.2500.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_court_of_the_muses }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2500.a
+		
+		add_learning_lifestyle_perk_points = 1
+
+		add_martial_skill = -1
+		add_intrigue_skill = -2
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.2500.b
+		
+	}
+}
+
+POD_spirit_travel.2501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2501.t
+	desc = POD_spirit_travel.2501.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_court_of_the_muses }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2500.a
+		
+		add_intrigue_lifestyle_perk_points = 1
+
+		add_martial_skill = -1
+		add_diplomacy_skill = -2
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.2500.b
+		
+	}
+}
+
+
+POD_spirit_travel.2502 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2502.t
+	desc = POD_spirit_travel.2502.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_court_of_the_muses }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2500.a
+		
+		add_diplomacy_lifestyle_perk_points = 1
+
+		add_stewardship_skill = -1
+		add_martial_skill = -2
+		
+	}
+
+	option = {
+		name = POD_spirit_travel.2500.b
+		
+	}
+}
+
+POD_spirit_travel.2503 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2503.t
+	desc = POD_spirit_travel.2503.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spires
+	
+	option = {
+		name = POD_spirit_travel.2503.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = bindrune_amulet
+		}
+		}		
+		}
+		
+		add_piety = -250
+		
+		create_artifact_bindrune_amulet_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.2503.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = wind_hammer
+		}
+		}		
+		}
+		
+		add_piety = -250
+		
+		create_artifact_wind_hammer_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.2503.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = cloud_string
+		}
+		}		
+		}
+		
+		add_piety = -250
+		
+		create_artifact_cloud_string_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.2503.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = beast_mask
+		}
+		}		
+		}
+		
+		add_piety = -250
+		
+		create_artifact_beast_mask_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#City of Brass flavor
+
+POD_spirit_travel.2600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2600.t
+	desc = POD_spirit_travel.2600.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:city_of_brass }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2600.a
+		
+	duel = {
+	skill = diplomacy
+	value = 20
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.2600.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.2600.success
+			left_icon = root	
+		}		
+		min = 1		
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.2600.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.2600.failure
+				left_icon = root
+				remove_short_term_gold = 100
+				add_prestige = -100
+				}		
+		min = 1			
+		}
+	}
+		
+	}
+
+}
+
+POD_spirit_travel.2601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2601.t
+	desc = POD_spirit_travel.2601.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:city_of_brass }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2601.a
+		
+	duel = {
+	skill = intrigue
+	value = 20
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.2601.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.2601.success
+			left_icon = root
+			add_intrigue_lifestyle_xp = 200
+		}		
+		min = 1		
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.2601.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.2601.failure
+				left_icon = root
+				add_prestige = -100
+				}		
+		min = 1			
+		}
+	}
+		
+	}
+
+}
+
+POD_spirit_travel.2602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2602.t
+	desc = POD_spirit_travel.2602.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:city_of_brass }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2602.a
+		
+		random_list = {
+			1 = { add_gold = 2000 }
+			99 = { add_prestige = -150 }
+		}		
+	}
+
+	option = {
+		name = POD_spirit_travel.2602.b
+				
+	}
+}
+
+POD_spirit_travel.2603 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2603.t
+	desc = POD_spirit_travel.2603.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_greedy
+	}
+	theme = spires
+	
+	option = {
+		name = POD_spirit_travel.2603.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = book_of_the_spirits_secrets
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 200
+		
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_book_of_the_spirits_secrets_effect = { OWNER = this TYPE = book }
+		}
+		else = {
+			create_artifact_book_of_the_spirits_secrets_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+		}
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.2603.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = feathered_cloak
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 200
+		
+		create_artifact_feathered_cloak_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.2603.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = tangling_lance
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 200
+		
+		create_artifact_tangling_lance_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.2603.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = time_piece
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 200
+		
+		create_artifact_time_piece_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#Aetherial realms flavor
+
+POD_spirit_travel.2700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2700.t
+	desc = POD_spirit_travel.2700.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:aetherial_realm }
+		NOT = { religion = { is_in_family = rf_gaia } }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2700.a
+		
+		add_stress = medium_stress_gain
+
+		increase_wounds_effect = { REASON = attacked }
+		
+	}
+
+}
+
+POD_spirit_travel.2701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2701.t
+	desc = POD_spirit_travel.2701.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:aetherial_realm }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2701.a
+		
+		add_stress = medium_stress_gain
+
+		random_list = {
+			50 = { }
+			50 = { add_prowess_skill = 1 }
+		}		
+	}
+
+	
+	option = {
+		name = POD_spirit_travel.2701.b
+	}
+}
+
+
+POD_spirit_travel.2702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2702.t
+	desc = POD_spirit_travel.2702.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:aetherial_realm }
+	}
+	
+	option = {
+		name = POD_spirit_travel.2702.a
+
+		random_list = {
+			50 = { add_stress = minor_stress_loss }
+			50 = { add_learning_lifestyle_xp = 50 }
+		}			
+	}
+	
+}
+
+#Atrocity realm flavor
+
+POD_spirit_travel.2800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2800.t
+	desc = POD_spirit_travel.2800.desc
+	
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	theme = atrocity_realm
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:atrocity_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.2800.a
+		
+		trigger = {
+			NOR = { 
+				has_trait = callous 
+				has_trait = sadistic
+			}
+		}
+		
+		add_stress = medium_stress_gain
+		
+	}
+	
+	option = {
+		name = POD_spirit_travel.2800.b
+		
+		trigger = {
+			OR = { 
+				has_trait = callous 
+				has_trait = sadistic
+			}
+		}
+		
+		add_stress = medium_stress_loss
+		
+	}
+
+}
+
+
+POD_spirit_travel.2801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2801.t
+	desc = POD_spirit_travel.2801.desc
+	
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	theme = atrocity_realm
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:atrocity_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.2801.a
+		
+		add_dread = 5
+				
+	}
+
+}
+
+POD_spirit_travel.2802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2802.t
+	desc = POD_spirit_travel.2802.desc
+	
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	theme = atrocity_realm
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:atrocity_realm }
+		NOT = { has_trait = torturer }
+	}
+
+	option = {
+		name = POD_spirit_travel.2802.a
+		
+		random_list = {
+			95 = { add_stress = major_stress_gain }
+			5 = { assign_intimidation_effect = yes }
+		}				
+				
+	}
+
+	option = {
+		name = POD_spirit_travel.2802.b
+				
+	}
+}
+
+#Battleground flavor
+
+POD_spirit_travel.2900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2900.t
+	desc = POD_spirit_travel.2900.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = battleground
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:battleground }
+	}
+
+	option = {
+		name = POD_spirit_travel.2900.a
+		
+		random_list = {
+			1 = { add_martial_skill = 1 }
+			70 = { }
+			19 = { add_martial_skill = -1 }
+		}			
+	}
+
+}
+
+POD_spirit_travel.2901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2901.t
+	desc = POD_spirit_travel.2901.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = battleground
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:battleground }
+	}
+
+	option = {
+		name = POD_spirit_travel.2901.a
+		
+		add_martial_lifestyle_xp = 100
+
+		add_stress = medium_stress_gain	
+	}
+
+	option = {
+		name = POD_spirit_travel.2901.b
+	}
+}
+
+POD_spirit_travel.2902 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.2902.t
+	desc = POD_spirit_travel.2902.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = battleground
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:battleground }
+	}
+
+	option = {
+		name = POD_spirit_travel.2902.a
+		
+		add_prestige = -50	
+	}
+
+	option = {
+		name = POD_spirit_travel.2902.b
+		
+		trigger = { prowess > 40 }
+
+		add_prestige = 50	
+		
+		custom_tooltip = elysium_security_tooltip
+	}
+}
+
+#Erebus flavor
+
+POD_spirit_travel.3000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3000.t
+	desc = POD_spirit_travel.3000.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:erebus }
+		NOT = { culture = culture:classical_greek }
+	}
+
+	option = {
+		name = POD_spirit_travel.3000.a
+		
+		set_culture = culture:classical_greek		
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.3000.b	
+			
+	}
+}
+
+
+POD_spirit_travel.3001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3001.t
+	desc = POD_spirit_travel.3001.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:erebus }
+	}
+
+	option = {
+		name = POD_spirit_travel.3001.a
+		
+		add_character_modifier = {
+			modifier = charyss_umbra_modifier
+			years = 5
+		}
+			
+	}
+	option = {
+		name = POD_spirit_travel.3001.b	
+			
+	}
+}
+
+POD_spirit_travel.3002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3002.t
+	desc = POD_spirit_travel.3002.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:erebus }
+	}
+
+	option = {
+		name = POD_spirit_travel.3002.a
+		
+		if = {
+			limit = {
+				piety > 500
+			}
+			increase_wounds_no_death_effect = {REASON = whipping}
+		}
+		else_if = {
+			limit = {
+				piety > 0
+				piety <= 500
+			}
+			increase_wounds_no_death_multiple_effect = {REASON = whipping AMOUNT = 2}
+		}
+		else_if = {
+			limit = {
+				piety <= 0
+			}	
+			increase_wounds_no_death_multiple_effect = { REASON = whipping AMOUNT = 3 }
+		}
+			
+	}
+}
+
+#Flux
+POD_spirit_travel.3100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3100.t
+	desc = POD_spirit_travel.3100.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:flux_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.3100.a
+		
+		random_list = {
+			10 = { 
+				if = {
+					limit = {
+						NOT = { has_trait = athletic }
+					}
+				add_trait = athletic
+				}
+			}
+			10 = { 
+				if = {
+					limit = {
+						NOT = { has_trait = journaller }
+					}
+				add_trait = journaller
+				}
+			}
+			10 = { 
+				if = {
+					limit = {
+						NOT = { has_trait = flagellant }
+					}
+				add_trait = flagellant
+				}
+			}
+			10 = { 
+				if = {
+					limit = {
+						NOT = { has_trait = reclusive }
+					}
+				add_trait = reclusive
+				}
+			}
+			60 = {} 			
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.3100.b
+	
+		add_stress = medium_stress_gain	
+	}	
+}
+
+POD_spirit_travel.3101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3101.t
+	desc = POD_spirit_travel.3101.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:flux_realm }
+	}
+	
+	immediate = {
+		random_ruler = {
+			limit = { 
+				is_ai = yes
+				}
+		save_scope_as = copiedchar		
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.3101.a
+			
+		custom_tooltip = umbra_random_dna_tt	
+		
+		hidden_effect = {	
+		copy_inheritable_appearance_from = scope:copiedchar
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.3101.b
+	
+		add_stress = medium_stress_gain	
+	}	
+}
+
+POD_spirit_travel.3102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3102.t
+	desc = POD_spirit_travel.3102.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:flux_realm }
+		NOT = { has_trait = physique_bad }
+		NOT = { has_trait = physique_good }
+			
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = POD_spirit_travel.3102.a
+			
+		random_list = {
+			10 = { add_trait = physique_bad_1 }
+			10 = { add_trait = physique_bad_2 }
+			10 = { add_trait = physique_bad_3 }
+			40 = { }
+			10 = { add_trait = physique_good_1 }
+			10 = { add_trait = physique_good_2 }
+			10 = { add_trait = physique_good_3 }
+		}	
+	}
+	
+	option = {
+		name = POD_spirit_travel.3102.b
+	
+		add_stress = medium_stress_gain	
+	}	
+}
+
+#hy brasil
+POD_spirit_travel.3200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3200.t
+	desc = POD_spirit_travel.3200.desc
+	
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:hy_brasil }
+		can_learn_sorcery_trigger = yes
+	}
+
+	option = {
+		name = POD_spirit_travel.3200.a
+		
+		give_sorcerer_secret_or_trait_effect = yes
+		
+		custom_tooltip = sorcery_gain_tt
+		
+		add_character_modifier = {
+			modifier = devoted_mariana_modifier
+			years = 5
+		}		
+	}
+	
+	option = {
+		name = POD_spirit_travel.3200.b	
+	}	
+}
+
+
+POD_spirit_travel.3201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3201.t
+	desc = POD_spirit_travel.3201.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:hy_brasil }
+	}
+
+	option = {
+		name = POD_spirit_travel.3201.a
+		
+		increase_wounds_no_death_effect = {REASON = fight}
+	
+	}
+	
+	option = {
+		name = POD_spirit_travel.3201.b	
+		
+		add_stress = medium_stress_gain
+	}	
+}
+
+POD_spirit_travel.3202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3202.t
+	desc = POD_spirit_travel.3202.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:hy_brasil }
+	}
+
+	option = {
+		name = POD_spirit_travel.3202.a
+
+		random_list = {
+			1 = { add_martial_skill = 1 }
+			2 = { add_prowess_skill = 1 }
+			17 = { add_martial_lifestyle_xp = 50 }
+			50 = { }
+			10 = { add_stress = medium_stress_gain }
+			10 = { add_prestige = -50 }
+			10 = { increase_wounds_no_death_effect = {REASON = fight} }
+		}			
+	}
+	
+	option = {
+		name = POD_spirit_travel.3202.b	
+	}	
+}
+
+#legendary realm
+POD_spirit_travel.3300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3300.t
+	desc = POD_spirit_travel.3300.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:legendary_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.3300.a
+		
+		add_prestige = -100
+	}
+		
+}
+
+POD_spirit_travel.3301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3301.t
+	desc = POD_spirit_travel.3301.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:legendary_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.3301.a
+		
+		add_prestige = 100
+	}
+		
+}
+
+POD_spirit_travel.3302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3302.t
+	desc = POD_spirit_travel.3302.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:legendary_realm }
+	}
+
+	option = {
+		name = POD_spirit_travel.3302.a
+		
+		random_list = {
+			50 = { dynasty = { add_dynasty_prestige = -200 } }
+			50 = { dynasty = { add_dynasty_prestige = 200 } }
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.3302.b
+	}		
+}
+
+#mountains of heaven
+POD_spirit_travel.3400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3400.t
+	desc = POD_spirit_travel.3400.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = mountains_of_heaven
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mountains_of_heaven }
+	}
+
+	option = {
+		name = POD_spirit_travel.3400.a
+		
+		random_list = {
+			25 = { add_diplomacy_lifestyle_xp = 50 }
+			25 = { add_stewardship_lifestyle_xp = 50 }
+			25 = { add_martial_lifestyle_xp = 50 }
+			25 = { add_intrigue_lifestyle_xp = 50 }
+			25 = { add_learning_lifestyle_xp = 50 }
+		}
+	}
+		
+}
+
+POD_spirit_travel.3401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3401.t
+	desc = POD_spirit_travel.3401.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = mountains_of_heaven
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mountains_of_heaven }
+	}
+
+	option = {
+		name = POD_spirit_travel.3401.a
+		
+		random_list = {
+			25 = { add_diplomacy_lifestyle_xp = -50 }
+			25 = { add_stewardship_lifestyle_xp = -50 }
+			25 = { add_martial_lifestyle_xp = -50 }
+			25 = { add_intrigue_lifestyle_xp = -50 }
+			25 = { add_learning_lifestyle_xp = -50 }
+		}
+	}
+		
+}
+
+POD_spirit_travel.3402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3402.t
+	desc = POD_spirit_travel.3402.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_greedy
+	}
+	theme = mountains_of_heaven
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:mountains_of_heaven }
+	}
+
+	option = {
+		name = POD_spirit_travel.3402.a
+		
+		random_list = {
+			25 = { add_gold = 100 }
+			25 = { increase_wounds_no_death_multiple_effect = { REASON = whipping AMOUNT = 3 } }
+			50 = { add_stress = medium_stress_gain }
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.3402.b
+	}		
+}
+
+#pangaea
+POD_spirit_travel.3500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3500.t
+	desc = POD_spirit_travel.3500.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:pangaea }
+	}
+	
+	option = {
+		name = POD_spirit_travel.3500.a
+		
+	duel = {
+	skill = prowess
+	value = 30
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.3500.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.3500.success
+			left_icon = root
+			add_prestige = 100
+		}				
+		
+		min = 1
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.3500.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.3500.failure
+				left_icon = root
+				add_prestige = -100
+				}	
+		min = 1				
+		}
+	}
+		
+	}
+
+}
+
+POD_spirit_travel.3501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3501.t
+	desc = POD_spirit_travel.3501.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:pangaea }
+	}
+	
+	option = {
+		name = POD_spirit_travel.3501.a
+		
+	duel = {
+	skill = prowess
+	value = 50
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.3500.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.3500.success
+			left_icon = root
+			add_prestige = 200
+		}				
+		
+		min = 1
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.3500.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.3500.failure
+				left_icon = root
+				add_prestige = -200
+				}
+		min = 1					
+		}
+	}
+		
+	}
+
+}
+
+POD_spirit_travel.3502 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3502.t
+	desc = POD_spirit_travel.3502.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:pangaea }
+	}
+	
+	option = {
+		name = POD_spirit_travel.3502.a
+		
+	duel = {
+	skill = prowess
+	value = 70
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.3500.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.3500.success
+			left_icon = root
+			add_prestige = 300
+		}		
+		min = 1		
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.3500.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.3500.failure
+				left_icon = root
+				add_prestige = -300
+				}				
+		min = 1	
+		}
+	}
+		
+	}
+
+}
+
+POD_spirit_travel.3503 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3503.t
+	desc = POD_spirit_travel.3503.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:pangaea }
+		POD_can_equip_fetish_trigger = yes
+		NOR = {
+		any_character_artifact = {
+			has_variable = belt_of_the_giants
+		}
+		any_character_artifact = {
+			has_variable = cloak_of_woven_mists
+		}
+		any_character_artifact = {
+			has_variable = staff_of_life
+		}
+		any_character_artifact = {
+			has_variable = bone_flute
+		}		
+		}		
+	}
+	
+	option = {
+		name = POD_spirit_travel.3503.a
+		
+		remove_short_term_gold = 150
+
+	duel = {
+	skill = prowess
+	value = 60
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_belt_of_the_giants_effect = { OWNER = root }
+			create_artifact_cloak_of_woven_mists_effect = { OWNER = root }
+			create_artifact_staff_of_life_effect = { OWNER = root }
+			create_artifact_bone_flute_effect = { OWNER = root }
+		}				
+		
+		min = 1
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}	
+		
+		min = 1				
+		}
+	}				
+	
+				
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#summer country
+POD_spirit_travel.3600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3600.t
+	desc = POD_spirit_travel.3600.desc
+	
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:summer_country }
+	}
+
+	option = {
+		name = POD_spirit_travel.3600.a
+		
+		add_stress = medium_stress_loss
+	}
+		
+}
+
+POD_spirit_travel.3601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3601.t
+	desc = POD_spirit_travel.3601.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:summer_country }
+		POD_splat_has_access_to_planetary_gifts = yes
+	}
+
+	option = {
+		name = POD_spirit_travel.3601.a
+		
+		add_planetarygifts_lifestyle_xp = 250
+	}
+}
+
+POD_spirit_travel.3602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3602.t
+	desc = POD_spirit_travel.3602.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:summer_country }
+	}
+
+	option = {
+		name = POD_spirit_travel.3602.a
+		
+		trigger = { NOT = { has_trait = depressed_1 } }
+		
+		random_list = {
+			50 = { add_trait = depressed_1 }
+			50 = { add_stress = medium_stress_gain }
+		}		
+	}
+
+	option = {
+		name = POD_spirit_travel.3602.a
+		
+		trigger = { has_trait = depressed_1  }
+		
+		add_stress = medium_stress_gain 
+	}		
+			
+}
+
+#tiger lands
+POD_spirit_travel.3700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3700.t
+	desc = POD_spirit_travel.3700.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:tiger_lands }
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.a
+		
+		trigger = { NOT = { has_trait = deceitful } }
+		
+		add_prestige = -100	
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.b
+
+		trigger = { has_trait = deceitful }
+		
+		add_intrigue_lifestyle_xp = 100	
+	}		
+			
+}
+
+POD_spirit_travel.3701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3701.t
+	desc = POD_spirit_travel.3701.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:tiger_lands }
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.a
+		
+		trigger = { NOT = { has_trait = brave } }
+		
+		add_prestige = -100	
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.b
+
+		trigger = { has_trait = brave }
+		
+		add_martial_lifestyle_xp = 100	
+	}		
+			
+}
+
+POD_spirit_travel.3702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3702.t
+	desc = POD_spirit_travel.3702.desc
+	
+	left_portrait = {
+		character = root
+		animation = boredom
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:tiger_lands }
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.a
+		
+		trigger = { NOT = { has_trait = lazy } }
+		
+		add_prestige = -100	
+	}
+
+	option = {
+		name = POD_spirit_travel.3700.b
+
+		trigger = { has_trait = lazy }
+		
+		add_stress = medium_stress_loss
+	}		
+			
+}
+
+#umi
+POD_spirit_travel.3800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3800.t
+	desc = POD_spirit_travel.3800.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = sunless_sea
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:umi }
+	}
+
+	option = {
+		name = POD_spirit_travel.3800.a
+		
+		trigger = { prestige >= 1000 } 
+		
+		add_prestige = -100
+		add_gold = 100	
+	}
+
+	option = {
+		name = POD_spirit_travel.3800.b
+
+		trigger = { prestige < 1000 }
+		
+		add_prestige = -100
+	}		
+			
+}
+
+POD_spirit_travel.3801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3801.t
+	desc = POD_spirit_travel.3801.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	theme = sunless_sea
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:umi }
+	}
+
+	option = {
+		name = POD_spirit_travel.3801.a
+		
+		trigger = { piety >= 1000 } 
+		
+		add_piety = -100
+		add_prestige = 100	
+	}
+
+	option = {
+		name = POD_spirit_travel.3801.b
+
+		trigger = { piety < 1000 }
+		
+		add_piety = -100
+	}		
+			
+}
+
+POD_spirit_travel.3802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3802.t
+	desc = POD_spirit_travel.3802.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = sunless_sea
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:umi }
+	}
+
+	option = {
+		name = POD_spirit_travel.3802.a
+		
+		trigger = { prowess >= 40 }
+		
+		random_list = {
+			50 = { add_prowess_skill = -1 }
+			50 = { add_prestige = 250 }
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.3802.b
+
+		trigger = { prowess < 40 }
+		
+		add_prestige = -100
+	}		
+			
+}
+
+#wolfhome
+POD_spirit_travel.3900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3900.t
+	desc = POD_spirit_travel.3900.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wolfhome }
+	}
+
+	option = {
+		name = POD_spirit_travel.3900.a
+		
+		trigger = { NOT = { has_trait = lifestyle_hunter } }
+		
+		random_list = {
+			25 = { add_trait = lifestyle_hunter }
+			75 = { add_prestige = -100 }
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.3900.b
+
+		trigger = { has_trait = lifestyle_hunter }
+		
+		add_prestige = 100
+	}		
+			
+}
+
+POD_spirit_travel.3901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3901.t
+	desc = POD_spirit_travel.3901.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wolfhome }
+	}
+
+	option = {
+		name = POD_spirit_travel.3901.a
+		
+		trigger = { NOT = { has_trait = lifestyle_hunter } }
+		
+		random_list = {
+			25 = { add_trait = lifestyle_hunter }
+			75 = { add_stress = medium_stress_gain }
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.3901.b
+
+		trigger = { has_trait = lifestyle_hunter }
+		
+		add_stress = medium_stress_loss
+	}		
+			
+}
+
+POD_spirit_travel.3902 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3902.t
+	desc = POD_spirit_travel.3902.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wolfhome }
+		has_trait = lifestyle_hunter
+	}
+
+	option = {
+		name = POD_spirit_travel.3902.a
+		
+		add_prestige = 200	
+	    add_stress = major_stress_gain 
+		
+	}	
+			
+}
+
+POD_spirit_travel.3903 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.3903.t
+	desc = POD_spirit_travel.3903.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.3903.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = truth_earring
+		}
+		}
+		has_trait = lifestyle_hunter
+		}
+		show_as_unavailable = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = truth_earring
+		}
+		}
+		}
+		
+		add_stress = medium_stress_gain
+		
+		create_artifact_truth_earring_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.3903.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = blanket_of_peaceful_past
+		}
+		}		
+		has_trait = lifestyle_hunter
+		}
+		show_as_unavailable = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = dark_mask
+		}
+		}
+		}
+		
+		add_stress = medium_stress_gain
+		
+		create_artifact_blanket_of_peaceful_past_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.3903.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = dark_mask
+		}
+		}	
+		has_trait = lifestyle_hunter
+		}
+		show_as_unavailable = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = dark_mask
+		}
+		}
+		}
+		
+		add_stress = medium_stress_gain
+		
+		create_artifact_dark_mask_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.3903.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = eyes_of_the_night
+		}
+		}
+		has_trait = lifestyle_hunter
+		}
+		show_as_unavailable = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = eyes_of_the_night
+		}
+		}
+		}
+		
+		add_stress = medium_stress_gain
+		
+		create_artifact_eyes_of_the_night_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#calumn
+POD_spirit_travel.4000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4000.t
+	desc = POD_spirit_travel.4000.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:calumn }
+		NOT = { religion = { is_in_family = rf_wyrm } }	
+		NOT = { has_trait = lunatic }
+	}
+
+	option = {
+		name = POD_spirit_travel.4000.a
+		
+		random_list = {
+			25 = { add_trait = lunatic_1 }
+			75 = { add_stress = major_stress_gain }
+		}
+	}
+		
+}
+
+POD_spirit_travel.4001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4001.t
+	desc = POD_spirit_travel.4001.desc
+	
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:calumn }
+		NOT = { religion = { is_in_family = rf_wyrm } }	
+	}
+
+	option = {
+		name = POD_spirit_travel.4001.a
+		
+		add_stress = major_stress_gain 
+	}
+		
+}
+
+POD_spirit_travel.4002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4002.t
+	desc = POD_spirit_travel.4002.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:calumn }
+		religion = { is_in_family = rf_wyrm } 
+	}
+
+	option = {
+		name = POD_spirit_travel.4002.a
+		
+		add_piety = 200
+		add_stress = major_stress_gain 
+		
+	}
+		
+}
+
+POD_spirit_travel.4003 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4003.t
+	desc = POD_spirit_travel.4003.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4003.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = kinship_doll
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_kinship_doll_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4003.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = law_skull
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_law_skull_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4003.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = moongleam
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_moongleam_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4003.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = air_foot_greaves
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_air_foot_greaves_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4003.e
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = sun_axe
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_sun_axe_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4003.f
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = whistle_caff
+		}
+		}		
+		}
+		
+		increase_wounds_effect = { REASON = attacked }
+		
+		create_artifact_whistle_caff_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#BF homeland flavor
+
+scripted_effect POD_fera_homeland_boon_cost_effect = {
+	add_prestige = -300
+	add_piety = -100
+}
+
+POD_spirit_travel.4100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4100.t
+	desc = POD_spirit_travel.4100.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_black_furies }
+		faith = { religion_tag = blackfury_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4100.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4101.t
+	desc = POD_spirit_travel.4101.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_black_furies }
+		faith = { religion_tag = blackfury_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4101.a
+		add_martial_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.4101.b
+		add_learning_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+	}	
+}	
+
+POD_spirit_travel.4102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4102.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_black_furies }
+		NOT = { faith = { religion_tag = blackfury_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4102.a
+				
+		add_stress = major_stress_gain
+	}
+	
+}
+
+POD_spirit_travel.4103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4103.t
+	desc = POD_spirit_travel.4103.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4103.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_lionfang_effect = { OWNER = root }
+		}	
+		min = 1			
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}	
+		min = 1				
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#Gnawers homeland flavor
+
+POD_spirit_travel.4200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4200.t
+	desc = POD_spirit_travel.4200.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_bone_gnawers }
+		POD_fera_is_bonegnawer = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.4200.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4201.t
+	desc = POD_spirit_travel.4201.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_bone_gnawers }
+		POD_fera_is_bonegnawer = yes
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4201.a
+		add_intrigue_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.4201.b
+		add_diplomacy_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+	}	
+}	
+
+POD_spirit_travel.4202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4202.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_bone_gnawers }
+		POD_fera_is_bonegnawer = no
+	}
+	
+	option = {
+		name = POD_spirit_travel.4102.a
+				
+		add_stress = major_stress_gain
+	}	
+}
+
+POD_spirit_travel.4203 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4203.t
+	desc = POD_spirit_travel.4203.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4203.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = intrigue
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_ring_of_the_elements_effect = { OWNER = root }
+		}			
+		min = 1	
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -400
+				}		
+		min = 1			
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#children homeland flavor
+
+POD_spirit_travel.4300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4300.t
+	desc = POD_spirit_travel.4300.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_children_of_gaia }
+		faith = { religion_tag = childofgaia_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4300.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4301.t
+	desc = POD_spirit_travel.4301.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_children_of_gaia }
+		faith = { religion_tag = childofgaia_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4301.a
+		add_diplomacy_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}	
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+	}	
+}	
+
+POD_spirit_travel.4302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4302.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_children_of_gaia }
+		NOT = { faith = { religion_tag = childofgaia_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4102.a
+				
+		add_stress = major_stress_gain
+	}	
+}
+
+POD_spirit_travel.4303 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4303.t
+	desc = POD_spirit_travel.4303.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4303.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = diplomacy
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_harp_of_enchantment_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -450
+				}				
+		min = 1	
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#fianna homeland flavor
+
+POD_spirit_travel.4400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4400.t
+	desc = POD_spirit_travel.4400.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_fianna }
+		faith = { religion_tag = fianna_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4400.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4401.t
+	desc = POD_spirit_travel.4401.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_fianna }
+		faith = { religion_tag = fianna_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4401.a
+				
+		add_diplomacy_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}	
+
+	option = {
+		name = POD_spirit_travel.4401.b
+				
+		add_stewardship_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4402.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_fianna }
+		NOT = { faith = { religion_tag = fianna_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a
+
+		increase_wounds_no_death_effect = {REASON = fight}
+				
+		add_stress = medium_stress_gain
+	}	
+}
+
+
+POD_spirit_travel.4403 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4403.t
+	desc = POD_spirit_travel.4403.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4403.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = horn_of_the_white_stag
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_horn_of_the_white_stag_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}			
+		min = 1		
+		}
+	}				
+	
+				
+	}
+	
+	option = {
+		name = POD_spirit_travel.4403.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = golden_torc
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = prowess
+	value = 55
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_golden_torc_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}					
+		min = 1
+		}
+	}		
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4403.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = crones_tongue
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = diplomacy
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_crones_tongue_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}		
+}
+
+#GoF homeland flavor
+
+POD_spirit_travel.4500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4500.t
+	desc = POD_spirit_travel.4500.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_get_of_fenris }
+		faith = { religion_tag = getoffenris_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4500.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4501.t
+	desc = POD_spirit_travel.4501.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_get_of_fenris }
+		faith = { religion_tag = getoffenris_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4501.a
+				
+		add_martial_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}	
+
+	option = {
+		name = POD_spirit_travel.4501.b
+				
+		add_prowess_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4502 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4502.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_get_of_fenris }
+		NOT = { faith = { religion_tag = getoffenris_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a
+
+		increase_wounds_effect = {REASON = fight}
+				
+		add_stress = medium_stress_gain
+	}	
+}
+
+
+POD_spirit_travel.4503 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4503.t
+	desc = POD_spirit_travel.4503.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4503.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = forge_crusher
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_forge_crusher_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}				
+	
+				
+	}
+	
+	option = {
+		name = POD_spirit_travel.4503.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = grinding_tooth
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = prowess
+	value = 55
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_grinding_tooth_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}		
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4503.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = spear_chaser
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = prowess
+	value = 55
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_spear_chaser_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4503.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = troll_eater
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = diplomacy
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_troll_eater_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}	
+
+	option = {
+		name = POD_spirit_travel.4503.e
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = bright_arm
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = stewardship
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_bright_arm_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4503.f
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = hag_talon
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = intrigue
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_hag_talon_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4503.g
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = pain_eagle
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = learning
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_pain_eagle_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}
+		min = 1					
+		}
+	}			
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+
+#glass walkers homeland flavor
+
+POD_spirit_travel.4600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4600.t
+	desc = POD_spirit_travel.4600.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_glass_walkers }
+		POD_fera_is_warderofmen = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.4600.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4601.t
+	desc = POD_spirit_travel.4601.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_glass_walkers }
+		POD_fera_is_warderofmen = yes
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4601.a
+				
+		add_stewardship_skill = 1
+		add_prestige = -300	
+		add_piety = -100
+	}	
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4602.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_glass_walkers }
+		POD_fera_is_warderofmen = no
+	}
+	
+	option = {
+		name = POD_spirit_travel.4102.a
+				
+		add_stress = major_stress_gain
+	}	
+}
+
+
+POD_spirit_travel.4603 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4603.t
+	desc = POD_spirit_travel.4603.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4603.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = stewardship
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_dreamcaller_effect = { OWNER = root }
+		}
+		min = 1				
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -450
+				}
+		min = 1					
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#red talons homeland flavor
+
+POD_spirit_travel.4700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4700.t
+	desc = POD_spirit_travel.4700.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_red_talons }
+		faith = { religion_tag = redtalon_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4700.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4701.t
+	desc = POD_spirit_travel.4701.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_red_talons }
+		faith = { religion_tag = redtalon_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4701.a
+				
+		add_prowess_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}	
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4702.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_red_talons }
+		NOT = { faith = { religion_tag = redtalon_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a
+				
+		increase_wounds_effect = {REASON = fight}
+				
+		add_stress = medium_stress_gain
+	}	
+}
+
+POD_spirit_travel.4703 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4703.t
+	desc = POD_spirit_travel.4703.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4703.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = runestone_of_gab
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = diplomacy
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_runestone_of_gab_effect = { OWNER = root }
+		}	
+		min = 1			
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}	
+		min = 1				
+		}
+	}				
+	
+				
+	}
+	
+	option = {
+		name = POD_spirit_travel.4703.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = runestone_of_war
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_runestone_of_war_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}				
+		min = 1	
+		}
+	}		
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.4703.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = runestone_of_control
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = stewardship
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_runestone_of_control_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}		
+		min = 1			
+		}
+	}			
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4703.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = runestone_of_cunning
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = intrigue
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_runestone_of_cunning_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}		
+		min = 1			
+		}
+	}			
+			
+	}	
+
+	option = {
+		name = POD_spirit_travel.4703.e
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = runestone_of_wisdom
+		}
+		}		
+		}
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = learning
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_runestone_of_wisdom_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}
+				}				
+		min = 1	
+		}
+	}			
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#shadow lords homeland flavor
+
+POD_spirit_travel.4800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4800.t
+	desc = POD_spirit_travel.4800.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_shadow_lords }
+		POD_fera_is_shadowlord = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.4800.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4801.t
+	desc = POD_spirit_travel.4801.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_shadow_lords }
+		POD_fera_is_shadowlord = yes
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4801.a
+				
+		add_intrigue_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}	
+	
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4802.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_shadow_lords }
+		POD_fera_is_shadowlord = no
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a				
+				
+		add_stress = major_stress_gain
+	}	
+}
+
+
+POD_spirit_travel.4803 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4803.t
+	desc = POD_spirit_travel.4803.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4803.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = intrigue
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_grand_klaive_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -450
+				}			
+		min = 1		
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+
+#silver fangs homeland flavor
+
+POD_spirit_travel.4900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4900.t
+	desc = POD_spirit_travel.4900.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silver_fangs }
+		faith = { religion_tag = silverfang_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4900.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.4901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4901.t
+	desc = POD_spirit_travel.4901.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silver_fangs }
+		faith = { religion_tag = silverfang_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.4901.a
+				
+		add_diplomacy_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.4901.b
+				
+		add_martial_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}	
+		
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.4902 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.4902.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silver_fangs }
+		NOT = { faith = { religion_tag = silverfang_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a				
+				
+		increase_wounds_effect = {REASON = fight}
+				
+		add_stress = medium_stress_gain
+	}	
+}
+
+POD_spirit_travel.4903 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4903.t
+	desc = POD_spirit_travel.4903.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	option = {
+		name = POD_spirit_travel.4903.a
+		
+		remove_short_term_gold = 300
+
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.4403.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.4403.success
+			left_icon = root
+			create_artifact_iceblade_effect = { OWNER = root }
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.4403.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.4403.failure
+				left_icon = root
+				add_prestige = -300
+				increase_wounds_effect = {REASON = fight}			
+				}					
+		min = 1
+		}
+	}				
+					
+	}
+				
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#white howlers homeland flavor
+
+POD_spirit_travel.5000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5000.t
+	desc = POD_spirit_travel.5000.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_former_homeland_of_the_white_howlers }
+		faith = { religion_tag = blackspiraldancer_religion }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5000.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.5001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5001.t
+	desc = POD_spirit_travel.5001.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_former_homeland_of_the_white_howlers }
+		faith = { religion_tag = blackspiraldancer_religion }
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.5001.a
+				
+		add_intrigue_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.5001.b
+				
+		add_prowess_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}	
+		
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.5002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.5002.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_former_homeland_of_the_white_howlers }
+		NOT = { faith = { religion_tag = blackspiraldancer_religion } }			
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a				
+				
+		increase_wounds_effect = {REASON = fight}
+				
+		add_stress = medium_stress_gain
+	}	
+}
+
+#silent striders homeland flavor
+
+POD_spirit_travel.5100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5100.t
+	desc = POD_spirit_travel.5100.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silent_striders }
+		POD_fera_is_silentstrider = yes
+	}
+	
+	option = {
+		name = POD_spirit_travel.5100.a
+				
+		add_stress = medium_stress_loss		
+	}
+}
+
+
+POD_spirit_travel.5101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5101.t
+	desc = POD_spirit_travel.5101.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silent_striders }
+		POD_fera_is_silentstrider = yes
+		prestige >= 0
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.5101.a
+				
+		add_diplomacy_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}
+	
+	option = {
+		name = POD_spirit_travel.5101.b
+				
+		add_learning_skill = 1
+		POD_fera_homeland_boon_cost_effect = yes	
+	}	
+		
+	option = {
+		name = POD_spirit_travel.1801.f
+				
+	}	
+}	
+
+POD_spirit_travel.5102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.4102.t
+	desc = POD_spirit_travel.5102.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:the_homeland_of_the_silent_striders }
+		POD_fera_is_silentstrider = no
+	}
+	
+	option = {
+		name = POD_spirit_travel.4402.a								
+				
+		add_stress = major_stress_gain
+	}	
+}
+
+#abyss flavor
+
+POD_spirit_travel.5200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5200.t
+	desc = POD_spirit_travel.5200.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:abyss }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5200.a
+		
+		add_prestige = -200
+		
+		add_stress = medium_stress_loss		
+	}
+}
+
+POD_spirit_travel.5201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5201.t
+	desc = POD_spirit_travel.5200.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:abyss }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5200.a
+		
+		add_piety = -200
+		
+		add_stress = medium_stress_loss		
+	}
+}
+
+POD_spirit_travel.5202 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5202.t
+	desc = POD_spirit_travel.5202.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:abyss }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5202.a
+				
+		random_list = {
+			25 = { add_piety = -200 }
+			25 = { add_prestige = -200 }
+			25 = { add_stress = medium_stress_gain }
+		}
+	}
+}
+
+#weaver reaches flavor
+
+POD_spirit_travel.5300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5300.t
+	desc = POD_spirit_travel.5300.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = weaver_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:weaver_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { has_trait = stubborn }
+		
+		add_prestige = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { NOT = { has_trait = stubborn } }
+		
+		add_prestige = -200
+			
+	}	
+}
+
+POD_spirit_travel.5301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5301.t
+	desc = POD_spirit_travel.5301.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = weaver_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:weaver_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { 
+			OR = {
+				has_trait = shy
+				has_trait = reclusive
+			}
+		}
+		
+		add_piety = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { 
+			NOR = {
+				has_trait = shy
+				has_trait = reclusive
+			}
+		}
+		
+		add_piety = -200
+			
+	}	
+}
+
+POD_spirit_travel.5302 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5302.t
+	desc = POD_spirit_travel.5302.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = weaver_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:weaver_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { has_trait = diligent }
+		
+		add_stress = medium_stress_loss
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { NOT = { has_trait = diligent } }
+		
+		add_stress = medium_stress_gain
+			
+	}	
+}
+
+#wyld reaches flavor
+
+POD_spirit_travel.5400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5400.t
+	desc = POD_spirit_travel.5400.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_irrational
+	}
+	theme = wyld_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyld_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { has_trait = fickle }
+		
+		add_prestige = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { NOT = { has_trait = fickle } }
+		
+		add_prestige = -200
+			
+	}	
+}
+
+POD_spirit_travel.5401 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5401.t
+	desc = POD_spirit_travel.5401.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_irrational
+	}
+	theme = wyld_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyld_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { 
+			has_trait = gregarious
+		}
+		
+		add_piety = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { 
+			NOT = { has_trait = gregarious }
+		}
+		
+		add_piety = -200
+			
+	}	
+}
+
+POD_spirit_travel.5402 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5402.t
+	desc = POD_spirit_travel.5402.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_irrational
+	}
+	theme = wyld_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyld_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { has_trait = impatient }
+		
+		add_stress = medium_stress_loss
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { NOT = { has_trait = impatient } }
+		
+		add_stress = medium_stress_gain
+			
+	}	
+}
+
+
+POD_spirit_travel.5403 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5403.t
+	desc = POD_spirit_travel.5403.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = wyld_reaches
+	
+	option = {
+		name = POD_spirit_travel.5403.a
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = klaive
+		}
+		}		
+		}
+		
+		add_prestige = -250
+		
+		create_artifact_klaive_effect = { OWNER = root }
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5403.b
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = eternal_waterskin
+		}
+		}		
+		}
+		
+		add_prestige = -250
+		
+		create_artifact_eternal_waterskin_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.c
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = beff_of_ice
+		}
+		}		
+		}
+		
+		add_prestige = -250
+		
+		create_artifact_beff_of_ice_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.d
+		
+		trigger = { 
+		NOT = {
+		any_character_artifact = {
+			has_variable = spirit_astrolabe
+		}
+		}		
+		}
+		
+		add_prestige = -250
+		
+		create_artifact_spirit_astrolabe_effect = { OWNER = root }
+			
+	}
+
+	option = {
+		name = POD_spirit_travel.5403.e
+		trigger_event = POD_umbra_expedition.200
+	}	
+}
+
+#wyrm reaches flavor
+
+POD_spirit_travel.5500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5500.t
+	desc = POD_spirit_travel.5500.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_callous
+	}
+	theme = wyrm_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyrm_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { 
+			OR = { 
+				has_trait = callous
+				has_trait = sadistic
+			}
+		}
+		
+		add_prestige = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { 
+			NOR = { 
+				has_trait = callous
+				has_trait = sadistic
+			}
+		}
+		
+		add_prestige = -200
+			
+	}	
+}
+
+POD_spirit_travel.5501 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5501.t
+	desc = POD_spirit_travel.5501.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_callous
+	}
+	theme = wyrm_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyrm_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = { 
+			has_trait = vengeful
+		}
+		
+		add_piety = 200
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = { 
+			NOT = { has_trait = vengeful }
+		}
+		
+		add_piety = -200
+			
+	}	
+}
+
+POD_spirit_travel.5502 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5502.t
+	desc = POD_spirit_travel.5502.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_callous
+	}
+	theme = wyrm_reaches
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:wyrm_reaches }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.a
+		
+		trigger = {			
+			OR = { 
+				has_trait = deceitful
+				has_trait = paranoid
+			}
+		}
+		
+		add_stress = medium_stress_loss
+			
+	}
+	
+	option = {
+		name = POD_spirit_travel.5300.b
+		
+		trigger = {			
+			NOR = { 
+				has_trait = deceitful
+				has_trait = paranoid
+			}
+		}		
+		add_stress = medium_stress_gain
+			
+	}	
+}
+
+#black spiral flavor
+
+POD_spirit_travel.5600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5600.t
+	desc = POD_spirit_travel.5600.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_callous
+	}
+	theme = labyrinth
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:black_spiral_labyrinth }
+		religion = { is_in_family = rf_wyrm } 
+	}
+	
+	option = {
+		name = POD_spirit_travel.5600.a
+				
+		add_piety = 100		
+	}
+}
+
+
+POD_spirit_travel.5601 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5601.t
+	desc = POD_spirit_travel.5601.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = labyrinth
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:black_spiral_labyrinth }
+		religion = { is_in_family = rf_wyrm } 
+	}
+	
+	option = {
+		name = POD_spirit_travel.5601.a
+		add_piety = -500
+		random_list = {
+			10 = { add_learning_skill = 1 }
+			10 = { add_prowess_skill = 1 }
+			10 = { add_diplomacy_skill = 1 }
+			10 = { add_stewardship_skill = 1 }
+			10 = { add_intrigue_skill = 1 }
+			50 = { add_stress = medium_stress_gain }
+		}
+	}	
+	option = {
+		name = POD_spirit_travel.5601.b
+				
+	}	
+}	
+
+POD_spirit_travel.5602 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5601.t
+	desc = POD_spirit_travel.5602.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = labyrinth
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:black_spiral_labyrinth }
+		NOT = { religion = { is_in_family = rf_wyrm } }		
+	}
+	
+	option = {
+		name = POD_spirit_travel.5602.a		
+
+		trigger = { NOT = { has_trait = lunatic } }	
+				
+		random_list = {
+			33 = { add_trait = lunatic_1 }
+			33 = { add_stress = medium_stress_gain }
+			33 = { add_learning_skill = -1 }			
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.5602.a	
+
+		trigger = { has_trait = lunatic }	
+		
+		add_stress = medium_stress_gain
+	}	
+}
+
+#kingdom of sand flavor
+
+POD_spirit_travel.5700 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5700.t
+	desc = POD_spirit_travel.5700.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:dark_kingdom_of_sand }
+		has_trait = mummy
+	}
+	
+	option = {
+		name = POD_spirit_travel.5700.a
+				
+		trigger = {
+			NOT = { culture = culture:ancient_egyptian } 
+		}
+		
+		set_culture = culture:ancient_egyptian
+		add_prestige = 200
+	}
+	
+	option = {
+		name = POD_spirit_travel.5700.b
+				
+		trigger = {
+			culture = culture:ancient_egyptian 
+		}
+		
+		random_list = {
+			50 = { add_prestige = 200 }
+			50 = { add_stress = medium_stress_gain }
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.5700.c		
+
+		trigger = {
+			NOT = { culture = culture:ancient_egyptian } 
+		}
+		
+		add_stress = medium_stress_gain
+	}	
+}
+
+POD_spirit_travel.5701 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5701.t
+	desc = POD_spirit_travel.5701.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:dark_kingdom_of_sand }
+		has_trait = mummy
+		prestige >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.5701.a
+		
+		add_hekau_necromancy_lifestyle_xp = 100
+		add_prestige = -200
+	}
+	
+	option = {
+		name = POD_spirit_travel.5701.b
+				
+		add_hekau_nomenclature_lifestyle_xp = 100
+		add_prestige = -200
+	}
+
+	option = {
+		name = POD_spirit_travel.5701.c		
+
+		add_hekau_celestial_lifestyle_xp = 100
+		add_prestige = -200
+	}
+
+	option = {
+		name = POD_spirit_travel.5701.d
+				
+	}	
+}
+
+POD_spirit_travel.5702 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5702.t
+	desc = POD_spirit_travel.5702.desc
+	
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:dark_kingdom_of_sand }
+		NOT = { has_trait = mummy }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5702.a
+
+		increase_wounds_effect = {REASON = fight}
+		
+		add_stress = medium_stress_gain
+
+	}
+		
+}
+
+#First city flavor
+POD_spirit_travel.5800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5800.t
+	desc = POD_spirit_travel.5800.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:first_city }
+		NOT = { has_trait = wraith }
+		piety >= 0
+	}
+	
+	option = {
+		name = POD_spirit_travel.5800.a
+		
+		add_piety = -150
+		
+		random_list = {
+			25 = { add_learning_lifestyle_xp = 100 }
+			20 = { add_prestige = 100 }
+			50 = { }
+			5 = { add_learning_lifestyle_perk_points = 1 }
+		}		
+	}
+	
+	option = {
+		name = POD_spirit_travel.5800.b
+				
+	}
+	
+}
+
+POD_spirit_travel.5801 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5801.t
+	desc = POD_spirit_travel.5801.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_vengeful
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:first_city }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5801.a
+		
+	duel = {
+	skill = martial
+	value = 25
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+		desc = POD_spirit_travel.5801.effect.success.desc
+		
+		send_interface_toast = {
+			title = POD_spirit_travel.5801.success
+			left_icon = root
+			add_martial_lifestyle_xp = 200
+		}				
+		min = 1
+		
+	}
+		10 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = 0.5
+			}
+
+			desc = POD_spirit_travel.5801.failure.effect.desc
+			
+			send_interface_toast = {
+				title = POD_spirit_travel.5801.failure
+				left_icon = root
+				increase_wounds_effect = {REASON = fight}
+				}			
+		min = 1		
+		}
+	}				
+	}
+	
+	option = {
+		name = POD_spirit_travel.5800.b
+				
+	}
+	
+}
+
+POD_spirit_travel.5802 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5802.t
+	desc = POD_spirit_travel.5802.desc
+	
+	left_portrait = {
+		character = root
+		animation = admiration
+	}
+	theme = spirit_world
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:first_city }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5802.a
+		
+		add_prestige = 100
+		add_stress = medium_stress_gain
+	}
+	
+}
+
+#nefer khetet flavor
+
+POD_spirit_travel.5900 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5900.t
+	desc = POD_spirit_travel.5900.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:neter_khertet }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5900.a
+				
+		add_character_modifier = {
+			modifier = improved_horse_mastery_modifier
+			years = 5
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.5900.b
+				
+		add_martial_lifestyle_xp = 150
+	}
+}
+
+POD_spirit_travel.5901 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5901.t
+	desc = POD_spirit_travel.5901.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:neter_khertet }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5901.a
+		
+		add_stress = minor_stress_gain
+		
+		add_character_modifier = {
+			modifier = diplomacy_foreign_1017_internal_affairs_modifier
+			years = 5
+		}
+	}
+	
+	option = {
+		name = POD_spirit_travel.5901.b
+				
+	}
+}
+
+POD_spirit_travel.5902 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.5902.t
+	desc = POD_spirit_travel.5902.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	theme = dark_kingdom
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:neter_khertet }
+	}
+	
+	option = {
+		name = POD_spirit_travel.5902.a
+
+		add_character_modifier = {
+			modifier = diplomacy_majesty_4090_resplendent_raiment_modifier
+			years = 5
+		}
+
+		remove_short_term_gold = 100
+	}
+
+	option = {
+		name = POD_spirit_travel.5902.b
+	}
+}
+
+#elemental courts flavor
+POD_spirit_travel.6000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.6000.t
+	desc = POD_spirit_travel.6000.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:elemental_courts }
+	}
+	
+	option = {
+		name = POD_spirit_travel.6000.a
+
+		add_stress = major_stress_loss
+		
+		random = {
+			chance = 1
+		if = {
+			limit = {
+				NOT = { has_trait = depressed_1 }
+			}
+		add_trait = depressed_1
+		}
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.6000.b
+	}
+}
+
+POD_spirit_travel.6001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.6001.t
+	desc = POD_spirit_travel.6001.desc
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:elemental_courts }
+	}
+	
+	option = {
+		name = POD_spirit_travel.6001.a
+
+		add_stress = major_stress_gain
+		
+		random = {
+			chance = 5
+		add_learning_skill = 1	
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.6001.b
+	}
+}
+
+POD_spirit_travel.6002 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_spirit_travel.6002.t
+	desc = POD_spirit_travel.6002.desc
+	
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	theme = spires
+	
+	cooldown = { years = 1 }
+	
+	trigger = {
+		POD_umbra_event_available_trigger = { LOCATION = flag:elemental_courts }
+	}
+	
+	option = {
+		name = POD_spirit_travel.6002.a
+
+		add_stress = major_stress_gain
+		
+		random = {
+			chance = 10
+		add_prowess_skill = 1	
+		}
+	}
+
+	option = {
+		name = POD_spirit_travel.6002.b
+	}
+}

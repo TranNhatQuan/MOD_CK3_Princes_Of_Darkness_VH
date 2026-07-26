@@ -1,0 +1,157 @@
+﻿l_english:
+ ##################################################
+ # INSTALL REGENT FACTION WAR
+ ##################################################
+  JAPANESE_REGENT_FACTION_WAR: "Chiến tranh để bổ nhiệm [CLAIMANT.GetTitledFirstName] làm Nhiếp Chính"
+  replace_ceremonial_regent_faction_war_name: "Bổ nhiệm $game_concept_ceremonial_regent$"
+  replace_ceremonial_regent_faction_war: "$replace_ceremonial_regent_faction_war_name$"
+  replace_ceremonial_regent_faction_war_victory_defender_desc: "Ngài sẽ bị [imprison|E] và toàn bộ đất đai bị [attacker.GetShortUIName] tịch thu."
+  replace_ceremonial_regent_faction_war_victory_desc: "[defender.GetShortUIName|U] sẽ bị [imprison|E] và toàn bộ đất đai bị [attacker.GetShortUIName] tịch thu."
+  replace_ceremonial_regent_faction_war_white_peace_defender_desc: "Ngài giữ các [titles|E] của mình và đạt được một [truce|E] với mọi [vassal|E] nổi loạn."
+  replace_ceremonial_regent_faction_war_white_peace_desc: "[defender.GetShortUIName|U] giữ các [titles|E] của [defender.GetHerHis]. Một [revoke_title_reason|E] được đưa ra đối với mọi [vassal|E] nổi loạn."
+  replace_ceremonial_regent_faction_war_defeat_defender_desc: "Ngài giữ các [titles|E] của mình và bỏ tù mọi [vassals|E] nổi loạn."
+  replace_ceremonial_regent_faction_war_defeat_desc: "[defender.GetShortUIName|U] giữ các [titles|E] của [defender.GetHerHis] và bỏ tù mọi [vassals|E] nổi loạn."
+ ##################################################
+ # RESTORE EMPEROR FACTION WAR
+ ##################################################
+  JAPANESE_RESTORE_EMPEROR_FACTION_WAR: "Chiến tranh để phục hồi [CLAIMANT.GetTitledFirstName]"
+  restore_ceremonial_liege_faction_war_name: "Phục hồi $game_concept_ceremonial_liege$"
+  restore_ceremonial_liege_faction_war: "$restore_ceremonial_liege_faction_war_name$"
+  restore_ceremonial_liege_faction_war_white_peace_desc: "[defender.GetShortUIName|U] sẽ giữ tất cả [titles|E]. Một [revoke_title_reason|E] được áp dụng cho tất cả [vassal|E] nổi loạn."
+  restore_ceremonial_liege_faction_war_defeat_desc: "[faction|E] bị giải tán, [attacker.GetShortUIName] và các kẻ nổi loạn khác bị [imprisoned|E]. [claimant.GetTitledFirstName] bị truất phế."
+  restore_ceremonial_liege_faction_war_defeat_end_desc: "[claimant.GetTitledFirstName] bị truất phế."
+  restore_ceremonial_liege_faction_war_victory_desc: "[defender.GetShortUIName|U] sẽ mất tất cả [titles|E], bị [imprisoned|E], và bị truất phế."
+ ##################################################
+ # INSTALL BLOC MEMBER WAR
+ ##################################################
+  japan_install_bloc_member_cb: "Mở rộng Liên minh"
+  JAPAN_INSTALL_BLOC_MEMBER_CB_NAME: "[ATTACKER.GetConfederation.GetLeadingHouse.GetBaseNameNoTooltip] [bloc_expansion|E]"
+  JAPAN_INSTALL_BLOC_MEMBER_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetConfederation.GetName] Chiến tranh Mở rộng"
+  JAPAN_INSTALL_BLOC_MEMBER_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_install_bloc_member_cb_victory_desc: "[attacker.GetShortUIName|U] sẽ chiếm các [titles|E] tranh chấp cho [attacker.GetConfederation.GetName] và quyết định phân phối chúng."
+  japan_install_bloc_member_cb_white_peace_desc: "[defender.GetShortUIName|U] sẽ bảo vệ đất đai của [defender.GetHerHis]."
+  japan_install_bloc_member_cb_defeat_desc: "[attacker.GetShortUIName|U] [CharAreIs(attacker)] bị nhục nhã."
+  japan_install_bloc_member_cb_ended_invalid.desc: "$japan_install_bloc_member_cb$ không còn hiệu lực"
+ ##################################################
+ # SORYO CONQUEST WAR
+ ##################################################
+  japan_soryo_conquest_cb: "$JAPAN_SORYO_CONQUEST_CB_NAME_GENERIC$"
+  JAPAN_SORYO_CONQUEST_DUCHY_CB_NAME: "$japan_feudal_government$ [duchy|E] Chinh phục [TITLE.GetBaseNameNoTier]"
+  JAPAN_SORYO_CONQUEST_COUNTY_CB_NAME: "$japan_feudal_government$ [county|E] Chinh phục [TITLE.GetBaseNameNoTier]"
+  JAPAN_SORYO_CONQUEST_CB_NAME_GENERIC: "$japan_feudal_government$ Chinh phục"
+  JAPAN_SORYO_CONQUEST_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetPrimaryTitle.GetAdjective] Chinh phục [TITLE.GetBaseNameNoTier]"
+  JAPAN_SORYO_CONQUEST_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  JAPAN_SORYO_CONQUEST_LANDLESS_WAR_NAME: "$ORDER$ Chinh phục [ATTACKER.GetHouse.GetName] đối với [TITLE.GetBaseNameNoTier]"
+  JAPAN_SORYO_CONQUEST_LANDLESS_WAR_NAME_BASE: "[ATTACKER.GetHouse.GetBaseName][DEFENDER.GetPrimaryTitle.GetName]"
+  JAPAN_SORYO_CONQUEST_LANDLESS_COUNTY_CB_NAME: "$japan_feudal_government$ [county|E] Chinh phục [TITLE.GetBaseNameNoTier]"
+  japan_soryo_conquest_county_landless_cb: "$japan_soryo_conquest_cb$"
+  japan_soryo_conquest_county_cb: "$japan_soryo_conquest_cb$"
+  japan_soryo_conquest_duchy_cb: "$japan_soryo_conquest_cb$"
+  japan_soryo_conquest_cb_ended_invalid.desc: "$JAPAN_SORYO_CONQUEST_CB_NAME_GENERIC$ không còn hiệu lực"
+  japan_soryo_conquest_cb_admin_warning: "\n@warning_icon!#X Vì [defender.GetShortUIName|U] là [ritsuryo|E] [vassal|E], [attacker.GetTopLiege.GetTitleAsName|V] sẽ coi đây là [crime_i|E][crime|E]."
+  tgp_japan_soryo_war_is_crime_title: "Tội được ghi nhận"
+  tgp_japan_soryo_war_is_crime_kampaku_title: "Tấn công Nhiếp chính"
+  admin_soryo_conquest_crime: "Tấn công Nhiếp chính"
+  enforced_pacification_opinion: "Bình định Hoàng triều"
+ ##################################################
+ # DEMAND RITSURYO WAR
+ ##################################################
+  japan_demand_administrative_cb: "$JAPAN_DEMAND_ADMINISTRATIVE_CB_NAME$"
+  JAPAN_DEMAND_ADMINISTRATIVE_CB_NAME: "Thi hành Hợp nhất Hành chính"
+  JAPAN_DEMAND_ADMINISTRATIVE_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetPrimaryTitle.GetAdjective] Thi hành Hợp nhất Hành chính [DEFENDER.GetPrimaryTitle.GetBaseNameNoTier]"
+  JAPAN_DEMAND_ADMINISTRATIVE_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_demand_administrative_cb_victory_desc: "Toàn bộ đất đai của [defender.GetShortUINamePossessive|U] sẽ bị tịch thu và trả về cho [attacker.GetTopLiege.GetTitleAsNameNoTooltip]."
+  japan_demand_administrative_cb_victory_vassal_desc: "Dịch vụ của Ngài đối với [attacker.GetTopLiege.GetPrimaryTitle.GetDefinitiveNameNoTooltip] sẽ được công nhận."
+  japan_demand_administrative_cb_white_peace_desc: "[defender.GetShortUIName|U] vẫn là [soryo|E] [vassal|E]."
+  japan_demand_administrative_cb_defeat_desc: "Vì [attacker.GetShortUIName] [CharAreIs(attacker)] không phải [attacker.GetTopLiege.GetTitleAsNameNoTooltip], [defender.GetShortUIName] vẫn là [soryo|E] [vassal|E]."
+  japan_demand_administrative_cb_defeat_desc_independence: "Vì [attacker.GetShortUIName|U] là [attacker.GetTopLiege.GetTitleAsNameNoTooltip], [defender.GetShortUIName] và tất cả [allies|E] sẽ trở thành [independent|E] [soryo|E] [realms|E]."
+  japan_demand_administrative_cb_ended_invalid.desc.attacker: "Chiến tranh [war.GetName] kết thúc: [attacker.GetShortUIName] không phải [ritsuryo|E]"
+  japan_demand_administrative_cb_ended_invalid.desc: "Chiến tranh [war.GetName] kết thúc: [defender.GetShortUIName] không phải [soryo|E] hoặc đã rời [realm|E]"
+  japan_demand_administrative_cb_warning_japan_tt: "@warning_icon! #X Nếu Ngài thua [war|E], [recipient.GetShortUIName] và [recipient.GetHerHis] [allies|E] sẽ trở thành [independent|E] [soryo|E] [realms|E]"
+  enforced_administrative_opinion: "Thi hành Hợp nhất Hành chính"
+ ##################################################
+ # IMPERIAL PACIFICATION WAR
+ ##################################################
+  japan_imperial_expansion_cb: "$JAPAN_IMPERIAL_EXPANSION_CB_NAME$"
+  JAPAN_IMPERIAL_EXPANSION_CB_NAME: "Bình định [county|E] Hoàng triều"
+  JAPAN_IMPERIAL_EXPANSION_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')]Bình định [TITLE.GetBaseName]"
+  JAPAN_IMPERIAL_EXPANSION_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_imperial_expansion_cb_victory_desc_attacker: "[title|E] tranh chấp sẽ bị Ngài chiếm đoạt."
+  japan_imperial_expansion_cb_victory_desc: "[title|E] tranh chấp sẽ bị [attacker.GetTopLiege.GetTitleAsNameNoTooltip] chiếm đoạt."
+  japan_imperial_expansion_cb_ended_invalid.desc.attacker: "Chiến tranh [war.GetName] kết thúc: [attacker.GetShortUIName] [CharAreIs(attacker)] không phải [ritsuryo|E] hoặc [soryo|E], hoặc không có [ceremonial_liege|E]"
+  japan_imperial_expansion_cb_ended_invalid.desc: "Chiến tranh [war.GetName] kết thúc: [defender.GetShortUIName] đã tham gia [realm|E] hoặc không giữ [county|E] hợp lệ"
+  japan_imperial_expansion_cb_warning_japan_tt: "@warning_icon! #X Nếu Ngài thua [war|E], [recipient.GetShortUIName] và [recipient.GetHerHis] [allies|E] sẽ trở thành [independent|E] [soryo|E] [realms|E]"
+  japan_imperial_expansion_cb_neighbour_tt: "[defender.GetShortUIName|U] không nắm [county|E] liền kề với [attacker.GetTopLiege.GetPrimaryTitle.GetName]"
+  CB_JAPANESE_GOVERNMENT: "[government|E] Nhật Bản"
+  tgp_japan_pacification_war_valid_empire_tt: "[target.GetBaseName] không phải là phần [de_jure|E] của [GetTitleByKey('e_japan').GetBaseName]"
+  tgp_japan_pacification_war_valid_region_tt: "[target.GetBaseName] không thuộc [GetGeographicalRegion('world_asia_japan').GetName] hoặc [GetGeographicalRegion('world_asia_sakhalin_hokkaido').GetName]"
+ ##################################################
+ # IMPERIAL RECONQUEST WAR
+ ##################################################
+  japan_imperial_reconquest_cb: "$JAPAN_IMPERIAL_RECONQUEST_CB_NAME$"
+  JAPAN_IMPERIAL_RECONQUEST_CB_NAME: "Tái chinh phục Hoàng triều Nhật Bản #weak ([de_jure|E])#!"
+  JAPAN_IMPERIAL_RECONQUEST_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')]Tái chinh phục Hoàng triều Nhật Bản"
+  JAPAN_IMPERIAL_RECONQUEST_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_imperial_reconquest_cb_victory_desc: "[attacker.GetTopLiege.GetShortUIName] chiếm [titles|E] tranh chấp."
+  japan_imperial_reconquest_cb_ended_invalid.desc.attacker: "Chiến tranh [war.GetName] kết thúc: [attacker.GetShortUIName] [CharAreIs(attacker)] không phải [ritsuryo|E] hoặc [soryo|E], hoặc không có [ceremonial_liege|E]"
+  japan_imperial_reconquest_cb_ended_invalid.desc: "Chiến tranh [war.GetName] kết thúc: [defender.GetShortUIName] tham gia [realm|E], hoặc không nắm [county|E] hợp lệ"
+  japan_imperial_reconquest_cb_warning_japan_tt: "@warning_icon! #X Nếu Ngài thua [war|E], [recipient.GetShortUIName] và [recipient.GetHerHis] [allies|E] sẽ trở thành [independent|E] [soryo|E] [realms|E]"
+  japan_imperial_reconquest_cb_neighbour_tt: "[defender.GetShortUIName|U] không nắm [county|E] liền kề"
+  tgp_japan_reconquest_war_valid_de_jure_tt: "Mục tiêu phải là một phần [de_jure|E] của [GetTitleByKey('e_japan').GetDefinitiveName]"
+  japan_imperial_reconquest_cb_cost_tt: "[counties|E]"
+ ##################################################
+ # MAINTAIN SORYO WAR
+ ##################################################
+  JAPAN_REFUSED_RITSURYO_WAR_NAME: "Chiến tranh duy trì Chính quyền $japan_feudal_government$"
+  japan_refused_ritsuryo_cb_victory_desc_defender: "[attacker.GetShortUIName|U] trở thành [ceremonial_regent|E]."
+  japan_refused_ritsuryo_cb_victory_desc: "[attacker.GetShortUIName|U] trở thành [ceremonial_regent|E]."
+  japan_refused_ritsuryo_cb_white_peace_desc_defender: "Ngài lập một hòa ước với [attacker.GetShortUIName] và nhận một [revoke_title_reason|E] chống lại họ."
+  japan_refused_ritsuryo_cb_white_peace_desc: "[attacker.GetShortUIName|U] và [defender.GetShortUIName] lập một hòa ước. [defender.GetShortUIName|U] nhận một [revoke_title_reason|E] chống lại [attacker.GetShortUIName]."
+  japan_refused_ritsuryo_cb_defeat_desc_defender: "Ngài [imprison|E] [attacker.GetShortUIName]."
+  japan_refused_ritsuryo_cb_defeat_desc:0 "[defender.GetShortUIName|U] [imprisons|E] [attacker.GetShortUIName]."
+##################################################
+ # SORYO ERADICATE HOUSE WAR
+ ##################################################
+  eradicate_house_cb: "Tiêu diệt Nhà đối thủ"
+  ERADICATE_HOUSE_CB_NAME: "Tiêu diệt Nhà [DEFENDER.GetHouse.GetBaseName]"
+  ERADICATE_HOUSE_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetHouse.GetBaseName] Cố gắng tiêu diệt [DEFENDER.GetHouse.GetBaseName]"
+  ERADICATE_HOUSE_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  eradicate_house_cb_victory_desc: "#X @warning_icon! [defender.GetShortUINamePossessive|U] [house|E] sẽ bị [attacker.GetShortUINamePossessive] tiêu diệt. #!"
+  eradicate_house_cb_white_peace_desc: "[defender.GetShortUIName|U] sẽ giữ [defender.GetHerHis] danh dự."
+  eradicate_house_cb_defeat_desc: "[attacker.GetShortUINamePossessive|U] [house|E] sẽ bị [defender.GetShortUIName] tiêu diệt."
+  eradicate_house_cb_ended_invalid.desc: "$ERADICATE_HOUSE_CB_NAME$ không còn hiệu lực"
+  every_close_family_house_member_in_court_cb_win_desc: "Mọi [spouse|E] và thành viên [house|E] trong [defender.GetShortUINamePossessive] [court|E]"
+  every_close_family_house_member_in_court_cb_lose_desc: "Mọi [spouse|E] và thành viên [house|E] trong [attacker.GetShortUINamePossessive] [court|E]"
+##################################################
+ # ESTABLISH SORYO ADMINISTRATION WAR
+ ##################################################
+  japan_establish_soryo_administration_cb: "$JAPAN_ESTABLISH_SORYO_ADMINISTRATION_CB_NAME$"
+  JAPAN_ESTABLISH_SORYO_ADMINISTRATION_CB_NAME: "Thiết lập Chính quyền Sōryō"
+  JAPAN_ESTABLISH_SORYO_ADMINISTRATION_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][DEFENDER.GetHouse.GetBaseNameNoTooltip] Chiến tranh thiết lập Chính quyền Sōryō"
+  JAPAN_ESTABLISH_SORYO_ADMINISTRATION_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_establish_soryo_administration_cb_victory_desc: "[attacker.GetShortUIName|U] sẽ thay thế [defender.GetShortUIName] làm người cai trị [defender.GetPrimaryTitle.GetBaseNameNoTier] và giam tất cả những người phòng thủ."
+  japan_establish_soryo_administration_cb_white_peace_desc: "[defender.GetShortUIName|U] vẫn là [ritsuryo|E]."
+  japan_establish_soryo_administration_cb_defeat_desc: "[defender.GetShortUIName|U], cùng tất cả thành viên [bloc|E], sẽ áp dụng [GetGovernment( 'japan_feudal_government' ).GetName] [government] và giam tất cả kẻ tấn công."
+  japan_establish_soryo_administration_cb_ended_invalid.desc: "$JAPAN_ESTABLISH_SORYO_ADMINISTRATION_CB_NAME$ không còn hiệu lực"
+##################################################
+ # CEREMONIAL CLAIMANT FACTION WAR
+ ##################################################
+  ceremonial_claimant_faction_war: "Phe người tuyên bố danh hiệu"
+  CEREMONIAL_CLAIMANT_WAR_NAME: "Chiến tranh vì Quyền của [CLAIMANT.GetTitledFirstNamePossessive] trên [TITLE.GetDefinitiveName|l]"
+  ceremonial_claimant_faction_war_victory_desc: "[claimant|E] trở thành [ceremonial_liege|E]."
+  ceremonial_claimant_faction_war_white_peace_desc: "[ceremonial_liege|E] vẫn giữ nguyên. Một [revoke_title_reason|E] được áp dụng với mọi [vassal] nổi loạn."
+  ceremonial_claimant_faction_war_defeat_desc: "[ceremonial_liege|E] vẫn giữ nguyên. Tất cả [vassals|E] nổi loạn bị [imprisoned|E]."
+ ##################################################
+ # BLOC WAR
+ ##################################################
+  japan_bloc_war_cb: "$JAPAN_BLOC_WAR_CB_NAME$"
+  JAPAN_BLOC_WAR_CB_NAME: "[ATTACKER.GetConfederation.GetLeadingHouse.GetNameNoTooltip]-[DEFENDER.GetConfederation.GetLeadingHouse.GetNameNoTooltip] [bloc_supremacy_war|E]"
+  JAPAN_BLOC_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetConfederation.GetLeadingHouse.GetName]-[DEFENDER.GetConfederation.GetLeadingHouse.GetName] Chiến tranh Thống trị Liên minh"
+  JAPAN_BLOC_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  japan_bloc_war_cb_victory_desc: "[defender.GetShortUIName|U] [CharAreIs(defender)] buộc phải công nhận sự ưu việt của [attacker.GetConfederation.GetName]."
+  japan_bloc_war_cb_white_peace_desc: "[defender.GetShortUIName|U] sẽ giữ danh dự của [defender.GetConfederation.GetName]."
+  japan_bloc_war_cb_defeat_desc: "[attacker.GetShortUIName|U] [CharAreIs(attacker)] buộc phải công nhận sự ưu việt của [defender.GetConfederation.GetName]."
+  japan_bloc_war_cb_ended_invalid.desc: "$JAPAN_BLOC_WAR_CB_NAME$ không còn hiệu lực"
+  tgp_bloc_war_defeat_member_description: "[member_houses|E] của [bloc|E] thất bại sẽ công nhận [supremacy|E] của kẻ chiến thắng:"
+  tgp_bloc_war_defeat_member_house_description: "$BULLET_WITH_TAB$[CHARACTER.GetHouse.GetBaseName]"
+  japan_bloc_war_cb_cohesion_requirement_tt: "Ít nhất #V 25#! [cohesion|E] cần để bắt đầu [war|E] #weak (Hiện tại: [attacker.GetConfederation.GetCohesion|V0])#!"

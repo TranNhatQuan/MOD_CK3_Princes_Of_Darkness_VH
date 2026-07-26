@@ -1,0 +1,346 @@
+﻿# POD Personal Character Interactions
+#  Blood Heal
+
+POD_blood_heal_interaction = {
+	category = interaction_category_vampire
+	common_interaction = yes
+	#interface_priority= 110
+	desc = POD_blood_heal_interaction_desc
+	options_heading = POD_blood_heal_interaction_options_heading
+
+	#use_diplomatic_range = no
+
+	cooldown = { months = 3 }
+	
+	is_shown = {
+		scope:actor = { has_POD_vamp_blood_trigger = yes }
+		trigger_if = {
+			limit = { scope:actor != scope:recipient }
+			scope:actor = { has_perk = obeah_panacea_perk }
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				POD_has_injury_or_main_trait_trigger = yes
+				POD_health_has_aggravated_wound_trigger = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			trigger_if = {
+				limit = { scope:aggravated ?= yes }
+				POD_has_enough_blood_for_discipline = { AMOUNT = 3 }
+			}
+			trigger_else = {
+				POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			}
+			NOT = { has_character_modifier = armor_of_diamond_serenity_modifier }
+		}
+		scope:recipient = {
+			POD_can_be_healed_trigger = yes
+		}
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = blind
+				has_vampire_blood_race_trigger = yes
+				scope:actor = scope:recipient
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = blind } }
+		}
+		flag = blind
+		localization = POD_heal_blind
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = maimed
+				has_vampire_blood_race_trigger = yes
+				scope:actor = scope:recipient
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = maimed } }
+		}
+		flag = maimed
+		localization = POD_heal_maimed
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = one_legged
+				has_vampire_blood_race_trigger = yes
+				scope:actor = scope:recipient
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_legged } }
+		}
+		flag = one_legged
+		localization = POD_heal_one_legged
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = one_eyed
+				has_vampire_blood_race_trigger = yes
+				scope:actor = scope:recipient
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = one_eyed } }
+		}
+		flag = one_eyed
+		localization = POD_heal_one_eyed
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = eunuch_1
+				has_vampire_blood_race_trigger = yes
+				scope:actor = scope:recipient
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = eunuch_1 } }
+		}
+		flag = eunuch
+		localization = POD_heal_eunuch
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+		is_valid = {
+			trigger_if = {
+				limit = { scope:actor != scope:recipient }
+				scope:actor = { has_perk = healers_touch_perk }
+			}
+		}
+		flag = wounded
+		localization = POD_heal_wounded
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_aggravated_wound_trigger = yes
+			}
+		}
+		is_valid = {
+			trigger_if = {
+				limit = { scope:actor != scope:recipient }
+				scope:actor = { has_perk = healers_touch_perk }
+			}
+		}
+		flag = aggravated
+		localization = POD_heal_aggravated_wound
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = scarred
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = scarred } }
+		}
+		flag = scarred
+		localization = POD_heal_scarred
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = disfigured
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = disfigured } }
+		}
+		flag = disfigured
+		localization = POD_heal_disfigured
+	}
+
+	can_send = {
+		custom_description = {
+			text = send_option_selected
+			OR = {
+				scope:blind ?= yes
+				scope:maimed ?= yes
+				scope:one_legged ?= yes
+				scope:one_eyed ?= yes
+				scope:eunuch ?= yes
+				scope:wounded ?= yes
+				scope:aggravated ?= yes
+				scope:scarred ?= yes
+				scope:disfigured ?= yes
+			}
+		}
+	}
+	
+	on_accept = {
+		scope:actor = {
+			if = {
+				limit = { scope:actor != scope:recipient }
+				POD_commit_heal_effect = yes
+			}
+			POD_hunger_rouse_check_effect = yes
+			if = {
+				limit = { scope:aggravated = yes }
+				POD_hunger_rouse_check_effect = yes
+				POD_hunger_rouse_check_effect = yes
+				if = {
+					limit = { has_character_modifier = balefire_health_modifier }
+					POD_hunger_rouse_check_effect = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:blind = yes
+			}
+			scope:recipient = {
+				remove_trait = blind
+				add_trait = one_eyed
+			}
+			scope:actor = { POD_minimal_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:maimed = yes
+			}
+			scope:recipient = {
+				remove_trait = maimed
+			}
+			scope:actor = { POD_small_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:one_legged = yes
+			}
+			scope:recipient = {
+				remove_trait = one_legged
+			}
+			scope:actor = { POD_small_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:disfigured = yes
+			}
+			scope:recipient = {
+				remove_trait = disfigured
+			}
+			scope:actor = { POD_small_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:eunuch = yes
+			}
+			scope:recipient = {
+				remove_trait = eunuch_1
+			}
+			scope:actor = { POD_minimal_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:one_eyed = yes
+			}
+			scope:recipient = {
+				remove_trait = one_eyed
+			}
+			scope:actor = { POD_minimal_risk_of_increasing_masquerade_exposure = yes }
+		}
+		
+		if = {
+			limit = {
+				scope:wounded = yes
+			}
+			if = {
+				limit = {
+					scope:actor = { has_perk = healers_touch_perk }
+				}
+				scope:recipient = {
+					POD_heal_superficial_wound_effect = { COUNT = POD_healers_touch_heal_value }
+				}
+			}
+			else = {
+				scope:recipient = {
+					POD_blood_heal_wound_effect = yes
+				}
+			}
+			scope:actor = { POD_minimal_risk_of_increasing_masquerade_exposure = yes }
+		}
+		
+		if = {
+			limit = {
+				scope:aggravated = yes
+			}
+			scope:recipient = {
+				POD_heal_aggravated_wound_effect = { COUNT = POD_aggravated_blood_heal_value }
+			}
+			scope:actor = { POD_small_risk_of_increasing_masquerade_exposure = yes }
+		}
+
+		if = {
+			limit = {
+				scope:scarred = yes
+			}
+			scope:recipient = {
+				remove_trait = scarred
+			}
+			scope:actor = { POD_minimal_risk_of_increasing_masquerade_exposure = yes }
+		}
+	}
+	
+	auto_accept = yes
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		ai_recipients = peer_vassals
+		max = 10
+	}
+	ai_frequency = 12
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 100
+			scope:recipient = {
+				OR = {
+					this = scope:actor
+					is_knight_of = scope:actor
+				}
+			}
+		}
+	}
+}

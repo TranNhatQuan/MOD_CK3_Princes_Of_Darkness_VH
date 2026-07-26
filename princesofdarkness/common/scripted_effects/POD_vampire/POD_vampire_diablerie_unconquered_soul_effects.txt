@@ -1,0 +1,122 @@
+﻿#POD diablerie unconquered soul effects
+
+POD_diablerie_unconquered_soul_effect = {
+	POD_unconquered_soul_with_preset_chance = {
+		VICTIM = $VICTIM$
+		CHANCE = POD_unconquered_soul_chance
+	}
+}
+
+POD_unconquered_soul_with_preset_chance = {
+	if = {
+		limit = {
+			NOT = { has_character_flag = POD_in_unconquered_soul_event } 
+			has_trait_rank = {
+				trait = vampgeneration
+				rank < 10
+			}
+		}
+		
+		$VICTIM$ = {
+			save_scope_as = unconquered_soul
+		}
+		
+		custom_description = {
+			value = $CHANCE$
+			text = unconquered_soul_warning
+		}
+
+		hidden_effect = {
+			random = {
+				chance = $CHANCE$
+				
+				add_character_flag = POD_in_unconquered_soul_event
+				#trigger_event = {
+				#	id = POD_diablerize.810 days = { 2 5 }
+				#}
+				trigger_event = {
+					id = POD_diablerize.800 years = { 5 25 }
+				}
+			}
+		}
+	}
+}
+
+POD_diablerie_unconquered_soul_get_partial_personality_effect  = {
+	
+	#Faith change is handled in the events now
+	#if = {
+	#	limit = {
+	#		NOT = { faith = scope:unconquered_soul.faith }
+	#	}
+	#		random = {
+	#			chance = 25
+	#			set_character_faith = scope:unconquered_soul.faith
+	#		}
+	#}
+	
+	save_scope_as = diablerist
+	
+	POD_remove_personality_traits_effect = yes
+	
+	scope:unconquered_soul = {
+		# could also set this to random_character_trait to only copy 1 trait
+		every_character_trait = {
+			limit = {
+				has_trait_category = personality
+			}
+			# need to copy to a list first because otherwise the error log complains
+			add_to_list = traits_to_copy
+		}
+		every_in_list = {
+			list = traits_to_copy
+			scope:diablerist = { add_trait_force_tooltip = prev }
+		}
+		POD_clear_list = { LIST = traits_to_copy }
+	}
+}
+
+POD_diablerie_unconquered_soul_change_appearance_effect = {
+	scope:unconquered_soul = { save_scope_as = namesake }
+	change_first_name = { template_character = scope:namesake }
+	
+	if = {
+		limit = { has_any_nickname = yes }
+		remove_nickname = yes
+	}
+	
+	give_nickname = nick_the_unconquered_soul
+	
+	add_character_flag = unconquered_soul_flag
+
+	if = {
+		limit = {
+			OR = {
+				has_trait = vicissitudediscipline
+				scope:unconquered_soul = { has_trait = vicissitudediscipline }
+			}
+		}
+		copy_inheritable_appearance_from = scope:unconquered_soul
+		if = {
+			limit = { NOT = { has_trait = vicissitudediscipline } }
+			add_trait = vicissitude
+		}
+	}
+}
+
+POD_diablerie_unconquered_soul_get_whole_personality_effect = {
+	POD_diablerie_unconquered_soul_change_appearance_effect = yes
+	
+	if = {
+		limit = {
+			NOT = { faith = scope:unconquered_soul.faith }
+		}
+		set_character_faith = scope:unconquered_soul.faith
+	}
+	
+	POD_remove_personality_traits_effect = yes
+	
+	scope:unconquered_soul = {
+		POD_copy_personality_effect = { TARGET = prev }
+	}
+}

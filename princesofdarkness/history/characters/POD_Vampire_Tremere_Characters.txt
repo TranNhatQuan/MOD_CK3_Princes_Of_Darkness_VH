@@ -1,0 +1,8783 @@
+﻿#tremere base template
+
+# id = {
+	# name = "namechar"
+	# dynasty_house = house_
+	# culture = "french"
+	# religion = "tremerecode"
+	# trait = "educationchar"
+	# trait = "vampire"
+	# trait = "tremere"
+	# trait = "personality1"		
+	# trait = "personality2"
+	# trait = "personality3"
+	# trait = "other1"
+	# trait = "other2"	
+	# trait = "pther3"
+	# trait = "other4"
+	# trait = "auspex"
+	# trait = "bloodsorcery"
+	# trait = "dominate"
+	# father = fathercharid
+	# female = no
+	# give_nickname = nick_	
+	# disallow_random_traits = yes
+	
+	# 1.1.1 = {
+		# birth = yes
+		# effect = {
+			# add_character_flag = immune_to_disease
+
+			# add_trait = vampgenerationx
+	
+			# #add_sanguine_lifestyle_xp = 20000
+			# #add_choleric_lifestyle_xp = 20000
+			# #add_phlegmatic_lifestyle_xp = 20000
+			
+			# set_immortal_age = x
+		# }				
+	# }
+	
+	# 799.1.1 = {
+	# }
+
+	# 1229.1.1 = {	
+	# }
+
+	# 2005.1.1 = {	
+	# }		
+	
+	# 2200.1.1 = {
+		# death = yes 
+	# }			
+# }
+
+#tremere
+
+505022 = {
+	name = "Tremere"
+	dynasty = 10000014
+	culture = "old_saxon"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	stewardship = 15
+	learning = 20
+	intrigue = 15
+	diplomacy = 10
+	martial = 10
+	prowess = 100
+	trait = "vampire"
+	trait = "tremere"
+	trait = "intellect_good_3"
+	trait = "ambitious"		
+	trait = "arrogant"
+	trait = "diligent"
+	trait = "diablerist"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "potenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "vampgeneration3"
+	female = no
+	give_nickname = nick_the_usurper
+	disallow_random_traits = yes
+	
+	757.1.1 = {
+		birth = yes
+	}
+
+	789.1.1 = {
+		effect = {
+			set_immortal_age = 32
+		}
+	}
+	
+	1002.1.1 = {
+
+		effect = {
+			add_character_flag = immune_to_disease
+			
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+			add_trait = torpor
+	}	
+
+	1201.1.1 = {
+		death = {
+			death_reason = death_disappearance 
+		}
+	}			
+}
+
+# House etrius
+
+505084 = {
+	name = "Etrius"
+	dna = 505084_etrius
+	dynasty_house = house_etrius
+	culture = "swedish"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	learning = 9
+	diplomacy = 10
+	intrigue = 14
+	stewardship = 12
+	trait = "vampire"
+	trait = "tremere"
+	trait = "intellect_good_1"
+	trait = "arrogant"		
+	trait = "zealous"
+	trait = "vengeful"
+	trait = "loyal"
+	trait = "bloodsorceryadvanced"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "obfuscate"
+	trait = "animalism"
+	trait = "fortitude"
+	father = 505022
+	give_nickname = nick_first_among_equals
+	female = no
+	disallow_random_traits = yes
+	
+	850.1.1 = {
+		birth = yes
+	}
+	
+	880.1.1 = {
+		effect = {
+			set_immortal_age = 30
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+	}
+	
+	1022.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_beard_flag			
+			add_trait = vampgeneration4
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+			POD_set_custom_idle_animation = { FLAG = flag:stressed_teacher }
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+		}			
+	}
+
+	1229.1.1 = {		
+	}
+	
+	1230.1.4 = {
+		effect = {
+			imprison = {
+				target = character:792241
+				type = house_arrest
+			}
+			imprison = {
+				target = character:792242
+				type = house_arrest
+			}
+			imprison = {
+				target = character:792244
+				type = house_arrest
+			}				
+		}
+		effect = {
+			#learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_wallachian
+			learn_language = language_greek
+		}
+		effect = {
+		#Troops that goes away
+			spawn_army = {
+				name = event_troop_default_name
+				#levies = 1750
+				men_at_arms = {
+					type = gargoyle_warriors
+					stacks = 2
+				}
+				men_at_arms = {
+					type = gargoyle_sentinels
+					stacks = 1
+				}				
+				location = province:5009
+				origin = province:5009
+				inheritable = no
+			}
+		}
+		effect = {
+			add_realm_law = crown_authority_3		
+		}		
+		effect = {
+			add_truce_both_ways = {
+				character = character:790243
+				name = TRUCE_COLLABORATION
+				years = 35
+			}
+		}	
+		effect = {
+			add_truce_both_ways = {
+				character = character:505050
+				name = TRUCE_COLLABORATION
+				years = 35
+			}
+		}			
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790363 = {
+	name = "Celestyn"
+	dna = 790363_celestyn
+	dynasty_house = house_etrius
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	stewardship = 6
+	diplomacy = 10
+	learning = 8	
+	martial = 9
+	intrigue = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "physique_good_1"
+	trait = "humble"		
+	trait = "diligent"
+	trait = "compassionate"
+	trait = "scholar"
+	trait = "bloodsorcery"
+	trait = "celerity"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "dominate"
+	father = 505084
+	give_nickname = nick_master_librarian
+	female = no
+	disallow_random_traits = yes
+	
+	1039.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_chaperone_flag
+			add_trait = vampgeneration6
+			add_secret = {
+				type = secret_diablerist
+				}						
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp1_01_flag
+			add_character_flag = POD_no_beard_flag			
+			set_immortal_age = 32
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:790324 }
+			set_relation_rival = { reason = rival_historical target = character:790114			 }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_wallachian
+			learn_language = language_south_slavic
+			#Countermagic 2
+			#Green Path 4
+			assign_rego_elementum_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790866 = {
+	name = "Mendacamina"
+	dna = 790866_mendacamina
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	prowess = 8
+	learning = 10
+	intrigue = 3
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "vengeful"
+	trait = "sadistic"
+	trait = "torturer"
+	trait = "lifestyle_herbalist"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	father = 505084
+	give_nickname = nick_iron_maiden
+	female = yes
+	disallow_random_traits = yes
+	
+	998.1.1 = {
+		birth = yes
+	}
+	
+	1023.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration6			
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_06_flag				
+		}				
+	}
+
+	1229.1.1 = {		
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505084 }
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			#Path of Phobos 5
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			#Path of Warding 2
+			assign_movement_of_the_mind_effect = { LEVEL = 3 }
+			}
+	}
+
+	1284.1.1 = {	
+		death = {
+			death_reason = death_battle
+			killer = 505084
+			}
+	}			
+}
+
+790780 = {
+	name = "Biturges"
+	dna = 790780_biturges
+	dynasty_house = house_etrius
+	culture = "italian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 11
+	intrigue = 4
+	stewardship = 8
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "fickle"		
+	trait = "ambitious"
+	trait = "arrogant"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "fortitude"
+	father = 505084
+	give_nickname = nick_foppish_magus
+	female = no
+	disallow_random_traits = yes
+	
+	1157.1.1 = {
+		birth = yes
+	}
+	
+	1202.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_chaperone_flag
+			add_trait = vampgeneration5			
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag	
+            add_character_flag = POD_portrait_male_beard_steppe_01_flag
+			assign_focused_mind_path_effect = { LEVEL = 3 }	
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}
+		
+	1977.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+790864 = {
+	name = "Divino"
+	dna = 790864_divino
+	dynasty_house = house_etrius
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "disfigured"
+	trait = "patient"		
+	trait = "paranoid"
+	trait = "callous"
+	trait = "reclusive"
+	trait = "bloodsorcery"
+	trait = "obfuscate"
+	trait = "fortitude"
+	father = 505084
+	give_nickname = nick_hidden_regent
+	female = no
+	disallow_random_traits = yes
+	
+	1158.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5			
+			
+			set_immortal_age = 55
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_09_flag	
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 4 }			
+		}			
+	}
+
+	1229.1.1 = {	
+	}
+
+	1259.1.3 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+
+791807 = {
+#Conspiracies
+	name = "Simon_Aylard"
+	dynasty_house = house_etrius
+	culture = "english"
+	religion = "tremerecode"
+	dna = 791807_simon
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "vengeful"		
+	trait = "impatient"
+	trait = "diligent"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorcery"
+	trait = "dominateadvanced"
+	trait = "fortitude"
+	learning = 8
+	father = 790864
+	give_nickname = nick_dead_man
+	female = no
+	disallow_random_traits = yes
+	
+	1179.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6			
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_01_flag			
+			set_immortal_age = 41
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }						
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 790864
+	}	
+
+	1259.1.3 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+
+790472 = {
+	name = "Karl_Shreckt" 
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "camahumanity"
+	trait = "education_martial_prowess_4"
+	dna = 790472_karl
+	prowess = 9
+	martial = 10
+	diplomacy = 8
+	intrigue = 7
+	learning = 11
+	trait = "vampire"
+	trait = "tremere"
+	trait = "callous"		
+	trait = "zealous"
+	trait = "arbitrary"
+	trait = "faith_warrior"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitudeadvanced"
+	trait = "presence"
+	trait = "potence"
+	father = 505087
+	give_nickname = nick_last_true_tremere
+	female = no
+	disallow_random_traits = yes
+	
+	1235.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			#add_sanguine_lifestyle_xp = 5000
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 40
+		}	
+
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505111 }
+			}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_western_03_flag
+            add_character_flag = POD_portrait_no_crown_flag			
+            add_character_flag = POD_portrait_male_hair_indian_01_flag
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_corruption_path_effect = { LEVEL = 3 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }			
+			assign_weather_controlpath_effect = { LEVEL = 4 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+		}			
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790770 = {
+	name = "Maxwell_Ldescu" 
+	dynasty_house = house_etrius
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "dominateadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitude"
+	father = 790472
+	give_nickname = nick_the_magus
+	female = no
+	disallow_random_traits = yes
+	
+	1882.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 25
+			
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }			
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+		}	
+	
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+505087 = {
+#Prince of Vienna
+	name = "Lotharius"
+	dna = 505087_lotharius
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_diplomacy_4"
+	diplomacy = 6
+	stewardship = 11
+	intrigue = 3
+	learning = 10
+	prowess = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "intellect_good_1"
+	trait = "humble"		
+	trait = "diligent"
+	trait = "calm"
+	trait = "loyal"	
+	trait = "diplomat"
+	trait = "dominateadvanced"
+	trait = "presence"
+	trait = "bloodsorceryadvanced"
+	father = 505084
+	give_nickname = nick_magus_prince
+	female = no
+	disallow_random_traits = yes
+	
+	984.1.1 = {
+		birth = yes
+	}
+	
+	1030.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_02_flag		
+			add_character_flag = POD_no_beard_flag			
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_corruption_path_effect = { LEVEL = 4 }		
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL =  5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }					
+		}			
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	1529.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+792875 = {
+#Cairo by Night p90. Might be a councilor
+#North Africa guy before Elaine de Calinot
+	name = "Mooreau"
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	stewardship = 5
+	diplomacy = 7
+	intrigue = 7
+	learning = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "arbitrary"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 505087
+	female = no
+	disallow_random_traits = yes
+	
+	1191.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 39
+			
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_neptunes_might_path_effect = { LEVEL = 2 }			
+		}
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+791360 = {
+#Regent of Vienna
+	name = "Filaereus"
+	dna = 791360_filaereus
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_stewardship_2"
+	stewardship = 6
+	diplomacy = 8
+	intrigue = 6
+	learning = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "vengeful"		
+	trait = "content"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "obfuscate"
+	trait = "dominate"
+	trait = "bloodsorceryadvanced"
+	give_nickname = nick_the_petty
+	father = 505084
+	female = no
+	disallow_random_traits = yes
+	
+	1073.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_04_flag	
+			assign_alchemy_path_effect = { LEVEL = 4 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_neptunes_might_path_effect = { LEVEL = 5 }			
+		}			
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+792252 = {
+#House of Tremere
+	name = "Audax"
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	stewardship = 9
+	diplomacy = 5
+	intrigue = 9
+	learning = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "calm"
+	trait = "patient"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 791360
+	give_nickname = nick_the_cursed
+	female = no
+	disallow_random_traits = yes
+	
+	1099.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 14
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 3 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }			
+		}			
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+
+792253 = {
+#House of Tremere
+	name = "Peter_Schloss"
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	diplomacy = 8
+	martial = 8
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "craven"
+	trait = "gregarious"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 791360
+	give_nickname = nick_the_mercenary
+	female = no
+	disallow_random_traits = yes
+	
+	1122.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 33
+		}			
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:792252 }
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+		}
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+792251 = {
+#House of Tremere
+	name = "Ala"
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	stewardship = 3
+	diplomacy = 9
+	intrigue = 6
+	learning = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "lustful"		
+	trait = "gregarious"
+	trait = "stubborn"
+	trait = "auspex"
+	trait = "presence"
+	trait = "bloodsorcery"
+	father = 791360
+	female = yes
+	disallow_random_traits = yes
+	
+	1146.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 26
+		}			
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_lover = { reason = lover_history target = character:791360 }
+		
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+		}
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+792197 = {
+#LS II
+	name = "Ashram"
+	dynasty_house = house_etrius
+	culture = "saxon"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 8
+	intrigue = 5
+	diplomacy = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "patient"
+	trait = "auspex"
+	trait = "presence"
+	trait = "bloodsorcery"
+	father = 791360
+	female = no
+	disallow_random_traits = yes
+	
+	1103.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 51
+			
+			assign_path_of_mars_path_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }			
+		}	
+				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+793025 = {
+#CN DA Setite
+	name = "Thomas_of_Hamburg"
+	dynasty_house = house_etrius
+	culture = "saxon"
+	religion = "tremerecode"
+	trait = "education_diplomacy_3"
+	learning = 6
+	intrigue = 6
+	diplomacy = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "trusting"		
+	trait = "gregarious"
+	trait = "patient"
+	trait = "auspex"
+	trait = "presence"
+	trait = "bloodsorcery"
+	father = 792197
+	female = no
+	disallow_random_traits = yes
+	
+	1188.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 48
+			
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 2 }					
+		}	
+				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+
+790361 = {
+#One liner sire of Deverra
+	name = "Alferic" 
+	dna = 790361_alferic
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "chaste"		
+	trait = "zealous"
+	trait = "impatient"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	trait = "obfuscate"
+	father = 505084
+	female = no
+	disallow_random_traits = yes
+	
+	1067.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_02_flag	
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }				
+			assign_weather_controlpath_effect = { LEVEL = 2 }				
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}		
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+				
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790869 = {
+#One liner sire of Virstania
+	name = "Brunavog"
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_martial_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "humble"
+	trait = "lazy"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	father = 790361
+	female = no
+	disallow_random_traits = yes
+	
+	1070.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 41
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 1 }
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 2 }				
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792132 = {
+#One liner sire of Mara	
+	name = "Randeux"
+	dynasty_house = house_etrius
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "greedy"
+	trait = "brave"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "auspex"
+	father = 790869
+	female = no
+	disallow_random_traits = yes
+	
+	1071.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8		
+			
+			set_immortal_age = 34
+			
+			assign_focused_mind_path_effect = { LEVEL = 3 }	
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }						
+			assign_neptunes_might_path_effect = { LEVEL = 3 }			
+		}				
+	}
+	
+	1190.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}
+				
+}
+
+792133 = {
+#JbN
+	name = "Mara"
+	dynasty_house = house_etrius
+	dna = 792133_mara
+	culture = "latgalian"
+	religion = "tremerecode"
+	trait = "education_diplomacy_3"
+	diplomacy = 5
+	stewardship = 12
+	intrigue = 10
+	learning = 12
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "diligent"		
+	trait = "ambitious"
+	trait = "arrogant"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	trait = "auspex"
+	give_nickname = nick_golden_exile
+	father = 792132
+	female = yes
+	disallow_random_traits = yes
+	
+	1072.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9		
+			
+			set_immortal_age = 25
+		}	
+
+		effect = {
+		    add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag	
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_lures_of_flames_effect = { LEVEL = 3 }	
+			assign_movement_of_the_mind_effect = { LEVEL = 3 }
+		}		
+	}
+
+	1229.1.1 = {
+	}
+	
+	1261.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}
+				
+}
+
+792563 = {
+#DA Werewolf scenario p216
+	name = "Michael"
+	dynasty_house = house_etrius
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 10
+	intrigue = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "temperate"
+	trait = "patient"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "dominate"
+	give_nickname = nick_careful_planner
+	father = 792132
+	female = no
+	disallow_random_traits = yes
+	
+	1141.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9		
+			
+			set_immortal_age = 46
+		}				
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_corruption_path_effect = { LEVEL = 3 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }				
+			assign_neptunes_might_path_effect = { LEVEL = 3 }			
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792134 = {
+#JbN
+	name = "Vaclav"
+	dynasty_house = house_etrius
+	culture = "vlach"
+	religion = "viahumanitatis"
+	trait = "education_learning_3"
+	diplomacy = 5
+	stewardship = 6
+	intrigue = 5
+	learning = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "impatient"		
+	trait = "ambitious"
+	trait = "fickle"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	trait = "auspex"
+	give_nickname = nick_bored_apprentice
+	mother = 792133
+	female = no
+	disallow_random_traits = yes
+	
+	1189.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10		
+			
+			set_immortal_age = 24
+			
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+		}				
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	1873.1.1 = {
+		death = {
+			death_reason = death_execution
+			}
+	}
+				
+}
+
+
+792257 = {
+	name = "Domina"
+	dynasty_house = house_etrius
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 8
+	intrigue = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "vengeful"		
+	trait = "arrogant"
+	trait = "callous"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790869
+	give_nickname = nick_the_unhinged
+	female = yes
+	disallow_random_traits = yes
+	
+	1167.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 25
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	1230.1.4 = {	
+		employer = 790711
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505103 }
+		
+			assign_alchemy_path_effect = { LEVEL = 3 }	
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }					
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+		}
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792845 = {
+#Aachen um night
+#Real power in Liege
+	name = "Amata_Magdalena_von_Werden"
+	dynasty_house = house_etrius
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 8
+	intrigue = 7
+	stewardship = 5
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "patient"
+	trait = "ambitious"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	mother = 792257
+	female = yes
+	disallow_random_traits = yes
+	
+	1189.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 31
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 4 }			
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_neptunes_might_path_effect = { LEVEL = 2 }			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	1230.1.4 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793197 = {
+#CN DA Tremere, chantry leader of zabor
+	name = "Albizellus"
+	dynasty_house = house_etrius
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 6
+	stewardship = 5
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gregarious"		
+	trait = "patient"
+	trait = "forgiving"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	mother = 792845
+	female = no
+	disallow_random_traits = yes
+	
+	1192.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 45
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_rego_elementum_path_effect = { LEVEL = 2 }			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+
+	1230.1.4 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+793198 = {
+#CN DA Tremere, jervais coterie, desc p94
+	name = "Zabor"
+	dynasty_house = house_etrius
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 5
+	stewardship = 5
+	diplomacy = 6
+	intrigue = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "cynical"		
+	trait = "stubborn"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 793197
+	female = no
+	disallow_random_traits = yes
+	
+	1202.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 26
+			
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_rego_elementum_path_effect = { LEVEL = 2 }			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	1230.1.4 = {
+		employer = 790359
+	}
+	1233.1.1 = {
+		death = {
+			death_reason = death_battle
+			killer = 790106
+		}
+	}
+}
+
+790870 = {
+	name = "Virstania"
+	dna = 790870_virstania
+	dynasty_house = house_etrius
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	martial = 10
+	intrigue = 7
+	stewardship = 9
+	diplomacy = 0
+	prowess = 8
+	learning = 8	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "shy"		
+	trait = "callous"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	father = 790869
+	give_nickname = nick_great_mother
+	female = yes
+	disallow_random_traits = yes
+	
+	1111.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 34
+		}
+		effect = {
+		    add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_western_02_flag
+			
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1450.1.1 = {
+		religion = "freeanarch"
+		effect = {
+			remove_trait = vampgeneration8
+			add_trait = vampgeneration7
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+		}		
+	}
+		
+	2005.1.1 = {		
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790470 = {
+#One liner jerk sire of Carna
+	name = "Bourdana" 
+	dynasty_house = house_etrius
+	culture = "breton"
+	religion = "tremerecode"
+	trait = "education_stewardship_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "sadistic"
+	trait = "impatient"
+	trait = "potence"
+	trait = "bloodsorcery"
+	trait = "obfuscate"
+	father = 790361
+	female = no
+	disallow_random_traits = yes
+	
+	1162.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 48
+			
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 1 }	
+			assign_path_of_mars_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 3 }					
+		}				
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790362 = {
+	name = "Ardan"
+	dna = 790362_ardanlane
+	dynasty_house = house_etrius
+	culture ="czech"
+	religion = "tremerecode"
+	trait = "education_stewardship_4"
+	intrigue = 6
+	stewardship = 5
+	diplomacy = 11
+	learning = 12	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "content"
+	trait = "loyal"
+	trait = "administrator"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "dominate"
+	trait = "necromancy"
+	father = 790363
+	give_nickname = nick_golden_lane
+	female = no
+	disallow_random_traits = yes
+	
+	1107.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = has_giovanni_necromancy_flag
+			assign_sepulchre_path_effect = { LEVEL = 2 RITUAL = no}
+			
+			add_trait = vampgeneration7
+				
+			
+			set_immortal_age = 36
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_02_flag
+            add_character_flag = POD_no_beard_flag	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_focused_mind_path_effect = { LEVEL = 4 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			#hearth path 3
+			#oneiromancy 1
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_lechitic
+			learn_language = language_wallachian
+		}			
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790473 = {
+#One liner sire of Theresa
+	name = "Friedrich_of_Munich" 
+	dynasty_house = house_etrius
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_stewardship_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "calm"		
+	trait = "zealous"
+	trait = "gluttonous"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "celerity"
+	mother = 790866
+	female = no
+	disallow_random_traits = yes
+	
+	1070.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 29
+		}				
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791468 = {
+#Warrior of Jervais' coterie
+	name = "Miklos" 
+	dynasty_house = house_etrius
+	culture = "czech"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	prowess = 9
+	learning = 7
+	martial = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "physique_good_2"
+	trait = "brave"		
+	trait = "honest"
+	trait = "content"
+	trait = "fortitude"
+	trait = "dominate"
+	trait = "auspex"
+	father = 790473
+	give_nickname = nick_warrior_magus
+	female = no
+	disallow_random_traits = yes
+	
+	1151.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 32
+		}				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_burned #during the war with the telyavs
+		}
+	}		
+}
+
+790474 = {
+	name = "Theresa_Kymena" 
+	dynasty_house = house_etrius
+	culture = "greek"
+	religion = "viaadversarius"
+	trait = "education_learning_2"
+	intrigue = 6
+	stewardship = 7
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "cynical"		
+	trait = "shy"
+	trait = "gluttonous"
+	trait = "depressed_1"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790473
+	give_nickname = nick_priestess_of_dreams
+	female = yes
+	disallow_random_traits = yes
+	
+	1139.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			set_immortal_age = 33
+			
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }	
+		}				
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790475 = {
+#Modern prince of Houston
+	name = "Lucas_Halton" 
+	dynasty_house = house_etrius
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_stewardship_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "lazy"		
+	trait = "trusting"
+	trait = "compassionate"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	mother = 790474
+	give_nickname = nick_soft_prince
+	female = no
+	disallow_random_traits = yes
+	
+	1749.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8		
+			
+			set_immortal_age = 41
+			
+			#add_choleric_lifestyle_xp = 5000
+			
+			assign_corruption_path_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}				
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+790251 = {
+	name = "Claas_Drescher"
+	dynasty_house = house_etrius
+	dna = 790251_claas
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_intrigue_4"
+	intrigue = 8
+	diplomacy = 8
+	learning = 9	
+	stewardship = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "patient"
+	trait = "scholar"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "obfuscate"
+	trait = "dominate"
+	father = 790362
+	give_nickname = nick_dutiful_spy
+	female = no
+	disallow_random_traits = yes
+	
+	1170.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 41
+		}
+
+		effect = {
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_fp3_iranian_01_flag
+			add_character_flag = POD_no_beard_flag		
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_israelite
+			learn_language = language_greek
+			learn_language = language_arabic
+			learn_language = language_east_slavic
+				
+			assign_rego_elementum_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 3 }
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }	
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House carna
+
+790471 = {
+	name = "Carna"
+	dna = 790471_carna
+	dynasty_house = house_carna
+	culture = "french"
+	religion = "camahumanity"
+	trait = "education_intrigue_4"
+	learning = 10
+	intrigue = 4
+	stewardship = 10
+	diplomacy = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "lustful"		
+	trait = "paranoid"
+	trait = "cynical"	
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790470
+	female = yes
+	give_nickname = nick_new_age_witch
+	disallow_random_traits = yes
+	
+	1435.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_02_flag
+			
+			
+			#add_sanguine_lifestyle_xp = 5000
+
+			assign_weather_controlpath_effect = { LEVEL = 4 }	
+			#Taste of blood 5
+			assign_movement_of_the_mind_effect = { LEVEL = 4 }
+			assign_lures_of_flames_effect = { LEVEL = 4 }
+			set_immortal_age = 23
+		}				
+	}
+		
+	2005.1.1 = {						
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House goratrix
+
+505102 = {
+	name = "Goratrix"
+	dna = 505102_goratrix
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_5"
+	learning = 10
+	intrigue = 9
+	martial = 6
+	stewardship = 8
+	diplomacy = 5
+	prowess = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "intellect_good_2"
+	trait = "deceitful"		
+	trait = "diligent"
+	trait = "ambitious"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "animalism"
+	trait = "fortitude"
+	trait = "obfuscate"
+	trait = "potence"
+	father = 505022
+	female = no
+	give_nickname = nick_the_lightbearer
+	disallow_random_traits = yes
+	
+	900.1.1 = {
+		birth = yes
+	}
+	
+	1022.1.1 = {
+
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_hermetic_mage_hood_male_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_beard_flag			
+			add_trait = vampgeneration4
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+			
+			set_immortal_age = 36
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_byzantine_02_flag			
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}	
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 75
+			}
+		}		
+	}	
+
+	1229.1.1 = {
+		add_pressed_claim = title:e_tremere
+		
+		effect = {
+			set_relation_nemesis = { reason = nemesis_historical target = character:505084 }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_greek
+			
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 2 }			
+		}			
+	}
+	
+	1230.1.4 = {
+		effect = {
+			imprison = {
+				target = character:POD_Rocia_01
+				type = house_arrest
+			}
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+			give_nickname = nick_the_betrayer
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790360 = {
+	name = "Malgorzata"
+	dna = 790360_malgorzata
+	dynasty_house = house_goratrix
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_intrigue_1"
+	intrigue = 3
+	learning = 12
+	stewardship = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "ambitious"
+	trait = "callous"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "fortitude"
+	trait = "potence"
+	father = 505102
+	female = yes
+	give_nickname = nick_the_conspirator
+	disallow_random_traits = yes
+	
+	1052.1.1 = {
+		birth = yes
+	}
+	
+	1097.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 25
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_northern_03_flag	
+
+			assign_path_of_blood_path_effect = { LEVEL = 4 }
+			#Countermagic 3
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	1905.1.1 = {
+		death = {
+			death_reason = death_execution
+			killer = 790178
+			}
+	}					
+}
+
+792241 = {
+#House of Tremere
+	name = "Itera"
+	dynasty_house = house_goratrix
+	culture = "bulgarian"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_2"
+	intrigue = 2
+	learning = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "trusting"		
+	trait = "humble"
+	trait = "deceitful"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "potence"
+	mother = 790360
+	female = yes
+	give_nickname = nick_wretched_usurper
+	disallow_random_traits = yes
+	
+	1197.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 38
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790360 }
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_path_of_blood_path_effect = { LEVEL = 2 }			
+			assign_neptunes_might_path_effect = { LEVEL = 2 }
+			}
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+790867 = {
+	name = "Orlando_Oriundus"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	intrigue = 2
+	stewardship = 10
+	diplomacy = 12
+	learning = 5	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "deceitful"
+	trait = "content"
+	trait = "schemer"
+	trait = "obfuscate"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 505102
+	female = no
+	give_nickname = nick_insightful_charlatan
+	disallow_random_traits = yes
+	
+	1195.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+
+			assign_focused_mind_path_effect = { LEVEL = 2 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 2 }
+			
+			set_immortal_age = 57
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1450.1.1 = {
+		add_trait = auspexadvanced
+	}	
+		
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791886 = {
+#FbN and House of Tremere
+	name = "Lucubratio"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	stewardship = 6
+	diplomacy = 6
+	learning = 6	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "callous"
+	trait = "content"
+	trait = "schemer"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790867
+	female = no
+	give_nickname = nick_refined_tastes
+	disallow_random_traits = yes
+	
+	1213.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			assign_corruption_path_effect = { LEVEL = 4 }
+			assign_focused_mind_path_effect = { LEVEL = 3 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 1 }
+			
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 31
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 505102
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+
+790359 = {
+	name = "Jervais"
+	dna = 790359_jervais
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	intrigue = 4
+	martial = 9
+	stewardship = 5
+	diplomacy = 13
+	learning = 12	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "arrogant"
+	trait = "cynical"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	mother = 790360
+	female = no
+	give_nickname = nick_servile_envoy
+	disallow_random_traits = yes
+	
+	1070.1.1 = {
+		birth = yes
+	}
+	
+	1102.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_beard_flag			
+			add_trait = vampgeneration7
+			add_character_flag = has_scripted_weight
+			add_character_modifier = obese_modifier	
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			set_immortal_age = 30
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_steppe_02_flag
+
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+			#Countermagic 4
+			#Levinbolt 3
+		}
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+                trait = ashen_adventurer
+				track = ashen_ambassador
+                value = 50
+            }
+		}		
+	}
+
+	1229.1.1 = {	
+		add_pressed_claim = title:k_lithuania
+		effect = {
+			learn_language = language_central_germanic
+			learn_language = language_latin
+		}		
+	}	
+	
+	1470.1.1 = {
+		add_trait = torpor
+	}	
+		
+	1931.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 505102
+			}
+	}			
+}
+
+792023 = {
+#Jervais' apprentice, guide to low clans, DA CN Toreador and Tremere
+	name = "Fidus"
+	dynasty_house = house_goratrix
+	culture = "castilian" #was named jorge before tremere
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	intrigue = 7
+	diplomacy = 6
+	stewardship = 5
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "diligent"
+	trait = "humble"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	father = 790359
+	female = no
+	disallow_random_traits = yes
+	
+	1122.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			assign_focused_mind_path_effect = { LEVEL = 4 }	
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			
+			set_immortal_age = 32
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+791306 = {
+#Cyprus
+	name = "Alexia_of_Nicosia"
+	dna = 791306_alexia_of_nicosia
+	dynasty_house = house_goratrix
+	culture = "greek"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 7
+	intrigue = 0
+	stewardship = 12
+	diplomacy = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "callous"
+	trait = "scholar"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790359
+	female = yes
+	give_nickname = nick_true_survivor
+	disallow_random_traits = yes
+	
+	1155.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_01_flag
+			
+			set_immortal_age = 25
+			
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791887 = {
+#FbN and House of Tremere
+	name = "Lectora"
+	dynasty_house = house_goratrix
+	culture = "norman"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tremere"
+	learning = 8
+	trait = "diligent"		
+	trait = "content"
+	trait = "callous"
+	trait = "lifestyle_mystic"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "obfuscate"
+	mother = 791306
+	female = yes
+	give_nickname = nick_the_alchemist
+	disallow_random_traits = yes
+	
+	1178.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			
+			set_immortal_age = 31
+		}
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = brewing
+                value = 35
+            }			
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+		
+	1230.1.4 = {
+		employer = 505102
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+790366 = {
+	name = "Viktor_Nagy" 
+	dynasty_house = house_goratrix
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_3"
+	learning = 9
+	martial = 7
+	prowess = 9
+	intrigue = 7
+	stewardship = 7
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "physique_good_1"
+	trait = "callous"		
+	trait = "arrogant"
+	trait = "ambitious"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 790359
+	female = no
+	give_nickname = nick_black_magus
+	disallow_random_traits = yes
+	
+	1194.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			assign_path_of_mars_path_effect = { LEVEL = 4 }
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			
+			set_immortal_age = 36
+		}
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	1598.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}			
+}
+
+605121 = {
+#Prince of Copenhagen... don_t ask when
+	name = "Rutor"
+	dna = 605121_rutor
+	dynasty_house = house_goratrix
+	culture = "vlach"
+	religion = "viaregalis"
+	trait = "education_martial_prowess_3"
+	martial = 8
+	intrigue = 7
+	stewardship = 9
+	diplomacy = 7
+	prowess = 6
+	learning = 12	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "arrogant"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790359
+	female = no
+	give_nickname = nick_no_one_pawn
+	disallow_random_traits = yes
+	
+	1200.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration7
+			
+			add_secret = {
+				type = secret_diablerist
+				}
+			add_secret = {
+				type = secret_unbondable
+				}				
+			
+			set_immortal_age = 31
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag	
+            add_character_flag = POD_no_beard_flag	
+			
+			assign_alchemy_path_effect = { LEVEL = 3 }	
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 4 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			#Countermagic 4
+			assign_movement_of_the_mind_effect = { LEVEL = 4 }
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_norse
+		}	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790364 = {
+	name = "Epistatia"
+	dynasty_house = house_goratrix
+	culture = "roman"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	prowess = 6
+	learning = 10
+	martial = 4
+	intrigue = 10
+	stewardship = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "callous"		
+	trait = "diligent"
+	trait = "vengeful"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	father = 505102
+	give_nickname = nick_usurper_huntress
+	female = yes	
+	disallow_random_traits = yes
+	
+	970.1.1 = {
+		birth = yes
+	}
+	
+	1042.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 61
+			
+		}
+		effect = {
+			add_trait = lifestyle_hunter
+			add_trait_xp = {
+                trait = lifestyle_hunter
+				track = hunter
+                value = 100
+            }
+		}	
+		effect = {
+			add_trait = rough_terrain_expert
+			add_trait_xp = {
+                trait = rough_terrain_expert
+                value = 35
+            }
+		}		
+	}
+		
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790365 }
+			}
+		effect = {
+			learn_language = language_enochian
+			learn_language = language_wallachian
+			
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			#Way of passage 4
+			assign_lures_of_flames_effect = { LEVEL = 3 }
+			#Countermagic 2
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }
+			#Phobos 2
+			
+		}			
+	}
+	
+	1500.1.1 = {
+		religion = "viahumanitatis"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791833 = {
+#One liner "sire" of Jean Furneaux
+	name = "Tania_Caboche"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "fickle"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "lifestyle_mystic"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	mother = 790364
+	female = yes	
+	disallow_random_traits = yes
+	
+	1063.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 35
+
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 4 }						
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791888 = {
+#FbN and House of Tremere
+	name = "Frondator"
+	dynasty_house = house_goratrix
+	dna = 791888_frondator
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_3"
+	martial = 8
+	prowess = 10
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "sadistic"
+	trait = "potence"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitude"
+	mother = 791833
+	give_nickname = nick_the_executrix
+	female = yes	
+	disallow_random_traits = yes
+	
+	1102.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 29
+
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag
+			
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 505102
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792260 = {
+#House of Tremere
+	name = "Michel_Culrier"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_3"
+	martial = 5
+	prowess = 8
+	intrigue = 6
+	learning = 3
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "lazy"
+	trait = "sadistic"
+	trait = "twin"
+	trait = "potence"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	mother = 791888
+	give_nickname = nick_rapacious_ruffian
+	female = no	
+	disallow_random_traits = yes
+	
+	1165.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 23
+
+			assign_path_of_mars_path_effect = { LEVEL = 2 }			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790868
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792261 = {
+#House of Tremere
+	name = "Martial_Culrier"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_3"
+	martial = 5
+	prowess = 8
+	intrigue = 6
+	learning = 3
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "lazy"
+	trait = "sadistic"
+	trait = "twin"
+	trait = "potence"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	mother = 791888
+	give_nickname = nick_rapacious_ruffian
+	female = no	
+	disallow_random_traits = yes
+	
+	1165.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 23
+	
+			assign_path_of_mars_path_effect = { LEVEL = 2 }		
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790868
+	}
+	
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792246 = {
+#House of Tremere
+	name = "Marcel_of_Dreux"
+	dynasty_house = house_goratrix
+	culture = "breton"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_4"
+	martial = 6
+	prowess = 10
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "brave"		
+	trait = "diligent"
+	trait = "wrathful"
+	trait = "lifestyle_blademaster"
+	trait = "potence"
+	trait = "celerity"
+	trait = "fortitude"
+	mother = 791888
+	give_nickname = nick_the_battle_hungry
+	female = no	
+	disallow_random_traits = yes
+	
+	1161.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 26
+			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 505102
+	}
+	
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791932 = {
+#One liner sire of Worringen
+	name = "Matthias"
+	dynasty_house = house_goratrix
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "lunatic_1"
+	trait = "deceitful"		
+	trait = "fickle"
+	trait = "callous"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	mother = 791888
+	female = no
+	disallow_random_traits = yes
+	
+	1122.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }	
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			
+			set_immortal_age = 32
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791940 = {
+#One liner sire of Searcy
+	name = "Bertrand_Ostek"
+	dynasty_house = house_goratrix
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "temperate"		
+	trait = "fickle"
+	trait = "generous"
+	trait = "lifestyle_mystic"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	father = 791932
+	female = no
+	disallow_random_traits = yes
+	
+	1140.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+
+			assign_conjuring_path_effect = { LEVEL = 1 }
+			assign_path_of_mars_path_effect = { LEVEL = 2 }		
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			
+			set_immortal_age = 41
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792247 = {
+#House of Tremere
+	name = "Remugio"
+	dynasty_house = house_goratrix
+	culture = "andalusian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 5
+	intrigue = 9
+	diplomacy = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "cynical"		
+	trait = "patient"
+	trait = "temperate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	father = 791940
+	give_nickname = nick_the_moor
+	female = no
+	disallow_random_traits = yes
+	
+	1165.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 43
+
+			assign_focused_mind_path_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791941 = {
+#Ashen cults, had to change her embrace date
+	name = "Searcy_Watteau"
+	dynasty_house = house_goratrix
+	culture = "english"
+	religion = "viahumanitatis"
+	trait = "education_learning_3"
+	learning = 5
+	diplomacy = 8
+	stewardship = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "temperate"		
+	trait = "fickle"
+	trait = "just"
+	trait = "lifestyle_mystic"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	give_nickname = nick_alchemist_soul
+	father = 791940
+	female = yes
+	disallow_random_traits = yes
+	
+	1158.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+
+			assign_alchemy_path_effect = { LEVEL = 4 }	
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			
+			set_immortal_age = 42
+		}
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = brewing
+                value = 60
+            }			
+		}		
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 790975
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791832 = {
+#FbN and Ashen cults, in Koln. Had to change his embrace date
+	name = "Johannes_of_Worringen"
+	dynasty_house = house_goratrix
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"	
+	learning = 5
+	intrigue = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "deceitful"
+	trait = "vengeful"
+	trait = "presence"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	give_nickname = nick_old_brat
+	father = 791932
+	female = no
+	disallow_random_traits = yes
+	
+	1143.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }			
+			assign_weather_controlpath_effect = { LEVEL = 4 }	
+			
+			set_immortal_age = 46
+		}
+	}
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791910 = {
+#FbN. Her sire is actually a dead vamp not named
+	name = "Aolis_de_Deols"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	martial = 8
+	prowess = 10
+	intrigue = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "callous"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitude"
+	mother = 791888
+	give_nickname = nick_the_war_regent
+	female = yes	
+	disallow_random_traits = yes
+	
+	1126.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			add_secret = { 
+				type = secret_diablerist
+			}
+
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 23
+			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792248 = {
+#House of Tremere
+	name = "Culmen"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_diplomacy_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "callous"
+	trait = "lustful"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	mother = 791910
+	female = no	
+	disallow_random_traits = yes
+	
+	1146.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+	
+			assign_rego_elementum_path_effect = { LEVEL = 4 }
+			assign_path_of_blood_path_effect = { LEVEL = 2 }			
+			
+			set_immortal_age = 23
+			
+		}
+	}			
+	
+	1170.1.1 = {
+		death = {
+			death_reason = death_duel
+			killer = 792249
+			}
+	}		
+}
+
+792249 = {
+#House of Tremere
+	name = "Lignupeda"
+	dynasty_house = house_goratrix
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	stewardship = 7
+	learning = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "cynical"
+	trait = "compassionate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	father = 792248
+	give_nickname = nick_illtempered_mother
+	female = yes	
+	disallow_random_traits = yes
+	
+	1169.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_focused_mind_path_effect = { LEVEL = 2 }	
+			
+			set_immortal_age = 46
+			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792471 = {
+#Spoils of War
+	name = "Marcella"
+	dynasty_house = house_goratrix
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	intrigue = 4
+	stewardship = 6
+	learning = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "presence"
+	mother = 792249
+	female = yes	
+	disallow_random_traits = yes
+	
+	1199.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			assign_alchemy_path_effect = { LEVEL = 3 }						
+			
+			set_immortal_age = 36
+			
+		}
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791834 = {
+#FbN and Ashen cults, in Narbonne, created artificially, hence his weird gene
+	name = "Jean_Furneaux"
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	learning = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	mother = 791833
+	give_nickname = nick_the_prodigy
+	female = no	
+	disallow_random_traits = yes
+	
+	1194.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 22
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }		
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+	}
+		
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 791259
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790365 = {
+	name = "Paul_Cordwood"
+	dynasty_house = house_goratrix
+	culture = "norwegian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	intrigue = 7
+	stewardship = 10
+	diplomacy = 5
+	learning = 15
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "content"
+	trait = "deceitful"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	mother = 790364
+	give_nickname = nick_master_of_spies
+	female = no	
+	disallow_random_traits = yes
+	
+	1062.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 36
+	
+		}
+	}
+		
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_wallachian
+			
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_lures_of_flames_effect = { LEVEL = 4 }
+			#Countermagic 2
+			#Way of passage 2
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790476 = {
+	name = "Therimna" 
+	dna = 790476_therimna
+	dynasty_house = house_goratrix
+	culture = "dutch"
+	religion = "viaadversarius"
+	trait = "education_intrigue_2"
+	martial = 9
+	intrigue = 0
+	stewardship = 9
+	diplomacy = 13
+	learning = 14
+	prowess = 7	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "paranoid"
+	trait = "lustful"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "serpentis" 
+	father = 505102
+	give_nickname = nick_the_executioner
+	female = yes	
+	disallow_random_traits = yes
+	
+	1042.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+		    add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_western_09_flag
+			
+			set_immortal_age = 24
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			#Countermagic 4
+			#Rego Magica 4
+			
+		}
+	}
+		
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_magyar
+			learn_language = language_wallachian
+		}	
+	}
+
+	2005.1.1 = {
+		effect = {
+			#set_name = "Ute Kovacs" 
+			}
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+792236 = {
+	name = "Locus" 
+	dynasty_house = house_goratrix
+	culture = "slovien"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	stewardship = 8
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "forgiving"		
+	trait = "content"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	mother = 790476
+	female = no	
+	disallow_random_traits = yes
+	
+	1156.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 29
+
+			assign_alchemy_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+			
+		}
+	}
+		
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792250 = {
+#House of Tremere
+	name = "Manicae" 
+	dynasty_house = house_goratrix
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_1"
+	prowess = 6
+	intrigue = 8
+	learning = 3
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "impatient"
+	trait = "gluttonous"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 792236
+	give_nickname = nick_the_frantic
+	female = no	
+	disallow_random_traits = yes
+	
+	1174.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 29
+
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 2 }			
+			
+		}
+	}
+		
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {
+		employer = 505102
+	}
+	
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House leduc
+
+505105 = {
+	name = "LeDuc"
+	dna = 505105_leduc
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	diplomacy = 7
+	learning = 3
+	stewardship = 11
+	intrigue = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "humble"		
+	trait = "diligent"
+	trait = "content"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "auspex"
+	trait = "obfuscateadvanced"
+	father = 505022
+	female = no
+	give_nickname = nick_the_voice_of_reason
+	disallow_random_traits = yes
+	
+	970.1.1 = {
+		birth = yes
+	}
+	
+	1022.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			set_immortal_age = 56
+		}
+        effect = { 
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_01_flag
+            add_character_flag = POD_portrait_male_beard_western_05_flag
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }	
+			assign_path_of_mars_path_effect = { LEVEL = 3 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}		
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_wallachian
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792406 = {
+	name = "Elaine_de_Calinot"
+	dna = 792406_elaine_de_calinot
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tremere"
+	intrigue = 8
+	stewardship = 12
+	diplomacy = 8
+	martial = 5
+	learning = 8
+	trait = "cynical"
+	trait = "stubborn"
+	trait = "ambitious"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "auspex"
+	father = 505105
+	female = yes
+	give_nickname = nick_inquisitive_sorceress
+	disallow_random_traits = yes
+	
+	1436.1.1 = {
+		birth = yes
+	}
+	
+	1436.1.2 = {
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_02_flag
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }	
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 1 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }
+			
+			set_immortal_age = 22
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791776 = {
+#Cherbourg
+	name = "Benoit"
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "just"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "auspex"
+	father = 505105
+	female = no
+	give_nickname = nick_maitre
+	disallow_random_traits = yes
+	
+	1045.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6		
+
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 2 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			
+			set_immortal_age = 45
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791778 = {
+	name = "Viorica"
+	dna = 791778_viorica
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_4"
+	intrigue = 4
+	learning = 18
+	stewardship = 13
+	trait = "vampire"
+	trait = "tremere"
+	trait = "sadistic"		
+	trait = "ambitious"
+	trait = "vengeful"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "animalism"
+	father = 505105
+	female = yes
+	give_nickname = nick_scarlet_witch
+	disallow_random_traits = yes
+	
+	1122.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6		
+			
+			set_immortal_age = 28
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp1_06_flag
+			add_character_flag = POD_portrait_female_hair_western_02_flag
+			#Also has dark thaumaturgy
+			#die herrschaft des wyrm
+			assign_rego_elementum_path_effect = { LEVEL = 4 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}				
+	}
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:505102 }
+			set_relation_rival = { reason = rival_historical target = character:505105 }
+		}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		}		
+	}
+		
+	1230.1.4 = {
+		employer = 791208
+		set_relation_friend = { reason = friend_generic_history target = character:505081 }		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791777 = {
+	name = "Thomas_de_Cherbourg"
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_4"
+	intrigue = 8
+	diplomacy = 8
+	stewardship = 8
+	learning = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "compassionate"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	trait = "fortitude"
+	trait = "obfuscate"
+	trait = "presence"
+	trait = "potence"
+	trait = "shrewd"
+	father = 791776
+	female = no
+	give_nickname = nick_heartful_magi
+	disallow_random_traits = yes
+	
+	1087.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6		
+			add_secret = { 
+				type = secret_diablerist
+			}				
+			set_immortal_age = 32
+		}				
+	}
+	
+	1229.1.1 = {		
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:505073 }
+			set_relation_rival = { reason = rival_historical target = character:505102 }
+
+			assign_path_of_blood_path_effect = { LEVEL = 2 }
+			assign_movement_of_the_mind_effect = { LEVEL = 1 }
+		}
+	}
+	
+	1230.1.4 = {
+		employer = 505073
+		}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791470 = {
+#Jervais' Coterie, physical desc p83
+	name = "Antal_Garaboncias"
+	dna = 791470_antal_garaboncias
+	dynasty_house = house_leduc
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_martial_4"
+	prowess = 10
+	martial = 8
+	intrigue = 3
+	stewardship = 8
+	diplomacy = 2
+	learning = 8	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "calm"		
+	trait = "content"
+	trait = "brave"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	trait = "fortitudeadvanced"
+	father = 505105
+	female = no
+	give_nickname = nick_the_warmage
+	disallow_random_traits = yes
+	
+	1069.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6	
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_beard_fp2_iberian_muslim_01_flag
+            add_character_flag = POD_portrait_no_hair_flag
+			
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 35
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790468 = {
+#One liner sire of Antonio... but could also be a member of the Seven
+	name = "Astio_Giavetti"
+	dynasty_house = house_leduc
+	culture = "italian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	learning = 4
+	diplomacy = 12
+	intrigue = 4
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	trait = "auspex"
+	father = 505105
+	female = no
+	give_nickname = nick_the_patient_mentor
+	disallow_random_traits = yes
+	
+	1045.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 2 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 1 }
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_rego_elementum_path_effect = { LEVEL = 1 }
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+			
+			add_trait = vampgeneration6		
+			
+			set_immortal_age = 48
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791967 = {
+#Ashen Thief, promethean coterie	
+	name = "Berengar"
+	dynasty_house = house_leduc
+	culture = "french"
+	religion = "viaprometheus"
+	trait = "education_learning_3"
+	intrigue = 8
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "craven"
+	trait = "diligent"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "obfuscate"
+	father = 790468
+	female = no
+	disallow_random_traits = yes
+	
+	1099.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7		
+
+			assign_focused_mind_path_effect = { LEVEL = 3 }	
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			
+			set_immortal_age = 48
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "camaanarchs"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793199 = {
+#chantry leader of olena
+	name = "Walenty"
+	dynasty_house = house_leduc
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	learning = 3
+	diplomacy = 6
+	intrigue = 6
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "arrogant"		
+	trait = "trusting"
+	trait = "arbitrary"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	father = 790468
+	female = no
+	disallow_random_traits = yes
+	
+	1112.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7		
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 38
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791469 = {
+#Jervais' Coterie
+#dark haired
+	name = "Olena"
+	dynasty_house = house_leduc
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	learning = 1
+	diplomacy = 6
+	intrigue = 6
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "intellect_good_1"
+	trait = "stubborn"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "presence"
+	father = 793199
+	female = yes
+	give_nickname = nick_mistress_of_vis
+	disallow_random_traits = yes
+	
+	1129.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8	
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }			
+			
+			set_immortal_age = 26
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793200 = {
+#Olena's chantry mate
+	name = "Pawel"
+	dynasty_house = house_leduc
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_stewardship_2"
+	learning = 5
+	stewardship = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "fickle"		
+	trait = "content"
+	trait = "wrathful"
+	trait = "bloodsorcery"
+	trait = "presence"
+	father = 793199
+	female = no
+	disallow_random_traits = yes
+	
+	1155.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8	
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_lures_of_flames_effect = { LEVEL = 2 }	
+			assign_spirit_manipulation_path_effect = { LEVEL = 2 }			
+			
+			set_immortal_age = 35
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792561 = {
+#One liner sire of Rachael
+	name = "Melchett"
+	dynasty_house = house_leduc
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "paranoid"		
+	trait = "craven"
+	trait = "patient"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "dominate"
+	mother = 791469
+	female = no
+	disallow_random_traits = yes
+	
+	1133.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8		
+			
+			set_immortal_age = 51
+			
+			assign_alchemy_path_effect = { LEVEL = 2 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }			
+		}				
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792562 = {
+#DA Werewolf scenario p215
+	name = "Rachael"
+	dynasty_house = house_leduc
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 8
+	intrigue = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "physique_good_1"
+	trait = "callous"		
+	trait = "craven"
+	trait = "patient"
+	trait = "scholar"
+	trait = "bloodsorcery"
+	trait = "presence"
+	trait = "dominate"
+	father = 792561
+	give_nickname = nick_the_sorceress
+	female = yes
+	disallow_random_traits = yes
+	
+	1190.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9		
+			
+			set_immortal_age = 31
+			
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			assign_lures_of_flames_effect = { LEVEL = 3 }		
+		}				
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790469 = {
+#Prince of New Orleans in BJD
+	name = "Antonio_Calbullarshi" 
+	dynasty_house = house_leduc
+	culture = "italian"
+	religion = "viapeccati"
+	trait = "education_intrigue_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "lustful"		
+	trait = "impatient"
+	trait = "craven"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	father = 790468
+	female = no
+	give_nickname = nick_the_lightning_rod
+	disallow_random_traits = yes
+	
+	1723.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6		
+
+			assign_conjuring_path_effect = { LEVEL = 4 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }			
+			assign_weather_controlpath_effect = { LEVEL = 4 }	
+			assign_movement_of_the_mind_effect = { LEVEL = 3 }
+			assign_lures_of_flames_effect = { LEVEL = 2 }
+			
+			set_immortal_age = 22
+		}				
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House meerlinda
+
+505103 = {
+	name = "Meerlinda"
+	dna = 505103_meerlinda
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_diplomacy_4"
+	intrigue = 8
+	diplomacy = 8
+	stewardship = 12
+	learning = 12
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "intellect_good_1"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "calm"
+	trait = "diplomat"
+	trait = "fortitudeadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "celerity"
+	trait = "obfuscateadvanced"
+	father = 505022
+	give_nickname = nick_eye_of_the_storm
+	female = yes
+	disallow_random_traits = yes
+	
+	994.1.1 = {
+		birth = yes
+	}
+	
+	1022.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration4
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+			
+			set_immortal_age = 28
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_northern_03_flag			
+			POD_set_custom_idle_animation = { FLAG = flag:chancellor }
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 75
+            }
+			
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_wallachian
+			learn_language = language_french
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792412 = {
+	name = "Ulugh_Begh"
+	dna = 792412_ulugh_begh
+	dynasty_house = house_meerlinda
+	culture = "turkish"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	intrigue = 5
+	diplomacy = 10
+	stewardship = 10
+	martial = 8
+	learning = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "vengeful"		
+	trait = "diligent"
+	trait = "ambitious"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	mother = 505103
+	give_nickname = nick_the_watcher
+	female = no
+	disallow_random_traits = yes
+	
+	1253.1.1 = {
+		birth = yes
+	}
+	
+	1253.1.2 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_western_09_flag
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+			
+			set_immortal_age = 32
+
+			assign_conjuring_path_effect = { LEVEL = 4 }
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_neptunes_might_path_effect = { LEVEL = 2 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			#Path of curses 4
+			
+		}			
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792410 = {
+	name = "Thomas_Wyncham"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	intrigue = 6
+	diplomacy = 6
+	stewardship = 6
+	learning = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "trusting"		
+	trait = "shy"
+	trait = "patient"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	mother = 505103
+	give_nickname = nick_spheres_master
+	female = no
+	disallow_random_traits = yes
+	
+	1306.1.1 = {
+		birth = yes
+	}
+	
+	1306.1.2 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration4
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+
+			assign_focused_mind_path_effect = { LEVEL = 3 }	
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 43
+			
+		}			
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792411 = {
+#Changed Embrace date to avoid issues
+	name = "Oliver_Thrace"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	intrigue = 8
+	diplomacy = 4
+	stewardship = 10
+	learning = 11
+	trait = "vampire"
+	trait = "tremere"
+	trait = "physique_good_1"
+	trait = "arrogant"		
+	trait = "callous"
+	trait = "deceitful"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	father = 792410
+	give_nickname = nick_white_devil
+	female = no
+	disallow_random_traits = yes
+	
+	1472.1.1 = {
+		birth = yes
+	}
+	
+	1472.1.2 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6			
+			
+			set_immortal_age = 40
+
+			#Also has dark thaumaturgy
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_movement_of_the_mind_effect = { LEVEL = 4 }
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			
+		}			
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792196 = {
+#LS II
+	name = "Geraint_de_Montfort"
+	dynasty_house = house_meerlinda
+	culture = "norman"
+	religion = "tremerecode"
+	trait = "education_martial_2"
+	learning = 6
+	prowess = 7
+	martial = 6
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	mother = 505103
+	female = no
+	disallow_random_traits = yes
+	
+	1198.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+
+			assign_path_of_mars_path_effect = { LEVEL = 4 }			
+			assign_neptunes_might_path_effect = { LEVEL = 3 }
+			
+			set_immortal_age = 22
+		
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791439 = {
+#Ventrue Chronicle
+	name = "Reginald_of_Durham"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	intrigue = 6
+	stewardship = 7
+	learning = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "impatient"		
+	trait = "wrathful"
+	trait = "zealous"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "bloodsorceryadvanced"
+	mother = 505103
+	female = no
+	disallow_random_traits = yes
+	
+	1065.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 58
+
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 5 }
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791973 = {
+#One liner sire of Lempi
+	name = "Canticus"
+	dynasty_house = house_meerlinda
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gluttonous"		
+	trait = "wrathful"
+	trait = "impatient"
+	trait = "fortitude"
+	trait = "presence"
+	trait = "bloodsorcery"
+	father = 791439
+	female = no
+	disallow_random_traits = yes
+	
+	1089.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 36
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_path_of_blood_path_effect = { LEVEL = 2 }			
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792254 = {
+#House of Tremere
+	name = "Dulcis"
+	dynasty_house = house_meerlinda
+	culture = "scottish"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	learning = 8
+	stewardship = 6	
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "zealous"
+	trait = "diligent"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 791973
+	give_nickname = nick_the_lovestruck
+	female = no
+	disallow_random_traits = yes
+	
+	1110.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_corruption_path_effect = { LEVEL = 3 }
+			
+			set_immortal_age = 41
+		
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+
+	1230.1.4 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792255 = {
+#House of Tremere
+	name = "Virfortis"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	learning = 10
+	martial = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "vengeful"
+	trait = "arrogant"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 792254
+	give_nickname = nick_the_veteran
+	female = no
+	disallow_random_traits = yes
+	
+	1135.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 68
+
+			assign_path_of_mars_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+
+	1230.1.4 = {
+		employer = 505103
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792256 = {
+#House of Tremere
+	name = "Oblatam"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_intrigue_1"
+	learning = 8
+	intrigue = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_3"
+	trait = "ambitious"		
+	trait = "cynical"
+	trait = "arrogant"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 792254
+	give_nickname = nick_god_gift
+	female = no
+	disallow_random_traits = yes
+	
+	1146.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 18
+
+			assign_focused_mind_path_effect = { LEVEL = 3 }		
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			
+		}	
+	}
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:792255 }
+			}
+	}
+
+	1230.1.7 = {
+		employer = 505103
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791974 = {
+#Bitter Crusade
+	name = "Lempi_Mannisenmaki"
+	dynasty_house = house_meerlinda
+	culture = "finnish"
+	religion = "tremerecode"
+	trait = "education_intrigue_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "craven"
+	trait = "vengeful"
+	trait = "auspex"
+	trait = "presence"
+	trait = "bloodsorcery"
+	father = 791973
+	female = yes
+	disallow_random_traits = yes
+	
+	1120.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 37
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_path_of_blood_path_effect = { LEVEL = 1 }						
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791975 = {
+#Bitter Crusade
+	name = "Kilian_Toth"
+	dynasty_house = house_meerlinda
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 5
+	stewardship = 5
+	intrigue = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "ambitious"
+	trait = "deceitful"
+	trait = "auspex"
+	trait = "presence"
+	trait = "bloodsorcery"
+	mother = 791974
+	give_nickname = nick_usurper_slave
+	female = no
+	disallow_random_traits = yes
+	
+	1210.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 26
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 1 }
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791805 = {
+#Conspiracies
+	name = "Simon_Blackwood"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "ambitious"		
+	trait = "callous"
+	trait = "diligent"
+	trait = "lifestyle_mystic"
+	trait = "protean"
+	trait = "potence"
+	trait = "bloodsorceryadvanced"
+	give_nickname = nick_mist_master
+	father = 791439
+	female = no
+	disallow_random_traits = yes
+	
+	1102.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 36
+
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_neptunes_might_path_effect = { LEVEL = 5 }
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 505103
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791995 = {
+#Courtier of Melusine
+	name = "Johanna"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 9
+	intrigue = 2
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "auspex"
+	trait = "obfuscate"
+	trait = "bloodsorcery"
+	father = 791805
+	female = yes
+	disallow_random_traits = yes
+	
+	1136.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			
+			set_immortal_age = 26
+		
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790131
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791440 = {
+#Ventrue Chronicle
+	name = "Leland_of_Durham"
+	dna = 791440_leland
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 10
+	intrigue = 5
+	diplomacy = 6
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "fickle"
+	trait = "deceitful"
+	trait = "dominate"
+	trait = "celerity"
+	trait = "bloodsorceryadvanced"
+	father = 791439
+	give_nickname = nick_agent_provocateur
+	female = no
+	disallow_random_traits = yes
+	
+	1102.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 46
+
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_sp3_western_01_flag
+			add_character_flag = POD_no_beard_flag
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+793334 = {
+#PoD char for modcon
+	name = "Hannah"
+	dna = 793334_hannah
+	dynasty_house = house_banpaia
+	culture = "english"
+	religion = "pathofstars"
+	trait = "education_learning_1"
+	prowess = 0
+	diplomacy = 10
+	martial = 3
+	stewardship = 5
+	intrigue = 0
+	learning = 13
+	trait = "vampire"
+	trait = "banpaia"
+	trait = "intellect_bad_1"
+	trait = "eccentric"		
+	trait = "impatient"
+	trait = "trusting"
+	#trait = "" #defiled
+	trait = "lifestyle_traveler"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	father = 791440
+	give_nickname = nick_banpaia
+	sexuality = homosexual
+	female = yes
+	disallow_random_traits = yes
+	
+	1177.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 26
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+						
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_cloak_flag
+			add_character_flag = POD_clothes_ep3_byzantine_era2_low_nobles_01_flag
+			POD_set_custom_idle_animation = { FLAG = flag:writing }
+			
+			start_cat_story_cycle_effect = yes
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+EA0001 = {
+#Hannah's First Childer
+	name = "Atsushi"
+	dna = EA0001_atsushi
+	dynasty_house = house_banpaia
+	culture = "japanese"
+	religion = "pathofstars"
+	trait = "education_learning_2"
+	prowess = 0
+	diplomacy = 3
+	martial = 3
+	stewardship = 5
+	intrigue = 5
+	learning = 7
+	trait = "vampire"
+	trait = "banpaia"
+	trait = "reclusive"
+	trait = "craven"		
+	trait = "paranoid"
+	trait = "shy"
+	#trait = "" #defiled
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	mother = 793334
+	# give_nickname = nick_lapog # MISSING NICKNAME
+	sexuality = asexual
+	female = no
+	disallow_random_traits = yes
+	
+	1201.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 18
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+						
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_m_beard_tgp_japanese_02_flag
+			add_character_flag = POD_portrait_male_hair_western_08_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_cloak_flag
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+EA0002 = {
+#Hannah's Second Childer
+	name = "Akane"
+	dna = EA0002_akane
+	dynasty_house = house_banpaia
+	culture = "japanese"
+	religion = "pathofstars"
+	trait = "education_intrigue_3"
+	prowess = 4
+	diplomacy = 3
+	martial = 5
+	stewardship = 3
+	intrigue = 3
+	learning = 5
+	trait = "vampire"
+	trait = "banpaia"
+	trait = "rakish"
+	trait = "sadistic"		
+	trait = "vengeful"
+	trait = "deceitful"
+	#trait = "" #defiled
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	mother = 793334
+	give_nickname = nick_wicked_citys_nightmare
+	sexuality = bisexual
+	female = yes
+	disallow_random_traits = yes
+	
+	1206.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 24
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+						
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_cloak_flag
+
+			add_secret = { 
+				type = secret_diablerist
+			}			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+793194 = {
+#DA CN Tremere, chantry leader of Kazharin
+	name = "Karolus"
+	dynasty_house = house_meerlinda
+	culture = "saxon"
+	religion = "tremerecode"
+	trait = "education_stewardship_2"
+	learning = 8
+	intrigue = 5
+	diplomacy = 6
+	stewardship = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "trusting"		
+	trait = "diligent"
+	trait = "stubborn"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	father = 791440
+	female = no
+	disallow_random_traits = yes
+	
+	1122.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 55
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+793195 = {
+#DA CN Tremere, jervais coterie, alchemy specialist
+	name = "Baghatur_Kazharin"
+	dynasty_house = house_meerlinda
+	culture = "khazar"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 8
+	intrigue = 7
+	diplomacy = 6
+	prowess = 8
+	stewardship = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "physique_good_1"
+	trait = "trusting"		
+	trait = "patient"
+	trait = "zealous"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 793194
+	female = no
+	disallow_random_traits = yes
+	
+	1188.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 26
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_alchemy_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+			
+		}
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = brewing
+                value = 45
+            }			
+		}		
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790359
+	}
+		
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+505106 = {
+	name = "Abetorius"
+	dna = 505106_abetorius
+	dynasty_house = house_meerlinda
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	diplomacy = 11
+	intrigue = 8
+	stewardship = 11
+	learning = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "vengeful"
+	trait = "zealous"
+	trait = "dominate"
+	trait = "potence"
+	trait = "bloodsorceryadvanced"
+	mother = 505103
+	give_nickname = nick_the_smiling_envoy
+	female = no
+	disallow_random_traits = yes
+	
+	1103.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 48
+			
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_04_flag
+			add_character_flag = POD_no_beard_flag	
+
+			assign_corruption_path_effect = { LEVEL = 5 }
+			assign_focused_mind_path_effect = { LEVEL = 5 }	
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}	
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+			learn_language = language_wallachian
+		}	
+	}
+		
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+793024 = {
+#CN DA Setite
+#desc p39
+	name = "Calleo"
+	dynasty_house = house_meerlinda
+	culture = "greek"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 11
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "shy"
+	trait = "impatient"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	father = 505106
+	give_nickname = nick_abetorius_minor #also known as the knowing
+	female = no
+	disallow_random_traits = yes
+	
+	1155.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 38
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			
+		}	
+	}
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_wallachian
+		}		
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791872 = {
+#FbN
+	name = "Ambrosinus"
+	dynasty_house = house_meerlinda
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	diplomacy = 8
+	intrigue = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "dominate"
+	trait = "obfuscate"
+	trait = "bloodsorceryadvanced"
+	father = 505106
+	give_nickname = nick_the_wouldbe_prince
+	female = no
+	disallow_random_traits = yes
+	
+	1139.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 39
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		add_pressed_claim = title:c_brugge
+		employer = 791242
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+793196 = {
+#CN DA Tremere, chantry leader of miklos
+	name = "Lazlo"
+	dynasty_house = house_meerlinda
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_diplomacy_3"
+	diplomacy = 3
+	learning = 8
+	stewardship = 8
+	intrigue = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "calm"
+	trait = "patient"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	father = 791872
+	female = no
+	disallow_random_traits = yes
+	
+	1151.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 45
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_focused_mind_path_effect = { LEVEL = 4 }
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }
+			
+		}	
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790706 = {
+	name = "John_Dee"
+	dynasty_house = house_meerlinda
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "intellect_good_1"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "ambitious"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	mother = 505103
+	give_nickname = nick_doctor
+	female = no
+	disallow_random_traits = yes
+	
+	1607.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 70
+
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+			assign_lures_of_flames_effect = { LEVEL = 4 }
+			
+		}		
+	}
+		
+	2005.1.1 = {	
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790417 }
+			}
+		add_pressed_claim = title:k_england	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790865 = {
+	name = "Jean_Entende"
+	dynasty_house = house_meerlinda
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_martial_prowess_3"
+	prowess = 8
+	martial = 9
+	learning = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "brave"		
+	trait = "honest"
+	trait = "humble"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "dominate"
+	father = 505106
+	female = no
+	give_nickname = nick_crusader_magus
+	disallow_random_traits = yes
+	
+	1130.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 29
+		}		
+	}
+	
+	1229.1.1 = {
+	}
+
+	1230.1.4 = {
+		employer = 790868
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:792259 }
+			}
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House calderon
+
+505104 = {
+	name = "Calderon"
+	dynasty_house = house_calderon
+	culture = "catalan"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	learning = 9
+	martial = 10
+	stewardship = 9
+	prowess = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "impatient"
+	trait = "zealous"
+	trait = "lifestyle_mystic"
+	trait = "dominateadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	father = 505022
+	give_nickname = nick_the_brash
+	female = no
+	disallow_random_traits = yes
+	
+	970.1.1 = {
+		birth = yes
+	}
+	
+	1022.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+
+			add_secret = { 
+				type = secret_diablerist
+			}				
+
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_focused_mind_path_effect = { LEVEL = 2 }	
+			assign_path_of_mars_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 5 }
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }
+			
+			set_immortal_age = 26
+		}				
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505102 }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_wallachian
+		}			
+	}
+		
+	1313.1.1 = {
+		death = {
+			death_reason = death_certamen 
+			killer = 505102
+		}	
+	}					
+}
+
+792407 = {
+# One liner Sire of Ignatius
+	name = "Cornelius" 
+	dynasty_house = house_calderon
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "content"		
+	trait = "temperate"
+	trait = "arrogant"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 505104
+	female = no
+	disallow_random_traits = yes
+	
+	1236.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5	
+			
+			set_immortal_age = 41
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 4 }						
+		}				
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792408 = {
+# Atlanta
+	name = "Ignatius" 
+	dynasty_house = house_calderon
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	intrigue = 8
+	learning = 4
+	trait = "vampire"
+	trait = "tremere"
+	trait = "stubborn"		
+	trait = "ambitious"
+	trait = "arrogant"
+	trait = "auspex"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	father = 792407
+	give_nickname = nick_master_alchemist
+	female = no
+	disallow_random_traits = yes
+	
+	1276.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5	
+
+			add_secret = { 
+				type = secret_diablerist
+			}		
+			
+			set_immortal_age = 18
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 80
+            }
+			
+			assign_alchemy_path_effect = { LEVEL = 5 }	
+			assign_conjuring_path_effect = { LEVEL = 3 }
+			assign_corruption_path_effect = { LEVEL = 1 }
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 4 }					
+			assign_neptunes_might_path_effect = { LEVEL = 3 }			
+		}
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = brewing
+                value = 80
+            }			
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	1865.1.1 = {
+		death = {
+			death_reason = death_burned
+		}
+	}		
+				
+}
+
+
+790358 = {
+# One liner Sire of Fanchon
+	name = "Shavrael" 
+	dynasty_house = house_calderon
+	culture = "hungarian"
+	religion = "tremerecode"
+	trait = "education_martial_1"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "vengeful"		
+	trait = "lustful"
+	trait = "arrogant"
+	trait = "potence"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 505104
+	female = no
+	disallow_random_traits = yes
+	
+	1051.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5	
+			
+			set_immortal_age = 32
+			
+			assign_alchemy_path_effect = { LEVEL = 3 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_corruption_path_effect = { LEVEL = 1 }		
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 4 }		
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+605106 = {
+	name = "Mistress_Fanchon"
+	dynasty_house = house_calderon
+	dna = 605106_fanchon
+	culture = "french"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 10
+	intrigue = 6
+	diplomacy = 10
+	stewardship = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "deceitful"		
+	trait = "stubborn"
+	trait = "ambitious"
+	trait = "auspexadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	father = 790358
+	female = yes
+	disallow_random_traits = yes
+	
+	1357.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6	
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 45
+		}
+
+		effect = {
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp1_02_flag	
+			
+			assign_weather_controlpath_effect = { LEVEL = 4 }	
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+		give_nickname = nick_founder_of_the_camarilla
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792442 = {
+#Archon in GC2
+	name = "Lester_Vance"
+	dynasty_house = house_calderon
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	learning = 5
+	intrigue = 5
+	diplomacy = 9
+	martial = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gregarious"		
+	trait = "calm"
+	trait = "honest"
+	trait = "scholar"
+	trait = "lifestyle_poet"
+	trait = "auspex"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	give_nickname = nick_quiet_dervish
+	mother = 605106
+	female = no
+	disallow_random_traits = yes
+	
+	1398.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7	
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }			
+			assign_neptunes_might_path_effect = { LEVEL = 5 }
+			
+			set_immortal_age = 26
+		}				
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790477 = {
+	name = "Valerius_Maior"
+	dynasty_house = house_calderon
+	culture = "roman"
+	religion = "viadiabolis"
+	trait = "education_intrigue_4"
+	intrigue = 7
+	learning = 13
+	diplomacy = 5
+	stewardship = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "sadistic"		
+	trait = "arrogant"
+	trait = "deceitful"
+	trait = "bloodsorceryadvanced"
+	trait = "daimonionadvanced"
+	trait = "fortitudeadvanced"
+	mother = 605106
+	give_nickname = nick_odd_eyes
+	female = no
+	disallow_random_traits = yes
+	
+	1652.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 20
+			
+			#add_choleric_lifestyle_xp = 5000
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_sanguine_lifestyle_xp = 5000
+			
+			#Dark thaumaturgy	
+			assign_path_of_mars_path_effect = { LEVEL = 3 }
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+			assign_movement_of_the_mind_effect = { LEVEL = 4 }
+		}				
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790861 = {
+	name = "Casmir"
+	dynasty_house = house_calderon
+	culture = "polish"
+	religion = "tremerecode"
+	trait = "education_intrigue_1"
+	learning = 6
+	intrigue = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "sadistic"		
+	trait = "arbitrary"
+	trait = "cynical"
+	trait = "torturer"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 505104
+	give_nickname = nick_lord
+	female = no
+	disallow_random_traits = yes
+	
+	1097.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 45
+			
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_lures_of_flames_effect = { LEVEL = 4 }
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }
+		}				
+	}
+
+	1229.1.1 = {	
+	}		
+	
+	1410.1.1 = {
+		death = {
+			death_reason = death_execution
+			}
+	}			
+}
+
+#CN DA Tremere major character, physical desc p61
+793190 = {
+	name = "Torgeir"
+	dynasty_house = house_calderon
+	culture = "danish"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 9
+	intrigue = 5
+	stewardship = 8
+	diplomacy = 3
+	trait = "vampire"
+	trait = "tremere"
+	trait = "patient"		
+	trait = "vengeful"
+	trait = "cynical"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "albino"
+	trait = "bloodsorcery"
+	father = 790861
+	give_nickname = nick_albino_rat
+	female = no
+	disallow_random_traits = yes
+	
+	1128.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 26
+			
+			assign_weather_controlpath_effect = { LEVEL = 3 }	
+			assign_lures_of_flames_effect = { LEVEL = 2 }
+			assign_movement_of_the_mind_effect = { LEVEL = 1 }
+		}				
+	}
+
+	1229.1.1 = {	
+	}		
+	1230.1.4 = {
+		employer = 790359
+	}	
+	1500.1.1 = {
+		religion = "freeanarch"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792409 = {
+	name = "Andre_Malotte"
+	dynasty_house = house_calderon
+	culture = "french"
+	religion = "viapeccati"
+	trait = "education_learning_3"
+	learning = 7
+	intrigue = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "deceitful"		
+	trait = "vengeful"
+	trait = "lustful"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790861
+	give_nickname = nick_master_ceremonies
+	female = no
+	disallow_random_traits = yes
+	
+	1405.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 44
+			
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+		}				
+	}
+
+	1500.1.1 = {
+		religion = "pathofcaine"
+	}		
+	
+	1666.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 792355
+			}
+	}			
+}
+
+790862 = {
+#One liner sire of Curraferum
+	name = "Percivax"
+	culture = "french"
+	dynasty_house = house_calderon
+	religion = "tremerecode"
+	trait = "education_diplomacy_1"
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "gregarious"		
+	trait = "callous"
+	trait = "content"
+	trait = "potence"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790861
+	female = no
+	disallow_random_traits = yes
+	
+	1117.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 18
+
+			assign_conjuring_path_effect = { LEVEL = 1 }		
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 4 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792001 = {
+#British Isles
+	name = "Johann"
+	culture = "bavarian"
+	dynasty_house = house_calderon
+	religion = "viadiabolis"
+	trait = "education_intrigue_2"
+	learning = 8
+	intrigue = 3
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "deceitful"		
+	trait = "callous"
+	trait = "humble"
+	trait = "obfuscate"
+	trait = "daimonion"
+	trait = "bloodsorcery"
+	father = 790862
+	give_nickname = nick_sniveling_assassin
+	female = no
+	disallow_random_traits = yes
+	
+	1146.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 29
+
+			#Dark thaumaturgy
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 4 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}
+
+	1230.1.4 = {	
+		employer = 790227
+	}		
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791057 = {
+#One liner sire of Tshaya
+	name = "Nikolai_Brust"
+	culture = "hungarian"
+	dynasty_house = house_calderon
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "deceitful"		
+	trait = "fickle"
+	trait = "content"
+	trait = "presence"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790862
+	female = no
+	disallow_random_traits = yes
+	
+	1137.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 36
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_path_of_mars_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791058 = {
+#Bar Sinister
+	name = "Tshaya"
+	dna = 791058_tshaya
+	culture = "hungarian"
+	dynasty_house = house_calderon
+	religion = "viafurores"
+	trait = "education_learning_2"
+	learning = 5
+	intrigue = 6
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "fickle"		
+	trait = "trusting"
+	trait = "ambitious"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 791057
+	give_nickname = nick_the_witch
+	female = yes
+	disallow_random_traits = yes
+	
+	1159.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_f_hair_fp3_iranian_02_flag
+															
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			
+			set_immortal_age = 25
+			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camaanarchs"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790863 = {
+	name = "Curaferrum"
+	dna = 790863_curaferrum
+	dynasty_house = house_calderon
+	culture = "russian"
+	religion = "tremerecode"
+	trait = "education_stewardship_3"
+	stewardship = 6
+	diplomacy = 9
+	learning = 15
+	intrigue = 7	
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "arrogant"		
+	trait = "stubborn"
+	trait = "impatient"
+	trait = "overseer"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790862
+	give_nickname = nick_pyramid_climber
+	female = no
+	disallow_random_traits = yes
+	
+	1140.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_fp1_05_flag
+            add_character_flag = POD_portrait_male_hair_fp1_07_flag
+
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			#Warding 4
+			#Regio magica 3
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }
+			
+			set_immortal_age = 39			
+		}				
+	}
+	
+	1229.1.1 = {	
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:505084 }
+			}
+	}		
+	
+	1476.1.1 = {
+		death = {	
+			death_reason = death_diablerie
+			killer = 790870
+			}
+	}					
+}
+
+792235 = {
+#ends up antitribu
+	name = "Esoara"
+	dna = 792235_esoara
+	dynasty_house = house_calderon
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_martial_3"
+	prowess = 10
+	martial = 12
+	stewardship = 4
+	learning = 1
+	trait = "vampire"
+	trait = "tremere"
+	trait = "giant"	
+	trait = "diligent"		
+	trait = "cynical"
+	trait = "content"
+	trait = "potence"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "fortitude"
+	father = 790863
+	give_nickname = nick_warmaster
+	female = no
+	disallow_random_traits = yes
+	
+	1167.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_western_07_flag
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_01_flag
+			
+			set_immortal_age = 38
+			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792796 = {
+#Midnight circus, second triumvir member
+	name = "Mordblund"
+	dynasty_house = house_calderon
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	diplomacy = 7
+	intrigue = 5
+	stewardship = 9
+	learning = 8
+	trait = "vampire"
+	trait = "tremere"
+	trait = "ambitious"		
+	trait = "cynical"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	trait = "auspex"
+	father = 792235
+	female = no
+	disallow_random_traits = yes
+	
+	1202.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 56
+
+			#Dark Thaumaturgy
+			assign_alchemy_path_effect = { LEVEL = 2 }	
+			assign_conjuring_path_effect = { LEVEL = 1 }
+			assign_corruption_path_effect = { LEVEL = 3 }		
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "viadiabolis"
+	}	
+		
+	1651.1.1 = {
+		death = yes #Is stuck in a mirror in the midnight circus 
+	}				
+}
+
+790868 = {
+#Embraced in 1195, but won't work for us
+	name = "Probitas"
+	dynasty_house = house_calderon
+	culture = "italian"
+	religion = "tremerecode"
+	trait = "education_stewardship_2"
+	learning = 10
+	stewardship = 5
+	intrigue = 8
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "diligent"		
+	trait = "callous"
+	trait = "cynical"
+	trait = "presence"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790863
+	give_nickname = nick_of_broken_faith
+	female = no
+	disallow_random_traits = yes
+	
+	1160.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 39
+
+			assign_path_of_mars_path_effect = { LEVEL = 1 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }						
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+
+792258 = {
+#House of Tremere, actually embraced around 1197
+	name = "Sodalis"
+	dynasty_house = house_calderon
+	culture = "cisalpine"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 8
+	stewardship = 3
+	intrigue = 3
+	diplomacy = 8
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "content"		
+	trait = "lustful"
+	trait = "cynical"
+	trait = "seducer"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790868
+	give_nickname = nick_rose_mage
+	female = no
+	disallow_random_traits = yes
+	
+	1180.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 22
+
+			assign_conjuring_path_effect = { LEVEL = 4 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+
+	1230.1.4 = {
+		employer = 790868
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792259 = {
+#House of Tremere
+	name = "Merusa"
+	dynasty_house = house_calderon
+	culture = "cisalpine"
+	religion = "tremerecode"
+	trait = "education_intrigue_2"
+	learning = 5
+	stewardship = 9
+	intrigue = 2
+	diplomacy = 9
+	trait = "vampire"
+	trait = "beauty_good_1"
+	trait = "tremere"	
+	trait = "ambitious"		
+	trait = "lustful"
+	trait = "cynical"
+	trait = "seducer"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 792258
+	give_nickname = nick_mage_splendor
+	female = yes
+	disallow_random_traits = yes
+	
+	1197.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration11
+			
+			set_immortal_age = 19
+
+			assign_conjuring_path_effect = { LEVEL = 4 }
+			assign_focused_mind_path_effect = { LEVEL = 3 }				
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+
+	1230.1.4 = {
+		employer = 790868
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+# House grimgroth
+
+505107 = {
+	name = "Grimgroth"
+	dna = 505107_grimgroth
+	dynasty_house = house_grimgroth
+	culture = "slovien"
+	religion = "tremerecode"
+	trait = "education_intrigue_4"
+	intrigue = 9
+	martial = 8
+	stewardship = 10
+	diplomacy = 6
+	prowess = 8
+	learning = 10	
+	trait = "vampire"
+	trait = "tremere"
+	trait = "fickle"		
+	trait = "deceitful"
+	trait = "zealous"
+	trait = "lifestyle_mystic"
+	trait = "obfuscate"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	father = 505022
+	female = no
+	give_nickname = nick_the_bane_of_mistridge
+	disallow_random_traits = yes
+	
+	1198.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_western_02_flag
+            add_character_flag = POD_portrait_m_hair_fp3_iranian_03_flag
+			
+			set_immortal_age = 25
+
+			assign_path_of_mars_path_effect = { LEVEL = 5 }			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+		}				
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			learn_language = language_wallachian
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House telyavel
+
+790106 = {
+	name = "Deverra"
+	dynasty_house = house_telyavel
+	dna = 790106_deverra
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_learning_4"
+	diplomacy = 7
+	stewardship = 12
+	prowess = 6
+	learning = 6
+	intrigue = 13
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "compassionate"
+	trait = "just"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "presence"
+	trait = "proteanadvanced"
+	father = 790361
+	sexuality = heterosexual
+	give_nickname = nick_goddess_of_strife
+	female = yes
+	disallow_random_traits = yes
+	
+	1101.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_01_flag
+			
+			set_immortal_age = 22
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 85
+			}
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_worlds_blood_effect = { LEVEL = 5 }
+			assign_shadow_world_effect = { LEVEL = 5 }
+		}
+	}
+
+	1229.1.1 = {	
+		effect = {
+			set_relation_soulmate = { reason = soulmate_professed_love target = character:790105 }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		}			
+	}	
+	
+	1233.1.7 = {
+		death = {
+			death_reason = death_battle
+			killer = 790359
+			}
+	}		
+}
+
+791472 = {
+	name = "Sturla"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_learning_3"
+	learning = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gluttonous"		
+	trait = "arbitrary"
+	trait = "stubborn"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "fortitude"
+	mother = 790106
+	female = no
+	disallow_random_traits = yes
+	
+	1125.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 41
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+791473 = {
+	name = "Bernalt"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_learning_3"
+	learning = 8
+	stewardship = 7
+	intrigue = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "stubborn"		
+	trait = "wrathful"
+	trait = "vengeful"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "fortitude"
+	mother = 790106
+	female = no
+	disallow_random_traits = yes
+	
+	1136.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 78
+			
+			assign_spirit_manipulation_path_effect = { LEVEL = 3 }
+			assign_rego_elementum_path_effect = { LEVEL = 2 }
+			assign_worlds_blood_effect = { LEVEL = 3 }
+			assign_shadow_world_effect = { LEVEL = 3 }
+		}				
+	}
+
+	1229.1.1 = {	
+		effect = {
+			learn_language = language_french
+		}		
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_suicide
+			}
+	}		
+}
+
+791475 = {
+	name = "Daine"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_martial_2"
+	learning = 7
+	martial = 8
+	prowess = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "brave"		
+	trait = "compassionate"
+	trait = "stubborn"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "potence"
+	father = 791473
+	female = no
+	disallow_random_traits = yes
+	
+	1171.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 51
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_battle
+			killer = 505082
+			}
+	}		
+}
+
+#DA CN Ventrue
+795134 = {
+	name = "Varka"
+	dna = 795134_varka
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_intrigue_2"
+	learning = 7
+	intrigue = 8
+	diplomacy = 7
+	prowess = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1" #Jurgen is troubled that she looks like Rosamund
+	trait = "brave"		
+	trait = "cynical"
+	trait = "vengeful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	father = 791475
+	give_nickname = nick_the_martyr
+	female = yes
+	disallow_random_traits = yes
+	
+	1190.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_02_flag
+			
+			set_immortal_age = 20
+		}				
+	}
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_central_germanic
+		}			
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_burned
+			killer = 505086
+			}
+	}		
+}
+
+
+791476 = {
+	name = "Ako"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_martial_prowess_2"
+	prowess = 8
+	martial = 7
+	learning = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "brave"
+	trait = "shy"
+	trait = "bloodsorcery"
+	trait = "fortitude"
+	trait = "protean"
+	father = 791473
+	female = yes
+	disallow_random_traits = yes
+	
+	1179.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 39
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_suicide
+			}
+	}		
+}
+
+#desc p216
+791474 = {
+	name = "Oluksna"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_diplomacy_2"
+	learning = 8
+	diplomacy = 7
+	intrigue = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "beauty_good_1"
+	trait = "zealous"		
+	trait = "fickle"
+	trait = "deceitful"
+	trait = "bloodsorceryadvanced"
+	trait = "animalism"
+	trait = "fortitude"
+	mother = 790106
+	female = yes
+	disallow_random_traits = yes
+	
+	1145.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_worlds_blood_effect = { LEVEL = 3 }
+			assign_shadow_world_effect = { LEVEL = 3 }
+			
+			set_immortal_age = 22
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1233.1.1 = {
+		death = {
+			death_reason = death_suicide
+			}
+	}		
+}
+
+793204 = {
+	name = "Aukstakojis"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_stewardship_2"
+	learning = 5
+	intrigue = 5
+	diplomacy = 6
+	stewardship = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "craven"		
+	trait = "zealous"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "presence"
+	mother = 791474
+	female = no
+	disallow_random_traits = yes
+	
+	1177.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 45
+		}		
+	}
+
+	1229.1.1 = {	
+		effect = {
+			add_trait = pod_crafter
+			add_trait_xp = {
+                trait = pod_crafter
+				track = forging
+                value = 20
+            }
+		}			
+	}	
+	
+	1232.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 793190
+			}
+	}		
+}
+
+791477 = {
+	name = "Valdur"
+	dna = 791477_valdur
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_intrigue_2"
+	learning = 8
+	intrigue = 7
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "gluttonous"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "fortitude"
+	mother = 791474
+	female = no
+	disallow_random_traits = yes
+	
+	1166.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 35
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_02_flag	
+            add_character_flag = POD_portrait_male_beard_indian_01_flag				
+		}		
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1231.1.1 = {
+		death = {
+			death_reason = death_suicide
+			}
+	}		
+}
+
+#Jurate is somewhat clearly intended as the "last telyav" in CN DA Tremere as she is the only survivor
+791478 = {
+	name = "Jurate"
+	dynasty_house = house_telyavel
+	culture = "lithuanian"
+	religion = "vialiberatio"
+	trait = "education_diplomacy_3"
+	learning = 8
+	diplomacy = 7
+	stewardship = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "zealous"		
+	trait = "brave"
+	trait = "compassionate"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "obfuscate"
+	give_nickname = nick_last_hope
+	father = 791477
+	female = yes
+	disallow_random_traits = yes
+	
+	1186.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration10
+			
+			set_immortal_age = 18
+		}				
+	}
+
+	1229.1.1 = {	
+		effect = {
+			set_relation_friend = { reason = friend_generic_history target = character:790106 }
+			}
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House cincao
+
+605134 = {
+	name = "Xavier_de_Cincao"
+	dna = 605134_xavierdecincao
+	dynasty_house = house_cincao
+	culture = "catalan"
+	religion = "tremerecode"
+	trait = "education_stewardship_4"
+	intrigue = 6
+	stewardship = 8
+	martial = 7
+	diplomacy = 7
+	prowess = 6	
+	learning = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "paranoid"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitude"
+	father = 505022
+	give_nickname = nick_watchful_eye
+	female = no
+	disallow_random_traits = yes
+	
+	1150.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+			
+			set_immortal_age = 28
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_02_flag		
+            add_character_flag = POD_portrait_male_beard_steppe_02_flag			
+		}			
+	}	
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_enochian
+			
+			assign_alchemy_path_effect = { LEVEL = 3 }	
+			assign_conjuring_path_effect = { LEVEL = 5 }
+			assign_corruption_path_effect = { LEVEL = 3 }
+			assign_focused_mind_path_effect = { LEVEL = 4 }	
+			assign_path_of_mars_path_effect = { LEVEL = 4 }
+			assign_spirit_manipulation_path_effect = { LEVEL = 1 }			
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 1 }
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_neptunes_might_path_effect = { LEVEL = 1 }			
+		}	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2004.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}				
+}
+
+792032 = {
+#Low Clans, in Frankfurt
+	name = "Dominka"
+	dynasty_house = house_cincao
+	culture = "bavarian"
+	religion = "tremerecode"
+	trait = "education_diplomacy_3"
+	learning = 6
+	intrigue = 9
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tremere"
+	trait = "temperate"		
+	trait = "patient"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "presence"
+	father = 605134
+	give_nickname = nick_the_inconspicuous 
+	female = yes
+	disallow_random_traits = yes
+	
+	1172.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 33
+
+			assign_weather_controlpath_effect = { LEVEL = 1 }	
+			assign_rego_elementum_path_effect = { LEVEL = 3 }
+			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792413 = {
+#One liner sire of Patricia
+	name = "Hallstedt"
+	dynasty_house = house_cincao
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_learning_2"
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "callous"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "dominate"
+	mother = 792032
+	female = no
+	disallow_random_traits = yes
+	
+	1236.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+
+			add_secret = { 
+				type = secret_diablerist
+			}
+			
+			set_immortal_age = 41
+		
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 3 }
+			assign_path_of_blood_path_effect = { LEVEL = 3 }			
+			
+		}				
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792414 = {
+#Frankfurst
+	name = "Patricia_von_Bernstein"
+	dynasty_house = house_cincao
+	culture = "franconian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	intrigue = 7
+	stewardship = 9
+	diplomacy = 8
+	learning = 5
+	trait = "vampire"
+	trait = "tremere"
+	trait = "craven"		
+	trait = "callous"
+	trait = "deceitful"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "daimonion"
+	give_nickname = nick_wyrm_touched
+	father = 792413
+	female = yes
+	disallow_random_traits = yes
+	
+	1278.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 38
+
+			#Dark Thaumaturgy
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			#Curses 5 
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+			#Path of phobos 2
+			#Path of pain/torture? 3 
+			#Power of the mirror 5
+			
+		}				
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+		religion = "viadiabolis"
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792140 = {
+#One liner sire of Gerard
+	name = "Lucinda"
+	dynasty_house = house_cincao
+	culture = "asturleonese"
+	religion = "tremerecode"
+	trait = "education_martial_2"
+	martial = 7
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gluttonous"		
+	trait = "patient"
+	trait = "gregarious"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "presence"
+	mother = 792032
+	female = yes
+	disallow_random_traits = yes
+	
+	1190.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 35
+
+			assign_alchemy_path_effect = { LEVEL = 1 }	
+			assign_conjuring_path_effect = { LEVEL = 2 }
+			assign_path_of_blood_path_effect = { LEVEL = 1 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+793026 = {
+#DA CN Setite
+	name = "ole_germanicus_magna"
+	dynasty_house = house_cincao
+	culture = "saxon"
+	religion = "tremerecode"
+	trait = "education_diplomacy_3"
+	diplomacy = 6
+	intrigue = 6
+	stewardship = 5
+	learning = 7
+	trait = "vampire"
+	trait = "tremere"
+	trait = "gregarious"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "dominate"
+	mother = 792140
+	female = no
+	disallow_random_traits = yes
+	
+	1193.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 68
+
+			assign_path_of_blood_path_effect = { LEVEL = 1 }		
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792141 = {
+#Road of the Beast
+	name = "Gerard"
+	dna = 792141_gerard
+	dynasty_house = house_cincao
+	culture = "french"
+	religion = "viabestiae"
+	trait = "education_martial_3"
+	martial = 4
+	diplomacy = 6
+	intrigue = 5
+	stewardship = 7
+	learning = 8
+	prowess = 10
+	trait = "vampire"
+	trait = "tremere"
+	trait = "wrathful"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "bloodsorcery"
+	trait = "animalism"
+	trait = "presence"
+	mother = 792140
+	give_nickname = nick_bestial_magus
+	female = no
+	disallow_random_traits = yes
+	
+	1208.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_sub_saharan_03_flag
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_02_flag
+			
+			set_immortal_age = 25
+
+			assign_path_of_mars_path_effect = { LEVEL = 1 }			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofthebeast"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790627 = {
+#One liner sire of Antonescu
+	name = "Stromberg"
+	dynasty_house = house_cincao
+	culture ="bavarian"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "just"		
+	trait = "compassionate"
+	trait = "wrathful"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "auspex"
+	trait = "presence"
+	father = 605134
+	female = no
+	disallow_random_traits = yes
+	
+	1201.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 54
+
+			assign_mastery_of_the_mortal_shell_path_effect = { LEVEL = 1 }
+			assign_weather_controlpath_effect = { LEVEL = 2 }	
+			assign_rego_elementum_path_effect = { LEVEL = 1 }		
+		}				
+	}	
+	
+	1229.1.1 = {	
+	}
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790628 = {
+	name = "Nicolai_Antonescu"
+	dynasty_house = house_cincao
+	culture = "vlach"
+	religion = "tremerecode"
+	trait = "education_stewardship_4"
+	learning = 13
+	stewardship = 7
+	diplomacy = 8
+	intrigue = 9
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "patient"
+	trait = "zealous"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	father = 790627
+	give_nickname = nick_the_director
+	female = no
+	disallow_random_traits = yes
+	
+	1314.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 10
+			
+			#add_choleric_lifestyle_xp = 5000
+			#add_phlegmatic_lifestyle_xp = 5000
+
+			assign_conjuring_path_effect = { LEVEL = 4 }
+			assign_corruption_path_effect = { LEVEL = 2 }
+			assign_weather_controlpath_effect = { LEVEL = 5 }	
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 5 }
+		}				
+	}
+
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790629 = {
+	name = "Abraham_DuSable" 
+	dynasty_house = house_cincao
+	culture = "english"
+	religion = "tremerecode"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tremere"
+	trait = "diligent"		
+	trait = "vengeful"
+	trait = "zealous"
+	trait = "bloodsorceryadvanced"
+	trait = "dominate"
+	trait = "auspex"
+	father = 790628
+	give_nickname = nick_the_lawyer
+	female = no
+	disallow_random_traits = yes
+	
+	1943.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 58
+
+			assign_spirit_manipulation_path_effect = { LEVEL = 5 }			
+			assign_rego_elementum_path_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 }			
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }
+		}				
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House trimira
+
+791170 = {
+#Mangaluru
+	name = "Amichai"
+	dna = 791170_amichai
+	culture = "kochinim"
+	dynasty_house = house_trimira
+	religion = "tremerecode"
+	trait = "education_intrigue_3"
+	learning = 6
+	intrigue = 1
+	stewardship = 9
+	diplomacy = 11
+	trait = "vampire"
+	trait = "tremere"	
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "celerity"
+	father = 791057
+	give_nickname = nick_foreign_envoy
+	female = no
+	disallow_random_traits = yes
+	
+	1152.1.1 = {
+		birth = yes			
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_indian_01_flag
+            add_character_flag = POD_portrait_male_beard_western_09_flag
+			
+			set_immortal_age = 25
+			
+		}				
+	}
+	
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}	
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}

@@ -1,0 +1,63 @@
+﻿POD_torture_all_prisoners_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_physician.dds"
+	}
+	desc = POD_torture_all_prisoners_decision_desc
+	decision_group_type = pod_qol
+	is_shown = {
+		any_prisoner = {
+			NOT = { has_character_modifier = recently_tortured }
+			is_adult = yes
+			count > 1
+		}
+		POD_is_not_trapped_in_umbra_trigger = yes
+	}
+
+	effect = {
+		custom_tooltip = POD_torture_all_prisoners_decision_effect
+
+		if = {
+			limit = { mass_torture_piety_gain != 0 }
+			custom_tooltip = POD_torture_all_prisoners_decision_effect_piety
+		}
+
+		if = {
+			limit = { has_trait = sadistic }
+			custom_tooltip = POD_torture_all_prisoners_decision_effect_stress_sadistic
+		}
+		if = {
+			limit = { has_trait = zealous }
+			custom_tooltip = POD_torture_all_prisoners_decision_effect_stress_zealous
+		}
+		if = {
+			limit = {
+				OR = {
+					has_trait = compassionate
+					has_trait = craven
+					has_trait = just
+					has_trait = forgiving
+					has_trait = generous
+					has_trait = trusting
+					has_trait = content
+				}
+			}
+			custom_tooltip = POD_torture_all_prisoners_decision_effect_stress_gain
+		}
+
+		hidden_effect = {
+			save_scope_as = actor
+			every_prisoner = {
+				limit = {
+					NOT = { has_character_modifier = recently_tortured }
+					NOT = { has_character_flag = is_being_tortured }
+					is_adult = yes
+				}
+				save_scope_as = recipient
+
+				POD_torture_interaction_effect = yes
+			}
+		}
+	}
+	
+	ai_check_interval = 0
+}

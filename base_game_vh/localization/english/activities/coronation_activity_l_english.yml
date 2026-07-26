@@ -1,0 +1,963 @@
+﻿l_english:
+ # Base details
+  activity_coronation: "Lễ Đăng Quang"
+  activity_coronation_host_desc: "$BULLET_WITH_TAB$@law_icon![GetLaw('crowned_king').GetName] hoặc [GetLaw('crowned_emperor').GetName] [law|E]\n$BULLET_WITH_TAB$Trong thời gian Lễ Đăng Quang diễn ra, @faction_icon![factions|E] không thể Ép Buộc Yêu Sách\n$BULLET_WITH_TAB$[opinion_i][opinion|E]\n$BULLET_WITH_TAB$[prestige_i][prestige|E]\n$BULLET_WITH_TAB$[legitimacy_i][legitimacy|E]\n$BULLET_WITH_TAB$Một [decision|E] [oath|E] đầy uy lực\n\n@warning_icon! #X @faction_icon![factions|E] và các kẻ thù khác sẽ làm tổn hại đến [coronation_magnificence|E] của Lễ Đăng Quang#!"
+  activity_coronation_guest_desc: "$BULLET_WITH_TAB$ Người tham dự có thể nhận được [opinion_i][opinion|E] từ những người tham dự khác\n$BULLET_WITH_TAB$Người tham dự có thể có những cơ hội đặc biệt dựa trên [intent|E] của họ"
+  activity_coronation_desc: "Mời những nhân vật quyền thế nhất trong lãnh thổ đến chứng kiến khoảnh khắc Ngài đăng quang. Điều này sẽ đặt nền móng cho một triều đại lâu dài và thịnh vượng."
+  activity_coronation_conclusion_desc: "[GetActivityType( 'activity_coronation' ).GetName] đã kết thúc."
+  activity_coronation_selection_tooltip: "Mời những nhân vật quyền thế nhất trong lãnh thổ đến chứng kiến khoảnh khắc Ngài đăng quang. Điều này sẽ đặt nền móng cho một triều đại lâu dài và thịnh vượng.\n\nPhần thưởng dự kiến:\n$activity_coronation_host_desc$"
+  activity_coronation_destination_selection: "\nMột [coronation|E] thường phải được tổ chức trong [realm|E] của [host|E], ngoại trừ [anointments|E] có thể cần được tiến hành tại lãnh thổ của [head_of_faith|E] nếu họ sở hữu các [holy_sites|E] phù hợp."
+  activity_coronation_guest_help_text: "Lễ Đăng Quang là cơ hội tuyệt vời để xây dựng mối quan hệ và gây ấn tượng với cả [vassals|E] lẫn các [rulers|E] khác.\n\nBất kỳ khách mời nào tham gia Lễ Đăng Quang đều sẽ có cơ hội gia tăng [opinion|E] với các khách mời khác, và có thể nhận được những cơ hội đặc biệt để tương tác với [host|E] của [activity|E]."
+  invite_to_activity_flavor_coronation: "Trân trọng kính mời ngài đến cùng ta và toàn thể vương quốc tại [ROOT.Char.GetCurrentLocation.Custom('GetCoronationSitePrefix')][ROOT.Char.GetCurrentLocation.Custom('GetCoronationSite')] để tham dự Lễ Đăng Quang sắp tới của ta."
+  activity_coronation_underage_tt: "Ngài #bold chưa#! đủ #V 12#! tuổi\n#flavor Vương miện trượt khỏi cái đầu bé nhỏ của Ngài#!"
+  activity_coronation_not_approved_anointment: "[GetPlayer.GetFaith.GetReligiousHead.GetTitledFirstName] chưa phê chuẩn [anointment|E] này, hãy tìm kiếm sự chấp thuận của [GetPlayer.GetFaith.GetReligiousHead.GetHerHis] thông qua [interaction|E] [request_anointment|E]"
+
+ # Province Desc
+  activity_coronation_province_desc: "Lễ Đăng Quang sẽ được tổ chức tại [ROOT.Province.GetName]"
+  activity_coronation_capital_province: "\n#p + Thủ đô#!"
+  activity_coronation_holy_site_province: "\n#p + Thánh địa#!"
+  activity_coronation_tradition_province: "\n#p + Địa điểm đăng quang truyền thống#!"
+  activity_coronation_long_tradition_province: "\n#p ++ Địa điểm đăng quang truyền thống#!"
+  activity_coronation_ancient_tradition_province: "\n#p +++ Địa điểm đăng quang truyền thống cổ xưa#!"
+
+ # Location Triggers
+  coronation_location_owned: "Không nằm trong [realm|E]"
+  coronation_location_hof_owned: "[THIS.Province.GetName] #bol không#! phải là một [holy_site|E] thuộc [realm|E] của [head_of_faith|E] của ngài"
+  coronation_location_holy_site_host: "[THIS.Province.GetName] #bol không#! phải là một [holy_site|E] thuộc [realm|E] của ngài ([head_of_faith|E] của ngài không sở hữu [holy_site|E] nào)"
+  coronation_location_neither_capital_nor_holy_site: "[THIS.Province.GetName] #bol không#! phải là [county_capital|E] cũng không phải là một [holy_site|E]"
+
+ # Phases
+  coronation_phase_preparations: "Khúc Dạo Đầu"
+  coronation_phase_preparations_desc: ""
+  coronation_phase_coronation: "Nghi Lễ"
+  coronation_phase_coronation_desc: ""
+  coronation_phase_feast: "Yến Tiệc"
+  coronation_phase_feast_desc: ""
+
+ # Types
+  coronation_type_normal: "Lễ Đăng Quang"
+  coronation_type_normal_desc: "$BULLET_WITH_TAB$Chứng minh [legitimacy_i][legitimacy|E] của Ngài\n$BULLET_WITH_TAB$Tuyên thệ một [oath|E] và định hướng triều đại của Ngài\n$BULLET_WITH_TAB$Có thể nhận [opinion_i][opinion|E] từ [vassals|E] [AddLocalizationIf( GetPlayer.GetGovernment.HasGovernmentFlag( 'government_is_mandala' ), 'coronation_type_tributaries' )]\n$BULLET_WITH_TAB$[vassals|E] có thể rời khỏi @faction_icon![factions|E]\n$BULLET_WITH_TAB$Có thể tự đội vương miện để nhận thêm [prestige_i][prestige|E]\n\n#weak $coronation_type_normal_flavor$#!"
+  coronation_type_normal_flavor: "Một nghi lễ trang nghiêm sẽ chứng minh tính chính danh của triều đại Ngài, và sự huy hoàng của vương quốc sẽ trở thành biểu tượng tối thượng cho quyền lực của Ngài."
+  coronation_type_tributaries: "và [tributaries|E]"
+  coronation_type_anointment: "Lễ Xức Dầu"
+  coronation_type_anointment_desc: "$BULLET_WITH_TAB$Chứng minh [legitimacy_i][legitimacy|E] không còn nghi ngờ\n$BULLET_WITH_TAB$Nhận [piety_i][piety|E], @fervor_icon![fervor|E] và sự ủng hộ của [GetVassalStance( 'zealot' ).GetTextIcon][GetVassalStance( 'zealot' ).GetName|U] [vassals|E]\n$BULLET_WITH_TAB$Tuyên thệ một [oath|E] và định hướng triều đại của Ngài\n$BULLET_WITH_TAB$Nhận [opinion_i][opinion|E] từ [vassals|E]\n$BULLET_WITH_TAB$Nhận [opinion_i][opinion|E] từ các [rulers|E] khác\n$BULLET_WITH_TAB$[vassals|E] có thể rời khỏi @faction_icon![factions|E]\n$BULLET_WITH_TAB$@alert_icon! #alert_trial Phải được tổ chức tại một [holy_site|E] của [faith|E] của Ngài#!\n\n#weak $coronation_type_anointment_flavor$#!"
+  coronation_type_anointment_flavor: "Một vị quân vương chân chính phải được bao bọc bởi mục đích thiêng liêng và được thiết lập bởi ân sủng thần linh. Sức mạnh trần thế không thể thay thế điều đó."
+
+ # Options
+  anointment_minimum: "[activity_option|E] không khả dụng cho [anointment|E]"
+  ceremony_size: "Quy Mô Nghi Lễ"
+  coronation_small_ceremony: "Nghi Thức Giản Dị"
+  coronation_small_ceremony_desc: "$EFFECT_LIST_BULLET$Giảm [coronation_magnificence|E]\n$EFFECT_LIST_BULLET$Các [rulers|E] ngoại quốc sẽ không tham gia [activity|E]\n$EFFECT_LIST_BULLET$Nếu [coronation_magnificence|E] thấp hơn #high 50#! khi Kết Thúc, Ngài sẽ nhận [GetModifier('ach_coronation_low_ceremony_modifier').GetNameWithTooltip] trong #high 10 năm#!\n\n#weak Ta đã là quân vương rồi, chẳng phải sao? Cớ gì phải long trọng hóa một hình thức đơn thuần như vậy...?#!"
+  coronation_medium_ceremony: "Trang Nghiêm Truyền Thống"
+  coronation_medium_ceremony_desc: "$EFFECT_LIST_BULLET$Tăng [coronation_magnificence|E]\n$EFFECT_LIST_BULLET$[activity_guests|E] sẽ có khả năng tham gia cao hơn đôi chút\n\n#weak Những lời thề thiêng liêng của quyền lực cần được sánh đôi cùng không gian vương giả và một đại lễ trang nghiêm.#!"
+  coronation_large_ceremony: "Vinh Quang và Huy Hoàng"
+  coronation_large_ceremony_desc: "$EFFECT_LIST_BULLET$Tăng mạnh [coronation_magnificence|E]\n$EFFECT_LIST_BULLET$[activity_guests|E] sẽ có khả năng tham gia cao hơn đáng kể\n\n#weak Giữa những thánh tích linh thiêng và châu báu lấp lánh, vang vọng âm nhạc mỹ lệ, sẽ có toàn thể gia tộc ta, các chư hầu và những vị khách danh giá từ phương xa.#!"
+  ceremony_feast_type: "Yến Hội"
+  ceremony_feast_type_austere: "Yến Lễ Khắc Khổ"
+  ceremony_feast_type_austere_desc: "$EFFECT_LIST_BULLET$Giảm [coronation_magnificence|E]\n$EFFECT_LIST_BULLET$Nếu [coronation_magnificence|E] thấp hơn #high 50#! khi Kết Thúc, Ngài sẽ nhận [SelectLocalization( GetPlayer.GetGovernment.HasGovernmentFlag( 'government_is_mandala' ), 'mandala_coronation_low_feast', 'generic_coronation_low_feast' )] trong #high 10 năm#!\n\n#weak Một lời mời tham dự sự kiện lịch sử này chẳng lẽ vẫn chưa đủ vinh hạnh sao...?#!"
+  generic_coronation_low_feast: "[GetModifier('ach_coronation_low_feast_modifier').GetNameWithTooltip]"
+  mandala_coronation_low_feast: "[GetModifier('mandala_coronation_low_feast_modifier').GetNameWithTooltip]"
+  ceremony_feast_type_regular: "Yến Tiệc Phù Hợp"
+  ceremony_feast_type_regular_desc: "$EFFECT_LIST_BULLET$Tăng [coronation_magnificence|E]\n\n#weak Sẽ không có sự keo kiệt nào trong đại hội của giới quý tộc, cũng như bữa tiệc linh đình sau nghi lễ.#!"
+  ceremony_feast_type_lavish: "Yến Tiệc Xa Hoa"
+  ceremony_feast_type_lavish_desc: "$EFFECT_LIST_BULLET$Tăng mạnh [coronation_magnificence|E]\n$EFFECT_LIST_BULLET$Giảm nguy cơ xảy ra các sự kiện tiêu cực\n\n#weak Những món cao lương mỹ vị nối tiếp không dứt đang chờ đợi; những khoái lạc tráng lệ nhằm tô điểm cho bàn tiệc tối cao của bậc quân vương.#!"
+
+  ach_coronation_low_ceremony_modifier: "Đăng quang trong lặng lẽ"
+  ach_coronation_low_ceremony_modifier_desc: "Dân chúng hầu như còn chẳng hay biết vị quân vương này thực sự là chúa tể của họ, còn giới quý tộc thì thản nhiên quên đi những nghi lễ khai vị nghèo nàn ấy."
+  ach_coronation_low_feast_modifier: "Giới quý tộc bị xúc phạm"
+  ach_coronation_low_feast_modifier_desc: "Những buổi ăn mừng nghèo nàn đến mức xúc phạm xoay quanh lễ đăng quang của vị quân vương này đã khiến người tham dự tràn đầy khinh miệt, và hoàn toàn thiếu vắng cao lương mỹ vị."
+  mandala_coronation_low_feast_modifier: "Thần dân bị xúc phạm"
+  mandala_coronation_low_feast_modifier_desc: "$ach_coronation_low_feast_modifier_desc$"
+
+ # Special Guests
+  coronation_hof_guest: "Giáo chủ"
+  coronation_hof_guest_desc: "$coronation_hof_guest_desc_for_host$"
+  coronation_hof_guest_for_host: "Giáo chủ"
+  coronation_hof_guest_desc_for_host: "Trong một lễ [anointment|E], [head_of_faith|E] phải là một [activity_guest|E] thì nghi lễ mới được xem là [legitimate|E].\n\nHãy đảm bảo sự ủng hộ của Giáo chủ bằng [interaction|E] [anointment_request|E]."
+
+ # Doctrines related to Coronations
+  doctrine_coronation_name: "Truyền thống đăng quang"
+  doctrine_no_anointment_name: "Không xức dầu"
+  doctrine_no_anointment_desc: "Trong đức tin này, không có dầu thánh nào chạm lên trán của các quân vương — con đường đến quyền lực của họ không cần sự xức dầu hay nghi lễ thần thánh."
+  doctrine_anointment_permitted_name: "Cho phép xức dầu"
+  doctrine_anointment_permitted_desc: "Ngay cả Hoàng đế cũng không cúi mình trước một nghi lễ duy nhất — dù Giáo chủ có thể chủ trì, quyền quyết định đăng quang vẫn thuộc về ngai vàng."
+  doctrine_imperial_anointment_name: "Xức dầu hoàng đế"
+  doctrine_imperial_anointment_desc: "Để trị vì với tư cách Hoàng đế mà không còn nghi ngờ nào, người ta phải quỳ gối — vì chỉ Giáo chủ mới có thể ban cho thẩm quyền tối hậu và không thể tranh cãi ấy."
+  doctrine_parameter_no_anointment: "[characters|E] không thể sử dụng [activity_option|E] [coronation_anointment|E]"
+  doctrine_parameter_theocratic_coronation: "[characters|E] có thể sử dụng [activity_option|E] [coronation_anointment|E]"
+  doctrine_parameter_imperial_anointment: "[characters|E] có [title_tier|E] từ [empire|E] trở lên phải sử dụng [activity_option|E] [coronation_anointment|E] để nhận [law|E] [GetLaw('crowned_emperor').GetName]"
+  doctrine_parameter_coronation_artifact: "[characters|E] của [faith|E] này phải có một [artifact|E] là [FAITH.Custom('CoronationRequiresArtifact')] để có thể sử dụng thêm các [activity_options|E]"
+  coronation_custom_crown_artifact: "Vương miện"
+  coronation_custom_regalia_artifact: "Pháp khí vương quyền"
+  coronation_custom_crown_or_regalia_artifact: "Vương miện hoặc Pháp khí"
+
+ # Costs
+  CORONATION_BASE_COST: "Chi phí cơ bản của [GetActivityType( 'activity_coronation' ).GetName]"
+
+ # Guest Join Chance Values
+  coronation_small_ceremony_value: "$coronation_small_ceremony$: $VALUE|=+0$"
+  coronation_medium_ceremony_value: "$coronation_medium_ceremony$: $VALUE|=+0$"
+  coronation_large_ceremony_value: "$coronation_large_ceremony$: $VALUE|=+0$"
+
+  coronation_special_vassal_value: "[coronation_i][coronation|E] của [liege|E]: $VALUE|=+0$"
+  coronation_pope_not_anointment: "[head_of_faith|E] chỉ tham dự một [coronation|E] có [coronation_anointment|E]: $VALUE|=+0$"
+  coronation_liege_value: "Lễ đăng quang của [vassal|E]: $VALUE|=+0$"
+  coronation_suzerain_value: "Lễ đăng quang của [tributary|E]: $VALUE|=+0$"
+  coronation_tributary_value: "Lễ đăng quang của [suzerain|E]: $VALUE|=+0$"
+  coronation_hof_supported_anointment: "[head_of_faith|E] ủng hộ [anointment|E]: $VALUE|=+0$"
+
+ # Laws for Coronation
+  crowned_laws: "Luật đăng quang"
+  uncrowned: "Chưa đăng quang"
+  crowned_king: "Quân vương đã đăng quang"
+  crowned_emperor: "Quân vương được xức dầu"
+  can_only_be_passed_through_coronation: "Chỉ có thể đạt được bằng cách tổ chức [GetActivityType( 'activity_coronation' ).GetName]"
+  can_only_be_lost_through_losing_titles: "Đã đăng quang"
+  already_better_coronation: "Đã được xức dầu"
+  already_coronated_trigger: "Đã đăng quang"
+  coronation_no_crown_trigger: "Đức tin của ngài yêu cầu một [artifact|E] Vương Miện, có thể được chế tác thông qua [GetDecisionWithKey('commission_artifact_decision').GetName] [decision|E]"
+  coronation_no_regalia_trigger: "Đức tin của ngài yêu cầu một [artifact|E] Bảo Vật Vương Quyền, có thể được chế tác thông qua [GetDecisionWithKey('commission_artifact_decision').GetName] [decision|E]"
+  coronation_no_crown_or_regalia_trigger: "Đức tin của ngài yêu cầu một [artifact|E] Vương Miện hoặc Bảo Vật Vương Quyền, có thể được chế tác thông qua [GetDecisionWithKey('commission_artifact_decision').GetName] [decision|E]"
+
+ ## Intents
+ # Host Intents
+  coronation_impress_attendees: "Gây ấn tượng với người tham dự"
+  coronation_impress_attendees_desc: "Ngươi sẽ hiện thân hoàn hảo của một quân vương, thu về [legitimacy|E], [cultural_acceptance|E] và [coronation_i][coronation_magnificence|E].\n#EMP #low [intent|E] này làm hài lòng các [vassals|E] theo khuynh hướng [GetVassalStance( 'courtly' ).GetTextIcon][GetVassalStance( 'courtly' ).GetName] và [GetVassalStance( 'minority' ).GetTextIcon][GetVassalStance( 'minority' ).GetName].#!#!"
+  coronation_embrace_supporters: "Ôm trọn người ủng hộ"
+  coronation_embrace_supporters_desc: "Chế độ của ngươi sẽ được xây dựng bởi những kẻ trung thành, cùng nhau giành [prestige|E], tạo dựng [relations|E] và làm giàu cho [realms|E] của ngươi.\n#EMP #low [intent|E] này làm hài lòng [coronation_supporters|E], đặc biệt là các [vassals|E] theo khuynh hướng [GetVassalStance( 'glory_hound' ).GetTextIcon][GetVassalStance( 'glory_hound' ).GetName] và [GetVassalStance( 'zealot' ).GetTextIcon][GetVassalStance( 'zealot' ).GetName].#!#!"
+  coronation_weaken_detractors: "Làm suy yếu kẻ chống đối"
+  coronation_weaken_detractors_desc: "Cùng với lễ đăng quang của ngươi là sự suy vong của các [claimants|E], và sự tan rã của [factions|E] cùng [confederations|E].\n#EMP #low [intent|E] này gây hại cho [coronation_detractors|E], đồng thời làm hài lòng các [vassals|E] không thuộc phe [coronation_detractor|E] theo khuynh hướng [GetVassalStance( 'belligerent' ).GetTextIcon][GetVassalStance( 'belligerent' ).GetName].#!#!"
+  coronation_exalt_crown: "Tôn vinh vương miện"
+  coronation_exalt_crown_desc: "Sự tôn kính dành cho mệnh lệnh của ngươi ban phúc lâu dài cho các địa điểm [coronation|E], [artifacts|E] và [oaths|E], như [dynasty_prestige|E].\n#EMP #low [intent|E] này làm hài lòng các [vassals|E] theo khuynh hướng [GetVassalStance( 'parochial' ).GetTextIcon][GetVassalStance( 'parochial' ).GetName].#!#!"
+ # Guest Intents
+  coronation_bear_witness: "Chứng kiến"
+  coronation_bear_witness_desc: "Bằng việc xuất hiện trong dịp lịch sử này, ngươi kỳ vọng nhận được [piety|E], [legitimacy|E] và [cultural_acceptance|E]."
+  coronation_seize_advantages: "Nắm bắt lợi thế"
+  coronation_seize_advantages_desc: "[SelectLocalization( GetPlayer.GetGovernment.HasGovernmentFlag( 'government_is_administrative' ), 'seize_advantages_admin', 'seize_advantages_non_admin' )]"
+  seize_advantages_admin: "Ngươi luôn cảnh giác tìm kiếm cơ hội để giành lấy [gold|E], [influence|E] hoặc [claims|E] cho bản thân."
+  seize_advantages_non_admin: "Ngươi luôn cảnh giác tìm kiếm cơ hội để giành lấy [gold|E], [prestige|E] hoặc [claims|E] cho bản thân."
+  coronation_offer_support: "Đề nghị ủng hộ"
+  coronation_offer_support_desc: "Bằng cách dành sự ủng hộ kiên định cho vương miện, ngươi hy vọng giành được [opinion|E], một [relation|E], hoặc một [alliance|E] với kẻ đội nó."
+  coronation_advocate_domain: "Bảo vệ lãnh địa"
+  coronation_advocate_domain_desc: "Ngươi thúc ép quân vương của mình ban hành các chính sách thúc đẩy [development|E], [control|E] và [county_opinion|E] trong tiểu [realm|E] của ngươi."
+  coronation_profess_rights: "Khẳng định quyền lợi"
+  coronation_profess_rights_desc: "Ngươi đứng vững đầy kiêu hãnh, yêu cầu một Ân huệ [hook|E] hoặc cải thiện [vassal_contract|E] từ chúa thượng của mình."
+  coronation_disrupt_loyalists: "Phá rối phe trung thành"
+  coronation_disrupt_loyalists_desc: "Ngươi tìm cách làm giảm [coronation_i][coronation_magnificence|E] của Lễ đăng quang, thổi phồng [factions|E] và mức độ [discontent|E] của họ, đồng thời gây rắc rối cho [activity_host|E] và các [coronation_supporters|E] của họ."
+
+ ## Widget
+ # Right-hand Side
+  SUPPORTER_WINDOW_OTHER_LABEL: "Những Người Ủng Hộ Khác: [Subtract_int32( GetDataModelSize( ActivityWindow.GetCurrentPhaseGuestSubset( 'supporter' ) ), '(int32)3' )]"
+  SUPPORTER_WINDOW_OTHER_LABEL_NONE: "Người ủng hộ khác: 0"
+  SUPPORTER_WINDOW_OTHER_LABEL_HOVER: "#T Người Ủng Hộ#!\n$game_concept_coronation_supporter_desc$\n\n" 
+  SUPPORTER_WINDOW_LABEL: "Những người ủng hộ chủ chốt"
+  SUPPORTER_WINDOW_LABEL_HOVER: "#T $SUPPORTER_WINDOW_LABEL$#!\nĐây là các [coronation_supporters|E] #V của Lễ đăng quang#! có tác động lớn nhất tới [coronation_magnificence|E].\n\n$game_concept_coronation_supporter_desc$"
+  DETRACTOR_WINDOW_OTHER_LABEL: "Những Kẻ Phản Đối Khác: [Subtract_int32( GetDataModelSize( ActivityWindow.GetCurrentPhaseGuestSubset( 'detractor' ) ), '(int32)3' )]" 
+  DETRACTOR_WINDOW_OTHER_LABEL_NONE: "Kẻ Phản Đối Khác: 0"
+  DETRACTOR_WINDOW_OTHER_LABEL_HOVER: "#T Kẻ Phản Đối#!\n$game_concept_coronation_detractor_desc$"
+  DETRACTOR_WINDOW_LABEL: "Những kẻ chống đối chủ chốt"
+  DETRACTOR_WINDOW_LABEL_HOVER: "#T $DETRACTOR_WINDOW_LABEL$#!\nĐây là các [coronation_detractors|E] #V của Lễ đăng quang#! có tác động lớn nhất tới [coronation_magnificence|E].\n\n$game_concept_coronation_detractor_desc$"
+  OPINION_OF_HOST: "Đánh giá về [host|E]: [Character.GetOpinionOf( GetPlayer )|+=0]"
+  PERSONAL_INTERACTIONS_CORONATION_BUTTON_TOOLTIP: "#T Hiển thị các tương tác [coronation|E]#!"
+  coronation_interaction_filter_tag_desc: "#S Tương tác đăng quang#!"
+  CORONATION_ACTIVITY_INTENT_TOOLTIP: "#T [ActivityIntent.GetName]#!\n[ActivityIntent.GetDescription]"
+  CORONATION_ACTIVITY_INTENT_NAME: "#UND [ActivityIntent.GetName]#!"
+ 
+ # Special Type Progression
+  activity_coronation_special_type_title: "#UND Huy hoàng#!"
+  activity_coronation_special_type_desc: "#T Huy hoàng#!\n$game_concept_coronation_magnificence_desc$"
+  CORONATION_WINDOW_SPECIAL_PROGRESS_TOOLTIP: "[coronation_magnificence|E]: [ActivityWindow.GetSpecialProgressValue|0^V]"
+  activity_coronation_special_type_bar_segment_tt_0: "#T Lễ đăng quang nghèo nàn#!\n$activity_coronation_special_type_bar_segment_tt_0_effects$\n$activity_coronation_special_type_bar_segment_tt_0_flavor$"
+  activity_coronation_special_type_bar_segment_tt_0_effects: ""
+  activity_coronation_special_type_bar_segment_tt_0_flavor: "#weak Một lễ đăng quang nghèo nàn, một nỗ lực đáng thương nhằm gây ấn tượng… rất ít người cảm thấy nó đủ sức nâng đỡ vị quân vương mới một cách thuyết phục.#!"
+  activity_coronation_special_type_bar_segment_tt_1: "#T Lễ đăng quang khiêm tốn#!\n$activity_coronation_special_type_bar_segment_tt_1_effects$\n$activity_coronation_special_type_bar_segment_tt_1_flavor$"
+  activity_coronation_special_type_bar_segment_tt_1_effects: "[CoronationRewardProgress('(CFixedPoint)25', 'activity_coronation_special_type_bar_segment_tt_1_progress')]$BULLET$Phần thưởng [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E] từ [oath|E]: #P +25%#!\n$BULLET$Tăng [opinion|E] của [vassal|E] [guest|E] theo [intent|E]: #P +5#!\n"
+  activity_coronation_special_type_bar_segment_tt_1_progress: "[coronation_magnificence|E]: #V [ActivityWindow.GetSpecialProgressValue|0]/25#!\n"
+  activity_coronation_special_type_bar_segment_tt_1_flavor: "#weak Ít ai nhắc đến buổi lễ khiêm tốn này sau khi ngày ấy trôi qua; nó không gây phản cảm, nhưng cũng chẳng lay động lòng người.#!"
+  activity_coronation_special_type_bar_segment_tt_2: "#T Lễ đăng quang trang trọng#!\n$activity_coronation_special_type_bar_segment_tt_2_effects$\n$activity_coronation_special_type_bar_segment_tt_2_flavor$"
+  activity_coronation_special_type_bar_segment_tt_2_effects: "[CoronationRewardProgress('(CFixedPoint)50', 'activity_coronation_special_type_bar_segment_tt_2_progress')]$BULLET$Phần thưởng hoạt động [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E]: #P +50%#!\n$BULLET$Phần thưởng [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E] từ [oath|E]: #P +50%#!\n$BULLET$Tăng [opinion|E] của [vassal|E] [guest|E] theo [intent|E]: #P +10#!\n"
+  activity_coronation_special_type_bar_segment_tt_2_progress: "[coronation_magnificence|E]: #V [ActivityWindow.GetSpecialProgressValue|0]/50#!\n"
+  activity_coronation_special_type_bar_segment_tt_2_flavor: "#weak Lễ đăng quang được nhớ đến với những lời khen chừng mực, xứng đáng với một bậc quân vương, dù chưa đủ để đi vào khúc ca.#!"
+  activity_coronation_special_type_bar_segment_tt_3: "#T Lễ đăng quang long trọng#!\n$activity_coronation_special_type_bar_segment_tt_3_effects$\n$activity_coronation_special_type_bar_segment_tt_3_flavor$"
+  activity_coronation_special_type_bar_segment_tt_3_effects: "[CoronationRewardProgress('(CFixedPoint)75', 'activity_coronation_special_type_bar_segment_tt_3_progress')]$BULLET$Phần thưởng hoạt động [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E]: #P +75%#!\n$BULLET$Phần thưởng [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E] từ [oath|E]: #P +75%#!\n$BULLET$Tăng [opinion|E] của [vassal|E] [guest|E] theo [intent|E]: #P +15#!\n"
+  activity_coronation_special_type_bar_segment_tt_3_progress: "[coronation_magnificence|E]: #V [ActivityWindow.GetSpecialProgressValue|0]/75#!\n"
+  activity_coronation_special_type_bar_segment_tt_3_flavor: "#weak Lễ đăng quang còn đọng lại trong ký ức, với nghi trượng huy hoàng và các nghi lễ trang nghiêm thường được nhắc tới trong sảnh đường quý tộc và các buổi tụ hội cung đình.#!"
+  activity_coronation_special_type_bar_segment_tt_4: "#T Lễ đăng quang huy hoàng rực rỡ#!\n$activity_coronation_special_type_bar_segment_tt_4_effects$\n$activity_coronation_special_type_bar_segment_tt_4_flavor$"
+  activity_coronation_special_type_bar_segment_tt_4_effects: "[CoronationRewardProgress('(CFixedPoint)100', 'activity_coronation_special_type_bar_segment_tt_4_progress')]$BULLET$Phần thưởng hoạt động [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E]: #P +150%#!\n$BULLET$Phần thưởng [legitimacy_i][legitimacy|E] và [prestige_i][prestige|E] từ [oath|E]: #P +100%#!\n$BULLET$Tăng [opinion|E] của [vassal|E] [guest|E] theo [intent|E]: #P +20#!\n"
+  activity_coronation_special_type_bar_segment_tt_4_progress: "[coronation_magnificence|E]: #V [ActivityWindow.GetSpecialProgressValue|0]/100#!\n"
+  activity_coronation_special_type_bar_segment_tt_4_flavor: "#weak Những câu chuyện về buổi lễ lan truyền khắp nơi, sự huy hoàng của nó được khắc ghi vào khúc ca, kinh thư và trái tim của tất cả những ai từng chứng kiến.#!"
+
+ # Debug Interaction
+  debug_coronation_add_to_guest_subset_interaction: "Thêm khách vào tập con (Đăng quang)"
+  debug_interaction_add_to_supporter: "Người ủng hộ"
+  debug_interaction_add_to_detractor: "Kẻ chống đối"
+
+ # Custom Loc
+  GetReconquerOathText: "Củng cố [GetPlayer.MakeScope.Var('oath_reconquest_title').Title.GetTierAsNameNoTooltip]"
+  GetConquestOathText: "Mở rộng lãnh thổ"
+  GetUniversityOathText: "Thúc đẩy khai sáng"
+  GetPeaceOathText: "Đảm bảo hòa bình"
+  GetAllianceOathText: "Củng cố liên minh"
+  GetBuildingOathText: "Định hình vương quốc"
+  GetChildrenOathText: "Củng cố gia tộc"
+  GetPurgePretendersOathText: "Thanh trừng kẻ tiếm vị"
+  GetEndTheStruggleOathText: "Chấm dứt xung đột"
+  GetGreatestHunterOathText: "Thợ săn vĩ đại nhất"
+  GetHeirPreparationOathText: "Chuẩn bị người thừa kế"
+  GetInstallClaimantsOathText: "Dựng lên kẻ có danh nghĩa"
+  GetMendTheFractureOathText: "Hàn gắn rạn nứt"
+  GetProvideForTheWarriorsOathText: "Hậu thuẫn cho [ROOT.Char.Custom('KnightCulturePluralNoTooltip')] của ta"
+  GetProvideForTheFaithfulOathText: "Chăm lo cho tín đồ"
+  GetProvideForThePoorOathText: "Cứu trợ người nghèo"
+  GetRepentOathText: "Sám hối"
+  GetNoOathText: "Không tuyên thệ"
+
+ # Modifiers
+  coronation_tradition_modifier: "Địa điểm kế vị truyền thống"
+  coronation_tradition_modifier_desc: "Tăng [coronation_magnificence|E] của [coronation|E]: #p +5#!"
+  coronation_long_tradition_modifier: "Địa điểm kế vị truyền thống"
+  coronation_long_tradition_modifier_desc: "Tăng [coronation_magnificence|E] trong [coronation|E]: #p +10#!"
+  coronation_ancient_tradition_modifier: "Địa điểm kế vị truyền thống"
+  coronation_ancient_tradition_modifier_desc: "Tăng [coronation_magnificence|E] trong [coronation|E]: #p +15#!"
+  oath_of_reconquest: "Củng cố vương quốc"
+  oath_of_reconquest_county: "Lời thề được giữ vững"
+  oath_of_conquest: "Mở rộng vương quốc"
+  oath_of_conquest_county: "$oath_of_reconquest_county$"
+  oath_university_county: "Vòng tròn học giả"
+  oath_of_peace: "Đảm bảo hòa bình"
+  oath_of_alliances: "Củng cố liên minh"
+  oath_of_alliances_desc: "Chấp nhận [marriage|E] với [allied|E]: #P +10#!"
+  oath_of_alliances_marriage_acceptance_value: "[GetModifier('oath_of_alliances').GetNameWithTooltip]: $VALUE|=+0$"
+  oath_of_buildings: "Định hình vương quốc"
+  oath_of_buildings_desc: "[holdings|E] mới trong [domain|E] của ngươi nhận [buildings|E] miễn phí khi hoàn thành"
+  oath_of_children: "Củng cố gia tộc"
+  oath_of_purge_pretenders: "Kẻ tiếm vị bị thanh trừng"
+  oath_of_purge_pretenders_house: "Kẻ tiếm vị bị thanh trừng: Lời thề đăng quang"
+  oath_of_purge_pretenders_house_desc: "Thành viên của [house|E] này có #P +50#! [candidate_score|E]. [modifier|E] này sẽ bị loại bỏ khi [house_head|E] qua đời"
+  oath_of_end_the_struggle: "Chấm dứt xung đột"
+  oath_greatest_hunter: "Thợ săn vĩ đại nhất"
+  oath_greatest_hunter_desc: "Phần thưởng [prestige|E] từ #V Săn bắn#!: #P +10%#!"
+  oath_heir_preparation: "Chuẩn bị người thừa kế"
+  oath_heir_preparation_heir: "Người thừa kế đã sẵn sàng"
+  oath_heir_preparation_desc: "Giá trị thừa kế [legitimacy|E]: #P +20%#!"
+  oath_install_claimants: "Dựng lên kẻ có danh nghĩa"
+  oath_mend_the_fracture: "Hàn gắn rạn nứt"
+  oath_mend_the_fracture_county: "Rạn nứt được hàn gắn bởi quân vương tuyên thệ"
+  oath_provide_for_the_warriors: "Hậu thuẫn cho chiến binh"
+  oath_provide_for_the_warriors_province: "Lời thề của chiến binh được hoàn thành"
+  oath_provide_for_the_warriors_province_desc: "Mở khóa việc xây dựng [building|E] [GetBuilding('oath_warriors_building_04').GetName] tại [barony|E] này"
+  oath_provide_for_the_faithful: "Chăm lo cho tín đồ"
+  oath_provide_for_the_faithful_province: "Lời thề của tín đồ được hoàn thành"
+  oath_provide_for_the_faithful_province_desc: "Mở khóa việc xây dựng [building|E] [GetBuilding('oath_faithful_building_04').GetName] tại [barony|E] này"
+  oath_provide_for_the_poor: "Cứu trợ người nghèo"
+  oath_provide_for_the_poor_province: "Lời thề cho người nghèo được hoàn thành"
+  oath_provide_for_the_poor_province_desc: "Mở khóa việc xây dựng [building|E] [GetBuilding('oath_poor_building_04').GetName] tại [barony|E] này"
+  oath_repent: "Sám hối"
+  oath_peaceful_ai_modifier: "$motto_peaceful$"
+  oath_warlike_ai_modifier: "$game_concept_ai_warlike_personality$"
+
+ ### Events
+ # Oaths
+  coronation_events.0100.t: "Lời thề cho muôn đời"
+ # Intro
+  coronation_events.0100.desc.opening: "Đại hội đang dõi theo ta. Có kẻ mang hy vọng, có kẻ hoài nghi, tất cả đều chờ ta lên tiếng về triều đại của mình và tuyên thệ cho tương lai. Ta có thể nghe thấy những câu hỏi họ không nói ra. Ta sẽ công bằng chăng? Ta sẽ chính trực chăng?"
+ # Mid section
+  coronation_events.0100.desc.previous_ruler_close_family: "Liệu ta có xứng đáng với [ROOT.Char.Custom2( 'RelationToMeShort', previous_ruler )] của mình?"
+  coronation_events.0100.desc.previous_ruler_not_family_no_house: "Liệu ta có vượt qua người tiền nhiệm, [previous_ruler.GetFirstNameNicknamed]?"
+  coronation_events.0100.desc.previous_ruler_not_family: "Liệu ta có thể vượt qua người tiền nhiệm, [previous_ruler.GetFullNameNoTooltip]?"
+  coronation_events.0100.desc.first_ruler: "Ta sẽ cai trị ra sao với tư cách [ROOT.Char.GetTitleAsNameNoTooltip|l] đầu tiên của những vùng đất này?"
+ # Outro
+  coronation_events.0100.desc.outro: "\n\nTa không đứng ở đây, với tư cách [ROOT.Char.GetTitleAsNameNoTooltip|l], để lặp lại những kỳ vọng của họ. Ta đến để tự chọn con đường của mình, và vạch ra lối đi cho [ROOT.Char.GetPrimaryTitle.GetTierAsNameNoTooltip|l].\n\nDù [ROOT.Char.GetPrimaryTitle.GetNameNoTier] sẽ trở thành điều gì — dù ta sẽ trở thành ai — tất cả đều bắt đầu từ khoảnh khắc này."
+ # Options
+  diplomacy_oath_reason: "Đây là một [oath|E] về [diplomacy|E]"
+  martial_oath_reason: "Đây là một [oath|E] về [martial|E]"
+  stewardship_oath_reason: "Đây là một [oath|E] về [stewardship|E]"
+  intrigue_oath_reason: "Đây là một [oath|E] về [intrigue|E]"
+  learning_oath_reason: "Đây là một [oath|E] về [learning|E]"
+  prowess_oath_reason: "Đây là một [oath|E] về [prowess|E]"
+
+ ## Diplomacy
+  coronation_events.0100.alliances: "$GetAllianceOathText$"
+  coronation_events.0100.alliances_flavor: "Ta thề sẽ lập nên những liên minh trải rộng khắp nơi."
+  coronation_events.0100.children: "$GetChildrenOathText$"
+  coronation_events.0100.children_flavor: "Ta thề sẽ củng cố gia tộc của mình bằng những thành viên mới."
+
+ ## Martial
+  coronation_events.0100.reconquest: "Củng cố [host.GetPrimaryTitle.GetTierAsNameNoTooltip]"
+  coronation_events.0100.reconquest_flavor: "Ta thề sẽ dốc toàn lực để khôi phục những vùng đất thuộc về [ROOT.Char.GetPrimaryTitle.GetNameNoTier]."
+  coronation_events.0100.reconquest_opinion: "$BULLET$Mọi [activity_attending|E] [ruler|E] ngoại bang đang nắm giữ một [county|E] tại [root_scope.GetPrimaryTitle.GetNameNoTier]"
+
+  coronation_events.0100.conquest: "$GetConquestOathText$"
+  coronation_events.0100.conquest_flavor: "Ta thề sẽ chinh phục những vùng đất mới vì con dân của [ROOT.Char.GetPrimaryTitle.GetNameNoTier]."
+  coronation_events.0100.conquest_opinion: "$BULLET$Mọi [activity_attending|E] [ruler|E] láng giềng "
+  warlike_character_opinion: "$BULLET$Mọi [activity_attending|E] [GetVassalStance( 'glory_hound' ).GetTextIcon][GetVassalStance( 'glory_hound' ).GetName] hoặc [GetVassalStance( 'belligerent' ).GetTextIcon][GetVassalStance( 'belligerent' ).GetName] [vassal|E]"
+
+ ## Stewardship
+  coronation_events.0100.peace: "$GetPeaceOathText$"
+  coronation_events.0100.peace_flavor: "Ta thề sẽ bảo đảm hòa bình cho [ROOT.Char.GetPrimaryTitle.GetTierAsName]."
+  coronation_events.0100.buildings: "$GetBuildingOathText$"
+  coronation_events.0100.buildings_flavor: "Ta thề sẽ tái thiết vương quốc."
+
+ ## Intrigue
+
+ ## Learning
+  coronation_events.0100.university: "$GetUniversityOathText$"
+  coronation_events.0100.university_flavor: "Ta thề sẽ bảo trợ cho một giới học giả trong lãnh thổ."
+
+ # De Jure Right
+  coronation_events.0100.purge_pretenders: "$GetPurgePretendersOathText$"
+  coronation_events.0100.purge_pretenders_flavor: "Ta thề sẽ thanh trừng những kẻ mạo xưng ngai vàng."
+
+ # End the Struggle
+  coronation_events.0100.end_the_struggle: "$GetEndTheStruggleOathText$"
+  coronation_events.0100.end_the_struggle_flavor: "Ta thề sẽ chấm dứt Cuộc Đấu Tranh này."
+
+ # Greatest Hunter
+  coronation_events.0100.greatest_hunter: "$GetGreatestHunterOathText$"
+  coronation_events.0100.greatest_hunter_flavor: "Ta thề sẽ trở thành thợ săn vĩ đại nhất."
+
+ # Heir Preparation
+  coronation_events.0100.heir_preparation: "$GetHeirPreparationOathText$"
+  coronation_events.0100.heir_preparation_flavor: "Ta thề sẽ chuẩn bị người thừa kế cho tương lai."
+
+ # Install Claimants
+  coronation_events.0100.install_claimants: "Dựng lập người thừa kế hợp pháp"
+  coronation_events.0100.install_claimants_flavor: "Ta thề sẽ đưa những người có quyền chính đáng lên ngai vàng của họ và lật đổ bọn tiếm quyền."
+ # Mend the Fracture
+  coronation_events.0100.mend_the_fracture: "Hàn gắn chia rẽ"
+  coronation_events.0100.mend_the_fracture_flavor: "Ta thề sẽ hàn gắn sự chia rẽ văn hóa trong vương quốc và mang lại hòa bình cho vùng đất này."
+ # Provide for the Warriors
+  coronation_events.0100.provide_for_the_warriors: "Hậu thuẫn [ROOT.Char.Custom('KnightCulturePluralNoTooltip')] của ta"
+  coronation_events.0100.provide_for_the_warriors_flavor: "Ta thề sẽ rộng rãi ban phát cho những chiến binh của [ROOT.Char.GetPrimaryTitle.GetNameNoTier]."
+ # Provide for the Faithful
+  coronation_events.0100.provide_for_the_faithful: "Chăm lo cho tín đồ"
+  coronation_events.0100.provide_for_the_faithful_flavor: "Ta thề sẽ bảo trợ cho các tín đồ trung thành của [ROOT.Char.GetPrimaryTitle.GetAdjective]."
+ # Provide for the Poor
+  coronation_events.0100.provide_for_the_poor: "Chăm lo cho người nghèo"
+  coronation_events.0100.provide_for_the_poor_flavor: "Ta thề sẽ ban phát ân huệ từ thiện cho dân nghèo của [ROOT.Char.GetPrimaryTitle.GetNameNoTier]."
+ # Repent
+  coronation_events.0100.repent: "$GetRepentOathText$"
+  coronation_events.0100.repent_flavor: "Ta thề sẽ sám hối vì những tội lỗi của mình."
+
+  coronation_events.0100.opt_out: "Ta không thề điều gì cả."
+
+  coronation_events.0110.t: "Lời Thề"
+  coronation_events.0110.desc.intro: "[activity.GetHost.GetFirstName] đứng trước đám đông, bên cạnh chính [activity.GetHost.GetHerselfHimself], khi tất cả đều chờ đợi lời thề của [activity.GetHost.GetHerHis].\n\n"
+ ## Diplomacy
+  coronation_events.0110.desc.diplomacy_oath_1: "#emp \"Không một vương quốc nào có thể hưng thịnh trong cô độc. Quyền lực không chỉ nằm ở binh đao, mà còn ở những mối ràng buộc niềm tin, trong các hiệp ước được Ta luyện bằng lời nói và ý chí.\n\nTừ [activity.GetHost.GetCapitalLocation.GetName], ta sẽ dang tay kết giao, dệt nên những liên minh bảo vệ [activity.GetHost.GetPrimaryTitle.GetNameNoTier] cho muôn thế hệ.\"#!"
+  coronation_events.0110.desc.diplomacy_oath_2: "#emp \"Sức mạnh của một vương quốc không chỉ đến từ liên minh, mà còn từ lời hứa thầm lặng về sự tiếp nối. Bằng cách bảo đảm [activity.GetHost.GetHouse.GetName] trường tồn, ta sẽ trao cho vương quốc một nền móng vững như đá.\n\nThông qua con cháu chúng ta, dòng dõi [activity.GetHost.GetHouse.GetName] sẽ không bao giờ đứt đoạn.\"#!"
+ ## Martial
+  coronation_events.0110.desc.martial_oath_1: "#emp \"Hôm nay ta đứng lên không chỉ để trị vì, mà để kiến tạo. Không chỉ giữ gìn những gì đang có, mà để tạo ra điều có thể trở thành. [activity.GetHost.GetPrimaryTitle.GetNameNoTier] không thể bị giam cầm trong ký ức hay bản đồ — nó phải lớn mạnh.\n\nVì tương lai của chúng ta, và của toàn dân.\"#!"
+  coronation_events.0110.desc.martial_oath_2: "#emp \"Quá lâu rồi, những vùng đất thuộc về [activity.GetHost.GetPrimaryTitle.GetNameNoTier] đã phải chịu sự cai trị của những kẻ kém cỏi — những kẻ nhầm lẫn chiếm hữu với chính danh.\n\nĐiều đó chấm dứt từ hôm nay. Từ [activity.GetHost.GetCapitalLocation.GetName], họ sẽ biết thế nào là cai trị đích thực. Bởi ta.\"#!"
+ ## Stewardship
+  coronation_events.0110.desc.stewardship_oath_1: "#emp \"Một quân vương không chỉ bảo vệ biên cương, mà còn phải khiến cuộc sống bên trong đáng để sống. Ta sẽ gìn giữ hòa bình, chăm lo vương quốc, và hoạch định cho tăng trưởng, chứ không phải chiến tranh.\n\nTừ [activity.GetHost.GetCapitalLocation.GetName], ta sẽ đưa [activity.GetHost.GetPrimaryTitle.GetNameNoTier] bước vào một kỷ nguyên hoàng kim mới.\"#!"
+  coronation_events.0110.desc.stewardship_oath_2: "#emp \"Không phải mọi di sản đều được tạo nên bởi chiến tranh. Có những di sản được dựng xây bằng đá, bằng mồ hôi và ý chí. Ta sẽ cải biến [activity.GetHost.GetPrimaryTitle.GetNameNoTier] với những công trình vĩ đại xứng đáng với tương lai.\n\nTừ [activity.GetHost.GetCapitalLocation.GetName], ta sẽ kiến tạo một vương quốc không chỉ trường tồn, mà còn bước vào một thời kỳ hoàng kim được hun đúc bằng sự tận tâm và tầm nhìn.\"#! "
+ ## Intrigue
+
+ ## Learning
+  coronation_events.0110.desc.learning_oath_1: "#emp \"Đừng để một quân vương nhầm lẫn vô tri với sức mạnh. Một vương quốc được dẫn dắt bởi tri thức sẽ trường tồn hơn bất kỳ nỗi sợ nào.\n\nTừ [activity.GetHost.GetCapitalLocation.GetName], ta sẽ quy tụ những trí tuệ ưu tú nhất để định hình tương lai của [activity.GetHost.GetPrimaryTitle.GetNameNoTier].\"#!"
+ ## Purge Pretenders
+  coronation_events.0110.desc.purge_pretenders_oath: "#emp \"Những kẻ mạo xưng ngai vàng của [activity.GetHost.GetPrimaryTitle.GetName] sinh sôi như chuột cống. Và như loài vermin, chúng phải bị tiêu diệt.\"#!"
+ ## End the Struggle
+  coronation_events.0110.desc.end_the_struggle_oath: "#emp \"[activity.GetHost.MakeScope.Var('end_the_struggle_oath_type_var').Struggle.GetName] đã từ từ rút cạn sinh lực của biết bao thế hệ người dân [activity.GetHost.GetCulture.GetCollectiveNoun]. Mọi chuyện sẽ chấm dứt từ đây. Ta sẽ đặt dấu chấm hết cho sự phung phí tài nguyên vô nghĩa này và mở ra một kỷ nguyên mới của thịnh vượng chung trên toàn vùng. Cầu xin [activity.GetHost.GetFaith.HighGodName] chứng giám cho lời thề của ta.\"#!"
+ ## Greatest Hunter
+  coronation_events.0110.desc.greatest_hunter_oath: "#emp \"Săn bắn không chỉ là thử thách kỹ năng, mà còn là sự tôn vinh sự sống và thiên nhiên. Ta sẽ trở thành thợ săn vĩ đại nhất, chúa tể đích thực của vùng hoang dã [activity.GetHost.GetPrimaryTitle.GetNameNoTier].\"#!"
+ ## Heir Preparation
+  coronation_events.0110.desc.heir_preparation_oath: "#emp \"Không có người thừa kế xứng đáng, gia tộc [activity.GetHost.GetDynasty.GetName] tất sẽ rơi vào quên lãng. Ta sẽ đích thân dìu dắt việc giáo dưỡng người kế vị, truyền dạy những phẩm chất và trí tuệ cần thiết để đưa gia tộc [activity.GetHost.GetDynasty.GetName] vươn tới những đỉnh cao mới.\"#!"
+ ## Install Claimants
+  coronation_events.0110.desc.install_claimants_oath: "#emp \"Quyền thừa kế chính đáng không chỉ là huyết thống, mà còn là công lý. Ta sẽ dựng lập những người có quyền hợp pháp và quét sạch bọn tiếm quyền.\"#!"
+ ## Mend the Fracture
+  coronation_events.0110.desc.mend_the_fracture_oath: "#emp \"Sự chia rẽ văn hóa đã gieo rắc hỗn loạn quá lâu. Ta sẽ đoàn kết các dân tộc dưới ngọn cờ [activity.GetHost.GetHouse.GetName], trong khi vẫn tôn trọng bản sắc của họ.\"#!"
+ ## Provide for the Warriors
+  coronation_events.0110.desc.provide_for_the_warriors_oath: "#emp \"Những chiến binh của [activity.GetHost.GetPrimaryTitle.GetNameNoTier] là kiếm và khiên của ta. Ta sẽ bảo đảm họ được trang bị đầy đủ để bảo vệ lãnh thổ.\"#!"
+ ## Provide for the Faithful
+  coronation_events.0110.desc.provide_for_the_faithful_oath: "#emp \"Các tín hữu của [activity.GetHost.GetPrimaryTitle.GetNameNoTier] là trụ cột của vương quốc ta. Ta sẽ bảo đảm những nhu cầu trần thế của họ được đáp ứng, để họ có thể toàn tâm phụng sự [ROOT.Char.GetFaith.HighGodName], hầu mang lại sự cứu rỗi cho [activity.GetHost.GetPrimaryTitle.GetTierAsNamePossessive] của ta.\"#!"
+ ## Provide for the Poor
+  coronation_events.0110.desc.provide_for_the_poor_oath: "#emp \"Những người nghèo của [activity.GetHost.GetPrimaryTitle.GetNameNoTier] là muối của đất, là ánh sáng của thế gian. Họ lặng lẽ lao động vì lợi ích của mọi người. Ta sẽ bảo đảm rằng ngay cả những thần dân nghèo khó nhất trong vương quốc của ta cũng được sống với phẩm giá và hy vọng.\"#!"
+ ## Repent
+  coronation_events.0110.desc.repent_oath: "#emp \"Điều gì có thể thay đổi bản tính của một [activity.GetHost.GetWomanMan]? Ý chí của riêng ta liệu có đủ? Ta có thể thuyết phục những tín hữu khác của [activity.GetHost.GetFaith.GetAdherentNamePlural], liệu ta có thể khiến [activity.GetHost.GetFaith.HighGodName] tin rằng ta thực lòng ăn năn vì những tội lỗi của mình? Có lẽ đó là một nỗ lực ngốc nghếch, nhưng không cố gắng mới là tội lỗi nặng nề nhất.\"#!"
+
+ ## Other
+  coronation_events.0110.desc.fallback_compassionate: "#emp \"Ta thề sẽ tuân thủ mọi luật lệ công minh và tập tục của dân tộc [activity.GetHost.GetPrimaryTitle.GetAdjective]; cai trị bằng sự thông tuệ hiền đức, và phán xét bằng lòng khoan dung nhân từ.\"#!"
+  coronation_events.0110.desc.fallback_honorable: "#emp \"Ta thề sẽ duy trì sự hòa hợp và an bình của các [activity.GetHost.GetFaith.AltPriestTermPlural] dưới danh nghĩa [activity.GetHost.GetFaith.HighGodNamePossessive] tại [activity.GetHost.GetPrimaryTitle.GetNameNoTier], và dùng danh dự của mình để bảo vệ quyền tự do cũng như lợi ích của nhân dân ta.\"#!"
+  coronation_events.0110.desc.fallback_feckless: "#emp \"Ta... ờ... thề sẽ thực hiện các lời thề đúng mực của một [activity.GetHost.GetTierAsName] vùng [activity.GetHost.GetPrimaryTitle.GetNameNoTierPossessive]... từ nay về sau sẽ làm theo những gì các [activity.GetHost.GetFaith.AltPriestTermPlural] yêu cầu, và đáp lại khi vương quốc kêu gọi [activity.GetHost.GetTierAsNameNoTooltip] của nó, vân vân và mây mây...\"#!"
+  coronation_events.0110.desc.fallback: "#emp \"Ta thề rằng dưới sự trị vì của ta, [activity.GetHost.GetPrimaryTitle.GetNameNoTier] sẽ đón nhận phồn vinh, phong tục của thần dân sẽ luôn được tôn trọng, và vinh quang sẽ thuộc về [activity.GetHost.GetPrimaryTitle.GetTierAsNameNoTooltip].\"#!"
+  coronation_events.0110.regular: "Chúng ta sẽ xem liệu [activity.GetHost.GetSheHe] có xứng đáng với kỳ vọng hay không..."
+  coronation_events.0110.no_oath: "Thật đáng thất vọng..."
+  coronation_events.0110.desc.outro: ""
+
+
+  coronation_events.0150.t: "Lời thề bị phản bội: [SCOPE.Custom('GetOathSpecific')|V]"
+  coronation_events.0150.desc: "Ta nghe thấy những lời thì thầm sau cánh cửa khép kín. Ta thấy nỗi thất vọng hằn sâu trong ánh mắt họ. Và ta cảm nhận gánh nặng nhục nhã đè nén lên mình.\n\nTất cả đều biết — ta đã thất bại. Ta đã phá vỡ lời thề từng tuyên trước toàn thể thần dân.\n\nGiờ ta phải đối mặt với họ thế nào?"
+  coronation_events.0150.desc_honest: "Quyền lực đến cùng với lời thề. Ta đã đứng trước toàn thể thần dân và tuyên thệ một lời thề mà họ tin tưởng — một lời thề mà chính #emp ta#! cũng tin tưởng.\n\nGiờ đây, ngai vàng chẳng khác nào một ngôi mộ hơn là chỗ ngự tọa. Một chiếc lồng mạ vàng lạnh lẽo, chế nhạo ta theo từng nhịp thở. Điều đau đớn nhất là biết rằng tất cả đều do chính ta gây nên."
+  coronation_events.0150.desc_deceitful: "Cứ để họ thì thầm. Cứ để họ phẫn nộ. Nhưng xấu hổ ư? Không. Lời thề chỉ thiêng liêng với những kẻ ngu ngốc."
+  coronation_events.0150.a: "Thật nhục nhã..."
+  coronation_events.0150.a_honest: "Ta sẽ sống với nỗi hổ thẹn này ra sao?"
+  coronation_events.0150.a_deceitful: "Mọi thứ vốn là như vậy."
+  coronation_events.150.custom_list_tooltip: "Mọi [vassal|E], [courtier|E] hoặc [guest|E]"
+
+  coronation_events.0175.t: "Hoàn thành lời thề: [SCOPE.Custom('GetOathSpecific')|V]"
+  coronation_events.0175.desc: "Ta đã làm đúng như những gì đã hứa. Ta đã nghe sự chế nhạo của kẻ hoài nghi — và ta đã chứng minh họ sai.\n\nGiờ đây, họ trao cho ta sự tôn kính mà trước kia họ cho là ngoài tầm với.\n\nMột bình minh mới đã đến..."
+  coronation_events.0175.a: "Và một [ROOT.Char.GetPrimaryTitle.GetNameNoTierNoTooltip] hùng cường hơn đã sẵn sàng đón nhận!"
+
+ ## Diplomacy
+  diplomacy_oath_1_tooltip: "Ta thề một [oath|E] nhằm #V Củng cố Liên minh#!:\n\t$EFFECT_LIST_BULLET$Cần có ít nhất #V 3#! [alliances|E] với các [rulers|E] thỏa điều kiện:\n\t\t$EFFECT_LIST_BULLET$Có ít nhất #V 50#! [opinion|E] đối với #V ngươi#!\n\t\t$EFFECT_LIST_BULLET$Thỏa mãn một trong các điều sau:\n\t\t\t$EFFECT_LIST_BULLET$Thấp hơn một bậc [title_tier|E]\n\t\t\t$EFFECT_LIST_BULLET$Cùng bậc [title_tier|E]\n\t\t\t$EFFECT_LIST_BULLET$Cao hơn một bậc [title_tier|E]\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [opinion_i][opinion|E], [cultural_acceptance_i][cultural_acceptance|E], và [GetModifier('oath_of_alliances').GetNameWithTooltip]"
+  diplomacy_oath_2_tooltip: "Ta thề một [oath|E] nhằm #V Củng cố Gia tộc#!:\n\t$EFFECT_LIST_BULLET$Cần có ít nhất #V 7#! [children|E] [legitimate|E] #weak (Hiện tại [host.MakeScope.ScriptValue('children_oath_value')|V0]/#V 7#!)#!\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 30 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [dynasty_prestige_i][dynasty_prestige|E] và [GetModifier('oath_of_children').GetNameWithTooltip]"
+ ## Martial
+  martial_oath_1_tooltip: "Ta thề một [oath|E] nhằm #V Củng cố [host.GetPrimaryTitle.GetNameNoTierNoTooltip]#!:\n\t$EFFECT_LIST_BULLET$[host.GetPrimaryTitle.GetName] phải [completely_control|E] toàn bộ biên giới [de_jure|E] của mình #low (Hiện tại [host.MakeScope.ScriptValue('oath_reconquest_value_1')|V0]/[host.MakeScope.ScriptValue('oath_reconquest_value_2')|V0])#!\n$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [GetModifier('oath_of_reconquest').GetNameWithTooltip]"
+  oath_reconquest_tooltip: "[completely_control|E] [de_jure|E] [THIS.Var('oath_reconquest_title').Title.GetName] #low ([root_scope.MakeScope.ScriptValue('oath_reconquest_value_1')]/[root_scope.MakeScope.ScriptValue('oath_reconquest_value_2')])#!"
+  martial_oath_2_tooltip: "Ta thề một [oath|E] nhằm #V Mở rộng Lãnh thổ#!:\n\t$EFFECT_LIST_BULLET$[realm|E] phải đạt quy mô ít nhất là [host.MakeScope.ScriptValue('oath_conquest_value_1')|V0] #low (Hiện tại [host.MakeScope.ScriptValue('oath_conquest_value_2')|V0])#!\n$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n$EFFECT_LIST_BULLET$Chọn giữa một ân huệ dành cho [capital|E] hoặc việc điều chỉnh lãnh thổ [de_jure|E]\n$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [GetModifier('oath_of_conquest').GetNameWithTooltip]"
+ ## Stewardship
+  stewardship_oath_1_tooltip: "Ta thề một [oath|E] nhằm #V Bảo đảm Hòa bình#!:\n\t$EFFECT_LIST_BULLET$Cần có ít nhất #V 5 năm#! hòa bình liên tục\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 50 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [development_i][development|E], và [GetModifier('oath_of_peace').GetNameWithTooltip]"
+  stewardship_oath_2_tooltip: "Ta thề một [oath|E] nhằm #V Định hình Lãnh thổ#!:\n\t$EFFECT_LIST_BULLET$Cần xây dựng hoặc nâng cấp ít nhất #V 8#! [buildings|E]\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [development_i][development|E], và [GetModifier('oath_of_buildings').GetNameWithTooltip]"
+ ## Intrigue
+
+ ## Learning
+  learning_oath_1_tooltip: "Ta thề một [oath|E] nhằm #V Nuôi dưỡng Khai sáng#!:[SelectLocalization( GreaterThan_CFixedPoint( GetPlayer.MakeScope.Var('learning_oath_1_university_exists').GetValue, '(CFixedPoint)0' ), 'learning_oath_1_tooltip_need_university', 'learning_oath_1_tooltip_need_development' )]\n\t$EFFECT_LIST_BULLET$Cần có ít nhất #V [learning_oath_temp_cost]#! [gold_i][gold|E]\n\t$EFFECT_LIST_BULLET$Cần đáp ứng #V 1#! trong các yêu cầu sau:\n\t\t\t$EFFECT_LIST_BULLET$Có [education_trait|E] cấp độ năm\n\t\t\t$EFFECT_LIST_BULLET$Mỗi [councillor|E] có chỉ số kỹ năng #V 20#! trở lên cho vai trò của họ\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 50 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [SelectLocalization( GreaterThan_CFixedPoint( GetPlayer.MakeScope.Var('learning_oath_1_university_exists').GetValue, '(CFixedPoint)0' ), 'learning_oath_1_tooltip_university', 'learning_oath_1_tooltip_no_university' )]"
+  learning_oath_1_tooltip_university: "[GetModifier('oath_university_county').GetNameWithTooltip]"
+  learning_oath_1_tooltip_no_university: "một [GetBuilding('generic_university').GetName]"
+  learning_oath_1_tooltip_need_university: "\n\t$EFFECT_LIST_BULLET$Cần một [county|E] có [GetBuilding('generic_university').GetName] và [development_i][development|E] đạt #V 30#! trở lên"
+  learning_oath_1_tooltip_need_development: "\n\t$EFFECT_LIST_BULLET$Cần một [county|E] có [development_i][development|E] đạt #V 30#! trở lên"
+
+ #Purge Pretenders
+  purge_pretenders_oath_tooltip: "Ta thề một [oath|E] nhằm #V Thanh trừng Kẻ tiếm vị#!:\n\t$EFFECT_LIST_BULLET$Không được tồn tại bất kỳ [claimant|E] nào đối với [primary_title|E] của ngươi ngoài [children|E] của ngươi\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 50 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [GetModifier('oath_of_purge_pretenders').GetNameWithTooltip].\n\t$EFFECT_LIST_BULLET$[SelectLocalization(GetPlayer.GetGovernment.IsType('nomad_government'), 'purge_pretenders_oath_nomad', '')][SelectLocalization(GetPlayer.GetGovernment.IsType('administrative_government'), 'purge_pretenders_oath_admin', '')][SelectLocalization(Not(Or(GetPlayer.GetGovernment.IsType('nomad_government'), GetPlayer.GetGovernment.IsType('administrative_government'))), 'purge_pretenders_oath_default', '')]"
+  purge_pretenders_oath_admin: "[house|E] của ngươi nhận được [modifier|E] [GetModifier('oath_of_purge_pretenders_house').GetNameWithTooltip]"
+  purge_pretenders_oath_nomad: "Chỉ số [obedience|E] của [kurultai|E] và [children|E]: #P +100#!"
+  purge_pretenders_oath_default: "Ngươi nhận được [GetLaw('single_heir_succession_law').GetName]. [law|E] này sẽ được đặt lại về luật hiện tại của ngươi khi qua đời."
+
+ # End the Struggle
+  end_the_struggle_oath_tooltip: "Ta thề một [oath|E] nhằm #V Kết thúc Cuộc Tranh đoạt#!:\n\t$EFFECT_LIST_BULLET$Cần thực hiện bất kỳ [decision|E] kết thúc [struggle|E] nào\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [GetModifier('oath_of_end_the_struggle').GetNameWithTooltip]."
+
+ # Greatest Hunter
+  greatest_hunter_oath_tooltip: "Ta tuyên thệ một [oath|E] để #V Trở Thành Thợ Săn Vĩ Đại Nhất#!:\n\t$EFFECT_LIST_BULLET$Cần chủ trì và hoàn thành thành công ít nhất #V 1#! cuộc [Concept( 'activity', 'Săn Huyền Thoại' )|E] hoặc #V 10#! cuộc [Concept( 'activity', 'Săn Bắn' )|E] thông thường. Tăng tỷ lệ xuất hiện #V Sinh Vật Huyền Thoại#! khi [oath|E] này còn hiệu lực.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 40 Năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [modifiers|E] độc nhất dành cho một [artifact|E] #V Cung#! và [GetModifier('oath_greatest_hunter').GetNameWithTooltip]"
+ # Heir Preparation
+  heir_preparation_oath_tooltip: "Ta thề một [oath|E] nhằm #V Chuẩn bị Người thừa kế#!:\n\t$EFFECT_LIST_BULLET$Cần có một [primary_heir|E] với tất cả [skills|E] đạt #V 10+#! và ít nhất hai [skills|E] đạt #V 14+#!.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 40 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], và [GetModifier('oath_heir_preparation').GetNameWithTooltip]. [primary_heir|E] sẽ nhận được [GetModifier('oath_heir_preparation_heir').GetNameWithTooltip]"
+
+ # Install Claimants
+  install_claimants_oath_tooltip: "Ta thề một [oath|E] nhằm #V Đưa Người có Danh nghĩa lên ngôi#!:\n\t$EFFECT_LIST_BULLET$Cần giành chiến thắng ít nhất #V 3#! [wars|E] vì [claimant|E]\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_install_claimants').GetNameWithTooltip], và một [perpetual_hook|E] với mỗi [claimant|E] được đưa lên ngôi cùng một [weak_hook|E] đối với [primary_heirs|E] của họ."
+ # Mend the Fracture
+  mend_the_fracture_oath_tooltip: "Ta thề một [oath|E] nhằm #V Hàn gắn Rạn nứt#!:\n\t$EFFECT_LIST_BULLET$Cần có ít nhất #V 70#! [cultural_acceptance|E] với một [culture|E] chiếm hơn #V 40%#! [realm|E] của ta.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_mend_the_fracture').GetNameWithTooltip], và cả hai nền văn hóa đều nhận được [culture_tradition|E] [GetCultureTradition('oath_mend_the_fracture_tradition').GetName]."
+ # Provide for the Warriors
+  provide_for_the_warriors_oath_tooltip: "Ta thề một [oath|E] nhằm #V Chu cấp cho Chiến binh#!:\n\t$EFFECT_LIST_BULLET$Cần xây dựng ít nhất #V 3#! [GetBuilding('oath_warriors_building_02').GetName]. Mở quyền tiếp cận chuỗi [buildings|E] này khi [oath|E] đang hiệu lực.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_provide_for_the_warriors').GetNameWithTooltip], và mở khóa nâng cấp cuối: [GetBuilding('oath_warriors_building_04').GetName]."
+ # Provide for the Faithful
+  provide_for_the_faithful_oath_tooltip: "Ta thề một [oath|E] nhằm #V Chu cấp cho Tín đồ#!:\n\t$EFFECT_LIST_BULLET$Cần xây dựng ít nhất #V 3#! [GetBuilding('oath_faithful_building_02').GetName]. Mở quyền tiếp cận chuỗi [buildings|E] này khi [oath|E] đang hiệu lực.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_provide_for_the_faithful').GetNameWithTooltip], và mở khóa nâng cấp cuối: [GetBuilding('oath_faithful_building_04').GetName]."
+ # Provide for the Poor
+  provide_for_the_poor_oath_tooltip: "Ta thề một [oath|E] nhằm #V Chu cấp cho Dân nghèo#!:\n\t$EFFECT_LIST_BULLET$Cần xây dựng ít nhất #V 3#! [GetBuilding('oath_poor_building_02').GetName]. Mở quyền tiếp cận chuỗi [buildings|E] này khi [oath|E] đang hiệu lực.\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_provide_for_the_poor').GetNameWithTooltip], và mở khóa nâng cấp cuối: [GetBuilding('oath_poor_building_04').GetName]."
+ # Repent
+  repent_oath_tooltip: "Ta tuyên thệ một [oath|E] để #V Sám Hối#!:\n\t$EFFECT_LIST_BULLET$Cần hoàn thành ít nhất #V 4#! cuộc [pilgrimages|E] và đạt [GetModifier( 'piety_level_3' ).GetNameWithTooltip|L]\n\t$EFFECT_LIST_BULLET$Phải hoàn thành trong vòng #V 20 Năm#!\n\t$EFFECT_LIST_BULLET$Phần thưởng: [legitimacy_i][legitimacy|E], [prestige_i][prestige|E], [GetModifier('oath_repent').GetNameWithTooltip], đồng thời loại bỏ mọi [traits|E] [sinful|E] và thay thế chúng bằng các [traits|E] [virtuous|E]."
+
+  coronation_events.0200.t: "Khúc Dạo đầu"
+  coronation_events.0200.desc.host: "Khách đã tề tựu. Từ gần, từ xa, vì trung thành, hay chỉ vì hiếu kỳ. Đám đông dày đặc những gương mặt mang theo kỳ vọng, toan tính, và đôi khi là chút ấm áp mong manh.\n\nTa cất giọng vừa đủ để trấn an người tham dự và chào đón họ đến lễ đăng quang của ta."
+  coronation_events.0200.desc.guest: "Buổi tụ họp lộng lẫy đúng như mong đợi. Gương mặt quen lẫn lạ hòa vào nhau, những lời chào chỉ đủ ấm để giữ lễ. Khi chủ lễ cất tiếng, căn phòng theo bản năng mà lắng xuống.\n\n\"Bằng hữu của ta, chư hầu của ta, huyết thân của ta — sự hiện diện của các ngươi còn quý giá hơn bất kỳ vương miện nào. Trước khi nghi lễ bắt đầu, hãy ăn uống, chuyện trò tự nhiên… và hãy biết rằng ta ghi nhớ từng người đã đứng nơi đây hôm nay.\"\n\nMột lời hứa hiền hòa, hay một lời cảnh báo thầm lặng — tùy vào cách người ta lắng nghe."
+  coronation_events.0200.a: "Chào mừng tất cả!"
+  coronation_events.0200.b: "Nào, còn ai nữa ở đây?"
+
+  coronation_events.0205.t: "Đại Lễ Đăng Quang"
+  coronation_events.0205.meager: "Mọi chuẩn bị đã hoàn tất. Đoàn nghi lễ đạm bạc đang chờ đợi tại"
+  coronation_events.0205.great: "Mọi chuẩn bị đã hoàn tất. Đại lễ long trọng nay đang chờ đợi tại"
+  coronation_events.0205.hagia_sophia: "Đại Thánh đường Hagia Sophia, nơi ngự trị Thánh Trí của Thượng Đế."
+  coronation_events.0205.st_peters: "Vương cung Thánh đường Thánh Phêrô, nơi ngự của vị đại diện tối cao của Đấng Christ."
+  coronation_events.0205.saint_denis: "Vương cung Thánh đường Thánh Denis, nơi an nghỉ của vị thánh bảo hộ dân tộc Pháp."
+  coronation_events.0205.westminster: "Tu viện Westminster uy nghi và cao quý."
+  coronation_events.0205.reims: "Nhà thờ Đức Bà Reims, thánh đường của các bậc quân vương."
+  coronation_events.0205.aachen: "Cung điện lừng danh Aachen của Charlemagne."
+  coronation_events.0205.wawel: "Nhà thờ Wawel, mỹ lệ và trường tồn."
+  coronation_events.0205.east_admin_location: "quần thể cung điện [location.GetTitle.GetNameNoTierPossessive] trong vẻ tĩnh lặng thanh nhã."
+  coronation_events.0205.temple: "đại [host.GetFaith.HouseOfWorship] của [location.GetTitle.GetNameNoTierPossessive]."
+  coronation_events.0205.east_admin_description: "\n\nTheo nhịp trống vang dội,"
+  coronation_events.0205.silence: "\n\nTrong bầu không khí tĩnh lặng lạnh lẽo,"
+  coronation_events.0205.cheers: "\n\nGiữa tiếng tung hô và hân hoan,"
+  coronation_events.0205.desc.host_east_asian: "đoàn nghi trượng [ROOT.Char.Custom('GetTitleTierAdjective')] của ta tiến qua từng hàng ngũ [host.Custom('GetFighterTermPlural')] cùng quan lại. Phía sau, ta rời khỏi từ đường tổ tiên của gia tộc, nơi các nghi lễ đầu ngày đã được cử hành."
+  coronation_events.0205.desc.guest_east_asian: "đoàn nghi trượng [ROOT.Char.Custom('GetTitleTierAdjective')] của [host.GetTitledFirstNamePossessive] tiến qua từng hàng ngũ [host.GetHerHis] [host.Custom('GetFighterTermPlural')] cùng quan lại. Phía sau, chúng ta rời khỏi từ đường tổ tiên của [host.GetTitleAsNameNoTooltip], nơi các nghi lễ đầu ngày đã được cử hành."
+  coronation_events.0205.desc.host: "đoàn rước của ta rẽ lối giữa đám đông chen chúc của [ROOT.Char.Custom('SettlementCity')|l]: những [ROOT.Char.Custom('KnightCulturePluralNoTooltipLowercase')] tinh nhuệ nhất đi trước, còn gia quyến [ROOT.Char.Custom('GetTitleTierAdjective')] theo sau."
+  coronation_events.0205.desc.guest: "đoàn rước của [host.GetTitledFirstNamePossessive] rẽ lối qua đám đông, và tùy tùng của ta theo sau ở vị trí danh dự."
+  coronation_events.0205.desc.low_magnificence_east_asian: "\n\nMột điềm xấu phủ lên các nghi lễ. Tổ tiên của [host.GetDynastyHouseName] sao có thể không hổ thẹn trước sự đăng vị đầy bất định này...?"
+  coronation_events.0205.desc.medium_magnificence_east_asian: "\n\nMột cảm giác hy vọng lan tỏa trong không trung. Nghi lễ tôn kính kéo dài buổi sớm đã mang lại điềm lành, gắn kết buổi đại lễ này với quá khứ xa xưa."
+  coronation_events.0205.desc.high_magnificence_east_asian: "\n\nSự tôn nghiêm kỳ diệu nâng tầm các nghi lễ buổi sớm, lan tỏa theo làn hương trầm, và được nuôi dưỡng bởi niềm kiêu hãnh vững chắc của tổ tiên [host.GetDynastyHouseName]."
+  coronation_events.0205.desc.low_magnificence: "Một số [host.Custom('GetLocalCommonerTermPlural')] ngước nhìn chúng ta với ánh mắt trống rỗng; kẻ khác lẩm bẩm chế giễu. Có kẻ gào lên #EMP \"[host.GetTitleAsName] giả danh!\"#! và đám đông liền dâng trào, chỉ vừa bị những [host.Custom('GetFighterTermPlural')] ít ỏi dọc đường ngăn lại."
+  coronation_events.0205.desc.medium_magnificence: "[host.Custom('GetLocalCommonerTermPlural')|U] chen chúc để được thoáng thấy vị [host.GetTitleAsNameNoTooltip|l] sắp đăng vị. Trên vai cha mẹ, giữa biển người, những đứa trẻ [location.GetCulture.GetName] nở nụ cười rạng rỡ."
+  coronation_events.0205.desc.high_magnificence: "Tiếng tù và vang dội! Cờ xí tung bay trong sắc màu rực rỡ của [host.GetPrimaryTitle.GetAdjective]! [host.Custom('GetLocalCommonerTermPlural')|U] ca tụng vị [host.GetTitleAsNameNoTooltip|l], còn nữ nhân rơi lệ trong niềm hân hoan trước đoàn rước huy hoàng này."
+
+  coronation_events.0205.a_low_magnificence_east_admin: "Chẳng được lòng người sống, cũng chẳng được lòng kẻ đã khuất..."
+  coronation_events.0205.a_low_magnificence: "[ROOT.Char.GetFaith.HighGodName], xin dẫn dắt ta vượt qua đám ô hợp này..."
+  coronation_events.0205.a_high_magnificence: "Và đại lễ đăng quang của ta #EMP mới chỉ vừa bắt đầu!#!"
+  coronation_events.0205.a: "Khoảnh khắc vĩ đại nhất đang dần kề cận."
+  coronation_events.0205.b: "Vị [ROOT.Char.GetTitleAsNameNoTooltip|l] này hẳn trông thật thảm hại..."
+  coronation_events.0205.b_flavor_infirm: "...với chút sinh lực còn sót lại để cưỡi ngựa tới lễ đăng quang của chính mình."
+  coronation_events.0205.b_improved: "Nhưng, may thay, giữa cảnh huy hoàng này, ắt sẽ ít ai để ý!"
+  coronation_events.0205.c_low_magnificence_east_admin: "Kẻ có mắt ắt hiểu rõ hơn!"
+  coronation_events.0205.c_low_magnificence: "Hãy nhìn kỹ đi, lũ dân đen! Ta đích thực là một [activity.GetHost.GetTitleAsNameNoTooltip|l] danh chính ngôn thuận."
+  coronation_events.0205.c: "Ta chính là hiện thân hoàn mỹ của một [activity.GetHost.GetTitleAsNameNoTooltip|l] vĩ đại!"
+  coronation_events.0205.d: "Giờ đây, hãy xem thực lực của vị [activity.GetHost.GetTitleAsNameNoTooltip] này."
+  coronation_events.0205.e_east_admin: "Ánh kim ngân sẽ khôi phục điềm lành của ngày hôm nay!"
+  coronation_events.0205.e: "Ánh kim ngân sẽ khôi phục vẻ huy hoàng của ngày hôm nay."
+  coronation_events.0205.e.tt: "Một con [ROOT.Char.CustomFixedRandom('GetKnightErrantAnimal')] được dắt vào, khoác vải dệt vàng; [ROOT.Char.CustomFixedRandom('GetExpensiveDrink_Singular')] tuôn chảy từ mọi đài phun; nhạc công ngồi trước đình trướng, ca tụng vinh quang của ngài."
+  coronation_events.0205.e.toast: "[host.GetShortUIName] Không tiếc tay chi cho đại lễ"
+  coronation_events.0205.f_east_admin: "Ta #EMP phải#! thân chinh phát biểu trước hội này."
+  coronation_events.0205.f: "Bách tính đều biết ai mới là [ROOT.Char.GetTitleAsNameNoTooltip] của họ."
+  coronation_events.0205.f.tt: "Ngài ban ra một bài diễn thuyết đầy khí thế trước bách tính."
+  coronation_events.0205.f.success: "Quần chúng kinh ngạc tán phục"
+  coronation_events.0205.f.failure: "Mọi nỗ lực của ngài trở nên vô ích"
+  coronation_events.0205.f.toast: "[host.GetShortUIName] Đã ban một bài diễn thuyết đầy hào khí"
+ 
+  coronation_events.0210.t: "Yến Tiệc"
+  coronation_events.0210.desc.host: "Nghi lễ đã hoàn tất: từng vinh dự xứng với một [ROOT.Char.Custom('GetTitleTierAdjective')] đều đã được ban cho ta. Ta một lần nữa đứng dậy, không phải để hứa hẹn hay ban lệnh, mà để thiết đãi mọi người bằng một yến tiệc thịnh soạn.\n\n\"Hãy bày đầy những bàn tiệc. Hãy nâng cao những chén rượu, và để đại sảnh này ghi nhớ không chỉ bổn phận, mà cả niềm vui.\"\n\nĐám đông, vốn đã đói lả sau khi kiên nhẫn chứng kiến những nghi thức dài dòng và cầu kỳ, đồng loạt hưởng ứng. Ít nhất vào lúc này, trước mặt mọi người đều có thứ gì đó để nhìn, ngoài ta."
+  coronation_events.0210.desc.guest: "Các nghi thức trang trọng đã kết thúc, và cùng với đó là bầu không khí tĩnh lặng bao trùm cả hội trường. Vài tiếng xì xào nổi lên khi chủ nhân buổi lễ lại đứng dậy, lần này để khép lại nghi lễ và mở đầu cho một bầu không khí thư thái hơn.\n\n[host.GetTitleAsName] cất cao giọng vừa đủ để mọi người đều nghe thấy: \"Bằng hữu của ta, các nghi lễ đã hoàn tất. Hãy bày đầy những bàn tiệc, hãy nâng cao những chén rượu, và để đại sảnh này ghi nhớ không chỉ bổn phận, mà cả niềm vui.\"\n\nNhững lời ấy được đón nhận nồng nhiệt, và theo từng khoảnh khắc trôi qua, buổi hội tụ của giới [ROOT.Char.Custom('GetTitleTierAdjective')] dần biến thành một lễ hội tưng bừng."
+  coronation_events.0210.a: "Gác chuyện đó lại, đã đến lúc ăn mừng!"
+  coronation_events.0210.b: "Cuối cùng thì nghi lễ cũng kết thúc."
+
+  coronation_events.0300.t: "Vị Trí Danh Dự"
+  coronation_events.0300.desc: "Trước khi lễ đăng quang có thể tiếp diễn, ta phải quyết định ai sẽ chủ trì nghi thức thiêng liêng này. Nếu muốn bảo đảm sự ủng hộ của các [ROOT.Char.GetFaith.AltPriestTermPlural|U], sẽ khôn ngoan hơn nếu để một người trong số họ đứng ra giám lễ, ban cho buổi lễ sự linh thiêng và phúc lành mà chỉ họ mới có thể mang lại.\n\nThế nhưng, một phần trong ta lại tự hỏi: chẳng phải sẽ là một câu chuyện huy hoàng hơn nếu chính ta tự tay đội vương miện, tuyên bố quyền cai trị của mình trước toàn thể mà không cần bất kỳ sự trung gian nào sao?"
+  coronation_events.0300.a: "Chỉ có [chaplain.GetFirstNameNoTooltip] mới có thể làm việc này."
+  coronation_events_0300_a_tooltip: "[chaplain.GetFirstName] sẽ là người chủ trì nghi lễ"
+  coronation_events.0300.b: "Hay là [alternative_1.GetFirstNameNoTooltip]?"
+  coronation_events_0300_b_tooltip: "[alternative_1.GetFirstName] sẽ là người chủ trì nghi lễ"
+  coronation_events.0300.c: "Ta đặt niềm tin vào [alternative_2.GetFirstNameNoTooltip]."
+  coronation_events_0300_c_tooltip: "[alternative_2.GetFirstName] sẽ là người chủ trì nghi lễ"
+  coronation_events.0300.d: "Đây là vinh dự chỉ có thể thuộc về chính ta."
+  coronation_events_0300_d_tooltip: "#high Chính Ngài#! sẽ là người chủ trì nghi lễ"
+  coronation_events_0300_d_tooltip_effect: "#high Ngài#! sẽ nhận @prestige_icon![prestige|E], nhưng mất @opinion_icon![opinion|E] với [court_chaplain|E] của Ngài và các [vassals|E] có lập trường [GetVassalStance( 'zealot' ).GetTextIcon][GetVassalStance( 'zealot' ).GetName|U], tùy theo mức [coronation_magnificence|E] của [coronation|E]"
+  coronation_events_0300_d_tooltip_effect_hof: "#high Ngài#! sẽ nhận @prestige_icon![prestige|E], nhưng mất @opinion_icon![opinion|E] với [head_of_faith|E] và các [vassals|E] có lập trường [GetVassalStance( 'zealot' ).GetTextIcon][GetVassalStance( 'zealot' ).GetName|U], tùy theo mức [coronation_magnificence|E] của [coronation|E]"
+
+  coronation_events.0301.t: "Cái Chết Của Người Chủ Lễ"
+  coronation_events.0301.desc: "Người chủ trì lễ đăng quang của ta, [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('dead_officiator'))] của ta là [dead_officiator.GetFirstName], đã qua đời, [dead_officiator.GetDeathReason]. Chỗ ngồi của [dead_officiator.GetHerHis|U] nay bỏ trống, và nghi lễ thiêng liêng vẫn còn dang dở.\n\n[first_candidate.GetFirstName], một [first_candidate.GetFaith.GetAdherentName] [first_candidate.GetFaith.PriestNeuter] đáng kính, bước lên phía trước. \"[first_candidate.GetFaith.HighGodName] không nao núng trước sự ra đi của một linh hồn,\" [first_candidate.GetSheHe] nói một cách trang nghiêm. \"Nếu ngài cho phép, ta sẽ hoàn tất nghi thức.\""
+  coronation_events.0301.a: "Thánh [ROOT.Char.Custom('GetCatholicSaint')], xin phó thác linh hồn [dead_officiator.GetHerHis] cho [ROOT.Char.GetFaith.PositiveAfterLife]."
+  coronation_events.0301.a.tooltip: "[first_candidate.GetFirstNameNoTooltip] sẽ là người chủ trì nghi lễ mới"
+  coronation_events.0301.a.c: "Ta sẽ không để cái chết của [dead_officiator.GetHerHis] cản trở buổi lễ."
+  coronation_events.0301.b: "[second_candidate.GetTitledFirstNameNoTooltip] gần gũi với [first_candidate.GetFaith.HighGodName] hơn."
+  coronation_events.0301.b.tooltip: "[second_candidate.GetFirstNameNoTooltip] sẽ là người chủ trì nghi lễ mới"
+  coronation_events.0301.c: "[dead_officiator.GetSheHe|U] xứng đáng nhận được sự tôn kính cao nhất của ta. Hủy bỏ các nghi lễ."
+  coronation_events.0301.c.tooltip: "#N @warning_icon! Hoạt động [coronation|E] của Ngài sẽ bị hủy.#!"
+  coronation_events.0301.c.tooltip_second: "Ngài sẽ có thể tổ chức một [funeral|E] cho [dead_officiator.GetFirstName]."
+  coronation_events.0301.c.tooltip_third: "Ngài sẽ có thể tổ chức lại [coronation|E] ngay sau [funeral|E] của [dead_officiator.GetHerHis]."
+  coronation_events.0301.d: "Ta sẽ không để một cái chết ngăn cản #EMP lễ đăng quang của ta#!."
+  coronation_events.0301.d.tooltip: "[first_candidate.GetFirstNameNoTooltip] sẽ là người chủ trì nghi lễ mới. Cái chết của [dead_officiator.GetTitledFirstNamePossessive] trong lễ đăng quang của Ngài được xem là một điềm cực xấu cho triều đại."
+  coronation_events.0301.e: "[first_candidate.GetFaith.HighGodName] ban cho và [first_candidate.GetFaith.HighGodName] lấy đi."
+  coronation_events.0301.e.tooltip: "#N @warning_icon! Hoạt động [coronation|E] của Ngài sẽ bị hủy.#!"
+  coronation_events.0301.e.tooltip_second: "Ngài sẽ không thể tổ chức thêm một lễ đăng quang nào khác trong 12 tháng tới."
+
+  coronation_cancelled_dead_officiator_desc: "Người chủ trì lễ [coronation|E] trước đó đã qua đời trong vòng một năm."
+  coronation_cancelled_wrong_primary_title_desc: "Khác [primary_title|E]"
+
+ ### Decisions
+ # General Decision stuff
+  busy_in_coronation_tooltip: "Vẫn đang là [activity_host_short|E] của một [coronation|E]"
+  coronation_value_still_undecided: "\n\n@alert_icon!#alert_trial Lễ đăng quang cho [oath|E] vẫn chưa hoàn tất, nên giá trị của nó vẫn chưa được xác định#!"
+  CORONATION_ACTIVITY_UNLOCK: "Mở khóa bởi [coronation|E] [activity|E]"
+  oath_decision_confirm: "Ta đã giữ trọn lời thề"
+
+ ## Diplomacy
+ # Alliances
+  diplomacy_oath_1_decision: "$GetAllianceOathText$ [CoronationTimer('diplomacy_oath_1_decision','diplomacy_oath_1_decision_timer')]"
+  diplomacy_oath_1_decision_timer: "\t#weak ([RemainingTime('diplomacy_oath_1_timer')])#!"
+  diplomacy_oath_1_decision_desc: "Vương quốc khao khát bằng hữu và đồng minh. Ta sẽ củng cố quan hệ với các vùng đất ngoại bang, và tìm những chiến hữu sát cánh cùng ta trong chiến tranh. $diplomacy_oath_1_decision_desc_extra$"
+  diplomacy_oath_1_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('diplomacy_oath_1_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('diplomacy_oath_1')]"
+  diplomacy_oath_1_decision_tooltip: "[ROOT.Char.GetPrimaryTitle.GetNameNoTier] sẽ được biết đến với các nhà ngoại giao vang danh khắp nơi, khi chúng ta xây dựng mối quan hệ vượt xa lãnh thổ của mình."
+  diplomacy_oath_1_decision_confirm: "Ta không đơn độc"
+  custom_every_allied_ruler: "Mọi [ruler|E] [allied|E]"
+  culture_acceptance_gain_oath: "Từ [oaths|E]"
+  custom_alliance_oath_decision_trigger: "Ít nhất #V 3#! [allies|E]:\n\t$EFFECT_LIST_BULLET$Hiện tại, [SCOPE.ScriptValue('alliance_oath_value')|V0] đáp ứng các yêu cầu này\n\t$EFFECT_LIST_BULLET$Ý kiến về [root_temp_scope.GetShortUIName] là #V 50#! trở lên\n\t$EFFECT_LIST_BULLET$Một trong các điều sau:\n\t\t\t$EFFECT_LIST_BULLET$Thấp hơn một bậc [title_tier|E]\n\t\t\t$EFFECT_LIST_BULLET$Cùng bậc [title_tier|E]\n\t\t\t$EFFECT_LIST_BULLET$Cao hơn [title_tier|E]"
+ # Children
+  diplomacy_oath_2_decision: "$GetChildrenOathText$ [CoronationTimer('diplomacy_oath_2_decision','diplomacy_oath_2_decision_timer')]"
+  diplomacy_oath_2_decision_timer: "\t#weak ([RemainingTime('diplomacy_oath_2_timer')])#!"
+  diplomacy_oath_2_decision_desc: "Nhiều hậu duệ của [house|E] [ROOT.Char.GetHouse.GetName] sẽ dẫn dắt vương quốc đến một tương lai hưng thịnh và bảo đảm di sản của triều đại. $diplomacy_oath_2_decision_desc_extra$"
+  diplomacy_oath_2_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('diplomacy_oath_2_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('diplomacy_oath_2')]"
+  diplomacy_oath_2_decision_tooltip: "[ROOT.Char.GetHouse.GetName] sẽ được biết đến với đông đảo hậu duệ"
+  diplomacy_oath_2_decision_confirm: "[ROOT.Char.GetHouse.GetBaseNameNoTooltip|U] ngày càng hùng mạnh"
+  custom_children_oath_decision_trigger: "Ít nhất #V 7#! [children|E]:\n\t$EFFECT_LIST_BULLET$Hiện tại, [SCOPE.ScriptValue('children_oath_value')|V0] đáp ứng các yêu cầu này\n\t$EFFECT_LIST_BULLET$#BOL KHÔNG #! có đặc tính [trait|E] [GetTrait('bastard').GetName( GetNullCharacter )]"
+  custom_children_renown_effect: "Cho mỗi [child|E] [legitimate|E]"
+  MODIFIER_DEFINITION_VALUE_CHILDREN_OATH_SCALE: " \t#weak Tăng theo mỗi [child|E] [legitimate|E]#!"
+
+ ## Martial
+  martial_oath_1_decision: "$GetReconquerOathText$ [CoronationTimer('martial_oath_1_decision','martial_oath_1_decision_timer')]"
+  martial_oath_1_decision_timer: "\t#weak ([RemainingTime('martial_oath_1_timer')])#!"
+  martial_oath_1_decision_desc: "Biên giới của [GetPlayer.MakeScope.Var('oath_reconquest_title').Title.GetNameNoTierNoTooltip] là bất khả xâm phạm, và ta sẽ trừng phạt bất kỳ kẻ nào dám xâm nhập những vùng đất vốn thuộc về ta theo lẽ phải. $martial_oath_1_decision_desc_extra$"
+  martial_oath_1_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('martial_oath_1_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('martial_oath_1')]"
+  martial_oath_1_decision_tooltip: "Chinh phục lại những vùng đất đã mất của [GetPlayer.MakeScope.Var('oath_reconquest_title').Title.GetNameNoTierNoTooltip], và khôi phục sự toàn vẹn cho [GetPlayer.MakeScope.Var('oath_reconquest_title').Title.GetTierAsNameNoTooltip]"
+  oath_reconquest_custom_de_jure_county: "Mọi [county|E] [de_jure|E] của [GetPlayer.MakeScope.Var('oath_reconquest_title').Title.GetNameNoTier]"
+  martial_oath_1_decision_confirm: "$oath_decision_confirm$"
+ # Conquest
+  martial_oath_2_decision: "$GetConquestOathText$ [CoronationTimer('martial_oath_2_decision','martial_oath_2_decision_timer')]"
+  martial_oath_2_decision_timer: "\t#weak ([RemainingTime('martial_oath_2_timer')])#!"
+  martial_oath_2_decision_desc: "Lãnh thổ của [ROOT.Char.GetPrimaryTitle.GetNameNoTierNoTooltip] được định mệnh là phải mở rộng. Không phải bằng lời nói, mà bằng chiến tranh. Ta đã thề chinh phạt trước thần dân của mình, và vì thế ta phải chinh phạt. $martial_oath_2_decision_desc_extra$"
+  martial_oath_2_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('martial_oath_2_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('martial_oath_2')]"
+  martial_oath_2_decision_tooltip: "Giữ trọn lời thề với thần dân, và mở rộng lãnh thổ của [ROOT.Char.GetPrimaryTitle.GetNameNoTierNoTooltip]"
+  martial_oath_2_decision_confirm: "$oath_decision_confirm$"
+
+ ## Stewardship
+ # Peace
+  stewardship_oath_1_decision: "$GetPeaceOathText$ [CoronationTimer('stewardship_oath_1_decision','stewardship_oath_1_decision_timer')]"
+  stewardship_oath_1_decision_timer: "\t#weak ([RemainingTime('stewardship_oath_1_timer')])#!"
+  stewardship_oath_1_decision_desc: "Đã đến lúc hạ vũ khí và tận hưởng một kỷ nguyên hòa bình. Người dân [ROOT.Char.GetPrimaryTitle.GetAdjective] đã trải qua quá nhiều năm tháng chiến tranh u ám. $stewardship_oath_1_decision_desc_extra$"
+  stewardship_oath_1_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('stewardship_oath_1_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('stewardship_oath_1')]"
+  stewardship_oath_1_decision_tooltip: "Ta đã thề sẽ mang đến cho thần dân một thời kỳ hòa bình."
+  stewardship_oath_1_decision_confirm: "Thời đại hoàng kim của [ROOT.Char.GetPrimaryTitle.GetNameNoTierNoTooltip]"
+  custom_every_realm_county: "Mọi [county|E] trong [realm|E]"
+  days_at_peace_text: "Hơn #V 5 năm#! hòa bình"
+  days_at_peace_text_alt: "$days_at_peace_text$ #weak (Còn lại #V [SCOPE.ScriptValue('peace_oath_value')]#! ngày)#!"
+ # Building Oath
+  stewardship_oath_2_decision: "$GetBuildingOathText$ [CoronationTimer('stewardship_oath_2_decision','stewardship_oath_2_decision_timer')]"
+  stewardship_oath_2_decision_timer: "\t#weak ([RemainingTime('stewardship_oath_2_timer')])#!"
+  stewardship_oath_2_decision_desc: "Ta sẽ tái tạo toàn bộ [ROOT.Char.GetPrimaryTitle.GetNameNoTier] theo hình ảnh của mình, để lại một di sản bền vững bằng đá và vữa cho các thế hệ mai sau. $stewardship_oath_2_decision_desc_extra$"
+  stewardship_oath_2_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('stewardship_oath_2_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('stewardship_oath_2')]"
+  building_oath_trigger: "Xây dựng hoặc nâng cấp ít nhất #V 8#! [buildings|E] #weak (Hiện tại: [SCOPE.ScriptValue('building_oath_value')|V0])#!"
+  stewardship_oath_2_decision_tooltip: "Ta đã thề sẽ tái định hình vương quốc theo ý mình, để lại dấu ấn lâu dài lên các khu định cư trong [realm|E]."
+  stewardship_oath_2_decision_confirm: "Di sản của ta hiên ngang tồn tại"
+  every_build_oath_place: "Mọi [county|E] nơi một [building|E] đã được xây dựng"
+
+ ## Intrigue
+
+ ## Learning
+ # Reconquest
+ # University
+  learning_oath_1_decision: "$GetUniversityOathText$ [CoronationTimer('learning_oath_1_decision','learning_oath_1_decision_timer')]"
+  learning_oath_1_decision_timer: "\t#weak ([RemainingTime('learning_oath_1_timer')])#!"
+  learning_oath_1_decision_desc: "Ta đã thề với người dân [ROOT.Char.GetPrimaryTitle.GetAdjective] sẽ xây dựng một trung tâm tri thức mới, vĩ đại — và ta sẽ thực hiện điều đó.$learning_oath_1_decision_desc_extra$"
+  learning_oath_1_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('learning_oath_1_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('learning_oath_1')]"
+  learning_oath_1_decision_tooltip: "Xây dựng một trung tâm học thuật cho mọi người trong [ROOT.Char.GetPrimaryTitle.GetNameNoTier]"
+  learning_oath_1_decision_confirm: "Đã đến lúc khai sáng"
+  learning_oath_1_diplomacy_councillor: "[councillors|E] tập trung vào [diplomacy|E] có [diplomacy_i][diplomacy|E] từ #V 20#! trở lên"
+  learning_oath_1_martial_councillor: "[councillors|E] tập trung vào [martial|E] có [martial_i][martial|E] từ #V 20#! trở lên"
+  learning_oath_1_stewardship_councillor: "[councillors|E] tập trung vào [stewardship|E] có [stewardship_i][stewardship|E] từ #V 20#! trở lên"
+  learning_oath_1_intrigue_councillor: "[councillors|E] tập trung vào [intrigue|E] có [intrigue_i][intrigue|E] từ #V 20#! trở lên"
+  learning_oath_1_learning_councillor: "[councillors|E] tập trung vào [learning|E] có [learning_i][learning|E] từ #V 20#! trở lên"
+
+
+ # Purge Pretenders
+  purge_pretenders_oath_decision: "$GetPurgePretendersOathText$ [CoronationTimer('purge_pretenders_oath_decision','purge_pretenders_oath_decision_timer')]"
+  purge_pretenders_oath_decision_timer: "\t#weak ([RemainingTime('purge_pretenders_oath_timer')])#!"
+  purge_pretenders_oath_decision_desc: "Ta đã thề sẽ tiêu diệt mọi kẻ mạo nhận ngai vàng của [GetPlayer.MakeScope.Var('purge_pretenders_target_title').Title.GetName]. Chúng phải từ bỏ những yêu sách sai trái của mình — hoặc phải chết. $purge_pretenders_oath_decision_desc_extra$"
+  purge_pretenders_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('purge_pretenders_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('purge_pretenders_oath')]"
+  purge_pretenders_oath_decision_tooltip: "Loại bỏ các [claimants|E] giả mạo"
+  purge_pretenders_oath_decision_confirm: "Cuộc thanh trừng đã hoàn tất"
+  purge_pretenders_oath_decision_default: "Luật [succession|E] sẽ được đặt lại theo hiện tại khi [character|E] của Ngài qua đời."
+  purge_pretenders_oath_decision_murderer_tyranny: "Ngài cần ít nhất #V 80#! [tyranny|E] #weak (Hiện tại: [GetPlayer.MakeScope.ScriptValue('oath_purge_pretenders_tyranny')])#!"
+  purge_pretenders_oath_decision_claimants: "Không tồn tại [claimant|E] nào cho [GetPlayer.MakeScope.Var('purge_pretenders_target_title').Title.GetName] ngoài [children|E] của Ngài #weak (Hiện tại: [GetPlayer.MakeScope.ScriptValue('oath_purge_pretenders_claimants')])#!"
+  purge_pretenders_oath_decision_children: "Ít hơn #V 3#! [children|E] của Ngài có [claim|E] đối với [GetPlayer.MakeScope.Var('purge_pretenders_target_title').Title.GetName] #weak (Hiện tại: [GetPlayer.MakeScope.ScriptValue('oath_purge_pretenders_children')])#!"
+
+ # End the Struggle
+  end_the_struggle_oath_decision: "$GetEndTheStruggleOathText$ [CoronationTimer('end_the_struggle_oath_decision','end_the_struggle_oath_decision_timer')]"
+ 
+  end_the_struggle_oath_decision_desc_persian: "Ta đã thề sẽ chấm dứt [GetStruggle('persian_struggle').GetName]. $end_the_struggle_oath_decision_desc_extra$"
+  end_the_struggle_oath_decision_desc_persian_ended: "Ta đã thề sẽ chấm dứt #V Iranian Intermezzo#!. $end_the_struggle_oath_decision_desc_extra$"
+  end_the_struggle_oath_decision_desc_iberian: "Ta đã thề sẽ chấm dứt [GetStruggle('iberian_struggle').GetName]. $end_the_struggle_oath_decision_desc_extra$"
+  end_the_struggle_oath_decision_desc_iberian_ended: "Ta đã thề sẽ chấm dứt #V Iberian Struggle#!. $end_the_struggle_oath_decision_desc_extra$"
+  end_the_struggle_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('end_the_struggle_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('end_the_struggle_oath')]"
+  end_the_struggle_oath_decision_tooltip: "Chấm dứt Cuộc Xung Đột"
+  end_the_struggle_oath_decision_confirm: "Những tháng ngày bất định đã kết thúc"
+  end_the_struggle_oath_decision_flag: "Ngài đã hoàn tất [struggle|E] bằng bất kỳ [decision|E] kết thúc nào."
+  end_the_struggle_oath_decision_trigger_persian: "Ngài đã hoàn tất [GetStruggle('persian_struggle').GetName] bằng bất kỳ [decision|E] kết thúc nào."
+  end_the_struggle_oath_decision_trigger_persian_ended: "Ngài đã hoàn tất #V Iranian Intermezzo#! bằng bất kỳ [decision|E] kết thúc nào."
+  end_the_struggle_oath_decision_trigger_iberian: "Ngài đã hoàn tất [GetStruggle('iberian_struggle').GetName] bằng bất kỳ [decision|E] kết thúc nào."
+  end_the_struggle_oath_decision_trigger_iberian_ended: "Ngài đã hoàn tất #V Iberian Struggle#! bằng bất kỳ [decision|E] kết thúc nào."
+
+  end_the_struggle_oath_decision_title_persian: "Chấm dứt [GetStruggle('persian_struggle').GetNameNoTooltip] [CoronationTimer('end_the_struggle_oath_decision_persian','end_the_struggle_oath_decision_timer')]"
+  end_the_struggle_oath_decision_title_persian_ended: "Chấm dứt #V Iranian Intermezzo#!  [CoronationTimer('end_the_struggle_oath_decision_persian','end_the_struggle_oath_decision_timer')]"
+  end_the_struggle_oath_decision_title_iberian: "Chấm dứt [GetStruggle('iberian_struggle').GetNameNoTooltip] [CoronationTimer('end_the_struggle_oath_decision_iberian','end_the_struggle_oath_decision_timer')]"
+  end_the_struggle_oath_decision_title_iberian_ended: "Chấm dứt #V Iberian Struggle#!  [CoronationTimer('end_the_struggle_oath_decision_iberian','end_the_struggle_oath_decision_timer')]"
+  end_the_struggle_oath_decision_timer: "\t#weak ([RemainingTime('end_the_struggle_oath_timer')])#!"
+
+ # Greatest Hunter
+  greatest_hunter_oath_decision: "$GetGreatestHunterOathText$ [CoronationTimer('greatest_hunter_oath_decision','greatest_hunter_oath_decision_timer')]"
+  greatest_hunter_oath_decision_timer: "\t#weak ([RemainingTime('greatest_hunter_oath_timer')])#!"
+  greatest_hunter_oath_decision_desc: "Ta đã thề sẽ trở thành thợ săn vĩ đại nhất mà vùng đất này từng biết đến, với những câu chuyện săn bắn được truyền tụng cho đến tận cùng thời gian. $greatest_hunter_oath_decision_desc_extra$"
+  greatest_hunter_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('greatest_hunter_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('greatest_hunter_oath')]"
+  greatest_hunter_oath_decision_tooltip: "Tổ chức một Cuộc Săn Huyền Thoại thành công"
+  greatest_hunter_oath_decision_confirm: "Ta là thợ săn vô song"
+  greatest_hunter_decision_l3_trigger: "Tổ chức thành công #V Cuộc Săn Huyền Thoại#! [GetActivityType('activity_hunt').GetTextIcon][GetActivityType('activity_hunt').GetName] #V 3#! lần ([THIS.Char.MakeScope.Var('greatest_hunter_oath_l_counter').GetValue|0]/3)"
+  greatest_hunter_decision_l1_trigger: "Tổ chức thành công #V Cuộc Săn Huyền Thoại#! [GetActivityType('activity_hunt').GetTextIcon][GetActivityType('activity_hunt').GetName] #V 1#! lần ([THIS.Char.MakeScope.Var('greatest_hunter_oath_l_counter').GetValue|0]/1)"
+  greatest_hunter_decision_r10_trigger: "Tổ chức thành công [GetActivityType('activity_hunt').GetTextIcon][GetActivityType('activity_hunt').GetName] #V 10#! lần ([THIS.Char.MakeScope.Var('greatest_hunter_oath_r_counter').GetValue|0]/10)"
+  greatest_hunter_decision_trigger_2: "Ngài sở hữu một [artifact|E] loại #V Cung#!"
+  greatest_hunter_decision_no_artifact_xp_effect: "[artifact|E] loại #V Cung#! của Ngài nhận #V #P 20%#! $trait_track_hunter_xp_gain_mult$#!"
+  greatest_hunter_decision_no_artifact_stress_effect: "[artifact|E] loại #V Cung#! của Ngài nhận #V #P -15%#! Lượng [stress|E] nhận vào#!"
+  greatest_hunter_decision_no_artifact_tribal_effect: "[artifact|E] loại #V Cung#! của Ngài nhận #V #P +6#! [tribal|E] [opinion|E]#!"
+
+ # Heir Preparation
+  heir_preparation_oath_decision: "$GetHeirPreparationOathText$ [CoronationTimer('heir_preparation_oath_decision','heir_preparation_oath_decision_timer')]"
+  heir_preparation_oath_decision_timer: "\t#weak ([RemainingTime('heir_preparation_oath_timer')])#!"
+  heir_preparation_oath_decision_desc: "Ta đã thề sẽ chuẩn bị người thừa kế của mình cho những thử thách phía trước. Triều đại của ta không có mục đích nào lớn hơn điều sẽ kế tục nó. $heir_preparation_oath_decision_desc_extra$"
+  heir_preparation_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('heir_preparation_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('heir_preparation_oath')]"
+  heir_preparation_oath_decision_tooltip: "Chuẩn bị [primary_heir|E] của Ngài cho tương lai"
+  heir_preparation_oath_decision_confirm: "Ngôi vị kế thừa đã được đảm bảo"
+  heir_preparation_oath_decision_no_heir: "[primary_heir|E] của Ngài là #V con ruột#! [child|E]"
+  heir_preparation_oath_decision_heir_under_12: "[primary_heir|E] của Ngài ít nhất #V 12#! tuổi"
+  heir_preparation_oath_decision_heir_stats_10: "[primary_heir|E] của Ngài có ít nhất #V 10#! ở mọi [skills|E]"
+  heir_preparation_oath_decision_heir_stats_14: "[primary_heir|E] của Ngài có ít nhất #V 14#! ở một [skill|E] bất kỳ"
+  heir_preparation_oath_decision_heir_stats_intellect: "[primary_heir|E] của Ngài có một [trait|E] thuộc nhóm Bright Minds"
+  heir_preparation_oath_decision_heir_stats_beauty: "[primary_heir|E] của Ngài có một [trait|E] thuộc nhóm Beautiful Characters"
+  heir_preparation_oath_decision_heir_stats_physique: "[primary_heir|E] của Ngài có một [trait|E] thuộc nhóm Physical Specimens"
+
+ # Install Claimants
+  install_claimants_oath_decision: "$GetInstallClaimantsOathText$ [CoronationTimer('install_claimants_oath_decision','install_claimants_oath_decision_timer')]"
+  install_claimants_oath_decision_timer: "\t#weak ([RemainingTime('install_claimants_oath_timer')])#!"
+  install_claimants_oath_decision_desc: "Ta đã thề sẽ đưa các [claimants|E] lên những ngai vàng chính đáng của họ, thiết lập trật tự công bằng cho các cõi đất trên thế gian này… và mang về những tân quân vương tràn đầy lòng biết ơn dành cho ta. $install_claimants_oath_decision_desc_extra$"
+  install_claimants_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('install_claimants_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('install_claimants_oath')]"
+  install_claimants_oath_decision_tooltip: "Dựng lên các [claimants|E]"
+  install_claimants_oath_decision_confirm: "Vĩnh biệt, những kẻ cầm quyền giả mạo!"
+  install_claimants_oath_decision_trigger: "#V [GetPlayer.MakeScope.Var('install_claimants_oath_counter').GetValue|0]/3#! [claimants|E] được dựng lên thông qua [wars|E]"
+
+ # Mend The Fracture
+  mend_the_fracture_oath_decision: "$GetMendTheFractureOathText$ [CoronationTimer('mend_the_fracture_oath_decision','mend_the_fracture_oath_decision_timer')]"
+  mend_the_fracture_oath_decision_timer: "\t#weak ([RemainingTime('mend_the_fracture_oath_timer')])#!"
+  mend_the_fracture_oath_decision_desc: "Ta đã thề sẽ vun đắp thiện chí giữa [ROOT.Char.GetCulture.GetName] và [GetPlayer.MakeScope.Var('mend_the_fracture_oath_target_culture').Culture.GetName], mang lại sự hòa hợp cho những vùng đất mà họ cùng chia sẻ. $mend_the_fracture_oath_decision_desc_extra$"
+  mend_the_fracture_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn [RemainingTime('mend_the_fracture_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('mend_the_fracture_oath')]"
+  mend_the_fracture_oath_decision_tooltip: "Tăng [cultural_acceptance|E] của [culture|E] [GetPlayer.MakeScope.Var('mend_the_fracture_oath_target_culture').Culture.GetName]"
+  mend_the_fracture_oath_decision_confirm: "Từ đa dạng, thành thống nhất"
+
+ # Provide for the Warriors
+  provide_for_the_warriors_oath_decision: "$GetProvideForTheWarriorsOathText$ [CoronationTimer('provide_for_the_warriors_oath_decision','provide_for_the_warriors_oath_decision_timer')]"
+  provide_for_the_warriors_oath_decision_timer: "\t#weak ([RemainingTime('provide_for_the_warriors_oath_timer')])#!"
+  provide_for_the_warriors_oath_decision_desc: "Ta đã thề sẽ chu cấp cho các [ROOT.Char.Custom('KnightCulturePluralNoTooltipLowercase')] và [ROOT.Char.Custom('GetFighterTermPlural')] của [ROOT.Char.GetPrimaryTitle.GetNameNoTier], ban thưởng hào phóng để họ được trang bị đầy đủ cho những cuộc chiến sắp tới. $provide_for_the_warriors_oath_decision_desc_extra$"
+  provide_for_the_warriors_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn lại [RemainingTime('provide_for_the_warriors_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('provide_for_the_warriors_oath')]"
+  provide_for_the_warriors_oath_decision_tooltip: "Xây dựng #V 3#! [GetBuilding('oath_warriors_building_02').GetName] [buildings|E]."
+  provide_for_the_warriors_oath_decision_confirm: "Sức mạnh của họ là nền tảng cho quyền cai trị của ta"
+
+ # Provide for the Faithful
+  provide_for_the_faithful_oath_decision: "$GetProvideForTheFaithfulOathText$ [CoronationTimer('provide_for_the_faithful_oath_decision','provide_for_the_faithful_oath_decision_timer')]"
+  provide_for_the_faithful_oath_decision_timer: "\t#weak ([RemainingTime('provide_for_the_faithful_oath_timer')])#!"
+  provide_for_the_faithful_oath_decision_desc: "Ta đã thề bảo trợ cho các tín đồ trung thành của [ROOT.Char.GetPrimaryTitle.GetAdjective], và xây dựng những cơ sở sùng đạo mới trên khắp lãnh thổ. $provide_for_the_faithful_oath_decision_desc_extra$"
+  provide_for_the_faithful_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn lại [RemainingTime('provide_for_the_faithful_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('provide_for_the_faithful_oath')]"
+  provide_for_the_faithful_oath_decision_tooltip: "Xây dựng #V 3#! [GetBuilding('oath_faithful_building_02').GetName] [buildings|E]."
+  provide_for_the_faithful_oath_decision_confirm: "Đức tin là sức mạnh của chúng ta"
+
+ # Provide for the Poor
+  provide_for_the_poor_oath_decision: "$GetProvideForThePoorOathText$ [CoronationTimer('provide_for_the_poor_oath_decision','provide_for_the_poor_oath_decision_timer')]"
+  provide_for_the_poor_oath_decision_timer: "\t#weak ([RemainingTime('provide_for_the_poor_oath_timer')])#!"
+  provide_for_the_poor_oath_decision_desc: "Ta đã thề sẽ chăm lo cho người nghèo của [ROOT.Char.GetPrimaryTitle.GetNameNoTier], với tư cách là vị quân vương nhân hậu và quảng đại của họ. $provide_for_the_poor_oath_decision_desc_extra$"
+  provide_for_the_poor_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn lại [RemainingTime('provide_for_the_poor_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('provide_for_the_poor_oath')]"
+  provide_for_the_poor_oath_decision_tooltip: "Xây dựng #V 3#! [GetBuilding('oath_poor_building_02').GetName] [buildings|E]."
+  provide_for_the_poor_oath_decision_confirm: "Người khốn khó không còn phải chịu khổ nữa"
+
+  # Repent
+  repent_oath_decision: "$GetRepentOathText$ [CoronationTimer('repent_oath_decision','repent_oath_decision_timer')]"
+  repent_oath_decision_timer: "\t#weak ([RemainingTime('repent_oath_timer')])#!"
+  repent_oath_decision_desc: "Ta đã thề sám hối cho những tội lỗi của mình, và trút bỏ gánh nặng của sai lầm: một gánh nặng cho trái tim ta, và cho cả vương quốc. $repent_oath_decision_desc_extra$"
+  repent_oath_decision_desc_extra: "\n\n@alert_icon!#alert_trial Còn lại [RemainingTime('repent_oath_timer')] để hoàn thành [oath|E]#![IsOngoingCoronationOath('repent_oath')]"
+  repent_oath_decision_tooltip: "Hoàn thành #V 4#! [pilgrimages|E]."
+  repent_oath_decision_confirm: "Linh hồn ta trần trụi trước [ROOT.Char.GetFaith.HighGodName]"
+  repent_oath_remove_traits_tooltip: "Toàn bộ [sinful|E] [traits|E] của Ngài sẽ được thay thế bằng các [virtuous|E] [traits|E] ngẫu nhiên."
+  repent_oath_pilgrimage: "#V [GetPlayer.MakeScope.Var('repent_oath_pilgrimage_counter').GetValue|0]/4#! [pilgrimages|E] đã hoàn thành"
+
+ # Activity Log
+  coronation_vassal_support_log_title: "Sự Ủng Hộ Của Chư Hầu"
+  coronation_vassal_support_log: "[CHARACTER.GetTitledFirstName|U] đã dùng ảnh hưởng cá nhân để củng cố [legitimacy|E] của [TARGET_CHARACTER.GetTitledFirstNamePossessive]"
+
+# Coronation Splendor Progression
+  coronation_tt_positive_massive: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] #P tăng vọt#!"
+  coronation_tt_positive_major: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] #P tăng mạnh#!"
+  coronation_tt_positive_medium: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] #P tăng đáng kể#!"
+  coronation_tt_positive_tiny: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] #P tăng nhẹ#!"
+  coronation_tt_positive_miniscule: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] #P tăng rất ít#!"
+  coronation_tt_negative_tiny: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] bị #N giảm nhẹ#!"
+  coronation_tt_negative: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] bị #N giảm#!"
+  coronation_tt_negative_major: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] bị #N suy giảm nghiêm trọng#!"
+  coronation_tt_negative_huge: "[coronation_magnificence|E] của [GetActivityType('activity_coronation').GetName] bị #N tổn hại nặng nề#!"
+
+  coronation_tt_positive_massive_log_title: "Hành động của [char.GetTitledFirstNamePossessiveNoTooltip] làm tăng sự lộng lẫy"
+  coronation_tt_positive_major_log_title: "$coronation_tt_positive_massive_log_title$"
+  coronation_tt_positive_medium_log_title: "$coronation_tt_positive_massive_log_title$"
+  coronation_tt_positive_tiny_log_title: "$coronation_tt_positive_massive_log_title$"
+  coronation_tt_positive_miniscule_log_title: "$coronation_tt_positive_massive_log_title$"
+  coronation_tt_negative_tiny_log_title: "Hành động của [char.GetTitledFirstNamePossessiveNoTooltip] làm suy giảm sự lộng lẫy"
+  coronation_tt_negative_log_title: "$coronation_tt_negative_tiny_log_title$"
+  coronation_tt_negative_major_log_title: "$coronation_tt_negative_tiny_log_title$"
+
+  magnificence_badly_reduced_by_factions_tt: "@warning_icon! #X [coronation_magnificence|E] đã bị các [factions|E] chống đối [host.GetShortUIName] tàn phá nghiêm trọng#!"
+  magnificence_badly_reduced_by_faction_tt: "@warning_icon! #X [coronation_magnificence|E] đã bị một [faction|E] chống đối [host.GetShortUIName] tàn phá nghiêm trọng#!"
+  magnificence_reduced_by_factions_tt: "[coronation_magnificence|E] đã bị #N tổn hại#! bởi các [factions|E] chống đối [host.GetShortUIName]"
+  magnificence_reduced_by_faction_tt: "[coronation_magnificence|E] đã bị #N tổn hại#! bởi một [faction|E] chống đối [host.GetShortUIName]"
+
+
+ # Rewards
+  coronation_oath_upgrade_100: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ việc hoàn thành [oath|E]: #P +160%#!"
+  coronation_oath_upgrade_75: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ việc hoàn thành [oath|E]: #P +120%#!"
+  coronation_oath_upgrade_50: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ việc hoàn thành [oath|E]: #P +80%#!"
+  coronation_oath_upgrade_25: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ việc hoàn thành [oath|E]: #P +40%#!"
+  coronation_reward_100: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ các [vassals|E] #V Ủng hộ#! ([THIS.ScriptValue('number_of_vassal_supporters')|V0]) có mặt tại [coronation|E]: #P 150%#!"
+  coronation_reward_75: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ các [vassals|E] #V Ủng hộ#! ([THIS.ScriptValue('number_of_vassal_supporters')|V0]) có mặt tại [coronation|E]: #P 75%#!"
+  coronation_reward_50: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ các [vassals|E] #V Ủng hộ#! ([THIS.ScriptValue('number_of_vassal_supporters')|V0]) có mặt tại [coronation|E]: #P 50%#!"
+  coronation_reward_25: "[prestige_i][prestige|E] và [legitimacy_i][legitimacy|E] nhận được từ các [vassals|E] #V Ủng hộ#! ([THIS.ScriptValue('number_of_vassal_supporters')|V0]) có mặt tại [coronation|E]: #P 25%#!"
+  intent_coronation_opinion_gain: "Do Ý Định #V [THIS.Char.GetInvolvedActivityIntent.GetName]#! của Ngài:"
+  coronation_completed_log_entry_effect_title: "[GetActivityType('activity_coronation').GetName] Hoàn Tất."
+  coronation_completed_log_entry_effect: "[GetActivityType('activity_coronation').GetName] đã kết thúc."
+  coronation_completed_log_oath_tt: "Lời thề đã tuyên: [THIS.Char.Custom('GetOath')|V]"
+
+
+# Artifacts
+
+  ach_spawned_crown_name: "Vương miện của [crown_title.GetDefinitiveNameNoTooltip]"
+  ach_spawned_crown_desc: "[SCOPE.Custom('ArtifactArticleWealth')] vương miện với tay nghề chế tác ở cấp độ [SCOPE.Custom('ArtifactQuality')]. Vương miện được rèn từ [newly_created_artifact.GetFeatureText( 'decoration_material_wire' )]. [title_founder.GetTitledFirstName] là người đầu tiên đội nó như biểu tượng cho nền cai trị [title_founder.Custom('trait_greedy_adjective')] của [title_founder.GetHerHis]. Kể từ đó, mọi [title_founder.GetTitleAsNameNoTooltip] của [crown_title.GetNameNoTier] đều đã đội vương miện này."
+  ach_spawned_regalia_name: "Bộ bảo vật của [crown_title.GetDefinitiveNameNoTooltip]"
+  ach_spawned_regalia_desc: "[SCOPE.Custom('ArtifactArticleWealth')] bộ bảo vật với tay nghề chế tác ở cấp độ [SCOPE.Custom('ArtifactQuality')]. [title_founder.GetTitledFirstName] là người đầu tiên nắm giữ nó như biểu tượng cho nền cai trị [title_founder.Custom('trait_greedy_adjective')] của [title_founder.GetHerHis]. Kể từ đó, mọi [title_founder.GetTitleAsNameNoTooltip] của [crown_title.GetNameNoTier] đều đã nắm giữ bộ bảo vật này."
+
+
+# Host activity rewards
+
+  coronation_events.0310.t: "Ý định của [ROOT.Char.GetTitleAsNamePossessiveNoTooltip]"
+  coronation_events.0310.desc.high_magnificence: "Ta đã làm việc không ngơi nghỉ để tôn vinh vinh quang, để nuôi dưỡng sự tráng lệ cho lễ đăng quang của mình. Các vị khách tràn đầy cảm hứng trước những gì họ chứng kiến nơi đây, tỏa ra niềm ngưỡng mộ. Đó là một khởi đầu xứng đáng cho triều đại của ta với tư cách là một [ROOT.Char.GetTitleAsNameNoTooltip|l].\n\n"
+  coronation_events.0310.desc.mid_magnificence: "Giờ ta đã thực sự là một [ROOT.Char.GetTitleAsNameNoTooltip|l]. Lễ đăng quang của ta chứng tỏ xứng đáng với địa vị ấy, một cảnh tượng đẹp đẽ cho các vị khách, nhiều người trong số họ vẫn còn nán lại với hy vọng được nghe thêm vài lời cuối mang phong thái [ROOT.Char.Custom('GetTitleTierAdjective')].\n\n"
+  coronation_events.0310.desc.low_magnificence: "Những cuộc ăn mừng đang dần đi đến hồi kết. Có rất nhiều lời xì xào về sự hỗn loạn, căng thẳng, và các tiện nghi chắp vá. Giờ đây ta đứng vững với những lời vu khống vang bên tai và thức ăn cũ kỹ, ôi thiu trong bụng... nhưng điều quan trọng duy nhất là cuối cùng ta cũng là một [ROOT.Char.GetTitleAsNameNoTooltip|l] đúng nghĩa.\n\n"
+  coronation_events.0310.desc.impress_attendees: "Từ đầu đến cuối, ta không tiếc công sức để gây ấn tượng với tất cả những người tham dự — cả Ngài lẫn thù! Nhưng sự hiện diện công bằng của ta, sự tập trung tuyệt đối của ta vào thành công của buổi tụ hội trọng đại này...\n\nRốt cuộc thì tất cả vì điều gì?"
+  coronation_events.0310.desc.weaken_detractors: "Những kẻ gièm pha hỗn xược, [first_char.Custom('InsultAdjective')] như [first_char.GetName] và [second_char.GetName], đã dám đến dự lễ đăng quang của ta... và ta đáp lại chúng bằng thứ mật đắng [ROOT.Char.Custom('GetTitleTierAdjective')] mà chúng đáng phải nhận! Chúng đến để moi móc điểm yếu của ta, nhưng chỉ tìm thấy sự khinh miệt lạnh lùng và ý chí sắt đá.\n\nCó lẽ, ta nên tung ra thêm một đòn chí mạng cuối cùng..."
+  coronation_events.0310.desc.embrace_supporters: "Mỗi cơ hội có được, ta đều ưu ái những kẻ trung thành nhất với ta, với vương miện của ta. Cùng nhau, ta và những người ủng hộ đã mưu tính, sắp đặt, và ca ngợi uy tín của lẫn nhau. [first_char.GetName], [second_char.GetName], cùng những người khác đã trở thành vòng tròn thân cận của ta.\n\nNiềm tin của họ có thể trở thành điều gì đó vững chắc hơn."
+  coronation_events.0310.desc.exalt_crown: "Ta vẫn trung thành với niềm tin rằng vinh quang của vương miện là trên hết. Những thử thách ta đối mặt nơi đây, những tranh chấp nhỏ nhặt — chỉ là rắc rối thoáng qua, còn [ROOT.Char.GetPrimaryTitle.GetNameNoTier] thì sẽ trường tồn! Ta đã truyền đạt niềm tin lớn lao ấy đến các vị khách, và đức tin của họ vào lãnh thổ đã được củng cố.\n\nNhưng rốt cuộc tất cả sự tôn vinh này nhằm tới điều gì?"
+  coronation_events.0310.low_magnificence: "#EMP #low Vì [coronation_magnificence|E] #N thấp#! của Ngài:#!#!"
+  coronation_events.0310.mid_magnificence: "#EMP #low Vì [coronation_magnificence|E] #V khá#! của Ngài:#!#!"
+  coronation_events.0310.high_magnificence: "#EMP #low Vì [coronation_magnificence|E] #P cao#! của Ngài:#!#!"
+  coronation_events.0310.a: "Niềm tin của các nền văn hóa khác."
+  coronation_events.0310.a.reward.tooltip: "[culture|E] của Ngài sẽ nhận được [cultural_acceptance|E] với [cultures|E] của các vị khách"
+  coronation_events.0310.a.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! [cultures|E] khác nhau sẽ bị ảnh hưởng"
+  coronation_events.0310.a.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! [cultures|E] khác nhau sẽ bị ảnh hưởng"
+  coronation_events.0310.a.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! [cultures|E] khác nhau sẽ bị ảnh hưởng"
+  coronation_events.0310.b: "Đức tin của những người ủng hộ ta."
+  coronation_events.0310.b.reward.tooltip: "Ngài sẽ nhận thêm #P tích cực#! [opinion|E] với các vị khách."
+  coronation_events.0310.b.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! vị khách sẽ bị ảnh hưởng"
+  coronation_events.0310.b.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! vị khách sẽ bị ảnh hưởng"
+  coronation_events.0310.b.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! vị khách sẽ bị ảnh hưởng"
+  coronation_events.0310.c: "Tính chính danh và uy tín của ta."
+  coronation_events.0310.c.reward.tooltip: "Ngài sẽ nhận [GetModifier('ach_intent_prestige_modifier').GetNameWithTooltip], trong khi các vị khách sẽ nhận [GetModifier('ach_intent_prestige_guest_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.c.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! vị khách sẽ bị ảnh hưởng và [modifier|E] của Ngài sẽ kéo dài #P [host.MakeScope.Var('reward_tier_plus_two').GetValue] thập kỷ#!"
+  coronation_events.0310.c.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! vị khách sẽ bị ảnh hưởng và [modifier|E] của Ngài sẽ kéo dài #P [host.MakeScope.Var('reward_tier_plus_one').GetValue] thập kỷ#!"
+  coronation_events.0310.c.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! vị khách sẽ bị ảnh hưởng và [modifier|E] của Ngài sẽ kéo dài #P [host.MakeScope.Var('reward_tier').GetValue] thập kỷ#!"
+  coronation_events.0310.d: "Lên án mọi phe phái."
+  coronation_events.0310.d.reward.tooltip: "#V Những kẻ phản đối lễ đăng quang#! sẽ nhận [GetModifier('ach_intent_faction_joining_prevention_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.d.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! #V Những kẻ phản đối lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.d.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! #V Những kẻ phản đối lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.d.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! #V Những kẻ phản đối lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.e: "Cảnh cáo chúng... ngục tối đang chờ đợi."
+  coronation_events.0310.e.reward.tooltip: "#V Những kẻ phản đối lễ đăng quang#! sẽ nhận [GetModifier('ach_intent_imprisonment_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.e.crit_success: "$coronation_events.0310.d.crit_success$"
+  coronation_events.0310.e.success: "$coronation_events.0310.d.success$"
+  coronation_events.0310.e.no_improvement: "$coronation_events.0310.d.no_improvement$"
+  coronation_events.0310.f: "Một bài công kích tàn khốc đến tận xương tủy là đủ."
+  coronation_events.0310.f.reward.tooltip: "#V Những kẻ phản đối lễ đăng quang#! sẽ nhận một lượng [stress|E] #P khổng lồ#!."
+  coronation_events.0310.f.crit_success: "$coronation_events.0310.d.crit_success$"
+  coronation_events.0310.f.success: "$coronation_events.0310.d.success$"
+  coronation_events.0310.f.no_improvement: "$coronation_events.0310.d.no_improvement$"
+  coronation_events.0310.g: "Chính các cận thần trung thành mới là điều ta cần nhất."
+  coronation_events.0310.g.reward.tooltip: "#V Những người ủng hộ lễ đăng quang#! sẽ nhận [GetModifier('ach_intent_better_councillors_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.g.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! #V Những người ủng hộ lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.g.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! #V Những người ủng hộ lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.g.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! #V Những người ủng hộ lễ đăng quang#! sẽ bị ảnh hưởng"
+  coronation_events.0310.h: "Những vùng đất trung thành với vương miện sẽ thịnh vượng!"
+  coronation_events.0310.h.reward.tooltip: "#V Những người ủng hộ lễ đăng quang#! sẽ nhận [GetModifier('ach_intent_vassal_development_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.h.crit_success: "$coronation_events.0310.g.crit_success$"
+  coronation_events.0310.h.success: "$coronation_events.0310.g.success$"
+  coronation_events.0310.h.no_improvement: "$coronation_events.0310.g.no_improvement$"
+  coronation_events.0310.i: "[host.GetTitleAsNameNoTooltip] của họ che chở."
+  coronation_events.0310.i.reward.tooltip: "#V Những người ủng hộ lễ đăng quang#! sẽ nhận [GetModifier('ach_intent_vassal_defensive_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0310.i.crit_success: "$coronation_events.0310.g.crit_success$"
+  coronation_events.0310.i.success: "$coronation_events.0310.g.success$"
+  coronation_events.0310.i.no_improvement: "$coronation_events.0310.g.no_improvement$"
+  coronation_events.0310.j: "Sự tôn kính tuyệt đối dành cho lễ phục [ROOT.Char.Custom('GetTitleTierAdjective')] của ta."
+  coronation_events.0310.j.reward.tooltip: "#V Các [artifacts|E] của Ngài sẽ nhận một [modifier|E] #P tích cực#!"
+  coronation_events.0310.j.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! #V trong số các [artifacts|E] của Ngài sẽ được cải thiện#!"
+  coronation_events.0310.j.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! #V trong số các [artifacts|E] của Ngài sẽ được cải thiện#!"
+  coronation_events.0310.j.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! #V trong số các [artifacts|E] của Ngài sẽ được cải thiện#!"
+  coronation_events.0310.k.reward.tooltip: "[counties|E] trong [domain|E] của Ngài sẽ nhận [GetModifier('ach_intent_development_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm"
+  coronation_events.0310.k.crit_success: "#P [host.MakeScope.Var('reward_tier_plus_two').GetValue]#! #V trong số các [counties|E] của Ngài sẽ bị ảnh hưởng#!"
+  coronation_events.0310.k.success: "#P [host.MakeScope.Var('reward_tier_plus_one').GetValue]#! #V trong số các [counties|E] của Ngài sẽ bị ảnh hưởng#!"
+  coronation_events.0310.k.no_improvement: "#P [host.MakeScope.Var('reward_tier').GetValue]#! #V trong số các [counties|E] của Ngài sẽ bị ảnh hưởng#!"
+  coronation_events.0310.k: "Dân chúng cũng phải được khích lệ."
+  coronation_events.0310.l: "Sự phòng thủ của [ROOT.Char.GetPrimaryTitle.GetTierAsNameNoTooltip] của chúng ta!"
+  coronation_events.0310.l.reward.tooltip: "[counties|E] trong [domain|E] của Ngài sẽ nhận [GetModifier('ach_intent_defense_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm"
+  coronation_events.0310.l.crit_success: "$coronation_events.0310.k.crit_success$"
+  coronation_events.0310.l.success: "$coronation_events.0310.k.success$"
+  coronation_events.0310.l.no_improvement: "$coronation_events.0310.k.no_improvement$"
+  coronation_events.0310.intent_toast: "Ý định của Ngài đã được thiết lập"
+
+  coronation_events.0311.t: "Hồi kết của lễ mừng"
+  coronation_events.0311.desc.high_magnificence: "Lễ đăng quang huy hoàng của ta đã kết thúc. Các vị khách rời đi, tất cả đều xúc động sâu sắc trước những nghi lễ."
+  coronation_events.0311.desc.mid_magnificence: "Lễ đăng quang của ta đã kết thúc. Các vị khách rời đi, phần nào ấn tượng với các nghi lễ."
+  coronation_events.0311.desc.low_magnificence: "Lễ đăng quang đạm bạc của ta đã kết thúc. Ta có thể là một chủ nhà tồi, nhưng vẫn là một [ROOT.Char.GetTitleAsNameNoTooltip]."
+  coronation_events.0311.a: "Triều đại của ta bắt đầu."
+
+  coronation_nomadic_herd_reward: "Ngài nhận được [herd_i] [TopScope.GetValue('coronation_herd_value')|+0] từ [coronation_supporters|E]"
+
+  coronation_events.0312.t: "Hồi kết của lễ mừng"
+  coronation_events.0312.desc.high_magnificence: "Lễ đăng quang huy hoàng đã kết thúc. Các vị khách rời đi, tất cả đều vô cùng ấn tượng trước những nghi lễ lộng lẫy."
+  coronation_events.0312.desc.mid_magnificence: "Lễ đăng quang đã kết thúc. Các vị khách rời đi, phần nào ấn tượng với các nghi lễ."
+  coronation_events.0312.desc.low_magnificence: "Lễ đăng quang đạm bạc đã kết thúc. [host.GetName] có thể là một chủ nhà tồi, nhưng vẫn là một [ROOT.Char.GetTitleAsNameNoTooltip]."
+  coronation_events.0312.a: "Triều đại của [host.GetTitledFirstNameNoTooltip] đã bắt đầu."
+  coronation_events.0312.cultural_acceptance: "Nhờ vào [intent|E] #V Gây ấn tượng với khách mời#! của [host.GetTitledFirstNamePossessiveNoTooltip], [cultural_acceptance|E] giữa [ROOT.Char.GetCulture.GetName] và [host.GetCulture.GetName] đã tăng lên."
+  coronation_events.0312.better_councillors: "Nhờ vào [intent|E] #V Gắn kết người ủng hộ#! của [host.GetTitledFirstNamePossessiveNoTooltip], Ngài đã nhận được [GetModifier('ach_intent_better_councillors_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0312.vassal_development_boost: "Nhờ vào [intent|E] #V Gắn kết người ủng hộ#! của [host.GetTitledFirstNamePossessiveNoTooltip], Ngài đã nhận được [GetModifier('ach_intent_vassal_development_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+  coronation_events.0312.vassal_defensive_boost: "Nhờ vào [intent|E] #V Gắn kết người ủng hộ#! của [host.GetTitledFirstNamePossessiveNoTooltip], Ngài đã nhận được [GetModifier('ach_intent_vassal_defensive_boost_modifier').GetNameWithTooltip] [modifier|E] trong 20 năm."
+
+  coronation_events.0400.desc: "Ta đã xem xét yêu cầu của ngươi, và quyết định rằng ngươi xứng đáng nhận được phúc lành của ta — dấu ấn thiêng liêng nhất của ân sủng từ [ROOT.Char.GetFaith.HighGodNamePossessive] dành cho các tín đồ."
+  coronation_events.0400.a: "Ta chờ đợi sự thăng vị chính đáng của mình với hơi thở nín lặng."
+
+  coronation_cultural_acceptance_reward_tt: "[culture|E] của [host.GetName] nhận được [cultural_acceptance|E] với các nền văn hóa sau:"
+  coronation_opinion_gain_reward_tt: "[host.GetName] nhận được [opinion|E] với các nhân vật sau:"
+  coronation_legitimacy_and_prestige_gain_reward_tt: "Các nhân vật sau nhận được [GetModifier('ach_intent_prestige_guest_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_prevent_faction_joining_reward_tt: "Những #V Kẻ phản đối#! sau nhận được [GetModifier('ach_intent_faction_joining_prevention_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_easier_imprisonment_reward_tt: "Những #V Kẻ phản đối#! sau nhận được [GetModifier('ach_intent_imprisonment_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_stress_reward_tt: "Những #V Kẻ phản đối#! sau nhận một lượng [stress|E] #V rất lớn#!:"
+  coronation_better_councillors_reward_tt: "Những #V Người ủng hộ#! sau nhận được [GetModifier('ach_intent_better_councillors_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_vassal_development_boost_reward_tt: "Những #V Người ủng hộ#! sau nhận được [GetModifier('ach_intent_vassal_development_boost_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_vassal_defensive_boost_reward_tt: "Những #V Người ủng hộ#! sau nhận được [GetModifier('ach_intent_vassal_defensive_boost_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_artifact_boost_reward_tt: "Các [artifacts|E] sau nhận được một [modifier|E] #P tích cực#!:"
+  coronation_host_development_boost_reward_tt: "Các [counties|E] sau nhận được [GetModifier('ach_intent_development_boost_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_host_defense_boost_reward_tt: "Các [counties|E] sau nhận được [GetModifier('ach_intent_defense_boost_modifier').GetNameWithTooltip] [modifier|E]:"
+  coronation_host_reward_tier_one_tt: "Bị ảnh hưởng: [first_reward_target.GetName]"
+  coronation_host_reward_tier_two_tt: "Bị ảnh hưởng: [first_reward_target.GetName] và [second_reward_target.GetName]"
+  coronation_host_reward_tier_three_tt: "Bị ảnh hưởng: [first_reward_target.GetName], [second_reward_target.GetName] và [third_reward_target.GetName]"
+  coronation_host_reward_tier_four_tt: "Bị ảnh hưởng: [first_reward_target.GetName], [second_reward_target.GetName], [third_reward_target.GetName] và [fourth_reward_target.GetName]"
+  coronation_host_reward_tier_five_tt: "Bị ảnh hưởng: [first_reward_target.GetName], [second_reward_target.GetName], [third_reward_target.GetName], [fourth_reward_target.GetName] và [fifth_reward_target.GetName]"
+
+  cultural_acceptance_gain_coronation_host_reward: "Ý định Đăng quang: Gây ấn tượng với khách mời"
+  ach_intent_opinion: "Khách mời cực kỳ ấn tượng"
+  ach_intent_prestige_guest_modifier: "Khách mời ấn tượng"
+  ach_intent_prestige_guest_modifier_desc: "Nhân vật này là người ủng hộ và là khách danh dự trong lễ đăng quang của vị quân chủ vừa lên ngôi."
+  ach_intent_prestige_modifier: "Chủ lễ ấn tượng"
+  ach_intent_prestige_modifier_desc: "Nhân vật này đã tổ chức một lễ đăng quang tráng lệ."
+  ach_intent_faction_joining_prevention_modifier: "Kẻ phản đối bị suy yếu: Phe phái"
+  ach_intent_faction_joining_prevention_modifier_desc: "#weak Nhân vật này không thể thành lập hoặc tham gia phe phái.#!\nMột kẻ phản đối lớn tiếng trong lễ đăng quang của vị quân chủ mới, đã bị sự tráng lệ của nghi lễ làm cho câm lặng."
+  ach_intent_imprisonment_modifier: "Kẻ phản đối bị khuất phục: Giam giữ"
+  ach_intent_imprisonment_modifier_desc: "#weak Nhân vật này dễ bị bỏ tù hơn.#!\nMột kẻ phản đối ồn ào của vị quân chủ mới, đã bị sự tráng lệ của lễ đăng quang khiến phải khuất phục."
+  ach_intent_better_councillors_modifier: "Gắn kết người ủng hộ: Cố vấn"
+  ach_intent_better_councillors_modifier_desc: "Nhân vật này là người ủng hộ trung thành của vị quân chủ mới lên ngôi và đặc biệt khao khát chứng tỏ bản thân với tư cách là một cố vấn."
+  ach_intent_vassal_development_boost_modifier: "Gắn kết người ủng hộ: Phát triển"
+  ach_intent_vassal_development_boost_modifier_desc: "Mùa màng trù phú, gỗ và đá xây dựng mới được khai thác: vùng đất của nhân vật này được ban phước bởi sự khởi sắc kinh tế, nhờ vị quân chủ mới lên ngôi."
+  ach_intent_vassal_defensive_boost_modifier: "Gắn kết người ủng hộ: Phòng thủ"
+  ach_intent_vassal_defensive_boost_modifier_desc: "$ach_intent_defense_boost_modifier_desc$"
+  ach_intent_development_boost_modifier: "Tôn vinh vương miện: Phát triển"
+  ach_intent_development_boost_modifier_desc: "Mùa màng trù phú, gỗ và đá xây dựng mới được khai thác: vùng đất của nhân vật này đang trải qua sự khởi sắc kinh tế, nhờ vị quân chủ mới lên ngôi."
+  ach_intent_defense_boost_modifier: "Tôn vinh vương miện: Phòng thủ"
+  ach_intent_defense_boost_modifier_desc: "Từ những cổng thành được gia cố, lính gác tuần tra khắp nơi. Hạt này đã được củng cố theo ý nguyện của vị quân chủ mới lên ngôi."
+
+  ach_maintenance_events.0002.title: "$oath_mend_the_fracture_tradition_name$"
+  ach_maintenance_events.0002.army_reward: "Nhận được $ach_culture_synergy_troops$ [soldiers|E]"
+  ach_maintenance_events.0002.opinion_reward: "Nhận được [opinion|E] với [culture_head|E]"
+### Character Interaction
+  coronation_anointment_request: "$game_concept_anointment_request$"
+  coronation_anointment_request_desc: "Đảm bảo sự ủng hộ của [recipient.GetTitledFirstName] để tiến hành một [anointment|E]."
+  coronation_anointment_request_extra_icon: "$hook_extra_icon$"
+  anoinment_request_accepted_tt: "[recipient.GetShortUIName] sẽ chấp nhận lời mời tham dự [coronation_i][anointment|E] của Ngài, nếu có thể"
+  already_using_hook: "Đang sử dụng một [hook_i][hook|E]"
+  coronation_request_return_land_trigger: "Ngài không nắm giữ bất kỳ [de_jure|E] [land|E] nào của [recipient.GetTitledFirstNamePossessive]"
+  TRADE_LAND_FOR_BETTER_AI_ACCEPTANCE: "Trả lại [title_i][de_jure|E] [land|E]"
+  TRADE_LAND_ACCEPTANCE_SEND_OPTION: "Trả lại [de_jure] [land|E]: $VALUE|=+0$"
+  CORONATION_ANOINTMENT_REQUEST_INTERACTION_NOTIFICATION: "Với sự tôn kính sâu sắc nhất, ta cầu xin phúc lành và sự ủng hộ của ngài cho sự thăng vị chính đáng và cát tường của ta lên ngai vàng."
+  anointment_request_already_supported: "[recipient.GetTitledFirstName] đã đồng ý ủng hộ [anointment|E] của Ngài"
+  coronation_realm_size_desc: "$CB_REALM_SIZE_COST$"
+  coronation_empire_req: "[empire|E] [title_tier|E]"
+  activity_coronation_predicted_cost: "The cost of a [GetActivityType( 'activity_coronation' ).GetNameNoTooltip] is primarily affected by [activity_type|E] the [activity_options|E] you select."
+  coronation_tribal_reg: "[GetGovernment('tribal_government').GetNameNoTooltip] hoặc [GetGovernment('wanua_government').GetNameNoTooltip]"
+  coronation_nomadic_reg: "[GetGovernment('nomad_government').GetNameNoTooltip]"
+  coronation_tribal_nomadic_reg: "[GetGovernment('tribal_government').GetNameNoTooltip], [GetGovernment('wanua_government').GetNameNoTooltip] or [GetGovernment('nomad_government').GetNameNoTooltip]"
+  coronation_discount_reg: "From Event"
+  HOF_is_ai_tt: "[head_of_faith|E] $IS_LOCAL_PLAYER_TRIGGER|l$"
+  coronation_conclusion_summary_desc_crown: "[host.GetTitledFirstNameNicknamedRegnal] giờ đây đã đăng quang ngôi vị [host.GetTitleAsNameNoTooltip] chính thống của [host.GetPrimaryTitle.GetNameNoTierPossessive], gánh vác trọng trách bảo an cương thổ."
+  coronation_conclusion_summary_desc: "[host.GetTitledFirstNameNicknamedRegnal] giờ đây đã đăng cơ ngôi vị [host.GetTitleAsNameNoTooltip] chính thống của [host.GetPrimaryTitle.GetNameNoTierPossessive], được ủy thác sứ mệnh vì sự hưng thịnh của vương quốc."
+  coronation_supporters_pledge_total: "\n\n[activity.MakeScope.Var('supporters_pledge_var').GetValue|0V] [vassals|E] ([coronation_supporters|E]) đã thề nguyện trung thành với niềm xác tín chân thành"
+  coronation_supporters_pledge_total_1: "\n\n[activity.MakeScope.Var('supporters_pledge_var').GetValue|0V] [vassal|E] ([coronation_supporter|E]) đã thề nguyện trung thành với niềm xác tín chân thành"
+  coronation_detractors_scorned_pledge_total: "\n\n[activity.MakeScope.Var('detractors_scorned_pledge_var').GetValue|0V] [vassals|E] ([coronation_detractors|E]) đã khước từ lời thề với [liege|E] mới của họ"
+  coronation_detractors_scorned_pledge_total_1: "\n\n[activity.MakeScope.Var('detractors_scorned_pledge_var').GetValue|0V] [vassal|E] ([coronation_detractor|E]) đã khước từ lời thề với [liege|E] mới của họ"
+  coronated_confed_modifier: "Được Liên Minh Tuyển Chọn"
+  coronated_confed_modifier_desc: "Nhân vật này đã chính thức được công nhận là người đứng đầu giữa những người bình đẳng, thủ lĩnh của một liên minh."
+
+  coronation_events.0401.opening: "Hỡi vị thượng khách đáng kính,"
+  coronation_events.0401.desc: "Ta không thể tiếp tục lễ đăng quang này được nữa, bởi tước vị cao nhất của ta đã thay đổi.\n\nTa tuyệt đối không có ý thất kính với ngài, hỡi vị khách quý. Cầu chúc cho hành trình trở về của ngài được thuận buồm xuôi gió."
+  coronation_events.0401.desc_title_loss: "Lễ đăng quang của ta đã tan thành mây khói. Tước vị của ta đã mất rồi.\n\nTa nguyện cầu rằng những vị khách đáng kính của mình sẽ không bao giờ phải nếm trải vận rủi cay đắng như thế này."
+  coronation_events.0401.a: "Có lẽ ta nên cáo từ tại đây."

@@ -1,0 +1,945 @@
+﻿POD_assign_random_bloodhunger = {
+	if = {
+		limit = {
+			is_monomi_trigger = yes
+			POD_suppress_clan_curse_trigger = no
+		}
+		random_list = {
+			10 = { add_character_modifier = bloodhunger0_modifier }
+			50 = { add_character_modifier = bloodhunger1_monomi_modifier }
+			20 = { add_character_modifier = bloodhunger2_monomi_modifier }
+			14 = { add_character_modifier = bloodhunger3_monomi_modifier }
+			5  = { add_character_modifier = bloodhunger4_monomi_modifier }
+			1  = { add_character_modifier = bloodhunger5_monomi_modifier }
+		}
+	}
+	else = {
+		random_list = {
+			10 = { add_character_modifier = bloodhunger0_modifier }
+			50 = { add_character_modifier = bloodhunger1_modifier }
+			20 = { add_character_modifier = bloodhunger2_modifier }
+			14 = { add_character_modifier = bloodhunger3_modifier }
+			5  = { add_character_modifier = bloodhunger4_modifier }
+			1  = { add_character_modifier = bloodhunger5_modifier }
+		}
+	}
+}
+
+POD_assign_initial_bloodhunger = {
+	if = {
+		limit = {
+			OR = {
+				POD_is_vampire_trigger = no # ghouls/revenants/dhampir start with no hunger
+				POD_has_infinite_blood_trigger = yes
+			}
+		}
+		add_character_modifier = bloodhunger0_modifier
+	}
+	else_if = {
+		limit = {
+			is_monomi_trigger = yes
+			POD_suppress_clan_curse_trigger = no
+		}
+		add_character_modifier = bloodhunger1_monomi_modifier
+	}
+	else = {
+		add_character_modifier = bloodhunger1_modifier
+	}
+}
+
+# for compatibility
+POD_hunger_increase_multiple_effect = {
+	POD_change_hunger_effect = { DELTA = $COUNT$ }
+}
+
+# for compatibility
+POD_hunger_decrease_multiple_effect = {
+	save_scope_value_as = {
+		name = negate_hunger
+		value = {
+			value = 0
+			subtract = $COUNT$
+		}
+	}
+	POD_change_hunger_effect = { DELTA = scope:negate_hunger }
+}
+
+# drink $AMOUNT$ blood from $VICTIM$
+# AMOUNT = 1 is equivalent to the old feeding_sip
+# AMOUNT = 2 is equivalent to the old feeding_drink
+# AMOUNT = 3 is equivalent to the old feeding_lot
+POD_drink_from_victim_effect = {
+	POD_restore_hunger_from_victim_effect       = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	POD_resonance_from_feeding_on_victim_effect = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	POD_secondary_effects_from_feeding_effect   = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	POD_cause_bloodloss_from_feeding_effect     = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+}
+
+POD_drink_from_victim_no_secondary_effect = {
+	POD_restore_hunger_from_victim_effect        = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	#POD_resonance_from_feeding_on_victim_effect = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	#POD_secondary_effects_from_feeding_effect   = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	POD_cause_bloodloss_from_feeding_effect      = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+}
+
+POD_drain_victim_effect = {
+	POD_restore_hunger_from_victim_effect       = { VICTIM = $VICTIM$ AMOUNT = 5 }
+	POD_resonance_from_feeding_on_victim_effect = { VICTIM = $VICTIM$ AMOUNT = 5 }
+	POD_secondary_effects_from_feeding_effect   = { VICTIM = $VICTIM$ AMOUNT = 5 }
+	POD_kill_victim_by_feeding_effect           = { VICTIM = $VICTIM$ }
+}
+
+# called from herd maintenance event
+POD_recurring_herd_feed_effect = {
+	random = {
+		chance = 10
+		POD_restore_hunger_from_victim_effect = { VICTIM = $VICTIM$ AMOUNT = 1 }
+	}
+
+	POD_resonance_from_herdmember_effect       = { VICTIM = $VICTIM$ AMOUNT = 1 }
+	#POD_secondary_effects_from_feeding_effect = { VICTIM = $VICTIM$ AMOUNT = 1 }
+	POD_cause_bloodloss_from_feeding_effect    = { VICTIM = $VICTIM$ AMOUNT = 1 }
+}
+
+POD_restore_hunger_from_victim_effect = {
+	if = {
+		limit = { $VICTIM$ = { POD_has_mundane_blood_trigger = yes } }
+
+		POD_restore_hunger_from_mortal_victim_effect = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	}
+	else_if = {
+		limit = { $VICTIM$ = { POD_is_vampire_trigger = yes } }
+		POD_restore_hunger_from_vampire_effect = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	}
+	else = {
+		POD_restore_hunger_from_supernatural_effect = { VICTIM = $VICTIM$ AMOUNT = $AMOUNT$ }
+	}
+}
+
+POD_restore_hunger_from_mortal_victim_effect = {
+	if = {
+		limit = { has_trait = methuselahs_thirst }
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = 0
+		}
+	}
+	else_if = {
+		limit = {
+			is_ventrue_trigger = yes
+			NOT = {
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = this
+					RECIPIENT = $VICTIM$
+				}
+			}
+		}
+		POD_ventrue_bane_notification_effect = {
+			TARGET = $VICTIM$
+		}
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = 0
+		}
+	}
+	else_if = {
+		limit = { $VICTIM$.drinkable_blood_left < $AMOUNT$ }
+		# no more blood left = drain
+		# draining takes all the blood left in the victim, plus 1
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = {
+				value    = 0
+				subtract = $VICTIM$.drinkable_blood_left
+				subtract = 1
+				divide   = mortal_blood_needed_to_slake_1_hunger
+				floor    = yes
+			}
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = {
+				value = 0
+				subtract = {
+					value  = $AMOUNT$
+					divide = mortal_blood_needed_to_slake_1_hunger
+					floor  = yes
+				}
+				max = 0
+			}
+		}
+		POD_apply_blood_potency_limits_when_drinking_from_mortal = {
+			HUNGER_DELTA_SCOPE_VALUE = hunger_delta
+		}
+	}
+	POD_hunger_loss = { DELTA = scope:hunger_delta }
+}
+
+# only used when the actual victim doesn't refer to an existing character, e.g. during frenzy events
+POD_restore_hunger_from_mortal_effect = {
+	if = {
+		limit = { has_trait = methuselahs_thirst }
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = 0
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = {
+				value = 0
+				subtract = {
+					value  = $AMOUNT$
+					divide = mortal_blood_needed_to_slake_1_hunger
+					floor  = yes
+				}
+				max = 0
+			}
+		}
+		POD_apply_blood_potency_limits_when_drinking_from_mortal = {
+			HUNGER_DELTA_SCOPE_VALUE = hunger_delta
+		}
+	}
+	POD_hunger_loss = { DELTA = scope:hunger_delta }
+}
+
+POD_apply_blood_potency_limits_when_drinking_from_mortal = {
+	# tooltip if high blood potency results in less than one hunger restored
+	if = {
+		limit = {
+			mortal_blood_needed_to_slake_1_hunger > 1
+			scope:$HUNGER_DELTA_SCOPE_VALUE$ = 0
+		}
+		custom_tooltip = hunger_decrease_effect.tt.nourishment
+	}
+	if = {
+		limit = { POD_splat_has_hunger_exclusively = yes }
+		# this is the maximum amount of hunger you could restore from mortals without draining them
+		# based on blood potency
+		save_scope_value_as = {
+			name = hunger_delta_cap
+			value = {
+				value    = minimum_hunger_slaked_by_mortal_blood
+				subtract = blood_hunger_level
+				max = 0
+			}
+		}
+		if = {
+			limit = { scope:hunger_delta_cap > scope:$HUNGER_DELTA_SCOPE_VALUE$ }
+			save_scope_value_as = {
+				name = $HUNGER_DELTA_SCOPE_VALUE$
+				value = scope:hunger_delta_cap
+			}
+			# tooltip notifying you of the blood potency cap
+			if = {
+				# no tooltip if blood is already full
+				limit = { blood_hunger_level > 0 }
+				custom_tooltip = hunger_decrease_effect.tt.0
+			}
+		}
+	}
+}
+
+POD_restore_hunger_from_vampire_effect = {
+	save_scope_value_as = {
+		name  = blood_potency_delta
+		value = {
+			value = 0
+			if = {
+				limit = { POD_splat_has_bloodpotency_trigger = yes }
+				value    = $VICTIM$.blood_potency_value
+				subtract = blood_potency_value
+			}
+		}
+	}
+	
+	save_scope_value_as = {
+		name  = hunger_delta
+		value = {
+			value = 0
+			subtract = {
+				value = $AMOUNT$
+
+				if = {
+					limit = { scope:blood_potency_delta >= 2 }
+					multiply = 2
+				}
+				else_if = {
+					limit = { scope:blood_potency_delta <= -2 }
+					multiply = 0.5
+				}
+			}
+
+			floor = yes
+		}
+	}
+	POD_hunger_loss = { DELTA = scope:hunger_delta }
+}
+
+POD_restore_hunger_from_supernatural_effect = {
+	if = {
+		limit = {
+			is_ventrue_trigger = yes
+			NOT = {
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = this
+					RECIPIENT = $VICTIM$
+				}
+			}
+		}
+		POD_ventrue_bane_notification_effect = {
+			TARGET = $VICTIM$
+		}
+	}
+	else_if = {
+		limit = {
+			$VICTIM$ = { is_amenti_trigger = yes }
+			POD_gains_resonance_from_feeding_trigger = yes
+		}
+		# no quench from mummies (tooltip handled by POD_resonance_from_feeding_on_victim_effect)
+	}
+	else_if = {
+		limit = { $VICTIM$.drinkable_blood_left < $AMOUNT$ }
+		# no more blood left = drain
+		# heartblood is equivalent to 5 sips
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = {
+				value    = -5
+				multiply = $VICTIM$.blood_quench_multiplier
+				floor    = yes
+			}
+		}
+	}
+	else = {
+		save_scope_value_as = {
+			name  = hunger_delta
+			value = {
+				value = 0
+				subtract = {
+					value    = $AMOUNT$
+					multiply = $VICTIM$.blood_quench_multiplier
+					floor    = yes
+				}
+			}
+		}
+	}
+
+	if = {
+		limit = { exists = scope:hunger_delta } # error suppression
+		POD_hunger_loss = { DELTA = scope:hunger_delta }
+	}
+}
+
+# For migrating the old hunger effects to the new energy system.
+# It'd be better to give the hunger effects a top-to-bottom refactor but ehhh
+POD_hunger_loss = {
+	save_scope_value_as = {
+		name = splat_agnostic_energy_refill
+		value = {
+			value = $DELTA$
+			# convert hunger loss to energy gain
+			multiply = -1
+			multiply = maximum_splat_agnostic_energy
+			divide = maximum_blood
+			# Less nourishing if you don't use actual blood as a resource
+			if = {
+				limit = { POD_splat_has_hunger_exclusively = no }
+				multiply = 0.5
+				ceiling = yes
+			}
+		}
+	}
+	POD_splat_agnostic_energy_refill = { COUNT = scope:splat_agnostic_energy_refill }
+}
+
+POD_set_hunger_modifier_effect = {
+	hidden_effect = { POD_remove_hunger_modifiers_effect = yes }
+	if = {
+		limit = {
+			is_monomi_trigger = yes
+			POD_suppress_clan_curse_trigger = no
+		}
+		switch = {
+			trigger  = $AMOUNT$
+			0        = { add_character_modifier = bloodhunger0_modifier }
+			1        = { add_character_modifier = bloodhunger1_monomi_modifier }
+			2        = { add_character_modifier = bloodhunger2_monomi_modifier }
+			3        = { add_character_modifier = bloodhunger3_monomi_modifier }
+			4        = { add_character_modifier = bloodhunger4_monomi_modifier }
+			fallback = { add_character_modifier = bloodhunger5_monomi_modifier }
+		}
+	}
+	else = {
+		switch = {
+			trigger  = $AMOUNT$
+			0        = { add_character_modifier = bloodhunger0_modifier }
+			1        = { add_character_modifier = bloodhunger1_modifier }
+			2        = { add_character_modifier = bloodhunger2_modifier }
+			3        = { add_character_modifier = bloodhunger3_modifier }
+			4        = { add_character_modifier = bloodhunger4_modifier }
+			fallback = { add_character_modifier = bloodhunger5_modifier }
+		}
+	}
+}
+
+POD_set_blood_level_to = {
+	save_scope_value_as = {
+		name = hunger_level
+		value = {
+			value = 5 # corresponds to maximum_blood script_value
+			subtract = $BLOOD$
+			min = 0
+			max = 5 # corresponds to maximum_blood script_value
+		}
+	}
+	POD_set_hunger_modifier_effect = { AMOUNT = scope:hunger_level }
+}
+
+POD_change_hunger_effect = {
+	if = {
+		limit = { POD_has_infinite_blood_trigger = yes }
+		custom_tooltip = hunger_increase_effect.hungerless
+	}
+	else = {
+		POD_hunger_change_tooltip_effect = { DELTA = $DELTA$ }
+
+		save_scope_value_as = {
+			name = new_hunger
+			value = {
+				value = blood_hunger_level
+				add = $DELTA$
+				min = 0
+				max = 5 # corresponds to maximum_blood script_value
+			}
+		}
+
+		if = {
+			limit = { scope:new_hunger != blood_hunger_level }
+			POD_set_hunger_modifier_effect = { AMOUNT = scope:new_hunger }
+		}
+		if = {
+			limit = {
+				is_ai = no
+				POD_is_masterless_ghoul_trigger = yes
+				scope:new_hunger >= 5
+			}
+			send_interface_message = {
+				type = send_interface_message_good
+				title = POD_masterless_ghoul_lost_all_vitae_message
+				
+				POD_cease_being_ghoul_effect = yes
+				if = {
+					limit = { has_POD_race_trigger = no }
+					add_trait = mortal # TODO MORTAL: trigger landed mortal maintenance
+				}
+			}
+		}
+	}
+}
+
+POD_hunger_change_tooltip_effect = {
+	if = {
+		limit = {
+			blood_hunger_level = 0
+			$DELTA$ <= 0
+		}
+		custom_tooltip = hunger_decrease_effect.tt.full
+	}
+	else_if = {
+		limit = { $DELTA$ != 0 }
+		custom_description = {
+			text = POD_hunger_change_desc
+			value = $DELTA$
+			subject = this
+		}
+	}
+}
+
+POD_set_bloodloss_modifier_effect = {
+	if = {
+		limit = { blood_loss_level != $AMOUNT$ }
+		hidden_effect = { POD_remove_bloodloss_modifiers_effect = yes }
+		switch = {
+			trigger  = $AMOUNT$
+			0        = { }
+			1        = { add_character_modifier = { modifier = slightbloodloss_modifier       days   = 29 } }
+			2        = { add_character_modifier = { modifier = smallbloodloss_modifier        months = 3  } }
+			3        = { add_character_modifier = { modifier = majorbloodloss_modifier        months = 6  } }
+			fallback = { add_character_modifier = { modifier = catastrophicbloodloss_modifier months = 12 } }
+		}
+	}
+}
+
+POD_increase_bloodloss_hostile = {
+	$ATTACKER$ = { save_scope_as = bloodloss_attacker }
+	POD_increase_bloodloss = { COUNT = $COUNT$ }
+}
+
+POD_increase_bloodloss = {
+	save_scope_value_as = {
+		name = new_bloodloss
+		value = {
+			value = blood_loss_level
+			add = $COUNT$
+			min = 0
+			#max = 4
+			floor = yes
+		}
+	}
+	if = {
+		limit = { scope:new_bloodloss > 4 }
+		no_blood_left_effect = yes
+	}
+	else = {
+		POD_set_bloodloss_modifier_effect = { AMOUNT = scope:new_bloodloss }
+	}
+}
+
+POD_decrease_bloodloss = {
+	save_scope_value_as = {
+		name = inverted_bloodloss
+		value = {
+			value = $COUNT$
+			multiply = -1
+		}
+	}
+	POD_increase_bloodloss = { COUNT = scope:inverted_bloodloss }
+}
+
+POD_cause_bloodloss_from_feeding_effect = {
+	if = {
+		limit = { $VICTIM$ = { POD_will_die_from_feeding_trigger = { AMOUNT = $AMOUNT$ } } }
+		POD_kill_victim_by_feeding_effect = { VICTIM = $VICTIM$ }
+	}
+	else = {
+		# blood loss for vampires is handled by hunger modifiers
+		if = {
+			limit = { $VICTIM$ = { POD_splat_has_hunger_exclusively = yes } }
+			
+			$VICTIM$ = {
+				### This has unintended consequences and causes lots of AI vampires to go into torpor. The world isn't ready
+				# if = {
+				# 	limit = { drinkable_blood_left < $AMOUNT$ }
+				# 	no_blood_left_effect = yes
+				# }
+				POD_change_hunger_effect = { DELTA = $AMOUNT$ }
+
+				#Adds a flag to prevent automatic herd feeding
+				add_character_flag = {
+					flag = POD_recently_fed_upon_flag
+					days = 29
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					faith = { has_doctrine_parameter = hurt_mortal_lose_piety }
+					$VICTIM$ = { POD_bloodloss_causes_piety_loss_trigger = { AMOUNT = $AMOUNT$ } }
+				}
+				POD_lose_piety_from_injuring_mortal_effect = { VICTIM = $VICTIM$ }
+			}
+	
+			$VICTIM$ = { POD_increase_bloodloss = { COUNT = $AMOUNT$ } }
+		}
+	}
+}
+
+POD_kill_victim_by_feeding_effect = {
+	custom_tooltip = POD_killed_victim_by_feeding_tt
+	add_character_flag = { flag = POD_recent_killed_victim days = 30 }
+	if = {
+		limit = {
+			is_vampire_trigger = yes
+			$VICTIM$ = { is_vampire_trigger = yes }
+		}
+		# Diablerie
+		POD_diablerie_effect = { VICTIM = $VICTIM$ }
+	}
+	else = {
+		if = {
+			limit = {
+				$VICTIM$ = { has_supernatural_race_trigger = no }
+				faith = { has_doctrine_parameter = hurt_mortal_lose_piety }
+			}
+			POD_lose_piety_from_draining_mortal_effect = { VICTIM = $VICTIM$ }
+		}
+		if = {
+			limit = {
+				# Safeguard so that characters aren't killed twice during executions
+				# this is spaghetti but still better than messing with execute_prisoner_effect
+				NOT = { exists = scope:execution_exsanguination }
+				NOT = { exists = scope:execution_devour }
+			}
+			$VICTIM$ = {
+				pod_death = {
+					death_reason = death_bloodloss
+					killer = prev
+				}
+			}
+		}
+		if = {
+			limit = { has_masquerade_risk_trigger = yes }
+			POD_small_risk_of_increasing_masquerade_exposure = yes
+		}
+	}
+}
+
+POD_hunger_rouse_check_effect = {
+	if = {
+		limit = { POD_has_infinite_blood_trigger = yes }
+		custom_tooltip = hunger_increase_effect.hungerless
+	}
+	else = {
+		random = {
+			chance = 50
+			modifier = {
+				add = 10
+				faith = { has_doctrine = tenet_continued_life }
+			}
+			POD_discipline_cost_effect = { COUNT = 1 }
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = tenet_continued_life } }
+			custom_tooltip = POD_hunger_risk_increase_tenet_continued_life_tt
+		}
+	}
+}
+
+POD_risen_discipline_rouse_check_effect = {
+	POD_hunger_rouse_check_effect = yes
+}
+
+POD_secondary_effects_from_feeding_effect = {
+	if = {
+		limit = { $AMOUNT$ >= 4 }
+		stress_impact = {
+			gluttonous    = major_stress_impact_loss
+			compassionate = major_stress_impact_gain
+		}
+	}
+	else_if = {
+		limit = { $AMOUNT$ = 3 }
+		stress_impact = {
+			gluttonous    = medium_stress_impact_loss
+			compassionate = medium_stress_impact_gain
+		}
+	}
+
+	if = {
+		limit = { is_vampire_trigger = yes }
+		if = {
+			limit = {
+				is_giovanni_trigger = yes
+				POD_suppress_clan_curse_trigger = no
+			}
+			reverse_add_opinion = {
+				target = $VICTIM$
+				modifier = bite_opinion
+				opinion = -25
+			}
+		}
+		else = {
+			reverse_add_opinion = {
+				target = $VICTIM$
+				modifier = kiss_opinion
+				opinion = 25
+			}
+		}
+	}
+	
+	if = {
+		limit = { 
+			POD_splat_has_dharma_trigger = yes 
+			OR = {
+				POD_gains_deviltigers_dharma_xp = yes
+				POD_gains_faceofthegods_dharma_xp = yes
+				POD_gains_screamer_dharma_xp = yes
+			}
+			$VICTIM$ = { POD_has_infinite_blood_trigger = no } # hah! nice try.
+		}
+		save_scope_value_as = {
+			name = blood_dharma
+			value = {
+				value = POD_kueijin_dharma_xp_drink
+				multiply = $AMOUNT$
+			}
+		}
+		POD_give_dharma_xp_effect = { VALUE = scope:blood_dharma }
+	}
+
+	if = {
+		limit = {
+			$VICTIM$ = {
+				has_trait = fera # TODO: frenzy chance
+			}
+		}
+		add_stress = {
+			value = minor_stress_gain
+			multiply = $AMOUNT$
+		}
+	}
+	
+	if = {
+		limit = {
+			$VICTIM$ = {
+				OR = { # TODO: tripping balls
+					POD_is_fae_trigger = yes
+					POD_is_changeling_trigger = yes
+				}
+			}
+		}
+		POD_become_enchanted_effect = yes
+	}
+	if = {
+		limit = { 
+			$VICTIM$ = { 
+				POD_is_mummy_trigger = yes 
+				is_amenti_trigger = no
+			}
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = hurt_mortal_lose_piety } }
+			add_piety = {
+				value = minor_piety_gain
+				multiply = $AMOUNT$
+			}
+		}
+		else = {
+			add_piety = {
+				value = minor_piety_loss
+				multiply = $AMOUNT$
+			}
+		}
+		while = {
+			count = $AMOUNT$
+			add_character_modifier = {
+				modifier = lifeblood_addiction_modifier
+				years = 1
+			}
+		}
+	}
+}
+
+POD_lose_piety_from_injuring_mortal_effect = {
+	save_scope_value_as = {
+		name = injury_piety_loss
+		value = {
+			value = major_piety_loss
+			if = {
+				limit = { $VICTIM$ = { is_adult = no } }
+				multiply = 2
+			}
+		}
+	}
+	custom_description = {
+		text = "POD_feed_mortal_piety_loss"
+		subject = this
+		object = $VICTIM$
+		value = scope:injury_piety_loss
+	}
+	hidden_effect = { add_piety = scope:injury_piety_loss }
+}
+
+POD_lose_piety_from_draining_mortal_effect = {
+	save_scope_value_as = {
+		name = drain_piety_loss
+		value = {
+			value = massive_piety_loss
+			if = {
+				limit = { $VICTIM$ = { is_adult = no } }
+				multiply = 2
+			}
+		}
+	}
+	custom_description = {
+		text = "POD_drain_mortal_piety_loss"
+		subject = this
+		object = $VICTIM$
+		value = scope:drain_piety_loss
+	}
+	hidden_effect = { add_piety = scope:drain_piety_loss }
+}
+
+POD_become_hungrier_from_foul_blood = {
+	save_scope_value_as = {
+		name = hunger_gain
+		value = {
+			value = 1
+			multiply = maximum_splat_agnostic_energy
+			divide = maximum_blood
+			ceiling = yes
+		}
+	}
+	POD_splat_agnostic_energy_loss = { COUNT = scope:hunger_gain }
+}
+
+POD_animal_feeding_ventrue_bane = {
+	if = {
+		limit = { has_trait = ventrue }
+		send_interface_message = {
+			type = event_generic_bad
+			title = POD_ventrue_bane_notification
+			left_icon = this
+
+			custom_tooltip = ventrue_clan_bane_anim
+			random = {
+				chance = 20
+				POD_become_hungrier_from_foul_blood = yes
+			}
+		}
+	}
+}
+
+POD_hunger_feeding_small_animal_effect = {
+	# Resolve Blood Hunger Draining Small to Medium Size Animals
+	if = {
+		limit = {
+			NOR = {
+				has_perk = animal_succulence_perk
+				has_trait = animalismadvanced
+			}
+			blood_potency_value <= 1
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 1 }
+	}
+	
+	if = {
+		limit = {
+			OR = {
+				has_perk = animal_succulence_perk
+				has_trait = animalismadvanced
+			}
+			blood_potency_value <= 2
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 2 }
+	}
+	
+	if = {
+		limit = {
+			OR = {
+				has_perk = animal_succulence_perk	
+				has_trait = animalismadvanced
+			}
+			blood_potency_value = 3
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 1 }
+	}
+	
+	POD_animal_feeding_ventrue_bane = yes
+}
+
+POD_hunger_feeding_large_animal_effect = {
+	# Resolve Blood Hunger By Draining Large Animal
+	if = {
+		limit = {
+			NOR = {
+				has_perk = animal_succulence_perk
+				has_trait = animalismadvanced
+			}
+			blood_potency_value <= 1
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 2 }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_perk = animal_succulence_perk	
+				has_trait = animalismadvanced
+			}
+			blood_potency_value <= 2
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 3 }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_perk = animal_succulence_perk	
+				has_trait = animalismadvanced
+			}
+			blood_potency_value = 3
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 3 }
+	}
+	random = {
+		chance = 20
+		modifier = {
+			add = 80
+			has_perk = gift_of_apis_perk
+		}
+		modifier = {
+			factor = 0
+			POD_is_hungerless_trigger = yes
+		}
+		send_interface_toast = {
+			title = POD_drain_animal_interaction_toast
+			left_icon = this
+			add_animal_lifestyle_xp = major_lifestyle_xp
+		}
+	}
+	POD_animal_feeding_ventrue_bane = yes	
+}
+
+POD_hunger_feeding_famulus_effect = {
+	POD_restore_hunger_from_mortal_effect = { AMOUNT = 3 }
+
+	random = {
+		chance = 55
+		modifier = {
+			add = 45
+			has_perk = gift_of_apis_perk
+		}
+		modifier = {
+			factor = 0
+			POD_is_hungerless_trigger = yes
+		}
+		send_interface_toast = {
+			title = POD_drain_animal_interaction_toast
+			left_icon = this
+			add_animal_lifestyle_xp = massive_lifestyle_xp
+		}
+	}
+	POD_animal_feeding_ventrue_bane = yes
+}
+
+POD_hunger_feeding_gorge_animal_herd_no_resonance_effect = {
+	if = {
+		limit = {
+			OR = {
+				blood_potency_value <= 3
+				has_perk = animal_succulence_perk	
+				has_trait = animalismadvanced
+			}
+		}
+		POD_restore_hunger_from_mortal_effect = { AMOUNT = 4 }
+	}
+}
+
+POD_discipline_cost_effect = {
+	if = {
+		limit = { POD_has_infinite_blood_trigger = yes }
+		custom_tooltip = hunger_increase_effect.hungerless
+	}
+	else = {
+		POD_energy_cost = {
+			COUNT = $COUNT$
+			SPLAT_MAXIMUM_ENERGY = maximum_blood
+		}
+	}
+}
+
+POD_risen_discipline_cost_effect = {
+	POD_discipline_cost_effect = { COUNT = $COUNT$ }
+}
+
+POD_blood_income_effect = {
+	POD_energy_income = {
+		COUNT = $COUNT$
+		SPLAT_MAXIMUM_ENERGY = maximum_blood
+	}
+}

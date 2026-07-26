@@ -1,0 +1,408 @@
+﻿namespace = pod1230objectives_kj
+
+pod1230objectives_kj.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_kj.1.t
+	desc = pod1230objectives_kj.1.desc
+
+	theme = stewardship_duty_focus
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+	
+	option = {
+		name = pod1230objectives_kj.1.a
+		POD_enlightenment_effect = yes
+		ai_chance = { base = 100 }
+	}
+	
+	option = {
+		name = pod1230objectives_kj.1.b
+	}
+}
+
+pod1230objectives_kj.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_kj.2.t
+	desc = pod1230objectives_kj.2.desc
+
+	theme = stewardship_duty_focus
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+		POD_advance_dharma_effect = yes
+		if = { 
+			limit = { faith = { has_doctrine = special_doctrine_unproven_dharma } }
+			faith = { remove_doctrine = special_doctrine_unproven_dharma }
+			if = {
+				limit = { is_ai = no }
+				set_global_variable = pod_achiev_unprovendharma # Achievement: Dharmic Explorer
+			}
+		}
+	}
+	
+	option = {
+		name = pod1230objectives_kj.2.a
+		death = { death_reason = death_hundred_clouds }
+		dynasty = { add_dynasty_prestige = 5000 }
+
+		ai_chance = { base = 50 }
+	}
+	
+	option = {
+		name = pod1230objectives_kj.1.b
+
+		custom_tooltip = pod1230objectives_kj.1.b.tt
+		
+		ai_chance = { 
+			base = 50 
+			modifier = { is_akuma_trigger = yes add = 50 }
+		}
+	}
+}
+
+pod1230objectives_kj.3 = {
+	type = character_event
+	content_source = dlc_POD
+	title = pod1230objectives_kj.3.t
+	desc = pod1230objectives_kj.3.desc
+
+	theme = stewardship_duty_focus
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+	
+	option = {
+		name = pod1230objectives_kj.3.a
+		add_trait_xp = { trait = dharma9 value = -50 } 
+		POD_static_stress_gain = { COUNT = 150 }
+	}
+}
+
+
+#Wheel of age turn in 1350
+pod1230objectives_kj.4 = {
+	type = character_event
+	content_source = dlc_POD
+    window = fullscreen_event
+	title = pod1230objectives_kj.4.t
+	desc = pod1230objectives_kj.4.desc
+	theme = anda_coa
+	override_background = { reference = the_end_of_ages_background }
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_end_animate" }
+
+	trigger = {
+		#if every fifth age related objective is done, gg, you silently avoided the fifth age 
+		
+		OR = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:reckoning_war_of_shame_objective_decision
+			}
+		}	
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:reckoning_dragon_river_war_objective_decision
+			}
+		}	
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akuma_buff_wheel_prevented
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:political_instability_wheel_prevented
+			}
+		}
+		}
+	}
+
+	immediate = {
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:fifth_age_started
+		}		
+	}
+	
+	option = {
+		name = pod1230objectives_kj.4.a
+		
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:reckoning_war_of_shame_objective_decision
+					}
+				}
+			}
+		
+		custom_tooltip = {
+			text = wheel_ages_lose_dharma_tt
+			
+		every_living_character = {
+			limit = {
+				has_trait = dharma 
+				NOT = { is_akuma_trigger = yes }
+			}
+		add_character_modifier = {
+			modifier = kj_harder_dharma_modifier
+			years = 50
+		}
+		}
+		
+		}
+		}
+		
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:reckoning_dragon_river_war_objective_decision
+					}
+				}
+			}
+		
+		custom_tooltip = {
+			text = wheel_ages_lose_godbodies_modifier_tt
+			
+		every_living_character = {
+			limit = {
+				has_character_modifier = godbodies_modifier
+			}
+		remove_character_modifier = godbodies_modifier
+		}
+		
+		}
+		}		
+
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:akuma_buff_wheel_prevented
+					}
+				}
+			}
+		
+		custom_tooltip = {
+			text = wheel_ages_akuma_buff_modifier_tt
+			
+		every_living_character = {
+			limit = {
+				is_akuma_trigger = yes
+			}
+		add_character_modifier = {
+			modifier = akuma_huge_buff_modifier
+			years = 50
+		}
+		}
+		}
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:political_instability_wheel_prevented
+					}
+				}
+			}
+		
+		custom_tooltip = {
+			text = wheel_ages_political_instability_tt
+			
+		every_ruler = {
+			limit = {
+				is_landed = yes
+				POD_middle_kingdom_splat_trigger = yes
+				NOT = { is_akuma_trigger = yes }
+			}
+		add_character_modifier = {
+			modifier = political_instability_modifier
+			years = 50
+		}
+		}
+		
+		}
+		}		
+	}
+}
+
+pod1230objectives_kj.5 = {
+	type = character_event
+	content_source = dlc_POD
+	title = golden_children_decision
+	desc = pod1230objectives_kj.5.desc
+
+	theme = diplomacy_majesty_focus
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+	
+	option = {
+		name = pod1230objectives_kj.5.a
+
+		#it's a fake trigger, I just want to highlight the dhampyr trait since it changes loca with this objective
+		trigger = {
+			has_trait = dhampyr
+		}
+		
+		custom_tooltip = golden_children_decision_effect
+		
+		hidden_effect = {
+			every_held_title = { #Should shift all dejure of all Empires owned at the time.
+				limit = {
+					tier >= tier_empire
+				}
+				every_in_de_jure_hierarchy = {
+					limit = {
+						tier = tier_kingdom
+					}
+					set_de_jure_liege_title = title:e_golden_children
+					
+				}
+			}
+			every_held_title = { #Completely Controlled Kingdoms as well.
+				limit = {
+					tier = tier_kingdom
+					root = { completely_controls = prev }
+				}
+				set_de_jure_liege_title = title:e_golden_children
+			}
+		}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		title:e_golden_children = {
+			change_title_holder = {
+				holder = root
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+		hidden_effect = { set_primary_title_to = title:e_golden_children }
+		every_held_title = { #Should destroy all other Empires owned at the time.
+			limit = {
+				tier >= tier_empire
+				NOT = { this = title:e_golden_children }
+			}
+			root = { destroy_title = prev }
+		}		
+		
+	}
+	
+	option = {
+		name = pod1230objectives_kj.5.a
+
+		#safeguard
+		trigger = {
+			NOT = { has_trait = dhampyr }
+		}
+		
+		custom_tooltip = golden_children_decision_effect
+		
+		hidden_effect = {
+			every_held_title = { #Should shift all dejure of all Empires owned at the time.
+				limit = {
+					tier >= tier_empire
+				}
+				every_in_de_jure_hierarchy = {
+					limit = {
+						tier = tier_kingdom
+					}
+					set_de_jure_liege_title = title:e_golden_children
+					
+				}
+			}
+			every_held_title = { #Completely Controlled Kingdoms as well.
+				limit = {
+					tier = tier_kingdom
+					root = { completely_controls = prev }
+				}
+				set_de_jure_liege_title = title:e_golden_children
+			}
+		}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		title:e_golden_children = {
+			change_title_holder = {
+				holder = root
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+		hidden_effect = { set_primary_title_to = title:e_golden_children }
+		every_held_title = { #Should destroy all other Empires owned at the time.
+			limit = {
+				tier >= tier_empire
+				NOT = { this = title:e_golden_children }
+			}
+			root = { destroy_title = prev }
+		}			
+	}
+}
+
+pod1230objectives_kj.6 = {
+	type = character_event
+	content_source = dlc_POD
+	title = shade_walkers_decision
+	desc = pod1230objectives_kj.6.desc
+
+	theme = diplomacy_majesty_focus
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+	
+	option = {
+		name = pod1230objectives_kj.6.a
+
+		add_trait = immortal
+		add_character_modifier = shade_walker_modifier
+	}
+}
+

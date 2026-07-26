@@ -1,0 +1,1514 @@
+﻿tablet_of_destiny_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = tablet_of_destiny_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = tablet_of_destiny
+		}
+		has_POD_public_vamp_blood_trigger = yes
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {
+		custom_tooltip = tablet_of_destiny_decision_effect_tooltip
+
+		trigger_event = POD_canon_artifacts.200
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+eye_of_hazimel_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = eye_of_hazimel_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = eye_of_hazimel
+		}	
+		NOT = {
+			has_character_flag = eye_of_hazimel_tamed
+			}
+		has_POD_public_vamp_blood_trigger = yes						
+		}
+		
+	is_valid = {
+		}
+	
+	effect = {
+		custom_tooltip = eye_of_hazimel_decision_tooltip
+
+		trigger_event = POD_canon_artifacts.300
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+ankaran_sarcophagus_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = ankaran_sarcophagus_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = ankaran_sarcophagus
+		}	
+		NOT = {
+			has_character_flag = ankaran_sarcophagus_opened
+			}
+		}
+		
+	is_valid = {
+		}
+	
+	effect = {
+		custom_tooltip = ankaran_sarcophagus_decision_tooltip
+
+		trigger_event = POD_canon_artifacts.400
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+#beatific_decision = {
+#	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+#	desc = beatific_decision_desc
+#	decision_group_type = pod_artifact
+#	
+#	ai_check_interval = 0
+#
+#	is_shown = {
+#		OR = {
+#			#AND = {
+#			#	any_character_artifact = {
+#			#		has_variable = true_cross
+#			#	}	
+#			#	is_vampire_trigger = no
+#			#}
+#			#AND = {
+#			#	any_character_artifact = {
+#			#		has_variable = holy_grail
+#			#	}	
+#			#	is_vampire_trigger = no
+#			#}
+#			#AND = {
+#			#	any_character_artifact = {
+#			#		has_variable = corona_ferrata
+#			#	}	
+#			#	has_trait = truefaith
+#			#}			
+#			#any_character_artifact = {
+#			#	has_variable = flagrum_passion
+#			#}				
+#		}		
+#		NOT = {
+#			has_trait = beatific
+#		}
+#		POD_is_infernalist_trigger = no
+#		POD_blocked_from_learning_trigger = no
+#	}
+#		
+#	is_valid = {
+#		}
+#	
+#	effect = {		
+#		assign_truefaith_effect = yes	
+#	}
+#
+#	ai_potential = {
+#		always = no
+#	}
+#
+#	ai_will_do = {
+#		base = 0
+#	}
+#}
+
+full_blood_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = full_blood_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		OR = {
+			any_character_artifact = {
+				has_variable = blood_horn
+			}
+			has_trait = POD_grail_knight
+		}
+		is_vampire_trigger = yes
+		POD_splat_has_hunger_exclusively = yes
+		NOT = {
+			has_character_modifier = bloodhunger0_modifier
+		}
+	}			
+		
+	is_valid = {
+		NOT = { has_trait = methuselahs_thirst }
+		}
+	
+	effect = {
+		POD_remove_hunger_modifiers_effect = yes
+		add_character_modifier = bloodhunger0_modifier				
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+shemaziel_sarcophagus_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = shemaziel_sarcophagus_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = shemaziel_sarcophagus
+		}	
+		NOT = { has_character_flag = shemaziel_sarcophagus_opened }
+		POD_has_true_faith_trigger = no
+		POD_can_be_possessed_trigger = yes	
+	}
+		
+	is_valid = {}
+	
+	effect = {
+		custom_tooltip = shemaziel_sarcophagus_decision_tooltip
+
+		trigger_event = POD_canon_artifacts.500
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+#oblivionadvanced_decision = {
+#	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+#	desc = oblivionadvanced_decision_desc
+#	decision_group_type = pod_artifact
+#	
+#	ai_check_interval = 0
+#
+#	is_shown = {
+#			AND = {
+#			any_character_artifact = {
+#				has_variable = codex_mortis
+#			}	
+#			is_vampire_trigger = yes
+#			}
+#								
+#		NOT = {
+#			has_perk = giovanninecromancyadvanced_perk
+#			}
+#		POD_blocked_from_learning_trigger = no
+#		}
+#		
+#	is_valid = {
+#		}
+#	
+#	effect = {	
+#		add_character_flag = has_giovanni_necromancy_flag		
+#	
+#		assign_giovanni_necromancy_effect = yes
+#
+#	}
+#
+#	ai_potential = {
+#		always = no
+#	}
+#
+#	ai_will_do = {
+#		base = 0
+#	}
+#}
+
+bloodsorceryadvanced_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = bloodsorceryadvanced_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		AND = {
+			any_character_artifact = {
+				has_variable = vassago_earring
+			}	
+			is_vampire_trigger = yes
+		}				
+		NOT = {
+			has_trait = bloodsorceryadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		assign_bloodsorcery_effect = yes
+		if = {
+			limit = { has_any_bloodmagic_path = no }
+			# PLACEHOLDER - switch to dark thaumaturgy once it's implemented
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+auspexadvanced_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = auspexadvanced_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		AND = {
+			any_character_artifact = {
+				has_variable = alashrad_eye
+			}	
+			is_vampire_trigger = yes
+		}
+								
+		NOT = {
+			has_trait = auspexadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		assign_auspex_effect = yes	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+truefaith_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = truefaith_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	cost = { piety = 500 }
+	
+	is_shown = {
+		
+		OR = {
+			any_character_artifact = {
+				has_variable = dagger_thorns
+			}	
+			any_character_artifact = {
+				has_variable = spear_destiny
+			}	
+		}
+		
+		OR = {
+			faith = { is_POD_christian_religion_trigger = yes }
+			has_trait = werewolf
+			POD_can_participate_in_vampire_politics = yes
+			AND = {
+				has_trait = supehunter
+				NOT = { has_trait = shih }
+			}
+		}
+		
+		POD_has_true_faith_trigger = no
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = { POD_splat_mixing_haight_mode = no }
+			POD_is_infernalist_trigger = no
+		}	
+	}
+	
+	effect = {	
+		if = {
+			limit = {
+				faith = { is_POD_christian_religion_trigger = yes }
+			}
+		}
+		
+		else_if = {
+			limit = {
+				has_trait = werewolf
+				is_female = no
+			}
+			set_character_faith = faith:crestofthehorn
+		}
+
+		else_if = {
+			limit = {
+				has_trait = werewolf
+				is_female = yes
+			}
+			set_character_faith = faith:orderofourmercifulmother
+		}
+
+		else_if = {
+			limit = {
+				POD_can_participate_in_vampire_politics = yes
+			}
+			set_character_faith = faith:viachristi
+		}
+
+		else_if = {
+			limit = {
+			AND = {
+				has_trait = supehunter
+				NOT = { has_trait = shih }
+			}			
+			}
+			set_character_faith = faith:akritai
+		}
+
+		add_character_modifier = {
+			modifier = POD_faith_commited_modifier
+			years = 100
+		}
+		
+		add_trait = truefaith
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+auspex_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = auspex_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_vampire_trigger = yes
+		OR = {
+			any_character_artifact = {
+				has_variable = ignace_notes
+			}
+			any_character_artifact = {
+				has_variable = marguerite_ring
+			}				
+		}						
+		NOT = {
+			has_trait = auspex
+			has_trait = auspexadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		add_trait = auspex
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+dominate_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = dominate_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_vampire_trigger = yes
+			any_character_artifact = {
+				has_variable = marguerite_ring
+			}									
+		NOT = {
+			has_trait = dominate
+			has_trait = dominateadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		add_trait = dominate
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+obtenebration_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = obtenebration_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_vampire_trigger = yes
+		any_character_artifact = {
+			has_variable = orb_shadows
+		}									
+		NOT = {
+			has_trait = obtenebration
+			has_trait = obtenebrationadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		add_trait = obtenebration
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+obfuscate_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = obfuscate_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_vampire_trigger = yes
+		any_character_artifact = {
+			has_variable = night_lantern
+		}
+		NOT = {
+			has_trait = obfuscate
+			has_trait = obfuscateadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+		}
+	
+	effect = {		
+		add_trait = obfuscate
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+gaffari_scrolls_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = gaffari_scrolls_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_vampire_trigger = yes
+			any_character_artifact = {
+				has_variable = gaffari_scrolls
+			}									
+		}
+		
+	is_valid = {
+		}
+	
+	effect = {		
+		custom_tooltip = gaffari_scrolls_decision_tooltip
+
+		trigger_event = POD_canon_artifacts.600
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+animalismadvanced_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = animalismadvanced_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		AND = {
+			any_character_artifact = {
+				has_variable = flesh_hunted
+			}	
+			is_vampire_trigger = yes
+			faith = { religion_tag = roadofbeast_religion }			
+		}					
+		NOT = {
+			has_trait = animalismadvanced
+		}
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {		
+		assign_animalism_effect = yes	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+grail_ashes_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = grail_ashes_decision_desc
+	decision_group_type = major
+	
+	sort_order = 1000
+	
+	ai_check_interval = 0
+
+	cooldown = { years = 10 }
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = holy_grail
+		}
+		is_vampire_trigger = yes
+		NOT = { has_trait = POD_grail_knight }
+	
+	}
+		
+	is_valid = {
+		is_infernalist_trigger = no
+		NOR = {
+			has_trait = azhi_dahaka_scholar
+			has_trait = azhi_dahaka
+		}
+	}
+	
+	effect = {
+		custom_tooltip = grail_ashes_decision_effect_tooltip
+
+		trigger_event = POD_canon_artifacts.700
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+full_glamour_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = full_glamour_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+	
+	cooldown = { days = 7 }
+
+	is_shown = {
+		any_character_artifact = { has_variable = rose_of_leanhaun }
+		has_POD_fae_blood_trigger = yes
+		NOT = { has_trait = hsien }
+		NOT = { has_character_modifier = glamour0_modifier }
+	}
+	
+	effect = {
+		POD_remove_glamour_modifiers_effect = yes
+		add_character_modifier = glamour5_modifier			
+	}
+}
+
+baizetu_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = baizetu_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = baizetu_fragment
+		}
+	}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = baizetu_decision_custom
+			any_character_artifact = {
+				count >= 5
+				has_variable = baizetu_fragment
+			}
+		}
+	}
+	
+	effect = {				
+		every_artifact = {
+			limit = { has_variable = baizetu_fragment }
+			destroy_artifact = this
+		}
+		
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_baizetu_effect = { OWNER = this TYPE = book }
+		}
+		else = {
+			create_artifact_baizetu_effect = { OWNER = this TYPE = miscellaneous_when_not_court }
+		}
+		POD_overwrite_artifact_link = { LINK = baizetu_link }
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+spear_orthia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = spear_orthia_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	cost = { gold = 500 }
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = shattered_spear
+		}						
+	}
+		
+	is_valid = {
+		OR = {
+			custom_description = {
+				text = shattered_spear_decision_custom
+				object = character:791233
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:791233
+				}
+			}
+
+			custom_description = {
+				text = shattered_spear_decision_custom
+				object = character:790292
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:790292
+				}
+			}
+		}
+	}
+	
+	effect = {				
+		every_character_artifact = {
+			limit = {
+			has_variable = shattered_spear
+			}
+			destroy_artifact = this
+		}
+
+		create_artifact = {
+			name = artifact_spear_orthia_name
+			description = artifact_spear_orthia_description
+			decaying = no	
+			wealth = 100
+			quality = 100			
+			history = {
+				type = created_before_history
+			}
+			type = spear
+			visuals = spear
+			modifier = spear_orthia_modifier
+		}		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+truth_saulot_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = truth_saulot_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = javaniel_journal
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:truth_saulot_decision
+			}
+		}		
+	}
+	
+	is_valid = {
+		POD_character_owns_linked_artifact = {
+			LINK = javaniel_key
+		}
+		POD_character_owns_linked_artifact = {
+			LINK = ivory_tablets
+		}
+	}
+	
+	effect = {				
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:truth_saulot_decision
+		}
+
+		custom_tooltip = truth_saulot_decision_tt
+
+		trigger_event = POD_canon_artifacts.800	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+samiel_code_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = samiel_code_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = fragment_code_samiel
+		}		
+	}
+		
+	is_valid = {
+		POD_character_owns_linked_artifact = {
+			LINK = fragment_code_samiel1
+		}
+		POD_character_owns_linked_artifact = {
+			LINK = fragment_code_samiel2
+		}
+	}
+	
+	effect = {				
+		every_character_artifact = {
+			limit = {
+			has_variable = fragment_code_samiel
+			}
+			destroy_artifact = this
+		}	
+		if = {
+			limit = { has_ep1_dlc_trigger = yes }
+			create_artifact_code_samiel_effect = { OWNER = root TYPE = book }
+		}
+		else = {
+			create_artifact_code_samiel_effect = { OWNER = root TYPE = miscellaneous_when_not_court }
+		}		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+codex_mortis_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = codex_mortis_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		AND = {
+			any_character_artifact = {
+				has_variable = codex_mortis
+			}	
+			is_vampire_trigger = yes
+		}
+								
+		 NOT = {
+		 	has_perk = necromancyadvanced_perk
+		 }
+		NOT = {
+			has_character_flag = codex_mortis_rejected_flag
+		}
+		
+		POD_blocked_from_learning_trigger = no
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {
+		
+		custom_tooltip = codex_mortis_decision_tt
+		
+		trigger_event = POD_canon_artifacts.900
+
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+tapestry_of_fate_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = tapestry_of_fate_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+	
+	cooldown = { years = 5 }
+
+	is_shown = {
+		AND = {
+			any_character_artifact = {
+				has_variable = tapestry_of_fate
+			}
+			POD_can_study_true_names_all_trigger = yes
+		}
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {
+		custom_tooltip = tapestry_of_fate_decision_effect_tooltip
+
+		trigger_event = POD_canon_artifacts.1000
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+incunabulum_kupalam_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds" }
+	desc = incunabulum_kupalam_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_playable_character = yes
+		OR = {
+			any_character_artifact = { has_variable = incunabulum_fragment }
+			has_koldunic_bloodmagic_trigger = yes
+		}
+		NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:incunabulum_kupalam_decision } }		
+	}
+	is_valid = {
+		OR = {
+			learning >= 20
+			has_trait = scholar
+		}
+		custom_tooltip = {
+			text = incunabulum_kupalam_decision_requirement
+			any_character_artifact = {
+				count >= 5
+				has_variable = incunabulum_fragment
+			}
+		}
+	}
+	
+	effect = {
+		add_to_global_variable_list = { name = unavailable_unique_decisions target = flag:incunabulum_kupalam_decision }
+		custom_tooltip = {
+			text = incunabulum_kupalam_decision_effect
+			every_artifact = {
+				limit = { has_variable = incunabulum_fragment }
+				destroy_artifact = this
+			}
+			create_artifact_incunabulum_kupalam_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = incunabulum_kupalam_link }
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+broken_blade_michael_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = broken_blade_michael_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	cost = { gold = 500 }
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = broken_blade_michael
+		}						
+	}
+		
+	is_valid = {
+		OR = {
+			custom_description = {
+				text = shattered_spear_decision_custom
+				object = character:791233
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:791233
+				}
+			}
+
+			custom_description = {
+				text = shattered_spear_decision_custom
+				object = character:790292
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:790292
+				}
+			}
+		}
+	}
+	
+	effect = {				
+		every_character_artifact = {
+			limit = {
+			has_variable = broken_blade_michael
+			}
+			destroy_artifact = this
+		}
+
+		create_artifact = {
+			name = artifact_blade_michael_name
+			description = artifact_blade_michael_description
+			decaying = no	
+			wealth = 100
+			quality = 100			
+			history = {
+				type = created_before_history
+				actor = character:505051
+				recipient = character:505051				
+			}
+			type = sword
+			visuals = sword
+			modifier = blade_michael_modifier
+		}		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+akhu_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = akhu_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		any_character_artifact = {
+			has_variable = book_going_night
+		}
+		has_POD_public_vamp_blood_trigger = yes
+		POD_blocked_from_learning_trigger = no
+		NOT = { has_character_flag = has_akhu_bloodmagic_flag }
+	}
+		
+	is_valid = {
+	}
+	
+	effect = {
+		custom_tooltip = akhu_decision_effect_tooltip
+
+		if = {
+			limit = {
+				NOT = { has_trait = bloodsorcery }
+			}
+			add_trait = bloodsorcery
+			add_character_flag = remove_clan_bloodmagic
+		}
+		add_character_flag = has_akhu_bloodmagic_flag
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+robe_golden_mandarin_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	desc = robe_golden_mandarin_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		is_playable_character = yes
+		any_character_artifact = {
+			has_variable = robe_golden_mandarin
+			
+			NOT = {
+				has_artifact_modifier = robe_golden_mandarin_modifier
+			}
+		}						
+	}
+		
+	is_valid = {
+		learning >= 25
+	}
+	
+	effect = {				
+		every_character_artifact = {
+			limit = {
+			has_variable = robe_golden_mandarin
+			}
+			remove_artifact_modifier = artifact_stress_gain_1_penalty_modifier
+			add_artifact_modifier = robe_golden_mandarin_modifier
+		}	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+sword_of_fever_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_black_plague.dds"
+	}
+	desc = sword_of_fever_decision_desc
+	decision_group_type = pod_artifact
+	
+	
+	is_shown = {
+		any_equipped_character_artifact = { has_variable = sword_of_fever prev = { can_benefit_from_artifact = prev } }
+	}
+
+	is_valid = {
+		piety >= 1000
+		piety_level >= 2
+		location ?= { geographical_region = world_africa }
+		trigger_if = {
+			limit = { has_character_modifier = sword_of_fever_modifier }
+			NOT = { has_character_modifier = sword_of_fever_modifier }
+		}
+	}
+	
+	effect = {
+		custom_tooltip = sword_of_fever_decision_effect_tooltip
+		trigger_event = POD_canon_artifacts.1100
+	}
+
+	ai_check_interval = 0
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+### Impundulu Submod — Artifact Crafting Decisions
+### Reference: 00_POD_1230_objectives_decisions.txt (artifact creation pattern)
+
+### ==========================================
+### ARTIFACT 1: Shew-Stone (Trinket)
+### Requires: Impundulu, Cenotaph Path, Legacy Tier 3
+### ==========================================
+
+craft_shewstone_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	}
+	decision_group_type = pod_splat
+
+	ai_check_interval = 0
+
+	desc = craft_shewstone_decision_desc
+
+	cost = {
+		gold = 150
+		piety = 100 
+	}
+
+	is_shown = {
+		is_impundulu_trigger = yes
+		is_vampire_trigger = yes
+		dynasty ?= { has_dynasty_perk = impundulu_legacy_3 }
+	}
+
+	is_valid = {
+		### Must know the Cenotaph Path
+		custom_tooltip = {
+			text = imp_requires_cenotaph_path_tt
+			has_perk = ns_a_touch_of_death_perk
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			create_artifact = {
+				name = artifact_shewstone_name
+				description = artifact_shewstone_description
+				modifier = artifact_shewstone_modifier
+				type = miscellaneous
+				visuals = small_box
+				wealth = 50
+				quality = 60
+			}
+		}
+
+		trigger_event = POD_impundulu.3001
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+### ==========================================
+### ARTIFACT 2: Nightmare Drums (Miscellaneous)
+### Requires: Impundulu, Haunting Path level 3+, Legacy Tier 3
+### ==========================================
+
+craft_nightmare_drums_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	}
+	decision_group_type = pod_splat
+
+	ai_check_interval = 0
+
+	desc = craft_nightmare_drums_decision_desc
+
+	cost = {
+		gold = 200
+		prestige = 150 
+	}
+
+	is_shown = {
+		is_impundulu_trigger = yes
+		is_vampire_trigger = yes
+		dynasty ?= { has_dynasty_perk = impundulu_legacy_3 }
+	}
+
+	is_valid = {
+		### Must have Haunting Path level 3+ (3rd perk in the tree)
+		custom_tooltip = {
+			text = imp_requires_haunting_path_3_tt
+			has_perk = ns_harrowing_perk
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			create_artifact = {
+				name = artifact_nightmare_drums_name
+				description = artifact_nightmare_drums_description
+				modifier = artifact_nightmare_drums_modifier
+				type = miscellaneous
+				visuals = small_box
+				wealth = 70
+				quality = 75
+			}
+		}
+
+		trigger_event = POD_impundulu.3002
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+### ==========================================
+### ARTIFACT 3: Witch Eye (Trinket)
+### Requires: Impundulu, Legacy Tier 4
+### ==========================================
+
+craft_witch_eye_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	}
+	decision_group_type = pod_splat
+
+	ai_check_interval = 0
+
+	desc = craft_witch_eye_decision_desc
+
+	cost = {
+		gold = 250
+		piety = 200 
+	}
+
+	is_shown = {
+		is_impundulu_trigger = yes
+		is_vampire_trigger = yes
+		dynasty ?= { has_dynasty_perk = impundulu_legacy_4 }
+		### Cannot craft if already have one
+		NOT = {
+			any_character_artifact = {
+				has_variable = imp_witch_eye_artifact
+			}
+		}
+	}
+
+	is_valid = {
+		### Must have advanced necromancy
+		has_trait = necromancyadvanced
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			create_artifact = {
+				name = artifact_witch_eye_name
+				description = artifact_witch_eye_description
+				modifier = artifact_witch_eye_modifier
+				type = miscellaneous
+				visuals = small_box
+				wealth = 90
+				quality = 90
+			}
+			### Health cost — self-mutilation
+			add_character_modifier = imp_witch_eye_scarred_modifier
+		}
+
+		trigger_event = POD_impundulu.3003
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -1,0 +1,251 @@
+﻿
+knight_discipline_attack_wound_perk_modifier = {
+	# KJ
+	modifier = {
+		add = 50
+		OR = {
+			# KJ
+			
+			# Shih
+			has_perk = thousand_fists_perk
+			# Mummy
+			has_perk = spark_of_ra_perk
+			# WW
+			has_perk = howl_of_death_perk
+			has_perk = toxic_claws_perk
+			# Mokole
+			has_perk = might_of_kings_perk
+			# Vampire
+			has_perk = lethal_body_perk
+			has_perk = fist_of_caine_perk
+			has_perk = fc_arm_r_tentacle_limb_perk
+			has_perk = fc_arm_l_tentacle_limb_perk
+			# Possessed
+			has_perk = fomori_devour_perk
+			has_perk = gorgon_devour_perk
+			has_perk = fomori_electrical_field_perk
+			has_perk = gorgon_electrical_field_perk
+			has_perk = drone_electrical_field_perk
+			has_perk = kami_electrical_field_perk
+			has_perk = fomori_hazardous_breath_perk
+			has_perk = gorgon_hazardous_breath_perk
+			has_perk = kami_hazardous_breath_perk
+			has_perk = fomori_malleate_perk
+			has_perk = gorgon_malleate_perk 
+			has_perk = fomori_poison_perk
+			has_perk = gorgon_poison_perk
+			has_perk = kami_poison_perk
+			has_perk = fomori_tar_baby_perk
+			has_perk = fomori_thick_skinned_perk
+			has_perk = gorgon_thick_skinned_perk
+			has_perk = drone_thick_skinned_perk
+			has_perk = kami_thick_skinned_perk
+			# Demon
+		}
+	}
+}
+
+knight_discipline_attack_severe_injury_perk_modifier = {
+	# Shih
+	modifier = {
+		add = 10
+		has_perk = burning_ghosts_perk
+	}
+	modifier = {
+		add = 5
+		has_perk = spear_hand_perk
+	}
+	# Mummy
+	modifier = {
+		add = 10
+		has_perk = ashes_to_ashes_perk
+	}
+	# Vampire
+	modifier = {
+		add = 10
+		has_perk = fist_of_caine_perk
+	}	
+	# Possessed
+	modifier = {
+		add = 10
+		OR = {
+			has_perk = fomori_poison_perk
+			has_perk = gorgon_poison_perk
+			has_perk = kami_poison_perk
+		}
+	}
+}
+
+knight_discipline_attack_maul_perk_modifier = {
+	# KJ
+	modifier = {
+		add = 10
+		has_perk = chi_arts_roar_of_phoenix_perk
+	}
+	modifier = {
+		add = 10
+		has_perk = chi_arts_silent_scream_perk
+	}
+	# Shih
+	modifier = {
+		add = 10
+		has_perk = thousand_swords_perk
+	}
+	modifier = {
+		add = 5
+		has_perk = steel_body_perk
+	}
+	# Mummy
+	modifier = {
+		add = 10
+		has_perk = dust_to_dust_perk
+	}
+	# WW
+	modifier = {
+		add = 10
+		has_perk = howl_of_death_perk
+	}
+	# Possessed
+	modifier = {
+		add = 10
+		OR = {
+			has_perk = fomori_devour_perk
+			has_perk = gorgon_devour_perk
+		}
+	}
+	modifier = {
+		add = 5
+		OR = {
+			has_perk = fomori_electrical_field_perk
+			has_perk = gorgon_electrical_field_perk
+			has_perk = drone_electrical_field_perk
+			has_perk = kami_electrical_field_perk
+		}
+	}
+	modifier = {
+		add = 10
+		OR = {
+			has_perk = fomori_hazardous_breath_perk
+			has_perk = gorgon_hazardous_breath_perk
+			has_perk = kami_hazardous_breath_perk
+		}
+	}
+}
+
+knight_discipline_attack_maim_perk_modifier = {
+	# KJ
+	
+	# WW
+	modifier = {
+		add = 5
+		has_perk = toxic_claws_perk
+	}
+	# Possessed
+	modifier = {
+		add = 10
+		OR = {
+			has_perk = fomori_malleate_perk
+			has_perk = gorgon_malleate_perk
+		}
+	}
+	modifier = {
+		add = 5
+		has_perk = fomori_tar_baby_perk
+	}
+	modifier = {
+		add = 10
+		OR = {
+			has_perk = fomori_thick_skinned_perk
+			has_perk = gorgon_thick_skinned_perk
+			has_perk = drone_thick_skinned_perk
+			has_perk = kami_thick_skinned_perk
+		}
+	}
+}
+
+knight_discipline_attack_kill_perk_modifier = {
+	# KJ
+	
+	# Shih
+	modifier = {
+		add = 10
+		has_perk = heaven_thunder_strike_perk
+	}
+	modifier = {
+		add = 5
+		has_perk = hundred_warriors_strike_perk
+	}
+	modifier = {
+		add = 20
+		POD_is_heightened_fatality_enabled = yes
+	}
+	modifier = {
+		add = 10
+		factor = 2
+		AND = {
+			prowess >= 25
+			POD_is_heightened_fatality_enabled = yes
+		}
+	}
+	modifier = {
+		factor = 0.1
+		OR = {
+			is_lowborn = yes
+			this.dynasty = { dynasty_prestige_level <= 1 }
+		}
+	}
+}
+
+knight_be_target_chance_modifier = {
+	modifier = {
+		factor = 10
+		has_any_nickname = no
+		POD_is_heightened_fatality_enabled = no
+	}
+	modifier = {
+		factor = 10
+		is_immortal = no
+		POD_is_heightened_fatality_enabled = no
+	}
+	modifier = {
+		factor = 10
+		has_trait = mortal
+	}
+	modifier = {
+		factor = 5
+		prowess <= 13
+		POD_is_heightened_fatality_enabled = yes
+	}
+	modifier = {
+		factor = 15 # Disdain for plebs 
+		OR = {
+			is_lowborn = yes
+			dynasty ?= { dynasty_prestige_level <= 1 }
+		}
+		POD_is_heightened_fatality_enabled = yes
+	}
+}
+
+
+knight_not_be_target_chance_modifier = {
+	modifier = {
+		factor = 0.01
+		has_any_nickname = yes
+		POD_is_heightened_fatality_enabled = no
+	}
+	modifier = {
+		factor = 0.1
+		NOT = { has_trait = mortal }
+		POD_is_heightened_fatality_enabled = no
+	}
+	modifier = {
+		factor = 0.3
+		has_character_flag = has_scripted_appearance
+		POD_is_heightened_fatality_enabled = yes
+	}
+	modifier = {
+		factor = 0.25
+		age >= 250
+		POD_is_heightened_fatality_enabled = yes
+	}
+}

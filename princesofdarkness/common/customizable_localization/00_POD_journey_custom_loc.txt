@@ -1,0 +1,253 @@
+﻿PODShowJourneyName = {
+	type = story
+	
+	text = {
+		trigger = {
+			exists = var:ritual
+		}
+		localization_key = POD_journey_name_ritual
+	}
+	
+	text = {
+		trigger = {
+			exists = var:target_trait
+		}
+		localization_key = POD_journey_name_targeted_trait
+	}
+	
+	text = {
+		trigger = {
+			exists = var:target_artifact
+		}
+		localization_key = POD_journey_name_targeted_artifact
+	}
+	
+	text = {
+		trigger = {
+			exists = var:target
+		}
+		localization_key = POD_journey_name_targeted
+	}
+	
+	
+	text = {
+		localization_key = POD_journey_name
+	}
+}
+
+PODShowJourneyPhase = {
+	type = character
+
+	text = {
+		trigger = {
+			var:current_journey ?= {
+				var:phase = flag:planning_phase
+			}
+		}
+		localization_key = POD_journey_phase_planning
+	}
+
+	text = {
+		trigger = {
+			var:current_journey ?= {
+				var:phase = flag:travel_phase
+			}
+		}
+		localization_key = POD_journey_phase_travel
+	}
+	
+	text = {
+		localization_key = POD_journey_phase_error
+	}
+}
+
+PODShowJourneyProgress = {
+	type = character
+
+	text = {
+		trigger = {
+			var:journey_detail_window_subtype = {
+				POD_is_instant_journey_trigger = yes
+			}
+		}
+		localization_key = POD_journey_progress_instant
+	}
+	
+	text = {
+		localization_key = POD_journey_progress
+	}
+}
+
+PODHasPausableJourney = {
+	type = character
+
+	text = {
+		trigger = {
+			has_variable = current_journey
+		}
+		localization_key = POD_journey_pausable
+	}
+	
+	text = {
+		localization_key = blank_line
+	}
+}
+
+PODShowJourneyCost = {
+	type = character
+
+	text = {
+		trigger = {
+			journey_window_gold_cost     != 0
+			journey_window_prestige_cost != 0
+			journey_window_piety_cost    != 0
+		}
+		localization_key = POD_journey_cost_goldprestigepiety
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost     != 0
+			journey_window_prestige_cost != 0
+			journey_window_piety_cost     = 0
+		}
+		localization_key = POD_journey_cost_goldprestige
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost     != 0
+			journey_window_prestige_cost  = 0
+			journey_window_piety_cost    != 0
+		}
+		localization_key = POD_journey_cost_goldpiety
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost      = 0
+			journey_window_prestige_cost != 0
+			journey_window_piety_cost    != 0
+		}
+		localization_key = POD_journey_cost_prestigepiety
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost     != 0
+			journey_window_prestige_cost  = 0
+			journey_window_piety_cost     = 0
+		}
+		localization_key = POD_journey_cost_gold
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost      = 0
+			journey_window_prestige_cost != 0
+			journey_window_piety_cost     = 0
+		}
+		localization_key = POD_journey_cost_prestige
+	}
+
+	text = {
+		trigger = {
+			journey_window_gold_cost      = 0
+			journey_window_prestige_cost  = 0
+			journey_window_piety_cost    != 0
+		}
+		localization_key = POD_journey_cost_piety
+	}
+	
+	text = {
+		localization_key = POD_journey_cost_free
+	}
+}
+
+PODShowJourneyCostHunt = {
+	type = character
+
+	text = {
+		trigger = {
+			OR = {
+				var:hunt_in_capital_selection = flag:choleric
+				var:hunt_in_capital_selection = flag:melancholic
+				var:hunt_in_capital_selection = flag:phlegmatic
+				var:hunt_in_capital_selection = flag:sanguine
+			}
+		}
+		localization_key = POD_journey_cost_hunt_rouse_blood
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				var:hunt_in_capital_selection = flag:pod_peasants
+				has_game_rule = journey_cost_mult_0
+			}
+		}
+		localization_key = POD_journey_cost_free
+	}
+
+	text = {
+		trigger = {
+			var:hunt_in_capital_selection = flag:pod_scoundrels
+		}
+		localization_key = POD_journey_cost_hunt_scoundrels
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				var:hunt_in_capital_selection = flag:pod_diplomats
+				var:hunt_in_capital_selection = flag:pod_warriors
+			}
+		}
+		localization_key = POD_journey_cost_hunt_warriors
+	}
+
+	text = {
+		trigger = {
+			var:hunt_in_capital_selection = flag:pod_merchants
+		}
+		localization_key = POD_journey_cost_hunt_merchants
+	}
+
+	text = {
+		trigger = {
+			var:hunt_in_capital_selection = flag:pod_clergy
+		}
+		localization_key = POD_journey_cost_hunt_clergy
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				var:hunt_in_capital_selection = flag:ashen_nobles
+				var:hunt_in_capital_selection = flag:ashen_knights
+			}
+		}
+		localization_key = POD_journey_cost_hunt_ashen_prestige
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				var:hunt_in_capital_selection = flag:ashen_seneschals
+				var:hunt_in_capital_selection = flag:ashen_thieves
+			}
+		}
+		localization_key = POD_journey_cost_hunt_ashen_gold
+	}
+
+	text = {
+		trigger = {
+			var:hunt_in_capital_selection = flag:ashen_cults
+		}
+		localization_key = POD_journey_cost_hunt_ashen_piety
+	}
+	
+	text = {
+		localization_key = POD_journey_cost_free
+	}
+}

@@ -1,0 +1,1155 @@
+﻿
+# for debug:
+# effect POD_refresh_journey_GUI
+# effect POD_add_journey_progress = { AMOUNT = instant_progress }
+# effect = { current_travel_plan = { add_destination_progress = { years = 9999 } } }
+
+
+# For future modders: put new Journeys here.
+# This effect lets Journeys be displayed in the sidebar GUI window.
+# (meaning there could be other "hidden" journeys, e.g. triggered via character interaction)
+#
+# POD_add_to_journey_list needs to be called with 6 arguments:
+# TYPE     - the journey ID, necessary to make everything else work
+# GUITYPE  - can be either journey or great_journey, used in the sidebar window
+# MONTHLY  - which script value to use for planning speed, used by POD_journey_monthly_tick
+# GOLD     - upfront gold cost (can be 0)
+# PRESTIGE - upfront prestige cost (can be 0)
+# PIETY    - upfront piety cost (can be 0)
+#
+# NOTE:
+# When you edit one of the Journeys here, also increment current_journey_version in common\script_values\POD_journey_values.txt
+#
+POD_initialize_journey_GUI = {
+
+	set_global_variable = {
+		name  = POD_journey_version
+		value = current_journey_version
+	}
+
+	# Regular Journeys
+	
+	POD_add_to_journey_list = {
+		TYPE     = look_for_contracts
+		GUITYPE  = journey
+		MONTHLY  = look_for_contracts
+		GOLD     = 0
+		PRESTIGE = 150
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = hunt_in_capital
+		GUITYPE  = journey
+		MONTHLY  = hunt_journey
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = fera_training
+		GUITYPE  = journey
+		MONTHLY  = fera_training
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = fera_spirit_quest
+		GUITYPE  = journey
+		MONTHLY  = fera_spirit_quest
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 250
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = mokole_mnesis_quest
+		GUITYPE  = journey
+		MONTHLY  = mokole_mnesis_quest
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 100
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge
+		GUITYPE  = journey
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery
+		GUITYPE  = journey
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = find_artifact
+		GUITYPE  = journey
+		MONTHLY  = find_artifact
+		GOLD     = 0
+		PRESTIGE = 2000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = hunt_for_sargon_codex_shard
+		GUITYPE  = journey
+		MONTHLY  = hunt_for_sargon_codex_shard
+		GOLD     = 250
+		PRESTIGE = 500
+		PIETY    = 500
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying
+		GUITYPE  = journey
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = study_true_name_journey
+		GUITYPE  = journey
+		MONTHLY  = study_true_name_journey
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 250
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = breaking_the_blond_bond
+		GUITYPE  = journey
+		MONTHLY  = breaking_the_blond_bond
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	
+	# Great Journeys
+	
+	POD_add_to_journey_list = {
+		TYPE     = provoke_vatican_caelestius
+		GUITYPE  = great_journey
+		MONTHLY  = instant
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = assemble_artifact
+		GUITYPE  = great_journey
+		MONTHLY  = find_artifact
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = golconda_1
+		GUITYPE  = great_journey
+		MONTHLY  = golconda_1
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 500
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = golconda_2
+		GUITYPE  = great_journey
+		MONTHLY  = golconda_2
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 1000
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = golconda_3
+		GUITYPE  = great_journey
+		MONTHLY  = instant
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 2000
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = provoke_vatican
+		GUITYPE  = great_journey
+		MONTHLY  = instant
+		GOLD     = 0
+		PRESTIGE = 10000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = azhi_dahaka_1
+		GUITYPE  = great_journey
+		MONTHLY  = azhi_dahaka_1
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 1000
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = azhi_dahaka_2
+		GUITYPE  = great_journey
+		MONTHLY  = azhi_dahaka_2
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 5000
+	}
+	
+	# Widgets
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_true_faith
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 500
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_demonology_baali
+		GUITYPE  = seek_knowledge
+		MONTHLY  = instant
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_animalism
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_auspex
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_celerity
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_dominate
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_fortitude
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_obfuscate
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_potence
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_presence
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_protean
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_abombwe
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_bardo
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	# POD_add_to_journey_list = {
+	# 	TYPE     = seek_knowledge_bloodsorcery
+	# 	GUITYPE  = seek_knowledge
+	# 	MONTHLY  = seek_knowledge
+	# 	GOLD     = 0
+	# 	PRESTIGE = 1000
+	# 	PIETY    = 0
+	# }
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_chimerstry
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_daimonion
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_dementation
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_kai
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_melpominee
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_mytherceria
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_obtenebration
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_quietus
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_rift
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_serpentis
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_spiritus
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_temporis
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_valeren
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_vicissitude
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_visceratika
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_thaumaturgy
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_sielanic_thaumaturgy
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_dur_an_ki
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_akhu
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_sadhana
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_koldunic
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_sihr
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 500
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_abyssal_mysticism
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_cappadocian
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_giovanni
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_harbinger
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_impundulu
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_lamia
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_nagaraja
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_rosselini
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_chicanery
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_legerdemain
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_primal
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_soothsay
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_wayfare
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_aphrodesia
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_kryos
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_metamorphosis
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_pyretics
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_chronos
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_dream_craft
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_naming
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_sovereign
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_infusion
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_tale_craft
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_aquis
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_petros
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_pyros
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_stratus
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_verdage
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 500
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_di_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_hou_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_lin_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_shui_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_tieh_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_nei_tan
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_feng_shui
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_obligation
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_tapestry
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_kiai
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_prana
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_tzu_wei
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_sorcery
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_theurgy
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_psychic
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+	
+	POD_add_to_journey_list = {
+		TYPE     = seek_knowledge_demonology
+		GUITYPE  = seek_knowledge
+		MONTHLY  = seek_knowledge
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 2000
+	}
+
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_actor
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_fae
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_prop
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_nature
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_scene
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = realm_mastery_time
+		GUITYPE  = realm_mastery
+		MONTHLY  = realm_mastery
+		GOLD     = 0
+		PRESTIGE = 1000
+		PIETY    = 0
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = siochain_1
+		GUITYPE  = great_journey
+		MONTHLY  = siochain_1
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 1500
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = siochain_2
+		GUITYPE  = great_journey
+		MONTHLY  = siochain_2
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 3000
+	}
+
+	POD_add_to_journey_list = {
+		TYPE     = siochain_3
+		GUITYPE  = great_journey
+		MONTHLY  = siochain_3
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 5000
+	}
+
+	# Sorcery
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_alchemy
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_conjuration
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_conveyance
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_divination
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_enchantment
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_ephemera
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_fascination
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_fortune
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_healing
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_hellfire
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_illusion
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_necromancy
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_oneiromancy
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_quintessence_manipulation
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_shadows
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_shapeshifting
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+	POD_add_to_journey_list = {
+		TYPE     = sorcery_legendary_studying_weather_control
+		GUITYPE  = sorcery_legendary_studying
+		MONTHLY  = sorcery_legendary_studying
+		GOLD     = 0
+		PRESTIGE = 0
+		PIETY    = 0
+	}
+}

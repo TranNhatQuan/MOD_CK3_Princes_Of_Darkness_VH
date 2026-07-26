@@ -1,0 +1,756 @@
+﻿POD_manipulate_fetters_interaction = {
+    category = interaction_category_wraith
+	icon = POD_lifeweb_interaction
+	desc = POD_manipulate_fetters_interaction_desc
+	
+	is_shown = {
+        trigger_if = {
+            limit = { NOT = { scope:actor = { has_perk = lifeline_perk } } }
+		    scope:actor = scope:recipient
+        }
+		scope:actor = { has_trait = wraith has_trait = arcanos_lifeweb } #Should wraith be removed from this if you have renaming hekau?
+        scope:recipient = { custom_tooltip = { text = "POD_no_fetters" NOT = { free_fetter_points = 10 } } }
+	}
+
+    cooldown = { years = 1 }
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { 
+			NOT = { has_trait = shadow }
+			NOT = { has_trait = spectre }
+		}
+        POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	send_options_exclusive = no
+	# FETTER TYPES
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = hatred }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = hatred LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_hatred
+		localization = POD_manipulate_hatred_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = love }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = love LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_love
+		localization = POD_manipulate_love_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = greed }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = greed LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_greed
+		localization = POD_manipulate_greed_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = creativity }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = creativity LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_creativity
+		localization = POD_manipulate_creativity_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = compassion }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = compassion LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_compassion
+		localization = POD_manipulate_compassion_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = lust }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = lust LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_justice = yes
+                }
+            }
+		}
+		flag = manipulate_lust
+		localization = POD_manipulate_lust_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = justice }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = justice LEVEL = 0 } }
+                NOR = {
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_hatred = yes
+                }
+            }
+		}
+		flag = manipulate_justice
+		localization = POD_manipulate_justice_option
+	}
+	
+    # ACTIONS
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                OR = {
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+                NOR = {
+                    scope:downgrade_fetter = yes
+                    scope:destroy_fetter = yes
+                }
+            }
+		}
+        is_valid = {
+            scope:actor = { has_perk = splice_strand_perk }
+            scope:recipient = {
+                custom_tooltip = { text = "POD_no_free_fetter_points" free_fetter_points > 0 }
+                NOT = {
+                    switch = {
+                        trigger = yes
+                        scope:manipulate_hatred = { POD_is_fetter_at_max_level = { TYPE = hatred } }
+                        scope:manipulate_love = { POD_is_fetter_at_max_level = { TYPE = love } }
+                        scope:manipulate_greed = { POD_is_fetter_at_max_level = { TYPE = greed } }
+                        scope:manipulate_creativity = { POD_is_fetter_at_max_level = { TYPE = creativity } }
+                        scope:manipulate_compassion = { POD_is_fetter_at_max_level = { TYPE = compassion } }
+                        scope:manipulate_lust = { POD_is_fetter_at_max_level = { TYPE = lust } }
+                        scope:manipulate_justice = { POD_is_fetter_at_max_level = { TYPE = justice } }
+                    }
+                }
+            }
+        }
+		flag = allocate_free_fetter
+		localization = POD_allocate_free_fetter_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                OR = {
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+                NOR = {
+                    scope:allocate_free_fetter = yes
+                    scope:destroy_fetter = yes
+                }
+            }
+		}
+        is_valid =  {
+            scope:actor = { has_perk = sever_strand_perk }
+            scope:recipient = {
+                NOT = {
+                    switch = {
+                        trigger = yes
+                        scope:manipulate_hatred = { POD_is_fetter_at_min_level = { TYPE = hatred } }
+                        scope:manipulate_love = { POD_is_fetter_at_min_level = { TYPE = love } }
+                        scope:manipulate_greed = { POD_is_fetter_at_min_level = { TYPE = greed } }
+                        scope:manipulate_creativity = { POD_is_fetter_at_min_level = { TYPE = creativity } }
+                        scope:manipulate_compassion = { POD_is_fetter_at_min_level = { TYPE = compassion } }
+                        scope:manipulate_lust = { POD_is_fetter_at_min_level = { TYPE = lust } }
+                        scope:manipulate_justice = { POD_is_fetter_at_min_level = { TYPE = justice } }
+                    }
+                }
+            }
+        }
+		flag = downgrade_fetter
+		localization = POD_downgrade_fetter_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                OR = {
+                    scope:manipulate_hatred = yes
+                    scope:manipulate_love = yes
+                    scope:manipulate_greed = yes
+                    scope:manipulate_creativity = yes
+                    scope:manipulate_compassion = yes
+                    scope:manipulate_lust = yes
+                    scope:manipulate_justice = yes
+                }
+                NOR = {
+                    scope:allocate_free_fetter = yes
+                    scope:downgrade_fetter = yes
+                }
+            }
+		}
+        is_valid =  {
+            scope:actor = { has_perk = sever_strand_perk }
+            scope:recipient = {
+                switch = {
+                    trigger = yes
+                    scope:manipulate_hatred = { POD_is_fetter_at_min_level = { TYPE = hatred } }
+                    scope:manipulate_love = { POD_is_fetter_at_min_level = { TYPE = love } }
+                    scope:manipulate_greed = { POD_is_fetter_at_min_level = { TYPE = greed } }
+                    scope:manipulate_creativity = { POD_is_fetter_at_min_level = { TYPE = creativity } }
+                    scope:manipulate_compassion = { POD_is_fetter_at_min_level = { TYPE = compassion } }
+                    scope:manipulate_lust = { POD_is_fetter_at_min_level = { TYPE = lust } }
+                    scope:manipulate_justice = { POD_is_fetter_at_min_level = { TYPE = justice } }
+                }
+            }
+        }
+		flag = destroy_fetter
+		localization = POD_destroy_fetter_option
+	}
+
+
+	on_accept = {
+		scope:actor = { POD_willpower_rouse_check_effect = yes }
+		scope:actor = { POD_pathos_cost_effect = { COUNT = 3 } }
+        scope:recipient = {
+            if = { limit = { scope:allocate_free_fetter = yes } 
+                switch = {
+                    trigger = yes
+                    scope:manipulate_hatred = { POD_increase_fetter_type_level = { TYPE = hatred VALUE = 1 ACTION = add } }
+                    scope:manipulate_love = { POD_increase_fetter_type_level = { TYPE = love VALUE = 1 ACTION = add } }
+                    scope:manipulate_greed = { POD_increase_fetter_type_level = { TYPE = greed VALUE = 1 ACTION = add } }
+                    scope:manipulate_creativity = { POD_increase_fetter_type_level = { TYPE = creativity VALUE = 1 ACTION = add } }
+                    scope:manipulate_compassion = { POD_increase_fetter_type_level = { TYPE = compassion VALUE = 1 ACTION = add } }
+                    scope:manipulate_lust = { POD_increase_fetter_type_level = { TYPE = lust VALUE = 1 ACTION = add } }
+                    scope:manipulate_justice = { POD_increase_fetter_type_level = { TYPE = justice VALUE = 1 ACTION = add } }
+                }
+            }
+            else_if = { limit = { scope:downgrade_fetter = yes } 
+                switch = {
+                    trigger = yes
+                    scope:manipulate_hatred = { POD_increase_fetter_type_level = { TYPE = hatred VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_love = { POD_increase_fetter_type_level = { TYPE = love VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_greed = { POD_increase_fetter_type_level = { TYPE = greed VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_creativity = { POD_increase_fetter_type_level = { TYPE = creativity VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_compassion = { POD_increase_fetter_type_level = { TYPE = compassion VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_lust = { POD_increase_fetter_type_level = { TYPE = lust VALUE = 1 ACTION = subtract } }
+                    scope:manipulate_justice = { POD_increase_fetter_type_level = { TYPE = justice VALUE = 1 ACTION = subtract } }
+                }
+            }
+            else_if = { limit = { scope:destroy_fetter = yes } 
+                switch = {
+                    trigger = yes
+                    scope:manipulate_hatred = { POD_destroy_fetter_of_type = { TYPE = hatred } }
+                    scope:manipulate_love = { POD_destroy_fetter_of_type = { TYPE = love } }
+                    scope:manipulate_greed = { POD_destroy_fetter_of_type = { TYPE = greed } }
+                    scope:manipulate_creativity = { POD_destroy_fetter_of_type = { TYPE = creativity } }
+                    scope:manipulate_compassion = { POD_destroy_fetter_of_type = { TYPE = compassion } }
+                    scope:manipulate_lust = { POD_destroy_fetter_of_type = { TYPE = lust } }
+                    scope:manipulate_justice = { POD_destroy_fetter_of_type = { TYPE = justice } }
+                }
+            }
+        }
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_sprout_fetter_seed_artifact_interaction = {
+    category = interaction_category_wraith
+	desc = POD_sprout_fetter_seed_artifact_interaction_desc
+	icon = prison
+	
+	cost = { piety = 1000 }
+	cooldown = { years = 3 }
+    target_type = artifact
+	target_filter = recipient_artifacts
+	
+	can_be_picked = {
+		scope:target = {
+			custom_tooltip = { text = "POD_is_fetter" NOT = { has_variable = fetter_owner } }
+		}
+	}
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { has_trait = wraith }    
+        scope:actor = { POD_has_any_fetter_seed = yes }
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { 
+			NOT = { has_trait = shadow }
+			NOT = { has_trait = spectre }
+            custom_tooltip = { text = "POD_no_free_fetter_points" free_fetter_points > 0 }
+        }
+        POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+    
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = hatred LEVEL = 0 }
+            }
+		}
+		flag = sprout_hatred
+		localization = POD_sprout_hatred_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = love LEVEL = 0 }
+            }
+		}
+        is_valid = {
+            custom_tooltip = { text = "POD_love_fetter_require_mortal" always = no }
+        }
+		flag = sprout_love
+		localization = POD_sprout_love_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = greed LEVEL = 0 }
+            }
+		}
+		flag = sprout_greed
+		localization = POD_sprout_greed_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = creativity LEVEL = 0 }
+            }
+		}
+		flag = sprout_creativity
+		localization = POD_sprout_creativity_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = compassion LEVEL = 0 }
+            }
+		}
+		flag = sprout_compassion
+		localization = POD_sprout_compassion_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = lust LEVEL = 0 }
+            }
+		}
+		flag = sprout_lust
+		localization = POD_sprout_lust_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type_and_level = { TYPE = justice LEVEL = 0 }
+            }
+		}
+		flag = sprout_justice
+		localization = POD_sprout_justice_option
+	}
+
+	on_accept = {
+		scope:actor = {
+            switch = {
+                trigger = yes
+                scope:sprout_hatred = { 
+                    POD_create_full_fetter = { TYPE = hatred LEVEL = 1 OBJECT = scope:target } 
+                }
+                scope:sprout_love = { 
+                    POD_create_full_fetter = { TYPE = love LEVEL = 1 OBJECT = scope:target }
+                }
+                scope:sprout_greed = { 
+                    POD_create_full_fetter = { TYPE = greed LEVEL = 1 OBJECT = scope:target } 
+                }
+                scope:sprout_creativity = { 
+                    POD_create_full_fetter = { TYPE = creativity LEVEL = 1 OBJECT = scope:target } 
+                }
+                scope:sprout_compassion = { 
+                    POD_create_full_fetter = { TYPE = compassion LEVEL = 1  OBJECT = scope:target} 
+                }
+                scope:sprout_lust = { 
+                    POD_create_full_fetter = { TYPE = lust LEVEL = 1 OBJECT = scope:target } 
+                }
+                scope:sprout_justice = { 
+                    POD_create_full_fetter = { TYPE = justice LEVEL = 1 OBJECT = scope:target } 
+                }
+            }
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	
+	ai_will_do = {
+		base = 0
+	}  
+}
+
+POD_sprout_fetter_seed_character_interaction = {
+    category = interaction_category_wraith
+	desc = POD_sprout_fetter_seed_character_interaction_desc
+	icon = prison
+	
+	cost = { piety = 1000 }
+	cooldown = { years = 3 }
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_trait = wraith }
+        scope:actor = { POD_has_any_fetter_seed = yes }
+        POD_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = { 
+            has_perk = souls_interwoven_perk 
+			NOT = { has_trait = shadow }
+			NOT = { has_trait = spectre }
+            custom_tooltip = { text = "POD_no_free_fetter_points" free_fetter_points > 0 }
+        }
+        scope:recipient = {
+            custom_tooltip = { text = "POD_is_fetter" NOT = { has_variable = fetter_owner } }
+            is_immortal = no
+        }
+        POD_interaction_is_valid_showing_failures_only = yes
+	}
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = hatred LEVEL = 0 }
+            }
+		}
+		flag = sprout_hatred
+		localization = POD_sprout_hatred_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = love LEVEL = 0 }
+            }
+		}
+		flag = sprout_love
+		localization = POD_sprout_love_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = greed LEVEL = 0 }
+            }
+		}
+		flag = sprout_greed
+		localization = POD_sprout_greed_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = creativity LEVEL = 0 }
+            }
+		}
+		flag = sprout_creativity
+		localization = POD_sprout_creativity_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = compassion LEVEL = 0 }
+            }
+		}
+		flag = sprout_compassion
+		localization = POD_sprout_compassion_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = lust LEVEL = 0 }
+            }
+		}
+		flag = sprout_lust
+		localization = POD_sprout_lust_option
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { 
+                POD_has_fetter_of_type_and_level = { TYPE = justice LEVEL = 0 }
+            }
+		}
+		flag = sprout_justice
+		localization = POD_sprout_justice_option
+	}
+
+	on_accept = {
+		scope:actor = {
+            switch = {
+                trigger = yes
+                scope:sprout_hatred = { 
+                    POD_create_full_fetter = { TYPE = hatred LEVEL = 1 OBJECT = scope:recipient } 
+                }
+                scope:sprout_love = { 
+                    POD_create_full_fetter = { TYPE = love LEVEL = 1 OBJECT = scope:recipient }
+                }
+                scope:sprout_greed = { 
+                    POD_create_full_fetter = { TYPE = greed LEVEL = 1 OBJECT = scope:recipient } 
+                }
+                scope:sprout_creativity = { 
+                    POD_create_full_fetter = { TYPE = creativity LEVEL = 1 OBJECT = scope:recipient } 
+                }
+                scope:sprout_compassion = { 
+                    POD_create_full_fetter = { TYPE = compassion LEVEL = 1  OBJECT = scope:recipient} 
+                }
+                scope:sprout_lust = { 
+                    POD_create_full_fetter = { TYPE = lust LEVEL = 1 OBJECT = scope:recipient } 
+                }
+                scope:sprout_justice = { 
+                    POD_create_full_fetter = { TYPE = justice LEVEL = 1 OBJECT = scope:recipient } 
+                }
+            }
+            set_relation_fetter = scope:recipient
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+	
+	ai_will_do = {
+		base = 0
+	}  
+}
+
+POD_resolve_fetter_interaction = {
+    category = interaction_category_wraith
+	icon = POD_lifeweb_interaction
+	desc = POD_manipulate_fetters_interaction_desc
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { 
+            has_trait = wraith
+			NOT = { has_trait = shadow }
+			NOT = { has_trait = spectre }
+        }
+        scope:actor = { custom_tooltip = { text = "POD_no_fetters" NOT = { free_fetter_points = 10 } } }
+
+	}
+    is_valid_showing_failures_only = {
+        scope:actor = { NOT = { has_trait = risen } }
+        POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+    }
+    cooldown = { years = 10 }
+	# FETTER TYPES
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = hatred }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = hatred LEVEL = 0 } }
+            }
+		}
+		flag = resolve_hatred
+		localization = POD_resolve_hatred_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = love }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = love LEVEL = 0 } }
+            }
+		}
+		flag = resolve_love
+		localization = POD_resolve_love_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = greed }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = greed LEVEL = 0 } }
+            }
+		}
+		flag = resolve_greed
+		localization = POD_resolve_greed_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = creativity }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = creativity LEVEL = 0 } }
+            }
+		}
+		flag = resolve_creativity
+		localization = POD_resolve_creativity_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = compassion }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = compassion LEVEL = 0 } }
+            }
+		}
+		flag = resolve_compassion
+		localization = POD_resolve_compassion_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = lust }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = lust LEVEL = 0 } }
+            }
+		}
+		flag = resolve_lust
+		localization = POD_resolve_lust_option
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = { 
+                POD_has_fetter_of_type = { TYPE = justice }
+                NOT = { POD_has_fetter_of_type_and_level = { TYPE = justice LEVEL = 0 } }
+            }
+		}
+		flag = resolve_justice
+		localization = POD_resolve_justice_option
+	}
+
+
+	on_accept = {
+		scope:actor = { POD_pathos_cost_effect = { COUNT = 5 } }
+        scope:recipient = {
+            POD_static_stress_gain = { COUNT = 90 }
+            duel = {
+			    skills = { diplomacy martial stewardship intrigue learning }
+				value = 20
+                25 = { # SUCCESS
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 2
+					}
+                    desc = POD_shared_loca_success
+                    send_interface_toast = {
+                        title = POD_shared_loca_success
+                        switch = {
+                            trigger = yes
+                            scope:resolve_hatred = { POD_resolve_fetter_of_type = { TYPE = hatred } }
+                            scope:resolve_love = { POD_resolve_fetter_of_type = { TYPE = love } }
+                            scope:resolve_greed = { POD_resolve_fetter_of_type = { TYPE = greed } }
+                            scope:resolve_creativity = { POD_resolve_fetter_of_type = { TYPE = creativity } }
+                            scope:resolve_compassion = { POD_resolve_fetter_of_type = { TYPE = compassion } }
+                            scope:resolve_lust = { POD_resolve_fetter_of_type = { TYPE = lust } }
+                            scope:resolve_justice = { POD_resolve_fetter_of_type = { TYPE = justice } }
+                        }
+                    }
+                }
+                25 = { # FAILURE
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -1
+					}
+                    desc = POD_shared_loca_failure
+                    send_interface_toast = {
+                        title = POD_shared_loca_failure
+                        POD_static_stress_gain = { COUNT = 10 }
+                    }
+                }
+            }
+        }
+	}
+	
+	auto_accept = yes
+	
+	ai_frequency = 0
+
+	ai_will_do = {
+		base = 0
+	}
+}

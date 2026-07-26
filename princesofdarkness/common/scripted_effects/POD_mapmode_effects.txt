@@ -1,0 +1,614 @@
+﻿POD_mapmode_reset_title_name_effect = {
+	if = {
+		limit = { has_global_variable_list = map_label_changed_list }
+		every_in_global_list = {
+			variable = map_label_changed_list
+			reset_title_name = yes
+			save_scope_as = title
+			holder = { trigger_event = POD_title_flavor.0002 }
+		}
+		clear_global_variable_list = map_label_changed_list
+	}
+}
+
+POD_mapmode_splatmode_observer_effect = {
+	POD_mapmode_reset_title_name_effect = yes # So observer can reset
+	POD_mapmode_splatmode_effect = yes
+}
+
+POD_mapmode_splatmode_effect = {
+	every_barony = {
+		if = {
+			limit = {
+				county.holder = { 
+					is_forsaken_or_gantenbein_trigger = yes
+				}
+			}
+			set_color_from_title = title:k_calomenasforsaken
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = {
+						has_trait = supehunter
+						is_child_of_supehunter_trigger = yes
+					}
+				}
+			}
+			set_color_from_title = title:h_shadow_inquisition
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = { 
+						has_trait = vampire
+						has_trait = dhampir
+					}
+				}
+			}
+			set_color_from_title = title:e_color_vampire
+		}
+		else_if = {
+			limit = {
+				county.holder = { has_trait = wraith }
+			}
+			set_color_from_title = title:d_adrar
+		}
+		else_if = {
+			limit = {
+				county.holder = { has_trait = fae }
+			}
+			set_color_from_title = title:e_autumn_court
+		}
+		else_if = {
+			limit = {
+				county.holder = { has_trait = mage }
+			}
+			set_color_from_title = title:e_color_mage
+		}
+		else_if = {
+			limit = {
+				county.holder = { has_POD_kj_blood_trigger = yes }
+			}
+			set_color_from_title = title:e_color_kueijin
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = { 
+						has_trait = fera
+						AND = {
+							has_trait = kinfolk
+							OR = { 
+								religion = { is_in_family = rf_gaia } 
+								religion = { is_in_family = rf_wyrm } 
+							}
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_color_fera
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = {
+						has_trait = mummy
+						trigger_if = { 
+							limit = { has_trait = mortal }
+							is_a_neteru = yes
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_color_mummy
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = {
+						has_trait = demon
+						has_trait = laham
+						has_trait = nephilim
+					}
+				}
+			}
+			set_color_from_title = title:e_voivodate
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					OR = {
+						has_trait = changeling
+						has_trait = kinain
+					}
+					religion = { is_in_family = rf_fae }
+				}
+			}
+			set_color_from_title = title:e_autumn_court
+		}
+		else_if = {
+			limit = {
+				county.holder = {
+					POD_is_any_kind_of_ghoul_trigger = yes
+					religion = { is_in_family = rf_kindred }
+				}
+			}
+			set_color_from_title = title:d_sjaelland
+		}
+		else_if = {
+			limit = {
+				county.holder = { 
+					religion = { is_in_family = rf_demons }
+				}
+			}
+			set_color_from_title = title:e_color_infernalist
+		}
+		else = {
+			set_color_from_title = title:k_angara
+		}
+	}
+}
+
+POD_mapmode_clanmode_observer_effect = {
+	POD_mapmode_reset_title_name_effect = yes # So observer can reset
+	POD_mapmode_clanmode_set_color_effect = yes
+}
+
+POD_mapmode_clanmode_effect = {
+	POD_mapmode_clanmode_set_name_effect = yes
+	POD_mapmode_clanmode_set_color_effect = yes
+}
+	
+POD_mapmode_clanmode_set_name_effect = {
+	every_independent_ruler = {
+		limit = { is_landed = yes }
+		add_to_global_variable_list = { 
+			name = map_label_changed_list
+			target = primary_title
+		}
+		if = {
+			limit = {
+				has_trait = assamite 
+			}
+			primary_title = { set_title_name = e_map_assamite }
+		}
+		else_if = {
+			limit = {
+				has_trait = baali 
+			}
+			primary_title = { set_title_name = e_map_baali }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = brujah
+					has_trait = truebrujah
+				}
+			}
+			primary_title = { set_title_name = e_map_brujah }
+		}
+		else_if = {
+			limit = {
+				has_trait = cacophony
+			}
+			primary_title = { set_title_name = e_map_cacophony }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = lamia
+					has_trait = cappadocian
+				}
+			}
+			primary_title = { set_title_name = e_map_cappadocian }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = gangrel
+					has_trait = anh
+				}
+			}
+			primary_title = { set_title_name = e_map_gangrel }
+		}
+		else_if = {
+			limit = {
+				has_trait = gargoyle
+			}
+			primary_title = { set_title_name = e_map_gargoyle }
+		}
+		else_if = {
+			limit = {
+				has_trait = giovanni
+			}
+			primary_title = { set_title_name = e_map_giovanni }
+		}
+		else_if = {
+			limit = {
+				has_trait = impundulu
+			}
+			primary_title = { set_title_name = e_map_impundulu }
+		}
+		else_if = {
+			limit = {
+				has_trait = kiasyd
+			}
+			primary_title = { set_title_name = e_map_kiasyd }
+		}
+		else_if = {
+			limit = {
+				has_trait = maeghar
+			}
+			primary_title = { set_title_name = e_map_maeghar }
+		}
+		else_if = {
+			limit = {
+				has_trait = lasombra
+			}
+			primary_title = { set_title_name = e_map_lasombra }
+		}
+		else_if = {
+			limit = {
+				has_trait = malkavian
+			}
+			primary_title = { set_title_name = e_map_malkavian }
+		}
+		else_if = {
+			limit = {
+				has_trait = nagaraja
+			}
+			primary_title = { set_title_name = e_map_nagaraja }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = nosferatu
+					has_trait = kuntilanak
+				}
+			}
+			primary_title = { set_title_name = e_map_nosferatu }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = ravnos
+					has_trait = kizoku
+				}
+			}
+			primary_title = { set_title_name = e_map_ravnos }
+		}
+		else_if = {
+			limit = {
+				has_trait = salubri
+			}
+			primary_title = { set_title_name = e_map_salubri }
+		}
+		else_if = {
+			limit = {
+				has_trait = setite
+			}
+			primary_title = { set_title_name = e_map_setite }
+		}
+		else_if = {
+			limit = {
+				has_trait = toreador
+			}
+			primary_title = { set_title_name = e_map_toreador }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = tremere
+					has_trait = banpaia
+				}
+			}
+			primary_title = { set_title_name = e_map_tremere }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = tzimisce
+					has_trait = oldclantzimisce
+					has_trait = chibo
+					has_trait = kishu
+					has_trait = monomi
+				}
+			}
+			primary_title = { set_title_name = e_map_tzimisce }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_trait = ventrue
+					has_trait = sangun
+				}
+			}
+			primary_title = { set_title_name = e_map_ventrue }
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					has_trait = caitiff
+					has_trait = bushi
+					has_trait = custom_bloodline
+					has_trait = hecata
+				}
+			}
+			primary_title = { set_title_name = e_map_caitiff }
+		}
+		else = {
+			primary_title = { set_title_name = e_map_else }
+		}
+	}
+}
+
+POD_mapmode_clanmode_set_color_effect = {
+	every_barony = {
+		if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = assamite 
+					}
+				}
+			}
+			set_color_from_title = title:e_assamites
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = baali 
+					}
+				}
+			}
+			set_color_from_title = title:k_otuken
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						OR = {
+							has_trait = brujah
+							has_trait = truebrujah
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_color_brujah
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = cacophony
+					}
+				}
+			}
+			set_color_from_title = title:d_jemba
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						OR = {
+							has_trait = lamia
+							has_trait = cappadocian 
+						}
+					}
+				}
+			}
+			set_color_from_title = title:d_cappadocia
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = gangrel 
+					}
+				}
+			}
+			set_color_from_title = title:e_color_gangrel
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = gargoyle
+					}
+				}
+			}
+			set_color_from_title = title:d_salzburg
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = giovanni 
+					}
+				}
+			}
+			set_color_from_title = title:e_color_giovanni
+		}
+		# else_if = {
+			# limit = {
+				# barony_controller = { 
+					# top_liege = { 
+						# has_trait = harbingersofskulls
+					# }
+				# }
+			# }
+			# set_color_from_title = title:?
+		# }
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = impundulu
+					}
+				}
+			}
+			set_color_from_title = title:k_tahert
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						OR = {
+							has_trait = maeghar
+							has_trait = kiasyd
+						}
+					}
+				}
+			}
+			set_color_from_title = title:d_lombardia
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = lasombra
+					}
+				}
+			}
+			set_color_from_title = title:e_color_mage
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = malkavian
+					}
+				}
+			}
+			set_color_from_title = title:k_tsang
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = nagaraja
+					}
+				}
+			}
+			set_color_from_title = title:d_moray
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = {
+						OR = {
+							has_trait = nosferatu
+							has_trait = kuntilanak
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_shadow_curtain
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = {
+						OR = {
+							has_trait = ravnos
+							has_trait = kizoku
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_ravnos
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = salubri
+					}
+				}
+			}
+			set_color_from_title = title:k_italy
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = setite
+					}
+				}
+			}
+			set_color_from_title = title:e_setite
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						has_trait = toreador
+					}
+				}
+			}
+			set_color_from_title = title:e_love
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = {
+						OR = {
+							has_trait = tremere
+							has_trait = banpaia
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_color_tremere
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = { 
+						OR = {
+							has_trait = tzimisce
+							has_trait = oldclantzimisce
+							has_trait = chibo
+							has_trait = monomi
+							has_trait = kishu
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_voivodate
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = {
+						OR = {
+							has_trait = ventrue
+							has_trait = sangun
+						}
+					}
+				}
+			}
+			set_color_from_title = title:e_color_ventrue
+		}
+		else_if = {
+			limit = {
+				barony_controller = { 
+					top_liege = {  
+						OR = {
+							has_trait = caitiff
+							has_trait = bushi
+							has_trait = custom_bloodline
+							has_trait = hecata
+						}
+					}
+				}
+			}
+			set_color_from_title = title:k_pagan
+		}
+		else = {
+			set_color_from_title = title:k_angara
+		}
+	}
+}

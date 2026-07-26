@@ -1,0 +1,547 @@
+﻿# This macro has lowercase arguments, to make it easier to compatch for vanilla updates
+pod_death = {
+	$killer$ = { save_temporary_scope_as = pod_killer }
+	if = {
+		limit = {
+			OR = {
+				NOT = { exists = this }
+				is_alive = no
+			}
+		}
+		# Do nothing
+	}
+	else = {
+		# if = { # puppet die
+		# 	limit = {
+		# 		is_ai = no
+		# 		has_variable = master_on_control
+		# 	}
+		# 	var:master_on_control = { remove_character_modifier = control_puppet_modifier }
+		# 	set_player_character = var:master_on_control
+		# 	remove_variable = master_on_control
+		# }
+		if = {
+			limit = {
+				has_character_modifier = life_warden_modifier
+				has_relation_life_warden = scope:pod_killer
+			}
+			remove_relation_life_warden = scope:pod_killer
+		}
+		if = {
+			limit = {
+				scope:pod_killer = { has_perk = arcana_excise_soul_perk }
+				POD_will_resurrect_as_wraith = no
+			}
+			death = {
+				death_reason = $death_reason$
+				killer = scope:pod_killer
+			}
+		}
+		else_if = {
+			limit = { POD_has_resurrection = yes }
+			POD_spew_wide_the_pit_effect = yes
+			random_list = {
+				100 = {
+					trigger = { POD_has_guaranteed_resurrection = no }
+					modifier = { add = { value = POD_resurrection_chance multiply = -1 } }
+					death = {
+						death_reason = $death_reason$
+						killer = scope:pod_killer
+					}
+				}
+				0 = {
+					modifier = { add = POD_resurrection_chance }
+					pod_resurrection_effect = {
+						KILLER = scope:pod_killer
+					}
+				}
+			}
+		}
+		else = {
+			#if = { limit = { is_akuma_trigger = yes }
+			#	POD_change_wheel_of_ages_progress = { VALUE = -0.1 }
+			#}
+			show_as_tooltip = {
+				death = {
+					death_reason = $death_reason$
+					killer = scope:pod_killer
+				}
+				POD_spew_wide_the_pit_effect = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						can_convert_to_wraith_trigger = yes
+						can_become_wraith_trigger = yes
+						any_player = { has_character_modifier = soul_beacon_modifier }
+					}
+					pod_soul_beacon_effect = yes
+				}
+				random_list = {
+					1 = {
+						trigger = { can_convert_to_wraith_trigger = yes }
+						pod_resurrection_effect = {
+							KILLER = scope:pod_killer
+						}
+						modifier = {
+							factor = 100
+							has_trait = dhampyr
+						}
+					}
+					1000 = {
+						trigger = {
+							#NOT = { has_perk = inurement_perk }
+							POD_will_resurrect_as_wraith = no
+						}
+						death = {
+							death_reason = $death_reason$
+							killer = scope:pod_killer
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# This macro has lowercase arguments, to make it easier to compatch for vanilla updates
+pod_death_no_killer = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { exists = this }
+				is_alive = no
+			}
+		}
+		# Do nothing
+	}
+	else = {
+		# if = { # puppet die
+		# 	limit = {
+		# 		is_ai = no
+		# 		has_variable = master_on_control
+		# 	}
+		# 	var:master_on_control = { remove_character_modifier = control_puppet_modifier }
+		# 	set_player_character = var:master_on_control
+		# 	remove_variable = master_on_control
+		# }
+		if = {
+			limit = {
+				has_trait = rokea
+				flag:$death_reason$ = flag:death_drowned
+			}
+		}
+		else_if = {
+			limit = {
+				POD_has_resurrection = yes
+				NOT = { POD_is_death_by_suicide = { DEATH_REASON = flag:$death_reason$ } }
+			}
+			POD_spew_wide_the_pit_effect = yes
+			random_list = {
+				100 = {
+					trigger = { POD_has_guaranteed_resurrection = no }
+					modifier = { add = { value = POD_resurrection_chance multiply = -1 } }
+					death = { death_reason = $death_reason$ }
+				}
+				0 = {
+					modifier = { add = POD_resurrection_chance }
+					pod_resurrection_from_accident_effect = yes
+				}
+			}
+		}
+		else = {
+			#if = { limit = { is_akuma_trigger = yes }
+			#	POD_change_wheel_of_ages_progress = { VALUE = -0.1 }
+			#}
+			show_as_tooltip = { death = { death_reason = $death_reason$ } }
+			hidden_effect = {
+				if = {
+					limit = {
+						any_player = { has_character_modifier = soul_beacon_modifier }
+						can_convert_to_wraith_trigger = yes
+					}
+					pod_soul_beacon_effect = yes
+				}
+				random_list = {
+					1 = {
+						trigger = { can_convert_to_wraith_trigger = yes }
+						save_scope_value_as = {
+							name = death_reason
+							value = flag:$death_reason$
+						}
+						pod_return_from_death_as_wraith = yes
+						modifier = {
+							factor = 100
+							has_trait = dhampyr
+						}
+					}
+					1000 = {
+						trigger = { POD_will_resurrect_as_wraith = no }
+						death = {
+							death_reason = $death_reason$
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+pod_return_from_death_as_wraith = {
+	POD_release_effect = yes
+	if = {
+		limit = { is_ai = yes }
+		POD_depose_effect = yes
+	}
+	if = {
+		limit = { exists = var:marked_for_return }
+		var:marked_for_return = { save_scope_as = necromancer }
+		remove_variable = marked_for_return
+	}
+	POD_become_wraith_effect = yes
+	if = {
+		limit = {
+			exists = scope:necromancer
+			NOT = { this = scope:necromancer }
+		}
+		if = {
+			limit = {
+				is_ruler = no
+				NOT = { is_courtier_of = scope:necromancer }
+			}
+			scope:necromancer = { add_courtier = prev }
+			hidden_effect = {
+				return_to_court = yes
+			}
+			add_character_flag = {
+				flag = blocked_from_leaving
+				years = 5
+			}
+		}
+		if = {
+			limit = { has_trait = wraith }
+			save_scope_as = wraith
+			scope:necromancer = {
+				send_interface_message = {
+					title = marked_wraith_has_arrive
+					left_icon = scope:wraith
+					right_icon = scope:necromancer
+				}
+			}
+		}
+	}
+}
+
+pod_resurrection_base_effect = {
+	hidden_effect = {
+		POD_release_effect = yes
+		every_targeting_scheme = { end_scheme = yes }
+		remove_character_modifier = prison_of_the_mind
+		remove_character_modifier = eye_of_sakhmet_modifier
+		remove_character_modifier = thin_blood_perk_modifier
+		remove_character_modifier = nar_iman_modifier
+		POD_full_heal_effect = yes
+		if = {
+			limit = { has_POD_shapeshifted_form_trigger = yes }
+			POD_shapeshift_revert_all_effect = yes
+		}
+		pod_resurrection_travel_effect = yes
+	}
+	pod_resurrection_cost_effect = yes
+}
+
+pod_resurrection_effect = {
+	show_as_tooltip = { $KILLER$ = { POD_commit_murder_effect = yes } }
+	add_opinion = {
+		target = $KILLER$
+		modifier = POD_killed_me_opinion
+	}
+	
+	pod_resurrection_base_effect = yes
+	
+	if = {
+		limit = { is_alive = yes }
+		save_scope_as = resurrected_victim
+		hidden_effect = {
+			$KILLER$ = { POD_commit_murder_effect = yes }
+			set_variable = {
+				name = my_killer
+				value = $KILLER$
+			}
+		
+			$KILLER$ = {
+				send_interface_toast = {
+					title = victim_has_resurrected_toast
+					left_icon = $KILLER$
+					right_icon = scope:resurrected_victim
+
+					show_as_tooltip = {
+						scope:resurrected_victim = {
+							pod_resurrection_cost_effect = yes
+						}
+					}
+				}
+			}
+			scope:resurrected_victim = {
+				send_interface_toast = {
+					title = you_have_resurrected_toast
+					left_icon = this
+					right_icon = $KILLER$
+
+					show_as_tooltip = { pod_resurrection_cost_effect = yes }
+				}
+			}
+			# Send a message to all other players.
+			every_player = {
+				limit = {
+					NOR = {
+						this = scope:resurrected_victim
+						this = $KILLER$
+					}
+					has_any_relation_trigger = { CHARACTER = scope:resurrected_victim }
+				}
+				send_interface_toast = {
+					title = victim_has_resurrected_toast
+					left_icon = scope:resurrected_victim
+					right_icon = $KILLER$
+
+					show_as_tooltip = {
+						scope:resurrected_victim = {
+							pod_resurrection_cost_effect = yes
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = { $KILLER$ = { has_perk = soul_arts_death_punch_perk } }
+			add_character_modifier = {
+				modifier = soul_arts_death_punch_modifier
+				years = 10
+			}
+		}
+	}
+}
+
+pod_resurrection_from_accident_effect = {
+	pod_resurrection_base_effect = yes
+	
+	if = {
+		limit = { is_alive = yes }
+		save_scope_as = resurrected_victim
+		hidden_effect = {
+			send_interface_toast = {
+				title = you_have_resurrected_toast
+				left_icon = this
+
+				show_as_tooltip = { pod_resurrection_cost_effect = yes }
+			}
+			# Send a message to all other players.
+			every_player = {
+				limit = {
+					NOT = { this = scope:resurrected_victim }
+					has_any_relation_trigger = { CHARACTER = scope:resurrected_victim }
+				}
+				send_interface_toast = {
+					title = victim_has_resurrected_toast
+					left_icon = scope:resurrected_victim
+
+					show_as_tooltip = {
+						scope:resurrected_victim = {
+							pod_resurrection_cost_effect = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+pod_resurrection_travel_effect = {
+
+}
+
+pod_resurrection_cost_effect = {
+	if = {
+		limit = { has_character_modifier = extra_life_4_modifier }
+		remove_character_modifier = extra_life_4_modifier
+		add_character_modifier = extra_life_3_modifier
+	}
+	else_if = {
+		limit = { has_character_modifier = extra_life_3_modifier }
+		remove_character_modifier = extra_life_3_modifier
+		add_character_modifier = extra_life_2_modifier
+	}
+	else_if = {
+		limit = { has_character_modifier = extra_life_2_modifier }
+		remove_character_modifier = extra_life_2_modifier
+		add_character_modifier = extra_life_1_modifier
+	}
+	else_if = {
+		limit = { has_character_modifier = extra_life_1_modifier }
+		remove_character_modifier = extra_life_1_modifier
+	}
+	else_if = {
+		limit = { POD_will_resurrect_as_wraith = yes }
+		pod_return_from_death_as_wraith = yes
+	}
+	else_if = {
+		limit = {
+			has_trait = spectre
+		}
+		trigger_event = {
+			id = POD_umbra_lost.100
+			days = 1
+		}
+	}
+	else_if = {
+		limit = {
+			has_trait = risen
+		}
+		POD_lose_risen_effect = yes
+	}
+	else_if = {
+		limit = {
+			has_trait = wraith
+			NOT = { has_trait = ferryman }
+			NOT = { has_trait = shadow }
+		}
+		POD_become_spectre_effect = yes
+		add_trait_xp = {
+			trait = spectre
+			value = 25
+		}
+		save_temporary_scope_as = spectre
+		every_relation = {
+			type = necromancer
+			POD_unbind_wraith_effect = {
+				WRAITH = scope:spectre
+				NECROMANCER = this
+			}
+		}
+		if = {
+			limit = { is_imprisoned = no }
+			move_to_pool = yes
+		}
+	}
+	else_if = {
+		limit = { has_perk = the_fleeing_scarab_perk }
+		POD_gift_cost_effect = { COUNT = 1 }
+		add_piety = -2000
+	}
+	else_if = {
+		limit = { has_perk = ashes_of_the_phoenix_perk }
+		POD_static_stress_gain = { COUNT = 200 }
+	}
+	else_if = {
+		limit = { has_perk = sleep_of_the_hero_perk }
+		remove_perk = sleep_of_the_hero_perk
+		POD_enter_torpor_effect = yes
+		POD_release_effect = yes
+		POD_depose_effect = yes
+	}
+	else_if = {
+		limit = { has_perk = rebirthing_perk }
+		if = {
+			limit = { has_trait = fera }
+			POD_revert_fera_to_kinfolk_effect = yes
+			POD_side_effects_from_changing_splats = yes
+			add_character_flag = fera_first_change
+			remove_character_flag = has_auspice_renunciation
+		}
+		remove_perk = rebirthing_perk
+		add_trait = reincarnation
+		add_character_flag = has_rebirthed
+		refund_all_perks = yes
+		set_age = 1
+		change_current_weight = { value = current_weight multiply = -1 }
+		if = {
+			limit = { health <= 0.25 }
+			add_character_modifier = health_gain_6_modifier
+		}
+	}
+	else_if = {
+		limit = { has_perk = draught_of_phoenix_blood_perk }
+		if = {
+			limit = { has_trait = vampgeneration }
+			change_trait_rank = {
+				trait = vampgeneration
+				rank = 1
+				max = 16
+			}
+		}
+		# POD_lose_elder_perks_effect = yes
+		POD_lose_inaccessible_discipline_perks_effect = yes
+	}
+	else_if = {
+		limit = {
+			num_of_relation_life_warden > 0
+		}
+		hidden_effect = {
+			random_relation = {
+				type = life_warden
+				send_interface_message = {
+					type = event_generic_bad
+					title = resurrection_cost_notification
+					left_icon = this
+					right_icon = prev
+
+					add_piety = massive_piety_loss
+				}
+			}
+			increase_wounds_no_death_effect = { REASON = treatment }
+			increase_wounds_no_death_effect = { REASON = treatment }
+			increase_wounds_no_death_effect = { REASON = treatment }
+		}
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = ritual_the_curse_belated_modifier
+			POD_can_be_embraced_scheme_trigger = yes 
+			NOT = { has_trait = fera }
+		}
+		save_scope_as = created_vampirechilde
+		var:the_curse_belated_caster = {
+			save_scope_as = vampiresire
+			POD_player_character_create_vampirechilde_effect = yes
+		}
+		remove_variable = the_curse_belated_caster
+		remove_character_modifier = ritual_the_curse_belated_modifier
+	}
+	else_if = {
+		limit = { has_trait = demon }
+		POD_change_ritual_of_sundered_soul_effect = { COUNT = -1 }
+	}
+	else_if = {
+		limit = { has_trait = mummy }
+		POD_mummy_resurrection_effect = yes
+	}
+	else_if = {
+		limit = { POD_can_become_ancestor_spirit_trigger = yes }
+		POD_become_ancestor_spirit_effect = yes
+	}
+	
+	if = {
+		limit = { has_trait = asekh_sen }
+		POD_become_hideous_effect = yes
+	}
+}
+
+pod_soul_beacon_effect = {
+	save_scope_as = interest
+	random_player = {
+		limit = {
+			NOT = { this = scope:interest }
+			OR = {
+				AND = {
+					has_character_flag = flag_soul_beacon_any
+				}
+			}
+		}
+		set_variable = {
+			name = marked_for_return
+			value = scope:interest
+			days = 10
+		}
+	}
+}

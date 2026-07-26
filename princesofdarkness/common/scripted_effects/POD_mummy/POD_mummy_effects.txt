@@ -1,0 +1,886 @@
+﻿POD_become_mummy_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	hidden_effect = { POD_remove_splat_traits_effect = yes }
+	add_trait_force_tooltip = mummy
+	if = {
+		limit = { exists = scope:saved_immortal_age }
+		hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+	}
+	hidden_effect = {
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		POD_remove_supernatural_relation_effect = yes
+		POD_remove_physical_coping_strategies = yes
+
+		POD_side_effects_from_changing_splats = yes
+	}
+
+	POD_mummy_initialization_effect = yes
+
+	if = {
+		limit = { is_ai = no }
+		trigger_event = podintroductions.2202
+	}
+}
+
+POD_mummy_initialization_effect = {
+	if = {
+		limit = {
+			OR = {
+				exists = scope:character_being_changed
+				is_from_ruler_designer = yes
+			}
+		}
+		POD_change_government_if_landed = { GOVERNMENT = cult_government }
+		add_trait_xp = { trait = mummy value = 50 }
+	}
+	hidden_effect = {
+		if = {
+			limit = {
+				NOR = {
+					religion = { is_in_family = rf_mummies }
+					POD_has_valid_splat_agnostic_faith = yes
+				}
+			}
+			POD_character_mummy_faith_initiation_effect = yes
+		}
+	}
+	if = { 
+		limit = { 
+			NOT = { has_trait = integrity }
+			POD_should_have_integrity_trigger = yes
+		} 
+		POD_mummy_initialization_integrity_effect = yes 
+	}
+}
+
+POD_mummy_initialization_integrity_effect = {
+	if = { 
+		limit = { 
+		NOT = { has_trait = integrity }
+		}		
+	add_trait = integrity
+	add_trait_xp = { trait = integrity value = 50 }
+	}
+}
+
+POD_mummy_initialization_shemsu_heru_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = shemsuheru
+	set_character_faith = faith:code_of_horus
+	POD_mummy_initialization_integrity_effect = yes
+}
+POD_mummy_initialization_ishmaelite_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = shemsuheru
+	set_character_faith = faith:ishmaelite
+	POD_mummy_initialization_integrity_effect = yes
+}
+POD_mummy_initialization_cabiri_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = cabiri
+	set_character_faith = faith:cabiri
+	if = {
+		limit = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:secure_hades_objective_decision
+			}
+		}
+		add_character_modifier = cabiri_secured_future_modifier
+	}
+}
+POD_mummy_initialization_banemummy_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = banemummy
+	set_character_faith = faith:faces_of_apophis
+}
+POD_mummy_initialization_wutian_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = wutian
+	set_character_faith = faith:ten_mandates_of_heaven
+	POD_mummy_initialization_integrity_effect = yes
+}
+POD_mummy_initialization_wukuei_effect = {
+	POD_remove_mummy_traits_effect = yes
+	add_trait_force_tooltip = wukuei
+	set_character_faith = faith:ten_mandates_of_hell
+}
+
+POD_character_mummy_faith_initiation_effect = {
+	if = {
+		limit = { has_trait = wutian NOT = { faith = faith:ten_mandates_of_heaven } }
+		POD_mummy_initialization_wutian_effect = yes
+	}
+	else_if = {
+		limit = { has_trait = wukuei NOT = { faith = faith:ten_mandates_of_hell } }
+		POD_mummy_initialization_wukuei_effect = yes
+	}
+	else_if = {
+		limit = { has_trait = cabiri NOT = { faith = faith:cabiri } }
+		POD_mummy_initialization_cabiri_effect = yes
+	}
+	else_if = {
+		limit = { has_trait = banemummy NOT = { faith = faith:faces_of_apophis } }
+		POD_mummy_initialization_banemummy_effect = yes
+	}
+	else_if = {
+		limit = { has_trait = shemsuheru NOT = { faith = faith:code_of_horus } }
+		POD_mummy_initialization_shemsu_heru_effect = yes
+	}
+	else = {
+		POD_mummy_initialization_ishmaelite_effect = yes
+	}
+}
+
+POD_mummy_faith_conversion_change_trait_effect = {
+	if = {
+		limit = { faith = { has_doctrine = special_doctrine_allied_to_apophis_hostility } has_trait = shemsuheru }
+		add_trait_xp = { trait = integrity value = -100 }
+		trigger_event = POD_mummy_resurrection.2
+	}
+	if = {
+		limit = { faith = { has_doctrine = special_doctrine_allied_to_yomi_wan_hostility } has_trait = wutian }
+		POD_mummy_initialization_wukuei_effect = yes
+	}
+}
+
+POD_mummy_random_perk_initialization_for_noble_effect = {
+	random_list = {
+		1 = {
+			trigger = { perks_in_tree = { tree = alchemy value = 0 } }
+			assign_hekau_alchemy_effect = { LEVEL = 5 }
+		}
+		1 = {
+			trigger = { perks_in_tree = { tree = amulets value = 0 } }
+			assign_hekau_amulets_effect = { LEVEL = 5 }
+		}
+		1 = {
+			trigger = { perks_in_tree = { tree = celestial value = 0 } }
+			assign_hekau_celestial_effect = { LEVEL = 5 }
+		}
+		1 = {
+			trigger = { perks_in_tree = { tree = effigy value = 0 } }
+			assign_hekau_effigy_effect = { LEVEL = 5 }
+		}
+		1 = {
+			trigger = { 
+				is_east_mummy_trigger = no
+				perks_in_tree = { tree = necromancy value = 0 } 
+			}
+			assign_hekau_necromancy_effect = { LEVEL = 5 }
+		}
+		1 = {
+			trigger = { perks_in_tree = { tree = nomenclature value = 0 } }
+			assign_hekau_nomenclature_effect = { LEVEL = 5 }
+		}
+	}
+}
+
+POD_hekau_cost_effect = {
+	POD_splat_agnostic_energy_cost = {
+		COUNT = $COUNT$
+	}
+}
+
+POD_tan_cost_effect = {
+	POD_splat_agnostic_energy_cost = {
+		COUNT = $COUNT$
+	}
+}
+
+POD_sekhem_income_effect = {
+	POD_splat_agnostic_energy_income = {
+		COUNT = $COUNT$
+	}
+}
+
+POD_become_asekh_sen_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	if = {
+		limit = { has_trait = mortal }
+		remove_trait = mortal
+	}
+	if = {
+		limit = {
+			has_trait = supehunter
+			NOT = { has_character_flag = chargen_changing_splat_flag }
+			scope:domitor ?= { POD_is_supehunter_trigger = no }
+		}
+		scope:domitor = { save_scope_as = vampiresire }
+		remove_trait = supehunter
+		POD_hunterembrace_effect = yes
+	}
+	if = {
+		limit = { POD_splat_mixing_haight_mode = no }
+		if = {
+			limit = { has_trait = kinfolk }
+			remove_trait = kinfolk
+			if = {
+				limit = { has_trait = gnosis }
+				remove_trait = gnosis
+			}
+		}
+		if = {
+			limit = { has_trait = kinain }
+			remove_trait = kinain
+		}
+	}
+	if = {
+		limit = { has_trait = changeling }
+		add_trait = lunatic_genetic # Dauntain
+	}
+	add_trait_force_tooltip = asekh_sen
+	if = {
+		limit = { exists = scope:saved_immortal_age }
+		hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+	}
+	hidden_effect = {
+		POD_remove_wrong_supernatural_traits_on_existing_character = yes
+		# POD_remove_supernatural_relation_effect = yes
+		POD_side_effects_from_changing_splats = yes
+	}
+	add_character_modifier = extra_life_4_modifier
+	give_witch_secret_or_trait_effect = yes
+	hidden_effect = {
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		POD_asekh_sen_bane_infusion_lotto_effect = yes
+		add_character_flag = POD_bane_skin_flag
+	}
+}
+
+POD_gain_integrity = {
+	if = {
+		limit = { has_trait = integrity }
+		add_trait_xp = {
+			trait = integrity
+			value = $VALUE$
+		}
+	}
+}
+
+POD_get_hekau_level_effect = {
+	if = {
+		limit = { NOT = { has_perk = $PERK$ } }
+		if = {
+			limit = { NOT = { POD_can_use_or_get_hekau_level_trigger = { LEVEL = $LEVEL$ } } }
+			custom_description_no_bullet = {
+				text = POD_get_hekau_level_effect
+				value = $LEVEL$
+			}
+		}
+		if = { limit = { has_trait = mummy } add_trait_xp = { trait = mummy value = -$LEVEL$ } }
+		POD_gain_integrity = { VALUE = 2 }
+	}
+	else = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { POD_can_use_or_get_hekau_level_trigger = { LEVEL = $LEVEL$ } } }
+				custom_description_no_bullet = {
+					text = POD_get_hekau_level_effect
+					value = $LEVEL$
+				}
+			}
+			if = { limit = { has_trait = mummy } add_trait_xp = { trait = mummy value = -$LEVEL$ } }
+			POD_gain_integrity = { VALUE = 2 }
+		}
+	}
+}
+
+POD_mummy_resurrection_effect = {
+	add_character_modifier = {
+		modifier = trapped_in_shadow_realm_modifier
+		years = POD_mummy_resurrection_time
+	}
+	add_trait_xp = { trait = mummy value = -10 }
+	trigger_event = POD_mummy_resurrection.1
+}
+
+POD_mummy_memory_check_effect = {
+	if = {
+		limit = {
+			has_trait = mummy
+			NOT = { POD_can_use_or_get_hekau_level_trigger = { LEVEL = $LEVEL$ } }
+		}
+		custom_tooltip = POD_mummy_memory_check_effect_tt
+		POD_static_stress_gain = { COUNT = 50 }
+	}
+}
+
+POD_mummy_tan_check_effect = {
+	if = {
+		limit = { NOT = { has_variable = chosen_tan_tree } }
+		set_variable = {
+			name  = chosen_tan_tree
+			value = flag:$TYPE$
+		}
+		custom_tooltip = POD_mummy_tan_check_effect
+	}
+	if = {
+		limit = {
+			POD_ignore_tan_penalty_trigger = no
+			exists = var:chosen_tan_tree
+			NOT = { var:chosen_tan_tree = flag:$TYPE$ }
+		}
+		POD_static_stress_gain = { COUNT = 50 }
+	}
+}
+
+# Domicile Effects
+
+POD_mummy_domicile_raid_check_effect = {
+	if = { limit = { highest_skill = diplomacy }   POD_mummy_domicile_raid_actual_check_effect = { SKILL = diplomacy   DIFFICULTY = $DIFFICULTY$ } }
+	if = { limit = { highest_skill = martial }     POD_mummy_domicile_raid_actual_check_effect = { SKILL = martial     DIFFICULTY = $DIFFICULTY$ } }
+	if = { limit = { highest_skill = stewardship } POD_mummy_domicile_raid_actual_check_effect = { SKILL = stewardship DIFFICULTY = $DIFFICULTY$ } }
+	if = { limit = { highest_skill = intrigue }    POD_mummy_domicile_raid_actual_check_effect = { SKILL = intrigue    DIFFICULTY = $DIFFICULTY$ } }
+	if = { limit = { highest_skill = learning }    POD_mummy_domicile_raid_actual_check_effect = { SKILL = learning    DIFFICULTY = $DIFFICULTY$ } }
+}
+POD_mummy_domicile_raid_actual_check_effect = {
+	save_temporary_scope_value_as = {
+		name = difficulty
+		value = {
+			value = $DIFFICULTY$
+			add = { value = POD_mummy_tomb_defense multiply = -1 }
+			min = 0
+		}
+	}
+	duel = {
+		skill = $SKILL$
+		value = scope:difficulty
+		50 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = low_positive_duel_skill_multiplier
+			}
+		}
+		50 = {
+			compare_modifier = {
+				value = scope:duel_value
+				multiplier = low_negative_duel_skill_multiplier
+			}
+
+			POD_mummy_domicile_building_raid_effect = yes
+		}
+	}
+}
+
+POD_mummy_domicile_building_raid_effect = {
+	random_list = {
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_01 } } domicile ?= { lower_domicile_building_no_refund = mummy_library_01 } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_01a } } domicile ?= { lower_domicile_building_no_refund = mummy_library_01a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_01b } } domicile ?= { lower_domicile_building_no_refund = mummy_library_01b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_01c } } domicile ?= { lower_domicile_building_no_refund = mummy_library_01c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_02a } } domicile ?= { lower_domicile_building_no_refund = mummy_library_02a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_02b } } domicile ?= { lower_domicile_building_no_refund = mummy_library_02b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_02c } } domicile ?= { lower_domicile_building_no_refund = mummy_library_02c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_03a } } domicile ?= { lower_domicile_building_no_refund = mummy_library_03a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_03b } } domicile ?= { lower_domicile_building_no_refund = mummy_library_03b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_03c } } domicile ?= { lower_domicile_building_no_refund = mummy_library_03c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_04a } } domicile ?= { lower_domicile_building_no_refund = mummy_library_04a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_04b } } domicile ?= { lower_domicile_building_no_refund = mummy_library_04b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_04c } } domicile ?= { lower_domicile_building_no_refund = mummy_library_04c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_05a } } domicile ?= { lower_domicile_building_no_refund = mummy_library_05a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_05b } } domicile ?= { lower_domicile_building_no_refund = mummy_library_05b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_library_05c } } domicile ?= { lower_domicile_building_no_refund = mummy_library_05c } }
+
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_01 } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_01 } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_01a } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_01a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_01b } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_01b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_01c } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_01c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_02a } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_02a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_02b } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_02b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_02c } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_02c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_03a } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_03a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_03b } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_03b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_03c } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_03c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_04a } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_04a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_04b } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_04b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_04c } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_04c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_05a } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_05a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_05b } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_05b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_memorandum_05c } } domicile ?= { lower_domicile_building_no_refund = mummy_memorandum_05c } }
+
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_01 } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_01 } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_01a } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_01a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_01b } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_01b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_01c } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_01c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_02a } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_02a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_02b } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_02b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_02c } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_02c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_03a } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_03a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_03b } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_03b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_03c } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_03c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_04a } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_04a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_04b } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_04b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_04c } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_04c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_05a } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_05a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_05b } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_05b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_connections_05c } } domicile ?= { lower_domicile_building_no_refund = mummy_connections_05c } }
+
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_01 } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_01 } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_01a } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_01a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_01b } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_01b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_01c } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_01c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_02a } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_02a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_02b } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_02b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_02c } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_02c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_03a } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_03a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_03b } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_03b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_03c } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_03c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_04a } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_04a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_04b } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_04b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_04c } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_04c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_05a } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_05a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_05b } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_05b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_private_guard_05c } } domicile ?= { lower_domicile_building_no_refund = mummy_private_guard_05c } }
+
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_01 } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_01 } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_01a } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_01a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_01b } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_01b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_01c } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_01c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_02a } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_02a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_02b } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_02b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_02c } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_02c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_03a } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_03a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_03b } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_03b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_03c } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_03c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_04a } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_04a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_04b } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_04b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_04c } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_04c } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_05a } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_05a } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_05b } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_05b } }
+		1 = { trigger = { domicile ?= { has_domicile_building = mummy_neteru_corner_05c } } domicile ?= { lower_domicile_building_no_refund = mummy_neteru_corner_05c } }
+	}
+	add_trait_xp = { trait = mummy value = -10 }
+	add_stress = 50
+}
+
+POD_add_copied_mummy_artifact_requirements = {
+	reforge_artifact = {
+		template = mummy_copy_template
+		type     = $TYPE$
+		visuals  = $VISUALS$
+	}
+}
+
+POD_display_known_ren = {
+	custom_tooltip = POD_ren_completion
+	
+	custom_tooltip = POD_ren_plants
+	POD_display_ren = { REN = crop }
+	POD_display_ren = { REN = weed }
+	POD_display_ren = { REN = flower }
+	POD_display_ren = { REN = thorn }
+	POD_display_ren = { REN = tree }
+	POD_display_ren = { REN = mushroom }
+	
+	custom_tooltip = POD_ren_animals
+	POD_display_ren = { REN = wolf }
+	POD_display_ren = { REN = snake }
+	POD_display_ren = { REN = rat }
+	POD_display_ren = { REN = scorpion }
+	POD_display_ren = { REN = crocodile }
+	POD_display_ren = { REN = bear }
+	POD_display_ren = { REN = lion }
+	POD_display_ren = { REN = tiger }
+	POD_display_ren = { REN = horse }
+	POD_display_ren = { REN = boar }
+	POD_display_ren = { REN = cat }
+	POD_display_ren = { REN = fox }
+	
+	custom_tooltip = POD_ren_metals
+	POD_display_ren = { REN = tn_stone }
+	POD_display_ren = { REN = tn_gold }
+	POD_display_ren = { REN = tn_silver }
+	POD_display_ren = { REN = tn_iron }
+}
+
+POD_display_ren = {
+	POD_save_tooltip = { LOC = POD_truename_$REN$ }
+	if = {
+		limit = { POD_knows_true_name_of_trigger = { TARGET = flag:$REN$ } }
+		custom_tooltip = POD_LOCALIZED_FLAG_WITH_TICKED_CHECKBOX
+	}
+	else = {
+		custom_tooltip = POD_LOCALIZED_FLAG_WITH_UNTICKED_CHECKBOX
+	}
+}
+
+POD_reapply_mummy_effigy_modifiers = {
+	hidden_effect = {
+		if = { 
+			limit = { has_character_modifier = POD_command_effigy_interaction_gold } 
+			POD_reapply_scaling_character_modifier = { MODIFIER = POD_command_effigy_interaction_gold }
+		}
+		if = { 
+			limit = { has_character_modifier = POD_command_effigy_interaction_prestige } 
+			POD_reapply_scaling_character_modifier = { MODIFIER = POD_command_effigy_interaction_prestige }
+		}
+		if = { 
+			limit = { has_character_modifier = POD_command_effigy_interaction_piety } 
+			POD_reapply_scaling_character_modifier = { MODIFIER = POD_command_effigy_interaction_piety }
+		}
+		if = { 
+			limit = { has_character_modifier = POD_command_effigy_interaction_renown } 
+			POD_reapply_scaling_character_modifier = { MODIFIER = POD_command_effigy_interaction_renown }
+		}
+	}
+}
+
+POD_asekh_sen_bane_infusion_lotto_effect = {
+	random_list = {
+		32 = {
+			trigger = { NOT = { has_perk = fomori_animal_control_perk } }
+			add_perk = fomori_animal_control_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_armored_hide_perk } }
+			add_perk = fomori_armored_hide_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_blending_perk } }
+			add_perk = fomori_blending_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_darksight_perk } }
+			add_perk = fomori_darksight_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_foot_pads_perk } }
+			add_perk = fomori_foot_pads_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_immunity_to_the_delirium_perk } }
+			add_perk = fomori_immunity_to_the_delirium_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_memory_caress_perk } }
+			add_perk = fomori_memory_caress_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_natural_weaponry_perk } }
+			add_perk = fomori_natural_weaponry_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_pliant_bones_perk } }
+			add_perk = fomori_pliant_bones_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_sense_gaia_perk } }
+			add_perk = fomori_sense_gaia_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_spirit_gift_perk } }
+			add_perk = fomori_spirit_gift_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_spirit_sense_perk } }
+			add_perk = fomori_spirit_sense_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_taint_suppression_perk } }
+			add_perk = fomori_taint_suppression_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_triatic_scent_perk } }
+			add_perk = fomori_triatic_scent_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_triatic_sense_perk } }
+			add_perk = fomori_triatic_sense_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_exoskeleton_perk } }
+			add_perk = fomori_exoskeleton_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_immunity_perk } }
+			add_perk = fomori_immunity_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_nimbleness_perk } }
+			add_perk = fomori_nimbleness_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_noxious_breath_perk } }
+			add_perk = fomori_noxious_breath_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_savage_genitalia_perk } }
+			add_perk = fomori_savage_genitalia_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_sense_the_unnatural_perk } }
+			add_perk = fomori_sense_the_unnatural_perk
+		}
+		32 = {
+			trigger = { NOT = { has_perk = fomori_skittersight_perk } }
+			add_perk = fomori_skittersight_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_berseker_perk } }
+			add_perk = fomori_berseker_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_bulky_perk } }
+			add_perk = fomori_bulky_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_ectoplasmic_extrusion_perk } }
+			add_perk = fomori_ectoplasmic_extrusion_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_electrical_field_perk } }
+			add_perk = fomori_electrical_field_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_elemental_resistance_perk } }
+			add_perk = fomori_elemental_resistance_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_enhanced_attribute_perk } }
+			add_perk = fomori_enhanced_attribute_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_extensible_limb_perk } }
+			add_perk = fomori_extensible_limb_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_extra_limb_perk } }
+			add_perk = fomori_extra_limb_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_nightmare_command_perk } }
+			add_perk = fomori_nightmare_command_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_poison_perk } }
+			add_perk = fomori_poison_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_poison_tumors_perk } }
+			add_perk = fomori_poison_tumors_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_reassuring_presence_perk } }
+			add_perk = fomori_reassuring_presence_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_spirit_kinship_perk } }
+			add_perk = fomori_spirit_kinship_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_tar_baby_perk } }
+			add_perk = fomori_tar_baby_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_enhancement_perk } }
+			add_perk = fomori_enhancement_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_numbing_perk } }
+			add_perk = fomori_numbing_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_slobber_snot_perk } }
+			add_perk = fomori_slobber_snot_perk
+		}
+		16 = {
+			trigger = { NOT = { has_perk = fomori_stomach_pumper_perk } }
+			add_perk = fomori_stomach_pumper_perk
+		}
+		10 = {
+			trigger = { NOT = { has_perk = fomori_enchanting_voice_perk } }
+			add_perk = fomori_enchanting_voice_perk
+		}
+		10 = {
+			trigger = { NOT = { has_perk = fomori_eyes_of_the_wyrm_perk } }
+			add_perk = fomori_eyes_of_the_wyrm_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_hand_from_beyond_perk } }
+			add_perk = fomori_hand_from_beyond_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_devour_perk } }
+			add_perk = fomori_devour_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_entropic_touch_perk } }
+			add_perk = fomori_entropic_touch_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_hazardous_breath_perk } }
+			add_perk = fomori_hazardous_breath_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_homogeneity_perk } }
+			add_perk = fomori_homogeneity_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_mask_presence_perk } }
+			add_perk = fomori_mask_presence_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_sanity_rending_perk } }
+			add_perk = fomori_sanity_rending_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_shadowplay_perk } }
+			add_perk = fomori_shadowplay_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_skinshift_perk } }
+			add_perk = fomori_skinshift_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_spirit_ties_perk } }
+			add_perk = fomori_spirit_ties_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_thick_skinned_perk } }
+			add_perk = fomori_thick_skinned_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_procreation_perk } }
+			add_perk = fomori_procreation_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_roar_of_the_wyrm_perk } }
+			add_perk = fomori_roar_of_the_wyrm_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_slither_skin_perk } }
+			add_perk = fomori_slither_skin_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_corrupted_visions_perk } }
+			add_perk = fomori_corrupted_visions_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_voice_of_the_wyrm_perk } }
+			add_perk = fomori_voice_of_the_wyrm_perk
+		}
+		8 = {
+			trigger = { NOT = { has_perk = fomori_wall_walking_perk } }
+			add_perk = fomori_wall_walking_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_flight_perk } }
+			add_perk = fomori_flight_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_gaseous_form_perk } }
+			add_perk = fomori_gaseous_form_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_infectious_bite_touch_perk } }
+			add_perk = fomori_infectious_bite_touch_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_invisibility_perk } }
+			add_perk = fomori_invisibility_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_liquid_form_perk } }
+			add_perk = fomori_liquid_form_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_mind_blast_perk } }
+			add_perk = fomori_mind_blast_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_self_immolation_perk } }
+			add_perk = fomori_self_immolation_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_stasis_cocoon_perk } }
+			add_perk = fomori_stasis_cocoon_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_step_sideways_perk } }
+			add_perk = fomori_step_sideways_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_veil_breach_perk } }
+			add_perk = fomori_veil_breach_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_webbing_perk } }
+			add_perk = fomori_webbing_perk
+		}
+		4 = {
+			trigger = { NOT = { has_perk = fomori_water_breathing_perk } }
+			add_perk = fomori_water_breathing_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_brain_eating_perk } }
+			add_perk = fomori_brain_eating_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_dispersion_perk } }
+			add_perk = fomori_dispersion_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_fungal_touch_perk } }
+			add_perk = fomori_fungal_touch_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_malleate_perk } }
+			add_perk = fomori_malleate_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_mind_rape_perk } }
+			add_perk = fomori_mind_rape_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_size_perk } }
+			add_perk = fomori_size_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_spirit_rending_perk } }
+			add_perk = fomori_spirit_rending_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_succubus_veil_perk } }
+			add_perk = fomori_succubus_veil_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_unnatural_strength_perk } }
+			add_perk = fomori_unnatural_strength_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_extra_speed_perk } }
+			add_perk = fomori_extra_speed_perk
+		}
+		2 = {
+			trigger = { NOT = { has_perk = fomori_toxic_secretions_perk } }
+			add_perk = fomori_toxic_secretions_perk
+		}
+		1 = {
+			trigger = { NOT = { has_perk = fomori_horror_perk } }
+			add_perk = fomori_horror_perk
+		}
+		1 = {
+			trigger = { NOT = { has_perk = fomori_regeneration_perk } }
+			add_perk = fomori_regeneration_perk
+		}
+		1 = {
+			trigger = { NOT = { has_perk = fomori_balefire_flux_perk } }
+			add_perk = fomori_balefire_flux_perk
+		}
+		1 = {
+			trigger = { NOT = { has_perk = fomori_deception_perk } }
+			add_perk = fomori_deception_perk
+		}
+	}
+}

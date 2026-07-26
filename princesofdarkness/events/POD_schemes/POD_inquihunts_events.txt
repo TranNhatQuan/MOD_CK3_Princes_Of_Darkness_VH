@@ -1,0 +1,4980 @@
+﻿namespace = POD_inquihunt
+
+scripted_trigger POD_inquihunt_scheme_1_trigger = {
+	any_scheme = {
+		scheme_type = inquihunt
+		scheme_target_character = {
+			this = scope:defender
+		}
+	}
+}
+
+scripted_effect POD_end_inquihunt_contract_or_journey_effect = {
+	if = {
+		limit = { exists = scope:task_contract }
+		scope:task_contract = {
+			var:travel_plan ?= {
+				if = {
+					limit = { is_paused = yes }
+					resume_travel_plan = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_character_active_contract = { scope:task_contract ?= this }
+			}
+			hidden_effect = {
+				scope:task_contract = { complete_task_contract = failure_abandoned_hunt }
+			}
+		}
+	}
+	else_if = {
+		limit = { exists = scope:scheme }
+		scope:scheme = { end_scheme = yes }
+	}
+	else_if = {
+		limit = {
+			var:current_journey ?= {
+				var:journey_type = flag:assault_lair
+				var:target = scope:defender
+			}
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+scripted_effect POD_inquihunt_bonus_rewards_effect = {
+	save_scope_value_as = {
+		name = multiplier
+		value = {
+			if = {
+				limit = { exists = scope:task_contract }
+				if = {
+					limit = { scope:task_contract.task_contract_tier >= tier_empire }
+					value = 1
+				}
+				else_if = {
+					limit = { scope:task_contract.task_contract_tier = tier_kingdom }
+					value = 0.75
+				}
+				else_if = {
+					limit = { scope:task_contract.task_contract_tier = tier_duchy }
+					value = 0.5
+				}
+				else = {
+					value = 0.25
+				}
+			}
+			else = {
+				value = 1
+			}
+		}
+	}
+	add_prestige = {
+		value = $PRESTIGE$
+		multiply = scope:multiplier
+	}
+	add_piety = {
+		value = $PIETY$
+		multiply = scope:multiplier
+	}
+}
+
+scripted_effect POD_inquihunt_success_effect = {
+	POD_inquihunt_success_side_effects = yes
+	
+	scope:defender = {
+		pod_death = {
+			death_reason = $DEATH_REASON$
+			killer = scope:attacker
+		}
+	}
+	
+	hidden_effect = {
+		scope:task_contract ?= { complete_task_contract = success_standard }
+	}
+	
+	POD_end_inquihunt_contract_or_journey_effect = yes
+}
+
+# Journey wrapper event for the old inquihunt scheme
+POD_inquihunt.7000 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = { var:current_journey.var:target = { is_alive = no } }
+			POD_clear_journeys_with_target_effect = { TARGET = var:current_journey.var:target }
+		}
+		else_if = {
+			limit = {
+				var:current_journey.var:target = {
+					highest_held_title_tier >= tier_kingdom
+					is_demon_trigger = no
+				}
+			}
+
+			trigger_event = POD_heists.3
+		}
+		else = {
+			POD_pause_journey_travel_plan_effect = yes
+
+			save_scope_as = attacker
+			var:current_journey.var:target = {
+				save_scope_as = defender
+			}
+			
+			trigger_event = POD_inquihunt.7002
+		}
+	}
+}
+
+scripted_effect POD_age_up_bloodsucker_for_contract = {
+	if = {
+		limit = { scope:task_contract.task_contract_tier >= tier_empire }
+		set_age = { 1000 2000 }
+	}
+	else_if = {
+		limit = { scope:task_contract.task_contract_tier = tier_kingdom }
+		set_age = { 400 999 }
+	}
+	else_if = {
+		limit = { scope:task_contract.task_contract_tier = tier_duchy }
+		set_age = { 200 399 }
+	}
+	else = {
+		set_age = { 18 199 }
+	}
+}
+
+# task_contract wrapper event for the old inquihunt scheme
+POD_inquihunt.7001 = {
+	hidden = yes
+	
+	immediate = {
+		POD_pause_task_contract_travel_plan = yes
+		
+		save_scope_as = attacker
+		
+		create_character = {
+			culture = scope:task_contract.task_contract_employer.culture
+			faith = scope:task_contract.task_contract_employer.faith
+			dynasty = none
+			location = root.location
+			age = { 18 60 }
+			gender_female_chance = 50
+			save_scope_as = defender
+			after_creation = {
+				POD_set_resonance_effect = yes
+			}
+		}
+		
+		hidden_effect_new_object = {
+			scope:defender = {
+				if = {
+					limit = {
+						scope:task_contract.task_contract_employer = {
+							is_werewolf_trigger = yes
+						}
+					}
+					add_trait = werewolf
+					POD_werewolf_initialization_effect = yes
+				}
+				else_if = {
+					limit = {
+						scope:task_contract.task_contract_employer = {
+							is_fae_trigger = yes
+						}
+					}
+					add_trait = fae
+					POD_custom_copy_kith_traits_effect = {
+						ORIGIN = scope:task_contract.task_contract_employer
+					}
+					POD_fae_initialization_effect = yes
+				}
+				else_if = {
+					limit = {
+						scope:task_contract.task_contract_employer = {
+							is_kueijin_trigger = yes
+						}
+					}
+					add_trait = kueijin
+					POD_age_up_bloodsucker_for_contract = yes
+					POD_kueijin_initialization_effect = yes
+				}
+				else = {
+					add_trait = vampire
+					add_trait = vampgeneration8
+					POD_age_up_bloodsucker_for_contract = yes
+					add_character_flag = immune_to_disease
+					POD_character_vampire_clan_initialization_effect = yes
+					POD_character_initialization_random_background_effect = yes
+					POD_character_vampire_discipline_initialization_effect = yes
+					POD_character_vampire_clan_traits_effect = yes
+					POD_character_vampire_faith_initialization_effect = yes
+					POD_vampires_look_younger_effect = yes
+					trigger_event = POD_character_canon_modifier_initalization.100
+				}
+				
+				if = {
+					limit = {
+						scope:task_contract.task_contract_employer = {
+							is_demon_trigger = yes
+						}
+					}
+					give_witch_secret_or_trait_effect = yes
+				}
+			}
+		}
+		
+		trigger_event = POD_inquihunt.7002
+	}
+}
+
+# trigger the right event by splat
+POD_inquihunt.7002 = {
+	hidden = yes
+	immediate = {
+		if = {
+			limit = { scope:defender = { is_werewolf_trigger = yes } }
+			trigger_event = POD_inquihunt.50
+		}
+		else_if = {
+			limit = { scope:defender = { is_demon_trigger = yes } }
+			trigger_event = POD_inquihunt.80
+		}
+		else_if = {
+			limit = { scope:defender = { is_fae_trigger = yes } }
+			trigger_event = POD_inquihunt.110
+		}
+		else = {
+			# Fallback for Vampires, Kuei-Jin, etc
+			trigger_event = POD_inquihunt.1
+		}
+	}
+}
+
+# accepting the task_contract
+POD_inquihunt.7010 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = faith
+	override_background = { reference = terrain_travel }
+	
+	title = POD_inquihunt.7010.t
+	desc  = POD_inquihunt.7010.desc
+	
+	widget = {
+		gui = "POD_event_window_widget_task_contract"
+		container = "custom_widgets_container"
+	}
+	
+	immediate = {
+		POD_save_task_contract_for_event_widget = yes
+	}
+	
+	after = {
+		POD_cleanup_task_contract_event_widget = yes
+	}
+	
+	left_portrait = {
+		character = root
+		animation = inspect_weapon
+	}
+	
+	# Travel
+	option = {
+		name = POD_inquihunt.7010.a
+		
+		trigger = {
+			is_available = yes
+		}
+		show_as_unavailable = {
+			always = yes
+		}
+		
+		POD_setup_task_contract_travel_plan = {
+			ARRIVAL_EVENT = POD_inquihunt.7001
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.7010.b
+		trigger_event = POD_task_contracts.2
+	}
+	
+	option = {
+		name = POD_abandon_contract
+		custom_tooltip = POD_abandon_contract_tt
+		trigger_event = POD_task_contracts.3
+	}
+}
+
+
+POD_inquihunt.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.1.t
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.1.desc.fera
+			}
+			desc = POD_inquihunt.1.desc		
+		}
+	}
+	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	immediate = {
+	
+		scope:scheme ?= {
+			scheme_target_character = {
+				save_scope_as = defender
+			}
+			scheme_owner = {
+				save_scope_as = attacker
+			}
+		}
+		
+		# scope:defender = {
+		# 	save_scope_as = bg_override_char
+		# }
+		
+		# Apply True Cross Modifier
+		hidden_effect = {
+			if = {
+				limit = { has_variable = coterie }
+				var:coterie = {
+					every_in_list = {
+						variable = members
+						limit = {
+							any_character_artifact = {
+								has_variable = true_cross
+							}
+						}
+						add_character_modifier = {
+							modifier = true_cross_hunt_modifier
+							days = 10
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						any_character_artifact = {
+							has_variable = true_cross
+						}
+					}
+					add_character_modifier = {
+						modifier = true_cross_hunt_modifier
+						days = 10
+					}
+				}
+			}
+		}
+		
+		POD_save_coterie_duelists = yes
+	
+	}
+	
+# Diplomacy contest
+	option = {
+	
+        name = {
+            text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+						}
+						desc = POD_inquihunt.1.option.a.fera
+					}
+					triggered_desc = {
+						trigger = {
+							NOT = { scope:attacker.faith = faith:shadowinquisition }
+						}
+						desc = POD_inquihunt.1.option.a.generic
+					}					
+					desc = POD_inquihunt.1.option.a        
+				}
+			}
+        }	
+		
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:diplomacy_duelist = {
+			duel = {
+				skill = diplomacy
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.2
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.3
+							days = 7	
+						}
+					}					
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					modifier = {
+						add = -2
+						scope:diplomacy_duelist = { has_trait = diplomat }
+					}
+					modifier = {
+						add = -2
+						scope:diplomacy_duelist = { has_trait = gregarious }
+					}
+					modifier = {
+						add = -2
+						scope:diplomacy_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:diplomacy_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = presence }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = presenceadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = dominate }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = dominateadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.4
+							days = 7	
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { diplomacy > 15 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { diplomacy > 20 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = 200
+				scope:attacker = { has_trait = diplomat }
+			}
+			modifier = {
+				add = 200
+				scope:attacker = { has_trait = gregarious }
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+# Martial contest
+	option = {
+		trigger = {
+			NOT = { scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut } }
+		}	
+		name = POD_inquihunt.1.option.b
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:martial_duelist = {
+			duel = {
+				skill = martial
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.5
+							days = 7	
+						}
+					}
+					
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.6
+							days = 7	
+						}
+					}					
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = strategist }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = brave }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:martial_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = potence }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = potenceadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = dominate }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = dominateadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.7
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { martial > 15 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { martial > 20 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	}
+
+# Martial contest, Fera
+	option = {
+		trigger = {
+			 scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+		}	
+		name = POD_inquihunt.1.option.b.fera
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:martial_duelist = {
+			duel = {
+				skill = martial
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.5
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.6
+							days = 7
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty = { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = strategist }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = brave }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:martial_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = potence }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = potenceadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = dominate }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = dominateadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.7
+							days = 7	
+						}
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { martial > 15 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { martial > 20 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}	
+	}
+		
+# Stewardship contest
+	option = {
+		name = POD_inquihunt.1.option.c
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:stewardship_duelist = {
+			duel = {
+				skill = stewardship
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.8
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.9
+							days = 7
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:stewardship_duelist = { has_trait = administrator }
+					}
+					modifier = {
+						add = -2
+						scope:stewardship_duelist = { has_trait = patient }
+					}
+					modifier = {
+						add = -2
+						scope:stewardship_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:stewardship_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = fortitude }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = fortitudeadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = auspex }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = auspexadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.10
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { stewardship > 15 }
+				scope:defender = { stewardship < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { stewardship > 20 }
+				scope:defender = { stewardship < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+# Intrigue contest
+	option = {
+		trigger = {
+			NOT = { scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut } }
+		}
+		name = POD_inquihunt.1.option.d
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:intrigue_duelist = {
+			duel = {
+				skill = intrigue
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.11
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+					
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.12
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = schemer }
+					}
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = deceitful }
+					}
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:intrigue_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = auspex }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = auspexadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = obfuscate }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = obfuscateadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = animalism }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = animalismadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.13
+							days = 7	
+						}
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { intrigue > 15 }
+				scope:defender = { intrigue < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { intrigue > 20 }
+				scope:defender = { intrigue < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = schemer }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = deceitful }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+# Intrigue contest, Fera
+	option = {
+		trigger = {
+			scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+		}
+		name = POD_inquihunt.1.option.d.fera
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:intrigue_duelist = {
+			duel = {
+				skill = intrigue
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.11
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.12
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = administrator }
+					}
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = patient }
+					}
+					modifier = {
+						add = -2
+						scope:intrigue_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:intrigue_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = auspex }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = auspexadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = obfuscate }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = obfuscateadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = animalism }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = animalismadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.13
+							days = 7
+						}
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { intrigue > 15 }
+				scope:defender = { intrigue < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { intrigue > 20 }
+				scope:defender = { intrigue < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = schemer }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = deceitful }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+# Learning contest
+	option = {
+		name = POD_inquihunt.1.option.e
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		scope:learning_duelist = {
+			duel = {
+				skill = learning
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.14
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.15
+							days = 7
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -2
+						scope:learning_duelist = { has_trait = theologian }
+					}
+					modifier = {
+						add = -2
+						scope:learning_duelist = { has_trait = zealous }
+					}
+					modifier = {
+						add = -3
+						scope:learning_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -5
+						scope:learning_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = obtenebration }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { has_trait = obtenebrationadvanced }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = bloodsorcery }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { has_trait = bloodsorceryadvanced }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = daimonion }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { has_trait = daimonionadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.16
+							days = 7
+						}
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { learning > 15 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { learning > 20 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = theologian }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = zealous }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+# Prowess contest
+	option = {
+		name = POD_inquihunt.1.option.g
+		#custom_tooltip = POD_diablerize.100.option.a.tt
+		
+		if = {
+			limit = {
+				var:coterie ?= {
+					any_in_list = {
+						variable = members
+						has_character_modifier = true_cross_hunt_modifier
+					}
+				}
+			}
+			custom_tooltip = POD_inquihunt_truecross_tt
+		}
+		
+		scope:prowess_duelist = {
+			duel = {
+				skill = prowess
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.5
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.17
+							days = 7	
+						}
+					}
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.18
+							days = 7
+						}
+					}
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					modifier = {
+						add = -1
+						scope:prowess_duelist = { 
+							has_trait = lifestyle_blademaster 
+							has_trait_xp = { trait = lifestyle_blademaster value < 50 }
+						}
+					}
+					modifier = {
+						add = -2
+						scope:prowess_duelist = { 
+							has_trait = lifestyle_blademaster 
+							has_trait_xp = { trait = lifestyle_blademaster value >= 50 }
+							NOT = { has_trait_xp = { trait = lifestyle_blademaster value = 100 } }
+						}
+					}
+					modifier = {
+						add = -3
+						scope:prowess_duelist = { 
+							has_trait = lifestyle_blademaster 
+							has_trait_xp = { trait = lifestyle_blademaster value = 100 }
+						}
+					}
+					modifier = {
+						add = -2
+						scope:prowess_duelist = { has_trait = gallant }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = celerity }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = celerityadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = temporis }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = temporisadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = flight }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = flightadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = kai }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = kaiadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = potence }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = potenceadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = fortitude }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = fortitudeadvanced }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { age > 100 }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { age > 500 }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { age > 750 }
+					}
+					modifier = {
+						add = 4
+						scope:defender = { age > 1000 }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.19
+							days = 7
+						}
+					}
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { prowess > 40 }
+				scope:defender = { prowess < 20 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { prowess > 60 }
+				scope:defender = { prowess < 20 }
+				}
+			}
+			modifier = {
+				add = 200
+				scope:attacker = { has_trait = gallant }
+			}
+			modifier = {
+				add = 100
+				scope:attacker = { 
+					has_trait = lifestyle_blademaster 
+					has_trait_xp = { trait = lifestyle_blademaster value < 50 }
+				}
+			}
+			modifier = {
+				add = 200
+				scope:attacker = { 
+					has_trait = lifestyle_blademaster 
+					has_trait_xp = { trait = lifestyle_blademaster value >= 50 }
+					NOT = { has_trait_xp = { trait = lifestyle_blademaster value = 100 } }
+				}
+			}
+			modifier = {
+				add = 300
+				scope:attacker = { 
+					has_trait = lifestyle_blademaster 
+					has_trait_xp = { trait = lifestyle_blademaster value = 100 }
+				}
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+		}
+	}
+
+# Give up	
+	option = {
+		name = POD_inquihunt.1.option.f
+		
+		if = {
+			limit = {
+				is_ai = no
+			}
+			stress_impact = {
+				zealous = minor_stress_impact_gain
+				ambitious = minor_stress_impact_gain
+				diligent = minor_stress_impact_gain
+				craven = medium_stress_impact_loss
+				lazy = minor_stress_impact_loss
+			}
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+		
+		custom_tooltip = POD_inquihunt.1.option.f.custom
+		
+		ai_chance = {
+			base = 1500
+		}
+	}
+
+	after = {
+		trigger_event = {
+			id = POD_inquihunt.666
+			days = 150
+		}
+	}
+}
+
+POD_inquihunt.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.2.desc.fera
+			}
+			desc = POD_inquihunt.2.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.2.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_diplomacy
+		}
+	}
+}
+
+POD_inquihunt.3 = {
+	type = character_event
+	content_source = dlc_POD
+	#title = POD_inquihunt.3.t
+	
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.3.t.fera
+			}
+			desc = POD_inquihunt.3.t		
+		}
+	}	
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.3.desc.fera
+			}
+			desc = POD_inquihunt.3.desc		
+		}
+	}
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+		name = POD_inquihunt.3.option.a	
+		
+		remove_trait = compassionate
+		add_trait = callous
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_diplomacy
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.3.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}	
+}
+
+POD_inquihunt.4 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.4.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.4.desc.generic
+			}			
+			desc = POD_inquihunt.4.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.4.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_dip
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.5 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.5.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.5.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.5.desc.generic
+			}			
+			desc = POD_inquihunt.5.desc		
+		}
+	}		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.5.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_martial
+		}
+	}
+}
+
+POD_inquihunt.6 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.6.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.6.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.6.desc.generic
+			}			
+			desc = POD_inquihunt.6.desc		
+		}
+	}		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+		trigger = {
+			NOT = { has_character_modifier = POD_ha_rod_and_staff_modifier }
+		}
+		name = POD_inquihunt.6.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 100
+		}
+		
+		add_character_modifier = {
+			modifier = sleep_deprived_modifier
+			years = 25
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_martial
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.6.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}
+}
+
+POD_inquihunt.7 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.7.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.7.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.7.desc.generic
+			}			
+			desc = POD_inquihunt.7.desc		
+		}
+	}		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.7.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_mar
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.8 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.8.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.8.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.8.desc.generic
+			}			
+			desc = POD_inquihunt.8.desc		
+		}
+	}		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.8.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_stewardship
+		}
+	}
+}
+
+POD_inquihunt.9 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.9.t
+	desc = POD_inquihunt.9.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+        name = {
+            text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							NOT = { scope:attacker.faith = faith:shadowinquisition }
+						}
+						desc = POD_inquihunt.9.option.a.fera
+					}					
+					desc = POD_inquihunt.9.option.a        
+				}
+			}
+        }	
+		
+		remove_long_term_gold = major_gold_value
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_stewardship
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.9.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}	
+}
+
+POD_inquihunt.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.10.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.10.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.10.desc.generic
+			}			
+			desc = POD_inquihunt.10.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+        name = {
+            text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+						}
+						desc = POD_inquihunt.10.option.a.fera
+					}
+					triggered_desc = {
+						trigger = {
+							NOT = { scope:attacker.faith = faith:shadowinquisition }
+						}
+						desc = POD_inquihunt.10.option.a.generic
+					}					
+					desc = POD_inquihunt.10.option.a        
+				}
+			}
+        }
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_ste
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.11.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.11.desc.fera
+			}
+			desc = POD_inquihunt.11.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+        name = {
+            text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+						}
+						desc = POD_inquihunt.11.option.a.fera
+					}
+					triggered_desc = {
+						trigger = {
+							NOT = { scope:attacker.faith = faith:shadowinquisition }
+						}
+						desc = POD_inquihunt.11.option.a.generic
+					}					
+					desc = POD_inquihunt.11.option.a        
+				}
+			}
+        }
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_intrigue
+		}
+	}
+}
+
+POD_inquihunt.12 = {
+	type = character_event
+	content_source = dlc_POD
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.12.t.fera
+			}
+			desc = POD_inquihunt.12.t	
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.12.desc.fera
+			}
+			desc = POD_inquihunt.12.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+		name = POD_inquihunt.12.option.a
+		
+		add_character_modifier = {
+			modifier = malignant_hearsay_modifier
+			years = 10
+		}
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_intrigue
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.12.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}	
+}
+
+POD_inquihunt.13 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.13.t
+	desc =  POD_inquihunt.13.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.13.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_int
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.14 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.14.t
+	desc =  POD_inquihunt.14.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.14.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_learning
+		}
+	}
+}
+
+POD_inquihunt.15 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.15.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.15.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.15.desc.generic
+			}			
+			desc = POD_inquihunt.15.desc		
+		}
+	}		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+		name = POD_inquihunt.15.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = -100
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_learning
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.15.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes	
+	}	
+}
+
+POD_inquihunt.16 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.16.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.16.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.16.desc.generic
+			}			
+			desc = POD_inquihunt.16.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.16.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_lea
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.17 = {
+	type = character_event
+	content_source = dlc_POD
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.17.t
+			}			
+			desc = POD_inquihunt.17.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.17.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.17.desc.generic
+			}			
+			desc = POD_inquihunt.17.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.17.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_prowess
+		}
+	}
+}
+
+POD_inquihunt.18 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.18.t
+	desc =  POD_inquihunt.18.desc		
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = personality_bold
+	}
+	
+	option = {
+		name = POD_inquihunt.18.option.a
+		
+		if = {
+			limit = {
+				NOT = { has_perk = gods_armour_perk }
+			}
+			increase_wounds_no_death_multiple_effect = {
+				REASON = fight
+				AMOUNT = 2
+			}
+		}
+		else_if = {
+			limit = {
+				has_perk = gods_armour_perk
+			}
+			increase_wounds_no_death_multiple_effect = {
+				REASON = fight
+				AMOUNT = 1
+			}
+		}
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_hunted_prowess
+		}
+	}
+	
+	option = {
+		name = POD_inquihunt.18.option.b
+		
+		stress_impact = {
+			zealous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes	
+	}	
+}
+
+POD_inquihunt.19 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.19.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:attacker.faith = { has_doctrine = tenet_vengeance_of_nut }
+				}
+				desc = POD_inquihunt.19.desc.fera
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { scope:attacker.faith = faith:shadowinquisition }
+				}
+				desc = POD_inquihunt.19.desc.generic
+			}			
+			desc = POD_inquihunt.19.desc		
+		}
+	}	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.19.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_hunt_backfired_pro
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+POD_inquihunt.666 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				scope:attacker = {
+					POD_inquihunt_scheme_1_trigger = yes
+				}
+			}
+			trigger_event = {
+				id = POD_inquihunt.667
+				days = 7
+			}
+		}
+	}
+}
+
+POD_inquihunt.667 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.667.t
+	desc =  POD_inquihunt.667.desc		
+	theme = faith
+	
+	left_portrait = {
+		character = scope:attacker
+		animation = idle
+	}
+
+	right_portrait = {
+		character = scope:defender
+		animation = idle
+	}
+	
+	# End scheme 
+	option = {
+		name = POD_inquihunt.667.option.a
+		scope:scheme ?= {
+			end_scheme = yes
+		}
+	}
+}
+
+#Werewolf hunt	
+POD_inquihunt.50 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.50.t
+
+	desc = POD_inquihunt.50.desc		
+	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	immediate = {
+	
+		scope:scheme ?= {
+			scheme_target_character = {
+				save_scope_as = defender
+			}
+			scheme_owner = {
+				save_scope_as = attacker
+			}
+		}
+		
+		# scope:defender = {
+		# 	save_scope_as = bg_override_char
+		# }
+		
+		# Apply True Cross Modifier
+		hidden_effect = {
+			if = {
+				limit = { has_variable = coterie }
+				var:coterie = {
+					every_in_list = {
+						variable = members
+						limit = {
+							any_character_artifact = {
+								has_variable = true_cross
+							}
+						}
+						add_character_modifier = {
+							modifier = true_cross_hunt_modifier
+							days = 10
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						any_character_artifact = {
+							has_variable = true_cross
+						}
+					}
+					add_character_modifier = {
+						modifier = true_cross_hunt_modifier
+						days = 10
+					}
+				}
+			}
+		}
+		
+		POD_save_coterie_duelists = yes		
+	}
+	
+	option = {
+		name = POD_inquihunt.50.option.a
+				
+		scope:martial_duelist = {
+			duel = {
+				skills = { martial prowess }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.51
+							days = 7	
+						}
+					}
+					
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.52
+							days = 7	
+						}
+					}					
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:martial_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -1
+						scope:martial_duelist = { has_trait = strategist }
+					}					
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = ahroun }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = strategist }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = brave }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.53
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { martial > 15 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { martial > 20 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	}
+
+	option = {
+		name = POD_inquihunt.50.option.b
+		
+		remove_short_term_gold = 150
+				
+		scope:martial_duelist = {
+			duel = {
+				skills = { martial prowess }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.51
+							days = 7	
+						}
+					}
+					
+				}
+				10 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.52
+							days = 7	
+						}
+					}					
+				}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:martial_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -1
+						scope:martial_duelist = { has_trait = strategist }
+					}					
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = ahroun }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = strategist }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = brave }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.53
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { martial > 15 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { martial > 20 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	}
+
+
+	option = {
+		name = POD_inquihunt.50.option.c
+				
+		scope:martial_duelist = {
+			duel = {
+				skills = { martial prowess }
+				target = scope:defender
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.51
+							days = 7	
+						}
+					}
+					
+				}
+				17 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.52
+							days = 7	
+						}
+					}					
+				}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					modifier = {
+						add = -2
+						scope:martial_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -4
+						scope:martial_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -1
+						scope:martial_duelist = { has_trait = strategist }
+					}					
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = ahroun }
+					}
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = strategist }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					modifier = {
+						add = 1
+						scope:defender = { has_trait = brave }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.53
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { martial > 15 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { martial > 20 }
+				scope:defender = { martial < 5 }
+				}
+			}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = strategist }
+				}
+			modifier = {
+					add = 200
+					scope:attacker = { has_trait = brave }
+				}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	}
+
+	option = {
+		name = POD_inquihunt.50.option.z
+		
+		custom_tooltip = hunt_give_up_tt
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}
+	
+	#option = {
+	#	name = POD_inquihunt.50.option.c
+	#	
+	#	custom_tooltip = hunt_ww_intrigue_tt
+	#	
+	#	trigger_event = {
+	#		id = POD_inquihunt.53
+	#		days = 3
+	#	}
+	#}		
+}
+
+POD_inquihunt.51 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.51.t
+	desc = 	POD_inquihunt.51.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.51.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_werewolf
+		}
+	}
+}
+
+POD_inquihunt.52 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.52.t
+	desc = 	POD_inquihunt.52.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.52.option.a
+		
+		add_prestige = -50
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+	}
+}
+
+POD_inquihunt.53 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.53.t
+	desc = 	POD_inquihunt.53.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.53.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_werewolf
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+#Demon hunt	
+POD_inquihunt.80 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.80.t
+
+	desc = POD_inquihunt.80.desc		
+	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	immediate = {
+	
+		scope:scheme ?= {
+			scheme_target_character = {
+				save_scope_as = defender
+			}
+			scheme_owner = {
+				save_scope_as = attacker
+			}
+		}
+		
+		# scope:defender = {
+		# 	save_scope_as = bg_override_char
+		# }
+		
+		# Apply True Cross Modifier
+		hidden_effect = {
+			if = {
+				limit = { has_variable = coterie }
+				var:coterie = {
+					every_in_list = {
+						variable = members
+						limit = {
+							any_character_artifact = {
+								has_variable = true_cross
+							}
+						}
+						add_character_modifier = {
+							modifier = true_cross_hunt_modifier
+							days = 10
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						any_character_artifact = {
+							has_variable = true_cross
+						}
+					}
+					add_character_modifier = {
+						modifier = true_cross_hunt_modifier
+						days = 10
+					}
+				}
+			}
+		}
+		
+		POD_save_coterie_duelists = yes		
+	}
+	
+	option = {
+		name = POD_inquihunt.80.option.a
+				
+		scope:learning_duelist = {
+			duel = {
+				skills = { learning intrigue }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.81
+							days = 7	
+						}
+					}
+					
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.82
+							days = 7	
+						}
+					}					
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					#TF is extra good against demons
+					modifier = {
+						add = -6
+						scope:learning_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -10
+						scope:learning_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -5
+						scope:learning_duelist = { has_trait = demonology }
+					}
+					#Don't trust demons
+					modifier = {
+						add = 5
+						scope:learning_duelist = { has_trait = trusting }
+					}					
+					#Fallen are harder to exorcise 
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = stubborn }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.83
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { learning > 15 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { learning > 20 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	}
+
+	option = {
+		name = POD_inquihunt.80.option.b
+		
+		add_stress = major_stress_gain
+				
+		scope:learning_duelist = {
+			duel = {
+				skills = { learning intrigue }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.81
+							days = 7	
+						}
+					}
+					
+				}
+				10 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.82
+							days = 7	
+						}
+					}					
+				}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					#TF is extra good against demons
+					modifier = {
+						add = -6
+						scope:learning_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -10
+						scope:learning_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -5
+						scope:learning_duelist = { has_trait = demonology }
+					}
+					#Don't trust demons
+					modifier = {
+						add = 5
+						scope:learning_duelist = { has_trait = trusting }
+					}					
+					#Fallen are harder to exorcise 
+					modifier = {
+						add = 2
+						scope:defender = { has_trait = stubborn }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.83
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { learning > 15 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { learning > 20 }
+				scope:defender = { learning < 5 }
+				}
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	
+	}
+
+
+
+	option = {
+		name = POD_inquihunt.50.option.z
+		
+		custom_tooltip = hunt_give_up_tt
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}
+	
+	#option = {
+	#	name = POD_inquihunt.50.option.c
+	#	
+	#	custom_tooltip = hunt_ww_intrigue_tt
+	#	
+	#	trigger_event = {
+	#		id = POD_inquihunt.53
+	#		days = 3
+	#	}
+	#}		
+}
+
+POD_inquihunt.81 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.81.t
+	desc = 	POD_inquihunt.81.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.81.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+		
+		POD_inquihunt_success_side_effects = yes
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+		
+		custom_tooltip = hunt_demon_abyss_tt
+		
+		scope:defender = {
+			hidden_effect = {
+				if = {
+					limit = { has_character_modifier = tracked_down_modifier }
+					remove_character_modifier = tracked_down_modifier
+				}
+			}
+			POD_send_to_abyss_effect = yes
+		}
+	}
+}
+
+POD_inquihunt.82 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.82.t
+	desc = 	POD_inquihunt.82.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.52.option.a
+		
+		add_prestige = -50
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+	}
+}
+
+POD_inquihunt.83 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.83.t
+	desc = 	POD_inquihunt.83.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.83.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_murder
+				killer = scope:defender
+			}
+		}
+	}
+}
+
+
+#Fae hunt	
+POD_inquihunt.110 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.110.t
+
+	desc = POD_inquihunt.110.desc		
+	
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	immediate = {
+	
+		scope:scheme ?= {
+			scheme_target_character = {
+				save_scope_as = defender
+			}
+			scheme_owner = {
+				save_scope_as = attacker
+			}
+		}
+		
+		# scope:defender = {
+		# 	save_scope_as = bg_override_char
+		# }
+		
+		# Apply True Cross Modifier
+		hidden_effect = {
+			if = {
+				limit = { has_variable = coterie }
+				var:coterie = {
+					every_in_list = {
+						variable = members
+						limit = {
+							any_character_artifact = {
+								has_variable = true_cross
+							}
+						}
+						add_character_modifier = {
+							modifier = true_cross_hunt_modifier
+							days = 10
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						any_character_artifact = {
+							has_variable = true_cross
+						}
+					}
+					add_character_modifier = {
+						modifier = true_cross_hunt_modifier
+						days = 10
+					}
+				}
+			}
+		}
+		
+		POD_save_coterie_duelists = yes		
+	}
+	
+	option = {
+		name = POD_inquihunt.110.option.a
+				
+		scope:diplomacy_duelist = {
+			duel = {
+				skills = { diplomacy learning }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.111
+							days = 7	
+						}
+					}
+					
+				}
+				13 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.112
+							days = 7	
+						}
+					}					
+				}
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					#TF is extra good against fae
+					modifier = {
+						add = -6
+						scope:diplomacy_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -10
+						scope:diplomacy_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -3
+						scope:diplomacy_duelist = { has_trait = stubborn }
+					}
+					#Don't trust pixies
+					modifier = {
+						add = 5
+						scope:diplomacy_duelist = { has_trait = trusting }
+					}					
+					modifier = {
+						add = -2
+						scope:diplomacy_duelist = { has_trait = zealous }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.113
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { diplomacy > 15 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { diplomacy > 20 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}
+	
+	}
+
+	option = {
+		name = POD_inquihunt.80.option.b
+		
+		remove_short_term_gold = 150
+				
+		scope:diplomacy_duelist = {
+			duel = {
+				skills = { diplomacy learning }
+				target = scope:defender
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					}
+					modifier = {
+						uses_cairo_ikhwan_reward = yes
+						factor = 1.25
+					}
+					inquihunt_contract_tier_success_modifier = yes
+					
+					desc = POD_inquihunt.1.option.aa.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.111
+							days = 7	
+						}
+					}
+					
+				}
+				10 = {
+					# compare_modifier = {
+						# value = scope:duel_value
+						# #multiplier = 0.5
+					# }
+
+					desc = POD_inquihunt.1.option.ab.effect.success.desc
+					
+					root = {
+						trigger_event = { 	
+							id = POD_inquihunt.112
+							days = 7	
+						}
+					}					
+				}
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					}
+					inquihunt_contract_tier_failure_modifier = yes
+					
+					modifier = {
+						add = -5
+						scope:attacker.dynasty ?= { has_dynasty_perk = unity_legacy_1 }
+					}
+					#TF is extra good against fae
+					modifier = {
+						add = -6
+						scope:diplomacy_duelist = { has_trait = truefaith }
+					}
+					modifier = {
+						add = -10
+						scope:diplomacy_duelist = { has_trait = beatific }
+					}
+					modifier = {
+						add = -3
+						scope:diplomacy_duelist = { has_trait = stubborn }
+					}
+					#Don't trust pixies
+					modifier = {
+						add = 5
+						scope:diplomacy_duelist = { has_trait = trusting }
+					}					
+					modifier = {
+						add = -2
+						scope:diplomacy_duelist = { has_trait = zealous }
+					}
+					modifier = {
+						add = 3
+						scope:defender = { highest_held_title_tier > tier_kingdom }
+					}
+					
+					desc = POD_inquihunt.1.option.ac.effect.success.desc
+					
+					root = {
+						trigger_event = {
+							id = POD_inquihunt.113
+							days = 7
+						}
+					}
+				}
+			}
+		}
+			
+		ai_chance = {
+			base = 0
+			
+			modifier = {
+				add = 1000
+				AND = {
+				scope:attacker = { diplomacy > 15 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = 9000
+				AND = {
+				scope:attacker = { diplomacy > 20 }
+				scope:defender = { diplomacy < 5 }
+				}
+			}
+			modifier = {
+				add = -100
+				AND = {
+					scope:defender = { age > 100 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -500
+				AND = {
+					scope:defender = { age > 500 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}
+			modifier = {
+				add = -1000
+				AND = {
+					scope:defender = { age > 750 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+			modifier = {
+				add = -2000
+				AND = {
+					scope:defender = { age > 1000 }
+					scope:attacker = {
+						NOR = {
+							has_trait = brave
+							has_trait = arrogant
+							has_trait = intellect_bad_1
+							has_trait = intellect_bad_2
+							has_trait = intellect_bad_3
+							has_trait = dull
+						}
+					}
+				}
+			}	
+		}	
+	}
+
+
+
+	option = {
+		name = POD_inquihunt.50.option.z
+		
+		custom_tooltip = hunt_give_up_tt
+		
+		POD_end_inquihunt_contract_or_journey_effect = yes
+	}
+	
+	#option = {
+	#	name = POD_inquihunt.50.option.c
+	#	
+	#	custom_tooltip = hunt_ww_intrigue_tt
+	#	
+	#	trigger_event = {
+	#		id = POD_inquihunt.53
+	#		days = 3
+	#	}
+	#}		
+}
+
+POD_inquihunt.111 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.111.t
+	desc = 	POD_inquihunt.111.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = fear
+	}
+	
+	option = {
+		name = POD_inquihunt.111.option.a
+		
+		POD_inquihunt_bonus_rewards_effect = {
+			PRESTIGE = 200
+			PIETY    = 200
+		}
+
+		POD_inquihunt_success_effect = {
+			DEATH_REASON = death_murder
+		}
+	}
+}
+
+POD_inquihunt.112 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.112.t
+	desc = 	POD_inquihunt.112.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.52.option.a
+		
+		add_prestige = -50
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+	}
+}
+
+POD_inquihunt.113 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_inquihunt.113.t
+	desc = 	POD_inquihunt.113.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:defender
+		animation = anger
+	}
+	
+	option = {
+		name = POD_inquihunt.113.option.a
+		
+		hidden_effect = { POD_end_inquihunt_contract_or_journey_effect = yes }
+			
+		scope:attacker = {
+			pod_death = {
+				death_reason = death_murder
+				killer = scope:defender
+			}
+		}
+	}
+}

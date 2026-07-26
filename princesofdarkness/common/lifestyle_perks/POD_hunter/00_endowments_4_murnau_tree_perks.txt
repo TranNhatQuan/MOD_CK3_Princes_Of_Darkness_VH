@@ -1,0 +1,150 @@
+﻿murnau_knowledge_perk = {
+	lifestyle = endowments_lifestyle
+	tree = murnau
+	position = { 0 0 }
+	icon = murnau_knowledge
+	
+	can_be_picked = {
+		exists = dynasty
+		OR = {
+			dynasty = dynasty:13000004
+			dynasty = { has_dynasty_modifier = support_from_von_murnau_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = murnau_oblige_perk }
+			}
+			multiply = 0
+		}
+	}
+	
+	character_modifier = {
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = murnau_knowledge_perk_text
+		}	
+		if = {
+			limit = {
+				NOT = { dynasty ?= dynasty:13000004 }
+				NOT = { dynasty ?= { has_dynasty_modifier = support_from_von_murnau_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = murnau_only_text
+			}
+		}
+	}
+}
+
+murnau_oblige_perk = {
+	lifestyle = endowments_lifestyle
+	tree = murnau
+	position = { 1.5 0 }
+	icon = murnau_oblige
+
+	can_be_picked = {
+		exists = dynasty
+		OR = {
+			dynasty = dynasty:13000004
+			dynasty = { has_dynasty_modifier = support_from_von_murnau_modifier }
+		}
+		has_trait = supehunter
+		faith = faith:shadowinquisition
+	}		
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_focus = endowments_all_focus
+			}
+			multiply = 5
+		}
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+				NOT = { has_perk = murnau_knowledge_perk }
+			}
+			multiply = 0
+		}
+	}
+	effect = {
+		custom_description_no_bullet = { 
+			text = murnau_oblige_perk_text
+		}		
+		if = {
+			limit = {
+				NOT = { dynasty ?= dynasty:13000004 }
+				NOT = { dynasty ?= { has_dynasty_modifier = support_from_von_murnau_modifier } }
+			}
+			custom_description_no_bullet = { 
+				text = murnau_only_text
+			}
+		}
+	}
+}
+
+murnau_wreathed_perk = {
+	lifestyle = endowments_lifestyle
+	tree = murnau
+	position = { 0 1.25 }
+	icon = murnau_wreathed
+	
+	parent = murnau_knowledge_perk
+	parent = murnau_oblige_perk
+
+	character_modifier = {
+		monthly_piety_gain_mult = 0.3
+	}
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = murnau_wreathed_perk_text
+		}
+	}
+}
+
+murnau_mirror_perk = {
+	lifestyle = endowments_lifestyle
+	tree = murnau
+	position = { 1.5 1.25 }
+	icon = murnau_mirror
+	
+	parent = murnau_knowledge_perk
+	parent = murnau_oblige_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = murnau_mirror_perk_text
+		}
+	}
+}
+
+murnau_arcana_perk = {
+	lifestyle = endowments_lifestyle
+	tree = murnau
+	position = { 0.75 2.5 }
+	icon = murnau_arcana
+	
+	parent = murnau_wreathed_perk
+	parent = murnau_mirror_perk
+	
+	effect = {
+		custom_description_no_bullet = { 
+			text = murnau_arcana_perk_text
+		}		
+		add_trait_force_tooltip = murnau_arcana
+	}
+}

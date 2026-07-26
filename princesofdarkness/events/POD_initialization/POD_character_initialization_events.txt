@@ -1,0 +1,213 @@
+﻿namespace = POD_character_initialization
+
+POD_character_initialization.10 = {
+	hidden = yes
+	scope = none
+	
+	trigger = {
+		}
+	
+	immediate = {
+		every_living_character = {
+			trigger_event = POD_character_initialization.1
+		}
+	}	
+}
+
+POD_character_initialization.1 = {
+	hidden = yes
+	
+	trigger = {
+		is_ai = yes 
+		NOT = { has_character_flag = had_POD_character_initialization }
+		#exists = capital_province
+		#is_adult = yes
+		#exists = location		
+		#is_landed = yes
+	}
+	
+	immediate = {
+	
+	#POD_clear_resonance_effect = yes
+	POD_set_resonance_effect = yes
+		
+		if = {
+			limit = {
+				has_POD_race_trigger = yes
+			}
+			add_character_flag = had_POD_character_initialization
+		}
+		
+		else_if = {
+			limit = {
+				is_ruler = yes
+				is_playable_character = no
+			}
+			POD_character_initialization_for_merc_commanders_effect = yes
+		}
+		
+		else_if = {
+			limit = {
+				OR = {
+					primary_title.tier >= tier_county
+				}
+			}
+			POD_character_initialization_for_nobles_effect = yes
+		}
+		
+		else_if = {
+			limit = {
+				primary_title.tier = tier_barony	
+			}
+			POD_character_initialization_for_barons_effect = yes				
+			POD_character_new_dynasty_effect = yes
+			
+			scope:title ?= {
+				if = {
+					limit = { holder ?= prev }
+					title_province = { POD_remove_incompatible_building_effect = yes }
+				}
+			}
+		}
+		
+		else_if = {
+			limit = {
+				is_a_faction_leader = yes
+			}
+			POD_character_initialization_for_merc_commanders_effect = yes
+		}
+		
+		else = {
+			POD_character_initialization_for_commoners_effect = yes
+		}
+		
+	}	
+}
+
+POD_character_initialization.100 = {
+	hidden = yes
+	scope = none
+	
+	trigger = {	
+		title:k_shadowinquisition = { 
+			exists = holder
+			holder = { NOT = { has_trait = supehunter } }
+		}
+	}
+	
+	immediate = {
+		title:k_shadowinquisition.holder = { 
+		if = {
+			limit = {
+				NOT = { has_trait = supehunter }
+			}
+			if = {
+				limit = {
+					has_trait = mortal
+				}
+				remove_trait = mortal
+			}
+			add_trait = supehunter
+		}
+		POD_character_new_dynasty_effect = yes		
+	}
+	}
+}
+
+POD_character_initialization.1001 = {
+	hidden = yes
+	scope = none
+	
+	immediate = {
+		# Extra-spicy easter eggs
+		if = {
+			limit = { NOT = { has_game_rule = pod_easter_egg_characters_silly } }
+			
+			if = {
+				limit = { character:easteregg_flandre = { is_landed = no } }
+				character:easteregg_flandre = { death = { death_reason = death_disappearance } }
+			}
+			if = {
+				limit = { character:easteregg_remilia = { is_landed = no } }
+				character:easteregg_remilia = { death = { death_reason = death_disappearance } }
+			}
+			if = {
+				limit = { character:easteregg_roselia = { is_landed = no } }
+				character:easteregg_roselia = { death = { death_reason = death_disappearance } }
+			}
+			if = {
+				limit = { character:easteregg_shinobu_oshino = { is_landed = no } }
+				character:easteregg_shinobu_oshino = { death = { death_reason = death_disappearance } }
+			}
+			if = {
+				limit = { character:easteregg_marceline = { is_landed = no } }
+				character:easteregg_marceline = { death = { death_reason = death_disappearance } }
+			}
+		}
+		#The effects to properly change titles need a new event, don't ask why, they just do
+		if = {
+			limit = { has_game_rule = pod_patreon_characters_disabled }
+											
+			every_living_character  = {
+				limit = { 
+					has_trait = patron 
+					}
+				trigger_event = POD_character_initialization.1002
+			}	
+		}
+		if = {
+			limit = { has_game_rule = pod_easter_egg_characters_disabled }
+											
+			every_living_character  = {
+				limit = { 
+					has_character_flag = easter_egg_character 
+					}
+				trigger_event = POD_character_initialization.1002
+			}	
+		}		
+	}	
+}
+
+POD_character_initialization.1002 = {
+	hidden = yes
+	type = character_event
+	
+	immediate = {
+		
+		if = {
+			limit = {
+				is_ruler = yes
+				primary_title.tier > tier_barony
+				is_independent_ruler = no
+			}
+				liege ?= { save_temporary_scope_as = canon_inheritor }
+					
+				POD_transfer_all_titles_to_character = {
+					CHARACTER = scope:canon_inheritor
+				}
+				death = { death_reason = death_disappearance }
+			}	
+		else_if = {
+			limit = {
+			primary_title.tier > tier_barony
+			is_independent_ruler = yes
+			}
+			random_neighboring_and_across_water_realm_same_rank_owner = {
+					limit = {
+						NOT = { has_trait = patron }
+						NOT = { has_character_flag = easter_egg_character }
+					}
+				save_temporary_scope_as = canon_inheritor
+				}
+			POD_transfer_all_titles_to_character = {
+				CHARACTER = scope:canon_inheritor
+			}
+			death = { death_reason = death_disappearance }			
+		}
+		else = {
+			death = { death_reason = death_disappearance }	
+		}	
+		
+	}
+	
+}

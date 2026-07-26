@@ -1,0 +1,9142 @@
+﻿#tzimisce base template
+
+# id = {
+	# name = "namechar"
+	# dynasty_house = house_
+	# culture = "vlach"
+	# religion = "viamutationis"
+	# trait = "educationchar"
+	# trait = "vampire"
+	# trait = "tzimisce"
+	# trait = "personality1"		
+	# trait = "personality2"
+	# trait = "personality3"
+	# trait = "other1"
+	# trait = "other2"	
+	# trait = "pther3"
+	# trait = "other4"
+	# trait = "auspex"
+	# trait = "vicissitude"
+	# trait = "animalism"
+	# father = fathercharid
+	# female = no
+	# give_nickname = nick_	
+	# disallow_random_traits = yes
+	
+	# 1.1.1 = {
+		# birth = yes
+		# effect = {
+			# add_character_flag = immune_to_disease
+
+			# add_trait = vampgenerationx
+	
+			# #add_animal_lifestyle_xp = 20000
+			# #add_melancholy_lifestyle_xp = 20000
+			# #add_phlegmatic_lifestyle_xp = 20000
+			
+			# set_immortal_age = x
+		# }				
+	# }
+	
+	# 799.1.1 = {
+	# }
+
+	# 1229.1.1 = {	
+	# }
+
+	# 2005.1.1 = {	
+	# }		
+	
+	# 2200.1.1 = {
+		# death = yes 
+	# }			
+# }
+
+#tzimisce
+
+505021 = {
+	name = "Tzimisce"
+	dynasty = 10000015
+	culture = "enochian"
+	religion = "viamutationis"
+	trait = "education_intrigue_4"
+	stewardship = 10
+	learning = 20
+	intrigue = 20
+	prowess = 100
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "arrogant"
+	trait = "deceitful"
+	trait = "auspexadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	trait = "celerityadvanced"
+	trait = "vampgeneration3"
+	father = 505003
+	female = no
+	give_nickname = nick_the_eldest
+	disallow_random_traits = yes
+	
+	40.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_phlegmatic_lifestyle_xp = 20000
+			#add_melancholy_lifestyle_xp = 20000
+			#add_animal_lifestyle_xp = 20000
+			
+			set_immortal_age = 52
+		}	
+			add_trait = torpor
+	}
+	
+	100.1.1 = {
+		death = {
+			death_reason = death_disappearance 
+		}
+	}				
+}
+
+# House kartarirya
+
+605123 = {
+	name = "Kartarirya"
+	dna = 605123_kartarirya
+	dynasty_house = house_kartarirya
+	culture = "sinhala"
+	religion = "pathoftheflesh"
+	trait = "education_martial_prowess_4"
+	prowess = 8
+	diplomacy = 0
+	stewardship = 1
+	intrigue = 2
+	learning = 10
+	martial = 9
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "arrogant"
+	trait = "deceitful"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_manyarmed
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 30
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_indian_03_flag
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 100
+            }
+		}
+		effect = {
+			assign_elder_protean_effect = { GEN = 4 }
+			
+			add_trait = fleshcrafted
+			add_perk = fc_torso_extra_arms_perk
+		}
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#Vindravan, heresies of the way p87 
+790945 = {
+	name = "Ratti_Ben"
+	dna = 790945_ratti_ben
+	dynasty_house = house_kartarirya
+	culture = "sinhala"
+	religion = "pathoftheflesh"
+	trait = "education_martial_prowess_3"
+	prowess = 8
+	learning = 3
+	martial = 7
+	intrigue = 10
+	diplomacy = 1
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "zealous"
+	trait = "diligent"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "animalismadvanced"
+	trait = "fortitudeadvanced"
+	father = 605123
+	female = yes
+	give_nickname = nick_sister_of_blood
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_indian_02_flag
+	
+			#add_melancholy_lifestyle_xp = 5000
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 37
+		}	
+		effect = {
+			add_trait = organizer
+			add_trait_xp = {
+                trait = organizer
+                value = 65
+            }
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#pod lore char
+793525 = {
+	name = "Nethmi"
+	dna = 793525_Nethmi 
+	dynasty_house = house_kartarirya
+	culture = "sinhala"
+	religion = "pathoftheflesh"
+	trait = "education_martial_prowess_4"
+	prowess = 10
+	learning = 3
+	martial = 5
+	intrigue = 3
+	diplomacy = 1
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "patient"
+	trait = "diligent"
+	trait = "loyal"
+	trait = "spindly"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "auspex"
+	trait = "fortitudeadvanced"
+	father = 605123
+	female = yes
+	give_nickname = nick_yakshi_artisan
+	disallow_random_traits = yes
+	
+	503.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_f_hair_fp3_iranian_01_flag
+			
+			set_immortal_age = 23
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#PoD lore char
+793524 = {
+	name = "Ezlynn"
+	dna = 793524_Ezlynn
+	dynasty_house = house_kartarirya
+	culture = "tamil"
+	religion = "pathoftheflesh"
+	trait = "education_learning_3"
+	prowess = 8
+	learning = 7
+	stewardship = 7
+	intrigue = 10
+	diplomacy = 1
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "patient"
+	trait = "diligent"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	trait = "animalism"
+	trait = "fortitudeadvanced"
+	mother = 790945
+	female = yes
+	give_nickname = nick_iron_fiend
+	disallow_random_traits = yes
+	
+	450.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_mena_02_flag
+            add_character_flag = POD_full_nosfed_body_flag
+			
+			add_character_flag = POD_leadskin_form_flag
+			add_character_flag = POD_shaders_ignore_clothing
+			
+			set_immortal_age = 21
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#PoD lore char for karta children
+793523 = {
+	name = "Akhed"
+	dna = 793523_Akhed
+	dynasty_house = house_kartarirya
+	culture = "tamil"
+	religion = "pathoftheflesh"
+	trait = "education_stewardship_2"
+	prowess = 8
+	learning = 9
+	stewardship = 3
+	intrigue = 10
+	diplomacy = 1
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "vengeful"
+	trait = "patient"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "celerityadvanced"
+	trait = "fortitude"
+	father = 605123
+	female = no
+	give_nickname = nick_sorrowless
+	disallow_random_traits = yes
+	
+	124.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_indian_03_flag
+            add_character_flag = POD_portrait_male_hair_indian_02_flag
+			
+			set_immortal_age = 67
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790945 }
+		}			
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+#
+### POD lore house for asian cainites, Monomi
+#
+793306 = {
+	name = "Yu_monomi"
+	dna = 793306_Yu
+	dynasty_house = house_monomi
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial way
+	trait = "education_martial_3"
+	prowess = 8
+	learning = 8
+	martial = 3
+	intrigue = 3
+	diplomacy = 9
+	trait = "vampire"
+	trait = "monomi"
+	trait = "brave"		
+	trait = "ambitious"
+	trait = "wrathful"
+	trait = "gallant"
+	trait = "twin"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "obfuscateadvanced"
+	#trait = #defiled
+	mother = 793303
+	female = no
+	give_nickname = nick_sword_great_clan
+	disallow_random_traits = yes
+	
+	682.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_beard_fp2_iberian_christian_03_flag
+			add_character_flag = POD_portrait_m_hair_fp3_iranian_01_flag
+						
+			set_immortal_age = 22
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 75
+            }
+		}			
+	}	
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:793307 }
+			set_relation_rival = { reason = rival_historical target = character:793387 }
+			}			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793322 = {
+	name = "Hayate"
+	dynasty_house = house_monomi
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial way
+	trait = "education_learning_3"
+	prowess = 8
+	learning = 6
+	martial = 6
+	stewardship = 6
+	diplomacy = 6
+	trait = "vampire"
+	trait = "monomi"
+	trait = "zealous"		
+	trait = "chaste"
+	trait = "diligent"
+	trait = "loyal"
+	trait = "giant"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	trait = "obfuscate"
+	father = 793306
+	female = no
+	sexuality = asexual
+	give_nickname = nick_ox_monk
+	disallow_random_traits = yes
+	
+	912.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+						
+			set_immortal_age = 35
+		}	
+	}
+	
+	1000.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 35
+            }
+		}			
+	}	
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793323 = {
+	name = "Cho"
+	dynasty_house = house_monomi
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial way
+	trait = "education_learning_3"
+	prowess = 8
+	learning = 6
+	martial = 6
+	stewardship = 6
+	diplomacy = 6
+	trait = "vampire"
+	trait = "monomi"
+	trait = "zealous"		
+	trait = "brave"
+	trait = "shy"
+	trait = "scarred"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "obfuscate"
+	trait = "celerity"
+	father = 793322
+	female = yes
+	give_nickname = nick_serpent_monk
+	disallow_random_traits = yes
+	
+	978.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+						
+			set_immortal_age = 46
+		}	
+	}
+	
+	1000.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 20
+            }
+		}			
+	}	
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793324 = {
+	name = "Hibiki"
+	dynasty_house = house_monomi
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial way
+	trait = "education_stewardship_2"
+	prowess = 6
+	learning = 7
+	martial = 5
+	stewardship = 5
+	intrigue = 7
+	trait = "vampire"
+	trait = "monomi"
+	trait = "sadistic"		
+	trait = "gregarious"
+	trait = "brave"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "obfuscate"
+	mother = 793323
+	female = no
+	give_nickname = nick_smiling_goblin
+	disallow_random_traits = yes
+	
+	1031.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+						
+			set_immortal_age = 25
+		}	
+	}
+	
+	1200.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 10
+            }
+		}			
+	}	
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+### POD lore house for asian cainites, kishu
+#
+793307 = {
+	name = "Yasu"
+	dna = 793307_Yasu
+	dynasty_house = house_kishu
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial arts
+	trait = "education_intrigue_3"
+	prowess = 7
+	learning = 9
+	martial = 8
+	intrigue = 0
+	diplomacy = 9
+	trait = "vampire"
+	trait = "kishu"
+	trait = "ambitious"		
+	trait = "deceitful"
+	trait = "vengeful"
+	trait = "schemer"
+	trait = "twin"
+	trait = "vicissitudeadvanced"
+	trait = "potence"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	trait = "obfuscateadvanced"
+	#trait = #defiled
+	mother = 793303
+	female = no
+	give_nickname = nick_dagger_great_clan
+	disallow_random_traits = yes
+	
+	682.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_m_beard_ep3_byzantine_02_flag
+			add_character_flag = POD_portrait_male_hair_indian_01_flag
+						
+			set_immortal_age = 22
+		}	
+	}
+	
+	799.1.1 = {		
+	}	
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:793387 }
+			}			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793318 = {
+	name = "Seiko"
+	dynasty_house = house_kishu
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial arts
+	trait = "education_intrigue_4"
+	prowess = 6
+	learning = 7
+	martial = 6
+	intrigue = 5
+	diplomacy = 6
+	trait = "vampire"
+	trait = "kishu"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "albino"
+	trait = "protean"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	trait = "obfuscateadvanced"
+	father = 793307
+	female = yes
+	give_nickname = nick_pale_phantom
+	disallow_random_traits = yes
+	
+	732.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+						
+			set_immortal_age = 29
+		}	
+	}
+	
+	799.1.1 = {		
+	}	
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793319 = {
+	name = "Yuto"
+	dynasty_house = house_kishu
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial arts
+	trait = "education_intrigue_3"
+	prowess = 9
+	learning = 6
+	intrigue = 5
+	diplomacy = 5
+	trait = "vampire"
+	trait = "kishu"
+	trait = "shy"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "reclusive"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "obfuscateadvanced"
+	mother = 793318
+	female = no
+	give_nickname = nick_whispered_dagger
+	disallow_random_traits = yes
+	
+	839.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+						
+			set_immortal_age = 19
+		}	
+	}
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793320 = {
+	name = "Toshiaki"
+	dynasty_house = house_kishu
+	culture = "japanese" #japanese
+	religion = "pathofstars" #Path of the martial arts
+	trait = "education_intrigue_2"
+	prowess = 7
+	learning = 7
+	intrigue = 5
+	diplomacy = 9
+	trait = "vampire"
+	trait = "kishu"
+	trait = "impatient"		
+	trait = "gregarious"
+	trait = "lustful"
+	trait = "seducer"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "obfuscate"
+	father = 793319
+	female = no
+	sexuality = heterosexual
+	give_nickname = nick_shadowed_flower
+	disallow_random_traits = yes
+	
+	1177.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+						
+			set_immortal_age = 25
+		}	
+	}
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+### POD lore house for asian cainites, chibo
+##
+793303 = {
+	name = "Kagaseo"
+	dna = 793303_kagaseo
+	dynasty_house = house_chibo
+	culture = "japanese" #placeholder for jomon
+	religion = "pathofstars"
+	trait = "education_stewardship_4"
+	prowess = 8
+	learning = 7
+	martial = 10
+	intrigue = 10
+	diplomacy = 6
+	trait = "vampire"
+	trait = "chibo"
+	trait = "sadistic"		
+	trait = "ambitious"
+	trait = "gregarious"
+	trait = "vicissitudeadvanced"
+	trait = "potence"
+	trait = "celerity"
+	trait = "bloodsorcery"
+	trait = "auspexadvanced"
+	trait = "animalismadvanced"
+	trait = "fortitude"
+	trait = "obfuscate"
+	#trait = #defiled
+	father = 605123
+	female = yes
+	give_nickname = nick_tyrant_stars
+	sexuality = bisexual
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration4
+	
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_03_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_f_clothes_sec_mpo_mongol_roy_01_flag
+			add_character_flag = POD_portrait_kagaseo_form_flag
+			add_character_flag = POD_pale_skin_look_flag
+			POD_set_custom_idle_animation = { FLAG = flag:chess_cocky }
+			
+			set_immortal_age = 26
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+			
+			learn_language = language_ainu
+			learn_language = language_sinhalese # embraced in sri lanka
+		}	
+		effect = {
+			add_character_flag = has_sadhana_bloodmagic_flag
+			assign_path_of_karma_effect = { LEVEL = 3 }
+		}			
+	}	
+
+	1229.1.1 = {		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+793387 = {
+	name = "Michiko"
+	dna = 793308_Michiko
+	dynasty_house = house_chibo
+	culture = "japanese" # japanese
+	religion = "pathofstars"
+	trait = "education_learning_4"
+	learning = 4
+	stewardship = 6
+	intrigue = 6
+	diplomacy = 7
+	trait = "vampire"
+	trait = "chibo"
+	trait = "ambitious"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "theologian"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	trait = "auspexadvanced"
+	trait = "celerity"
+	trait = "potence"
+	#trait = #defiled
+	mother = 793303
+	female = yes
+	give_nickname = nick_sage_great_clan
+	disallow_random_traits = yes
+	
+	625.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_western_02_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_f_clothes_sec_mpo_mongol_roy_01_flag
+						
+			set_immortal_age = 22
+		}	
+		effect = {
+			add_character_flag = has_sadhana_bloodmagic_flag
+			assign_path_of_karma_effect = { LEVEL = 2 }
+		}		
+	}
+	
+	799.1.1 = {		
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 65
+            }
+		}	
+	}	
+
+	1229.1.1 = {			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793315 = {
+	name = "Katsuko"
+	dynasty_house = house_chibo
+	culture = "japanese" # japanese
+	religion = "pathofstars"
+	trait = "education_learning_3"
+	learning = 7
+	stewardship = 7
+	intrigue = 5
+	diplomacy = 5
+	trait = "vampire"
+	trait = "chibo"
+	trait = "ambitious"		
+	trait = "vengeful"
+	trait = "patient"
+	trait = "bloodsorcery"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	trait = "fortitude"
+	#trait = #defiled
+	mother = 793387
+	female = yes
+	give_nickname = nick_prodigal_student
+	disallow_random_traits = yes
+	
+	738.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+						
+			set_immortal_age = 25
+		}	
+		effect = {
+			add_character_flag = has_sadhana_bloodmagic_flag
+		}		
+	}
+	
+	799.1.1 = {		
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+		}	
+	}	
+
+	1229.1.1 = {			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+793316 = {
+	name = "Reina"
+	dynasty_house = house_chibo
+	culture = "japanese" # japanese
+	religion = "pathofstars"
+	trait = "education_learning_3"
+	learning = 6
+	stewardship = 6
+	intrigue = 6
+	diplomacy = 3
+	trait = "vampire"
+	trait = "chibo"
+	trait = "content"		
+	trait = "lazy"
+	trait = "wrathful"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "animalism"
+	#trait = #defiled
+	mother = 793315
+	female = yes
+	give_nickname = nick_damnation_seer
+	disallow_random_traits = yes
+	
+	831.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+						
+			set_immortal_age = 45
+		}	
+		effect = {
+			add_character_flag = has_sadhana_bloodmagic_flag
+		}		
+	}
+	
+	850.1.1 = {		
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 60
+            }
+		}	
+	}	
+
+	1229.1.1 = {			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+#
+793317 = {
+	name = "Jun_ichi"
+	dynasty_house = house_chibo
+	culture = "japanese" # japanese
+	religion = "pathofstars"
+	trait = "education_stewardship_3"
+	learning = 10
+	stewardship = 6
+	intrigue = 5
+	diplomacy = 3
+	trait = "vampire"
+	trait = "chibo"
+	trait = "diligent"		
+	trait = "temperate"
+	trait = "eccentric"
+	trait = "bloodsorcery"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "possessed_genetic"
+	mother = 793316
+	female = no
+	give_nickname = nick_smog_prophet
+	disallow_random_traits = yes
+	
+	976.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+						
+			set_immortal_age = 39
+		}	
+		effect = {
+			add_character_flag = has_sadhana_bloodmagic_flag
+		}		
+	}
+	
+	1000.1.1 = {		
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 45
+            }
+		}	
+	}	
+
+	1229.1.1 = {			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+#
+
+# House yaroslavich
+
+605111 = {
+	name = "Hedeon_Yaroslavich"
+	dna = 605111_hedeon
+	dynasty_house = house_yaroslavich
+	culture = "polish"
+	religion = "viamutationis"
+	trait = "education_intrigue_2"
+	intrigue = 0
+	stewardship = 6
+	diplomacy = 2
+	prowess = 6
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "arrogant"
+	trait = "deceitful"
+	trait = "torturer"
+	trait = "schemer"
+	trait = "auspexadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "potenceadvanced"
+	father = 605125
+	female = no
+	give_nickname = nick_monster_among_monsters
+	disallow_random_traits = yes
+	
+	412.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_beard_flag			
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag			
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_central_germanic
+			learn_language = language_baltic
+			learn_language = language_wallachian
+		}
+		effect = {
+			#Troops that goes away
+			spawn_army = {
+				name = event_troop_default_name
+				#levies = 1000
+				men_at_arms = {
+					type = vozhd
+					stacks = 2
+				}
+				men_at_arms = {
+					type = szlachta
+					stacks = 1
+				}				
+				location = province:4900
+				origin = province:4900
+				inheritable = no
+			}	
+		}		
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+791107 = {
+#Prince of Santa Amanda, somewhere between the Alps and Dalmatia
+	name = "Radovan_Istvic"
+	dynasty_house = house_yaroslavich
+	culture = "serbian"
+	religion = "viadolorosa"
+	trait = "education_martial_3"
+	martial = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "arrogant"
+	trait = "trusting"
+	trait = "presenceadvanced"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	trait = "dominateadvanced"
+	father = 605111
+	give_nickname = nick_vengeful_warlord
+	female = no
+	disallow_random_traits = yes
+	
+	435.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 28
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = aggressive_attacker
+			add_trait_xp = {
+                trait = aggressive_attacker
+                value = 10
+            }
+		}		
+	}		
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791825 = {
+#France by Night
+	name = "Mircea_Fratescu_Besarab"
+	dynasty_house = house_yaroslavich
+	culture = "serbian"
+	religion = "viaequitum"
+	trait = "education_martial_prowess_3"
+	martial = 6
+	learning = 8
+	stewardship = 7
+	diplomacy = 6
+	intrigue = 7
+	prowess = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "gregarious"		
+	trait = "impatient"
+	trait = "trusting"
+	trait = "adventurer"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	trait = "dominateadvanced"
+	father = 791107
+	female = no
+	disallow_random_traits = yes
+	
+	597.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 29
+		}	
+	}
+	
+	799.1.1 = {
+	}		
+
+	1229.1.1 = {
+		 effect = {
+			set_relation_best_friend = { reason = best_friend_counsel_and_support target = character:791824 }
+			}		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791850 = {
+#France by Night
+	name = "Chaigidel"
+	dynasty_house = house_yaroslavich
+	culture = "old_saxon"
+	religion = "viaspinae"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "patient"
+	trait = "wrathful"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "protean"
+	father = 791825
+	give_nickname = nick_sower_dark_mother
+	female = yes
+	disallow_random_traits = yes
+	
+	678.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 35
+		}	
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+		}		
+	}		
+
+	1229.1.1 = {	
+	}
+	
+	1230.1.4 = {	
+		employer = 791224
+	}	
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791299 = {
+#One liner sire of Dorsteinn
+	name = "Basarab_cel_Cumplit"
+	dynasty_house = house_yaroslavich
+	culture = "polish"
+	religion = "viatyrannus"
+	trait = "education_martial_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "just"		
+	trait = "arrogant"
+	trait = "trusting"
+	trait = "dominate"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	father = 791107
+	female = no
+	disallow_random_traits = yes
+	
+	798.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+						
+			set_immortal_age = 52
+		}	
+	}
+	
+	799.1.1 = {
+	}			
+	
+	1185.1.1 = {
+		death = {
+			death_reason = death_burned
+			}
+	}			
+}
+
+791300 = {
+#Prince of Trondheim
+	name = "Dorsteinn"
+	dna = 791300_dorsteinn
+	dynasty_house = house_yaroslavich
+	culture = "norse"
+	religion = "viaeinherjar"
+	trait = "education_martial_prowess_2"
+	martial = 8
+	prowess = 6
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "wrathful"
+	trait = "diligent"
+	trait = "celerity"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	father = 791299
+	give_nickname = nick_the_grim
+	female = no
+	disallow_random_traits = yes
+	
+	960.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_beard_western_10_flag
+            add_character_flag = POD_portrait_no_hair_flag
+						
+			set_immortal_age = 31
+		}	
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+790463 = {
+#Prince of Szczecin
+	name = "Elica"
+	dynasty_house = house_yaroslavich
+	culture = "polish"
+	religion = "viamutationis"
+	trait = "education_stewardship_1"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "craven"
+	trait = "trusting"
+	trait = "depressed_1"
+	trait = "auspex"
+	trait = "animalism"
+	trait = "potence"
+	father = 605111
+	female = yes
+	disallow_random_traits = yes
+	
+	992.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 39
+		}	
+	}
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792290 = {
+#VaV Warsaw
+	name = "Natashen_ka"
+	dynasty_house = house_yaroslavich
+	culture = "polish"
+	religion = "pathoftheflesh"
+	trait = "education_intrigue_2"
+	intrigue = 6
+	learning = 7
+	martial = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "stubborn"
+	trait = "patient"
+	trait = "auspex"
+	trait = "animalism"
+	trait = "vicissitude"
+	mother = 790463
+	female = yes
+	disallow_random_traits = yes
+	
+	1181.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 41
+		}	
+	}
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House ruthvenski
+
+790338 = {
+	name = "Ruthven"
+	dynasty_house = house_ruthven
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_martial_3"
+	martial = 7
+	intrigue = 5
+	stewardship = 7
+	diplomacy = 5
+	prowess = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "zealous"
+	trait = "vicissitudeadvanced"
+	trait = "fortitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "proteanadvanced"
+	trait = "dominateadvanced"
+	trait = "presenceadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_lord
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 45
+			
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	1450.1.1 = {
+	effect = {
+		add_trait = torpor
+	}
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+791779 = {
+	name = "Gunnhild"
+	dynasty_house = house_ruthven
+	culture = "norse"
+	religion = "viaeinherjar"
+	trait = "education_learning_4"
+	learning = 6
+	stewardship = 7
+	intrigue = 6
+	diplomacy = 8
+	martial = 9
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "patient"
+	trait = "zealous"
+	trait = "vicissitudeadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "animalismadvanced"
+	father = 790338
+	female = yes
+	give_nickname = nick_mother_kings
+	disallow_random_traits = yes
+	
+	897.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 78
+			
+		}	
+		effect = {
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+			add_character_flag = has_koldunic_bloodmagic_flag
+			#Add Dark Thaumaturgy once added
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+		}
+	}
+	
+	1229.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}		
+	}
+	
+	1230.1.3 = {
+		employer = 505088
+	}
+
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792420 = {
+	name = "Lars_Svengaard"
+	dynasty_house = house_ruthven
+	culture = "swedish"
+	religion = "viaeinherjar"
+	trait = "education_martial_3"
+	learning = 6
+	stewardship = 5
+	intrigue = 5
+	diplomacy = 6
+	martial = 9
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "brave"		
+	trait = "patient"
+	trait = "fickle"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "animalism"
+	mother = 791779
+	female = no
+	give_nickname = nick_kraken_kiss
+	disallow_random_traits = yes
+	
+	1406.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 36
+			
+		}	
+	}
+
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790337 = {
+#Prince of Sarmizegetusa
+	name = "Damek_Ruthven"
+	dna = 790337_damek_ruthven
+	dynasty_house = house_ruthven
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_3"
+	martial = 5
+	intrigue = 1
+	stewardship = 13
+	diplomacy = 2
+	prowess = 9
+	learning = 5	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "zealous"
+	trait = "arrogant"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "animalismadvanced"
+	trait = "fortitudeadvanced"
+	trait = "presenceadvanced"
+	father = 790338
+	female = no
+	give_nickname = nick_deluded_protector
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_02_flag
+            add_character_flag = POD_portrait_m_beard_fp3_iranian_02_flag
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 52
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}	
+	
+	1395.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}				
+}
+
+505108 = {
+	name = "Danika_Ruthven"
+	dynasty_house = house_ruthven
+	culture = "vlach"
+	religion = "viatyrannus"
+	dna = 505108_danika
+	trait = "education_stewardship_3"
+	martial = 5
+	intrigue = 7
+	stewardship = 5
+	diplomacy = 6
+	learning = 7	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "patient"
+	trait = "arrogant"
+	trait = "administrator"
+	trait = "vicissitudeadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "animalismadvanced"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "fortitude"
+	trait = "necromancy"
+	trait = "presence"
+	father = 790337
+	female = yes
+	give_nickname = nick_mistress_of_hunedoara
+	disallow_random_traits = yes
+	
+	180.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+				
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 24
+			
+			add_character_flag = has_cappadocian_necromancy_flag	
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 	
+		
+		}
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 3
+			#Way of Water 4
+			#Way of Fire 2
+			#Way of Spirit 5
+			#Not sure if we will ever have those so in the meantime
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 2 }						
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_steppe_02_flag				
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+792415 = {
+	name = "Anastazi"
+	dynasty_house = house_ruthven
+	culture = "vlach"
+	religion = "viaconsuasor"
+	dna = 792415_anastazi
+	trait = "education_stewardship_3"
+	intrigue = 6
+	stewardship = 8
+	diplomacy = 5
+	learning = 5	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "lustful"		
+	trait = "craven"
+	trait = "ambitious"
+	trait = "vicissitude"
+	trait = "animalism"
+	trait = "auspex"
+	mother = 505108
+	female = no
+	give_nickname = nick_steward_of_hunedoara
+	disallow_random_traits = yes
+	
+	1460.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+			add_secret = { 
+				type = secret_diablerist
+			}
+			
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 23
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_09_flag	
+            add_character_flag = POD_no_beard_flag			
+		}			
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+# House vykos
+
+790114 = {
+	name = "Myka_Vykos"
+	dna = 790114_mykavykos
+	dynasty_house = house_vykos
+	culture = "greek"
+	religion = "viapeccati"
+	trait = "education_learning_4"
+	diplomacy = 9
+	intrigue = 6
+	stewardship = 6
+	martial = 7
+	prowess = 5
+	learning = 0	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "intellect_good_1"
+	trait = "ambitious"		
+	trait = "diligent"
+	trait = "deceitful"
+	trait = "scholar"
+	trait = "vicissitude"
+	trait = "bloodsorcery"
+	trait = "dominate"
+	father = 790115
+	female = no
+	sexuality = bisexual
+	give_nickname = nick_the_seeking_sinner
+	disallow_random_traits = yes
+	
+	1002.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_no_beard_flag			
+			add_trait = vampgeneration7
+					
+			
+			set_immortal_age = 25
+			#set_immortal_age = 19
+		}		
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp1_02_flag			
+		}	
+		effect = {
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+		}	
+		effect = {
+			assign_lures_of_flames_effect = { LEVEL = 5 }
+			assign_path_of_blood_path_effect = { LEVEL = 5 } #Path of Blood
+			assign_movement_of_the_mind_effect = { LEVEL = 2 }
+		}	
+	}
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_soulmate = { reason = soulmate_professed_love target = character:790933 }
+			}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_south_slavic
+			learn_language = language_wallachian
+			learn_language = language_central_germanic			
+		}			
+	}
+	
+	1230.1.4 = {
+		effect = {
+			add_truce_both_ways = {
+				character = character:505050
+				name = UNDER_THE_BLACK_CROSS_TRUCE_NAME
+				years = 20
+				result = victory
+				}
+			add_truce_both_ways = {
+				character = character:505086
+				name = UNDER_THE_BLACK_CROSS_TRUCE_NAME
+				years = 20
+				result = victory
+				}	
+			add_truce_both_ways = {
+				character = character:505053
+				name = UNDER_THE_BLACK_CROSS_TRUCE_NAME
+				years = 20
+				result = victory
+				}					
+			}
+			# Troops that goes away
+			#spawn_army = {
+			#	name = event_troop_default_name
+			#	levies = 1500
+			#	men_at_arms = {
+			#		type = ghouls
+			#		stacks = 5
+			#	}
+			#	location = 3052
+			#	origin = 3052
+			#	inheritable = no
+			#}			
+		}	
+		
+	1237.1.1 = {	
+		give_nickname = nick_angel_caine
+		remove_trait = diligent
+		add_trait = sadistic
+		religion = "pathoftheflesh"
+		add_trait = presence
+	}
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+		name = "Sascha_Vykos"	
+		add_trait = fortitude
+		add_trait = animalism	
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House rustovitch
+
+505053 = {
+	name = "Vladimir_Rustovich"
+	dna = 505053_vladimir
+	dynasty_house = house_rustovitch
+	culture = "vlach"
+	religion = "viaregalis"
+	trait = "education_martial_4"
+	martial = 7
+	prowess = 7
+	intrigue = 12
+	stewardship = 10
+	diplomacy = 10
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "ambitious"
+	trait = "zealous"
+	trait = "strategist"
+	trait = "auspexadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "dominate"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "presence"
+	trait = "protean"
+	father = 790326
+	give_nickname = nick_bane_of_wolves
+	female = no
+	disallow_random_traits = yes
+	
+	876.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			#add_character_flag = POD_portrait_event_armor_flag
+			add_trait = vampgeneration6				
+			
+			set_immortal_age = 39
+			
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag	
+            add_character_flag = POD_portrait_male_beard_western_04_flag				
+		}
+		effect = {
+			add_trait = organizer
+			add_trait_xp = {
+                trait = organizer
+                value = 95
+            }
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_lechitic
+			learn_language = language_south_slavic
+			learn_language = language_central_germanic		
+		}	
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 35
+            }
+		}
+		effect = {
+			add_truce_both_ways = {
+				character = character:605124
+				name = TRUCE_ENFORCE_TRUCE
+				years = 15
+				result = victory
+			}
+		}
+		effect = {
+			reverse_add_opinion = {
+				modifier = respect_opinion
+				target = character:790247
+				opinion = 65
+			}
+			add_opinion = {
+				modifier = respect_opinion
+				target = character:790247
+				opinion = 65
+			}
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofhonorableaccord"
+	}
+		
+	2002.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+790942 = {
+	name = "Kara_Vlaszy_Lupescu"
+	dna = 790942_karavlaszylupescu						   
+	dynasty_house = house_rustovitch
+	culture = "vlach"
+	religion = "viaequitum"
+	trait = "education_diplomacy_3"
+	diplomacy = 3
+	prowess = 6
+	intrigue = 15
+	stewardship = 7
+	martial = 8
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_2"
+	trait = "stubborn"		
+	trait = "content"
+	trait = "zealous"
+	trait = "diplomat"
+	trait = "presence"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "animalism"
+	trait = "celerity"
+	trait = "fortitude"
+	father = 505053
+	give_nickname = nick_fiendish_knight
+	female = yes
+	disallow_random_traits = yes
+	
+	975.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7				
+			
+			set_immortal_age = 25
+			
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_steppe_02_flag				
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_french
+			learn_language = language_central_germanic
+		}	
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+                trait = ashen_adventurer
+				track = ashen_ambassador
+                value = 45
+            }
+		}			
+	}
+	
+	1500.1.1 = {
+		religion = "pathofhonorableaccord"
+	}
+		
+	1698.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+#Osobei appears in DA CN Tremere
+793202 = {
+	name = "Osobei_Vasilevitch"
+	dna = 793202_osobei
+	dynasty_house = house_rustovitch
+	culture = "mongol"
+	religion = "viaequitum"
+	trait = "education_diplomacy_4"
+	diplomacy = 3
+	prowess = 8
+	intrigue = 10
+	stewardship = 4
+	martial = 10
+	learning = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "stubborn"		
+	trait = "content"
+	trait = "patient"
+	trait = "diplomat"
+	trait = "presence"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "animalism"
+	trait = "celerity"
+	trait = "fortitude"
+	father = 505053
+	give_nickname = nick_boyar_diplomat
+	female = no
+	disallow_random_traits = yes
+	
+	1159.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_03_flag
+            add_character_flag = POD_portrait_male_beard_steppe_02_flag
+			
+			set_immortal_age = 36
+			
+		}	
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+			learn_language = language_central_germanic
+		}	
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+                trait = ashen_adventurer
+				track = ashen_ambassador
+                value = 25
+            }
+		}			
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House yorak
+
+790247 = {
+	name = "Yorak"
+	dna = 790247_yorak
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_learning_4"
+	prowess = 10
+	stewardship = 12
+	diplomacy = 1
+	intrigue = 6
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "patient"
+	trait = "sadistic"
+	trait = "torturer"
+	trait = "animalismadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	trait = "potenceadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	give_nickname = nick_your_darkest_terror
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_bald_look_flag
+            add_character_flag = POD_no_beard_flag		
+			POD_set_custom_idle_animation = { FLAG = flag:holding_crutch }
+			
+			set_immortal_age = 100
+			
+			#add_animal_lifestyle_xp = 5000
+			#add_melancholy_lifestyle_xp = 10000
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance			
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 100
+            }
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_kraina_of_the_well_path_effect = { LEVEL = 5 }
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }
+		}
+	}	
+	
+	799.1.1 = {		
+		effect = {
+			assign_elder_vicissitude_effect = { GEN = 4 }
+			POD_learn_all_anatomy_traits_effect = yes
+		}
+	}	
+	
+	1229.1.1 = {
+		add_pressed_claim = title:e_voivodate	
+	}
+	
+	1494.1.1 = {
+		death = {
+			death_reason = death_suicide
+		}
+	}
+}
+
+#Could need a 5th tzimisce to break up yorak lineage and put back kos into triglav's
+790326 = {
+	name = "Kosczecsyku"
+	dna = 790326_kosczecsyku
+	dynasty_house = house_yorak  #Osobei says that Kosc is childe of Triglav in CN DA Tremere. It's in character so it's not definitive proof
+	culture = "serbian"
+	religion = "viamutationis"
+	trait = "education_learning_4"
+	martial = 5
+	intrigue = 7
+	stewardship = 10
+	diplomacy = 5
+	prowess = 5
+	learning = 5	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "deceitful"
+	trait = "sadistic"
+	trait = "reclusive"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "proteanadvanced"
+	trait = "potenceadvanced"
+	trait = "bloodsorceryadvanced"
+	father = 790247
+	give_nickname = nick_estranged_scholar
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5			
+			
+			set_immortal_age = 65
+			
+			#add_melancholy_lifestyle_xp = 10000
+		}				
+	}	
+	
+	799.1.1 = {
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 90
+            }
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+			add_character_flag = has_dur_an_ki_bloodmagic_flag
+			add_character_flag = has_akhu_bloodmagic_flag
+			add_character_flag = has_giovanni_necromancy_flag
+			add_character_flag = POD_portrait_male_beard_indian_01_flag
+			add_character_flag = POD_portrait_male_hair_fp1_04_flag
+			add_character_flag = POD_religious_northern_high_clothes_flag
+			POD_learn_abyssal_mysticism_bloodmagic_effect = yes
+			}
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }
+		}		
+	}	
+	
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790950 = {
+	name = "Vrisa"
+	dna = 790950_vrisa
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "humble"
+	trait = "zealous"
+	trait = "depressed_1"
+	trait = "flagellant"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	trait = "protean"
+	father = 790326
+	give_nickname = nick_test_subject
+	female = yes
+	disallow_random_traits = yes
+	
+	759.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_03_flag
+            add_character_flag = "POD_blind_eyes_flag"
+            add_character_flag = "POD_ivory_skin_flag"			
+			
+			set_immortal_age = 25
+			
+		}				
+	}	
+	
+	799.1.1 = {
+	}	
+	
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790342 = {
+	name = "Visya"
+	dynasty_house = house_yorak
+	culture = "lithuanian"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	intrigue = 0
+	learning = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arbitrary"		
+	trait = "deceitful"
+	trait = "sadistic"
+	trait = "torturer"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "obfuscate"
+	father = 790326
+	female = no
+	disallow_random_traits = yes
+	
+	600.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6			
+			
+			set_immortal_age = 51
+			
+			#add_melancholy_lifestyle_xp = 5000
+		}				
+	}	
+	
+	799.1.1 = {
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505053 }
+			}
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+			
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+792742 = {
+#CB Brujah rev p23	
+	name = "Tzevolod"
+	dynasty_house = house_yorak
+	culture = "lithuanian"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	intrigue = 6
+	martial = 6
+	learning = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "trusting"
+	trait = "diligent"
+	trait = "torturer"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	trait = "obfuscate"
+	father = 790342
+	female = no
+	disallow_random_traits = yes
+	
+	631.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7			
+			
+			set_immortal_age = 39
+			
+			#add_melancholy_lifestyle_xp = 5000
+		}				
+	}	
+	
+	799.1.1 = {
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+			
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790932 = {
+#One liner Sire of Ilias, also serves as Mascha_s eaten sire
+	name = "Dorinta"
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "pathofthespirit"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "paranoid"		
+	trait = "deceitful"
+	trait = "lustful"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	trait = "vicissitude"
+	father = 790342
+	female = yes
+	disallow_random_traits = yes
+	
+	795.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7			
+			
+			set_immortal_age = 32
+			
+		}				
+	}	
+	
+	799.1.1 = {
+	}		
+	
+	1152.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 791043
+			}
+	}					
+}
+
+791043 = {
+#Silent Fury
+	name = "Masha_Ulitzakaya"
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "viafurores"
+	trait = "education_martial_prowess_3"
+	prowess = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "wrathful"
+	trait = "sadistic"
+	trait = "lifestyle_blademaster"	
+	trait = "obfuscate"
+	trait = "potenceadvanced"
+	trait = "fortitude"
+	mother = 790932
+	female = yes
+	give_nickname = nick_the_feral	
+	disallow_random_traits = yes
+	
+	1150.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			set_immortal_age = 21
+		}				
+	}
+	
+	1229.1.1 = {	
+	}
+
+	1233.1.1 = {	
+		death = {
+			death_reason = death_battle
+			killer = 505086
+			}
+	}				
+}
+
+790933 = {
+	name = "Ilias_cel_Frumos"
+	dynasty_house = house_yorak
+	dna = 790933_ilias
+	culture = "vlach"
+	religion = "viavoluptuous"
+	trait = "education_learning_4"
+	intrigue = 7
+	stewardship = 7
+	diplomacy = 7
+	learning = 8	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_2"
+	trait = "zealous"		
+	trait = "compassionate"
+	trait = "lustful"
+	trait = "bloodsorcery" #koldunic sorcery
+	trait = "auspex"
+	trait = "vicissitude"
+	mother = 790932
+	give_nickname = nick_the_beautiful
+	sexuality = bisexual
+	female = no
+	disallow_random_traits = yes
+	
+	1104.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8			
+			
+			set_immortal_age = 18	
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_02_flag
+			add_character_flag = POD_no_beard_flag
+		}
+		effect = {
+			add_trait = lifestyle_reveler
+			add_trait_xp = {
+                trait = lifestyle_reveler
+                value = 80
+            }
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 3
+			#Way of Water 1
+		}	
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		}	
+	}
+	
+	1236.1.1 = {
+		add_trait = torpor
+	}
+				
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790762 = {
+#Prince of Voruta, Lithuania 
+	name = "Gabija"
+	dna = 790762_gabija
+	dynasty_house = house_yorak
+	culture = "lithuanian"
+	religion = "viatantabus"
+	trait = "education_martial_prowess_4"
+	prowess = 7
+	martial = 7
+	stewardship = 6
+	intrigue = 9
+	learning = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "just"		
+	trait = "deceitful"
+	trait = "sadistic"
+	trait = "torturer"
+	trait = "celerityadvanced"
+	trait = "auspex"
+	trait = "potenceadvanced"
+	trait = "vicissitude"
+	father = 790342
+	give_nickname = nick_clever_monster
+	female = no
+	disallow_random_traits = yes
+	
+	811.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_rtt_01_flag
+            add_character_flag = POD_portrait_male_hair_northern_01_flag			
+			
+			set_immortal_age = 43
+			
+		}				
+	}	
+	
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790460 = {
+#Prince of Bistritz
+	name = "Radu_Szantovich_Bistri"
+	dna = 790460_radubistri					
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "viaequitum"
+	trait = "education_diplomacy_4"
+	martial = 5
+	intrigue = 5
+	stewardship = 11
+	diplomacy = 8
+	learning = 11
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "humble"		
+	trait = "deceitful"
+	trait = "gregarious"
+	trait = "diplomat"
+	trait = "dominate"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "animalism"
+	trait = "presence"
+	trait = "vicissitude"
+	father = 790342
+	give_nickname = nick_senescent_master
+	female = no
+	disallow_random_traits = yes
+	
+	1125.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7			
+			
+			set_immortal_age = 40
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_09_flag				
+		}		
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_lechitic
+			learn_language = language_greek			
+		}	
+		effect = {
+			add_trait = ashen_adventurer
+			add_trait_xp = {
+                trait = ashen_adventurer
+				track = ashen_ambassador
+                value = 70
+            }
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofhonorableaccord"
+	}
+				
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790615 = {
+	name = "Marelle"
+	dna = 790615_marelle
+	dynasty_house = house_yorak
+	culture = "vlach"
+	religion = "viaferitas"
+	trait = "education_martial_prowess_4"
+	prowess = 10
+	martial = 10
+	intrigue = 2
+	stewardship = 6
+	diplomacy = 4
+	learning = 5	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "sadistic"		
+	trait = "zealous"
+	trait = "vengeful"
+	trait = "torturer"
+	trait = "animalismadvanced"
+	trait = "auspex"
+	trait = "vicissitude"
+	father = 790460
+	give_nickname = nick_the_sculptor_of_wolves
+	female = yes
+	disallow_random_traits = yes
+	
+	1150.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_09_flag
+			
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag		
+			set_immortal_age = 25
+			
+		}				
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:791456 }
+			add_hook = {
+				target = character:555006
+				type = majorboon_hook 
+			}
+		}
+	}
+	
+	1500.1.1 = {
+		religion = "pathofthebeast"
+	}
+				
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790253 = {
+#Prince of Kybartai
+	name = "Geidas"
+	dna = geidas_790253
+	dynasty_house = house_yorak
+	culture = "estonian"
+	religion = "viatyrannus"
+	trait = "education_intrigue_1"
+	intrigue = 0
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arbitrary"		
+	trait = "craven"
+	trait = "sadistic"
+	trait = "animalism"
+	trait = "presence"
+	trait = "dominateadvanced"
+	father = 790342
+	give_nickname = nick_the_puppet_prince
+	female = no
+	disallow_random_traits = yes
+	
+	1005.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration7			
+			
+			set_immortal_age = 12
+						
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_indian_03_flag			
+		}		
+	}	
+	
+	1229.1.1 = {
+	}
+		
+	1236.2.2 = {
+		death = {
+			death_reason = death_duel
+			killer = 795132 #Actually killed by jovirdas
+		}
+	}					
+}
+
+# House tabak
+
+790248 = {
+	name = "Tabak"
+	dna = 790248_tabak
+	dynasty_house = house_tabak
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_stewardship_2"
+	martial = 6
+	intrigue = 2
+	stewardship = 6
+	diplomacy = 5
+	prowess = 5	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "craven"		
+	trait = "just"
+	trait = "zealous"
+	trait = "potenceadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "presenceadvanced"
+	trait = "celerityadvanced"
+	trait = "proteanadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_noble_born
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease	
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			
+			set_immortal_age = 25
+			
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_09_flag	
+            add_character_flag = POD_portrait_male_beard_western_09_flag			
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}		
+	
+	1495.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790458 
+			}
+	}		
+}
+
+790457 = {
+#Too many possibilities, just stick with Lambach as the idiot childe of Tabak
+	name = "Lambach_Ruthven"
+	dna = 790457_lambach_ruthven
+	dynasty_house = house_tabak
+	culture = "vlach"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_1"
+	diplomacy = 3
+	intrigue = 0
+	stewardship = 2
+	learning = 6
+	martial = 2
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "craven"		
+	trait = "paranoid"
+	trait = "content"
+	trait = "potenceadvanced"
+	trait = "celerity"
+	trait = "obfuscateadvanced"
+	father = 790248
+	female = no
+	give_nickname = nick_tzimisce_favorite
+	disallow_random_traits = yes
+	
+	1005.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_01_flag
+			
+			set_immortal_age = 20
+			
+		}				
+	}
+
+	1229.1.1 = {
+	}		
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+			
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790742 = {
+	name = "Caltuna"
+	dynasty_house = house_tabak
+	culture = "vlach"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_4"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "deceitful"		
+	trait = "diligent"
+	trait = "ambitious"
+	trait = "potenceadvanced"
+	trait = "celerity"
+	trait = "dominateadvanced"
+	father = 790457
+	female = yes
+	give_nickname = nick_spider_bride
+	disallow_random_traits = yes
+	
+	1788.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 30	
+		}				
+	}
+	
+	2005.1.1 = {
+		add_spouse = 790458
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+# House dracon
+
+790341 = {
+	name = "The_Dracon"
+	dna = 790341_dracon
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "pathofthespirit"
+	trait = "education_learning_4"
+	intrigue = 15
+	diplomacy = 10
+	stewardship = 14
+	prowess = 15
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "vengeful"
+	trait = "calm"
+	trait = "scholar"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "dominateadvanced"
+	trait = "proteanadvanced"
+	trait = "animalismadvanced"
+	trait = "vampgeneration4"
+	sexuality = homosexual
+	father = 505021
+	give_nickname = nick_holy_spirit
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+            add_character_flag = POD_no_beard_flag
+			
+			set_immortal_age = 21
+			
+			#add_phlegmatic_lifestyle_xp = 10000
+			#add_melancholy_lifestyle_xp = 10000
+		}	
+			add_trait = torpor
+	}
+
+	799.1.1 = {
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_israelite
+			learn_language = language_wallachian
+			
+			assign_elder_vicissitude_effect = { GEN = 4 }
+			POD_learn_all_anatomy_traits_effect = yes
+		}
+		add_pressed_claim = title:c_byzantion			
+	}	
+
+	1236.1.1 = {
+		death = {
+			death_reason = death_disappearance
+			}
+	}			
+}
+
+790939 = {
+	name = "Keeper_of_the_Faith"
+	dna = 790939_keeper_of_the_faith
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viaarchangeli"
+	trait = "education_learning_4"
+	learning = 0
+	stewardship = 5
+	intrigue = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "patient"
+	trait = "loyal"
+	trait = "scholar"
+	trait = "devoted"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	trait = "proteanadvanced"
+	father = 790341
+	female = yes
+	disallow_random_traits = yes
+	
+	206.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_04_flag
+			
+			set_immortal_age = 28
+			
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_animal_lifestyle_xp = 5000
+		}	
+	}
+
+	799.1.1 = {
+	}	
+	
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790940 = {
+	name = "Alexus_Simocatta"
+	dna = 790940_alexus_simocatta
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viaarchangeli"
+	trait = "education_learning_3"
+	intrigue = 13
+	stewardship = 8
+	learning = 1
+	diplomacy = 3
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "diligent"
+	trait = "fickle"
+	trait = "scholar"
+	trait = "architect"
+	trait = "vicissitudeadvanced"
+	trait = "potence"
+	trait = "animalism"
+	trait = "auspex"
+	mother = 790939
+	give_nickname = nick_masterless_spy
+	female = no
+	disallow_random_traits = yes
+	
+	1018.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_m_hair_ep3_byzantine_01_flag
+			
+			set_immortal_age = 25
+		}	
+	}
+	
+	1229.1.1 = {
+	}		
+	
+	1481.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+790340 = {
+	name = "Gesu"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viaarchangeli"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "calm"		
+	trait = "diligent"
+	trait = "callous"
+	trait = "scholar"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	father = 790341
+	give_nickname = nick_saint_divinity
+	female = no
+	disallow_random_traits = yes
+	
+	701.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 19
+			
+			#add_phlegmatic_lifestyle_xp = 10000
+		}				
+	}
+
+	799.1.1 = {
+	}	
+
+	1204.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}		
+}
+
+790934 = {
+	name = "Zubor"
+	dynasty_house = house_dracon
+	culture = "mogyer"
+	religion = "viaarchangeli"
+	trait = "education_diplomacy_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "trusting"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "architect"
+	trait = "auspex"
+	trait = "dominateadvanced"
+	trait = "presence"
+	father = 790340
+	give_nickname = nick_the_architect
+	female = no
+	disallow_random_traits = yes
+	
+	789.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 48
+			
+		}				
+	}
+
+	799.1.1 = {
+	}	
+
+	1162.1.1 = {
+		death = {
+			death_reason = death_execution
+			killer = 790941
+			}
+	}		
+}
+
+791895 = {
+#FbN
+	name = "Abalus_Dracontos"
+	dynasty_house = house_dracon
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_intrigue_3"
+	intrigue = 4
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "deceitful"
+	trait = "zealous"
+	trait = "auspex"
+	trait = "vicissitudeadvanced"
+	trait = "obfuscateadvanced"
+	father = 790934
+	give_nickname = nick_the_infiltrator
+	female = no
+	disallow_random_traits = yes
+	
+	905.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 33
+			
+		}				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1230.1.4 = {
+		employer = 790138
+	}		
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792150 = {
+#Road of the Beast
+	name = "Zavid"
+	dynasty_house = house_dracon
+	culture = "vlach"
+	religion = "viapraedator"
+	trait = "education_martial_prowess_3"
+	prowess = 8
+	martial = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "fickle"
+	trait = "zealous"
+	trait = "auspex"
+	trait = "vicissitudeadvanced"
+	trait = "protean"
+	father = 791895
+	give_nickname = nick_errant_predator
+	female = no
+	disallow_random_traits = yes
+	
+	942.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 36
+			
+		}				
+	}
+	
+	1229.1.1 = {
+	}	
+	
+	1230.1.4 = {
+		employer = 790138
+	}		
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790947 = {
+	name = "Bodor_Toth"
+	dynasty_house = house_dracon
+	culture = "hungarian"
+	religion = "viatyrannus"
+	trait = "education_learning_2"
+	learning = 3
+	stewardship = 8
+	intrigue = 6
+	diplomacy = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "trusting"		
+	trait = "diligent"
+	trait = "content"
+	trait = "auspexadvanced"
+	trait = "vicissitude"
+	father = 790934
+	give_nickname = nick_father_brood
+	female = no
+	disallow_random_traits = yes
+	
+	1162.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 36
+			
+		}				
+	}
+
+	1229.1.1 = {
+	}	
+
+	1238.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 791975
+			}
+	}		
+}
+
+791315 = {
+	name = "Erzebet_Toth"
+	dynasty_house = house_dracon
+	culture = "hungarian"
+	religion = "viahumanitatis"
+	trait = "education_martial_2"
+	martial = 3
+	learning = 5
+	intrigue = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "trusting"		
+	trait = "humble"
+	trait = "vengeful"
+	trait = "animalism"
+	trait = "vicissitude"
+	trait = "celerity"
+	father = 790947
+	give_nickname = nick_lesser_child
+	female = yes
+	disallow_random_traits = yes
+	
+	1182.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 19
+			
+		}				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+#Supporting character in both CA DN Ravnos and Malkavian
+#Confirmed grandchilde of Gesu
+790935 = {
+	name = "Gerasimos"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viaarchangeli"
+	trait = "education_learning_3"
+	learning = 8
+	diplomacy = 6
+	stewardship = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "compassionate"		
+	trait = "honest"
+	trait = "zealous"
+	trait = "theologian"
+	trait = "auspexadvanced"
+	trait = "dominate"
+	trait = "animalism"
+	father = 790934
+	give_nickname = nick_the_confessor
+	female = no
+	disallow_random_traits = yes
+	
+	911.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 56
+			
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+792418 = {
+#Prince of Constantinople before Mustafa
+	name = "John_Paleologus"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viaregalis"
+	trait = "education_stewardship_3"
+	learning = 8
+	stewardship = 8
+	intrigue = 8
+	martial = 8
+	diplomacy = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "ambitious"		
+	trait = "vengeful"
+	trait = "stubborn"
+	trait = "auspex"
+	trait = "vicissitude"
+	trait = "animalism"
+	trait = "dominateadvanced"
+	father = 790935
+	give_nickname = nick_vengeful_basileus
+	female = no
+	disallow_random_traits = yes
+	
+	1391.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 58
+			
+		}
+		add_pressed_claim = title:c_byzantion	
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}	
+}
+
+790115 = {
+	name = "Symeon_Gesudin_syn_Draconov"
+	dna = 790115_symeon_gesudin_syn_draconov
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viacaeli"
+	trait = "education_stewardship_4"
+	martial = 4
+	intrigue = 12
+	stewardship = 8
+	diplomacy = 7
+	learning = 14	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "trusting"		
+	trait = "diligent"
+	trait = "deceitful"
+	trait = "administrator"
+	trait = "vicissitudeadvanced"
+	trait = "dominateadvanced"
+	trait = "presenceadvanced"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "fortitude"
+	trait = "obfuscate"
+	father = 790340
+	give_nickname = nick_his_brothers_keeper
+	female = no
+	disallow_random_traits = yes
+	
+	721.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_ep2_western_01_flag
+			
+			set_immortal_age = 25
+			
+			#add_phlegmatic_lifestyle_xp = 1000
+		}				
+	}
+
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {	
+		effect = {
+			add_opinion = {
+				modifier = respect_opinion
+				target = character:790114
+				opinion = 100
+			}
+		}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_wallachian
+		}		
+	}	
+	
+	1550.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790114
+			}
+	}		
+}
+
+790157 = {
+# Prince of Arta
+	name = "Kyprios"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viadolorosa"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "paranoid"
+	trait = "shy"
+	trait = "auspex"
+	trait = "animalismadvanced"
+	trait = "presenceadvanced"
+	father = 790115
+	give_nickname = nick_self_proclaimed_martyr
+	female = no
+	disallow_random_traits = yes
+	
+	782.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 56
+			
+		}				
+	}
+
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {	
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791048 = {
+# in Sofia
+	name = "Elsbetta"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viacaeli"
+	trait = "education_intrigue_2"
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "deceitful"		
+	trait = "paranoid"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "animalismadvanced"
+	trait = "obfuscateadvanced"
+	father = 790157
+	female = yes
+	disallow_random_traits = yes
+	
+	906.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 36
+			
+		}				
+	}
+
+	1229.1.1 = {
+		add_pressed_claim = title:d_turnovo
+	}	
+	
+	1500.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791356 = {
+# Constantinople
+	name = "Elaiodora_Sophida"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viacaeli"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "callous"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "obfuscateadvanced"
+	mother = 791048
+	sexuality = homosexual
+	female = yes
+	give_nickname = nick_scholarch
+	disallow_random_traits = yes
+	
+	981.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 47
+			
+		}				
+	}
+
+	1229.1.1 = {
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791200 = {
+# Prince of Brie (under ile de france)
+	name = "Theophilos"
+	dynasty_house = house_dracon
+	culture = "greek"
+	religion = "viacaeli"
+	trait = "education_learning_3"
+	learning = 8
+	stewardship = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "shy"		
+	trait = "zealous"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "presence"
+	trait = "obfuscateadvanced"
+	mother = 791048
+	give_nickname = nick_legacy_preserver
+	female = no
+	disallow_random_traits = yes
+	
+	938.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 51
+			
+		}				
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+		religion = "camahumanity"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790343 = {
+#One liner sire of Nikita, also serves as Minerva_s eaten Sire
+	name = "Zdarvka"
+	dna = 790343_zdarvka
+	dynasty_house = house_dracon
+	culture = "croatian"
+	religion = "pathofthespirit"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "chaste"		
+	trait = "temperate"
+	trait = "lazy"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "presenceadvanced"
+	trait = "fortitudeadvanced"
+	father = 790341
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			add_character_flag = has_scripted_appearance	
+            add_character_flag = POD_portrait_male_hair_fp1_03_flag
+            add_character_flag = POD_portrait_male_beard_western_05_flag			
+			set_immortal_age = 32
+			
+			#add_melancholy_lifestyle_xp = 5000		
+		}				
+	}
+
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	1849.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790618
+			}
+	}		
+}
+
+790943 = {
+	name = "Mieczyslav"
+	dynasty_house = house_dracon
+	culture = "polish"
+	religion = "viatyrannus"
+	trait = "education_stewardship_1"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "sadistic"		
+	trait = "deceitful"
+	trait = "fickle"
+	trait = "torturer"
+	trait = "vicissitude"
+	trait = "animalism"
+	trait = "potence"
+	father = 790343
+	give_nickname = nick_artist_of_screams
+	female = no
+	disallow_random_traits = yes
+	
+	1066.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 24
+				
+		}				
+	}
+
+	1229.1.1 = {	
+	}		
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	1577.1.1 = {
+		death = {
+			death_reason = death_murder
+			}
+	}		
+}
+
+790618 = {
+	name = "Minerva_Schwalke-Wojtkiewicz"
+	dynasty_house = house_dracon
+	culture = "polish"
+	religion = "viamutationis"
+	trait = "education_intrigue_4"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "ambitious"		
+	trait = "impatient"
+	trait = "wrathful"
+	trait = "vicissitudeadvanced"
+	trait = "animalism"
+	trait = "presence"
+	father = 790343
+	give_nickname = nick_ignorant_little_girl
+	female = yes
+	disallow_random_traits = yes
+	
+	1810.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			set_immortal_age = 19
+			
+			#add_choleric_lifestyle_xp = 1000		
+		}				
+	}	
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790261 = {
+	name = "Nikita_of_Sredetz"
+	dna = 790261_nikita
+	dynasty_house = house_dracon
+	culture = "bulgarian"
+	religion = "viacain"
+	trait = "education_learning_4"
+	intrigue = 6
+	stewardship = 11
+	diplomacy = 11
+	learning = 3	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"		
+	trait = "diligent"
+	trait = "deceitful"
+	trait = "theologian"
+	trait = "vicissitudeadvanced"
+	trait = "dominateadvanced"
+	trait = "animalismadvanced"
+	father = 790343
+	give_nickname = nick_herald_of_caine
+	female = no
+	disallow_random_traits = yes
+	
+	782.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 43
+			
+			#add_melancholy_lifestyle_xp = 2500
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_02_flag
+            add_character_flag = POD_portrait_male_beard_western_01_flag				
+		}		
+	}
+
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+		}	
+	}	
+	
+	1236.1.1 = {
+		death = {
+			death_reason = death_execution
+			killer = 790341
+			}
+	}		
+}
+
+790616 = {
+#One liner sire of Kazimir
+	name = "Andras_Tholdy"
+	dna = 790616_andrastholdy
+	dynasty_house = house_dracon
+	culture = "hungarian"
+	religion = "manusnigrum"
+	trait = "education_intrigue_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "craven"		
+	trait = "wrathful"
+	trait = "lazy"
+	trait = "auspex"
+	trait = "animalism"
+	trait = "obfuscate"
+	father = 790343
+	female = no
+	disallow_random_traits = yes
+	
+	1080.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 57
+		
+		}
+		effect = {
+		    add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_western_08_flag
+			add_character_flag = POD_portrait_male_beard_western_09_flag
+		}
+	}	
+
+	1229.1.1 = {	
+	}	
+	
+	1450.1.1 = {
+		religion = "talmahera"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+790617 = {
+	name = "Kazimir_Savostin"
+	dynasty_house = house_dracon
+	culture = "hungarian"
+	religion = "manusnigrum"
+	trait = "education_intrigue_4"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "deceitful"		
+	trait = "cynical"
+	trait = "patient"
+	trait = "schemer"
+	trait = "auspex"
+	trait = "animalism"
+	trait = "bloodsorcery"
+	father = 790616
+	give_nickname = nick_hurul
+	female = no
+	disallow_random_traits = yes
+	
+	1790.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 24
+			
+			#add_animal_lifestyle_xp = 10000
+		
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Water 3
+			#Way of Fire 2
+			#Way of Spirit 3
+		}			
+	}		
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+# House byelobog
+
+605125 = {
+	name = "Byelobog"
+	dna = 605125_byelobog
+	dynasty_house = house_byelobog
+	culture = "lithuanian"
+	religion = "pathoftheflesh"
+	trait = "education_learning_3"
+	learning = 6
+	stewardship = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "shy"		
+	trait = "content"
+	trait = "callous"
+	trait = "albino"
+	#trait = "scaly"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	trait = "presenceadvanced"
+	trait = "potence"
+	trait = "bloodsorceryadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_white_god
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_character_flag = POD_portrait_north_beast_flag
+	
+			#add_melancholy_lifestyle_xp = 20000
+			#add_phlegmatic_lifestyle_xp = 10000			
+			set_immortal_age = 100
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_01_flag	
+            add_character_flag = POD_portrait_male_beard_rtt_01_flag			
+		}
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_kraina_of_the_well_path_effect = { LEVEL = 5 }
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }
+		}		
+	}
+	60.1.2 = {
+		effect = {
+			add_character_flag = "POD_corpse_look_flag"
+			add_character_flag = "POD_permanent_disease_scarring_flag"
+		}
+	}
+	
+	799.1.1 = {
+	}
+
+	1269.1.1 = {	
+		death = {
+			death_reason = death_diablerie
+			killer = 790459
+			}
+	}				
+}
+
+790951 = {
+	name = "Vukodlak"
+	dna = 790951_vukodlak
+	dynasty_house = house_byelobog
+	culture = "levantine"
+	religion = "viatyrannus"
+	trait = "education_intrigue_4"
+	prowess = 10
+	martial = 7
+	intrigue = 8
+	stewardship = 4	
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "ambitious"
+	trait = "sadistic"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "celerityadvanced"
+	trait = "presenceadvanced"
+	father = 605125
+	female = no
+	give_nickname = nick_the_main_antagonist
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+															
+			
+			set_immortal_age = 78
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_bald_look_flag	
+            add_character_flag = POD_no_beard_flag			
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+		add_trait = torpor	
+	}
+	
+	1230.1.4 = {
+		employer = 505089
+		effect = {
+			learn_language = language_latin
+			learn_language = language_greek
+			learn_language = language_wallachian
+		}		
+	}	
+
+	2000.1.1 = {	
+		death = {
+			death_reason = death_execution
+			killer = 790802
+			}
+	}				
+}
+
+791922 = {
+#One liner sire of Agoston
+	name = "Ayakul"
+	#dna = 791922_ayakul #This DNA warps everything under it as its genes are so tilted
+	dynasty_house = house_byelobog
+	culture = "mogyer"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "scaly"
+	trait = "arrogant"		
+	trait = "patient"
+	trait = "sadistic"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "auspexadvanced"
+	father = 605125
+	female = no
+	disallow_random_traits = yes
+	
+	510.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 58
+		}
+		#effect = {
+		#    add_character_flag = has_scripted_appearance
+		#	add_character_flag = POD_bald_look_flag
+		#}
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+		
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+795132 = {
+#DA CN Ventrue, ends up as vassal of jurgen
+	name = "Jovirdas"
+	dynasty_house = house_byelobog
+	culture = "estonian"
+	religion = "viaregalis"
+	trait = "education_stewardship_3"
+	learning = 7
+	stewardship = 5
+	diplomacy = 6
+	intrigue = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "zealous"
+	trait = "just"		
+	trait = "brave"
+	trait = "vicissitude"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "dominate"
+	father = 791922
+	give_nickname = nick_determined_tysiatskii
+	female = no
+	disallow_random_traits = yes
+	
+	1059.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 29
+		}
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+	}
+		
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+
+791835 = {
+#FbN
+	name = "Agoston"
+	dynasty_house = house_byelobog
+	culture = "hungarian"
+	religion = "viatyrannus"
+	trait = "education_martial_4"
+	martial = 5
+	learning = 5
+	stewardship = 10
+	intrigue = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "ambitious"
+	trait = "fickle"
+	trait = "strategist"
+	trait = "vicissitudeadvanced"
+	trait = "dominate"
+	trait = "auspexadvanced"
+	father = 791922
+	female = no
+	give_nickname = nick_the_young
+	disallow_random_traits = yes
+	
+	895.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 38
+		}	
+	}
+
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 791258
+		}	
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+
+791836 = {
+#FbN
+	name = "Jehan_du_Pleaux"
+	dna = 791836_jehan_du_pleaux
+	dynasty_house = house_byelobog
+	culture = "occitan"
+	religion = "pathoftheflesh"
+	trait = "education_stewardship_4"
+	stewardship = 10
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "ambitious"
+	trait = "patient"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "presence"
+	trait = "protean"
+	trait = "vicissitude"
+	give_nickname = nick_the_tamer
+	father = 791835
+	female = no
+	disallow_random_traits = yes
+	
+	1095.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_western_09_flag
+			
+			set_immortal_age = 30
+		}	
+	}
+
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 791252
+		}	
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+791368 = {
+#Latvia
+	name = "Vala"
+	dynasty_house = house_byelobog
+	culture = "prussian"
+	religion = "viaregalis"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "ambitious"		
+	trait = "callous"
+	trait = "deceitful"
+	trait = "vicissitudeadvanced"
+	trait = "presence"
+	trait = "obfuscateadvanced"
+	father = 790951
+	female = yes
+	give_nickname = nick_calculating
+	disallow_random_traits = yes
+	
+	758.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 41
+			
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+791140 = {
+#Prince in Russia
+#WftE p40
+	name = "Raiya"
+        dna = 791140_raiya
+	dynasty_house = house_byelobog
+	culture = "severian"
+	religion = "viaregalis"
+	trait = "education_martial_3"
+	martial = 7
+	stewardship = 5
+	prowess = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "stubborn"
+	trait = "vengeful"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "fortitudeadvanced"
+	trait = "dominateadvanced"
+	father = 790951
+	female = yes
+	give_nickname = nick_ironhammer
+	disallow_random_traits = yes
+	
+	287.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 19
+			
+			#add_choleric_lifestyle_xp = 5000
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_05_flag				
+		}		
+	}
+	
+	799.1.1 = {
+		effect = {
+			add_trait = unyielding_defender
+			add_trait_xp = {
+                trait = unyielding_defender
+                value = 40
+            }
+		}			
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+
+# House triglav
+
+605126 = {
+	name = "Triglav"
+	dynasty_house = house_triglav
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "wrathful"
+	trait = "diligent"
+	trait = "auspexadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_threeheaded
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			set_immortal_age = 57
+		}	
+	}
+	
+	702.1.1 = {
+		death = {
+			death_reason = death_duel
+			killer = 790341
+			}
+	}				
+}
+
+791291 = {
+#One liner sire of Zirlany
+	name = "Czerno"
+	dna = 791291_czerno
+	dynasty_house = house_triglav
+	culture = "vlach"
+	religion = "pathoftheflesh"
+	trait = "education_learning_4"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "cynical"
+	trait = "diligent"
+	trait = "lifestyle_mystic"
+	trait = "bloodsorceryadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "celerityadvanced"
+	father = 605126
+	female = no
+	give_nickname = nick_the_black_dragon
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 50
+		}
+        effect = {
+            add_character_flag = has_scripted_appearance
+			add_character_flag = POD_bald_look_flag
+			add_character_flag = POD_permanent_disease_scarring_flag
+			
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+791292 = {
+#Used as prince of Vecchio
+	name = "Zirlany"
+	dna = 791292_zirlany
+	dynasty_house = house_triglav
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_learning_3"
+	learning = 2
+	intrigue = 1
+	stewardship = 2
+	prowess = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "cynical"
+	trait = "diligent"
+	trait = "albino"
+	trait = "bloodsorceryadvanced"
+	trait = "dominateadvanced"
+	trait = "auspexadvanced"
+	trait = "animalism"
+	trait = "fortitude"
+	trait = "potence"
+	trait = "vicissitude"
+	father = 791291
+	female = yes
+	give_nickname = nick_priestess_black_dragon
+	disallow_random_traits = yes
+	
+	100.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+	
+			#add_melancholy_lifestyle_xp = 5000
+			
+			set_immortal_age = 22
+						
+		}
+        effect = {
+            add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_female_hair_indian_01_flag
+		}
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 55
+            }
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+605112 = {
+	name = "Velya"
+	dna = 605112_velya
+	dynasty_house = house_triglav
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_learning_4"
+	intrigue = 10
+	stewardship = 10
+	diplomacy = 12
+	prowess = 5
+	learning = 9	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "zealous"
+	trait = "vengeful"
+	trait = "bloodsorceryadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	trait = "auspexadvanced"
+	trait = "dominateadvanced"
+	trait = "fortitude"
+	trait = "presenceadvanced"
+	father = 605126
+	female = no
+	give_nickname = nick_the_flayer
+	disallow_random_traits = yes
+	
+	130.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag	
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 44
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_02_flag	
+            add_character_flag = POD_no_beard_flag			
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#In case we never get the above
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }			
+		}
+	}
+	
+	799.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790114 }
+			}
+	}	
+
+	1229.1.1 = {
+		effect = {
+			learn_language = language_latin
+			learn_language = language_lechitic
+			learn_language = language_greek
+		}	
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+795151 = {
+# DA CN Tzimisce, just a tzimisce prince
+	name = "Vladya"
+	dynasty_house = house_triglav
+	culture = "czech"
+	religion = "viatyrannus"
+	trait = "education_stewardship_2"
+	learning = 6
+	stewardship = 7
+	diplomacy = 5
+	intrigue = 5
+	martial = 4
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "vengeful"
+	trait = "patient"
+	trait = "vicissitudeadvanced"
+	trait = "animalism"
+	trait = "dominate"
+	father = 605112
+	female = no
+	disallow_random_traits = yes
+	
+	856.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 49
+		}		
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+795152 = {
+# DA CN Tzimisce, grandchilde of velya described as a warrior
+	name = "Ilyana"
+	dynasty_house = house_triglav
+	culture = "albanian"
+	religion = "pathoftheflesh"
+	trait = "education_martial_prowess_4"
+	learning = 6
+	prowess = 8
+	martial = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "brave"		
+	trait = "vengeful"
+	trait = "impatient"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "dominate"
+	father = 795151
+	female = yes
+	disallow_random_traits = yes
+	
+	1052.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 26
+		}		
+	}
+
+	1229.1.1 = {	
+	}	
+	
+	1500.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790464 = {
+	name = "Gorchist"
+	dna = 790464_gorchist
+	dynasty_house = house_triglav
+	culture = "croatian"
+	religion = "viaregalis"
+	trait = "education_diplomacy_3"
+	martial = 6
+	intrigue = 13
+	stewardship = 14
+	diplomacy = 7
+	learning = 4	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "patient"
+	trait = "presenceadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	father = 605126
+	female = no
+	give_nickname = nick_the_deal_broker
+	disallow_random_traits = yes
+	
+	530.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+				
+			
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 22
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_mena_02_flag
+            add_character_flag = POD_no_beard_flag			
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	1933.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790300
+			}
+	}			
+}
+
+790946 = {
+	name = "Shaagra"
+	dna = 790946_shaagra
+	dynasty_house = house_triglav
+	culture = "czech"
+	religion = "viatyrannus"
+	trait = "education_martial_3"
+	diplomacy = 2
+	intrigue = 7
+	stewardship = 13
+	martial = 6
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "trusting"
+	trait = "arrogant"
+	trait = "presence"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "animalismadvanced"
+	father = 605126
+	female = yes
+	give_nickname = nick_vroi_goddess
+	disallow_random_traits = yes
+	
+	152.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+	
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 31
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_rtt_02_flag				
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {		
+		add_pressed_claim = title:d_bohemia
+	}
+
+	1450.1.1 = {
+		add_trait = torpor
+	}
+
+	1945.2.12 = {	
+		death = {
+			death_reason = death_execution
+			}
+	}					
+}
+
+792092 = {
+#Old Austrian Tzimisce, DA Europe
+	name = "Jorska"
+	dynasty_house = house_triglav
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	diplomacy = 2
+	intrigue = 2
+	martial = 10
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "deceitful"
+	trait = "wrathful"
+	trait = "obfuscate"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "animalism"
+	mother = 790946
+	female = no
+	give_nickname = nick_the_markoman
+	disallow_random_traits = yes
+	
+	172.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 45
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+		add_pressed_claim = title:d_osterreich
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+# House andeleon
+
+790612 = {
+	name = "Andeleon"
+	dynasty_house = house_andeleon
+	dna = 790612_andeleon
+	culture = "sogdian"
+	religion = "manusnigrum"
+	trait = "education_learning_4"
+	learning = 8
+	intrigue = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "lunatic_1"
+	trait = "arbitrary"		
+	trait = "arrogant"
+	trait = "sadistic"
+	trait = "lifestyle_physician"
+	trait = "animalismadvanced"
+	trait = "auspexadvanced"
+	trait = "celerityadvanced"
+	trait = "obfuscateadvanced"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	give_nickname = nick_alien_hunger
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_animal_lifestyle_xp = 20000
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 49
+		}
+
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_fp2_iberian_christian_03_flag
+            add_character_flag = POD_portrait_male_hair_indian_03_flag			
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+		add_trait = torpor
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790948 = {
+	name = "Urdo"
+	dna = 790948_urdo
+	dynasty_house = house_andeleon
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_diplomacy_3"
+	learning = 12
+	intrigue = 2
+	stewardship = 10
+	diplomacy = 3
+	martial = 9
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "zealous"
+	trait = "deceitful"
+	trait = "animalismadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "celerityadvanced"
+	trait = "fortitudeadvanced"
+	father = 790612
+	give_nickname = nick_master_of_hellhounds
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_mena_01_flag
+            add_character_flag = POD_portrait_male_beard_fp2_iberian_christian_04_flag
+			
+			
+			add_trait = vampgeneration5
+	
+			#add_choleric_lifestyle_xp = 10000
+			
+			set_immortal_age = 37
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+
+# House demdemeh
+
+790619 = {
+	name = "Demdemeh"
+        dna = 790619_demdemeh
+	dynasty_house = house_demdemeh
+	culture = "kanuri"
+	religion = "viaconsuasor"
+	trait = "education_learning_4"
+	learning = 4
+	diplomacy = 4
+	stewardship = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "honest"		
+	trait = "humble"
+	trait = "gregarious"
+	trait = "animalismadvanced"
+	trait = "auspexadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "proteanadvanced"
+	trait = "obfuscateadvanced"
+	trait = "potenceadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	give_nickname = nick_the_impassible
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_phlegmatic_lifestyle_xp = 10000
+			#add_melancholy_lifestyle_xp = 10000
+			
+			set_immortal_age = 78
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_sub_saharan_01_flag			
+            add_character_flag = POD_portrait_male_beard_sub_saharan_02_flag			
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790620 = {
+	name = "Sycorax"
+	dna = 790620_sycorax
+	dynasty_house = house_demdemeh
+	culture = "kanuri"
+	religion = "viaregalis"
+	trait = "education_stewardship_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	learning = 10
+	stewardship = 1
+	intrigue = 5
+	martial = 6
+	trait = "vengeful"		
+	trait = "humble"
+	trait = "stubborn"
+	trait = "bloodsorceryadvanced"
+	trait = "potenceadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	father = 790619
+	give_nickname = nick_mother_of_the_nok
+	female = yes
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_sub_saharan_03_flag	
+
+			add_trait = vampgeneration5
+			
+			
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 36
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Water 5
+			#Way of Fire 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 5 }
+			assign_bialowieza_kraina_path_effect = { LEVEL = 5 }
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}		
+	
+	1818.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}					
+}
+
+791225 = {
+#Prince of Reims
+	name = "Nicodemus"
+	dna = 791225_nicodemus
+	dynasty_house = house_demdemeh
+	culture = "greek"
+	religion = "viavoluptuous"
+	trait = "education_intrigue_3"
+	learning = 13
+	intrigue = 6
+	stewardship = 15
+	diplomacy = 15
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "gluttonous"		
+	trait = "honest"
+	trait = "lustful"
+	trait = "obfuscateadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "presence"
+	trait = "fortitudeadvanced"
+	mother = 790620
+	sexuality = homosexual
+	give_nickname = nick_great_morningstar
+	female = no
+	disallow_random_traits = yes
+	
+	457.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			add_character_flag = has_scripted_appearance	
+            add_character_flag = POD_portrait_male_hair_indian_01_flag		
+			set_immortal_age = 32
+		}
+		effect = {
+			add_trait = lifestyle_reveler
+			add_trait_xp = {
+                trait = lifestyle_reveler
+                value = 75
+            }
+		}		
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}		
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+790621 = {
+#Prince in Sicily
+	name = "Landulf_II"
+	dna = 790621_landulf
+	dynasty_house = house_demdemeh
+	culture = "italian"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	martial = 7
+	intrigue = 1
+	stewardship = 14
+	diplomacy = 15
+	prowess = 6	
+	learning = 11
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arbitrary"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "obfuscateadvanced"
+	trait = "potenceadvanced"
+	trait = "dominate"
+	mother = 790620
+	give_nickname = nick_dark_lord_tzimisce
+	female = no
+	disallow_random_traits = yes
+	
+	875.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			add_character_flag = has_scripted_appearance	
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+            add_character_flag = POD_portrait_male_beard_mena_04_flag				
+			set_immortal_age = 50
+		}		
+	}
+
+	1229.1.1 = {
+	}		
+	
+	1450.1.1 = {
+		add_trait = bloodsorceryadvanced
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+	}
+		
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}						
+}
+
+# House dracula
+
+790458 = {
+#Used birth date instead of Embrace date to avoid issues
+	name = "Vlad_Tepes"
+	dna = 790458_vladtepes
+	dynasty_house = house_dracula
+	culture = "vlach"
+	religion = "viatyrannus"
+	learning = 10
+	martial = 13
+	intrigue = 7
+	stewardship = 10
+	diplomacy = 10
+	prowess = 10
+	trait = "education_intrigue_4"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "intellect_good_2"
+	trait = "brave"		
+	trait = "ambitious"
+	trait = "arrogant"
+	trait = "strategist"
+	trait = "torturer"
+	trait = "bloodsorcery"
+	trait = "animalism"
+	trait = "vicissitude"
+	trait = "auspex"
+	father = 790457
+	female = no
+	give_nickname = nick_the_impaler
+	disallow_random_traits = yes
+	
+	1431.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_secret = {
+				type = secret_diablerist
+			}
+			
+			set_immortal_age = 34
+			
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_northern_01_flag	
+            add_character_flag = POD_portrait_male_beard_western_05_flag	
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag			
+		}
+		effect = {
+			learn_language = language_latin
+			learn_language = language_lechitic
+			learn_language = language_french
+			learn_language = language_central_germanic
+			learn_language = language_east_slavic
+		}
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 35
+            }
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Fire 5
+			#Way of Spirit 5
+		}	
+		effect = {
+			add_trait = flexible_leader
+			add_trait_xp = {
+                trait = flexible_leader
+                value = 80
+            }
+		}			
+	}	
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+dummy790458 = {
+	name = "John"
+	dna = 790458_vladtepes
+	dynasty_house = house_ald
+	culture = "polish"
+	religion = "viahumanitatis"
+	trait = "vampire"
+	trait = "torpor"
+
+	disallow_random_traits = yes
+	
+	1096.1.1 = {
+		birth = yes
+		effect = {
+			set_immortal_age = 34
+			add_character_flag = POD_do_not_disturb_flag
+			# Never Used
+			# add_character_flag = POD_dummy_for_looks
+		}
+		employer = POD_wraith_01
+	}	
+	1500.1.1 = {
+		death = yes 
+	}		
+}
+
+# House djavakhi
+
+790465 = {
+	name = "Djavakhi"
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "pathoftheflesh"
+	trait = "education_martial_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "callous"
+	trait = "chaste"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "celerityadvanced"
+	trait = "fortitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "proteanadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_animal_lifestyle_xp = 5000
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 45
+		}	
+		
+	}
+	
+	799.1.1 = {
+	}	
+	
+	1450.1.1 = {
+		add_trait = torpor
+	}
+	
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790949 = {
+	name = "Valeska"
+	dna = 790949_valeska
+	dynasty_house = house_djavakhi
+	culture = "lithuanian"
+	religion = "viacaeli"
+	trait = "education_diplomacy_3"
+	stewardship = 7
+	diplomacy = 8	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "humble"
+	trait = "zealous"
+	trait = "reclusive"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "auspexadvanced"
+	trait = "presenceadvanced"
+	father = 790465
+	give_nickname = nick_the_renewer
+	female = yes
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_03_flag
+
+			add_trait = vampgeneration5
+	
+			#add_phlegmatic_lifestyle_xp = 5000
+			#add_phlegmatic_lifestyle_xp = 5000
+			
+			set_immortal_age = 19
+		}	
+		
+	}
+	
+	799.1.1 = {
+		add_pressed_claim = title:e_voivodate
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790466 = {
+#One liner sire of Jolan
+	name = "Baian"
+	dynasty_house = house_djavakhi
+	culture = "mogyer"
+	religion = "viamutationis"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "humble"		
+	trait = "deceitful"
+	trait = "lustful"
+	trait = "vicissitude"
+	trait = "potence"
+	trait = "auspexadvanced"
+	father = 790465
+	female = no
+	disallow_random_traits = yes
+	
+	807.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 59
+		}	
+		
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+790467 = {
+#Supposed to descend from Lugoj, but that doesn't make sense
+	name = "Szechenyi_Jolan"
+	dna = 790467_szchenyijolan
+	dynasty_house = house_djavakhi
+	culture = "hungarian"
+	religion = "pathoftheflesh"
+	trait = "education_learning_4"
+	learning = 7
+	intrigue = 7
+	stewardship = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "diligent"		
+	trait = "content"
+	trait = "callous"
+	trait = "vicissitudeadvanced"
+	trait = "animalism"
+	trait = "auspex"
+	father = 790466
+	give_nickname = nick_mother_of_horrors
+	female = yes
+	disallow_random_traits = yes
+	
+	1150.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_western_02_flag
+
+			
+		}		
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+		add_trait = protean
+	}
+	
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+605124 = {
+	name = "Noriz"
+	dna = 605124_noriz
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viacrudelitas"
+	trait = "education_martial_4"
+	intrigue = 10
+	diplomacy = 6
+	stewardship = 2
+	prowess = 8
+	martial = 3
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "ambitious"		
+	trait = "sadistic"
+	trait = "arrogant"
+	trait = "disloyal"
+	trait = "strategist"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	father = 790465
+	female = no
+	give_nickname = nick_corruptor_of_legions
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration5
+	
+			#add_animal_lifestyle_xp = 10000
+			#add_phlegmatic_lifestyle_xp = 10000
+			
+			set_immortal_age = 25
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_mena_02_flag
+            add_character_flag = POD_no_beard_flag			
+		}	
+		effect = {
+			add_trait = aggressive_attacker
+			add_trait_xp = {
+                trait = aggressive_attacker
+                value = 50
+            }
+		}		
+	}
+	
+	799.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790247 }
+			}
+	}	
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:505053 }
+			}
+		add_pressed_claim = title:e_voivodate	
+	}
+
+	1361.1.1 = {	
+		death = {
+			death_reason = death_murder
+			killer = 790941
+			}
+	}				
+}
+
+790944 = {
+	name = "Rachlav"
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_2"	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "vengeful"
+	trait = "arbitrary"
+	trait = "vicissitude"
+	trait = "potenceadvanced"
+	trait = "fortitude"
+	father = 605124
+	give_nickname = nick_the_unquenchable	
+	female = no
+	disallow_random_traits = yes
+	
+	809.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 29
+			
+			#add_choleric_lifestyle_xp = 2000
+		}	
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790461 }
+			}
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790941 = {
+	name = "Koban"
+	dna = 790941_koban
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viaadversarius"
+	trait = "education_martial_prowess_3"
+	stewardship = 10
+	martial = 11
+	intrigue = 7
+	learning = 12	
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"		
+	trait = "vengeful"
+	trait = "brave"
+	trait = "strategist"
+	trait = "torturer"
+	trait = "vicissitudeadvanced"
+	trait = "bloodsorceryadvanced"
+	trait = "fortitude"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "dominate"
+	father = 605124
+	female = no
+	give_nickname = nick_fiend_among_fiends
+	disallow_random_traits = yes
+	
+	812.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_fp1_04_flag
+			
+			#add_choleric_lifestyle_xp = 10000
+			
+			set_immortal_age = 25
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 4
+			#Way of Spirit 3
+			#In case we never get the above
+			assign_transylvanian_kraina_path_effect = { LEVEL = 3 }			
+		}
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:605124 }
+			}		
+		effect = {
+			add_trait = lifestyle_mystic
+			add_trait_xp = {
+                trait = lifestyle_mystic
+                value = 45
+            }
+		}
+		effect = {
+			add_trait = aggressive_attacker
+			add_trait_xp = {
+                trait = aggressive_attacker
+                value = 55
+            }
+		}		
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	1765.1.1 = {	
+		death = {
+			death_reason = death_murder
+			}
+	}				
+}
+
+791972 = {
+#Koban's childe in Bitter Crusade
+	name = "Dominik"
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viaadversarius"
+	trait = "education_martial_prowess_3"
+	prowess = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "content"		
+	trait = "wrathful"
+	trait = "diligent"
+	trait = "auspex"
+	trait = "celerity"
+	trait = "potence"
+	give_nickname = nick_fiendish_messenger
+	father = 790941
+	female = no
+	disallow_random_traits = yes
+	
+	1163.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 45
+			
+			#add_choleric_lifestyle_xp = 2000
+		}	
+	}
+
+	1229.1.1 = {
+	}
+
+	1368.1.1 = {	
+		death = {
+			death_reason = death_execution
+			killer = 790941
+			}
+	}				
+}
+
+790461 = {
+	name = "Lukasz_Brancoveanu"
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_1"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "vengeful"
+	trait = "arbitrary"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	trait = "fortitude"
+	father = 605124
+	female = no
+	disallow_random_traits = yes
+	
+	711.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 36
+			
+			#add_choleric_lifestyle_xp = 2000
+		}	
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790683 = {
+# Prince in Macedonia
+	name = "Radovan"
+	dynasty_house = house_djavakhi
+	culture = "croatian"
+	religion = "manusnigrum"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "lustful"		
+	trait = "vengeful"
+	trait = "fickle"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	trait = "dominateadvanced"
+	father = 790461
+	female = no
+	disallow_random_traits = yes
+	
+	850.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 49
+		}	
+	}
+
+	1229.1.1 = {
+	}
+	
+	1450.1.1 = {
+		religion = "talmahera"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790684 = {
+	name = "Irina"
+	dynasty_house = house_djavakhi
+	culture = "croatian"
+	religion = "viacalantica"
+	trait = "education_learning_4"
+	learning = 7
+	intrigue = 5
+	diplomacy = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_1"
+	trait = "diligent"		
+	trait = "deceitful"
+	trait = "arrogant"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "animalism"
+	father = 790683
+	give_nickname = nick_rebellious_scholar
+	female = yes
+	disallow_random_traits = yes
+	
+	1200.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8			
+			set_immortal_age = 18
+		}	
+	}
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+#description p133 of DA CN Tzimisce
+790462 = {
+	name = "Ioan_Brancoveanu"
+	dna = 790462_ioan_brancoveanu
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_4"
+	martial = 8
+	diplomacy = 8
+	stewardship = 8
+	prowess = 8
+	intrigue = 5
+	learning = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "intellect_good_1"
+	trait = "diligent"		
+	trait = "vengeful"
+	trait = "sadistic"
+	trait = "strategist"
+	trait = "bloodsorcery"
+	trait = "auspex"
+	trait = "vicissitudeadvanced"
+	trait = "animalism"
+	father = 790461
+	give_nickname = nick_hammer_of_the_tremere
+	female = no
+	disallow_random_traits = yes
+	
+	902.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_beard_fp2_iberian_christian_03_flag
+            add_character_flag = POD_portrait_male_hair_fp1_02_flag
+			
+			set_immortal_age = 34
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#In case we never get the above
+			assign_transylvanian_kraina_path_effect = { LEVEL = 4 }
+			assign_black_sea_kraina_path_effect = { LEVEL = 2 }
+			
+		}
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790944 }	
+		}
+		effect = {
+			add_trait = unyielding_defender
+			add_trait_xp = {
+                trait = unyielding_defender
+                value = 70
+            }
+		}			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790459 = {
+	name = "Lugoj"
+	dynasty_house = house_djavakhi
+	culture = "vlach"
+	dna = 790459_lugoj
+	religion = "viafurores"
+	trait = "education_martial_3"
+	martial = 4
+	intrigue = 12
+	prowess = 8	
+	diplomacy = 8
+	learning = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "brave"		
+	trait = "ambitious"
+	trait = "zealous"
+	trait = "vicissitudeadvanced"
+	trait = "potence"
+	trait = "fortitudeadvanced"
+	father = 605124
+	give_nickname = nick_blood_breaker
+	female = no
+	disallow_random_traits = yes
+	
+	976.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 35
+		}
+		add_character_flag = has_scripted_appearance
+		add_character_flag = POD_portrait_male_hair_fp2_iberian_muslim_03_flag		
+	}
+
+	1229.1.1 = {
+		add_pressed_claim = title:d_pecheneg
+	}	
+	
+	1413.1.1 = {
+		death = {
+			death_reason = death_execution
+			killer = 505021
+			}
+	}				
+}
+
+790613 = {
+# Prince of Melnik
+# Oradea League, old clan
+	name = "Janek_Ritka"
+	dynasty_house = house_djavakhi
+	culture ="czech"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	learning = 8
+	stewardship = 2
+	diplomacy = 9
+	intrigue = 9
+	martial = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "stubborn"		
+	trait = "diligent"
+	trait = "zealous"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790459
+	give_nickname = nick_the_stalwart
+	female = no
+	disallow_random_traits = yes
+	
+	1102.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 51
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 1
+			#Way of Wind 2
+		}
+	}
+
+	1229.1.1 = {
+	}	
+	
+	1500.1.1 = {
+		add_trait = "auspexadvanced"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+
+792803 = {
+# Rival of Janek, old clan
+	name = "Michal_Albertus_Staniewski"
+	dynasty_house = house_djavakhi
+	culture ="czech"
+	religion = "viatyrannus"
+	trait = "education_intrigue_2"
+	learning = 5
+	stewardship = 7
+	diplomacy = 6
+	intrigue = 6
+	martial = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "paranoid"		
+	trait = "vengeful"
+	trait = "zealous"
+	trait = "auspex"
+	trait = "potence"
+	trait = "dominate"
+	trait = "bloodsorcery"
+	father = 790459
+	female = no
+	disallow_random_traits = yes
+	
+	1123.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+			set_immortal_age = 41
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 1
+			#Way of Wind 2
+		}
+	}
+
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790613 }
+		}		
+	}	
+	
+	1500.1.1 = {
+		add_trait = "auspexadvanced"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790614 = {
+	name = "Jaromir_Cerny"
+	dynasty_house = house_djavakhi
+	culture ="czech"
+	religion = "viafurores"
+	trait = "education_intrigue_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "cynical"		
+	trait = "arrogant"
+	trait = "diligent"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "dominate"
+	father = 790613
+	female = no
+	disallow_random_traits = yes
+	
+	1989.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 28
+		}	
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790339 = {
+# One liner sire of Darvag
+	name = "Vidor"
+	dna = 790339_vidor
+	dynasty_house = house_djavakhi
+	culture = "ilmenian"
+	religion = "viaferitas"
+	trait = "education_martial_prowess_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "vengeful"
+	trait = "zealous"
+	trait = "vicissitude"
+	trait = "celerity"
+	trait = "fortitudeadvanced"
+	father = 605124
+	female = no
+	disallow_random_traits = yes
+	
+	906.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 24
+		}
+        effect = {
+            add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_hair_indian_03_flag
+		}		
+	}
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofthebeast"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+790113 = {
+# "Prince" of Kiev
+# Should be in torpor post 1240 until BY awakens
+	name = "Darvag_Grozny"
+	dna = 790113_darvaggrozny
+	dynasty_house = house_djavakhi
+	culture = "russian"
+	religion = "viatantabus"
+	trait = "education_martial_prowess_4"
+	stewardship = 0
+	diplomacy = 1
+	intrigue = 2
+	martial = 10
+	prowess = 8
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "physique_good_1"
+	trait = "sadistic"		
+	trait = "vengeful"
+	trait = "wrathful"
+	trait = "vicissitude"
+	trait = "protean"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "potence"
+	father = 790339
+	female = no
+	give_nickname = nick_the_butcher_of_rus
+	disallow_random_traits = yes
+	
+	1037.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+			add_trait = vampgeneration6
+			
+			add_secret = { 
+				type = secret_diablerist
+			}			
+			
+			set_immortal_age = 66
+		}	
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+            add_character_flag = POD_portrait_male_beard_western_04_flag				
+		}		
+	}
+
+	1229.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 40
+            }
+		}			
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}				
+}
+
+# House Nagloper
+
+791182 = {
+#Prince in Kenya before modern, KotEB p11
+	name = "Tsunda"
+	dna = 791182_tsunda
+	dynasty_house = house_nagloper
+	culture = "hausa"
+	religion = "laibon"
+	trait = "education_martial_2"
+	learning = 5
+	stewardship = 5
+	intrigue = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "vengeful"		
+	trait = "sadistic"
+	trait = "deceitful"
+	trait = "animalismadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "auspexadvanced"
+	father = 790612
+	give_nickname = nick_blodletting_bastard
+	female = no
+	disallow_random_traits = yes
+	
+	569.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+			add_character_flag = POD_portrait_male_beard_sub_saharan_02_flag
+            add_character_flag = POD_portrait_no_hair_flag
+				
+			
+			#add_choleric_lifestyle_xp = 5000
+			
+			set_immortal_age = 32
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+
+791674 = {
+#Non canon filler 0 - 0
+	name = "Awo"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_martial_prowess_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "sadistic"
+	trait = "shy"
+	trait = "wrathful"
+	trait = "vicissitudeadvanced"
+	trait = "fortitudeadvanced"
+	trait = "auspexadvanced"
+	father = 791182
+	female = yes
+	give_nickname = nick_twilight_monster
+	disallow_random_traits = yes
+	
+	603.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration6			
+	
+			#add_choleric_lifestyle_xp = 2500
+			
+			set_immortal_age = 42
+		}	
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791675 = {
+#Non canon filler 1 - 1
+	name = "Kumba"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_2"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "forgiving"
+	trait = "wrathful"
+	trait = "gluttonous"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "presence"
+	mother = 791674
+	female = no
+	disallow_random_traits = yes
+	
+	738.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			add_trait = vampgeneration7
+			
+			#add_sanguine_lifestyle_xp = 2500
+			
+			set_immortal_age = 38
+		}	
+	}
+	
+	799.1.1 = {
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791678 = {
+#Non canon filler 2 - 1
+	name = "Demba"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "twin"
+	trait = "sadistic"
+	trait = "deceitful"
+	trait = "gregarious"
+	trait = "potence"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	father = 791675
+	give_nickname = nick_lonely_twin
+	female = yes
+	disallow_random_traits = yes
+	
+	921.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+				
+			add_trait = vampgeneration8
+			
+			set_immortal_age = 31
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791681 = {
+#Non canon filler 3 - 1
+	name = "Sanjan"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_stewardship_2"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "lazy"
+	trait = "humble"
+	trait = "generous"
+	trait = "auspex"
+	trait = "vicissitude"
+	trait = "presence"
+	mother = 791678
+	female = no
+	disallow_random_traits = yes
+	
+	1031.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration9			
+				
+			set_immortal_age = 38
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791686 = {
+#Non canon filler 1 - 2
+	name = "Mahecor"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "patient"
+	trait = "deceitful"
+	trait = "diligent"
+	trait = "fortitude"
+	trait = "vicissitudeadvanced"
+	trait = "animalismadvanced"
+	mother = 791674
+	give_nickname = nick_deciphering_eye
+	female = no
+	disallow_random_traits = yes
+	
+	808.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration7			
+	
+			#add_sanguine_lifestyle_xp = 2500
+			
+			set_immortal_age = 37
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791689 = {
+#Non canon filler 2 - 2
+	name = "Tasse"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_2"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "deceitful"
+	trait = "callous"
+	trait = "vengeful"
+	trait = "fortitude"
+	trait = "dominate"
+	trait = "vicissitudeadvanced"
+	father = 791686
+	female = no
+	disallow_random_traits = yes
+	
+	948.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration8			
+			
+			set_immortal_age = 51
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791682 = {
+#Non canon filler 3 - 2
+	name = "Faaduma"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "stubborn"
+	trait = "callous"
+	trait = "shy"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "vicissitude"
+	father = 791689
+	give_nickname = nick_inhuman_vice
+	female = yes
+	disallow_random_traits = yes
+	
+	1104.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration9			
+			
+			set_immortal_age = 28
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791687 = {
+#Non canon filler 1 - 3
+	name = "Malado"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_diplomacy_1"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "gregarious"
+	trait = "lazy"
+	trait = "cynical"
+	trait = "presence"
+	trait = "dominateadvanced"
+	trait = "vicissitudeadvanced"
+	mother = 791674
+	female = yes
+	disallow_random_traits = yes
+	
+	918.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration7			
+	
+			#add_phlegmatic_lifestyle_xp = 2500
+			
+			set_immortal_age = 41
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791680 = {
+#Non canon filler 2 - 3
+	name = "Mbooj"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "intellect_good_1"
+	trait = "deceitful"
+	trait = "sadistic"
+	trait = "arrogant"
+	trait = "fortitude"
+	trait = "auspex"
+	trait = "vicissitudeadvanced"
+	give_nickname = nick_vile_and_cunning
+	mother = 791687
+	female = no
+	disallow_random_traits = yes
+	
+	1005.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration8			
+			
+			set_immortal_age = 41
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+791683 = {
+#Non canon filler 3 - 3
+	name = "Yerim"
+	dynasty_house = house_nagloper
+	culture = "pulaar"
+	religion = "laibon"
+	trait = "education_learning_1"
+	trait = "vampire"
+	trait = "tzimisce"	
+	trait = "honest"
+	trait = "fickle"
+	trait = "forgiving"
+	trait = "presence"
+	trait = "vicissitude"
+	trait = "auspex"
+	father = 791680
+	female = no
+	disallow_random_traits = yes
+	
+	1200.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 19
+		}	
+	}
+
+	1229.1.1 = {
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+799913 = {
+#Mombasa Nagloper, rogue childer of Tsunda
+	name = "Shawata"
+	# dna = 799913
+	dynasty_house = house_nagloper
+	culture = "hausa"
+	religion = "laibon"
+	trait = "education_learning_3"
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "diligent"
+	trait = "cynical"
+	trait = "animalism"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "abombwe"
+	father = 791182
+	give_nickname = nick_runaway
+	female = yes
+	disallow_random_traits = yes
+	
+	672.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+
+			set_immortal_age = 18
+		}
+
+		effect = {
+			add_trait = lifestyle_physician
+			add_trait_xp = {
+                trait = lifestyle_physician
+                value = 55
+            }
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+#House Hrothgar
+
+791138 = {
+#Einherjar Tzimisce
+	name = "Hrothgar"
+        dna = 791138_hrothgar
+	dynasty_house = house_hrothgar
+	culture = "norse"
+	religion = "viaeinherjar"
+	trait = "education_intrigue_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "shy"		
+	trait = "content"
+	trait = "sadistic"
+	trait = "vicissitudeadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "proteanadvanced"
+	father = 790951
+	female = no
+	give_nickname = nick_the_fairtroll
+	disallow_random_traits = yes
+	
+	225.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 38
+			
+			#add_melancholy_lifestyle_xp = 5000
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_male_hair_western_07_flag
+            add_character_flag = POD_portrait_male_beard_mena_02_flag			
+		}			
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+# House Jedrik
+
+790936 = {
+	name = "Jedrik"
+	dynasty_house = house_jedrik
+	culture = "polish"
+	religion = "viatyrannus"
+	trait = "education_learning_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arbitrary"		
+	trait = "arrogant"
+	trait = "callous"
+	trait = "animalism"
+	trait = "auspexadvanced"
+	trait = "presence"
+	father = 790612
+	give_nickname = nick_the_scholar
+	female = no
+	disallow_random_traits = yes
+	
+	910.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			set_immortal_age = 30
+		}	
+	}
+	
+	1005.1.1 = {
+		death = {
+			death_reason = death_battle
+			}
+	}					
+}
+
+790937 = {
+#Prince of Krakow
+#Still alive by 1472 (TC2 p42)
+	name = "Razkoljna"
+    dna = 790937_razkoljna
+	dynasty_house = house_jedrik
+	culture = "polish"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	martial = 10
+	intrigue = 9
+	stewardship = 5
+	diplomacy = 10
+	prowess = 10
+	learning = 5
+	trait = "physique_good_2"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "arrogant"
+	trait = "stubborn"
+	trait = "animalism"
+	trait = "dominate"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "fortitude"
+	father = 790936
+	give_nickname = nick_diligent_autocrat
+	female = yes
+	disallow_random_traits = yes
+	
+	930.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			
+			set_immortal_age = 21
+		}
+		effect = {
+            add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp1_02_flag
+			add_character_flag = POD_portrait_no_hat_flag
+			add_character_flag = POD_portrait_no_crown_flag
+		}		
+	}
+	
+	1229.1.1 = {
+		effect = {
+			add_trait = lifestyle_blademaster
+			add_trait_xp = {
+                trait = lifestyle_blademaster
+                value = 15
+            }
+		}	
+	}
+	
+	1479.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790938
+			}
+	}					
+}
+
+790938 = {
+	name = "Zara_Slatikov"
+	dynasty_house = house_jedrik
+	dna = 790938_zara
+	culture = "polish"
+	religion = "pathofthespirit"
+	trait = "education_diplomacy_3"
+	learning = 15
+	diplomacy = 8
+	stewardship = 4
+	intrigue = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "zealous"
+	trait = "stubborn"
+	trait = "lifestyle_mystic"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "vicissitude"
+	trait = "bloodsorcery"
+	mother = 790937
+	give_nickname = nick_scholar_of_enlightenment
+	female = yes
+	disallow_random_traits = yes
+	
+	1213.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+			
+		 	add_character_flag = has_scripted_appearance
+            add_character_flag = POD_portrait_female_hair_fp2_iberian_christian_02_flag
+			
+			set_immortal_age = 24
+		}	
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			#Way of Earth 5
+			#Way of Wind 5
+			#Way of Spirit 5
+			#Way of Sorrow 5
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+		}
+	}
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		effect = {
+			remove_trait = vampgeneration7
+			add_trait = vampgeneration6
+			
+			add_secret = { 
+				type = secret_diablerist
+			}				
+		}		
+		religion = "pathofmetamorphosis"
+	}
+		
+	2005.1.1 = {
+
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}					
+}
+
+555038 = {
+	name = "Vintila_Basarab"
+	dynasty_house = house_tabak
+	culture = "vlach"
+	religion = "viamutationis"
+	trait = "education_learning_3"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"
+	trait = "patient"
+	trait = "paranoid"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "vicissitude"
+	trait = "bloodsorceryadvanced"
+	father = 555039 
+	female = no
+	disallow_random_traits = yes
+	
+	1135.1.1 = {
+		birth = yes	
+	}
+		
+	1136.1.1 = {
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_trait = vampgeneration7
+			set_immortal_age = 40
+		}
+		effect = {
+			add_character_flag = has_koldunic_bloodmagic_flag
+		}	
+		effect = {
+			assign_transylvanian_kraina_path_effect = { LEVEL = 5 }
+		}
+	}
+		
+	1215.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 555040
+			}
+	}					
+}
+
+555039 = {
+#Actually dies by diablerie from Mitru, TC1 p114
+	name = "Florescu"
+	dna = 555039_florescu
+	dynasty_house = house_tabak
+	culture = "russian"
+	religion = "pathoftheflesh"
+	trait = "education_stewardship_3"
+	trait = "ambitious"
+	trait = "sadistic"
+	trait = "trusting"
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "animalism"
+	trait = "dominate"
+	trait = "vicissitudeadvanced"
+	father = 790457
+	learning = 7
+	stewardship = 5
+	prowess = 3
+	martial = 7
+	intrigue = 3
+	diplomacy = 5
+	female = no
+	disallow_random_traits = yes
+	
+	1111.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+			add_character_flag = has_scripted_appearance	
+            add_character_flag = POD_portrait_male_hair_fp1_02_flag			
+			set_immortal_age = 24
+		}	
+	}
+	
+	1350.1.1 = {
+		death = {
+			death_reason = death_diablerie
+			killer = 790741
+		}
+	}					
+}
+
+555040 = {
+	name = "Dragomir_Basarab"
+	dynasty_house = house_tabak
+	culture = "vlach"
+	religion = "viapeccati"
+	trait = "education_martial_prowess_3"
+	martial = 6
+	intrigue = 5
+	stewardship = 8
+	learning = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "paranoid"
+	trait = "ambitious"
+	trait = "arbitrary"
+	trait = "disloyal"
+	trait = "possessed_genetic"
+	trait = "depressed_1"
+	trait = "intellect_good_1"
+	trait = "contrite"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "vicissitude"
+	trait = "obfuscate"
+	father = 555038
+	prowess = 7
+	give_nickname = nick_treacherous_childe
+	female = no
+	disallow_random_traits = yes
+	
+	1190.1.1 = {
+		birth = yes	
+	}
+	
+	1206.1.1 = {
+		add_trait = "revenant"
+	}
+	
+	1215.1.1 = {
+		remove_trait = "revenant"
+		add_trait = "vampire"
+		effect = {
+			add_character_flag = immune_to_disease
+			add_trait = vampgeneration7
+			add_secret = { 
+				type = secret_diablerist
+			}
+			set_immortal_age = 20
+		}
+	}		
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	1510.1.1 = {
+		death = {
+			death_reason = death_burned
+			}
+	}					
+}
+
+# House cyscek
+
+792056 = {
+	name = "Cyscek"
+	dynasty_house = house_cyscek
+	dna = 792056_cyscek
+	culture = "vlach"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_3"
+	intrigue = 5
+	learning = 10
+	martial = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "humble"
+	trait = "brave"
+	trait = "dominateadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "celerityadvanced"
+	trait = "presenceadvanced"
+	trait = "obfuscateadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_hidden
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+            add_character_flag = POD_portrait_male_hair_byzantine_02_flag
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 30
+		}	
+	}
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House gallod
+
+792057 = {
+	name = "Gallod"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viahumanitatis"
+	trait = "education_intrigue_2"
+	learning = 5
+	martial = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "deceitful"
+	trait = "gregarious"
+	trait = "dominateadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 36
+		}	
+	}	
+	
+	100.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 505021
+		}
+	}			
+}
+
+792135 = {
+#JbN
+	name = "Mandalay"
+	dna = 792135_mandalay
+	dynasty_house = house_gallod
+	culture = "persian"
+	religion = "viaossium"
+	trait = "education_intrigue_4"
+	learning = 9
+	martial = 8
+	intrigue = 3
+	prowess = 15
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "necromancy" 
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	trait = "celerityadvanced"
+	trait = "valerenadvanced"
+	father = 792057
+	give_nickname = nick_the_plague
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+			
+			add_character_flag = has_scripted_appearance
+            add_character_flag = POD_no_beard_flag
+			add_character_flag = POD_portrait_no_hair_flag
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 25
+			
+			add_character_flag = has_cappadocian_necromancy_flag
+			assign_graves_decay_effect = { LEVEL = 1 RITUAL = no} 				
+		}	
+	}	
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792419 = {
+#Black Monastery
+	name = "Vadislava"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viaossium"
+	trait = "education_intrigue_3"
+	learning = 9
+	intrigue = 5
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "beauty_good_2"
+	trait = "arrogant"		
+	trait = "deceitful"
+	trait = "diligent"
+	trait = "vicissitude"
+	trait = "auspex"
+	trait = "animalism"
+	father = 792135
+	give_nickname = nick_proud_predator
+	female = yes
+	disallow_random_traits = yes
+	
+	1460.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 32
+		}	
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofdeathandthesoul"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792180 = {
+#Libellus Sanguinus I
+	name = "Boleslav_Volhyny"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_2"
+	learning = 8
+	martial = 5
+	intrigue = 8
+	stewardship = 5
+	diplomacy = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "calm"
+	trait = "sadistic"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "auspex"
+	father = 792135
+	give_nickname = nick_perfect_host
+	female = no
+	disallow_random_traits = yes
+	
+	556.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 46
+		}	
+	}	
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792181 = {
+#Libellus Sanguinus I
+	name = "Borivoj"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_martial_prowess_3"
+	learning = 7
+	prowess = 6
+	martial = 8
+	intrigue = 8
+	stewardship = 5
+	diplomacy = 3
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "content"
+	trait = "sadistic"
+	trait = "giant"
+	trait = "auspex"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	father = 792180
+	female = no
+	disallow_random_traits = yes
+	
+	781.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 32
+		}	
+	}	
+	
+	799.1.1 = {
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792182 = {
+#Libellus Sanguinus I
+	name = "Oleg"
+	dynasty_house = house_gallod
+	culture = "severian"
+	religion = "viaquiritare"
+	trait = "education_intrigue_3"
+	learning = 5
+	prowess = 5
+	martial = 3
+	intrigue = 5
+	stewardship = 3
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "impatient"		
+	trait = "wrathful"
+	trait = "sadistic"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "vicissitudeadvanced"
+	father = 792180
+	female = no
+	disallow_random_traits = yes
+	
+	816.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 22
+		}	
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792183 = {
+#Libellus Sanguinus I
+	name = "Ludmilla"
+	dynasty_house = house_gallod
+	culture = "volhynian"
+	religion = "viaregalis"
+	trait = "education_intrigue_2"
+	learning = 9
+	intrigue = 6
+	stewardship = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "shy"		
+	trait = "diligent"
+	trait = "callous"
+	trait = "presence"
+	trait = "dominate"
+	trait = "vicissitudeadvanced"
+	father = 792180
+	female = yes
+	disallow_random_traits = yes
+	
+	919.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 19
+		}	
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+792482 = {
+#Traitor Danislav, betrays his family to the Tzimisce for embrace
+#Transylvania by night
+#Actually named Vikto (TC2 p17)
+	name = "Vikto_Danislav"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_intrigue_3"
+	learning = 6
+	intrigue = 5
+	stewardship = 8
+	martial = 7
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "deceitful"		
+	trait = "ambitious"
+	trait = "callous"
+	trait = "disloyal"
+	trait = "auspex"
+	trait = "protean"
+	trait = "vicissitudeadvanced"
+	mother = 792183
+	give_nickname = nick_the_traitor
+	female = no
+	disallow_random_traits = yes
+	
+	1399.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 33
+		}	
+	}	
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792184 = {
+#Libellus Sanguinus I
+	name = "Drahomira"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_diplomacy_2"
+	learning = 6
+	intrigue = 8
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "gregarious"		
+	trait = "lustful"
+	trait = "sadistic"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "vicissitude"
+	father = 792180
+	female = yes
+	disallow_random_traits = yes
+	
+	1011.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 29
+		}	
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+792549 = {
+#SL Tribebook, foe of Alexandru
+	name = "Mikhail_Dombrescu"
+	dynasty_house = house_gallod
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_diplomacy_3"
+	learning = 6
+	intrigue = 8
+	stewardship = 7
+	diplomacy = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "gregarious"		
+	trait = "ambitious"
+	trait = "deceitful"
+	trait = "auspex"
+	trait = "dominate"
+	trait = "vicissitude"
+	mother = 792184
+	give_nickname = nick_the_unifier
+	female = no
+	disallow_random_traits = yes
+	
+	1086.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 36
+		}	
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+795150 = {
+#DA CN Tzimisce, just a tzimisce prince
+	name = "Boleslaus"
+	dynasty_house = house_gallod
+	culture = "croatian"
+	religion = "viatyrannus"
+	trait = "education_stewardship_2"
+	learning = 6
+	intrigue = 5
+	stewardship = 3
+	diplomacy = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "just"
+	trait = "lazy"
+	trait = "animalism"
+	trait = "dominate"
+	trait = "vicissitude"
+	father = 792549
+	female = no
+	disallow_random_traits = yes
+	
+	1121.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 45
+		}	
+	}	
+
+	1229.1.1 = {
+	}
+		
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+		
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+
+# House ionache
+
+792058 = {
+	name = "Ionache"
+	dynasty_house = house_ionache
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	intrigue = 10
+	learning = 5
+	stewardship = 7
+	martial = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arbitrary"		
+	trait = "wrathful"
+	trait = "ambitious"
+	trait = "torpor"
+	trait = "dominateadvanced"
+	trait = "potenceadvanced"
+	trait = "fortitudeadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "presenceadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	give_nickname = nick_the_first_voivode
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 39
+		}	
+	}
+	
+	799.1.1 = {
+		add_pressed_claim = title:e_voivodate
+	}	
+
+	1229.1.1 = {
+	}
+	
+	1230.1.4 = {
+		employer = 790948
+	}
+			
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}			
+}
+
+# House toomler
+
+792059 = {
+	name = "Toomler"
+	dynasty_house = house_toomler
+	culture = "vlach"
+	religion = "pathoftheflesh"
+	trait = "education_learning_2"
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "fickle"		
+	trait = "deceitful"
+	trait = "shy"
+	trait = "dominateadvanced"
+	trait = "potenceadvanced"
+	trait = "presenceadvanced"
+	trait = "vicissitudeadvanced"
+	trait = "vampgeneration4"
+	father = 505021
+	female = no
+	disallow_random_traits = yes
+	
+	60.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 36
+		}	
+	}	
+	
+	456.1.1 = {
+		death = {
+			death_reason = death_murder
+		}
+	}			
+}
+
+792416 = {
+#One liner sire of Valenko
+	name = "Laanto_Dormotji"
+	dynasty_house = house_toomler
+	culture = "vlach"
+	religion = "pathofthespirit"
+	trait = "education_learning_2"
+	intrigue = 5
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "deceitful"
+	trait = "callous"
+	trait = "dominateadvanced"
+	trait = "animalismadvanced"
+	trait = "presenceadvanced"
+	trait = "vicissitudeadvanced"
+	father = 792059
+	female = no
+	disallow_random_traits = yes
+	
+	80.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration5
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 46
+		}	
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1477.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 792417
+		}
+	}			
+}
+
+
+792478 = {
+#Transylvania by Night, rival of Basilio
+	name = "Gabor"
+	dynasty_house = house_toomler
+	culture = "bulgarian"
+	religion = "viatyrannus"
+	trait = "education_intrigue_2"
+	intrigue = 5
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "deceitful"
+	trait = "ambitious"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitudeadvanced"
+	father = 792416
+	female = no
+	disallow_random_traits = yes
+	
+	881.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 51
+		}	
+	}	
+	
+	1229.1.1 = {
+		add_pressed_claim = title:d_turnovo	
+	}
+	
+	1456.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = 791451
+		}
+	}			
+}
+
+792620 = {
+#One liner sire of Mircea
+	name = "Gerlo"
+	dynasty_house = house_toomler
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_intrigue_2"
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "paranoid"
+	trait = "callous"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitude"
+	father = 792478
+	female = no
+	disallow_random_traits = yes
+	
+	917.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 39
+		}	
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792497 = {
+#TC1 full sheet
+	name = "Mircea_Dzardescu"
+	dynasty_house = house_toomler
+	culture = "vlach"
+	religion = "viatyrannus"
+	trait = "education_stewardship_3"
+	diplomacy = 6
+	martial = 8
+	stewardship = 6
+	intrigue = 7
+	learning = 9
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "intellect_good_1"
+	trait = "arrogant"		
+	trait = "gregarious"
+	trait = "ambitious"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitude"
+	father = 792620
+	give_nickname = nick_protector_dzardrev
+	female = no
+	disallow_random_traits = yes
+	
+	1113.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 39
+		}	
+	}	
+	
+	1229.1.1 = {
+		effect = {
+			set_relation_rival = { reason = rival_historical target = character:790460 }
+		}
+	}
+	
+	1500.1.1 = {
+		religion = "pathofpowerandtheinnervoice"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+793032 = {
+#CN DA Setite, desc p245
+	name = "Djula"
+	dynasty_house = house_toomler
+	culture = "serbian"
+	religion = "viamutationis"
+	trait = "education_diplomacy_3"
+	diplomacy = 7
+	stewardship = 6
+	intrigue = 7
+	learning = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "patient"		
+	trait = "gregarious"
+	trait = "callous"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitude"
+	father = 792497
+	female = yes
+	disallow_random_traits = yes
+	
+	1126.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration8
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 31
+		}	
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+		religion = "pathofmetamorphosis"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+795147 = {
+#DA CN Tzimisce, main advisor of Symeon but not of his lineage 
+	name = "Eudokhia"
+	dynasty_house = house_toomler
+	culture = "greek"
+	religion = "viacaeli"
+	trait = "education_stewardship_3"
+	diplomacy = 8
+	stewardship = 6
+	intrigue = 8
+	learning = 6
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "diligent"		
+	trait = "arrogant"
+	trait = "callous"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitude"
+	mother = 793032
+	female = yes
+	disallow_random_traits = yes
+	
+	1155.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration9
+			
+			set_immortal_age = 33
+		}	
+	}	
+	
+	1229.1.1 = {
+	}
+	
+	1500.1.1 = {
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+
+792434 = {
+#One liner sire of Jack
+	name = "Agatha_of_Maidstone"
+	dynasty_house = house_toomler
+	culture = "english"
+	religion = "viaquiritare"
+	trait = "education_diplomacy_2"
+	learning = 5
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "arrogant"		
+	trait = "patient"
+	trait = "callous"
+	trait = "dominate"
+	trait = "animalism"
+	trait = "vicissitude"
+	father = 792416
+	female = yes
+	disallow_random_traits = yes
+	
+	1203.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 36
+		}	
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofcathari"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}
+
+792435 = {
+#Vitel's BFF
+	name = "Jack"
+	dynasty_house = house_toomler
+	culture = "english"
+	religion = "viatyrannus"
+	trait = "education_martial_prowess_4"
+	intrigue = 10
+	diplomacy = 5
+	stewardship = 5
+	martial = 10
+	learning = 8
+	prowess = 10
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "callous"		
+	trait = "patient"
+	trait = "zealous"
+	trait = "obfuscate"
+	trait = "animalism"
+	trait = "vicissitude"
+	trait = "celerity"
+	trait = "auspex"
+	give_nickname = nick_hand_emperor	
+	mother = 792434
+	female = no
+	disallow_random_traits = yes
+	
+	1250.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration7
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 33
+		}	
+	}
+
+	1450.1.1 = {
+		effect = {
+			set_relation_best_friend = { reason = best_friend_counsel_and_support target = character:505141 }
+			}
+	}
+	
+	1500.1.1 = {
+	}
+	
+	1999.1.1 = {	
+		death = {
+			death_reason = death_duel
+			killer = 790608
+			}
+	}		
+			
+}
+
+792417 = {
+#Chaos factor
+#Changed Embrace date to avoid issues
+	name = "Valenko_Dmiritav"
+	dynasty_house = house_toomler
+	culture = "vlach"
+	religion = "pathoftheflesh"
+	trait = "education_learning_3"
+	intrigue = 9
+	learning = 7
+	trait = "vampire"
+	trait = "tzimisce"
+	trait = "cynical"		
+	trait = "deceitful"
+	trait = "vengeful"
+	trait = "animalism"
+	trait = "auspex"
+	trait = "vicissitude"
+	father = 792416
+	give_nickname = nick_vengeful_mage
+	female = no
+	disallow_random_traits = yes
+	
+	1472.1.1 = {
+		birth = yes
+		effect = {
+			add_character_flag = immune_to_disease
+
+			add_trait = vampgeneration6
+	
+			#add_melancholy_lifestyle_xp = 10000
+			#add_animal_lifestyle_xp = 10000
+			
+			set_immortal_age = 24
+		}	
+	}	
+	
+	1500.1.1 = {
+		religion = "pathofhonorableaccord"
+	}
+	
+	2005.1.1 = {	
+	}		
+	
+	2200.1.1 = {
+		death = yes 
+	}		
+}

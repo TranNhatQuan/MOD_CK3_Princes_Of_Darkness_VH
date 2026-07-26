@@ -1,0 +1,61 @@
+﻿# Only integrated splat for now
+POD_race_pregnancy_compatibility_with_character_trigger = {
+	trigger_if = {
+		limit = { POD_race_pregnancy_trigger = yes } 
+		$CHARACTER$ = { POD_race_fertility_care_trigger = yes }
+	}
+
+	trigger_if = {
+		limit = { POD_race_fertility_care_trigger = yes }
+		$CHARACTER$ = { POD_race_pregnancy_trigger = yes }
+	}
+}
+
+# This splat can pregnate, Used to allow pregnancy event
+POD_race_pregnancy_trigger = {
+	OR = {
+		is_thinblooded_trigger = yes
+		has_trait = kueijin
+		has_trait = dhampyr
+		has_trait = supehunter
+		has_trait = mortal
+		has_trait = ghoul
+		has_trait = revenant
+		has_trait = mummy
+		has_trait = fera
+		has_trait = kinfolk
+		has_trait = mage
+		has_trait = kithain
+		has_trait = jinn
+		has_trait = african_kiths
+		has_trait = phyla
+		has_trait = kinain
+		has_trait = laham
+		has_trait = nephilim
+		has_trait = dhampir
+	}
+}
+
+# This splat care about fettility, Used to add opinion of no fertilty
+POD_race_fertility_care_trigger = {
+	OR = {
+		has_trait = supehunter
+		has_trait = mortal
+		has_trait = ghoul
+		has_trait = revenant
+		has_trait = mummy
+		has_trait = fera
+		has_trait = kinfolk
+		has_trait = mage
+		has_trait = kithain
+		has_trait = jinn
+		has_trait = african_kiths
+		has_trait = phyla
+		has_trait = kinain
+		has_trait = dhampyr
+		has_trait = laham
+		has_trait = nephilim
+		has_trait = dhampir
+		has_trait = kueijin
+	}
+}

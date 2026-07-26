@@ -1,0 +1,36 @@
+﻿PODcustom_vampire_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+	}
+
+
+	decision_group_type = pod_customization
+    ai_check_interval = 0
+
+    is_shown = {
+		NOT = {
+			has_character_flag = POD_used_character_generator
+		}
+		
+		years_from_game_start < 1
+	}
+    
+    desc = podintroductions.2001.e
+
+    effect = {
+	
+		trigger_event = POD_chargen.1
+		
+		custom_tooltip = PODcustom_vampire_decision_tooltip
+		
+		add_character_flag = POD_used_character_generator
+	}	
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

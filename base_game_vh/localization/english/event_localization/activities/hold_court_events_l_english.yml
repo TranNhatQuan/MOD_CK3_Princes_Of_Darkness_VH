@@ -1,0 +1,51 @@
+﻿l_english:
+ hold_court_placeholder_gain_cgv:0 "Ngươi nhận #P 10#! Uy Nghi Triều Đình"
+ hold_court_placeholder_lose_cgv:0 "Ngươi mất #N 10#! Uy Nghi Triều Đình"
+ hold_court_start_activity:0 "Ngươi lắng nghe người thỉnh cầu đầu tiên"
+
+ hold_court_header:0 "Thiết Triều:"
+
+ # Activity Start
+ hold_court.0001.t:0 "$hold_court_header$ Khai Triều"
+ hold_court.0001.desc:0 "Ngồi trên ngai vàng, ta ra hiệu cho lính canh mở cửa đại sảnh. Một dòng người tiến vào, vài kẻ xếp hàng trước ngai của ta trong khi những người khác đứng sang bên để quan sát buổi thiết triều.\n\nSau một lúc, mọi chuyển động trong điện đều dừng lại, mọi ánh mắt đều hướng về ta đầy mong đợi. Trước mặt ta có [ROOT.Var('num_petitioners').GetValue|V0] người thỉnh cầu đứng thành một hàng chỉnh tề, chờ ta gọi tới."
+ hold_court.0001.a:0 "Ra hiệu cho người đầu hàng tiến lên."
+ hold_court.0001.b:0 "Nghĩ lại thì... hôm nay thời tiết ngoài kia thật đẹp..."
+ hold_court.0001.b.tooltip:0 "Buổi thiết triều kết thúc và ngươi cho các người thỉnh cầu ra về"
+
+ # Guest offers to share rumors from a nearby foreign realm.
+ hold_court.1001.t:0 "Gián Điệp Gián Tiếp"
+ hold_court.1001.desc:0 "Khách mời [rumormonger.GetTitledFirstName] tiếp cận ngai vàng của ta với một cái nhếch mép trên khuôn mặt [rumormonger.GetHerHis] và cúi chào sâu.\n\n\"Xin chào, bệ hạ. Trong chuyến đi gần đây của ta đến [neighboring_realm.GetName], ta đã học được một vài mẩu tin #EMP thú vị#! về một vài thần dân của [neighboring_ruler.GetTitledFirstNamePossessive]. Ta rất vui được chia sẻ những điều này với người... với một cái giá.\""
+ hold_court.1001.a:0 "Một cái giá không nhỏ, nhưng ta không thể để mình mù tịt."
+ hold_court.1001.a.seducer:0 "Có lẽ chúng ta có thể sắp xếp theo cách khác?"
+ hold_court.1001.a.success:0 "Thông tin của [rumormonger.GetTitledFirstNamePossessive] chứa đựng tài liệu tống tiền có giá trị"
+ hold_court.1001.a.success.tt:0 "[rumormonger.GetTitledFirstName] tiết lộ mọi [secret|E] liên quan mà [rumormonger.GetSheHe] biết cho ngươi"
+ hold_court.1001.a.failure:0 "Thông tin của [rumormonger.GetTitledFirstNamePossessive] không gì khác hơn là những lời đồn thổi nhàn rỗi"
+ hold_court.1001.a.failure.tt:0 "[rumormonger.GetTitledFirstName] thực ra không biết bất kỳ [secrets|E] nào đáng kể"
+ hold_court.1001.b:0 "Không ai dám tống tiền ta ngay trước triều đình của ta! Lính đâu, bắt lấy [rumormonger.GetHerHim]!"
+ hold_court.1001.c:0 "Cút đi, kẻ buôn chuyện! Triều đình của ta không có chỗ cho hạng như ngươi!"
+
+ # Wandering claimant asks you to press their claim NOW!!
+ hold_court.1011.t:1 "Một Yêu Sách Dẫn Đến Chiến Tranh"
+ hold_court.1011.desc:0 "\"Ôi [ROOT.Char.GetTitledFirstNameNoTooltip] hào hiệp, ta là [claimant_guest.GetFirstName], đã đi đường xa để cầu xin ngài giúp ta sửa lại một bất công lớn!\"\n\nNgười [claimant_guest.GetWomanMan] trước mặt ta cúi chào thật sâu trước khi tiếp tục lời cầu xin đã luyện tập kỹ càng của [claimant_guest.GetHerHis]. \"[target_character.Custom2('MyCharacterIntroduction', claimant_guest)|U] hiện đang ngồi trên ngai của [target_title.GetNameNoTier], nhưng ta mới là kẻ cai trị chân chính của vùng đất ấy!\"\n\n\"Nếu ngài giúp ta thực thi yêu sách của mình, ta sẽ thề trung thành với ngài và phụng sự ngài đến hết đời.\""
+ hold_court.1011.a:1 "Trong vòng một năm, ta sẽ giúp ngươi thực thi yêu sách!"
+ hold_court.1011.b:0 "Hãy rời đi ngay — ta không thể mạo phạm [target_character.GetTitleAsNameNoTooltip]."
+ hold_court.1011.c:0 "Ta không thể giúp ngươi, nhưng hãy tận hưởng lòng hiếu khách của ta."
+
+ # Peasant begs for relief after a drought/early frost/etc.
+ hold_court.1021.t:0 "Bụi Tro Trở Về Bụi Tro"
+ hold_court.1021.desc:0 "Một người nông dân gầy gò, rách rưới đứng trước mặt ta, nhìn chằm chằm vào sự sang trọng của phòng ngai vàng. Rõ ràng là đang phân tâm, ta gọi [peasant.GetHerHim] để thu hút sự chú ý của [peasant.GetHerHis].\n\n\"Ồ, xin lỗi, [ROOT.Char.Custom('FormOfAddressForLiege')]. Ta, ừm... Ngôi làng của ta ở [county.GetNameNoTier] bị bệnh bạc lá trong năm nay. Chúng ta không chỉ mất mùa màng mà còn mất cả hạt giống. Chúng ta không có gì cả, chúng ta sẽ chết đói nếu không có sự giúp đỡ!\"\n\nNhìn quanh phòng ngai vàng của ta một lần nữa, [peasant.GetSheHe] nói thêm \"Chắc chắn ngài có dư thừa của cải chứ?\""
+ hold_court.1021.a:0 "Ngươi sẽ có số tiền cần thiết để khôi phục."
+ hold_court.1021.a.stewardship:0 "Hãy lập hệ thống chia sẻ mùa màng với các làng lân cận."
+ hold_court.1021.b:1 "Ngươi sẽ trả nợ bằng phục dịch."
+ hold_court.1021.c:0 "Nếu ruộng đồng cằn cỗi, ngươi hãy cầm lấy gươm."
+ county_or_15_dev: "[county.GetName] và mọi [county|E] trong [realm|E] có [development|E] từ 15 trở xuống"
+
+ # Activity End
+ hold_court.0021.t:0 "$hold_court_header$ Kết Triều"
+ hold_court.0021.desc:0 "Khi người thỉnh cầu cuối cùng rời đi, nhiều cận thần cũng theo họ ra khỏi đại điện để lo công việc khác. Những người còn lại đứng lại, bàn tán với nhau về những việc vừa diễn ra.\n\nChẳng bao lâu sau, sự trang nghiêm của buổi thiết triều cũng tan biến, nhường chỗ cho nhịp sống bình thường của triều đình."
+ hold_court.0021.a:0 "Công việc của ta ở đây đã xong."
+ hold_court.0021.arrogant:0 "Thật tốt khi để thần dân chiêm ngưỡng uy nghi của ta."
+ hold_court.0021.shy:0 "Ta chỉ muốn trở về phòng mình càng sớm càng tốt..."
+ hold_court.0021.gregarious:0 "Đây có vẻ là dịp tốt để giao lưu với triều đình."
+ hold_court.0021.every_guest_and_courtier:0 "Mọi Khách và Cận Thần:"
+ hold_court_1001_pool_tt: "[rumormonger.GetShortUIName] rời khỏi [court|E] của ngươi"

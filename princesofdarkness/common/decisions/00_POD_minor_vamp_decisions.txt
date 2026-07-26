@@ -1,0 +1,307 @@
+﻿
+invite_ashen_prospect_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_invite_knights.dds"
+	}
+
+
+	decision_group_type = pod_splat
+	ai_check_interval = 360
+	
+	
+	
+	is_shown = {
+		is_playable_character = yes
+		exists = dynasty
+	    OR = {
+		    dynasty = {
+			    has_dynasty_perk = ashen_nobles_legacy_5
+			}
+			dynasty = {
+			    has_dynasty_perk = ashen_knights_legacy_5
+			}
+			dynasty = {
+			    has_dynasty_perk = ashen_seneschals_legacy_5
+			}
+			dynasty = {
+			    has_dynasty_perk = ashen_thieves_legacy_5
+			}
+			dynasty = {
+			    has_dynasty_perk = ashen_cults_legacy_5
+			}
+		}
+	}
+		
+	cooldown = { years = 35 }			
+	
+	desc = invite_ashen_prospect_decision_desc
+
+
+	effect = {
+	    trigger_event = POD_ashen_prospect.001
+		custom_tooltip = invite_ashen_prospect_decision_effect_tooltip
+	}
+
+	cost = { prestige = 500 }
+	cost = { gold = 800 }
+
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+		    add = 80
+			AND = {
+			    gold > 1000
+				prestige > 800
+			}
+		}
+	}
+}
+
+challenge_house_head_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/fp3/antagonistic.dds"
+	}
+
+	desc = challenge_house_head_decision_desc
+	decision_group_type = house_unity
+	is_invisible = yes
+	ai_check_interval = 0
+	
+	is_shown = {
+		is_ai = no
+		government_has_flag = government_uses_vampire_unity
+		exists = house
+		exists = house.house_head
+		is_house_head = no	
+	}
+	
+	cost = { prestige = 500 }
+
+	is_valid = {
+		is_house_head = no				
+	}
+	
+	effect = {
+		root.house ?= {
+			house_head = { save_scope_as = challenged_house_head }
+		}
+	    trigger_event = POD_diarchy_events.0005
+		custom_tooltip = challenge_house_head_decision_effect_tooltip
+	}
+
+}	
+
+suicide_by_diablerie_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+	}
+
+
+	decision_group_type = pod_splat	
+	ai_check_interval = 0
+	
+	is_shown = {
+		is_ai = no
+		exists = player_heir
+		faith = faith:jocastian
+	}
+
+	is_valid = {
+		player_heir = { faith = faith:jocastian }
+	}
+
+	is_valid_showing_failures_only = {
+		not = { exists = involved_activity }
+		is_imprisoned = no
+		is_commanding_army = no
+	}
+	
+	effect = {
+		save_scope_as = cloned_character
+		save_scope_as = willing_diablerie
+		player_heir = { 
+			POD_copy_supernatural_lifestyle_perks_effect = yes
+			POD_diablerie_effect = { VICTIM = root } 
+		}
+	}
+}
+
+change_predatortype_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+	}
+
+
+	desc = change_predatortype_decision_desc
+	decision_group_type = pod_customization
+	ai_check_interval = 0
+	
+	cooldown = { years = 50 }
+	
+	is_shown = {
+		has_trait = vampire
+		NOT = { has_character_flag = POD_change_predatortype_flag }
+		is_mnemachien_trigger = no # Mnemachien are always Consensualists
+	}
+
+	effect = {
+		custom_tooltip = change_predatortype_decision_tt.1
+		custom_tooltip = change_predatortype_decision_tt.3
+		add_character_flag = {
+			flag = POD_change_predatortype_flag
+			years = 50
+		}
+		trigger_event = POD_change_predatortype.1
+	}
+}
+
+sacrifice_perk_from_obtenebration_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_POD_obtenebration.dds"
+	}
+
+	decision_group_type = pod_splat
+
+	desc = sacrifice_perk_from_obtenebration_decision_desc
+
+	ai_check_interval = 0
+	
+	cooldown = { years = 5 }
+	
+	is_shown = {
+		has_trait = vampire
+		NOT = { has_perk = abyssal_mysticism_level_5_perk }
+		has_trait = obtenebrationadvanced
+		
+	}
+
+	is_valid_showing_failures_only = {
+		has_abyssal_mysticism_bloodmagic_trigger = yes
+	}
+
+	effect = {
+		POD_decrease_discipline_obtenebration_effect = yes
+		if = { limit = { has_perk = abyssal_mysticism_level_4_perk } assign_abyssal_mysticism_effect = { LEVEL = 5 } }
+		else_if = { limit = { has_perk = abyssal_mysticism_level_3_perk } assign_abyssal_mysticism_effect = { LEVEL = 4 } }
+		else_if = { limit = { has_perk = abyssal_mysticism_level_2_perk } assign_abyssal_mysticism_effect = { LEVEL = 3 } }
+		else_if = { limit = { has_perk = abyssal_mysticism_level_1_perk } assign_abyssal_mysticism_effect = { LEVEL = 2 } }
+		else = { assign_abyssal_mysticism_effect = { LEVEL = 1 } }
+	}
+}
+
+daimyos_presence_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+	}
+
+	decision_group_type = pod_splat
+
+	desc = daimyos_presence_decision_desc
+
+	ai_check_interval = 0
+
+	is_shown = {
+		has_perk = kai_elder_2_perk
+		has_kai_trigger = yes
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = daimyos_presence_decision_effect
+			trigger_event = POD_kai.100
+		}
+		custom_tooltip = daimyos_presence_decision_effect_2
+	}
+}
+
+vaulderie_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+		#reference = "gfx/interface/illustrations/decisions/mpo_decision_confederation_night.dds"
+	}
+
+	decision_group_type = pod_splat
+	
+	desc = vaulderie_decision_desc
+
+	ai_check_interval = 0
+
+	is_shown = {
+		faith = {
+			OR = {
+				has_doctrine_parameter = can_perform_vaulderie
+				# better clarity if this was tooltipped somewhere, like in a special doctrine. but eh
+				religion = religion:sabbat_religion
+			}
+		}
+		has_vampire_blood_race_trigger = yes
+	}
+	
+	is_valid = {
+		POD_has_coterie_trigger = yes
+		custom_tooltip = {
+			text = vaulderie_decision_is_valid
+			any_relation = {
+				type = coterie_member
+				NOT = { has_character_modifier = POD_vinculum_modifier }
+			}
+		}
+	}
+
+	effect = {
+		POD_vaulderie_effect = yes
+	}
+}
+
+overwork_capital_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+		#reference = "gfx/interface/illustrations/decisions/tgp_great_project_night.dds"
+	}
+
+	decision_group_type = pod_splat
+	
+	desc = overwork_capital_decision_desc
+	
+	cooldown = { days = 1825 }
+	cost = { prestige = 150 }
+
+	is_shown = {
+		faith = {
+			has_doctrine_parameter = overwork_capital_unlocked
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_landed = yes
+	}
+
+	effect = {
+		send_interface_toast = {
+			type = event_toast_effect_neutral
+			title = tenet_cruelty_of_stars_name
+			left_icon = capital_province.county
+			
+			capital_province.county ?= {
+				add_county_modifier = {
+					modifier = POD_county_overworked_modifier
+					years = 5
+				}
+			}
+			if = {
+				limit = { is_ai = no }
+				POD_masquerade_exposure_increase_multiple_effect = { AMOUNT = 2 }
+			}
+		}
+	}
+
+	ai_check_interval_by_tier = {
+		barony = 0
+		county = 1825
+		duchy = 1825
+		kingdom = 1825
+		empire = 1825
+		hegemony = 1825
+	}
+}

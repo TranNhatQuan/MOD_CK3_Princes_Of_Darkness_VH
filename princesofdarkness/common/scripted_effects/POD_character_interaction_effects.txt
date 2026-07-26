@@ -1,0 +1,99 @@
+﻿POD_teleport_army_interaction_effect = {
+	scope:actor = {
+		custom_description = {
+			text = POD_teleport_army_tt
+			object = scope:recipient.location.barony
+			commanding_army = {
+				set_army_location = scope:recipient.location
+			}
+		}
+	}
+}
+
+POD_teleport_travel_interaction_effect = {
+	scope:actor = {
+		custom_description = {
+			text = POD_teleport_travel_tt
+			object = scope:actor.current_travel_plan.next_destination_province.barony
+			current_travel_plan ?= {
+				# temporarily disable points of interest so they don't get collected on the way
+				every_future_path_location = {
+					limit = { NOT = { this = prev.next_destination_province } }
+					POD_travel_poi_injector = {
+						EFFECT = POD_temporarily_remove_poi
+					}
+				}
+				add_destination_progress = { years = 9999 }
+			}
+		}
+	}
+}
+
+POD_temporarily_remove_poi = {
+	if = {
+		limit = { has_travel_point_of_interest = $POI$ }
+		remove_travel_point_of_interest = $POI$
+		save_scope_value_as = {
+			name = removed_poi
+			value = flag:$POI$
+		}
+		trigger_event = { id = POD_maintenance.30 days = 1 }
+	}
+}
+
+POD_restore_poi_after_teleport = {
+	if = {
+		limit = { scope:removed_poi = flag:$POI$ }
+		add_travel_point_of_interest = $POI$
+	}
+}
+
+# Scheme scope
+POD_glimpses_of_murder_effect = {
+	every_player = {
+		limit = {
+			NOT = { this = scope:owner }
+			NOT = { this = scope:target }
+			POD_can_predict_schemes_trigger = yes
+			OR = {
+				has_any_good_relationship_with_character_trigger = { CHARACTER = scope:target }
+				is_consort_of = scope:target
+				is_close_or_extended_family_of = scope:target
+			}
+		}
+		send_interface_message = {
+			type = event_generic_bad_text
+			title = pod_glimpses_kill.t
+			desc = pod_glimpses_kill.desc
+			left_icon = scope:owner
+			right_icon = scope:target
+		}
+	}
+}
+
+# Scheme scope
+POD_glimpses_of_seduction_effect = {
+	every_player = {
+		limit = {
+			NOT = { this = scope:owner }
+			NOT = { this = scope:target }
+			POD_can_predict_schemes_trigger = yes
+			OR = {
+				has_relation_lover = scope:target
+				has_relation_soulmate = scope:target
+				is_consort_of = scope:target
+				
+				has_relation_lover = scope:owner
+				has_relation_soulmate = scope:owner
+				is_consort_of = scope:owner
+			}
+		}
+		send_interface_message = {
+			type = event_generic_bad_text
+			title = pod_glimpses_love.t
+			desc = pod_glimpses_love.desc
+			left_icon = scope:owner
+			right_icon = scope:target
+		}
+	}
+}

@@ -1,0 +1,260 @@
+﻿
+POD_awaken_true_jade_interaction = {
+	category = interaction_category_fae
+	icon = POD_art_interaction
+	desc = POD_awaken_true_jade_interaction_desc
+	options_heading = POD_awaken_true_jade_interaction_options_heading
+	
+	cost = { gold = 50 }
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			OR = {
+				has_perk = tieh_tan_awaken_true_jade_perk
+				has_perk = lin_tan_awaken_true_jade_perk
+				has_perk = shui_tan_awaken_true_jade_perk
+				has_perk = hou_tan_awaken_true_jade_perk
+				has_perk = di_tan_awaken_true_jade_perk
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			# formerly chi cost 1 (0.5 glamour)
+			POD_has_enough_glamour_for_fae_art = { AMOUNT = 1 }
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_valid = { scope:actor = { has_perk = lin_tan_awaken_true_jade_perk } }
+		flag = dragon_jade
+		localization = POD_awaken_true_jade_interaction_option_dragon_jade
+	}
+	
+	send_option = {
+		is_valid = { scope:actor = { has_perk = hou_tan_awaken_true_jade_perk } }
+		flag = feng_jade
+		localization = POD_awaken_true_jade_interaction_option_feng_jade
+	}
+	
+	send_option = {
+		is_valid = { scope:actor = { has_perk = tieh_tan_awaken_true_jade_perk } }
+		flag = tiger_jade
+		localization = POD_awaken_true_jade_interaction_option_tiger_jade
+	}
+	
+	send_option = {
+		is_valid = { scope:actor = { has_perk = shui_tan_awaken_true_jade_perk } }
+		flag = tortoise_jade
+		localization = POD_awaken_true_jade_interaction_option_tortoise_jade
+	}
+	
+	send_option = {
+		is_valid = { scope:actor = { has_perk = di_tan_awaken_true_jade_perk } }
+		flag = mandarin_jade
+		localization = POD_awaken_true_jade_interaction_option_mandarin_jade
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			# formerly chi cost 1 (0.5 glamour)
+			POD_glamour_cost_effect = { COUNT = 1 }
+			duel = {
+				desc = bunk.duel.desc
+				skill = stewardship
+				value = low_skill_rating
+				50 = {
+					desc = POD_shared_loca_success
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					switch = {
+						trigger = yes
+						scope:dragon_jade	= { create_artifact_dragon_jade_effect = { OWNER = scope:actor } }
+						scope:feng_jade		= { create_artifact_feng_jade_effect = { OWNER = scope:actor } }
+						scope:tiger_jade	= { create_artifact_tiger_jade_effect = { OWNER = scope:actor } }
+						scope:tortoise_jade	= { create_artifact_tortoise_jade_effect = { OWNER = scope:actor } }
+						scope:mandarin_jade	= { create_artifact_mandarin_jade_effect = { OWNER = scope:actor } }
+					}
+				}
+				50 = {
+					desc = POD_shared_loca_failure
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					POD_bunk_failure_modifier = yes
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_transmute_metal_interaction = {
+	category = interaction_category_fae
+	icon = POD_art_interaction
+	desc = POD_transmute_metal_interaction_desc
+	
+	cooldown = { years = 3 }
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { has_perk = transmute_metal_perk }
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_glamour_for_fae_art = { AMOUNT = 4 }
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			duel = {
+				desc = bunk.duel.desc
+				skill = intrigue
+				value = high_skill_rating
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_gold = massive_gold_value
+					POD_glamour_cost_effect = { COUNT = 4 }
+				}
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_gold = major_gold_value
+					POD_glamour_cost_effect = { COUNT = 3 }
+				}
+				30 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_gold = medium_gold_value
+					POD_glamour_cost_effect = { COUNT = 2 }
+				}
+				40 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					add_gold = minor_gold_value
+					POD_glamour_cost_effect = { COUNT = 1 }
+					POD_bunk_failure_modifier = yes
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 100
+	}
+}
+
+POD_transmute_earth_interaction = {
+	category = interaction_category_fae
+	icon = POD_art_interaction
+	desc = POD_transmute_earth_interaction_desc
+	
+	cooldown = { years = 3 }
+	
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { has_perk = transmute_earth_perk }
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_glamour_for_fae_art = { AMOUNT = 4 }
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			duel = {
+				desc = bunk.duel.desc
+				skill = intrigue
+				value = high_skill_rating
+				10 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_prestige = massive_prestige_value
+					POD_glamour_cost_effect = { COUNT = 4 }
+				}
+				20 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_prestige = major_prestige_value
+					POD_glamour_cost_effect = { COUNT = 3 }
+				}
+				30 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					add_prestige = medium_prestige_value
+					POD_glamour_cost_effect = { COUNT = 2 }
+				}
+				40 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					POD_bunk_failure_modifier = yes
+					add_prestige = minor_prestige_value
+					POD_glamour_cost_effect = { COUNT = 1 }
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 100
+	}
+}

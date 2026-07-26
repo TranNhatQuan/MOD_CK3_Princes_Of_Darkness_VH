@@ -1,0 +1,68 @@
+widget = {
+	name = "resource_bars_hud"
+	layer = bottom
+	visible = "[And( And( Not( IsPauseMenuShown ), IsDefaultGUIMode ), GetPlayer.IsValid)]"
+	size = { 100% 100% }
+	
+	widget = {
+		#visible = "[Not(GetVariableSystem.Exists( 'hide_bottom_left_HUD'))]"
+		visible = "[IsMapMode('realms')]"
+		
+		parentanchor = bottom|hcenter
+		#position = { -66 -8 }
+		position = { 17 -12 }
+
+		vbox = {
+			set_parent_size_to_minimum = yes
+			
+			pod_resource_bar_glamour = {
+				visible = "[PlayerGuiIsShown('glamour_meters_show')]"
+			}
+			
+			pod_resource_bar_pathos = {
+				visible = "[PlayerGuiIsShown('pathos_meters_show')]"
+			}
+			
+			pod_resource_bar_angst = {
+				visible = "[PlayerGuiIsShown('angst_meters_show')]"
+			}
+			
+			pod_resource_bar_resolve = {
+				visible = "[PlayerGuiIsShown('resolve_meters_show')]"
+			}
+			
+			pod_resource_bar_gnosis = {
+				visible = "[PlayerGuiIsShown('gnosis_meters_show')]"
+			}
+			
+			pod_resource_bar_masquerade = {
+				visible = "[PlayerGuiIsShown('masquerade_bar_gui')]"
+			}
+			
+			pod_resource_bar_blood = {
+				visible = "[PlayerGuiIsShown('blood_hunger_show')]"
+			}
+			
+			# spacer for the "raise all armies" button from 1.19
+			spacer = {
+				#size = { 0 120 }
+				datacontext = "[GetPlayer]"
+				visible = "[And( And( Not(IsGameViewOpen('barbershop')), And( IsMapMode('realms'), And( Not(IsGameViewOpen('struggle')), Not(IsAnySituationViewOpen) ) ) ), And(Not(Character.HasActiveCompanionAISetting('raise_armies')),Or(And( Character.IsAtWar, Not(Character.HasRaisedRegiments)),PlayerShouldDisbandAll)) )]"
+				
+				state = {
+					name = _show
+					duration = 0.6
+					using = Animation_Curve_Default
+					size = { 0 120 }
+				}
+
+				state = {
+					name = _hide
+					duration = 0.6
+					using = Animation_Curve_Default
+					size = { 0 0 }
+				}
+			}
+		}
+	}
+}

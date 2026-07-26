@@ -1,0 +1,1032 @@
+﻿# POD Schemes for hunters
+# Karde
+
+knighting_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = knighting
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			has_knightly_order_dynasty_trigger = yes
+		}
+		scope:recipient = {
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+			is_a_cultist = no
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = "i_can_only_hunterize_one_at_a_time"
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = knighting
+					}
+				}
+			}
+		}
+		scope:recipient = { is_married = no }
+		scope:actor = {
+			can_start_scheme = {
+				type = knighting
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = knighting
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = knighting
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationsisters_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationsisters
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			has_mendicant_order_dynasty_trigger = yes
+		}
+		scope:recipient = {
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+
+		custom_description = {
+			object = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationsisters
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					OR = {
+						dynasty = dynasty:13000003
+						dynasty = dynasty:13000011
+					}
+				}
+			}
+			scope:recipient = { is_female = yes }
+		}
+		scope:recipient = { is_married = no }
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationsisters
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationsisters
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationsisters
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationred_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationred
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			has_contemplative_order_dynasty_trigger = yes
+		}
+		scope:recipient = {
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationred
+					}
+				}
+			}
+		}
+		scope:recipient = { is_married = no }
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationred
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationred
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationred
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationoculi_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationoculi
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			has_lay_order_no_murnau_dynasty_trigger = yes
+		}
+		scope:recipient = {
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			object = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationoculi
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationoculi
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationoculi
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationoculi
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationmurnau_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationmurnau
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			dynasty ?= dynasty:13000004
+			has_trait = supehunter
+			is_adult = yes
+		}
+		scope:recipient = {
+			dynasty ?= dynasty:13000004
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = {
+				NOT = {
+					scope:recipient = {
+						AND = {
+							is_close_family_of = scope:actor
+							is_ruler = no
+						}
+					}
+				}
+			}
+			custom_description = {
+				text = same_location
+				scope:actor = { exists = location }
+				scope:recipient = { exists = location }
+				scope:actor = { location = scope:recipient.location }
+			}
+		}
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationmurnau
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationmurnau
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationmurnau
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationmurnau
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationgantenbein_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationgantenbein
+	icon = POD_hunter_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			dynasty ?= dynasty:13000007
+			has_trait = supehunter
+			is_adult = yes
+		}
+		scope:recipient = {
+			NOT = { dynasty ?= dynasty:13000007 }
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = mortal
+				has_trait = ghoul
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationgantenbein
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationgantenbein
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationgantenbein
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationgantenbein
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationshih_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationshih
+	icon = POD_hunter_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = shih
+			NOT = { faith = faith:sanbenito }
+			is_adult = yes
+		}
+		scope:recipient = {
+			NOR = {
+				has_trait = supehunter
+				has_trait = shih
+			}
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = mortal
+				AND = {
+					has_trait = dhampyr
+					# Haight mode safeguard: No splat traits aside from Dhampyr
+					any_character_trait = {
+						count = 0
+						has_trait_flag = splat
+						this != trait:dhampyr
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationshih
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationshih
+				target_character = scope:recipient
+			}
+		}
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationshih
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationshih
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+}
+
+ordinationindep_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationindep
+	icon = POD_hunter_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			religion = { is_in_family = rf_hunters }
+			NOT = { has_trait = shih }
+			has_inquisitor_dynasty_trigger = no
+			NOT = { dynasty ?= dynasty:13000007 }
+			NOT = { faith = faith:sanbenito }
+		}
+		scope:recipient = {
+			has_inquisitor_dynasty_trigger = no
+			NOT = { dynasty ?= dynasty:13000007 }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = { scope:recipient = { has_trait = mortal } }
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationindep
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationindep
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationindep
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationindep
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ordinationsanbenito_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	#interface_priority = 83
+	scheme = ordinationsanbenito
+	icon = POD_hunter_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			has_trait = supehunter
+			is_adult = yes
+			faith = faith:sanbenito
+		}
+		scope:recipient = {
+			NOT = { has_trait = supehunter }
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:recipient = { is_infernalist_trigger = no }
+	}
+
+	is_valid_showing_failures_only = {
+		custom_description = {
+			subject = scope:actor
+			text = i_can_only_hunterize_one_at_a_time
+			scope:actor = {
+				NOT = {
+					any_scheme = {
+						scheme_type = ordinationsanbenito
+					}
+				}
+			}
+		}
+		scope:actor = {
+			can_start_scheme = {
+				type = ordinationsanbenito
+				target_character = scope:recipient
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	desc = {
+		triggered_desc = {
+			trigger = {
+				scope:actor = {
+					NOT = { is_at_war_with = scope:recipient }
+					can_start_scheme = {
+						type = ordinationsanbenito
+						target_character = scope:recipient
+					}
+
+				}
+			}
+			desc = scheme_interaction_tt_knighting_approved
+		}
+
+	}
+
+	on_accept = {
+		hidden_effect = {
+			scope:actor = {
+				start_scheme = {
+					type = ordinationsanbenito
+					target_character = scope:recipient
+				}
+			}
+		}
+	}
+	
+	ai_min_reply_days = 0
+	ai_max_reply_days = 0
+	
+	ai_accept = {
+		base = -50
+		sanbenito_ordination_modifier = yes
+	}
+}
+
+ordinationrecommendation_interaction = {
+	category = interaction_category_friendly
+	desc = ordinationrecommendation_interaction_desc
+	ai_frequency = 0
+	icon = POD_hunter_interaction
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			OR = {
+				has_trait = supehunter
+				has_trait = wutian
+				has_trait = shemsuheru
+			}
+			is_adult = yes
+		}
+		scope:recipient = {
+			has_trait = supehunter
+			is_adult = yes
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_playable_character = yes }
+		scope:recipient = { is_available = yes }
+		NOT = { scope:actor = { is_at_war_with = scope:recipient } }
+		custom_description = {
+			subject = scope:recipient
+			text = target_can_only_hunterize_one_at_a_time
+			scope:recipient = {
+				NOR = {
+					any_scheme = { scheme_type = knighting }
+					any_scheme = { scheme_type = ordinationsisters }
+					any_scheme = { scheme_type = ordinationred }
+					any_scheme = { scheme_type = ordinationoculi }
+					any_scheme = { scheme_type = ordinationmurnau }
+					any_scheme = { scheme_type = ordinationshih }
+					any_scheme = { scheme_type = ordinationindep }
+					any_scheme = { scheme_type = ordinationsanbenito }
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:actor = { has_trait = wutian } }
+			scope:recipient = { has_trait = shih }
+		}
+		trigger_if = {
+			limit = { scope:actor = { has_trait = shemsuheru } }
+			scope:recipient = { faith = faith:ikhwan_al_safa }
+		}
+		trigger_if = {
+			limit = { scope:recipient = { POD_is_gantenbein_trigger = yes } }
+			scope:actor = { POD_is_gantenbein_trigger = yes }
+		}
+		trigger_if = {
+			limit = { scope:recipient = { faith = faith:sanbenito } }
+			scope:actor = { faith = faith:sanbenito }
+		}
+		trigger_if = {
+			limit = { exists = scope:secondary_recipient }
+			scope:secondary_recipient = {
+				trigger_if = {
+					limit = {
+						scope:recipient.dynasty = {
+							OR = {
+								this = dynasty:13000003
+								this = dynasty:13000011
+							}
+						}
+					}
+					is_female = yes
+				}
+				trigger_if = {
+					limit = { scope:recipient.dynasty = dynasty:13000004 }
+					dynasty ?= dynasty:13000004
+				}
+				trigger_if = {
+					limit = { scope:recipient = { has_trait = order_member } }
+					is_married = no
+				}
+			}
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	populate_recipient_list = {
+		scope:actor = {
+			every_courtier_or_guest = {
+				limit = {
+					trigger_if = {
+						limit = { scope:recipient.faith = faith:sanbenito }
+						NOT = { has_trait = supehunter }
+						POD_is_infernalist_trigger = no
+					}
+					trigger_else_if = {
+						limit = { scope:recipient.dynasty = dynasty:13000007 }
+						POD_is_gantenbein_trigger = no
+						OR = {
+							has_trait = mortal
+							has_trait = ghoul
+						}
+					}
+					trigger_else = {
+						has_trait = mortal
+					}
+				}
+				add_to_list = characters
+			}
+		}
+		scope:recipient = {
+			every_courtier_or_guest = {
+				limit = {
+					trigger_if = {
+						limit = { scope:recipient.faith = faith:sanbenito }
+						NOT = { has_trait = supehunter }
+						POD_is_infernalist_trigger = no
+					}
+					trigger_else_if = {
+						limit = { scope:recipient.dynasty = dynasty:13000007 }
+						POD_is_gantenbein_trigger = no
+						OR = {
+							has_trait = mortal
+							has_trait = ghoul
+						}
+					}
+					trigger_else = {
+						has_trait = mortal
+					}
+				}
+				add_to_list = characters
+			}
+		}
+	}
+	
+	cost = {
+		prestige = major_prestige_value
+	}
+
+	on_accept = {
+
+		scope:recipient = {
+			if = {
+				limit = {
+					faith = faith:sanbenito
+				}
+				start_scheme = {
+					type = ordinationsanbenito
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = shih
+				}
+				start_scheme = {
+					type = ordinationshih
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = {
+					dynasty = dynasty:13000007
+				}
+				start_scheme = {
+					type = ordinationgantenbein
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = { has_knightly_order_dynasty_trigger = yes }
+				start_scheme = {
+					type = knighting
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = { has_mendicant_order_dynasty_trigger = yes }
+				start_scheme = {
+					type = ordinationsisters
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = { has_contemplative_order_dynasty_trigger = yes }
+				start_scheme = {
+					type = ordinationred
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = {
+					dynasty = dynasty:13000004
+				}
+				start_scheme = {
+					type = ordinationmurnau
+					target_character = scope:secondary_recipient
+				}
+			}
+			else_if = {
+				limit = { has_lay_order_dynasty_trigger = yes }
+				start_scheme = {
+					type = ordinationoculi
+					target_character = scope:secondary_recipient
+				}
+			}
+			else = {
+				start_scheme = {
+					type = ordinationindep
+					target_character = scope:secondary_recipient
+				}
+			}
+		}
+		
+		scope:secondary_recipient = {
+			add_opinion = {
+				modifier = grateful_opinion
+				target = scope:actor
+				opinion = 20
+			}
+		}
+	}
+	
+	ai_accept = {
+		base = 0 # Try to make it 0 for most interactions
+		
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1.0
+			desc = AI_OPINION_REASON
+		}
+		
+		opinion_modifier = { # Opinion Factor
+			who = scope:recipient
+			opinion_target = scope:secondary_recipient
+			multiplier = 0.25
+			desc = AI_OPINION_REASON
+		}
+	}
+}

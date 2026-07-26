@@ -1,0 +1,66 @@
+﻿POD_set_parent_effect = {
+	hidden_effect = {
+		if = {
+			limit = { age >= $PARENT$.age }
+			set_local_variable = {
+				name = saved_age
+				value = this.age
+			}
+			set_age = {
+				value = {
+					value =$PARENT$.age
+					add = -1
+				}
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			$PARENT$ = {
+				is_female = no
+			}
+		}
+		set_father = $PARENT$
+	}
+	else = {
+		set_mother = $PARENT$
+	}
+	hidden_effect = { 
+		if = {
+			limit = { exists = local_var:saved_age }
+			set_age = local_var:saved_age
+		}
+	}
+	if = {
+		limit = { exists = $PARENT$.house }
+		set_house = $PARENT$.house
+	}
+}
+
+POD_replace_in_family_effect = {
+	create_character = {
+		save_scope_as = new_parent
+		location = this.location
+		culture = this.culture
+		faith = this.faith
+		gender = this
+		random_traits = yes
+	}
+	every_child = {
+		even_if_dead = yes
+		POD_set_parent_effect = { PARENT = scope:new_parent }
+	}
+	scope:new_father = {
+		if = {
+			limit = { prev = { exists = father } }
+			set_father = prev.father
+		}
+		if = {
+			limit = { prev = { exists = mother } }
+			set_mother = prev.mother
+		}
+		set_house = prev.house
+		death = { death_reason = death_disappearance }
+	}
+}

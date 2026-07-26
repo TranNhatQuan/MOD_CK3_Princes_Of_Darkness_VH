@@ -1,0 +1,665 @@
+﻿POD_give_orison_effect = {
+	random_list = {
+		11 = {
+			add_trait = orison_hierophant
+			
+			modifier = {
+				add = 10
+				has_trait = zealous
+			}
+			modifier = {
+				add = 10
+				has_trait = vengeful
+			}
+			modifier = {
+				add = 10
+				has_trait = calm
+			}
+			modifier = {
+				add = -100
+				has_trait = cynical
+			}
+		}
+		11 = {
+			add_trait = orison_innocent
+			
+			modifier = {
+				add = 15
+				has_trait = chaste
+			}
+			modifier = {
+				add = 15
+				has_trait = temperate
+			}
+			modifier = {
+				add = 15
+				has_trait = generous
+			}
+			modifier = {
+				add = 15
+				has_trait = diligent
+			}
+			modifier = {
+				add = 15
+				has_trait = calm
+			}
+			modifier = {
+				add = 15
+				has_trait = forgiving
+			}
+			modifier = {
+				add = 15
+				has_trait = humble
+			}
+			modifier = {
+				add = 15
+				has_trait = compassionate
+			}
+			modifier = {
+				add = -100
+				has_trait = lustful
+			}
+			modifier = {
+				add = -15
+				has_trait = gluttonous
+			}
+			modifier = {
+				add = -100
+				has_trait = greedy
+			}
+			modifier = {
+				add = -15
+				has_trait = lazy
+			}
+			modifier = {
+				add = -100
+				has_trait = wrathful
+			}
+			modifier = {
+				add = -100
+				has_trait = vengeful
+			}
+			modifier = {
+				add = -100
+				has_trait = arrogant
+			}
+			modifier = {
+				add = -100
+				has_trait = sadistic
+			}
+			modifier = {
+				add = -100
+				has_trait = callous
+			}
+		}
+		11 = {
+			add_trait = orison_noah
+			
+			modifier = {
+				add = 20
+				has_trait = compassionate
+			}
+		}
+		11 = {
+			add_trait = orison_vigilance
+			
+			modifier = {
+				add = 15
+				has_trait = diligent
+			}
+			modifier = {
+				add = 25
+				has_trait = paranoid
+			}
+			modifier = {
+				add = 15
+				has_trait = impatient
+			}
+		}
+		11 = {
+			add_trait = orison_penitent
+			
+			modifier = {
+				add = 50
+				has_trait = humble
+			}
+			modifier = {
+				add = -100
+				has_trait = arrogant
+			}
+		}
+		11 = {
+			add_trait = orison_years
+			
+			modifier = {
+				add = 5
+				has_trait = intellect_good_1
+			}
+			modifier = {
+				add = 10
+				has_trait = intellect_good_2
+			}
+			modifier = {
+				add = 15
+				has_trait = intellect_good_3
+			}
+			modifier = {
+				add = 15
+				has_trait = shrewd
+			}
+		}
+		12 = {
+			add_trait = orison_hierophant
+			
+			modifier = {
+				add = 25
+				has_trait = brave
+			}
+			modifier = {
+				add = 10
+				has_trait = calm
+			}
+			modifier = {
+				add = 5
+				has_trait = vengeful
+			}
+			modifier = {
+				add = -100
+				has_trait = craven
+			}
+		}
+		11 = {
+			add_trait = orison_sanguine
+			
+			modifier = {
+				add = 5
+				has_trait = zealous
+			}
+			modifier = {
+				add = 5
+				has_trait = strong
+			}
+			modifier = {
+				add = 10
+				has_trait = physique_good_1
+			}
+			modifier = {
+				add = 15
+				has_trait = physique_good_2
+			}
+			modifier = {
+				add = 20
+				has_trait = physique_good_3
+			}
+		}
+		11 = {
+			add_trait = orison_talespinner
+			
+			modifier = {
+				add = 5
+				has_trait = zealous
+			}
+			modifier = {
+				add = 15
+				has_trait = gregarious
+			}
+			modifier = {
+				add = 10
+				has_trait = beauty_good_1
+			}
+			modifier = {
+				add = 15
+				has_trait = beauty_good_2
+			}
+			modifier = {
+				add = 20
+				has_trait = beauty_good_3
+			}
+		}
+	}
+}
+
+POD_give_random_endowments_effect = {
+	#basically copying the lifestyle is valid to avoid giving perks to hunters without access to it
+	if = {
+		limit = {
+		faith = faith:shadowinquisition
+		has_trait = supehunter
+		dynasty ?= {
+			OR = {
+				this = dynasty:13000001
+				this = dynasty:13000002
+				this = dynasty:13000003
+				this = dynasty:13000004
+				this = dynasty:13000005
+				this = dynasty:13000006
+				this = dynasty:13000008
+				this = dynasty:13000011
+				has_dynasty_modifier = custom_knightly_order_modifier
+				has_dynasty_modifier = custom_lay_order_modifier
+				has_dynasty_modifier = custom_contemplative_order_modifier
+				has_dynasty_modifier = custom_mendicant_order_modifier
+				has_dynasty_modifier = support_from_sister_of_stjohn_modifier
+				has_dynasty_modifier = support_from_oculi_dei_modifier
+				has_dynasty_modifier = support_from_red_order_modifier
+				has_dynasty_modifier = support_from_von_murnau_modifier
+			}
+		}			
+		}
+	random_list = {
+		25 = { add_endowments_lifestyle_xp = 250 }
+		25 = { add_endowments_lifestyle_xp = 500 }
+		25 = { add_endowments_lifestyle_xp = 750 }
+		25 = { add_endowments_lifestyle_xp = 1000 }
+		25 = { add_endowments_lifestyle_xp = 1500 }
+		25 = { add_endowments_lifestyle_xp = 2000 }
+	}
+	}
+}
+
+POD_remove_hunter_traits_effect = {
+	remove_trait = orison_compass
+	remove_trait = orison_innocent
+	remove_trait = orison_noah
+	remove_trait = orison_penitent
+	remove_trait = orison_vigilance
+	remove_trait = orison_years
+	remove_trait = orison_hierophant
+	remove_trait = orison_sanguine
+	remove_trait = orison_talespinner
+#	remove_trait = oculi_shepherd
+#	remove_trait = oculi_sight
+#	remove_trait = oculi_liturgy
+#	remove_trait = oculi_trust
+	remove_trait = oculi_wine
+#	remove_trait = acre_catechumen
+#	remove_trait = acre_flesh
+#	remove_trait = acre_flight
+#	remove_trait = acre_resurrection
+	remove_trait = acre_auto
+#	remove_trait = murnau_knowledge
+#	remove_trait = murnau_oblige
+#	remove_trait = murnau_wreathed
+#	remove_trait = murnau_mirror
+	remove_trait = murnau_arcana
+#	remove_trait = sisters_gospel
+#	remove_trait = sisters_lux
+#	remove_trait = sisters_chorale
+#	remove_trait = sisters_hosanna
+	remove_trait = sisters_oratorio
+#	remove_trait = red_vigil
+#	remove_trait = red_sunstone
+#	remove_trait = red_march
+#	remove_trait = red_fortunes
+	remove_trait = red_forge
+	remove_trait = ha_patris_mastery
+	remove_trait = ha_filius_mastery
+	remove_trait = ha_spiritus_mastery
+}
+
+POD_remove_hunter_perks_effect = {
+	if = {
+		limit = { endowments_lifestyle_perks > 0 }
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = endowments_lifestyle
+		}
+	}
+	if = {
+		limit = { faith_lifestyle_perks > 0 }
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = faith_lifestyle
+		}
+	}
+	if = {
+		limit = { qiao_lifestyle_perks > 0 }
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = qiao_lifestyle
+		}
+	}
+}
+
+POD_lose_true_faith_effect = {
+	if = {
+		limit = {
+			has_trait = ha_filius_mastery
+		}
+	remove_trait = ha_filius_mastery
+	}
+	if = {
+		limit = {
+			has_trait = ha_patris_mastery
+		}
+	remove_trait = ha_patris_mastery
+	}
+	if = {
+		limit = {
+			has_trait = ha_spiritus_mastery
+		}
+	remove_trait = ha_spiritus_mastery
+	}	
+	remove_trait = truefaith
+	remove_trait = beatific
+	POD_remove_all_perks_in_lifestyle = {
+		LIFESTYLE = faith_lifestyle
+	}
+}
+
+POD_endowments_reward_effect = {
+	if = {
+		limit = {
+			is_playable_character = yes
+			POD_is_supehunter_trigger = yes
+			NOT = { dynasty ?= dynasty:13000011 }
+			has_inquisitor_dynasty_trigger = yes
+			trigger_if = {
+				limit = {
+					OR = {
+						has_contemplative_order_dynasty_trigger = yes
+						dynasty ?= { has_dynasty_modifier = support_from_red_order_modifier }
+					}
+				}
+				NOT = { has_trait = red_forge }
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						has_knightly_order_dynasty_trigger = yes
+						dynasty ?= { has_dynasty_modifier = support_from_knight_of_acre_modifier }
+					}
+				}
+				NOT = { has_trait = acre_auto }
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						has_mendicant_order_dynasty_trigger = yes
+						dynasty ?= { has_dynasty_modifier = support_from_sister_of_stjohn_modifier }
+					}
+				}
+				NOT = { has_trait = sisters_oratorio }
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						dynasty = dynasty:13000004
+						dynasty = { has_dynasty_modifier = support_from_von_murnau_modifier }
+					}
+				}
+				NOT = { has_trait = murnau_arcana }
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						has_lay_order_no_murnau_dynasty_trigger = yes
+						dynasty ?= { has_dynasty_modifier = support_from_oculi_dei_modifier }
+					}
+				}
+				NOT = { has_trait = oculi_wine }
+			}
+		}
+		add_endowments_lifestyle_xp = $XP$
+	}
+}
+
+POD_endowments_reward_tiny_effect = {
+	POD_endowments_reward_effect = { XP = 20 }
+}
+
+POD_endowments_reward_small_effect = {
+	POD_endowments_reward_effect = { XP = 50 }
+}
+
+POD_endowments_reward_medium_effect = {
+	POD_endowments_reward_effect = { XP = 100 }
+}
+
+POD_endowments_reward_large_effect = {
+	POD_endowments_reward_effect = { XP = 200 }
+}
+
+POD_endowments_reward_huge_effect = {
+	POD_endowments_reward_effect = { XP = 500 }
+}
+
+POD_hunter_ai_tf_xp_effect = {
+	if = {
+		limit = {
+			is_playable_character = yes
+			is_ai = yes
+			POD_is_supehunter_trigger = yes
+			NOT = { dynasty ?= dynasty:13000011 }
+			has_inquisitor_dynasty_trigger = yes
+			NOR = {
+				has_trait = ha_patris_mastery
+				has_trait = ha_filius_mastery
+				has_trait = ha_spiritus_mastery
+			}
+		}
+		add_faith_lifestyle_xp = 1000
+	}
+}
+
+POD_hunterembrace_effect = {
+	add_trait_force_tooltip = turnedhunter
+	
+	if = {
+		limit = {
+			scope:vampiresire ?= {
+				this != prev
+				is_alive = yes
+			}
+		}
+		add_opinion = {
+			target = scope:vampiresire
+			modifier = POD_turned_me_opinion
+		}
+		stress_impact = {
+			base = medium_stress_impact_gain
+		}
+	}
+
+	remove_trait = holy_warrior
+	
+	if = {
+		limit = { has_trait = order_member }
+		remove_trait = order_member
+		add_character_modifier = holy_order_experience_modifier
+	}
+	
+	POD_remove_hunter_traits_effect = yes
+	POD_remove_hunter_perks_effect = yes
+	POD_side_effects_from_changing_splats = yes
+	
+	trigger_event = POD_negotiation.4000
+}
+
+POD_inquihunt_success_side_effects = {
+	POD_inquihunt_gain_renown_effect = yes
+	POD_inquihunt_gain_xp_effect = yes
+
+	if = {
+		limit = {
+			scope:attacker = {
+				is_ai = no
+				this = character:792915
+			}
+			scope:defender = { this = character:505087 }
+		}
+		set_global_variable = pod_achiev_schrekt # Achievement: No Canon Ending for Me
+	}
+
+	if = {
+		limit = {
+			scope:attacker = {
+				is_ai = no
+				POD_is_supehunter_trigger = yes
+			}
+			scope:defender = {
+				has_trait = vampgeneration4
+				highest_held_title_tier >= tier_kingdom
+			}
+		}
+		set_global_variable = pod_achiev_4thgenhunt # Achievement: Legendary Hero
+	}
+	
+	scope:defender = {
+		hidden_effect = {
+			if = {
+				limit = { has_character_modifier = tracked_down_modifier }
+				remove_character_modifier = tracked_down_modifier
+			}
+		}
+	}
+}
+
+POD_inquihunt_gain_renown_effect = {
+	if = {
+		limit = {
+			scope:defender = {
+				OR = {
+					is_vampire_trigger = yes
+					is_kueijin_trigger = yes
+				}
+			}
+		}
+		if = {
+			limit = { scope:defender = { age >= 1000 } }
+			add_prestige = 200
+			dynasty ?= { add_dynasty_prestige = major_dynasty_prestige_gain }
+			POD_add_curia_support = { VALUE = 10 }
+		}
+		else_if = {
+			limit = { scope:defender = { age >= 400 } }
+			add_prestige = 150
+			dynasty ?= { add_dynasty_prestige = medium_dynasty_prestige_gain }
+			POD_add_curia_support = { VALUE = 8 }
+		}
+		else_if = {
+			limit = { scope:defender = { age >= 200 } }
+			add_prestige = 100
+			dynasty ?= { add_dynasty_prestige = minor_dynasty_prestige_gain }
+			POD_add_curia_support = { VALUE = 5 }
+		}
+		else = {
+			add_prestige = 50
+			dynasty ?= { add_dynasty_prestige = miniscule_dynasty_prestige_gain }
+			POD_add_curia_support = { VALUE = 2 }
+		}
+	}
+	
+	else_if = {
+		limit = {
+			scope:defender = { is_werewolf_trigger = yes }
+		}
+		add_prestige = 100
+		dynasty ?= { add_dynasty_prestige = minor_dynasty_prestige_gain }
+		POD_add_curia_support = { VALUE = 5 }
+	}
+	
+	else_if = {
+		limit = {
+			scope:defender = { is_demon_trigger = yes }
+		}
+		add_prestige = 150
+		dynasty ?= { add_dynasty_prestige = medium_dynasty_prestige_gain }
+		POD_add_curia_support = { VALUE = 10 }
+	}
+
+	else_if = {
+		limit = {
+			scope:defender = { is_fae_trigger = yes }
+		}
+		add_prestige = 100
+		dynasty ?= { add_dynasty_prestige = minor_dynasty_prestige_gain }
+		POD_add_curia_support = { VALUE = 5 }
+	}
+
+	else = {
+		add_prestige = 50
+		dynasty ?= { add_dynasty_prestige = miniscule_dynasty_prestige_gain }
+		POD_add_curia_support = { VALUE = 2 }
+	}
+}
+
+POD_inquihunt_gain_xp_effect = {
+	custom_tooltip = POD_inquihunt_effect_message
+	
+	hidden_effect = {
+		if = {
+			limit = {
+				OR = {
+					has_trait = truefaith
+					has_trait = beatific
+					faith = faith:shadowinquisition
+				}
+				NAND = {
+					has_trait = ha_patris_mastery
+					has_trait = ha_filius_mastery
+					has_trait = ha_spiritus_mastery
+				}
+			}
+			if = {
+				limit = { scope:defender = { age >= 1000 } }
+				add_faith_lifestyle_xp = 2000
+			}
+			else_if = {
+				limit = { scope:defender = { age >= 400 } }
+				add_faith_lifestyle_xp = 1000
+			}
+			else_if = {
+				limit = { scope:defender = { age >= 200 } }
+				add_faith_lifestyle_xp = 500
+			}
+			else = {
+				add_faith_lifestyle_xp = 250
+			}
+		}
+	}
+}
+
+POD_add_curia_support = {
+	if = {
+		limit = {
+			faith = faith:shadowinquisition
+			is_landless_ruler = yes
+			NOT = { has_trait = excommunicated }
+		}
+		custom_description = {
+			text = POD_add_curia_support
+			value = $VALUE$
+			if = {
+				limit = { NOT = { has_variable = curia_support_var } }
+				set_variable = {
+					name = curia_support_var
+					value = 0
+				}
+			}
+			# error suppression
+			if = {
+				limit = { has_variable = curia_support_var }
+				change_variable = {
+					name = curia_support_var
+					add = $VALUE$
+				}
+			}
+		}
+	}
+}
+
+POD_inquisition_excommunication_effect = {
+	if = {
+		limit = { exists = var:curia_support_var }
+		remove_variable = curia_support_var
+	}
+
+	add_trait = excommunicated
+}
+
+POD_side_effects_from_using_true_faith = {
+	stress_impact = {
+		fomori = massive_stress_gain
+		drone = major_stress_gain
+		gorgon = major_stress_gain
+		kami = medium_stress_gain
+	}
+}

@@ -1,0 +1,50 @@
+﻿invite_infernalist_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_invite_knights.dds" }
+
+	decision_group_type = pod_splat
+	ai_check_interval = 360
+	
+	is_shown = {
+                OR = {
+                        has_perk = lure_diabolik_perk
+                }
+	}
+		
+	cooldown = { years = 2 }			
+	
+	desc = invite_infernalist_decision_desc
+
+	effect = {
+                hidden_effect = {
+                        create_character = {
+                                location = root.capital_province
+                                template = POD_mortal_infernalist_character_enhanced
+                                save_scope_as = infernalist
+                        }
+                }
+                POD_hunger_rouse_check_effect = yes
+                custom_tooltip = invite_infernalist_decision_effect_tooltip
+                hidden_effect = {
+                        send_interface_toast = {
+                                title =  invite_infernalist_decision_tp
+                                right_icon = scope:infernalist
+                                add_courtier = scope:infernalist
+                        }
+                }
+	}
+
+	cost = { prestige = 500 }
+	cost = { gold = 250 }
+
+	ai_will_do = {
+                base = 0
+                
+                modifier = {
+                        add = 80
+                        AND = {
+                                gold > 500
+                                prestige > 800
+                        }
+                }
+	}
+}

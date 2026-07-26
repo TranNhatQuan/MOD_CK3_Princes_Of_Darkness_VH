@@ -1,0 +1,8488 @@
+﻿#Char/Province/Counties/Dynasties/house modifiers
+#Char/Province/Counties/Dynasties/house modifiers
+#change_fervor
+#Discovering innovations
+#Dynasty prestige/perks
+#Add opinion / gold / piety / prestige
+#get title
+#add_doctrine
+#add_special_building add_special_building_slot
+#add_diplomacy_skill
+#create_holy_order
+
+oust_mithras_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_setting_the_sun.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = oust_mithras_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		any_sub_realm_county = {
+			de_jure_liege.de_jure_liege.de_jure_liege = title:e_avalon
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:oust_mithras_objective_decision
+			}
+		}
+		
+		NOT = {
+			this = character:505071 #Mithras can't oust himself. Shocking.
+			}
+		NOT = {
+			faith = faith:viamithras
+			}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls_region = world_europe_west_britannia
+
+		# You can't have any Mithraic vassal
+		custom_tooltip = {
+			text = oust_mithras_custom_decision
+			
+			trigger_if = {
+				limit = {
+					any_vassal = {
+						NOT = { primary_title.tier = tier_barony }	
+						faith = faith:viamithras
+					}
+				}
+				any_vassal = {
+					count <= 1
+					NOT = { primary_title.tier = tier_barony }
+					faith = faith:viamithras
+				}	
+			}
+		}
+		custom_tooltip = {
+			text = oust_mithras_custom_decision2
+			POD_vampire_is_defeated = { CHARACTER = character:505071 }
+		}			
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:oust_mithras_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_the_eclipse
+		}
+		show_as_tooltip = {
+			custom_tooltip = oust_mithras_objective_decision_effect_tooltip2
+			custom_tooltip = create_holy_order_decision_effect_message
+			add_character_modifier = {
+				modifier = mithras_bane_modifier
+				years = 100
+			}
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		save_scope_as = mithras_bane
+		trigger_event = pod1230objectives.1
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+mithras_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_scepter_and_the_sun.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = mithras_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:mithras_victory_objective_decision
+			}
+		}
+		
+		faith = faith:viamithras
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 75
+		
+		OR = {
+			has_title = title:e_avalon
+			has_title = title:e_ventrue
+			character:505071 = {
+				has_title = title:e_avalon
+				}
+			}
+
+		custom_tooltip = {
+			text = mithras_victory_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:505050 }
+			POD_vampire_is_defeated = { CHARACTER = character:505082 }
+			POD_vampire_is_defeated = { CHARACTER = character:790101 }
+		}
+
+		is_dynast = yes
+		
+		# custom_tooltip = {
+		# text = mithras_victory_custom_decision2		
+		# any_independent_ruler = {
+				# count < 1 
+				# NOR = { 
+				# this = root 
+				# this = character:505071
+				# faith = faith:viamithras
+				# }				
+				# is_ventrue_trigger = yes
+				# highest_held_title_tier > tier_kingdom
+			# }	
+		# }		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:mithras_victory_objective_decision
+		}
+		show_as_tooltip = {
+			custom_tooltip = mithras_victory_objective_decision_effect_tooltip2
+			give_nickname = nick_lord_of_light
+			faith = { add_doctrine = burning_faith_doctrine }
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2
+		}
+		save_scope_as = victorious_mithraic
+		trigger_event = pod1230objectives.3
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+toreador_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dreaming_again.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = toreador_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:toreador_victory_objective_decision
+			}
+		}
+		NOT = {
+			faith = faith:laibon
+			}
+		NOT = {	
+		capital_province = {
+			geographical_region = world_india
+		}	
+		}	
+
+		OR = {	
+			faith = faith:viaarchangeli
+			is_toreador_trigger = yes
+			this = character:790104
+			this = character:790114
+			this = character:505156
+			}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 50
+		
+		completely_controls = title:k_thessalonika
+		completely_controls = title:d_venice
+		prestige >= 500
+		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:toreador_victory_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_caretaker_of_dreams
+		}
+		show_as_tooltip = {
+			custom_tooltip = toreador_victory_objective_decision_effect_tooltip
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.6.a
+					custom_tooltip = pod1230objectives.6.custom
+					set_character_faith = faith:codexoflegacies
+					add_piety = massive_piety_value
+					add_piety_level = 2
+				}
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.6.b
+					add_prestige = massive_prestige_value
+					add_prestige_level = 2	
+					add_character_modifier = {
+						modifier = politically_secure_modifier
+						years = 250
+					}
+					dynasty = {
+						add_dynasty_prestige = 1000
+						add_dynasty_prestige_level = 1
+					}
+				}
+			}
+		}
+		save_scope_as = victorious_archangeli
+		trigger_event = pod1230objectives.6
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+#Repurposed as struggle ending
+shadow_reconquista_objective_decision = {
+	decision_group_type = major
+	title = shadow_reconquista_objective_decision
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_shadow_reconquista.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	desc = shadow_reconquista_objective_decision_desc
+	selection_tooltip = shadow_reconquista_objective_decision_tooltip
+	is_invisible = yes
+	sort_order = 80
+
+	ai_check_interval = 120
+
+	is_shown = {
+		#is_playable_character = yes
+		#is_vampire_trigger = yes
+		#capital_province = {
+		#	geographical_region = world_europe_west_iberia
+		#}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:shadow_reconquista_objective_decision
+			}
+		}
+		#is_lasombra_trigger = yes	
+		#NOT = {
+		#	faith = faith:tariqelalaam
+		#	faith = faith:tariqelbedouin
+		#	faith = faith:tariqelharb
+		#	faith = faith:tariqelsama
+		#	faith = faith:tariqelumma
+		#	}
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = shadow_reconquista_tt
+			
+			is_vampire_trigger = yes
+			is_lasombra_trigger = yes	
+			NOT = {
+				faith = faith:tariqelalaam
+				faith = faith:tariqelbedouin
+				faith = faith:tariqelharb
+				faith = faith:tariqelsama
+				faith = faith:tariqelumma
+				}	
+		}
+		
+		is_independent_ruler = yes
+		completely_controls_region  = world_europe_west_iberia
+
+		# You can't have any Ashirra vassal
+		custom_tooltip = {
+			text = shadow_reconquista_objective_decision_custom
+			
+			trigger_if = {
+			limit = {
+			any_vassal = {
+					NOT = {
+						primary_title.tier = tier_barony
+						}	
+				faith = faith:tariqelalaam
+				faith = faith:tariqelbedouin
+				faith = faith:tariqelharb
+				faith = faith:tariqelsama
+				faith = faith:tariqelumma
+					}
+				}
+				any_vassal = {
+					count <= 1				
+					NOT = {
+						primary_title.tier = tier_barony
+						}
+				faith = faith:tariqelalaam
+				faith = faith:tariqelbedouin
+				faith = faith:tariqelharb
+				faith = faith:tariqelsama
+				faith = faith:tariqelumma
+					}	
+				}
+			}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:shadow_reconquista_objective_decision		
+		}
+		show_as_tooltip = {
+			custom_tooltip = shadow_reconquista_objective_decision_effect_tooltip
+			custom_tooltip = fp2_struggle_can_keep_using_struggle_clash_tt
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_sea_of_shadows = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_character_modifier = {
+				modifier = hostile_shadows_modifier
+				years = 100
+			}
+			if = {
+				limit = { 
+					exists = house 
+					is_dynast = no
+				}
+				house = {
+					set_house_head = this
+				}
+			}
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = shadow_reconqueror
+		trigger_event = pod1230objectives.8
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+einherjar_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_defeating_ragnarok.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = einherjar_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:einherjar_victory_objective_decision
+			}
+		}
+		faith = faith:viaeinherjar
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls_region  = ghw_region_scandinavia
+		has_title = title:e_midgard
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:einherjar_victory_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_king_of_aesir
+		}
+		show_as_tooltip = {
+			custom_tooltip = einherjar_victory_objective_decision_effect_tooltip
+			create_artifact = {
+				name = artifact_blood_horn_name
+				description = artifact_blood_horn_description
+				modifier = blood_horn_modifier
+				type = miscellaneous
+				visuals = small_box
+				wealth = 100
+				quality = 100
+			}
+			faith = { add_doctrine = undead_aesir_doctrine }
+			custom_tooltip = create_holy_order_decision_effect_message
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2
+		}
+		save_scope_as = einherjar_victor
+		trigger_event = pod1230objectives.10
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+#Repurposed as Ashirra victory ending in the struggle
+ashirra_deconquista_objective_decision = {
+	decision_group_type = major
+	title = ashirra_deconquista_objective_decision
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_iberia_after_midnight.dds"
+	}
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_compromise.dds"
+	desc = ashirra_deconquista_objective_decision_desc
+	selection_tooltip = ashirra_deconquista_objective_decision_tooltip
+	is_invisible = yes
+
+	sort_order = 80
+	
+	ai_check_interval = 120
+
+	is_shown = {
+		#is_playable_character = yes
+		#is_vampire_trigger = yes
+		#capital_province = {
+		#	geographical_region = world_europe_west_iberia
+		#}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ashirra_deconquista_objective_decision
+			}
+		}
+		#OR = {
+		#	faith = faith:tariqelalaam
+		#	faith = faith:tariqelbedouin
+		#	faith = faith:tariqelharb
+		#	faith = faith:tariqelsama
+		#	faith = faith:tariqelumma
+		#	faith = faith:tariqelhaqim
+		#	}
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = ashirra_reconquista_tt
+			
+			is_vampire_trigger = yes
+			
+			OR = {
+				faith = faith:tariqelalaam
+				faith = faith:tariqelbedouin
+				faith = faith:tariqelharb
+				faith = faith:tariqelsama
+				faith = faith:tariqelumma
+				faith = faith:tariqelhaqim
+				}	
+		}	
+		is_independent_ruler = yes
+		completely_controls_region  = world_europe_west_iberia
+		
+		# You can't have any Via Noctis vassal
+		custom_tooltip = {
+			text = ashirra_deconquista_objective_decision_custom
+			
+			trigger_if = {
+			limit = {
+			any_vassal = {
+					NOT = {
+						primary_title.tier = tier_barony
+						}	
+				faith = faith:vianoctis
+					}
+				}
+				any_vassal = {
+					count <= 1				
+					NOT = {
+						primary_title.tier = tier_barony
+						}
+				faith = faith:vianoctis
+					}	
+				}
+			}	
+		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ashirra_deconquista_objective_decision
+		}
+
+		show_as_tooltip = {
+			custom_tooltip = ashirra_deconquista_objective_decision_effect_tooltip
+			custom_tooltip = fp2_struggle_can_keep_using_struggle_clash_tt
+			add_pressed_claim = title:e_ashirra
+			capital_province = {
+				add_province_modifier = {
+					modifier = capital_past_modifier
+					years = 100
+				}
+			}
+			if = {
+				limit = { 
+					exists = house 
+					is_dynast = no
+				}
+				house = {
+					set_house_head = this
+				}
+			}
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2
+		}
+		
+		save_scope_as = ashirra_deconqueror
+		trigger_event = pod1230objectives.12
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+malkavian_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_little_prank.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = malkavian_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:malkavian_victory_objective_decision
+			}
+		}	
+		is_malkavian_trigger = yes
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 50
+		
+		OR = {
+			completely_controls_region = world_middle_east_jerusalem
+			completely_controls = title:k_bohemia
+			}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:malkavian_victory_objective_decision
+		}
+
+		show_as_tooltip = {
+			custom_tooltip = malkavian_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_malkavian = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			random_list = {
+				25 = {
+					show_chance = no
+					desc = pod1230objectives.14.a
+					custom_tooltip = pod1230objectives.14.customa
+				}
+				25 = {
+					show_chance = no
+					desc = pod1230objectives.14.b
+					custom_tooltip = pod1230objectives.14.customb
+				}
+				25 = {
+					show_chance = no
+					desc = pod1230objectives.14.c
+					custom_tooltip = pod1230objectives.14.customc
+				}
+				25 = {
+					show_chance = no
+					desc = pod1230objectives.14.d
+					custom_tooltip = pod1230objectives.14.customd
+				}
+			}
+		}
+		
+		save_scope_as = victorious_malkav
+		trigger_event = pod1230objectives.14
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+senate_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_eternal_republic.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = senate_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:senate_victory_objective_decision
+			}
+		}
+		OR = {	
+		faith = faith:eternalsenate
+		has_character_flag = angiwar_roman_flag
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 50
+		
+		completely_controls = title:c_roma
+		custom_tooltip = {
+			text = senate_victory_objective_decision_custom
+			OR = {
+				has_title = title:e_fiefs_of_the_black_cross
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_fiefs_of_the_black_cross = {
+						is_title_created = no
+					}
+				}
+			}
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:senate_victory_objective_decision
+		}
+
+		show_as_tooltip = {
+			custom_tooltip = senate_victory_objective_decision_effect_tooltip
+			give_nickname = nick_pater_patriae
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_spqr = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			faith = {
+				add_doctrine = senatorial_clans_doctrine
+				add_doctrine = restored_republic_doctrine
+			}	
+		}
+		
+		save_scope_as = victorious_senator
+		trigger_event = pod1230objectives.16
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+brujah_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_carthage.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = brujah_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:brujah_victory_objective_decision
+			}
+		}	
+		OR = {
+		is_brujah_trigger = yes	
+		faith = faith:viaprometheus
+		}
+		OR = {
+		is_truebrujah_trigger = no	
+		this = character:791232
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 50
+		
+		completely_controls = title:d_tunis
+		custom_tooltip = {
+			text = brujah_victory_objective_decision_custom
+			POD_vampire_is_defeated = { CHARACTER = character:790101 }
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:brujah_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = brujah_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_maghreb = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.18.a
+					create_artifact = {
+						name = artifact_sword_of_troile_name
+						description = artifact_sword_of_troile_description
+						modifier = sword_of_troile_modifier
+						type = sword
+						visuals = sword
+						wealth = 100
+						quality = 100
+					}
+					faith = { add_doctrine = vengeful_carthage_doctrine }
+				}
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.18.b
+					faith = { add_doctrine = broken_hope_doctrine }
+					add_character_modifier = {
+						modifier = politically_secure_modifier
+						years = 150
+					}
+				}
+			}	
+		}
+		
+		save_scope_as = victorious_brujah
+		trigger_event = pod1230objectives.18
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+babayaga_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_caring_grandmother.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = babayaga_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:nosferatu_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:babayaga_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:blackspiraldancer_objective_decision
+			}
+		}		
+		OR = {
+		is_nosferatu_trigger = yes	
+		this = character:790483 #Viktor
+		this = character:790762 #Gabija
+		this = character:790113 #Darvag Grozny
+		has_faith = faith:viatantabus
+		}
+		NOT = { this = character:699999 }
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls = title:e_shadow_curtain
+		has_title = title:e_shadow_curtain
+		custom_tooltip = {
+			text = babayaga_victory_objective_decision_custom
+			POD_vampire_is_defeated = { CHARACTER = character:790274 }
+		}
+
+		prestige >= 1500	
+		
+		custom_tooltip = nosferatu_exclusive_decisions_tt
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:babayaga_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = babayaga_victory_objective_decision_effect_tooltip
+			dynasty = {
+				add_dynasty_prestige = 20000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_babayaga
+		trigger_event = pod1230objectives.20
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+nosferatu_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_horrors_in_the_dark.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = nosferatu_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:nosferatu_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:babayaga_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:blackspiraldancer_objective_decision
+			}
+		}		
+		is_nosferatu_trigger = yes	
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		prestige >= 1000
+		realm_size >= 100
+
+		custom_tooltip = nosferatu_exclusive_decisions_tt
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:nosferatu_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = nosferatu_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_nosferatu = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_character_modifier = eyes_and_ears_modifier
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_nosferatu
+		trigger_event = pod1230objectives.22
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+#urshulgi_victory_objective_decision = {
+#	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+#	decision_group_type = major
+#
+#	ai_check_interval = 120
+#
+#	desc = urshulgi_victory_objective_decision_desc
+#
+#	is_shown = {
+#		is_playable_character = yes
+#		is_vampire_trigger = yes
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:assamite_victory_objective_decision
+#			}
+#		}
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:urshulgi_victory_objective_decision				
+#			}
+#		}		
+#		faith = faith:pathofrighteousness
+#	}
+#
+#	is_valid = {
+#		is_independent_ruler = yes
+#		completely_controls = title:e_assamites
+#		has_title = title:e_assamites
+#		custom_tooltip = {
+#			text = urshulgi_victory_objective_decision_custom
+#					
+#		character:605110 = {
+#				OR = {
+#					is_alive = no
+#					has_trait = torpor
+#					}
+#			}
+#
+#		character:790530 = {
+#				OR = {
+#					is_alive = no
+#					has_trait = torpor
+#					}
+#			}	
+#
+#		character:790166 = {
+#				OR = {
+#					is_alive = no
+#					has_trait = torpor
+#					}
+#			}	
+#			
+#		}
+#
+#	}
+#
+#	is_valid_showing_failures_only = {
+#		is_imprisoned = no
+#		is_at_war = no
+#	}
+#
+#	effect = {
+#		POD_major_objective_finished_effect = yes
+#		save_scope_as = victorious_urshulgi
+#		add_to_global_variable_list = {
+#			name = unavailable_unique_decisions
+#			target = flag:urshulgi_victory_objective_decision
+#		}
+#		custom_tooltip = urshulgi_victory_objective_decision_effect_tooltip
+#		trigger_event = pod1230objectives.24
+#	
+#	}
+#	
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}
+#
+#assamite_victory_objective_decision = {
+#	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+#	decision_group_type = major
+#
+#	ai_check_interval = 120
+#
+#	desc = assamite_victory_objective_decision_desc
+#
+#	is_shown = {
+#		is_playable_character = yes
+#		is_vampire_trigger = yes
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:assamite_victory_objective_decision
+#			}
+#		}
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:urshulgi_victory_objective_decision				
+#			}
+#		}			
+#		is_assamite_trigger = yes
+#		NOT = {	
+#		faith = faith:pathofrighteousness
+#		}
+#		OR = {
+#			POD_bookmark_is_before_anarch_revolt = yes
+#		}		
+#	}
+#
+#	is_valid = {
+#		is_independent_ruler = yes
+#		completely_controls = title:e_assamites
+#		has_title = title:e_assamites
+#		custom_tooltip = {
+#			text = assamite_victory_objective_decision_custom
+#					
+#			OR = {
+#				has_title = title:k_losttribe
+#				trigger_if = {
+#					limit = { POD_is_shattered_world_enabled = no }
+#					title:k_losttribe = {
+#						is_title_created = no
+#					}
+#				}
+#			}
+#			
+#			OR = {
+#				has_title = title:k_webofknives
+#				trigger_if = {
+#					limit = { POD_is_shattered_world_enabled = no }
+#					title:k_webofknives = {
+#						is_title_created = no
+#					}
+#				}
+#			}				
+#			
+#		}
+#
+#	}
+#
+#	is_valid_showing_failures_only = {
+#		is_imprisoned = no
+#		is_at_war = no
+#	}
+#
+#	effect = {
+#		POD_major_objective_finished_effect = yes
+#		save_scope_as = victorious_assamite
+#		add_to_global_variable_list = {
+#			name = unavailable_unique_decisions
+#			target = flag:assamite_victory_objective_decision
+#		}
+#		custom_tooltip = assamite_victory_objective_decision_effect_tooltip
+#		trigger_event = pod1230objectives.27
+#	
+#	}
+#	
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}
+
+sinner_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_political_sin.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = sinner_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:sinner_victory_objective_decision
+			}
+		}
+		OR = {	
+		faith = faith:viapeccati
+		faith = faith:viavoluptuous
+		faith = faith:viacrudelitas
+		faith = faith:pathofwatchfulgods
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls = title:c_roma
+		completely_controls = title:k_romagna
+		gold >= 2000
+		prestige >= 500
+		piety >= 500
+
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:sinner_victory_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_rose_of_the_seven_sins
+		}	
+		show_as_tooltip = {
+			custom_tooltip = sinner_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_eternal_rome = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_character_modifier = eternal_consul_modifier
+		}
+		
+		save_scope_as = victorious_sinner
+		trigger_event = pod1230objectives.29
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+ventrue_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_king_of_kings.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = ventrue_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ventrue_victory_objective_decision
+			}
+		}	
+		is_ventrue_trigger = yes
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 100
+		
+		is_dynast = yes
+	
+		custom_tooltip = {
+		text = ventrue_victory_objective_decision_custom		
+		any_independent_ruler = {
+				count < 1 
+				NOT = { 
+				this = root 
+				}				
+				is_ventrue_trigger = yes
+				highest_held_title_tier > tier_kingdom
+			}	
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ventrue_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = ventrue_victory_objective_decision_effect_tooltip
+			#give_nickname = nick_king_of_kings
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_ventrue = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			dynasty = {
+				add_dynasty_modifier = dynasty_ventrue_modifier
+				add_dynasty_prestige = 20000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_ventrue
+		trigger_event = pod1230objectives.31
+	
+	}
+	
+	ai_potential = {
+		realm_size >= 150
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+lasombra_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_faith_in_shadows.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = lasombra_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:lasombra_victory_objective_decision
+			}
+		}		
+		is_lasombra_trigger = yes
+		NOT = {
+			faith = faith:tariqelalaam
+			faith = faith:tariqelbedouin
+			faith = faith:tariqelharb
+			faith = faith:tariqelsama
+			faith = faith:tariqelumma
+			}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 50
+		
+		is_dynast = yes
+		custom_tooltip = {
+			text = lasombra_victory_objective_decision_custom
+			OR = {
+				has_title = title:e_ashirra
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_ashirra = {
+						is_title_created = no
+					}
+				}
+			}
+			OR = {
+				has_title = title:k_midnight_crescent
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:k_midnight_crescent = {
+						is_title_created = no
+					}
+				}
+			}
+		}
+		completely_controls = title:d_sicily
+		completely_controls = title:d_thrace
+		has_title = title:e_sea_of_shadows
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:lasombra_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = lasombra_victory_objective_decision_effect_tooltip
+			add_character_modifier = {
+				modifier = lasombra_chronicles_modifier
+				years = 50
+			}
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2	
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_lasombra
+		trigger_event = pod1230objectives.33
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+ashirra_victory_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_crescent_over_shadows.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = ashirra_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ashirra_victory_objective_decision
+			}
+		}	
+		OR = {
+			faith = faith:tariqelalaam
+			faith = faith:tariqelbedouin
+			faith = faith:tariqelharb
+			faith = faith:tariqelsama
+			faith = faith:tariqelumma
+			}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		custom_tooltip = {
+			text = ashirra_victory_objective_decision_custom
+			OR = {
+				has_title = title:e_sea_of_shadows
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_sea_of_shadows = {
+						is_title_created = no
+					}
+				}
+			}
+		}
+		completely_controls = title:d_sicily
+		completely_controls = title:e_ashirra
+		has_title = title:e_ashirra
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ashirra_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = ashirra_victory_objective_decision_effect_tooltip
+			give_nickname = nick_the_eternal_mullah
+			add_character_modifier = {
+				modifier = eternal_mullah_modifier
+				years = 250
+			}
+			capital_province = {
+				add_province_modifier = {
+					modifier = ashirra_castle_modifier
+					years = 100
+				}
+			}
+		}
+		
+		save_scope_as = victorious_ashirra
+		trigger_event = pod1230objectives.35
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+heretic_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_truth_until_caine.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = heretic_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:heretic_victory_objective_decision
+			}
+		}	
+		faith = { religion_tag = bloodgnosticism_religion }
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	has_title = title:k_seeofnod
+
+	completely_controls = title:d_venice
+	completely_controls = title:d_latium
+	realm_size >= 50
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:heretic_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = heretic_victory_objective_decision_effect_tooltip
+			give_nickname = nick_herald_of_caine
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_church_third_caine = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			faith = { add_doctrine = crimsom_curia_doctrine }
+		}
+		
+		save_scope_as = victorious_heretic
+		trigger_event = pod1230objectives.38
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##TODO deactivate for asia
+#anda_victory_objective_decision = {
+#
+#	picture = {
+#		reference = "gfx/interface/illustrations/decisions/decision_eye_of_the_storm.dds"
+#	}
+#	decision_group_type = major
+#
+#	ai_check_interval = 120
+#
+#	desc = anda_victory_objective_decision_desc
+#
+#	is_shown = {
+#		is_playable_character = yes
+#		is_vampire_trigger = yes
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:anda_victory_objective_decision
+#			}
+#		}	
+#		faith = faith:viayasaq
+#	}
+#
+#	is_valid = {
+#	is_independent_ruler = yes	
+#	has_title = title:e_anda
+#
+#	completely_controls = title:e_anda
+#	completely_controls = title:e_siberia
+#	completely_controls = title:e_tartaria
+#	}
+#
+#	is_valid_showing_failures_only = {
+#		is_imprisoned = no
+#		is_at_war = no
+#	}
+#
+#	effect = {
+#		POD_major_objective_finished_effect = yes
+#		add_to_global_variable_list = {
+#			name = unavailable_unique_decisions
+#			target = flag:anda_victory_objective_decision
+#		}
+#		
+#		show_as_tooltip = {
+#			custom_tooltip = anda_victory_objective_decision_effect_tooltip
+#			faith = { add_doctrine = secure_anda_doctrine }
+#		}
+#		
+#		save_scope_as = victorious_anda
+#		trigger_event = pod1230objectives.41
+#	
+#	}
+#	
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}
+
+gangrel_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_scourge.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = gangrel_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:gangrel_victory_objective_decision
+			}
+		}
+		is_gangrel_trigger = yes	
+		NOT = { faith = faith:viayasaq }
+		NOT = { faith = faith:viaeinherjar }
+		NOT = { religion = religion:camarilla_religion }
+		NOT = { religion = religion:sabbat_religion }
+		NOT = { this = character:790483 } #Viktor
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	realm_size >= 100 
+	prowess >= 40
+	prestige >= 1000
+
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:gangrel_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = gangrel_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_gangrel = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_character_modifier = {
+				modifier = alpha_gangrel_modifier
+				years = 100
+			}
+		}
+		
+		save_scope_as = victorious_gangrel
+		trigger_event = pod1230objectives.43
+	
+	}
+	
+	ai_potential = {
+		completely_controls = title:c_krakowska
+		completely_controls = title:c_byzantion
+		completely_controls = title:c_novgorod
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+tremere_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_will_of_tremere.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = tremere_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:tremere_victory_objective_decision
+			}
+		}
+		is_tremere_trigger = yes	
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	completely_controls = title:e_voivodate 
+	has_title = title:e_tremere
+	realm_size >= 35
+
+	custom_tooltip = {
+		text = tremere_victory_objective_decision_customb		
+		any_independent_ruler = {
+				count < 1 				
+				is_salubri_trigger = yes
+				highest_held_title_tier > tier_kingdom
+			}	
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:tremere_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = tremere_victory_objective_decision_effect_tooltip
+			give_nickname = nick_voice_of_tremere
+			add_character_modifier = prime_councilor_modifier
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_tremere
+		trigger_event = pod1230objectives.45
+	}
+	
+	ai_potential = {
+		realm_size >= 60
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+tzimisce_victory_objective_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_eternal_change.dds" }
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = tzimisce_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		is_tzimisce_trigger = yes
+		capital_province = { geographical_region = world_europe }
+		NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:tzimisce_victory_objective_decision } }
+	}
+
+	is_valid = {
+		has_title = title:e_voivodate
+		completely_controls = title:e_voivodate
+		is_dynast = yes
+		trigger_if = {
+			limit = { POD_is_shattered_world_enabled = no }
+			custom_tooltip = {
+				text = tzimisce_victory_objective_decision_custom
+				title:e_tremere = { is_title_created = no }	
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = { name = unavailable_unique_decisions target = flag:tzimisce_victory_objective_decision }
+		
+		show_as_tooltip = {
+			custom_tooltip = tzimisce_victory_objective_decision_effect_tooltip
+			random_list = {
+				33 = {
+					show_chance = no
+					desc = pod1230objectives.47.a
+					give_nickname = nick_lord_of_scions
+					add_pressed_claim = title:e_fiefs_of_the_black_cross
+					custom_tooltip = pod1230objectives.47.custom
+				}
+				33 = {
+					show_chance = no
+					desc = pod1230objectives.47.b
+					give_nickname = nick_seeker_of_seekers
+					if = {
+						limit = { NOT = { has_religion = religion:roadofmetamorphosis_religion } }
+						set_character_faith = faith:viamutationis
+					}
+					faith:viamutationis = { add_doctrine = militarized_experiments_doctrine }
+					faith:pathoftheflesh = { add_doctrine = militarized_experiments_doctrine }
+					faith:pathofthespirit = { add_doctrine = militarized_experiments_doctrine }
+					custom_tooltip = pod1230objectives.47.customb
+				}
+				33 = {
+					show_chance = no
+					desc = pod1230objectives.47.c
+					give_nickname = nick_kupalas_favored
+					add_character_modifier = kupala_empowered_modifier
+					custom_tooltip = pod1230objectives.47.customc
+				}
+			}
+		}
+		
+		save_scope_as = victorious_tzimisce
+		trigger_event = pod1230objectives.47
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+# cappadocian_victory_objective_decision = {
+# 	picture = "gfx/interface/illustrations/decisions/decision_sargon_codex.dds"
+# 	decision_group_type = major
+
+# 	ai_check_interval = 120
+
+# 	desc = cappadocian_victory_objective_decision_desc
+
+# 	is_shown = {
+# 		is_playable_character = yes
+# 		is_vampire_trigger = yes
+# 		NOT = {
+# 			is_target_in_global_variable_list = {
+# 				name = unavailable_unique_decisions
+# 				target = flag:cappadocian_victory_objective_decision
+# 			}
+# 		}
+# 		OR = {
+# 		is_giovanni_trigger = yes
+# 		is_cappadocian_trigger = yes
+# 		}
+# 	}
+
+# 	is_valid = {
+# 	is_independent_ruler = yes
+# 	is_dynast = yes	
+# 	has_title = title:k_erciyes
+# 	completely_controls = title:c_byzantion
+# 	completely_controls = title:c_giza
+# 	completely_controls = title:c_vaspurakan
+# 	piety >= 500
+# 	}
+
+# 	is_valid_showing_failures_only = {
+# 		is_imprisoned = no
+# 		is_at_war = no
+# 	}
+
+# 	effect = {
+# 		POD_major_objective_finished_effect = yes
+# 		add_to_global_variable_list = {
+# 			name = unavailable_unique_decisions
+# 			target = flag:cappadocian_victory_objective_decision
+# 		}
+		
+# 		show_as_tooltip = {
+# 			custom_tooltip = cappadocian_victory_objective_decision_effect_tooltip
+# 			random_list = {
+# 				50 = {
+# 					show_chance = no
+# 					desc = pod1230objectives.49.a
+# 					remove_trait = dull
+# 					remove_trait = intellect_bad_1
+# 					remove_trait = intellect_bad_2
+# 					remove_trait = intellect_bad_3
+# 					change_trait_rank = {
+# 						trait = intellect_good
+# 						rank = 3
+# 						max = 3
+# 					}
+# 					add_trait = lunatic_1
+# 					add_stress = monumental_stress_gain
+# 					add_character_modifier = sargon_codex_modifier
+# 				}
+# 				50 = {
+# 					show_chance = no
+# 					desc = pod1230objectives.49.b
+# 					add_character_modifier = sargon_fragment_modifier
+# 					add_prestige = massive_prestige_value
+# 					add_prestige_level = 2
+# 				}
+# 			}
+# 		}
+		
+# 		save_scope_as = victorious_cappadocian
+# 		trigger_event = pod1230objectives.49
+# 	}
+	
+# 	ai_potential = {
+# 		always = yes
+# 	}
+
+# 	ai_will_do = {
+# 		base = 100
+# 	}
+# }
+
+giovanni_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_conspiracy.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = giovanni_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:giovanni_victory_objective_decision
+			}
+		}
+		POD_bookmark_is_before_anarch_revolt = yes
+		is_giovanni_trigger = yes
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		is_dynast = yes	
+		has_title = title:k_giovanni
+		custom_tooltip = {
+			text = giovanni_victory_objective_decision_custom
+			OR = {
+				has_title = title:k_erciyes
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:k_erciyes = {
+						is_title_created = no
+					}
+				}
+			}	
+		}		
+		completely_controls = title:d_venice
+		completely_controls = title:k_romagna
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:giovanni_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = giovanni_victory_objective_decision_effect_tooltip
+			give_nickname = nick_the_antediluvian
+			add_character_modifier = pseudo_third_modifier
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_giovanni = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+		}
+		
+		save_scope_as = victorious_giovanni
+		trigger_event = pod1230objectives.51
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+furores_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = furores_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:furores_victory_objective_decision
+			}
+		}
+		OR = {
+		faith = faith:viafurores
+		faith = faith:vialiberatio
+		faith = faith:viaadversarius
+		}		
+	}
+
+	is_valid = {
+	is_independent_ruler = yes
+	realm_size >= 100
+	diplomacy >= 10
+	prestige >= 1000	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:furores_victory_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_fire_of_the_many
+		}
+		show_as_tooltip = {
+			custom_tooltip = furores_victory_objective_decision_effect_tooltip
+			custom_tooltip = create_holy_order_decision_effect_message
+			add_character_modifier = decentralized_rule_modifier
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_free_states = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+		}
+		
+		save_scope_as = victorious_furore
+		trigger_event = pod1230objectives.53
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+setite_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_serpents_embrace.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = setite_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:setite_victory_objective_decision
+			}
+		}
+		is_setite_trigger = yes	
+		NOT = { this = character:790512 }
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:e_setite
+		completely_controls = title:k_olives
+		completely_controls = title:k_syria
+		completely_controls = title:k_egypt
+		trigger_if = {
+			limit = { POD_is_shattered_world_enabled = no }
+			custom_tooltip = {
+				text = setite_victory_objective_decision_custom
+				title:e_ashirra = {
+					is_title_created = no
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:setite_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = setite_victory_objective_decision_effect_tooltip
+			give_nickname = nick_sets_herald
+			add_character_modifier = serpent_allure_modifier
+			add_pressed_claim = title:e_assamites	
+			add_pressed_claim = title:k_webofknives
+			add_pressed_claim = title:k_losttribe
+			add_pressed_claim = title:k_makran
+		}
+		
+		save_scope_as = victorious_setite
+		trigger_event = pod1230objectives.55
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+salubri_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_reckoning.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = salubri_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:salubri_victory_objective_decision
+			}
+		}
+		is_salubri_trigger = yes	
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:k_olives
+		completely_controls = title:k_olives
+		completely_controls = title:k_syria
+		trigger_if = {
+			limit = { POD_is_shattered_world_enabled = no }
+			custom_tooltip = {
+				text = salubri_victory_objective_decision_custom
+				title:k_moloch = {
+					is_title_created = no
+				}
+				title:k_angellisater = {
+					is_title_created = no
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:salubri_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = salubri_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_salubri = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.57.a
+					give_nickname = nick_avenging_angel
+					create_artifact = {
+						name = sword_samiel_artifact_name
+						description = sword_samiel_artifact_description
+						modifier = sword_samiel_modifier
+						type = sword
+						visuals = wall_POD_sword_of_nul
+						wealth = 90
+						quality = 90
+					}
+				}
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.57.b
+					add_character_modifier = saulot_heir_modifier
+				}
+			}
+		}
+		
+		save_scope_as = victorious_salubri
+		trigger_event = pod1230objectives.57
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+baali_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_end_of_ages.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = baali_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:baali_victory_objective_decision
+			}
+		}
+		is_baali_trigger = yes	
+		NOT = {
+			faith = faith:viahyron
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:k_angellisater
+		completely_controls = title:k_mesopotamia
+		completely_controls = title:k_syria
+		trigger_if = {
+			limit = { POD_is_shattered_world_enabled = no }
+			custom_tooltip = {
+				text = baali_victory_objective_decision_custom
+
+			OR = {
+				has_title = title:k_moloch				
+				title:k_moloch = {
+					is_title_created = no
+				}
+			}
+			OR = {
+				has_title = title:e_assamites
+				title:e_assamites = {
+					is_title_created = no
+				}
+			}
+			OR = {
+				has_title = title:k_olives
+				title:k_olives = {
+					is_title_created = no
+				}
+			}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:baali_victory_objective_decision
+		}
+			
+		show_as_tooltip = {
+			custom_tooltip = baali_victory_objective_decision_effect_tooltip
+			give_nickname = nick_the_great_enemy
+			add_character_modifier = herald_of_the_end_modifier
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_baali = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			dynasty = {
+				add_dynasty_prestige = 20000
+				add_dynasty_prestige_level = 1
+			}
+		}
+		
+		save_scope_as = victorious_baali
+		trigger_event = pod1230objectives.59
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+molochim_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_warding_evil.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = molochim_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:molochim_victory_objective_decision
+			}
+		}
+		faith = faith:viahyron
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:k_moloch
+		completely_controls = title:k_mesopotamia
+		completely_controls = title:k_syria
+		trigger_if = {
+			limit = { POD_is_shattered_world_enabled = no }
+			custom_tooltip = {
+				text = molochim_victory_objective_decision_custom
+				title:k_angellisater = {
+					is_title_created = no
+				}
+				title:e_assamites = {
+					is_title_created = no
+				}
+				title:k_olives = {
+					is_title_created = no
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:molochim_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = molochim_victory_objective_decision_effect_tooltip
+			give_nickname = nick_warden_of_baali
+			custom_tooltip = create_holy_order_decision_effect_message
+			faith = { add_doctrine = warden_network_doctrine }
+			add_piety = massive_piety_value
+			add_piety_level = 2
+		}
+		
+		save_scope_as = victorious_molochim
+		trigger_event = pod1230objectives.61
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+ravnos_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_west_and_east.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = ravnos_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ravnos_victory_objective_decision
+			}
+		}
+		is_ravnos_trigger = yes
+		NOT = {	
+		capital_province = {
+			geographical_region = world_india
+		}	
+		}	
+		NOT = {	
+		capital_province = {
+			geographical_region = world_tibet
+		}	
+		}			
+	}
+
+	is_valid = {
+	is_independent_ruler = yes
+	realm_size >= 100
+	prestige >= 1000		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ravnos_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = ravnos_victory_objective_decision_effect_tooltip
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_western_ravnos = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			custom_tooltip = pod1230objectives.63.custom
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.63.a
+					custom_tooltip = pod1230objectives.63.customb
+				}
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.63.b
+					add_pressed_claim = title:e_ravnos
+				}
+			}
+		}
+		
+		save_scope_as = victorious_ravnos
+		trigger_event = pod1230objectives.63
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+indian_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_ending_the_eternal.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = indian_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:indian_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:kueijin_victory_objective_decision
+			}
+		}		
+		OR = {	
+		capital_province = {
+			geographical_region = world_burma
+		}
+		capital_province = {
+			geographical_region = world_india
+		}	
+		capital_province = {
+			geographical_region = world_tibet
+		}	
+		}	
+	}
+	
+
+	is_valid = {
+	is_independent_ruler = yes
+	completely_controls = title:e_ravnos
+	completely_controls = title:e_bengal
+	completely_controls = title:e_infinite_thunder
+	highest_held_title_tier >= tier_kingdom			
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:indian_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = indian_victory_objective_decision_effect_tooltip
+			add_trait = chakravarti
+			custom_tooltip = pod1230objectives.65.custom
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:h_india = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2
+		}
+		
+		save_scope_as = victorious_indian
+		trigger_event = pod1230objectives.65
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+laibon_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_ebony_kingdom.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = laibon_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:laibon_victory_objective_decision
+			}
+		}		
+		religion = religion:roadoflaibon_religion		
+	}
+	
+
+	is_valid = {
+	is_independent_ruler = yes
+	realm_size >= 100
+	prestige >= 1000	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:laibon_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = laibon_victory_objective_decision_effect_tooltip
+			add_character_modifier = first_magaji_modifier
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:e_laibon = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			add_prestige = massive_prestige_value
+			add_prestige_level = 2
+			add_gold = 1000
+		}
+		
+		save_scope_as = victorious_laibon
+		trigger_event = pod1230objectives.69
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+# Inquisition objectives
+
+occupy_san_michele_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_san_michele.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0 # AI gets the buildings automatically
+
+	desc = occupy_san_michele_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		is_san_michele_built_trigger = no
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:c_roma
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = occupy_san_michele_decision_effect_tooltip
+			POD_build_san_michele_effect = yes
+		}
+	}
+}
+
+knights_support_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/acredec.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = knights_support_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:knights_support_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		
+		trigger_if = {
+			limit = {
+				is_landless_adventurer = no
+			}
+			realm_size >= 50
+		}
+		
+		trigger_if = {
+			limit = {
+				is_landless_adventurer = yes
+			}
+			martial >= 15
+		}
+		
+		#completely_controls = title:k_cyprus
+	
+		#completely_controls = title:k_thessalonika
+		
+		custom_tooltip = {
+			text = knights_support_custom_decision_cyprus
+			title:d_cyprus.holder ?= {
+				POD_has_inquisition_faith = yes
+			}
+			completely_controls = title:d_cyprus
+		}	
+		custom_tooltip = {
+			text = knights_support_custom_decision_thessalonika
+			title:k_thessalonika.holder ?= {
+				POD_has_inquisition_faith = yes
+			}				
+		}
+		custom_tooltip = {
+			text = knights_support_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:505070 }
+			POD_vampire_is_defeated = { CHARACTER = character:505098 }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_knight
+		show_as_tooltip = {
+			dynasty = { add_dynasty_modifier = support_from_knight_of_acre_modifier }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:knights_support_objective_decision
+		}
+		custom_tooltip = knights_support_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.71
+	}
+	
+	ai_potential = {
+		NOT = { any_player = { POD_has_inquisition_faith = yes } }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+sisters_support_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/sistersdec.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = sisters_support_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:sisters_support_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1		
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		piety >= 1000
+
+		custom_tooltip = {
+			text = sisters_support_custom_decision_england
+			title:k_england.holder ?= {
+				POD_has_inquisition_faith = yes
+			}
+		}		
+
+		custom_tooltip = {
+			text = sisters_support_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:505071 }
+			POD_vampire_is_defeated = { CHARACTER = character:790134 }
+		}
+	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_sister
+		show_as_tooltip = {
+			dynasty = { add_dynasty_modifier = support_from_sister_of_stjohn_modifier }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:sisters_support_objective_decision
+		}
+		custom_tooltip = sisters_support_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.73
+	
+	}
+	
+	ai_potential = {
+		NOT = { any_player = { POD_has_inquisition_faith = yes } }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+oculi_support_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/oculideidec.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = oculi_support_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:oculi_support_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		intrigue >= 15
+		
+		custom_tooltip = {
+			text = oculi_support_custom_decision_france
+			title:k_grand_court.holder ?= {
+				POD_has_inquisition_faith = yes
+			}				
+		}	
+
+		custom_tooltip = {
+			text = oculi_support_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:505072 }
+			POD_vampire_is_defeated = { CHARACTER = character:505073 }
+		}
+	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_oculi
+		show_as_tooltip = {
+			dynasty = { add_dynasty_modifier = support_from_oculi_dei_modifier }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:oculi_support_objective_decision
+		}
+		custom_tooltip = oculi_support_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.75
+	
+	}
+	
+	ai_potential = {
+		NOT = { any_player = { POD_has_inquisition_faith = yes } }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+red_support_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/redorderdec.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = red_support_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:red_support_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		gold >= 1000
+		
+		custom_tooltip = {
+			text = red_support_custom_decision_romagna
+			title:k_romagna.holder ?= {
+				POD_has_inquisition_faith = yes
+			}
+		}
+
+		custom_tooltip = {
+			text = red_support_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:790101 }
+			POD_vampire_is_defeated = { CHARACTER = character:790203 }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_red
+		show_as_tooltip = {
+			dynasty = { add_dynasty_modifier = support_from_red_order_modifier }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:red_support_objective_decision
+		}
+		custom_tooltip = red_support_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.77
+	
+	}
+	
+	ai_potential = {
+		NOT = { any_player = { POD_has_inquisition_faith = yes } }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+murnau_support_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/murnaudec.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = murnau_support_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_has_inquisition_faith = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:murnau_support_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		prestige >= 1000
+		
+		custom_tooltip = {
+			text = murnau_support_custom_decision_bavaria
+			title:k_house_murnau.holder ?= {
+				POD_has_inquisition_faith = yes
+			}				
+		}	
+
+		custom_tooltip = {
+		text = murnau_support_custom_decision_lotharingia
+			title:k_east_francia.holder ?= {
+				POD_has_inquisition_faith = yes
+			}				
+		}
+
+		custom_tooltip = {
+			text = murnau_support_custom_decision
+			POD_vampire_is_defeated = { CHARACTER = character:505050 }
+			POD_vampire_is_defeated = { CHARACTER = character:505084 }
+		}
+	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_murnau
+		show_as_tooltip = {
+			dynasty = { add_dynasty_modifier = support_from_von_murnau_modifier }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:murnau_support_objective_decision
+		}
+		custom_tooltip = murnau_support_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.79
+	
+	}
+	
+	ai_potential = {
+		NOT = { any_player = { POD_has_inquisition_faith = yes } }
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+inquisition_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/inquisitionfin.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = inquisition_victory_objective_decision_desc
+
+	is_shown = {
+		is_landed = yes #Requires realm size
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:inquisition_victory_objective_decision
+			}
+		}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:murnau_support_objective_decision
+			}	
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:red_support_objective_decision
+			}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:oculi_support_objective_decision
+			}	
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:knights_support_objective_decision
+			}	
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:sisters_support_objective_decision
+			}			
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1		
+		faith = faith:shadowinquisition
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 150
+		prestige >= 1500
+		piety >= 1500
+	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_inquisitor
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:inquisition_victory_objective_decision
+		}
+		custom_tooltip = inquisition_victory_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.81
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+talmahera_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = talmahera_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		OR = {
+			is_vampire_trigger = yes
+			this = character:792605
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:talmahera_victory_objective_decision
+			}
+		}
+		OR = {	
+			faith = { religion_tag = talmahera_religion }
+			this = character:792605
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		realm_size >= 75
+		
+		OR = {
+			completely_controls = title:k_persia
+			completely_controls = title:k_rajputana
+		}
+		
+		custom_tooltip = {
+			text = talmahera_victory_objective_decision_custom
+			OR = {
+				has_title = title:k_losttribe
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:k_losttribe = {
+						is_title_created = no
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = talmahera_victory_objective_decision_customb
+			POD_vampire_is_defeated = { CHARACTER = character:790219 }
+		}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_talmahera
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:talmahera_victory_objective_decision
+		}
+		custom_tooltip = talmahera_victory_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.83
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+blackcross_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_under_the_black_cross.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = blackcross_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_ventrue_trigger = yes
+		is_vampire_trigger = yes
+		capital_province = {
+			OR = {
+				geographical_region = ghw_region_germanic
+				geographical_region = ghw_region_germany
+			}
+		}		
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:blackcross_victory_objective_decision
+			}
+		}
+		POD_bookmark_is_before_anarch_revolt = yes
+	}
+
+	is_valid = {
+		realm_size >= 50
+		
+		completely_controls = title:k_pomerania
+		
+		custom_tooltip = {
+			text = blackcross_victory_objective_decision_custom
+			OR = {
+				has_title = title:k_ferals_livonia
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:k_ferals_livonia = {
+						is_title_created = no
+					}
+				}	
+			}	
+		
+			OR = {
+				has_title = title:e_voivodate
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_voivodate = {
+						is_title_created = no
+					}
+				}
+			}	
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_blackcross
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:blackcross_victory_objective_decision
+		}
+		custom_tooltip = blackcross_victory_objective_decision_effect_tooltip2
+		trigger_event = pod1230objectives.85
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+revenant_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_bloodsurge.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+	desc = revenant_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		has_trait = revenant
+		NAND = {
+			dynasty = dynasty:13000007
+			faith = faith:calomenasforsaken
+		}
+		NOT = { has_character_modifier = antediluvian_dominor_modifier }
+		NOT = { has_trait = ghoul }
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_trait = bloodsorceryadvanced
+		has_trait = scholar
+		
+		custom_tooltip = {
+			text = revenant_victory_objective_decision_custom	
+			any_prisoner = {
+				count >= 3
+				has_trait = vampgeneration4
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	cost = {
+		gold = omega_gold_value
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		show_as_tooltip = {	
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.87.sucess
+					add_trait_force_tooltip = vampire
+					add_trait_force_tooltip = vampgeneration4
+				}
+				50 = {
+					show_chance = no
+					desc = pod1230objectives.87.fail
+					custom_tooltip = pod1230objectives.87.fail.tt
+					add_character_modifier = {
+						modifier = antediluvian_dominor_modifier
+						years = 10
+					}
+				}
+			}
+		}
+		save_scope_as = victorious_revenant
+		custom_tooltip = revenant_victory_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.87
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+custom_bloodline_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/custombloodline.dds"
+	}
+
+	decision_group_type = major
+	
+	ai_check_interval = 0
+	
+	desc = custom_bloodline_objective_decision_desc
+	
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		has_trait = caitiff
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:custom_bloodline_objective_decision
+			}
+		}
+	}
+	
+	is_valid = {
+	    is_independent_ruler = yes	
+		is_dynast = yes
+		prestige >= 25000
+		piety >= 2000
+		custom_tooltip = {
+			text = custom_bloodline_custom_decision
+			has_trait_rank = {
+				trait = vampgeneration
+				rank <= 5
+			}
+		}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+	    custom_tooltip = custom_bloodline_objective_decision_effect_tooltip
+		save_scope_as = victorious_caitiff
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:custom_bloodline_objective_decision
+		}
+		trigger_event = pod1230objectives.255
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+greek_fire_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/shitsonfireyo.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 1200
+	
+	desc = greek_fire_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		POD_is_supehunter_trigger = yes
+		religion = religion:hunters_religion
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:greek_fire_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1		
+	}
+
+	is_valid = {
+	
+		has_trait = scholar
+		prestige_level >= 3
+		OR = {
+			custom_tooltip = {
+				text = greek_fire_objective_decision_custom1
+				AND = {
+					completely_controls = title:c_byzantion
+					intrigue >= 12
+					}
+				}
+				
+			custom_tooltip = {
+				text = greek_fire_objective_decision_custom2
+				AND = {
+					OR = {
+					any_courtier = { has_trait = torturer }
+					has_trait = torturer
+					}
+					OR = {
+					character:790015 = { is_imprisoned_by = root }
+					#Belisarius
+					character:790115 = { is_imprisoned_by = root }
+					#Symeon
+					character:790767 = { is_imprisoned_by = root }
+					#Alexius
+					character:790341 = { is_imprisoned_by = root }
+					#Dracon
+					character:790939 = { is_imprisoned_by = root }
+					#Keeper of the Faith
+					}
+				}
+			}
+			
+			custom_tooltip = {
+				text = greek_fire_objective_decision_custom3
+				AND = {
+					culture = {
+						has_innovation = innovation_development_04
+							}
+					learning >= 20
+				}
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	cost = {
+		gold = 200
+	}
+
+	effect = {
+		save_scope_as = firewielding_supe
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:greek_fire_objective_decision
+		}
+		custom_tooltip = greek_fire_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.91
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+ghoulbro_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/medcity.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 1200
+	
+	desc = ghoulbro_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		dynasty = dynasty:13000007
+		faith = faith:calomenasforsaken
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ghoulbro_objective_decision
+			}
+		}
+		current_date >= 1230.1.1
+		current_date <= 1700.1.1		
+	}
+
+	is_valid = {
+	
+		has_trait = theologian
+		piety_level >= 5
+		completely_controls = title:c_byzantion
+		custom_tooltip = {
+			text = ghoulbro_custom_decision
+			any_knight = { POD_is_real_bro_trigger = yes count >= 20 }
+		}
+		custom_tooltip = {
+			text = ghoulbro_custom_decision1
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:791424 }
+				character:791424 = { is_landed = no }
+			}
+		}
+		custom_tooltip = {
+			text = ghoulbro_custom_decision2
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:791418 }
+				character:791418 = { is_landed = no }
+			}
+		}
+		custom_tooltip = {
+			text = ghoulbro_custom_decision3
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:791419 }
+				character:791419 = { is_landed = no }
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	cost = {
+		piety = 1000
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_ghoulbro
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ghoulbro_objective_decision
+		}
+		custom_tooltip = ghoulbro_objective_decision_effect_tooltip
+		show_as_tooltip = {
+			faith = { add_doctrine = great_awakening_doctrine }
+			custom_tooltip = POD_unlocked_empire_ghw
+		}
+		trigger_event = pod1230objectives.93
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+poltzimi_objective_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/poltzimi.dds" }
+	decision_group_type = major
+
+	ai_check_interval = 120
+	
+	desc = poltzimi_objective_decision_desc
+
+	is_shown = {
+		POD_is_vampire_trigger = yes
+		is_tzimisce_trigger = yes
+		culture = { has_cultural_pillar = heritage_west_slavic }
+		capital_province = { geographical_region = custom_west_slavia }
+		NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:poltzimi_objective_decision } }	
+	}
+
+	is_valid = {
+		prestige_level >= 4
+		has_title = title:k_poland
+		realm_size >= 35
+		completely_controls = title:c_krakowska
+		title:c_krakowska = { development_level >= 40 }
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+		is_independent_ruler = yes
+	}
+	
+	cost = { prestige = 1000 }
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_poltzimi
+		add_to_global_variable_list = { name = unavailable_unique_decisions target = flag:poltzimi_objective_decision }
+		show_as_tooltip = {
+			if = {
+				limit = { has_any_nickname = no }
+				give_nickname = nick_sculptor_of_thrones
+			}
+		}
+		custom_tooltip = poltzimi_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.95
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+blood_curse_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_ending_the_curse.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+	
+	desc = blood_curse_objective_decision_desc
+
+	is_shown = {
+		POD_is_vampire_trigger = yes
+		has_character_modifier = tremere_blood_curse_modifier	
+	}
+
+	is_valid = {
+		completely_controls = title:c_qazwin
+		custom_tooltip = {
+			text = tremere_blood_curse_decision_custom
+		title:b_qazvin = {
+			title_province = { has_building = alamut_03 }
+			}
+		}
+		learning >= 20
+		has_trait = bloodsorceryadvanced
+		cp:councillor_court_chaplain = {
+			learning >=25
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = victorious_decurser
+		
+		custom_tooltip = blood_curse_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.97
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+
+toreador_grandeur_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dazzling_grandeur.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = toreador_grandeur_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		is_toreador_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:toreador_grandeur_victory_objective_decision
+			}
+		}		
+	}
+	
+
+	is_valid = {
+
+	is_independent_ruler = yes
+		
+		trigger_if = {
+			limit = { has_ep1_dlc_trigger = yes }
+		custom_tooltip = {
+			text = toreador_grandeur_custom_decision2
+			court_grandeur_current_level >= 10
+		}
+		}
+		
+		trigger_else = {
+			prestige >= 15000 
+		}	
+		
+		custom_description = {
+			text = "is_king_or_emperor"
+			highest_held_title_tier >= tier_kingdom
+		}
+		
+		custom_tooltip = {
+			text = toreador_grandeur_custom_decision
+			
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = brujah_primogen_court_position
+				}
+				employs_court_position = brujah_primogen_court_position
+				any_court_position_holder = {
+					type = brujah_primogen_court_position
+					aptitude = {
+						court_position = brujah_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = lasombra_primogen_court_position
+				}
+				employs_court_position = lasombra_primogen_court_position
+				any_court_position_holder = {
+					type = lasombra_primogen_court_position
+					aptitude = {
+						court_position = lasombra_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = toreador_primogen_court_position
+				}
+				employs_court_position = toreador_primogen_court_position
+				any_court_position_holder = {
+					type = toreador_primogen_court_position
+					aptitude = {
+						court_position = toreador_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = tzimisce_primogen_court_position
+				}
+				employs_court_position = tzimisce_primogen_court_position
+				any_court_position_holder = {
+					type = tzimisce_primogen_court_position
+					aptitude = {
+						court_position = tzimisce_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = ventrue_primogen_court_position
+				}
+				employs_court_position = ventrue_primogen_court_position
+				any_court_position_holder = {
+					type = ventrue_primogen_court_position
+					aptitude = {
+						court_position = ventrue_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = assamite_primogen_court_position
+				}
+				employs_court_position = assamite_primogen_court_position
+				any_court_position_holder = {
+					type = assamite_primogen_court_position
+					aptitude = {
+						court_position = assamite_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = gangrel_primogen_court_position
+				}
+				employs_court_position = gangrel_primogen_court_position
+				any_court_position_holder = {
+					type = gangrel_primogen_court_position
+					aptitude = {
+						court_position = gangrel_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = malkavian_primogen_court_position
+				}
+				employs_court_position = malkavian_primogen_court_position
+				any_court_position_holder = {
+					type = malkavian_primogen_court_position
+					aptitude = {
+						court_position = malkavian_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = nosferatu_primogen_court_position
+				}
+				employs_court_position = nosferatu_primogen_court_position
+				any_court_position_holder = {
+					type = nosferatu_primogen_court_position
+					aptitude = {
+						court_position = nosferatu_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = tremere_primogen_court_position
+				}
+				employs_court_position = tremere_primogen_court_position
+				any_court_position_holder = {
+					type = tremere_primogen_court_position
+					aptitude = {
+						court_position = tremere_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					can_employ_court_position_type = salubri_primogen_court_position
+				}
+				employs_court_position = salubri_primogen_court_position
+				any_court_position_holder = {
+					type = salubri_primogen_court_position
+					aptitude = {
+						court_position = salubri_primogen_court_position
+						value >= 3
+					}
+				}
+			}
+		}
+		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_toreador_grandeur
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:toreador_grandeur_victory_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_architect_of_splendor
+		}
+		custom_tooltip = toreador_grandeur_victory_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.99
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+library_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_eternal_knowledge.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = library_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		OR = {
+			is_tremere_clan_or_bloodline_trigger = yes
+			is_cappadocian_trigger = yes
+			is_giovanni_trigger = yes
+			AND = {
+				learning >= 25
+				has_trait = scholar
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:library_victory_objective_decision
+			}
+		}	
+	}
+	
+
+	is_valid = {
+		custom_tooltip = {
+			text = library_victory_objective_decision_custom
+			any_character_artifact = {
+				has_variable = book_of_nod
+			}	
+		}
+		POD_character_owns_linked_artifact = {
+			LINK = erciyes_fragments
+		}
+		POD_character_owns_linked_artifact = {
+			LINK = great_book
+		}
+		
+		custom_tooltip = {
+			text = library_victory_objective_decision_custom2
+			OR = {
+				completely_controls = title:c_toulouse
+				completely_controls = title:c_vienna
+				completely_controls = title:c_malta
+				completely_controls = title:c_barcelona
+				completely_controls = title:c_cappadocia
+			}
+		}
+					
+		learning >= 20	
+		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_library
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:library_victory_objective_decision
+		}
+		custom_tooltip = library_victory_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.101
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+avenge_arikels_shame_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_avenge_arikels_shame.dds"
+	}
+
+
+	decision_group_type = major
+	
+	ai_check_interval = 120
+	
+	desc = avenge_arikels_shame_objective_decision_desc
+	
+	is_shown = {
+		is_playable_character = yes
+		is_toreador_trigger = yes		
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:avenge_arikels_shame_objective_decision
+			}
+		}		
+	}
+	
+	is_valid = {
+	    is_independent_ruler = yes	
+		POD_character_owns_linked_artifact = {
+			LINK = tablet_of_destiny
+		}
+		custom_tooltip = {
+			text = avenge_arikels_shame_custom_decision_gangrel
+			character:792050 = { is_alive = no }
+			character:792051 = { is_alive = no }	
+		}
+		custom_tooltip = {
+			text = avenge_arikels_shame_custom_decision_malks
+			OR = {
+				any_courtier = { 
+					this = character:790319
+				}
+				employs_court_position = malkavian_primogen_court_position
+				any_court_position_holder = {
+					type = malkavian_primogen_court_position
+					aptitude = {
+						court_position = malkavian_primogen_court_position
+						value >= 4
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+	    custom_tooltip = avenge_arikels_shame_objective_decision_effect_tooltip
+		save_scope_as = victorious_toreador_avenge
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:avenge_arikels_shame_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_avenging_petal
+		}
+		trigger_event = pod1230objectives.103
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+toreador_unity_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_a_new_era.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = toreador_unity_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes	
+		is_toreador_trigger = yes		
+		is_vampire_trigger = yes
+		any_sub_realm_county = {
+			de_jure_liege.de_jure_liege.de_jure_liege = title:e_love
+		}		
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:toreador_unity_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		
+		is_dynast = yes
+		completely_controls_region  = world_europe_west_francia
+		custom_tooltip = {
+			text = toreador_unity_objective_decision_alexander	
+			character:505082 = { is_alive = no }	
+		}
+		custom_tooltip = {
+			text = toreador_unity_objective_decision_love
+			OR = {
+				has_title = title:e_love
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_love = {
+						is_title_created = no
+					}
+				}		
+			}
+		}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_toreador_unity
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:toreador_unity_objective_decision
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_la_rose_couronnee
+		}
+		custom_tooltip = toreador_unity_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.105
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+stealing_wistom_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+	
+	desc = stealing_wistom_objective_decision_desc
+	
+	cost = { piety = 1000 }	
+
+	is_shown = {
+		OR = {
+			AND = {
+				is_salubri_trigger = yes
+				has_trait = salubri_watcher
+			}
+			AND = {
+				POD_splat_mixing_haight_mode = yes
+				is_vampire_trigger = yes
+				any_relation = {
+					type = friend
+					count >= 1
+					has_trait = salubri_watcher			
+				}
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:stealing_wistom_objective_decision
+			}
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		custom_tooltip = {
+			text = stealing_wistom_objective_decision_custom
+			any_prisoner = {
+				count >= 3
+				has_trait = kueijin
+				# has_dharma_greater_than_trigger = { LEVEL = 8 }
+				has_dharma_greater_than_trigger = { LEVEL = 4 }
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			add_character_modifier = wisdom_stealer_modifier
+			add_prestige = massive_prestige_value
+			dynasty = { add_dynasty_prestige = 3000 }
+			custom_tooltip = unlock_chiiumuh_tooltip
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:stealing_wistom_objective_decision
+		}
+		trigger_event = pod1230objectives.115
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+true_brujah_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_truth_about_brujah.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = true_brujah_victory_objective_decision_desc
+
+	is_shown = {
+		is_truebrujah_trigger = yes	
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:true_brujah_victory_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		prestige >= 1500
+		
+		completely_controls = title:d_tunis
+		
+		custom_tooltip = trujah_objective_tt
+		
+		custom_tooltip = {
+			text = trujah_victory_objective_decision_custom
+			OR = {
+				character:790303 = { is_alive = no }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:790303
+				}
+			}
+		}
+
+		custom_tooltip = {
+			text = trujah_victory_objective_decision_custom2
+			OR = {
+				character:605102 = { is_alive = no }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:605102
+				}
+			}
+		}
+
+		custom_tooltip = {
+			text = trujah_victory_objective_decision_custom3
+			OR = {
+				character:790309 = { is_alive = no }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:790309
+				}
+			}
+		}
+
+		custom_tooltip = {
+			text = trujah_victory_objective_decision_custom4
+			OR = {
+				character:790305 = { is_alive = no }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:790305
+				}
+			}
+		}	
+
+		custom_tooltip = {
+			text = trujah_victory_objective_decision_custom5
+			OR = {
+				character:792741 = { is_alive = no }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:792741
+				}
+			}
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		save_scope_as = victorious_trujah
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:true_brujah_victory_objective_decision
+		}
+		custom_tooltip = trujah_victory_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.124
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+ikhwan_al_safa_egypt_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	is_shown = {
+		has_trait = supehunter
+		faith = faith:ikhwan_al_safa
+		is_landed = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ikhwan_al_safa_egypt_objective_decision
+			}
+		}			
+	}
+
+	is_valid = {
+		completely_controls = title:k_egypt
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		custom_tooltip = ikwan_egypt_effect_tt
+		show_as_tooltip = {
+			add_character_modifier = extra_life_1_modifier
+			add_prestige = massive_prestige_value
+			add_gold = massive_gold_value
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ikhwan_al_safa_egypt_objective_decision
+		}
+		trigger_event = pod1230objectives.126
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ikhwan_al_safa_arabia_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	is_shown = {
+		has_trait = supehunter
+		faith = faith:ikhwan_al_safa
+		is_landed = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ikhwan_al_safa_arabia_objective_decision
+			}
+		}			
+	}
+
+	is_valid = {
+		piety_level >= max_piety_level
+		completely_controls = title:c_mecca
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		custom_tooltip = ikhwan_al_safa_arabia_objective_decision_effect_tooltip
+		show_as_tooltip = {
+			add_character_modifier = keening_modifier
+			add_prestige = massive_prestige_value
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ikhwan_al_safa_arabia_objective_decision
+		}
+		trigger_event = pod1230objectives.127
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ikhwan_al_safa_persia_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		has_trait = supehunter
+		faith = faith:ikhwan_al_safa
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ikhwan_al_safa_persia_objective_decision
+			}
+		}	
+		is_landed = yes		
+	}
+
+	is_valid = {
+		learning >= 20
+		has_trait = lifestyle_mystic
+		trigger_if = {
+			limit = { current_date < 1258.2.10 }
+			completely_controls = title:c_baghdad
+		}
+		trigger_else = {
+			completely_controls = title:c_isfahan
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		custom_tooltip = ikhwan_al_safa_persia_objective_decision
+		show_as_tooltip = {
+			faith:ikhwan_al_safa = {
+				add_doctrine = special_doctrine_sorcerer_ordination
+			}
+			add_character_modifier = sufi_mystic_modifier
+			add_prestige = massive_prestige_value
+			add_trait = sorcerer
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ikhwan_al_safa_persia_objective_decision
+		}
+		trigger_event = pod1230objectives.128
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+akritai_mend_hunter_schism_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	desc = akritai_mend_hunter_schism_decision_desc
+	selection_tooltip = akritai_mend_hunter_schism_decision_tooltip
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_playable_character = yes
+		faith = faith:akritai
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akritai_mend_hunter_schism_decision
+			}
+		}
+		is_landed = yes
+	}
+
+	is_valid = {
+		piety_level >= max_piety_level
+		completely_controls = title:c_byzantion
+		completely_controls = title:c_antiocheia
+		completely_controls = title:c_jerusalem
+		completely_controls = title:c_alexandria
+		completely_controls = title:c_roma
+		custom_description = {
+			text = "mend_schism_byzantion_bishop"
+			title:c_byzantion.holder.faith = root.faith  #Either own County directly, or have a vassal of same religion.
+		}
+		custom_description = {
+			text = "mend_schism_antiocheia_bishop"
+			title:c_antiocheia.holder.faith = root.faith #Either own County directly, or have a vassal of same religion.
+		}
+		custom_description = {
+			text = "mend_schism_jerusalem_bishop"
+			title:c_jerusalem.holder.faith = root.faith #Either own County directly, or have a vassal of same religion.
+		}
+		custom_description = {
+			text = "mend_schism_alexandria_bishop"
+			title:c_alexandria.holder.faith = root.faith #Either own County directly, or have a vassal of same religion.
+		}
+		custom_description = {
+			text = "mend_schism_roma_bishop"
+			title:c_roma.holder.faith = root.faith #Either own County directly, or have a vassal of same religion.
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		custom_tooltip = akritai_schism_tt
+		show_as_tooltip = {
+			faith:akritai = {
+				add_doctrine = special_doctrine_hunter_schism_mended
+				change_fervor = {
+					value = 25
+					desc = fervor_gain_mended_schism
+				}
+			}
+			faith:shadowinquisition = {
+				change_fervor = {
+					value = -25
+					desc = fervor_loss_mended_schism
+				}
+			}
+			set_nickname_effect = { NICKNAME = nick_the_ecumenist }
+		}
+		trigger_event = pod1230objectives.131
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akritai_mend_hunter_schism_decision
+			}
+		}	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+#Refitted as theurgy
+judge_sorcery_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	is_shown = {
+		has_trait = supehunter
+		faith = faith:judge
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:judge_sorcery_objective_decision
+			}
+		}			
+	}
+
+	is_valid = {
+		learning >= 20
+		has_trait = theurgist
+		has_trait = scholar
+		has_trait = lifestyle_mystic
+		has_trait_xp = {
+			trait = lifestyle_mystic
+			value >= 100 
+		}		
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		show_as_tooltip = {
+			add_character_modifier = kabbalah_modifier
+			add_prestige = massive_prestige_value
+			faith = { add_doctrine = special_doctrine_theurgist_ordination }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:judge_sorcery_objective_decision
+		}
+		trigger_event = pod1230objectives.132
+			
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+#We now have a journey and a lifestyle for theurgist
+#None of the current orders are really known to be great theurgists besides the order of st joan who already have a way to teach theurgist to their pupils
+#Theurgy, as a fully christian/jewish thing, would also make very little sense for our non abrahamic hunters like the dazbog or qorjin
+#hunter_theurgist_ordination_objective_decision = {
+#	picture = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+#	decision_group_type = major
+#
+#	ai_check_interval = 120
+#
+#	is_shown = {
+#		has_trait = supehunter
+#		religion = religion:hunters_religion # Faithful
+#		NOT = { faith = faith:shadowinquisition } # Do they need?
+#		NOT = { faith = faith:ikhwan_al_safa } # Has better vesion
+#		NOT = { faith = { has_doctrine = special_doctrine_theurgist_ordination } }
+#		NOT = {
+#			is_target_in_global_variable_list = {
+#				name = unavailable_unique_decisions
+#				target = flag:hunter_theurgist_ordination_objective_decision
+#			}
+#		}			
+#	}
+#
+#	is_valid = {
+#		learning >= 20
+#		has_trait_xp = {
+#			trait = lifestyle_mystic
+#			value >= 100
+#		}
+#	}
+#	
+#	is_valid_showing_failures_only = {
+#		is_capable_adult = yes
+#		is_imprisoned = no
+#		is_independent_ruler = yes
+#	}
+#
+#	effect = {
+#		custom_tooltip = ikhwan_al_safa_persia_objective_decision # Re-use loca
+#		show_as_tooltip = {
+#			faith = { add_doctrine = special_doctrine_theurgist_ordination }
+#			add_trait = theurgist
+#			if = {
+#				limit = { has_trait = beatific }
+#				POD_advance_beatific_multiple_effect = { VALUE = 5 }
+#			}
+#		}
+#		add_to_global_variable_list = {
+#			name = unavailable_unique_decisions
+#			target = flag:hunter_theurgist_ordination_objective_decision
+#		}
+#		trigger_event = pod1230objectives.133
+#	}
+#	
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}
+
+awake_hun_and_po_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+	
+	desc = awake_hun_and_po_objective_decision_desc
+	
+	cost = { 
+		piety = 10000 
+		gold = 1000
+	}	
+
+	is_shown = {
+		OR = {
+			AND = {
+				is_salubri_trigger = yes
+				has_trait = salubri_watcher
+			}
+			AND = {
+				POD_splat_mixing_haight_mode = yes
+				is_vampire_trigger = yes
+				any_relation = {
+					type = friend
+					count >= 1
+					has_trait = salubri_watcher			
+				}
+			}
+		}
+		is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:stealing_wistom_objective_decision
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:awake_hun_and_po_objective_decision
+			}
+		}
+	}
+
+	is_valid = {
+		learning >= 35
+		OR = {
+			custom_tooltip = {
+				text = awake_hun_and_po_objective_decision_custom1
+				any_prisoner = {
+					count >= 5
+					has_trait = kueijin
+					# has_dharma_greater_than_trigger = { LEVEL = 9 }
+					has_dharma_greater_than_trigger = { LEVEL = 5 }
+				}
+			}
+			custom_tooltip = {
+				text = awake_hun_and_po_objective_decision_custom2
+				any_courtier = {
+					count >= 6
+					has_trait = kueijin
+					# has_dharma_greater_than_trigger = { LEVEL = 8 }
+					has_dharma_greater_than_trigger = { LEVEL = 4 }
+				}
+			}
+		}
+		custom_tooltip = {
+			text = "awake_hun_and_po_objective_decision_custom3"
+			any_relation = {
+				type = bound_wraith
+				count >= 5
+				culture_has_east_asian_heritage_pillar_trigger = yes				
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			remove_character_modifier = wisdom_stealer_modifier
+			add_trait = hun_and_po
+			add_trait = dharma1
+			add_prestige = massive_prestige_value
+			dynasty = { add_dynasty_prestige = 3000 }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:awake_hun_and_po_objective_decision
+		}
+		trigger_event = pod1230objectives.130
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+forever_indomitable_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/shitsonfireyo.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = forever_indomitable_decision_desc
+
+	is_shown = {
+		has_trait = forever_infamous
+		POD_provoke_vatican_completed_trigger = yes
+		is_playable_character = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:forever_indomitable_decision
+			}
+		}
+	}
+	
+	is_valid = {
+		trigger_if = {
+			limit = {
+				years_left_until_premature_inquisition_ends > 0
+			}
+			custom_tooltip = {
+				text = forever_indomitable_decision_req1_invalid
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = forever_indomitable_decision_req1_valid
+				always = yes
+			}
+		}
+		
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_playable_character = yes
+					is_landed = yes
+					has_trait = supehunter
+					NOT = { has_trait = shih } # Abrahamic hunters only?
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = forever_indomitable_decision_req2_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = forever_indomitable_decision_req2
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		show_as_tooltip = {
+			remove_trait = forever_infamous
+			add_trait = forever_indomitable
+			add_prestige_level = 5
+			add_legitimacy = 5000
+		}
+		custom_tooltip = forever_indomitable_decision_effect
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:forever_indomitable_decision
+		}
+		trigger_event = POD_provoke_vatican.200
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+qorjin_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_eye_of_the_storm.dds"
+	}
+
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = qorjin_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:qorjin_victory_objective_decision
+			}
+		}	
+		faith = faith:qorjin_baghatur
+		is_landed = yes
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	has_title = title:e_anda
+
+	completely_controls = title:e_anda
+	completely_controls = title:e_siberia
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:qorjin_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = qorjin_victory_objective_decision_effect_tooltip
+		}
+		
+		save_scope_as = victorious_qorjin
+		trigger_event = pod1230objectives.138
+
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+dazbog_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = dazbog_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:dazbog_victory_objective_decision
+			}
+		}	
+		faith = faith:warriors_dazbog
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	martial >= 20
+	prowess >= 40
+	
+	any_killed_character = {
+		is_tzimisce_trigger = yes
+		count >= 15
+	}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:dazbog_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = dazbog_victory_objective_decision_effect_tooltip
+		}
+		
+		save_scope_as = victorious_dazbog
+		trigger_event = pod1230objectives.139
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+indep_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = indep_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		has_trait = supehunter
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:indep_victory_objective_decision
+			}
+		}	
+		faith = faith:independenthunters
+	}
+
+	is_valid = {
+	is_independent_ruler = yes	
+	prestige_level >= 3
+	
+	any_killed_character = {
+		has_supernatural_race_trigger = yes
+		count >= 30
+	}	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:indep_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			custom_tooltip = indep_victory_objective_decision_effect_tooltip
+		}
+		
+		save_scope_as = victorious_indep
+		trigger_event = pod1230objectives.140
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+azhi_dahaka_objective_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_eternal_change.dds" }
+
+	decision_group_type = major
+
+	desc = azhi_dahaka_objective_decision_desc
+
+	is_shown = {
+		POD_is_vampire_trigger = yes
+		OR = {
+			is_tzimisce_trigger = yes	
+			trigger_if = {
+				limit = { POD_splat_mixing_haight_mode = yes } 
+				AND = {
+					has_trait = vicissitudediscipline
+					religion = religion:roadofmetamorphosis_religion
+				}
+			}
+		}
+		NOR = { 
+			has_trait = azhi_dahaka
+			has_trait = azhi_dahaka_scholar
+			has_trait = golconda
+			has_trait = golconda_seeker
+			has_trait = POD_grail_knight
+		}
+	}
+
+	is_valid = {
+		trigger_if = { 
+			limit = { POD_can_pick_elder_perk_trigger = { GEN = 4 } }
+			has_perk = perfect_essence_perk
+			has_perk = sculpture_of_the_mind_perk
+		}
+		trigger_else_if = {
+			limit = { POD_can_pick_elder_perk_trigger = { GEN = 5 } }
+			has_perk = the_last_dracul_perk
+			has_perk = living_testudo_perk
+			has_perk = liquefy_the_mortal_coil_perk
+		}
+		trigger_else_if = {
+			limit = { POD_can_pick_elder_perk_trigger = { GEN = 6 } }
+			has_perk = graft_life_to_life_perk
+			has_perk = sublimation_of_the_larval_flesh_perk
+		}
+		trigger_else_if = {
+			limit = { POD_can_pick_elder_perk_trigger = { GEN = 7 } }
+			has_perk = body_arsenal_perk
+		}
+		trigger_else = { has_trait = vicissitudeadvanced }
+
+		has_trait_xp = { trait = fleshcrafted value >= 50 }
+
+		custom_tooltip = {
+			text = azhi_dahaka_objective_decision_requirement
+			any_relation = {
+				type = ghoul_thrall
+				count >= 3
+				has_trait_xp = { trait = fleshcrafted value >= 25 }
+			}
+		}
+
+		OR = {
+			has_trait = vampgeneration4
+			domicile ?= { has_domicile_building = vampire_tzimisce_fleshcrafting_laboratory_06 }
+			any_realm_county = {
+				count >= 5
+				title_province = { has_building = sanctuary_of_flesh_01 }
+			}
+			custom_tooltip = {
+				text = azhi_dahaka_objective_decision_requirement2
+				any_prisoner = {
+					count >= 10
+					vampgeneration_less_or_equal_to_trigger = { LEVEL = 7 }
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		
+		show_as_tooltip = { add_trait = azhi_dahaka_scholar }
+		trigger_event = pod1230objectives.156
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	ai_check_interval = 120
+}
+
+one_with_shadows_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_faith_in_shadows.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = one_with_shadows_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:one_with_shadows_objective_decision
+			}
+		}
+		OR = {
+			is_lasombra_trigger = yes	
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				AND = {
+					has_trait = obtenebrationdiscipline
+					faith = faith:roadoftheabyss
+				}
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 4 } } has_perk = ahrimans_demesne_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 5 } } has_perk = devour_all_hope_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 6 } } has_perk = shadow_twin_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 7 } } has_perk = darksight_perk }
+		trigger_else = { has_perk = obtenebrationadvanced_perk }
+		POD_umbra_realm_known_localized_trigger = { NAME = flag:abyss }
+		POD_umbra_realm_known_localized_trigger = { NAME = flag:oblivion }
+		OR = {
+			any_killed_character = { count >= 25 }
+			custom_tooltip = {
+				text = one_with_shadows_objective_decision_prisoner
+				any_prisoner = {
+					count = 5
+					OR = {
+						has_trait = shadow
+						has_trait = spectre
+					}
+				}
+			}
+		}
+		trigger_if = { limit = { is_lasombra_trigger = no } vampgeneration_less_or_equal_to_trigger = { LEVEL = 4 } piety_level >= 5 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:one_with_shadows_objective_decision
+		}
+		show_as_tooltip = {
+			random_list = {
+				1 = {
+					show_chance = no
+					desc = pod1230objectives.157.a
+					custom_tooltip = pod1230objectives.157.a.t
+				}
+				1 = {
+					show_chance = no
+					desc = pod1230objectives.157.b
+					if = { limit = { has_abyssal_mysticism_bloodmagic_trigger = no } POD_learn_abyssal_mysticism_bloodmagic_effect = yes }
+					assign_abyssal_mysticism_effect = { LEVEL = 5 }
+					custom_tooltip = pod1230objectives.157.b.t
+				}
+			}
+		}
+		trigger_event = pod1230objectives.157
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+
+ashirra_lands_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_carthage.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = ashirra_lands_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ashirra_lands_victory_objective_decision
+			}
+		}	
+		has_religion = religion:ashirra_religion
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls_region = pod_lands_of_faith
+		custom_tooltip = {
+			text = ashirra_lands_victory_objective_decision_tooltip2
+			title:e_ashirra = {
+				any_de_jure_county = {
+					count = all
+					religion = religion:ashirra_religion
+				}
+			}
+			title:k_egypt = {
+				any_de_jure_county = {
+					count = all
+					religion = religion:ashirra_religion
+				}
+			}
+			title:k_persia = {
+				any_de_jure_county = {
+					count = all
+					religion = religion:ashirra_religion
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ashirra_lands_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			dynasty = { add_dynasty_prestige = 5000 }
+			add_piety = 5000
+			add_trait_force_tooltip = faith_warrior
+			if = {
+				limit = {
+					NOT = { has_trait = true_faith }
+					OR = { 
+						POD_is_infernalist_trigger = no
+						POD_splat_mixing_haight_mode = yes
+					}
+				}
+				add_trait = truefaith
+			}
+		}
+		
+		save_scope_as = victorious_ashirra
+		trigger_event = pod1230objectives.351
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+shepherds_islam_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_crescent_over_shadows.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = shepherds_islam_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:shepherds_islam_victory_objective_decision
+			}
+		}	
+		has_faith = faith:sheperdsofislam
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		has_title = title:k_shepherds
+		custom_tooltip = {
+			text = shepherds_islam_victory_objective_decision_tooltip2
+			OR = {
+				has_title = title:e_ashirra
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_ashirra = {
+						is_title_created = no
+					}
+				}
+			}
+		}
+		completely_controls = title:e_ashirra
+		completely_controls = title:k_shepherds
+		completely_controls = title:c_cairo
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:shepherds_islam_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			dynasty = { add_dynasty_prestige = 1000 }
+			add_piety = 2500
+			faith = { add_doctrine = special_doctrine_ashirra_pillars_kindred }
+			custom_tooltip = POD_unlocked_empire_ghw
+		}
+		
+		save_scope_as = victorious_shepherd
+		trigger_event = pod1230objectives.352
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+demonization_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_faith_in_shadows.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = demonization_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:demonization_objective_decision
+			}
+		}
+		OR = {
+			AND = {
+			is_baali_trigger = yes
+			faith = faith:viadiabolis  #via hyron, the other main baali branch, wouldn't demonize itself
+			}			
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				AND = {
+					has_trait = daimoniondiscipline
+					faith = faith:viadiabolis
+					
+				}
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 4 } } has_perk = spew_wide_the_pit_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 5 } } has_perk = adramelechs_wrath_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 6 } } has_perk = bring_the_plague_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 7 } } has_perk = hell_born_investiture_perk }
+		trigger_else = { has_perk = advanceddaimonion_perk }
+		POD_umbra_realm_known_localized_trigger = { NAME = flag:abyss }
+		OR = {
+			any_killed_character = { count >= 100 }
+			num_of_relation_bound_demon >= 5
+		}
+		trigger_if = { limit = { is_baali_trigger = no } vampgeneration_less_or_equal_to_trigger = { LEVEL = 4 } piety_level >= 5 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:demonization_objective_decision
+		}
+		custom_tooltip = demonization_objective_decision_effect
+		trigger_event = pod1230objectives.158
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+quest_for_sargon_codex_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_sargon_codex.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = quest_for_sargon_codex_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:quest_for_sargon_codex_objective_decision
+			}
+		}
+		OR = {
+			is_giovanni_trigger = yes
+			is_cappadocian_trigger = yes	
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				AND = {
+					has_trait = necromancydiscipline
+					faith = {
+						has_doctrine = tenet_knowledge_above_all
+					}
+				}
+			}
+		}
+	}
+
+	is_valid = {
+		OR = {
+			learning >= 40
+			custom_tooltip = {
+				text = quest_for_sargon_codex_objective_decision_at_least_1_shard
+				OR = {
+					any_character_artifact = {
+						has_artifact_modifier = sagron_codex_shard_modifier
+					}
+				}
+			}
+			AND = {
+				learning >= 25
+				has_trait = scholar
+			}
+		}
+		trigger_if = { limit = { is_cappadocian_trigger = no is_giovanni_trigger = no } vampgeneration_less_or_equal_to_trigger = { LEVEL = 4 } piety_level >= 5 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:quest_for_sargon_codex_objective_decision
+		}
+		save_scope_as = victorious_cappadocian
+		custom_tooltip = quest_for_sargon_codex_objective_decision_at_effect1
+		custom_tooltip = quest_for_sargon_codex_objective_decision_at_effect2
+		custom_tooltip = quest_for_sargon_codex_objective_decision_at_effect3
+		trigger_event = pod1230objectives.159
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+deliver_shards_to_cappadocius_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_sargon_codex.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = deliver_shards_to_cappadocius_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		is_target_in_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:quest_for_sargon_codex_objective_decision
+		}
+		NOT = { has_character_flag = not_giving_cappadocius_shards }
+		OR = {
+			is_giovanni_trigger = yes
+			is_cappadocian_trigger = yes	
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				AND = {
+					has_trait = necromancydiscipline
+					faith = {
+						has_doctrine = tenet_knowledge_above_all
+					}
+				}
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = { 
+			limit = { 
+				NOT = {
+					any_character_artifact = {
+						has_artifact_modifier = sagron_codex_shard_modifier
+					}
+				}
+			}
+			trigger_if = {
+				limit = {
+					any_artifact = {
+						has_artifact_modifier = sagron_codex_shard_modifier
+						artifact_owner = {
+							NOT = { this = root }
+							NOT = { this = character:POD_wraith_01 }
+							save_temporary_scope_as = example
+						}
+					}
+				}
+				custom_tooltip = {
+					text = deliver_shards_to_cappadocius_objective_decision_shard_custom
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = quest_for_sargon_codex_objective_decision_at_least_1_shard
+					OR = {
+						any_character_artifact = {
+							has_artifact_modifier = sagron_codex_shard_modifier
+						}
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = quest_for_sargon_codex_objective_decision_at_least_1_shard
+				OR = {
+					any_character_artifact = {
+						has_artifact_modifier = sagron_codex_shard_modifier
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		custom_tooltip = {
+			text = deliver_shards_to_cappadocius_objective_decision_effect
+			while = {
+				limit = { any_character_artifact = { has_artifact_modifier = sagron_codex_shard_modifier } }
+				random_character_artifact = { 
+					limit = {
+						has_artifact_modifier = sagron_codex_shard_modifier
+					}
+					set_owner = character:POD_wraith_01
+				}
+				add_character_modifier = cappadocius_boon_modifier
+				if = { limit = { NOT = { exists = global_var:cappadocius_delivered_shards } } set_global_variable = { name = cappadocius_delivered_shards value = 1 } }
+				else = { change_global_variable = { name = cappadocius_delivered_shards add = 1 } }
+			}
+			if = { limit = { exists = global_var:cappadocius_delivered_shards global_var:cappadocius_delivered_shards >= 13 } trigger_event = pod1230objectives.1592 }
+
+		}
+		custom_tooltip = deliver_shards_to_cappadocius_objective_decision_effect2
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+malkavian_aenigmatis_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_little_prank.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = malkavian_aenigmatis_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:malkavian_aenigmatis_objective_decision
+			}
+		}
+		OR = {
+			is_malkavian_trigger = yes	
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				faith = faith:ordoaenigmatis
+			}
+		}
+	}
+
+	is_valid = {
+		learning >= 35
+		has_trait = scholar
+		OR = {
+			has_trait = lifestyle_mystic
+			learning >= 50
+		}
+		custom_tooltip = {
+			text = malkavian_aenigmatis_objective_decision_has_5_book_artifact
+			any_character_artifact = {
+				count >= 5
+				OR = {
+					artifact_type = miscellaneous_when_not_court
+					artifact_type = book
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:malkavian_aenigmatis_objective_decision
+		}
+		custom_tooltip = malkavian_aenigmatis_objective_decision_effect
+		trigger_event = pod1230objectives.160
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+malkavian_ecstasis_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_little_prank.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = malkavian_ecstasis_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:malkavian_ecstasis_objective_decision
+			}
+		}
+		OR = {
+			is_malkavian_trigger = yes	
+			trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+				faith = faith:ordosecstasis
+			}
+		}
+	}
+
+	is_valid = {
+		intrigue >= 25
+		has_trait = torturer
+		has_trait = lifestyle_reveler
+		has_trait_xp = {
+			trait = lifestyle_reveler
+			value >= 100
+		}
+		trigger_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 4 } } has_perk = touch_of_the_saints_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 5 } } has_perk = prison_of_the_mind_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 6 } } has_perk = cobble_the_road_perk }
+		trigger_else_if = { limit = { POD_can_pick_elder_perk_trigger = { GEN = 7 } } has_perk = stain_the_soul_perk }
+		trigger_else = { has_perk = dementationadvanced_perk }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:malkavian_ecstasis_objective_decision
+		}
+		if = {
+			limit = {
+				is_landless_adventurer = no 
+				}
+		custom_tooltip = malkavian_ecstasis_objective_decision_effect
+		trigger_event = pod1230objectives.161
+		}
+		else = {
+		add_character_modifier = malkavian_pain_and_pleasure_landless_modifier 
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+#TODO: I need break from objectives for some time - VecsonON
+malkavian_maleficus_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_little_prank.dds"
+	}	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = malkavian_maleficus_objective_decision_desc
+
+	is_shown = {
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:malkavian_maleficus_objective_decision
+			}
+		}
+		#This one is a secret society of malkavian infernalist, hard to see it used by others, even in sam mode
+		faith = faith:ordomaleficus
+		#OR = {
+			is_malkavian_trigger = yes	
+		#	trigger_if = { limit = { POD_splat_mixing_haight_mode = yes } 
+		#		has_trait = daimoniondiscipline
+		#	}
+		#}
+	}
+
+	is_valid = {
+		is_infernalist_trigger = yes
+		has_trait_xp = {
+			trait = demonology
+			value >= 100
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:malkavian_maleficus_objective_decision
+		}
+		custom_tooltip = malkavian_maleficus_objective_decision_effect
+		trigger_event = pod1230objectives.162
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#Technically the following isn't landless only but main thing for them
+ikhwan_al_safa_landless_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { days = 5 } #Needed because you can actually refuse the reward
+
+	ai_check_interval = 0
+
+	sort_order = 100
+
+	is_shown = {
+		has_trait = supehunter
+		NOT = { faith = faith:shadowinquisition }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ikhwan_al_safa_landless_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		intrigue >= 20
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}	
+		custom_tooltip = {
+			text = ikhwan_al_safa_landless_tt
+			
+		title:c_tunis.holder ?= {
+				has_faith = root.faith
+			}
+		}
+		}
+		trigger_else = {
+			completely_controls = title:c_tunis
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		#Just skip to the reward if you are of the right faith 
+		if = {
+			limit = {
+				NOT = { has_faith = faith:ikhwan_al_safa }
+			}
+			show_as_tooltip = {
+				POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_2 }
+			}
+		
+			trigger_event = pod1230objectives.164
+		}
+		
+		else = {
+			POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_2 }
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ikhwan_al_safa_landless_objective_decision
+			}
+		}			
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+judges_landless_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { days = 5 } #Needed because you can actually refuse the reward
+
+	ai_check_interval = 0
+	
+	sort_order = 100	
+
+	is_shown = {
+		has_trait = supehunter
+		NOT = { faith = faith:shadowinquisition }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:judges_landless_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		learning >= 20
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+			custom_tooltip = {
+				text = judges_landless_tt
+						
+				title:c_jerusalem.holder ?= {
+					has_faith = root.faith
+				}
+			}
+		}
+		trigger_else = {
+			#Help people reach the advanced Judge objectives if they are a Judge
+			trigger_if = {
+				limit = { 
+					has_faith = faith:judge
+				}
+				custom_tooltip = {
+					text = judges_landless_special_tt
+							
+					#Control one of the Judge Cell cities from the Contact objectives
+					OR = {
+						completely_controls = title:c_jerusalem
+						completely_controls = title:c_praha
+						completely_controls = title:c_tigre
+						completely_controls = title:c_cordoba
+						completely_controls = title:c_kufa
+						completely_controls = title:c_kerala
+					}
+				}
+			}
+			trigger_else = {
+				completely_controls = title:c_jerusalem
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		#Just skip to the reward if you are of the right faith 
+		if = {
+			limit = {
+				NOT = { has_faith = faith:judge }
+			}
+			show_as_tooltip = {
+				POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_3 }
+			}
+		
+			trigger_event = pod1230objectives.165
+		}
+		
+		else = {
+			POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_3 }
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:judges_landless_objective_decision
+			}
+			#Help people find the advanced Judge objectives
+			custom_tooltip = {
+				text = judges_landless_objectives_tt
+			}
+		}			
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+akritai_landless_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { days = 5 } #Needed because you can actually refuse the reward
+
+	ai_check_interval = 0
+	
+	sort_order = 100
+
+	is_shown = {
+		has_trait = supehunter
+		NOT = { faith = faith:shadowinquisition }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akritai_landless_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		stewardship >= 20
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+		custom_tooltip = {
+			text = akritai_landless_tt
+				
+		title:c_byzantion.holder ?= {
+				has_faith = root.faith
+			}
+		}
+		}
+		trigger_else = {
+			completely_controls = title:c_byzantion
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		#Just skip to the reward if you are of the right faith 
+		if = {
+			limit = {
+				NOT = { has_faith = faith:akritai }
+			}
+			show_as_tooltip = {
+				POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_4 }
+			}
+		
+			trigger_event = pod1230objectives.166
+		}
+		
+		else = {
+			POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_4 }
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:akritai_landless_objective_decision
+			}				
+		}			
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+qorjin_landless_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { days = 5 } #Needed because you can actually refuse the reward
+
+	ai_check_interval = 0
+	
+	sort_order = 100
+
+	is_shown = {
+		has_trait = supehunter
+		NOT = { faith = faith:shadowinquisition }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:qorjin_landless_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		martial >= 20
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+		custom_tooltip = {
+			text = qorjin_landless_tt
+				
+		title:c_karakorum.holder ?= {
+				has_faith = root.faith
+			}
+		}
+		}
+		trigger_else = {
+			completely_controls = title:c_karakorum
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		#Just skip to the reward if you are of the right faith 
+		if = {
+			limit = {
+				NOT = { has_faith = faith:qorjin_baghatur }
+			}
+			show_as_tooltip = {
+				POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_5 }
+			}
+			
+		trigger_event = pod1230objectives.167
+		}
+		
+		else = {
+			POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_5 }
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:qorjin_landless_objective_decision
+			}				
+		}			
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+shadow_landless_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { days = 5 } #Needed because you can actually refuse the reward
+
+	ai_check_interval = 0
+
+	sort_order = 100
+
+	is_shown = {
+		has_trait = supehunter
+		NOT = { faith = faith:shadowinquisition }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:shadow_landless_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		diplomacy >= 20
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+		custom_tooltip = {
+			text = shadow_landless_tt
+					
+		title:c_roma.holder ?= {
+				has_faith = root.faith
+			}
+		}
+		}
+		trigger_else = {
+			completely_controls = title:c_roma
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		#Just skip to the reward if you are of the right faith 
+		if = {
+			limit = {
+				NOT = { has_faith = faith:shadowinquisition }
+			}
+			show_as_tooltip = {
+				POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_1 }
+			}
+		
+			trigger_event = pod1230objectives.168
+		}
+		
+		else = {
+			POD_add_free_dynasty_perk = { PERK = hunter_alliances_legacy_1 }
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:shadow_landless_objective_decision
+			}
+		}			
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#Landless vampires
+
+ashen_ambassador_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	cooldown = { years = 10 } 
+
+	ai_check_interval = 0
+
+	sort_order = 100
+
+	is_shown = {
+		is_landless_adventurer = yes
+		OR = {
+		POD_can_participate_in_vampire_politics = yes
+		POD_can_participate_in_kj_politics = yes
+		}
+		trigger_if = { #give time for canon landless ambassadors to have their startup event
+			limit = {
+				OR = {
+				this = character:790428
+				this = character:791755
+				this = character:791425
+				this = character:791827
+				this = character:791919
+				}				
+			}
+			
+			years_from_game_start >= 10
+		}
+	}
+
+	is_valid = {
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = POD_ashen_ambassador_decision_tt
+			
+		if = {
+			limit = {
+				NOT = { has_trait = ashen_adventurer }
+			}
+			add_trait = ashen_adventurer
+		}
+		add_character_flag = ambassador_searching_for_patron_flag	
+	}
+	
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ashen_grandmaster_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		POD_can_participate_in_vampire_politics = yes
+		trigger_if = { #give time for canon landless grandmasters to have their startup event
+			limit = {
+				OR = {
+				this = character:791951
+				this = character:791755
+				this = character:791425
+				this = character:792827
+				this = character:505100
+				this = character:791827
+				this = character:791870
+				this = character:791919
+				this = character:791953
+				this = character:791900
+				this = character:791952
+				}
+				current_date <= 1230.1.18
+			}
+			
+			has_character_flag = landless_intro_done
+		}		
+	}
+	
+	is_valid = {
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				exists = var:military_order_precept			
+			}
+			custom_tooltip = later_ashen_grandmaster_decision_tt	
+			trigger_event = pod1230objectives.175		
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = { has_trait = ashen_adventurer }
+				}
+				add_trait = ashen_adventurer
+			}			
+			custom_tooltip = initial_ashen_grandmaster_decision_tt	
+			trigger_event = pod1230objectives.172				
+		}
+				
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ashen_grandmaster_initial_kj_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		POD_can_participate_in_kj_politics = yes
+	
+		#If you did the three tracks, you are done, don't show anymore
+		OR = {
+		NOT = { 
+			has_trait_xp = {
+			trait = midnight_warrior
+			value >= 100
+			}
+		}
+		NOT = { 
+			has_trait_xp = {
+			trait = twilight_warrior
+			value >= 100
+			}
+		}
+		NOT = { 
+			has_trait_xp = {
+			trait = wayang_kulit
+			value >= 100
+			}	
+		}
+		}	
+
+		#flag to control if you started 
+		NOT = {
+			has_character_flag = POD_kj_started_ashen_strategist_flag	
+		}		
+	}
+	
+	is_valid = {
+		martial >= 10		
+	}
+	
+	effect = {
+		custom_tooltip = ashen_strategist_initial_effect_tt	
+		add_character_flag = POD_kj_started_ashen_strategist_flag								
+		if = {
+			limit = {
+				NOT = { has_trait = ashen_adventurer }
+			}
+			add_trait = ashen_adventurer
+		}	
+		add_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_grandmaster
+			value >= 10
+		}		
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#KJ gain xp the same way but don't spend it the same
+ashen_grandmaster_kj_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		POD_can_participate_in_kj_politics = yes
+	
+		#If you did the three tracks, you are done, don't show anymore
+		OR = {
+		NOT = { 
+			has_trait_xp = {
+			trait = midnight_warrior
+			value >= 100
+			}
+		}
+		NOT = { 
+			has_trait_xp = {
+			trait = twilight_warrior
+			value >= 100
+			}
+		}
+		NOT = { 
+			has_trait_xp = {
+			trait = wayang_kulit
+			value >= 100
+			}	
+		}
+		}		
+	}
+	
+	is_valid = {
+		#Need 50 to pay for one upgrade	
+		custom_tooltip = {
+			text = need_50_ashen_grandmaster_xp
+			
+		has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_grandmaster
+			value >= 50
+		}
+
+		}		
+	}
+	
+	effect = {
+		custom_tooltip = ashen_strategist_effect_tt	
+		trigger_event = pod1230objectives.217							
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ashen_caravan_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+	
+	cost = { gold = 300 }
+
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		OR = {
+		POD_can_participate_in_vampire_politics = yes
+		POD_can_participate_in_kj_politics = yes
+		}		
+		NOT = { 
+			has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_caravan
+			value >= 1
+		}
+		}
+	}
+	
+	is_valid = {
+	}
+	
+	effect = {		
+		custom_tooltip = initial_ashen_caravan_decision_tt	
+		if = {
+			limit = {
+				NOT = { has_trait = ashen_adventurer }
+			}
+			add_trait = ashen_adventurer
+		}
+		add_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_caravan
+			value = 1	
+		}			
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ashen_cult_initial_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+	
+	cost = { piety = 300 }
+
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		OR = {
+		POD_can_participate_in_vampire_politics = yes
+		POD_can_participate_in_kj_politics = yes
+		}		
+		NOT = { 
+			has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_cult
+			value >= 1
+		}
+		}
+	}
+	
+	is_valid = {
+		custom_tooltip = {
+			text = initial_ashen_cult_prerequisites_tt
+			
+		any_courtier = {
+			count >= 5
+			
+			has_faith = root.faith
+		}
+		}
+	}
+	
+	effect = {		
+		custom_tooltip = initial_ashen_cult_decision_tt	
+		if = {
+			limit = {
+				NOT = { has_trait = ashen_adventurer }
+			}
+			add_trait = ashen_adventurer
+		}
+		add_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_cult
+			value = 1	
+		}			
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ashen_cult_later_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+		
+	decision_group_type = major
+
+	sort_order = 100
+
+	ai_check_interval = 0
+	
+	cooldown = { months = 6 }
+	
+	is_shown = {
+		is_ai = no
+		is_landless_adventurer = yes
+		OR = {
+		POD_can_participate_in_vampire_politics = yes
+		POD_can_participate_in_kj_politics = yes
+		}		
+		has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_cult
+			value >= 1
+		}
+	}
+	
+	is_valid = {
+		domicile.domicile_location.county ?= {
+			NOT = {
+				has_county_modifier = POD_cult_visited_modifier
+			}
+		}
+	}
+	
+	effect = {		
+		custom_tooltip = ashen_cult_decision_tt	
+
+		domicile.domicile_location.county ?= {
+			save_scope_as = culted_county
+		}
+		
+		trigger_event = pod1230objectives.176
+		
+		domicile.domicile_location.county ?= {
+			add_county_modifier = {
+				modifier = POD_cult_visited_modifier
+				years = 5
+			}
+		}		
+	}	
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#EA cainites objectives 
+
+great_clan_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_eternal_change.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = great_clan_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:great_clan_victory_objective_decision
+			}
+		}
+		OR = {
+			house = house:house_chibo
+			house = house:house_kishu
+			house = house:house_monomi
+		}			
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		completely_controls = title:e_japan
+		has_title = title:e_japan
+		
+		POD_vampire_is_defeated = { CHARACTER = character:793304 }
+		POD_vampire_is_defeated = { CHARACTER = character:793303 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:great_clan_victory_objective_decision
+		}
+		
+		custom_tooltip = great_clan_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_great_clan
+		trigger_event = pod1230objectives.210
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+blood_tribe_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = blood_tribe_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:blood_tribe_victory_objective_decision
+			}
+		}
+		#replace by blood tribe
+		house = house:house_bushi			
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		highest_held_title_tier >= tier_kingdom
+		
+		#replace by
+		#controls_holy_site 
+		#piety >= 1500
+		
+		realm_size >= 35
+		prestige >= 1500
+		
+		POD_vampire_is_defeated = { CHARACTER = character:793303 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:blood_tribe_victory_objective_decision
+		}
+		
+		custom_tooltip = blood_tribe_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_blood_tribe
+		trigger_event = pod1230objectives.211
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+road_horizon_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = road_horizon_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:road_horizon_victory_objective_decision
+			}
+		}
+		religion = religion:roadofunexaminedhorizons_religion			
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		
+		custom_tooltip = {
+		text = road_horizon_victory_objective_decision_custom		
+		any_independent_ruler = {
+				count < 1 
+				OR = { 
+				house = house:house_chibo
+				house = house:house_anh
+				house = house:house_bushi
+				}				
+			}	
+		}	
+		
+		legitimacy_level = 5
+		
+		POD_vampire_is_defeated = { CHARACTER = character:793303 }
+		POD_vampire_is_defeated = { CHARACTER = character:793304 }
+		POD_vampire_is_defeated = { CHARACTER = character:793309 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:road_horizon_victory_objective_decision
+		}
+		
+		custom_tooltip = road_horizon_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+		#add quincunx participation as reward
+		save_scope_as = victorious_road_horizon
+		trigger_event = pod1230objectives.218
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+chibo_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = chibo_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:chibo_victory_objective_decision
+			}
+		}
+		house = house:house_chibo
+	}
+
+	is_valid = {
+		piety >= 1000	
+		learning >= 20	
+		has_trait = bloodsorceryadvanced
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:chibo_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			create_artifact = {
+				decaying = no	
+				name = artifact_hand_mikaboshi_name
+				description = artifact_hand_mikaboshi_description
+				#category = inventory
+				type = miscellaneous
+				template = general_unique_template	
+				visuals = medium_box	
+				wealth = 90
+				quality = 90
+				modifier = artifact_scheme_resistance_mult_1_modifier				
+			}			
+			
+		}
+		
+		
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+		save_scope_as = victorious_chibo
+		trigger_event = pod1230objectives.219
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+monomi_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = monomi_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:monomi_victory_objective_decision
+			}
+		}
+		OR = {
+		house = house:house_monomi
+		house = house:house_kishu
+		}
+	}
+
+	is_valid = {
+		prestige >= 1000
+		OR = {
+		prowess >= 55
+		martial >= 25
+		}
+		OR = {
+		has_trait = strategist
+		has_trait = torturer
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:monomi_victory_objective_decision
+		}
+		
+		show_as_tooltip = {
+			create_artifact = {
+				decaying = no	
+				name = artifact_sword_stars_name
+				description = artifact_sword_stars_description
+				#category = inventory
+				type = sword
+				template = general_unique_template	
+				visuals = sword	
+				wealth = 90
+				quality = 90
+				modifier = sword_samiel_modifier				
+			}			
+			
+		}
+		
+		
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+		save_scope_as = victorious_monomi
+		trigger_event = pod1230objectives.220
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+bushi_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = bushi_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:bushi_victory_objective_decision
+			}
+		}
+		house = house:house_bushi
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = bushi_victory_objective_decision_custom
+			any_relation = {
+				type = soulmate
+				has_trait = kueijin
+			}
+		}
+		learning >= 25
+		has_trait = scholar			
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:bushi_victory_objective_decision
+		}
+		
+		custom_tooltip = bushi_victory_objective_decision_custom2		
+		
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+		save_scope_as = victorious_bushi
+		trigger_event = pod1230objectives.221
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+kizoku_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_new_beginnings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = kizoku_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:kizoku_victory_objective_decision
+			}
+		}
+		house = house:house_kizoku		
+	}
+
+	is_valid = {
+		capital_province = {
+			geographical_region = world_asia_japan
+		}		
+		
+		capital_county = {
+			development_level >= 35
+		}
+		
+		capital_province = {
+			free_building_slots = 0
+		}
+		
+		legitimacy_level >= 5
+		
+		prestige_level >= 5
+			
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:kizoku_victory_objective_decision
+		}
+		
+		custom_tooltip = kizoku_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_kizoku
+		trigger_event = pod1230objectives.212
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+anh_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_scourge.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = anh_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:anh_victory_objective_decision
+			}
+		}
+		house = house:house_anh		
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		completely_controls_region = world_asia_philippines
+		has_title = title:e_nusantara
+		
+		custom_tooltip = {
+			text = anh_custom_decision
+			character:791113 = {
+				is_alive = no
+			}
+		}
+		
+		POD_vampire_is_defeated = { CHARACTER = character:793311 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:anh_victory_objective_decision
+		}
+		
+		custom_tooltip = anh_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_anh
+		trigger_event = pod1230objectives.213
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+kuntilanak_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_horrors_in_the_dark.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = kuntilanak_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:kuntilanak_victory_objective_decision
+			}
+		}
+		house = house:house_kuntilanak		
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		
+		has_trait = necromancyadvanced
+		
+		learning >= 20
+
+		num_of_relation_bound_wraith >= 5
+		custom_tooltip = {
+			text = new_yama_king_objective_decision_custom1
+			bound_wraiths_summed_skills >= 200
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:kuntilanak_victory_objective_decision
+		}
+		
+		custom_tooltip = kuntilanak_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_kuntilanak
+		trigger_event = pod1230objectives.214
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+sangun_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_king_of_kings.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = sangun_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:sangun_victory_objective_decision
+			}
+		}
+		house = house:house_sangun		
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		
+		realm_size >= 50
+		
+		custom_tooltip = {
+			text = sangun_victory_objective_decision_custom
+			OR = {
+				has_title = title:e_goryeo
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:e_goryeo = {
+						is_title_created = no
+					}
+				}
+			}
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:sangun_victory_objective_decision
+		}
+		
+		custom_tooltip = sangun_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_sangun
+		trigger_event = pod1230objectives.215
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+banpaia_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_will_of_tremere.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = banpaia_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:banpaia_victory_objective_decision
+			}
+		}
+		house = house:house_banpaia		
+	}
+
+	is_valid = {
+		is_independent_ruler = yes	
+		
+		learning >= 20
+		
+		any_courtier = {
+			count >= 15
+			has_trait = gargoyle
+		}
+		
+		has_trait = bloodsorceryadvanced	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:banpaia_victory_objective_decision
+		}
+		
+		custom_tooltip = banpaia_victory_objective_decision_effect_tooltip
+
+		dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+			
+		save_scope_as = victorious_banpaia
+		trigger_event = pod1230objectives.216
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+ennamaru_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_warding_evil.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = ennamaru_victory_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ennamaru_victory_objective_decision
+			}
+		}
+		NOT = {	
+			capital_province = {
+				geographical_region = world_india
+			}	
+		}	
+		is_ennamaru_trigger = yes
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		
+		completely_controls_region  = world_europe_west_francia
+		
+		piety >= 500
+		
+		custom_tooltip = {
+			text = ennamaru_victory_objective_decision_custom
+			any_child = { 
+				count >= 3
+				intrigue >= 10
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ennamaru_victory_objective_decision
+		
+		}
+		if = {
+			limit = { has_any_nickname = no }
+			give_nickname = nick_shadow_upon_lily
+		}
+		show_as_tooltip = {
+			custom_tooltip = ennamaru_victory_objective_decision_effect_tooltip
+			add_character_modifier = ennamaru_reborn_modifier
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 2
+			}
+		}
+		save_scope_as = ennamaru_victory
+		trigger_event = pod1230objectives.222
+	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+volgirre_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_POD_vicissitude.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = volgirre_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:volgirre_objective_decision
+			}
+		}
+		is_volgirre_trigger = yes
+	}
+
+	is_valid = {
+		has_trait = torturer
+		has_trait = vicissitudeadvanced
+		
+		piety >= 250
+		
+		custom_tooltip = {
+			text = volgirre_objective_decision_custom	
+			any_prisoner = {
+				count >= 3
+				has_trait = beauty_good
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:volgirre_objective_decision
+		}
+			
+		custom_tooltip = volgirre_objective_decision_effect_tooltip
+
+		save_scope_as = volgirre_victory
+		trigger_event = pod1230objectives.223
+	
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+mnemachien_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_conspiracy.dds"
+	}
+
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = mnemachien_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:mnemachien_objective_decision
+			}
+		}
+		is_mnemachien_trigger = yes
+	}
+
+	is_valid = {
+		has_trait = bloodsorceryadvanced
+		
+		piety >= 1000
+		prestige >= 1000
+		
+		custom_tooltip = {
+			text = mnemachien_objective_decision_customtwo
+			title:e_love = {
+				any_de_jure_county_holder = {
+					count = 0
+					is_ennamaru_trigger = yes
+				}
+			}
+		}
+		custom_tooltip = {
+			text = mnemachien_objective_decision_custom	
+			any_court_position_holder = {
+				type = touchstones_court_position
+				count >= 3
+				aptitude = {
+					court_position = touchstones_court_position
+					value >= 3
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:mnemachien_objective_decision
+		}
+			
+		custom_tooltip = mnemachien_objective_decision_effect_tooltip
+
+		save_scope_as = mnemachien_victory
+		trigger_event = pod1230objectives.224
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+### Impundulu Submod — Objective Decisions
+### Reference: 00_POD_1230_objectives_decisions.txt (Tzimisce/Brujah structure)
+
+### ==========================================
+### MAJOR OBJECTIVE: "Cure the Withering Blood"
+### ==========================================
+### The Bomkazi mortal line is failing. Find a way to save it or transcend the dependency.
+### 2-way branch: Covenant Renewed (preserve the bond) or Ishologu Rite (break free)
+
+withering_blood_objective_decision = {
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = withering_blood_objective_decision_desc
+
+	is_shown = {
+		is_playable_character = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:withering_blood_objective_decision
+			}
+		}
+		is_impundulu_trigger = yes
+	}
+
+	is_valid = {
+		### Must be House Head
+		is_house_head = yes
+		### Must have learned a necromancy path beyond Cenotaph/Haunting
+		custom_tooltip = {
+			text = withering_blood_extra_necromancy_tt
+			OR = {
+				has_character_flag = has_giovanni_necromancy_flag
+				has_character_flag = has_cappadocian_necromancy_flag
+				has_character_flag = has_harbinger_necromancy_flag
+				has_character_flag = has_lamia_necromancy_flag
+				has_character_flag = has_nagaraja_necromancy_flag
+				has_character_flag = has_rosselini_necromancy_flag
+			}
+		}
+		### Realm size requirement
+		sub_realm_size >= 35
+		### Must have a Bomkazi courtier
+		custom_tooltip = {
+			text = POD_impundulu_has_bomkazi_courtier_tt
+			any_courtier = {
+				has_trait = bomkazi_witch
+				is_alive = yes
+				POD_is_available = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:withering_blood_objective_decision
+		}
+		POD_major_objective_finished_effect = yes
+
+		show_as_tooltip = {
+			random_list = {
+				1 = {
+					show_chance = no
+					desc = pod1230objectives.228.a
+					POD_impundulu_apply_covenant_renewed_effect = yes
+				}
+				1 = {
+					show_chance = no
+					desc = pod1230objectives.228.b
+					POD_impundulu_apply_ishologu_rite_effect = yes
+				}
+			}
+		}
+
+		save_scope_as = victorious_impundulu
+		trigger_event = pod1230objectives.228
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+koldunic_ways_objective_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_blood_moon.dds" }
+	decision_group_type = major
+	
+	desc = koldunic_ways_objective_decision_desc
+
+	is_shown = {
+		POD_is_vampire_trigger = yes
+		has_koldunic_bloodmagic_trigger = yes
+		NOT = { has_global_variable = koldunic_ways_discovered }
+	}
+
+	is_valid = {
+		piety_level >= 4
+		has_trait = bloodsorceryadvanced
+		has_perk = genius_loci_5_perk
+		OR = {
+			AND = {
+				learning >= 30
+				has_trait = scholar
+			}
+			custom_tooltip = {
+				text = koldunic_ways_objective_decision_requirement
+				any_character_artifact = { has_variable = incunabulum_kupalam }
+			}
+		}
+		OR = {
+			custom_tooltip = {
+				text = koldunic_ways_objective_decision_requirement2
+				any_prisoner = {
+					count >= 5
+					is_tremere_trigger = yes
+				}
+			}
+			custom_tooltip = {
+				text = koldunic_ways_objective_decision_requirement3
+				any_prisoner = {
+					count >= 10
+					has_trait = bloodsorcerydiscipline
+				}
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		set_global_variable = koldunic_ways_discovered
+		show_as_tooltip = {
+			house ?= { add_house_modifier = koldunic_ways_founders_modifier }
+			custom_tooltip = koldunic_ways_objective_decision_effect
+		}
+		trigger_event = pod1230objectives.225
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	ai_check_interval = 120
+}
+
+tzimisce_land_for_dragons_objective_decision = {
+	picture = { reference = "gfx/interface/illustrations/decisions/decision_eternal_change.dds" }
+	decision_group_type = major
+	
+	desc = tzimisce_land_for_dragons_objective_decision_desc
+
+	is_shown = {
+		POD_is_vampire_trigger = yes
+		is_tzimisce_trigger = yes
+		capital_province = {
+			OR = {
+				NOT = { geographical_region = world_europe }
+				#These two are far enough
+				geographical_region = world_europe_west_britannia
+				geographical_region = world_europe_west_iberia
+			}
+		}
+		NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:tzimisce_land_for_dragons_objective_decision } }
+		NOT = { has_title = title:e_voivodate } #no cheeky capital moving
+	}
+
+	is_valid = {
+		prestige_level >= 4
+		realm_size >= 50
+		is_house_head = yes
+		custom_tooltip = {
+			text = tzimisce_land_for_dragons_objective_decision_requirement
+			any_held_title = {
+				count >= 3
+				title_tier = kingdom
+			}
+		}
+		trigger_if = {
+			limit = { is_ai = no }
+			any_powerful_vassal = {
+				count = all
+				opinion = {
+					target = root
+					value >= 50
+				}
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+		is_independent_ruler = yes
+	}
+
+	effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = { name = unavailable_unique_decisions target = flag:tzimisce_land_for_dragons_objective_decision }
+		show_as_tooltip = {
+			add_prestige = 1000
+			house ?= { add_house_modifier = land_for_dragons_modifier }
+			custom_tooltip = tzimisce_land_for_dragons_objective_decision_effect
+
+			if = {
+				limit = { title:e_voivodate = { is_title_created = yes } }
+				title:e_voivodate.holder = { set_relation_rival = { target = root reason = rival_grave_insult } }
+			}
+		}
+		trigger_event = pod1230objectives.227
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	ai_check_interval = 120
+}

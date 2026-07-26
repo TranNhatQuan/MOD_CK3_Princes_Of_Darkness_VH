@@ -1,0 +1,1080 @@
+﻿namespace = POD_charjoin
+
+POD_charjoin.100 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.100.t
+	desc = POD_charjoin.100.desc
+	theme = vampire
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	# Become Vampire
+	option = {
+		name = POD_charjoin.100.option.a
+		
+		
+		if = { 
+			limit = { has_trait = fera }
+			random_list = {
+				1 = {
+					custom_tooltip = POD_embrace.410.option.a.success.tt
+					scope:vampiresire = { POD_player_character_create_vampirechilde_effect = yes }
+		
+					POD_change_government_if_landed = { GOVERNMENT = traditions_government }
+					
+					trigger_event = POD_chargen.710
+				}
+				99 = {
+					custom_tooltip = POD_embrace.410.option.a.fail.tt
+					failed_fera_embrace_effect = {
+						VAMPIRE = scope:vampiresire
+						VICTIM = scope:created_vampirechilde
+					}
+					modifier = {
+						factor = 0
+						has_trait = flaying_plague
+					}
+				}
+			}
+		}
+		else = { 
+			scope:vampiresire = { POD_player_character_create_vampirechilde_effect = yes }
+		
+			POD_change_government_if_landed = { GOVERNMENT = traditions_government }
+					
+			trigger_event = POD_chargen.710
+		}
+	}
+	
+	# Become Ghoul
+	option = {
+		name = POD_charjoin.100.option.b
+		trigger = { 
+			POD_can_be_ghouled_scheme_trigger = yes
+		} 
+		
+		scope:created_vampirechilde = {
+			POD_become_ghoul_effect = yes
+			POD_become_bound_ghoul_effect = { DOMITOR = scope:vampiresire }
+		}
+		
+		scope:vampiresire = {
+			POD_hunger_rouse_check_effect = yes
+			POD_high_risk_of_increasing_masquerade_exposure = yes
+			
+			POD_give_regnant_secret_effect = yes
+		}
+		
+		POD_change_government_if_landed = { GOVERNMENT = traditions_government }
+		
+		trigger_event = podintroductions.2002
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+		
+		add_character_flag = charjoin_become_vampire_flag
+	}
+}
+
+POD_charjoin.200 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.200.t
+	desc = POD_charjoin.200.desc
+	theme = vampire
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = POD_charjoin.200.option.a
+		trigger = { 
+			scope:vampiresire = {
+				# don't join ante "houses"
+				NOT = { has_trait = vampgeneration3 } 
+			} 
+		}
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		hidden_effect = {
+			POD_remove_vampire_generation_traits_effect = yes
+			POD_remove_vampire_clan_traits_effect = yes
+		}
+		
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+		POD_character_vampire_inherit_clan_effect = yes
+		POD_character_vampire_inherit_generation_effect = yes
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = POD_charjoin.200.option.c
+		trigger = { 
+			scope:vampiresire = {
+				# don't join ante "houses"
+				NOT = { has_trait = vampgeneration3 } 
+			} 
+		}
+		
+		custom_tooltip = POD_charjoin.200.option.c.t
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		hidden_effect = {
+			POD_remove_vampire_generation_traits_effect = yes
+			#POD_remove_vampire_generation_secret_effect = yes
+			POD_remove_vampire_clan_traits_effect = yes
+		}
+
+		set_house = scope:vampiresire.house
+		POD_character_vampire_inherit_clan_effect = yes
+		trigger_event = POD_charjoin.201
+	}
+
+	option = {
+		name = POD_charjoin.200.option.b
+		custom_tooltip = POD_charjoin.200.option.b.t
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		if = {
+			limit = { is_from_ruler_designer = yes }
+			house = { save_scope_as = coa_target }
+		}
+		
+		hidden_effect = {
+			POD_remove_vampire_generation_traits_effect = yes
+			POD_remove_vampire_clan_traits_effect = yes
+		}
+		
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+		POD_character_vampire_inherit_clan_effect = yes
+		POD_character_vampire_inherit_generation_effect = yes
+		
+		house.house_head = { save_scope_as = house_head }
+		POD_create_cadet_branch_effect = yes
+		POD_add_house_heritage_modifier_effect = { HOUSE_HEAD = scope:house_head }
+		
+		trigger_event = POD_chargen.610
+	}
+	
+	# Ante beg teaser :p
+	option = {
+		trigger = { 
+			always = no # deprecated since the sidebar button accomplishes the same thing
+			scope:vampiresire = { 
+				has_trait = vampgeneration4
+				OR = { 
+					exists = father
+					exists = mother
+				} 
+			} 
+		}
+		name = POD_charjoin.200.option.e
+		custom_tooltip = POD_charjoin.200.option.e.t
+		add_internal_flag = special
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		if = {
+			limit = { is_from_ruler_designer = yes }
+			house = { save_scope_as = coa_target }
+		}
+		
+		hidden_effect = {
+			POD_remove_vampire_generation_traits_effect = yes
+			POD_remove_vampire_clan_traits_effect = yes
+			set_house = scope:vampiresire.house
+		}
+		
+		if = {
+			limit = { scope:vampiresire = { exists = mother } }
+			set_mother = scope:vampiresire.mother
+			scope:vampiresire.mother = { save_scope_as = vampiresire }
+		}
+		else = {
+			set_father = scope:vampiresire.father
+			scope:vampiresire.father = { save_scope_as = vampiresire }
+		}
+		POD_character_vampire_inherit_generation_effect = yes
+		POD_character_vampire_inherit_clan_effect = yes
+		
+		house.house_head = { save_scope_as = house_head }
+		POD_create_cadet_branch_effect = yes
+		POD_add_house_heritage_modifier_effect = { HOUSE_HEAD = scope:house_head }
+			
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = POD_charjoin.200.option.d
+		custom_tooltip = POD_charjoin.200.option.d.t
+	}
+}
+
+POD_charjoin.201 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.201.t
+	desc = POD_charjoin.201.desc
+	theme = vampire
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = trait_vampgeneration5
+
+		trigger = {
+			scope:vampiresire = {
+				is_vampgeneration4_trigger = yes
+			}
+		}
+		add_trait = vampgeneration5
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration6
+
+		trigger = {
+			scope:vampiresire = {
+				is_vampgeneration4_trigger = yes
+			}
+		}
+		add_trait = vampgeneration6
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration7
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 5
+				}
+			}
+		}
+		add_trait = vampgeneration7
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration8
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 6
+				}
+			}
+		}
+		add_trait = vampgeneration8
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration9
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 7
+				}
+			}
+		}
+		add_trait = vampgeneration9
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration10
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 8
+				}
+			}
+		}
+		add_trait = vampgeneration10
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration11
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 9
+				}
+			}
+		}
+		add_trait = vampgeneration11
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration12
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 10
+				}
+			}
+		}
+		add_trait = vampgeneration12
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration13
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 11
+				}
+			}
+		}
+		add_trait = vampgeneration13
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration14
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 12
+				}
+			}
+		}
+		add_trait = vampgeneration14
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration15
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 13
+				}
+			}
+		}
+		add_trait = vampgeneration15
+		trigger_event = POD_chargen.610
+	}
+
+	option = {
+		name = trait_vampgeneration16
+
+		trigger = {
+			scope:vampiresire = {
+				has_trait_rank = {
+					trait = vampgeneration
+					rank <= 14
+				}
+			}
+		}
+		add_trait = vampgeneration16
+		trigger_event = POD_chargen.610
+	}
+	
+	after = {
+		POD_achiev_nomnom_initialize = yes
+	}
+}
+
+POD_charjoin.300 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.300.t
+	desc = POD_charjoin.300.desc
+	theme = faith
+	left_portrait = scope:hunterpupil
+	right_portrait = scope:huntermentor
+	
+	# Mortal become Inquisitor
+	option = {
+		name = POD_charjoin.100.option.a
+		
+		if = {
+			limit = {
+				exists = scope:huntermentor.dynasty
+				scope:huntermentor.dynasty = { has_dynasty_perk = unity_legacy_4 }
+			}
+			add_martial_skill = 4
+		}
+		else = {
+			add_martial_skill = 2
+		}
+		remove_trait = mortal
+		# Remove bastard traits
+		if = {
+			limit = {
+				has_any_bastard_trait_trigger = yes
+			}
+			remove_all_bastard_traits = yes
+		}
+		add_trait_force_tooltip = supehunter
+		if = {
+			limit = {
+				scope:huntermentor = { has_trait = order_member }
+				scope:hunterpupil = { NOT = { has_trait = order_member } }
+			}
+			add_trait = order_member
+		}
+		set_character_faith = scope:huntermentor.faith
+		set_house = scope:huntermentor.house
+		if = {
+			limit = { has_orison_trigger = no }
+			POD_give_orison_effect = yes
+		}
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			random = {
+				chance = 10
+				add_trait = truefaith
+			}
+		}
+		
+		if = {
+			limit = { scope:huntermentor.faith = faith:shadowinquisition }
+			POD_change_government_if_landed = { GOVERNMENT = inquisition_government }
+			trigger_event = podintroductions.2102
+		}
+		else = {
+			POD_change_government_if_landed = { GOVERNMENT = cell_government }
+			trigger_event = podintroductions.2152
+		}
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.310 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.310.t
+	desc = POD_charjoin.310.desc
+	theme = faith
+	left_portrait = scope:hunterpupil
+	right_portrait = scope:huntermentor
+	
+	# Mortal become Inquisitor
+	option = {
+		name = POD_charjoin.100.option.a
+		
+		POD_remove_child_relation_effect = yes
+		POD_remove_spouse_relation_effect = yes
+		
+		if = {
+			limit = {
+				exists = scope:huntermentor.dynasty
+				scope:huntermentor.dynasty = { has_dynasty_perk = unity_legacy_4 }
+			}
+			add_martial_skill = 4
+		}
+		else = {
+			add_martial_skill = 2
+		}
+		remove_trait = mortal
+		# Remove bastard traits
+		if = {
+			limit = {
+				has_any_bastard_trait_trigger = yes
+			}
+			remove_all_bastard_traits = yes
+		}
+		add_trait_force_tooltip = supehunter
+		if = {
+			limit = {
+				scope:huntermentor = { has_trait = order_member }
+				scope:hunterpupil = { NOT = { has_trait = order_member } }
+			}
+			add_trait = order_member
+		}
+		set_character_faith = scope:huntermentor.faith
+		set_house = scope:huntermentor.house
+		if = {
+			limit = { has_orison_trigger = no }
+			POD_give_orison_effect = yes
+		}
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			random = {
+				chance = 10
+				add_trait = truefaith
+			}
+		}
+		
+		if = {
+			limit = { scope:huntermentor.faith = faith:shadowinquisition }
+			POD_change_government_if_landed = { GOVERNMENT = inquisition_government }
+			trigger_event = podintroductions.2102
+		}
+		else = {
+			POD_change_government_if_landed = { GOVERNMENT = cell_government }
+			trigger_event = podintroductions.2152
+		}
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.400 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.400.t
+	desc = POD_charjoin.400.desc
+	theme = faith
+	left_portrait = scope:hunterpupil
+	right_portrait = scope:huntermentor
+	
+	# Join order
+	option = {
+		name = POD_charjoin.100.option.a
+		
+		if = {
+			limit = {
+				exists = scope:huntermentor.dynasty
+				scope:huntermentor.dynasty = { has_dynasty_perk = unity_legacy_4 }
+			}
+			add_martial_skill = 4
+		}
+		else = {
+			add_martial_skill = 2
+		}
+		# Remove bastard traits
+		if = {
+			limit = {
+				has_any_bastard_trait_trigger = yes
+			}
+			remove_all_bastard_traits = yes
+		}
+		add_trait_force_tooltip = supehunter
+		if = {
+			limit = {
+				scope:huntermentor = { has_trait = order_member }
+				scope:hunterpupil = { NOT = { has_trait = order_member } }
+			}
+			add_trait = order_member
+		}
+		set_character_faith = scope:huntermentor.faith
+		set_house = scope:huntermentor.house
+		if = {
+			limit = {
+			has_orison_trigger = no
+			}
+			POD_give_orison_effect = yes
+		}
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			random = {
+				chance = 10
+				add_trait = truefaith
+			}
+		}
+		
+		if = {
+			limit = { scope:huntermentor.faith = faith:shadowinquisition }
+			POD_change_government_if_landed = { GOVERNMENT = inquisition_government }
+			trigger_event = podintroductions.2102
+		}
+		else = {
+			POD_change_government_if_landed = { GOVERNMENT = cell_government }
+			trigger_event = podintroductions.2152
+		}
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.410 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.410.t
+	desc = POD_charjoin.410.desc
+	theme = faith
+	left_portrait = scope:hunterpupil
+	right_portrait = scope:huntermentor
+	
+	# Join order
+	option = {
+		name = POD_charjoin.100.option.a
+		
+		POD_remove_child_relation_effect = yes
+		POD_remove_spouse_relation_effect = yes
+		
+		if = {
+			limit = {
+				exists = scope:huntermentor.dynasty
+				scope:huntermentor.dynasty = { has_dynasty_perk = unity_legacy_4 }
+			}
+			add_martial_skill = 4
+		}
+		else = {
+			add_martial_skill = 2
+		}
+		# Remove bastard traits
+		if = {
+			limit = {
+				has_any_bastard_trait_trigger = yes
+			}
+			remove_all_bastard_traits = yes
+		}
+		add_trait_force_tooltip = supehunter
+		if = {
+			limit = {
+				scope:huntermentor = { has_trait = order_member }
+				scope:hunterpupil = { NOT = { has_trait = order_member } }
+			}
+			add_trait = order_member
+		}
+		set_character_faith = scope:huntermentor.faith
+		set_house = scope:huntermentor.house
+		if = {
+			limit = { has_orison_trigger = no }
+			POD_give_orison_effect = yes
+		}
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			random = {
+				chance = 10
+				add_trait = truefaith
+			}
+		}
+		
+		if = {
+			limit = { scope:huntermentor.faith = faith:shadowinquisition }
+			POD_change_government_if_landed = { GOVERNMENT = inquisition_government }
+			trigger_event = podintroductions.2102
+		}
+		else = {
+			POD_change_government_if_landed = { GOVERNMENT = cell_government }
+			trigger_event = podintroductions.2152
+		}
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.500 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.500.t
+	desc = POD_charjoin.500.desc
+	theme = vampire
+	left_portrait = scope:kueijindisciple
+	right_portrait = scope:kueijinsifu
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	# Join Wu
+	option = {
+		name = POD_charjoin.100.option.a
+
+		POD_set_parent_effect = { PARENT = scope:kueijinsifu }
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.510 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.510.t
+	desc = POD_charjoin.510.desc
+	theme = vampire
+	left_portrait = scope:kueijindisciple
+	right_portrait = scope:kueijinsifu
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	# Present
+	option = {
+		name = POD_charjoin.510.option.a
+
+		if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma9 }
+			}
+			scope:kueijindisciple = { 
+				pay_short_term_gold = {
+					target = scope:kueijinsifu
+					gold = 1000
+				} 
+			}
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma8 }
+			}
+			scope:kueijindisciple = { 
+				pay_short_term_gold = {
+					target = scope:kueijinsifu
+					gold = 500
+				} 
+			}
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma7 }
+			}
+			scope:kueijindisciple = { 
+				pay_short_term_gold = {
+					target = scope:kueijinsifu
+					gold = 300
+				} 
+			}
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma6 }
+			}
+			scope:kueijindisciple = { 
+				pay_short_term_gold = {
+					target = scope:kueijinsifu
+					gold = 200
+				} 
+			}
+		}
+		else = {
+			scope:kueijindisciple = { 
+				pay_short_term_gold = {
+					target = scope:kueijinsifu
+					gold = 100
+				} 
+			}
+		}
+		
+		trigger_event = POD_charjoin.500
+	}
+
+	# Lose Prestige
+	option = {
+		name = POD_charjoin.510.option.a
+
+		if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma9 }
+			}
+			scope:kueijindisciple = { add_prestige = -1000 }
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma8 }
+			}
+			scope:kueijindisciple = { add_prestige = -500 }
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma7 }
+			}
+			scope:kueijindisciple = { add_prestige = -300 }
+		}
+		else_if = {
+			limit = {
+				scope:kueijinsifu = { has_trait = dharma6 }
+			}
+			scope:kueijindisciple = { add_prestige = -200 }
+		}
+		else = {
+			scope:kueijindisciple = { add_prestige = -100 }
+		}
+		
+		trigger_event = POD_charjoin.500
+	}
+
+	# Give up
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.600 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.600.t
+	desc = POD_charjoin.600.desc
+	theme = faith
+	left_portrait = scope:ghoulbrospupil
+	right_portrait = scope:ghoulbrosmentor
+	
+	# Join Ghoulbros
+	option = {
+		name = POD_charjoin.100.option.a
+
+		if = {
+			limit = {
+				exists = scope:ghoulbrosmentor.dynasty
+				scope:ghoulbrosmentor.dynasty = { has_dynasty_perk = unity_legacy_4 }
+			}
+			add_martial_skill = 4
+		}
+		else = {
+			add_martial_skill = 2
+		}
+		if = {
+			limit = {
+				has_trait = bastard
+				}
+			remove_trait = bastard
+		}
+		if = {
+			limit = {
+				NOT = { has_trait = peasant_leader }
+			}
+			add_trait = peasant_leader
+		}
+		set_character_faith = scope:ghoulbrosmentor.faith
+		set_house = scope:ghoulbrosmentor.house	
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			random = {
+				chance = 10
+				add_trait = truefaith
+			}
+		}
+		
+		POD_change_government_if_landed = { GOVERNMENT = cell_government }
+		
+		trigger_event = podintroductions.2152
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+	}
+}
+
+POD_charjoin.700 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.700.t
+	desc = POD_charjoin.200.desc
+	theme = vampire
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = POD_charjoin.700.option.a
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+
+		POD_kueijin_initialization_effect = yes
+	}
+
+	option = {
+		name = POD_charjoin.700.option.b
+		custom_tooltip = POD_charjoin.200.option.b.t
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		house = { save_scope_as = coa_target }
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+		POD_create_cadet_branch_effect = yes
+
+		POD_kueijin_initialization_effect = yes
+	}
+
+	option = {
+		name = POD_charjoin.700.option.c
+		custom_tooltip = POD_charjoin.700.option.c.t
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		set_house = scope:vampiresire.house
+
+		POD_kueijin_initialization_effect = yes
+	}
+
+	option = {
+		name = POD_charjoin.200.option.d
+		custom_tooltip = POD_charjoin.200.option.d.t
+	}
+}
+
+POD_charjoin.800 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.800.t
+	desc = POD_charjoin.200.desc
+	theme = faith
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+
+	option = {
+		name = POD_charjoin.800.option.a
+		
+		remove_character_flag = chargen_choosing_sire_flag		
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+	}
+
+	option = {
+		name = POD_charjoin.800.option.b
+		custom_tooltip = POD_charjoin.200.option.b.t
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		house = { save_scope_as = coa_target }
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+		POD_create_cadet_branch_effect = yes
+	}
+
+	option = {
+		name = POD_charjoin.800.option.c
+		custom_tooltip = POD_charjoin.700.option.c.t
+		
+		remove_character_flag = chargen_choosing_sire_flag
+		
+		set_house = scope:vampiresire.house
+	}
+
+	option = {
+		name = POD_charjoin.200.option.d
+		custom_tooltip = POD_charjoin.200.option.d.t
+	}
+}
+
+POD_charjoin.900 = {           
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.900.t
+	desc = POD_charjoin.900.desc
+	theme = fae
+	left_portrait = scope:created_vampirechilde
+	right_portrait = scope:vampiresire
+	
+	# Become Changeling
+	option = {
+		name = POD_charjoin.900.option.a
+		
+		POD_become_changeling_effect = yes
+		
+		trigger_event = podintroductions.2502
+	}
+
+	# Regret
+	option = {
+		name = POD_charjoin.100.option.c
+		custom_tooltip = POD_charjoin.100.option.c.t
+		
+		add_character_flag = charjoin_become_changeling_flag
+	}
+}
+
+POD_charjoin.1000 = {            
+	type = character_event
+	content_source = dlc_POD
+	title = POD_charjoin.1000.t
+	desc = POD_charjoin.1000.desc
+	theme = demon
+	
+	# Become Fallen Host
+	option = {
+		name = POD_charjoin.1000.option.a
+		
+		POD_become_demon_effect = yes
+			
+		add_trait = possessed_genetic
+	}
+
+	option = {
+		name = POD_charjoin.1000.option.e
+	}
+}

@@ -1,0 +1,631 @@
+﻿# macro with 2 arguments
+# LOC: localization key for the content of the interface message
+# COOLDOWN: cooldown value, needs to be passed in quotation marks. e.g.: COOLDOWN = "years = 5"
+POD_queue_cooldown_message = {
+	save_scope_value_as = {
+		name  = cooldown_loc
+		value = flag:$LOC$
+	}
+	if = {
+		limit = { scope:cooldown_loc = flag:$LOC$ } # error suppression
+		trigger_event = {
+			id = POD_interface.1
+			$COOLDOWN$
+		}
+	}
+}
+
+# save the last created artifact as a link
+# the link can be used in datafunctions with the macro GetPODArtifact(link)
+# or in script via POD_character_owns_linked_artifact
+POD_save_new_artifact_as_link = {
+	character:POD_wraith_01 ?= {
+		set_variable = {
+			name = $LINK$
+			value = scope:newly_created_artifact
+		}
+		# error suppression
+		if = {
+			limit = {
+				always = no
+				has_variable = $LINK$
+			}
+		}
+	}
+}
+
+POD_overwrite_artifact_link = {
+	hidden_effect_new_object = {
+		if = {
+			limit = {
+				POD_artifact_link_exists = { LINK = $LINK$ }
+				character:POD_wraith_01.var:$LINK$ = {
+					POD_artifact_is_unavailable_trigger = yes
+				}
+			}
+			character:POD_wraith_01.var:$LINK$ = {
+				destroy_artifact = this
+			}
+		}
+	}
+	POD_save_new_artifact_as_link = { LINK = $LINK$ }
+}
+
+POD_display_linked_artifact_and_owner = {
+	if = {
+		limit = {
+			POD_artifact_link_exists = {
+				LINK = $LINK$
+			}
+		}
+		character:POD_wraith_01.var:$LINK$ = {
+			custom_tooltip = POD_display_artifact_and_owner
+		}
+	}
+}
+
+POD_show_trait_tooltip = {
+	save_scope_value_as = {
+		name = trait_tt
+		value = flag:$TRAIT$
+	}
+	custom_tooltip = POD_trait_tooltip
+	POD_error_suppression_unused_flag = { FLAG = $TRAIT$ }
+}
+
+POD_show_trait_reason_tooltip = {
+	save_scope_value_as = {
+		name = trait_reason
+		value = flag:$TRAIT$
+	}
+	custom_tooltip = POD_trait_reason_tooltip
+	POD_error_suppression_unused_flag = { FLAG = $TRAIT$ }
+}
+
+POD_init_idle_animation_list = {
+	add_to_variable_list = {
+		name   = idle_animations
+		target = flag:$FLAG$
+	}
+	POD_error_suppression_unused_flag = { FLAG = $FLAG$ }
+}
+
+POD_clear_idle_animation_list = {
+	clear_variable_list = idle_animations
+}
+
+POD_set_custom_idle_animation = {
+	set_variable = {
+		name = custom_idle
+		value = $FLAG$
+	}
+}
+
+POD_clear_custom_idle_animation = {
+	remove_variable = custom_idle
+}
+
+POD_clear_resource_hint_vars_effect = {
+	# Blood
+	remove_variable = hunt_in_capital_story
+	remove_variable = suggested_herdmember
+	remove_variable = suggested_prisoner
+}
+
+POD_save_potential_mortal_herd_effect = {
+	ordered_courtier_or_guest = {
+		limit = {
+			prev = {
+				is_character_interaction_valid = {
+					recipient = prev
+					interaction = POD_herdify_mortal_interaction
+				}
+			}
+		}
+		order_by = resonance_rating_value
+		position = 0
+		save_scope_as = potential_mortal_herd
+	}
+}
+
+POD_save_potential_dreamer_effect = {
+	ordered_courtier_or_guest = {
+		limit = {
+			prev = {
+				is_character_interaction_valid = {
+					recipient = prev
+					interaction = POD_musing_mortal_interaction
+				}
+			}
+		}
+		order_by = {
+			value = 0
+			subtract = min_musing_days
+		}
+		position = 0
+		save_temporary_scope_as = potential_dreamer
+	}
+}
+
+# need to pass TARGET as an argument
+POD_open_bloodmagic_gui = {
+	set_variable = {
+		name = spell_target
+		value = $TARGET$
+	}
+	set_variable = bloodmagic_open
+	remove_variable = necromagic_open
+	clear_variable_list = UnlockedPaths
+	clear_variable_list = path_alchemy_list
+	clear_variable_list = path_conjuring_list
+	clear_variable_list = path_corruption_list
+	clear_variable_list = path_focused_mind_list
+	clear_variable_list = path_mastery_of_the_mortal_shell_list
+	clear_variable_list = path_hedayat_iman_list
+	clear_variable_list = path_hedayat_qalb_list
+	clear_variable_list = path_weather_control_list
+	clear_variable_list = path_of_blood_list
+	clear_variable_list = path_neptunes_might_list
+	clear_variable_list = path_of_duat_list
+	clear_variable_list = path_immanence_of_set_list
+	clear_variable_list = path_dry_nile_list
+	clear_variable_list = path_snake_inside_list
+	clear_variable_list = path_transylvanian_kraina_list
+	clear_variable_list = path_black_sea_kraina_list
+	clear_variable_list = path_kraina_of_the_well_list
+	clear_variable_list = path_kraina_of_enoch_list
+	clear_variable_list = path_koldun_five_ways_list
+	clear_variable_list = path_awakening_of_the_steel_list
+	clear_variable_list = path_covenant_of_nergal_list
+	clear_variable_list = path_of_karma_list
+	clear_variable_list = path_divine_hand_list
+	clear_variable_list = path_evil_eye_list
+	clear_variable_list = path_of_bloods_curse_list
+	clear_variable_list = path_revelations_of_duat_list
+	clear_variable_list = path_revelations_of_midgard_list
+
+	clear_variable_list = akhu_rituals_list
+	clear_variable_list = dur_an_ki_rituals_list
+	clear_variable_list = koldunic_rituals_list
+	clear_variable_list = thaumaturgy_rituals_list
+	clear_variable_list = sielanic_thaumaturgy_rituals_list
+	clear_variable_list = abyssal_mysticism_rituals_list
+	clear_variable_list = sadhana_rituals_list
+	clear_variable_list = sihr_rituals_list
+
+	if = { limit = { has_akhu_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:akhu_rituals } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_typhons_brew } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_inscribe_the_book_of_set } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_dreams_of_duat } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_linked_soul_elixir } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_scorpions_sending } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_severing_sand } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_summon_sebau } 
+		add_to_variable_list = { name = akhu_rituals_list target = flag:ritual_warding_cippus } 
+	}
+	if = { limit = { has_dur_an_ki_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:dur_an_ki_rituals } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_horoscope } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_warding_baptism } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_bind_the_heavens } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_bull_of_heaven } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_kudurru } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_apsu_portal } 
+		add_to_variable_list = { name = dur_an_ki_rituals_list target = flag:ritual_liliths_vengeance } 
+	}
+	if = { limit = { has_koldunic_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:koldunic_rituals } 
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_master_of_the_domain }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_truth_in_water }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_reawakening_the_dead_water }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_autumns_armor }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_concentrated_vitae }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_invoke_lesser_sign }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_rouse_the_elemental_spirit }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_conjure_spirit }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_invoke_greater_sign }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_merging_of_souls }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_ties_that_bind }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_beyond_the_wall_of_death }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_earths_embrace }
+		add_to_variable_list = { name = koldunic_rituals_list target = flag:ritual_nemesis_of_the_living_earth }
+	}
+	if = { limit = { has_thaumaturgy_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:thaumaturgy_rituals } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_brand_of_the_paramour } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_encrypt_missive } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_impressive_visage } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_the_imps_affliction } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_purge_the_inner_demon } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_rebirth_of_mortal_vanity } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_the_scribe } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_blood_mead } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_bureaucratic_condemnation } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_impassable_trail } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_jinx } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_mourning_life_curse } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_steps_of_the_terrified } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_trima } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_blood_allergy } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_cleansing_of_the_flesh } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_the_curse_belated } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_infirm_inert } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_return_of_the_heart } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_stolen_kisses } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_court_of_hallowed_truth } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_sculpting_the_perfect_servant } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_severed_hand } 
+		add_to_variable_list = { name = thaumaturgy_rituals_list target = flag:ritual_stone_of_the_true_form } 
+	}
+	if = { limit = { has_sielanic_thaumaturgy_bloodmagic_trigger = yes }
+		add_to_variable_list = { name = UnlockedPaths target = flag:sielanic_thaumaturgy_rituals }
+		#Thaumaturgy
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_purge_the_inner_demon }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_rebirth_of_mortal_vanity }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_the_scribe }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_become_one_with_the_land } #Sielanic
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_blood_mead }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_impassable_trail }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_steps_of_the_terrified }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_blood_allergy }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_cleansing_of_the_flesh }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_the_curse_belated }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_stolen_kisses }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_soul_of_the_land } #Sielanic
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_stone_of_the_true_form }
+		add_to_variable_list = { name = sielanic_thaumaturgy_rituals_list target = flag:ritual_touch_the_protectors_mind } #Sielanic
+	}
+	if = { limit = { has_abyssal_mysticism_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:abyssal_mysticism_rituals } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_pierce_the_veil } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_eyes_of_the_abyss } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_the_heart_that_beats_in_silence } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_feed_the_darkness } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_abyssal_threads } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_calling_the_hungry_shade } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_reflections_of_hollow_revelation } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_maw_of_ahriman } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_commune_with_the_abyss } 
+		add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_ahrimans_wight } 
+		if = { limit = { has_character_flag = knows_ritual_cry_that_slays_light } add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_cry_that_slays_light } }
+		if = { limit = { has_character_flag = knows_ritual_lord_aludians_claim } add_to_variable_list = { name = abyssal_mysticism_rituals_list target = flag:ritual_lord_aludians_claim } }
+	}
+	if = { limit = { has_sadhana_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:sadhana_rituals } 
+		add_to_variable_list = { name = sadhana_rituals_list target = flag:ritual_armor_of_diamond_serenity } 
+		add_to_variable_list = { name = sadhana_rituals_list target = flag:ritual_animaa } 
+		add_to_variable_list = { name = sadhana_rituals_list target = flag:ritual_destinys_call } 
+		add_to_variable_list = { name = sadhana_rituals_list target = flag:ritual_warded_womb } 
+		add_to_variable_list = { name = sadhana_rituals_list target = flag:ritual_transcendentally_satisfying_body_filling } 
+	}
+	if = { limit = { has_sihr_bloodmagic_trigger = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:sihr_rituals } 
+		add_to_variable_list = { name = sihr_rituals_list target = flag:ritual_touch_of_allah } 
+		add_to_variable_list = { name = sihr_rituals_list target = flag:ritual_mask_of_allah} 
+		add_to_variable_list = { name = sihr_rituals_list target = flag:ritual_ward_against_djinn } 
+		add_to_variable_list = { name = sihr_rituals_list target = flag:ritual_allahs_blessing } 
+		#add_to_variable_list = { name = sihr_rituals_list target = flag:ritual_dampen_the_keening } 
+	}
+
+
+	if = { limit = { show_bs_alchemy_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_alchemy } 
+		add_to_variable_list = { name = path_alchemy_list target = flag:spell_mutate } 
+	}
+	if = { limit = { show_bs_conjuring_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_conjuring } 
+		add_to_variable_list = { name = path_conjuring_list target = flag:spell_summon_the_simplest_form } 
+		add_to_variable_list = { name = path_conjuring_list target = flag:spell_magic_of_the_smith } 
+		add_to_variable_list = { name = path_conjuring_list target = flag:spell_power_over_life } 
+	}
+	if = { limit = { show_bs_corruption_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_corruption } 
+		add_to_variable_list = { name = path_corruption_list target = flag:spell_contradict } 
+		add_to_variable_list = { name = path_corruption_list target = flag:spell_subvert } 
+		add_to_variable_list = { name = path_corruption_list target = flag:spell_dissociate } 
+	}
+	if = { limit = { show_bs_focused_mind_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_focused_mind } 
+		add_to_variable_list = { name = path_focused_mind_list target = flag:spell_readiness } 
+		add_to_variable_list = { name = path_focused_mind_list target = flag:spell_one_tracked_mind } 
+		add_to_variable_list = { name = path_focused_mind_list target = flag:spell_dual_thought } 
+	}
+	if = { limit = { show_bs_mastery_of_the_mortal_shell_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_mastery_of_the_mortal_shell } 
+		add_to_variable_list = { name = path_mastery_of_the_mortal_shell_list target = flag:spell_marionette } 
+	}
+	if = { limit = { show_bs_hedayat_iman_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_hedayat_iman } 
+		add_to_variable_list = { name = path_hedayat_iman_list target = flag:spell_saut_allah }
+		add_to_variable_list = { name = path_hedayat_iman_list target = flag:spell_ghadub_allah }
+		add_to_variable_list = { name = path_hedayat_iman_list target = flag:spell_kubda_allah }
+	}
+	if = { limit = { show_bs_hedayat_qalb_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_hedayat_qalb } 
+		add_to_variable_list = { name = path_hedayat_qalb_list target = flag:spell_idrak_allah }
+		add_to_variable_list = { name = path_hedayat_qalb_list target = flag:spell_sultat_nabi }
+		add_to_variable_list = { name = path_hedayat_qalb_list target = flag:spell_nar_iman }
+	}
+	if = { limit = { show_bs_weather_control_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_weather_control } 
+		add_to_variable_list = { name = path_weather_control_list target = flag:spell_irigated_land } 
+	}
+	if = { limit = { show_bs_path_of_blood_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_blood } 
+		add_to_variable_list = { name = path_of_blood_list target = flag:spell_a_taste_for_blood } 
+		add_to_variable_list = { name = path_of_blood_list target = flag:spell_blood_rage } 
+		add_to_variable_list = { name = path_of_blood_list target = flag:spell_theft_of_vitae } 
+		add_to_variable_list = { name = path_of_blood_list target = flag:spell_blood_of_potency } 
+	}
+	if = { limit = { show_bs_neptunes_might_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_neptunes_might } 
+		add_to_variable_list = { name = path_neptunes_might_list target = flag:spell_prison_of_water }
+		add_to_variable_list = { name = path_neptunes_might_list target = flag:spell_blood_to_water }
+	}
+	if = { limit = { show_bs_path_of_duat_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_duat } 
+		add_to_variable_list = { name = path_of_duat_list target = flag:spell_darkness_of_duat }
+		add_to_variable_list = { name = path_of_duat_list target = flag:spell_suffocation_of_the_tomb }
+		add_to_variable_list = { name = path_of_duat_list target = flag:spell_consignment_to_duat }
+	}
+	if = { limit = { show_bs_immanence_of_set_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_immanence_of_set } 
+		add_to_variable_list = { name = path_immanence_of_set_list target = flag:spell_tongue_of_the_tempter }
+		add_to_variable_list = { name = path_immanence_of_set_list target = flag:spell_voice_of_the_prophet }
+	}
+	if = { limit = { show_bs_dry_nile_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_dry_nile } 
+		add_to_variable_list = { name = path_dry_nile_list target = flag:spell_beauty_fades }
+		add_to_variable_list = { name = path_dry_nile_list target = flag:spell_trust_withers }
+		add_to_variable_list = { name = path_dry_nile_list target = flag:spell_love_dies }
+		add_to_variable_list = { name = path_dry_nile_list target = flag:spell_thrones_crumble }
+	}
+	if = { limit = { show_bs_snake_inside_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_snake_inside } 
+		add_to_variable_list = { name = path_snake_inside_list target = flag:spell_first_taste }
+		add_to_variable_list = { name = path_snake_inside_list target = flag:spell_the_jones }
+		add_to_variable_list = { name = path_snake_inside_list target = flag:spell_fatal_compulsion }
+		add_to_variable_list = { name = path_snake_inside_list target = flag:spell_temperance }
+	}
+	if = { limit = { show_bs_transylvanian_kraina_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_transylvanian_kraina }
+		add_to_variable_list = { name = path_transylvanian_kraina_list target = flag:spell_kupalas_exhalation }
+		add_to_variable_list = { name = path_transylvanian_kraina_list target = flag:spell_restless_medias }
+	}
+	if = { limit = { show_bs_black_sea_kraina_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_black_sea_kraina } 
+		add_to_variable_list = { name = path_black_sea_kraina_list target = flag:spell_pontos_euxeinos }
+		add_to_variable_list = { name = path_black_sea_kraina_list target = flag:spell_minions_of_deep_marmora }
+		add_to_variable_list = { name = path_black_sea_kraina_list target = flag:spell_pontos_axeinos }
+	}
+	if = { limit = { show_bs_kraina_of_the_well_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_kraina_of_the_well }
+		add_to_variable_list = { name = path_kraina_of_the_well_list target = flag:spell_heed_the_hell_bound_heart }
+		add_to_variable_list = { name = path_kraina_of_the_well_list target = flag:spell_heave_the_host_of_hell }
+	}
+	if = { limit = { show_bs_kraina_of_enoch_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_kraina_of_enoch } 
+		add_to_variable_list = { name = path_kraina_of_enoch_list target = flag:spell_pond_of_malevolent_dread }
+		add_to_variable_list = { name = path_kraina_of_enoch_list target = flag:spell_wrath_of_the_tempest }
+		add_to_variable_list = { name = path_kraina_of_enoch_list target = flag:spell_hunger_of_the_void }
+	}
+	if = {
+		limit = { show_bs_way_of_earth_path = yes } #all 5 ways use the same trigger so we just check 1
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_koldun_five_ways } #all 5 paths are thematically linked and have very few spells in total, unnecessary to create seperate menus
+		add_to_variable_list = { name = path_koldun_five_ways_list target = flag:spell_kupalas_fury }
+		add_to_variable_list = { name = path_koldun_five_ways_list target = flag:spell_fury_of_the_night_sky }
+		add_to_variable_list = { name = path_koldun_five_ways_list target = flag:spell_doom_tide }
+		add_to_variable_list = { name = path_koldun_five_ways_list target = flag:spell_the_insults_of_krivda }
+		add_to_variable_list = { name = path_koldun_five_ways_list target = flag:spell_the_starvation_of_marena }
+	}
+
+
+	if = { limit = { show_bs_awakening_of_the_steel_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_awakening_of_the_steel } 
+		add_to_variable_list = { name = path_awakening_of_the_steel_list target = flag:spell_confer_with_the_blade }
+	}
+	if = { limit = { show_bs_covenant_of_nergal_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_covenant_of_nergal } 
+		add_to_variable_list = { name = path_covenant_of_nergal_list target = flag:spell_maskims_touch }
+		add_to_variable_list = { name = path_covenant_of_nergal_list target = flag:spell_breath_of_ereshkigal }
+		add_to_variable_list = { name = path_covenant_of_nergal_list target = flag:spell_nergals_blessing }
+		add_to_variable_list = { name = path_covenant_of_nergal_list target = flag:spell_nergals_wrath }
+	}
+	if = { limit = { show_bs_path_of_karma_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_karma } 
+		add_to_variable_list = { name = path_of_karma_list target = flag:spell_threads_of_the_past }
+		add_to_variable_list = { name = path_of_karma_list target = flag:spell_weave_of_the_future }
+		add_to_variable_list = { name = path_of_karma_list target = flag:spell_certain_fate }
+		add_to_variable_list = { name = path_of_karma_list target = flag:spell_past_lives }
+		add_to_variable_list = { name = path_of_karma_list target = flag:spell_master_of_samsara }
+	}
+	if = { limit = { show_bs_divine_hand_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_divine_hand } 
+		add_to_variable_list = { name = path_divine_hand_list target = flag:spell_hand_of_ptah }
+		add_to_variable_list = { name = path_divine_hand_list target = flag:spell_hand_of_khnum }
+	}
+	if = { limit = { show_bs_evil_eye_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_evil_eye } 
+		add_to_variable_list = { name = path_evil_eye_list target = flag:spell_humiliation }
+		add_to_variable_list = { name = path_evil_eye_list target = flag:spell_loss }
+		add_to_variable_list = { name = path_evil_eye_list target = flag:spell_peril }
+		add_to_variable_list = { name = path_evil_eye_list target = flag:spell_enemy }
+	}
+	if = { limit = { show_bs_path_of_bloods_curse_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_bloods_curse } 
+		add_to_variable_list = { name = path_of_bloods_curse_list target = flag:spell_ravages_of_the_beast }
+		add_to_variable_list = { name = path_of_bloods_curse_list target = flag:spell_weight_of_the_sun }
+		add_to_variable_list = { name = path_of_bloods_curse_list target = flag:spell_abated_tooth }
+		add_to_variable_list = { name = path_of_bloods_curse_list target = flag:spell_treacherous_bonds }
+		add_to_variable_list = { name = path_of_bloods_curse_list target = flag:spell_the_withering_of_ages }
+	}
+	if = { limit = { show_bs_revelations_of_duat_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_revelations_of_duat } 
+		add_to_variable_list = { name = path_revelations_of_duat_list target = flag:spell_weigh_the_virtues }
+		add_to_variable_list = { name = path_revelations_of_duat_list target = flag:spell_pharaohs_sentry }
+		add_to_variable_list = { name = path_revelations_of_duat_list target = flag:spell_the_sorcery_of_life }
+	}
+	if = { limit = { show_bs_revelations_of_midgard_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_revelations_of_midgard } 
+		add_to_variable_list = { name = path_revelations_of_midgard_list target = flag:spell_bestowment_of_scales }
+		add_to_variable_list = { name = path_revelations_of_midgard_list target = flag:spell_suffer_for_jormungandr }
+		add_to_variable_list = { name = path_revelations_of_midgard_list target = flag:spell_swallow_the_tail }
+		add_to_variable_list = { name = path_revelations_of_midgard_list target = flag:spell_apeps_transformation }
+	}
+}
+POD_open_necromagic_gui = {
+	set_variable = {
+		name = spell_target
+		value = $TARGET$
+	}
+	set_variable = necromagic_open
+	remove_variable = bloodmagic_open
+	clear_variable_list = UnlockedPaths
+	clear_variable_list = sepulchre_path_list
+	clear_variable_list = ash_path_list
+	clear_variable_list = bone_path_list
+	clear_variable_list = cenotaph_path_list
+	clear_variable_list = corpse_in_the_monster_path_list
+	clear_variable_list = graves_decay_path_list
+	clear_variable_list = vitreous_path_list
+	clear_variable_list = path_of_the_twilight_garden_list
+	clear_variable_list = nightshade_path_list
+	clear_variable_list = path_of_haunting_list
+	clear_variable_list = path_of_woe_list
+	if = { limit = { show_ns_sepulchre_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:sepulchre_path } 
+		add_to_variable_list = { name = sepulchre_path_list target = flag:spell_haunting } 
+		add_to_variable_list = { name = sepulchre_path_list target = flag:ritual_minestra_di_morte } 
+		add_to_variable_list = { name = sepulchre_path_list target = flag:ritual_deaths_communion } 
+		add_to_variable_list = { name = sepulchre_path_list target = flag:ritual_spirit_beacon } 
+	}
+	if = { limit = { show_ns_ash_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:ash_path } 
+		add_to_variable_list = { name = ash_path_list target = flag:ritual_eldritch_beacon } 
+		add_to_variable_list = { name = ash_path_list target = flag:ritual_parting_the_veil } 
+		add_to_variable_list = { name = ash_path_list target = flag:ritual_din_of_the_damned } 
+	}
+	if = { limit = { show_ns_bone_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:bone_path } 
+		add_to_variable_list = { name = bone_path_list target = flag:spell_seal_of_abamixtra } 
+		add_to_variable_list = { name = bone_path_list target = flag:spell_daemonic_possession } 
+		add_to_variable_list = { name = bone_path_list target = flag:ritual_cadavers_touch } 
+		add_to_variable_list = { name = bone_path_list target = flag:ritual_summon_ethereal_horde } 
+	}
+	if = { limit = { show_ns_cenotaph_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:cenotaph_path } 
+		add_to_variable_list = { name = cenotaph_path_list target = flag:ritual_words_of_insight } 
+		add_to_variable_list = { name = cenotaph_path_list target = flag:ritual_tempesta_scudo } 
+	}
+	if = { limit = { show_ns_corpse_in_the_monster_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:corpse_in_the_monster_path } 
+		add_to_variable_list = { name = corpse_in_the_monster_path_list target = flag:spell_intimations_of_mortality } 
+		add_to_variable_list = { name = corpse_in_the_monster_path_list target = flag:spell_benedicto_vitae } 
+		add_to_variable_list = { name = corpse_in_the_monster_path_list target = flag:ritual_hand_of_glory } 
+		add_to_variable_list = { name = corpse_in_the_monster_path_list target = flag:ritual_thanatos_caress } 
+		add_to_variable_list = { name = corpse_in_the_monster_path_list target = flag:ritual_garb_of_hades } 
+	}
+	if = { limit = { show_ns_graves_decay_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:graves_decay_path } 
+		add_to_variable_list = { name = graves_decay_path_list target = flag:spell_ashen_ladys_embrace } 
+		add_to_variable_list = { name = graves_decay_path_list target = flag:spell_gift_of_melancholia } 
+		add_to_variable_list = { name = graves_decay_path_list target = flag:ritual_eyes_of_the_grave } 
+		add_to_variable_list = { name = graves_decay_path_list target = flag:ritual_chill_of_oblivion } 
+	}
+	if = { limit = { show_ns_vitreous_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:vitreous_path } 
+		add_to_variable_list = { name = vitreous_path_list target = flag:spell_curse_of_the_maelstrom } 
+		add_to_variable_list = { name = vitreous_path_list target = flag:ritual_judgement_of_radamanthus } 
+		add_to_variable_list = { name = vitreous_path_list target = flag:ritual_call_upon_the_shadows_grace } 
+		add_to_variable_list = { name = vitreous_path_list target = flag:ritual_grasp_the_ghostly } 
+	}
+	if = { limit = { show_ns_path_of_the_twilight_garden = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_the_twilight_garden } 
+		add_to_variable_list = { name = path_of_the_twilight_garden_list target = flag:spell_whispers_to_the_soul } 
+		add_to_variable_list = { name = path_of_the_twilight_garden_list target = flag:ritual_bastone_diabolico } 
+		add_to_variable_list = { name = path_of_the_twilight_garden_list target = flag:ritual_caul_the_living_mind_loca } 
+		add_to_variable_list = { name = path_of_the_twilight_garden_list target = flag:ritual_esilio } 
+	}
+	if = { limit = { show_ns_nightshade_path = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:nightshade_path } 
+		add_to_variable_list = { name = nightshade_path_list target = flag:ritual_rape_of_persephone } 
+		add_to_variable_list = { name = nightshade_path_list target = flag:ritual_drink_of_lethes_waters } 
+		add_to_variable_list = { name = nightshade_path_list target = flag:ritual_the_ferrymans_recall } 
+	}
+	# if = { limit = { show_ns_skull_path = yes } CHANGED TO INTERACTION FOR EASE SAKE # HAH, There aren't even any rituals!
+	# 	add_to_variable_list = { name = UnlockedPaths target = flag:skull_path } 
+	# 	add_to_variable_list = { name = skull_path_list target = flag:spell_degulo } 
+	# }
+	if = { limit = { show_ns_path_of_haunting = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_haunting } 
+		add_to_variable_list = { name = path_of_haunting_list target = flag:spell_song_of_the_dead } 
+		add_to_variable_list = { name = path_of_haunting_list target = flag:ritual_orphic_sojourn } 
+	}
+	if = { limit = { show_ns_path_of_woe = yes } 
+		add_to_variable_list = { name = UnlockedPaths target = flag:path_of_woe } 
+		add_to_variable_list = { name = path_of_woe_list target = flag:spell_cursed_eucharist } 
+		add_to_variable_list = { name = path_of_woe_list target = flag:ritual_circle_of_cerberus } 
+		add_to_variable_list = { name = path_of_woe_list target = flag:ritual_draining_the_well_of_life } 
+		add_to_variable_list = { name = path_of_woe_list target = flag:ritual_of_the_unearthed_fetter } 
+	}
+}
+POD_open_sorcery_gui = {
+	set_variable = {
+		name = spell_target
+		value = $TARGET$
+	}
+	set_variable = sorcery_open
+	remove_variable = bloodmagic_open
+	clear_variable_list = UnlockedPaths
+	clear_variable_list = path_conjuration_list
+	clear_variable_list = path_conveyance_list
+	clear_variable_list = path_divination_list
+	clear_variable_list = path_ephemera_list
+	clear_variable_list = path_fascination_list
+	clear_variable_list = path_fortune_list
+	clear_variable_list = path_healing_list
+	clear_variable_list = path_oneiromancy_list
+	clear_variable_list = path_numina_weather_control_list
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_conjuration } 
+	add_to_variable_list = { name = path_conjuration_list target = flag:spell_summon_pet } 
+	add_to_variable_list = { name = path_conjuration_list target = flag:spell_summon_artifact } 
+	add_to_variable_list = { name = path_conjuration_list target = flag:spell_summon_character } 
+	add_to_variable_list = { name = path_conjuration_list target = flag:spell_summon_demon } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_conveyance } 
+	add_to_variable_list = { name = path_conveyance_list target = flag:spell_personal_teleport } 
+	add_to_variable_list = { name = path_conveyance_list target = flag:spell_army_teleport } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_divination } 
+	add_to_variable_list = { name = path_divination_list target = flag:spell_scry_for_secrets } 
+	add_to_variable_list = { name = path_divination_list target = flag:spell_scry_for_schemes } 
+	add_to_variable_list = { name = path_divination_list target = flag:spell_predict_schemes } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_ephemera } 
+	add_to_variable_list = { name = path_ephemera_list target = flag:spell_false_chiminage } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_fascination } 
+	add_to_variable_list = { name = path_fascination_list target = flag:spell_entrance } 
+	add_to_variable_list = { name = path_fascination_list target = flag:spell_popular_love } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_fortune } 
+	add_to_variable_list = { name = path_fortune_list target = flag:spell_curse } 
+	add_to_variable_list = { name = path_fortune_list target = flag:spell_bless } 
+	add_to_variable_list = { name = path_fortune_list target = flag:spell_dowsing } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_healing } 
+	add_to_variable_list = { name = path_healing_list target = flag:spell_cure } 
+	add_to_variable_list = { name = path_healing_list target = flag:spell_heal } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_oneiromancy } 
+	add_to_variable_list = { name = path_oneiromancy_list target = flag:spell_invade_dreams } 
+
+	add_to_variable_list = { name = UnlockedPaths target = flag:path_numina_weather_control } 
+	add_to_variable_list = { name = path_numina_weather_control_list target = flag:spell_send_flow } 
+	add_to_variable_list = { name = path_numina_weather_control_list target = flag:spell_send_storm } 
+	add_to_variable_list = { name = path_numina_weather_control_list target = flag:spell_send_earthquake } 
+	add_to_variable_list = { name = path_numina_weather_control_list target = flag:spell_send_flood } 
+	add_to_variable_list = { name = path_numina_weather_control_list target = flag:spell_send_drought } 
+}

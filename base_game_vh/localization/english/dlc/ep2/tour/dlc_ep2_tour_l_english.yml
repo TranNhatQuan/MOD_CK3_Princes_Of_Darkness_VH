@@ -1,0 +1,92 @@
+﻿l_english:
+
+ ##### TOUR #####
+
+ ### ACTIVITY
+  activity_tour:0 "Đại Tuần Du"
+  activity_tour_desc:0 "Tổ chức một [tour|E] hoành tráng và đi thăm các [vassals|E] cùng lãnh địa của họ. Mỗi [stop|E] sẽ có thời lượng #bold 2 tháng#!."
+  activity_tour_selection_tooltip:1 "Du hành khắp lãnh thổ của Ngài và thăm các chư hầu trong một chuyến tuần du hoành tráng\n\nPhần thưởng dự kiến:\n$BULLET_WITH_TAB$[control_i] [county_control|E]\n$BULLET_WITH_TAB$@domain_icon! [county_opinion|E]\n$BULLET_WITH_TAB$[legitimacy_i] [legitimacy|E] Gia tăng\n$BULLET_WITH_TAB$[stress_loss_i] [stress|E] Giảm"
+  activity_tour_host_desc:1 "$BULLET_WITH_TAB$@control_icon![county_control|E]\n$BULLET_WITH_TAB$@domain_icon![county_opinion|E]\n$BULLET_WITH_TAB$[legitimacy_i] [legitimacy|E] Gia tăng\n$BULLET_WITH_TAB$[stress_loss_i][stress|E] Giảm\n\n[tour_success|E] Phần thưởng:\n$BULLET_WITH_TAB$Cấp #V 1#!: [prestige_i|E][prestige|E]\n$BULLET_WITH_TAB$Cấp #V 2#!: [GetVassalStance( 'parochial' ).GetTextIcon][GetVassalStance( 'parochial' ).GetName] [vassal|E] [opinion|E]\n$BULLET_WITH_TAB$Cấp #V 3#!: Đã ghé thăm [vassal|E] [opinion|E]\n$BULLET_WITH_TAB$Cấp #V 4#!: [GetModifier( 'itinerant_liege_modifier' ).GetNameWithTooltip|L] #weak ([character|E])#!\n$BULLET_WITH_TAB$Cấp #V 5#!: [GetModifier( 'mega_itinerant_liege_modifier' ).GetNameWithTooltip|L] #weak ([character|E])#!"
+  activity_tour_conclusion_characters_header:0 "Các Chư Hầu Đã Ghé Thăm"
+
+  itinerant_liege_modifier:0 "Chủ Quân Du Hành"
+  itinerant_liege_modifier_desc:0 "Nhân vật này đã tổ chức một [tour|E] thành công."
+  mega_itinerant_liege_modifier:0 "Chủ Quân Vĩ Đại"
+  mega_itinerant_liege_modifier_desc:0 "Nhân vật này đã tổ chức một [tour|E] vô cùng hoành tráng."
+  activity_window_character_stop_host:1 "Chủ Nhà Điểm Dừng\n[Character.GetShortUINameNoTooltip|U]"
+  activity_tour_conclusion_desc:0 "[GetActivityType( 'activity_tour' ).GetName] của Ngài đã kết thúc."
+
+ ### PHASES
+  tour_phase_tour_grounds:2 "Tham Quan Lãnh Địa"
+  tour_phase_tour_grounds_desc:0 "[tour_the_grounds|E] tại lãnh địa của [vassal|E], gia tăng [control|E]."
+  tour_phase_dinner:1 "Bữa Tiệc Đãi Khách"
+  tour_phase_dinner_desc:0 "Thưởng thức một [hosted_dinner|E] do chư hầu của Ngài tổ chức, gia tăng [opinion|E] với [vassal|E] đó."
+  tour_phase_cultural_festival:1 "Lễ Hội Văn Hóa"
+  tour_phase_cultural_festival_desc:0 "Tham gia một [cultural_festival|E], trải nghiệm văn hóa địa phương và gia tăng [county_opinion|E] cùng [cultural_acceptance|E]."
+  tour_phase_journey_home:0 "Trở Về"
+  tour_phase_journey_home_desc:0 "Quay trở lại thủ đô, kết thúc chuyến tuần du của Ngài."
+  tour_phase_tour_grounds_cost_desc:0 "[tour_grounds|E] tại [province.GetBaronyNameExplicitly]"
+  tour_phase_dinner_cost_desc:0 "[hosted_dinner|E] tại [province.GetBaronyNameExplicitly]"
+  tour_phase_cultural_festival_cost_desc:0 "[cultural_festival|E] tại [province.GetBaronyNameExplicitly]"
+
+ ### OPTIONS
+  tour_option_speed:0 "Ngựa"
+  tour_speed_bad:0 "Lừa"
+  tour_speed_normal:0 "Ngựa Chiến"
+  tour_speed_good:0 "Secretariat"
+  tour_type_majesty:1 "Tuần Du Uy Nghi"
+  tour_type_majesty_desc:1 "$EFFECT_LIST_BULLET$ Một số sự kiện sẽ cho phép những hành động đặc biệt uy nghiêm\n$EFFECT_LIST_BULLET$ Thực hiện những hành động này sẽ nhận [prestige|E] và [vassal|E] [opinion|E] cả khi rời một [stop|E] và khi kết thúc [GetActivityType('activity_tour').GetName]\n\n#weak Chuyến Đại Tuần Du này là cơ hội để ta cho thần dân thấy ta là một chủ quân công bằng, nhân từ và uy nghi.#!"
+  tour_type_intimidation:1 "Tuần Du Đe Dọa"
+  tour_type_intimidation_desc:1 "$EFFECT_LIST_BULLET$ Một số sự kiện sẽ cho phép những hành động đặc biệt đáng sợ\n$EFFECT_LIST_BULLET$ Thực hiện những hành động này sẽ nhận [dread|E]\n$EFFECT_LIST_BULLET$ Khi rời một [stop|E], Ngài có thể cố ép [vassals|E] rút khỏi các [factions|E] thù địch\n\n#weak Chuyến Đại Tuần Du này là cơ hội để đặt thần dân vào đúng vị trí của họ và cho thấy ta đáng sợ đến mức nào.#!"
+  tour_type_taxation:1 "Tuần Du Thu Thuế"
+  tour_type_taxation_desc:1 "$EFFECT_LIST_BULLET$ Một số sự kiện sẽ cho phép những hành động tham lam\n$EFFECT_LIST_BULLET$ Thực hiện những hành động này sẽ nhận [gold|E] cả khi rời một [stop|E] và khi kết thúc [GetActivityType('activity_tour').GetName]\n\n#weak Chuyến Đại Tuần Du này là cơ hội để nhắc nhở các chư hầu rằng họ nợ ta thuế và nghĩa vụ, đồng thời nhổ tận gốc mọi hành vi trốn thuế trong lãnh thổ.#!"
+  tour_entourage:0 "Tùy Tùng"
+  tour_entourage_small:0 "Tùy Tùng Nhỏ"
+  tour_entourage_small_desc:1 "$EFFECT_LIST_BULLET$ Năm [courtiers|E] thân cận sẽ đi cùng Ngài trong [tour|E]\n\n#weak Chuyến tuần du của ta là cơ hội để rời xa cuộc sống cung đình và gặp gỡ thần dân ở xa. Ta không cần sự lải nhải của triều đình theo sau trên mọi nẻo đường.#!"
+  tour_entourage_normal:0 "Tùy Tùng Vừa"
+  tour_entourage_normal_desc:1 "$EFFECT_LIST_BULLET$ Mười [courtiers|E] thân cận sẽ đi cùng Ngài trong [tour|E]\n$EFFECT_LIST_BULLET$ $tour_increase_prestige$\n\n#weak Chuyến tuần du này không chỉ dành cho ta, mà còn cho cả triều đình. Ta phải mang theo một nhóm tùy tùng nhỏ để các chư hầu làm quen hơn với các cận thần của ta.#!"
+  tour_entourage_grand:0 "Tùy Tùng Lớn"
+  tour_entourage_grand_desc:1 "$EFFECT_LIST_BULLET$ Mọi [courtier|E] sẵn có sẽ đi cùng Ngài trong [tour|E]\n$EFFECT_LIST_BULLET$ $tour_increase_prestige$\n\n#weak Chuyến tuần du này là cơ hội để thể hiện ta vĩ đại và huy hoàng đến mức nào, và còn cách nào tốt hơn là phô bày toàn bộ triều đình đáng ngưỡng mộ của ta?#!"
+  tour_luxuries:0 "Xa Xỉ Phẩm"
+  tour_luxuries_bad:1 "Không Có Xa Xỉ Phẩm"
+  tour_luxuries_bad_desc:1 "$EFFECT_LIST_BULLET$ Không tăng mức độ thành công của [tour|E]\n\n#weak Ngài không mang theo bất kỳ vật phẩm xa xỉ nào từ nhà.#!"
+  tour_luxuries_normal:1 "Xa Xỉ Phẩm Thiết Yếu"
+  tour_luxuries_normal_desc:1 "$EFFECT_LIST_BULLET$ $tour_increase_success$\n\n#weak Ngài chỉ mang theo những nhu yếu phẩm xa xỉ về thực phẩm và tiện nghi.#!"
+  tour_luxuries_good:1 "Xa Xỉ Phẩm Phung Phí"
+  tour_luxuries_good_desc:1 "$EFFECT_LIST_BULLET$ $tour_increase_success$\n\n#weak Không có chi phí nào là quá lớn cho chuyến tuần du của Ngài, mọi loại mỹ thực và tiện nghi đều được mang theo suốt hành trình.#!"
+  tour_furniture_normal:1 "Nội Thất Xa Hoa"
+  tour_furniture_normal_desc:1 "$EFFECT_LIST_BULLET$ $tour_increase_success$\n$EFFECT_LIST_BULLET$ $tour_increase_prestige$\n\n#weak Tủ, ghế và bàn sẽ được mang theo trong chuyến tuần du của Ngài.#!"
+  tour_furniture_good:1 "Nội Thất Quá Mức"
+  tour_furniture_good_desc:1 "$EFFECT_LIST_BULLET$ $tour_increase_success$\n$EFFECT_LIST_BULLET$ $tour_increase_prestige$\n\n#weak Gần như mọi cổ vật và đồ nội thất Ngài sở hữu sẽ được mang theo trong chuyến tuần du này để phô trương sự giàu có khổng lồ của Ngài.#!"
+  tour_increase_success:1 "Tăng mức độ thành công ban đầu của [tour|E]"
+  tour_increase_prestige:1 "[prestige|E] nhận được"
+
+ ### INTENTS
+
+ ### RANDOM CHARACTER LOG
+
+
+  tour_start_majesty_log_title:0 "Tuần Du Bắt Đầu"
+  tour_start_majesty_log:0 "[CHARACTER.GetTitledFirstName] rời khỏi [CHARACTER.GetCapitalLocation.GetName] trong một [grand_tour|E] Uy Nghi"
+  tour_start_intimidation_log_title:0 "$tour_start_majesty_log_title$"
+  tour_start_intimidation_log:0 "[CHARACTER.GetTitledFirstName] rời khỏi [CHARACTER.GetCapitalLocation.GetName] trong một [grand_tour|E] Đe Dọa"
+  tour_start_taxation_log_title:0 "$tour_start_majesty_log_title$"
+  tour_start_taxation_log:0 "[CHARACTER.GetTitledFirstName] rời khỏi [CHARACTER.GetCapitalLocation.GetName] trong một [grand_tour|E] Thu Thuế"
+  tour_stop_tour_grounds_log_title:0 "Điểm Dừng Tuần Du"
+  tour_stop_tour_grounds_log:0 "[CHARACTER.GetTitledFirstName] đã thăm [TARGET_CHARACTER.GetTitledFirstName] để tham quan lãnh địa tại [PROVINCE.GetName]"
+  tour_stop_dinner_log_title:0 "$tour_stop_tour_grounds_log_title$"
+  tour_stop_dinner_log:0 "[CHARACTER.GetTitledFirstName] đã thăm [TARGET_CHARACTER.GetTitledFirstName] để dự yến tiệc tại [PROVINCE.GetName]"
+  tour_stop_cultural_festival_log_title:0 "$tour_stop_tour_grounds_log_title$"
+  tour_stop_cultural_festival_log:0 "[CHARACTER.GetTitledFirstName] đã thăm [TARGET_CHARACTER.GetTitledFirstName] để tham gia lễ hội văn hóa tại [PROVINCE.GetName]"
+
+  tour_base_cost:0 "Cơ Bản"
+  activity_tour_guest_desc:0 "Các vị khách của Ngài sẽ đồng hành khi Ngài thăm các [vassals|E] trong chuyến tuần du"
+  activity_tour_province_desc:2 "Thăm [ROOT.Province.GetTitle.GetHolder.GetName] tại [ROOT.Province.GetName]\n[GetPlayer.Custom2('RelationToMe', ROOT.Province.GetTitle.GetHolder)] của Ngài\n[opinion|E] về Ngài: [ROOT.Province.GetTitle.GetHolder.GetOpinionOf( GetPlayer )|+=]"
+  5_courtiers_or_more:0 "Ngài phải có ít nhất 5 [courtiers|E]"
+  more_than_5_courtiers:0 "Ngài phải có nhiều hơn 5 [courtiers|E]"
+  more_than_10_courtiers:0 "Ngài phải có nhiều hơn 10 [courtiers|E]"
+  3_vassals_or_more:0 "Ngài phải có ít nhất 3 [vassals|E]"
+
+  activity_tour_destination_selection:0 "Khoảng cách từ [stop|E] trước đó đến điểm đến càng xa, Ngài sẽ càng tốn nhiều [gold|E] cho chuyến tuần du. Hãy lên kế hoạch khôn ngoan để giảm chi phí và thăm được càng nhiều [vassals|E] càng tốt."
+
+  activity_window_character_visited_vassal:1 "Chủ Nhà [stop|E] và [vassal|E]\n[Character.GetShortUINameNoTooltip|U]"

@@ -1,0 +1,984 @@
+﻿blood_surge_level = {
+	value = 0
+
+	#Blood Potency
+	if = {
+		limit = {
+			OR = {
+				has_character_modifier = bloodpotency10_modifier
+				has_character_modifier = bloodpotency9_modifier
+			}
+		}
+		add = 5
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_character_modifier = bloodpotency8_modifier
+				has_character_modifier = bloodpotency7_modifier
+			}
+		}
+		add = 3
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_character_modifier = bloodpotency6_modifier
+				has_character_modifier = bloodpotency5_modifier
+			}
+		}
+		add = 3
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_character_modifier = bloodpotency4_modifier
+				has_character_modifier = bloodpotency3_modifier
+			}
+		}
+		add = 2
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_character_modifier = bloodpotency2_modifier
+				has_character_modifier = bloodpotency1_modifier
+			}
+		}
+		add = 1
+	}
+
+	#Other Sources
+	if = {
+		limit = {
+			has_perk = kai_elder_1_perk
+			scope:prowess ?= yes
+		}
+		add = 5
+	}
+
+	if = {
+		limit = { has_character_modifier = touch_the_protectors_mind_modifier }
+		add = 1
+	}
+
+	if = {
+		limit = { has_perk = perfect_essence_perk }
+		add = 1
+	}
+
+	if = {
+		limit = { has_perk = fc_torso_adrenal_heart_perk }
+		add = 1
+	}
+}
+
+max_ghoul_cap = {
+	value = 3
+	#divide = 8
+	floor = yes
+	#add = 3
+	if = {
+		limit = { has_character_modifier = ritual_brand_of_the_paramour_modifier }
+		add = 1
+	}
+	if = {
+		limit = { 
+			has_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 25
+			}		
+			}
+		add = 1
+	}	
+	if = {
+		limit = { 
+			has_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 75
+			}		
+			}
+		add = 1
+	}		
+	if = { 
+		limit = { 
+			dynasty ?= { has_dynasty_perk = tzimisce_legacy_1 }
+		}
+		add = 2
+	}	
+	if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_ghoul_size_3
+		}
+		}
+		add = 3
+	}
+	else_if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_ghoul_size_2
+		}
+		}
+		add = 2
+	}
+	else_if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_ghoul_size_1
+		}
+		}
+		add = 1
+	}
+
+	if = {
+		limit = { has_perk = bloodform_perk }
+		add = 1
+	}
+	if = {
+		limit = { has_perk = sublimation_of_the_larval_flesh_perk }
+		add = 1
+	}
+
+	if = {
+		limit = { has_trait = azhi_dahaka_scholar }
+		if = {
+			limit = { has_trait_xp = { trait = azhi_dahaka_scholar value >= 80 } }
+			add = 2
+		}
+		else_if = {
+			limit = { has_trait_xp = { trait = azhi_dahaka_scholar value >= 40 } }
+			add = 1
+		}
+	}
+
+	if = {
+		limit = { has_trait = azhi_dahaka }
+		add = 3
+	}
+
+	if = {
+        limit = { is_landed = yes }
+        add = {
+            value = {
+                every_held_title = {
+                    limit = {
+						tier = tier_barony 
+						is_landless_type_title = no
+					}
+                    title_province = {
+                        if = {
+                            limit = { has_building_with_flag = building_ghoul_limit_1 }
+                            add = 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+max_herd_cap = {
+	value = 3
+	#divide = 8
+	#add = 3
+	if = {
+		limit = { has_perk = foul_blood_perk }
+		add = 1
+	}
+	if = {
+		limit = { 
+			has_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 50
+			}		
+			}
+		add = 1
+	}	
+	if = {
+		limit = { 
+			has_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_cult
+				value >= 100
+			}		
+			}
+		add = 1
+	}		
+	if = { 
+		limit = { 
+			dynasty ?= { has_dynasty_perk = tzimisce_legacy_5 }
+		}
+		add = 2
+	}
+	if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_herd_size_3
+		}
+		}
+		add = 3
+	}
+	else_if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_herd_size_2
+		}
+		}
+		add = 2
+	}
+	else_if = {
+		limit = {
+		domicile ?= {
+			has_domicile_parameter = max_herd_size_1
+		}
+		}
+		add = 1
+	}
+
+	if = {
+		limit = {
+			any_court_position_holder = {
+				type = majordomo_court_position
+				aptitude = { court_position = majordomo_court_position value >= 3 }
+			}
+		}
+		add = 1
+	}
+
+	if = {
+        limit = { is_landed = yes }
+        add = {
+            value = {
+                every_held_title = {
+                    limit = {
+						tier = tier_barony 
+						is_landless_type_title = no
+					}
+                    title_province = {
+                        if = {
+                            limit = { has_building_with_flag = building_herd_limit_1 }
+                            add = 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+	floor = yes
+}
+
+POD_holy_heal_cheaper_cooldown = {
+	value = 0
+	if = {
+		limit = {
+			has_perk = restoration_perk
+			OR = {
+				has_perk = lay_of_hands_perk 
+				has_trait = beatific
+			}
+		}
+		value = 1
+	}
+	else = {
+		value = 6
+	}
+}
+
+POD_unconquered_soul_chance = {
+	value = 1
+	if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration6_trigger = yes } }
+		add = 4 
+	}
+	else_if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration5_trigger = yes } }
+		add = 9
+	}
+	else_if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration4_trigger = yes } }
+		add = 24
+	}
+	else_if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration3_trigger = yes } }
+		add = 49
+	}
+	else_if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration2_trigger = yes } }
+		add = 74
+	}
+	else_if = {
+		limit = { scope:unconquered_soul = { is_vampgeneration1_trigger = yes } }
+		add = 99
+	}
+	if = {
+		limit = { scope:unconquered_soul = { has_perk = crimson_fury_perk } }
+		multiply = 1.5
+	}
+	if = {
+		limit = { exists = scope:willing_diablerie }
+		multiply = 0
+	}
+}
+
+
+POD_doctrine_change_value = {
+	value = 0
+	add = {
+		desc = "BASE"
+		value = 500
+	}
+	if = {
+		limit = { has_variable = doctrine_enlightenment_virtues }
+		add = {
+			value = 1000
+			desc = doctrine_enlightenment_virtues_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampirethemasquerade }
+		add = {
+			value = 500
+			desc = doctrine_vampirethemasquerade_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampirediablerie }
+		add = {
+			value = 500
+			desc = doctrine_vampirediablerie_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampirefrenzy }
+		add = {
+			value = 500
+			desc = doctrine_vampirefrenzy_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampirethinblood }
+		add = {
+			value = 500
+			desc = doctrine_vampirethinblood_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampirebloodoath }
+		add = {
+			value = 500
+			desc = doctrine_vampirebloodoath_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_vampireghouling }
+		add = {
+			value = 500
+			desc = doctrine_vampireghouling_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_bloodsorcery }
+		add = {
+			value = 500
+			desc = doctrine_bloodsorcery_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_demonology }
+		add = {
+			value = 500
+			desc = doctrine_demonology_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_demonic }
+		add = {
+			value = 500
+			desc = doctrine_demonic_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_fera }
+		add = {
+			value = 500
+			desc = doctrine_fera_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_magicraft }
+		add = {
+			value = 500
+			desc = doctrine_magicraft_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_haunting }
+		add = {
+			value = 500
+			desc = doctrine_haunting_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_glamour }
+		add = {
+			value = 500
+			desc = doctrine_glamour_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_undying }
+		add = {
+			value = 500
+			desc = doctrine_undying_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_kueijin }
+		add = {
+			value = 500
+			desc = doctrine_kueijin_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_lycanthropy }
+		add = {
+			value = 500
+			desc = doctrine_lycanthropy_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_ajaba }
+		add = {
+			value = 500
+			desc = doctrine_ajaba_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_entomos }
+		add = {
+			value = 500
+			desc = doctrine_entomos_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_bastet }
+		add = {
+			value = 500
+			desc = doctrine_bastet_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_corax }
+		add = {
+			value = 500
+			desc = doctrine_corax_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_gurahl }
+		add = {
+			value = 500
+			desc = doctrine_gurahl_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_kitsune }
+		add = {
+			value = 500
+			desc = doctrine_kitsune_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_mokole }
+		add = {
+			value = 500
+			desc = doctrine_mokole_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_nagah }
+		add = {
+			value = 500
+			desc = doctrine_nagah_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_nuwisha }
+		add = {
+			value = 500
+			desc = doctrine_nuwisha_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_ratkin }
+		add = {
+			value = 500
+			desc = doctrine_ratkin_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_rokea }
+		add = {
+			value = 500
+			desc = doctrine_rokea_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_apis }
+		add = {
+			value = 500
+			desc = doctrine_apis_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_camazotz }
+		add = {
+			value = 500
+			desc = doctrine_camazotz_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_grondr }
+		add = {
+			value = 500
+			desc = doctrine_grondr_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_ventrue }
+		add = {
+			value = 500
+			desc = doctrine_ventrue_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_toreador }
+		add = {
+			value = 500
+			desc = doctrine_toreador_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_tremere }
+		add = {
+			value = 500
+			desc = doctrine_tremere_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_brujah }
+		add = {
+			value = 500
+			desc = doctrine_brujah_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_nosferatu }
+		add = {
+			value = 500
+			desc = doctrine_nosferatu_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_gangrel }
+		add = {
+			value = 500
+			desc = doctrine_gangrel_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_malkavian }
+		add = {
+			value = 500
+			desc = doctrine_malkavian_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_lasombra }
+		add = {
+			value = 500
+			desc = doctrine_lasombra_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_tzimisce }
+		add = {
+			value = 500
+			desc = doctrine_tzimisce_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_ravnos }
+		add = {
+			value = 500
+			desc = doctrine_ravnos_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_hecata }
+		add = {
+			value = 500
+			desc = doctrine_hecata_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_setite }
+		add = {
+			value = 500
+			desc = doctrine_setite_name
+		}
+	}
+	if = {
+		limit = { has_variable = doctrine_assamite }
+		add = {
+			value = 500
+			desc = doctrine_assamite_name
+		}
+	}
+	every_in_list = {
+		variable = doctrine_to_change_list
+		add = {
+			value = 2500
+			desc = game_concept_core_tenet
+		}
+	}
+}
+
+POD_current_number_of_tenets = {
+	value = 3
+	every_in_list = {
+		variable = doctrine_to_change_list
+		if = {
+			limit = { scope:faith = { has_doctrine = prev } }
+			subtract = 1
+		}
+		else = {
+			add = 1
+		}
+	}
+}
+
+POD_trait_change_value = {
+	value = 0
+	add = {
+		value = POD_selected_personality_traits
+		multiply = 500
+		desc = TRAIT_CATEGORY_PERSONALITY
+	}
+	add = {
+		value = POD_selected_education_traits
+		multiply = 500
+		desc = TRAIT_CATEGORY_EDUCATION
+	}
+	add = {
+		value = POD_selected_commander_traits
+		multiply = 150
+		desc = TRAIT_CATEGORY_COMMANDER
+	}
+	add = {
+		value = POD_selected_lifestyle_traits
+		multiply = 750
+		desc = TRAIT_CATEGORY_LIFESTYLE
+	}
+	add = { # And stress
+		value = POD_selected_fame_traits
+		multiply = 750
+		desc = TRAIT_CATEGORY_FAME
+	}
+	add = {
+		value = POD_selected_health_traits
+		multiply = 250
+		desc = TRAIT_CATEGORY_HEALTH
+	}
+	add = {
+		value = POD_selected_physical_traits
+		multiply = 500
+		desc = TRAIT_CATEGORY_PHYSICAL
+	}
+	if = {
+		limit = { 
+			any_relation = {
+				type = animantis_creator
+				has_perk = gilgul_perk
+			}
+		}
+		multiply = {
+			value = 0.5
+			desc = gilgul_perk_name
+		}
+	}
+	add = {
+		desc = "BASE"
+		value = 500
+	}
+}
+
+POD_selected_personality_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_category = personality }
+		add = 1
+	}
+}
+
+POD_selected_education_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_category = education }
+		add = 1
+	}
+}
+
+POD_selected_commander_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			OR = {
+				has_trait_category = commander
+				has_trait_category = winter_commander
+			}
+		}
+		add = 1
+	}
+}
+
+POD_selected_lifestyle_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_category = lifestyle }
+		add = 1
+	}
+}
+
+POD_selected_fame_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_category = fame } # And stress
+		add = 1
+	}
+}
+
+POD_selected_health_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_category = health }
+		add = 1
+	}
+}
+
+POD_selected_physical_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = { has_trait_flag = reweaving_physical_trait }
+		add = 1
+	}
+}
+
+POD_current_number_of_personality_traits = {
+	value = number_of_personality_traits
+	add = POD_added_personality_traits
+	subtract = POD_removed_personality_traits
+}
+
+POD_added_personality_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { NOT = { has_trait = prev } }
+			has_trait_category = personality
+		}
+		add = 1
+	}
+}
+
+POD_removed_personality_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { has_trait = prev }
+			has_trait_category = personality
+		}
+		add = 1
+	}
+}
+
+POD_current_number_of_education_traits = {
+	value = 0
+	every_character_trait = {
+		limit = { has_trait_category = education } 
+		add = 1
+	}
+	add = POD_added_education_traits
+	subtract = POD_removed_education_traits
+}
+
+POD_added_education_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { NOT = { has_trait = prev } }
+			has_trait_category = education
+		}
+		add = 1
+	}
+}
+
+POD_removed_education_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { has_trait = prev }
+			has_trait_category = education
+		}
+		add = 1
+	}
+}
+
+POD_current_number_of_commander_traits = {
+	value = number_of_commander_traits
+	add = POD_added_commander_traits
+	subtract = POD_removed_commander_traits
+}
+
+POD_added_commander_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { NOT = { has_trait = prev } }
+			OR = {
+				has_trait_category = commander
+				has_trait_category = winter_commander
+			}
+		}
+		add = 1
+	}
+}
+
+POD_removed_commander_traits = {
+	value = 0
+	every_in_list = {
+		variable = trait_to_change_list
+		limit = {
+			root = { has_trait = prev }
+			OR = {
+				has_trait_category = commander
+				has_trait_category = winter_commander
+			}
+		}
+		add = 1
+	}
+}
+
+choleric_lifestyle_perk_half_points = {
+	value = choleric_lifestyle_perk_points
+	multiply = 2
+	if = {
+		limit = {
+			choleric_lifestyle_xp > 999
+		}
+		add = 1
+	}
+}
+
+phlegmatic_lifestyle_perk_half_points = {
+	value = phlegmatic_lifestyle_perk_points
+	multiply = 2
+	if = {
+		limit = {
+			phlegmatic_lifestyle_xp > 999
+		}
+		add = 1
+	}
+}
+
+sanguine_lifestyle_perk_half_points = {
+	value = sanguine_lifestyle_perk_points
+	multiply = 2
+	if = {
+		limit = {
+			sanguine_lifestyle_xp > 999
+		}
+		add = 1
+	}
+}
+
+melancholy_lifestyle_perk_half_points = {
+	value = melancholy_lifestyle_perk_points
+	multiply = 2
+	if = {
+		limit = {
+			melancholy_lifestyle_xp > 999
+		}
+		add = 1
+	}
+}
+
+animal_lifestyle_perk_half_points = {
+	value = animal_lifestyle_perk_points
+	multiply = 2
+	if = {
+		limit = {
+			animal_lifestyle_xp > 999
+		}
+		add = 1
+	}
+}
+
+devore_mind_cooldown_value = 3
+
+next_devore_mind_date = {
+	value = 0
+	
+	every_memory = {
+		limit = { has_memory_type = devore_mind_memory }
+		add = memory_end_date
+		subtract = current_date
+	}
+}
+
+dominate_duraction = {
+	value = 3650
+	
+	if = {
+		limit = {
+			OR = {
+				has_perk = submerged_directive_perk
+			}
+		}
+		multiply = 2
+	}
+}
+
+malkavian_book_eating_scale = {
+	value = 1
+	if = { limit = { has_variable = malk_eaten_books } multiply = var:malk_eaten_books }
+}
+
+malkavian_pain_and_pleasure_scale = {
+	value = 1
+	if = { limit = { has_variable = malkavian_pain_and_pleasure_scale } multiply = var:malkavian_pain_and_pleasure_scale }
+}
+
+malkavian_demon_friend_scale = {
+	value = 1
+	if = { limit = { has_variable = malk_sacrifices } multiply = var:malk_sacrifices }
+}
+
+rift_user_stress_gain = 20
+rift_target_stress_gain = 30

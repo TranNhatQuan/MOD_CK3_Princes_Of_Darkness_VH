@@ -1,0 +1,183 @@
+﻿POD_is_samuel_haight_mode_enabled = {
+	has_game_rule = pod_lore_restrictions_less
+}
+
+POD_is_storyteller_mode_enabled = {
+	has_game_rule = pod_lore_restrictions_more
+}
+
+POD_is_custom_mode_enabled = {
+	has_game_rule = pod_lore_restrictions_custom
+}
+
+
+# Changes from Storyteller Mode
+
+POD_use_harsher_loyalty = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_loyalty_harsher
+	}
+	trigger_else = { POD_is_storyteller_mode_enabled = yes }
+}
+
+POD_is_loyalty_disabled = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_loyalty_disabled
+	}
+	trigger_else = { always = no }
+}
+
+POD_resonance_has_diminishing_returns = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_resonance_diminishing_returns_enabled
+	}
+	trigger_else = { POD_is_storyteller_mode_enabled = yes }
+}
+
+POD_harsher_golconda_restrictions = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_losing_golconda_harsher
+	}
+	trigger_else = { POD_is_storyteller_mode_enabled = yes }
+}
+
+
+# Changes from Samuel Haight Mode
+
+POD_seek_knowledge_cost_increase_disabled = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_seek_knowledge_cost_increase_disabled
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+POD_splat_hostility_disabled = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_splat_hostility_disabled
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+POD_charjoin_decisions_enabled = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_charjoin_decisions_enabled
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+POD_numina_on_birth_unrestricted = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_numina_on_birth_unrestricted
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+POD_sorcery_unrestricted = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_sorcery_availability_unrestricted
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+POD_splat_mixing_haight_mode = {
+	trigger_if = {
+		limit = { POD_is_custom_mode_enabled = yes }
+		has_game_rule = pod_splat_mixing_haight_mode
+	}
+	trigger_else = { POD_is_samuel_haight_mode_enabled = yes }
+}
+
+
+# Experimental game rules
+
+POD_experimental_game_rules_enabled = {
+	has_game_rule = pod_experimental_game_rules_enabled
+}
+
+POD_has_conqueror_ai_game_rule = {
+	POD_experimental_game_rules_enabled = yes
+	OR = {
+		has_game_rule = pod_conqueror_ai_enabled
+		has_game_rule = pod_conqueror_ai_bloodthirsty
+	}
+}
+
+POD_is_bloodthirsty_conqueror_ai_enabled = {
+	POD_experimental_game_rules_enabled = yes
+	has_game_rule = pod_conqueror_ai_bloodthirsty
+}
+
+POD_ai_gets_additional_maa = {
+	POD_experimental_game_rules_enabled = yes
+	has_game_rule = pod_ai_additional_maa_enabled
+}
+
+POD_barons_are_disabled = {
+	POD_experimental_game_rules_enabled = yes
+	has_game_rule = pod_barons_disabled
+}
+
+POD_is_heightened_fatality_enabled = {
+	POD_experimental_game_rules_enabled = yes
+	has_game_rule = pod_heightened_fatality_enabled
+}
+
+POD_is_landless_disabled = {
+	POD_experimental_game_rules_enabled = yes
+	has_game_rule = pod_landless_disabled
+}
+
+
+# Roguelike mode
+
+POD_is_roguelike_mode_enabled_trigger = {
+	OR = {
+		has_game_rule = POD_roguelike_mode_enabled_randomized_vampire
+		has_game_rule = POD_roguelike_mode_enabled
+		has_game_rule = POD_roguelike_mode_enabled_no_permadeath
+	}
+}
+
+POD_is_roguelike_randomization_enabled_trigger = {
+	has_game_rule = POD_roguelike_mode_enabled_randomized_vampire
+}
+
+POD_has_roguelike_curse = {
+	OR = {
+		has_character_flag = POD_roguelike_cursed
+		has_character_flag = POD_roguelike_all_curses
+	}
+}
+
+POD_blocked_from_learning_trigger = {
+	has_character_modifier = POD_roguelike_no_curiosity
+}
+
+POD_is_valid_roguelike_ruler_trigger = {
+	sub_realm_size <= 1
+	trigger_if = {
+		limit = { has_global_variable = roguelike_immortality_filter }
+		is_immortal = yes
+	}
+	POD_has_guaranteed_resurrection = no
+	is_playable_character = yes
+	is_ai = yes
+}
+
+
+# Shattered World
+
+POD_is_shattered_world_enabled = {
+	#OR = {
+		has_game_rule = pod_shattered_world_counties
+	#}
+}

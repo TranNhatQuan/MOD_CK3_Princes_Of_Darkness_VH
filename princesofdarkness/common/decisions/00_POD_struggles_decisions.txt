@@ -1,0 +1,1486 @@
+﻿
+secure_reconquista_foothold_decision = {
+	title = secure_reconquista_foothold_decision_title
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	desc = secure_reconquista_foothold_decision_desc
+	selection_tooltip = secure_reconquista_foothold_decision_tooltip
+	sort_order = 80
+
+	decision_group_type = major
+
+	is_shown = {
+		is_landed = yes
+		# Struggle is active
+		exists = struggle:reconquista_struggle
+		# Not Involved and capital lies outside Iberia
+		custom_tooltip = {
+			text = fp2_struggle_uninvolved_or_external_tt
+			NOR = {
+				any_character_struggle = {
+					is_struggle_type = reconquista_struggle
+					involvement = involved
+				}
+				any_character_struggle = {
+					is_struggle_type = reconquista_struggle
+					involvement = interloper
+				}				
+			}
+		}
+		# Hold land near Iberia
+		any_sub_realm_county = {
+			title_province = {
+				OR = {
+					geographical_region = world_europe_west_iberia # Iberia
+					geographical_region = ghw_region_southern_france # Aquitaine
+					geographical_region = world_africa_north_west # Maghreb
+				}
+			}
+		}
+		# NOT = { has_title = title:e_spain }
+	}
+
+	is_valid = {
+		##### General triggers #####
+
+		# Struggle phase must be right
+		custom_tooltip = {
+			text = fp2_struggle_uninvolved_or_external_tt
+			NOT = {
+				capital_province = { geographical_region = world_europe_west_iberia }
+			}
+		}
+		custom_tooltip = {
+			text = fp2_struggle_secure_iberian_foothold_empire_tt
+			any_held_title = {
+				tier >= tier_empire
+				NOT = { this = title:e_spain }
+			}
+		}
+		# If my religion is involved, I need to own the better portion of those counties
+		trigger_if = {
+			limit = {
+				religion = {
+					any_faith = {
+						struggle:reconquista_struggle = { is_faith_involved_in_struggle = prev }
+					}
+				}
+			}
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_religion_tt
+				fp2_struggle_secure_iberian_foothold_religion_percent_value >= fp2_struggle_secure_iberian_foothold_religion_target_percent_value
+			}
+		}
+		# Otherwise, I need to own a big chunk of the peninsula
+		trigger_else = {
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_outsider_tt
+				any_county_in_region = {
+					region = world_europe_west_iberia
+					percent >= fp2_struggle_secure_iberian_foothold_outsider_target_percent_decimal_value
+					holder.top_liege = root
+				}
+			}
+		}
+
+		##### kingdom triggers #####
+
+		# Any de jure kingdom of Iberia is completely controlled
+		custom_tooltip = {
+			text = fp2_struggle_secure_iberian_foothold_kingdom_iberian_tt
+			any_held_title = { fp2_struggle_secure_iberian_foothold_iberian_kingdom_trigger = yes }
+		}
+		# Real tooltips
+		trigger_if = {
+			limit = { exists = scope:iberian_kingdom_temp }
+			# That kingdom is mostly my faith
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_faith_tt
+				fp2_struggle_secure_iberian_foothold_faith_trigger = yes
+			}
+			# Borders held lands in a non-iberian kingdom you hold
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_border_tt
+				scope:iberian_kingdom_temp = { fp2_struggle_secure_iberian_foothold_outsider_kingdom_trigger = yes }
+			}
+			# Held that kingdom for a while
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_held_tt
+				scope:iberian_kingdom_temp = { title_held_years >= fp2_struggle_secure_iberian_foothold_years_value }
+			}
+		}
+		# Fake tooltips
+		trigger_else = {
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_faith_tt
+				always = no
+			}
+			# Borders held lands in a non-iberian kingdom you hold
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_border_tt
+				always = no
+			}
+			custom_tooltip = {
+				text = fp2_struggle_secure_iberian_foothold_kingdom_held_tt
+				always = no
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = { exists = struggle:reconquista_struggle }
+			custom_tooltip = {
+				text = reconquista_struggle_phase_hostility_or_opportunity_tt
+				struggle:reconquista_struggle = {
+					has_struggle_phase_parameter = unlocks_secure_reconquista_foothold_decision
+				}
+			}
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				any_held_title = { tier >= tier_empire }
+			}
+			custom_tooltip = fp2_struggle_secure_iberian_foothold_empire_held_effect_tt
+		}
+		else = { custom_tooltip = fp2_struggle_secure_iberian_foothold_empire_dejure_effect_tt }
+
+		trigger_event = {
+			id = pod_reconquista_struggle.100
+		}
+
+		custom_tooltip = struggle_secure_reconquista_foothold_ends_the_struggle_tt
+	}
+
+	cost = {}
+
+	ai_check_interval = 120
+	
+	ai_potential = {}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+#The third ending to the reconquista struggle
+noconquista_objective_decision = {
+	decision_group_type = major
+	title = noconquista_objective_decision
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_third_way.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	desc = noconquista_objective_decision_desc
+	selection_tooltip = noconquista_objective_decision_tooltip
+	is_invisible = yes
+
+	ai_check_interval = 120
+
+	sort_order = 80
+
+	is_shown = {
+		exists = struggle:reconquista_struggle
+		NOT = {
+			is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:thirdway_reconquista_objective_decision
+			}
+		}	
+	}
+
+	is_valid = {
+		is_landed = yes
+		custom_tooltip = {
+			text = thirdway_reconquista_tt
+			
+			is_vampire_trigger = yes
+			
+			is_lasombra_trigger = no
+			NOR = {
+				faith = faith:tariqelalaam
+				faith = faith:tariqelbedouin
+				faith = faith:tariqelharb
+				faith = faith:tariqelsama
+				faith = faith:tariqelumma
+				faith = faith:tariqelhaqim
+				}	
+		}	
+		is_independent_ruler = yes
+		# Hold and completely control two de jure kingdoms of Hispania
+		custom_tooltip = { #
+			text = struggle_iberia_ending_hostility_decision_kingdom_tt
+			any_held_title = { # 1st kingdom
+				tier = tier_kingdom
+				de_jure_liege = title:e_spain
+				root = { completely_controls = prev }
+				save_temporary_scope_as = spanish_kingdom
+			}
+			any_held_title = { # 2nd kingdom
+				tier = tier_kingdom
+				de_jure_liege = title:e_spain
+				trigger_if = {
+					limit = { exists = scope:spanish_kingdom }
+					NOT = { this = scope:spanish_kingdom }
+				}
+				root = { completely_controls = prev }
+				save_temporary_scope_as = spanish_kingdom_2
+			}
+		}
+		
+		# Completely control at least 2 of the important Iberian duchies
+		calc_true_if = {
+			amount >= 2
+			completely_controls = title:d_galicia
+			completely_controls = title:d_toledo
+			completely_controls = title:d_cordoba
+			completely_controls = title:d_valencia
+			completely_controls = title:d_barcelona
+		}
+		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = thirdway_conqueror
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:thirdway_reconquista_objective_decision
+		
+		}
+
+		custom_tooltip = noconquista_objective_decision_effect_tooltip
+		trigger_event = pod1230objectives.113
+
+		custom_tooltip = fp2_struggle_can_keep_using_struggle_clash_tt
+
+		if = {
+			limit = { exists = house }
+			house = {
+				add_house_modifier = {
+					modifier = fp2_struggle_hostility_house_combined_modifier
+					years = 200
+				}
+			}
+		}	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+secure_assamite_foothold_decision = {
+	title = secure_assamite_foothold_decision_title
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_third_way.dds"
+	}
+	desc = secure_assamite_foothold_decision_desc
+	selection_tooltip = secure_assamite_foothold_decision_tooltip
+	sort_order = 80
+
+	decision_group_type = major
+
+	is_shown = {
+		is_landed = yes
+		# Struggle is active
+		exists = struggle:assamite_struggle
+		# Not Involved and capital lies outside Iberia
+		custom_tooltip = {
+			text = fp2_struggle_uninvolved_or_external_tt
+			NOR = {
+				any_character_struggle = {
+					is_struggle_type = assamite_struggle
+					involvement = involved
+				}
+				any_character_struggle = {
+					is_struggle_type = assamite_struggle
+					involvement = interloper
+				}				
+			}
+		}
+		# Hold land near Iberia
+		any_sub_realm_county = {
+			title_province = {
+				OR = {
+					geographical_region = world_middle_east_arabia 
+					geographical_region = world_india_rajastan 
+					geographical_region = world_middle_east_persia 
+				}
+			}
+		}
+		# NOT = { has_title = title:e_assamites }
+	}
+
+	is_valid = {
+		##### General triggers #####
+
+		# Struggle phase must be right
+		#custom_tooltip = {
+		#	text = assamite_struggle_uninvolved_or_external_tt
+		#	NOT = {
+		#		capital_province = { geographical_region = world_middle_east_persia }
+		#	}
+		#}
+		custom_tooltip = {
+			text = assamite_struggle_secure_assamite_foothold_empire_tt
+			any_held_title = {
+				tier >= tier_empire
+				NOT = { this = title:e_assamites }
+			}
+		}
+
+		## Otherwise, I need to own a big chunk of the peninsula
+		#trigger_else = {
+		#	custom_tooltip = {
+		#		text = secure_persia_outsider_tt
+		#		any_county_in_region = {
+		#			region = world_middle_east_persia
+		#			percent >= fp2_struggle_secure_iberian_foothold_outsider_target_percent_decimal_value
+		#			holder.top_liege = root
+		#		}
+		#	}
+		#}
+
+		##### kingdom triggers #####
+
+		# Any de jure kingdom of Iberia is completely controlled
+		custom_tooltip = {
+			text = secure_persia_kingdom_tt
+			any_held_title = { struggle_secure_assamite_foothold_assamite_kingdom_trigger = yes }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	effect = {
+		if = {
+			limit = {
+				any_held_title = { tier >= tier_empire }
+			}
+			custom_tooltip = fp2_struggle_secure_assamite_foothold_empire_dejure_effect_tt
+		}
+		else = { custom_tooltip = fp2_struggle_secure_assamite_foothold_empire_dejure_effect_tt }
+
+		trigger_event = {
+			id = pod_assamite_struggle.100
+		}
+
+		custom_tooltip = struggle_secure_reconquista_foothold_ends_the_struggle_tt
+	}
+
+	cost = {}
+
+	ai_check_interval = 120
+	
+	ai_potential = {}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+urshulgi_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_a_god_dreams.dds"
+	}
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = urshulgi_victory_objective_decision_desc
+
+	is_shown = {
+		OR = {
+		faith = faith:pathofrighteousness
+		character_any_involvement_assamite_struggle_trigger = yes
+		}	
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:assamite_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:urshulgi_victory_objective_decision				
+			}
+		}
+		POD_bookmark_is_before_anarch_revolt = yes
+	}
+
+	is_valid = {
+		is_landed = yes
+		is_independent_ruler = yes
+		faith = faith:pathofrighteousness
+		is_vampire_trigger = yes
+		custom_tooltip = {
+			text = assamite_struggle_needed_tt
+			character_any_involvement_assamite_struggle_trigger = yes
+		}
+		
+		custom_tooltip = {
+			text = urshulgi_victory_objective_decision_tt
+					
+		global_var:influence_wok >= 5
+		
+		}
+
+		custom_tooltip = {
+			text = urshulgi_victory_objective_decision_tt2
+					
+		global_var:influence_council <= 0
+		
+		}	
+		
+		piety >= 2000
+		prestige >= 2000
+	}
+
+	
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = victorious_urshulgi
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:urshulgi_victory_objective_decision
+		}
+		custom_tooltip = urshulgi_victory_objective_decision_effect_tooltip
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+
+		trigger_event = pod1230objectives.24
+	
+	}
+	
+	ai_potential = {
+		prestige >= 4000
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+assamite_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_a_divided_house.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_compromise.dds"
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = assamite_victory_objective_decision_desc
+
+	is_shown = {
+		OR = {
+			AND = {
+				NOT = {	
+				faith = faith:pathofrighteousness
+				}
+				NOT = {		
+				faith = faith:cultofzilah
+				}
+				NOR = {
+					faith = faith:roadofahuramazda
+					faith = faith:roadofagramainyu		
+				}
+			}
+		character_any_involvement_assamite_struggle_trigger = yes
+		}
+		is_assamite_trigger = yes
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:assamite_victory_objective_decision
+			}
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:urshulgi_victory_objective_decision				
+			}
+		}			
+		POD_bookmark_is_before_anarch_revolt = yes
+	}
+
+	is_valid = {
+		is_landed = yes
+		is_assamite_trigger = yes
+		is_independent_ruler = yes
+		NOT = {	
+		faith = faith:pathofrighteousness
+		}
+		NOT = {		
+		faith = faith:cultofzilah
+		}
+		NOR = {
+			faith = faith:roadofahuramazda
+			faith = faith:roadofagramainyu		
+		}	
+		custom_tooltip = {
+			text = assamite_struggle_needed_tt
+			character_any_involvement_assamite_struggle_trigger = yes
+		}
+		
+		custom_tooltip = {
+			text = assamite_victory_objective_decision_tt
+					
+		global_var:influence_wok <= 0
+		
+		}
+
+		custom_tooltip = {
+			text = assamite_victory_objective_decision_tt2
+		OR = {			
+		global_var:influence_council >= 5
+		global_var:influence_ashirra >= 5
+		}
+		}	
+		
+		piety >= 2000
+		prestige >= 2000
+	}
+
+	
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = victorious_assamite
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:assamite_victory_objective_decision
+		}
+		custom_tooltip = assamite_victory_objective_decision_effect_tooltip
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+
+		trigger_event = pod1230objectives.27
+	
+	}
+	
+	ai_potential = {
+		prestige >= 4000
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+losttribe_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = losttribe_victory_objective_decision_desc
+
+	is_shown = {
+		faith = faith:cultofzilah
+		is_vampire_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:losttribe_victory_objective_decision
+			}
+		}			
+		POD_bookmark_is_before_anarch_revolt = yes
+	}
+
+	is_valid = {
+		is_landed = yes
+		faith = faith:cultofzilah
+		is_independent_ruler = yes
+	
+		custom_tooltip = {
+			text = assamite_struggle_needed_tt
+			character_any_involvement_assamite_struggle_trigger = yes
+		}
+		
+		custom_tooltip = {
+			text = losttribe_victory_objective_decision_tt
+					
+		global_var:influence_losttribe >= 5
+		
+		}
+
+		custom_tooltip = {
+			text = losttribe_victory_objective_decision_tt2		
+		global_var:influence_silsila <= 0
+
+		}	
+
+		custom_tooltip = {
+			text = assamite_victory_objective_decision_tt
+					
+		global_var:influence_wok <= 0
+		
+		}
+
+		custom_tooltip = {
+			text = urshulgi_victory_objective_decision_tt2
+					
+		global_var:influence_council <= 0
+		
+		}	
+
+
+		custom_tooltip = {
+			text = losttribe_victory_objective_decision_tt3
+					
+		global_var:influence_ashirra <= 0
+		
+		}	
+						
+		piety >= 2000
+		prestige >= 2000
+	}
+
+
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = victorious_losttribe
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:losttribe_victory_objective_decision
+		}
+		custom_tooltip = losttribe_victory_objective_decision_effect_tooltip
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+
+		trigger_event = pod_assamite_struggle.102
+	
+	}
+	
+	ai_potential = {
+		prestige >= 4000
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+silsila_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_compromise.dds"
+	decision_group_type = major
+
+	ai_check_interval = 120
+
+	desc = silsila_victory_objective_decision_desc
+
+	is_shown = {
+		OR = {
+			OR = {
+				faith = faith:roadofahuramazda
+				faith = faith:roadofagramainyu		
+			}
+		character_any_involvement_assamite_struggle_trigger = yes		
+		}
+		is_assamite_trigger = yes
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:silsila_victory_objective_decision
+			}
+		}			
+		POD_bookmark_is_before_anarch_revolt = yes
+	}
+
+	is_valid = {
+		is_landed = yes
+		religion = religion:roadofzarathustra_religion
+		is_assamite_trigger = yes
+		is_independent_ruler = yes
+	
+		custom_tooltip = {
+			text = assamite_struggle_needed_tt
+			character_any_involvement_assamite_struggle_trigger = yes
+		}
+		
+		custom_tooltip = {
+			text = silsila_victory_objective_decision_tt
+					
+		global_var:influence_silsila >= 5
+		
+		}
+
+		custom_tooltip = {
+			text = silsila_victory_objective_decision_tt2
+		
+		global_var:influence_losttribe <= 0
+
+		}	
+
+		custom_tooltip = {
+			text = losttribe_victory_objective_decision_tt3
+					
+		global_var:influence_ashirra <= 0
+		
+		}	
+						
+		piety >= 2000
+		prestige >= 2000
+
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = victorious_silsila
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:silsila_victory_objective_decision
+		}
+		custom_tooltip = silsila_victory_objective_decision_effect_tooltip
+		custom_tooltip = assamite_struggle_victory_effect_tooltip
+
+		trigger_event = pod_assamite_struggle.105
+	
+	}
+	
+	ai_potential = {
+		prestige >= 4000
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+assamite_factions_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_compromise.dds"
+
+	ai_check_interval = 0
+
+	desc = assamite_factions_decision_desc
+
+	is_shown = {
+		is_ai = no
+		exists = struggle:assamite_struggle
+		character_any_involvement_assamite_struggle_trigger = yes	
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		custom_tooltip = assamite_factions_tt
+		trigger_event = pod_assamite_struggle.107
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+french_victory_objective_decision = {
+	decision_group_type = major
+	title = french_victory_objective_decision
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_third_way.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	desc = french_victory_objective_decision_desc
+	selection_tooltip = french_victory_objective_decision_tooltip
+	is_invisible = yes
+
+	ai_check_interval = 120
+
+	sort_order = 80
+
+	is_shown = {
+		exists = struggle:french_struggle
+		NOT = {
+			is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:french_victory_objective_decision
+			}
+		}
+		OR = {
+			has_culture = culture:french
+			has_culture = culture:occitan
+			has_culture = culture:norman
+			has_culture = culture:breton
+			has_culture = culture:frankish
+			has_culture = culture:visigothic
+			has_culture = culture:greek
+			has_culture = culture:mycenean
+		}
+		character_any_involvement_french_struggle_trigger = yes		
+	}
+
+	is_valid = {
+	is_landed = yes
+	prestige >= 500
+	custom_description = {
+		object = title:c_sable	
+		text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_sable
+			AND = {
+			exists = title:c_sable.holder	
+			title:c_sable.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_ile_de_france	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_ile_de_france
+			AND = {
+			exists = title:c_ile_de_france.holder	
+			title:c_ile_de_france.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_rethel	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_rethel
+			AND = {
+			exists = title:c_rethel.holder	
+			title:c_rethel.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_toulouse	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_toulouse
+			AND = {
+			exists = title:c_toulouse.holder	
+			title:c_toulouse.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_bordeaux	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_bordeaux
+			AND = {
+			exists = title:c_bordeaux.holder	
+			title:c_bordeaux.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_lyon	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_lyon
+			AND = {
+			exists = title:c_lyon.holder	
+			title:c_lyon.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_poitiers	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_poitiers
+			AND = {
+			exists = title:c_poitiers.holder	
+			title:c_poitiers.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = french_struggle_german_less_control_tt
+		OR = {
+			AND = {
+			exists = title:e_fiefs_of_the_black_cross.holder
+			title:e_fiefs_of_the_black_cross.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent < 0.2
+						holder.top_liege = title:e_fiefs_of_the_black_cross.holder
+					}
+				}
+			}
+			NOT = { exists = title:e_fiefs_of_the_black_cross.holder }	
+		}
+	}
+	
+	custom_tooltip = {
+		text = french_struggle_english_less_control_tt
+		OR = {
+			AND  = {
+			exists = title:e_avalon.holder
+			title:e_avalon.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent < 0.2
+						holder.top_liege = title:e_avalon.holder
+					}
+				}
+			}
+			NOT = { exists = title:e_avalon.holder }	
+		}
+	}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = french_struggle_victor
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:french_victory_objective_decision
+		
+		}
+
+		custom_tooltip = french_victory_objective_decision_effect_tooltip
+		trigger_event = pod_french_struggle.102
+
+		if = {
+			limit = { exists = house }
+			house = {
+				add_house_modifier = {
+					modifier = french_struggle_house_modifier
+					years = 100
+				}
+			}
+		}		
+	}
+	
+	ai_potential = {
+		prestige >= 4000
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+english_victory_objective_decision = {
+	decision_group_type = major
+	title = english_victory_objective_decision
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_third_way.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	desc = english_victory_objective_decision_desc
+	selection_tooltip = english_victory_objective_decision_tooltip
+	is_invisible = yes
+
+	ai_check_interval = 120
+
+	sort_order = 80
+
+	is_shown = {
+		exists = struggle:french_struggle
+		NOT = {
+			is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:english_victory_objective_decision
+			}
+		}
+		character_any_involvement_french_struggle_trigger = yes				
+	}
+
+	is_valid = {
+	is_landed = yes	
+	prestige >= 500		
+	custom_description = {
+		object = title:c_sable	
+		text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_sable
+			AND = {
+			exists = title:c_sable.holder	
+			title:c_sable.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_ile_de_france	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_ile_de_france
+			AND = {
+			exists = title:c_ile_de_france.holder	
+			title:c_ile_de_france.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_rethel	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_rethel
+			AND = {
+			exists = title:c_rethel.holder	
+			title:c_rethel.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_toulouse	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_toulouse
+			AND = {
+			exists = title:c_toulouse.holder	
+			title:c_toulouse.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_bordeaux	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_bordeaux
+			AND = {
+			exists = title:c_bordeaux.holder	
+			title:c_bordeaux.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_lyon	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_lyon
+			AND = {
+			exists = title:c_lyon.holder	
+			title:c_lyon.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_poitiers	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_poitiers
+			AND = {
+			exists = title:c_poitiers.holder	
+			title:c_poitiers.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = french_struggle_german_less_control_tt
+		OR = {
+			AND = {
+			exists = title:e_fiefs_of_the_black_cross.holder
+			title:e_fiefs_of_the_black_cross.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent < 0.2
+						holder.top_liege = title:e_fiefs_of_the_black_cross.holder
+					}
+				}
+			}
+			NOT = { exists = title:e_fiefs_of_the_black_cross.holder }	
+		}
+	}
+	
+	custom_tooltip = {
+		text = french_struggle_english_more_control_tt
+			AND = {
+			exists = title:e_avalon.holder
+			title:e_avalon.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent > 0.3
+						holder.top_liege = title:e_avalon.holder
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = french_struggle_victor
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:english_victory_objective_decision
+		
+		}
+
+		custom_tooltip = english_victory_objective_decision_effect_tooltip
+		trigger_event = pod_french_struggle.105
+
+		if = {
+			limit = { exists = house }
+			house = {
+				add_house_modifier = {
+					modifier = french_struggle_house_modifier
+					years = 100
+				}
+			}
+		}	
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+german_victory_objective_decision = {
+	decision_group_type = major
+	title = german_victory_objective_decision
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_the_third_way.dds"
+	}
+
+	extra_picture = "gfx/interface/illustrations/struggle_decisions_buttons/fp2_decision_hostility.dds"
+	desc = german_victory_objective_decision_desc
+	selection_tooltip = english_victory_objective_decision_tooltip
+	is_invisible = yes
+
+	ai_check_interval = 120
+
+	sort_order = 80
+
+	is_shown = {
+		exists = struggle:french_struggle
+		NOT = {
+			is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:german_victory_objective_decision
+			}
+		}
+		character_any_involvement_french_struggle_trigger = yes				
+	}
+
+	is_valid = {
+	is_landed = yes
+	prestige >= 500		
+	custom_description = {
+		object = title:c_sable	
+		text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_sable
+			AND = {
+			exists = title:c_sable.holder	
+			title:c_sable.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_ile_de_france	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_ile_de_france
+			AND = {
+			exists = title:c_ile_de_france.holder	
+			title:c_ile_de_france.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_rethel	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_rethel
+			AND = {
+			exists = title:c_rethel.holder	
+			title:c_rethel.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_toulouse	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_toulouse
+			AND = {
+			exists = title:c_toulouse.holder	
+			title:c_toulouse.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {
+	object = title:c_bordeaux	
+	text = blois_french_struggle_tt			
+		OR = {
+			has_title = title:c_bordeaux
+			AND = {
+			exists = title:c_bordeaux.holder	
+			title:c_bordeaux.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_lyon	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_lyon
+			AND = {
+			exists = title:c_lyon.holder	
+			title:c_lyon.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	custom_description = {	
+	object = title:c_poitiers	
+	text = blois_french_struggle_tt		
+		OR = {
+			has_title = title:c_poitiers
+			AND = {
+			exists = title:c_poitiers.holder	
+			title:c_poitiers.holder = {
+			opinion = {
+				target = root
+				value >= 75
+			}				
+			}
+			}
+		}
+	}
+	
+	custom_tooltip = {
+		text = french_struggle_german_more_control_tt
+			AND = {
+			exists = title:e_fiefs_of_the_black_cross.holder
+			title:e_fiefs_of_the_black_cross.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent > 0.3
+						holder.top_liege = title:e_fiefs_of_the_black_cross.holder
+					}
+				}
+			}		
+		}
+		
+	custom_tooltip = {
+		text = french_struggle_english_less_control_tt
+		OR = {
+			AND = {
+			exists = title:e_avalon.holder
+			title:e_avalon.holder = {
+					any_county_in_region = {
+						region = world_europe_west_francia
+						percent < 0.2
+						holder.top_liege = title:e_avalon.holder
+					}
+				}
+			}
+			NOT = { exists = title:e_avalon.holder }	
+		}
+	}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		save_scope_as = french_struggle_victor
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:german_victory_objective_decision
+		
+		}
+
+		custom_tooltip = english_victory_objective_decision_effect_tooltip
+		trigger_event = pod_french_struggle.106
+
+		if = {
+			limit = { exists = house }
+			house = {
+				add_house_modifier = {
+					modifier = french_struggle_house_modifier
+					years = 100
+				}
+			}
+		}		
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

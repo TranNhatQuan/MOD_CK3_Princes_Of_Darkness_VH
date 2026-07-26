@@ -1,0 +1,4315 @@
+﻿helena_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = helena_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790179
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:helena_decision
+			}
+		}		
+	}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = helena_custom_decision
+			character:790309 = { is_alive = no }
+		}
+	}
+	
+	effect = {
+		custom_tooltip = helena_decision_effect_tooltip
+
+		add_character_modifier = skilled_infiltrator_modifier
+
+		trigger_event = PODcanon_chars.1
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:helena_decision
+		}	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+absalon_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = absalon_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790117
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:absalon_decision
+			}
+		}
+	}
+		
+	is_valid = {
+		has_trait_xp = {
+			trait = demonology
+			value >= 50
+			}
+		}
+	
+	cost = {					
+		gold = 666
+		piety = 666
+		prestige = 666
+	}
+	
+	effect = {
+		custom_tooltip = absalon_decision_effect_tooltip
+		trigger_event = PODcanon_chars.2
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:absalon_decision
+		}		
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+mithras_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = mithras_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505071
+		has_character_modifier = serpent_garden_modifier
+		current_date <= 1300.1.1
+		}
+		
+	is_valid = {
+		completely_controls = title:k_england
+		completely_controls = title:k_wales
+		
+		custom_tooltip = {
+			text = mithras_custom_decision
+			current_date <= 1300.1.1
+			}
+		}
+	
+	
+	effect = {
+	
+		remove_character_modifier = serpent_garden_modifier	
+	
+		if = {
+		limit = {
+			has_trait = lazy
+			}
+		remove_trait = lazy
+		add_trait = diligent
+		}
+
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_mithras # Achievement: Snake Charmer
+		}
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+tabitha_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = tabitha_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790175
+		current_date <= 1300.1.1
+		NOT = { has_character_flag = tabithaisdone }
+		}
+		
+	is_valid = {
+	custom_tooltip = {
+	text = tabitha_custom_decision1
+	OR = {
+		completely_controls = title:c_coimbra
+		liege = {
+			completely_controls = title:c_coimbra
+			}
+		}
+	}	
+	
+	custom_tooltip = {
+	text = tabitha_custom_decision2
+	OR = {	
+		completely_controls = title:c_madrid
+		liege = {
+			completely_controls = title:c_madrid
+			}
+		}
+	}
+	
+		custom_tooltip = {
+			text = mithras_custom_decision
+			current_date <= 1300.1.1
+			}
+		}
+	
+	
+	effect = {
+	
+		custom_tooltip = tabitha_decision_effect_tooltip
+
+		trigger_event = PODcanon_chars.6	
+		
+		add_character_flag = tabithaisdone
+		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+montano_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = montano_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505070
+		NOT = { has_character_modifier = restored_autorithy_modifier }
+		}
+		
+	is_valid = {
+	has_title = title:e_sea_of_shadows
+	completely_controls = title:k_sicily
+	completely_controls = title:k_romagna
+	}	
+	
+	effect = {
+	
+		custom_tooltip = montano_decision_effect_tooltip
+
+		trigger_event = PODcanon_chars.8	
+		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+qawiyya_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = qawiyya_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790236
+		has_character_modifier = targeted_by_baali_modifier
+		current_date <= 1300.1.1
+		}
+		
+	is_valid = {
+		completely_controls = title:d_palmyra
+		completely_controls = title:d_damascus
+		
+		custom_tooltip = {
+			text = mithras_custom_decision
+			current_date <= 1300.1.1
+			}
+		}
+	
+	
+	effect = {
+	
+		remove_character_modifier = targeted_by_baali_modifier	
+	
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+petaniqua_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = petaniqua_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790217
+		NOT = { has_character_flag = foundalexander }
+		}
+		
+	is_valid = {
+		}
+		
+	cooldown = { days = 1825 }	
+	
+	effect = {
+		custom_tooltip = petaniqua_decision_effect_tooltip
+		trigger_event = PODcanon_chars.10		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+anna_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = anna_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790004
+		has_character_modifier = anna_ambition_modifier
+		}
+		
+	is_valid = {
+		completely_controls = title:c_byzantion
+		}
+	
+	
+	effect = {
+		give_nickname = nick_prince_in_waiting_improved
+		remove_character_modifier = anna_ambition_modifier	
+		add_character_modifier = anna_ambition_fulfilled_modifier	
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+anadja_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = anadja_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790241
+		OR = {
+			character:790015 = { is_alive = yes }
+			character:790962 = { is_alive = yes }
+			}		
+		NAND = {
+			martial > 25
+			diplomacy > 20
+			intrigue > 20	
+			}			
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = anadja_custom_decision			
+			}	
+		}
+		
+	cooldown = { days = 1825 }	
+	
+	effect = {
+		custom_tooltip = anadja_decision_effect_tooltip
+		trigger_event = PODcanon_chars.19		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+badr_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = badr_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505125
+		OR = {
+			has_character_modifier = shaky_secrets_modifier
+			has_character_modifier = shrouded_secrets_modifier
+			has_character_modifier = darkened_secrets_modifier
+			}
+		}
+		
+	is_valid = {	
+		custom_tooltip = {
+			text = mithras_custom_decision
+			current_date <= 1300.1.1
+			}	
+		}
+	
+	cost = {					
+		gold = 200
+		prestige = 200
+	}
+	
+	effect = {
+	
+	if = {
+		limit = {
+			has_character_modifier = shaky_secrets_modifier
+			}
+		remove_character_modifier = shaky_secrets_modifier
+		add_character_modifier = shrouded_secrets_modifier
+	}		
+	
+	else_if = {
+		limit = {
+			has_character_modifier = shrouded_secrets_modifier
+			}
+		remove_character_modifier = shrouded_secrets_modifier
+		add_character_modifier = darkened_secrets_modifier
+	}
+	
+	else_if = {
+		limit = {
+			has_character_modifier = darkened_secrets_modifier
+			}
+		remove_character_modifier = darkened_secrets_modifier
+		add_character_modifier = secrets_secrets_modifier
+	}
+
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+lucita_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = lucita_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790178
+		is_landed = yes
+		has_character_modifier = caged_lucita_modifier
+		}
+		
+	is_valid = {	
+		custom_tooltip = {
+			text = lucita_custom_decision
+			character:505154 = {
+				is_alive = no
+			}
+		}		
+		is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+	}
+	
+	effect = {
+	
+		if = {
+			limit = {
+				has_character_modifier = caged_lucita_modifier
+			}
+			remove_character_modifier = caged_lucita_modifier
+			add_character_modifier = unleashed_lucita_modifier
+		}		
+
+		trigger_event = {
+			id = PODcanon_chars.59
+			years = 5
+		}
+
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_lucita # Achievement: A Killer and a Saint
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+lucita_landless_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = lucita_landless_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790178
+		is_landless_adventurer = yes
+		has_character_modifier = caged_lucita_modifier
+		}
+		
+	is_valid = {	
+		has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_ambassador
+			value >= 100 
+		}
+	}
+	
+	effect = {
+	
+		custom_tooltip = lucita_landless_decision_effect_tooltip
+	
+		if = {
+			limit = {
+				character:505154 = {
+					is_alive = yes
+					}
+			}
+		trigger_event = PODcanon_chars.93
+		}
+		
+		else_if = {
+			limit = {
+				has_character_modifier = caged_lucita_modifier
+			}
+			remove_character_modifier = caged_lucita_modifier
+		}
+		else = {}
+
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_lucita # Achievement: A Killer and a Saint
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+alfonzo_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = alfonzo_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505098
+		NOT = {  #Can be redone if the Title is destroyed again.
+			exists = title:e_latin_empire.holder
+		}
+		}
+		
+	is_valid = {		
+		is_independent_ruler = yes
+		prestige >= 500
+		#realm_size >= 35
+		completely_controls = title:k_thessalonika			
+	}
+	
+	effect = {
+		
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_latin_empire = {
+		change_title_holder = {
+			holder = character:505098
+			change = scope:change
+		}	
+	}
+	
+	resolve_title_and_vassal_change = scope:change
+
+	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+gratiano_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = gratiano_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505144
+		has_character_modifier = bad_gratiano_modifier
+	}
+		
+	is_valid = {		
+		is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+	}
+	
+	effect = {
+		POD_remove_character_modifier = { MODIFIER = bad_gratiano_modifier }
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+melinda_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = melinda_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790300
+		}
+		
+	is_valid = {	
+		capital_county = { 
+			development_level > 5
+		}		
+	}
+	
+	effect = {
+	
+		capital_county = {
+			change_development_level = -5
+		}		
+		
+		add_gold = 300
+		add_prestige = 100
+		add_dread = 20
+		add_stress = massive_stress_loss
+		POD_masquerade_exposure_increase_effect = yes		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+rosamund_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = rosamund_decision_desc
+	decision_group_type = major
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790302
+		character:505086 = { is_alive = yes }
+		NOT = { has_character_flag = rosamundisdone }
+		}
+		
+	is_valid = {	
+		custom_tooltip = {
+			text = rosamund_custom_decision
+			character:505082 = { is_alive = no }
+			}	
+
+		custom_tooltip = {
+			text = rosamund_custom_decisionb
+		character:790302 = { 
+		has_relation_soulmate = character:505086
+			}
+			}				
+	}
+	
+	effect = {
+		add_character_modifier = {
+			modifier = love_triumph_modifier
+			years = 50
+			}	
+		character:505086 = {
+			add_character_modifier = {
+				modifier = love_triumph_modifier
+				years = 50
+				}
+			}	
+		add_character_flag = rosamundisdone		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+menele_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = menele_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790309
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:menele_decision
+			}
+		}		
+	}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = menele_custom_decision
+			OR = {
+			character:790179 = { is_alive = no }
+			NOR = {
+			character:790179 = { 
+			has_relation_nemesis = character:790309
+			}
+			character:790179 = { 
+			has_relation_rival = character:790309
+			}				
+			}
+			}	
+		}
+	}
+	
+	effect = {
+		custom_tooltip = menele_decision_effect_tooltip
+
+		trigger_event = PODcanon_chars.25
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:menele_decision
+		}	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+hektor_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = hektor_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790158		
+		}
+		
+	is_valid = {
+		has_faith = faith:viaprometheus
+		}
+		
+	cooldown = { years = 5 }	
+	
+	effect = {
+		custom_tooltip = hektor_decision_effect_tooltip
+		trigger_event = PODcanon_chars.27		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+augustus_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = augustus_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505018
+		OR = {
+			character:790141 = { is_alive = yes }
+			character:790140 = { is_alive = yes }
+			character:790144 = { is_alive = yes }
+			}				
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = augustus_custom_decision
+		}
+		has_title = title:k_giovanni
+	}
+		
+	cooldown = { years = 5 }	
+	
+	effect = {
+		custom_tooltip = augustus_decision_effect_tooltip
+		trigger_event = PODcanon_chars.28		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+claudius_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = claudius_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790141
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:claudius_decision
+			}
+		}		
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = claudius_custom_decision
+			character:790140 = { is_alive = no }
+			character:790161 = { is_alive = no }			
+			}	
+		}
+	
+	effect = {
+		add_pressed_claim = title:k_giovanni
+
+		add_character_modifier = {
+			modifier = rightful_giovanni_heir_modifier
+			years = 50
+			}
+			
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:claudius_decision
+		}			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+markus_nikita_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = markus_nikita_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790143
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:markus_nikita_decision
+			}
+		}		
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = markus_nikita_custom_decision
+			character:790261 = { is_alive = no }			
+			}		
+			completely_controls = title:c_gacka
+		}
+	
+	effect = {
+		custom_tooltip = markus_nikita_decision_effect_tooltip
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_character_modifier = medium_falsinar_modifier
+					}
+				remove_character_modifier = medium_falsinar_modifier
+				add_character_modifier = high_falsinar_modifier
+				}
+			else_if = {
+				limit = {
+					has_character_modifier = weak_falsinar_modifier
+					}
+				remove_character_modifier = weak_falsinar_modifier
+				add_character_modifier = medium_falsinar_modifier
+				}
+		}		
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:markus_nikita_decision
+		}			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+markus_egypt_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = markus_egypt_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790143
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:markus_egypt_decision
+			}
+		}		
+		}
+		
+	is_valid = {	
+			completely_controls = title:c_aswan
+		}
+	
+	effect = {
+		custom_tooltip = markus_egypt_decision_effect_tooltip
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_character_modifier = medium_falsinar_modifier
+					}
+				remove_character_modifier = medium_falsinar_modifier
+				add_character_modifier = high_falsinar_modifier
+				}
+			else_if = {
+				limit = {
+					has_character_modifier = weak_falsinar_modifier
+					}
+				remove_character_modifier = weak_falsinar_modifier
+				add_character_modifier = medium_falsinar_modifier
+				}
+		}		
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:markus_egypt_decision
+		}			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+japhet_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = japhet_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790020
+		}
+		
+	is_valid = {	
+			completely_controls = title:k_erciyes
+		}
+		
+	cooldown = { years = 10 }	
+
+	effect = {
+		custom_tooltip = japhet_decision_effect_tooltip
+
+	hidden_effect = {
+			random_list = {
+				30 = {
+					trigger_event = PODcanon_chars.29
+					}
+				30 = {
+					trigger_event = PODcanon_chars.30
+					}	
+				30 = {
+					trigger_event = PODcanon_chars.31
+					}					
+			}
+		}		
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+bela_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = bela_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505091
+		NOT = { has_character_modifier = kupala_avatar_modifier }
+		}
+	
+	is_valid = {	
+		capital_county = { 
+			development_level > 10
+		}		
+	}
+	
+	effect = {
+
+	capital_county = {
+		change_development_level = -10
+	}	
+	
+	POD_masquerade_exposure_increase_effect = yes
+	
+	if = {
+		limit = {
+			has_character_modifier = kupala_rising_strong
+			}
+		remove_character_modifier = kupala_rising_strong
+		custom_tooltip = bela_decision_effect_tooltip
+		trigger_event = PODcanon_chars.32	
+	}		
+	
+	else_if = {
+		limit = {
+			has_character_modifier = kupala_rising_medium
+			}
+		remove_character_modifier = kupala_rising_medium
+		add_character_modifier = kupala_rising_strong
+	}
+	
+	else_if = {
+		limit = {
+			has_character_modifier = kupala_rising_weak
+			}
+		remove_character_modifier = kupala_rising_weak
+		add_character_modifier = kupala_rising_medium
+	}
+	
+	else_if = {
+		limit = {
+			has_character_modifier = kupala_rising_weakest
+			}
+		remove_character_modifier = kupala_rising_weakest
+		add_character_modifier = kupala_rising_weak
+	}	
+	
+	else = {
+		add_character_modifier = kupala_rising_weakest
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+myka_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = myka_decision_desc
+	decision_group_type = major
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790114
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:myka_decision
+			}
+		}		
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = markus_nikita_custom_decision
+			character:790261 = { is_alive = no }			
+			}		
+			completely_controls = title:c_gacka
+		}
+	
+	effect = {
+		custom_tooltip = myka_decision_effect_tooltip
+
+		trigger_event = PODcanon_chars.33
+		
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:myka_decision
+		}			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+noriz_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = noriz_decision_desc
+	decision_group_type = major
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:605124
+		NOT = {
+			has_character_flag = norizisdone
+		}			
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = noriz_custom_decision
+			character:505053 = { is_alive = no }			
+			}		
+			completely_controls = title:e_voivodate
+			is_independent_ruler = yes
+		}
+	
+	effect = {
+		house:house_djavakhi = {
+			remove_house_modifier = house_djavakhi_modifier
+			}	
+
+		house:house_djavakhi = {
+			add_house_modifier = house_noriz_modifier
+			}
+		add_character_flag = norizisdone			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+fatima_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = fatima_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790168
+		current_date <= 1300.1.1
+		NOT = { has_character_flag = fatimaisdone }
+		}
+		
+	is_valid = {
+		completely_controls = title:k_erciyes
+	
+		custom_tooltip = {
+			text = mithras_custom_decision
+			current_date <= 1300.1.1
+			}
+		}
+	
+	
+	effect = {
+	
+		custom_tooltip = fatima_decision_effect_tooltip
+
+		add_prestige = 500
+		add_gold = 500
+		add_piety = 500
+		
+		add_prowess_skill = 10
+		
+		add_character_flag = fatimaisdone
+		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+alashrad_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = alashrad_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790166
+		NOT = { learning = 100 }
+		}
+		
+	is_valid = {
+	}	
+	
+	cooldown = { years = 10 }
+	
+	effect = {
+		
+		add_stress = medium_stress_gain
+		add_learning_skill = 5
+				
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+nakurtum_eldest_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = nakurtum_eldest_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790530
+		has_character_modifier = broken_alamut_modifier
+		}
+		
+	is_valid = {
+		completely_controls = title:k_daylam
+	}	
+	
+	effect = {
+		
+		remove_character_modifier = broken_alamut_modifier
+				
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+nakurtum_control_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = nakurtum_control_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790530
+		has_character_modifier = nakurtum_losing_control_modifier
+		}
+		
+	is_valid = {
+		completely_controls = title:k_persia
+	}	
+	
+	effect = {
+		
+		remove_character_modifier = nakurtum_losing_control_modifier
+				
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+dunlop_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = dunlop_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:792186
+		}
+		
+	is_valid = {	
+		custom_tooltip = {
+			text = dunlop_custom_decision
+			character:505071 = {
+					is_alive = no
+					}
+			}		
+
+		custom_tooltip = {
+			text = dunlop_custom_decision2 #Geraint
+			character:790820 = {
+					is_alive = no
+					}
+			}
+
+
+		custom_tooltip = {
+			text = dunlop_custom_decision3 #Marcus
+			character:790134 = {
+					is_alive = no
+					}
+			}
+
+
+		custom_tooltip = {
+			text = dunlop_custom_decision4 #Cretheus
+			character:505109 = {
+					is_alive = no
+					}
+			}							
+	}
+	
+	effect = {
+		add_character_modifier = {
+			modifier = mary_dunlop_avenged_modifier
+			years = 50
+			}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+valborg_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = valborg_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790265
+		}
+		
+	is_valid = {						
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+		custom_tooltip = valborg_decision_effect_tooltip
+	
+		trigger_event = PODcanon_chars.37
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+vasantasena_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = vasantasena_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790207	
+		NOT = { has_character_flag = vasadecisiondone }		
+	}
+		
+	is_valid = {
+		is_independent_ruler = yes	
+		realm_size >= 5
+		custom_tooltip = {
+			text = tzimisce_victory_objective_decision_custom
+		title:e_tremere = {
+				is_title_created = no
+			}	
+		}
+		piety >= 500
+	}
+			
+	effect = {
+		custom_tooltip = vasantasena_decision_effect_tooltip
+		set_character_faith = faith:vasantasenadharma
+		add_learning_skill = 5	
+		add_character_flag = vasadecisiondone
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+louhi_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = louhi_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790633			
+		}
+		
+	is_valid = {
+		has_faith = faith:roadoftheabyss
+	}
+			
+	effect = {
+		custom_tooltip = louhi_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.38
+	}	
+
+	cooldown = { years = 1 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+anatole_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = anatole_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790323			
+		}
+		
+	is_valid = {
+		piety >= 0
+	}
+			
+	effect = {
+		custom_tooltip = anatole_decision_effect_tooltip
+		
+	hidden_effect = {
+			random_list = {
+				30 = {
+					trigger_event = PODcanon_chars.39
+					}
+				30 = {
+					trigger_event = PODcanon_chars.40
+					}	
+				30 = {
+					trigger_event = PODcanon_chars.41
+					}					
+			}
+		}
+	}	
+
+	cooldown = { years = 5 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+elimelech_delroh_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = elimelech_delroh_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790631
+		has_character_modifier = broken_talmahera_modifier
+		}
+		
+	is_valid = {
+		completely_controls = title:k_bihar
+		completely_controls = title:k_himalaya
+		completely_controls = title:k_kosala		
+	}	
+	
+	effect = {
+		
+		remove_character_modifier = broken_talmahera_modifier
+				
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+elimelech_control_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = elimelech_control_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790631
+		has_character_modifier = elimelech_losing_control_modifier
+		}
+		
+	is_valid = {
+		completely_controls = title:e_talmahera
+		
+		custom_tooltip = {
+			text = elimelech_custom_decision
+			current_date > 1300.1.1
+			}		
+	}	
+	
+	effect = {
+		
+		remove_character_modifier = elimelech_losing_control_modifier
+				
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+zettler_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = zettler_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790641			
+		}
+		
+	is_valid = {
+	}
+			
+	effect = {
+		custom_tooltip = zettler_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.42
+	}	
+
+	cooldown = { years = 5 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+josef_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = josef_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505089
+		has_character_modifier = josef_terrified_modifier
+		}
+		
+	is_valid = {	
+		custom_tooltip = {
+			text = josef_custom_decision
+			character:790946 = {
+					is_alive = no
+					}
+			}		
+		is_independent_ruler = yes
+		completely_controls = title:k_bohemia
+	}
+	
+	effect = {
+	
+	if = {
+		limit = {
+			has_character_modifier = josef_terrified_modifier
+			}
+		remove_character_modifier = josef_terrified_modifier
+		add_character_modifier = {
+			modifier = josef_breathing_modifier
+			years = 20
+			}
+	}		
+
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+tarique_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = tarique_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790213
+		NOT = {	
+			has_character_flag = tariqueisdone
+			}
+		}
+		
+	is_valid = {	
+		completely_controls = title:c_mecca
+		completely_controls = title:c_medina
+		completely_controls = title:c_damascus
+		completely_controls = title:c_baghdad
+		completely_controls = title:c_cairo
+		completely_controls = title:c_cordoba
+	}
+	
+	effect = {
+	
+		add_character_modifier = tarique_guardian_modifier
+		
+		add_faith_lifestyle_xp = 1000
+		
+		add_character_flag = tariqueisdone
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+gregor_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = gregor_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791240
+		NOT = {	
+			has_character_flag = gregorisdone
+			}
+		}
+		
+	is_valid = {	
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+	
+		custom_tooltip = gregor_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.44
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+chandraputra_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = chandraputra_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790190
+		}
+		
+	is_valid = {	
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+	
+		custom_tooltip = chandraputra_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.45
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+iago_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = iago_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791004
+		}
+		
+	is_valid = {	
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+	
+		custom_tooltip = iago_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.46
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+marcia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = marcia_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790999
+		}
+		
+	is_valid = {	
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+	
+		custom_tooltip = marcia_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.48
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+kemintiri_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = kemintiri_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790512
+		NOT = { has_character_flag = kemintiriisdone }		
+		}
+		
+	is_valid = {
+		NOT = {
+			has_religion = religion:roadofset_religion
+			}
+		completely_controls = title:k_egypt
+		completely_controls = title:k_nubia
+	}
+		
+	effect = {
+		add_character_flag = kemintiriisdone
+		
+		custom_tooltip = kemintiri_decision_effect_tooltip
+	
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_isis = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}	
+	}
+	
+	resolve_title_and_vassal_change = scope:change	
+
+		title:k_egypt = { set_de_jure_liege_title = title:e_isis }
+		title:k_nubia = { set_de_jure_liege_title = title:e_isis }
+		title:k_blemmyia = { set_de_jure_liege_title = title:e_isis }
+	
+		hidden_effect = {
+			every_living_character = {
+				limit = {
+					has_religion = religion:roadofset_religion
+					}
+			set_character_faith = faith:viahumanitatis
+			}
+			}
+		
+		add_piety = 1000
+		add_stress = massive_stress_loss
+		
+		trigger_event = PODcanon_chars.67
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+kemintiri_second_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = kemintiri_second_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790512
+		has_character_flag = kemintiriisdone
+		NOT = { has_character_flag = knows_spell_of_life }		
+	}
+		
+	is_valid = {
+		trigger_if = {
+			limit = {
+				POD_bookmark_has_mummies = yes
+			}
+			OR = {
+				learning >= 30
+			
+				custom_tooltip = {
+					text = kemintiri_second_decision_custom
+					POD_character_supports_you_for_objectives = {
+						CHARACTER = character:792593
+					}
+				}
+			}
+		}
+
+		trigger_else = {
+			learning >= 30
+		}
+			
+	}
+		
+	effect = {
+		add_character_flag = knows_spell_of_life
+		
+		custom_tooltip = kemintiri_second_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.68
+	}		
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#andreas_decision = {
+#	picture = {
+#		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+#	}
+#	
+#	desc = andreas_decision_desc
+#	decision_group_type = decisions
+#	
+#	ai_check_interval = 0
+#
+#	is_shown = {
+#		this = character:790129
+#		}
+#		
+#	is_valid = {	
+#	}
+#	
+#	cooldown = { years = 5 }
+#	
+#	effect = {
+#	
+#		custom_tooltip = andreas_decision_effect_tooltip
+#		
+#		trigger_event = PODcanon_chars.50
+#	}		
+#
+#	ai_potential = {
+#		always = no
+#	}
+#
+#	ai_will_do = {
+#		base = 0
+#	}
+#}
+
+
+nakh_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = nakh_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505094
+		OR = {
+			character:790126 = { is_alive = yes }
+			character:790128 = { is_alive = yes }
+			}					
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = nakh_custom_decision
+		}
+	}
+		
+	cooldown = { days = 1825 }	
+	
+	effect = {
+		custom_tooltip = nakh_decision_effect_tooltip
+		trigger_event = PODcanon_chars.51		
+	}	
+
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+sarrasine_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = sarrasine_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790398
+		has_character_modifier = sarrasine_running_modifier
+		}
+		
+	is_valid = {		
+		is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+	}
+	
+	effect = {
+		POD_remove_character_modifier = { MODIFIER = sarrasine_running_modifier }
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+meerlinda_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = meerlinda_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505103
+		NOT = { has_character_modifier = meerlinda_morgan_modifier }
+		}
+		
+	is_valid = {		
+		completely_controls = title:c_gowrie
+		completely_controls = title:c_devon
+	}
+	
+	effect = {
+		add_character_modifier = meerlinda_morgan_modifier
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+jervais_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = jervais_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790359
+		NOT = { has_character_modifier = jervais_rising_modifier }
+		}
+		
+	is_valid = {		
+		custom_tooltip = {
+			text = jervais_custom_decision
+			character:790106 = {
+					is_alive = no
+					}
+			}	
+	custom_tooltip = {
+			text = jervais_custom_decision2
+		title:k_ferals_livonia = {
+				is_title_created = no
+			}	
+		}
+	}
+	
+	effect = {	
+		add_character_modifier = jervais_rising_modifier
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+rutor_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = rutor_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:605121
+		has_character_modifier = rutor_running_modifier
+		}
+		
+	is_valid = {		
+		is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+	}
+	
+	effect = {
+		POD_remove_character_modifier = { MODIFIER = rutor_running_modifier }
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+therimna_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = therimna_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790476
+		OR = {
+		has_character_modifier = therimna_secrets5_modifier
+		has_character_modifier = therimna_secrets4_modifier
+		has_character_modifier = therimna_secrets3_modifier
+		has_character_modifier = therimna_secrets2_modifier
+		has_character_modifier = therimna_secrets1_modifier
+		}
+		}
+		
+	is_valid = {		
+	}
+	
+	cooldown = { years = 5 }
+	
+	effect = {
+	add_gold = 200
+	if = {
+		limit = {
+			has_character_modifier = therimna_secrets5_modifier
+			}
+		remove_character_modifier = therimna_secrets5_modifier
+		add_character_modifier = therimna_secrets4_modifier	
+	}		
+	else_if = {
+		limit = {
+			has_character_modifier = therimna_secrets4_modifier
+			}
+		remove_character_modifier = therimna_secrets4_modifier
+		add_character_modifier = therimna_secrets3_modifier
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = therimna_secrets3_modifier
+			}
+		remove_character_modifier = therimna_secrets3_modifier
+		add_character_modifier = therimna_secrets2_modifier
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = therimna_secrets2_modifier
+			}
+		remove_character_modifier = therimna_secrets2_modifier
+		add_character_modifier = therimna_secrets1_modifier
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = therimna_secrets1_modifier
+			}
+		remove_character_modifier = therimna_secrets1_modifier
+	}	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+virstania_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = virstania_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790870			
+		}
+		
+	is_valid = {
+	}
+			
+	effect = {
+		custom_tooltip = virstania_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.53
+	}	
+
+	cooldown = { years = 1 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+marconius_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = marconius_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505121			
+		}
+		
+	is_valid = {
+	}
+			
+	effect = {
+		custom_tooltip = marconius_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.54
+	}	
+
+	cooldown = { years = 5 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+catubodua_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = catubodua_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791232		
+		NOT = { has_character_modifier = catu_heir_of_brujah_modifier }
+		}
+		
+	is_valid = {
+		martial >= 20
+		learning >= 20
+		realm_size >= 50
+	}
+			
+	effect = {
+		add_character_modifier = catu_heir_of_brujah_modifier
+	}	
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+deverra_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = deverra_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790106			
+		NOT = { has_character_modifier = deverra_blessed_modifier }		
+		}
+		
+	is_valid = {
+		custom_tooltip = {
+			text = deverra_custom_decision
+			character:790359 = {
+					is_alive = no
+					}
+			}	
+			
+		custom_tooltip = {
+			text = deverra_custom_decision2
+			OR = {
+				completely_controls = title:d_pomerelia
+				liege = {
+				completely_controls = title:d_pomerelia
+				}
+			}
+		}	
+		custom_tooltip = {
+			text = deverra_custom_decision3
+			OR = {
+				completely_controls = title:d_prussia
+				liege = {
+				completely_controls = title:d_prussia
+				}
+			}
+		}			
+	}
+	
+	is_valid_showing_failures_only = {
+		trigger_if = {
+			limit = { POD_splat_mixing_haight_mode = no }
+			POD_is_infernalist_trigger = no
+		}	
+	}
+			
+	effect = {
+		add_character_modifier = deverra_blessed_modifier
+		add_trait = truefaith
+	}	
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+dyanang_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = dyanang_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791112			
+		}
+		
+	is_valid = {
+	}
+			
+	effect = {
+		custom_tooltip = dyanang_decision_effect_tooltip
+		
+		trigger_event = PODcanon_chars.56
+	}	
+
+	cooldown = { years = 1 }
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+vittoria_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = vittoria_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791715	
+		has_character_modifier = vittoria_illness_modifier	
+		}
+		
+	is_valid = {
+		completely_controls = title:c_provence
+	}
+			
+	effect = {		
+		remove_character_modifier = vittoria_illness_modifier
+	}	
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+maria_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = maria_decision_desc
+	decision_group_type = decisions
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:791713
+		NOT = {	has_character_flag = mariaisdone }
+		}
+		
+	is_valid = {		
+	}
+	
+	cost = { gold = 150 }
+	
+	effect = {
+
+	if = {
+		limit = {
+			has_character_modifier = teresa_life_4_modifier
+			}
+		remove_character_modifier = teresa_life_4_modifier
+		root.dynasty = {
+			add_dynasty_prestige = 1000
+			add_dynasty_prestige_level = 1
+		}
+		add_piety = 500	
+		add_character_flag = mariaisdone
+	}		
+	else_if = {
+		limit = {
+			has_character_modifier = teresa_life_3_modifier
+			}
+		remove_character_modifier = teresa_life_3_modifier
+		add_character_modifier = teresa_life_4_modifier
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = teresa_life_2_modifier
+			}
+		remove_character_modifier = teresa_life_2_modifier
+		add_character_modifier = teresa_life_3_modifier
+	}
+	else_if = {
+		limit = {
+			has_character_modifier = teresa_life_1_modifier
+			}
+		remove_character_modifier = teresa_life_1_modifier
+		add_character_modifier = teresa_life_2_modifier
+	}
+	else = {
+		add_character_modifier = teresa_life_1_modifier
+	}	
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+horus_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = horus_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:792593
+		NOT = {	has_character_flag = horusisdone }
+		}
+		
+	is_valid = {
+		completely_controls = title:k_egypt
+		
+		custom_tooltip = {
+			text = horus_custom_decision_1
+		character:505094 = {
+					is_alive = no
+			}	
+		}
+
+		custom_tooltip = {
+			text = horus_custom_decision_2
+		character:790126 = {
+					is_alive = no
+			}	
+		}
+
+		custom_tooltip = {
+			text = horus_custom_decision_3
+		character:790128 = {
+					is_alive = no
+			}	
+		}
+
+		custom_tooltip = {
+			text = horus_custom_decision_4
+		character:790988 = {
+					is_alive = no
+			}	
+		}		
+	}
+	
+	
+	effect = {
+		custom_tooltip = horus_decision_effect_tooltip	
+
+		trigger_event = PODcanon_chars.60
+		
+		add_character_flag = horusisdone
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+bezariel_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = bezariel_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:792760
+		NOT = {	has_character_flag = bezarielisdone }
+		}
+		
+	is_valid = {
+		completely_controls = title:e_shadow_curtain
+		
+		prowess >= 40		
+	}
+	
+	
+	effect = {
+		custom_tooltip = bezariel_decision_effect_tooltip	
+
+		trigger_event = PODcanon_chars.62
+		
+		add_character_flag = bezarielisdone
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+lamashtu_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = lamashtu_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:792734
+		NOT = {	has_character_flag = lamashtuisdone }
+		any_character_artifact = {
+			has_variable = heart_lamashtu
+		}		
+	}
+		
+	is_valid = {
+		completely_controls = title:c_acre	
+	}
+	
+	
+	effect = {
+		random_character_artifact = {
+			limit = {
+				has_variable = heart_lamashtu
+				}
+		save_scope_as = heart_lamashtu
+		}
+		scope:heart_lamashtu = {		
+			add_artifact_modifier = gabriel_trumpet_modifier	
+		}		
+		add_character_flag = lamashtuisdone
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#Ravnos special content
+
+ravnos_jati_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	desc = ravnos_jati_decision_desc
+	decision_group_type = major
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ravnos_trigger = yes
+		NOT = {
+			house = house:house_kinyonyi
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:ravnos_jati_decision
+			}
+		}		
+	}
+		
+	is_valid = {
+		trigger_if = {
+			limit = {
+				house = house:house_alexandrite
+			}
+			completely_controls = title:k_egypt
+			prestige >= 2000
+		}
+		trigger_else_if = {
+			limit = {
+				house = house:house_rroma
+			}
+			piety >= 2000
+			prestige >= 2000
+		}
+		 trigger_else_if = {
+            limit = {
+                house = house:house_erk
+            }
+    	    gold >= 2000
+			completely_controls = title:k_khakassia
+			completely_controls = title:k_angara
+        }
+		trigger_else_if = {
+			limit = {
+				house = house:house_baytmujirim
+			}
+			completely_controls = title:k_persia
+		}
+		trigger_else_if = {
+			limit = {
+				house = house:house_bashirite
+			}
+			completely_controls = title:k_olives
+			gold >= 1500
+		}
+		trigger_else_if = {
+			limit = {
+				house = house:house_phaedymite
+			}
+			prowess >= 60
+			martial >= 20
+		}
+		trigger_else_if = {
+			limit = {
+				house = house:house_sybarite
+			}
+			completely_controls = title:k_sardinia
+			gold >= 1500
+		}
+		trigger_else_if = {
+			limit = {
+				house = house:house_yoryari
+			}
+			piety >= 1500
+			learning >= 20
+		}	
+		trigger_else = {
+			completely_controls = title:e_ravnos
+		}		
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				house = house:house_alexandrite
+			}
+			house:house_alexandrite = {
+				remove_house_modifier = house_alexandrite_modifier
+				add_house_modifier = house_alexandrite_improved_modifier
+			}
+		}
+		else_if = {
+			limit = {
+				house = house:house_rroma
+			}
+			house:house_rroma = {
+				remove_house_modifier = house_rroma_modifier
+				add_house_modifier = house_rroma_improved_modifier
+			}			
+		}
+		else_if = {
+			limit = {
+				house = house:house_erk
+			}
+			house:house_erk = {
+				remove_house_modifier = house_erk_modifier
+				add_house_modifier = house_erk_improved_modifier
+			}			
+		}
+		else_if = {
+			limit = {
+				house = house:house_baytmujirim
+			}
+			house:house_baytmujirim = {
+				remove_house_modifier = house_baytmujirim_modifier
+				add_house_modifier = house_baytmujirim_improved_modifier
+			}
+		}
+		else_if = {
+			limit = {
+				house = house:house_bashirite
+			}
+			house:house_bashirite = {
+				remove_house_modifier = house_bashirite_modifier
+				add_house_modifier = house_bashirite_improved_modifier
+			}
+		}
+		else_if = {
+			limit = {
+				house = house:house_phaedymite
+			}
+			house:house_phaedymite = {
+				remove_house_modifier = house_phaedymite_modifier
+				add_house_modifier = house_phaedymite_improved_modifier
+			}
+		}
+		else_if = {
+			limit = {
+				house = house:house_sybarite
+			}
+			house:house_sybarite = {
+				remove_house_modifier = house_sybarite_modifier
+				add_house_modifier = house_sybarite_improved_modifier
+			}
+		}
+		else_if = {
+			limit = {
+				house = house:house_yoryari
+			}
+			house:house_yoryari = {
+				remove_house_modifier = house_yoryari_modifier
+				add_house_modifier = house_yoryari_improved_modifier
+			}
+		}	
+		else = {
+			house = {
+				add_house_modifier = indian_ravnos_improved_modifier			
+			}
+		}
+					
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:ravnos_jati_decision
+		}			
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+thrax_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = thrax_decision_desc
+
+	is_shown = {
+		this = character:790200
+		NOT = { has_character_flag = thraxisdone }
+	}
+
+	is_valid = {
+		has_faith = faith:viapura
+		piety >= 1000
+		completely_controls = title:d_latium
+		has_title = title:c_roma
+		custom_tooltip = {
+			text = thrax_decision_custom
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:790101 }
+				character:790101 = { is_vassal_of = root }
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		add_character_flag = thraxisdone
+		
+		custom_tooltip = thrax_decision_effect_tooltip
+		trigger_event = PODcanon_chars.75
+	
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+constancia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = constancia_decision_desc
+
+	is_shown = {
+		this = character:790021
+		NOT = { has_character_flag = constanciaisdone }
+	}
+
+	is_valid = {
+
+		custom_tooltip = {
+			text = constancia_decision_custom
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:790537 }
+				character:790537 = { is_vassal_of = root }
+				character:790537 = { is_vassal_of = title:k_erciyes.holder }
+			}
+		}
+
+		POD_vampire_is_defeated = { CHARACTER = character:710501 }
+		
+		custom_tooltip = {
+			text = constancia_decision_custom2
+			POD_vampire_is_defeated = { CHARACTER = character:710502 }
+		}
+
+		custom_tooltip = {
+			text = constancia_decision_custom4
+			OR = {
+				has_title = title:k_giovanni
+				trigger_if = {
+					limit = { POD_is_shattered_world_enabled = no }
+					title:k_giovanni = {
+						is_title_created = no
+					}
+				}
+			}
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = constanciaisdone
+	
+	root.dynasty ?= {
+		add_dynasty_modifier = united_cappadocians_modifier
+	}
+	
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:e_cappadocian = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}	
+	}
+	
+	resolve_title_and_vassal_change = scope:change	
+
+	title:k_erciyes = { set_de_jure_liege_title = title:e_cappadocian }	
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+lucretia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = lucretia_decision_desc
+
+	is_shown = {
+		this = character:790161
+		has_character_modifier = lucretia_reckless_modifier
+	}
+
+	is_valid = {
+		OR = {
+			highest_held_title_tier >= tier_kingdom
+			learning >= 25
+			character:790140 = { has_title = title:k_giovanni }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		remove_character_modifier = lucretia_reckless_modifier	
+		add_character_modifier = lucretia_appeased_modifier
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+guilelmo_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = guilelmo_decision_desc
+
+	is_shown = {
+		this = character:505099
+		NOT = { has_character_flag = guilelmoisdone }
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = guilelmo_custom_decision
+			current_date >= 1250.1.1
+		}
+			
+		is_independent_ruler = yes
+		has_title = title:d_venice
+		has_title = title:c_venezia
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = guilelmoisdone
+		
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_seeofnod = {
+		change_title_holder = {
+			holder = character:505099
+			change = scope:change
+		}	
+	}
+	
+	resolve_title_and_vassal_change = scope:change
+		
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+fatimaallama_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = fatimaallama_decision_desc
+
+	is_shown = {
+		this = character:710303
+		NOT = { has_character_flag = fatimaallamaisdone }
+	}
+
+	is_valid = {		
+		completely_controls = title:k_ajuraan
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = fatimaallamaisdone
+		
+	add_gold = 1000
+	add_prestige = 500
+
+	add_character_modifier = fatima_queen_pearls_modifier
+	give_nickname = nick_monarch_pearled_light			
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+shamit_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = shamit_decision_desc
+
+	is_shown = {
+		this = character:790124
+		NOT = { has_character_flag = shamitisdone }
+	}
+
+	is_valid = {		
+		completely_controls = title:k_yemen
+		custom_tooltip = {
+			text = shamit_decision_custom
+			POD_vampire_is_defeated = { CHARACTER = character:790296 }
+		}
+		custom_tooltip = {
+			text = shamit_decision_custom2
+			OR = {
+				POD_vampire_is_defeated = { CHARACTER = character:791099 }
+				POD_character_supports_you_for_objectives = {
+					CHARACTER = character:791099
+				}
+				has_relation_lover = character:791099
+			}
+		}		
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		add_character_flag = shamitisdone
+		add_prestige = 200
+		add_pressed_claim = title:e_ashirra
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+fabrizio_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = fabrizio_decision_desc
+
+	is_shown = {
+		this = character:790203
+		NOT = { has_character_flag = fabrizioisdone }
+	}
+
+	is_valid = {		
+		completely_controls = title:d_latium
+		has_faith = faith:viachristi	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = fabrizioisdone
+	
+	add_character_modifier = eternal_cardinal_modifier
+	
+	custom_tooltip = fabrizio_custom_decision
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+ikkenai_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = ikkenai_decision_desc
+
+	is_shown = {
+		this = character:790880
+		NOT = { has_character_flag = ikkenaiisdone }
+	}
+
+	is_valid = {		
+		completely_controls = title:d_julich	
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = ikkenaiisdone
+
+	create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+
+	title:k_saxony = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}	
+	}
+	
+	resolve_title_and_vassal_change = scope:change	
+
+	title:d_julich = { set_de_jure_liege_title = title:k_saxony }
+	
+	custom_tooltip = ikkenai_custom_decision
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+midian_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = midian_decision_desc
+
+	is_shown = {
+		this = character:505090
+		NOT = { has_character_flag = midianisdone }
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = guilelmo_custom_decision
+			current_date >= 1250.1.1
+		}
+			
+		is_independent_ruler = yes
+		has_title = title:c_hamburg
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = midianisdone
+		
+	trigger_event = PODcanon_chars.87
+	
+	custom_tooltip = midian_decision_effect_tooltip
+		
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+varsik_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = varsik_decision_desc
+
+	is_shown = {
+		this = character:790385
+		NOT = { has_character_flag = varsikisdone }
+	}
+
+	is_valid = {			
+		is_independent_ruler = yes
+		has_title = title:c_jerusalem
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+	add_character_flag = varsikisdone
+		
+	trigger_event = PODcanon_chars.89
+	
+	custom_tooltip = varsik_intro_tt
+		
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+abetorius_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+
+	desc = abetorius_decision_desc
+
+	is_shown = {
+		this = character:505106
+		NOT = { has_character_flag = abetoriusisdone }
+	}
+
+	is_valid = {			
+		custom_tooltip = {
+			text = abetorius_decision_custom
+			character:790474 = {
+				is_alive = no
+			}	
+		}
+		
+		custom_tooltip = {
+			text = abetorius_decision_custom2
+			OR = {
+				AND = {
+					has_title = title:c_byzantion
+					highest_held_title_tier >= tier_kingdom
+				}
+				character:790004 = {
+					has_title = title:c_byzantion
+					highest_held_title_tier >= tier_kingdom
+				}			
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		add_character_flag = abetoriusisdone
+		
+		custom_tooltip = {
+			text = abetorius_decision_custom3
+			
+			if = {
+				limit = {	
+					AND = {
+						has_title = title:c_byzantion
+						highest_held_title_tier >= tier_kingdom
+					}
+				}
+				add_piety = 250
+				title:c_byzantion = { change_development_level = 5 }
+			}
+		
+			if = {
+				limit = {
+					character:790004 = {
+						has_title = title:c_byzantion
+						highest_held_title_tier >= tier_kingdom
+					}
+				}
+				add_prestige = 500
+				add_gold = 250
+				character:790004 = {
+					if = {
+						limit = {
+							NOR = {
+								has_relation_friend = root
+								has_relation_best_friend = root
+							}
+						}
+						set_relation_best_friend = { reason = best_friend_counsel_and_support target = root }
+					}
+				}			
+			}
+		}
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+#not needed anymore
+#camilla_ai_decision = {
+#	picture = {
+#		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+#	}
+#	
+#	decision_group_type = major
+#
+#	# Never shown, so it doesn't matter what we write here
+#	title = placeholder
+#	desc = placeholder
+#	confirm_text = placeholder
+#	selection_tooltip = placeholder
+#	
+#	ai_check_interval = 60
+#
+#	cost = { gold = 250 }
+#
+#	is_shown = {
+#		this = character:790101
+#		is_ai = yes
+#		NOT = {
+#			has_title = title:k_romagna
+#		}
+#		is_independent_ruler = yes
+#		
+#	}
+#		
+#	is_valid = {
+#		has_title = title:d_latium
+#		custom_description = {
+#			text = found_kingdom_decision_three_duchies_held
+#			any_held_title = {
+#				count > 2
+#				tier = tier_duchy
+#			}
+#		}
+#		sub_realm_size >= 10		
+#	}
+#	
+#	effect = {
+#	create_title_and_vassal_change = {
+#			type = created
+#			save_scope_as = change
+#			add_claim_on_loss = no
+#		}
+#
+#	title:k_romagna = {
+#		change_title_holder = {
+#			holder = character:790101
+#			change = scope:change
+#		}	
+#	}
+#	
+#	resolve_title_and_vassal_change = scope:change
+#			
+#	}
+#
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 100
+#	}
+#}	
+
+persephone_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = decisions
+	
+    ai_check_interval = 0
+
+	cooldown = { years = 1 }
+	
+    is_shown = {
+		this = character:POD_wraith_02
+	}
+
+    effect = {
+		add_stress = medium_stress_gain
+		if = {
+			limit = { is_imprisoned = yes }
+			release_from_prison = yes
+		}
+		POD_umbra_travel_effect = { LOCATION = flag:hades }
+		add_character_modifier = {
+			modifier = living_in_hades_modifier
+			months = 6
+		}
+		trigger_event = { 
+			id = POD_wraith_maintenance.100
+			months = 6
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+unnamed_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+	sort_order = 1000
+
+	desc = unnamed_decision_desc
+
+	is_shown = {
+		this = character:793085
+		has_character_modifier = unnamed_amnesia_modifier
+	}
+
+	is_valid = {			
+		has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_cult
+			value >= 100 
+		}
+		custom_tooltip = {
+			text = unnamed_decision_prerequisites_tt
+			
+		any_courtier = {
+			count >= 10
+			
+			has_faith = root.faith
+		}
+		}
+		has_trait = schemer
+		
+		domicile ?= {
+			OR = {
+			has_domicile_building = vampire_cult_061
+			has_domicile_building = vampire_cult_06
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	effect = {
+		remove_character_modifier = unnamed_amnesia_modifier
+		
+		trigger_event = PODcanon_chars.94
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+alexander_livonia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = alexander_livonia_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:505082
+		has_character_flag = alexander_war_livonia_flag	
+		title:c_vaucouleurs.holder = { is_ai = yes } #don't usurp players
+	}
+		
+	is_valid = {
+		completely_controls = title:k_ferals_livonia
+		completely_controls = title:c_malbork
+	}
+	
+	effect = {
+		custom_tooltip = alexander_livonia_decision_effect_tooltip
+
+		trigger_event = podregionalevents.21
+
+		remove_character_flag = alexander_war_livonia_flag		
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}	
+
+qarakh_livonia_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = qarakh_livonia_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:790105
+		has_character_flag = qarakh_war_livonia_flag	
+	}
+		
+	is_valid = {
+		completely_controls = title:k_ferals_livonia
+		completely_controls = title:c_malbork
+	}
+	
+	effect = {
+		custom_tooltip = qarakh_livonia_decision_effect_tooltip
+
+		trigger_event = podregionalevents.23
+
+		remove_character_flag = qarakh_war_livonia_flag		
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}	
+
+wang_kyu_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = wang_kyu_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:795046
+		NOT = {
+		has_character_flag = wang_kyu_done_flag	
+		}
+	}
+		
+	is_valid = {
+		completely_controls = title:d_gyoju
+		completely_controls = title:d_gwangju
+		custom_tooltip = {
+			text = wang_kyu_custom_decision
+			character:795047 = { is_alive = no }
+		}		
+	}
+	
+	effect = {
+		add_legitimacy = 850
+		
+		add_pressed_claim = title:e_goryeo
+
+		add_character_flag = wang_kyu_done_flag		
+	}
+
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+
+soo_kyung_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = soo_kyung_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 0
+
+	is_shown = {
+		this = character:793174
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+		}	
+		NOT = {
+		any_character_artifact = {
+			has_variable = flowers_scarlet_ebon
+			rarity = illustrious
+		}			
+		}		
+	}
+		
+	is_valid = {
+		trigger_if = {
+			limit = {
+				any_character_artifact = {
+					has_variable = flowers_scarlet_ebon
+					rarity = famed
+				}
+				}
+			OR = {
+				has_trait = dharma9
+				has_trait = dharma10
+			}
+		}
+		trigger_else = {
+			learning >= 20
+		}
+	}
+	
+	effect = {
+		custom_tooltip = soo_kyung_decision_tt
+		trigger_event = PODcanon_chars.97
+	}
+
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}	
+
+piyau_first_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/tgp_decision_mandala.dds"
+	}
+	
+
+	desc = piyau_first_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 12
+
+	is_shown = {	
+		this = character:791113
+		NOT = { has_character_flag = piyau_first_flag }
+	}
+		
+	is_valid = {
+		has_faith = faith:the_passion_bloodflowers
+		
+		trigger_if = {
+			limit = {
+				is_ai = no
+			}
+			has_title = title:k_hujung_medini
+		}
+		trigger_else = {
+			OR = {
+				has_title = title:k_hujung_medini
+				current_date >= 1235.1.1
+			}
+		}
+	}
+	
+	effect = {
+		custom_tooltip = piyau_first_decision_tt
+		if = {
+			limit = {
+				NOT = { has_trait = conqueror }
+			}
+			POD_become_scripted_conqueror = yes
+		}
+		add_character_flag = piyau_first_flag
+		
+		trigger_event = PODcanon_chars.100
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}	
+
+piyau_second_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/tgp_decision_mandala.dds"
+	}
+	
+
+	desc = piyau_second_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 12
+
+	is_shown = {	
+		this = character:791113
+		has_character_flag = piyau_first_flag 
+		NOT = { has_character_flag = piyau_second_flag }
+	}
+		
+	is_valid = {
+		has_faith = faith:the_passion_bloodflowers
+		custom_description = {
+			text = found_empire_decision_three_kingdoms_held
+			any_held_title = {
+				count >= 3
+				tier = tier_kingdom
+			}
+		}
+	}
+	
+	effect = {
+		custom_tooltip = piyau_first_decision_tt
+		
+		custom_tooltip = piyau_second_decision_tt
+		
+		add_character_flag = piyau_second_flag
+		
+		trigger_event = PODcanon_chars.101
+		
+		custom_tooltip = wheel_ages_political_instability_prevented_tt
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:political_instability_wheel_prevented
+		}		
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}	
+
+piyau_third_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/tgp_decision_mandala.dds"
+	}
+	
+
+	desc = piyau_third_decision_desc
+	decision_group_type = major
+	
+	ai_check_interval = 12
+
+	is_shown = {	
+		this = character:791113
+		has_character_flag = piyau_second_flag 
+		NOT = { has_character_flag = piyau_third_flag }
+	}
+		
+	is_valid = {
+		has_faith = faith:the_passion_bloodflowers
+		has_title = title:h_scarlet_phoenix_court
+		realm_size >= 100
+	}
+	
+	effect = {		
+		custom_tooltip = piyau_third_decision_tt
+		
+		add_character_flag = piyau_third_flag
+		
+		if = {
+			limit = { is_ai = no }
+			set_global_variable = pod_achiev_piyau # Achievement: The Blood of Women
+		}
+		
+		trigger_event = PODcanon_chars.102
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+sun_li_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = sun_li_decision_desc
+	decision_group_type = major
+	sort_order = 100
+	
+	ai_check_interval = 0
+
+	is_shown = {	
+		this = character:793164
+	}
+		
+	is_valid = {
+		has_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_grandmaster
+			value >= 50
+		}
+	}
+	
+	effect = {	
+		add_martial_skill = 1
+	
+		add_trait_xp = {
+			trait = ashen_adventurer
+			track = ashen_grandmaster
+			value >= -50
+		}
+	}
+
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+folch_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	
+
+	desc = folch_decision_desc
+	decision_group_type = major
+	sort_order = 100
+	
+	ai_check_interval = 0
+
+	is_shown = {	
+		this = character:792275
+		NOT = { has_character_flag = folchisdone }
+	}
+		
+	is_valid = {
+		any_prisoner = {
+			this = character:792273
+		}
+	}
+	
+	effect = {	
+		custom_tooltip = folch_decision_effect_tt
+		trigger_event = PODcanon_chars.110
+		add_character_flag = folchisdone
+	}
+
+	#ai_potential = {
+	#	always = yes
+	#}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+
+

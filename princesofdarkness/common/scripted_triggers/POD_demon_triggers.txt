@@ -1,0 +1,123 @@
+﻿has_demonic_liege_trigger = {
+	liege ?= { 
+		OR = {
+			has_trait = demon
+			is_a_cultist = yes 
+		}
+	} 
+}
+
+POD_can_be_converted_by_cult_leader = {
+	NOT = { this = $DEMON$ }
+	NOT = { has_relation_worshipped_demon = $DEMON$ }
+	NOT = { has_relation_rival = $DEMON$ }
+	POD_hostile_mental_interaction_is_shown_custom = {
+		ACTOR = $DEMON$
+		RECIPIENT = this
+	}
+	opinion = {
+		target = $DEMON$
+		value >= 50
+	}
+}
+
+can_be_demonic_possesed = {
+	NOT = { has_trait = demon }
+	NOT = { has_trait = wraith } # As spirits, ghosts cannot suffer demonic possession.
+	NOT = { has_trait = fera } # The souls of werewolves blaze with spiritual power, leaving no room for demons to enter and seize control.
+	NOT = { has_trait = vampire } # The blood of Caine carries a curse imposed by God upon that monstrous race.
+	NOT = { has_trait = fae } # Demons generally find the true fae too alien to possess under any circumstances.
+	NOT = { has_trait = mummy }
+	NOT = { has_trait = kueijin }
+	NOT = { has_trait = fomori }
+	NOT = { has_trait = drone }
+	NOT = { has_trait = gorgon }
+	NOT = { has_trait = kami }
+	NOT = { has_trait = spirit }
+	is_ai = yes
+}
+
+POD_is_demon_or_pseudo_demon = {
+	OR = {
+		has_trait = demon
+		has_character_modifier = decani_modifier
+		has_character_modifier = absalon_svantevit_reborn
+		has_character_modifier = yama_king_modifier
+	}
+}
+
+POD_has_any_resolve_modifier = {
+	OR = {
+		has_character_modifier = resolve0_modifier
+		has_character_modifier = resolve1_modifier
+		has_character_modifier = resolve2_modifier
+		has_character_modifier = resolve3_modifier
+		has_character_modifier = resolve4_modifier
+		has_character_modifier = resolve5_modifier
+		has_character_modifier = resolve6_modifier
+		has_character_modifier = resolve7_modifier
+		has_character_modifier = resolve8_modifier
+		has_character_modifier = resolve9_modifier
+		has_character_modifier = resolve10_modifier
+	}
+}
+
+POD_has_enough_arcana_perk_points = {
+	arcana_lifestyle_perk_points >= $LEVEL$
+}
+
+POD_has_access_to_lore_of_herald = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = namaru_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_herald
+	}
+}
+
+POD_has_access_to_lore_of_life_bringer = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = asharu_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_life_bringer
+	}
+}
+
+POD_has_access_to_lore_of_creation = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = annunaki_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_creation
+	}
+}
+
+POD_has_access_to_lore_of_seer = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = neberu_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_seer
+	}
+}
+
+POD_has_access_to_lore_of_beauty = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = lammasu_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_beauty
+	}
+}
+
+POD_has_access_to_lore_of_living = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = rabisu_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_living
+	}
+}
+
+POD_has_access_to_lore_of_ethereal = {
+	OR = {
+		dynasty ?= { has_dynasty_modifier = halaku_dynasty_modifier }
+		has_global_variable = abyss_broken
+		has_character_flag = learnt_lore_of_ethereal
+	}
+}

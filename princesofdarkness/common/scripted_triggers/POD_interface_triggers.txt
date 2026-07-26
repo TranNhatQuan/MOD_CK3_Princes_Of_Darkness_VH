@@ -1,0 +1,434 @@
+﻿# The link must have been saved via POD_save_new_artifact_as_link
+# need to pass LINK
+POD_character_owns_linked_artifact = {
+	trigger_if = {
+		limit = {
+			POD_artifact_link_exists = {
+				LINK = $LINK$
+			}
+		}
+		character:POD_wraith_01.var:$LINK$ = {
+			custom_description = {
+				text = POD_book_of_nod_decision_custom
+				artifact_owner = prev
+			}
+		}
+	}
+}
+
+POD_artifact_link_exists = {
+	character:POD_wraith_01 ?= {
+		exists = var:$LINK$
+	}
+}
+
+POD_use_nighttime_event_bg = {
+	OR = {
+		POD_day_background_trigger = no
+		trigger_if = {
+			limit = { exists = scope:bg_override_char }
+			scope:bg_override_char = { POD_day_background_trigger = no }
+		}
+	}
+}
+
+POD_use_nighttime_event_bg_activity = {
+	#OR = {
+		#POD_day_background_trigger = no
+		scope:host = { POD_day_background_trigger = no }
+	#}
+}
+
+POD_khans_of_the_steppe_event_bg_trigger = {
+	OR = {
+		#government_has_flag = government_is_nomadic
+		faith = faith:viayasaq
+		faith = faith:viaerronis
+		#faith = faith:tariqelbedouin # doesn't fit the steppe horse-lord theme probably
+		faith = faith:qorjin_baghatur
+		# Matasuntha & Morrow clause:
+		AND = {
+			OR = {
+				culture = culture:hunnic
+				culture = culture:mogyer
+			}
+			faith = faith:viaferitas
+		}
+	}
+}
+
+POD_can_use_non_CFP_throne_rooms = {
+	trigger_if = {
+		limit = { exists = global_var:cfp_is_loaded }
+		NOR = { 
+			POD_CFP_has_graphical_papal_culture_group_trigger = yes # CFP papal
+			POD_CFP_has_graphical_hre_culture_group_trigger = yes # CFP hre
+			POD_CFP_has_graphical_byzantine_culture_group_trigger = yes # CFP byzantine/byzantine_mena/byzantine_pagan
+			POD_CFP_has_graphical_norman_culture_group_trigger = yes # CFP norman
+			POD_CFP_has_graphical_goidelic_culture_group_trigger = yes # CFP goidelic
+			AND = { # CFP norse
+				POD_CFP_has_graphical_norse_culture_group_trigger = yes
+				NOT = { religion = religion:codeoftremere_religion }
+			}
+			POD_CFP_has_graphical_iberian_culture_group_trigger = yes # CFP iberian/andalusian
+			AND = { # CFP west_african
+				POD_CFP_has_graphical_west_african_culture_group_trigger = yes
+				faith = { is_POD_muslim_religion_trigger = no }
+			}
+			AND = { # CFP east_african
+				POD_CFP_has_graphical_east_african_culture_group_trigger = yes
+				faith = { is_POD_muslim_religion_trigger = no }
+			}
+		}
+	}
+	trigger_else = {
+		always = yes
+	}
+}
+
+POD_uses_steppe_throne_room = {
+	has_mpo_dlc_trigger = yes
+	OR = {
+		government_has_flag = government_is_tribal
+		POD_khans_of_the_steppe_event_bg_trigger = yes
+	}
+}
+
+POD_uses_chinese_throne_room = {
+	has_tgp_dlc_trigger = yes
+	OR = {
+		capital_county ?= {
+			OR = {
+				culture = { has_graphical_chinese_culture_group_trigger = yes }
+				# Also used for East Asian throne rooms
+				title_province = { 
+					geographical_region = world_asia
+					NOT = { geographical_region = world_asia_japan }
+					NOT = { geographical_region = world_asia_southeast }
+				}
+			}
+		}
+	}
+}
+
+POD_uses_japanese_throne_room = {
+	has_tgp_dlc_trigger = yes
+	capital_county ?= {
+		OR = {
+			culture = { has_graphical_japanese_culture_group_trigger = yes }
+			# Also used for East Asian ceremonial regents
+			title_province = { 
+				geographical_region = world_asia
+				NOT = { geographical_region = world_asia_southeast }
+			}
+		}
+	}
+}
+
+POD_uses_SEA_throne_room = {
+	has_tgp_dlc_trigger = yes
+	capital_county ?= {
+		OR = {
+			title_province = { geographical_region = world_asia_southeast }
+			culture = { has_building_gfx = southeast_asian_building_gfx }
+		}
+	}
+}
+
+POD_uses_mediterranean_throne_room = {
+	capital_county ?= {
+		OR = {
+			culture = { has_graphical_mediterranean_culture_group_trigger = yes }
+			AND = {
+				culture = { has_graphical_iberian_culture_group_trigger = yes }
+				faith = { is_POD_muslim_religion_trigger = no }
+			}
+			title_province = { steppe_building_gfx_use_mediterranean_trigger = yes }
+		}
+	}
+}
+
+POD_uses_mena_throne_room = {
+	capital_county ?= {
+		OR = {
+			culture = {
+				OR = {
+					has_graphical_mena_culture_group_trigger = yes
+					has_graphical_iranian_culture_group_trigger = yes
+					has_graphical_african_culture_group_trigger = yes
+					AND = {
+						has_graphical_iberian_culture_group_trigger = yes
+						prev.faith = { is_POD_muslim_religion_trigger = yes }
+					}
+				}
+			}
+			AND = {
+				culture = {
+					has_graphical_steppe_culture_group_trigger = yes
+				}
+				title_province = {
+					steppe_building_gfx_use_mediterranean_trigger = no
+					steppe_building_gfx_use_indian_trigger = no
+					steppe_building_gfx_use_western_trigger = no
+					steppe_building_gfx_use_east_asian_trigger = no
+					steppe_building_gfx_use_japanese_trigger = no
+					steppe_building_gfx_use_southeast_asian_trigger = no
+				}
+			}
+		}
+	}
+}
+
+POD_uses_western_throne_room = {
+	capital_county ?= {
+		OR = {
+			culture = { has_graphical_western_culture_group_trigger = yes }
+			culture = { has_graphical_norse_culture_group_trigger = yes }
+			title_province = { steppe_building_gfx_use_western_trigger = yes }
+		}
+	}
+}
+
+POD_uses_indian_throne_room = {
+	capital_county ?= {
+		OR = {
+			culture = { has_graphical_india_culture_group_trigger = yes }
+			title_province = { steppe_building_gfx_use_indian_trigger = yes }
+		}
+	}
+}
+
+
+###### Custom idle animations
+
+# for animations that don't need fat/dwarf variants
+POD_has_generic_idle_animation = {
+	is_alive = yes
+	var:custom_idle ?= $FLAG$
+	NOT = { has_trait = pregnant }
+}
+
+# for animations that have fat/dwarf variants
+POD_has_default_idle_animation = {
+	is_alive = yes
+	var:custom_idle ?= $FLAG$
+	should_use_fat_animation = no
+	should_use_fat_dwarf_animation = no
+	NOT = { has_trait = pregnant }
+}
+
+POD_has_fat_idle_animation = {
+	is_alive = yes
+	var:custom_idle ?= $FLAG$
+	should_use_fat_animation = yes
+	NOT = { has_trait = pregnant }
+}
+
+POD_has_fat_dwarf_idle_animation = {
+	is_alive = yes
+	var:custom_idle ?= $FLAG$
+	should_use_fat_dwarf_animation = yes
+	NOT = { has_trait = pregnant }
+}
+
+POD_has_fat_or_dwarf_idle_animation = {
+	is_alive = yes
+	var:custom_idle ?= $FLAG$
+	OR = {
+		should_use_fat_animation = yes
+		should_use_fat_dwarf_animation = yes
+	}
+	NOT = { has_trait = pregnant }
+}
+
+POD_uses_torpor_corpse_animation = {
+	OR = {
+		POD_is_vampire_trigger = yes
+		has_trait = abomination
+		#POD_splat_is_fera_trigger = yes # seems to break some characters
+	}
+}
+
+
+POD_character_age_is_unknown = {
+	#OR = {
+		POD_is_demon_trigger = yes
+	#}
+}
+
+POD_character_age_predates_mankind = {
+	OR = {
+		this = character:795111 #Mokole-Mbembe
+		this = character:793509 #Hunger of Qyrl
+	}
+}
+
+POD_character_age_predates_history = {
+	#OR = {
+		POD_has_caine_character_sheet = yes
+	#}
+}
+
+POD_character_age_is_ancient = {
+	age > 1000
+}
+
+POD_has_caine_character_sheet = {
+	# Optimization since most of those characters are dead
+	trigger_if = {
+		limit = { is_alive = no }
+		OR = {
+			# Dead characters
+			this = character:505001 # Caine
+			this = character:505002 # Lilith
+			has_trait = vampgeneration2
+			has_trait = vampgeneration3
+			has_trait = dharma10
+			# this = character:505003 # Enoch
+			# this = character:505004 # Irad
+			# this = character:505005 # Zillah
+			# this = character:505008 # Saulot
+			# this = character:505009 # Haqim
+			# this = character:791695 # Ashur
+			# this = character:505015 # Brujah
+			# this = character:505016 # Troile
+			# this = character:505017 # Cappadocius
+			# this = character:505013 # Ennoia
+			# this = character:505019 # Lau-Som-Bheu
+			# this = character:505007 # Malkav
+			# this = character:505011 # Absimiliard
+			# this = character:505020 # Zapathasura
+			# this = character:505012 # Set
+			# this = character:505006 # Arikel
+			# this = character:505021 # Tzimisce
+			# this = character:505014 # Ventru
+			# this = character:505022 # Tremere
+			# this = character:791111 # Xue
+			this = character:791150 # Osiris
+			this = character:POD_fae_character_1000 # Danu
+			this = character:POD_fae_character_1001 # Nuada
+			this = character:POD_fae_character_1002 # Goibhniu
+			this = character:POD_fae_character_1003 # Dian Cecht
+			this = character:POD_fae_character_1004 # Culann
+			this = character:POD_fae_character_1005 # Dagda
+			this = character:POD_fae_character_1006 # Bodb Derg
+			this = character:POD_fae_character_1007 # Brigit
+			this = character:POD_fae_character_1008 # Ruadán
+			this = character:POD_fae_character_1009 # Ernmas
+			this = character:POD_fae_character_1010 # Ogma
+			this = character:POD_fae_character_1011 # Cairbre
+			this = character:POD_fae_character_04 # Dougal
+			this = character:POD_fae_character_09 # Balor
+			this = character:POD_fae_character_10 # Eithlinn
+			this = character:POD_fae_character_11 # Cian
+			this = character:POD_fae_character_12 # Lugh
+			this = character:POD_fae_character_13 # Alynyad
+			this = character:POD_fae_character_17 # Scathach ni Uanaind
+			this = character:POD_fae_character_18 # Morrigan
+			this = character:POD_fae_character_83 # Mathonwy
+			this = character:POD_fae_character_84 # Math fab Mathonwy
+			this = character:POD_fae_character_85 # Dôn
+			this = character:POD_fae_character_1024 # Odin
+			this = character:POD_fae_character_1025 # Heimdallr
+			this = character:POD_fae_character_1023 # Sigi
+			# Living characters
+			this = character:790356 # Ur-Shulgi
+			this = character:505075 # Baba Yaga
+			this = character:790368 # Nergal
+			this = character:POD_wraith_01 # Charon
+			this = character:POD_wraith_03 # Yu Huang
+		}
+	}
+	trigger_else = {
+		OR = {
+			this = character:790356 # Ur-Shulgi
+			this = character:505075 # Baba Yaga
+			this = character:790368 # Nergal
+			this = character:POD_wraith_01 # Charon
+			this = character:POD_wraith_03 # Yu Huang
+			has_variable = caine_character_sheet
+		}
+	}
+}
+
+POD_has_potential_mortal_herd_trigger = {
+	POD_is_vampire_trigger = yes
+	num_of_relation_herd_member < max_herd_cap
+	NOT = { any_scheme = { scheme_type = herdify_mortal } }
+	any_courtier_or_guest = {
+		prev = {
+			is_character_interaction_valid = {
+				recipient = prev
+				interaction = POD_herdify_mortal_interaction
+			}
+		}
+	}
+}
+
+POD_has_potential_dreamer_trigger = {
+	can_gain_glamour_from_dreamers_trigger = yes
+	num_of_relation_dreamer_member < max_herd_cap
+	NOT = { any_scheme = { scheme_type = musing_mortal } }
+	any_courtier_or_guest = {
+		prev = {
+			is_character_interaction_valid = {
+				recipient = prev
+				interaction = POD_musing_mortal_interaction
+			}
+		}
+	}
+}
+
+POD_has_any_clothing_color = {
+	OR = {
+		has_variable = POD_portrait_clothing_1_r
+		has_variable = POD_portrait_clothing_2_r
+		has_variable = POD_portrait_clothing_3_r
+		has_variable = POD_portrait_clothing_4_r
+		has_variable = POD_portrait_clothing_5_r
+		has_variable = POD_portrait_clothing_6_r
+		has_variable = POD_portrait_clothing_7_r
+	}
+}
+
+
+##### Triggers for domicile building asset = {} blocks
+# These are in descending priority
+
+# Priority 1
+POD_domicile_uses_landed_yurt_assets = {
+	owner = { is_landed_or_landless_administrative = yes }
+	owner = { POD_khans_of_the_steppe_event_bg_trigger = yes }
+}
+
+# Priority 2
+POD_domicile_uses_landed_mena_assets = {
+	owner = { is_landed_or_landless_administrative = yes }
+	owner.culture = {
+		OR = {
+			has_graphical_iranian_culture_group_trigger = yes
+			has_graphical_mena_culture_group_trigger = yes
+			has_graphical_steppe_culture_group_trigger = yes
+			has_graphical_african_culture_group_trigger = yes
+			has_graphical_india_culture_group_trigger = yes
+			has_graphical_iberian_culture_group_trigger = yes
+		}
+	}
+}
+
+# Priority 3
+POD_domicile_uses_landed_western_assets = {
+	owner = { is_landed_or_landless_administrative = yes }
+	owner.culture = {
+		OR = {
+			has_graphical_western_culture_group_trigger = yes
+			has_graphical_norse_culture_group_trigger = yes
+		}
+	}
+}
+
+# Priority 4
+# used as a fallback for landed domiciles
+POD_domicile_uses_landed_byzantine_assets = {
+	owner = { is_landed_or_landless_administrative = yes }
+}

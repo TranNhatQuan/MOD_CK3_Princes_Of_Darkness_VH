@@ -1,0 +1,37 @@
+﻿POD_set_military_order_precept = {
+	set_variable = {
+		name  = military_order_precept
+		value = $PRECEPT$
+	}
+	set_variable = {
+		name  = military_order_rank
+		value = 1
+	}
+}
+
+# need to pass WAR
+POD_gain_ashen_grandmaster_xp_from_war = {
+	if = {
+		limit = {
+			has_trait = ashen_adventurer
+			is_landless_adventurer = yes
+			POD_is_ashen_grandmaster = yes
+			$WAR$ = {
+				war_contribution = {
+					target = prev
+					value >= 25
+				}
+			}
+		}
+		send_interface_message = {
+			type = send_interface_message
+			title = POD_grandmaster_war_xp_toast
+			left_icon = this
+			add_trait_xp = {
+				trait = ashen_adventurer
+				track = ashen_grandmaster
+				value = 5
+			}
+		}
+	}
+}

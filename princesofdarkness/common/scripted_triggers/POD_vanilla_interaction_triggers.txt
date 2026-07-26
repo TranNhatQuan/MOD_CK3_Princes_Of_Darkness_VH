@@ -1,0 +1,135 @@
+﻿# Moved to a dedicated file to reduce the footprint of our diffs with vanilla files
+
+##### 00_artifact_interactions
+
+POD_gift_artifact_interaction_is_valid = {
+	trigger_if = {
+		limit = {
+			exists = scope:target
+			scope:actor = { NOT = { has_trait = wraith } }
+			scope:recipient = { has_trait = wraith }
+		}
+		OR = {
+			scope:actor = {
+				trigger_if = {
+					limit = { scope:target = { rarity = illustrious } }
+					has_perk = sanctify_chattel_perk
+				}
+				trigger_else_if = {
+					limit = { scope:target = { rarity = famed } }
+					has_perk = princely_reflection_perk
+				}
+				trigger_else_if = {
+					limit = { scope:target = { rarity = masterwork } }
+					has_perk = majestic_reflection_perk
+				}
+				trigger_else = {
+					has_perk = modest_reflection_perk
+				}
+			}
+			scope:recipient = { has_perk = obliviate_perk }
+		}
+	}
+	trigger_if = {
+		limit = {
+			scope:actor = { has_trait = wraith }
+			scope:recipient = { NOT = { has_trait = wraith } }
+		}
+		scope:actor = { has_perk = cache_perk }
+	}
+}
+
+POD_buy_artifact_claim_is_shown = {
+	OR = {
+		has_perk = accomplished_forger_perk
+		has_perk = a_job_done_right_perk
+		has_perk = chains_of_loyalty_perk
+		has_perk = sticky_fingers_perk
+		has_perk = psychometry_1_perk
+		has_perk = mark_as_mine_perk
+		has_perk = daimyos_law_perk
+		has_perk = rift_collection_perk
+		has_character_flag = special_can_buy_claim_perk
+		any_directly_owned_province = {
+			has_building_with_flag = building_unlocks_buying_artifact_claims
+		}
+		this = character:792858
+		employs_court_position = master_thief_camp_officer
+	}
+}
+
+
+##### 00_prison_interactions
+
+POD_imprison_interaction_is_shown = {
+	#Give time for very precarious start position to flourish instead of insta prison
+	trigger_if = {
+		limit = {
+			years_from_game_start < 15
+			POD_incompatible_splats_trigger = no
+		}
+		scope:actor = {
+			is_ai = no
+		}
+	}
+}
+
+POD_imprison_interaction_is_valid_showing_failures_only = {
+	POD_damage_spirit_trigger = yes
+	NOT = { scope:actor = { has_relation_innocent_tormentor = scope:recipient } }
+}
+
+POD_move_to_dungeon_interaction_is_valid_showing_failures_only = {
+	scope:actor = {
+		custom_tooltip = {
+			text = house_arrest_only_tooltip
+			NOT = { faith = { has_doctrine_parameter = house_arrest_only } }
+		}
+	}
+}
+
+POD_ransom_interaction_is_shown = {
+	NOT = {
+		POD_inquisitor_on_unholy_trigger = { ACTOR = scope:actor RECIPIENT = scope:recipient }
+	}
+}
+
+POD_release_from_prison_interaction_is_shown = {
+	NAND = {
+		scope:actor = { is_ai = yes }
+		POD_inquisitor_on_unholy_trigger = { ACTOR = scope:actor RECIPIENT = scope:recipient }
+	}
+}
+
+POD_execute_prisoner_interaction_is_shown = {
+	scope:actor = {
+		trigger_if = {
+			limit = { is_ai = yes }
+			POD_is_willing_to_kill_trigger = yes
+		}
+	}
+}
+
+POD_torture_interaction_is_shown = {
+	scope:actor = {
+		trigger_if = {
+			limit = { is_ai = yes }
+			POD_is_willing_to_commit_heinous_acts_trigger = yes
+		}
+	}
+}
+
+
+##### 00_scheme_interactions
+
+POD_start_abduct_is_shown = {
+	OR = {
+		has_perk = mesmerize_perk 
+		has_perk = oubliette_perk
+		has_perk = daimyos_law_perk
+		has_perk = arcana_scry_perk
+		has_perk = touch_of_sin_perk
+		dynasty ?= { has_dynasty_perk = brujah_legacy_3 }
+		has_perk = obsession_perk
+	}
+}

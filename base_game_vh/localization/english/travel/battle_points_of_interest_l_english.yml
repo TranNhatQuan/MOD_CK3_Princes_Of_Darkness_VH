@@ -1,0 +1,161 @@
+﻿l_english:
+ ### Battle Poi - BP3
+  TRAVEL_POINT_OF_INTEREST_TT_poi_battles: "#T Trận chiến tại $BattlePoiProvince$#!\n$BattlePoiInfo$\n$BattlePoiDescription$\n\n"
+  BattlePoiInfo: "#emp $BattlePoiVictoriousSide$\n$BattlePoiLosingSide$\n$BattlePoiDate$#!"
+  BattlePoiVictoriousSide: "Bên chiến thắng: [Province.MakeScope.Var('battle_poi_winner').Char.GetName]"
+  BattlePoiLosingSide: "Bên bại trận: [Province.MakeScope.Var('battle_poi_loser').Char.GetName]"
+  BattlePoiDate: "Ngày: [Province.Custom('OrdinalIndicatorPoI')] tháng [Province.Custom('MonthBattlePoI')], năm [Province.MakeScope.Var('battle_poi_date_year').GetValue] SCN"
+  BattlePoiDescription: "#weak [Province.Custom('BattlePoIDescriptionLocIntro')] [Province.Custom('BattlePoIDescriptionLocMid')] [Province.Custom('BattlePoIDescriptionLocOutcome')] [Province.Custom('BattlePoIDescriptionLocOutro')]#!"
+
+
+  poi_battles.visit: "Đã viếng thăm chiến trường tại [province.GetNameNoTooltip]"
+  poi_battles.learn: "Học hỏi từ trận chiến tại [province.GetNameNoTooltip]"
+  OrdinalIndicatorPoIST: "[Province.MakeScope.Var('battle_poi_date_day').GetValue]"
+  OrdinalIndicatorPoIND: "[Province.MakeScope.Var('battle_poi_date_day').GetValue]"
+  OrdinalIndicatorPoIRD: "[Province.MakeScope.Var('battle_poi_date_day').GetValue]"
+  OrdinalIndicatorPoIFallback: "[Province.MakeScope.Var('battle_poi_date_day').GetValue]"
+
+  BattlePoiProvince: "[Province.GetNameNoTooltip]"
+
+  BattlePoiCommander: "[Province.MakeScope.Var('battle_poi_winner').Char.GetTitledFirstNameNoTooltip]"
+  BattlePoiCommanderHisHer: "[Province.MakeScope.Var('battle_poi_winner').Char.GetHerHis]"
+  BattlePoiCommanderCulture: "[Province.MakeScope.Var('battle_poi_winner').Char.GetCulture.GetNameNoTooltip]"
+  BattlePoiEnemyCommander: "[Province.MakeScope.Var('battle_poi_loser').Char.GetTitledFirstNameNoTooltip]"
+  BattlePoiEnemyCommanderSheHe: "[Province.MakeScope.Var('battle_poi_loser').Char.GetSheHe]"
+  BattlePoiEnemyCommanderHisHer: "[Province.MakeScope.Var('battle_poi_loser').Char.GetHerHis]"
+  BattlePoiEnemyCommanderCulture: "[Province.MakeScope.Var('battle_poi_loser').Char.GetCulture.GetNameNoTooltip]"
+
+  BattlePoiBraveKnight: "[Province.MakeScope.Var('battle_poi_brave_knight').Char.GetName]"
+
+ # Intro
+  BattlePoiDescriptionIntro1: "Hai phe giao tranh tại $BattlePoiProvince$, một bên do $BattlePoiCommander$ chỉ huy, bên còn lại do $BattlePoiEnemyCommander$ lãnh đạo."
+  BattlePoiDescriptionIntroAttacker2: "$BattlePoiCommander$ phát động một đợt tấn công dữ dội nhằm vào quân đội của $BattlePoiEnemyCommander$."
+  BattlePoiDescriptionIntroDefender2: "$BattlePoiCommander$ tổ chức một tuyến phòng thủ xuất sắc để chống lại đạo quân đang tiến đến của $BattlePoiEnemyCommander$."
+  BattlePoiDescriptionIntroAttackerFallback: "$BattlePoiCommander$ dũng cảm dẫn dắt binh sĩ của $BattlePoiCommanderHisHer$ xông lên tấn công đạo quân $BattlePoiEnemyCommanderCulture$ do $BattlePoiEnemyCommander$ chỉ huy."
+  BattlePoiDescriptionIntroDefenderFallback: "$BattlePoiCommander$ dũng cảm dẫn dắt binh sĩ của $BattlePoiCommanderHisHer$ phòng thủ trước đạo quân $BattlePoiEnemyCommanderCulture$ của $BattlePoiEnemyCommander$."
+
+ # Key Moment
+  BattlePoiDescriptionLocArchers: "Khoảnh khắc then chốt của trận chiến là khi các cung thủ $BattlePoiCommanderCulture$ luồn vòng qua được kẻ địch, "
+  BattlePoiDescriptionLocHeavyInfantry: "Trận chiến được định đoạt khi một đội bộ binh nặng $BattlePoiCommanderCulture$ phá vỡ hàng ngũ đối phương,"
+  BattlePoiDescriptionLocLightCavalry: "Kết cục được quyết định khi kỵ binh $BattlePoiCommanderCulture$ vòng ra sau đội hình quân địch,"
+  BattlePoiDescriptionLocHeavyCavalry: "Trận chiến khép lại khi kỵ binh nặng $BattlePoiCommanderCulture$ xé toạc chiến tuyến và lao thẳng vào trung tâm đội hình đối phương,"
+  BattlePoiDescriptionLocPikemen: "Chiến thắng được đảm bảo khi đội thương binh $BattlePoiCommanderCulture$ đẩy lùi đợt xung phong của kẻ địch,"
+  BattlePoiDescriptionLocArchersKnight: "Khoảnh khắc then chốt của trận chiến là khi các cung thủ $BattlePoiCommanderCulture$ do $BattlePoiBraveKnight$ chỉ huy luồn vòng qua được kẻ địch, "
+  BattlePoiDescriptionLocHeavyInfantryKnight: "Trận chiến được định đoạt khi một đội bộ binh nặng $BattlePoiCommanderCulture$ do $BattlePoiBraveKnight$ dẫn đầu phá vỡ hàng ngũ đối phương,"
+  BattlePoiDescriptionLocLightCavalryKnight: "Kết cục được quyết định khi kỵ binh $BattlePoiCommanderCulture$ do $BattlePoiBraveKnight$ chỉ huy vòng ra sau đội hình quân địch,"
+  BattlePoiDescriptionLocHeavyCavalryKnight: "Trận chiến khép lại khi kỵ binh nặng $BattlePoiCommanderCulture$ do $BattlePoiBraveKnight$ dẫn đầu xé toạc chiến tuyến và lao thẳng vào trung tâm đội hình đối phương,"
+  BattlePoiDescriptionLocPikemenKnight: "Chiến thắng được đảm bảo khi đội thương binh $BattlePoiCommanderCulture$ do $BattlePoiBraveKnight$ chỉ huy đẩy lùi đợt xung phong của kẻ địch,"
+  BattlePoiDescriptionLocVarangian: "Trận chiến kết thúc khi một toán Vệ binh Varangian do $BattlePoiBraveKnight$ dẫn đầu xuyên phá chiến tuyến và tiến sâu vào đội hình đối phương,"
+  BattlePoiDescriptionLocBerserker: "Trận chiến bất ngờ rẽ sang hướng khác khi $BattlePoiBraveKnight$ lao thẳng qua hàng ngũ quân $BattlePoiEnemyCommanderCulture$,"
+  BattlePoiDescriptionLocMidFallback: "Hai bên bào mòn lẫn nhau, và cuối cùng quân $BattlePoiCommanderCulture$ bao vây được kẻ địch"
+
+ # Outcome
+  BattlePoiDescriptionLocOutcomeBerserker: "một mình phá tan tinh thần quân địch khi hạ gục hàng chục chiến binh đối phương,"
+  BattlePoiDescriptionLocOutcomeBerserkerFled: "và một mình phá tan tinh thần quân địch khi hạ gục hàng chục chiến binh đối phương."
+  BattlePoiDescriptionLocOutcomeDevastation: "tiêu diệt hoàn toàn quân thù,"
+  BattlePoiDescriptionLocOutcomeDevastationFled: "và tiêu diệt đội quân đối phương."
+  BattlePoiDescriptionLocOutcomeChaos: "gây ra tổn thất nặng nề cho kẻ địch,"
+  BattlePoiDescriptionLocOutcomeChaosFled: "và gây ra tổn thất nặng nề cho kẻ địch."
+  BattlePoiDescriptionLocOutcomeLoss: "làm tan vỡ tinh thần chiến đấu của đối phương,"
+  BattlePoiDescriptionLocOutcomeLossFled: "và làm tan vỡ tinh thần chiến đấu của đối phương."
+
+ # Outro
+  BattlePoiDescriptionLocOutroImprisoned: "và bắt giữ $BattlePoiEnemyCommander$."
+  BattlePoiDescriptionLocOutroSlain: "và giết chết $BattlePoiEnemyCommander$."
+  BattlePoiDescriptionLocOutroFledChaos: "Giữa cơn hỗn loạn, $BattlePoiEnemyCommander$ đã kịp thời đào thoát cùng những cận thần thân cận nhất của $BattlePoiCommanderHisHer$."
+  BattlePoiDescriptionLocOutroFledOrganized: "Dù chịu tổn thất nặng nề, $BattlePoiEnemyCommander$ vẫn kịp tổ chức một cuộc rút lui có trật tự."
+
+
+  MonthBattlePoIJanuary: "Tháng Một"
+  MonthBattlePoIFebruary: "Tháng Hai"
+  MonthBattlePoIMarch: "Tháng Ba"
+  MonthBattlePoIApril: "Tháng Tư"
+  MonthBattlePoIMay: "Tháng Năm"
+  MonthBattlePoIJune: "Tháng Sáu"
+  MonthBattlePoIJuly: "Tháng Bảy"
+  MonthBattlePoIAugust: "Tháng Tám"
+  MonthBattlePoISeptember: "Tháng Chín"
+  MonthBattlePoIOctober: "Tháng Mười"
+  MonthBattlePoINovember: "Tháng Mười Một"
+  MonthBattlePoIDecember: "Tháng Mười Hai"
+
+ # Historical Battles
+  TRAVEL_POINT_OF_INTEREST_TT_poi_battles_historical: "#T $TRAVEL_POINT_OF_INTEREST_TT_poi_battles_historical_name$#!\n$TRAVEL_POINT_OF_INTEREST_TT_poi_battles_historical_desc$\n\n"
+ 
+  TRAVEL_POINT_OF_INTEREST_TT_poi_battles_historical_name: "[Province.Custom('BattlePoiNameHistorical')]"
+  TRAVEL_POINT_OF_INTEREST_TT_poi_battles_historical_desc: "[Province.Custom('BattlePoIDescriptionHistorical')]"
+
+  travel_point_historical_name_visit_message: "[ROOT.Char.GetCurrentLocation.Custom('BattlePoiNameHistorical')]"
+
+
+  BattlePoIHistoricalNameTours: "Trận Tours"
+  BattlePoIHistoricalDescTours: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '131721' ).GetFirstNameNicknamed]\nThất bại: Abd al-Rahman al-Ghafiqi\nNgày: 10 tháng Mười, năm 732 SCN#!\n#weak Trận chiến nơi Karl Búa Tạ chặn đứng cuộc xâm lược của người Umayyad vào nước Pháp, tại các con sông Clain và Vienne. Tương truyền rằng quân của Karl đứng vững như một bức tường, chém ngã kỵ binh hạng nặng Umayyad đang xung phong. Sau khi truy đuổi và giết chết vị chỉ huy địch, quân đối phương đã tan rã và tháo chạy khỏi chiến trường.#!"
+
+  BattlePoIHistoricalNameLechfeld: "Trận Lechfeld"
+  BattlePoIHistoricalDescLechfeld: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '1282' ).GetTitledFirstName]\nThất bại: [GetScriptedCharacterByHistoryID( '460' ).GetFirstName] [GetScriptedCharacterByHistoryID( '460' ).GetDynastyName]\nNgày: 10 tháng Tám, năm 955 SCN#!\n#weak Một trận chiến đẫm máu giữa quân đội của Vua Otto xứ Sachsen và quân Hungary. Sau những tổn thất nặng nề ở cả hai phía, quân Hungary tháo chạy khi sắp bị bao vây và cục diện chiến trường đảo chiều bất lợi cho họ.\n\nSau khi trận chiến kết thúc, nhiều tướng lĩnh Hungary bị bắt và xử tử, và mối đe dọa Magyar kéo dài đối với Tây Âu cuối cùng cũng chấm dứt.#!"
+
+  BattlePoIHistoricalNameHastings: "Trận Hastings"
+  BattlePoIHistoricalDescHastings: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '140' ).GetFirstName] [GetScriptedCharacterByHistoryID( '140' ).GetDynastyName]\nThất bại: [GetScriptedCharacterByHistoryID( '122' ).GetFullName]\nNgày: 14 tháng Mười, năm 1066 SCN#!\n#weak Trận Hastings là một trong những trận đánh then chốt trong quá trình William vươn lên nắm quyền tại Anh. Buộc phải giao chiến trên địa hình dốc cao, quân Norman gặp nhiều khó khăn và thậm chí đã có lúc phải rút lui, nhưng William đã kịp thời tái tổ chức và phát động một đợt phản công vào quân Anh.\n\nBị áp đảo bởi lực lượng đối phương, Harold tử trận cùng với hai người anh em của mình là [GetScriptedCharacterByHistoryID( '132' ).GetFirstNameNoTooltip] và [GetScriptedCharacterByHistoryID( '130' ).GetFirstNameNoTooltip], để lại ngai vàng nước Anh trống rỗng.#!"
+
+  BattlePoIHistoricalNameStamfordBridge: "Trận Stamford Bridge"
+  BattlePoIHistoricalDescStamfordBridge: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '122' ).GetFullName]\nThất bại: [GetScriptedCharacterByHistoryID( '102531' ).GetNameNicknamed]\nNgày: 25 tháng Chín, năm 1066 SCN#!\n#weak Trận Stamford Bridge là một trong những trận chiến quyết định giữa ba ứng viên cho ngai vàng nước Anh: William xứ Normandy, Harald xứ Na Uy và Harold xứ Anh. Hành quân gấp rút lên phía bắc, Harold đã bất ngờ tập kích quân Na Uy và buộc họ phải giao chiến trong tình thế hoàn toàn không chuẩn bị.\n\nHarald bị giết bởi một mũi tên xuyên qua cổ họng, và đồng minh người Anh của ông, [GetScriptedCharacterByHistoryID( '124' ).GetFirstNameNoTooltip] — em trai của Harold — cũng tử trận. Quân đội Na Uy, mất đi các chỉ huy, đã bị tiêu diệt hoàn toàn sau trận chiến.#!"
+
+  BattlePoIHistoricalNameManzikert: "Trận Manzikert"
+  BattlePoIHistoricalDescManzikert: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '3040' ).GetFirstName] [GetScriptedCharacterByHistoryID( '3040' ).GetDynastyName]\nThất bại: [GetScriptedCharacterByHistoryID( '1734' ).GetFullName]\nNgày: 26 tháng Tám, năm 1071 SCN#!\n#weak Được đăng quang Hoàng đế Byzantine vào năm 1068, Romanos phát động một chiến dịch chống lại các cuộc xâm nhập của người Thổ vào Anatolia. Sau những thành công hạn chế, ông quyết định tìm kiếm một chiến thắng mang tính quyết định trong trận chiến với Arp Arslan của Đế chế Seljuk gần Manzikert.\n\nBị phản bội bởi một trong các chỉ huy rút lui cùng phần lớn quân đội, Romanos bị quân Hồi giáo bắt giữ. Dù sau đó được thả, ông bị phế truất, chọc mù, lưu đày và cuối cùng qua đời vì vết thương của mình.#!"
+
+  BattlePoIHistoricalNameYarmuk: "Trận Yarmuk"
+  BattlePoIHistoricalDescYarmuk: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '163015' ).GetFullName]\nThất bại: [GetScriptedCharacterByHistoryID( '145071' ).GetFullName]\nNgày: 20 tháng Tám, năm 636 SCN#!\n#weak Trận Yarmuk là một trong những trận đánh quan trọng nhất trong lịch sử Byzantine. Thất bại mang tính quyết định này đã dẫn đến việc mất Syria và Ai Cập, đồng thời mở đường cho sự bành trướng mạnh mẽ của Đế chế Ả Rập.\n\nKéo dài suốt 6 ngày, ban đầu cục diện chiến trường nghiêng về phía quân Byzantine, nhưng khi ngày thứ năm bắt đầu, quân Hồi giáo chuyển từ thế phòng thủ sang tấn công. Sang ngày thứ sáu, họ tung toàn bộ kỵ binh vào một đòn xung phong táo bạo, phá vỡ đội hình Byzantine.\n\nTinh thần tan rã, binh sĩ Byzantine rơi xuống khe núi, chết đuối hoặc bị quân địch giết hại khi tháo chạy khỏi chiến trường.#!"
+
+  BattlePoIHistoricalNameDandanaqan: "Trận Dandanaqan"
+  BattlePoIHistoricalDescDandanaqan: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '3036' ).GetFullName]\nThất bại: [GetScriptedCharacterByHistoryID( '144129' ).GetFullName]\nNgày: 23 tháng Năm, năm 1040 SCN#!\n#weak Một trận chiến quan trọng giữa thế lực Seljuk đang trỗi dậy ở miền bắc Ba Tư và Đế chế Ghaznavid. Sau khi đánh bật quân Seljuk trong các trận đầu, quân Ghaznavid bắt đầu tranh giành chiến lợi phẩm bỏ lại.\n\nTrong tình trạng rối loạn và không sẵn sàng chiến đấu, họ bị bất ngờ khi quân Seljuk quay trở lại. Bị quấy nhiễu, đói khát và suy sụp tinh thần, quân Ghaznavid đã bị nghiền nát hoàn toàn.#!"
+
+  BattlePoIHistoricalNameAror: "Trận Aror"
+  BattlePoIHistoricalDescAror: "#emp Chiến thắng: Muhammad ibn al-Qasim\nThất bại: Raja Dahir\nNgày: năm 711 SCN#!\n#weak Một trận đánh trong cuộc xâm lược Ấn Độ của người Umayyad, giữa Raja xứ Sindh và Đế chế Umayyad.\n\nDù ban đầu đối phương đông quân hơn, vị chỉ huy Umayyad đã giành được vị trí chiến lược thuận lợi trước khi quyết định giao chiến. Trong suốt cuộc xung đột, sự chênh lệch này khiến quân Hồi giáo dần kiểm soát cục diện, và với cái chết của Raja Dahir, chiến thắng của họ được đảm bảo.#!"
+
+  BattlePoIHistoricalNameSvolder: "Trận Svolder"
+  BattlePoIHistoricalDescSvolder: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '101505' ).GetFullName]\nThất bại: [GetScriptedCharacterByHistoryID( '144004' ).GetFullName]\nNgày: 9 tháng Chín, năm 999 SCN#!\n#weak Một trận hải chiến giữa lực lượng Na Uy của Olafr Tryggvason và liên minh Đan Mạch–Thụy Điển do Vua Sveinn xứ Đan Mạch lãnh đạo.\n\nDù bị áp đảo về quân số, vị vua Na Uy từ chối bỏ chạy và quyết định giao chiến, vừa chiến đấu vừa chế giễu đối thủ là “kẻ ăn thịt ngựa” và “dê rừng”.\n\nCuối cùng, dù gây tổn thất nặng cho kẻ thù, quân đội Na Uy vẫn bị đánh bại. Olafr biến mất trong trận chiến và rất có thể đã tử trận.#!"
+
+  BattlePoIHistoricalNameCivitate: "Trận Civitate"
+  BattlePoIHistoricalDescCivitate: "#emp Chiến thắng: [GetScriptedCharacterByHistoryID( '1126' ).GetFullName]\nThất bại: [GetScriptedCharacterByHistoryID( '1338' ).GetFullName]\nNgày: 18 tháng Sáu, năm 1053 SCN#!\n#weak Một trận chiến giữa quân Norman và một liên minh do Giáo hoàng lãnh đạo, bao gồm quân Đức và các lực lượng Ý địa phương.\n\nDù có ưu thế quân số, liên minh Giáo hoàng không thể phá vỡ bộ binh Norman ở trung tâm chiến tuyến, trong khi các cánh kỵ binh của họ bị kỵ binh Norman đánh bại.\n\nKhông lâu sau trận chiến, chính Giáo hoàng bị quân Norman bắt giữ, dẫn đến hồi kết của cuộc xung đột.#!"
+
+  BattlePoIHistoricalNameTalas: "Trận Talas"
+  BattlePoIHistoricalDescTalas: "#emp Chiến thắng: Khalip Abbasid\nThất bại: Nhà Đường\nNgày: năm 751 SCN#!\n#weak Một cuộc xung đột kéo dài giữa Khalip Abbasid mở rộng vào Transoxiana từ phía tây nam và Nhà Đường tiến vào khu vực này từ phía đông.\n\nBan đầu, bộ binh hạng nặng của Nhà Đường cùng các lính đánh thuê Turk đóng vai trò quan trọng trong việc đẩy lùi quân Abbasid, nhưng khi lính đánh thuê đổi phe và nhiều đồng minh phản bội, quân Đường buộc phải rút lui.\n\nCuộc xung đột này đánh dấu sự kết thúc của quá trình bành trướng về phía tây của Nhà Đường, và Transoxiana rơi vào tay người Hồi giáo trong một thời gian dài sau đó.#!"
+
+  BattlePoIHistoricalNameSufuku: "Trận Subushi"
+  BattlePoIHistoricalDescSufuku: "#emp Người Chiến Thắng: Người Emishi tại Isawa\nBị Thua: [GetScriptedCharacterByHistoryID( 'japanese_iruma_1' ).GetFullName]\nNgày: 789 SCN#!\n#weak Một trận đánh quan trọng trong cuộc chinh phục người Emishi của Nhật Bản.\n\nQuân Nhật chia làm hai mũi, tiến theo hai bên sông Kitakami, truy đuổi người Emishi rút lui. Các lính lẻ của Emishi ngăn chặn Nhật Bản qua sông, dồn phần lớn quân Nhật giữa sông và núi.\n\nSự sụp đổ của quân Nhật là một nỗi nhục lớn, nhiều lính phải bơi trần qua sông để thoát chết. Quân đội tan rã và [GetScriptedCharacterByHistoryID( 'japanese_yamato_24' ).GetFullName] nghiêm khắc khiển trách các tướng sĩ.#!"
+
+  BattlePoIHistoricalNameBaekgang: "Trận Baekgang"
+  BattlePoIHistoricalDescBaekgang: "#emp Người Chiến Thắng: Vương quốc Silla & Trung Hoa Đường\nBị Thua: [GetScriptedCharacterByHistoryID( 'japanese_abe_36' ).GetFullName]\nNgày: 663 SCN#!\n#weak Một trận hải chiến quyết định khi quân Đường và Silla đối đầu với lực lượng Phục Hưng Baekje và đồng minh Nhật Bản.\n\nTrận đánh chủ yếu diễn ra trên sông Baengma. Quân Nhật đông hơn nhưng hải quân Đường vững vàng, phản công và bao vây tiêu diệt hạm đội Nhật.\n\nTrận này đánh dấu sự chấm dứt ảnh hưởng của Baekje và Nhật Bản tại bán đảo Triều Tiên.#!"
+
+  BattlePoIHistoricalNamePalembang: "Cuộc Công Kích Palembang của Chola"
+  BattlePoIHistoricalDescPalembang: "#emp Người Chiến Thắng: [GetScriptedCharacterByHistoryID( '189038' ).GetFullName]\nBị Thua: [GetScriptedCharacterByHistoryID( 'javanese_sailendra_25' ).GetFullName]\nNgày: 1025 SCN#!\n#weak Một cuộc tấn công bất ngờ của lực lượng Chola vào kinh đô Srivijaya tại Palembang.\n\nQuân Chola vượt biển, nhanh chóng chiếm kinh đô, cướp phá và phá hủy thành phố.\n\nSự sụp đổ của Palembang dẫn đến tan rã hoàn toàn Đế quốc Srivijaya, ảnh hưởng của Chola tại vùng này kéo dài nhiều thập kỷ.#!"
+ 
+  BattlePoIHistoricalNameAngkor: "Vây Hãm Angkor"
+  BattlePoIHistoricalDescAngkor: "#emp Người Chiến Thắng: [GetScriptedCharacterByHistoryID( 'cham_panduranga_04' ).GetFullName]\nBị Thua: [GetScriptedCharacterByHistoryID( 'khmer_tribhuvanaditya_01' ).GetFullName]\nNgày: 1177 SCN#!\n#weak Nội chiến và các cuộc đảo chính tại Kambuja khiến Tribhuvanaditya, một kẻ không hoàng tộc, lên nắm quyền. Trong lúc đối phó với quân nổi loạn ủng hộ các kẻ khác, vương quốc Champa xâm lược Kambuja.\n\nQuân Champa tiến dọc sông Mekong và Tonle Sap, cướp phá kinh đô Angkor và giết Tribhuvanaditya.\n\nSau cuộc vây hãm, vương quốc Kambuja sụp đổ, chiến lợi phẩm được phân tán hoặc mang về bởi người Cham.#!"
+
+  BattlePoIHistoricalNameSongping: "Vây Hãm Songping"
+  BattlePoIHistoricalDescSongping: "#emp Người Chiến Thắng: Yang Sijin\nBị Thua: Cai Xi\nNgày: 863 SCN#!\n#weak Hỗn loạn tại châu quận An Nam thuộc Đường khiến vương quốc Nanzhao liên minh với các bộ lạc địa phương xâm lược vùng này.\n\nQuân Nanzhao cùng đồng minh vây hãm thành phố, cuối cùng phá được nội thành. Quân phòng thủ đứng chân cuối cùng tại cổng phía đông, phục kích kỵ binh địch và giết nhiều trước khi thất bại.\n\nMặc dù ban đầu được dân Việt chào đón, quân Nanzhao cướp phá vùng này, và một cuộc phản công của Đường năm 864 đã giành lại toàn bộ.#!"
+
+  BattlePoIHistoricalNameMuye: "Trận Muye"
+  BattlePoIHistoricalDescMuye: "#emp Người Chiến Thắng: Vua Wu\nBị Thua: Hoàng đế Zhou của Thương\nNgày: 1046 TCN#!\n#weak Trận Muye diễn ra giữa vua nổi loạn Wu và Hoàng đế Zhou của Thương.\n\nQuân Wu ban đầu ít hơn nhưng quân Thương chủ yếu là nô lệ quân sự, không đáng tin và tháo chạy. Kết quả là chiến thắng đẫm máu cho quân nổi loạn của vua Wu.\n\nTrận này dẫn đến sụp đổ nhà Thương và vua Wu đoạt Thiên Mệnh, lập triều Zhou mới.#!"
+
+  BattlePoIHistoricalNameRedCliffs: "Trận Xích Bích"
+  BattlePoIHistoricalDescRedCliffs: "#emp Người Chiến Thắng: Tôn Quyền\nBị Thua: Tào Tháo\nNgày: 208 SCN#!\n#weak Trận Xích Bích là một trận thủy chiến giữa liên minh các thế lực cát cứ với Tào Tháo ở phía bắc cuối thời nhà Hán. Tào Tháo muốn lập tiền đồn qua sông Dương Tử vào Nam Trung Quốc.\n\nGiả vờ đầu hàng, quân liên minh dụ thuyền Tào Tháo vào bẫy, thiêu sống nhiều lính và ngựa. Quân Bắc bị hỗn loạn và thất bại.\n\nChiến bại ngăn Tào Tháo tiến qua Dương Tử, mở ra giai đoạn Tam Quốc sau này.#!"
+
+  BattlePoIHistoricalNameGuandu: "Trận Quan Độ"
+  BattlePoIHistoricalDescGuandu: "#emp Người Chiến Thắng: Tào Tháo\nBị Thua: Viên Thiệu\nNgày: 200 SCN#!\n#weak Trận Quan Độ diễn ra giữa Tào Tháo và Viên Thiệu cuối Đông Hán. Hai thế lực lớn, cản đường nhau thống trị Trung Quốc.\n\nQuân Tào Tháo ít hơn nhưng dùng chiến thuật đánh trộm kho tiếp liệu Viên Thiệu, làm suy yếu đối phương.\n\nTrận này là bước ngoặt, Tào Tháo chiến thắng, mở đường cho nước Ngụy trong Tam Quốc.#!"
+
+  BattlePoIHistoricalNameYiling: "Trận Dương Lăng"
+  BattlePoIHistoricalDescYiling: "#emp Người Chiến Thắng: Lỗ Tấn - Đông Ngô\nBị Thua: Lưu Bị - Thục Hán\nNgày: 221 SCN#!\n#weak Lưu Bị cố chiếm lại tỉnh Kinh, tự dẫn quân tấn công Đông Ngô, ban đầu thành công.\n\nTrong trận, quân Lưu Bị bị Lỗ Tấn dụ vào bẫy, đốt trại Thục Hán, khiến Lưu Bị rút lui. Cuối cùng Lưu Bị tự cứu mình bằng cách ra lệnh đốt giáp trụ, tạo tường lửa chống quân địch.\n\nTrận này là thất bại quyết định của Lưu Bị, kết thúc chiến dịch và dẫn đến cái chết của ông.#!"
+
+  BattlePoIHistoricalNameFeiRiver: "Trận Sông Phì"
+  BattlePoIHistoricalDescFeiRiver: "#emp Người Chiến Thắng: Tạ An - Tấn\nBị Thua: Phù Kiến - Tần Cựu Quốc\nNgày: 383 SCN#!\n#weak Trận này kết thúc một chiến dịch dài, khi Tần trước hợp nhất nhiều bộ tộc, chiếm đất Tấn. Quân Tần đông hơn nhưng kém tổ chức.\n\nQuân Tấn kỷ luật tốt đánh bại quân Tần đông nhưng hỗn loạn.\n\nChiến thắng này làm thay đổi cán cân quyền lực, bảo vệ Nam Trung Quốc độc lập hơn 100 năm.#!"
+
+  BattlePoIHistoricalNameCanheSlope: "Trận Canhae"
+  BattlePoIHistoricalDescCanheSlope: "#emp Người Chiến Thắng: Đậu Ba Quý - Bắc Ngụy\nBị Thua: Mông Vũ Bạo - Yên Hậu\nNgày: 395 SCN#!\n#weak Trận này xuất phát từ chiến dịch trừng phạt của Yên Hậu với Bắc Ngụy.\n\nQuân Yên Hậu tới sườn Canhae thì gặp bão, bị tấn công bất ngờ. Nhiều lính bỏ chạy xuống sông Hoàng.\n\nTrận này đảo ngược quyền lực khu vực, Bắc Ngụy chiếm phần lớn đất Yên Hậu.#!"
+
+  BattlePoIHistoricalNameXiangji: "Trận Chùa Tương Kỳ"
+  BattlePoIHistoricalDescXiangji: "#emp Người Chiến Thắng: [GetScriptedCharacterByHistoryID( 'han_1528' ).GetFullName]\nBị Thua: [GetScriptedCharacterByHistoryID( 'an_qingxu' ).GetFullName]\nNgày: 757 SCN#!\n#weak Trận này là cao trào phản công nhà Đường với quân nổi loạn chiếm Bắc Trung Hoa, một trong những trận đẫm máu nhất cuộc nổi loạn An Lushan. Hai đội quân khổng lồ giao chiến phía bắc Trường An, gần chùa Tương Kỳ.\n\nĐến giữa ngày, quân Đường chiếm cao điểm, quân Yên trước Trường An. Sau nhiều thủ thuật, trận kéo dài thành bế tắc, cả hai quân kỷ luật nghiêm ngặt đánh nhau. Cuối cùng quân Yên gãy trận vì tổn thất nặng.\n\nSự tàn khốc của trận đánh khiến cả hai bên tổn thất nặng, nhưng phá vỡ cuộc nổi loạn. Quân Đường chiếm lại Trường An ngày hôm sau.#!"
+
+  BattlePoIHistoricalNameGaoliang: "Trận Sông Cao Lương"
+  BattlePoIHistoricalDescGaoliang: "#emp Người Chiến Thắng: [GetScriptedCharacterByHistoryID( '194330' ).GetFullName]\nBị Thua: [GetScriptedCharacterByHistoryID( 'han_4801' ).GetFullName]\nNgày: 979 SCN#!\n#weak Trận này là nỗ lực của Tống giành lại 16 châu mà nhà Liêu chiếm năm 960, do em trai hoàng đế trực tiếp dẫn đầu (tương lai là Hoàng đế [GetScriptedCharacterByHistoryID( 'han_4801' ).GetFullNameNoTooltip]).\n\nThành Youzhou bị vây 3 tháng trước khi quân tiếp viện Liêu tới. Dù ban đầu thắng, quân Tống bị bất ngờ tấn công đêm từ 3 hướng.\n\nKết quả [GetScriptedCharacterByHistoryID( 'han_4801' ).GetFullNameNoTooltip] bỏ chạy trên xe lừa. Đây là thất bại lớn đầu tiên của Tống sau khi lên quyền.#!"

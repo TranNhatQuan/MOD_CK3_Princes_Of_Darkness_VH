@@ -1,0 +1,1274 @@
+﻿# Ran before supernatural perks, modifiers etc are applied.
+# For newly generated characters (e.g. random barons, ruler designer)
+POD_remove_wrong_supernatural_traits_on_new_character = {
+	# Remove Wraith traits first so the Risen trait won't interfere with Discipline removal
+	if = {
+		limit = { POD_is_wraith_trigger = no }
+		POD_remove_wraith_traits_effect = yes
+		POD_remove_wraith_arcanoi_traits_effect = yes
+	}
+	
+	if = {
+		limit = { has_POD_vamp_blood_trigger = no }
+		if = {
+			limit = { has_trait = risen }
+			POD_remove_vampire_non_risen_discipline_traits_effect = yes
+		}
+		else = {
+			POD_remove_vampire_discipline_traits_effect = yes
+		}
+	}
+	
+	if = {
+		limit = { POD_is_vampire_trigger = no }
+		POD_remove_vampire_generation_traits_effect = yes
+		POD_remove_vampire_clan_traits_effect = yes
+		POD_remove_vampire_misc_traits_effect = yes
+		POD_remove_vampire_predatortype_traits_effect = yes
+	}
+	
+	if = {
+		limit = {
+			has_POD_vamp_blood_trigger = no
+			POD_can_participate_in_kj_politics = no
+		}
+		remove_trait = ashen_adventurer
+	}
+	
+	if = {
+		limit = { POD_splat_has_dharma_trigger = no }		
+		POD_clean_dharma_effect = yes
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_chi_arts = no }
+		POD_trait_injector_chi_arts = { EFFECT = POD_remove_trait }
+	}
+	
+	if = {
+		limit = { POD_is_supehunter_trigger = no }
+		POD_remove_hunter_traits_effect = yes
+		remove_trait = shih
+	}
+	
+	if = {
+		limit = { POD_is_mummy_trigger = no }
+		POD_remove_mummy_traits_effect = yes
+	}
+	
+	if = {
+		limit = { POD_is_demon_trigger = no }
+		POD_remove_demon_traits_effect = yes
+	}
+	
+	if = {
+		limit = {
+			NOR = {
+				has_trait = abomination
+				has_trait = fera
+			}
+		}
+		POD_remove_breed_traits_effect = yes
+		POD_remove_lunar_auspice_traits_effect = yes
+		POD_remove_pryio_traits_effect = yes
+		POD_remove_solar_auspice_traits_effect = yes
+	}
+	if = {
+		limit = { NOT = { has_trait = kinfolk } }
+		remove_trait = gnosis
+	}
+	if = {
+		limit = { 
+			POD_is_fae_trigger = no 
+			POD_is_changeling_trigger = no
+		}
+		POD_remove_fae_kith_traits_effect = yes
+	}
+	
+	if = {
+		limit = { has_POD_fae_blood_trigger = no }
+		POD_remove_fae_art_traits_effect = yes
+		POD_remove_fae_realm_traits_effect = yes
+	}
+	
+	if = {
+		limit = { POD_can_be_possessed_basic_trigger = no }
+		remove_trait = fomori
+		remove_trait = drone
+		remove_trait = gorgon
+		if = {
+			limit = { has_trait_with_flag = is_spirit }
+			remove_trait = kami
+		}
+	}
+	
+	if = {
+		limit = {
+			OR = {
+				has_trait = theurgist
+				is_sorcerer_trigger = yes
+			}
+			POD_splat_is_valid_for_sorcery = no
+		}
+		# blood sorcery assignment handled in POD_sorcerer_embrace_effect
+		add_character_flag = {
+			flag = sorcerer_embrace
+			days = 1
+		}
+		remove_trait = theurgist
+		remove_trait = sorcerer
+		random_secret = {
+			limit = { secret_type = secret_sorcerer }
+			remove_secret = yes
+		}
+		if = {
+			limit = { has_POD_vamp_blood_trigger = yes }
+			add_blood_magic_lifestyle_perk_points = {
+				value = POD_numina_sorcery_perk_amount
+				add   = POD_numina_theurgy_perk_amount
+			}
+		}
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = sorcery_lifestyle
+		}
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = theurgy_lifestyle
+		}
+		remove_variable = POD_numina_sorcery_additional_perk_cost
+	}
+	
+	if = {
+		limit = { POD_splat_is_valid_for_psychic = no }
+		remove_trait = psychic
+	}
+	
+	if = {
+		limit = { POD_splat_can_be_infernalist = no }
+		remove_trait = witch
+	}
+}
+
+# For characters who've already received their splat initialization from before.
+# Usually for player characters who switch their splat.
+# More expensive in terms of performance. Use sparingly.
+POD_remove_wrong_supernatural_traits_on_existing_character = {
+	POD_remove_wrong_supernatural_traits_on_new_character = yes
+	
+	##### Energy maintenance
+	
+	hidden_effect = {
+		POD_change_to_appropriate_energy_type = yes
+	}
+	
+	##### Traits
+	
+	if = {
+		limit = {
+			has_trait = wight
+			POD_splat_can_be_wight = no
+		}
+		remove_trait = wight
+	}
+	
+	##### Modifiers
+	
+	if = {
+		limit = { POD_splat_has_bloodpotency_trigger = no }
+		POD_remove_bloodpotency_modifiers_effect = yes
+	}
+	if = {
+		limit = { POD_splat_has_masquerade_trigger = no }
+		POD_remove_masquerade_modifiers_effect = yes
+	}
+	if = {
+		limit = { POD_is_vampire_trigger = no }
+		POD_remove_vampire_clan_modifiers_effect = yes
+	}
+	if = {
+		limit = { POD_splat_has_wheel_of_ages_modifiers = no }
+		POD_remove_wheel_of_ages_modifiers = yes
+	}
+	if = {
+		limit = { POD_is_wraith_trigger = no }
+		POD_remove_conduit_modifiers_effect = yes
+		POD_clear_wraith_support_modifier = yes
+		POD_side_effects_if_no_longer_wraith = yes
+	}
+	if = {
+		limit = { POD_is_pooka_trigger = no }
+		POD_remove_pooka_affinity_modifiers_effect = yes
+	}
+	
+	##### Lifestyles
+	
+	# Vampire lifestyles
+	
+	if = {
+		limit = {
+			POD_splat_has_access_to_disciplines = no
+			POD_splat_has_access_to_risen_disciplines = no
+		}
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = animal_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = choleric_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = melancholy_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = phlegmatic_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = sanguine_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = blood_magic_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = necro_magic_lifestyle }
+		
+		POD_remove_vampire_bloodsorcery_traditions_effect = yes
+		POD_remove_vampire_necromancy_traditions_effect = yes
+		
+		remove_character_flag = POD_ghoul_shouldnt_get_new_disciplines
+		
+		remove_character_flag = duplicate_warrior_valeren_cost_flag
+		remove_character_flag = duplicate_watcher_valeren_cost_flag
+		remove_character_flag = duplicate_healer_valeren_cost_flag
+		remove_character_flag = triplicate_warrior_valeren_cost_flag
+		remove_character_flag = triplicate_watcher_valeren_cost_flag
+		remove_character_flag = triplicate_healer_valeren_cost_flag
+		
+		POD_flag_injector_aspect_of_the_beast = {
+			EFFECT = POD_remove_character_flag
+		}
+		POD_modifier_injector_spirit_beast = {
+			EFFECT = POD_remove_character_modifier
+		}
+	}
+	else = {
+		POD_lose_inaccessible_discipline_perks_effect = yes
+	}
+	
+	if = {
+		limit = { POD_splat_can_be_fleshcrafted = no }
+		remove_trait = fleshcrafted
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = fleshcrafting_lifestyle }
+		# spirit lobe maintenance
+		every_relation = {
+			type = umbra_employer
+			trigger_event = { id = POD_umbra_expedition.7000 days = 1 }
+		}
+	}
+
+	
+	# Kuei-Jin lifestyles
+	
+	if = {
+		limit = { POD_splat_has_access_to_demon_arts = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = demon_arts_lifestyle }
+		POD_modifier_injector_demon_arts = { EFFECT = POD_remove_all_character_modifier_instances }
+		POD_flag_injector_demon_regalia = { EFFECT = POD_remove_character_flag }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_soul_arts = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = soul_arts_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_chi_arts = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = chi_arts_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_shintai = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = shintai_lifestyle }
+	}
+	
+	### TODO: Fera lifestyles
+	
+	# Mummy lifestyles
+	
+	if = {
+		limit = { POD_splat_has_access_to_hekau = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_alchemy_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_amulets_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_celestial_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_effigy_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_hekau_necromancy = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_necromancy_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_hekau_nomenclature = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = hekau_nomenclature_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_tan = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = tan_lifestyle }
+	}
+	
+	# Demonic lifestyles
+	
+	if = {
+		limit = { POD_splat_has_access_to_arcana = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = arcana_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_lores = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = lore_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_can_be_infernalist = no }
+		POD_clear_investiture_lifestyle = yes
+	}
+	
+	# Fae lifestyles
+	
+	if = {
+		limit = { POD_splat_has_access_to_fae_arts = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = realm_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = common_arts_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = rare_arts_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_kith_arts = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = kith_arts_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_slivers = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = slivers_lifestyle }
+	}
+	
+	if = {
+		limit = { POD_splat_has_access_to_wu_tan = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = wu_tan_lifestyle }
+	}
+	
+	# Wraith lifestyles
+	
+	if = {
+		limit = { POD_splat_has_access_to_arcanoi = no }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = arcanoi_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = jade_arcanoi_lifestyle }
+		#POD_remove_all_perks_in_lifestyle = { LIFESTYLE = dark_arcanoi_lifestyle }
+		#POD_remove_all_perks_in_lifestyle = { LIFESTYLE = misc_arcanoi_lifestyle }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = thorn_lifestyle }
+	}
+	
+	# Numina lifestyles
+	
+	if = {
+		limit = { NOT = { has_trait = psychic } }
+		POD_remove_all_perks_in_lifestyle = {
+			LIFESTYLE = psi_lifestyle
+		}
+	}
+	
+	if = {
+		limit = { NOT = { has_trait = truepossessed } }
+		POD_remove_all_perks_in_lifestyle = { LIFESTYLE = possessedpower_lifestyle }
+	}
+	
+	##### Variables
+	
+	if = {
+		limit = { POD_should_have_fera_type_variable = no }
+		remove_variable = fera_type
+	}
+
+	if = {
+		limit = { NOT = { has_trait = ghoul } }
+		POD_clear_bound_ghoul_variables = yes
+		remove_character_flag = recent_ghoulify
+	}
+	
+	##### Flags
+	
+	if = {
+		limit = { POD_should_have_disease_immunity = no }
+		remove_character_flag = immune_to_disease
+	}
+}
+
+POD_side_effects_from_changing_splats = {
+	POD_demolish_incompatible_haven_buildings = yes
+	POD_abandon_splat_journeys_effect = yes
+	POD_reset_grand_cities_on_splat_change = yes
+	POD_reset_splat_county_modifiers = yes
+	POD_refresh_health_track = yes
+}
+
+POD_finish_supernatural_character_initialization = {
+	POD_initialize_energy_modifier = yes
+}
+
+POD_remove_all_supernatural_atribute_effect = {
+	POD_remove_splat_traits_effect = yes
+	
+	remove_trait = torpor
+	remove_trait = regnant
+	remove_trait = massregnant
+	remove_trait = unbondable
+	remove_trait = sire
+	remove_trait = masssire
+	remove_trait = diablerist
+	remove_trait = wight
+	remove_trait = exposed
+	remove_trait = oathbreaker
+	
+	remove_trait = truefaith
+	remove_trait = beatific
+	remove_trait = witch
+	remove_trait = demonology
+	remove_trait = psychic
+	remove_trait = sorcerer
+	remove_trait = theurgist
+	remove_trait = gnosis
+	remove_trait = fomori
+	remove_trait = drone
+	remove_trait = gorgon
+	remove_trait = kami
+	
+	POD_remove_vampire_clan_traits_effect = yes
+	POD_remove_vampire_generation_traits_effect = yes
+	POD_remove_vampire_discipline_traits_effect = yes
+	POD_remove_vampire_predatortype_traits_effect = yes
+	POD_remove_vampire_misc_traits_effect = yes
+	# fleshcrafts aren't removed here since mortals can have them too
+	POD_remove_hunter_traits_effect = yes
+	POD_remove_shih_atribute_effect = yes
+	POD_remove_mummy_traits_effect = yes
+	POD_remove_wraith_traits_effect = yes
+	POD_remove_wraith_arcanoi_traits_effect = yes
+	POD_remove_conduit_modifiers_effect = yes
+	POD_clear_wraith_support_modifier = yes
+	POD_remove_breed_traits_effect = yes
+	POD_remove_lunar_auspice_traits_effect = yes
+	POD_remove_pryio_traits_effect = yes
+	POD_remove_solar_auspice_traits_effect = yes
+	POD_remove_demon_traits_effect = yes
+	POD_remove_fae_kith_traits_effect = yes
+	POD_remove_fae_art_traits_effect = yes
+	POD_remove_fae_realm_traits_effect = yes
+	POD_clean_dharma_effect = yes
+	POD_trait_injector_chi_arts = { EFFECT = POD_remove_trait }
+	
+	POD_remove_supernatural_basic_modifiers_effect = yes
+	POD_remove_supernatural_perks_effect = yes
+	POD_remove_supernatural_secrets_effect = yes
+	POD_remove_supernatural_variables_effect = yes
+
+	POD_remove_achievement_flags_effect = yes
+}
+
+POD_remove_splat_traits_effect = {
+	every_character_trait = {
+		limit = { has_trait_flag = splat }
+		prev = { remove_trait = prev }
+	}
+}
+
+POD_remove_supernatural_basic_modifiers_effect = {
+	POD_remove_eminence_modifiers_effect = yes
+	POD_remove_masquerade_modifiers_effect = yes
+	POD_remove_pooka_affinity_modifiers_effect = yes
+	# Potency
+	POD_remove_bloodpotency_modifiers_effect = yes
+	#remove_arete_effect = yes
+	POD_remove_energy_modifiers_effect = yes
+	POD_remove_wheel_of_ages_modifiers = yes
+}
+
+POD_save_energy_level_before_splat_change = {
+	save_scope_value_as = {
+		name  = splat_agnostic_energy
+		value = splat_agnostic_energy_points_value
+	}
+}
+
+POD_change_to_appropriate_energy_type = {
+	if = {
+		limit = { NOT = { exists = scope:splat_agnostic_energy } }
+		save_scope_value_as = {
+			name  = splat_agnostic_energy
+			value = splat_agnostic_energy_points_value
+		}
+	}
+	POD_splat_agnostic_energy_assign_value = {
+		COUNT = scope:splat_agnostic_energy
+	}
+}
+
+POD_remove_vampire_generation_traits_effect = {
+	remove_trait = vampgeneration1
+	remove_trait = vampgeneration2
+	remove_trait = vampgeneration3
+	remove_trait = vampgeneration4
+	remove_trait = vampgeneration5
+	remove_trait = vampgeneration6
+	remove_trait = vampgeneration7
+	remove_trait = vampgeneration8
+	remove_trait = vampgeneration9
+	remove_trait = vampgeneration10
+	remove_trait = vampgeneration11
+	remove_trait = vampgeneration12
+	remove_trait = vampgeneration13
+	remove_trait = vampgeneration14
+	remove_trait = vampgeneration15
+	remove_trait = vampgeneration16
+	POD_achiev_nomnom_clear_flag = yes
+}
+
+POD_remove_vampire_clan_traits_effect = {
+	every_character_trait = {
+		limit = { has_trait_flag = vamp_clan }
+		prev = { remove_trait = prev }
+	}
+	remove_trait = salubri_healer
+	remove_trait = salubri_warrior
+	remove_trait = salubri_watcher
+}
+
+POD_remove_vampire_clan_modifiers_effect = {
+	POD_remove_character_modifier = { MODIFIER = uncursed_nosferatu_modifier }
+	POD_remove_character_modifier = { MODIFIER = uncursed_tzimisce_modifier }
+	POD_remove_character_modifier = { MODIFIER = uncursed_chibo_modifier }
+	POD_remove_character_modifier = { MODIFIER = uncursed_kizoku_modifier }
+	POD_modifier_injector_gargoyle_caste = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_discipline_trait = {
+	remove_trait = $TRAIT$
+	remove_trait = $TRAIT$advanced
+}
+
+POD_remove_vampire_discipline_traits_effect = {
+	POD_remove_vampire_risen_discipline_traits_effect = yes
+	POD_remove_vampire_non_risen_discipline_traits_effect = yes
+}
+
+POD_remove_vampire_risen_discipline_traits_effect = {
+	POD_trait_injector_risen_disciplines = { EFFECT = POD_remove_discipline_trait }
+}
+
+POD_remove_vampire_non_risen_discipline_traits_effect = {
+	POD_trait_injector_non_risen_disciplines = { EFFECT = POD_remove_discipline_trait }
+	remove_trait = itarajana_sorcerer
+}
+
+POD_remove_vampire_predatortype_traits_effect = {
+	remove_trait = predatortype_consensualist
+	remove_trait = predatortype_familias
+	remove_trait = predatortype_cultist
+	remove_trait = predatortype_bloodleech 
+	remove_trait = predatortype_alleycat 
+	remove_trait = predatortype_bedlamite
+	remove_trait = predatortype_cauchemar
+	remove_trait = predatortype_cenobite
+	remove_trait = predatortype_footpad
+	remove_trait = predatortype_gentry
+	remove_trait = predatortype_graverobber
+	remove_trait = predatortype_phlebotomist
+	remove_trait = predatortype_siren
+	remove_trait = predatortype_farmer
+	remove_trait = predatortype_extortionist
+}
+
+POD_remove_vampire_predatortype_secrets_effect = {
+	POD_secret_injector_predatortype = { EFFECT = POD_remove_secret }
+}
+
+POD_remove_vampire_misc_traits_effect = {
+	remove_trait = golconda
+	remove_trait = golconda_seeker
+	remove_trait = azhi_dahaka
+	remove_trait = azhi_dahaka_scholar
+	remove_trait = abomination
+	remove_trait = hun_and_po
+	remove_trait = POD_grail_knight
+	#remove_trait = ashen_adventurer # not exclusively a vampire trait
+	remove_character_flag = suppressed_clan_curse_flag
+}
+
+
+# Vampire modifiers
+
+POD_remove_masquerade_modifiers_effect = {
+	POD_modifier_injector_masquerade = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_hunger_modifiers_effect = {
+	POD_modifier_injector_hunger = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_bloodpotency_modifiers_effect = {
+	POD_modifier_injector_bloodpotency = { EFFECT = POD_remove_character_modifier }
+}
+
+
+# Fera modifiers
+
+POD_remove_gnosis_modifiers_effect = {
+	POD_modifier_injector_gnosis = { EFFECT = POD_remove_character_modifier }
+}
+
+
+# Demon modifiers
+
+POD_remove_resolve_modifiers_effect = {
+	POD_modifier_injector_resolve = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_sundered_soul_modifiers_effect = {
+	POD_modifier_injector_sundered_soul = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_demonic_house_modifiers_effect = {
+	POD_modifier_injector_demonic_house = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_eminence_modifiers_effect = {
+	POD_modifier_injector_eminence = { EFFECT = POD_remove_character_modifier }
+}
+
+
+# Fae modifiers
+
+POD_remove_glamour_modifiers_effect = {
+	POD_modifier_injector_glamour = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_pooka_affinity_modifiers_effect = {
+	POD_modifier_injector_pooka_affinity = { EFFECT = POD_remove_character_modifier }
+}
+
+
+# Wraith modifiers
+
+POD_remove_pathos_modifiers_effect = {
+	POD_modifier_injector_pathos = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_angst_modifiers_effect = {
+	POD_modifier_injector_angst = { EFFECT = POD_remove_character_modifier }
+}
+
+POD_remove_conduit_modifiers_effect = {
+	POD_modifier_injector_conduit = { EFFECT = POD_remove_character_modifier }
+}
+
+
+POD_remove_mummy_traits_effect = {
+	remove_trait = shemsuheru
+	remove_trait = banemummy
+	remove_trait = cabiri
+	remove_trait = wutian
+	remove_trait = wukuei
+	remove_trait = integrity
+	POD_remove_character_modifier = { MODIFIER = cabiri_secured_future_modifier }
+}
+
+POD_remove_wraith_traits_effect = {
+	remove_trait = risen
+	remove_trait = spectre
+	#remove_trait = barghest
+	remove_trait = ferryman
+	remove_trait = shadow
+	every_in_list = {
+		variable = owned_fetter_list
+		var:object = {
+			POD_destroy_fetter = yes
+		}
+	}
+}
+
+POD_side_effects_if_no_longer_wraith = {
+	every_relation = {
+		type = necromancer
+		POD_unbind_wraith_effect = {
+			WRAITH = prev
+			NECROMANCER = this
+		}
+	}
+	if = {
+		limit = { is_in_umbra_trigger = yes }
+		POD_remove_umbra_modifier_effect = yes
+		POD_umbra_send_effect = { LOCATION = flag:earth }
+	}
+}
+
+POD_remove_wraith_arcanoi_traits_effect = {
+	POD_trait_injector_arcanoi = { EFFECT = POD_remove_trait }
+}
+
+POD_remove_fae_kith_traits_effect = {
+	remove_trait = sidhe
+	remove_trait = boggan
+	remove_trait = clurichaun
+	remove_trait = eshu
+	remove_trait = ghilledhu
+	remove_trait = nocker
+	remove_trait = piskey
+	remove_trait = pooka
+	remove_trait = troll
+	remove_trait = redcap
+	remove_trait = riverhag
+	remove_trait = satyr
+	remove_trait = sluagh
+	remove_trait = swanmaiden
+	remove_trait = wichtel
+	remove_trait = ifrit
+	remove_trait = lilin
+	remove_trait = qareen
+	remove_trait = shaytan
+	remove_trait = biloko
+	remove_trait = djedi
+	remove_trait = kuino
+	remove_trait = obambo
+	remove_trait = okubili
+	remove_trait = chuihyu
+	remove_trait = chujung
+	remove_trait = fuhsi
+	remove_trait = hanumen
+	remove_trait = hengpo
+	remove_trait = houchi
+	remove_trait = komuko
+	remove_trait = nyan
+	remove_trait = suijen
+	remove_trait = tanuki
+	remove_trait = glome
+	remove_trait = kubera
+	remove_trait = ondine
+	remove_trait = paroseme
+	remove_trait = solimond
+	remove_trait = mannikin
+}
+
+POD_remove_art_trait = {
+	remove_trait = $TRAIT$
+	remove_trait = $TRAIT$_advanced
+}
+
+POD_remove_fae_art_traits_effect = {
+	POD_trait_injector_arts = { EFFECT = POD_remove_art_trait }
+}
+
+POD_remove_fae_realm_traits_effect = {
+	remove_trait = realm_actor
+	remove_trait = realm_fae
+	remove_trait = realm_nature
+	remove_trait = realm_prop
+	remove_trait = realm_scene
+	remove_trait = realm_time
+}
+
+POD_remove_supernatural_perks_effect = {
+	refund_all_perks = yes
+	POD_remove_supernatural_perk_points_effect = yes
+	
+	remove_character_flag = duplicate_warrior_valeren_cost_flag
+	remove_character_flag = duplicate_watcher_valeren_cost_flag
+	remove_character_flag = duplicate_healer_valeren_cost_flag
+	remove_character_flag = triplicate_warrior_valeren_cost_flag
+	remove_character_flag = triplicate_watcher_valeren_cost_flag
+	remove_character_flag = triplicate_healer_valeren_cost_flag
+	POD_flag_injector_aspect_of_the_beast = {
+		EFFECT = POD_remove_character_flag
+	}
+	POD_modifier_injector_spirit_beast = {
+		EFFECT = POD_remove_character_modifier
+	}
+	POD_modifier_injector_demon_arts = {
+		EFFECT = POD_remove_all_character_modifier_instances
+	}
+	POD_flag_injector_demon_regalia = {
+		EFFECT = POD_remove_character_flag
+	}
+	POD_modifier_injector_investiture = {
+		EFFECT = POD_remove_all_character_modifier_instances_and_tracked_stacks
+	}
+	remove_character_flag = access_to_investiture
+	remove_variable = POD_numina_sorcery_additional_perk_cost
+}
+
+POD_remove_vanilla_perk_points_effect = { 
+	hidden_effect = {
+		add_diplomacy_lifestyle_perk_points = -1
+		add_martial_lifestyle_perk_points = -1
+		add_stewardship_lifestyle_perk_points = -1
+		add_intrigue_lifestyle_perk_points = -1
+		add_learning_lifestyle_perk_points = -1
+	}
+}
+
+POD_remove_supernatural_perk_points_effect = {
+	hidden_effect = {
+		add_animal_lifestyle_perk_points = -1000
+		add_choleric_lifestyle_perk_points = -1000
+		add_melancholy_lifestyle_perk_points = -1000
+		add_phlegmatic_lifestyle_perk_points = -1000
+		add_sanguine_lifestyle_perk_points = -1000
+		add_blood_magic_lifestyle_perk_points = -1000
+		add_necro_magic_lifestyle_perk_points = -1000
+		add_faith_lifestyle_perk_points = -1000
+		add_endowments_lifestyle_perk_points = -1000
+		add_psi_lifestyle_perk_points = -1000
+		add_sorcery_lifestyle_perk_points = -1000
+		add_theurgy_lifestyle_perk_points = -1000
+		add_shintai_lifestyle_perk_points = -1000
+		add_chi_arts_lifestyle_perk_points = -1000
+		add_soul_arts_lifestyle_perk_points = -1000
+		add_demon_arts_lifestyle_perk_points = -1000
+		add_qiao_lifestyle_perk_points = -1000
+		add_hekau_alchemy_lifestyle_perk_points = -1000
+		add_hekau_amulets_lifestyle_perk_points = -1000
+		add_hekau_celestial_lifestyle_perk_points = -1000
+		add_hekau_effigy_lifestyle_perk_points = -1000
+		add_hekau_necromancy_lifestyle_perk_points = -1000
+		add_hekau_nomenclature_lifestyle_perk_points = -1000
+		add_tan_lifestyle_perk_points = -1000
+		add_commongifts_lifestyle_perk_points = -1000
+		add_breedgifts_lifestyle_perk_points = -1000
+		add_lunar_auspicegifts_lifestyle_perk_points = -1000
+		add_solar_auspicegifts_lifestyle_perk_points = -1000
+		add_tribalgifts_lifestyle_perk_points = -1000
+		add_streamgifts_lifestyle_perk_points = -1000
+		add_planetarygifts_lifestyle_perk_points = -1000
+		add_urgetaints_lifestyle_perk_points = -1000
+		add_mnesis_lifestyle_perk_points = -1000
+		add_arcanoi_lifestyle_perk_points = -1000
+		add_jade_arcanoi_lifestyle_perk_points = -1000
+		add_dark_arcanoi_lifestyle_perk_points = -1000
+		add_misc_arcanoi_lifestyle_perk_points = -1000
+		add_thorn_lifestyle_perk_points = -1000
+		add_arcana_lifestyle_perk_points = -1000
+		add_lore_lifestyle_perk_points = -1000
+		add_investiture_lifestyle_perk_points = -1000
+		add_possessedpower_lifestyle_perk_points = -1000
+		add_realm_lifestyle_perk_points = -1000
+		add_common_arts_lifestyle_perk_points = -1000
+		add_rare_arts_lifestyle_perk_points = -1000
+		add_kith_arts_lifestyle_perk_points = -1000
+		add_slivers_lifestyle_perk_points = -1000
+		add_wu_tan_lifestyle_perk_points = -1000
+	}
+}
+
+POD_remove_all_perks_in_lifestyle = {
+	hidden_effect = {
+		refund_perks = $LIFESTYLE$
+		add_$LIFESTYLE$_perk_points = -1000
+	}
+}
+
+POD_remove_breed_traits_effect = {
+	remove_trait = homid_born
+	remove_trait = beast_born
+}
+
+POD_remove_lunar_auspice_traits_effect = {
+	remove_trait = ahroun
+	remove_trait = galliard
+	remove_trait = philodox
+	remove_trait = theurge
+	remove_trait = ragabash
+}
+
+POD_remove_pryio_traits_effect = {
+	remove_trait = pryio_twilight
+	remove_trait = pryio_daylight
+	remove_trait = pryio_night
+}
+
+POD_remove_solar_auspice_traits_effect = {
+	remove_trait = rising_sun
+	remove_trait = noonday_sun
+	remove_trait = setting_sun
+	remove_trait = midnight_sun
+	remove_trait = shrouded_sun
+	remove_trait = decorated_sun
+	remove_trait = eclipsed_sun
+	remove_trait = vasanta
+	remove_trait = grisma
+	remove_trait = zarad
+	remove_trait = hemanta
+	remove_trait = tung_chun
+	remove_trait = nam_hsia
+	remove_trait = sai_chau
+	remove_trait = pei_tung
+}
+
+
+POD_remove_demon_traits_effect = {
+}
+
+POD_refund_arcana_effect = {
+	if = {
+		limit = {
+			has_trait = demon
+		}
+		add_arcana_lifestyle_perk_points = -14
+		POD_character_demon_lifestyle_initialization_effect = yes
+	}
+}
+
+POD_clear_investiture_lifestyle = {
+	if = {
+		limit = { has_perk = investiture_uncanny_beauty_perk }
+		remove_perk = investiture_uncanny_beauty_perk
+		remove_trait = beauty_good_3
+		POD_reapply_visual_clan_curse_effect = yes
+	}
+	POD_remove_all_perks_in_lifestyle = {
+		LIFESTYLE = investiture_lifestyle
+	}
+	POD_modifier_injector_investiture = {
+		EFFECT = POD_remove_all_character_modifier_instances_and_tracked_stacks
+	}
+	remove_character_flag = access_to_investiture
+}
+
+POD_refund_investiture = {
+	custom_tooltip = {
+		text = POD_refund_investiture_effect
+		
+		if = {
+			limit = { has_perk = investiture_uncanny_beauty_perk }
+			remove_perk = investiture_uncanny_beauty_perk
+			add_investiture_lifestyle_perk_points = 1
+			remove_trait = beauty_good_3
+			POD_reapply_visual_clan_curse_effect = yes
+		}
+		POD_modifier_injector_investiture = {
+			EFFECT = POD_refund_investiture_stacking_perk
+		}
+		
+		refund_perks = investiture_lifestyle
+	}
+}
+
+POD_refund_investiture_stacking_perk = {
+	if = {
+		limit = { has_character_modifier = $MODIFIER$ }
+		remove_all_character_modifier_instances = $MODIFIER$
+		add_investiture_lifestyle_perk_points = var:$MODIFIER$_stacks
+		remove_variable = $MODIFIER$_stacks
+	}
+}
+
+POD_refund_discipline_macro = {
+	if = {
+		limit = { has_trait = $TRAIT$advanced }
+		remove_trait = $TRAIT$advanced
+		add_trait = $TRAIT$
+	}
+}
+
+POD_refund_discipline_effect = {
+	POD_trait_injector_disciplines = { EFFECT = POD_refund_discipline_macro }
+	remove_character_flag = duplicate_warrior_valeren_cost_flag
+	remove_character_flag = duplicate_watcher_valeren_cost_flag
+	remove_character_flag = duplicate_healer_valeren_cost_flag
+	remove_character_flag = triplicate_warrior_valeren_cost_flag
+	remove_character_flag = triplicate_watcher_valeren_cost_flag
+	remove_character_flag = triplicate_healer_valeren_cost_flag
+}
+
+POD_refund_art_macro = {
+	if = {
+		limit = { has_trait = $TRAIT$_advanced }
+		remove_trait = $TRAIT$_advanced
+		add_trait = $TRAIT$
+	}
+}
+
+POD_refund_fae_art_traits_effect = {
+	POD_trait_injector_arts = { EFFECT = POD_refund_art_macro }
+}
+
+POD_remove_all_perk_lifestyle_traits_effect = {
+	if = {
+		limit = { has_trait = beatific }
+		remove_trait = beatific
+		add_trait = truefaith
+	}
+	POD_remove_hunter_traits_effect = yes
+	POD_refund_fae_art_traits_effect = yes
+	POD_refund_discipline_effect = yes
+	POD_refund_arcana_effect = yes
+}
+
+POD_remove_supernatural_relation_effect = {
+	save_scope_as = victim
+	
+	every_relation = {
+		type = herd_owner
+		POD_remove_herd_no_masquerade_effect = { TARGET = scope:victim }
+	}
+	
+	every_relation = {
+		type = dreamer_owner
+		remove_hook = {
+			target = scope:victim
+			type = dreamer_hook
+		}
+		scope:victim = {
+			remove_relation_dreamer_owner = prev
+			remove_character_flag = blocked_from_leaving
+		}
+	}
+	
+	every_relation = {
+		type = demonic_master
+		scope:victim = {
+			remove_relation_demonic_master = prev
+		}
+	}
+	
+	POD_clear_bound_ghoul_variables_and_relations = yes
+	
+	every_relation = {
+		type = possessesing_wraith
+		POD_wraith_end_possession = {
+			WRAITH = this
+			PUPPET = scope:victim
+		}
+	}
+	
+	every_relation = {
+		type = necromancer
+		POD_unbind_wraith_effect = {
+			WRAITH = scope:victim
+			NECROMANCER = this
+		}
+	}
+}
+
+POD_remove_spouse_relation_effect = {
+	if = {
+		limit = { is_married = yes }
+		every_spouse = {
+			divorce = prev
+		}
+	}
+	if = {
+		limit = { exists = betrothed }
+		break_betrothal = betrothed
+	}
+	if = {
+		limit = { is_concubine = yes }
+		concubinist = {
+			remove_concubine = prev
+		}
+	}
+	if = {
+		limit = { number_of_concubines > 0 }
+		every_concubine = {
+			prev = {
+				remove_concubine = prev
+			}
+		}
+	}
+}
+
+POD_remove_parent_relation_effect = {
+	save_scope_as = this_character
+	if = {
+		limit = { exists = mother }
+		create_character = {
+			save_temporary_scope_as = new_mother
+			location = scope:this_character.capital_province
+			age = 1200
+			culture = scope:this_character.culture
+			faith = scope:this_character.faith
+			dynasty_house = scope:this_character.house
+			gender = female
+			random_traits = no
+		}
+		hidden_effect_new_object = {
+			set_mother = scope:new_mother
+			scope:new_mother = { 
+				death = {
+					death_reason = death_mysterious
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = father }
+		create_character = {
+			save_temporary_scope_as = new_father
+			location = scope:this_character.capital_province
+			age = 1200
+			culture = scope:this_character.culture
+			faith = scope:this_character.faith
+			dynasty_house = scope:this_character.house
+			gender = male
+			random_traits = no
+		}
+		hidden_effect_new_object = {
+			set_father = scope:new_father
+			scope:new_father = { 
+				death = {
+					death_reason = death_mysterious
+				}
+			}
+		}
+	}
+	house = {
+		every_house_member = { 
+			limit = {
+				has_hook_of_type = {
+					target = scope:this_character
+					type = house_head_hook
+				}
+			}
+			remove_hook = {
+				target = scope:this_character
+				type = house_head_hook
+			}
+		}
+	}
+}
+
+POD_remove_child_relation_effect = {
+	if = {
+		limit = {
+			any_child = {
+				even_if_dead = yes
+				count >= 1
+			}
+		}
+		create_character = {
+			location = this.capital_province
+			age = 1200
+			culture = this.culture
+			faith = this.faith
+			dynasty = none
+			gender = this
+			random_traits = no
+			save_temporary_scope_as = created_badparent
+		}
+								
+		if = {
+			limit = { exists = father }
+			scope:created_badparent = { set_father = prev.father }
+		}				
+		if = {
+			limit = { exists = mother }
+			scope:created_badparent = { set_mother = prev.mother }
+		}			
+		if = {
+			limit = { exists = house }
+			scope:created_badparent = { set_house = prev.house }
+		}
+		
+		if = {
+			limit = { is_female = yes }
+			every_child = {
+				even_if_dead = yes
+				set_mother = scope:created_badparent
+			}
+		}
+		else = {
+			every_child = {
+				even_if_dead = yes
+				set_father = scope:created_badparent
+			}
+		}
+		
+		scope:created_badparent = {
+			death = { death_reason = death_disappearance }
+		}
+	}
+	if = {
+		limit = {
+			is_female = no
+			any_consort = { is_pregnant = yes }
+		}
+		create_character = {
+			location = this.capital_province
+			age = 40
+			culture = this.culture
+			faith = this.faith
+			dynasty = none
+			gender = male
+			trait = mortal
+			random_traits = no
+			save_temporary_scope_as = assumed_father
+		}
+		every_consort = {
+			limit = { is_pregnant = yes }
+			set_pregnancy_assumed_father = scope:assumed_father
+		}
+		scope:assumed_father = {
+			death = { death_reason = death_disappearance }
+		}
+	}
+}
+
+POD_remove_supernatural_variables_effect = {
+	remove_variable = fera_type
+}
+
+POD_remove_achievement_flags_effect = {
+	POD_achiev_nomnom_clear_flag = yes
+}
+
+POD_reset_splat_county_modifiers = {
+	if = {
+		limit = {
+			is_anh_trigger = yes
+			# disabled for the AI until we can make them smarter about choosing their domain
+			is_ai = no
+			POD_suppress_clan_curse_trigger = no
+		}
+		every_held_title = { POD_apply_anh_clan_curse = yes }
+	}
+	else = {
+		every_held_title = { POD_remove_anh_clan_curse = yes }
+	}
+}
+
+POD_remove_food_based_coping_strategies = {
+	remove_trait = drunkard
+	remove_trait = hashishiyah
+	remove_trait = comfort_eater
+	remove_trait = inappetetic
+}
+
+POD_remove_physical_coping_strategies = {
+	POD_remove_food_based_coping_strategies = yes
+	remove_trait = rakish
+	remove_trait = flagellant
+	remove_trait = athletic
+}
+
+POD_end_pregnancy = {
+	if = {
+		limit = { is_pregnant = yes } 
+		end_pregnancy = yes
+		pregnancy_cleanup_effect = yes
+	}
+}
+
+POD_remove_vampire_bloodsorcery_traditions_effect = {
+	remove_character_flag = remove_clan_bloodmagic
+	remove_character_flag = has_thaumaturgy_bloodmagic_flag
+	remove_character_flag = has_sielanic_thaumaturgy_bloodmagic_flag
+	remove_character_flag = has_dur_an_ki_bloodmagic_flag
+	remove_character_flag = has_akhu_bloodmagic_flag
+	remove_character_flag = has_sadhana_bloodmagic_flag
+	remove_character_flag = has_koldunic_bloodmagic_flag
+	remove_character_flag = has_abyssal_mysticism_bloodmagic_flag
+	remove_character_flag = has_sihr_bloodmagic_flag
+}
+
+POD_remove_vampire_necromancy_traditions_effect = {
+	remove_character_flag = has_giovanni_necromancy_flag
+	remove_character_flag = has_cappadocian_necromancy_flag
+	remove_character_flag = has_harbinger_necromancy_flag
+	remove_character_flag = has_lamia_necromancy_flag
+	remove_character_flag = has_impundulu_necromancy_flag
+	remove_character_flag = has_nagaraja_necromancy_flag
+	remove_character_flag = has_rosselini_necromancy_flag
+}

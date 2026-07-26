@@ -1,0 +1,1088 @@
+﻿POD_train_disciplines_interaction = {
+	category = interaction_category_vampire
+	#common_interaction = yes
+	#interface_priority = 89
+	desc = POD_train_disciplines_interaction_desc
+	icon = icon_culture
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_POD_vamp_blood_trigger = yes  }
+		scope:recipient = { has_POD_vamp_blood_trigger = yes }
+		scope:actor = {
+			OR = {
+				choleric_lifestyle_perk_half_points > 0
+				phlegmatic_lifestyle_perk_half_points > 0
+				sanguine_lifestyle_perk_half_points > 0
+				melancholy_lifestyle_perk_half_points > 0
+				animal_lifestyle_perk_half_points > 0
+				has_perk = cycle_of_the_midgard_serpent_perk
+			}
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	on_accept = {
+		custom_tooltip = POD_train_disciplines_interaction_effect_tt 
+		scope:recipient = {
+			save_scope_as = disciplinetrainee
+		}
+		scope:actor = {
+				save_scope_as = disciplinetrainer
+			}
+		scope:actor = {
+			trigger_event = POD_disciplinetrain.100
+		}
+	}
+}
+
+POD_train_hekau_interaction = {
+	category = interaction_category_mummy
+	desc = POD_train_hekau_interaction_desc
+	common_interaction = yes
+	icon = POD_hekau_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_trait = mummy }
+		scope:recipient = { has_trait = mummy }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:actor = {
+			OR = {
+				hekau_alchemy_lifestyle_perk_points >= 1
+				hekau_amulets_lifestyle_perk_points >= 1
+				hekau_celestial_lifestyle_perk_points >= 1
+				hekau_effigy_lifestyle_perk_points >= 1
+				hekau_necromancy_lifestyle_perk_points >= 1
+				hekau_nomenclature_lifestyle_perk_points >= 1
+				tan_lifestyle_perk_points >= 1
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_sekhem_for_hekau = { AMOUNT = 1 }
+		}
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_alchemy_lifestyle_perk_points >= 1 }
+		}
+		flag = hekau_alchemy_lifestyle
+		localization = hekau_alchemy_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_amulets_lifestyle_perk_points >= 1 }
+		}
+		flag = hekau_amulets_lifestyle
+		localization = hekau_amulets_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_celestial_lifestyle_perk_points >= 1 }
+		}
+		flag = hekau_celestial_lifestyle
+		localization = hekau_celestial_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_effigy_lifestyle_perk_points >= 1 }
+		}
+		flag = hekau_effigy_lifestyle
+		localization = hekau_effigy_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_necromancy_lifestyle_perk_points >= 1 }
+			scope:recipient = { is_east_mummy_trigger = no }
+		}
+		flag = hekau_necromancy_lifestyle
+		localization = hekau_necromancy_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hekau_nomenclature_lifestyle_perk_points >= 1 }
+		}
+		flag = hekau_nomenclature_lifestyle
+		localization = hekau_nomenclature_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { tan_lifestyle_perk_points >= 1 }
+			scope:recipient = { is_east_mummy_trigger = yes }
+		}
+		flag = tan_lifestyle
+		localization = tan_lifestyle_name
+	}
+	
+	on_accept = {
+		scope:actor = {
+			stress_impact = {
+				base = medium_stress_gain
+			}
+			POD_hekau_cost_effect = { COUNT = 1 }
+			if = {
+				limit = { has_perk = firebringer_perk }
+				add_prestige = major_prestige_gain
+				dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+			}
+		}
+		if = {
+			limit = { scope:hekau_alchemy_lifestyle = yes }
+			scope:actor = { add_hekau_alchemy_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_alchemy_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:hekau_effigy_lifestyle = yes }
+			scope:actor = { add_hekau_effigy_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_effigy_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:hekau_celestial_lifestyle = yes }
+			scope:actor = { add_hekau_celestial_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_celestial_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:hekau_amulets_lifestyle = yes }
+			scope:actor = { add_hekau_amulets_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_amulets_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:hekau_necromancy_lifestyle = yes }
+			scope:actor = { add_hekau_necromancy_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_necromancy_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:hekau_nomenclature_lifestyle = yes }
+			scope:actor = { add_hekau_nomenclature_lifestyle_perk_points = -1 }
+			scope:recipient = { add_hekau_nomenclature_lifestyle_perk_points = 1 }
+		}
+		if = {
+			limit = { scope:tan_lifestyle = yes }
+			scope:actor = { add_tan_lifestyle_perk_points = -1 }
+			scope:recipient = { add_tan_lifestyle_perk_points = 1 }
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_frequency = 120
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		number_of_knights > 0
+		primary_title.tier > tier_barony
+		
+		piety >= 800
+	}
+	ai_targets = {
+		ai_recipients = vassals
+		max = 10
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		max = 10
+	}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 100
+			scope:recipient = {
+				is_knight_of = scope:actor
+			}
+		}
+	}
+}
+
+POD_train_perk_interaction = {
+	category = interaction_category_friendly
+	desc = POD_train_perk_interaction_desc
+	icon = icon_culture
+
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			OR = {
+				diplomacy_lifestyle_perk_points >= 1
+				martial_lifestyle_perk_points >= 1
+				stewardship_lifestyle_perk_points >= 1
+				intrigue_lifestyle_perk_points >= 1
+				learning_lifestyle_perk_points >= 1
+				wanderer_lifestyle_perk_points >= 1
+			}
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	### Diplomacy trees
+	
+	send_option = {
+		is_shown = { scope:actor = { diplomacy_lifestyle_perk_points >= 1 } }
+		flag = foreign_affairs
+		localization = foreign_affairs_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { diplomacy_lifestyle_perk_points >= 1 } }
+		flag = majesty
+		localization = majesty_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { diplomacy_lifestyle_perk_points >= 1 } }
+		flag = family
+		localization = family_visible
+	}
+	
+	### Martial trees
+	
+	send_option = {
+		is_shown = { scope:actor = { martial_lifestyle_perk_points >= 1 } }
+		flag = strategy
+		localization = strategy_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { martial_lifestyle_perk_points >= 1 } }
+		flag = authority
+		localization = authority_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { martial_lifestyle_perk_points >= 1 } }
+		flag = chivalry
+		localization = chivalry_visible
+	}
+	
+	### Stewardship trees
+	
+	send_option = {
+		is_shown = { scope:actor = { stewardship_lifestyle_perk_points >= 1 } }
+		flag = wealth
+		localization = wealth_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { stewardship_lifestyle_perk_points >= 1 } }
+		flag = domain
+		localization = domain_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { stewardship_lifestyle_perk_points >= 1 } }
+		flag = duty
+		localization = duty_visible
+	}
+	
+	### Intrigue trees
+	
+	send_option = {
+		is_shown = { scope:actor = { intrigue_lifestyle_perk_points >= 1 } }
+		flag = skulduggery
+		localization = skulduggery_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { intrigue_lifestyle_perk_points >= 1 } }
+		flag = temptation
+		localization = temptation_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { intrigue_lifestyle_perk_points >= 1 } }
+		flag = intimidation
+		localization = intimidation_visible
+	}
+	
+	### Learning trees
+	
+	send_option = {
+		is_shown = { scope:actor = { learning_lifestyle_perk_points >= 1 } }
+		flag = medicine
+		localization = medicine_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { learning_lifestyle_perk_points >= 1 } }
+		flag = scholarship
+		localization = scholarship_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { learning_lifestyle_perk_points >= 1 } }
+		flag = theology
+		localization = theology_visible
+	}
+	
+	### Wanderer trees
+	
+	send_option = {
+		is_shown = { scope:actor = { wanderer_lifestyle_perk_points >= 1 } }
+		flag = surveyor
+		localization = surveyor_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { wanderer_lifestyle_perk_points >= 1 } }
+		flag = wayfarer
+		localization = wayfarer_visible
+	}
+	
+	send_option = {
+		is_shown = { scope:actor = { wanderer_lifestyle_perk_points >= 1 } }
+		flag = voyager
+		localization = voyager_visible
+	}
+	
+	
+	on_accept = {
+		scope:actor = {
+			stress_impact = {
+				base = medium_stress_gain
+			}
+			if = {
+				limit = { has_perk = firebringer_perk }
+				add_prestige = major_prestige_gain
+				dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+			}
+		}
+		switch = {
+			trigger = yes
+			
+			scope:foreign_affairs = {
+				scope:actor = { add_diplomacy_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = foreign_affairs } }
+			}
+			scope:majesty = {
+				scope:actor = { add_diplomacy_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = majesty } }
+			}
+			scope:family = {
+				scope:actor = { add_diplomacy_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = family } }
+			}
+			
+			scope:strategy = {
+				scope:actor = { add_martial_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = strategy } }
+			}
+			scope:authority = {
+				scope:actor = { add_martial_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = authority } }
+			}
+			scope:chivalry = {
+				scope:actor = { add_martial_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = chivalry } }
+			}
+			
+			scope:wealth = {
+				scope:actor = { add_stewardship_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = wealth } }
+			}
+			scope:domain = {
+				scope:actor = { add_stewardship_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = domain } }
+			}
+			scope:duty = {
+				scope:actor = { add_stewardship_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = duty } }
+			}
+			
+			scope:skulduggery = {
+				scope:actor = { add_intrigue_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = skulduggery } }
+			}
+			scope:temptation = {
+				scope:actor = { add_intrigue_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = temptation } }
+			}
+			scope:intimidation = {
+				scope:actor = { add_intrigue_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = intimidation } }
+			}
+			
+			scope:medicine = {
+				scope:actor = { add_learning_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = medicine } }
+			}
+			scope:scholarship = {
+				scope:actor = { add_learning_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = scholarship } }
+			}
+			scope:theology = {
+				scope:actor = { add_learning_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = theology } }
+			}
+			
+			scope:surveyor = {
+				scope:actor = { add_wanderer_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = surveyor } }
+			}
+			scope:wayfarer = {
+				scope:actor = { add_wanderer_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = wayfarer } }
+			}
+			scope:voyager = {
+				scope:actor = { add_wanderer_lifestyle_perk_points = -1 }
+				scope:recipient = { POD_gain_next_perk_in_lifestyle = { LIFESTYLE = voyager } }
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_train_gift_interaction = {
+	category = interaction_category_fera
+	desc = POD_train_gift_interaction_desc
+	common_interaction = yes
+	icon = POD_fera_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		OR = {
+			AND = {
+				scope:actor = { has_trait = fera }
+				scope:recipient = {
+					OR = {
+						has_trait = fera
+						has_trait = kinfolk
+					}
+				}
+			}
+			AND = {
+				scope:actor = { has_trait = abomination }
+				scope:recipient = { has_trait = abomination }
+			}
+		}
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:actor = {
+			OR = {
+				commongifts_lifestyle_perk_points >= 1
+				breedgifts_lifestyle_perk_points >= 1
+				lunar_auspicegifts_lifestyle_perk_points >= 1
+				solar_auspicegifts_lifestyle_perk_points >= 1
+				tribalgifts_lifestyle_perk_points >= 1
+				streamgifts_lifestyle_perk_points >= 1
+				hengeyokaigifts_lifestyle_perk_points >= 1
+				planetarygifts_lifestyle_perk_points >= 1
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { commongifts_lifestyle_perk_points >= 1 }
+			scope:recipient = {
+				POD_has_access_to_fera_gifts = { TRAIT = trait:bastet }
+			}
+		}
+		flag = commongifts_lifestyle
+		localization = commongifts_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { breedgifts_lifestyle_perk_points >= 1 }
+			scope:recipient = {
+				OR = {
+					POD_has_access_to_fera_gifts = { TRAIT = trait:werewolf }
+					POD_has_access_to_fera_gifts = { TRAIT = trait:bastet }
+				}
+			}
+		}
+		flag = breedgifts_lifestyle
+		localization = breedgifts_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { lunar_auspicegifts_lifestyle_perk_points >= 1 }
+			scope:recipient = { has_trait = lunar_auspice }
+		}
+		flag = lunar_auspicegifts_lifestyle
+		localization = lunar_auspicegifts_lifestyle_name
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { solar_auspicegifts_lifestyle_perk_points >= 1 }
+			scope:recipient = { has_trait = solar_auspice }
+		}
+		flag = solar_auspicegifts_lifestyle
+		localization = solar_auspicegifts_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { tribalgifts_lifestyle_perk_points >= 1 }
+			scope:recipient = {
+				OR = {
+					POD_has_access_to_fera_gifts = { TRAIT = trait:werewolf }
+					POD_has_access_to_fera_gifts = { TRAIT = trait:bastet }
+				}
+			}
+		}
+		flag = tribalgifts_lifestyle
+		localization = tribalgifts_lifestyle_name
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = { streamgifts_lifestyle_perk_points >= 1 }
+			scope:recipient = {
+				POD_has_access_to_fera_gifts = { TRAIT = trait:mokole }
+			}
+		}
+		flag = streamgifts_lifestyle
+		localization = streamgifts_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { hengeyokaigifts_lifestyle_perk_points >= 1 }
+			scope:recipient = {
+				has_trait = fera
+				faith = { has_doctrine = doctrine_fera_beast_courts }
+			}
+		}
+		flag = hengeyokaigifts_lifestyle
+		localization = hengeyokaigifts_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { planetarygifts_lifestyle_perk_points >= 1 }
+			scope:recipient = { POD_splat_has_access_to_planetary_gifts = yes }
+		}
+		flag = planetarygifts_lifestyle
+		localization = planetarygifts_lifestyle_name
+	}
+	
+	on_accept = {
+		scope:actor = {
+			stress_impact = {
+				base = medium_stress_gain
+			}
+			if = {
+				limit = { has_perk = firebringer_perk }
+				add_prestige = major_prestige_gain
+				dynasty = { add_dynasty_prestige = major_dynasty_prestige_gain }
+			}
+		}
+		switch = {
+			trigger = yes
+			scope:commongifts_lifestyle = {
+				scope:actor = { add_commongifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_commongifts_lifestyle_perk_points = 1 }
+			}
+			scope:breedgifts_lifestyle = {
+				scope:actor = { add_breedgifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_breedgifts_lifestyle_perk_points = 1 }
+			}
+			scope:lunar_auspicegifts_lifestyle = {
+				scope:actor = { add_lunar_auspicegifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_lunar_auspicegifts_lifestyle_perk_points = 1 }
+			}
+			scope:solar_auspicegifts_lifestyle = {
+				scope:actor = { add_solar_auspicegifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_solar_auspicegifts_lifestyle_perk_points = 1 }
+			}
+			scope:tribalgifts_lifestyle = {
+				scope:actor = { add_tribalgifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_tribalgifts_lifestyle_perk_points = 1 }
+			}
+			scope:streamgifts_lifestyle = {
+				scope:actor = { add_streamgifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_streamgifts_lifestyle_perk_points = 1 }
+			}
+			scope:hengeyokaigifts_lifestyle = {
+				scope:actor = { add_hengeyokaigifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_hengeyokaigifts_lifestyle_perk_points = 1 }
+			}
+			scope:planetarygifts_lifestyle = {
+				scope:actor = { add_planetarygifts_lifestyle_perk_points = -1 }
+				scope:recipient = { add_planetarygifts_lifestyle_perk_points = 1 }
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = mentored_me_opinion
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_frequency = 120
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		number_of_knights > 0
+		primary_title.tier > tier_barony
+		
+		piety >= 800
+	}
+	ai_targets = {
+		ai_recipients = vassals
+		max = 10
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		max = 10
+	}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 100
+			scope:recipient = {
+				is_knight_of = scope:actor
+			}
+		}
+	}
+}
+
+POD_train_cantrips_interaction = {
+	category = interaction_category_fae
+	desc = POD_train_cantrips_interaction_desc
+	common_interaction = yes
+	icon = POD_fae_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_POD_fae_blood_trigger = yes }
+		scope:recipient = { has_POD_fae_blood_trigger = yes }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:actor = {
+			OR = {
+				realm_lifestyle_perk_points >= 1
+				common_arts_lifestyle_perk_points >= 1
+				rare_arts_lifestyle_perk_points >= 1
+				kith_arts_lifestyle_perk_points >= 1
+				slivers_lifestyle_perk_points >= 1
+				wu_tan_lifestyle_perk_points >= 1
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = { realm_lifestyle_perk_points >= 1 }
+		}
+		flag = realm_lifestyle
+		localization = realm_lifestyle_name
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				OR = {
+					common_arts_lifestyle_perk_points >= 1
+					rare_arts_lifestyle_perk_points >= 1
+					kith_arts_lifestyle_perk_points >= 1
+					slivers_lifestyle_perk_points >= 1
+					wu_tan_lifestyle_perk_points >= 1
+				}
+			}
+		}
+		flag = art
+		localization = POD_train_cantrips_interaction_option_art
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_glamour_cost_effect = { COUNT = 1 }
+		}
+		if = {
+			limit = { scope:realm_lifestyle = yes }
+			scope:actor = {
+				add_realm_lifestyle_perk_points = -1
+				stress_impact = {
+					base = medium_stress_gain
+				}
+			}
+			scope:recipient = {
+				add_realm_lifestyle_perk_points = 1
+				add_opinion = {
+					target = scope:actor
+					modifier = mentored_me_opinion
+				}
+			}
+		}
+		else = {
+			scope:recipient = { save_scope_as = disciplinetrainee }
+			scope:actor = { save_scope_as = disciplinetrainer }
+			scope:actor = { trigger_event = POD_disciplinetrain.150 }
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_frequency = 120
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		number_of_knights > 0
+		primary_title.tier > tier_barony
+		
+		piety >= 800
+	}
+	ai_targets = {
+		ai_recipients = vassals
+		max = 10
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		max = 10
+	}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 100
+			scope:recipient = {
+				is_knight_of = scope:actor
+			}
+		}
+	}
+}
+
+POD_train_arts_interaction = {
+	category = interaction_category_vampire
+	desc = POD_train_arts_interaction_desc
+	icon = POD_art_interaction
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_trait = kueijin }
+		scope:recipient = { has_trait = kueijin }
+		POD_interaction_is_shown = yes
+	}
+	
+	is_valid = {
+		scope:actor = {
+			OR = {
+				shintai_lifestyle_perk_points >= 1
+				chi_arts_lifestyle_perk_points >= 1
+				soul_arts_lifestyle_perk_points >= 1
+				demon_arts_lifestyle_perk_points >= 1
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_option = {
+		flag = shintai
+		is_valid = { scope:actor = { shintai_lifestyle_perk_points >= 1 } }
+		localization = shintai_lifestyle_name
+	}
+	
+	send_option = {
+		flag = chi_arts
+		is_valid = { scope:actor = { chi_arts_lifestyle_perk_points >= 1 } }
+		localization = chi_arts_lifestyle_name
+	}
+	
+	send_option = {
+		flag = soul_arts
+		is_valid = { scope:actor = { soul_arts_lifestyle_perk_points >= 1 } }
+		localization = soul_arts_lifestyle_name
+	}
+	
+	send_option = {
+		flag = demon_arts
+		is_valid = { scope:actor = { demon_arts_lifestyle_perk_points >= 1 } }
+		localization = demon_arts_lifestyle_name
+	}
+	
+	on_accept = {
+		scope:actor = {
+			POD_static_stress_gain = { COUNT = 50 }
+			switch = {
+				trigger = yes
+				scope:shintai = { add_shintai_lifestyle_perk_points = -1 }
+				scope:chi_arts = { add_chi_arts_lifestyle_perk_points = -1 }
+				scope:soul_arts = { add_soul_arts_lifestyle_perk_points = -1 }
+				scope:demon_arts = { add_demon_arts_lifestyle_perk_points = -1 }
+			}
+			
+			if = {
+				limit = { POD_gains_boneflowers_dharma_xp = yes }
+				POD_give_dharma_xp_effect = { VALUE = POD_kueijin_dharma_xp_value_high }
+			}
+		}
+		scope:recipient = {
+			switch = {
+				trigger = yes
+				scope:shintai = { add_shintai_lifestyle_perk_points = 1 }
+				scope:chi_arts = { add_chi_arts_lifestyle_perk_points = 1 }
+				scope:soul_arts = { add_soul_arts_lifestyle_perk_points = 1 }
+				scope:demon_arts = { add_demon_arts_lifestyle_perk_points = 1 }
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	ai_frequency = 120
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+		number_of_knights > 0
+		primary_title.tier > tier_barony
+		
+		piety >= 800
+	}
+	ai_targets = {
+		ai_recipients = vassals
+		max = 10
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		max = 10
+	}
+	
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 100
+			scope:recipient = {
+				is_knight_of = scope:actor
+			}
+		}
+	}
+}
+
+POD_mass_train_disciplines_interaction = {
+	category = interaction_category_vampire
+	#common_interaction = yes
+	#interface_priority = 89
+	desc = POD_mass_train_disciplines_interaction_desc
+	icon = icon_culture
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { has_POD_vamp_blood_trigger = yes }
+	}
+	
+	is_valid = {
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_options_exclusive = no
+	
+	send_option = {
+		flag = knight
+		localization = game_concept_knights
+	}
+	
+	send_option = {
+		flag = vassal
+		localization = vassals
+	}
+	
+	send_option = {
+		flag = family
+		localization = POD_sorcery_auto_resurrection_interaction_family
+	}
+	
+	on_accept = {
+		scope:actor = {
+			save_scope_as = disciplinetrainer
+			custom_tooltip = POD_mass_train_disciplines_interaction_desc
+			if = {
+				limit = { scope:knight = yes }
+				every_knight = {
+					limit = { has_POD_vamp_blood_trigger = yes }
+					add_to_list = disciplinetrainee
+				}
+			}
+			if = {
+				limit = { scope:vassal = yes }
+				every_vassal = {
+					limit = { has_POD_vamp_blood_trigger = yes }
+					add_to_list = disciplinetrainee
+				}
+			}
+			if = {
+				limit = { scope:family = yes }
+				house = {
+					every_house_member = {
+						limit = {
+							has_POD_vamp_blood_trigger = yes
+							NOT = { this = scope:actor }
+						}
+						add_to_list = disciplinetrainee
+					}
+				}
+			}
+			trigger_event = POD_disciplinetrain.200
+		}
+	}
+}
+
+POD_mass_train_cantrips_interaction = {
+	category = interaction_category_fae
+	#common_interaction = yes
+	#interface_priority = 89
+	desc = POD_mass_train_cantrips_interaction_desc
+	icon = POD_fae_interaction
+	
+	ai_frequency = 0
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = { has_POD_fae_blood_trigger = yes }
+	}
+	
+	is_valid = {
+		scope:actor = {
+			OR = {
+				common_arts_lifestyle_perk_points >= 1
+				rare_arts_lifestyle_perk_points >= 1
+				kith_arts_lifestyle_perk_points >= 1
+				slivers_lifestyle_perk_points >= 1
+				wu_tan_lifestyle_perk_points >= 1
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_options_exclusive = no
+	
+	send_option = {
+		flag = knight
+		localization = game_concept_knights
+	}
+	
+	send_option = {
+		flag = vassal
+		localization = vassals
+	}
+	
+	send_option = {
+		flag = family
+		localization = POD_sorcery_auto_resurrection_interaction_family
+	}
+	
+	on_accept = {
+		scope:actor = {
+			save_scope_as = disciplinetrainer
+			custom_tooltip = POD_mass_train_cantrips_interaction
+			if = {
+				limit = { scope:knight = yes }
+				every_knight = {
+					limit = { has_POD_fae_blood_trigger = yes }
+					add_to_list = disciplinetrainee
+				}
+			}
+			if = {
+				limit = { scope:vassal = yes }
+				every_vassal = {
+					limit = { has_POD_fae_blood_trigger = yes }
+					add_to_list = disciplinetrainee
+				}
+			}
+			if = {
+				limit = { scope:family = yes }
+				house = {
+					every_house_member = {
+						limit = {
+							has_POD_fae_blood_trigger = yes
+							NOT = { this = scope:actor }
+						}
+						add_to_list = disciplinetrainee
+					}
+				}
+			}
+			trigger_event = POD_disciplinetrain.250
+		}
+	}
+}

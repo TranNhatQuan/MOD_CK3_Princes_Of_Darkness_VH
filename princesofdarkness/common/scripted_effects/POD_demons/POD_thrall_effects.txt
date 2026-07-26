@@ -1,0 +1,333 @@
+﻿POD_cult_leader_pulse_effect = {
+	save_scope_as = demon
+	if = {
+		limit = { var:cult_leader_cooldown ?= 0 } 
+		set_variable = {
+			name = cult_leader_cooldown
+			value = cult_leader_court_position_level
+		}
+		if = {
+			limit = {
+				any_vassal = {
+					POD_can_be_converted_by_cult_leader = { DEMON = scope:demon }
+				} 
+			}
+			ordered_vassal = {
+				order_by = "opinion(scope:demon)"
+				limit = { POD_can_be_converted_by_cult_leader = { DEMON = scope:demon } }
+				save_scope_as = new_cultist
+			}
+		}
+		else_if = {
+			limit = {
+				any_courtier = {
+					POD_can_be_converted_by_cult_leader = { DEMON = scope:demon }
+				}
+			}
+			ordered_courtier = {
+				order_by = "opinion(scope:demon)"
+				limit = { POD_can_be_converted_by_cult_leader = { DEMON = scope:demon } }
+				save_scope_as = new_cultist
+			}
+		}
+		else_if = {
+			limit = {
+				any_relation = {
+					type = demonic_thrall
+					is_landed = yes
+					any_vassal = {
+						count >= 1
+						POD_can_be_converted_by_cult_leader = { DEMON = scope:demon }
+					}
+				}
+			}
+			ordered_relation = {
+				type = demonic_thrall
+				order_by = "opinion(scope:demon)"
+				limit = { is_landed = yes }
+				ordered_vassal = {
+					order_by = "opinion(scope:demon)"
+					limit = { POD_can_be_converted_by_cult_leader = { DEMON = scope:demon } }
+					save_scope_as = new_cultist
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				any_relation = {
+					type = demonic_thrall
+					is_landed = yes
+					any_courtier = {
+						POD_can_be_converted_by_cult_leader = { DEMON = scope:demon }
+					}
+				}
+			}
+			ordered_relation = {
+				type = demonic_thrall
+				order_by = "opinion(scope:demon)"
+				limit = { is_landed = yes }
+				ordered_courtier = {
+					order_by = "opinion(scope:demon)"
+					limit = { POD_can_be_converted_by_cult_leader = { DEMON = scope:demon } }
+					save_scope_as = new_cultist
+				}
+			}
+		}
+		if = {
+			limit = { exists = scope:new_cultist }
+			send_interface_message = {
+				type = POD_event_demon
+				title = POD_set_cultist_interaction
+				desc = POD_set_cultist_interaction_effect
+				left_icon = scope:new_cultist
+
+				scope:new_cultist = {
+					set_relation_worshipped_demon = scope:demon
+					if = {
+						limit = { has_trait = supehunter }
+						scope:demon = { save_scope_as = vampiresire }
+						POD_hunter_enthrall_effect = yes
+					}
+					give_witch_secret_or_trait_effect = yes
+				}
+			}
+			clear_saved_scope = new_cultist
+		}
+	}
+	else_if = { 
+		limit = { has_variable = cult_leader_cooldown }
+		change_variable = {
+			name = cult_leader_cooldown
+			add = -1
+		}
+	}
+	else = {
+		set_variable = {
+			name = cult_leader_cooldown
+			value = {
+				value = cult_leader_court_position_level
+				subtract = 1 # prevent off-by-one error in first month
+			}
+		}
+	}
+}
+
+POD_hunter_enthrall_effect = {
+	remove_trait = supehunter
+	if = {
+		limit = { has_trait = shih }
+		POD_become_kueijin_effect = yes
+		set_character_faith = faith:wayofthetenthousandscreams
+	}
+	else_if = {
+		limit = { has_POD_race_trigger = no }
+		add_trait_force_tooltip = mortal
+		if = {
+			limit = { can_hold_title_as_mortal_trigger = no }
+			POD_depose_effect = yes
+		}
+	}
+	POD_hunterembrace_effect = yes
+	if = {
+		limit = { exists = scope:vampiresire }
+		remove_opinion = {
+			modifier = POD_turned_me_opinion
+			target = scope:vampiresire
+		}
+	}
+}
+
+# arguments: DEMON
+POD_become_demonic_thrall_of = {
+	$DEMON$ = {
+		add_hook_no_toast = {
+			type = thrall_hook
+			target = prev
+		}
+	}
+	if = {
+		limit = { NOT = { has_relation_worshipped_demon = $DEMON$ } }
+		show_as_tooltip = {
+			# tooltip from on_set_relation_worshipped_demon, for clarity
+			POD_demonic_cultist_religion_switch = { DEMON = $DEMON$ }
+		}
+		set_relation_worshipped_demon = $DEMON$
+	}
+	if = {
+		limit = { NOT = { has_relation_demonic_master = $DEMON$ } }
+		set_relation_demonic_master = $DEMON$
+	}
+	
+	if = {
+		limit = { $DEMON$.domicile ?= { has_domicile_parameter = thrall_strength_parameter } }
+		add_character_modifier = POD_abbadons_gift_modifier
+	}
+	if = {
+		limit = { $DEMON$.domicile ?= { has_domicile_parameter = thrall_architect_parameter } }
+		assign_domain_effect = yes
+	}
+	if = {
+		limit = { $DEMON$.domicile ?= { has_domicile_parameter = thrall_scholar_parameter } }
+		assign_scholarship_effect = yes
+	}
+	if = {
+		limit = { $DEMON$.domicile ?= { has_domicile_parameter = thrall_august_parameter } }
+		assign_majesty_effect = yes
+	}
+	
+	$DEMON$ = { save_scope_as = vampiresire }
+	POD_give_and_expose_witch_trait_effect = yes
+	add_character_flag = access_to_investiture
+}
+
+POD_demonic_cultist_religion_switch = {
+	$DEMON$ = { save_scope_as = demon }
+	if = {
+		limit = {
+			OR = {
+				scope:demon.religion = religion:demons_religion # splat-agnostic faith
+				# safeguard for decani: don't convert other splats to vampire faiths
+				pod_convert_trigger = { CHARACTER = this FAITH = scope:demon.faith }
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					is_ai = yes
+					religion = religion:demons_religion # worshippers of other sins will switch allegiances
+					faith = { is_demon_worshipper_religion_trigger = no } # other infernalists don't switch
+				}
+			}
+			set_character_faith = scope:demon.faith
+		}
+		else = {
+			trigger_event = POD_demon_maintenance.2
+		}
+	}
+}
+
+# POD_sacrifice_prisoner_to_great_demon_effect = {
+# 	if = {
+# 		limit = { var:great_demon = flag:abaddon }
+# 		add_character_modifier = {
+# 			modifier = lesser_abaddon_buff_modifier
+# 			months = no_resurrecting_prisoner_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:asmodeus }
+# 		add_character_modifier = {
+# 			modifier = lesser_asmodeus_buff_modifier
+# 			months = no_resurrecting_prisoner_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:azrael }
+# 		add_character_modifier = {
+# 			modifier = lesser_azrael_buff_modifier
+# 			months = no_resurrecting_prisoner_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:belial }
+# 		add_character_modifier = {
+# 			modifier = lesser_belial_buff_modifier
+# 			months = no_resurrecting_prisoner_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:dagon }
+# 		add_character_modifier = {
+# 			modifier = lesser_dagon_buff_modifier
+# 			months = no_resurrecting_prisoner_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { NOT = { has_trait = demon } }
+# 		add_investiture_lifestyle_xp = POD_sacrifice_prisoner_investiture_xp_gain
+# 	}
+# }
+
+# POD_sacrifice_holding_to_great_demon_effect = {
+# 	if = {
+# 		limit = { var:great_demon = flag:abaddon }
+# 		add_character_modifier = {
+# 			modifier = greater_abaddon_buff_modifier
+# 			months = target_combined_building_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:asmodeus }
+# 		add_character_modifier = {
+# 			modifier = greater_asmodeus_buff_modifier
+# 			months = target_combined_building_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:azrael }
+# 		add_character_modifier = {
+# 			modifier = greater_azrael_buff_modifier
+# 			months = target_combined_building_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:belial }
+# 		add_character_modifier = {
+# 			modifier = greater_belial_buff_modifier
+# 			months = target_combined_building_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:dagon }
+# 		add_character_modifier = {
+# 			modifier = greater_dagon_buff_modifier
+# 			months = target_combined_building_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { NOT = { has_trait = demon } }
+# 		add_investiture_lifestyle_xp = POD_sacrifice_holding_investiture_xp_gain
+# 	}
+# }
+
+# POD_sacrifice_region_to_great_demon_effect = {
+# 	if = {
+# 		limit = { var:great_demon = flag:abaddon }
+# 		add_character_modifier = {
+# 			modifier = potent_abaddon_buff_modifier
+# 			months = target_combined_development_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:asmodeus }
+# 		add_character_modifier = {
+# 			modifier = potent_asmodeus_buff_modifier
+# 			months = target_combined_development_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:azrael }
+# 		add_character_modifier = {
+# 			modifier = potent_azrael_buff_modifier
+# 			months = target_combined_development_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:belial }
+# 		add_character_modifier = {
+# 			modifier = potent_belial_buff_modifier
+# 			months = target_combined_development_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { var:great_demon = flag:dagon }
+# 		add_character_modifier = {
+# 			modifier = potent_dagon_buff_modifier
+# 			months = target_combined_development_level_count
+# 		}
+# 	}
+# 	if = {
+# 		limit = { NOT = { has_trait = demon } }
+# 		add_investiture_lifestyle_xp = POD_sacrifice_region_investiture_xp_gain
+# 	}
+# }

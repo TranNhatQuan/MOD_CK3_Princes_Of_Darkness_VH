@@ -1,0 +1,1980 @@
+﻿POD_character_initialization_for_nobles_effect = {
+
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = { NOT = { has_character_flag = had_POD_character_initialization } }
+		
+	if = {
+		limit = { exists = liege }
+		liege = { save_scope_as = template_ruler }
+	}
+	else_if = { # give same rank title making indepent
+		limit = { exists = capital_province.county.previous_holder }
+		capital_province.county.previous_holder = { save_scope_as = template_ruler }
+	}
+	
+	if = {
+		limit = {
+			scope:template_ruler ?= { is_forsaken_or_gantenbein_trigger = yes }
+		}
+		POD_character_initialization_for_forsaken_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= {
+				OR = {
+					has_trait = supehunter
+					is_child_of_supehunter_trigger = yes
+				}
+			}
+		}
+		POD_character_initialization_for_supehunter_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= {
+				# OR = {
+					has_trait = vampire
+					# has_trait = risen
+				# }
+			}
+		}
+		POD_character_initialization_for_vampire_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= { has_trait = fera }
+		}
+		POD_character_initialization_for_fera_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= { has_trait = wraith }
+		}
+		POD_character_initialization_for_wraith_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= { has_trait = fae }
+		}
+		POD_character_initialization_for_fae_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= { has_POD_kj_blood_trigger = yes }
+		}
+		POD_character_initialization_for_kueijin_nobles_effect = yes
+	}
+	else_if = { # delay to here for ghoul-ww
+		limit = {
+			scope:template_ruler ?= { has_trait = ghoul }
+		}
+		POD_character_initialization_for_ghoul_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= {
+				has_trait = revenant
+				religion = { is_in_family = rf_kindred }
+			}
+		}
+		trigger_event = POD_ghoul_maintenance.300
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= {
+				OR = {
+					has_trait = changeling
+					has_trait = kinain
+				}
+				religion = { is_in_family = rf_fae }
+			}
+		}
+		POD_character_initialization_for_fae_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:template_ruler ?= {
+				has_trait = kinfolk
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+			}
+		}
+		POD_character_initialization_for_fera_barons_effect = yes
+	}
+	
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = religion:calomenasforsaken_religion }
+		}
+		POD_character_initialization_for_forsaken_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = { is_in_family = rf_hunters } }
+		}
+		POD_character_initialization_for_supehunter_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = { is_in_family = rf_kueijin } }
+		}
+		POD_character_initialization_for_kueijin_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			OR = {
+				liege ?= { has_trait = ghoul }
+				capital_province ?= { religion = religion:ghoul_religion }
+			}
+		}
+		POD_character_initialization_for_ghoul_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = { is_in_family = rf_kindred } }
+		}
+		POD_character_initialization_for_vampire_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = {
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+			}
+		}
+		POD_character_initialization_for_fera_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = { is_in_family = rf_fae } }
+		}
+		POD_character_initialization_for_fae_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			exists = capital_province
+			capital_province = { religion = { is_in_family = rf_wraiths } }
+		}
+		POD_character_initialization_for_wraith_nobles_effect = yes
+	}
+	
+	else_if = {
+		limit = { has_amenti_liege_trigger = yes }
+		
+		POD_character_initialization_for_vampire_nobles_effect = yes
+	}
+	
+	else = {
+		POD_character_initialization_for_random_nobles_effect = yes
+	}
+	
+		if = {
+			limit = { has_amenti_liege_trigger = yes }
+			POD_character_initialization_for_neteru_barons_effect = yes
+		}
+		if = {
+			limit = { has_demonic_liege_trigger = yes }
+			POD_character_initialization_for_thrall_barons_effect = yes
+		}
+		if = {
+			limit = { POD_has_defiled_liege_trigger = yes }
+			POD_character_initialization_for_defiled_barons_effect = yes
+		}
+		trigger_event = POD_maintenance.2
+	}
+}
+
+POD_character_initialization_for_barons_effect = {
+
+	POD_set_resonance_effect = yes
+
+# Check era
+	
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+	
+		set_character_faith = liege.faith
+		
+		if = {
+			limit = {
+				religion = religion:calomenasforsaken_religion
+			}
+			POD_character_initialization_for_forsaken_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_hunters }
+			}
+			POD_character_initialization_for_supehunter_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					liege ?= { has_trait = ghoul }
+					religion = religion:ghoul_religion
+				}
+			}
+			POD_character_initialization_for_ghoul_nobles_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_kindred }
+			}
+			POD_character_initialization_for_vampire_barons_adult_only_effect = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+			}
+			POD_character_initialization_for_fera_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_fae }
+			}
+			POD_character_initialization_for_fae_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_wraiths }
+			}
+			POD_character_initialization_for_wraith_nobles_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_kueijin }
+			}
+			POD_character_initialization_for_kueijin_nobles_effect = yes
+		}
+
+		else_if = {
+			limit = { has_amenti_liege_trigger = yes }
+			
+			POD_character_initialization_for_vampire_nobles_effect = yes
+		}
+	
+		else = {
+			POD_character_initialization_for_random_barons_effect = yes
+		}
+		
+		if = {
+			limit = { has_amenti_liege_trigger = yes }
+			POD_character_initialization_for_neteru_barons_effect = yes
+		}
+		if = {
+			limit = { has_demonic_liege_trigger = yes }
+			POD_character_initialization_for_thrall_barons_effect = yes
+		}
+		if = {
+			limit = { POD_has_defiled_liege_trigger = yes }
+			POD_character_initialization_for_defiled_barons_effect = yes
+		}
+		
+		trigger_event = POD_maintenance.2
+	}
+}
+
+POD_character_initialization_for_merc_commanders_effect = {
+
+	POD_set_resonance_effect = yes
+
+# Check era
+	
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		if = {
+			limit = { has_government = mercenary_government }
+			POD_character_initialization_for_mortal_commoners_effect = yes
+		}
+		else = { # Holy Order and Head of Faith
+			if = {
+				limit = {
+					religion = religion:calomenasforsaken_religion
+				}
+				POD_character_initialization_for_forsaken_barons_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_hunters }
+				}
+				POD_character_initialization_for_supehunter_barons_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_kueijin }
+				}
+				POD_character_initialization_for_kueijin_nobles_effect = yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						liege ?= { has_trait = ghoul }
+						religion = religion:ghoul_religion
+					}
+				}
+				POD_character_initialization_for_ghoul_nobles_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_kindred }
+				}
+				POD_character_initialization_for_vampire_barons_adult_only_effect = yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						religion = { is_in_family = rf_gaia }
+						religion = { is_in_family = rf_wyrm }
+					}
+				}
+				POD_character_initialization_for_fera_barons_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_wraiths }
+				}
+				POD_character_initialization_for_wraith_nobles_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_fae }
+				}
+				POD_character_initialization_for_fae_commoners_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_mummies }
+				}
+				POD_character_initialization_for_random_commoners_effect = yes
+			}
+			else_if = {
+				limit = {
+					religion = { is_in_family = rf_demons }
+				}
+				POD_character_initialization_for_thrall_commoners_effect = yes
+			}
+			else = {
+				POD_character_initialization_for_mortal_commoners_effect = yes
+			}
+		}
+	}
+}
+
+POD_character_initialization_for_commoners_effect = {
+if = {
+	limit = { is_alive = yes }
+	
+	if = {
+		limit = { NOT = { exists = location } }
+
+		#Oops, no good! Go someplace.
+		random_independent_ruler = {
+			limit = {
+				exists = capital_province
+				capital_province = { local_pool_is_full_trigger = no }
+			}
+			alternative_limit = { exists = capital_province }
+			capital_province = { save_scope_as = destination }
+		}
+		
+		move_to_pool_at = scope:destination
+	}
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		if = {
+			limit = { exists = liege_or_court_owner }
+			set_character_faith = liege_or_court_owner.faith
+		}
+		
+		random_list = {
+			90 = {
+				trigger = {
+					NOT = {
+						religion = religion:redtalon_religion
+						has_council_position = councillor_court_chaplain
+					}
+				}
+				POD_character_initialization_for_mortal_commoners_effect = yes
+			}
+			10 = {
+				if = {
+					limit = {
+						religion = religion:calomenasforsaken_religion
+					}
+					POD_character_initialization_for_forsaken_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_hunters }
+					}
+					POD_character_initialization_for_supehunter_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_kueijin }
+					}
+					POD_character_initialization_for_kueijin_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_kindred }
+					}
+					POD_character_initialization_for_vampire_commoners_adult_only_effect = yes
+				}
+				else_if = {
+					limit = {
+						OR = {
+							religion = { is_in_family = rf_gaia }
+							religion = { is_in_family = rf_wyrm }
+						}
+					}
+					POD_character_initialization_for_fera_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_fae }
+					}
+					POD_character_initialization_for_fae_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_wraiths }
+					}
+					POD_character_initialization_for_wraith_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_mummies }
+					}
+					POD_character_initialization_for_neteru_commoners_effect = yes
+				}
+				else_if = {
+					limit = {
+						religion = { is_in_family = rf_demons }
+					}
+		POD_character_initialization_for_thrall_commoners_effect = yes
+	}
+	else = {
+		POD_character_initialization_for_mortal_commoners_effect = yes
+	}
+			}
+		}
+	}
+}
+}
+
+POD_character_initialization_for_faction_leader_effect = {
+	remove_trait = mortal
+	if = {
+		limit = {
+			scope:target_title.title_province = { religion = religion:calomenasforsaken_religion }
+		}
+		POD_character_initialization_for_forsaken_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = { is_in_family = rf_hunters } }
+		}
+		POD_character_initialization_for_supehunter_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = { is_in_family = rf_kueijin } }
+		}
+		POD_character_initialization_for_kueijin_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = religion:ghoul_religion }
+		}
+		POD_character_initialization_for_ghoul_nobles_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = { is_in_family = rf_kindred } }
+		}
+		POD_character_initialization_for_vampire_barons_adult_only_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = {
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+			}
+		}
+		POD_character_initialization_for_fera_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = { is_in_family = rf_fae } }
+		}
+		POD_character_initialization_for_fae_barons_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:target_title.title_province = { religion = { is_in_family = rf_wraiths } }
+		}
+		POD_character_initialization_for_wraith_nobles_effect = yes
+	}
+	
+	else = {
+		POD_character_initialization_for_random_barons_effect = yes
+	}
+}
+
+POD_character_initialization_for_court_chaplain_effect = {
+	if = {
+		limit = { has_POD_race_trigger = no }
+		if = {
+			limit = { liege_or_court_owner ?= { has_trait = vampire } }
+			add_trait = vampire
+			trigger_event = POD_character_canon_modifier_initalization.101
+		}
+		else_if = {
+			limit = { liege_or_court_owner ?= { has_trait = kueijin } }
+			add_trait = kueijin
+			trigger_event = POD_character_canon_modifier_initalization.200
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					has_trait = supehunter
+					NOT = { has_trait = ghoul }
+				}
+			}
+			add_trait = supehunter
+			if = {
+				limit = { liege_or_court_owner ?= { has_trait = shih } }
+				add_trait = shih
+				trigger_event = POD_character_canon_modifier_initalization.210
+			}
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					NOT = { has_trait = entomos }
+					OR = {
+						has_trait = fera
+						has_trait = kinfolk
+					}
+				}
+			}
+			add_trait = kinfolk
+			trigger_event = POD_character_canon_modifier_initalization.600
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+					}
+				}
+			}
+			add_trait = changeling
+			trigger_event = POD_character_canon_modifier_initalization.910
+		}
+		else_if = {
+			limit = { liege_or_court_owner ?= { has_trait = wraith } }
+			add_trait = wraith
+			POD_arcanoi_initiation_effect = yes
+			trigger_event = POD_character_canon_modifier_initalization.400
+		}
+		else = {
+			add_trait = mortal
+		}
+	}
+}
+
+POD_character_initialization_for_court_chaplain_on_game_start_effect = { # Already getting POD_character_canon_modifier_initalization.1 at start
+	remove_trait = mortal
+	if = {
+		limit = { has_POD_race_trigger = no }
+		if = {
+			limit = { liege_or_court_owner ?= { has_trait = vampire } }
+			add_trait = vampire
+			POD_character_vampire_clan_initialization_effect = yes
+			add_trait = vampgeneration8
+			POD_character_vampire_discipline_initialization_effect = yes
+		}
+		else_if = {
+			limit = { liege_or_court_owner ?= { has_trait = kueijin } }
+			add_trait = kueijin
+			POD_kueijin_initialization_effect = yes
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					has_trait = supehunter
+					NOT = { has_trait = ghoul }
+				}
+			}
+			add_trait = supehunter
+			if = {
+				limit = { liege_or_court_owner ?= { has_trait = shih } }
+				add_trait = shih
+			}
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					NOT = { has_trait = entomos }
+					OR = {
+						has_trait = fera
+						has_trait = kinfolk
+					}
+				}
+			}
+			add_trait = kinfolk
+		}
+		else_if = {
+			limit = {
+				liege_or_court_owner ?= {
+					OR = {
+						has_trait = fae
+						has_trait = changeling
+					}
+				}
+			}
+			add_trait = kinain
+		}
+		else_if = {
+			limit = { liege_or_court_owner ?= { has_trait = wraith } }
+			add_trait = wraith
+			POD_arcanoi_initiation_effect = yes
+		}
+		else = {
+			add_trait = mortal
+		}
+	}
+}
+
+POD_character_initialization_for_generated_child_effect = {
+	if = {
+		limit = { root = { has_trait = vampire } }
+		silent_disappearance_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = kueijin } }
+		add_trait = dhampyr
+		POD_dhampyr_initialization_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = fera } }
+		add_trait = kinfolk
+		POD_kinfolk_initialization_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = fae } }
+		add_trait = fae
+		POD_fae_initialization_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = changeling } }
+		add_trait = kinain
+		POD_kinain_initialization_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = mummy } }
+		POD_character_initialization_for_neteru_commoners_effect = yes
+	}
+	else_if = {
+		limit = { root = { has_trait = demon } }
+		add_trait = laham
+	}
+	else = {
+		POD_character_initialization_for_mortal_commoners_effect = yes
+	}
+}
+
+POD_character_initialization_for_generated_baron_effect = { # is not ruler at now
+	if = {
+		limit = {
+			exists = scope:previous_holder
+			has_POD_race_trigger = no
+		}
+		set_character_faith = scope:previous_holder.faith
+		
+		if = {
+			limit = {
+				religion = religion:calomenasforsaken_religion
+			}
+			POD_character_initialization_for_forsaken_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_hunters }
+			}
+			POD_character_initialization_for_supehunter_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					scope:previous_holder ?= { has_trait = ghoul }
+					religion = religion:ghoul_religion
+				}
+			}
+			POD_character_initialization_for_ghoul_nobles_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_kindred }
+			}
+			POD_character_initialization_for_vampire_barons_adult_only_effect = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					religion = { is_in_family = rf_gaia }
+					religion = { is_in_family = rf_wyrm }
+				}
+			}
+			POD_character_initialization_for_fera_generated_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_fae }
+			}
+			POD_character_initialization_for_fae_barons_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_wraiths }
+			}
+			POD_character_initialization_for_wraith_nobles_effect = yes
+		}
+		else_if = {
+			limit = {
+				religion = { is_in_family = rf_kueijin }
+			}
+			POD_character_initialization_for_kueijin_nobles_effect = yes
+		}
+
+		else_if = {
+			limit = {
+				scope:previous_holder = {
+					OR = {
+						is_amenti_trigger = yes
+						is_a_neteru = yes
+					}
+				}
+			}
+			POD_character_initialization_for_vampire_nobles_effect = yes
+		}
+		
+		else = {
+			random_list = {
+				500 = {
+					trigger = { can_hold_title_as_mortal_trigger = yes }
+					POD_character_initialization_for_mortal_commoners_effect = yes
+				}
+				100 = {
+					trigger = { culture_has_east_asian_heritage_pillar_trigger = yes }
+					POD_character_initialization_for_kueijin_nobles_effect = yes
+				}
+				100 = { POD_character_initialization_for_vampire_barons_adult_only_effect = yes }
+				100 = { POD_character_initialization_for_fera_generated_barons_effect = yes }
+				100 = { POD_character_initialization_for_supehunter_barons_effect = yes }
+				100 = {
+					trigger = { POD_bookmark_has_fae = yes }
+					POD_character_initialization_for_fae_barons_effect = yes
+				}
+				1 = { POD_character_initialization_for_wraith_nobles_effect = yes }
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:previous_holder = {
+					OR = {
+						is_amenti_trigger = yes
+						is_a_neteru = yes
+					}
+				}
+			}
+			POD_character_initialization_for_neteru_generated_barons_effect = yes
+		}
+		if = {
+			limit = {
+				scope:previous_holder = {
+					OR = {
+						has_trait = demon
+						is_a_cultist = yes
+					}
+				}
+			}
+			POD_character_initialization_for_thrall_generated_barons_effect = yes
+		}
+	}
+}
+
+POD_character_initialization_for_vampire_nobles_effect = {
+	POD_set_resonance_effect = yes
+	
+	POD_character_create_vampirelord_effect = yes
+	
+	if = {
+		limit = { has_amenti_liege_trigger = yes }
+		POD_character_initialization_for_neteru_barons_effect = yes
+	}
+	if = {
+		limit = { has_demonic_liege_trigger = yes }
+		POD_character_initialization_for_thrall_barons_effect = yes
+	}
+	if = {
+		limit = { POD_has_defiled_liege_trigger = yes }
+		POD_character_initialization_for_defiled_barons_effect = yes
+	}
+		
+	trigger_event = POD_maintenance.2
+}
+
+POD_character_initialization_for_vampire_barons_adult_only_effect = {
+	if = {
+		limit = {
+			is_adult = yes
+		}
+		POD_character_initialization_for_vampire_barons_effect = yes
+	}
+	else = {
+		trigger_event = POD_ghoul_maintenance.300
+	}
+}
+
+POD_character_initialization_for_vampire_barons_effect = {
+	POD_set_resonance_effect = yes
+	
+	add_trait = vampire
+	
+	# Assign Clan Based on Faith then Location
+
+	if = {
+		limit = {
+			faith = faith:viahyron
+		}
+		add_trait = baali
+	}
+	else_if = {
+		limit = {
+			OR = {
+				religion = religion:roadofset_religion
+				faith = faith:pathofdaitya
+				religion = religion:naktanchara_religion
+			}
+			POD_can_setite_be_embraced_trigger = yes
+		}
+		add_trait = setite
+	}
+	else_if = {
+		limit = {
+			religion = religion:roadofmetamorphosis_religion
+		}
+		add_trait = tzimisce
+	}
+	else_if = {
+		limit = {
+			religion = religion:roadofblood_religion
+		}
+		add_trait = assamite
+	}
+	else_if = {
+		limit = {
+			religion = religion:roadofmetamorphosis_religion
+		}
+		add_trait = tzimisce
+	}
+	else_if = {
+		limit = {
+			religion = religion:codeoftremere_religion
+		}
+		add_trait = tremere
+	}
+	else_if = {
+		limit = {
+			religion = religion:ordos_religion
+		}
+		add_trait = malkavian
+	}
+	else_if = {
+		limit = {
+			OR = {
+				faith = faith:mayaparisatya
+				faith = faith:viaparadox
+				faith = faith:samsara
+			}
+		}
+		add_trait = ravnos
+	}
+	else_if = {
+		limit = {
+			faith = faith:codeofsamiel
+		}
+		add_trait = salubri
+	}
+	else_if = {
+		limit = {
+			faith = faith:viaarchangeli
+		}
+		add_trait = toreador
+	}
+	else_if = {
+		limit = {
+			faith = faith:viaentelechia
+		}
+		add_trait = brujah
+	}
+	else_if = {
+		limit = {
+			OR = {
+				faith = faith:roadoftheabyss
+				faith = faith:vianoctis
+			}
+		}
+		add_trait = lasombra
+	}
+	else_if = {
+		limit = {
+			faith = faith:viacalantica
+		}
+		random_list = {
+			30 = { add_trait = nosferatu }
+			70 = { add_trait = toreador }
+		}
+	}
+	else_if = {
+		limit = {
+			faith = faith:dreamcourtiers
+		}
+		add_trait = kizoku
+	}
+	else_if = {
+		limit = {
+			faith = faith:ghostcourtiers
+		}
+		add_trait = kuntilanak
+	}
+	else_if = {
+		limit = {
+			faith = faith:lordlycourtiers
+		}
+		add_trait = sangun
+	}
+	else = {
+		POD_character_vampire_clan_initialization_effect = yes
+	}
+	
+	POD_remove_disease_traits_effect = yes
+	add_character_flag = immune_to_disease
+	POD_character_initialization_random_background_effect = yes
+	
+	random_list = {
+		60 = { add_trait = vampgeneration12 }
+		20 = { add_trait = vampgeneration11 }
+		20 = { add_trait = vampgeneration10 }
+	}
+	POD_character_vampire_clan_traits_effect = yes
+	POD_character_vampire_clan_special_effect = yes
+	POD_assign_random_bloodhunger = yes
+	#POD_character_vampire_predatortype_initialization_effect = yes
+	POD_character_vampire_bloodpotency_initialization_effect = yes
+	POD_character_vampire_discipline_initialization_effect = yes
+	POD_character_masquerade_initialization_effect = yes
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_vampire_commoners_adult_only_effect = {
+	if = {
+		limit = {
+			is_adult = yes
+		}
+		POD_character_initialization_for_vampire_commoners_effect = yes
+	}
+	else = {
+		trigger_event = POD_ghoul_maintenance.300
+	}
+}
+
+POD_character_initialization_for_vampire_commoners_effect = {
+
+	POD_set_resonance_effect = yes
+	
+	add_trait = vampire
+	POD_remove_disease_traits_effect = yes
+	add_character_flag = immune_to_disease
+	# Assign Clan Based on Location
+	POD_character_vampire_clan_initialization_effect = yes
+	POD_character_vampire_clan_traits_effect = yes
+	# Assign Faith based on Clan and Location
+	if = {
+		limit = {
+			is_a_cultist = no
+			NOT = { religion = { is_in_family = rf_kindred } }
+		}
+		POD_character_vampire_faith_initialization_effect = yes
+	}
+	POD_character_vampire_clan_special_effect = yes
+
+	POD_character_initialization_random_background_effect = yes
+	random_list = {
+		60 = { add_trait = vampgeneration12 }
+		20 = { add_trait = vampgeneration11 }
+		20 = { add_trait = vampgeneration10 }
+	}
+	POD_character_vampire_bloodpotency_initialization_effect = yes
+	POD_character_vampire_discipline_initialization_effect = yes
+	POD_assign_random_bloodhunger = yes
+	#POD_character_vampire_predatortype_initialization_effect = yes
+	POD_character_masquerade_initialization_effect = yes
+					
+	POD_character_new_dynasty_effect = yes
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_kueijin_nobles_effect = {
+	add_trait = kueijin
+	if = {
+		limit = {
+			highest_held_title_tier >= tier_kingdom
+			current_year > 1100
+		}
+		change_age = { 500 1000 } #Random king or emperor?!
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+	}
+	else_if = {
+		limit = { highest_held_title_tier >= tier_duchy }
+		change_age = { 250 500 } #Random duke?
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+	}
+	else_if = {
+		limit = { highest_held_title_tier = tier_county }
+		change_age = { 100 250 } #Mandarin
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+	}
+	else = {
+		change_age = { 25 100 } #Jina
+		POD_kueijin_random_perk_initialization_for_noble_effect = yes
+	}
+	POD_kueijin_initialization_effect = yes
+	POD_character_initialization_random_background_effect = yes
+	POD_character_vampire_infernalist_initialization_effect = yes
+	#if = {
+	#	limit = { exists = liege }
+	#	POD_kj_ai_adoption_effect = { PARENT = liege }
+	#}
+	add_character_flag = { flag = had_POD_character_initialization }
+}
+
+POD_character_initialization_for_kueijin_commoners_effect = {
+	if = {
+		limit = { is_adult = no }
+		POD_character_initialization_for_mortal_commoners_effect = yes
+	}
+	else = {
+		add_trait = kueijin
+		POD_kueijin_initialization_effect = yes
+		POD_character_initialization_random_background_effect = yes
+		POD_character_vampire_infernalist_initialization_effect = yes
+		add_character_flag = { flag = had_POD_character_initialization }
+		#if = {
+		#	limit = { exists = liege_or_court_owner }
+		#	POD_kj_ai_adoption_effect = { PARENT = liege_or_court_owner }
+		#}
+	}
+}
+
+POD_character_initialization_for_supehunter_barons_effect = {
+	POD_character_initialization_for_supehunter_commoners_effect = yes
+	if = {
+		limit = { NOT = { has_trait = shih } }
+		POD_give_orison_effect = yes
+	}
+	else = {
+		POD_shih_random_perk_initialization_for_noble_effect = yes
+	}
+}
+
+POD_character_initialization_for_supehunter_commoners_effect = {
+
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		add_trait = supehunter
+		
+		if = {
+			limit = {
+				can_be_shih_trigger = yes
+			}
+			POD_shih_initialization_effect = yes
+		}
+		
+		if = {
+			limit = {
+				NOT = { religion = { is_in_family = rf_hunters } }
+			}
+			POD_character_hunter_faith_initialization_effect = yes
+		}
+		
+		random = {
+			chance = 50
+			POD_character_new_dynasty_effect = yes
+		}
+		
+		random = {
+			chance = 1
+			add_trait = psychic
+			POD_resonance_increase_intensity_effect = yes
+		}
+		
+		if = {
+			limit = { faith = faith:shadowinquisition }
+			random = {
+				chance = 1
+				add_trait = truefaith
+			}
+		}
+		else = {
+			random = {
+				chance = 2
+				add_trait = theurgist
+			}
+		}
+		
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+}
+
+POD_character_initialization_for_forsaken_barons_effect = {
+	POD_character_initialization_for_forsaken_commoners_effect = yes
+	add_trait = peasant_leader
+}
+
+POD_character_initialization_for_forsaken_commoners_effect = {
+	POD_set_resonance_effect = yes
+	if = {
+		limit = {
+			has_trait = mortal
+		}
+		remove_trait = mortal
+	}
+	add_trait = ghoul
+	random_list = {
+		70 = { add_trait = potence }
+		70 = { add_trait = fortitude }
+		70 = { add_trait = presence }
+	}
+	set_character_faith = faith:calomenasforsaken
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_random_nobles_effect = {
+	random_list = {
+		100 = {
+			trigger = { culture_has_east_asian_heritage_pillar_trigger = yes }
+			POD_character_initialization_for_kueijin_nobles_effect = yes
+		}
+		100 = { POD_character_initialization_for_vampire_nobles_effect = yes }
+		10 = { POD_character_initialization_for_supehunter_barons_effect = yes }
+		10 = { POD_character_initialization_for_fera_barons_effect = yes }
+		10 = {
+			trigger = { POD_bookmark_has_fae = yes }
+			POD_character_initialization_for_fae_nobles_effect = yes
+		}
+		1 = { POD_character_initialization_for_wraith_nobles_effect = yes }
+	}
+}
+
+POD_character_initialization_for_random_barons_effect = {
+	random_list = {
+		500 = {
+			trigger = { can_hold_title_as_mortal_trigger = yes }
+			POD_character_initialization_for_mortal_commoners_effect = yes
+		}
+		100 = {
+			trigger = { culture_has_east_asian_heritage_pillar_trigger = yes }
+			POD_character_initialization_for_kueijin_nobles_effect = yes
+		}
+		100 = { POD_character_initialization_for_vampire_barons_adult_only_effect = yes }
+		100 = { POD_character_initialization_for_fera_barons_effect = yes }
+		100 = { POD_character_initialization_for_supehunter_barons_effect = yes }
+		100 = {
+			trigger = { POD_bookmark_has_fae = yes }
+			POD_character_initialization_for_fae_barons_effect = yes
+		}
+		1 = { POD_character_initialization_for_wraith_nobles_effect = yes }
+	}
+}
+
+POD_character_initialization_for_random_commoners_effect = {
+	random_list = {
+		700 = { POD_character_initialization_for_mortal_commoners_effect = yes }
+		100 = {
+			trigger = { culture_has_east_asian_heritage_pillar_trigger = yes }
+			POD_character_initialization_for_kueijin_commoners_effect = yes
+		}
+		100 = { POD_character_initialization_for_vampire_commoners_adult_only_effect = yes }
+		100 = { POD_character_initialization_for_fera_commoners_effect = yes }
+		100 = { POD_character_initialization_for_supehunter_commoners_effect = yes }
+		100 = {
+			trigger = { POD_bookmark_has_fae = yes }
+			POD_character_initialization_for_fae_commoners_effect = yes
+		}
+		1 = { POD_character_initialization_for_wraith_commoners_effect = yes }
+	}
+}
+
+POD_character_initialization_for_neteru_barons_effect = {
+	if = {
+		limit = {
+			liege = { has_trait = mummy }
+		}
+		liege = { save_scope_as = amenti }
+	}
+	else = {
+		liege = {
+			random_relation = {
+				type = worshipped_reborn
+				save_scope_as = amenti
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		POD_character_initialization_for_random_barons_effect = yes
+	}
+	if = {
+		limit = { is_a_neteru = no }
+		set_relation_worshipped_reborn = scope:amenti
+	}
+	#add_trait = peasant_leader
+	if = {
+		limit = { scope:amenti = { has_trait = banemummy } }
+		if = {
+			limit = { has_trait = supehunter }
+			scope:amenti = { save_scope_as = vampiresire }
+			POD_hunter_enthrall_effect = yes
+		}
+	}
+	else = {
+		if = {
+			limit = { has_trait = setite }
+			remove_trait = setite
+			add_trait = caitiff
+		}
+	}
+	if = {
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine = doctrine_undying_crime
+					has_doctrine = doctrine_undying_shunned
+				}
+			}
+		}
+		neteru_faith_initiation_effect = { LIEGE = scope:amenti }
+	}
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_neteru_generated_barons_effect = {
+	if = {
+		limit = {
+			scope:previous_holder = { has_trait = mummy }
+		}
+		scope:previous_holder = { save_scope_as = amenti }
+	}
+	else = {
+		scope:previous_holder = {
+			random_relation = {
+				type = worshipped_reborn
+				save_scope_as = amenti
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		POD_character_initialization_for_random_barons_effect = yes
+	}
+	if = {
+		limit = { is_a_neteru = no }
+		set_relation_worshipped_reborn = scope:amenti
+	}
+	#add_trait = peasant_leader
+	if = {
+		limit = { scope:amenti = { has_trait = banemummy } }
+		if = {
+			limit = { has_trait = supehunter }
+			scope:amenti = { save_scope_as = vampiresire }
+			POD_hunter_enthrall_effect = yes
+		}
+	}
+	else = {
+		if = {
+			limit = { has_trait = setite }
+			remove_trait = setite
+			add_trait = caitiff
+		}
+	}
+	if = {
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine = doctrine_undying_crime
+					has_doctrine = doctrine_undying_shunned
+				}
+			}
+		}
+		neteru_faith_initiation_effect = { LIEGE = scope:amenti }
+	}
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_neteru_commoners_effect = {
+	if = {
+		limit = { NOT = { has_character_flag = had_POD_character_initialization } }
+		if = {
+			limit = { has_council_position = councillor_court_chaplain }
+			POD_character_initialization_for_mortal_commoners_effect = yes
+		}
+		else = { POD_character_initialization_for_random_commoners_effect = yes }
+	}
+	if = {
+		limit = { exists = liege_or_court_owner }
+		liege_or_court_owner = { save_scope_as = vampiresire }
+	}
+	if = {
+		limit = { exists = scope:vampiresire }
+		if = {
+			limit = { scope:vampiresire = { has_trait = banemummy } }
+			if = {
+				limit = { has_trait = supehunter }
+				POD_hunter_enthrall_effect = yes
+			}
+		}
+		else = {
+			limit = { has_trait = setite }
+			remove_trait = setite
+			add_trait = caitiff
+		}
+	}
+	if = {
+		limit = {
+			faith = {
+				OR = {
+					has_doctrine = doctrine_undying_crime
+					has_doctrine = doctrine_undying_shunned
+				}
+			}
+		}
+		neteru_faith_initiation_effect = { LIEGE = scope:vampiresire }
+	}
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_thrall_barons_effect = {
+	if = {
+		limit = {
+			liege = { has_trait = demon }
+		}
+		liege = { save_scope_as = demon }
+	}
+	else = {
+		liege = {
+			random_relation = {
+				type = worshipped_demon
+				save_scope_as = demon
+			}
+		}
+	}
+	if = {
+		limit = { NOT = { has_character_flag = had_POD_character_initialization } }
+		POD_character_initialization_for_random_barons_effect = yes
+	}
+	give_witch_secret_or_trait_effect = yes
+	if = {
+		limit = {
+			scope:demon = { is_ai = yes }
+			is_a_cultist = no
+		}
+		set_relation_worshipped_demon = scope:demon
+		if = {
+			limit = { has_trait = supehunter }
+			scope:demon = { save_scope_as = vampiresire }
+			POD_hunter_enthrall_effect = yes
+		}
+	}
+	if = {
+		limit = { has_trait = theurgist }
+		remove_trait = theurgist
+	}
+	#add_trait = peasant_leader
+	set_character_faith = scope:demon.faith
+	POD_adopt_correct_government_effect = yes
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_defiled_barons_effect = {
+	# TODO YK: save yama king/liege and adopt their faith
+	# TODO YK: chance to become bakemono, based on splat
+	give_witch_secret_or_trait_effect = yes
+}
+
+POD_character_initialization_for_thrall_generated_barons_effect = {
+	if = {
+		limit = {
+			scope:previous_holder = { has_trait = demon }
+		}
+		scope:previous_holder = { save_scope_as = demon }
+	}
+	else = {
+		scope:previous_holder = {
+			random_relation = {
+				type = worshipped_demon
+				save_scope_as = demon
+			}
+		}
+	}
+	if = {
+		limit = { NOT = { has_character_flag = had_POD_character_initialization } }
+		POD_character_initialization_for_random_barons_effect = yes
+	}
+	give_witch_secret_or_trait_effect = yes
+	if = {
+		limit = {
+			scope:demon = { is_ai = yes }
+			is_a_cultist = no
+		}
+		set_relation_worshipped_demon = scope:demon
+		if = {
+			limit = { has_trait = supehunter }
+			scope:demon = { save_scope_as = vampiresire }
+			POD_hunter_enthrall_effect = yes
+		}
+	}
+	if = {
+		limit = { has_trait = theurgist }
+		remove_trait = theurgist
+	}
+	#add_trait = peasant_leader
+	set_character_faith = scope:demon.faith
+	#change_government = infernal_court_government
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_thrall_commoners_effect = {
+	if = {
+		limit = { NOT = { has_character_flag = had_POD_character_initialization } }
+		POD_character_initialization_for_random_commoners_effect = yes
+	}
+	give_witch_secret_or_trait_effect = yes
+	if = {
+		limit = { exists = liege_or_court_owner }
+		set_character_faith = liege_or_court_owner.faith
+		liege_or_court_owner = { save_scope_as = vampiresire }
+	}
+	if = {
+		limit = { has_trait = supehunter }
+		POD_hunter_enthrall_effect = yes
+	}
+	if = {
+		limit = { has_trait = theurgist }
+		remove_trait = theurgist
+	}
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_wraith_nobles_effect = {
+	POD_character_initialization_for_wraith_commoners_effect = yes
+	add_trait = peasant_leader
+	change_government = dark_kingdom_government
+	if = {
+		limit = { liege = { NOT = { has_trait = wraith } } }
+		remove_character_modifier = traveling_underworld_modifier
+		POD_umbra_send_effect = { LOCATION = flag:earth }
+	}
+}
+
+POD_character_initialization_for_wraith_commoners_effect = {
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		add_trait = wraith
+		if = {
+			limit = {
+				exists = liege
+				liege = { has_trait = wraith }
+			}
+			if = {
+				limit = {
+					liege = { has_trait = spectre }
+				}
+				add_trait = spectre
+			}
+		}
+
+		POD_wraith_initialization_effect = yes
+		POD_arcanoi_initiation_effect = yes
+	}
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_mage_commoners_effect = {
+
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		add_trait = mage
+		
+		# Assign Tradition (Faith) based on location
+		
+		# Assign Spheres based on Tradition
+		
+		#set_character_faith = faith:viahumanitatis
+
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+}
+
+POD_character_initialization_for_mortal_commoners_effect = {
+
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		add_trait = mortal
+		
+		if = {
+			limit = { has_POD_vampire_clan_trigger = yes}
+			POD_remove_vampire_clan_traits_effect = yes
+		}
+		
+		if = {
+			limit = {
+				has_game_rule = world_of_monsters
+				NOR = {
+					religion = { is_in_family = rf_hunters }
+					religion = { is_in_family = rf_ignorance }
+					religion = { is_in_family = rf_demons }
+					religion = { is_in_family = rf_mummies }
+				}
+			}
+			set_character_faith = faith:innocence
+		}
+		
+		random = {
+			chance = 1
+			add_trait = psychic
+			POD_resonance_increase_intensity_effect = yes
+		}
+		random = {
+			chance = 1
+			give_sorcerer_secret_or_trait_effect = yes
+		}
+		random = {
+			chance = 1
+			add_trait = theurgist
+		}
+
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+}
+
+
+
+POD_character_initialization_for_fera_generated_barons_effect = {
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		scope:previous_holder = { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+		
+		if = {
+			limit = { NOT = { exists = scope:fera_type } }
+			trait:werewolf = { save_scope_as = fera_type }
+		}
+
+		if = {
+			limit = {
+				scope:previous_holder = { POD_mokole_has_stream_trigger = yes }
+				POD_mokole_has_stream_trigger = no
+			}
+			scope:previous_holder = {
+				if = {
+					limit = { is_lowborn = no }
+					dynasty.var:mokole_stream = { save_scope_as = dynasty_stream }
+				}
+				else = { var:mokole_stream = { save_scope_as = dynasty_stream } }
+			}
+		}
+		
+		random_list = {
+			10 = {
+				add_trait = scope:fera_type
+				POD_fera_initialization_effect = yes
+			}
+			90 = {
+				add_trait = kinfolk
+				POD_set_fera_type = { TRAIT = scope:fera_type }
+				random = {
+					chance = 1
+					add_trait = psychic
+					POD_resonance_increase_intensity_effect = yes
+				}
+				random = {
+					chance = 1
+					give_sorcerer_secret_or_trait_effect = yes
+				}
+				POD_kinfolk_initialization_effect = yes
+			}
+		}
+		
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+	
+}
+
+
+POD_character_initialization_for_fera_barons_effect = {
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		liege = { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+		
+		if = {
+			limit = { NOT = { exists = scope:fera_type } }
+			trait:werewolf = { save_scope_as = fera_type }
+		}
+		
+		random_list = {
+			10 = {
+				add_trait = scope:fera_type
+				POD_fera_initialization_effect = yes
+			}
+			90 = {
+				add_trait = kinfolk
+				POD_set_fera_type = { TRAIT = scope:fera_type }
+				random = {
+					chance = 1
+					add_trait = psychic
+					POD_resonance_increase_intensity_effect = yes
+				}
+				random = {
+					chance = 1
+					give_sorcerer_secret_or_trait_effect = yes
+				}
+				POD_kinfolk_initialization_effect = yes
+			}
+		}
+		
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+	
+}
+
+POD_character_initialization_for_fera_commoners_effect = {
+
+	POD_set_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		liege_or_court_owner ?= { POD_save_fera_type_as = { SAVE_AS = fera_type } }
+		
+		if = {
+			limit = { NOT = { exists = scope:fera_type } }
+			trait:werewolf = { save_scope_as = fera_type }
+		}
+		
+		random_list = {
+			90 = {
+				add_trait = scope:fera_type
+				POD_fera_initialization_effect = yes
+			}
+			10 = {
+				add_trait = kinfolk
+				POD_set_fera_type = { TRAIT = scope:fera_type }
+				random = {
+					chance = 1
+					add_trait = psychic
+					POD_resonance_increase_intensity_effect = yes
+				}
+				random = {
+					chance = 1
+					give_sorcerer_secret_or_trait_effect = yes
+				}
+				POD_kinfolk_initialization_effect = yes
+			}
+		}
+		
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+}
+
+POD_character_initialization_for_fae_nobles_effect = {
+	random_list = {
+		80 = {
+			add_trait = fae
+			modifier = {
+				add = -75
+				global_banality >= 2
+			}
+		}
+		20 = { add_trait = changeling }
+	}
+	
+	if = {
+		limit = { has_trait = fae }
+		POD_fae_initialization_effect = yes
+	}
+	if = {
+		limit = { has_trait = changeling }
+		POD_changeling_initialization_effect = yes
+	}
+	trigger_event = POD_fae_maintenance.3
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_fae_barons_effect = {
+	if = {
+		limit = {
+			current_date < 1348.1.1
+		}
+		random_list = {
+			70 = {
+				add_trait = fae
+			}
+			30 = { add_trait = changeling }
+		}
+	}
+	else = {
+		random_list = {
+			30 = {
+				add_trait = fae
+			}
+			70 = { add_trait = changeling }
+		}
+	}
+	
+	if = {
+		limit = { has_trait = fae }
+		POD_fae_initialization_effect = yes
+	}
+	if = {
+		limit = { has_trait = changeling }
+		POD_changeling_initialization_effect = yes
+	}
+	trigger_event = POD_fae_maintenance.3
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_character_initialization_for_fae_commoners_effect = {
+	random_list = {
+		10 = { add_trait = fae }
+		20 = { add_trait = changeling }
+		70 = { add_trait = kinain }
+	}
+	
+	if = {
+		limit = {
+			has_trait = fae
+		}
+		POD_fae_initialization_effect = yes
+	}
+	if = {
+		limit = {
+			has_trait = changeling
+		}
+		POD_changeling_initialization_effect = yes
+	}
+	if = {
+		limit = {
+			has_trait = kinain
+		}
+		random = {
+			chance = 1
+			add_trait = psychic
+			POD_resonance_increase_intensity_effect = yes
+		}
+		random = {
+			chance = 1
+			give_sorcerer_secret_or_trait_effect = yes
+		}
+		POD_kinain_initialization_effect = yes
+	}
+	trigger_event = POD_fae_maintenance.3
+	
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+}
+
+POD_create_cadet_branch_effect = {
+	hidden_effect = {
+		if = { 
+			limit = { house.house_head = THIS } 
+			create_character = {
+				save_temporary_scope_as = created_vampirelord
+				location = ROOT.capital_province
+				age = 1200
+				culture = ROOT.culture
+				faith = ROOT.faith
+				dynasty = generate
+				gender = male
+				random_traits = yes
+			}
+			scope:created_vampirelord ?= {
+				set_house = scope:vampiresire.house
+				house ?= { set_house_head = PREV }
+			}
+		}
+	}
+	create_cadet_branch = {}
+	if = {
+		limit = { exists = scope:coa_target }
+		house = {
+			set_coa = scope:coa_target
+			set_house_name_from_house = scope:coa_target
+		}
+	}
+	hidden_effect = {
+		scope:created_vampirelord ?= {
+			set_to_lowborn = yes
+			move_to_pool = yes
+			death = { death_reason = death_existence_erased } # HE NEVER EXISTED, BELIEVE ME.
+		}
+	}
+}
+
+POD_character_initialization_for_ghoul_nobles_effect = {
+	POD_set_resonance_effect = yes
+	
+	if = {
+		limit = {
+			NOT = { has_character_flag = had_POD_character_initialization }
+		}
+		
+		POD_become_ghoul_effect = yes
+		
+		if = {
+			limit = { exists = scope:template_ruler }
+			set_character_faith = scope:template_ruler.faith
+		}
+		else_if = {
+			limit = {
+				is_a_cultist = no
+				POD_is_supehunter_trigger = no
+			}
+			POD_character_vampire_faith_initialization_effect = yes
+		}
+		
+		random = {
+			chance = 50
+			POD_character_new_dynasty_effect = yes
+		}
+		
+		add_character_flag = {
+			flag = had_POD_character_initialization
+		}
+	}
+		
+	trigger_event = POD_maintenance.2
+}

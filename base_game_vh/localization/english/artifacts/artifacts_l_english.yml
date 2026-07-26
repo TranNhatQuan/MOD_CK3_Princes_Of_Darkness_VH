@@ -1,0 +1,1407 @@
+﻿l_english:
+  artifact_type_helmet:0 "vương miện"
+  artifact_type_primary_armament:0 "vũ khí"
+  artifact_type_armor:0 "giáp"
+  artifact_type_regalia:0 "nghi trượng"
+  artifact_type_trinket:0 "vật kỷ niệm"
+  artifact_type_wall_big:0 "vật trang trí treo tường"
+  artifact_type_wall_small:0 "$artifact_type_wall_big$"
+  artifact_type_throne:0 "ngai vàng"
+  artifact_type_sculpture:0 "vật trưng bày"
+  artifact_type_book:0 "sách"
+  artifact_type_pedestal:0 "$artifact_type_sculpture$"
+  artifact_type_elixir:0 "linh dược"
+  artifact_type_panacea: "thuốc vạn năng"
+  artifact_type_philosophers_stone: "Hòn đá Phù thủy"
+  artifact_type_animal_hide: "da thú"
+  artifact_type_brooch: "trâm cài"
+  artifact_type_animal_skull: "sọ thú"
+  artifact_type_chest: "rương"
+  artifact_type_box: "hộp"
+  artifact_type_cabinet: "tủ trưng bày"
+  artifact_type_goblet: "ly rượu"
+  artifact_type_scientific_apparatus: "thiết bị cơ khí"
+  artifact_type_jug: "bình rót"
+  artifact_type_necklace: "vòng cổ"
+  artifact_type_bowl: "bát"
+  artifact_type_plate: "đĩa"
+  artifact_type_urn: "bình tro cốt"
+  artifact_type_tun_barrel: "thùng gỗ"
+  artifact_type_scepter_pedestal: "quyền trượng"
+  artifact_type_tapestry: "thảm treo tường"
+  artifact_type_wall_shield: "khiên treo tường"
+  artifact_type_wall_icon: "thánh tượng"
+
+# These are used for when we generate the title at the same time as we create the artifact
+  artifact_name_prefix:1 "[SCOPE.Custom('ArtifactPrefixGeneric')|U]"
+  artifact_name_prefix_owner_name:0 "[owner.GetTitledFirstNamePossessiveNoTooltip]"
+  artifact_name_prefix_inspiration_owner_name:0 "[inspiration_owner.GetTitledFirstNamePossessiveNoTooltip]"
+  artifact_name_prefix_owner_culture:0 "[owner.GetCulture.GetNameNoTooltip]"
+  artifact_name_prefix_location_culture:1 "[owner.MakeScope.Var('adventure_artifact_location').Province.GetHolder.GetCulture.GetNameNoTooltip]"
+  artifact_name_prefix_owner_dynasty:1 "[owner.GetDynasty.GetBaseNameNoTooltip]"
+  artifact_name_prefix_descriptor_high_quality:0 "tráng lệ"
+  artifact_name_prefix_descriptor_medium_quality:0 "vững chắc"
+  artifact_name_prefix_descriptor_medium_alt_version_quality:0 "xuất sắc"
+  artifact_name_prefix_descriptor_low_quality:1 "tinh xảo"
+
+# These are used for when we generate the title after the artifact is already created since we have to use different scopes then
+  artifact_name_prefix_artifact_scope:0 "[Artifact.GetOwner.Custom('ArtifactPrefixGenericAfterCreation')|U]"
+  artifact_name_prefix_artifact_scope_owner_name:0 "[Artifact.GetOwner.GetTitledFirstNamePossessiveNoTooltip]"
+  artifact_name_prefix_artifact_scope_owner_culture:0 "[Artifact.GetOwner.GetCulture.GetNameNoTooltip]"
+  artifact_name_prefix_artifact_scope_owner_dynasty:1 "[Artifact.GetOwner.GetDynasty.GetBaseNameNoTooltip]"
+
+  placeholder:0 "$holderplace$"
+  holder_place:0 "#D Chỗ giữ chỗ#!"
+
+ ##########
+ # Metals #
+ ##########
+
+ # Irons and steels for use in arms and armor. All steels are just regional names for wootz steel, which is only known to have been manufactured in Southern India (but ingots of it traveled the silk road).
+  metal_iron:0 "sắt"
+  metal_wrought_iron:0 "sắt rèn"
+  metal_folded_iron:0 "sắt gấp"
+  metal_steel:0 "thép"
+  metal_wootz_steel:0 "thép wootz"
+  metal_bintie_steel: "thép bintie"
+  metal_bulat_steel:0 "thép bulat"
+  metal_damascus_steel:0 "thép Damascus"
+
+ # Metal Feature Derivatives 
+  feature_blade_metal_wrought_iron:0 "$metal_wrought_iron$"
+  feature_blade_metal_folded_iron:0 "$metal_folded_iron$"
+  feature_blade_metal_wootz_steel:0 "$metal_wootz_steel$"
+  feature_blade_metal_damascus_steel:1 "$metal_damascus_steel$"
+  feature_blade_metal_bulat_steel:1 "$metal_bulat_steel$"
+
+  feature_head_metal_wrought_iron:0 "$metal_wrought_iron$"
+  feature_head_metal_folded_iron:0 "$metal_folded_iron$"
+  feature_head_metal_wootz_steel:0 "$metal_wootz_steel$"
+  feature_head_metal_damascus_steel:1 "$metal_damascus_steel$"
+  feature_head_metal_bulat_steel:1 "$metal_bulat_steel$"
+
+  feature_handle_metal_wrought_iron:0 "$metal_wrought_iron$"
+  feature_handle_metal_folded_iron:0 "$metal_folded_iron$"
+  feature_handle_metal_wootz_steel:0 "$metal_wootz_steel$"
+  feature_handle_metal_damascus_steel:1 "$metal_damascus_steel$"
+  feature_handle_metal_bulat_steel:1 "$metal_bulat_steel$"
+
+ # Precious/decorative metals and metal-based compounds
+  metal_gold:0 "vàng"
+  metal_electrum:0 "điện kim"
+  metal_silver:0 "bạc"
+  metal_brass:0 "đồng thau"
+  metal_bronze:0 "đồng thiếc"
+  metal_copper:0 "đồng đỏ"
+  metal_pewter:0 "hợp kim thiếc"
+  metal_latten:0 "latten"
+
+
+ # Pure black 'alloy' of sulfur, copper, silver, and lead. Commonly used as an inlay in engraved or etched metals, or sometimes as a background in reliefs.
+  metal_niello:0 "niello"
+ # Golden (gold-leafed) bronze. More common in East Asia but could be found in Europe.
+  metal_gilt_bronze:0 "đồng mạ vàng"
+ # Gilded (gold-leafed) silver. More common in Europe but could be found in East Asia.
+  metal_silver_gilt:0 "bạc mạ vàng"
+ # Extremely rare bronze alloy from antiquity. Manufacturing process unknomwn, statues made from it were more valuable than gold.
+  metal_corinthian_bronze:0 "đồng Corinth"
+ # Alloy of gold, silver, copper, zinc, and iron. Sacred in Hinduism, used for making jewelery and decorating statues.
+  metal_panchaloha:0 "panchaloha"
+ # High-purity iron collected from meteorites. Auspicious in Tibetan culture, where it was known as 'thokcha'.
+  metal_meteoric_iron:0 "sắt thiên thạch"
+ # Asian
+ #Copper-gold alloy, with rich patination valued in luxury sword fittings and ornaments.
+  metal_shakudo: "shakudo"
+ #Copper-silver alloy for subtle gray inlay, more refined than copper but not on par with gold
+  metal_shibuichi: "shibuichi"
+
+  feature_decoration_material_inlay_gold:0 "$metal_gold$"
+  feature_decoration_material_inlay_electrum:0 "$metal_electrum$"
+  feature_decoration_material_inlay_silver:0 "$metal_silver$"
+  feature_decoration_material_inlay_copper:0 "$metal_copper$"
+  feature_decoration_material_inlay_pewter:0 "$metal_pewter$"
+  feature_decoration_material_inlay_niello:0 "$metal_niello$"
+  feature_decoration_material_inlay_jade:0 "$gem_jade$"
+  feature_decoration_material_inlay_amber:0 "$gem_amber$"
+  feature_decoration_material_inlay_shakudo: "$metal_shakudo$"
+  feature_decoration_material_inlay_shibuichi: "$metal_shibuichi$"
+
+  feature_decoration_material_wire_gold:0 "$metal_gold$"
+  feature_decoration_material_wire_electrum:0 "$metal_electrum$"
+  feature_decoration_material_wire_silver:0 "$metal_silver$"
+  feature_decoration_material_wire_brass:0 "$metal_brass$"
+  feature_decoration_material_wire_bronze:0 "$metal_bronze$"
+  feature_decoration_material_wire_copper:0 "$metal_copper$"
+  feature_decoration_material_wire_pewter:0 "$metal_pewter$"
+  feature_decoration_material_wire_latten:0 "$metal_latten$"
+
+ #############
+ # Earthware #
+ #############
+
+  earthware_clay:0 "đất sét"
+  earthware_stone:0 "đá"
+  earthware_terracotta:0 "đất nung"
+  earthware_porcelain:0 "sứ"
+
+ #########
+ # Woods #
+ #########
+  wood:0 "gỗ"
+
+ # Found Everywhere
+  wood_ash:0 "gỗ tần bì"
+  wood_oak:0 "gỗ sồi"
+
+ # Widespread Regional - Elm (Found all over Europe except southern Spain, Italy, and Greece)
+  wood_elm:0 "gỗ du"
+
+ # Widespread Regional - Walnut (found all over Europe excluding Scotland and Scandinavia, but including Northern Anatolia/Persia)
+  wood_walnut:0 "gỗ óc chó"
+
+ # Widespread Regional - Maple (found all over Europe excluding Scotland and northern Scandinavia, as well as northern Morocco/Tunisia/Persia and all of Anatolia)
+  wood_maple:0 "gỗ thích"
+
+ # Widespread Regional - Pines and Firs (found all over Europe except northern France/Germany and the Balkans, but spreads East through Anatolia, Scandinavia, Russia, China, and Tibet)
+  wood_pine:0 "gỗ thông"
+  wood_fir:0 "gỗ linh sam"
+
+ # Widespread Regional - Subsaharan Africa
+  wood_fleroya:0 "gỗ fleroya"
+  wood_sycomore:0 "gỗ sung dâu"
+  wood_padauk:0 "gỗ giáng hương châu Phi"
+
+ # Widespread Regional - India
+  wood_sal:0 "gỗ sal"
+  wood_teak:0 "gỗ tếch"
+  wood_rosewood:0 "gỗ cẩm lai"
+  wood_satinwood:0 "gỗ sa tanh"
+
+ # Regional - France, England, Wales, Ireland
+  wood_yew:0 "gỗ thủy tùng"
+
+ # Regional - Mediterranean
+  wood_olivewood:0 "gỗ ô liu"
+
+ # Regional - Sri Lanka
+  wood_coromandel:0 "gỗ coromandel"
+  wood_ebony:0 "gỗ mun"
+
+ # Regional - East Asia
+  wood_nanmu: "nanmu"
+  wood_boxwood: "gỗ hoàng dương"
+  wood_paulownia: "gỗ ngô đồng"
+  wood_camphorwood: "gỗ long não"
+
+ # Regional - Southeast Asia
+  wood_narra: "narra"
+  wood_toona_sureni: "toona sureni"
+  wood_agarwood: "trầm hương"
+  wood_sandalwood: "đàn hương"
+
+ # Regional - Northeast Asia
+  wood_birch: "gỗ bạch dương"
+  wood_linden: "gỗ đoạn"
+
+ # Wood Feature Derivatives 
+  feature_generic_material_wood_ash:0 "$wood_ash$"
+  feature_generic_material_wood_oak:0 "$wood_oak$"
+  feature_generic_material_wood_elm:0 "$wood_elm$"
+  feature_generic_material_wood_walnut:0 "$wood_walnut$"
+  feature_generic_material_wood_maple:0 "$wood_maple$"
+  feature_generic_material_wood_pine:0 "$wood_pine$"
+  feature_generic_material_wood_fir:0 "$wood_fir$"
+  feature_generic_material_wood_fleroya:0 "$wood_fleroya$"
+  feature_generic_material_wood_sycomore:0 "$wood_sycomore$"
+  feature_generic_material_wood_padauk:0 "$wood_padauk$"
+  feature_generic_material_wood_sal:0 "$wood_sal$"
+  feature_generic_material_wood_teak:0 "$wood_teak$"
+  feature_generic_material_wood_rosewood:0 "$wood_rosewood$"
+  feature_generic_material_wood_satinwood:0 "$wood_satinwood$"
+  feature_generic_material_wood_yew:0 "$wood_yew$"
+  feature_generic_material_wood_olivewood:0 "$wood_olivewood$"
+  feature_generic_material_wood_coromandel:0 "$wood_coromandel$"
+  feature_generic_material_wood_ebony:0 "$wood_ebony$"
+  feature_generic_material_wood_nanmu: "$wood_nanmu$"
+  feature_generic_material_wood_boxwood: "$wood_boxwood$"
+  feature_generic_material_wood_paulownia: "$wood_paulownia$"
+  feature_generic_material_wood_camphorwood: "$wood_camphorwood$"
+  feature_generic_material_wood_narra: "$wood_narra$"
+  feature_generic_material_wood_toona_sureni: "$wood_toona_sureni$"
+  feature_generic_material_wood_agarwood: "$wood_agarwood$"
+  feature_generic_material_wood_sandalwood: "$wood_sandalwood$"
+  feature_generic_material_wood_birch: "$wood_birch$"
+  feature_generic_material_wood_linden: "$wood_linden$"
+
+ feature_shaft_wood_ash:0 "$wood_ash$"
+ feature_shaft_wood_oak:0 "$wood_oak$"
+ feature_shaft_wood_elm:0 "$wood_elm$"
+ feature_shaft_wood_walnut:0 "$wood_walnut$"
+ feature_shaft_wood_maple:0 "$wood_maple$"
+ feature_shaft_wood_pine:0 "$wood_pine$"
+ feature_shaft_wood_fir:0 "$wood_fir$"
+ feature_shaft_wood_fleroya:0 "$wood_fleroya$"
+ feature_shaft_wood_sycomore:0 "$wood_sycomore$"
+ feature_shaft_wood_padauk:0 "$wood_padauk$"
+ feature_shaft_wood_sal:0 "$wood_sal$"
+ feature_shaft_wood_teak:0 "$wood_teak$"
+ feature_shaft_wood_rosewood:0 "$wood_rosewood$"
+ feature_shaft_wood_satinwood:0 "$wood_satinwood$"
+ feature_shaft_wood_yew:0 "$wood_yew$"
+ feature_shaft_wood_olivewood:0 "$wood_olivewood$"
+ feature_shaft_wood_coromandel:0 "$wood_coromandel$"
+ feature_shaft_wood_ebony:0 "$wood_ebony$"
+ feature_shaft_wood_nanmu: "$wood_nanmu$"
+ feature_shaft_wood_boxwood: "$wood_boxwood$"
+ feature_shaft_wood_paulownia: "$wood_paulownia$"
+ feature_shaft_wood_camphorwood: "$wood_camphorwood$"
+ feature_shaft_wood_narra: "$wood_narra$"
+ feature_shaft_wood_toona_sureni: "$wood_toona_sureni$"
+ feature_shaft_wood_agarwood: "$wood_agarwood$"
+ feature_shaft_wood_sandalwood: "$wood_sandalwood$"
+ feature_shaft_wood_birch: "$wood_birch$"
+ feature_shaft_wood_linden: "$wood_linden$"
+
+ ##########
+ # Cloths #
+ ##########
+
+ # Simple wool fabric, can vary wildly in quality and appearance depending on the yarn used to wave it as well as the weaver's skill. 
+  cloth_wool:0 "len"
+
+ # Wool from the very first shearing of a sheep. Soft, elastic, and slippery, used in high-grade textiles.
+  cloth_lambswool:0 "len cừu non"
+
+ # A fine, dense wool yarn or fabric. Originated in 12th century England, considered to be one of the highest quality wools. Suits are made from it today.
+  cloth_worsted_wool:0 "len chải kỹ"
+
+ # Generic plain weave cotton
+  cloth_cotton:0 "bông"
+
+ # cotton plain weave from Bangladesh, but common as far out as Iraq. Can be either coarse or very fine.
+  cloth_muslin:0 "vải muslin"
+
+ # twill cotton-linen blend. As it a mixed fabric, practicing Jews are forbidden to wear it.
+  cloth_fustian:0 "vải fustian"
+
+ # plain weave flax fibers. Consistently average in quality and price, saw widespread use throughout the medieval era.
+  cloth_linen:0 "vải lanh"
+
+ # Plain(?) silk weave.
+  cloth_silk:0 "lụa"
+
+ # satin weave, most commonly made of silk, becoming famous in 12th century Europe after the Crusades. 
+  cloth_satin:0 "lụa sa tanh"
+
+ # piled silk weave popular in the Middle East. Must be woven on a special loom. Due to its difficulty of manufacture, it is associated with nobility. Arrived in western Europe after the Crusades.
+  cloth_velvet:0 "nhung"
+
+ # twill silk weave popular in Byzantium, which originated in Sassanid Persia. Commonly restricted to royalty or clergy.
+  cloth_samite:0 "lụa samit"
+
+ # cloth woven from silk wrapped in silver. Similar to the cloth-of-gold below, but less expensive.
+  cloth_of_silver:0 "vải dệt bạc"
+
+ # cloth woven from silk wrapped in gold. In addition to being expensive, it was almost always outlawed for any non-royalty or non-clergy to wear.
+  cloth_of_gold:0 "vải dệt vàng"
+
+ # sturdy fabric
+  cloth_canvas:0 "vải bố"
+
+ feature_generic_material_cloth_wool:0 "$cloth_wool$"
+ feature_generic_material_cloth_lambswool:0 "$cloth_lambswool$"
+ feature_generic_material_cloth_worsted_wool:0 "$cloth_worsted_wool$"
+ feature_generic_material_cloth_cotton:0 "$cloth_cotton$"
+ feature_generic_material_cloth_fustian:0 "$cloth_fustian$"
+ feature_generic_material_cloth_linen:0 "$cloth_linen$"
+ feature_generic_material_cloth_silk:0 "$cloth_silk$"
+ feature_generic_material_cloth_satin:0 "$cloth_satin$"
+ feature_generic_material_cloth_velvet:0 "$cloth_velvet$"
+ feature_generic_material_cloth_samite:0 "$cloth_samite$"
+
+ feature_generic_material_cordage_wool:0 "$cloth_wool$"
+ feature_generic_material_cordage_cotton:0 "$cloth_cotton$"
+ feature_generic_material_cordage_linen:0 "$cloth_linen$"
+ feature_generic_material_cordage_silk:0 "$cloth_silk$"
+
+ feature_decoration_material_embroidery_wool:0 "$cloth_wool$"
+ feature_decoration_material_embroidery_linen:0 "$cloth_linen$"
+ feature_decoration_material_embroidery_cotton:0 "$cloth_cotton$"
+ feature_decoration_material_embroidery_silk:0 "$cloth_silk$"
+ feature_decoration_material_embroidery_silver_thread:0 "$metal_silver$"
+ feature_decoration_material_embroidery_gold_thread:0 "$metal_gold$"
+
+ ########
+ # Gems #
+ ########
+
+ # Common Everywhere
+  gem_rock_crystal:0 "thạch anh trong"
+  gem_rock_crystal_plural:0 "thạch anh trong"
+  gem_jet:0 "than đen"
+  gem_jet_plural:0 "than đen"
+  gem_agate:0 "mã não"
+  gem_agate_plural:0 "mã não"
+  gem_onyx:0 "onix"
+  gem_onyx_plural:0 "onix"
+
+ # Uncommon Everywhere
+  gem_garnet:0 "hồng ngọc lựu"
+  gem_garnet_plural:0 "hồng ngọc lựu"
+  gem_jasper:0 "ngọc bích đỏ"
+  gem_jasper_plural:0 "ngọc bích đỏ"
+  gem_zircon:0 "zircon"
+  gem_zircon_plural:0 "zircon"
+
+ # Common Regional/Uncommon Elsewhere
+  gem_turquoise:0 "ngọc lam"
+  gem_turquoise_plural:0 "ngọc lam"
+  gem_amber:0 "hổ phách"
+  gem_amber_plural:0 "hổ phách"
+  gem_moonstone:0 "đá mặt trăng"
+  gem_moonstone_plural:0 "đá mặt trăng"
+  gem_flourite:0 "huỳnh thạch"
+  gem_flourite_plural:0 "huỳnh thạch"
+  gem_adventurine:0 "aventurine"
+  gem_adventurine_plural:0 "aventurine"
+  gem_amethyst:0 "thạch anh tím"
+  gem_amethyst_plural:0 "thạch anh tím"
+  gem_carnelian:0 "ngọc đỏ"
+  gem_carnelian_plural:0 "ngọc đỏ"
+
+ # Uncommon Regional/Rare Elsewhere
+  gem_spinel:0 "spinel"
+  gem_spinel_plural:0 "spinel"
+  gem_opal:0 "opal"
+  gem_opal_plural:0 "opal"
+  gem_lapis_lazuli:0 "lam ngọc"
+  gem_lapis_lazuli_plural:0 "lam ngọc"
+  gem_peridot:0 "peridot"
+  gem_peridot_plural:0 "peridot"
+  gem_jade:0 "ngọc"
+  gem_jade_plural:0 "ngọc"
+
+ # Rare
+  gem_sapphire:0 "lam ngọc thượng hạng"
+  gem_sapphire_plural:0 "lam ngọc thượng hạng"
+  gem_ruby:0 "hồng ngọc"
+  gem_ruby_plural:0 "hồng ngọc"
+  gem_emerald:0 "lục bảo ngọc"
+  gem_emerald_plural:0 "lục bảo ngọc"
+
+ feature_decoration_material_gem_rock_crystal:0 "$gem_rock_crystal$"
+ feature_decoration_material_gem_jet:0 "$gem_jet$"
+ feature_decoration_material_gem_agate:0 "$gem_agate$"
+ feature_decoration_material_gem_onyx:0 "$gem_onyx$"
+ feature_decoration_material_gem_garnet:0 "$gem_garnet$"
+ feature_decoration_material_gem_jasper:0 "$gem_jasper$"
+ feature_decoration_material_gem_zircon:0 "$gem_zircon$"
+ feature_decoration_material_gem_turquoise:0 "$gem_turquoise$"
+ feature_decoration_material_gem_amber:0 "$gem_amber$"
+ feature_decoration_material_gem_moonstone:0 "$gem_moonstone$"
+ feature_decoration_material_gem_flourite:0 "$gem_flourite$"
+ feature_decoration_material_gem_adventurine:0 "$gem_adventurine$"
+ feature_decoration_material_gem_amethyst:0 "$gem_amethyst$"
+ feature_decoration_material_gem_carnelian:0 "$gem_carnelian$"
+ feature_decoration_material_gem_spinel:0 "$gem_spinel$"
+ feature_decoration_material_gem_opal:0 "$gem_opal$"
+ feature_decoration_material_gem_lapis_lazuli:0 "$gem_lapis_lazuli$"
+ feature_decoration_material_gem_peridot:0 "$gem_peridot$"
+ feature_decoration_material_gem_jade:0 "$gem_jade$"
+ feature_decoration_material_gem_sapphire:0 "$gem_sapphire$"
+ feature_decoration_material_gem_ruby:0 "$gem_ruby$"
+ feature_decoration_material_gem_emerald:0 "$gem_emerald$"
+
+
+ ########
+ # Inks #
+ ########
+
+  ink_pine_soot: "mực đen bồ hóng thông"
+  ink_oil_soot: "mực đen bồ hóng dầu"
+  ink_lacquer_soot: "mực đen bồ hóng sơn mài"
+  ink_charcoal: "mực đen than củi"
+  ink_cinnabar: "mực chu sa đỏ"
+  ink_orpiment: "mực hoàng thạch vàng"
+  ink_lac_dye: "mực thuốc nhuộm cánh kiến đỏ sẫm"
+  ink_silver: "mực bạc phát quang"
+  ink_shell_gold: "mực vàng vỏ sò óng ánh"
+
+ feature_decoration_material_ink_pine_soot: "$ink_pine_soot$"
+ feature_decoration_material_ink_oil_soot: "$ink_oil_soot$"
+ feature_decoration_material_ink_lacquer_soot: "$ink_lacquer_soot$"
+ feature_decoration_material_ink_charcoal: "$ink_charcoal$"
+ feature_decoration_material_ink_cinnabar: "$ink_cinnabar$"
+ feature_decoration_material_ink_orpiment: "$ink_orpiment$"
+ feature_decoration_material_ink_lac_dye: "$ink_lac_dye$"
+ feature_decoration_material_ink_silver: "$ink_silver$"
+ feature_decoration_material_ink_shell_gold: "$ink_shell_gold$"
+
+ ##########
+ # Slates #
+ ##########
+
+  slate_bamboo: "phiến tre mộc"
+  slate_soapstone: "phiến đá xà phòng đánh bóng"
+  slate_bronze: "phiến đồng thẫm màu"
+  slate_quartz: "phiến thạch anh lấp lánh"
+  slate_jade: "phiến ngọc óng ánh"
+  slate_ivory: "phiến ngà sáng"
+  slate_rhinocerous_horn: "phiến sừng tê giác phát quang"
+
+ feature_decoration_material_slate_bamboo: "$slate_bamboo$"
+ feature_decoration_material_slate_soapstone: "$slate_soapstone$"
+ feature_decoration_material_slate_bronze: "$slate_bronze$"
+ feature_decoration_material_slate_quartz: "$slate_quartz$"
+ feature_decoration_material_slate_jade: "$slate_jade$"
+ feature_decoration_material_slate_ivory: "$slate_ivory$"
+ feature_decoration_material_slate_rhinocerous_horn: "$slate_rhinocerous_horn$"
+
+
+ ############################
+ # Horns, Shells, and Bones #
+ ############################
+
+  hsb_ivory:0 "ngà"
+  hsb_mother_of_pearl:0 "xà cừ"
+  hsb_tortoiseshell:0 "mai rùa"
+  hsb_seashell:0 "vỏ sò"
+  hsb_deer_antler:0 "sừng hươu"
+  hsb_boar_tusk:0 "nanh lợn rừng"
+  hsb_camel_bone:0 "xương lạc đà"
+ 
+ feature_decoration_material_inlay_HSB_camel_bone:0 "$hsb_camel_bone$"
+ feature_decoration_material_inlay_HSB_deer_antler:0 "$hsb_deer_antler$"
+ feature_decoration_material_inlay_HSB_boar_tusk:0 "$hsb_boar_tusk$"
+ feature_decoration_material_inlay_HSB_seashell:0 "$hsb_seashell$"
+ feature_decoration_material_inlay_HSB_tortoiseshell:0 "$hsb_tortoiseshell$"
+ feature_decoration_material_inlay_HSB_mother_of_pearl:0 "$hsb_mother_of_pearl$"
+ feature_decoration_material_inlay_HSB_ivory:0 "$hsb_ivory$"
+ feature_decoration_material_inlay_HSB_bone: "$material_bone$"
+
+ #Other
+  material_bone:0 "xương"
+  material_horn:0 "sừng"
+  material_pangolin_scales:0 "vảy tê tê"
+  material_glass:0 "thủy tinh"
+  material_leather:0 "da"
+  material_hardened_leather:0 "da cứng"
+
+ ############
+ # Patterns #
+ ############
+
+  feature_decoration_pattern_roses:0 "hoa hồng"
+  feature_decoration_pattern_floral:0 "họa tiết hoa lá"
+  feature_decoration_pattern_geometric:0 "hình khối hình học"
+  feature_decoration_pattern_wolf:0 "đầu sói"
+  feature_decoration_pattern_local_animal:0 "hình chạm khắc chi tiết của [Artifact.GetOwner.Custom('GetAnimalType')]"
+  feature_decoration_pattern_war_god:0 "biểu tượng và văn tự dâng hiến cho [Artifact.GetOwner.GetFaith.WarGodName]"
+  feature_decoration_pattern_religious_symbol:0 "biểu tượng [Artifact.GetOwner.GetFaith.ReligiousSymbol]"
+  feature_decoration_pattern_gibberish:0 "những ký hiệu mà ngoài người tạo ra không ai hiểu được ý nghĩa"
+  feature_decoration_pattern_bodies:0 "những thân thể quằn quại"
+  feature_decoration_pattern_culture_symbol:0 "các biểu tượng gắn liền với văn hóa [Artifact.GetOwner.GetCulture.GetNameNoTooltip]"
+  feature_decoration_pattern_culture_style:0 "hoa văn và trang trí theo phong cách [Artifact.GetOwner.GetCulture.GetNameNoTooltip]"
+  feature_decoration_pattern_shield:0 "huy hiệu của gia tộc [Artifact.GetOwner.GetHouse.GetBaseName]"
+  feature_decoration_pattern_dynasty_shield:0 "$feature_decoration_pattern_shield$"
+  feature_decoration_pattern_dynasty_motifs:0 "hoa văn từ khẩu hiệu và huy hiệu của gia tộc [Artifact.GetOwner.GetHouse.GetBaseName]"
+  feature_decoration_pattern_beasts:0 "linh thú thần thoại"
+  feature_decoration_pattern_religion:0 "biểu tượng tôn giáo"
+  feature_decoration_pattern_quotes:0 "những câu danh ngôn truyền cảm hứng"
+  feature_decoration_pattern_eschatology:0 "cảnh tượng cánh chung"
+  feature_decoration_pattern_knots:0 "hoa văn thắt nút đan xen"
+  feature_decoration_pattern_animals:0 "hoa văn hình thú"
+  feature_decoration_pattern_bird:0 "một loài chim oai vệ"
+
+  feature_decoration_material_inlay_HSB_placeholder:0 "#D PLACEHOLDER#!"
+ 
+  feature_icon_decoration_pattern_saint: "[Artifact.GetOwner.Custom('PredeterminedSaintName')]"
+
+ ###########
+ # Quality and wealth #
+ ###########
+
+  quality_fine:0 "tinh xảo"
+  quality_very_fine:0 "rất tinh xảo"
+  quality_excellent:0 "xuất sắc"
+  quality_masterful:0 "bậc thầy"
+
+  adverb_quality_masterful:0 "một cách bậc thầy"
+  adverb_quality_excellent:0 "một cách xuất sắc"
+  adverb_quality_fine:0 "một cách tinh xảo"
+
+  wealth_extravagant:0 "xa hoa"
+  wealth_opulent:0 "phú quý"
+  wealth_beautiful:0 "đẹp đẽ"
+  wealth_elegant:0 "thanh nhã"
+  wealth_ornate:0 "cầu kỳ"
+  wealth_fancy:0 "diêm dúa"
+  wealth_plain:0 "giản dị"
+
+  article_wealth_plain:0 "một món giản dị"
+  article_wealth_fancy:0 "một món diêm dúa"
+  article_wealth_ornate:0 "một món cầu kỳ"
+  article_wealth_elegant:0 "một món thanh nhã"
+  article_wealth_beautiful:0 "một món đẹp đẽ"
+  article_wealth_opulent:0 "một món phú quý"
+  article_wealth_extravagant:0 "một món xa hoa"
+
+  adverb_wealth_extravagant:0 "một cách xa hoa"
+  adverb_wealth_masterful:0 "một cách bậc thầy"
+  adverb_wealth_opulent:0 "một cách phú quý"
+  adverb_wealth_wonderful:0 "một cách tuyệt vời"
+  adverb_wealth_elegant:0 "một cách thanh nhã"
+  adverb_wealth_lavish:0 "một cách hào phóng"
+  adverb_wealth_beautiful:0 "một cách đẹp đẽ"
+  adverb_wealth_rich:0 "một cách giàu có"
+  adverb_wealth_ornate:0 "một cách cầu kỳ"
+  adverb_wealth_fancy:0 "một cách diêm dúa"
+  adverb_wealth_plain:0 "một cách giản dị"
+
+ ############################
+ # Weapon Descriptions 		#
+ ############################
+  create_artifact_weapon_tooltip:0 "[inspiration_owner.GetShortUIName] đã chế tác [SCOPE.Custom('ArtifactWeaponType')] với trình độ tay nghề [SCOPE.Custom('ArtifactQuality')]"
+ # Sword and Dagger components (Blades, Hilts, and Pommels) 
+  feature_hilt_decoration_carved_pattern:0 "chuôi kiếm được chạm khắc hoa văn [Artifact.GetFeatureText( 'decoration_pattern' )] — dù đã được giản lược"
+  feature_hilt_decoration_inlay_pattern:0 "chuôi kiếm được khảm [Artifact.GetFeatureText( 'decoration_material_inlay' )] theo hoa văn [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_hilt_decoration_filigree:0 "chuôi kiếm được trang trí bằng những đường filigree tinh xảo từ [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_hilt_decoration_rounded_pommels:0 "quả táo chuôi được tạo hình thành nhiều thùy tròn và khảm [Artifact.GetFeatureText( 'decoration_material_inlay' )]"
+  feature_hilt_decoration_wires:0 "tay cầm được bao phủ bởi lớp khảm xoắn ốc bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_hilt_decoration_circles:0 "tay cầm có các vòng [Artifact.GetFeatureText( 'decoration_material_wire' )] trang trí, phân bố đều giữa những dải da"
+  feature_hilt_decoration_twisting:0 "chuôi và quả táo được trang trí bằng lớp khảm [Artifact.GetFeatureText( 'decoration_material_inlay' )] với họa tiết xoắn tinh vi"
+  feature_blade_decoration_etched_pattern:0 "lưỡi kiếm được khắc nổi hoa văn [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_blade_decoration_etched_motto:0 "lưỡi kiếm được khắc dòng chữ \"[Artifact.GetOwner.GetHouse.GetMotto]\""
+  feature_blade_decoration_etched_owner:1 "trên lưỡi kiếm có khắc dòng chữ \"Thuộc sở hữu của [Artifact.GetOwner.GetTitledFirstName] xứ [Artifact.GetOwner.GetPrimaryTitle.GetNameNoTierNoTooltip]\""
+
+ # Swords
+  artifact_sword_name:0 "$artifact_name_prefix$ Kiếm"
+  artifact_longsword_name:0 "$artifact_name_prefix$ Trường kiếm"
+  artifact_sword_description:3 "Một thanh kiếm bằng [newly_created_artifact.GetFeatureText( 'blade_metal' )] với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactSwordDecoration')]"
+  sword_decoration_hilt_and_blade:1 "[ROOT.Artifact.GetFeatureText( 'hilt_decoration' )|U], cùng với [ROOT.Artifact.GetFeatureText( 'blade_decoration' )]."
+  sword_decoration_hilt:1 "[ROOT.Artifact.GetFeatureText( 'hilt_decoration' )|U]."
+  sword_decoration_blade:1 "[ROOT.Artifact.GetFeatureText( 'blade_decoration' )|U]."
+  sword_decoration_none:0 "Nó giản dị, không có trang trí cầu kỳ, nhưng vẫn toát lên vẻ cuốn hút."
+  sword_decoration_none_alt:0 "Mọi chi tiết trong kết cấu đều phục vụ mục đích sử dụng, và sự thiếu vắng vẻ hào nhoáng tạo cho chủ nhân khí chất nghiêm cẩn, thực dụng."
+
+ # Daggers
+  artifact_dagger_name:0 "Dao găm của [owner.GetTitledFirstNamePossessiveNoTooltip]"
+  artifact_dagger_description:1 "Một con dao găm bằng [newly_created_artifact.GetFeatureText( 'blade_metal' )] với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactDaggerDecoration')]"
+  dagger_decoration_hilt_and_blade:0 "$sword_decoration_hilt_and_blade$"
+  dagger_decoration_hilt:0 "$sword_decoration_hilt$"
+  dagger_decoration_blade:0 "$sword_decoration_blade$"
+  dagger_decoration_none:0 "$sword_decoration_none$"
+  artifact_kris_name:0 "Kris của [owner.GetTitledFirstNamePossessiveNoTooltip]"
+  artifact_kris_description:0 "Một thanh Kris bằng [newly_created_artifact.GetFeatureText( 'blade_metal' )] với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactDaggerDecoration')]"
+
+ # Axe, Spear, Hammer, and Mace components (Heads, Shafts/Hafts)
+  feature_head_decoration_etched_pattern:0 "được khắc nổi hoa văn [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_head_decoration_religious_motifs:0 "được khắc các mô-típ mang màu sắc [Artifact.GetOwner.GetFaith.GetAdjective]"
+  feature_shaft_decoration_painted_pattern:0 "được sơn các hình ảnh [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_shaft_decoration_inlay:0 "được khảm [Artifact.GetFeatureText( 'decoration_material_inlay_HSB' )]"
+  feature_shaft_decoration_varnish:0 "được phủ véc-ni tạo nên vẻ bóng tối, đậm màu"
+  feature_shaft_decoration_grooves:0 "được chạm các rãnh nhẹ tại vị trí cầm nắm để tăng độ thoải mái"
+  feature_shaft_decoration_wavelets:0 "được chạm các gợn sóng tinh tế nhằm giảm trượt khi sử dụng"
+  feature_shaft_decoration_lines:0 "được chạm các đường mảnh để tôn lên vẻ đẹp vật liệu và tạo bề mặt cầm chắc tay"
+  feature_metal_handle_decoration_inlay:0 "được khảm [Artifact.GetFeatureText( 'decoration_material_inlay' )]"
+  feature_metal_handle_decoration_etched_pattern:0 "được khắc hoa văn lặp lại [Artifact.GetFeatureText( 'decoration_pattern' )]"
+
+ # Axes
+  artifact_axe_name:0 "$artifact_name_prefix$ Rìu chiến"
+  artifact_axe_description:2 "Một chiếc rìu chiến với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactAxeHeadDescription')] [newly_created_artifact.Custom('ArtifactAxeHaftDescription')]"
+  artifact_axe_head_undecorated:1 "Phần đầu bằng [ROOT.Artifact.GetFeatureText( 'head_metal' )] được gắn vào"
+  artifact_axe_head_decorated:1 "Phần đầu bằng [ROOT.Artifact.GetFeatureText( 'head_metal' )] đã được [ROOT.Artifact.GetFeatureText( 'head_decoration' )], rồi gắn vào"
+  artifact_axe_haft_undecorated:2 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] chắc chắn. Vũ khí được cân bằng hoàn hảo, vừa dễ vung vừa sắc bén."
+  artifact_axe_haft_decorated:1 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] thanh nhã, đã được [ROOT.Artifact.GetFeatureText( 'shaft_decoration' )]."
+ 
+ # Hammers
+  artifact_hammer_name:1 "$artifact_name_prefix$ Búa chiến"
+  artifact_hammer_description:3 "Một chiếc búa chiến với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactHammerHeadDescription')] [newly_created_artifact.Custom('ArtifactHammerShaftDescription')]"
+  artifact_hammer_head_undecorated:0 "$artifact_axe_head_undecorated$"
+  artifact_hammer_head_decorated:0 "$artifact_axe_head_decorated$"
+  artifact_hammer_shaft_undecorated:1 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] chắc chắn."
+  artifact_hammer_shaft_decorated:1 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] thanh nhã, đã được [ROOT.Artifact.GetFeatureText( 'shaft_decoration' )]."
+
+ # Spears
+  artifact_spear_name:0 "$artifact_name_prefix$ Giáo"
+  artifact_spear_description:2 "Một cây giáo dài với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactSpearHeadDescription')] [newly_created_artifact.Custom('ArtifactSpearShaftDescription')]"
+  artifact_spear_head_undecorated:0 "$artifact_axe_head_undecorated$"
+  artifact_spear_head_decorated:0 "$artifact_axe_head_decorated$"
+  artifact_spear_head_decorated_flanked:1 "Lưỡi giáo hai cạnh được kèm theo các cánh mỏng kéo dài, tạo nên dáng vẻ đặc trưng và đầy chết chóc"
+  artifact_spear_shaft_undecorated:1 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] chắc chắn."
+  artifact_spear_shaft_undecorated_alt:2 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] chắc chắn. Đây là một vũ khí vừa thanh nhã vừa chết người."
+  artifact_spear_shaft_decorated:1 "một cán [ROOT.Artifact.GetFeatureText( 'shaft_wood' )] thanh nhã, đã được [ROOT.Artifact.GetFeatureText( 'shaft_decoration' )]."
+
+ # Maces
+  artifact_mace_name:0 "$artifact_name_prefix$ Chùy"
+  artifact_mace_description:2 "Một chiếc chùy có gờ với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.Custom('ArtifactMaceHeadDescription')] [newly_created_artifact.Custom('ArtifactMaceHandleDescription')]"
+  artifact_mace_head_undecorated:0 "$artifact_axe_head_undecorated$"
+  artifact_mace_head_decorated:0 "$artifact_axe_head_decorated$"
+  artifact_mace_handle_undecorated:1 "một tay cầm bằng [ROOT.Artifact.GetFeatureText( 'handle_metal' )] chắc chắn."
+  artifact_mace_handle_decorated:2 "một tay cầm bằng [ROOT.Artifact.GetFeatureText( 'handle_metal' )] thanh nhã, đã được [ROOT.Artifact.GetFeatureText( 'metal_handle_decoration' )]."
+
+ ############################
+ # Wearable Descriptions	#
+ ############################
+
+ # Armor
+  artifact_armor_name:0 "[SCOPE.Custom('ArtifactArmorArtifactName')]"
+  artifact_armor_name_basic:1 "$artifact_name_prefix$ [newly_created_artifact.GetFeatureText( 'armor_property' )|U] [SCOPE.Custom('ArtifactArmorTypeUppercase')|U]"
+  artifact_armor_name_culture:0 "[ROOT.Char.GetCulture.GetNameNoTooltip] [SCOPE.Custom('ArtifactArmorTypeUppercase')|U]"
+  artifact_armor_name_dynasty:1 "[ROOT.Char.GetDynasty.GetBaseNameNoTooltip] [SCOPE.Custom('ArtifactArmorTypeUppercase')|U]"
+  artifact_armor_name_descriptor:1 "[newly_created_artifact.GetFeatureText( 'armor_property' )|U] [SCOPE.Custom('ArtifactArmorTypeUppercase')|U]"
+
+  artifact_armor_mail_lowercase:0 "giáp xích"
+  artifact_armor_mail_uppercase:0 "Giáp xích"
+  artifact_armor_plate_lowercase:0 "giáp tấm"
+  artifact_armor_plate_uppercase:0 "Giáp tấm"
+  artifact_armor_scale_lowercase:0 "giáp vảy"
+  artifact_armor_scale_uppercase:0 "Giáp vảy"
+  artifact_armor_lamellar_lowercase:0 "giáp phiến"
+  artifact_armor_lamellar_uppercase:0 "Giáp phiến"
+  artifact_armor_laminar_lowercase:0 "giáp laminar"
+  artifact_armor_laminar_uppercase:0 "Giáp laminar"
+  artifact_armor_brigandine_lowercase:1 "giáp phân đoạn"
+  artifact_armor_brigandine_uppercase:1 "Giáp phân đoạn"
+  artifact_armor_shield_lowercase:0 "một tấm khiên"
+  artifact_armor_shield_uppercase:0 "Một tấm khiên"
+
+  artifact_armor_descriptor_shiny:0 "bóng loáng"
+  artifact_armor_descriptor_flexible:0 "linh hoạt"
+  artifact_armor_descriptor_powerful:0 "uy lực"
+ 
+  feature_artifact_armor_descriptor_shiny:0 "$artifact_armor_descriptor_shiny$"
+  feature_artifact_armor_descriptor_lustrous:0 "Óng ánh"
+  feature_artifact_armor_descriptor_burnished:0 "Đánh bóng"
+  feature_artifact_armor_descriptor_flexible:0 "$artifact_armor_descriptor_flexible$"
+  feature_artifact_armor_descriptor_powerful:0 "$artifact_armor_descriptor_powerful$"
+  feature_artifact_armor_descriptor_silver_inlaid:0 "Khảm bạc"
+  feature_artifact_armor_descriptor_gold_inlaid:0 "Khảm vàng"
+  feature_artifact_armor_descriptor_bronze_inlaid:0 "Mạ đồng"
+  feature_artifact_armor_descriptor_armor_material_hardened_leather:0 "Gia cố"
+  feature_artifact_armor_descriptor_armor_material_steel:0 "Thép"
+  feature_artifact_armor_descriptor_armor_gold_decorated:0 "Trang trí vàng"
+  feature_artifact_armor_descriptor_armor_silver_decorated:0 "Khảm bạc"
+  feature_artifact_armor_descriptor_armor_copper_decorated:0 "Khảm đồng"
+  feature_artifact_armor_descriptor_armor_shakudo_decorated:0 "Khảm Shakudo"
+  feature_artifact_armor_descriptor_armor_shibuichi_decorated:0 "Khảm Shibuichi"
+
+  feature_armor_material_iron:0 "$metal_iron$"
+  feature_armor_material_steel:0 "$metal_steel$"
+  feature_armor_material_gold:0 "$metal_gold$"
+  feature_armor_material_bronze:0 "$metal_bronze$"
+  feature_armor_material_canvas:0 "$cloth_canvas$"
+  feature_armor_material_horn:0 "$material_horn$"
+  feature_armor_material_pangolin_scales:0 "$material_pangolin_scales$"
+  feature_armor_material_leather:0 "$material_leather$"
+  feature_armor_material_hardened_leather:0 "$material_hardened_leather$"
+
+  feature_armor_helmet_spangenhelm:0 "Bộ giáp bao gồm một mũ spangenhelm và một tấm che cổ bằng xích"
+  feature_armor_helmet_crested:0 "Bộ giáp bao gồm một mũ có mào với phần chân mày trang trí"
+  feature_armor_helmet_nasal:0 "Bộ giáp bao gồm một mũ che mũi và mũ trùm xích, được đệm bằng [Artifact.GetFeatureText( 'generic_material_cloth' )]"
+  feature_armor_helmet_enclosed:0 "Bộ giáp bao gồm một mũ kín và mũ trùm xích, được đệm bằng [Artifact.GetFeatureText( 'generic_material_cloth' )]"
+  feature_armor_helmet_great_helmet:0 "Bộ giáp bao gồm một đại mũ và mũ trùm xích, được đệm bằng [Artifact.GetFeatureText( 'generic_material_cloth' )]"
+  feature_armor_helmet_great_helmet_bascinet:0 "Bộ giáp bao gồm một đại mũ và một bascinet đội bên trong"
+  feature_armor_helmet_great_helmet_cervelliere:0 "Bộ giáp bao gồm một đại mũ và một cervelliere đội bên trong"
+  feature_armor_helmet_turban_helmet:0 "Bộ giáp bao gồm một mũ turban và một tấm che cổ"
+  feature_armor_helmet_lamellar:0 "Bộ giáp bao gồm một mũ giáp phiến với chùm trang trí trên đỉnh và một tấm che cổ"
+  feature_armor_helmet_kettle:0 "Bộ giáp bao gồm một mũ vành rộng kiểu kettle"
+  feature_armor_helmet_cervelliere:0 "Bộ giáp bao gồm một mũ cervelliere ôm sát hình bán cầu và mũ trùm xích, được đệm bằng [Artifact.GetFeatureText( 'generic_material_cloth' )]"
+  feature_armor_helmet_kulah_khud:0 "Bộ giáp bao gồm một mũ Khula Khud và một tấm che cổ"
+
+  feature_armor_decoration_etched_pattern:0 "Toàn bộ bộ giáp được khắc hoa văn lặp lại hình ảnh [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_armor_decoration_inlay_pattern:0 "Toàn bộ bộ giáp được trang trí bằng lớp khảm [Artifact.GetFeatureText( 'decoration_material_inlay' )], thể hiện hoa văn lặp lại [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_armor_decoration_painted_pattern:0 "Toàn bộ bộ giáp được sơn các hình ảnh [Artifact.GetFeatureText( 'decoration_pattern' )]"
+  feature_armor_decoration_lines:0 "Toàn bộ bộ giáp được chạm các đường mảnh nhằm tôn lên vẻ đẹp của vật liệu"
+  feature_armor_decoration_gold_plating:0 "Toàn bộ bộ giáp được mạ một lớp vàng dày"
+  feature_armor_decoration_lining:0 "Các vòng xích phía dưới cùng được làm từ [Artifact.GetFeatureText( 'decoration_material_wire' )] trang trí, viền quanh toàn bộ bộ giáp"
+  feature_armor_decoration_embossed:0 "Các đinh tán [Artifact.GetFeatureText( 'decoration_material_wire' )] gắn các tấm giáp vào vải nền được dập nổi hoa văn trang trí"
+  feature_armor_decoration_grouped_rivets:0 "Các đinh tán [Artifact.GetFeatureText( 'decoration_material_wire' )] gắn các tấm giáp vào lớp vải được sắp xếp thành hoa văn trang trí"
+
+  artifact_armor_description:0 "[SCOPE.Custom('ArtifactArmorDesc')]. [newly_created_artifact.GetFeatureText('armor_helmet')]. [newly_created_artifact.GetFeatureText('armor_decoration')]."
+ 
+  artifact_armor_mail_description:2 "Dù các mắt xích không cho phép nhiều không gian trang trí, nhưng tay nghề tán đinh đạt mức [SCOPE.Custom('ArtifactQuality')] đã khiến bộ giáp này vượt trội so với giáp xích thông thường"
+  artifact_armor_plate_description:2 "Bộ giáp được cấu thành từ các tấm [newly_created_artifact.GetFeatureText( 'armor_material' )] lớn, được rèn [SCOPE.Custom('ArtifactAdverbQuality')] nhằm bao phủ hoàn toàn người mặc"
+  artifact_armor_scale_description:2 "Bộ giáp được cấu thành từ các vảy [newly_created_artifact.GetFeatureText( 'armor_material' )] được chế tác [SCOPE.Custom('ArtifactAdverbQuality')], gắn trên lớp nền bằng da"
+  artifact_armor_lamellar_description:2 "Bộ giáp này được chế tạo từ những tấm giáp bằng [newly_created_artifact.GetFeatureText( 'armor_material' )] được liên kết chắc chắn với nhau bằng các sợi dây làm từ vải [newly_created_artifact.GetFeatureText( 'generic_material_cordage' )], trong khi phần viền và lớp lót được cắt may từ loại vải [newly_created_artifact.GetFeatureText( 'generic_material_cloth' )] tinh xảo."
+  artifact_armor_laminar_description:2 "Bộ giáp được cấu thành từ các dải [newly_created_artifact.GetFeatureText( 'armor_material' )] xếp chồng theo phương ngang, được buộc [SCOPE.Custom('ArtifactAdverbQuality')] bằng dây [newly_created_artifact.GetFeatureText( 'generic_material_cordage' )], trong khi viền và lớp lót được cắt từ [newly_created_artifact.GetFeatureText( 'generic_material_cloth' )] thượng hạng"
+  artifact_armor_brigandine_description:2 "Lớp [newly_created_artifact.GetFeatureText( 'armor_material' )] của bộ giáp được lót bên trong bằng các tấm thép hình bầu dục theo kỹ thuật [SCOPE.Custom('ArtifactAdverbQuality')], và phủ bên ngoài bằng lớp [newly_created_artifact.GetFeatureText( 'generic_material_cloth' )]"
+  artifact_armor_fallback_description:2 "[SCOPE.Custom('ArtifactDecorationArmor')]."
+
+  create_artifact_armor_tooltip:1 "[inspiration_owner.GetShortUIName] đã chế tác [SCOPE.Custom('ArtifactArmorTypeLowercase')] với trình độ tay nghề [SCOPE.Custom('ArtifactQuality')]"
+
+ # Regalia
+  artifact_regalia_name:0 "$artifact_name_prefix$ Nghi trượng"
+  artifact_regalia_description:1 "[SCOPE.Custom('ArtifactArticleWealth')] bộ nghi trượng với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. Bao gồm [newly_created_artifact.GetFeatureText( 'regalia_scepter' )], [newly_created_artifact.GetFeatureText( 'regalia_clothes' )], và [newly_created_artifact.GetFeatureText( 'regalia_accessory' )]."
+
+  feature_regalia_scepter_gemstone:0 "một quyền trượng bằng [Artifact.GetFeatureText( 'decoration_material_wire' )] gắn các mảnh [Artifact.GetFeatureText( 'decoration_material_gem' )]"
+  feature_regalia_accessory_orb:0 "một quả cầu thánh giá bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_regalia_accessory_necklace:0 "một chuỗi vòng cổ cabochon lớn bằng [Artifact.GetFeatureText( 'decoration_material_gem' )]"
+  feature_regalia_clothes_robe:0 "những bộ lễ bào bằng [Artifact.GetFeatureText( 'generic_material_cloth' )] thượng hạng, được thêu bằng [Artifact.GetFeatureText( 'decoration_material_embroidery' )]"
+  feature_regalia_clothes_cloak:0 "một chiếc áo choàng bằng [Artifact.GetFeatureText( 'generic_material_cloth' )], được thêu chỉ [Artifact.GetFeatureText( 'decoration_material_embroidery' )]"
+ 
+  create_artifact_regalia_tooltip:1 "[inspiration_owner.GetShortUIName] đã chế tác một bộ nghi trượng với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+
+  artifact_seal_of_investiture: "$artifact_name_prefix$ $seal_of_investiture$"
+  seal_of_investiture: "Ấn phong tước"
+  artifact_seal_of_investiture_court: "$seal_of_investiture$"
+  seal_of_investiture.desc: "[SCOPE.Custom('ArtifactArticleWealth')] [seal_of_investiture|E] với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. Đây là một tấm [newly_created_artifact.GetFeatureText( 'decoration_material_slate' )] với mực [newly_created_artifact.GetFeatureText( 'decoration_material_ink' )].\n\nNó được chế tác theo lệnh của [tributary_scope.GetSuzerain.GetFullName] để ghi nhận sự trung thành của [tributary_scope.GetFullName], và được trao cho [tributary_scope.GetHerHim] trong nghi lễ bế mạc chuyến triều cống của [tributary_scope.GetHerHis] tới [tributary_scope.GetSuzerain.GetCapitalLocation.GetName]."
+  feature_regalia_seal_slate: "một ấn hoàng gia bằng [Artifact.GetFeatureText( 'decoration_material_slate' )]"
+  feature_regalia_seal_ink: "được thư pháp bằng mực [Artifact.GetFeatureText( 'decoration_material_ink' )]"
+
+  heirloom_seal.name: "Ngọc Tỷ Gia Truyền"
+  heirloom_seal.desc: "Ngọc tỷ cổ xưa này được chế tác từ ngọc bích, do Tần Thủy Hoàng tạo lập hơn nghìn năm trước sau khi thống nhất chư hầu Trung Hoa. Tương truyền, ngọc tỷ được tạc từ Hòa Thị Bích, một trong những bảo vật thiêng liêng bậc nhất từng tồn tại của hoàng triều.\n\nMinh văn khắc rằng: \"Phụng Thiên thừa vận, hoàng đế thọ mệnh vĩnh xương.\""
+
+  artifact_seal_dynastic: "Đế Ấn"
+  dynastic_imperial_seal.name: "Đế Ấn của [owner.GetPrimaryTitle.GetBaseNameNoTierNoTooltip]"
+  dynastic_imperial_seal.desc: "Đây là đế ấn của gia tộc [owner.GetDynasty.GetBaseNameNoTooltip] cùng quốc hiệu [owner.GetPrimaryTitle.GetBaseNameNoTooltip]. Vật này được chế tác theo chiếu chỉ của [owner.GetTitledFirstNamePossessiveNoTooltip], là một [newly_created_artifact.GetFeatureText( 'decoration_material_slate' )] được điểm xuyết bằng [newly_created_artifact.GetFeatureText( 'decoration_material_ink' )]. Đế ấn là một trong những chí bảo của quốc gia, đồng thời tượng trưng cho quyền uy của triều đại đương trị."
+
+
+ # Crowns
+  artifact_crown_name:0 "$artifact_name_prefix$ Vương miện"
+  artifact_crown_description:1 "[SCOPE.Custom('ArtifactArticleWealth')] vương miện với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. Vương miện được rèn từ [newly_created_artifact.GetFeatureText( 'decoration_material_wire' )] và [newly_created_artifact.GetFeatureText( 'crown_decoration' )]."
+
+  feature_crown_decoration_gems:1 "đính các mảnh [Artifact.GetFeatureText( 'decoration_material_gem' )] nhỏ"
+  feature_crown_decoration_filigree:0 "được trang trí bằng filigree tinh xảo"
+  feature_crown_decoration_filigree_and_gem:0 "được trang trí bằng filigree tinh xảo, bao quanh một viên [Artifact.GetFeatureText( 'decoration_material_gem' )] lớn ở trung tâm"
+
+  create_artifact_crown_tooltip:1 "[inspiration_owner.GetShortUIName] đã chế tác một vương miện với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+
+ # Icons
+  artifact_icon_name: "Thánh tượng [newly_created_artifact.GetFeatureText('icon_decoration')]"
+  artifact_icon_description: "[SCOPE.Custom('ArtifactArticleWealth')] thánh tượng với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')], khắc họa [newly_created_artifact.GetFeatureText('icon_decoration')]"
+
+ # Brooches
+  artifact_brooch:0 "Trâm cài"
+  artifact_brooch_pedestal:0 "$artifact_brooch$"
+  artifact_brooch_name:0 "$artifact_name_prefix$ Trâm cài"
+  artifact_brooch_description:1 "[SCOPE.Custom('ArtifactArticleWealth')] trâm cài với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. [newly_created_artifact.GetFeatureText( 'brooch_decoration' )]."
+
+  feature_brooch_decoration_centerpiece_and_adornment:0 "Nó bao gồm [Artifact.GetFeatureText( 'brooch_centerpiece' )] và được [Artifact.GetFeatureText( 'brooch_adornment' )]"
+  feature_brooch_decoration_centerpiece:0 "Nó bao gồm [Artifact.GetFeatureText( 'brooch_centerpiece' )] gắn trên một chốt bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_brooch_decoration_adornment:0 "Nó bao gồm một chốt bằng [Artifact.GetFeatureText( 'decoration_material_wire' )] được [Artifact.GetFeatureText( 'brooch_adornment' )]"
+  feature_brooch_centerpiece_cabochon:0 "một viên cabochon bằng [Artifact.GetFeatureText( 'decoration_material_gem' )]"
+  feature_brooch_centerpiece_cross:0 "một cây thánh giá bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_brooch_centerpiece_sword:0 "một hình tượng thanh kiếm bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_brooch_adornment_filigree:0 "được trang trí bằng filigree tinh xảo"
+  feature_brooch_adornment_gems:0 "được đính các mảnh [Artifact.GetFeatureText( 'decoration_material_gem' )] nhỏ"
+  feature_brooch_adornment_runes:0 "được viền bởi một vòng [Artifact.GetFeatureText( 'decoration_material_wire' )] khắc phù văn"
+  create_artifact_brooch_tooltip:0 "[inspiration_owner.GetShortUIName] đã chế tác [SCOPE.Custom('ArtifactArticleWealth')|l] trâm cài với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+
+ # Rings
+  artifact_ring:0 "Nhẫn"
+  artifact_ring_name:0 "$artifact_name_prefix$ Nhẫn"
+  artifact_ring_description:0 "[SCOPE.Custom('ArtifactArticleWealth')] nhẫn với tay nghề chế tác [SCOPE.Custom('ArtifactQuality')]. Phần đai bằng [newly_created_artifact.GetFeatureText( 'generic_material_metal' )] [newly_created_artifact.GetFeatureText( 'ring_decoration' )]."
+  feature_ring_decoration_centerpiece_and_adornment:0 "với [Artifact.GetFeatureText( 'ring_centerpiece' )] và được [Artifact.GetFeatureText( 'ring_adornment' )]"
+  feature_ring_decoration_centerpiece:0 "được gắn [Artifact.GetFeatureText( 'ring_centerpiece' )]"
+  feature_ring_decoration_adornment:0 "được [Artifact.GetFeatureText( 'ring_adornment' )]"
+  feature_ring_centerpiece_cabochon:0 "một viên cabochon bằng [Artifact.GetFeatureText( 'decoration_material_gem' )]"
+  feature_ring_centerpiece_signet:0 "ấn hiệu của gia tộc [Artifact.GetOwner.GetHouse.GetBaseNameNoTooltip], khắc trên mặt nhẫn bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_ring_centerpiece_religious:0 "biểu tượng [Artifact.GetOwner.GetFaith.GetAdjective] [Artifact.GetOwner.GetFaith.ReligiousSymbol], khắc trên mặt nhẫn bằng [Artifact.GetFeatureText( 'decoration_material_wire' )]"
+  feature_ring_adornment_filigree:0 "$feature_brooch_adornment_filigree$"
+  feature_ring_adornment_motto:0 "bao quanh bởi gia huấn của nhà [Artifact.GetOwner.GetHouse.GetBaseNameNoTooltip]: '#EMP [Artifact.GetOwner.GetHouse.GetMotto]#!'"
+  feature_ring_adornment_religious:0 "bao quanh bởi trích đoạn từ kinh văn [Artifact.GetOwner.GetFaith.GetAdjective] [Artifact.GetOwner.GetFaith.ReligiousText]"
+  feature_ring_adornment_gems:0 "$feature_brooch_adornment_gems$"
+  feature_ring_adornment_runes:0 "$feature_brooch_adornment_runes$"
+
+ ## fund_inspiration.6001-6006 trinkets from your adventurer
+  morin_khuur_ornament_name:0 "Trang trí đầu ngựa Morin Khuur"
+  morin_khuur_ornament_description:1 "Một đầu ngựa được chạm khắc từ xương ngựa, thường dùng để trang trí trên đỉnh đàn Morin Khuur. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+  animal_ring_name:0 "Nhẫn hổ lòe loẹt"
+  animal_ring_description:1 "Được nạm đầy đá quý và có quá nhiều màu sắc, chiếc nhẫn này có khả năng làm lóa mắt quần thần nhiều hơn là gây ấn tượng về gu thẩm mỹ. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+  ostrich_shell_necklace_name:0 "Vòng cổ hạt vỏ trứng đà điểu"
+  ostrich_shell_necklace_description:1 "Một món trang sức tinh xảo với sắc trắng rực rỡ. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+  pilgrimage_figurine_name:0 "Tượng Thánh Vardan bằng xương mực"
+  pilgrimage_figurine_description:1 "Một bức tượng Thánh Vardan Mamikonian, vị tướng Armenia đã bảo vệ quyền thực hành Kitô giáo của người Armenia trong trận Avarayr năm 451. Chiếc mũ của ông được tô điểm bằng các chi tiết đồng. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+  saint_margaret_fingernails_name:0 "Móng tay của Thánh Margaret"
+  saint_margaret_fingernails_description:1 "Thánh Margaret thành Antioch nổi danh vì đã giết rồng chỉ bằng gót giày của mình. Theo truyền thuyết, những mảnh móng tay cũ kỹ và ghê rợn này thuộc về bà. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+  seahorse_brooch_name:0 "Trâm cài cá ngựa bằng vàng"
+  seahorse_brooch_description:1 "Một chiếc trâm cài với các tua xích mảnh phía dưới hình cá ngựa, sinh vật có cả cánh lẫn đuôi cá. Được gửi tới [owner.GetTitledFirstNameNoTooltip] bởi [inspiration_owner.GetTitledFirstNameNoTooltip] trong chuyến phiêu lưu của [inspiration_owner.GetHerHis]."
+
+
+ #fund_inspiration.6500- trinkets from your adventurer
+  leopard_hat_name:0 "Mũ Báo"
+  leopard_hat_description:0 "Một chiếc mũ làm từ đầu của một con báo, bị hạ bởi [inspiration_owner.GetTitledFirstName]."
+  kurgan_ornament_name:0 "Tượng Báo Scythia"
+  kurgan_ornament_description:0 "Một bức tượng đá được [inspiration_owner.GetTitledFirstName] cướp từ một gò mộ Kurgan cổ của người Scythia."
+  kurgan_saddle_name:0 "Yên Ngựa từ Kurgan"
+  kurgan_saddle_description:1 "Một chiếc yên ngựa do [inspiration_owner.GetTitledFirstName] lấy từ một gò mộ Scythia. Hơn một nghìn năm tuổi, nó được bảo quản nhờ không khí bị niêm phong trong lăng mộ, giữa thi thể của hàng chục con ngựa được ướp xác. Có lẽ chúng ta có thể học hỏi điều gì đó từ lối chiến đấu của những kỵ sĩ yên ngựa cổ đại."
+  naked_tapestry_name:0 "Thảm Dệt Khỏa Thân"
+  naked_tapestry_description:0 "Một bức họa khỏa thân của [inspiration_owner.GetTitledFirstName] tại một ốc đảo ven biển, tự phe phẩy [inspiration_owner.GetHerselfHimself] bằng một chiếc lá, thân thể lấp lánh những giọt nước trong veo."
+
+  frogspawn_jar_name:0 "Lọ Trứng Ếch"
+  frogspawn_jar_description:0 "Một chiếc lọ chứa đầy trứng ếch đang sánh động, cùng vài con nòng nọc vừa nở. Được [inspiration_owner.GetTitledFirstName] gửi cho [ROOT.Char.GetTitledFirstNameNoTooltip] như một minh chứng cho những nỗi kinh hoàng của thế giới hoang dã.\n\nNgọ nguậy!"
+  beaver_book_name:1 "Cung Điện của Loài Hải Ly"
+  beaver_book_description:0 "Một cuốn sách về kiến trúc và kỹ thuật xây dựng của loài hải ly, do [inspiration_owner.GetTitledFirstName] ghi chép kèm phác họa trong những chuyến du hành của [inspiration_owner.GetHerHis]."
+  crocodile_tapestry_name:0 "Thảm Dệt Cá Sấu"
+  crocodile_tapestry_description:0 "Một tấm thảm thêu hình một con cá sấu được tạo ra bằng tất cả khả năng tốt nhất của [inspiration_owner.GetTitledFirstNamePossessive]. Sinh vật này có màu đỏ rực, sở hữu nhiều lớp răng nanh, những mụn độc và một chiếc đuôi có gai. Nó được bao quanh bởi một ổ trứng khổng lồ trong một hang động phía sau thác nước."
+  mountain_rock_name:0 "Tảng Đá Núi"
+  mountain_rock_description:0 "Một tảng đá lớn, được [inspiration_owner.GetTitledFirstName] vất vả khuân vác suốt quãng đường dài từ [mountain_location.GetName] trở về."
+ 
+ # Game start additional unique artifacts
+  reichskrone_name:0 "Vương Miện Đế Chế"
+  reichskrone_description:1 "Đây là biểu trưng cho chức vị Hoàng đế La Mã Thần thánh. Đảm bảo sẽ thu hút ánh nhìn của mọi Công tước đi ngang qua."
+  nikephoros_crown_name:0 "Vương Miện của Nikephoros II Phokas"
+  nikephoros_crown_description:2 "Đây là vương miện của một trong những chiến lược gia kiệt xuất nhất từng xuất hiện trong dòng dõi Đế quốc. Thất bại trong các cuộc chiến ở phương Tây, nhưng là kẻ chinh phục phương Đông."
+  skull_cap_charlemagne_name:0 "Hộp Sọ của Charlemagne"
+  skull_cap_charlemagne_description:0 "Đỉnh đầu của Charlemagne được lưu giữ trong chiếc hộp này. Có lẽ trí tuệ của ông sẽ truyền lại cho người sở hữu."
+  papal_tiara_name:0 "Mũ Ba Tầng Giáo Hoàng"
+  papal_tiara_description:1 "Chiếc mũ miện nạm ngọc với vương miện vàng, biểu trưng cho quyền lực Giáo hoàng. Nhưng chẳng phải nó sẽ rực rỡ nhất khi được đội trên đầu Ngài sao?"
+  essen_crown_name:0 "Kinderkrone"
+  essen_crown_description:1 "Có người nói đây là vương miện được chế tác cho lễ đăng quang của Otto III tại Essen, kẻ khác lại cho rằng nó dùng để đội lên tượng Đức Mẹ. Dù thế nào, nó cũng rất nhỏ — nhưng biết đâu Ngài vẫn có thể cố đội lên đầu."
+  monomachus_crown_name:1 "Vương Miện Monomachus"
+  monomachus_crown_description:1 "Một chiếc vương miện gồm các tấm vàng chạm khắc chân dung Constantine IX Monomachus, vợ ông là Zoe, em gái Theodora, cùng những hình tượng vũ công mang tính biểu trưng."
+  edmund_head_name:1 "Thủ Cấp của Thánh Edmund"
+  edmund_head_description:0 "Edmund được cho là đã định sẵn trở thành Thánh nhân ngay từ lúc chào đời. Truyền thuyết kể rằng ông là Vua Đông Anglia, đã tự nguyện hiến thân cho người Viking để cứu dân mình khỏi bị tàn sát."
+  dhammapada_name:0 "Pháp Cú (Dhammapada)"
+  dhammapada_description:1 "Một tuyển tập những lời dạy của Đức Phật, được chép và đóng thành bản thảo lá cọ tinh xảo."
+  excalibur_name:0 "'Excalibur'"
+  excalibur_description:0 "Không có vị quân chủ nào tại Britannia mà không tự nhận mình sở hữu Excalibur thật. Chiến tranh được tài trợ bằng việc bán Excalibur, và Ngài chỉ có thể cầu mong rằng khách khứa không bắt gặp một thanh khác đang được trưng bày."
+  vinaya_pitaka_name:0 "Luật Tạng (Vinaya Pitaka)"
+  vinaya_pitaka_description:0 "Một kinh điển Phật giáo thuộc ba tạng của Tam Tạng Pali. Văn bản này hướng dẫn các quy tắc và giới luật trong đời sống tu hành của tăng ni."
+  sutta_pitaka_name:0 "Kinh Tạng (Sutta Pitaka)"
+  sutta_pitaka_description:1 "Một kinh điển Phật giáo Theravada, dựa trên kỳ kết tập Phật pháp lần thứ nhất sau khi Đức Phật nhập diệt. Bao gồm nhiều bài thơ và bài giảng được cho là của Đức Phật và các đệ tử. Thuộc Tam Tạng Pali."
+  abhidhamma_pitaka_name:0 "Luận Tạng (Abhidhamma Pitaka)"
+  abhidhamma_pitaka_description:0 "Một công trình học thuật phân tích sâu giáo lý của Đức Phật. Thuộc Tam Tạng Pali."
+
+
+
+
+ # Brooches
+
+  brooch_decoration_centerpiece_and_adornment:0 "Nó gồm [SCOPE.Custom('BroochDecorationCenterpiece')] và được [SCOPE.Custom('BroochDecorationAdornment')]"
+  brooch_decoration_centerpiece:0 "Nó gồm [SCOPE.Custom('BroochDecorationCenterpiece')] được gắn trên một chốt cài bằng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('fastener_metal'))]"
+  brooch_decoration_adornment:0 "Nó gồm một chốt cài bằng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('fastener_metal'))] được [SCOPE.Custom('BroochDecorationAdornment')]"
+  brooch_centerpiece_cabochon:0 "một viên cabochon bằng [ROOT.Char.Custom2_Flag('ArtifactGemType', SCOPE.GetFlagName('centerpiece_gem'))]"
+  brooch_centerpiece_cross:0 "một thánh giá bằng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('centerpiece_metal'))]"
+  brooch_centerpiece_sword:0 "một tượng kiếm bằng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('centerpiece_metal'))]"
+  brooch_adornment_filigree_primary:0 "được trang trí bằng hoa văn filigree tinh xảo"
+  brooch_adornment_filigree_secondary:0 "được trang trí bằng filigree bằng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('adornment_filigree_metal'))]"
+  brooch_adornment_gems:0 "được gắn những mảnh nhỏ bằng [ROOT.Char.Custom2_Flag('ArtifactGemType', SCOPE.GetFlagName('adornment_gem'))]"
+  brooch_adornment_runes:0 "được viền bởi một vòng [ROOT.Char.Custom2_Flag('ArtifactMetalType', SCOPE.GetFlagName('adornment_runed_ring_metal'))] khắc đầy rune"
+
+  tiny_sculpture_trinket_name:0 "Tượng Nhỏ"
+  tiny_sculpture_trinket_description:1 "Một bức tượng tí hon của [statue_owner.GetTitledFirstNameNoTooltip]. Vừa túi áo, sẵn sàng cai trị. Chế tác bởi [inspiration_owner.GetTitledFirstNameNoTooltip]."
+  tiny_box_trinket_name:0 "Hộp Nhỏ"
+  tiny_box_trinket_description:0 "Một chiếc hộp nhỏ bé nhưng đầy bí ẩn. Có lẽ khi mở ra, nó sẽ giải phóng một tội lỗi duy nhất lên thế gian. Chế tác bởi [inspiration_owner.GetTitledFirstNameNoTooltip]."
+  tiny_chest_trinket_name:0 "Rương Nhỏ"
+  tiny_chest_trinket_description:0 "Một chiếc rương khóa bé xíu, chỉ bằng ngón tay cái. Khi lắc lên, nó phát ra tiếng lạo xạo, để lộ rằng bên trong có vật gì đó. Chế tác bởi [inspiration_owner.GetTitledFirstNameNoTooltip]."
+  tiny_cabinet_trinket_name:0 "Tủ Nhỏ"
+  tiny_cabinet_trinket_description:0 "Một chiếc tủ nhỏ đến mức có lẽ nên cất nó trong một chiếc tủ khác để tránh bị giẫm phải. Chế tác bởi [inspiration_owner.GetTitledFirstNameNoTooltip]."
+  tiny_throne_trinket_name:0 "Ngai Nhỏ"
+  tiny_throne_trinket_description:0 "Một chiếc ngai phù hợp cho chuột hoặc loài gặm nhấm khác ngồi trị vì. Chế tác bởi [inspiration_owner.GetTitledFirstNameNoTooltip]."
+
+
+#fund_inspiration.6301 same sex love poems
+  prince_archivist_love_poem_name:0 "Ta Là Trăng, Người Là Mặt Trời"
+  prince_archivist_love_poem_description:0 "Một khúc tình ca về hai người đàn ông yêu nhau — một vương tử và một viên lưu trữ, cùng ngắm sao trên đỉnh tháp, tránh xa những ánh mắt dòm ngó và hòa mình giữa các vì tinh tú. Lời đồn cho rằng nhân vật người lưu trữ được xây dựng từ chính trải nghiệm của tác giả [inspiration_owner.GetTitledFirstNamePossessiveNoTooltip]."
+  witch_queen_love_poem_name:0 "Trái Tim Được Giải Thoát"
+  witch_queen_love_poem_description:0 "Một bài thơ kể về hai người phụ nữ yêu nhau — một phù thủy và một nữ vương lạc bước trong khu rừng gần căn nhà gỗ của phù thủy. Cả hai tìm thấy sự an ủi trong khoảnh khắc rời xa xã hội. Những lời thì thầm cho rằng hình ảnh phù thủy là bức tự họa của tác giả [inspiration_owner.GetTitledFirstNameNoTooltip]."
+
+ #Books
+  book_artifact_title_desc:0 "Cuốn sách được bọc da, ghi chép toàn bộ những hy sinh và lao động gian khổ đã bỏ ra để [SCOPE.Custom('ArtifactBookSubject')] danh hiệu [relevant_title.GetName]."
+  book_artifact_no_topic_desc:0 "Cuốn sách được bọc da, đi sâu chi tiết vào [SCOPE.Custom('ArtifactBookSubject')] — kèm theo minh họa tỉ mỉ và các ghi chú trang trí ở lề sách."
+  book_artifact_other_desc:0 "Cuốn sách được bọc da, thể hiện [SCOPE.Custom('ArtifactArticleBookContentQuality')] mức độ am hiểu về [SCOPE.Custom('ArtifactBookSubject')], đồng thời đề cập đến các chủ đề như [SCOPE.Custom('ArtifactBookTopic')]."
+
+  book_artifact_martial:0 "chiến tranh"
+  book_artifact_diplomacy:0 "ngoại giao"
+  book_artifact_learning:0 "học thuật"
+  book_artifact_stewardship:0 "quản trị"
+  book_artifact_intrigue:0 "âm mưu"
+  book_artifact_medicine:0 "y thuật"
+  book_artifact_reveler:0 "yến tiệc"
+  book_artifact_blademaster:0 "chiến đấu"
+  book_artifact_hunter:0 "săn bắn"
+  book_artifact_mystic:0 "huyền học"
+  book_artifact_herbalist:0 "thảo dược"
+  book_artifact_physician:0 "chăm sóc y tế"
+  book_artifact_torturer:0 "tra tấn"
+  book_artifact_cannibal:0 "việc tiêu thụ thịt người"
+  book_artifact_witch:0 "cách thờ phụng [ROOT.Char.GetFaith.WitchGodName]"
+  book_artifact_witch_sponsor:0 "cách thờ phụng [ROOT.Char.GetLiege.GetFaith.WitchGodName]"
+  book_artifact_deviant:0 "những ham muốn tình dục dị biệt"
+  book_artifact_lunatic:0 "những sai lệch của thực tại"
+  book_artifact_unification:0 "thống nhất"
+  book_artifact_creation:0 "sáng lập"
+  book_artifact_restoration:0 "phục hưng"
+
+  book_artifact_topic_herbs_the_art_of_lovemaking:0 "nghệ thuật ái ân"
+  book_artifact_topic_medicine:0 "việc ứng dụng các loại dược thủy và thuốc mỡ khác nhau"
+  book_artifact_topic_herbs:0 "những công dụng đa dạng của các loại thảo dược và cây cỏ hiếm"
+  book_artifact_topic_witch:0 "dược thủy, thuốc mỡ, thảo dược và những phương thức thờ phụng thay thế"
+
+  book_content_quality_excellent:0 "một mức độ xuất sắc"
+  book_content_quality_deep:0 "một sự am hiểu sâu sắc"
+  book_content_quality_good:0 "một sự am hiểu tốt"
+  book_content_quality_modest:0 "một sự am hiểu khiêm tốn"
+  create_artifact_book_tooltip:0 "[inspiration_owner.GetShortUIName] đã tạo ra [SCOPE.Custom('ArtifactArticleWealth')|l] cuốn sách với nét chữ đạt trình độ [SCOPE.Custom('ArtifactQuality')]"
+
+  create_artifact_artisan_tooltip:0 "[inspiration_owner.GetShortUIName] đã tạo ra [inspiration_owner.Custom('InspirationArtisanType')] với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+
+  create_artifact_smith_tooltip:0 "[inspiration_owner.GetShortUIName] đã tạo ra [inspiration_owner.Custom('InspirationSmithType')] với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+  feature_blade_wrought_iron:0 "sắt rèn"
+  feature_blade_folded_iron:0 "sắt gấp lớp"
+  feature_blade_steel:0 "thép"
+  feature_blade_wootz_steel:0 "thép wootz"
+  feature_blade_bulat_steel:0 "thép bulat"
+  feature_blade_damascus_steel:0 "thép Damascus"
+
+ ## Character Modifiers made to artifacts ##
+
+ # From court_ongoing_1021
+  artifact_necklace:2 "Vòng cổ"
+  artifact_necklace_pedestal:0 "$artifact_necklace$"
+  artifact_necklace_name:1 "Vòng cổ [newly_created_artifact.GetFeatureText( 'decoration_material_gem' )|U] [newly_created_artifact.GetFeatureText( 'decoration_material_wire' )|U]"
+  artifact_necklace_description:1 "[SCOPE.Custom('ArtifactArticleWealth')], nhưng tinh xảo, chiếc vòng cổ được chế tác với tay nghề [SCOPE.Custom('ArtifactQuality')]. Vòng được rèn từ [newly_created_artifact.GetFeatureText( 'decoration_material_wire' )] và nổi bật với mặt dây chuyền [newly_created_artifact.GetFeatureText( 'decoration_material_gem' )] tuyệt mỹ."
+  artifact_pressed_flower_name:1 "[SCOPE.Custom('ArtifactFlowerSpecies')|U] Ép Khô"
+  artifact_pressed_flower_description:1 "Một bông hoa [SCOPE.Custom('ArtifactFlowerSpecies')] tuyệt đẹp, được ép và sấy khô để lưu giữ vẻ mỹ lệ của nó."
+
+ # From stewardship_wealth.1061
+  stewardship_old_ledger_name:0 "Sổ Cái Cũ"
+  stewardship_old_ledger_description:0 "Một cuốn sổ cái cũ kỹ, phủ đầy bụi, chi chít nét bút và ghi chép kế toán. Nó hầu như vô dụng, ngoại trừ việc cho thấy một cuốn sổ cái trông ra sao."
+  feature_book_title_stewardship_old_ledger:0 "$stewardship_old_ledger_name$"
+  feature_book_topic_stewardship_old_ledger:0 "$stewardship_old_ledger_description$"
+
+ # From lover.3219
+  lover_keepsake_hair_name:0 "Lọn Tóc Của [original_lover.GetFirstNamePossessiveNoTooltip]"
+  lover_keepsake_hair_description:1 "Một vật kỷ niệm được [original_lover.GetTitledFirstNamePossessive] trao tặng cho người tình xa cách [lover.GetTitledFirstName] của [original_lover.GetHerHis], để [lover.GetSheHe] có thể luôn mang theo một phần của [original_lover.GetHerHim] bên mình."
+  lover_keepsake_clothes_male_name:0 "Quần Lót Của [original_lover.GetFirstNamePossessiveNoTooltip]"
+  lover_keepsake_clothes_female_name:0 "Áo Lót Của [original_lover.GetFirstNamePossessiveNoTooltip]"
+  lover_keepsake_clothes_description:1 "Những món đồ thân mật nhất của [original_lover.GetTitledFirstNamePossessive], được gửi đến người tình xa cách [lover.GetTitledFirstNameNoTooltip] của [original_lover.GetHerHis], nhằm duy trì ngọn lửa của những kỷ niệm giữa họ trong chốn phòng the."
+  lover_keepsake_shell_name:0 "Vỏ Sò Của [original_lover.GetFirstNamePossessiveNoTooltip]"
+  lover_keepsake_shell_description:1 "Một vật kỷ niệm được [original_lover.GetTitledFirstNamePossessive] gửi tặng cho người tình xa cách [lover.GetTitledFirstNameNoTooltip] của [original_lover.GetHerHis], được nhặt lên như một kỷ vật trong lần gặp gỡ đầu tiên của họ."
+
+## christian_saint_bone pilgrim reward
+  christian_saint_bone_name:0 "[saint_bone_owner.Custom('RandomSaintNamePossessive')] [saint_bone_owner.Custom('RandomSaintBone')]"
+  christian_saint_bone_description:1 "Hài cốt được cho là của một vị thánh thuộc tín ngưỡng [saint_bone_owner.GetFaith.GetReligion.GetAdjectiveNoTooltip], do [saint_bone_owner.GetNameNoTooltip] thu được trong chuyến hành hương của [saint_bone_owner.GetHerHis] đến [christian_saint_bone_scope.MakeScope.Var('holy_site').GetProvince.GetCounty.GetTitle.GetNameNoTierNoTooltip], và được các tín đồ [saint_bone_owner.GetFaith.GetAdherentNamePluralNoTooltip] tôn kính như biểu tượng của vận may và lòng mộ đạo."
+# bones
+  bone_type_knuckle:0 "Đốt Ngón Tay"
+  bone_type_shin:0 "Xương Ống Chân"
+  bone_type_kneecap:0 "Xương Bánh Chè"
+  bone_type_femur:0 "Xương Đùi"
+  bone_type_clavicle:0 "Xương Đòn"
+  bone_type_rib:0 "Xương Sườn"
+  bone_type_vertebra:0 "Đốt Sống"
+  bone_type_jaw:0 "Xương Hàm"
+  bone_type_toe:0 "Ngón Chân"
+  bone_type_scapula:0 "Xương Bả Vai"
+  bone_type_finger:0 "Ngón Tay"
+  bone_type_thumb:0 "Ngón Cái"
+  bone_type_hip:0 "Xương Hông"
+  bone_type_humerus:0 "Xương Cánh Tay"
+  bone_type_tibia:0 "Xương Chày"
+  bone_type_ankle:0 "Mắt Cá Chân"
+
+ # yearly.4081
+  translated_arabic_book_de_materia_medica_name:0 "#italic Về Dược Liệu#!"
+  translated_arabic_book_de_materia_medica_desc:0 "Một bản minh họa của bộ dược thư năm tập của Dioscorides về công dụng y học của các loài thực vật, được viết tại Alexandria cổ đại $translated_arabic_book_shared_desc$"
+  translated_arabic_book_on_ascensions_name:0 "#italic Về Các Cung Thiên#!"
+  translated_arabic_book_on_ascensions_desc:0 "Một bản sao của luận thuyết thiên văn của Hypsicles về chuyển động của các cung hoàng đạo trên bầu trời, được viết tại Alexandria cổ đại và $translated_arabic_book_shared_desc$"
+  translated_arabic_book_elements_name:0 "#italic Cơ Bản#!"
+  translated_arabic_book_elements_desc:0 "Một bản sao bộ trước tác toán học mười ba tập của Euclid về hình học, logic và các chứng minh của chúng, được viết tại Alexandria cổ đại và $translated_arabic_book_shared_desc$"
+  translated_arabic_book_on_the_soul_name:0 "#italic Về Linh Hồn#!"
+  translated_arabic_book_on_the_soul_desc:0 "Một bản sao bộ luận thuyết tâm lý học ba tập của Aristotle về bản chất của linh hồn và những khuynh hướng của nó, $translated_arabic_book_shared_desc$"
+  translated_arabic_book_thucydides_name:0 "#italic Lịch Sử Của Thucydides#!"
+  translated_arabic_book_thucydides_desc:0 "Một bản sao tác phẩm cổ của Thucydides về Chiến tranh Peloponnesus giữa Athens và Sparta, $translated_arabic_book_shared_desc$"
+  translated_arabic_book_plutarch_name:0 "#italic Danh Nhân Truyện Của Plutarch#!"
+  translated_arabic_book_plutarch_desc:0 "Một bản sao các tiểu sử so sánh của Plutarch về những nhà lãnh đạo cổ đại nổi bật và phẩm hạnh đạo đức của họ, $translated_arabic_book_shared_desc$"
+  translated_arabic_book_shared_desc:0 "được dịch sang tiếng Ả Rập từ nguyên bản tiếng Hy Lạp cho [ROOT.Char.GetTitledFirstNameNoTooltipRegnal]."
+ 
+ # hold_court.4300
+  dress_me_artifact_desc:0 "Một bộ y phục tuyệt mỹ được tạo ra bởi những thợ may lành nghề nhất, được [ROOT.Char.GetTitledFirstNameNoTooltipRegnal] đặt làm để gây ấn tượng với triều đình [ROOT.Char.GetHerHis] bằng vẻ lộng lẫy của nó."
+
+ # martial_authority.4000-5
+  improvised_halberd_desc:0 "Biến thể kích tạm bợ này được gắn một lưỡi câu, khiến nó trở thành vũ khí hữu dụng trong tình thế cấp bách."
+  improvised_dagger_desc:0 "Con dao găm tạm thời này được tạo ra từ việc cải biến một công cụ nông nghiệp, vẫn giữ được sự tiện dụng và khả năng cắt gọt."
+  improvised_billhook_desc:0 "Chiếc câu liêm một tay này vốn dùng để cắt cành bụi rậm. Dù chẳng xứng với một vị vua, lưỡi cong của nó lại tỏ ra hiệu quả đáng ngạc nhiên khi tìm kẽ hở trong giáp trụ."
+
+ # yearly_event.7010-50
+  football_cup_desc:0 "Chiếc cúp này được chế tác để kỷ niệm chiến thắng trong một trận bóng."
+  participation_trophy_desc:0 "Chiếc cúp này được chế tác để kỷ niệm một ‘chiến thắng’ trong một trận bóng."
+
+ #bp1_yearly.7200
+  perfume_bottle_description:0 "[ROOT.Char.GetFirstNameNoTooltip] đã tự tay thu thập các nguyên liệu cho hương thơm này."
+
+ # travel_events.4005
+  maritime_trading_handbook:0 "Sổ Tay Thương Mại Hàng Hải"
+  maritime_trading_handbook_description:0 "Một cuốn cẩm nang được biên soạn công phu về tập quán thương mại đường biển của người [merchant_character_scope.GetCulture.GetName]."
+  own_holy_text_mid:0 "[root_scope.GetFaith.ReligiousText|U] Đính Ngọc"
+  own_holy_text_mid_description:0 "Một bản [root_scope.GetFaith.ReligiousText|U] được trang trí bằng đá quý khảm."
+  merchants_holy_text_mid:0 "[merchant_character_scope.GetFaith.ReligiousText|U] Đính Ngọc"
+  merchants_holy_text_mid_description:0 "Một bản [merchant_character_scope.GetFaith.ReligiousText|U] được trang trí bằng đá quý khảm."
+  merchants_sword:0 "Kiếm [merchant_character_scope.GetCulture.GetName]"
+  merchants_sword_description:0 "Một lưỡi kiếm tinh xảo mua từ một thương nhân du hành người [merchant_character_scope.GetCulture.GetNameNoTooltip]."
+  jewelled_slippers:0 "Dép Nạm Ngọc"
+  jewelled_slippers_description:0 "Một đôi dép tuyệt đẹp được nạm đầy đá quý. Có điều gì đó khi mang chúng khiến Ngài luôn cảm thấy mình sẽ tìm được đường về nhà."
+  witchcraft_book:0 "Tập Sách Thảo Dược"
+  witchcraft_book_description:0 "Một cuốn sách từng thuộc về Phù Thủy xứ [ROOT.Char.GetCurrentLocation.GetTitle.GetNameNoTier]. Các trang sách chứa đầy những phương thuốc thảo dược đơn giản nhằm cân bằng thể dịch."
+  witchy_holy_text_mid:0 "[witch_scope.GetFaith.ReligiousText|U] Đính Ngọc"
+  witchy_holy_text_mid_description:0 "Một bản [witch_scope.GetFaith.ReligiousText|U] được trang trí bằng đá quý khảm."
+  immaculate_witchy_bones:0 "Xương Phù Thủy Vẹn Nguyên"
+  immaculate_witchy_bones_description:0 "Một đống xương từng thuộc về Phù Thủy xứ [ROOT.Char.GetCurrentLocation.GetTitle.GetNameNoTier]. Ngay cả sau khi [witch_scope.GetHerHis] bị thiêu sống, những khúc xương vẫn còn nguyên vẹn."
+  mysterious_lamp:0 "Đèn Bí Ẩn"
+  mysterious_lamp_description:0 "Một chiếc đèn vàng rực rỡ, khảm đầy châu báu. Khi cầm nó, Ngài cảm nhận được một sức mạnh vũ trụ phi thường."
+  mysterious_puzzle:0 "Khối Đố Bí Ẩn"
+  mysterious_puzzle_description:0 "Một khối đố vàng xa hoa, phủ đầy những dòng khắc bằng ngôn ngữ xa lạ. Người ta nói nó từng thuộc về một bậc thầy trò chơi quyền năng."
+  lunchbox:0 "Hộp Bảo Quản"
+  lunchbox_description:0 "Một chiếc hộp được niêm kín chặt chẽ, dường như kéo dài thời gian thực phẩm bên trong còn dùng được."
+
+ #Artifact Titles
+  artifact_title_valor:0 "của Dũng Cảm"
+  artifact_title_virtue:0 "của Đức Hạnh"
+  artifact_title_pain:0 "của Đau Đớn"
+  artifact_title_judgement:0 "của Phán Quyết"
+  artifact_title_merciless:0 "Tàn Nhẫn"
+  artifact_title_brutal:0 "Hung Bạo"
+  artifact_title_victorious:0 "Khải Hoàn"
+  artifact_title_famed:0 "Lừng Danh"
+  artifact_title_lion:0 "của Sư Tử"
+  artifact_title_dragon:0 "của Rồng"
+  artifact_title_raven:0 "của Quạ"
+  artifact_title_hero:0 "của Anh Hùng"
+  artifact_title_legendary:0 "Huyền Thoại"
+  artifact_title_miraculous:0 "Kỳ Diệu"
+  artifact_title_mythical:0 "Thần Thoại"
+  artifact_title_fabled:0 "Truyền Kỳ"
+  artifact_title_impenetrable:0 "Bất Khả Xâm Phạm"
+  artifact_title_secure:0 "Vững Chắc"
+  artifact_title_solid:0 "Rắn Rỏi"
+  artifact_title_shiny:0 "Lấp Lánh"
+  artifact_title_patience:0 "của Nhẫn Nại"
+  artifact_title_grace:0 "của Ân Sủng"
+  artifact_title_mercy:0 "của Khoan Dung"
+  artifact_title_strength:0 "của Sức Mạnh"
+  artifact_title_invincible:0 "Bất Bại"
+  artifact_title_glorious:0 "Huy Hoàng"
+  artifact_title_sun:0 "của Mặt Trời"
+  artifact_title_immortal:0 "của Bất Tử"
+  artifact_title_brave:0 "của Can Đảm"
+  artifact_title_quick:0 "Nhanh Nhẹn"
+  artifact_title_darting:0 "Lướt Nhanh"
+  artifact_title_flashing:0 "Chớp Lóa"
+  artifact_title_flickering:0 "Chập Chờn"
+  artifact_title_shades:0 "của Bóng Tối"
+  artifact_title_lightning:0 "của Sét"
+  artifact_title_thunder:0 "của Sấm"
+  artifact_title_stream:0 "của Dòng Chảy"
+  artifact_title_implacable:0 "Không Khoan Nhượng"
+  artifact_title_heroic:0 "Anh Dũng"
+  artifact_title_amazing:0 "Kinh Ngạc"
+  artifact_title_fearsome:0 "Đáng Sợ"
+  artifact_title_snakes:0 "của Rắn"
+  artifact_title_themerciless:0 "của Kẻ Tàn Nhẫn"
+  artifact_title_glory:0 "của Vinh Quang"
+# Additional Historical Artifacts
+  artifact_pedestal_koh_i_noor_name:0 "Núi Ánh Sáng"
+  artifact_pedestal_koh_i_noor_description:0 "Đây là một viên kim cương có kích thước và độ tinh khiết vô song. Người ta nói nó được khai quật tại các mỏ ở đông nam Ấn Độ, nhưng nguồn gốc thực sự của nó có lẽ không ai biết rõ."
+  artifact_jewelled_danda_name:0 "Gậy Danda Gắn Ngọc"
+  artifact_jewelled_danda_description:0 "Đây là một quyền trượng gắn đầy châu báu đến từ Ấn Độ, biểu tượng tối thượng của quyền lực hoàng gia và khả năng của quân vương trong việc trừng phạt thần dân."
+  artifact_aruval_name:0 "Aruval Cổ Đại"
+  artifact_aruval_description:0 "Thanh Aruval dài này được cho là cổ xưa đến mức chính Karuppu Sami từng cầm nó trong tay."
+  artifact_khanda_name:0 "Khanda Nghi Lễ"
+  artifact_khanda_description:0 "Thanh Khanda này được chế tạo cho nghi lễ chứ không phải chiến đấu, và qua nhiều thế hệ đã trở thành lời nhắc nhở về sự cần thiết phải chặt bỏ bức màn vô minh."
+  artifact_makarakundala_name:0 "Makarakundala"
+  artifact_makarakundala_description:0 "Đây là đôi hoa tai như những gì các vị thần mang, thậm chí có người còn cho rằng cặp này từng thuộc về các đấng thần linh."
+  artifact_cintamani_name:0 "Đá Cintamani"
+  artifact_cintamani_hindu_description:0 "Đây là một viên đá được cho là từng rơi xuống từ bầu trời. Một số người tin rằng nó từng thuộc về Vishnu hoặc Vua Naga, và rằng nó mang lại sự thịnh vượng cho chủ nhân."
+  artifact_cintamani_buddhist_description:0 "Đây là một viên đá được cho là từng rơi xuống từ bầu trời. Có người nói nó từng nằm trong tay các Bồ Tát Avalokiteshvara và Ksitigarbha, và rằng nó có thể thực hiện những ước nguyện của người sở hữu."
+  artifact_navaratna_name:0 "Navaratna"
+  artifact_navaratna_description:0 "Một chuỗi gồm chín viên bảo thạch, với một viên hồng ngọc lớn ở trung tâm, tượng trưng cho chín vị thần thiên thể trong Ấn Độ giáo."
+  artifact_shankha_conch_name:0 "Ốc Shankha"
+  artifact_shankha_conch_description:0 "Biểu tượng của thần Vishnu, chiếc ốc Shankha cổ xưa này được dùng làm kèn trong các nghi lễ tôn giáo và được cho là biểu trưng của sự thịnh vượng và đức hạnh."
+  artifact_pedestal_great_diamond_name:0 "Đại Kim Cương"
+  artifact_pedestal_great_diamond_description:0 "Viên ngọc khổng lồ này được cho là từng trang trí cho một bức tượng trong đền thờ, trước khi bị một kẻ tham lam đánh cắp."
+  al_taj_crown_name:0 "al-Taj al-Sharif"
+  al_taj_crown_description:0 "'Vương Miện Tôn Kính' hay 'Khăn Quấn Tôn Vinh' là vương miện nghi lễ truyền thống của các Caliph Fatimid. Nó được gắn viên bảo thạch khổng lồ mang tên 'al-Yatima'."
+  qadib_al_mulk_name:0 "Qadib al-Mulk"
+  qadib_al_mulk_description:0 "Gậy nghi lễ của Caliphate Fatimid, được bọc vàng và đính ngọc trai cùng châu báu."
+  ryukyu_shaku_name: "Shaku Tam Sơn"
+  ryukyu_shaku_description: "Một thẻ hốt nghi lễ sơn mài, được tạc từ gỗ tuyết tùng linh thiêng nơi hải đảo, tượng trưng cho sự hợp nhất các thị tộc dưới một thiên mệnh duy nhất."
+  ryukyu_crown_name: "Vương Miện Hải Long"
+  ryukyu_crown_description: "Một bảo vật khảm san hô, trên đỉnh là hải long bằng vàng ôm giữ minh châu trí tuệ. Ánh huy của nó lan khắp trùng dương, như ngọn đuốc soi đường cho quyền uy và phồn thịnh."
+  al_sayf_al_khass_name:0 "al-Sayf al-Khass"
+  al_sayf_al_khass_description:0 "Thanh kiếm gắn ngọc này được cho là rèn từ một tia sét. Nó được cất trong một vỏ vàng khắc chữ và hiếm khi được rút ra do ý nghĩa nghi lễ đặc biệt trong Caliphate."
+  al_dawat_name:0 "al-Dawat"
+  al_dawat_description:0 "Đây là một lọ mực làm từ vàng và san hô. Trong thời gian dài, nó giữ một vai trò đặc biệt trong các nghi lễ của Caliphate."
+  al_hafir_name:0 "al-Hafir"
+  al_hafir_description:0 "Viên hồng ngọc đỏ này, được gọi là al-Hafir hay 'Móng Guốc', có chất lượng hiếm thấy trên đời. Nó được khâu vào một mảnh lụa, xung quanh là các thanh ngọc lục bảo tạo thành một vòng tròn. Theo truyền thống, nó được gắn trên khuôn mặt con ngựa của Caliph."
+  artifact_wall_banner_thankfulness_name:0 "Biểu Ngữ Tri Ân"
+  artifact_wall_banner_thankfulness_description:0 "Lá cờ lụa trắng này được khắc chữ vàng và quấn quanh một ngọn giáo vàng. Theo truyền thống, lá cờ này và người anh em của nó được mang trong các cuộc rước của Caliph."
+  artifact_arms_of_alex_name:0 "Giáp của Alexander"
+  artifact_arms_of_alex_description:0 "Bộ giáp vải lanh ghép lớp cổ xưa này được cho là từng thuộc về Alexander Đại đế. Dù không còn có thể mặc được, bản thân bộ giáp vẫn mang theo di sản của vị chinh phạt vĩ đại, nổi danh từ Địa Trung Hải đến tận rìa Ấn Độ."
+  artifact_pedestal_al_jabal_name:0 "al-Jabal"
+  artifact_pedestal_al_jabal_description:0 "Đây là một chiếc nhẫn được gắn viên hồng ngọc lớn mang tên al-Jabal, hay 'Ngọn Núi'. Viên đá có kích thước vô song, và người ta nói chính chiếc nhẫn này từng được các hoàng đế Sassanid của Ba Tư đeo."
+  artifact_pedestal_al_yatima_name:0 "al-Yatima"
+  artifact_pedestal_al_yatima_description:0 "Được biết đến với tên al-Yatima ('Kẻ Mồ Côi'), viên ngọc trai khổng lồ này được cho là không giống bất kỳ viên nào khác trên đời — một kẻ mồ côi giữa các dòng họ bảo thạch và ngọc trai."
+  artifact_dagger_of_rostam_name:0 "Dao găm của Rostam"
+  artifact_dagger_of_rostam_description:0 "Con dao găm tinh xảo này được cho là vũ khí Rostam đã dùng để giết Bạch Quỷ Daeva."
+  artifact_spear_of_ascalon_name:0 "Ascalon"
+  artifact_spear_of_ascalon_description:0 "Ngọn giáo cổ gãy này được cho là một phần của cây giáo mà Thánh George đã dùng để giết con rồng ở Beirut."
+  artifact_zomorrodnegar_name:0 "Shamshir-e Zomorrodnegar"
+  artifact_zomorrodnegar_description:0 "Thanh kiếm nạm ngọc lục bảo này được cho là lưỡi kiếm huyền thoại của vua Solomon, dùng để tiêu diệt ác quỷ Fulad-zereh."
+  artifact_muhammads_epistles_name:0 "Thư của Muhammad"
+  artifact_muhammads_epistles_description:1 "Bức thư này là một phần trong thư tín giữa Nhà Tiên Tri Muhammad và các vị cai trị của [newly_created_artifact.Custom('EpistleReciever')|U]."
+  epistle_syria:0 "Syria"
+  epistle_arabia:0 "các bộ tộc Ả Rập"
+  epistle_persia:0 "Ba Tư"
+  epistle_byzantium:0 "Đế quốc Đông La Mã"
+  epistle_bahrain:0 "Bahrain"
+  artifact_kaves_apron_name:0 "Tạp dề của Kave"
+  artifact_kaves_apron_description:0 "Lá cờ rách nát này được cho là biểu ngữ huyền thoại mà người thợ rèn Ba Tư Kave đã làm từ chính chiếc tạp dề của mình để hiệu triệu dân chúng đứng lên chống lại kẻ bạo chúa."
+  artifact_joyeuse_name:0 "Joyeuse"
+  artifact_joyeuse_description:1 "Thanh kiếm của Charlemagne, được rèn để chứa Thánh Thương Longinus. Joyeuse vừa là biểu tượng của tinh thần hiệp sĩ, vừa là di sản hoàng quyền của đế chế Charlemagne."
+  artifact_durendal_name:0 "Durendal"
+  artifact_durendal_description:0 "Thanh kiếm ngắn và nặng này được cho là Durendal huyền thoại, được Roland giấu đi trong khoảnh khắc hấp hối nhằm không để nó rơi vào tay kẻ thù của vương triều."
+  artifact_curtana_name:0 "Curtana"
+  artifact_curtana_description:0 "Thanh kiếm này được cho là Curtana, Thanh Kiếm của Lòng Nhân Từ. Vũ khí huyền thoại từng được Tristan sử dụng để giao chiến với Morholt, và đó cũng là lý do vì sao mũi kiếm bị sứt — một mảnh đã gãy khi chém vào chiếc sọ dày của gã khổng lồ Ireland."
+  artifact_ring_angelica_name:0 "Nhẫn của Angelica"
+  artifact_ring_angelica_description:0 "Chiếc nhẫn được cho là chính vật Angelica từng đeo, nhân vật quen thuộc trong các câu chuyện về Roland và Charlemagne. Quyền năng của nó có lẽ đã phai nhạt, khi dường như không còn ban cho khả năng tàng hình nữa, nhưng nó vẫn là một biểu tượng lộng lẫy của vị công chúa đã thuộc về dĩ vãng."
+  artifact_olifant_name:0 "Olifant"
+  artifact_olifant_description:0 "Chiếc kèn bằng ngà voi lớn, được chạm khắc tinh xảo. Một số người tin rằng đây chính là chiếc kèn Roland đã dùng để gọi viện binh trước khi hy sinh trong trận Roncevaux."
+  artifact_colada_name:0 "Colada"
+  artifact_colada_description:0 "Được đồn đại là một trong những thanh kiếm của El Cid, lưỡi kiếm này là nguồn cảm hứng cho bất kỳ ai khao khát những đức hạnh hiệp sĩ của ông."
+  artifact_aram_name:0 "Aram"
+  artifact_aram_description:0 "Ngọn giáo cổ xưa, sẫm màu này đã chứng kiến vô số thế hệ đến rồi đi. Nó già đến mức nhiều người tin rằng đây chính là cây giáo huyền thoại Aram, được nhắc đến trong các câu chuyện về Jangar."
+  artifact_ikenga_name:0 "Ikenga"
+  artifact_ikenga_description:0 "Bức tượng nhỏ có sừng này được cho là mang lại thành công và chiến thắng cho người sở hữu."
+  artifact_mmaagha_kamalu_name:0 "Mmaagha Kamalu"
+  artifact_mmaagha_kamalu_description:0 "Đây là một thanh kiếm nghi lễ cổ xưa, được trang trí cầu kỳ. Người ta cho rằng nó từng thuộc về Kamalu, vị thần chiến tranh của người Igbo."
+  artifact_bronze_head_name:0 "Đầu Tượng Đồng"
+  artifact_bronze_head_description:0 "Bức đầu tượng bằng đồng mang phong cách hiện thực này khắc họa các đường nét của một vị quân vương đã qua đời từ lâu với độ chi tiết đáng kinh ngạc, trông giống một tác phẩm điêu khắc hơn là vật được đúc kim loại. Trên đầu có đội vương miện để thể hiện địa vị của nhân vật được khắc họa."
+  artifact_crystal_carving_name:0 "Chạm Khắc Pha Lê"
+  artifact_crystal_carving_description:0 "Khối pha lê đá trong suốt hình chữ nhật này gần như hoàn toàn tinh khiết, và phần lớn bề mặt được phủ kín bởi những hoa văn chạm khắc tinh vi. Đây là một vật phẩm cực kỳ mỹ lệ, dù công dụng của nó không mấy rõ ràng."
+  artifact_ibeji_name:0 "Ibeji"
+  artifact_ibeji_description:0 "Bức tượng gỗ nhỏ này mô tả một người song sinh đã qua đời, được tin rằng sẽ mang lại giàu sang và may mắn nếu được gia đình chăm sóc. Nó được trang trí với kiểu tóc cầu kỳ và khá cao."
+  artifact_kantele_name:0 "Kantele Cổ Đại"
+  artifact_kantele_description:0 "Nhạc cụ dây bằng gỗ này đã được truyền lại qua nhiều thế hệ. Có tin đồn cho rằng nó thậm chí có thể có niên đại từ thời của chính Väinämöinen."
+  artifact_sledovik_name:0 "Sledovik"
+  artifact_sledovik_description:0 "Tảng đá lớn này in đầy những dấu chân hằn sâu vào mặt đá. Trong nhiều năm, nó đã đóng vai trò như một bàn thờ, và các dấu chân được cho là do những bậc thánh nhân địa phương để lại."
+  artifact_nagelring_name:0 "Nagelring"
+  artifact_nagelring_description:0 "Theo truyền thống, thanh kiếm già nua này có liên hệ với nhân vật huyền thoại rất được yêu mến Dietrich von Bern. Mối liên hệ ấy đã mang lại cho nó danh tiếng vượt xa giá trị thực tế."
+  artifact_kladenets_name:0 "Kladenets"
+  artifact_kladenets_description:1 "Dù đã qua thời kỳ huy hoàng, thanh kiếm thép cổ này vẫn được cho là Kladenets huyền thoại — một thanh kiếm có thể tự vung chém. Trong tình trạng hiện tại, nó hầu như không dễ sử dụng, nhưng chỉ riêng sự hiện diện của nó cũng đủ khiến những ai tin vào nguồn gốc siêu nhiên phải kính nể."
+  artifact_legbiter_name:0 "Legbiter"
+  artifact_legbiter_description:0 "Thanh kiếm cực kỳ sắc bén với chuôi bằng ngà voi này được cho là từng thuộc về đại vương Magnus Olafsson của Na Uy."
+  artifact_quernbiter_name:0 "Quern-Biter"
+  artifact_quernbiter_description:0 "Thanh kiếm này từng được chính vua Haakon của Na Uy sử dụng, và khi đó người ta nói rằng nó sắc đến mức có thể chém xuyên cả cối xay đá."
+  artifact_dragvandil_name:0 "Dragvandil"
+  artifact_dragvandil_description:0 "Thanh kiếm được cho là từng thuộc về Egill Skallagrimsson — nông dân, thi sĩ và chiến binh — nhân vật nổi tiếng trong Saga của Egill."
+  artifact_szczerbiec_name:0 "Szczerbiec"
+  artifact_szczerbiec_description:1 "Được cho là do một thiên thần ban cho vua Boleslaw Dũng Cảm, thanh kiếm này được tin là vũ khí đã dùng để chém vào Cổng Vàng của Kyiv. Nó mang ý nghĩa biểu tượng vô cùng to lớn."
+  artifact_chinese_caligraphy_name:1 "Thư Pháp Trung Hoa"
+  artifact_chinese_caligraphy_description:0 "Mảnh giấy mỏng manh này được phủ kín những ký tự kỳ lạ nhưng đẹp đẽ và vô cùng chuẩn xác. Người ta nói rằng nó đến từ vùng đất Trung Hoa ở phương Đông xa xôi."
+  artifact_ruyi_name:0 "Ruyi"
+  artifact_ruyi_description:0 "Đây là một quyền trượng nhỏ bằng ngọc bích, được phủ kín các ký tự và hoa văn Trung Hoa."
+  turquoise_throne_name:0 "Ngai Ngọc Lam"
+  turquoise_throne_description:0 "Ngai vàng hoàng gia nạm ngọc này được chế tác theo hình mẫu ngai huyền thoại của các vị vua Ba Tư trong Shahnama. Khung gỗ mun được trang trí bằng vô số ngọc lam cùng các tấm vàng ròng tráng men sắc lam. Vẻ đẹp choáng ngợp ấy chỉ có thể đạt được nhờ những nghệ nhân bậc thầy nhất."
+  peacock_throne_name:0 "Ngai Chim Công"
+  peacock_throne_description:0 "Ngai vàng xa hoa này nhằm tái hiện ngai trị vì của Jamsheed. Người ta nói rằng các nghệ nhân từ khắp nơi trên thế giới đã cùng hội tụ để ghép vàng, bạc và hàng trăm viên đá quý thành chiếc ngai hiện diện trước mắt Ngài."
+  artifact_banner_islam_name:0 "Thánh Kỳ của Muhammad"
+  artifact_banner_islam_description:0 "Lá cờ này được cho là Thánh Kỳ của Muhammad, một thánh tích từ thời Nhà Tiên Tri và là biểu tượng của toàn bộ đức tin Hồi giáo."
+  artifact_spear_of_the_prophet_name:0 "Thương của Nhà Tiên Tri"
+  artifact_spear_of_the_prophet_description:0 "Được cho là cây thương của Muhammad, do vị vua Abyssinia tặng cho al-Zubayr bin al-Awwam."
+  artifact_mantle_of_the_prophet_islam_name:0 "Áo Choàng của Nhà Tiên Tri"
+  artifact_mantle_of_the_prophet_description:0 "Được truyền lại qua nhiều thế kỷ từ Caliph này sang Caliph khác, đây là áo choàng của Nhà Tiên Tri. Theo truyền thống, Caliph mặc nó trong các dịp lễ trọng, mang lại cho ông vẻ điềm tĩnh và uy nghi vượt trội."
+  afarganyu_name:0 "Afarganyu"
+  artifact_afarganyu_description:0 "Chiếc bình lớn này là nơi ngọn lửa thiêng — trung tâm của nhiều nghi lễ trong Hỏa giáo — được thắp lên. Một dòng khắc cổ cho biết danh tính người đã hiến tặng nó cho hàng giáo sĩ."
+  siddhachakra_name:0 "Siddhachakra"
+  artifact_siddhachakra_description:0 "Đây là một đồ hình huyền bí dùng trong việc thờ phụng của đạo Jain. Ở trung tâm là một đóa sen nở rộ, xung quanh là các vị thần trên từng cánh hoa, biểu tượng gắn liền với truyền thuyết về vua Shripala và hoàng hậu Mayanasundari."
+  artifact_staff_kakusandha:0 "Gậy của Kakusandha"
+  artifact_staff_kakusandha_desc:0 "Kakusandha, vị Phật đầu tiên của kiếp Kalpa hiện tại, sở hữu cây gậy này để xua đuổi thú dữ và làm chúng sinh nhỏ bé tránh xa, hầu không bị giẫm phải trên những bước chân du hành của các tăng sĩ."
+  water_filter_konagamana:1 "Bộ Lọc Nước của Koṇāgamana"
+  water_filter_konagamana_desc:0 "Koṇāgamana, vị Phật thứ hai của kiếp Kalpa hiện tại, mang theo bộ lọc nước này trên các hành trình của mình. Mảnh vải đơn sơ này vừa dùng để tạo nước uống an toàn, vừa bảo đảm rằng mọi sinh vật nhỏ bé đều được lọc ra một cách từ bi."
+  robe_kassapa:2 "Mảnh Áo của Kassapa"
+  robe_kassapa_desc:0 "Kassapa, vị Phật thứ ba của kiếp Kalpa hiện tại, đã mặc chiếc áo này trong phần lớn sinh hoạt hằng ngày. Đây là một mảnh vải thô ráp một cách kỳ lạ, nhưng được tôn kính đặc biệt như một trong số rất ít những vật dụng y phục của một vị Phật còn tồn tại."
+ ##Trinket Generation
+ #Bad/Trash
+  gilded_rats_tail:0 "Đuôi Chuột Mạ Vàng"
+  gilded_rats_tail.desc:0 "Trang sức của kẻ nghèo."
+  quail_eggshell_gem:0 "“Viên Ngọc” Vỏ Trứng Cút"
+  quail_eggshell_gem.desc:0 "Một mảnh vỏ trứng sặc sỡ giả làm đá quý."
+  stained_glass_shard:0 "Mảnh Kính Màu “Thánh Hóa”"
+  stained_glass_shard.desc:0 "Nó dường như bị nhuốm một màu đỏ máu kỳ lạ..."
+  xylospongium:0 "Miếng Bọt Biển Gắn Trên Gậy"
+  xylospongium.desc:1 "Nguồn gốc và công dụng không rõ ràng — nhưng nó tỏa ra một mùi khó chịu, thoang thoảng."
+ #Common
+  st_davids_morsel:1 "Mẩu Thánh Tích của Thánh David"
+  st_davids_morsel.desc:0 "Trông giống như một miếng thịt khô. Tuổi đời và nguồn gốc không rõ ràng."
+  platypus_figurine:0 "Tượng Động Vật"
+  platypus_figurine.desc:0 "Con vật tí hon này có chiếc mỏ rộng, bộ lông bóng và chân chèo. Thật kỳ lạ."
+  terracotta_toy_fowl:0 "Gà Đồ Chơi Bằng Đất Nung"
+  terracotta_toy_fowl.desc:0 "Bề mặt mòn cũ kể lại câu chuyện về một món đồ chơi từng được yêu quý."
+ #This one uses a scope local to the stewardship_general.2001-event
+  stewardship_general.2001.artifact.potsherd_holy:0 "Mảnh Gốm"
+  stewardship_general.2001.artifact.potsherd_holy.desc:0 "Một mảnh gốm cổ. Theo ghi nhận, nó có nguồn gốc từ thánh địa [trinket_holy_site.GetNameNoTierNoTooltip]."
+  small_bell_beaker:0 "Cốc Chuông Nhỏ"
+  small_bell_beaker.desc:0 "Một chiếc cốc chuông với hoa văn tinh xảo."
+  serpentine_budai:0 "Tượng Bố Đại Bằng Đá Serpentine"
+  serpentine_budai.desc:0 "Hình tượng tí hon của một người đàn ông mập mạp, cười lớn và hói đầu."
+ #Uncommon
+  mythical_creature_horn:0 "Sừng của [ROOT.Char.Custom('HornedMythicalCreature')|U]"
+  mythical_creature_horn.desc:0 "Một cục sừng có hình dạng đáng ngờ, được cho là đến từ sinh vật thần thoại [ROOT.Char.Custom('HornedMythicalCreature')]."
+  mythical_creature_figurine:0 "Tượng [ROOT.Char.Custom('TrinketLookAdjective')|U] của [ROOT.Char.Custom('RegionalMythicalCreature')]"
+  mythical_creature_figurine.desc:1 "Bức tượng mô tả con [new_trinket.Custom('ArtifactAnimalAdjective')] [SCOPE.Custom('RegionalMythicalCreatureLower')] này trông có vẻ [ROOT.Char.Custom('TrinketLookAdverbFollowup')] [ROOT.Char.Custom('TrinketLookAdjective')], được nạm những viên đá quý nhỏ, rực rỡ có nguồn gốc từ [ROOT.Char.GetCurrentLocation.GetNameNoTooltip]."
+  st_davids_taper:1 "Nến Thánh David"
+  st_davids_taper.desc:1 "Trông như thể ai đó đã cố đốt nó ở cả hai đầu."
+  jira_stick:0 "Vương Trượng Đá Cẩm Thạch của J'Ira"
+  jira_stick.desc:0 "Dù đã qua nhiều lần sử dụng, đầu nhọn của nó vẫn đầy uy lực."
+  lucky_coin:0 "Đồng Xu May Mắn của [ROOT.Char.GetCurrentLocation.GetCulture.GetNameNoTooltip]"
+  lucky_coin.desc:1 "Một đồng xu của người [ROOT.Char.GetCurrentLocation.GetCulture.GetNameNoTooltip], có nguồn gốc từ [ROOT.Char.GetCurrentLocation.GetNameNoTooltip].\n\nBề mặt từng được khắc dấu nay đã nhẵn mịn vì bị xoa và xoay liên tục."
+  lavender_jade_pendant:0 "Mặt Dây Ngọc Phỉ Thúy Tím"
+  lavender_jade_pendant.desc:0 "Những vân tím đậm trông vô cùng mê hoặc."
+ #Rare
+  sekhmet_ring:0 "Nhẫn Ấn Cổ"
+  sekhmet_ring.desc:0 "Chiếc nhẫn vàng được khắc hình một con người đội một chiếc mũ trông kỳ lạ."
+  scarab_brooch:0 "Trâm Bọ Hung Cổ"
+  scarab_brooch.desc:0 "Một chiếc trâm tinh xảo hình bọ hung. Phần ngọc lục bảo nạm trên đó được cho là có tác dụng tốt cho sức khỏe."
+ 
+ # Easter eggs
+  easteregg_artifact_elisabeth_plush:0 "Cáo Nhồi Bông của Elisabeth"
+  easteregg_artifact_elisabeth_plush_description:0 "Con cáo nhồi bông của Elisabeth là một món đồ chơi được vô cùng yêu quý và đã ở bên cô suốt phần lớn cuộc đời. Elisabeth thường được trông thấy đang trò chuyện với nó khi cô dệt nên những mật mã phức tạp cho bất kỳ ai thuê dịch vụ của mình. Nó mang lại sự an ủi và truyền cảm hứng để người sở hữu noi theo sự xảo quyệt của loài cáo."
+  easteregg_artifact_nicks_redolence: "Hương Thơm Cuối Cùng"
+  easteregg_artifact_nicks_redolence_description: "Một chiếc lọ nhỏ chứa một lượng — [ROOT.Char.Custom('GetComplexColor')] — hương thơm, đủ khiến cả quý ông lẫn quý bà phải ngây ngất khi ở gần. Một dòng khắc nhỏ trên nút chai ghi rằng #EMP “Và giờ đây, hồi kết đã cận kề...”#!"
+  easteregg_artifact_chad_book:0 "Bản Aeneid Có Chú Giải"
+  easteregg_artifact_chad_book_description:0 "Một bản sao Aeneid của Virgil được yêu thích và minh họa công phu, nhưng bị phủ kín bởi vô số ghi chép — có cái ngớ ngẩn, có cái sâu sắc."
+  easteregg_artifact_chad_dagger:0 "Con Dao Găm"
+  easteregg_artifact_chad_dagger_description:0 "Ánh thép của nó đã trở nên xỉn màu bởi những vết máu khô, dù vậy nó vẫn khát khao thêm nữa."
+  easteregg_artifact_veronica_book:0 "Những Chiếc Nhẫn của Chúa Tể"
+  easteregg_artifact_veronica_book_description:0 "Một sự ám chỉ được che giấu khéo léo, dưới hình thức một cuốn sách. Được viết bằng thứ tiếng Bồ Đào Nha tinh tuyển nhất."
+  easteregg_artifact_map_lohmander: "Lộ Trình Cổ"
+  easteregg_artifact_map_lohmander_description: "Cuốn sách nhỏ bọc da này chứa đựng những câu chuyện của một người chép sách Scandinavia và hành trình của ông từ phương Tây tới Ấn Độ. Nó mô tả các hiểm nguy, tuyến đường và những trang bị cần thiết — từ việc mang nước ở đâu cho tới khi nào cần loại giày phù hợp, v.v. Ngoài ra còn có rất nhiều thông tin về các món ăn hay điệu múa địa phương.\n\nBên trong còn có một số bản đồ được gấp lại, khắc họa tiểu lục địa cũng như nhiều vùng đất khác, kèm theo ghi chú về những miền xa xôi và tên gọi của chúng trong các thời đại đã qua."
+
+  easteregg_artifact_jason_sword:0 "Thanh Gươm của Thánh Martin"
+  easteregg_artifact_jason_sword_description:0 "Dọc theo rãnh sống lưỡi kiếm, ai đó đã cào một cách vụng về dòng chữ “Ta là Đấng Hiện Hữu”."
+
+  child_toy_template_tt:0 "Phải là [child|E] mới có thể trang bị như một [inventory_artifact|E]"
+
+ # Blessed Junk
+  fp2_blessed_junk:0 "[ROOT.Char.Custom('TrinketLookAdjective')|U] $blessed_artifact_modifier$"
+  fp2_blessed_junk_desc:0 "Một hiện vật [ROOT.Char.Custom('TrinketLookAdverbFollowup')] [ROOT.Char.Custom('TrinketLookAdjective')] nhưng ngoài ra thì hoàn toàn vô dụng. $blessed_artifact_modifier_desc$."
+ 
+  local_artisan_modifier:0 "Nghệ Nhân Địa Phương"
+  local_artisan_modifier_desc:0 "Nhân vật này là một nghệ nhân địa phương được một vị quý tộc thuyết phục phục vụ cho mình.\n#weak Bất kỳ [inspirations|E] nào họ tạo ra sẽ có chất lượng thấp hơn.#!"
+
+ # EP2
+ # TOURNAMENT
+  artifact_pas_darmes_token:0 "Kỷ Vật Pas d'Armes"
+  artifact_pas_darmes_token_name:0 "Kỷ vật của [owner.GetFirstNamePossessiveNoTooltip]"
+  artifact_pas_darmes_token_description:0 "Một [owner.GetFullNamePossessive] [SCOPE.Custom('ArtifactQuality')] [newly_created_artifact.GetFeatureText( 'generic_material_cloth' )] [owner.Custom('GetTournamentFavor')] được trang trí bằng [newly_created_artifact.GetFeatureText( 'decoration_pattern' )], trao cho [winner.GetFullName] tại một pas d'armes ở [location.GetName]."
+  artifact_pas_darmes_spurs:0 "Chiến Lợi Phẩm Pas d'Armes"
+  artifact_pas_darmes_spurs_name:0 "Cựa của [owner.GetFirstNamePossessiveNoTooltip]"
+  artifact_pas_darmes_spurs_description:0 "Một cặp cựa [SCOPE.Custom('ArtifactQuality')] làm từ [newly_created_artifact.GetFeatureText( 'generic_material_metal' )], thuộc về [owner.GetFullName], được trao cho [winner.GetFullName] tại một pas d'armes ở [location.GetName]."
+  artifact_tournament_favor:0 "Tín Vật Giải Đấu"
+  artifact_tournament_favor_name:0 "Tín vật của một [owner.GetLadyLord|U]"
+  artifact_tournament_favor_description:0 "Một [SCOPE.Custom('ArtifactQuality')] [newly_created_artifact.GetFeatureText( 'generic_material_cloth' )] [owner.Custom('GetTournamentFavor')], được trang trí bằng [newly_created_artifact.GetFeatureText( 'decoration_pattern' )], do một người ngưỡng mộ trao tặng cho [recipient.GetFullName]."
+ # BOWS
+  artifact_longbow:0 "Cung Dài"
+  artifact_longbow_name:0 "$artifact_name_prefix_owner_culture$ Cung Dài"
+  artifact_longbow_description:1 "Một cây cung dài tự thân [SCOPE.Custom('ArtifactQuality')], được chạm khắc từ [newly_created_artifact.GetFeatureText( 'longbow_wood' )] với lớp gỗ dát đàn hồi và lõi gỗ cứng, căng dây bằng [newly_created_artifact.GetFeatureText( 'bow_string' )]. Cao hơn cả một người trưởng thành, rất ít cây cung có thể sánh được lực kéo của nó."
+  artifact_composite:0 "Cung Phức Hợp"
+  artifact_composite_name:0 "$artifact_name_prefix$ Cung Phức Hợp"
+  artifact_composite_description:0 "Một cây cung phức hợp [SCOPE.Custom('ArtifactQuality')] làm từ [newly_created_artifact.GetFeatureText( 'composite_wood' )], được gia cường bằng sừng [newly_created_artifact.GetFeatureText( 'composite_horn' )] và gân, căng dây bằng [newly_created_artifact.GetFeatureText( 'bow_string' )]. Kích thước ngắn khiến nó đặc biệt phù hợp để bắn khi cưỡi ngựa."
+  artifact_bow:0 "Cung"
+  artifact_bow_name:0 "$artifact_name_prefix$ Cung"
+  artifact_bow_description:1 "Một cây cung tự thân [SCOPE.Custom('ArtifactQuality')] làm từ [newly_created_artifact.GetFeatureText( 'bow_wood' )], căng dây bằng [newly_created_artifact.GetFeatureText( 'bow_string' )], hữu dụng cả trong săn bắn lẫn chiến tranh."
+  artifact_crossbow:0 "Nỏ"
+  artifact_crossbow_name:0 "$artifact_name_prefix$ Nỏ"
+  artifact_crossbow_description:0 "Một cây nỏ [SCOPE.Custom('ArtifactQuality')] với báng làm từ [newly_created_artifact.GetFeatureText( 'bow_wood' )], cánh nỏ bằng gân. Vô cùng mạnh mẽ và có thể giữ ở trạng thái sẵn sàng, nhưng nạp lại chậm."
+  create_artifact_bow_tooltip: "[inspiration_owner.GetShortUIName] đã chế tác một [SCOPE.Custom('ArtifactBowType')] với tay nghề [SCOPE.Custom('ArtifactQuality')]"
+  feature_longbow_wood_elm:0 "$feature_bow_wood_elm$"
+  feature_longbow_wood_yew:0 "$feature_bow_wood_yew$"
+  feature_composite_wood_bamboo:1 "$feature_bow_wood_bamboo$"
+  feature_composite_wood_maple:0 "$feature_bow_wood_maple$"
+  feature_composite_wood_mulberry:0 "$feature_bow_wood_mulberry$"
+  feature_composite_horn_antelope:1 "$animal_type_antelope_plural$"
+  feature_composite_horn_bison:1 "$animal_type_bison_plural$"
+  feature_composite_horn_deer:1 "$animal_type_buck_plural$"
+  feature_composite_horn_gazelle:0 "$animal_type_gazelle_plural$"
+  feature_composite_horn_aurochs:0 "$animal_type_aurochs_plural$"
+  feature_bow_wood_ash:0 "$wood_ash$"
+  feature_bow_wood_bamboo:0 "tre"
+  feature_bow_wood_cherry:0 "anh đào"
+  feature_bow_wood_dogwood:0 "dogwood"
+  feature_bow_wood_elm:0 "$wood_elm$"
+  feature_bow_wood_hazel:0 "phỉ"
+  feature_bow_wood_hickory:0 "hickory"
+  feature_bow_wood_maple:0 "$wood_maple$"
+  feature_bow_wood_mulberry:0 "dâu tằm"
+  feature_bow_wood_palm:0 "cọ"
+  feature_bow_wood_oak:0 "$wood_oak$"
+  feature_bow_wood_walnut:0 "$wood_walnut$"
+  feature_bow_wood_yew:0 "$wood_yew$"
+  feature_bow_string_hemp:0 "sợi gai dầu"
+  feature_bow_string_horse_hair:0 "lông ngựa"
+  feature_bow_string_linen:0 "$cloth_linen$"
+  feature_bow_string_rawhide:0 "da sống"
+  feature_bow_string_silk:0 "$cloth_silk$"
+  feature_bow_string_sinew:0 "gân động vật"
+
+  tournament_favor_glove:0 "găng tay"
+  tournament_favor_sleeve:0 "ống tay áo"
+  tournament_favor_scarf:0 "khăn choàng"
+
+  blooded_blade:0 "Lưỡi Kiếm Nhuốm Máu"
+  blooded_blade_description:0 "Những hoa văn xoáy, gồ ghề trên vũ khí này là dấu hiệu tinh tế cho thấy độ giòn tương đối của lưỡi kiếm, đồng thời phản ánh nguồn gốc của nó: một vũ khí được Ta trong máu của [ROOT.Char.GetTitledFirstName]."
+  sullied_blooded_blade:0 "Lưỡi Kiếm Vấy Bẩn"
+  sullied_blooded_blade_description:0 "Những hoa văn xoáy, gồ ghề trên vũ khí này là dấu hiệu tinh tế cho thấy chất lượng tổng thể kém cỏi của lưỡi kiếm, đồng thời phản ánh nguồn gốc của nó: một vũ khí được Ta trong máu của [ROOT.Char.GetTitledFirstName]."
+
+  fake_papal_tiara_name:0 "Vương Miện Giáo Hoàng Giả"
+  fake_papal_tiara_description:0 "Một bản sao đồ sộ của mũ giáo hoàng, có lẽ không chịu được việc quan sát kỹ lưỡng. Dù sao thì… cũng chỉ để vui thôi, phải không?"
+
+  artisanal_sword:0 "Thanh Kiếm của [ROOT.Char.GetFirstNamePossessive]"
+  artisanal_sword_description:0 "Một thanh kiếm được chế tác tuyệt mỹ, chuôi kiếm nạm đá quý hài hòa với phần tay cầm vừa đẹp mắt vừa chắc chắn. Lưỡi kiếm mang hoa văn tinh xảo, cân bằng hoàn hảo, với mũi kiếm thuôn dần đến một điểm xuyên phá sắc bén."
+  feature_generic_material_metal_gold:0 "$metal_gold$"
+  feature_generic_material_metal_silver:0 "$metal_silver$"
+  feature_generic_material_metal_electrum:0 "$metal_electrum$"
+  feature_generic_material_metal_iron:0 "$metal_iron$"
+  feature_generic_material_metal_pewter:0 "$metal_pewter$"
+  feature_generic_material_metal_brass:0 "$metal_brass$"
+  feature_generic_material_metal_steel:0 "$metal_steel$"
+  feature_generic_material_metal_bronze:0 "$metal_bronze$"
+  feature_generic_material_metal_copper:0 "$metal_copper$"
+  feature_generic_material_earthware_clay:0 "$earthware_clay$"
+  feature_generic_material_earthware_terracotta:0 "$earthware_terracotta$"
+  feature_generic_material_earthware_stone:0 "$earthware_stone$"
+  feature_generic_material_earthware_porcelain:0 "$earthware_porcelain$"
+
+ # FP3 artifacts
+  artifact_oxus_bracelet_name: "Vòng Tay Oxus"
+  artifact_oxus_bracelet_description: "Chiếc vòng tay với tay nghề chế tác tuyệt vời này được cho là xuất xứ từ vùng đất $k_transoxiana$. Dù lớp khảm men và đá bán quý đã thất lạc từ lâu, vàng vẫn giữ được độ sáng bóng. Những chiếc vòng như vậy từng là lễ vật danh dự tại triều đình của Vua của các vị Vua thời cổ đại, vì thế có lẽ nó từng được đeo bởi một đại lãnh chúa ở Babylon."
+  fp3_incense_burner_sculpture: "Tượng Lư Đốt Hương"
+  fp3_incense_burner_sculpture_desc: "Chiếc lư đốt hương hình loài mèo này phun làn khói thơm qua nhiều lỗ nhỏ trên thân. Phần đầu với đôi mắt nạm đá quý có bản lề, cho phép đặt hương đang cháy vào bên trong."
+  fp3_ancient_drinking_vessel: "Chén Uống Thời Achaemenes"
+  fp3_ancient_drinking_vessel_desc: "Chiếc chén cầu kỳ này kết thúc bằng hình dáng một con dê. Nó được chế tác từ thời đại đã bị lãng quên, nhưng vẻ đẹp thì chưa hề phai nhạt."
+  artifact_sassanian_sword_name: "Kiếm Sassanian"
+  artifact_sassanian_sword_description: "Được cho là tàn tích của thời kỳ Sassanian cổ xưa, thanh kiếm này $sassanian_sword_description_base$, khiến nó trở thành một cảnh tượng tráng lệ. Dù ngày nay nó quá mong manh để mang ra chiến trận, biết đâu thanh kiếm này từng nằm trong tay một vị anh hùng nay đã bị thời gian lãng quên?"
+  artifact_sassanian_replica_sword_name: "Kiếm Phong Cách Sassanian"
+  sassanian_sword_description_base: "được trang trí bằng nhiều loại đá quý và mang các hoa văn tinh xảo"
+  famed_replica_sassanian_sword_description: "Thanh kiếm này được lấy cảm hứng từ viễn cảnh huy hoàng của một thời đại đã qua, gợi nhớ đến quá khứ anh hùng của tổ tiên người thợ rèn. Nó $sassanian_sword_description_base$, khiến nó trở thành một cảnh tượng tráng lệ. Khi cầm nó trong tay, người ta toát lên hình ảnh của những vị vua huyền thoại thuở xưa."
+  masterwork_replica_sassanian_sword_description: "Thanh kiếm này rõ ràng được tạo ra để mô phỏng vũ khí của một thời đại cổ xưa, gợi nhớ đến quá khứ anh hùng của tổ tiên người thợ rèn. Nó $sassanian_sword_description_base$. Dù chỉ là tiếng vọng xa xôi của dĩ vãng, khi vung kiếm người ta vẫn có thể tưởng tượng mình là một lãnh chúa hùng mạnh của thời đã qua."
+  common_replica_sassanian_sword_description: "Bản sao kém cỏi này là sự chế nhạo đối với dòng dõi của người thợ rèn. Nó được khảm bằng đá rẻ tiền và trang trí bằng những hoa văn thô ráp, lệch lạc. Mang nó lủng lẳng bên vỏ kiếm chỉ khiến người ta trông như một kẻ mê muội, khát khao quay về một thời đại đã vĩnh viễn lùi xa."
+
+#CE1 Artifacts
+  artifact_magnificent_crown_name: "Vương Miện Lộng Lẫy"
+  artifact_magnificent_crown_description: "Những đường filigree tuyệt đẹp và hoa văn tinh xảo của chiếc vương miện này đều nhằm làm nổi bật lý do tồn tại thực sự của nó: các phù điêu khắc chìm ghi lại tổ tiên của [ROOT.Char.GetFirstNamePossessive], khơi dậy quyền uy của họ và đan xen nó với chính quyền lực của [ROOT.Char.GetHerHis]."
+  artifact_splendid_necklace_name: "Vòng Cổ Lộng Lẫy"
+  artifact_splendid_necklace_description: "Chiếc vòng cổ tinh xảo này được bao phủ bởi huy hiệu gia tộc [artifact.GetOwner.GetHouse.GetBaseName], không để lại bất kỳ nghi ngờ nào về tính chính danh của người sở hữu."
+  artifact_fine_brooch_name: "Trâm Cài Tinh Xảo"
+  artifact_fine_brooch_description: "Sự gợi nhắc tinh tế đến danh xưng của gia tộc [artifact.GetOwner.GetHouse.GetBaseName] dọc theo viền trâm cài khiến danh tiếng về tính chính danh của họ nhanh chóng lan rộng."
+
+  medicine_jar: "Hũ Thuốc"
+  medicine_jar_desc: "Chiếc hũ gốm tráng men mỏng này chứa các loại thảo dược hiếm và mạnh, khoáng chất chữa bệnh cùng nhiều bộ phận động vật phơi khô — tất cả đều được các thầy thuốc sử dụng khi điều trị bệnh tật và cân bằng thể dịch."
+  whale_fat_candles_name: "Nến Mỡ Cá Voi"
+  whale_fat_candles_description: "Những cây nến này được nấu chảy từ lớp mỡ của một con leviathan khủng khiếp. Chúng trông đầy đe dọa với những gai nhọn bằng mỡ cá voi."
+
+  warenne_coin: "Đồng Xu Warenne"
+  warenne_coin_description: "Đồng xu này mang phù hiệu bàn cờ xanh-vàng của triều đại Warenne ở mặt trước. Một vệt máu sẫm màu đánh dấu mép đồng xu."
+
+  traitors_head: "Thủ Cấp Kẻ Phản Bội"
+  traitors_head_description: "Một cái đầu bị chặt rời khỏi cơ thể chủ nhân một cách gọn gàng. Nó mang ý nghĩa của một thông điệp hơn là một kỷ vật."
+ 
+  artifact_: "Di Vật Bị Phá Hủy"
+  artifact_slot_untyped: "Di Vật Bị Phá Hủy             " # Yes the tabs are intended
+
+  artifact_tale_of_genji: "Truyện Genji"
+  artifact_tale_of_genji_description: "Được cho là lấy cảm hứng từ cuộc đời của Minamoto $TO_ru$, Truyện Genji là một tác phẩm mang phong cách tiểu thuyết do phu nhân Murasaki sáng tác. Tác phẩm kể về cuộc đời và các mối tình của Hoàng tử hư cấu Genji, con trai của Thiên hoàng."
+  artifact_pillow_book: "Gối Thảo"
+  artifact_pillow_book_description: "Được nữ thi sĩ kiêm cung nữ Sei Shōnagon viết như một cuốn nhật ký riêng, tác phẩm được gọi là Gối Thảo hé lộ những câu chuyện tán gẫu, tình ái và bi kịch thường nhật của giới quý tộc Nhật Bản."

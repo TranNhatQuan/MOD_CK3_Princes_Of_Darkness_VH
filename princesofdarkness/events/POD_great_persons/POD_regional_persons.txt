@@ -1,0 +1,3624 @@
+﻿namespace = podregionalpersons
+
+podregionalpersons.1 = {
+	#Main event handling RP
+	#Called from specific yearly pulse on action with a small delay
+	hidden = yes
+	scope = none
+	
+	trigger = {
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				current_year = 1232
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = ghw_region_scandinavia
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = ghw_region_scandinavia
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.7
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1235
+				OR = {
+					character:792915 ?= { #Only one Karl
+						AND = {
+							is_alive = no
+							death_reason = death_disappearance
+						}
+					}
+					POD_bookmark_is_war_of_princes = yes
+				}
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_germania
+					}
+					OR = {
+						has_trait = supehunter
+						is_vampire_trigger = yes
+					}
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_germania
+					}
+					OR = {
+						has_trait = supehunter
+						is_vampire_trigger = yes
+					}
+				}
+				trigger_event = {
+					id = podregionalpersons.2
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1239
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_italy
+					}
+					is_vampire_trigger = yes
+					is_landed_or_landless_administrative = yes # events don't make sense for adventurers
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_italy
+					}
+					is_vampire_trigger = yes
+					is_landed_or_landless_administrative = yes # events don't make sense for adventurers
+				}
+				trigger_event = {
+					id = podregionalpersons.25
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1245
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_francia
+					}
+					is_vampire_trigger = yes
+					POD_is_infernalist_trigger = no
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_francia
+					}
+					is_vampire_trigger = yes
+					POD_is_infernalist_trigger = no
+				}
+				trigger_event = {
+					id = podregionalpersons.15
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1249
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_middle_east
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_middle_east
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.22
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1283
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_east
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_east
+					}
+					is_vampire_trigger = yes
+					is_landed = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.18
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1301
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_iberia
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_iberia
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.29
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1350
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = ghw_region_egypt
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = ghw_region_egypt
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.48
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1354
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_britannia
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_west_britannia
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.35
+				}
+			}
+		}
+		#else_if = {
+		#	limit = {
+		#		current_year = 1360
+		#		OR = {
+		#			NOT = {
+		#				is_target_in_global_variable_list = {
+		#					name = unavailable_unique_decisions
+		#					target = flag:anda_victory_objective_decision
+		#				}
+		#			}
+		#			NOT = {
+		#				is_target_in_global_variable_list = {
+		#					name = unavailable_unique_decisions
+		#					target = flag:qorjin_victory_objective_decision
+		#				}
+		#			}
+		#		}
+		#	}
+		#	trigger_event = {
+		#		id = podregionalpersons.40
+		#	}
+		#}
+		else_if = {
+			limit = {
+				current_year = 1410
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_africa_north
+					}
+					is_vampire_trigger = yes
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_africa_north
+					}
+					is_vampire_trigger = yes
+				}
+				trigger_event = {
+					id = podregionalpersons.54
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_year = 1426
+				any_player = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_italy
+					}
+					OR = {
+						has_trait = supehunter
+						is_vampire_trigger = yes
+					}
+				}
+			}
+			random_player = {
+				limit = {
+					POD_is_valid_for_regional_event = {
+						REGION = world_europe_south_italy
+					}
+					OR = {
+						has_trait = supehunter
+						is_vampire_trigger = yes
+					}
+				}
+				trigger_event = {
+					id = podregionalpersons.64
+				}
+			}
+		}
+	}
+}
+
+#Karl
+
+podregionalpersons.2 = {
+	#Warning about Karl
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.2.t
+	desc = podregionalpersons.2.desc
+	theme = inquisition
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.2.a
+		
+		trigger = {
+			is_vampire_trigger  = yes
+		}
+		
+		custom_tooltip = podregionalpersons.2.custom
+		
+		trigger_event = {
+			id = podregionalpersons.3
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.2.c
+		
+		trigger = {
+			has_trait = supehunter
+		}
+		
+		custom_tooltip = podregionalpersons.2.customc
+		
+		remove_short_term_gold = medium_gold_value
+		
+		trigger_event = {
+			id = podregionalpersons.4
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.2.b
+		
+		custom_tooltip = podregionalpersons.2.customb
+		
+	}
+	
+}
+
+podregionalpersons.4 = {
+	#Karl : Inquisitor road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.4.t
+	desc = podregionalpersons.4.desc
+	theme = inquisition
+	left_portrait = {
+		character = scope:rp_karl
+		animation = personality_callous
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Karl_Shreckt"
+			age = 40
+			gender = male
+			dynasty = none
+			martial = 20
+			learning = 10
+			stewardship = 15
+			diplomacy = 5
+			intrigue = 10
+			prowess = 30
+			faith = faith:shadowinquisition
+			culture = culture:bavarian
+			trait = education_martial_prowess_4
+			trait = intellect_good_1
+			trait = callous
+			trait = zealous
+			trait = stubborn
+			trait = lifestyle_blademaster
+			trait = supehunter
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_karl
+			after_creation = {
+				give_nickname = nick_vampire_killer
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.4.a
+		duel = {
+			skill = learning
+			value = 10
+			60 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.4.effect.success.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.4.success
+					left_icon = root
+					right_icon = scope:rp_karl
+					add_courtier = scope:rp_karl
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				desc = podregionalpersons.4.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.4.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					add_piety = -100
+					add_courtier = scope:rp_karl
+				}
+			}
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.4.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.4.critical.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						select_and_move_to_pool_effect = yes
+						set_character_faith = faith:independenthunters
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.4.c
+		
+		scope:rp_karl = {
+			select_and_move_to_pool_effect = yes
+			set_character_faith = faith:independenthunters
+		}
+		
+	}
+	
+}
+
+podregionalpersons.3 = {
+	#Karl : vampire road, choice
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.3.t
+	desc = podregionalpersons.3.desc
+	theme = inquisition
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.3.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		trigger_event = {
+			id = podregionalpersons.5
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.3.b
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		trigger_event = {
+			id = podregionalpersons.6
+			days = { 30 45 }
+		}
+	}
+}
+
+podregionalpersons.5 = {
+	#Karl : vampire intrigue road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.5.t
+	desc = podregionalpersons.5.desc
+	theme = inquisition
+	left_portrait = {
+		character = scope:rp_karl
+		animation = personality_callous
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Karl_Shreckt"
+			age = 40
+			gender = male
+			dynasty = none
+			martial = 20
+			learning = 10
+			stewardship = 15
+			diplomacy = 5
+			intrigue = 10
+			prowess = 30
+			faith = faith:shadowinquisition
+			culture = culture:bavarian
+			trait = education_martial_prowess_4
+			trait = intellect_good_1
+			trait = callous
+			trait = zealous
+			trait = stubborn
+			trait = lifestyle_blademaster
+			trait = supehunter
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_karl
+			after_creation = {
+				give_nickname = nick_vampire_killer
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.5.a
+		duel = {
+			skill = intrigue
+			value = 15
+			60 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.5.effect.success.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.5.success
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						add_character_flag = lost_duel
+					}
+					rightfully_imprison_character_effect = {
+						IMPRISONER = root
+						TARGET = scope:rp_karl
+					}
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				desc = podregionalpersons.5.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.5.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					add_character_modifier = {
+						modifier = broken_authority_modifier
+						years = 1
+					}
+					scope:rp_karl = {
+						add_character_flag = lost_duel
+					}
+					rightfully_imprison_character_effect = {
+						IMPRISONER = root
+						TARGET = scope:rp_karl
+					}
+				}
+			}
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.5.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.5.critical.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						silent_disappearance_effect = yes
+					}
+					add_character_modifier = {
+						modifier = broken_authority_modifier
+						years = 5
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+
+podregionalpersons.6 = {
+	#Karl : vampire prowess road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.6.t
+	desc = podregionalpersons.6.desc
+	theme = inquisition
+	left_portrait = {
+		character = scope:rp_karl
+		animation = personality_callous
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Karl_Shreckt"
+			age = 43
+			gender = male
+			dynasty = none
+			martial = 20
+			learning = 10
+			stewardship = 15
+			diplomacy = 5
+			intrigue = 10
+			prowess = 30
+			faith = faith:shadowinquisition
+			culture = culture:bavarian
+			trait = education_martial_prowess_4
+			trait = intellect_good_1
+			trait = callous
+			trait = zealous
+			trait = stubborn
+			trait = lifestyle_blademaster
+			trait = supehunter
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_karl
+			after_creation = {
+				give_nickname = nick_vampire_killer
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.6.a
+		duel = {
+			skill = prowess
+			value = 20
+			60 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.6.effect.success.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.6.success
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						add_character_flag = lost_duel
+					}
+					rightfully_imprison_character_effect = {
+						IMPRISONER = root
+						TARGET = scope:rp_karl
+					}
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				desc = podregionalpersons.6.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.6.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						add_character_flag = lost_duel
+					}
+					POD_add_wound_trait = { TRAIT = wounded_3 }
+					add_trait = scarred
+					rightfully_imprison_character_effect = {
+						IMPRISONER = root
+						TARGET = scope:rp_karl
+					}
+				}
+			}
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.6.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.6.critical.failure
+					left_icon = root
+					right_icon = scope:rp_karl
+					scope:rp_karl = {
+						silent_disappearance_effect = yes
+					}
+					death = {
+						death_reason = death_burned
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+#Ulf Hall
+
+podregionalpersons.7 = {
+	#Warning about Hall
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.7.t
+	desc = podregionalpersons.7.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.7.a
+		
+		custom_tooltip = podregionalpersons.2.custom
+		
+		trigger_event = {
+			id = podregionalpersons.8
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.7.b
+		
+		trigger = {
+			has_faith = faith:viaeinherjar
+		}
+		
+		
+		trigger_event = {
+			id = podregionalpersons.13
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.7.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.8 = {
+	#Hall : Raid road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.8.t
+	desc = podregionalpersons.8.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.8.a
+		duel = {
+			skill = martial
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.8.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.9
+					days = 7
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				desc = podregionalpersons.8.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.8.failure
+					left_icon = root
+					add_trait = maimed
+				}
+				trigger_event = {
+					id = podregionalpersons.9
+					days = 7
+				}
+			}
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.8.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.10
+					days = 7
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.8.b
+		
+		duel = {
+			skill = intrigue
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.8.effect.success.descb
+				
+				trigger_event = {
+					id = podregionalpersons.11
+					days = 7
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.8.critical.failure.effect.descb
+				
+				trigger_event = {
+					id = podregionalpersons.12
+					days = 7
+				}
+			}
+		}
+		
+	}
+	
+}
+
+podregionalpersons.9 = {
+	#Hall : raid road, final duel
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.9.t
+	desc = podregionalpersons.9.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.9.a
+		
+		duel = {
+			skill = prowess
+			value = 40
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.9.effect.success.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.9.success
+					left_icon = root
+					add_gold = 1500
+				}
+				
+			}
+			35 = {
+				trigger = { scope:attacker ?= { POD_immune_to_fire_trigger = no } } #???
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.9.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.9.critical.failure
+					left_icon = root
+					pod_death_no_killer = {
+						death_reason = death_burned
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.9.b
+		
+		add_gold = 500
+	}
+}
+
+podregionalpersons.10 = {
+	#Hall : Raid martial defeat
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.10.t
+	desc = podregionalpersons.10.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.10.a
+		
+		add_character_modifier = {
+			modifier = broken_authority_modifier
+			years = 1
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.10.b
+		
+		add_prestige = major_prestige_loss
+		
+	}
+	
+}
+
+
+podregionalpersons.11 = {
+	#Hall : Raid intrigue
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.11.t
+	desc = podregionalpersons.11.desc
+	theme = gangrel_coa
+	left_portrait = {
+		character = scope:rp_brand
+		animation = fear
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Brand_Gyrdsson"
+			age = 33
+			gender = male
+			dynasty = none
+			diplomacy = 10
+			stewardship = 10
+			learning = 12
+			martial = 13
+			prowess = 20
+			faith = faith:viaeinherjar
+			culture = culture:norse
+			trait = education_martial_prowess_4
+			trait = sorcerer 
+			trait = just
+			trait = zealous
+			trait = stubborn
+			trait = lifestyle_blademaster
+			trait = mortal
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_brand
+			after_creation = {
+				give_nickname = nick_last_valdaermen
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.11.a
+		
+		add_gold = 500
+		
+		scope:rp_brand = {
+			add_character_flag = lost_duel
+		}
+		rightfully_imprison_character_effect = {
+			IMPRISONER = root
+			TARGET = scope:rp_brand
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.11.b
+		
+		scope:rp_brand = {
+			select_and_move_to_pool_effect = yes
+		}
+		
+		add_gold = 1500
+	}
+	
+}
+
+podregionalpersons.12 = {
+	#Hall : Raid intrigue defeat
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.12.t
+	desc = podregionalpersons.12.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.12.a
+		
+		add_character_modifier = {
+			modifier = broken_authority_modifier
+			years = 1
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.12.b
+		
+		add_prestige = major_prestige_loss
+		
+	}
+	
+}
+
+
+podregionalpersons.13 = {
+	#Hall : Ally road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.13.t
+	desc = podregionalpersons.13.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.13.a
+		duel = {
+			skill = diplomacy
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.13.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.14
+					days = 7
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.13.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.13.critical.failure
+					left_icon = root
+					add_gold = 100
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.13.b
+		
+		add_gold = 250
+		
+	}
+	
+}
+
+podregionalpersons.14 = {
+	#Hall : Ally final
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.14.t
+	desc = podregionalpersons.14.desc
+	theme = gangrel_coa
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.14.a
+		
+		capital_province = {
+			add_province_modifier = {
+				modifier = runemages_community_modifier
+				years = 50
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.14.b
+		
+		add_gold = 1500
+		
+		add_piety = -200
+	}
+}
+
+# Last Cathar
+
+podregionalpersons.15 = {
+	#Warning about Cathar
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.15.t
+	desc = podregionalpersons.15.desc
+	theme = faith
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.15.a
+		
+		trigger_event = {
+			id = podregionalpersons.16
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.15.b
+		
+		trigger_event = {
+			id = podregionalpersons.17
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.15.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.16 = {
+	#Cathar : Friendly
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.16.t
+	desc = podregionalpersons.16.desc
+	theme = faith
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.16.a
+		
+		set_character_faith = faith:viapura
+		
+		add_character_modifier = {
+			modifier = POD_faith_commited_modifier
+			years = 100
+		}
+		
+		if = {
+			limit = {
+				POD_has_true_faith_trigger = no
+				OR = {
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			add_trait = truefaith
+		}
+		if = {
+			limit = {
+				has_trait = cynical
+			}
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.16.b
+		
+		add_character_modifier = {
+			modifier = pilgrimage_sympathetic_towards_faiths_modifier
+			years = 50
+		}
+	}
+	
+}
+
+podregionalpersons.17 = {
+	#Cathar : Unfriendly
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.17.t
+	desc = podregionalpersons.17.desc
+	theme = faith
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.17.a
+		
+		if = {
+			limit = {
+				NOT = { has_trait = cynical }
+				NOT = { has_trait = zealous }
+			}
+			add_trait = cynical
+		}
+		
+		capital_province = {
+			add_province_modifier = {
+				modifier = cathar_community_modifier
+				years = 100
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.17.b
+		
+		add_gold = 750
+		
+		add_character_modifier = {
+			modifier = cursed_by_cathar_modifier
+			years = 50
+		}
+	}
+	
+}
+
+#Strohmann
+
+podregionalpersons.18 = {
+	#Warning about Strohmann
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.18.t
+	desc = podregionalpersons.18.desc
+	theme = torture
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.18.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		custom_tooltip = podregionalpersons.18.custom
+		
+		trigger_event = {
+			id = podregionalpersons.19
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.18.b
+		
+		random_held_title = {
+			limit = {
+				tier = tier_county
+				development_level > 2
+			}
+			change_development_level = -2
+		}
+		
+		custom_tooltip = podregionalpersons.18.customb
+		
+		
+		trigger_event = {
+			id = podregionalpersons.21
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.18.c
+		
+		custom_tooltip = podregionalpersons.18.customc
+		
+	}
+	
+}
+
+podregionalpersons.19 = {
+	#Strohmann : Using the Inqui road
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.19.t
+	desc = podregionalpersons.19.desc
+	theme = torture
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.19.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		custom_tooltip = podregionalpersons.19.custom
+		
+		trigger_event = {
+			id = podregionalpersons.20
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.19.b
+		
+		POD_masquerade_exposure_decrease_effect = yes
+		
+		
+		custom_tooltip = podregionalpersons.19.customb
+		
+	}
+	
+	
+}
+
+podregionalpersons.20 = {
+	#Strohmann : End
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.20.t
+	desc = podregionalpersons.20.desc
+	theme = torture
+	left_portrait = {
+		character = scope:rp_strohmann
+		animation = personality_callous
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Strohmann"
+			age = 38
+			gender = male
+			dynasty = none
+			intrigue = 10
+			stewardship = 15
+			diplomacy = 5
+			martial = 5
+			learning = 15
+			faith = faith:innocence
+			culture = culture:saxon
+			trait = education_intrigue_4
+			trait = mortal
+			trait = sadistic
+			trait = deceitful
+			trait = ambitious
+			trait = torturer
+			trait = lifestyle_mystic
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_strohmann
+			after_creation = {
+				give_nickname = nick_most_wanted
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.20.a
+		
+		add_courtier = scope:rp_strohmann
+		
+		POD_masquerade_exposure_decrease_effect = yes
+		
+	}
+	
+	option = {
+		name = podregionalpersons.20.b
+		
+		add_courtier = scope:rp_strohmann
+		
+		add_dread = 20
+		
+	}
+	
+	
+}
+
+podregionalpersons.21 = {
+	#Strohmann : Letting him free
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.21.t
+	desc = podregionalpersons.21.desc
+	theme = torture
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.21.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		custom_tooltip = podregionalpersons.21.custom
+		
+		trigger_event = {
+			id = podregionalpersons.20
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.21.b
+		
+		POD_masquerade_exposure_decrease_effect = yes
+		
+		custom_tooltip = podregionalpersons.21.customb
+		
+	}
+	
+	
+}
+
+#Tariq
+podregionalpersons.22 = {
+	#Tariq : Warning
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.22.t
+	desc = podregionalpersons.22.desc
+	theme = torture
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.22.a
+		
+		custom_tooltip = podregionalpersons.22.custom
+		
+		trigger_event = {
+			id = podregionalpersons.23
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.22.b
+		
+		add_gold = 250
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.23 = {
+	#Tariq : Crusaders' reprisal
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.23.t
+	desc = podregionalpersons.23.desc
+	theme = torture
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.23.a
+		duel = {
+			skill = martial
+			value = 15
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.23.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.24
+					days = 7
+				}
+				
+			}
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				desc = podregionalpersons.23.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.23.critical.failure
+					left_icon = root
+					POD_masquerade_exposure_increase_effect = yes
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.23.b
+		
+		custom_tooltip = podregionalpersons.23.custom
+		
+	}
+	
+}
+
+podregionalpersons.24 = {
+	#Tariq : Bakr' reprisal
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.24.t
+	desc = podregionalpersons.24.desc
+	theme = torture
+	left_portrait = {
+		character = scope:rp_tariq
+		animation = personality_bold
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Tariq"
+			age = 30
+			gender = male
+			dynasty = none
+			martial = 10
+			learning = 5
+			stewardship = 10
+			diplomacy = 5
+			intrigue = 10
+			prowess = 20
+			faith = faith:innocence
+			culture = culture:levantine
+			trait = education_martial_prowess_4
+			trait = mortal
+			trait = patient
+			trait = content
+			trait = brave
+			trait = lifestyle_blademaster
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_tariq
+			after_creation = {
+				give_nickname = nick_the_silent
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.24.a
+		duel = {
+			skill = prowess
+			value = 50
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.24.effect.success.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.24.success
+					left_icon = root
+					right_icon = scope:rp_tariq
+					add_courtier = scope:rp_tariq
+				}
+			}
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				desc = podregionalpersons.24.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.24.critical.failure
+					left_icon = root
+					death = {
+						death_reason = death_duel
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.24.b
+		
+		custom_tooltip = podregionalpersons.24.custom
+		
+		add_prestige = -1000
+		
+		add_courtier = scope:rp_tariq
+	}
+	
+}
+
+#Aftermath of the 4th
+podregionalpersons.25 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.25.t
+	desc = podregionalpersons.25.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.25.a
+		
+		trigger_event = {
+			id = podregionalpersons.26
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.25.b
+		
+		trigger_event = {
+			id = podregionalpersons.27
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.25.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+#Aftermath of the 4th : Welcoming the refugees
+podregionalpersons.26 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.26.t
+	desc = podregionalpersons.26.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.26.a
+		
+		capital_county = {
+			add_county_modifier = {
+				modifier = byzantine_community_modifier
+				years = 50
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.26.b
+		
+		add_character_modifier = shard_hagia_modifier
+		
+		trigger_event = {
+			id = podregionalpersons.28
+			days = { 30 45 }
+		}
+	}
+	
+}
+
+#Aftermath of the 4th : Stealing the refugees
+podregionalpersons.27 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.27.t
+	desc = podregionalpersons.27.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.27.a
+		
+		add_gold = 250
+	}
+	
+	option = {
+		name = podregionalpersons.27.b
+		
+		add_character_modifier = shard_hagia_modifier
+		
+		trigger_event = {
+			id = podregionalpersons.28
+			days = { 30 45 }
+		}
+	}
+	
+}
+
+#Aftermath of the 4th : Michael's call
+podregionalpersons.28 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.28.t
+	desc = podregionalpersons.28.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		
+	}
+	
+	option = {
+		name = podregionalpersons.28.a
+		
+		set_character_faith = faith:viaarchangeli
+		
+		add_stress = medium_stress_gain
+	}
+	
+	option = {
+		name = podregionalpersons.28.b
+		
+		remove_character_modifier = shard_hagia_modifier
+		
+	}
+	
+}
+
+#Roderigo : warning
+
+podregionalpersons.29 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.29.t
+	desc = podregionalpersons.29.desc
+	theme = ossuary
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.29.a
+		
+		remove_short_term_gold = 100
+		
+		trigger_event = {
+			id = podregionalpersons.30
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.29.b
+		
+		duel = {
+			skill = intrigue
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.29.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.30
+					days = 35
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.29.critical.failure.effect.desc
+				
+				send_interface_toast = {
+					title = podregionalpersons.29.critical.failure
+					left_icon = root
+				}
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.29.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+}
+
+#Roderigo : step 1
+
+podregionalpersons.30 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.30.t
+	desc = podregionalpersons.30.desc
+	theme = ossuary
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.30.a
+		
+		add_character_modifier = roderigo_step1_modifier
+		
+		trigger_event = {
+			id = podregionalpersons.32
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.30.b
+		
+		trigger_event = {
+			id = podregionalpersons.31
+			days = 7
+		}
+		
+	}
+}
+
+#Roderigo : Embrace
+
+podregionalpersons.31 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.31.t
+	desc = podregionalpersons.31.desc
+	theme = ossuary
+	left_portrait = {
+		character = scope:rp_roderigo
+		animation = personality_rational
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Roderigo_al_Dakhil"
+			age = 22
+			gender = male
+			dynasty = none
+			learning = 10
+			prowess = 8
+			stewardship = 13
+			diplomacy = 10
+			intrigue = 10
+			faith = faith:innocence
+			culture = culture:castilian
+			trait = education_learning_4
+			trait = mortal
+			trait = patient
+			trait = shy
+			trait = diligent
+			trait = lifestyle_mystic
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_roderigo
+			after_creation = {
+				give_nickname = nick_padre_craneo
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.31.a
+		
+		add_courtier = scope:rp_roderigo
+		
+		if = {
+			limit = {
+				has_character_modifier = roderigo_step1_modifier
+			}
+			remove_character_modifier = roderigo_step1_modifier
+		}
+		
+		else_if = {
+			limit = {
+				has_character_modifier = roderigo_step2_modifier
+			}
+			remove_character_modifier = roderigo_step2_modifier
+		}
+		
+		else_if = {
+			limit = {
+				has_character_modifier = roderigo_step3_modifier
+			}
+			remove_character_modifier = roderigo_step3_modifier
+		}
+	}
+	
+}
+
+#Roderigo : step 2
+
+podregionalpersons.32 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.32.t
+	desc = podregionalpersons.32.desc
+	theme = ossuary
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.32.a
+		
+		if = {
+			limit = {
+				has_character_modifier = roderigo_step1_modifier
+			}
+			remove_character_modifier = roderigo_step1_modifier
+		}
+		
+		add_character_modifier = roderigo_step2_modifier
+		
+		trigger_event = {
+			id = podregionalpersons.33
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.32.b
+		
+		trigger_event = {
+			id = podregionalpersons.31
+			days = 7
+		}
+		
+	}
+}
+
+#Roderigo : step 3
+
+podregionalpersons.33 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.33.t
+	desc = podregionalpersons.33.desc
+	theme = ossuary
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.33.a
+		
+		if = {
+			limit = {
+				has_character_modifier = roderigo_step1_modifier
+			}
+			remove_character_modifier = roderigo_step1_modifier
+		}
+		
+		if = {
+			limit = {
+				has_character_modifier = roderigo_step2_modifier
+			}
+			remove_character_modifier = roderigo_step2_modifier
+		}
+		
+		add_character_modifier = roderigo_step3_modifier
+		
+		custom_tooltip = podregionalpersons.33.custom
+		
+		trigger_event = {
+			id = podregionalpersons.34
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.33.b
+		
+		trigger_event = {
+			id = podregionalpersons.31
+			days = 7
+		}
+		
+	}
+}
+
+#Roderigo : step 4
+
+podregionalpersons.34 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.34.t
+	desc = podregionalpersons.34.desc
+	theme = ossuary
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.34.a
+		
+		if = {
+			limit = {
+				has_character_modifier = roderigo_step3_modifier
+			}
+			remove_character_modifier = roderigo_step3_modifier
+		}
+		
+		add_stress = monumental_stress_gain
+		
+		if = {
+			limit = {
+				NOT = { has_trait = lunatic }
+			}
+			add_trait = lunatic_1
+		}
+		
+		add_diplomacy_skill = -15
+		add_stewardship_skill = -15
+		add_learning_skill = 15
+	}
+	
+}
+
+#Talley : warning
+
+podregionalpersons.35 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.35.t
+	desc = podregionalpersons.35.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.35.a
+		
+		duel = {
+			skill = diplomacy
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.35.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.36
+					days = 35
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.35.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.37
+					days = 35
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.35.b
+		
+		duel = {
+			skill = intrigue
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.35.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.36
+					days = 35
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.35.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.37
+					days = 35
+				}
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.35.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+}
+
+#Talley : a rival
+
+podregionalpersons.37 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.37.t
+	desc = podregionalpersons.37.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.37.a
+		
+		remove_short_term_gold = 150
+		
+		trigger_event = {
+			id = podregionalpersons.36
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.37.b
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		trigger_event = {
+			id = podregionalpersons.36
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.37.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+}
+
+#Talley : the trail
+
+podregionalpersons.36 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.36.t
+	desc = podregionalpersons.36.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.36.a
+		
+		duel = {
+			skill = prowess
+			value = 45
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.36.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.39
+					days = 35
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.36.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.38
+					days = 35
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.36.b
+		
+		duel = {
+			skill = martial
+			value = 15
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.36.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.39
+					days = 35
+				}
+				
+			}
+			35 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -2.5
+				}
+				
+				desc = podregionalpersons.36.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.38
+					days = 35
+				}
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.36.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+}
+
+#Talley : the wolves
+
+podregionalpersons.38 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.38.t
+	desc = podregionalpersons.38.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.38.a
+		
+		add_character_modifier = {
+			modifier = hunted_by_wolves_modifier
+			years = 10
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.39
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.38.b
+		
+		capital_province = {
+			add_province_modifier = {
+				modifier = loose_wolves_modifier
+				years = 50
+			}
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.39
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.38.c
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+}
+
+podregionalpersons.39 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.39.t
+	desc = podregionalpersons.39.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_talley
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Talley"
+			age = 44
+			gender = male
+			dynasty = none
+			intrigue = 10
+			prowess = 10
+			diplomacy = 8
+			stewardship = 5
+			learning = 5
+			faith = faith:innocence
+			culture = culture:english
+			trait = education_martial_prowess_4
+			trait = mortal
+			martial = 14
+			trait = calm
+			trait = diligent
+			trait = brave
+			trait = lifestyle_blademaster
+			trait = strategist
+			trait = aggressive_attacker
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_talley
+			after_creation = {
+				give_nickname = nick_the_hound
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.39.a
+		
+		add_courtier = scope:rp_talley
+		
+	}
+	
+}
+
+# Kuei Jin Invasion
+
+# Warning event
+
+#podregionalpersons.40 = {
+#	hidden = yes
+#	scope = none
+#	
+#	immediate = {
+#		every_player = {
+#			limit = {
+#				any_realm_province = {
+#					geographical_region = world_steppe
+#				}
+#				OR = {
+#					is_vampire_trigger = yes
+#					has_trait = kueijin
+#				}
+#			}
+#			trigger_event = {
+#				id = podregionalpersons.41
+#			}
+#		}
+#		
+#		trigger_event = {
+#			id = podregionalpersons.42
+#			days = { 10 15 }
+#		}
+#	}
+#	
+#}
+#
+#podregionalpersons.41 = {
+#	type = character_event
+#	content_source = dlc_POD
+#	title = podregionalpersons.41.t
+#	desc = podregionalpersons.41.desc
+#	theme = vampire
+#	left_portrait = {
+#		character = root
+#		animation = worry
+#	}
+#	
+#	widget = {
+#		gui = "POD_shader_event_fog_alley_night"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+#	immediate = {
+#		play_music_cue = "mx_cue_general_crusade_event_1"
+#	}
+#	
+#	trigger = {
+#	}
+#	
+#	option = {
+#		name = podregionalpersons.41.a
+#		
+#		custom_tooltip = podregionalpersons.41.player_warningb
+#	}
+#}
+#
+## Spawn
+#
+#podregionalpersons.42 = {
+#	scope = none
+#	hidden = yes
+#	
+#	immediate = {
+#		find_title_for_quincunx_spawn_effect = yes
+#	}
+#}
+#
+#
+#### Spawn Leader
+#podregionalpersons.43 = {
+#	scope = none
+#	hidden = yes
+#	
+#	trigger = {
+#		scope:quincunx_county = {
+#			holder = {
+#				OR = { # Last resort check to make sure that we don't automatically game over a player
+#				is_ai = yes # Either they have to be AI
+#				any_held_title = { # Or they have to hold land elsewhere
+#				tier = tier_county
+#				NOT = { this = scope:quincunx_county }
+#			}
+#		}
+#	}
+#}
+#}
+#
+#immediate = {
+#	debug_log = "Quincunx Vanguard appeared!"
+#	debug_log_date = yes
+#	create_quincunxwarlord_effect = yes
+#}
+#}
+
+#Elaine
+
+podregionalpersons.54 = {
+	#Warning about Elaine
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.43.t
+	desc = podregionalpersons.43.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.43.a
+		
+		if = {
+			limit = {
+				NOT = {
+					has_trait = bloodsorcery
+					has_trait = bloodsorceryadvanced
+				}
+			}
+			add_trait = bloodsorcery
+			add_character_flag = remove_clan_bloodmagic
+			add_character_flag = has_thaumaturgy_bloodmagic_flag
+		}
+		
+		add_sanguine_lifestyle_xp = 100
+		
+		add_character_modifier = {
+			modifier = elaine_knights1_modifier
+			years = 5
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.44
+			days = { 30 45 }
+		}
+	}
+	
+	
+	option = {
+		name = podregionalpersons.43.b
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.44 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.44.t
+	desc = podregionalpersons.44.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.44.a
+		
+		add_sanguine_lifestyle_xp = 300
+		
+		remove_character_modifier = elaine_knights1_modifier
+		
+		add_character_modifier = {
+			modifier = elaine_knights2_modifier
+			years = 5
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.45
+			days = { 30 45 }
+		}
+	}
+	
+	
+	option = {
+		name = podregionalpersons.43.b
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+
+podregionalpersons.45 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.45.t
+	desc = podregionalpersons.45.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.45.a
+		
+		add_sanguine_lifestyle_xp = 700
+		
+		remove_character_modifier = elaine_knights2_modifier
+		
+		add_character_modifier = {
+			modifier = elaine_knights3_modifier
+			years = 5
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.46
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.45.b
+		
+		duel = {
+			skill = diplomacy
+			value = 10
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.45.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.47
+					days = 35
+				}
+			}
+			
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				desc = podregionalpersons.45.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.46
+					days = 35
+				}
+			}
+		}
+	}
+	option = {
+		name = podregionalpersons.43.b
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+#Elaine, failure
+podregionalpersons.46 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.46.t
+	desc = podregionalpersons.46.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.46.a
+		
+		add_character_modifier = {
+			modifier = dreadful_omen_modifier
+			years = 5
+		}
+		
+	}
+}
+
+#Elaine : End
+podregionalpersons.47 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.47.t
+	desc = podregionalpersons.47.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_elaine
+		animation = personality_rational
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Elaine_de_Calinot"
+			age = 37
+			gender = female
+			dynasty = none
+			intrigue = 8
+			stewardship = 14
+			diplomacy = 10
+			martial = 5
+			learning = 10
+			faith = faith:innocence
+			culture = culture:french
+			trait = education_learning_3
+			trait = mortal
+			trait = cynical
+			trait = stubborn
+			trait = ambitious
+			trait = sorcerer
+			trait = lifestyle_mystic
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_elaine
+			after_creation = {
+				give_nickname = nick_inquisitive_sorceress
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.47.a
+		
+		add_courtier = scope:rp_elaine
+		
+	}
+	
+	
+}
+
+
+#Mukthar
+
+podregionalpersons.48 = {
+	#Warning about Mukthar
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.48.t
+	desc = podregionalpersons.48.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.48.a
+		
+		remove_short_term_gold = 100
+		
+		trigger_event = {
+			id = podregionalpersons.49
+			days = { 30 45 }
+		}
+	}
+	
+	
+	option = {
+		name = podregionalpersons.48.b
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.49 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.49.t
+	desc = podregionalpersons.49.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.49.a
+		
+		duel = {
+			skill = intrigue
+			value = 10
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.49.effect.success.desc
+				
+				add_character_flag = foundmuktharweakness
+			}
+			
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				desc = podregionalpersons.49.critical.failure.effect.desc
+				
+			}
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.50
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.48.b
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.50 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.50.t
+	desc = podregionalpersons.50.desc
+	theme = vampire
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.50.a
+		
+		trigger = {
+			NOT = { has_character_flag = foundmuktharweakness }
+		}
+		
+		duel = {
+			skill = martial
+			value = 10
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				desc = podregionalpersons.50.effect.success.desc
+				
+				trigger_event = {
+					id = podregionalpersons.51
+					days = { 5 10 }
+				}
+			}
+			
+			13 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				
+				desc = podregionalpersons.50.critical.failure.effect.desc
+				
+				trigger_event = {
+					id = podregionalpersons.52
+					days = { 5 10 }
+				}
+			}
+		}
+		
+	}
+	
+	option = {
+		name = podregionalpersons.50.b
+		
+		trigger = { has_character_flag = foundmuktharweakness }
+		
+		remove_character_flag = foundmuktharweakness
+		
+		custom_tooltip = podregionalpersons.50.custom
+		
+		trigger_event = {
+			id = podregionalpersons.53
+			days = { 5 10 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.50.c
+		
+		trigger = {
+			NOT = { has_character_flag = foundmuktharweakness }
+		}
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+		add_prestige = -150
+		
+	}
+}
+
+#Mukthar defeated
+podregionalpersons.51 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.51.t
+	desc = podregionalpersons.51.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_mukhtar
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Mukthar_Bey"
+			age = 41
+			gender = male
+			dynasty = none
+			intrigue = 9
+			stewardship = 14
+			diplomacy = 9
+			martial = 10
+			learning = 5
+			prowess = 15
+			culture = culture:egyptian
+			faith = faith:viaequitum
+			trait = "education_martial_4"
+			trait = "vampire"
+			trait = "caitiff"
+			trait = "craven"
+			trait = "deceitful"
+			trait = "diligent"
+			trait = "gallant"
+			trait = "lifestyle_blademaster"
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_mukhtar
+			after_creation = {
+				give_nickname = nick_the_mamluk
+				add_trait = vampgeneration7
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.51.a
+		
+		add_gold = 150
+		add_prestige = 150
+		add_stress = medium_stress_loss
+		
+		scope:rp_mukhtar = {
+			add_character_flag = lost_duel
+		}
+		rightfully_imprison_character_effect = {
+			IMPRISONER = root
+			TARGET = scope:rp_mukhtar
+		}
+	}
+	
+}
+
+
+#Mukthar won
+podregionalpersons.52 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.52.t
+	desc = podregionalpersons.52.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_mukhtar
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Mukthar_Bey"
+			age = 41
+			gender = male
+			dynasty = none
+			intrigue = 9
+			stewardship = 14
+			diplomacy = 9
+			martial = 10
+			learning = 5
+			prowess = 15
+			culture = culture:egyptian
+			faith = faith:viaequitum
+			trait = "education_martial_4"
+			trait = "vampire"
+			trait = "caitiff"
+			trait = "craven"
+			trait = "deceitful"
+			trait = "diligent"
+			trait = "gallant"
+			trait = "lifestyle_blademaster"
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_mukhtar
+			after_creation = {
+				give_nickname = nick_the_mamluk
+				add_trait = vampgeneration7
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.52.a
+		
+		remove_short_term_gold = 150
+		add_prestige = -150
+		add_stress = medium_stress_gain
+		
+		hidden_effect = {
+			scope:rp_mukhtar = {
+				select_and_move_to_pool_effect = yes
+			}
+		}
+		
+		set_relation_rival = scope:rp_mukhtar
+	}
+	
+}
+
+#Mukthar : Good End
+podregionalpersons.53 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.53.t
+	desc = podregionalpersons.53.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_mukhtar
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Mukthar_Bey"
+			age = 41
+			gender = male
+			dynasty = none
+			intrigue = 9
+			stewardship = 14
+			diplomacy = 9
+			martial = 10
+			learning = 5
+			prowess = 15
+			culture = culture:egyptian
+			faith = faith:innocence
+			trait = "education_martial_4"
+			trait = "mortal"
+			trait = "craven"
+			trait = "deceitful"
+			trait = "diligent"
+			trait = "gallant"
+			trait = "lifestyle_blademaster"
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_mukhtar
+			after_creation = {
+				give_nickname = nick_the_mamluk
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.53.a
+		
+		add_courtier = scope:rp_mukhtar
+		
+	}
+	
+	
+}
+
+#Genevra
+
+podregionalpersons.64 = {
+	#Warning about Genevra
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.64.t
+	desc = podregionalpersons.64.desc
+	theme = inquisition
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.64.a
+		
+		trigger = {
+			is_vampire_trigger  = yes
+		}
+		
+		POD_masquerade_exposure_decrease_effect = yes
+		
+		remove_short_term_gold = 50
+		
+		trigger_event = {
+			id = podregionalpersons.66
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.64.b
+		
+		trigger = {
+			has_trait = supehunter
+		}
+		
+		add_character_modifier = genevra_interference_modifier
+		
+		
+		trigger_event = {
+			id = podregionalpersons.65
+			years = 3
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.64.c
+		
+		trigger = {
+			NOT = { has_trait = supehunter }
+		}
+		
+		custom_tooltip = podregionalpersons.7.customb
+		
+	}
+	
+}
+
+podregionalpersons.65 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.65.t
+	desc = podregionalpersons.65.desc
+	theme = vampire
+	left_portrait = {
+		character = scope:rp_genevra
+		animation = schadenfreude
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Genevra"
+			age = 27
+			gender = female
+			dynasty = none
+			learning = 7
+			stewardship = 10
+			intrigue = 4
+			diplomacy = 13
+			culture = culture:italian
+			faith = faith:innocence
+			trait = "education_intrigue_3"
+			trait = "mortal"
+			trait = "ambitious"
+			trait = "deceitful"
+			trait = "callous"
+			trait = "schemer"
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_genevra
+			after_creation = {
+				give_nickname = nick_ruthless_outsider
+			}
+		}
+		
+		remove_character_modifier = genevra_interference_modifier
+		
+	}
+	
+	option = {
+		name = podregionalpersons.65.a
+		
+		add_courtier = scope:rp_genevra
+		
+	}
+	
+	option = {
+		name = podregionalpersons.65.b
+		
+		add_prestige = 150
+		
+		scope:rp_genevra = {
+			death = {
+				death_reason = death_burned
+			}
+		}
+		
+	}
+	
+}
+
+podregionalpersons.66 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.66.t
+	desc = podregionalpersons.66.desc
+	theme = inquisition
+	
+	trigger = {
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = podregionalpersons.66.a
+		
+		POD_masquerade_exposure_decrease_effect = yes
+		
+		trigger_event = {
+			id = podregionalpersons.67
+			days = { 30 45 }
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.66.b
+		
+		add_character_modifier = {
+			modifier = intrigue_clandestine_informant_modifier
+			years = 5
+		}
+		
+		trigger_event = {
+			id = podregionalpersons.67
+			days = { 30 45 }
+		}
+	}
+	
+}
+
+podregionalpersons.67 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podregionalpersons.67.t
+	desc = podregionalpersons.67.desc
+	theme = inquisition
+	left_portrait = {
+		character = scope:rp_genevra
+		animation = schadenfreude
+	}
+	
+	trigger = {
+	}
+	
+	immediate = {
+		create_character = {
+			name = "Genevra"
+			age = 27
+			gender = female
+			dynasty = none
+			learning = 7
+			stewardship = 10
+			intrigue = 4
+			diplomacy = 13
+			culture = culture:italian
+			faith = faith:innocence
+			trait = "education_intrigue_3"
+			trait = "mortal"
+			trait = "ambitious"
+			trait = "deceitful"
+			trait = "callous"
+			trait = "schemer"
+			random_traits = no
+			location = root.capital_province
+			save_scope_as = rp_genevra
+			after_creation = {
+				give_nickname = nick_ruthless_outsider
+			}
+		}
+	}
+	
+	option = {
+		name = podregionalpersons.67.a
+		
+		POD_masquerade_exposure_increase_effect = yes
+		
+		add_courtier = scope:rp_genevra
+		
+	}
+	
+	option = {
+		name = podregionalpersons.67.b
+		
+		remove_short_term_gold = 100
+		
+		add_courtier = scope:rp_genevra
+		
+	}
+	
+	option = {
+		name = podregionalpersons.67.c
+		
+		trigger = {
+			prowess > 55
+		}
+		
+		custom_tooltip = elysium_security_tooltip
+		
+		add_courtier = scope:rp_genevra
+		
+	}
+	
+	option = {
+		name = podregionalpersons.67.d
+		
+		trigger = {
+			OR = {
+				has_trait = dominateadvanced
+				has_trait = presenceadvanced
+			}
+		}
+		
+		custom_tooltip = ending_elysium_tooltip
+		
+		add_courtier = scope:rp_genevra
+		
+	}
+	
+	option = {
+		name = podregionalpersons.67.e
+		
+		scope:rp_genevra = {
+			death = {
+				death_reason = death_disappearance
+			}
+		}
+		
+	}
+}

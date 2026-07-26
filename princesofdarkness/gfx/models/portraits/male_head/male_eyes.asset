@@ -1,0 +1,260 @@
+pdxmesh = {
+	name = "male_eyes_mesh"
+	file = "male_eyes.mesh"
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_diffuse.dds"
+		texture_normal = "male_eyes_normal.dds"
+		texture_specular = "male_eyes_properties.dds"
+		texture = { file = "male_eyes_ssao_color.dds" index = 3 }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "male_eyes_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+}
+
+entity = {
+	name = "male_eyes_no_shadow_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_no_shadow_diffuse.dds"
+	}
+}
+
+entity = {
+	name = "male_eyes_dark_iris_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_dark_iris_diffuse.dds"
+	}
+}
+
+entity = {
+	name = "male_eyes_asian_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_asian_diffuse.dds"
+	}
+}
+
+entity = {
+	name = "male_eyes_bloodshot_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_bloodshot_diffuse.dds"
+	}
+}
+
+entity = {
+	name = "male_eyes_blind_entity"
+	pdxmesh = "male_eyes_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			color_mask_remap_interval = {
+				interval = {0.0 1.0}
+			}
+		}
+	}
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_eyes_blind_diffuse.dds"
+	}
+}
+
+
+# NOTE FOR POD:
+# the vanilla eye shader assumes that you'll further blend its colors with the character's genetic eye color
+# which will lead to visual glitches unless we use a custom shader
+# add these lines to the meshsettings to prevent this:
+#	additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+#	shader = "portrait_eye"
+#	shader_file = "gfx/FX/jomini/portrait.shader"
+
+entity = {
+	name = "male_eyes_POD_serp_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_serp_eyes_diffuse.dds"
+		#texture_normal = "male_POD_serp_eyes_normal.dds"
+		#texture_specular = "male_POD_serp_eyes_properties.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "male_eyes_POD_beasty_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_beasty_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "male_eyes_POD_haunty_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+		name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_haunty_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_frenzy_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_frenzy_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_bloodgorged_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_bloodgorged_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_pisha_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_pisha_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_abyss_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_abyss_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_kinginyellow_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_kinginyellow_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+    name = "male_eyes_POD_red_eyes_entity"
+	pdxmesh = "male_eyes_mesh"
+	
+	meshsettings = {
+	    name = "male_eyesShape"
+		index = 0
+		texture_diffuse = "male_POD_red_eyes_diffuse.dds"
+		additional_shader_defines = { "IGNORE_GENETIC_EYE_COLOR" }
+		shader = "portrait_eye"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}

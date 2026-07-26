@@ -1,0 +1,707 @@
+﻿tempest_custom_name = {
+	type = character
+
+	text = {
+		trigger = {
+			current_date < 1605.1.1
+		}
+		localization_key = umbra_realm_sea_of_shadow
+	}
+
+	text = {
+		trigger = {
+			current_date > 1999.1.1
+		}
+		localization_key = umbra_realm_stormwall
+	}
+	
+	text = {
+		fallback = yes
+		localization_key = umbra_realm_tempest
+	}
+}
+
+tempest_custom_desc = {
+	type = character
+
+	text = {
+		trigger = {
+			current_date < 1605.1.1
+		}
+		localization_key = umbra_realm_sea_of_shadow_desc
+	}
+
+	text = {
+		trigger = {
+			current_date > 1999.1.1
+		}
+		localization_key = umbra_realm_stormwall_desc
+	}
+	
+	text = {
+		fallback = yes
+		localization_key = umbra_realm_tempest_desc
+	}
+}
+
+# GreatDemonName = {
+# 	type = character
+# 	text = {
+# 		trigger = {
+# 			NOT = { has_variable = great_demon }
+# 		}
+# 		localization_key = greatdemon_name_fallback
+# 	}
+# 	text = {
+# 		trigger = {
+# 			var:great_demon = flag:abaddon
+# 		}
+# 		localization_key = greatdemon_name_abaddon
+# 	}
+# 	text = {
+# 		trigger = {
+# 			var:great_demon = flag:asmodeus
+# 		}
+# 		localization_key = greatdemon_name_asmodeus
+# 	}
+# 	text = {
+# 		trigger = {
+# 			var:great_demon = flag:azrael
+# 		}
+# 		localization_key = greatdemon_name_azrael
+# 	}
+# 	text = {
+# 		trigger = {
+# 			var:great_demon = flag:belial
+# 		}
+# 		localization_key = greatdemon_name_belial
+# 	}
+# 	text = {
+# 		trigger = {
+# 			var:great_demon = flag:dagon
+# 		}
+# 		localization_key = greatdemon_name_dagon
+# 	}
+# }
+
+gauntlet_level = {
+	type = province
+
+	text = {
+		trigger = {
+			gauntlet_level = 0
+		}
+		localization_key = gauntletname0
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 1
+		}
+		localization_key = gauntletname1
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 2
+		}
+		localization_key = gauntletname2
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 3
+		}
+		localization_key = gauntletname3
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 4
+		}
+		localization_key = gauntletname4
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 5
+		}
+		localization_key = gauntletname5
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 6
+		}
+		localization_key = gauntletname6
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 7
+		}
+		localization_key = gauntletname7
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 8
+		}
+		localization_key = gauntletname8
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 9
+		}
+		localization_key = gauntletname9
+	}
+
+	text = {
+		trigger = {
+			gauntlet_level = 10
+		}
+		localization_key = gauntletname10
+	}
+	
+	text = {
+		fallback = yes
+		localization_key = NONE
+	}
+}
+
+shroud_level = {
+	type = province
+
+	text = {
+		trigger = {
+			shroud_level = 0
+		}
+		localization_key = shroudname0
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 1
+		}
+		localization_key = shroudname1
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 2
+		}
+		localization_key = shroudname2
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 3
+		}
+		localization_key = shroudname3
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 4
+		}
+		localization_key = shroudname4
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 5
+		}
+		localization_key = shroudname5
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 6
+		}
+		localization_key = shroudname6
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 7
+		}
+		localization_key = shroudname7
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 8
+		}
+		localization_key = shroudname8
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 9
+		}
+		localization_key = shroudname9
+	}
+
+	text = {
+		trigger = {
+			shroud_level = 10
+		}
+		localization_key = shroudname10
+	}
+	
+	text = {
+		fallback = yes
+		localization_key = NONE
+	}
+}
+
+
+#######
+# Pet #
+#######
+
+### Dragon ###
+DragonStoryName = {
+	type = character
+
+	text = {
+		trigger = {
+			exists = var:story_cycle_dragon_name
+			var:story_cycle_dragon_name = flag:custom
+		}
+		localization_key = dragon_name
+	}
+	text = {
+		fallback = yes
+		localization_key = cat_name_mite
+	}
+}
+
+DragonStoryNamePossessive = {
+	type = character
+	
+	text = {
+		localization_key = dragon_name_possessive
+	}
+}
+
+DragonStoryHerHis = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:female
+			}
+		}
+		localization_key = dragon_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:male
+			}
+		}
+		localization_key = dragon_gender_his
+	}
+}
+
+DragonStoryHerHim = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:female
+			}
+		}
+		localization_key = dragon_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:male
+			}
+		}
+		localization_key = dragon_gender_him
+	}
+}
+
+DragonStoryGirlBoy = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:female
+			}
+		}
+		localization_key = girl
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:male
+			}
+		}
+		localization_key = boy
+	}
+}
+
+DragonStorySheHe = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:female
+			}
+		}
+		localization_key = dragon_gender_she
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:male
+			}
+		}
+		localization_key = dragon_gender_he
+	}
+}
+
+DragonStoryFemaleMale = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:female
+			}
+		}
+		localization_key = dragon_gender_female
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_dragon 
+				var:dragon_gender = flag:male
+			}
+		}
+		localization_key = dragon_gender_male
+	}
+}
+
+### Unicorn ###
+UnicornStoryName = {
+	type = character
+
+	text = {
+		trigger = {
+			exists = var:story_cycle_unicorn_name
+			var:story_cycle_unicorn_name = flag:custom
+		}
+		localization_key = unicorn_name
+	}
+	text = {
+		fallback = yes
+		localization_key = cat_name_mite
+	}
+}
+
+UnicornStoryNamePossessive = {
+	type = character
+	
+	text = {
+		localization_key = unicorn_name_possessive
+	}
+}
+
+UnicornStoryHerHis = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:female
+			}
+		}
+		localization_key = unicorn_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:male
+			}
+		}
+		localization_key = unicorn_gender_his
+	}
+}
+
+UnicornStoryHerHim = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:female
+			}
+		}
+		localization_key = unicorn_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:male
+			}
+		}
+		localization_key = unicorn_gender_him
+	}
+}
+
+UnicornStoryGirlBoy = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:female
+			}
+		}
+		localization_key = girl
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:male
+			}
+		}
+		localization_key = boy
+	}
+}
+
+UnicornStorySheHe = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:female
+			}
+		}
+		localization_key = unicorn_gender_she
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:male
+			}
+		}
+		localization_key = unicorn_gender_he
+	}
+}
+
+UnicornStoryFemaleMale = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:female
+			}
+		}
+		localization_key = unicorn_gender_female
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_unicorn 
+				var:unicorn_gender = flag:male
+			}
+		}
+		localization_key = unicorn_gender_male
+	}
+}
+
+### Pegasus ###
+PegasusStoryName = {
+	type = character
+
+	text = {
+		trigger = {
+			exists = var:story_cycle_pegasus_name
+			var:story_cycle_pegasus_name = flag:custom
+		}
+		localization_key = pegasus_name
+	}
+	text = {
+		fallback = yes
+		localization_key = cat_name_mite
+	}
+}
+
+PegasusStoryNamePossessive = {
+	type = character
+	
+	text = {
+		localization_key = pegasus_name_possessive
+	}
+}
+
+PegasusStoryHerHis = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:female
+			}
+		}
+		localization_key = pegasus_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:male
+			}
+		}
+		localization_key = pegasus_gender_his
+	}
+}
+
+PegasusStoryHerHim = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:female
+			}
+		}
+		localization_key = pegasus_gender_her
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:male
+			}
+		}
+		localization_key = pegasus_gender_him
+	}
+}
+
+PegasusStoryGirlBoy = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:female
+			}
+		}
+		localization_key = girl
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:male
+			}
+		}
+		localization_key = boy
+	}
+}
+
+PegasusStorySheHe = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:female
+			}
+		}
+		localization_key = pegasus_gender_she
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:male
+			}
+		}
+		localization_key = pegasus_gender_he
+	}
+}
+
+PegasusStoryFemaleMale = {
+	type = character
+
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:female
+			}
+		}
+		localization_key = pegasus_gender_female
+	}
+	text = {
+		trigger = {
+			any_owned_story = {
+				story_type = POD_story_pet_pegasus 
+				var:pegasus_gender = flag:male
+			}
+		}
+		localization_key = pegasus_gender_male
+	}
+}
+
+### Chances ###
+
+PlanetarygiftsAddicionalChance = {
+	type = character
+
+	text = {
+		trigger = {
+			piety_level >= 5
+		}
+		localization_key = PlanetarygiftsAddicionalChancePlus75
+	}
+	text = {
+		trigger = {
+			piety_level >= 4
+		}
+		localization_key = PlanetarygiftsAddicionalChancePlus50
+	}
+	text = {
+		trigger = {
+			piety_level >= 3
+		}
+		localization_key = PlanetarygiftsAddicionalChancePlus25
+	}
+}

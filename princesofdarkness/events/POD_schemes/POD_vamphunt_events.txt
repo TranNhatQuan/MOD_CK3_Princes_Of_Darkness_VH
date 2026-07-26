@@ -1,0 +1,621 @@
+﻿namespace = POD_vamphunt
+
+# Journey wrapper event for the old hunt scheme
+POD_vamphunt.7000 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = { var:current_journey.var:target = { is_alive = no } }
+			POD_clear_journeys_with_target_effect = { TARGET = var:current_journey.var:target }
+		}
+		else = {
+			var:current_journey.var:target = {
+				save_scope_as = target
+			}
+			if = {
+				limit = { is_vampire_trigger = yes }
+				trigger_event = POD_vamphunt.1
+			}
+			else_if = {
+				limit = { has_trait = kueijin }
+				trigger_event = POD_vamphunt.11
+			}
+			else_if = {
+				limit = { has_trait = banemummy }
+				trigger_event = POD_vamphunt.21
+			}
+			else_if = {
+				limit = { has_trait = ghoul }
+				save_scope_as = attacker
+				scope:target = { save_scope_as = defender }
+				configure_start_single_combat_effect = {
+					SC_INITIATOR = scope:attacker
+					SC_ATTACKER = scope:attacker
+					SC_DEFENDER = scope:defender
+					FATALITY = no
+					FIXED = no
+					LOCALE = throne_room
+					OUTPUT_EVENT =  POD_vamphunt.31
+					INVALIDATION_EVENT = tribal.1022
+				}
+			}
+		}
+	}
+}
+
+POD_vamphunt.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_vamphunt.1.t
+	desc =  POD_vamphunt.1.desc
+	theme = vamphunt
+
+	left_portrait = {
+		character = root
+		animation = anger
+	}	
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}
+
+	widgets = {
+		widget = {
+			gui = "POD_event_window_widget_hunt"
+			container = "custom_widgets_container"
+		}
+		widget = {
+			gui = "POD_shader_event_fog_alley_night"
+			container = "background_shader_vfx_container"
+		}
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim	
+		}
+		
+		scope:victim = {
+			if = {
+				limit = {
+					NOT = {	has_character_flag = POD_resonance_negligible_flag }
+					NOT = {	has_character_flag = POD_resonance_fleeting_flag }
+					NOT = {	has_character_flag = POD_resonance_intense_flag }
+					NOT = {	has_character_flag = POD_resonance_acute_flag }
+					NOT = {	has_character_flag = choleric_resonance }
+					NOT = {	has_character_flag = melancholic_resonance }
+					NOT = {	has_character_flag = phlegmatic_resonance }
+					NOT = {	has_character_flag = sanguine_resonance }
+				}
+				POD_set_resonance_effect = yes
+			}
+		}
+	}
+	
+	# Take no blood
+	option = {
+		name = POD_vamphunt.1.option.a
+		
+		stress_impact = {
+			gluttonous = medium_stress_impact_gain
+		}	
+
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			random = {
+				chance = 10
+				stress_impact = {
+					compassionate = miniscule_stress_impact_loss
+				}			
+			}
+		}	
+	}
+	
+	# A sip
+	option = {
+		name = POD_vamphunt.1.option.b
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 1
+		}
+	}
+	
+	# A drink
+	option = {
+		name = POD_vamphunt.1.option.c
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 2
+		}
+	}
+	
+	# A lot
+	option = {
+		name = POD_vamphunt.1.option.d
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 3
+		}
+	}
+	
+	# Kill them
+	option = {
+		name = POD_vamphunt.1.option.e
+		
+		if = {
+			limit = {
+				has_perk = ns_chthonic_womb_perk
+				has_variable = cthonic_womb_enabled
+			}
+			scope:victim = {
+				set_variable = {
+					name = marked_for_return
+					value = prev
+					days = 1
+				}
+			}
+		}
+
+		POD_drain_victim_effect = {
+			VICTIM = scope:victim
+		}
+	}
+	
+	#Herd them
+	option = {
+		name = POD_vamphunt.1.option.f
+		trigger = {
+			OR = {
+				has_perk = lingering_kiss_perk 
+				has_trait = presenceadvanced
+			}
+			POD_is_hungerless_trigger = no
+			num_of_relation_herd_member < max_herd_cap
+			scope:victim = { 
+				POD_can_be_herd_trigger = yes
+			}
+			trigger_if = {
+				limit = {
+					POD_is_any_kind_of_ghoul_trigger = yes
+				}
+				scope:victim = { POD_is_vampire_trigger = yes }
+			}
+			OR = {
+				is_ventrue_trigger = no
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = root
+					RECIPIENT = scope:victim
+				}
+			}
+		}
+		show_as_unavailable = {
+			custom_description = {
+				text = POD_herdify_vampire_interaction_limit
+				num_of_relation_herd_member >= max_herd_cap
+			}
+		}
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 1
+		}
+		
+		POD_herdify_effect = { TARGET = scope:victim }
+	}
+	
+	after = {
+		scope:scheme ?= {
+			end_scheme = yes
+		}
+		POD_end_journey_effect = yes
+		
+		# Keep hunting (hunt_in_capital Journey)
+		if = {
+			limit = {
+				exists = scope:use_widget
+				has_variable = continue_hunting
+			}
+			custom_tooltip = {
+				text = hunt_in_capital_widget_tt
+				POD_find_and_start_journey_effect = {
+					TYPE = hunt_in_capital
+				}
+				POD_hunt_in_capital_cost_effect = yes
+			}
+		}
+	}
+}
+
+POD_vamphunt.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_vamphunt.11.t
+	desc =  POD_vamphunt.11.desc
+	theme = vamphunt
+
+	left_portrait = {
+		character = root
+		animation = anger
+	}	
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:target = { save_scope_as = victim	 }
+	}
+	
+	# Take no blood
+	option = {
+		name = POD_vamphunt.11.option.a
+		
+		stress_impact = {
+			gluttonous = medium_stress_impact_gain
+		}	
+
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			random = {
+				chance = 10
+				stress_impact = {
+					compassionate = miniscule_stress_impact_loss
+				}			
+			}
+		}	
+	}
+	
+	# A sip
+	option = {
+		name = POD_vamphunt.1.option.b # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 1
+		}
+	}
+	
+	# A drink
+	option = {
+		name = POD_vamphunt.1.option.c # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 2
+		}
+	}
+	
+	# A lot
+	option = {
+		name = POD_vamphunt.1.option.d # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 3
+		}
+	}
+	
+	# Kill them
+	option = {
+		name = POD_vamphunt.1.option.e # reused loc
+		POD_drain_victim_effect = {
+			VICTIM = scope:victim
+		}
+	}
+	
+	after = {
+		scope:scheme ?= {
+			end_scheme = yes
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+POD_vamphunt.21 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_vamphunt.21.t
+	desc =  POD_vamphunt.21.desc
+	theme = vamphunt
+
+	left_portrait = {
+		character = root
+		animation = anger
+	}	
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim	
+		}
+	}
+	
+	# Take no blood
+	option = {
+		name = POD_vamphunt.1.option.a
+		
+		stress_impact = {
+			gluttonous = medium_stress_impact_gain
+			#compassionate = medium_stress_impact_loss
+		}	
+
+		if = {
+			limit = { has_trait = compassionate }
+			random = {
+				chance = 10
+				stress_impact = {
+					compassionate = miniscule_stress_impact_loss
+				}			
+			}
+		}	
+	}	
+	
+	# A sip
+	option = {
+		name = POD_vamphunt.1.option.b
+		
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 1
+		}
+	}
+	
+	# A drink
+	option = {
+		name = POD_vamphunt.1.option.c
+		
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 2
+		}
+	}
+	
+	# A lot
+	option = {
+		name = POD_vamphunt.1.option.d
+		
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 3
+		}
+	}
+	
+	# Kill them
+	option = {
+		name = POD_vamphunt.1.option.e
+
+		POD_drain_victim_effect = {
+			VICTIM = scope:victim
+		}
+	}
+	
+	after = {
+		scope:scheme ?= {
+			end_scheme = yes
+		}
+		POD_end_journey_effect = yes
+	}
+}
+
+POD_vamphunt.31 = {
+	hidden = yes
+
+	immediate = {
+		single_combat_clean_shirtlessness_effect = {
+			ATTACKER = scope:attacker
+			DEFENDER = scope:defender
+		}
+		if = {
+			limit = { scope:sc_victor = scope:attacker }
+			scope:attacker = {
+				trigger_event = {
+					id = POD_vamphunt.32
+					days = 1
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:sc_victor = scope:defender }
+			scope:attacker = {
+				trigger_event = POD_vamphunt.33
+			}
+		}
+	}	
+}
+
+POD_vamphunt.32 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_vamphunt.1.t
+	desc =  POD_vamphunt.32.desc
+	theme = vamphunt
+
+	left_portrait = {
+		character = root
+		animation = anger
+	}	
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}	
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:defender = { save_scope_as = victim }
+	}
+	
+	# Take no blood
+	option = {
+		name = POD_vamphunt.1.option.a # reused loc
+		add_stress = 50
+	}
+	
+	# A sip
+	option = {
+		name = POD_vamphunt.1.option.b # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 1
+		}
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:target.POD_vampgeneration }
+	}
+	
+	# A drink
+	option = {
+		name = POD_vamphunt.1.option.c # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 2
+		}
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:target.POD_vampgeneration }
+		POD_ghoul_drink_from_vampire_force_submission_effect = { CHANCE = 25 VAMPIRE = scope:target }
+	}
+	
+	# A lot
+	option = {
+		name = POD_vamphunt.1.option.d # reused loc
+		POD_drink_from_victim_effect = {
+			VICTIM = scope:victim
+			AMOUNT = 3
+		}
+		POD_ghoul_new_generation_ingested_effect = { GENERATION = scope:target.POD_vampgeneration }
+		POD_ghoul_drink_from_vampire_force_submission_effect = { CHANCE = 50 VAMPIRE = scope:target }
+	}
+
+	#Drinking any more would be a suicide even for an very hunger ghoul
+	
+	after = {
+		scope:scheme ?= { end_scheme = yes }
+		POD_end_journey_effect = yes
+	}
+}
+
+POD_vamphunt.33 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_vamphunt.33.t
+	desc = {
+		desc = POD_vamphunt.33.desc
+		triggered_desc = {
+			trigger = { exists = scope:death }
+			desc = POD_vamphunt.33.desc.death
+		}
+		triggered_desc = {
+			trigger = { exists = scope:submission }
+			desc = POD_vamphunt.33.desc.submission
+		}
+	}
+	theme = vamphunt
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}	
+	
+	right_portrait = {
+		character = scope:target
+		animation = anger
+	}
+
+	immediate = {
+		random_list = {
+			50 = {
+				modifier = {
+					scope:target = { has_trait = wrathful }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = sadistic }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = vengeful }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = paranoid }
+					add = 20
+				}
+				save_scope_as = death
+			}
+			20 = {
+				modifier = {
+					scope:target = { has_trait = eccentric }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = arbitrary }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = fickle }
+					add = 20
+				}
+				modifier = {
+					scope:target = { has_trait = forgiving }
+					add = 20
+				}
+				save_scope_as = submission
+			}
+		}
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+	
+	# Die
+	option = {
+		name = POD_vamphunt.33.a
+		trigger = { NOT = { exists = scope:submission } }
+		death = {
+			death_reason = death_murder
+			killer = scope:target
+		}
+	}
+	
+	# Surrender
+	option = {
+		trigger = { exists = scope:submission }
+		name = POD_vamphunt.33.b
+		POD_become_bound_ghoul_effect = { DOMITOR = scope:target }
+	}
+	
+	# Defy
+	option = {
+		trigger = { exists = scope:submission }
+		name = POD_vamphunt.33.c
+		death = {
+			death_reason = death_murder
+			killer = scope:target
+		}
+	}
+	
+	after = {
+		scope:scheme ?= { end_scheme = yes }
+		POD_end_journey_effect = yes
+	}
+}

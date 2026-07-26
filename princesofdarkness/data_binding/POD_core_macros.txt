@@ -1,0 +1,101 @@
+﻿macro = {
+	description = "3-way concatenation"
+	definition = "Concatenate3(Text1,Text2,Text3)"
+	replace_with = "Concatenate( Concatenate( Text1, Text2), Text3 )"
+}
+
+macro = {
+	description = "3-way And()"
+	definition = "And3(x,y,z)"
+	replace_with = "And( And( x, y ), z )"
+}
+
+macro = {
+	description = "3-way Or()"
+	definition = "Or3(x,y,z)"
+	replace_with = "Or( Or( x, y ), z )"
+}
+
+macro = {
+	description = "4-way Or()"
+	definition = "Or4(a,b,c,d)"
+	replace_with = "Or( Or( a, b ), Or( c, d ) )"
+}
+
+macro = {
+	description = "Exclusive Or()"
+	definition = "Xor(a,b)"
+	replace_with = "Or( And( a, Not(b) ), And( Not(a), b ) )"
+}
+
+macro = {
+	description = "Interpolate between a and b by the scaling value t"
+	definition = "Lerp_CFixedPoint(a,b,t)"
+	replace_with = "Add_CFixedPoint( a, Multiply_CFixedPoint( t, Subtract_CFixedPoint( b, a ) ) )"
+}
+
+macro = {
+	description = "Check if a Scripted GUI is valid for the player"
+	definition = "PlayerGuiIsValid(Text)"
+	replace_with = "GetScriptedGui( Text ).IsValid( GuiScope.SetRoot( GetPlayer.MakeScope ).End )"
+}
+
+macro = {
+	description = "Call a Scripted GUI's IsValidTooltip for the player"
+	definition = "PlayerGuiIsValidTooltip(Text)"
+	replace_with = "GetScriptedGui( Text ).IsValidTooltip( GuiScope.SetRoot( GetPlayer.MakeScope ).End )"
+}
+
+macro = {
+	description = "Check if a Scripted GUI is shown for the player"
+	definition = "PlayerGuiIsShown(Text)"
+	replace_with = "GetScriptedGui( Text ).IsShown( GuiScope.SetRoot( GetPlayer.MakeScope ).End )"
+}
+
+macro = {
+	description = "Execute a Scripted GUI for the player"
+	definition = "PlayerGuiExecute(Text)"
+	replace_with = "GetScriptedGui( Text ).Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End )"
+}
+
+macro = {
+	description = "Call a Scripted GUI's BuildTooltip for the player"
+	definition = "PlayerGuiBuildTooltip(Text)"
+	replace_with = "GetScriptedGui( Text ).BuildTooltip( GuiScope.SetRoot( GetPlayer.MakeScope ).End )"
+}
+
+macro = {
+	description = "Insert double linebreak. Necessary in certain contexts (like tooltips)"
+	definition = "DoubleLinebreak"
+	replace_with = "Localize('double_line_break')"
+}
+
+macro = {
+	description = "SGUI IsValid shortcut, passing a story_cycle from the current datamodel to the Player root"
+	definition = "StoryGuiIsValid(Text)"
+	replace_with = "GetScriptedGui( Text ).IsValid( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'story', Scope.Story.MakeScope ).End )"
+}
+
+macro = {
+	description = "SGUI IsValidTooltip shortcut, passing a story_cycle from the current datamodel to the Player root"
+	definition = "StoryGuiIsValidTooltip(Text)"
+	replace_with = "GetScriptedGui( Text ).IsValidTooltip( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'story', Scope.Story.MakeScope ).End )"
+}
+
+macro = {
+	description = "SGUI IsShown shortcut, passing a story_cycle from the current datamodel to the Player root"
+	definition = "StoryGuiIsShown(Text)"
+	replace_with = "GetScriptedGui( Text ).IsShown( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'story', Scope.Story.MakeScope ).End )"
+}
+
+macro = {
+	description = "SGUI Execute shortcut, passing a story_cycle from the current datamodel to the Player root"
+	definition = "StoryGuiExecute(Text)"
+	replace_with = "GetScriptedGui( Text ).Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'story', Scope.Story.MakeScope ).End )"
+}
+
+macro = {
+	description = "SGUI BuildTooltip shortcut, passing a story_cycle from the current datamodel to the Player root"
+	definition = "StoryGuiBuildTooltip(Text)"
+	replace_with = "GetScriptedGui( Text ).BuildTooltip( GuiScope.SetRoot( GetPlayer.MakeScope ).AddScope( 'story', Scope.Story.MakeScope ).End )"
+}

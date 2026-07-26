@@ -1,0 +1,442 @@
+﻿namespace = POD_diarchy_events
+
+#a power struggle starrts (potentially)
+POD_diarchy_events.0002 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = realm
+	title = POD_diarchy_events.0002.t
+	desc = POD_diarchy_events.0002.desc
+	left_portrait = {
+		character = scope:potential_diarch
+		animation = chancellor
+	}
+	right_portrait = {
+		character = root
+		animation = disgust
+	}
+	
+	immediate = {
+		save_scope_as = contested_liege
+	}
+
+	option = {
+		name = POD_diarchy_events.0002.a	
+		
+		custom_tooltip = liege_warning_diarchy_tt
+		
+		add_prestige = -500
+		add_tyranny = 30
+		
+		reverse_add_opinion = {
+			target = scope:potential_diarch
+			modifier = insult_opinion
+			opinion = -25
+		}
+		add_opinion = {
+			target = scope:potential_diarch
+			modifier = insult_opinion
+			opinion = -25
+		}
+
+		scope:potential_diarch = {
+			trigger_event = POD_diarchy_events.0003
+		}
+		
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				OR = {
+					has_trait = ambitious
+					has_trait = arbitrary
+					has_trait = greedy
+				}
+			}			
+		}	
+	}
+		
+	option = {
+		name = POD_diarchy_events.0002.b	
+		
+		custom_tooltip = liege_warning_diarchy_tt
+
+		scope:potential_diarch = {
+			add_character_flag = has_had_diarch_intro_event_flag
+		}
+		
+		designate_diarch = scope:potential_diarch
+
+		try_start_diarchy = pod_power_struggle	
+		
+		set_diarchy_swing = 50
+
+		scope:potential_diarch = {
+			trigger_event = POD_diarchy_events.0004
+		}
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 50
+				OR = {
+					has_trait = content
+					has_trait = just
+					has_trait = generous
+				}
+			}
+			modifier = {
+				add = 50
+				scope:potential_diarch = { is_ai = no }
+			}			
+		}		
+	}
+	
+}
+
+#a power struggle is refused
+POD_diarchy_events.0003 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = realm
+	title = POD_diarchy_events.0003.t
+	desc = POD_diarchy_events.0003.desc
+	left_portrait = {
+		character = scope:potential_diarch
+		animation = chancellor
+	}
+	right_portrait = {
+		character = scope:contested_liege
+		animation = disgust
+	}
+	
+	
+	option = {
+		name = POD_diarchy_events.0003.a	
+		
+		show_as_tooltip = {
+		
+		scope:contested_liege = {
+			
+		add_prestige = -500
+		add_tyranny = 30
+		
+		reverse_add_opinion = {
+			target = scope:potential_diarch
+			modifier = insult_opinion
+			opinion = -25
+		}
+		add_opinion = {
+			target = scope:potential_diarch
+			modifier = insult_opinion
+			opinion = -25
+		}
+		}
+		}
+	}
+}
+		
+#a power struggle is accepted
+POD_diarchy_events.0004 = {
+	type = character_event
+	content_source = dlc_POD
+	theme = realm
+	title = POD_diarchy_events.0004.t
+	desc = POD_diarchy_events.0004.desc
+	left_portrait = {
+		character = scope:potential_diarch
+		animation = chancellor
+	}
+	right_portrait = {
+		character = scope:contested_liege
+		animation = disgust
+	}
+	
+	
+	option = {
+		name = POD_diarchy_events.0004.a	
+
+		# Reminder about diarch powers.
+		custom_tooltip = diarchy.0021.reminder.diarch_powers
+		# Reminder about the Scales of Power.
+		custom_tooltip = diarchy.0021.reminder.scales_of_power
+		
+		show_as_tooltip = {
+		
+		scope:contested_liege = {
+			
+		designate_diarch = scope:potential_diarch
+
+		try_start_diarchy = pod_power_struggle	
+		}
+		}
+	}
+}		
+
+#Challenge for house heads events. Not a new file to try to limit small files bloat
+POD_diarchy_events.0005	= {
+	type = character_event
+	content_source = dlc_POD
+	theme = realm
+	title = challenge_house_head_decision
+	desc = POD_diarchy_events.0005.desc
+	left_portrait = {
+		character = root
+		animation = chancellor
+	}
+	right_portrait = {
+		character = scope:challenged_house_head
+		animation = anger
+	}
+
+	option = {
+		name = POD_diarchy_events.0005.a
+
+		trigger = { 
+			scope:challenged_house_head = {	
+				has_trait = torpor 
+				}
+		}
+
+		custom_tooltip = challenge_house_head_torpor
+		
+		house ?= { set_house_head = root }
+		
+		add_character_modifier = {
+			modifier = challenged_house_head_modifier
+			years = 20
+		}
+		
+		if = {
+			limit = {
+				government_has_flag = government_uses_vampire_unity
+			}
+			house = {
+				add_unity_value = {
+					value = medium_unity_loss
+					character = root
+					desc = clan_unity_generic_decreased_fallback.notarget
+				}
+			}
+		}		
+	}
+
+	option = {
+		name = POD_diarchy_events.0005.c
+
+		trigger = { 
+			scope:challenged_house_head = {	
+				has_trait = deceitful
+				NOT = { has_trait = torpor }
+				}
+		}
+
+		scope:challenged_house_head = {
+			add_hook_no_toast = {
+				target = root
+				type = predecessor_loyalty_hook
+			}
+		}	
+		
+		house ?= { set_house_head = root }
+
+		if = {
+			limit = {
+				government_has_flag = government_uses_vampire_unity
+			}
+			house = {
+				add_unity_value = {
+					value = medium_unity_loss
+					character = root
+					desc = clan_unity_generic_decreased_fallback.notarget
+				}
+			}
+		}		
+	}
+
+	option = {
+		name = POD_diarchy_events.0005.d
+		
+		trigger = { 
+			scope:challenged_house_head = {	
+				NOT = { has_trait = torpor }
+			}
+		}
+		
+		duel = {
+			skill = prowess
+			target = scope:challenged_house_head
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					 }
+				
+				custom_tooltip = POD_diarchy_events.0005.duelwin
+				send_interface_toast = {
+				type = event_toast_effect_good
+				title = POD_diarchy_events.0005.duelwin
+				left_icon = scope:challenged_house_head
+				
+				house ?= { set_house_head = root }					
+				}
+				}
+		
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					 }
+
+				custom_tooltip = POD_diarchy_events.0005.duelloss
+
+				send_interface_toast = {
+				type = event_toast_effect_bad
+				title = POD_diarchy_events.0005.duelloss
+				left_icon = scope:challenged_house_head
+				
+				add_prestige = -200					
+				}
+				}
+		}
+		
+		if = {
+			limit = {
+				can_set_relation_rival_trigger = { CHARACTER = scope:challenged_house_head }				
+			}		
+		progress_towards_rival_effect = {
+			REASON = rival_house_head_rejected_challenge
+			CHARACTER = scope:challenged_house_head
+			OPINION = default_rival_opinion
+		}	
+		}
+
+		if = {
+			limit = {
+				government_has_flag = government_uses_vampire_unity
+			}
+			house = {
+				add_unity_value = {
+					value = medium_unity_loss
+					character = root
+					desc = clan_unity_generic_decreased_fallback.notarget
+				}
+			}
+		}		
+	}
+
+
+	option = {
+		name = POD_diarchy_events.0005.e
+
+		trigger = { 
+			scope:challenged_house_head = {	
+				OR = {
+				has_trait = gregarious
+				has_trait = arrogant
+				}
+				NOT = { has_trait = torpor }
+			}
+		}
+		
+		duel = {
+			skill = diplomacy
+			target = scope:challenged_house_head
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					 }
+				
+				custom_tooltip = POD_diarchy_events.0005.duelwin
+				send_interface_toast = {
+				type = event_toast_effect_good
+				title = POD_diarchy_events.0005.duelwin
+				left_icon = scope:challenged_house_head
+				
+				house ?= { set_house_head = root }					
+				}
+				}
+		
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					 }
+
+				custom_tooltip = POD_diarchy_events.0005.duelloss
+
+				send_interface_toast = {
+				type = event_toast_effect_bad
+				title = POD_diarchy_events.0005.duelloss
+				left_icon = scope:challenged_house_head
+				
+				add_prestige = -200					
+				}
+				}
+		}
+		
+		if = {
+			limit = {
+				can_set_relation_rival_trigger = { CHARACTER = scope:challenged_house_head }				
+			}		
+		progress_towards_rival_effect = {
+			REASON = rival_house_head_rejected_challenge
+			CHARACTER = scope:challenged_house_head
+			OPINION = default_rival_opinion
+		}	
+		}
+
+		if = {
+			limit = {
+				government_has_flag = government_uses_vampire_unity
+			}
+			house = {
+				add_unity_value = {
+					value = medium_unity_loss
+					character = root
+					desc = clan_unity_generic_decreased_fallback.notarget
+				}
+			}
+		}		
+	}
+
+	option = {
+		name = POD_diarchy_events.0005.f
+
+		trigger = { 
+			scope:challenged_house_head = {	
+				has_trait = content	
+				NOT = { has_trait = torpor }
+				}
+		}
+
+		custom_tooltip = challenge_house_head_content
+		
+		house ?= { set_house_head = root }
+		
+		add_character_modifier = {
+			modifier = challenged_house_head_modifier
+			years = 20
+		}
+		
+		if = {
+			limit = {
+				government_has_flag = government_uses_vampire_unity
+			}
+			house = {
+				add_unity_value = {
+					value = medium_unity_loss
+					character = root
+					desc = clan_unity_generic_decreased_fallback.notarget
+				}
+			}
+		}		
+	}
+	
+	option = {
+		name = POD_diarchy_events.0005.b	
+		
+		add_prestige = 500
+	}	
+}

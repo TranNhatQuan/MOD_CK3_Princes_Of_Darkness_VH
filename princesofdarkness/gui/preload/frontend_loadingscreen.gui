@@ -1,0 +1,270 @@
+### This GUI cannot use types or templates from other files, as they have not been loaded yet.
+
+widget = {
+	name = "load_screen"
+	size = { 100% 100% }
+
+	widget_loading_screen = {}
+}
+
+types LoadingScreen
+{
+	type widget_loading_screen = widget {
+		size = { 100% 100% }
+
+		background = {
+			visible = no # CfV
+			texture = "[GetCurrentLoadingScreen]"
+			fittype = centercrop
+		}
+		
+		# CfV PoD: loading screen shader
+		
+		# letterbox bg
+		widget = {
+			parentanchor = center
+			size = { 100% 100% }
+
+			background = {
+				texture = "gfx/interface/component_tiles/tile_window_background.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 18 0 }
+				texture_density = 2
+				color = { 0.5 0.5 0.5 1.0 }
+				margin = { 10 0 }
+		
+				modify_texture = {
+					texture = "gfx/interface/component_overlay/overlay_effect.dds"
+					blend_mode = overlay
+				}
+			}
+		}
+		
+		# letterbox fg
+		widget = {
+			parentanchor = center
+			#size = { 100% 82% }
+			size = { 100% 78% }
+
+			background = {
+				texture = "gfx/interface/component_tiles/tile_window_background.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 18 0 }
+				texture_density = 2
+				#color = { 0.6 0.6 0.6 1.0 }
+				color = { 0.8 0.8 0.8 1.0 }
+				margin = { 10 0 }
+		
+				modify_texture = {
+					texture = "gfx/interface/component_overlay/overlay_effect.dds"
+					blend_mode = overlay
+				}
+			}
+		}
+		
+		icon = {
+			parentanchor = center
+			size = { 100% 78% } # CfV
+			texture = "gfx/interface/illustrations/event_scenes/pod_velvet.dds"
+
+			shaderfile = "gfx/FX/POD_shaders/POD_sdf_shaders.shader"
+			effectname = "PODSDFLoadingScreen"
+			
+			spriteborder_left = 1.0 # background (black) opacity
+
+			# first SDF
+			modify_texture = {
+				texture = "gfx/interface/sdf/sdf_pod.dds"
+				blend_mode = normal
+				#alpha = 0.0
+				rotate_uv = 0.9 # scale (SpriteTranslateRotateUVAndAlpha[1].z)
+				spriteborder_left = 0.5  # uv x offset (SpriteBorder[1].x)
+				spriteborder_top  = 0.15 # uv y offset (SpriteBorder[1].y)
+			}
+
+			# second SDF
+			modify_texture = {
+				texture = "gfx/interface/sdf/sdf_ankh.dds"
+				blend_mode = normal
+				#alpha = 0.0
+				rotate_uv = 0.9 # scale (SpriteTranslateRotateUVAndAlpha[2].z)
+				spriteborder_left = 0.5  # uv x offset (SpriteBorder[2].x)
+				spriteborder_top  = 0.15 # uv y offset (SpriteBorder[2].y)
+			}
+
+			# color properties
+			modify_texture = {
+				blend_mode = normal
+				spriteborder_left  = 1.0 # exponent for R channel (SpriteBorder[3].x)
+				spriteborder_top   = 1.0 # exponent for G channel (SpriteBorder[3].y)
+				spriteborder_right = 5.0 # exponent for B channel (SpriteBorder[3].z)
+				# multiplier for R/G/B channels (alpha is discarded) (SpriteModifyTexturesColors[3])
+				color = { 1.0 0.0 0.25 1.0 }
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_scratches.dds"
+				spriteType = Corneredtiled
+				blend_mode = alphamultiply
+				texture_density = 4
+				alpha = 0.25
+			}
+		}
+		# CfV end
+
+		flowcontainer = {
+			margin = { 25 25 }
+
+			flowcontainer = {
+				ignoreinvisible = yes
+				spacing = 15
+
+				background = {
+					visible = "[ReleaseMode]"
+					texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+					color = { 0.15 0.15 0.15 0.7 }
+					margin = { 0 30 }
+					margin_left = 150
+					margin_right = 80
+				}
+
+				progressbar = {
+					size = { 65 65 }
+					gfxtype = framedprogressbargfx
+					texture = "gfx/interface/frontend/loading_progress.dds"
+					framesize = { 88 88 }
+					loopinterval = 1.5
+					max = 0
+
+					icon = {
+						parentanchor =  center
+						texture = "gfx/interface/frontend/ck3_logo_banner.dds"
+						size = { 36 45 }
+						scale = 0.8
+					}
+				}
+
+				block "loading_screen_text"
+				{
+					textbox = {
+						name = "load_status_text"
+						visible = "[Not(ReleaseMode)]"
+						parentanchor = vcenter
+						size = { 200 30 }
+						fontsize = 20
+						font = StandardGameFont
+						default_format = "#medium;glow_color:{0.2,0.2,0.2,1}"
+						align = left|nobaseline
+					}
+
+					textbox = {
+						name = "load_status_text_release"
+						visible = "[ReleaseMode]"
+						text = "LOADSCREEN_INITIALIZING_GAME"
+						parentanchor = vcenter
+						size = { 200 30 }
+						fontsize = 20
+						font = StandardGameFont
+						align = left|nobaseline
+						default_format = "#medium;glow_color:{0.2,0.2,0.2,1}"
+					}
+				}
+			}
+		}
+
+		clickable_version_number = {
+			visible = "[Not(ReleaseMode)]"
+
+			parentanchor = bottom|right
+			position = { -15 -15 }
+		}
+		
+		# CfV PoD: Load tip quotes
+		widget = {
+			parentanchor = bottom|hcenter
+			
+			size = { 100% 11% }
+			
+			text_multi = {
+				parentanchor = center
+				
+				margin = { 40 40 }
+				margin_bottom = 45
+				
+				autoresize = yes
+				align = center
+
+				text = "[GetLoadTip]"
+				
+				default_format = "#color:{0.7,0.0,0.1,1.0};glow_color:{0.5,0.0,0.0,0.5}"
+				alpha = 0.9
+				
+				font = PODSubtitles
+				fontsize = 28
+				
+				max_width = 1920
+				max_height = 170
+			}
+		}
+		# CfV end
+	}
+}
+
+template Animation_LoadingScreen_ShowHide
+{
+	alpha = 0.3
+
+	state = {
+		name = appear
+		trigger_on_create = yes
+		bezier = { 0.25 0.1 0.25 1 }
+		delay = 0.3
+		duration = 1
+
+		alpha = 1
+	}
+
+	state = {
+		name = _show
+		bezier = { 0.25 0.1 0.25 1 }
+		duration = 1
+
+		alpha = 1
+	}
+
+	state = {
+		name = _hide
+		bezier = { 0.25 0.1 0.25 1 }
+		duration = 1
+
+		alpha = 0
+	}
+}
+
+
+Types BasicFrontendTypes
+{
+	type clickable_version_number = button_group {
+		name = "copy_build_version"
+
+		onclick = "[CopyBuildVersionInfoToClipboard]"
+		tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
+
+		textbox = {
+			name = "build_version"
+			parentanchor = center
+			autoresize = yes
+			block "version_text" {
+				text = "TOP_BAR_VERSION"
+				align = right
+			}
+			max_width = 400
+			multiline = yes
+
+			default_format = "#medium;glow_color:{0,0,0,1}"
+		}
+
+
+	}
+
+}

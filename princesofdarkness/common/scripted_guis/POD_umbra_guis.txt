@@ -1,0 +1,4305 @@
+﻿spirit_travel_enable = {
+	scope = character
+	saved_scopes = { player }
+	is_shown = {
+		scope:player ?= {
+			is_alive = yes
+			OR = {
+				has_access_to_astral_reaches_trigger = yes
+				has_access_to_spirit_wilds_trigger = yes
+				has_access_to_dreaming_trigger = yes
+				has_access_to_underworld_trigger = yes
+				has_access_to_deep_umbra_trigger = yes
+				
+				has_variable_list = known_umbra_realms_list
+				is_in_umbra_trigger = yes
+
+				can_manipulate_the_gauntlet_trigger = yes
+				can_manipulate_the_shroud_trigger = yes
+			}
+		}
+	}
+}
+
+umbra_initiate = {
+	scope = character
+	effect = {
+		if = {
+			limit = { NOT = { has_global_variable_list = umbra_type_list } }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:all }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:stationed }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:unstationed }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:clear }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:unclear }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:discovery }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:realm }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:astral_reaches }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:spirit_wilds }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:underworld }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:dreaming }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:deep_umbra }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:penumbra }
+			add_to_global_variable_list = { name = umbra_type_list target = flag:zone }
+		}
+		if = {
+			limit = { NOT = { has_variable_list = known_umbra_realms_list } }
+			POD_create_umbra_location = { NAME = flag:earth }
+		}
+		if = {
+			limit = { NOT = { POD_umbra_every_neighboring_realm_known_trigger = { LOCATION = flag:earth } } }
+			POD_umbra_set_neighboring_realm_known_effect = { LOCATION = flag:earth }
+		}
+		if = {
+			limit = { NOT = { has_variable = umbra_filter } }
+			set_variable = { name = umbra_filter value = flag:all }
+		}
+	}
+}
+
+in_astral_reaches = {
+	scope = story
+	is_shown = { var:type = flag:astral_reaches } 
+}
+
+in_deep_umbra = {
+	scope = story
+	is_shown = { var:type = flag:deep_umbra } 
+}
+
+in_dreaming = {
+	scope = story
+	is_shown = { var:type = flag:dreaming } 
+}
+
+in_spirit_wilds = {
+	scope = story
+	is_shown = { var:type = flag:spirit_wilds } 
+}
+
+in_underworld = {
+	scope = story
+	is_shown = { var:type = flag:underworld } 
+}
+
+in_penumbra = {
+	scope = story
+	is_shown = { var:type = flag:penumbra } 
+}
+
+in_zone = {
+	scope = story
+	is_shown = { var:type = flag:zone } 
+}
+
+is_tempest_trap_umbra_location = {
+	scope = story
+	is_shown = { in_tempest_trap_umbra_location_trigger = { LOCATION = root.var:name } } 
+}
+
+is_oblivion_trap_umbra_location = {
+	scope = story
+	is_shown = { in_oblivion_trap_umbra_location_trigger = { LOCATION = root.var:name } } 
+}
+
+is_wyrm_trap_umbra_location = {
+	scope = story
+	is_shown = { in_wyrm_trap_umbra_location_trigger = { LOCATION = root.var:name } } 
+}
+
+is_demon_trap_umbra_location = {
+	scope = story
+	is_shown = { root.var:name = flag:abyss } 
+}
+
+is_yama_trap_umbra_location = {
+	scope = story
+	is_shown = { in_yomi_trigger = { LOCATION = root.var:name } } 
+}
+
+is_dangerous_umbra_location = {
+	scope = story
+	is_shown = { in_dangerous_umbra_location_trigger = { LOCATION = root.var:name } } 
+}
+
+is_eventful_umbra_location = {
+	scope = story
+	is_shown = { in_eventful_umbra_location_trigger = { LOCATION = root.var:name } } 
+}
+
+POD_toggle_umbra_filter = {
+	scope = character
+	saved_scopes = { filter } 
+	effect = { set_variable = { name = umbra_filter value = scope:filter } } 
+}
+
+POD_filter_umbra_realms = {
+	scope = character
+	saved_scopes = { realm } 
+	is_shown = {
+		trigger_if = {
+			limit = { var:umbra_filter = flag:all }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:stationed }
+			scope:realm = { has_variable = explorer }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:unstationed }
+			scope:realm = { NOT = { has_variable = explorer } }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:clear }
+			POD_umbra_every_neighboring_realm_known_trigger = { LOCATION = scope:realm.var:name }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:unclear }
+			NOT = { POD_umbra_every_neighboring_realm_known_trigger = { LOCATION = scope:realm.var:name } }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:discovery }
+			scope:realm = { has_variable = umbra_discovery_type }
+		}
+		trigger_else_if = {
+			limit = { var:umbra_filter = flag:realm }
+			in_umbra_realm_trigger = { LOCATION = scope:realm.var:name }
+		}
+		trigger_else = {
+			scope:realm.var:type = var:umbra_filter
+		}
+	} 
+}
+
+###############
+### Actions ###
+###############
+
+# Repeat Action
+
+umbra_diplomacy_train_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	confirm_title = umbra_diplomacy_train_start_confirm
+	confirm_text = umbra_quarterly_action_start
+	is_shown = {
+		NOT = { has_variable = umbra_diplomacy_train }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_diplomacy_train_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_diplomacy_train_start
+		}
+		set_variable = {
+			name = umbra_diplomacy_train
+			value = 1
+		}
+		custom_tooltip = umbra_quarterly_action_start
+		add_character_modifier = umbra_action_diplomacy_train_modifier
+		show_as_tooltip = { umbra_train_effect = { SKILL = diplomacy LEVEL = 1 } }
+		trigger_event = POD_umbra_monthly.1001
+	}
+}
+
+umbra_martial_train_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	confirm_title = umbra_martial_train_start_confirm
+	confirm_text = umbra_quarterly_action_start
+	is_shown = {
+		NOT = { has_variable = umbra_martial_train }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_martial_train_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_martial_train_start
+		}
+		set_variable = {
+			name = umbra_martial_train
+			value = 1
+		}
+		custom_tooltip = umbra_quarterly_action_start
+		add_character_modifier = umbra_action_martial_train_modifier
+		show_as_tooltip = { umbra_train_effect = { SKILL = martial LEVEL = 1 } }
+		trigger_event = POD_umbra_monthly.1002
+	}
+}
+
+umbra_stewardship_train_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	confirm_title = umbra_stewardship_train_start_confirm
+	confirm_text = umbra_quarterly_action_start
+	is_shown = {
+		NOT = { has_variable = umbra_stewardship_train }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_stewardship_train_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_stewardship_train_start
+		}
+		set_variable = {
+			name = umbra_stewardship_train
+			value = 1
+		}
+		custom_tooltip = umbra_quarterly_action_start
+		add_character_modifier = umbra_action_stewardship_train_modifier
+		show_as_tooltip = { umbra_train_effect = { SKILL = stewardship LEVEL = 1 } }
+		trigger_event = POD_umbra_monthly.1003
+	}
+}
+
+umbra_intrigue_train_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	confirm_title = umbra_intrigue_train_start_confirm
+	confirm_text = umbra_quarterly_action_start
+	is_shown = {
+		NOT = { has_variable = umbra_intrigue_train }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_intrigue_train_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_intrigue_train_start
+		}
+		set_variable = {
+			name = umbra_intrigue_train
+			value = 1
+		}
+		custom_tooltip = umbra_quarterly_action_start
+		add_character_modifier = umbra_action_intrigue_train_modifier
+		show_as_tooltip = { umbra_train_effect = { SKILL = intrigue LEVEL = 1 } }
+		trigger_event = POD_umbra_monthly.1004
+	}
+}
+
+umbra_learning_train_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	confirm_title = umbra_learning_train_start_confirm
+	confirm_text = umbra_quarterly_action_start
+	is_shown = {
+		NOT = { has_variable = umbra_learning_train }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_learning_train_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_learning_train_start
+		}
+		set_variable = {
+			name = umbra_learning_train
+			value = 1
+		}
+		custom_tooltip = umbra_quarterly_action_start
+		add_character_modifier = umbra_action_learning_train_modifier
+		show_as_tooltip = { umbra_train_effect = { SKILL = learning LEVEL = 1 } }
+		trigger_event = POD_umbra_monthly.1005
+	}
+}
+
+umbra_diplomacy_train_next_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_diplomacy_train
+		var:umbra_diplomacy_train <= 6
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		trigger_if = {
+			limit = { var:umbra_diplomacy_train = 6 }
+			prestige >= monumental_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_diplomacy_train = 5 }
+			prestige >= massive_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_diplomacy_train = 4 }
+			prestige >= major_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_diplomacy_train = 3 }
+			prestige >= medium_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_diplomacy_train = 2 }
+			prestige >= minor_prestige_value
+		}
+		trigger_else = {
+		}
+	}
+	effect = {
+		if = {
+			limit = { var:umbra_diplomacy_train = 6 }
+			add_prestige = monumental_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_diplomacy_train = 5 }
+			add_prestige = massive_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_diplomacy_train = 4 }
+			add_prestige = major_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_diplomacy_train = 3 }
+			add_prestige = medium_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_diplomacy_train = 2 }
+			add_prestige = minor_prestige_loss
+		}
+		else = {
+		}
+		change_variable = {
+			name = umbra_diplomacy_train
+			add = 1
+		}
+		save_scope_value_as = {
+			name = next_level
+			value = {
+				value = var:umbra_diplomacy_train
+				add = 1
+			}
+		}
+		hidden_effect = { remove_character_modifier = umbra_action_diplomacy_train_modifier }
+		add_character_modifier = umbra_action_diplomacy_train_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_train_effect = { SKILL = diplomacy LEVEL = scope:next_level } }
+	}
+}
+
+umbra_martial_train_next_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_martial_train
+		var:umbra_martial_train <= 6
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		trigger_if = {
+			limit = { var:umbra_martial_train = 6 }
+			prestige >= monumental_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_martial_train = 5 }
+			prestige >= massive_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_martial_train = 4 }
+			prestige >= major_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_martial_train = 3 }
+			prestige >= medium_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_martial_train = 2 }
+			prestige >= minor_prestige_value
+		}
+		trigger_else = {
+		}
+	}
+	effect = {
+		if = {
+			limit = { var:umbra_martial_train = 6 }
+			add_prestige = monumental_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_martial_train = 5 }
+			add_prestige = massive_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_martial_train = 4 }
+			add_prestige = major_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_martial_train = 3 }
+			add_prestige = medium_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_martial_train = 2 }
+			add_prestige = minor_prestige_loss
+		}
+		else = {
+		}
+		change_variable = {
+			name = umbra_martial_train
+			add = 1
+		}
+		save_scope_value_as = {
+			name = next_level
+			value = {
+				value = var:umbra_martial_train
+				add = 1
+			}
+		}
+		hidden_effect = { remove_character_modifier = umbra_action_martial_train_modifier }
+		add_character_modifier = umbra_action_martial_train_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_train_effect = { SKILL = martial LEVEL = scope:next_level } }
+	}
+}
+
+umbra_stewardship_train_next_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_stewardship_train
+		var:umbra_stewardship_train <= 6
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		trigger_if = {
+			limit = { var:umbra_stewardship_train = 6 }
+			prestige >= monumental_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_stewardship_train = 5 }
+			prestige >= massive_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_stewardship_train = 4 }
+			prestige >= major_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_stewardship_train = 3 }
+			prestige >= medium_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_stewardship_train = 2 }
+			prestige >= minor_prestige_value
+		}
+		trigger_else = {
+		}
+	}
+	effect = {
+		if = {
+			limit = { var:umbra_stewardship_train = 6 }
+			add_prestige = monumental_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_stewardship_train = 5 }
+			add_prestige = massive_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_stewardship_train = 4 }
+			add_prestige = major_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_stewardship_train = 3 }
+			add_prestige = medium_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_stewardship_train = 2 }
+			add_prestige = minor_prestige_loss
+		}
+		else = {
+		}
+		change_variable = {
+			name = umbra_stewardship_train
+			add = 1
+		}
+		save_scope_value_as = {
+			name = next_level
+			value = {
+				value = var:umbra_stewardship_train
+				add = 1
+			}
+		}
+		hidden_effect = { remove_character_modifier = umbra_action_stewardship_train_modifier }
+		add_character_modifier = umbra_action_stewardship_train_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_train_effect = { SKILL = stewardship LEVEL = scope:next_level } }
+	}
+}
+
+umbra_intrigue_train_next_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_intrigue_train
+		var:umbra_intrigue_train <= 6
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		trigger_if = {
+			limit = { var:umbra_intrigue_train = 6 }
+			prestige >= monumental_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_intrigue_train = 5 }
+			prestige >= massive_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_intrigue_train = 4 }
+			prestige >= major_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_intrigue_train = 3 }
+			prestige >= medium_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_intrigue_train = 2 }
+			prestige >= minor_prestige_value
+		}
+		trigger_else = {
+		}
+	}
+	effect = {
+		if = {
+			limit = { var:umbra_intrigue_train = 6 }
+			add_prestige = monumental_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_intrigue_train = 5 }
+			add_prestige = massive_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_intrigue_train = 4 }
+			add_prestige = major_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_intrigue_train = 3 }
+			add_prestige = medium_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_intrigue_train = 2 }
+			add_prestige = minor_prestige_loss
+		}
+		else = {
+		}
+		change_variable = {
+			name = umbra_intrigue_train
+			add = 1
+		}
+		save_scope_value_as = {
+			name = next_level
+			value = {
+				value = var:umbra_intrigue_train
+				add = 1
+			}
+		}
+		hidden_effect = { remove_character_modifier = umbra_action_intrigue_train_modifier }
+		add_character_modifier = umbra_action_intrigue_train_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_train_effect = { SKILL = intrigue LEVEL = scope:next_level } }
+	}
+}
+
+umbra_learning_train_next_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_learning_train
+		var:umbra_learning_train <= 6
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_no_explorer_tooltip
+			exists = scope:explorer
+		}
+		trigger_if = {
+			limit = { var:umbra_learning_train = 6 }
+			prestige >= monumental_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_learning_train = 5 }
+			prestige >= massive_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_learning_train = 4 }
+			prestige >= major_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_learning_train = 3 }
+			prestige >= medium_prestige_value
+		}
+		trigger_else_if = {
+			limit = { var:umbra_learning_train = 2 }
+			prestige >= minor_prestige_value
+		}
+		trigger_else = {
+		}
+	}
+	effect = {
+		if = {
+			limit = { var:umbra_learning_train = 6 }
+			add_prestige = monumental_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_learning_train = 5 }
+			add_prestige = massive_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_learning_train = 4 }
+			add_prestige = major_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_learning_train = 3 }
+			add_prestige = medium_prestige_loss
+		}
+		else_if = {
+			limit = { var:umbra_learning_train = 2 }
+			add_prestige = minor_prestige_loss
+		}
+		else = {
+		}
+		change_variable = {
+			name = umbra_learning_train
+			add = 1
+		}
+		save_scope_value_as = {
+			name = next_level
+			value = {
+				value = var:umbra_learning_train
+				add = 1
+			}
+		}
+		hidden_effect = { remove_character_modifier = umbra_action_learning_train_modifier }
+		add_character_modifier = umbra_action_learning_train_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_train_effect = { SKILL = learning LEVEL = scope:next_level } }
+	}
+}
+
+umbra_diplomacy_train_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_diplomacy_train
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_variable = umbra_diplomacy_train
+		remove_character_modifier = umbra_action_diplomacy_train_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+umbra_martial_train_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_martial_train
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_variable = umbra_martial_train
+		remove_character_modifier = umbra_action_martial_train_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+umbra_stewardship_train_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_stewardship_train
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_variable = umbra_stewardship_train
+		remove_character_modifier = umbra_action_stewardship_train_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+umbra_intrigue_train_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_intrigue_train
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_variable = umbra_intrigue_train
+		remove_character_modifier = umbra_action_intrigue_train_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+umbra_learning_train_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = umbra_learning_train
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_variable = umbra_learning_train
+		remove_character_modifier = umbra_action_learning_train_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+umbra_collect_artifact_pieces_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = { has_character_flag = umbra_collect_artifact_pieces_flag }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_collect_artifact_pieces_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_collect_artifact_pieces_start
+		}
+		add_character_flag = umbra_collect_artifact_pieces_flag
+		custom_tooltip = umbra_monthly_action_start
+		show_as_tooltip = { umbra_collect_artifact_pieces_effect = yes }
+		trigger_event = POD_umbra_monthly.1101
+	}
+}
+
+umbra_collect_artifact_pieces_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_character_flag = umbra_collect_artifact_pieces_flag
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_character_flag = umbra_collect_artifact_pieces_flag
+		custom_tooltip = umbra_monthly_action_end
+	}
+}
+
+umbra_search_invention_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = { has_character_flag = umbra_search_invention_flag }
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = search_invention_unlocked }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_search_invention_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_search_invention_start
+		}
+		add_character_flag = umbra_search_invention_flag
+		custom_tooltip = umbra_monthly_action_start
+		show_as_tooltip = { umbra_search_invention_effect = yes }
+		trigger_event = POD_umbra_monthly.1201
+	}
+}
+
+umbra_search_invention_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_character_flag = umbra_search_invention_flag
+	}
+	is_valid = {
+	}
+	effect = {
+		remove_character_flag = umbra_search_invention_flag
+		custom_tooltip = umbra_monthly_action_end
+	}
+}
+
+umbra_search_innovation_start_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = { has_character_modifier = umbra_search_innovation_modifier }
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = search_innovation_unlocked }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_search_innovation_start
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_search_innovation_start
+		}
+		add_character_modifier = umbra_search_innovation_modifier
+		custom_tooltip = umbra_quarterly_action_start
+		show_as_tooltip = { umbra_search_innovation_effect = yes }
+		trigger_event = POD_umbra_monthly.1202
+	}
+}
+
+umbra_search_innovation_end_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_character_modifier = umbra_search_innovation_modifier
+	}
+	effect = {
+		remove_character_modifier = umbra_search_innovation_modifier
+		custom_tooltip = umbra_quarterly_action_end
+	}
+}
+
+# Umbra Place
+
+umbra_place_glen_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_trait = fera
+		faith = { NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } }
+	}
+	is_valid = {
+		capital_county = { development_level < 10 }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_glen
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_glen
+		}
+		custom_description_no_bullet = { text = glen_desc }
+		add_stress = minor_stress_loss
+	}
+}
+
+umbra_place_onyx_tower_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = number_of_grace
+				value = 50000
+				scope:explorer.var:umbra_stationed_realm.var:grace >= 50000
+			}
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = onyx_tower_unlocked }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		NOT = { has_character_modifier = charon_wraith_maa_modifier }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_onyx_tower
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_onyx_tower
+		}
+		custom_description_no_bullet = { text = onyx_tower_desc }
+		if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = remove_grace
+				value = 50000
+				scope:explorer.var:umbra_stationed_realm = {
+					change_variable = {
+						name = grace
+						add = -50000
+					}
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = charon_wraith_maa_modifier
+			months = 50
+		}
+	}
+}
+
+umbra_place_periphery_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = lifestyle_poet
+		NOT = { stress_level >= 1 }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_periphery
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_periphery
+		}
+		custom_description_no_bullet = { text = periphery_desc }
+		random_list = {
+			55 = {
+				random_courtier = {
+					if = {
+						limit = { has_ep1_dlc_trigger = yes }
+						POD_create_random_inspiration_effect = yes 
+					}
+					else = {
+						add_character_modifier = {
+							modifier = inspiration_modifier
+							years = 10
+						}
+					}
+				}
+			}
+			21 = { add_stress = miniscule_stress_gain }
+			21 = { add_stress = miniscule_stress_loss }
+			1 = { 
+				custom_tooltip ={
+					text = umbra_expedition_event_tooltip
+					trigger_event = POD_spirit_travel.1300 #Periphery flavor 1
+				}
+			}
+			1 = { 
+				custom_tooltip ={
+					text = umbra_expedition_event_tooltip
+					trigger_event = POD_spirit_travel.1301 #Periphery flavor 2
+				}
+			}
+			1 = { 
+				custom_tooltip ={
+					text = umbra_expedition_event_tooltip
+					trigger_event = POD_spirit_travel.1302 #Periphery flavor 3
+				}
+			}
+		}
+	}
+}
+
+umbra_place_blight_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_trait = fera
+	}
+	is_valid = {
+		capital_county = { development_level >= 10 }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_blight
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_blight
+		}
+		custom_description_no_bullet = { text = blight_desc }
+		duel = {
+			skill = prowess
+			value = 55
+		
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				random_list = {
+					20 = { dynasty = { add_dynasty_prestige =  minor_dynasty_prestige_gain } }
+					20 = { add_prestige = minor_prestige_gain }
+					20 = { add_martial_lifestyle_xp = 50 }
+				}
+			}
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				increase_wounds_effect = { REASON = fight }
+				add_prestige = minor_prestige_loss
+				add_piety = minor_piety_loss
+			}
+		}
+	}
+}
+
+umbra_place_hellhole_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_trait = fera
+		faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+	}
+	is_valid = {
+		location = { has_building_or_higher = wyrm_taint_01 }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_hellhole
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_hellhole
+		}
+		custom_description_no_bullet = { text = hellhole_desc }
+		add_stress = minor_stress_loss
+	}
+}
+
+umbra_place_broken_lands_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		location = { gauntlet_level = 0 }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_broken_lands
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_broken_lands
+		}
+		custom_description_no_bullet = { text = broken_lands_desc }
+		add_gold = minor_gold_value
+	}
+}
+
+umbra_place_vista_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_vista
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_vista
+		}
+		custom_description_no_bullet = { text = vista_desc }
+		add_stress = minor_stress_gain
+		random_list = {
+			20 = { add_diplomacy_lifestyle_xp = 50 }
+			20 = { add_martial_lifestyle_xp = 50 }
+			20 = { add_stewardship_lifestyle_xp = 50 }
+			20 = { add_intrigue_lifestyle_xp = 50 }
+			20 = { add_learning_lifestyle_xp = 50 }
+		}
+	}
+}
+
+umbra_place_broken_mirror_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		POD_middle_kingdom_splat_trigger = yes
+		NOT = { 
+			POD_umbra_realm_known_trigger = { NAME = flag:yomi_wan } 
+			#has_global_variable = broken_broken_mirror
+		}
+	}
+	is_valid = {
+		is_infernalist_trigger = yes # TODO YK: defilement instead
+		custom_tooltip = {
+			text = broken_mirror_valid_tooltip
+			OR = {
+				location = {
+					OR = {
+						has_building_or_higher = wyrm_taint_01
+						faith = { has_doctrine = doctrine_demonology_accepted }
+						religion = religion:demons_religion
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		custom_description_no_bullet = { text = broken_mirror_desc }
+		POD_create_umbra_location = { NAME = flag:yomi_wan }
+		give_witch_secret_or_trait_effect = yes # TODO YK: defilement instead
+	}
+}
+
+umbra_place_veinous_stair_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_veinous_stair
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_veinous_stair
+		}
+		custom_description_no_bullet = { text = veinous_stair_desc }
+		if = {
+			limit = { NOT = { POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth } } }
+			POD_create_umbra_location = { NAME = flag:pod_realm_labyrinth }
+		}
+		else = {
+			custom_tooltip = {
+				text = labyrinth_progress_effect_tooltip
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = flag:pod_realm_labyrinth }
+					POD_gain_umbra_progress_effect = { VICTIM = var:explorer VALUE = 100 }
+				}
+			}
+		}
+	}
+}
+
+umbra_place_earth_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_variable = spirit_location
+		NOT = { var:spirit_location = flag:earth }
+	}
+	is_valid = {
+		has_access_to_skinlands_trigger = yes
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+		custom_tooltip = {
+			text = shadow_realm_tt
+			NOT = { in_shadow_realm_trigger = { LOCATION = var:spirit_location } }
+		}
+	}
+	effect = {
+		custom_tooltip = umbra_place_earth_tooltip
+		set_variable = { name = spirit_destination value = flag:earth }
+		show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = flag:earth } }
+		if = {
+			limit = { POD_umbra_bypass_trigger = { LOCATION = flag:earth } }
+			trigger_event = { on_action = spirit_travel_movement_end_pulse }
+		}
+		else = {
+			trigger_event = { on_action = spirit_travel_movement_start_pulse }
+		}
+	}
+}
+
+umbra_place_shadowlands_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		OR = {
+			NOT = { has_variable = spirit_location }
+			NOT = { var:spirit_location = flag:shadowlands }
+		}
+	}
+	is_valid = {
+		has_trait = wraith # TODO: some generic atcion for shadowland instead
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+	}
+	effect = {
+		custom_tooltip = umbra_place_shadowlands_tooltip
+		set_variable = { name = spirit_destination value = flag:shadowlands }
+		show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = flag:shadowlands } }
+		if = {
+			limit = { POD_umbra_bypass_trigger = { LOCATION = flag:shadowlands } }
+			trigger_event = { on_action = spirit_travel_movement_end_pulse }
+		}
+		else = {
+			trigger_event = { on_action = spirit_travel_movement_start_pulse }
+		}
+	}
+}
+
+umbra_place_dark_kingdom_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_perk = return_perk
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+	}
+	effect = {
+		custom_tooltip = umbra_place_dark_kingdom_tooltip
+		POD_return_to_destination_action_effect = yes
+	}
+}
+
+umbra_place_oblivion_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+	}
+	effect = {
+		custom_tooltip = oblivion_effect_desc
+		trigger_event = POD_umbra_lost.100
+	}
+}
+
+umbra_place_seat_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = number_of_grace
+				value = 1000
+				scope:explorer.var:umbra_stationed_realm.var:grace >= 1000
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		NOT = { has_character_modifier = seat_of_burning_waters_modifier }
+		NOT = { has_character_modifier = seat_of_dust_modifier }
+		NOT = { has_character_modifier = seat_of_golden_tears_modifier }
+		NOT = { has_character_modifier = seat_of_shadows_modifier }
+		NOT = { has_character_modifier = seat_of_silence_modifier }
+		NOT = { has_character_modifier = seat_of_succor_modifier }
+		NOT = { has_character_modifier = seat_of_thorns_modifier }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_seat
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_seat
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = remove_grace
+				value = 1000
+				scope:explorer.var:umbra_stationed_realm = {
+					change_variable = {
+						name = grace
+						add = -1000
+					}
+				}
+			}
+		}
+		custom_tooltip = POD_umbra_action.1101.desc
+		trigger_event = POD_umbra_action.1101
+	}
+}
+
+umbra_place_seat_of_fate_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		prestige >= major_prestige_value
+		NOT = { has_character_modifier = seat_of_fate_modifier }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_seat_of_fate
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_seat_of_fate
+		}
+		add_prestige = major_prestige_loss
+		add_character_modifier = {
+			modifier = seat_of_fate_modifier
+			years = 5
+		}
+		if = {
+			limit = { NOT = { POD_umbra_realm_known_trigger = { NAME = flag:pod_realm_labyrinth } } }
+			POD_create_umbra_location = { NAME = flag:pod_realm_labyrinth }
+		}
+		else = {
+			custom_tooltip = {
+				text = labyrinth_progress_effect_tooltip
+				random_in_list = {
+					variable = known_umbra_realms_list
+					limit = { var:name = flag:pod_realm_labyrinth }
+					POD_gain_umbra_progress_effect = { VICTIM = var:explorer VALUE = 100 }
+				}
+			}
+		}
+	}
+}
+
+umbra_place_jade_palace_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = number_of_grace
+				value = 1000
+				scope:explorer.var:umbra_stationed_realm.var:grace >= 1000
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		NOT = { has_character_modifier = jade_palace_modifier }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_place_jade_palace
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_place_jade_palace
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			custom_description = {
+				text = remove_grace
+				value = 1000
+				scope:explorer.var:umbra_stationed_realm = {
+					change_variable = {
+						name = grace
+						add = -1000
+					}
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = jade_palace_modifier
+			years = 5
+		}
+		if = { 
+			limit = { is_at_war = yes }
+			random_character_war = { save_temporary_scope_as = war }
+			spawn_army = {
+				men_at_arms = {
+					type = bureaucrats_of_jade_palace
+					stacks = 5
+				}
+				location = capital_province
+				war = scope:war
+				inheritable = no
+				name = bureaucrats_of_jade_palace
+			}
+		}
+	}
+}
+
+# Commune
+umbra_commune_charon_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+	}
+	effect = {
+		set_variable = { name = umbra_ruler value = character:POD_wraith_01 }
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:dark_kingdom_of_iron }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_yuhuang_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+	}
+	effect = {
+		set_variable = { name = umbra_ruler value = character:POD_wraith_03 }
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:dark_kingdom_of_jade }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_eshtarra_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_eshtarra }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_sokhta_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_sokhta }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_katanka_sonnak_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_katanka_sonnak }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_mitanu_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_mitanu }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_hakahe_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_hakahe }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_tambiyah_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_tambiyah }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_nerigal_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_nerigal }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_rorg_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_rorg }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_zarok_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_zarok }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_lu_bat_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_lu_bat }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_ruatma_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_ruatma }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_shantar_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_shantar }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+umbra_commune_meros_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		has_trait = fera
+		faith = {
+			NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+			NOT = { has_doctrine = wyrm_tainted_doctrine } 
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		random_in_list = {
+			variable = known_umbra_realms_list
+			limit = { var:name = flag:court_of_meros }
+			root = { set_variable = { name = incarna_court value = prev } }
+		}
+	}
+}
+
+# Unique Artifact
+
+umbra_caliburn_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:caliburn
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = caliburn_unlocked }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_caliburn
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_caliburn
+		}
+		
+		custom_tooltip = umbra_caliburn_tooltip
+		random_list = {
+			0 = {
+				modifier = {
+					add = 5
+					has_trait = brave
+				}
+				modifier = {
+					add = 5
+					has_trait = generous
+				}
+				modifier = {
+					add = 5
+					has_trait = honest
+				}
+				modifier = {
+					add = 5
+					has_trait = humble
+				}
+				modifier = {
+					add = 5
+					has_trait = compassionate
+				}
+				modifier = {
+					add = 10
+					has_trait = just
+				}
+				custom_tooltip = {
+					text = umbra_caliburn_choose_tt
+					create_artifact_caliburn_effect = { OWNER = root }
+					POD_overwrite_artifact_link = { LINK = caliburn_link }
+					create_artifact_caliburns_sheath_effect = { OWNER = root }
+					POD_overwrite_artifact_link = { LINK = caliburns_sheath_link }
+				}
+				add_to_global_variable_list = {
+					name = unavailable_unique_artifact
+					target = flag:caliburn
+				}
+			}
+			100 = {
+				modifier = {
+					add = 5
+					has_trait = craven
+				}
+				modifier = {
+					add = 5
+					has_trait = greedy
+				}
+				modifier = {
+					add = 5
+					has_trait = deceitful
+				}
+				modifier = {
+					add = 5
+					has_trait = arrogant
+				}
+				modifier = {
+					add = 5
+					has_trait = callous
+				}
+				modifier = {
+					add = 5
+					has_trait = sadistic
+				}
+				modifier = {
+					add = 10
+					has_trait = arbitrary
+				}
+				add_stress = medium_stress_gain
+			}
+		}
+	}
+}
+
+umbra_eternal_grace_of_eshtarras_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:eternal_grace_of_eshtarras
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = earth_heal_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_eternal_grace_of_eshtarras_choose_tt
+			create_artifact_eternal_grace_of_eshtarras_might_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = eternal_grace_of_eshtarras_might_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:eternal_grace_of_eshtarras
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_shining_klaive_of_sokhta_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:shining_klaive_of_sokhta
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = moondream_perk
+			has_trait = werewolf
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_shining_klaive_of_sokhta_choose_tt
+			create_artifact_shining_klaive_of_sokhta_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = shining_klaive_of_sokhta_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:shining_klaive_of_sokhta
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_radiant_blade_of_katanka_sonnak_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:radiant_blade_of_katanka_sonnak
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = cleansing_flame_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_radiant_blade_of_katanka_sonnak_choose_tt
+			create_artifact_radiant_blade_of_katanka_sonnak_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = radiant_blade_of_katanka_sonnak_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:radiant_blade_of_katanka_sonnak
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_mercurial_mask_of_mitanu_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:mercurial_mask_of_mitanu
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = madthought_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_mercurial_mask_of_mitanu_choose_tt
+			create_artifact_mercurial_mask_of_mitanu_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = mercurial_mask_of_mitanu_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:mercurial_mask_of_mitanu
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_burning_mask_of_hakahe_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:burning_mask_of_hakahe
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = planetarygifts_ebon_binding_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_burning_mask_of_hakahe_choose_tt
+			create_artifact_burning_mask_of_hakahe_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = burning_mask_of_hakahe_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:burning_mask_of_hakahe
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_radiant_dress_of_tambiyah_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:radiant_dress_of_tambiyah
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = bring_forth_the_future_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_radiant_dress_of_tambiyah_choose_tt
+			create_artifact_radiant_dress_of_tambiyah_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = radiant_dress_of_tambiyah_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:radiant_dress_of_tambiyah
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_burning_horns_of_nerigal_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:burning_horns_of_nerigal
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = heart_of_the_ice_warrior_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_burning_horns_of_nerigal_choose_tt
+			create_artifact_burning_horns_of_nerigal_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = burning_horns_of_nerigal_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:burning_horns_of_nerigal
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_ruinous_talons_of_rorg_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:ruinous_talons_of_rorg
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = pack_mind_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_ruinous_talons_of_rorg_choose_tt
+			create_artifact_ruinous_talons_of_rorg_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = ruinous_talons_of_rorg_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:ruinous_talons_of_rorg
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_imperious_crown_of_zarok_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:imperious_crown_of_zarok
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = grand_gesture_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_imperious_crown_of_zarok_choose_tt
+			create_artifact_imperious_crown_of_zarok_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = imperious_crown_of_zarok_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:imperious_crown_of_zarok
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_eternal_wings_of_lu_bat_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:eternal_wings_of_lu_bat
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = burden_of_knowledge_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_eternal_wings_of_lu_bat_choose_tt
+			create_artifact_eternal_wings_of_lu_bat_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = eternal_wings_of_lu_bat_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:eternal_wings_of_lu_bat
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_shadowed_stave_of_ruatma_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:shadowed_stave_of_ruatma
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = diplomatic_immunity_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_shadowed_stave_of_ruatma_choose_tt
+			create_artifact_shadowed_stave_of_ruatma_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = shadowed_stave_of_ruatma_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:shadowed_stave_of_ruatma
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_dancing_loom_of_shantar_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:dancing_loom_of_shantar
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = drown_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_dancing_loom_of_shantar_choose_tt
+			create_artifact_dancing_loom_of_shantar_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = dancing_loom_of_shantar_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:dancing_loom_of_shantar
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_whispering_ankh_of_meros_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_artifact
+				target = flag:whispering_ankh_of_meros
+			}
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			trigger_if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = number_of_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 4500
+				}
+			}
+			trigger_else = {
+				custom_description = {
+					text = number_of_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm.var:grace >= 5000
+				}
+			}
+			has_perk = essential_transformation_perk
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				exists = scope:explorer
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = umbra_whispering_ankh_of_meros_choose_tt
+			create_artifact_whispering_ankh_of_meros_effect = { OWNER = root }
+			POD_overwrite_artifact_link = { LINK = whispering_ankh_of_meros_link }
+		}
+		add_to_global_variable_list = {
+			name = unavailable_unique_artifact
+			target = flag:whispering_ankh_of_meros
+		}
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { uses_cairo_caern_alternate_reward = yes }
+				custom_description = {
+					text = remove_grace
+					value = 4500
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -4500
+						}
+					}
+				}
+			}
+			else = {
+				custom_description = {
+					text = remove_grace
+					value = 5000
+					scope:explorer.var:umbra_stationed_realm = {
+						change_variable = {
+							name = grace
+							add = -5000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Condition Action
+umbra_gain_commander_trait_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_gain_commander_trait
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_gain_commander_trait
+		}
+		duel = {
+			skill = martial
+			value = medium_skill_rating
+		
+			10 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.25
+				}
+				modifier = {
+					factor = 0.25
+					number_of_commander_traits > 0
+				}
+				modifier = {
+					factor = 0.25
+					number_of_commander_traits > 1
+				}
+				modifier = {
+					factor = 0.25
+					number_of_commander_traits > 2
+				}
+				custom_tooltip = umbra_gain_commander_trait_sucess
+				trigger_event = POD_umbra_action.1001
+			}
+			25 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.25
+				}
+				add_stress = medium_stress_gain
+			}
+		}
+	}
+}
+
+umbra_hire_artificer_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = hire_artificer_unlocked }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		short_term_gold >= medium_gold_value
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_hire_artificer
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_hire_artificer
+		}
+		remove_short_term_gold = medium_gold_value
+		create_character = {
+			employer = root
+			template = celebration_artisan_character
+			save_scope_as = creator
+			after_creation = {
+				POD_become_wraith_effect = yes
+				add_trait = arcanos_inhabit
+				assign_inhabit_effect = yes
+				if = {
+					limit = { scope:explorer.var:umbra_stationed_realm ?= { has_variable = hire_masquer_unlocked } }
+					add_trait = arcanos_moliate
+					assign_moliate_effect = yes
+				}
+				trigger_event = {
+					id = POD_disappearance.1
+					years = 5
+				}
+			}
+		}
+	}
+}
+
+umbra_wyld_possesion_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		POD_is_possessed_trigger = no
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = wyld_possesion_chance }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		POD_can_be_possessed_trigger = yes
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_wyld_possesion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { POD_is_wyld_servant_trigger = no }
+			POD_is_not_weaver_servant_trigger = yes
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_wyld_possesion
+		}
+		
+		custom_tooltip = umbra_wyld_possesion_tooltip
+		duel = {
+			skill = intrigue
+			value = medium_skill_rating
+		
+			25 = {
+				desc = POD_shared_loca_success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 0
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 1
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 2
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 0
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 1
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 2
+				}
+				add_trait = gorgon
+				add_trait = possessed_genetic
+				if = {
+					limit = { POD_is_wyld_servant_trigger = no }
+					POD_become_wyld_servant_effect = yes
+					add_piety = massive_piety_loss
+				}
+			}
+			25 = {
+				desc = POD_shared_loca_failure
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					factor = 1.5
+					has_trait = truefaith
+					POD_is_wyld_servant_trigger = no
+				}
+				modifier = {
+					factor = 2
+					has_trait = beatific
+					POD_is_wyld_servant_trigger = no
+				}
+				add_stress = medium_stress_gain
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+}
+
+umbra_weaver_possesion_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		POD_is_possessed_trigger = no
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = weaver_possesion_chance }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		POD_can_be_possessed_trigger = yes
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_weaver_possesion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { POD_is_weaver_servant_trigger = no }
+			POD_is_not_wyld_servant_trigger = yes
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_weaver_possesion
+		}
+		
+		custom_tooltip = umbra_weaver_possesion_tooltip
+		
+		duel = {
+			skill = intrigue
+			value = medium_skill_rating
+		
+			25 = {
+				desc = POD_shared_loca_success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 0
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 1
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 2
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 0
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 1
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 2
+				}
+				POD_become_drone_effect = yes
+			}
+			25 = {
+				desc = POD_shared_loca_failure
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					factor = 1.5
+					has_trait = truefaith
+					POD_is_weaver_servant_trigger = no
+				}
+				modifier = {
+					factor = 2
+					has_trait = beatific
+					POD_is_weaver_servant_trigger = no
+				}
+				add_stress = medium_stress_gain
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+}
+
+umbra_gaia_possesion_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		POD_is_possessed_trigger = no
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { exists = scope:explorer }
+			custom_tooltip = {
+				text = umbra_action_locked_tooltip
+				scope:explorer.var:umbra_stationed_realm = { has_variable = gaia_possesion_chance }
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = umbra_action_no_explorer_tooltip
+				always = no
+			}
+		}
+		# POD_can_be_possessed_trigger = yes
+		NOT = { has_trait_with_flag = is_spirit }
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_gaia_possesion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { POD_is_gaia_servant_trigger = no }
+			POD_is_not_wyrm_servant_trigger = yes
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_gaia_possesion
+		}
+		
+		custom_tooltip = umbra_gaia_possesion_tooltip
+		duel = {
+			skill = intrigue
+			value = medium_skill_rating
+		
+			25 = {
+				desc = POD_shared_loca_success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 0
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 1
+				}
+				modifier = {
+					factor = 0.75
+					num_sinful_traits > 2
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 0
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 1
+				}
+				modifier = {
+					factor = 1.25
+					num_virtuous_traits > 2
+				}
+				add_trait = kami
+				# add_trait = possessed_genetic
+			}
+			25 = {
+				desc = POD_shared_loca_failure
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				}
+				modifier = {
+					factor = 1.5
+					has_trait = truefaith
+					NOT = { religion = { is_in_family = rf_gaia } }
+				}
+				modifier = {
+					factor = 2
+					has_trait = beatific
+					NOT = { religion = { is_in_family = rf_gaia } }
+				}
+				add_stress = medium_stress_gain
+				add_piety = medium_piety_loss
+			}
+		}
+	}
+}
+
+# Gauntlet
+umbra_manipulate_the_gauntlet_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		location ?= { is_sea_province = no }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = manipulate_the_gauntlet_invalid
+			OR = {
+				can_manipulate_the_gauntlet_trigger = yes
+				can_tear_down_the_gauntlet_trigger = yes
+			}
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_manipulate_the_gauntlet
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_manipulate_the_gauntlet
+		}
+		location = { save_scope_as = target_location }
+		if = { limit = { POD_middle_kingdom_splat_trigger = no } 
+			custom_tooltip = umbra_manipulate_the_gauntlet_tooltip
+			trigger_event = POD_gauntlet.101
+		}
+		else = {
+			custom_tooltip = umbra_manipulate_the_wall_tooltip
+			trigger_event = POD_gauntlet.102
+		}
+	}
+}
+
+umbra_manipulate_the_shroud_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		location ?= { is_sea_province = no }
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = manipulate_the_shroud_invalid
+			OR = {
+				can_manipulate_the_shroud_trigger = yes
+				can_tear_down_the_shroud_trigger = yes
+			}
+		}
+		custom_tooltip = {
+			text = umbra_action_cooldown_tooltip
+			NOT = {
+				is_target_in_variable_list = {
+					name = umbra_action_cooldown
+					target = flag:umbra_manipulate_the_shroud
+				}
+			}
+		}
+	}
+	effect = {
+		add_to_variable_list = {
+			name = umbra_action_cooldown
+			target = flag:umbra_manipulate_the_shroud
+		}
+		custom_tooltip = umbra_manipulate_the_shroud_tooltip
+		location = { save_scope_as = target_location }
+		trigger_event = POD_gauntlet.103
+	}
+}
+
+# Other Action
+
+umbra_bow_to_wyrm_choose = {
+	scope = character
+	is_shown = {
+		POD_is_wyrm_servant_trigger = no
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_bow_to_wyrm_req
+			OR = {
+				has_character_modifier = trapped_in_labyrinth_modifier
+				has_character_modifier = trapped_in_malfeas_modifier
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = umbra_bow_to_wyrm_tooltip
+		POD_become_wyrm_servant_effect = yes
+		
+		if = {
+			limit = { has_character_modifier = trapped_in_labyrinth_modifier }
+			remove_character_modifier = trapped_in_labyrinth_modifier
+		}
+		if = {
+			limit = { has_character_modifier = trapped_in_malfeas_modifier }
+			remove_character_modifier = trapped_in_malfeas_modifier
+		}
+		
+		add_piety = massive_piety_loss
+	}
+}
+
+umbra_bow_to_demon_choose = {
+	scope = character
+	is_shown = {
+		NOT = { has_trait = demon }
+	}
+	is_valid = {
+		custom_tooltip = { 
+			text = POD_summon_demon_demonology_interaction_valid 
+			no_resurrecting_prisoner_count >= 1
+		}
+	}
+	effect = {
+		custom_tooltip = umbra_bow_to_demon_tooltip
+		save_scope_as = actor
+		
+		random_prisoner = {
+			limit = { POD_has_guaranteed_resurrection = no }
+			trigger_event = char_interaction.0171
+			save_scope_as = prisoner
+			execute_prisoner_effect = {
+				VICTIM = scope:prisoner
+				EXECUTIONER = scope:actor
+			}
+		}
+		give_witch_secret_or_trait_effect = yes
+		
+		POD_free_from_abyss_effect = yes
+		
+		add_piety = massive_piety_loss
+	}
+}
+
+###############
+### Commune ###
+###############
+
+umbra_commune_clean = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_variable = umbra_ruler }
+			remove_variable = umbra_ruler
+		}
+		remove_variable = incarna_court
+	}
+}
+
+umbra_offer_piety = {
+	scope = character
+	is_shown = {
+	}
+	is_valid = {
+		piety >= 0
+		trigger_if = {
+			limit = { communing_with_incarna_trigger = yes }
+			has_trait = fera
+			faith = {
+				NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+				NOT = { has_doctrine = wyrm_tainted_doctrine } 
+			}
+		}
+	}
+	effect = {
+		add_piety = -300
+		custom_description = {
+			text = add_grace
+			value = 100
+			var:incarna_court = {
+				change_variable = {
+					name = grace
+					add = 100
+				}
+			}
+		}
+	}
+}
+
+umbra_offer_prestige = {
+	scope = character
+	is_shown = {
+	}
+	is_valid = {
+		prestige >= 0
+		trigger_if = {
+			limit = { communing_with_incarna_trigger = yes }
+			has_trait = fera
+			faith = {
+				NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+				NOT = { has_doctrine = wyrm_tainted_doctrine } 
+			}
+		}
+	}
+	effect = {
+		add_prestige = -100
+		custom_description = {
+			text = add_grace
+			value = 100
+			var:incarna_court = {
+				change_variable = {
+					name = grace
+					add = 100
+				}
+			}
+		}
+	}
+}
+
+umbra_request_perk = {
+	scope = character
+	is_shown = {
+		has_variable = umbra_ruler
+	}
+	is_valid = {
+		# nested in a trigger_if for clearer tooltip
+		trigger_if = {
+			limit = { POD_splat_has_access_to_arcanoi = no }
+			has_trait = wraith
+		}
+		trigger_if = {
+			limit = { communing_with_yuhuang_trigger = yes }
+			religion = religion:yellow_springs_religion 
+		}
+		custom_description = {
+			text = number_of_grace
+			value = 1200
+			var:incarna_court = { var:grace >= 250 }
+		}
+	}
+	effect = {
+		if = {
+			limit = { communing_with_charon_trigger = yes }
+			add_arcanoi_lifestyle_perk_points = 1
+		}
+		if = {
+			limit = { communing_with_yuhuang_trigger = yes }
+			add_jade_arcanoi_lifestyle_perk_points = 1
+		}
+		custom_description = {
+			text = remove_grace
+			value = 250
+			var:incarna_court = {
+				change_variable = {
+					name = grace
+					add = -250
+				}
+			}
+		}
+	}
+}
+
+umbra_request_army = {
+	scope = character
+	is_shown = {
+		OR = {
+			communing_with_yuhuang_trigger = yes
+			communing_with_incarna_trigger = yes
+		}
+	}
+	is_valid = {
+		trigger_if = {
+			limit = { communing_with_yuhuang_trigger = yes }
+			custom_description = {
+				text = number_of_grace
+				value = 300
+				var:incarna_court = { var:grace >= 300 }
+			}
+		}
+		trigger_if = {
+			limit = { communing_with_incarna_trigger = yes }
+			has_trait = fera
+			faith = {
+				NOT = { has_doctrine = doctrine_fera_triat_alignment_wyrm } 
+				NOT = { has_doctrine = wyrm_tainted_doctrine } 
+			}
+			custom_description = {
+				text = number_of_grace
+				value = 1200
+				var:incarna_court = { var:grace >= 1200 }
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = { communing_with_yuhuang_trigger = yes }
+			custom_tooltip = {
+				text = umbra_spawn_army_yuhuang
+				spawn_army = {
+					uses_supply = no
+					inheritable = no
+					men_at_arms = {
+						type = soldiers_of_the_emperor
+						stacks = 2
+					}		
+					location = root.capital_province
+					name = soldiers_of_the_emperor
+				}
+			}
+			custom_description = {
+				text = remove_grace
+				value = 300
+				var:incarna_court = {
+					change_variable = {
+						name = grace
+						add = -300
+					}
+				}
+			}
+		}
+		if = {
+			limit = { communing_with_incarna_trigger = yes }
+			custom_tooltip = {
+				text = umbra_spawn_army_incarna
+				spawn_army = {
+					uses_supply = no
+					inheritable = no
+					men_at_arms = {
+						type = jagglings
+						stacks = 2
+					}		
+					location = root.capital_province
+					name = jagglings
+				}
+			}
+			custom_description = {
+				text = remove_grace
+				value = 1200
+				var:incarna_court = {
+					change_variable = {
+						name = grace
+						add = -1200
+					}
+				}
+			}
+		}
+	}
+}
+
+umbra_request_gold = {
+	scope = character
+	is_shown = {
+		communing_with_charon_trigger = yes
+	}
+	is_valid = {
+		custom_description = {
+			text = number_of_grace
+			value = 800
+			var:incarna_court = { var:grace >= 800 }
+		}
+	}
+	effect = {
+		add_gold = medium_gold_value
+		custom_description = {
+			text = remove_grace
+			value = 800
+			var:incarna_court = {
+				change_variable = {
+					name = grace
+					add = -800
+				}
+			}
+		}
+	}
+}
+
+################
+### Explorer ###
+################
+
+potential_umbra_explorer_initiate = {
+	scope = character
+	saved_scopes = { explorer realm }
+	effect = {
+		if = {
+			limit = { exists = scope:explorer }
+			if = {
+				limit = { scope:explorer.var:umbra_stationed_realm = scope:realm }
+				set_variable = { name = local_umbra_explorer value = scope:explorer }
+			}
+			else = {
+				scope:realm = { remove_variable = explorer }
+			}
+		}
+		set_variable = { name = local_umbra_realm value = scope:realm }
+		add_to_variable_list = {
+			name = potential_umbra_explorer
+			target = this
+		}
+		every_courtier_or_guest = {
+			limit = {
+				OR = {
+					has_access_to_astral_reaches_trigger = yes 
+					has_access_to_spirit_wilds_trigger = yes 
+					has_access_to_underworld_trigger = yes 
+					has_access_to_dreaming_trigger = yes 
+					has_access_to_deep_umbra_trigger = yes 
+				}
+				POD_is_not_mindless = yes
+				POD_is_not_apocalyptic_background_character = yes
+			}
+			root = {
+				add_to_variable_list = {
+					name = potential_umbra_explorer
+					target = prev
+				}
+			}
+		}
+		if = {
+			limit = { POD_has_coterie_members_trigger = yes }
+			var:coterie = {
+				every_in_list = {
+					variable = members
+					limit = {
+						is_ai = yes
+						POD_is_not_mindless = yes
+						POD_is_not_apocalyptic_background_character = yes
+					}
+					root = {
+						add_to_variable_list = {
+							name = potential_umbra_explorer
+							target = prev
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+potential_umbra_explorer_clean = {
+	scope = character
+	effect = {
+		remove_variable = local_umbra_explorer
+		remove_variable = local_umbra_realm
+		clear_variable_list = potential_umbra_explorer
+	}
+}
+
+assign_umbra_explorer_choose = {
+	scope = character
+	saved_scopes = { courtier }
+	is_shown = {
+		NOT = { has_variable = local_umbra_explorer }
+	}
+	is_valid = {
+		can_assign_umbra_explorer_trigger = yes
+		scope:courtier = { 
+			can_be_umbra_explorer_trigger = yes
+			POD_umbra_travel_valid_trigger = { LOCATION = root.var:local_umbra_realm.var:name }
+		}
+	}
+	effect = {
+		if = {
+			limit = { 
+				exists = scope:courtier 
+				NOT = { root = scope:courtier } 
+			}
+			POD_assign_umbra_explorer_effect= { TARGET = scope:courtier VALUE = 0 }
+		}
+		else = {
+			POD_assign_umbra_explorer_effect= { TARGET = root VALUE = 0 }
+		}
+	}
+}
+
+swap_umbra_explorer_choose = {
+	scope = character
+	saved_scopes = { courtier }
+	is_shown = {
+		has_variable = local_umbra_explorer
+		trigger_if = {
+			limit = { 
+				exists = scope:courtier 
+				NOT = { root = scope:courtier } 
+			}
+			NOT = { var:local_umbra_explorer = scope:courtier }
+		}
+		trigger_else = {
+			NOT = { var:local_umbra_explorer = root }
+		}
+	}
+	is_valid = {
+		can_assign_umbra_explorer_trigger = yes
+		scope:courtier = { 
+			can_be_umbra_explorer_trigger = yes
+			POD_umbra_travel_valid_trigger = { LOCATION = root.var:local_umbra_realm.var:name }
+		}
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+	}
+	effect = {
+		if = {
+			limit = { 
+				exists = scope:courtier 
+				NOT = { root = scope:courtier } 
+			}
+			POD_swap_umbra_explorer_effect = { TARGET = scope:courtier }
+		}
+		else = {
+			POD_swap_umbra_explorer_effect = { TARGET = root }
+		}
+	}
+}
+
+fire_umbra_explorer_choose = {
+	scope = character
+	is_shown = {
+		has_variable = local_umbra_explorer
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+	}
+	effect = {
+		POD_dismiss_umbra_explorer_effect = { TARGET = var:local_umbra_explorer }
+		remove_variable = local_umbra_explorer 
+	}
+}
+
+fire_umbra_explorer = {
+	scope = character
+	saved_scopes = { player } 
+	effect = {
+		scope:player = { 
+			POD_dismiss_umbra_explorer_effect = { TARGET = root } 
+			if = {
+				limit = { 
+					has_variable = local_umbra_explorer 
+					var:local_umbra_explorer = root
+				}
+				remove_variable = local_umbra_explorer 
+			}
+		}
+	}
+}
+
+umbra_explorer_enable = {
+	scope = character
+	saved_scopes = { location }
+	is_valid = { can_set_umbra_explorer_trigger = yes }
+}
+
+has_umbra_explorer = {
+	scope = character
+	is_shown = {
+		any_in_list = {
+			variable = known_umbra_realms_list
+			has_variable = explorer
+		}
+	}
+}
+
+#################
+### Discovery ###
+#################
+
+POD_toggle_coterie_spirit_travel = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_variable = coterie_spirit_travel }
+			remove_variable = coterie_spirit_travel
+		}
+		else = {
+			set_variable = coterie_spirit_travel
+		}
+	}
+}
+
+POD_toggle_physical_spirit_travel = {
+	scope = character
+	is_shown = {
+		OR = {
+			has_trait = werewolf
+			has_trait = corax
+			has_trait = nuwisha
+			has_trait = fae
+			has_perk = unlock_the_jade_portal_perk
+			has_perk = walk_the_matres_mind_perk
+		}
+	}
+	effect = {
+		if = {
+			limit = { has_variable = physical_spirit_travel }
+			remove_variable = physical_spirit_travel
+		}
+		else = {
+			set_variable = physical_spirit_travel
+		}
+	}
+}
+
+# Expedition
+umbra_expedition_choose = {
+	saved_scopes = { realm }
+	scope = character
+	is_shown = {}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_cooldown_tt
+			NOT = { any_memory = { has_memory_type = umbra_expedition_memory } }
+		}
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			NOT = { has_variable = umbra_map }
+		}
+		POD_umbra_travel_valid_trigger = { LOCATION = scope:realm.var:name }
+	}
+	effect = {
+		if = {
+			limit = { has_variable = spirit_location }
+			set_variable = {
+				name = umbra_origin_location
+				value = var:spirit_location
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = spirit_location }
+					NOT = { var:spirit_location = scope:realm.var:name }
+				}
+			}
+			set_variable = { name = spirit_destination value = scope:realm.var:name }
+			show_as_tooltip = { POD_umbra_travel_effect = { LOCATION = scope:realm.var:name } }
+			if = {
+				limit = { POD_umbra_bypass_trigger = { LOCATION = scope:realm.var:name } }
+				trigger_event = { on_action = spirit_travel_movement_end_pulse }
+			}
+			else = {
+				trigger_event = { on_action = spirit_travel_movement_start_pulse }
+			}
+		}
+		set_variable = { name = current_umbra_discovery value = scope:realm.var:umbra_discovery_type }
+		show_as_tooltip = { POD_umbra_trigger_expedition_discovery_effect = { DISCOVERY = scope:realm.var:umbra_discovery_type LOCATION = scope:realm.var:name } }
+		custom_tooltip = {
+			text = umbra_expedition_tooltip
+			if = {
+				limit = {
+					POD_is_currently_in_umbra_expedition_trigger = no
+				}
+				POD_create_umbra_expedition = yes
+			}
+		}
+	}
+}
+
+umbra_expedition_cooldown = {
+	scope = character
+	
+	is_shown = {
+		NOT = { any_memory = { has_memory_type = umbra_expedition_memory } }
+	}
+}
+
+umbra_expedition_is_crisis = {
+	scope = character
+	
+	is_shown = {
+		has_variable = umbra_discovery_type
+		POD_is_umbra_crisis_trigger = { TYPE = var:umbra_discovery_type }
+	}
+}
+
+umbra_expedition_send_explorer = {
+	saved_scopes = { realm }
+	scope = character
+	is_shown = { AND = {
+		NOT = { var:umbra_stationed_realm ?= scope:realm } }
+		scope:realm = {
+			has_variable = explorer
+		}
+	}
+	is_valid = {
+		custom_tooltip = {
+			text = umbra_ongoing_tt
+			POD_is_currently_in_umbra_expedition_trigger = no
+		}
+		scope:realm.var:explorer = { POD_umbra_travel_valid_trigger = { LOCATION = scope:realm.var:name } }
+		gold >= medium_gold_value
+	}
+	effect = {
+		custom_tooltip = appoint_explorer_tt
+		pay_short_term_gold = {
+			target = scope:realm.var:explorer
+			gold = medium_gold_value
+		}
+		if = {
+			limit = { 
+				uses_cairo_eshu_main_reward = yes 
+				scope:realm.var:explorer = { has_trait = fae }
+				in_dreaming_trigger = { LOCATION = var:explorer }
+			}
+			POD_umbra_trigger_expedition_discovery_effect = { DISCOVERY = scope:realm.var:umbra_discovery_type LOCATION = scope:realm.var:name }
+			scope:realm.var:explorer = { POD_umbra_remove_discovery_effect = yes }
+		}
+		else = {
+			random = {
+				chance = scope:realm.var:explorer.umbra_sense_value
+				POD_umbra_trigger_expedition_discovery_effect = { DISCOVERY = scope:realm.var:umbra_discovery_type LOCATION = scope:realm.var:name }
+				scope:realm.var:explorer = { POD_umbra_remove_discovery_effect = yes }
+			}
+		}
+	}
+}
+
+has_umbra_discovery = {
+	scope = character
+	is_shown = {
+		any_in_list = {
+			variable = known_umbra_realms_list
+			has_variable = umbra_discovery_type
+		}
+	}
+}
+
+# Wraith
+
+umbra_recruit_wraith_choose = {
+	scope = character
+	saved_scopes = { explorer }
+	is_shown = {
+		has_trait = wraith
+	}
+	is_valid = {
+		NOT = { has_trait = shadow }
+		NOT = { has_trait = spectre }
+		prestige >= 250
+	}
+	effect = {
+		add_prestige = -250
+		send_interface_toast = {
+			title = umbra_recruit_wraith_choose_tt
+			custom_tooltip = {
+				text = umbra_recruit_wraith_choose_tt
+				create_character = {
+					employer = root
+					template = POD_journey_teacher_template
+					save_scope_as = creator
+					after_creation = {
+						POD_become_wraith_effect = yes
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,372 @@
+﻿masquerade_level = {
+	switch = {
+		trigger = has_character_modifier
+		masquerade0_modifier = { add = 5 }
+		masquerade1_modifier = { add = 4 }
+		masquerade2_modifier = { add = 3 }
+		masquerade3_modifier = { add = 2 }
+		masquerade4_modifier = { add = 1 }
+		#masquerade5_modifier = { add = 0 }
+	}
+}
+
+POD_resurrection_chance = {
+	value = 100
+	if = {
+		limit = { POD_can_become_ancestor_spirit_trigger = yes }
+		value = POD_ancestor_spirit_chance
+	}
+	min = 0
+	max = 100
+}
+
+immortal_cooldown = {
+	value = 0
+	
+	if = { 
+		limit = { 
+			OR = {
+				has_POD_longevity_trigger = yes 
+				is_immortal = yes
+			}
+		}
+		add = 50
+	}
+	else = { 
+		add = 5
+	}
+}
+
+standard_pilgrimage_cooldown_time = {
+	value = 10
+}
+
+days_until_next_month = {
+	value = 30
+	subtract = current_day
+
+	if = { 
+		limit = { current_month = 2 }
+		subtract = 2
+	}
+	else_if = { 
+		limit = { 
+			OR = {
+				current_month = 1 
+				current_month = 3
+				current_month = 5
+				current_month = 7
+				current_month = 8
+				current_month = 10
+				current_month = 12
+			}
+		}
+		add = 1
+	}
+}
+
+# For the vanilla swing_scales_currency_interaction
+POD_swing_scales_cooldown = 4 # (in years)
+POD_swing_scales_during_cooldown_cost_mult = 5
+
+gargoyle_courtiers_count = {
+	value = 0
+	every_courtier = {
+		limit = { has_trait = gargoyle }
+		add = 1
+	}
+}
+
+warrior_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = warrior_gargoyles_created }
+		add = var:warrior_gargoyles_created
+	}
+}
+
+scout_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = scout_gargoyles_created }
+		add = var:scout_gargoyles_created
+	}
+}
+
+sentinel_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = sentinel_gargoyles_created }
+		add = var:sentinel_gargoyles_created
+	}
+}
+
+kintsugi_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = kintsugi_gargoyles_created }
+		add = var:kintsugi_gargoyles_created
+	}
+}
+
+rogata_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = rogata_gargoyles_created }
+		add = var:rogata_gargoyles_created
+	}
+}
+
+totai_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = totai_gargoyles_created }
+		add = var:totai_gargoyles_created
+	}
+}
+
+bingmayong_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = bingmayong_gargoyles_created }
+		add = var:bingmayong_gargoyles_created
+	}
+}
+
+special_gargoyles_created = {
+	value = 0
+	if = {
+		limit = { has_variable = special_gargoyles_created }
+		add = var:special_gargoyles_created
+	}
+}
+
+POD_loyalty_opinion = {
+	if = {
+		limit = { POD_use_harsher_loyalty = yes }
+		value = 50
+	}
+	else = {
+		value = 0
+	}
+}
+
+POD_befriend_limit = {
+	add = {
+		desc = "BASE_VALUE"
+		value = 5
+		format = "POD_FORMAT_BASE_POSITIVE"
+	}
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = setite_legacy_2 } }
+		add = {
+			desc = POD_befriend_limit_setite
+			value = 2
+			format = "POD_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = seelie_romantic_legacy_2 } }
+		add = {
+			desc = POD_befriend_limit_seelie
+			value = 2
+			format = "POD_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = chi_arts_taming_yang_soul_perk }
+		add = {
+			desc = POD_befriend_limit_taming_yang_soul
+			value = 2
+			format = "POD_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = numina_fascination_2_perk }
+		add = {
+			desc = POD_befriend_limit_numina_fascination_2
+			value = 1
+			format = "POD_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = numina_fascination_6_perk }
+		add = {
+			desc = POD_befriend_limit_numina_fascination_6
+			value = 2
+			format = "POD_FORMAT_POSITIVE"
+		}
+	}
+}
+
+POD_num = {
+	     if = { limit = { scope:POD_num1   ?= yes }   value =   1 }
+	else_if = { limit = { scope:POD_num2   ?= yes }   value =   2 }
+	else_if = { limit = { scope:POD_num3   ?= yes }   value =   3 }
+	else_if = { limit = { scope:POD_num4   ?= yes }   value =   4 }
+	else_if = { limit = { scope:POD_num5   ?= yes }   value =   5 }
+	else_if = { limit = { scope:POD_num6   ?= yes }   value =   6 }
+	else_if = { limit = { scope:POD_num7   ?= yes }   value =   7 }
+	else_if = { limit = { scope:POD_num8   ?= yes }   value =   8 }
+	else_if = { limit = { scope:POD_num9   ?= yes }   value =   9 }
+	else_if = { limit = { scope:POD_num10  ?= yes }   value =  10 }
+	else_if = { limit = { scope:POD_num20  ?= yes }   value =  20 }
+	else_if = { limit = { scope:POD_num30  ?= yes }   value =  30 }
+	else_if = { limit = { scope:POD_num40  ?= yes }   value =  40 }
+	else_if = { limit = { scope:POD_num50  ?= yes }   value =  50 }
+	else_if = { limit = { scope:POD_num60  ?= yes }   value =  60 }
+	else_if = { limit = { scope:POD_num70  ?= yes }   value =  70 }
+	else_if = { limit = { scope:POD_num80  ?= yes }   value =  80 }
+	else_if = { limit = { scope:POD_num90  ?= yes }   value =  90 }
+	else_if = { limit = { scope:POD_num100 ?= yes }   value = 100 }
+	min = 1
+}
+
+num_of_discipline_perks = {
+	value = 0
+
+	# unassigned perks
+	add = animal_lifestyle_perk_points
+	add = choleric_lifestyle_perk_points
+	add = melancholy_lifestyle_perk_points
+	add = phlegmatic_lifestyle_perk_points
+	add = sanguine_lifestyle_perk_points
+
+	# assigned perks (animalism)
+	add = "this.perks_in_tree(animalism)"
+	add = "this.perks_in_tree(protean)"
+	add = "this.perks_in_tree(serpentis)"
+	add = "this.perks_in_tree(abombwe)"
+	add = "this.perks_in_tree(spiritus)"
+	add = "this.perks_in_tree(animal_flight)"
+
+	# assigned perks (choleric)
+	add = "this.perks_in_tree(celerity)"
+	add = "this.perks_in_tree(potence)"
+	add = "this.perks_in_tree(vicissitude)"
+	add = "this.perks_in_tree(valeren)"
+
+	# assigned perks (melancholy)
+	add = "this.perks_in_tree(fortitude)"
+	add = "this.perks_in_tree(obfuscate)"
+	add = "this.perks_in_tree(obtenebration)"
+	add = "this.perks_in_tree(necromancy)"
+	add = "this.perks_in_tree(visceratika)"
+	add = "this.perks_in_tree(chimerstry)"
+	add = "this.perks_in_tree(bardo)"
+	add = "this.perks_in_tree(rift)"
+
+	# assigned perks (phlegmatic)
+	add = "this.perks_in_tree(auspex)"
+	add = "this.perks_in_tree(dominate)"
+	add = "this.perks_in_tree(temporis)"
+	add = "this.perks_in_tree(dementation)"
+	add = "this.perks_in_tree(melpominee)"
+	add = "this.perks_in_tree(mytherceria)"
+
+	# assigned perks (sanguine)
+	add = "this.perks_in_tree(bloodsorcery)"
+	add = "this.perks_in_tree(presence)"
+	add = "this.perks_in_tree(daimonion)"
+	add = "this.perks_in_tree(quietus)"
+	add = "this.perks_in_tree(thinbloodalchemy)"
+	add = "this.perks_in_tree(kai)"
+}
+
+max_zmei = {
+	value = 7
+	
+	if = {
+		limit = { current_year > 1240 }
+		subtract = 1 # Sharkala the Cruel
+	}
+}
+
+POD_jank_event_delay = {
+	value = 0
+	if = {
+		limit = { exists = var:jank_event_delay }
+		add = var:jank_event_delay
+	}
+}
+
+curia_support = {
+	value = 0
+	if = {
+		limit = { exists = var:curia_support_var }
+		add = var:curia_support_var
+	}
+}
+
+POD_military_order_rank = {
+	value = 0
+	if = {
+		limit = { exists = var:military_order_rank }
+		add = var:military_order_rank
+	}
+}
+
+POD_selfless_invasion_cost_multiplier = {
+	value = 1
+	multiply = {
+		if = {
+			limit = {
+				any_in_list = {
+					list = target_titles
+					tier >= tier_kingdom
+				}
+			}
+			value = 0.75
+		}
+		else = { value = 0.5 }
+		desc = POD_SELFLESS_INVASION_DISCOUNT
+	}
+}
+
+realm_county_to_convert_value = {
+	every_realm_county = {
+		limit = { NOT = { faith = root.faith } }
+		add = 1
+	}
+}
+
+POD_killed_character_count = {
+	value = 0
+	every_killed_character = {
+		add = 1
+	}
+}
+
+relations_younger_than_10_years = {
+	value = 0
+	every_in_list = {
+		variable = new_relations
+		limit = { is_alive = yes }
+		add = 1
+	}
+}
+
+POD_stress_progress_gui = {
+	value = stress
+	if = { limit = { has_variable = saved_stress } value = var:saved_stress }
+	modulo = 100
+}
+
+POD_stress_level_gui = {
+	value = stress_level
+	if = { limit = { has_variable = saved_stress_level } value = var:saved_stress_level }
+}
+
+# for custom_tooltip purposes
+POD_num_sinful_traits = {
+	value = num_sinful_traits
+}
+
+POD_kj_fuxi_legacy_2_hunt_discount = {
+	value = 0.5
+}
+
+liege_plus_50_percent_strength_value = {
+	value = liege.max_military_strength
+	multiply = 1.5
+}

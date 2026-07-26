@@ -1,0 +1,195 @@
+﻿sundered_soul_level = {
+	value = 0
+	
+	if = { limit = { has_character_modifier = ritual_of_sundered_soul_unstable_modifier } value = 1 }
+	if = { limit = { has_character_modifier = ritual_of_sundered_soul_semi_stable_modifier } value = 2 }
+	if = { limit = { has_character_modifier = ritual_of_sundered_soul_modifier } value = 3 }
+	if = { limit = { has_character_modifier = ritual_of_sundered_soul_stabilized_modifier } value = 4 }
+	if = { limit = { has_character_modifier = ritual_of_sundered_soul_exalted_modifier } value = 5 }
+}
+
+sundered_soul_improve_cost = {
+	value = sundered_soul_level
+	multiply = 5
+}
+
+arcana_xp_per_cultist_value = {
+	value = 20
+	if = { 
+		limit = { is_a_thrall = yes } 
+		switch = {
+			trigger = demonic_pact_level
+			1 = { multiply = 3 }
+			2 = { multiply = 4 }
+			3 = { multiply = 5 }
+			4 = { multiply = 6 }
+			5 = { multiply = 7 }
+			fallback = { multiply = 2 }
+		}
+	}
+}
+
+arcana_xp_gain_multiplier = {
+	value = 1
+	if = { 
+		limit = {
+			exists = house
+			OR = {
+				house = { has_house_modifier = eternal_avarice_modifier }
+				house = { has_house_modifier = eternal_envy_modifier }
+				house = { has_house_modifier = eternal_gluttony_modifier }
+				house = { has_house_modifier = eternal_lust_modifier }
+				house = { has_house_modifier = eternal_pride_modifier }
+				house = { has_house_modifier = eternal_sloth_modifier }
+				house = { has_house_modifier = eternal_wrath_modifier }		
+			} 
+		}  
+		multiply = 2
+	}
+}
+
+arcana_xp_gain_value = {
+	value = 0
+	every_relation = {
+		type = worshipping_cultist
+		add = arcana_xp_per_cultist_value
+	}
+	
+	multiply = arcana_xp_gain_multiplier
+	
+	if = {
+		limit = {
+			OR = {
+				NOT = { exists = dynasty }
+				dynasty = { NOT = { has_dynasty_perk = eminence_legacy_1 } }
+			}
+		}
+		max = 1000
+	}
+	else_if = {
+		limit = {
+			dynasty = { NOT = { has_dynasty_perk = eminence_legacy_2 } }
+		}
+		max = 2000
+	}
+	else_if = {
+		limit = {
+			dynasty = { NOT = { has_dynasty_perk = eminence_legacy_3 } }
+		}
+		max = 3000
+	}
+	else_if = {
+		limit = {
+			dynasty = { NOT = { has_dynasty_perk = eminence_legacy_4 } }
+		}
+		max = 4000
+	}
+	else_if = {
+		limit = {
+			dynasty = { NOT = { has_dynasty_perk = eminence_legacy_5 } }
+		}
+		max = 5000
+	}
+}
+
+POD_revelations_resolve_income = {
+	value = 2
+	if = { limit = { has_perk = arcana_gift_of_faith_perk } add = 2 }
+	if = { limit = { has_perk = arcana_theft_of_faith_perk } add = 2 }
+}
+
+POD_revelations_cost = {
+	value = -150
+	if = { limit = { has_perk = arcana_sin_eating_perk } divide = 2 }
+	if = { limit = { has_perk = arcana_ravage_sinner_perk } divide = 2 }
+}
+
+demonic_pact_strength = {
+	value = 0
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = pacts_legacy_5 } }
+		add = 5
+	}
+	else_if = {
+		limit = { dynasty ?= { has_dynasty_perk = pacts_legacy_4 } }
+		add = 4
+	}
+	else_if = {
+		limit = { dynasty ?= { has_dynasty_perk = pacts_legacy_3 } }
+		add = 3
+	}
+	else_if = {
+		limit = { dynasty ?= { has_dynasty_perk = pacts_legacy_2 } }
+		add = 2
+	}
+	else_if = {
+		limit = { dynasty ?= { has_dynasty_perk = pacts_legacy_1 } }
+		add = 1
+	}
+}
+
+demonic_pact_level = {
+	value = 0
+	ordered_relation = {
+		type = worshipped_demon
+		order_by = demonic_pact_strength
+		position = 0
+		add = demonic_pact_strength
+	}
+}
+
+max_thrall_cap = {
+	value = intrigue
+	divide = 8
+	floor = yes
+	add = 3
+	if = {
+		limit = {
+			domicile ?= { has_domicile_parameter = increased_thrall_cap_parameter }
+		}
+		add = 1
+	}	
+}
+
+cult_leader_court_position_level = {
+	value = 12
+	court_position:cult_leader_court_position ?= {
+		if = {
+			limit = {
+				aptitude = { court_position = cult_leader_court_position value <= 1 }
+			}
+			value = 12
+		}
+		else_if = {
+			limit = {
+				aptitude = { court_position = cult_leader_court_position value = 2 }
+			}
+			value = 10
+		}
+		else_if = {
+			limit = {
+				aptitude = { court_position = cult_leader_court_position value = 3 }
+			}
+			value = 8
+		}
+		else_if = {
+			limit = {
+				aptitude = { court_position = cult_leader_court_position value = 4 }
+			}
+			value = 6
+		}				
+		else = { value = 4 }
+	}
+}
+
+POD_landless_demon_clues = {
+	value = 0
+	if = {
+		limit = { exists = var:landless_demon_clues }
+		add = var:landless_demon_clues
+	}
+}
+
+POD_landless_demon_clues_for_1st_unlock = 35
+POD_landless_demon_clues_for_2nd_unlock = 70
+POD_landless_demon_clues_for_3rd_unlock = 100

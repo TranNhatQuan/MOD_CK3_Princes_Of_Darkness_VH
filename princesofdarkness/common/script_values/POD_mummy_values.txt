@@ -1,0 +1,132 @@
+﻿# (in months)
+POD_weather_default_duration = 60
+POD_weather_mummy_duration = {
+	value = 120
+
+	if = {
+		limit = { scope:flood ?= yes scope:actor ?= { has_perk = inundation_of_the_nile_perk } }
+		add = 60
+	}
+}
+POD_mummy_memory_level = {
+	value = 0
+	if = { limit = { has_trait_xp = { trait = mummy value >= 5 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 15 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 25 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 35 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 45 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 55 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 70 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = mummy value >= 90 } } add = 1 }
+}
+
+POD_mummy_integrity_level = {
+	value = 0
+	if = { limit = { has_trait_xp = { trait = integrity value >= 1 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 10 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 20 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 30 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 40 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 60 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 80 } } add = 1 }
+	if = { limit = { has_trait_xp = { trait = integrity value >= 100 } } add = 1 }
+}
+
+POD_mummy_yearly_memory_change = {
+	value = 0
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_01a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_02a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_03a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_04a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_05a } } add = 0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_01a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_02a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_03a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_04a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_05a } } add = 0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_01a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_02a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_03a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_04a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_05a } } add = 0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_01a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_02a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_03a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_04a } } add = 0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_05a } } add = 0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_01c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_02c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_03c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_04c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_05c } } add = -0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_01c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_02c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_03c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_04c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_05c } } add = -0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_01c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_02c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_03c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_04c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_05c } } add = -0.25 }
+
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_01c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_02c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_03c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_04c } } add = -0.25 }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_05c } } add = -0.25 }
+}
+
+POD_mummy_resurrection_time = {
+	value = 5
+	if = {
+		limit = {
+			faith = faith:ishmaelite
+			NOT = { is_target_in_global_variable_list = { name = unavailable_unique_decisions target = flag:keeping_the_roots_safe_objective_decision } }
+		}
+		multiply = 2
+	}
+
+	if = { limit = { has_perk = scarab_of_life_perk } add = -1 }
+	if = { limit = { has_perk = scarab_of_death_perk } add = -1 }
+	if = { limit = { has_perk = deaths_shroud_perk } add = -1 }
+	if = { limit = { has_perk = amentis_grace_perk } add = -1 }
+	if = { limit = { has_perk = empower_ba_perk } add = -1 }
+	if = { limit = { dynasty = { has_dynasty_perk = psyche_mummy_legacy_4 } } add = -1 }
+	min = 0
+}
+
+POD_mummy_domicile_trap_value = 5
+
+POD_mummy_tomb_defense = {
+	value = 0
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_library_trapped_bookcase } } add = POD_mummy_domicile_trap_value }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_memorandum_trapped_doorway } } add = POD_mummy_domicile_trap_value }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_connections_trapped_entry } } add = POD_mummy_domicile_trap_value }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_private_guard_always_ready_guard } } add = POD_mummy_domicile_trap_value }
+	if = { limit = { domicile ?= { has_domicile_building_or_higher = mummy_neteru_corner_protected_ground } } add = POD_mummy_domicile_trap_value }
+}
+
+POD_command_effigy_interaction_scale = {
+	value = 1
+	if = { limit = { has_perk = stalking_hound_of_typhon_perk }	add = 1 }
+	if = { limit = { has_perk = the_crawling_eye_perk }		add = 1 }
+	if = { limit = { has_perk = guard_perk }			add = 1 }
+	if = { limit = { has_perk = effigy_overseer_perk }		add = 1 }
+}
+
+known_trait_true_names_number = {
+	every_in_list = { variable = known_true_name_traits add = 1 }
+}
+
+total_nonstandard_true_names_number = 22
+
+known_nonstandard_true_names_number = {
+	every_in_list = { variable = known_true_name_flags add = 1 }
+}

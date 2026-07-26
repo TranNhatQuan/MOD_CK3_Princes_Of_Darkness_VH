@@ -1,0 +1,2594 @@
+﻿POD_camarilla_membership_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		POD_all_is_member_clan_trigger = no
+	}
+	
+	widget = {
+		gui = "decision_view_widget_option_list_generic"
+		controller = decision_option_list_controller
+		decision_to_second_step_button = "NEXT_LABEL"
+		show_from_start = yes
+
+		item = { # workaround
+			value = none
+			is_shown = { always = no }
+			current_description = blank_line
+			localization = blank_line
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_ventrue_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ventrue } } }
+				is_ventrue_trigger = no
+			}
+			current_description = camarilla_ventrue_membership_desc
+			localization = camarilla_ventrue_membership_name
+			icon = "gfx/interface/icons/traits/ventrue.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_toreador_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = toreador } } }
+				is_toreador_trigger = no
+			}
+			current_description = camarilla_toreador_membership_desc
+			localization = camarilla_toreador_membership_name
+			icon = "gfx/interface/icons/traits/toreador.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_tremere_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tremere } } }
+				is_tremere_trigger = no
+			}
+			current_description = camarilla_tremere_membership_desc
+			localization = camarilla_tremere_membership_name
+			icon = "gfx/interface/icons/traits/tremere.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_brujah_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = brujah } } }
+				is_brujah_trigger = no
+			}
+			current_description = camarilla_brujah_membership_desc
+			localization = camarilla_brujah_membership_name
+			icon = "gfx/interface/icons/traits/brujah.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_nosferatu_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = nosferatu } } }
+				is_nosferatu_trigger = no
+			}
+			current_description = camarilla_nosferatu_membership_desc
+			localization = camarilla_nosferatu_membership_name
+			icon = "gfx/interface/icons/traits/nosferatu.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_gangrel_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = gangrel } } }
+				is_gangrel_trigger = no
+			}
+			current_description = camarilla_gangrel_membership_desc
+			localization = camarilla_gangrel_membership_name
+			icon = "gfx/interface/icons/traits/gangrel.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_malkavian_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = malkavian } } }
+				is_malkavian_trigger = no
+			}
+			current_description = camarilla_malkavian_membership_desc
+			localization = camarilla_malkavian_membership_name
+			icon = "gfx/interface/icons/traits/malkavian.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_lasombra_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = lasombra } } }
+				is_lasombra_trigger = no
+			}
+			current_description = camarilla_lasombra_membership_desc
+			localization = camarilla_lasombra_membership_name
+			icon = "gfx/interface/icons/traits/lasombra.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_tzimisce_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tzimisce } } }
+				is_tzimisce_trigger = no
+			}
+			current_description = camarilla_tzimisce_membership_desc
+			localization = camarilla_tzimisce_membership_name
+			icon = "gfx/interface/icons/traits/tzimisce.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_ravnos_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ravnos } } }
+				is_ravnos_trigger = no
+			}
+			current_description = camarilla_ravnos_membership_desc
+			localization = camarilla_ravnos_membership_name
+			icon = "gfx/interface/icons/traits/ravnos.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_hecata_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = hecata } } }
+				is_hecata_trigger = no
+			}
+			current_description = camarilla_hecata_membership_desc
+			localization = camarilla_hecata_membership_name
+			icon = "gfx/interface/icons/traits/cappadocian.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_setite_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = setite } } }
+				is_setite_trigger = no
+			}
+			current_description = camarilla_setite_membership_desc
+			localization = camarilla_setite_membership_name
+			icon = "gfx/interface/icons/traits/setite.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_assamite_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = assamite } } }
+				is_assamite_trigger = no
+			}
+			current_description = camarilla_assamite_membership_desc
+			localization = camarilla_assamite_membership_name
+			icon = "gfx/interface/icons/traits/assamite.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_salubri_membership
+			is_shown = {
+				NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = salubri } } }
+				is_salubri_trigger = no
+			}
+			current_description = camarilla_salubri_membership_desc
+			localization = camarilla_salubri_membership_name
+			icon = "gfx/interface/icons/traits/salubri.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+		item = {
+			value = camarilla_caitiff_membership
+			is_shown = {
+				faith:camahumanity = {
+					NOR = {
+						is_target_in_variable_list = { 
+							name = member_clan
+							target = doctrine:doctrine_vampirethinblood_justicar
+						}
+						is_target_in_variable_list = { 
+							name = member_clan
+							target = doctrine:doctrine_vampirethinblood_accepted
+						}
+					}
+				}
+				NOR = {
+					has_trait = caitiff 
+					has_trait = custom_bloodline
+				}
+			}
+			current_description = camarilla_caitiff_membership_desc
+			localization = camarilla_caitiff_membership_name
+			icon = "gfx/interface/icons/traits/caitiff.dds"
+			ai_chance = {
+				value = 0
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+		trigger_if = {
+			limit = { scope:camarilla_ventrue_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_ventrue_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_ventrue_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_ventrue_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_ventrue_membership_decision_custom2
+				any_independent_ruler = {
+					is_ventrue_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_toreador_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_toreador_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_toreador_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_toreador_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_toreador_membership_decision_custom2
+				any_independent_ruler = {
+					is_toreador_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_tremere_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_tremere_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_tremere_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_tremere_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_tremere_membership_decision_custom2
+				any_independent_ruler = {
+					is_tremere_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_brujah_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_brujah_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_brujah_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_brujah_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_brujah_membership_decision_custom2
+				any_independent_ruler = {
+					is_brujah_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_nosferatu_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_nosferatu_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_nosferatu_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_nosferatu_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_nosferatu_membership_decision_custom2
+				any_independent_ruler = {
+					is_nosferatu_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_gangrel_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_gangrel_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_gangrel_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_gangrel_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_gangrel_membership_decision_custom2
+				any_independent_ruler = {
+					is_gangrel_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_malkavian_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_malkavian_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_malkavian_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_malkavian_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_malkavian_membership_decision_custom2
+				any_independent_ruler = {
+					is_malkavian_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_lasombra_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_lasombra_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_lasombra_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_lasombra_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_lasombra_membership_decision_custom2
+				any_independent_ruler = {
+					is_lasombra_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_tzimisce_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_tzimisce_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_tzimisce_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_tzimisce_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_tzimisce_membership_decision_custom2
+				any_independent_ruler = {
+					is_tzimisce_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_ravnos_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_ravnos_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_ravnos_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_ravnos_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_ravnos_membership_decision_custom2
+				any_independent_ruler = {
+					is_ravnos_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_hecata_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_hecata_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_hecata_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_hecata_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_hecata_membership_decision_custom2
+				any_independent_ruler = {
+					is_hecata_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_setite_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_setite_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_setite_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_setite_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_setite_membership_decision_custom2
+				any_independent_ruler = {
+					is_setite_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_assamite_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_assamite_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_assamite_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_assamite_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_assamite_membership_decision_custom2
+				any_independent_ruler = {
+					is_assamite_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_salubri_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						is_salubri_trigger = yes	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_salubri_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_salubri_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_salubri_membership_decision_custom2
+				any_independent_ruler = {
+					is_salubri_trigger = yes	
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_caitiff_membership = yes }
+			trigger_if = {
+				limit = { 
+					any_independent_ruler = {
+						OR = {
+							has_trait = caitiff 
+							has_trait = custom_bloodline
+						}	
+						is_landed = yes
+						NOT = { religion = religion:camarilla_religion }
+						save_temporary_scope_as = example
+					}
+				}
+				custom_tooltip = {
+					text = POD_camarilla_caitiff_membership_decision_custom_ex
+					always = no
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = POD_camarilla_caitiff_membership_decision_custom
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_caitiff_membership_decision_custom2
+				any_independent_ruler = {
+					OR = {
+						has_trait = caitiff 
+						has_trait = custom_bloodline
+					}
+					is_landed = yes
+					religion = religion:camarilla_religion
+				}
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+		trigger_if = {
+			limit = { scope:camarilla_ventrue_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_ventrue_shunned }
+				NOT = { has_doctrine = doctrine_ventrue_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_toreador_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_toreador_shunned }
+				NOT = { has_doctrine = doctrine_toreador_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_tremere_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_tremere_shunned }
+				NOT = { has_doctrine = doctrine_tremere_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_brujah_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_brujah_shunned }
+				NOT = { has_doctrine = doctrine_brujah_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_nosferatu_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_nosferatu_shunned }
+				NOT = { has_doctrine = doctrine_nosferatu_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_gangrel_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_gangrel_shunned }
+				NOT = { has_doctrine = doctrine_gangrel_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_malkavian_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_malkavian_shunned }
+				NOT = { has_doctrine = doctrine_malkavian_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_lasombra_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_lasombra_shunned }
+				NOT = { has_doctrine = doctrine_lasombra_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_tzimisce_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_tzimisce_shunned }
+				NOT = { has_doctrine = doctrine_tzimisce_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_ravnos_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_ravnos_shunned }
+				NOT = { has_doctrine = doctrine_ravnos_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_hecata_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_hecata_shunned }
+				NOT = { has_doctrine = doctrine_hecata_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_setite_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_setite_shunned }
+				NOT = { has_doctrine = doctrine_setite_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_assamite_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_assamite_shunned }
+				NOT = { has_doctrine = doctrine_assamite_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_salubri_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_salubri_shunned }
+				NOT = { has_doctrine = doctrine_salubri_crime }
+			}
+		}
+		trigger_if = {
+			limit = { scope:camarilla_caitiff_membership = yes }
+			faith:camahumanity = { 
+				NOT = { has_doctrine = doctrine_vampirethinblood_shunned }
+				NOT = { has_doctrine = doctrine_vampirethinblood_crime }
+			}
+		}
+	}
+
+    effect = {
+		if = {
+			limit = { scope:camarilla_ventrue_membership = yes }
+			custom_tooltip = POD_camarilla_ventrue_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_ventrue_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_ventrue_accepted } }
+			trigger_event = POD_camarilla.2001
+		}
+		if = {
+			limit = { scope:camarilla_toreador_membership = yes }
+			custom_tooltip = POD_camarilla_toreador_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_toreador_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_toreador_accepted } }
+			trigger_event = POD_camarilla.2002
+		}
+		if = {
+			limit = { scope:camarilla_tremere_membership = yes }
+			custom_tooltip = POD_camarilla_tremere_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_tremere_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_tremere_accepted } }
+			trigger_event = POD_camarilla.2003
+		}
+		if = {
+			limit = { scope:camarilla_brujah_membership = yes }
+			custom_tooltip = POD_camarilla_brujah_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_brujah_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_brujah_accepted } }
+			trigger_event = POD_camarilla.2004
+		}
+		if = {
+			limit = { scope:camarilla_nosferatu_membership = yes }
+			custom_tooltip = POD_camarilla_nosferatu_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_nosferatu_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_nosferatu_accepted } }
+			trigger_event = POD_camarilla.2005
+		}
+		if = {
+			limit = { scope:camarilla_gangrel_membership = yes }
+			custom_tooltip = POD_camarilla_gangrel_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_gangrel_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_gangrel_accepted } }
+			trigger_event = POD_camarilla.2006
+		}
+		if = {
+			limit = { scope:camarilla_malkavian_membership = yes }
+			custom_tooltip = POD_camarilla_malkavian_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_malkavian_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_malkavian_accepted } }
+			trigger_event = POD_camarilla.2007
+		}
+		if = {
+			limit = { scope:camarilla_lasombra_membership = yes }
+			custom_tooltip = POD_camarilla_lasombra_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_lasombra_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_lasombra_accepted } }
+			trigger_event = POD_camarilla.2008
+		}
+		if = {
+			limit = { scope:camarilla_tzimisce_membership = yes }
+			custom_tooltip = POD_camarilla_tzimisce_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_tzimisce_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_tzimisce_accepted } }
+			trigger_event = POD_camarilla.2009
+		}
+		if = {
+			limit = { scope:camarilla_ravnos_membership = yes }
+			custom_tooltip = POD_camarilla_ravnos_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_ravnos_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_ravnos_accepted } }
+			trigger_event = POD_camarilla.2010
+		}
+		if = {
+			limit = { scope:camarilla_hecata_membership = yes }
+			custom_tooltip = POD_camarilla_hecata_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_hecata_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_hecata_accepted } }
+			trigger_event = POD_camarilla.2011
+		}
+		if = {
+			limit = { scope:camarilla_setite_membership = yes }
+			custom_tooltip = POD_camarilla_setite_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_setite_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_setite_accepted } }
+			trigger_event = POD_camarilla.2012
+		}
+		if = {
+			limit = { scope:camarilla_assamite_membership = yes }
+			custom_tooltip = POD_camarilla_assamite_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_assamite_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_assamite_accepted } }
+			trigger_event = POD_camarilla.2013
+		}
+		if = {
+			limit = { scope:camarilla_salubri_membership = yes }
+			custom_tooltip = POD_camarilla_salubri_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_salubri_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_salubri_accepted } }
+			trigger_event = POD_camarilla.2014
+		}
+		if = {
+			limit = { scope:camarilla_caitiff_membership = yes }
+			custom_tooltip = POD_camarilla_caitiff_membership_decision_effect_tooltip
+			religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_vampirethinblood_accepted } }
+			faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_vampirethinblood_accepted } }
+			trigger_event = POD_camarilla.2015
+		}
+	}
+}
+
+POD_camarilla_ventrue_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ventrue } } }
+		is_ventrue_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_ventrue_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_ventrue_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_ventrue_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_ventrue_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_ventrue_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_ventrue_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_ventrue_shunned }
+				remove_doctrine = doctrine_ventrue_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_ventrue_crime }
+				remove_doctrine = doctrine_ventrue_crime
+			}
+		}
+		trigger_event = POD_camarilla.2101
+	}
+}
+
+POD_camarilla_ventrue_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ventrue } }
+		faith = { NOT = { has_doctrine = doctrine_ventrue_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_ventrue_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_ventrue_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_ventrue_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_ventrue_accepted }
+				remove_doctrine = doctrine_ventrue_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_ventrue_justicar }
+		}
+		trigger_event = POD_camarilla.2201
+	}
+}
+
+POD_camarilla_toreador_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = toreador } } }
+		is_toreador_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_toreador_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_toreador_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_toreador_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_toreador_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_toreador_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_toreador_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_toreador_shunned }
+				remove_doctrine = doctrine_toreador_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_toreador_crime }
+				remove_doctrine = doctrine_toreador_crime
+			}
+		}
+		trigger_event = POD_camarilla.2102
+	}
+}
+
+POD_camarilla_toreador_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = toreador } }
+		faith = { NOT = { has_doctrine = doctrine_toreador_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_toreador_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_toreador_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_toreador_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_toreador_accepted }
+				remove_doctrine = doctrine_toreador_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_toreador_justicar }
+		}
+		trigger_event = POD_camarilla.2202
+	}
+}
+
+POD_camarilla_tremere_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tremere } } }
+		is_tremere_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_tremere_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_tremere_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_tremere_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_tremere_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_tremere_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_tremere_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_tremere_shunned }
+				remove_doctrine = doctrine_tremere_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_tremere_crime }
+				remove_doctrine = doctrine_tremere_crime
+			}
+		}
+		trigger_event = POD_camarilla.2103
+	}
+}
+
+POD_camarilla_tremere_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tremere } }
+		faith = { NOT = { has_doctrine = doctrine_tremere_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_tremere_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_tremere_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_tremere_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_tremere_accepted }
+				remove_doctrine = doctrine_tremere_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_tremere_justicar }
+		}
+		trigger_event = POD_camarilla.2203
+	}
+}
+
+POD_camarilla_brujah_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = brujah } } }
+		is_brujah_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_brujah_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_brujah_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_brujah_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_brujah_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_brujah_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_brujah_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_brujah_shunned }
+				remove_doctrine = doctrine_brujah_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_brujah_crime }
+				remove_doctrine = doctrine_brujah_crime
+			}
+		}
+		trigger_event = POD_camarilla.2104
+	}
+}
+
+POD_camarilla_brujah_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = brujah } }
+		faith = { NOT = { has_doctrine = doctrine_brujah_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_brujah_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_brujah_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_brujah_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_brujah_accepted }
+				remove_doctrine = doctrine_brujah_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_brujah_justicar }
+		}
+		trigger_event = POD_camarilla.2204
+	}
+}
+
+POD_camarilla_nosferatu_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = nosferatu } } }
+		is_nosferatu_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_nosferatu_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_nosferatu_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_nosferatu_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_nosferatu_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_nosferatu_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_nosferatu_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_nosferatu_shunned }
+				remove_doctrine = doctrine_nosferatu_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_nosferatu_crime }
+				remove_doctrine = doctrine_nosferatu_crime
+			}
+		}
+		trigger_event = POD_camarilla.2105
+	}
+}
+
+POD_camarilla_nosferatu_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = nosferatu } }
+		faith = { NOT = { has_doctrine = doctrine_nosferatu_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_nosferatu_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_nosferatu_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_nosferatu_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_nosferatu_accepted }
+				remove_doctrine = doctrine_nosferatu_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_nosferatu_justicar }
+		}
+		trigger_event = POD_camarilla.2205
+	}
+}
+
+POD_camarilla_gangrel_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = gangrel } } }
+		is_gangrel_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_gangrel_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_gangrel_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_gangrel_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_gangrel_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_gangrel_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_gangrel_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_gangrel_shunned }
+				remove_doctrine = doctrine_gangrel_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_gangrel_crime }
+				remove_doctrine = doctrine_gangrel_crime
+			}
+		}
+		trigger_event = POD_camarilla.2106
+	}
+}
+
+POD_camarilla_gangrel_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = gangrel } }
+		faith = { NOT = { has_doctrine = doctrine_gangrel_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_gangrel_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_gangrel_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_gangrel_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_gangrel_accepted }
+				remove_doctrine = doctrine_gangrel_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_gangrel_justicar }
+		}
+		trigger_event = POD_camarilla.2206
+	}
+}
+
+POD_camarilla_malkavian_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = malkavian } } }
+		is_malkavian_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_malkavian_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_malkavian_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_malkavian_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_malkavian_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_malkavian_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_malkavian_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_malkavian_shunned }
+				remove_doctrine = doctrine_malkavian_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_malkavian_crime }
+				remove_doctrine = doctrine_malkavian_crime
+			}
+		}
+		trigger_event = POD_camarilla.2107
+	}
+}
+
+POD_camarilla_malkavian_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = malkavian } }
+		faith = { NOT = { has_doctrine = doctrine_malkavian_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_malkavian_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_malkavian_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_malkavian_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_malkavian_accepted }
+				remove_doctrine = doctrine_malkavian_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_malkavian_justicar }
+		}
+		trigger_event = POD_camarilla.2207
+	}
+}
+
+POD_camarilla_lasombra_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = lasombra } } }
+		is_lasombra_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_lasombra_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_lasombra_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_lasombra_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_lasombra_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_lasombra_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_lasombra_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_lasombra_shunned }
+				remove_doctrine = doctrine_lasombra_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_lasombra_crime }
+				remove_doctrine = doctrine_lasombra_crime
+			}
+		}
+		trigger_event = POD_camarilla.2108
+	}
+}
+
+POD_camarilla_lasombra_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = lasombra } }
+		faith = { NOT = { has_doctrine = doctrine_lasombra_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_lasombra_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_lasombra_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_lasombra_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_lasombra_accepted }
+				remove_doctrine = doctrine_lasombra_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_lasombra_justicar }
+		}
+		trigger_event = POD_camarilla.2208
+	}
+}
+
+POD_camarilla_tzimisce_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tzimisce } } }
+		is_tzimisce_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_tzimisce_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_tzimisce_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_tzimisce_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_tzimisce_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_tzimisce_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_tzimisce_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_tzimisce_shunned }
+				remove_doctrine = doctrine_tzimisce_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_tzimisce_crime }
+				remove_doctrine = doctrine_tzimisce_crime
+			}
+		}
+		trigger_event = POD_camarilla.2109
+	}
+}
+
+POD_camarilla_tzimisce_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tzimisce } }
+		faith = { NOT = { has_doctrine = doctrine_tzimisce_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_tzimisce_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_tzimisce_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_tzimisce_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_tzimisce_accepted }
+				remove_doctrine = doctrine_tzimisce_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_tzimisce_justicar }
+		}
+		trigger_event = POD_camarilla.2209
+	}
+}
+
+POD_camarilla_ravnos_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ravnos } } }
+		is_ravnos_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_ravnos_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_ravnos_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_ravnos_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_ravnos_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_ravnos_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_ravnos_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_ravnos_shunned }
+				remove_doctrine = doctrine_ravnos_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_ravnos_crime }
+				remove_doctrine = doctrine_ravnos_crime
+			}
+		}
+		trigger_event = POD_camarilla.2110
+	}
+}
+
+POD_camarilla_ravnos_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ravnos } }
+		faith = { NOT = { has_doctrine = doctrine_ravnos_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_ravnos_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_ravnos_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_ravnos_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_ravnos_accepted }
+				remove_doctrine = doctrine_ravnos_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_ravnos_justicar }
+		}
+		trigger_event = POD_camarilla.2210
+	}
+}
+
+POD_camarilla_hecata_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = hecata } } }
+		is_hecata_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_hecata_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_hecata_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_hecata_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_hecata_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_hecata_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_hecata_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_hecata_shunned }
+				remove_doctrine = doctrine_hecata_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_hecata_crime }
+				remove_doctrine = doctrine_hecata_crime
+			}
+		}
+		trigger_event = POD_camarilla.2111
+	}
+}
+
+POD_camarilla_hecata_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = hecata } }
+		faith = { NOT = { has_doctrine = doctrine_hecata_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_hecata_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_hecata_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_hecata_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_hecata_accepted }
+				remove_doctrine = doctrine_hecata_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_hecata_justicar }
+		}
+		trigger_event = POD_camarilla.2211
+	}
+}
+
+POD_camarilla_setite_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = setite } } }
+		is_setite_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_setite_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_setite_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_setite_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_setite_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_setite_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_setite_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_setite_shunned }
+				remove_doctrine = doctrine_setite_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_setite_crime }
+				remove_doctrine = doctrine_setite_crime
+			}
+		}
+		trigger_event = POD_camarilla.2112
+	}
+}
+
+POD_camarilla_setite_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = setite } }
+		faith = { NOT = { has_doctrine = doctrine_setite_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_setite_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_setite_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_setite_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_setite_accepted }
+				remove_doctrine = doctrine_setite_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_setite_justicar }
+		}
+		trigger_event = POD_camarilla.2212
+	}
+}
+
+POD_camarilla_assamite_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = assamite } } }
+		is_assamite_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_assamite_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_assamite_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_assamite_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_assamite_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_assamite_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_assamite_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_assamite_shunned }
+				remove_doctrine = doctrine_assamite_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_assamite_crime }
+				remove_doctrine = doctrine_assamite_crime
+			}
+		}
+		trigger_event = POD_camarilla.2113
+	}
+}
+
+POD_camarilla_assamite_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = assamite } }
+		faith = { NOT = { has_doctrine = doctrine_assamite_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_assamite_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_assamite_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_assamite_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_assamite_accepted }
+				remove_doctrine = doctrine_assamite_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_assamite_justicar }
+		}
+		trigger_event = POD_camarilla.2213
+	}
+}
+
+POD_camarilla_salubri_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		NOT = { faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = salubri } } }
+		is_salubri_trigger = yes
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					is_assamite_trigger = yes	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_salubri_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_salubri_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_salubri_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_salubri_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_salubri_accepted } }
+		faith:camahumanity = {
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_salubri_shunned }
+				remove_doctrine = doctrine_salubri_shunned
+			}
+			if= { # Only happen if multiplayer go mean
+				limit = { has_doctrine = doctrine_salubri_crime }
+				remove_doctrine = doctrine_salubri_crime
+			}
+		}
+		trigger_event = POD_camarilla.2114
+	}
+}
+
+POD_camarilla_salubri_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = salubri } }
+		faith = { NOT = { has_doctrine = doctrine_salubri_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_salubri_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_salubri_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_salubri_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_salubri_accepted }
+				remove_doctrine = doctrine_salubri_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_salubri_justicar }
+		}
+		trigger_event = POD_camarilla.2214
+	}
+}
+
+POD_camarilla_caitiff_membership_request_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = {
+			NOR = {
+				is_target_in_variable_list = { 
+					name = member_clan
+					target = doctrine:doctrine_vampirethinblood_justicar
+				}
+				is_target_in_variable_list = { 
+					name = member_clan
+					target = doctrine:doctrine_vampirethinblood_accepted
+				}
+			}
+		}
+		OR = {
+			has_trait = caitiff 
+			has_trait = custom_bloodline
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { 
+				any_independent_ruler = {
+					OR = {
+						has_trait = caitiff 
+						has_trait = custom_bloodline
+					}	
+					is_landed = yes
+					NOT = { religion = religion:camarilla_religion }
+					save_temporary_scope_as = example
+				}
+			}
+			custom_tooltip = {
+				text = POD_camarilla_caitiff_membership_decision_custom_ex
+				always = no
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = POD_camarilla_caitiff_membership_decision_custom
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_caitiff_membership_decision_effect_tooltip
+		religion:sabbat_religion = { remove_list_variable = { name = member_clan target = doctrine:doctrine_vampirethinblood_accepted } }
+		faith:camahumanity = { add_to_variable_list = { name = member_clan target = doctrine:doctrine_vampirethinblood_accepted } }
+		faith:camahumanity = {
+			if= {
+				limit = { has_doctrine = doctrine_vampirethinblood_shunned }
+				remove_doctrine = doctrine_vampirethinblood_shunned
+			}
+			if= {
+				limit = { has_doctrine = doctrine_vampirethinblood_crime }
+				remove_doctrine = doctrine_vampirethinblood_crime
+			}
+		}
+		trigger_event = POD_camarilla.2115
+	}
+}
+
+POD_camarilla_caitiff_justicar_right_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	cost = { prestige = 1000 }
+	
+    is_shown = {
+		POD_reached_endgame_date_trigger = { YEAR = 1504 }
+		religion = religion:camarilla_religion
+		faith:camahumanity = {
+			OR = {
+				is_target_in_variable_list = { 
+					name = member_clan
+					target = doctrine:doctrine_vampirethinblood_justicar
+				}
+				is_target_in_variable_list = { 
+					name = member_clan
+					target = doctrine:doctrine_vampirethinblood_accepted
+				}
+			}
+		}
+		faith = { NOT = { has_doctrine = doctrine_vampirethinblood_justicar } }
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { POD_is_inner_circle_trigger = no }
+			POD_is_justicar_trigger = yes
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		custom_tooltip = POD_camarilla_caitiff_justicar_right_decision_effect_tooltip
+		faith:camahumanity = {
+			remove_list_variable = { name = member_clan target = doctrine:doctrine_vampirethinblood_accepted }
+			add_to_variable_list = { name = member_clan target = doctrine:doctrine_vampirethinblood_justicar }
+			if= {
+				limit = { has_doctrine = doctrine_vampirethinblood_accepted }
+				remove_doctrine = doctrine_vampirethinblood_accepted
+			}
+			show_as_tooltip = { add_doctrine = doctrine_vampirethinblood_justicar }
+		}
+		trigger_event = POD_camarilla.2215
+	}
+}
+
+POD_camarilla_victory_objective_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	}
+	decision_group_type = major
+
+	ai_check_interval = 0
+	
+    is_shown = {
+		is_playable_character = yes
+		religion = religion:camarilla_religion
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:POD_camarilla_victory_objective_decision
+			}
+		}		
+	}
+
+	is_valid = {
+		POD_is_inner_circle_trigger = yes
+		custom_tooltip = {
+			text = POD_camarilla_victory_objective_decision_custom
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ventrue } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = toreador } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tremere } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = brujah } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = nosferatu } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = gangrel } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = malkavian } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = lasombra } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = tzimisce } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = ravnos } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = hecata } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = setite } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = assamite } }
+			faith:camahumanity = { POD_is_member_clan_trigger = { CLAN = salubri } }
+			# faith:camahumanity = {
+				# OR = {
+					# is_target_in_variable_list = { 
+						# name = member_clan
+						# target = doctrine:doctrine_vampirethinblood_justicar
+					# }
+					# is_target_in_variable_list = { 
+						# name = member_clan
+						# target = doctrine:doctrine_vampirethinblood_accepted
+					# }
+				# }
+			# }
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+    effect = {
+		POD_major_objective_finished_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:POD_camarilla_victory_objective_decision
+		}
+		show_as_tooltip = {
+			add_prestige = massive_prestige_value
+			dynasty = {
+				add_dynasty_prestige = 1000
+				add_dynasty_prestige_level = 1
+			}
+			
+			add_trait = crusader_king
+			declare_bloodline_holy_decision_effect = yes
+			if = {
+				limit = { has_dlc_feature = legends_of_the_dead }
+				add_trait = legend
+			}
+		
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			title:h_camarilla = {
+				change_title_holder = {
+					holder = root
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			
+			add_character_modifier = camarilla_victory_modifier
+		}
+		trigger_event = POD_camarilla.2300
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

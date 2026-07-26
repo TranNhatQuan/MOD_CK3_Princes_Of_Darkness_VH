@@ -1,0 +1,584 @@
+﻿l_english:
+ ### Setup Work ###
+  activity_survey: "Thanh Tra"
+  activity_survey_desc: "Tiến hành một cuộc thanh tra toàn diện lãnh thổ của Ngài để bảo đảm rằng vương quốc vận hành trơn tru, đồng thời tìm kiếm cơ hội cải thiện bộ máy quan liêu và tình hình hiện tại."
+  activity_survey_tenet_bonus: "\n$BULLET_WITH_TAB$Sẽ nhận được [piety_experience|E] khi hoàn thành"
+  activity_survey_host_desc: "[AddLocalizationIf( GetPlayer.GetGovernment.HasRule( 'merit' ), 'activity_survey_gain_merit_desc' )]$BULLET_WITH_TAB$Có thể nhận @pressed_claim![claims|E]\n$BULLET_WITH_TAB$Có thể tăng mức chấp nhận @vassal_icon![offer_vassalization|E]\n$BULLET_WITH_TAB$Có thể cải thiện @gold_icon![taxes|E] trong [county|E]\n$BULLET_WITH_TAB$Có thể cải thiện @development_icon![development|E] trong [county|E]\n$BULLET_WITH_TAB$Có thể cải thiện @control_icon![control|E] trong [county|E]\n$BULLET_WITH_TAB$Có thể cải thiện @stationed_regiment_icon![levies|E] trong [county|E]\n$BULLET_WITH_TAB$Có thể cải thiện @opinion_icon![opinion|E]\n$BULLET_WITH_TAB$Có thể cải thiện @domain_icon![county_opinion|E][AddLocalizationIf( GetPlayer.GetFaith.HasParameterByKey('inspections_unlocked_and_costs_piety' ), 'activity_survey_tenet_bonus' )]"
+  activity_survey_guest_desc: ""
+  activity_survey_conclusion_desc: "Chuyến hành trình này đã cho ta cơ hội quý giá để tận mắt chứng kiến lãnh thổ của mình, nhưng ta không thể ở đây mãi. Công việc đã hoàn tất, đã đến lúc trở về."
+  activity_survey_selection_tooltip: "Đảm bảo vương quốc của Ngài được vận hành bởi những Bạn Tốt hành tận tụy thông qua một cuộc thanh tra kỹ lưỡng\n\nPhần thưởng dự kiến: $rewards_inspection_tt$"
+  activity_survey_destination_selection: "\n[inspections|E] sẽ mang lại nhiều lợi ích hơn khi diễn ra tại các [counties|E] có [county_control|E] thấp hoặc nằm dọc biên giới với các [realms|E] ngoại bang, nơi bộ máy quan liêu địa phương đang hoạt động kém hiệu quả. Những khu vực này có thể mang lại nhiều cơ hội hơn và tăng [inspection_success_chance_no_prefix|E]."
+  survey_activity_not_capital: "[inspections|E] không thể được tổ chức tại [capital|E]"
+  survey_activity_on_cooldown: "[inspections|E] chỉ có thể được tổ chức tại một [county|E] mỗi #bold 5#! năm"
+  rewards_inspection_tt: "\n$BULLET_WITH_TAB$@pressed_claim![claims|E] & mức chấp nhận @vassal_icon![offer_vassalization|E]\n$BULLET_WITH_TAB$@gold_icon![taxes|E], @development_icon![development|E], & @control_icon![control|E]\n$BULLET_WITH_TAB$@stationed_regiment_icon![levies|E], @opinion_icon![opinion|E], & @domain_icon![county_opinion|E]"
+  activity_survey_predicted_cost: "Chi phí của một [inspection|E] chủ yếu bị ảnh hưởng bởi mức ngân sách được phân bổ cho [activity|E]. Nguồn lực càng nhiều thì việc hoàn thành nhiệm vụ càng dễ dàng, nhưng chi phí cũng sẽ cao hơn."
+ 
+  activity_survey_gain_merit_desc: "$BULLET_WITH_TAB$$may_gain_merit_desc$\n"
+ 
+  phase_surveying: "Thanh Tra Lãnh Thổ"
+  phase_surveying_desc: ""
+
+  survey_overseer_intent: "Chủ Đích Giám Sát"
+  survey_overseer_intent_desc: "Các quan chức và quý tộc địa phương vốn nổi tiếng vì thu thêm thuế và túi tiền sâu không đáy — đã đến lúc chấm dứt chuyện đó.\n\n#emp Tăng [inspection_success_chance_no_prefix|E]#!"
+
+  survey_learning_intent: "$survey_learning_intent_guest$"
+  survey_learning_intent_desc: "$survey_learning_intent_guest_desc$\n\n#emp Có cơ hội nhận thêm các lợi ích cho [capital|E]#!"
+
+  survey_learning_intent_guest: "Chủ Đích Khảo Sát"
+  survey_learning_intent_guest_desc: "Xem những bài học nào từ bộ máy quan liêu địa phương có thể mang về áp dụng cho thủ đô."
+
+  activity_survey_province_desc: "Ngài di chuyển tới [ROOT.Province.GetName]"
+
+  survey_border_county: "\n#positive_value ++ Huyện Biên Giới #!"
+  survey_bordering_other_vassals_county: "\n#positive_value + Huyện Giáp Lãnh Địa Chư Hầu Đồng Cấp #!"
+  survey_very_low_county_control: "\n#positive_value +++ Quyền Kiểm Soát Huyện Rất Thấp#!"
+  survey_low_county_control: "\n#positive_value ++ Quyền Kiểm Soát Huyện Thấp#!"
+  survey_medium_county_control: "\n#positive_value + Quyền Kiểm Soát Huyện Trung Bình#!"
+
+  county_control_modifier: "[county_control|E]"
+  borderlands_modifier: "Vùng Biên Giới"
+  inspection_success_chance.events: "Sự Kiện"
+  inspection_success_chance.second_try_modifier: "[GetModifier('inspection_second_try_modifier').GetName]"
+
+  inspection_activity_success_increase_miniscule_tt: "[inspection_success_chance_no_prefix|E] #positive_value tăng nhẹ#!"
+  inspection_activity_success_increase_minor_tt:0 "[inspection_success_chance_no_prefix|E] #positive_value tăng một chút#!"
+  inspection_activity_success_increase_medium_tt:0 "[inspection_success_chance_no_prefix|E] #positive_value tăng#!"
+  inspection_activity_success_decrease_miniscule_tt: "[inspection_success_chance_no_prefix|E] #negative_value giảm nhẹ#!"
+  inspection_activity_success_decrease_minor_tt:0 "[inspection_success_chance_no_prefix|E] #negative_value giảm một chút#!"
+  inspection_activity_success_decrease_medium_tt:0 "[inspection_success_chance_no_prefix|E] #negative_value giảm#!"
+
+  inspection_success_chance: "[inspection_success_chance_no_prefix|E]"
+  inspection_success_bar: "[inspection_success_chance_no_prefix|E]: [Activity.MakeScope.Var( 'inspection_success_chance' ).GetValue|V0]%"
+
+ ### Activity Option ###
+  inspection_option_allocated_funds: "Ngân Sách Thanh Tra"
+  inspection_no_funding: "Không Cấp Ngân Sách"
+  inspection_no_funding_desc: "$EFFECT_LIST_BULLET$ [skill_challenges|E] sẽ khó thành công hơn\n$EFFECT_LIST_BULLET$ Chi phí [gold_i] [gold|E] trong các sự kiện giữ nguyên\n\n#weak Với nguồn ngân sách hạn chế hoặc không có, sẽ rất khó tìm đủ tài chính để hỗ trợ mọi mục tiêu trong tỉnh.#!"
+  inspection_small_fund: "Ngân Sách Đủ Dùng"
+  inspection_small_fund_desc: "$EFFECT_LIST_BULLET$ [skill_challenges|E] trong [activity|E] có tỷ lệ thành công cao hơn\n$EFFECT_LIST_BULLET$ Chi phí [gold_i] [gold|E] trong sự kiện giảm #P 20%#!\n\n#weak Với một khoản vàng nhỏ, việc tài trợ cho những cải tổ cần thiết trong tỉnh sẽ dễ dàng hơn.#!"
+  inspection_large_fund: "Ngân Sách Dồi Dào"
+  inspection_large_fund_desc: "$EFFECT_LIST_BULLET$ [skill_challenges|E] trong [activity|E] có tỷ lệ thành công cao hơn đáng kể\n$EFFECT_LIST_BULLET$ Chi phí [gold_i] [gold|E] trong sự kiện giảm #p 40%#!\n\n#weak Với nguồn ngân sách lớn, khó có điều gì trong tỉnh mà Ngài không thể chi trả.#!"
+
+ ### Intro Event ###
+  bp3_survey.0005.t: "Đến Nơi"
+  bp3_survey.0005.desc.holder: "Khi ta đến [ROOT.Char.GetCurrentLocation.GetName], ta được đưa tới một phòng làm việc nhỏ, nơi [county_holder.GetTitledFirstName] tiếp đón ta. Ta đã cử sứ giả báo trước, vì vậy việc ta xuất hiện ở đây không nên khiến [county_holder.GetSheHe] bất ngờ, nhưng rõ ràng [county_holder.GetSheHe] vẫn tò mò về lý do ta đến. Sự sốt sắng và lo lắng của [county_holder.GetHerHis] là vì lương tâm cắn rứt, hay chỉ đơn thuần là những lời khách sáo?\n\nDù sao đi nữa, hiện tại ta không đến đây để đối phó với [county_holder.GetHerHim], ta đến đây để..."
+  bp3_survey.0005.desc.no_holder: "Khi ta đến [ROOT.Char.GetCurrentLocation.GetName], ta được đưa vào phòng làm việc. Một nhóm gia nhân lo liệu mọi thứ và lui tới không ngớt, cho đến khi ta yêu cầu họ rời đi. Làm sao ta có thể tập trung vào nhiệm vụ trước mắt nếu họ cứ chạy quanh như vậy?\n\nKhi mọi thứ đã yên ổn, ta cuối cùng cũng có thể bắt tay vào kế hoạch của mình, đó là..."
+  bp3_survey.0005.a: "Mở rộng biên giới của ta."
+  bp3_survey.0005.a.tt: "Cuộc [inspection|E] sẽ tìm cách:$SurveyArrivalIntroClaims$ $SurveyARrivalIntroVassals$"
+  bp3_survey.0005.b: "Cải thiện bộ máy quan liêu tại [ROOT.Char.GetCurrentLocation.GetNameNoTooltip]."
+  bp3_survey.0005.b.tt: "Cuộc [inspection|E] sẽ tìm cách:$SurveyArrivalIntroTax$ $SurveyArrivalIntroDevelopment$ $SurveyArrivalIntroControl$"
+  bp3_survey.0005.c: "Đảm bảo dân chúng nơi đây nhớ rõ vì sao ta là chúa tể của họ."
+  bp3_survey.0005.c.tt: "Cuộc [inspection|E] sẽ tìm cách:$SurveyArrivalIntroLevy$ $SurveyArrivalIntroOpinion$ $SurveyArrivalIntroPopularOpinion$"
+
+  SurveyArrivalIntroClaims: "\n$BULLET_WITH_TAB$ Tạo @pressed_claim![claims|E]"
+  SurveyARrivalIntroVassals: "\n$BULLET_WITH_TAB$ Tăng mức chấp nhận @vassal_icon![offer_vassalization|E]"
+
+  SurveyArrivalIntroTax: "\n$BULLET_WITH_TAB$ Cải thiện @gold_icon![taxes|E] (#bold [activity.GetHost.MakeScope.ScriptValue('survey_province_tax_info_value')|2]#!)"
+  SurveyArrivalIntroDevelopment: "[activity.GetHost.Custom('SurveyArrivalIntroDevelopmentLoc')]"
+  SurveyArrivalIntroControl: "[activity.GetHost.Custom('SurveyArrivalIntroControlLoc')]"
+
+  SurveyArrivalIntroLevy: "\n$BULLET_WITH_TAB$ Cải thiện @stationed_regiment_icon![levies|E] (#bold [activity.GetHost.MakeScope.ScriptValue('survey_province_levy_info_value')|0]#!)"
+  SurveyArrivalIntroOpinion: "[activity.GetHost.Custom2('SurveyArrivalIntroOpinionLoc', county_holder)]"
+  SurveyArrivalIntroPopularOpinion: "[activity.GetHost.Custom('SurveyArrivalIntroPopularOpinionLoc')]"
+
+  SurveyArrivalIntroDevelopmentLocMaxed: ""
+  SurveyArrivalIntroDevelopmentLocGood: "\n$BULLET_WITH_TAB$ Cải thiện @development_icon![development|E] (#bold #p [ROOT.Char.MakeScope.ScriptValue('survey_province_development_info_value')|0]#!#!)"
+  SurveyArrivalIntroDevelopmentLocBad: "\n$BULLET_WITH_TAB$ Cải thiện @development_icon![development|E] (#bold #n [ROOT.Char.MakeScope.ScriptValue('survey_province_development_info_value')|0]#!#!)"
+  SurveyArrivalIntroDevelopmentLocNeutral: "\n$BULLET_WITH_TAB$ Cải thiện @development_icon![development|E] (#bold #color_yellow [ROOT.Char.MakeScope.ScriptValue('survey_province_development_info_value')|0]#!#!)"
+
+  SurveyArrivalIntroControlLocMaxed: ""
+  SurveyArrivalIntroControlLocBad: "\n$BULLET_WITH_TAB$ Cải thiện @control_icon![control|E] (#bold #n [ROOT.Char.MakeScope.ScriptValue('survey_province_control_info_value')|0]#!#!)"
+  SurveyArrivalIntroControlLocNeutral: "\n$BULLET_WITH_TAB$ Cải thiện @control_icon![control|E] (#bold #color_yellow [ROOT.Char.MakeScope.ScriptValue('survey_province_control_info_value')|0]#!#!)"
+
+  SurveyArrivalIntroOpinionLocEmpty: "" # Intentionally empty
+  SurveyArrivalIntroOpinionLocGood: "\n$BULLET_WITH_TAB$ Cải thiện @opinion_icon![opinion|E] (#bold #p [second.GetOpinionOf( GetPlayer )|=]#!#!)"
+  SurveyArrivalIntroOpinionLocBad: "\n$BULLET_WITH_TAB$ Cải thiện @opinion_icon![opinion|E] (#bold #n [second.GetOpinionOf( GetPlayer )|=]#!#!)"
+
+  SurveyArrivalIntroPopularOpinionLocMaxed: "\n$BULLET_WITH_TAB$ Cải thiện @domain_icon![county_opinion|E] (#bold #p [ROOT.Char.MakeScope.ScriptValue('survey_province_popular_opinion_info_value')|0]#!#!)"
+  SurveyArrivalIntroPopularOpinionLocBad: "\n$BULLET_WITH_TAB$ Cải thiện @domain_icon![county_opinion|E] (#bold #n [ROOT.Char.MakeScope.ScriptValue('survey_province_popular_opinion_info_value')|0]#!#!)"
+  SurveyArrivalIntroPopularOpinionLocNeutral: "\n$BULLET_WITH_TAB$ Cải thiện @domain_icon![county_opinion|E] (#bold #color_yellow [ROOT.Char.MakeScope.ScriptValue('survey_province_popular_opinion_info_value')|0]#!#!)"
+
+ ### End Event ###
+  bp3_survey.0010.t: "Kết Thúc"
+  bp3_survey.0010.desc.border.success: "Những nỗ lực của chúng ta tại vùng biên giới của [province.GetName] đã đạt được thành công vang dội. Khu vực này nay đã được xác định rõ ràng là nằm dưới sự giám sát của [ROOT.Char.GetPrimaryTitle.GetName], và điều đó được phản ánh qua cách người dân nhắc đến nơi đây.\n\nNhiều người địa phương thậm chí còn nói về ta như thể ta đã là chúa tể của họ."
+  bp3_survey.0010.desc.border.failure: "Bất chấp mọi cố gắng, mọi nỗ lực khẳng định quyền kiểm soát tại vùng biên của [province.GetName] đều thất bại, thậm chí có phần đáng xấu hổ. Một số cư dân vùng biên còn bắt đầu dùng câu “thành công như [ROOT.Char.GetTitledFirstName]” làm thành ngữ để chỉ những [ROOT.Char.GetWomenMen] trẻ tuổi bị từ chối.\n\nTa bắt đầu hối hận vì đã làm chuyện này..."
+  bp3_survey.0010.desc.bureaucracy.success: "Ban đầu mọi thứ tưởng chừng như bất khả thi, nhưng bằng cách nào đó ta đã tìm ra con đường để bắt đầu chấn chỉnh lại tình hình tại [province.GetName], chấm dứt một phần tham nhũng và nạn thảo khấu địa phương. Dù đây mới chỉ là bước đi đầu tiên, nó vẫn vô cùng quan trọng cho tương lai của huyện.\n\nGiờ chỉ cần bảo đảm rằng chúng ta tiếp tục đi đúng hướng trong thời gian tới."
+  bp3_survey.0010.desc.bureaucracy.failure: "Đã có lúc tưởng như nạn tham nhũng tại [province.GetName] sắp chấm dứt, nhưng cứ mỗi bước tiến lại xuất hiện một vấn đề mới. Luôn có thêm bọn thảo khấu cướp bóc, thêm quý tộc tham ô giấu thuế, hay thêm công trình cần tu sửa.\n\nDù ta đã nỗ lực hết mình, thì một [ROOT.Char.GetWomanMan] cũng chỉ có thể làm được đến thế..."
+  bp3_survey.0010.desc.people.success: "Mức độ ủng hộ của dân chúng tại [province.GetName] đã tăng lên rõ rệt, đến mức một số người còn dùng câu “hãy giống như [ROOT.Char.GetFirstName]” như một thành ngữ. Chỉ là vấn đề thời gian trước khi họ học được cách trân trọng những bậc bề trên của mình.\n\nHy vọng họ sẽ nhớ điều này vào lần tới khi một chuyện nhỏ nhặt vô nghĩa nào đó phát sinh."
+  bp3_survey.0010.desc.people.failure: "Dù ta đã nói chuyện và tiếp xúc với dân chúng tại [province.GetName] nhiều đến đâu, nơi đây vẫn bao trùm bởi bầu không khí bất mãn. Bất chấp mọi nỗ lực, ta không biết phải tiếp cận hay giải quyết vấn đề này ra sao.\n\nCó lẽ đây chưa phải lúc thích hợp — ít nhất là hiện tại."
+  bp3_survey.0010.a: "Đúng như kế hoạch."
+  bp3_survey.0010.b: "Ta sẽ quay lại và chấn chỉnh việc này vào một thời điểm khác."
+
+  bp3_survey.0010.acceptance.positive: "Tăng mức chấp nhận [offer_vassalization|E] từ [THIS.Char.GetName]: "
+  bp3_survey.0010.acceptance.success: "$bp3_survey.0010.acceptance.positive$ #p +10#!"
+  INSPECTION_REASON_REWARD: "[inspection|E] thành công: $VALUE|=+0$"
+  INSPECTION_REASON_REWARD_FOCUSED: "Trọng tâm [inspection|E]: Chấp nhận chư hầu: $VALUE|=+0$"
+
+  inspection_reward_focused_vassal_acceptance: "Trọng Tâm Thanh Tra: Chấp Nhận Chư Hầu"
+  inspection_reward_focused_vassal_acceptance_desc: "Nhân vật này tập trung xây dựng mối quan hệ với những người bên ngoài lãnh thổ của mình.\n[offer_vassalization|E] Chấp nhận: #p +10#!"
+  inspection_reward_focused_claims_modifier: "Trọng Tâm Thanh Tra: Yêu Sách"
+  inspection_reward_focused_claims_modifier_desc: "Nhân vật này có danh tiếng là mang tư duy bành trướng.\nTốc độ [fabricate_claim|E]: #p +25%#!"
+  FABRICATE_CLAIM_INSPECTION_BONUS: "[inspection|E]"
+
+  inspection_reward_average_tax_modifier: "Thuế Đã Thanh Tra"
+  inspection_reward_average_tax_modifier_desc: "Thuế địa phương gần đây đã có chiều hướng gia tăng."
+  inspection_reward_focused_tax_modifier: "Trọng Tâm Thanh Tra: Thuế"
+  inspection_reward_focused_tax_modifier_desc: "Nhiều thời gian và công sức đã được dành để bảo đảm người nộp thuế thực hiện đầy đủ nghĩa vụ."
+  inspection_reward_focused_development_modifier: "Trọng Tâm Thanh Tra: Phát Triển"
+  inspection_reward_focused_development_modifier_desc: "Một khoản tiền đáng kể đã được phân bổ để cải thiện đường sá và công trình công cộng."
+  inspection_reward_focused_control_modifier: "Trọng Tâm Thanh Tra: Kiểm Soát"
+  inspection_reward_focused_control_modifier_desc: "Việc tuyển mộ và huấn luyện lại đồn trú địa phương đã giúp cải thiện mức độ kiểm soát huyện."
+
+  inspection_reward_average_levy_modifier: "Quân Dịch Đã Thanh Tra"
+  inspection_reward_average_levy_modifier_desc: "Quân dịch địa phương gần đây đã có đợt tuyển mộ mới."
+  inspection_reward_focused_levy_modifier: "Trọng Tâm Thanh Tra: Quân Dịch"
+  inspection_reward_focused_levy_modifier_desc: "Thời gian và công sức đã được đầu tư để huấn luyện lại và tuyển thêm quân."
+  inspection_reward_average_popular_opinion_modifier: "Huyện Được Thị Sát"
+  inspection_reward_average_popular_opinion_modifier_desc: "Huyện này gần đây đã được chúa tể trực tiếp ghé thăm."
+  inspection_reward_focused_popular_opinion_modifier: "Trọng Tâm Thanh Tra: Dân Ý"
+  inspection_reward_focused_popular_opinion_modifier_desc: "Chúa tể địa phương đã dành nhiều thời gian đi khắp huyện và tiếp xúc với dân chúng."
+  inspection_reward_focused_opinion_modifier: "Trọng Tâm Thanh Tra: Quan Hệ"
+  inspection_reward_focused_opinion_modifier_desc: "Nhân vật này dành nhiều thời gian để lấy lòng các chư hầu."
+  inspection_reward_focused_popular_opinion_character_modifier: "Trọng Tâm Thanh Tra: Thanh Danh"
+  inspection_reward_focused_popular_opinion_character_modifier_desc: "Nhân vật này được yêu mến rộng rãi, từ giới quý tộc cho đến tầng lớp bình dân."
+
+  inspection_conclusion_success_claim_key_title: "Yêu Sách Thành Công"
+  inspection_conclusion_success_claim_key: "[host.GetShortUIName] đã thành công trong việc khẳng định yêu sách của [host.GetHerHis] tại vùng biên giới của [province.GetName]."
+  inspection_conclusion_expansionist_mindset_key_title: "Tư Duy Bành Trướng"
+  inspection_conclusion_expansionist_mindset_key: "[host.GetShortUIName] đã thể hiện một tư tưởng bành trướng đáng kể."
+  inspection_conclusion_success_acceptance_key_title: "Ngoại Giao Thành Công"
+  inspection_conclusion_success_acceptance_key: "[host.GetShortUIName] đã gây ấn tượng với nhiều quốc gia láng giềng của [host.GetHerHis] bằng tài ngoại giao của mình."
+  inspection_conclusion_impressed_neighbors_key_title: "Gây Ấn Tượng Với Láng Giềng"
+  inspection_conclusion_impressed_neighbors_key: "Nhờ những nỗ lực ngoại giao của [host.GetHerHis], [host.GetSheHe] đã cải thiện quan hệ với một số quốc gia láng giềng của mình."
+
+  inspection_conclusion_success_tax_key_title: "Điều Chỉnh Thuế"
+  inspection_conclusion_success_tax_key: "[host.GetShortUIName] đã cải thiện và loại bỏ nhiều kẽ hở thuế tại [province.GetName]."
+  inspection_conclusion_success_development_key_title: "Cải Thiện Hạ Tầng"
+  inspection_conclusion_success_development_key: "Đường sá và cầu cống tại [province.GetName] đã được cấp một khoản ngân sách lớn để tu sửa."
+  inspection_conclusion_success_control_key_title: "Siết Chặt Kiểm Soát"
+  inspection_conclusion_success_control_key: "Đồn trú địa phương đã được tăng cường và huấn luyện lại để xử lý các vấn đề tại [province.GetName]."
+
+  inspection_conclusion_success_levy_key_title: "Quân Dịch Được Cải Thiện"
+  inspection_conclusion_success_levy_key: "Quân dịch địa phương tại [province.GetName] đã được tăng cường đáng kể sau chuyến thị sát của [host.GetShortUIName]."
+  inspection_conclusion_success_opinion_key_title: "Ngoại Giao Thành Công"
+  inspection_conclusion_success_opinion_key: "[host.GetShortUIName] đã xử lý các vấn đề nội bộ của [host.GetHerHis] một cách xuất sắc, và đã chứng minh được bản thân [host.GetHerselfHimself] trước các chư hầu của [host.GetHerHis]."
+  inspection_conclusion_success_popular_opinion_key_title: "Chúa Tể Được Mến Mộ"
+  inspection_conclusion_success_popular_opinion_key: "[host.GetShortUIName] đã gia tăng mức độ được ủng hộ sau khi [host.GetSheHe] ghé thăm [province.GetName]."
+ 
+  inspection_conclusion_success_governor_experience_key_title: "Kinh Nghiệm [host.Custom('GetGovernorConceptNoTooltip')]"
+  inspection_conclusion_success_governor_experience_key: "[host.GetShortUIName] đã tích lũy được kinh nghiệm quý báu trong vai trò [host.Custom('GetGovernorConceptNoTooltip')] của [host.GetHerHis] sau khi [host.GetSheHe] viếng thăm [province.GetName]."
+
+  inspection_conclusion_success_piety_key_title: "Thanh Tra Sùng Đạo"
+  inspection_conclusion_success_piety_key: "[host.GetShortUIName] đã nhận được [piety_experience|E] trong chuyến thanh tra của [host.GetHerHis], nơi [host.GetSheHe] đã viếng thăm [province.GetName]."
+
+  inspection_conclusion_failure_devotion_key_title: "$inspection_conclusion_failure_merit_key_title$"
+  inspection_conclusion_failure_devotion_key: "[host.GetShortUIName] đã nhận được [piety_experience|E] trong chuyến thanh tra của [host.GetHerHis], nơi [host.GetSheHe] đã viếng thăm [province.GetName], mặc dù không đạt được nhiều thành công."
+
+  inspection_conclusion_success_merit_key_title: "Thanh Tra Xuất Sắc"
+  inspection_conclusion_success_merit_key: "[host.GetShortUIName] đã nhận được [merit|E] sau một cuộc thanh tra thành công tại [province.GetName]."
+ 
+  inspection_conclusion_failure_merit_key_title: "Thanh Tra Thất Bại"
+  inspection_conclusion_failure_merit_key: "[host.GetShortUIName] vẫn nhận được một ít [merit|E], dù cuộc thanh tra tại [province.GetName] không mấy thành công."
+ 
+  inspection_conclusion_success_salary_key_title: "Thưởng Lương Hậu Hĩnh"
+  inspection_conclusion_success_salary_key: "[host.GetShortUIName] đã kiếm được nhiều vàng cùng một khoản thưởng lương đáng kể sau cuộc thanh tra thành công."
+ 
+  inspection_conclusion_failure_salary_key_title: "Thưởng Lương Ít Ỏi"
+  inspection_conclusion_failure_salary_key: "[host.GetShortUIName] vẫn nhận được một ít vàng và khoản thưởng lương nhỏ, dù cuộc thanh tra không thành công."
+
+  inspection_retry_desc: "Lần gần nhất khu vực này được chúa tể giám sát, công việc đã kết thúc mà không có kết luận rõ ràng. Tuy nhiên, nền tảng được thiết lập để cải thiện huyện vẫn còn tồn tại.\n#weak Sẽ bị loại bỏ khi [inspection|E] thành công#!"
+
+  inspection_second_try_modifier: "Cuộc Thanh Tra Chưa Ngã Ngũ"
+  inspection_second_try_modifier_desc: "$inspection_retry_desc$\n\n[inspection_success_chance|E]: #p +10%#!"
+
+  inspection_third_try_modifier: "$inspection_second_try_modifier$"
+  inspection_third_try_modifier_desc: "$inspection_retry_desc$\n\n[inspection_success_chance|E]: #p +20%#!"
+
+  inspection_fourth_try_modifier: "$inspection_second_try_modifier$"
+  inspection_fourth_try_modifier_desc: "$inspection_retry_desc$\n\n[inspection_success_chance|E]: #p +30%#!"
+
+ ### Mid-Activity Events ###
+  bp3_survey.0020.t: "Kế Hoạch Mở Rộng"
+  bp3_survey.0020.desc: "Ta tiến đến vùng biên giới của [province.GetName], tận mắt chứng kiến rìa ngoài của lãnh thổ mình. Một vùng đất hoang vu, đang chờ đợi một [ROOT.Char.GetLadyLord] có tham vọng đủ lớn để nắm quyền kiểm soát. Một người biết nhìn ra tiềm năng.\n\n"
+  bp3_survey.0020.desc_weak_neighbor: "Nghe nói một [neighboring_lord.GetName] nào đó là người gần như duy nhất nắm quyền tại vùng đất này. Một [neighboring_lord.GetWomanMan] yếu đuối, chỉ chờ ai đó đến bảo [neighboring_lord.GetHerHim] phải làm gì, ít nhất là theo những gì ta nghe được."
+  bp3_survey.0020.desc_no_neighbor: "Khi không có ai đáng kể ở xung quanh, việc thiết lập quyền kiểm soát và khẳng định yêu sách của chúng ta đối với vùng đất này sẽ không phải là vấn đề."
+  bp3_survey.0020.a: "Hãy tìm một dạng thỏa hiệp nào đó với [neighboring_lord.GetFirstNameNoTooltip]."
+  bp3_survey.0020.a.tt: "Phần thưởng [offer_vassalization|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0020.b: "Đã đến lúc biến vùng đất này thành đất của ta."
+  bp3_survey.0020.b.tt: "Phần thưởng [claims|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0020.acceptance.positive: "Tăng [offer_vassalization|E] Acceptance từ [neighboring_lord.GetName]: "
+  bp3_survey.0020.acceptance.great_success: "$bp3_survey.0020.acceptance.positive$ #p +10#!"
+  bp3_survey.0020.acceptance.success: "$bp3_survey.0020.acceptance.positive$ #p +5#!"
+
+  inspection_mid_border_key_title: "Ngoại Giao Địa Phương"
+  inspection_mid_border_key: "[host.GetShortUIName] đã khẳng định yêu sách của [host.GetHerHis] đối với vùng biên giới của [province.GetName]."
+  inspection_mid_border_fail_key_title: "Những Nỗ Lực Thất Bại"
+  inspection_mid_border_fail_key: "[host.GetShortUIName] đã không thể khẳng định yêu sách của [host.GetHerHis] tại vùng biên giới của [province.GetName]."
+
+  bp3_survey.0030.t: "Giám Sát [province.GetNameNoTooltip]"
+  bp3_survey.0030.desc: "Sau khi rà soát kỹ lưỡng mọi tài liệu có thể tìm được, ta đã xoay xở để trích ra một khoản ngân sách bổ sung nhằm giải quyết một số vấn đề hạ tầng đang gây khó khăn cho bá quốc này. Giờ chỉ cần quyết định bộ phận hành chính nào đang cần sự hỗ trợ nhất."
+  bp3_survey.0030.a: "Khắc phục các lỗ hổng thuế sẽ sớm mang lại lợi ích."
+  bp3_survey.0030.a.tt: "Phần thưởng [tax|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0030.b: "[province.Custom('SurveyMidDomainInfrastructureOptionsLoc')] [province.GetNameNoTooltip] cần được giúp đỡ."
+  bp3_survey.0030.b.tt: "Phần thưởng [development|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0030.c: "Đồn trú địa phương đang gặp khó khăn gần đây."
+  bp3_survey.0030.c.tt: "Phần thưởng [control|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0030.d: "Thật ra thì… #emp ta#! cần số tiền đó."
+
+  inspection_mid_activity_tax_great_modifier: "Cải Thiện Thuế Khóa"
+  inspection_mid_activity_tax_great_modifier_desc: "Lãnh chúa địa phương đã trực tiếp giám sát hệ thống thu thuế trong khu vực."
+  inspection_mid_activity_tax_average_modifier: "Điều Chỉnh Thuế Khóa"
+  inspection_mid_activity_tax_average_modifier_desc: "Gần đây đã có những điều chỉnh đối với bộ máy thu thuế của bá quốc."
+
+  inspection_mid_activity_development_great_modifier: "Phát Triển Vượt Bậc"
+  inspection_mid_activity_development_great_modifier_desc: "Lãnh chúa địa phương đã tái phân bổ ngân sách để cải thiện đáng kể cơ sở hạ tầng."
+  inspection_mid_activity_development_average_modifier: "Điều Chỉnh Phát Triển"
+  inspection_mid_activity_development_average_modifier_desc: "Một khoản tiền đã được dành ra để cải thiện bộ máy hành chính."
+
+  inspection_mid_activity_control_great_modifier: "Tăng Cường Kiểm Soát"
+  inspection_mid_activity_control_great_modifier_desc: "Đồn trú địa phương đã được cấp một khoản ngân sách lớn để tăng cường tuần tra."
+  inspection_mid_activity_control_average_modifier: "Điều Chỉnh Kiểm Soát"
+  inspection_mid_activity_control_average_modifier_desc: "Ngân sách đã được phân bổ để giảm bớt các vấn đề của bá quốc."
+
+  SurveyMidDomainInfrastructureOptionsFarm: "những nông trại cũ tại"
+  SurveyMidDomainInfrastructureOptionsManors: "những dinh thự quanh thị trấn tại"
+  SurveyMidDomainInfrastructureOptionsCastle: "tường thành tại"
+  SurveyMidDomainInfrastructureOptionsCity: "tòa thị chính cũ tại"
+  SurveyMidDomainInfrastructureOptionsTemple: "[ROOT.Province.GetCounty.GetFaith.HouseOfWorship] cũ tại"
+  SurveyMidDomainInfrastructureOptionsPort: "bến cảng cổ tại"
+  SurveyMidDomainInfrastructureOptionsQuarries: "những mỏ đá cũ bên ngoài"
+
+  inspection_mid_domain_key_title: "Tái Phân Bổ Thành Công"
+  inspection_mid_domain_key: "[host.GetShortUIName] đã thành công trong việc tìm và tái phân bổ ngân sách để cải thiện hạ tầng và bộ máy hành chính tại [province.GetName]."
+  inspection_mid_domain_fail_key_title: "Quan Liêu Tham Nhũng"
+  inspection_mid_domain_fail_key: "Bất chấp nhiều nỗ lực của [host.GetHerHis], [host.GetShortUIName] vẫn không thể chấm dứt tình trạng quan liêu tham nhũng tại [province.GetName]."
+  inspection_mid_domain_selfish_key_title: "Lợi Ích Cá Nhân"
+  inspection_mid_domain_selfish_key: "[host.GetShortUIName] đã giữ lại một phần ngân sách của [province.GetName] cho nhu cầu cá nhân."
+
+  bp3_survey.0040.t: "Người Dân [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip]"
+  bp3_survey.0040.desc: "Nhằm cải thiện vị thế của mình trong mắt người dân [province.GetName], ta đã dành trọn một ngày để đi khắp thành phố và gặp gỡ dân chúng."
+  bp3_survey.0040.mid: "Bất chấp sự phản đối của [county_holder.GetHerHis], ta đã đưa theo [county_holder.GetFirstName] để [county_holder.GetSheHe] thấy mọi việc nên được làm như thế nào."
+  bp3_survey.0040.outro: "\n\nDù ban đầu còn dè dặt, một nhóm lớn người dân đã tiến đến để kể cho chúng ta nghe về những vấn đề của họ. Nếu có cơ hội, ta sẽ nói về..."
+  bp3_survey.0040.a: "Quân dịch và đồn trú địa phương."
+  bp3_survey.0040.a.tt: "Phần thưởng [levy|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0040.b: "Ấn tượng tốt đẹp của ta về công việc mà [county_holder.GetFirstNameNoTooltip] đang làm."
+  bp3_survey.0040.b.tt: "Phần thưởng [opinion|E] được cải thiện nếu [inspection|E] thành công\n"
+  bp3_survey.0040.c: "Ấn tượng tuyệt vời mà ta có về [province.GetNameNoTooltip]."
+  bp3_survey.0040.c.tt: "Phần thưởng [county_opinion|E] được cải thiện nếu [inspection|E] thành công\n"
+
+  inspection_mid_activity_levy_great_modifier: "Cải Thiện Quân Dịch"
+  inspection_mid_activity_levy_great_modifier_desc: "Bá quốc đã chứng kiến sự gia tăng đáng kể về tuyển quân sau khi lãnh chúa tiếp xúc với người dân."
+  inspection_mid_activity_levy_average_modifier: "Điều Chỉnh Quân Dịch"
+  inspection_mid_activity_levy_average_modifier_desc: "Quân dịch đã tăng nhẹ sau chuyến thăm của lãnh chúa."
+  inspection_mid_activity_opinion_great_modifier: "Lãnh Chúa Được Yêu Mến"
+  inspection_mid_activity_opinion_great_modifier_desc: "Người cai trị địa phương đã trở nên được yêu mến sau khi đến thăm bá quốc."
+  inspection_mid_activity_opinion_average_modifier: "Xoa Dịu Dân Chúng"
+  inspection_mid_activity_opinion_average_modifier_desc: "Sau khi trực tiếp trò chuyện, lãnh chúa đã xoa dịu được một bộ phận người dân."
+
+  inspection_mid_people_key_title: "Lãnh Chúa Quyến Rũ"
+  inspection_mid_people_key: "[host.GetShortUIName] đã chinh phục người dân địa phương tại [province.GetName] sau những cuộc trò chuyện dài."
+  inspection_mid_people_fail_key_title: "Nói Chuyện Kém Hiệu Quả"
+  inspection_mid_people_fail_key: "[host.GetShortUIName] đã không gây được ấn tượng với bất kỳ ai sau một thời gian tiếp xúc với người dân tại [province.GetName]."
+
+  bp3_survey.0050.t: "Lãnh Chúa Tại Triều Đình"
+  bp3_survey.0050.desc: "Dù [host.GetSheHe] đã cử sứ giả báo trước, ta vẫn không khỏi bất ngờ khi thấy lãnh chúa của mình, [host.GetFirstName], đích thân đến triều đình của ta tại [province.GetName]. [host.GetSheHe|U] giải thích rằng [host.GetSheHe] đến đây để \"giám sát\" mọi việc [host.GetHerselfHimself], nhưng không nói rõ chi tiết.\n\nTa cố gắng dò hỏi xem liệu [host.GetSheHe] có yêu cầu gì cụ thể hay không, nhưng [host.GetSheHe] nói rằng [host.GetSheHe] đã có mọi thứ [host.GetSheHe] cần. Mong rằng [host.GetSheHe] sẽ không phát hiện ra điều gì mà [host.GetSheHe] không nên thấy..."
+  bp3_survey.0050.a: "Chào mừng đến với [province.GetNameNoTooltip], thưa [host.GetTitleAsNameNoTooltip]."
+  bp3_survey.0050.a.tt: "[host.GetName] đang tiến hành một [inspection|E] tại [province.GetName]"
+
+  bp3_survey_liege_intervention: "Lãnh Chúa Can Thiệp"
+
+ ### Random Events ###
+  bp3_survey.1000.t: "Vùng Đất Hoang Vu"
+  bp3_survey.1000.desc: "Khi chúng Ta khảo sát những vùng hẻo lánh hơn của [province.GetName], [guest_1.GetFirstName] và Ta phát hiện ra một khu vực nhỏ được gọi là [empty_province.Custom('HoldingNoHoldingTerrainRoamingTooltip')]. "
+  bp3_survey.1000.desc_lonely: "Khi Ta khảo sát những vùng hẻo lánh hơn của [province.GetName], Ta bắt gặp một khu vực nhỏ được gọi là [empty_province.Custom('HoldingNoHoldingTerrainRoamingTooltip')]. "
+  bp3_survey.1000.desc_continuation: "Ngoài một vài người chăn dê lác đác, dường như không có ai sinh sống quanh đây. Mỗi khi chúng Ta đi ngang qua họ, họ đều nhìn chúng Ta với ánh mắt đầy nghi ngờ.\n\n"
+  bp3_survey.1000.desc_border: "Nếu ta muốn mở rộng lãnh địa của mình, ta cần đảm bảo rằng ta có những chư hầu có thể phản ánh quyền lực của ta tới tận những góc xa nhất của vương quốc."
+  bp3_survey.1000.desc_bureaucracy: "Nếu ta muốn bảo đảm quyền kiểm soát đối với [province.GetNameNoTooltip], ta cần nắm bắt rõ hơn tình hình dân chúng, ngay cả ở những vùng đất xa xôi này."
+  bp3_survey.1000.desc_domain: "Nếu ta muốn truyền cảm hứng cho dân chúng, ta cần bảo đảm rằng ngay cả những người sống tại nơi hẻo lánh này cũng biết đến gương mặt và danh tiếng của ta."
+  bp3_survey.1000.a: "Cử một số người tới dựng một tiền đồn nhỏ trong khu vực."
+  bp3_survey.1000.b: "Đầu tư xây dựng một số con đường cho khu vực này, để ta có thể cử người tới đây."
+  bp3_survey.1000.c: "Ta cần tiếp xúc với người dân địa phương."
+
+  inspection_empty_lands_populace_modifier: "Chuyến Thăm Của Lãnh Chúa"
+  inspection_empty_lands_populace_modifier_desc: "Những người chăn dê địa phương đã vinh dự được gặp trực tiếp lãnh chúa của mình."
+
+  inspection_empty_lands_domain_modifier: "Đường Thu Phí"
+  inspection_empty_lands_domain_modifier_desc: "Vùng đất xa xôi này đã được cải thiện hệ thống đường sá địa phương.\n#emp Sẽ chuyển thành một [economic_building|E] nếu một [holding|E] được xây dựng#!"
+
+  inspection_empty_lands_border_modifier: "Tiền Đồn Nhỏ"
+  inspection_empty_lands_border_modifier_desc: "Một tiền đồn biên giới nhỏ được xây dựng như bước đầu tiên để khai phá khu vực này.\n#emp Sẽ chuyển thành một [fortification_building|E] nếu một [holding|E] được xây dựng#!"
+
+  inspection_survey_new_goods_modifier: "Hàng Hóa Mới"
+  inspection_survey_new_goods_modifier_desc: "Hạt này đã chứng kiến các loại hàng hóa mới xuất hiện sau khi lãnh chúa mở rộng lãnh thổ sang những vùng đất mới."
+
+  bp3_survey.1010.t: "Bọn Du Côn Ở [province.GetNameNoTooltip]"
+  bp3_survey.1010.desc: "Khi ta đang đi qua những con phố của [province.GetName], ta bất ngờ bắt gặp một [peasant_character.GetWomanMan] đang bị đe dọa bởi một tên côn đồ nào đó giữa ban ngày. [peasant_character.GetSheHe|U] kêu cứu, khi [peasant_character.GetSheHe] nhìn về phía ta và những người lính canh của ta.\n\nGần đây, một số lính đánh thuê trong thành phố đã chuyển sang con đường cướp bóc và phạm tội để kiếm sống, nhưng ta không ngờ mọi chuyện đã trở nên tồi tệ đến mức này. Liệu ta có muốn can thiệp và giúp đỡ [peasant_character.GetWomanMan] đáng thương này không?"
+  bp3_survey.1010.a: "Ra lệnh cho lực lượng đồn trú đuổi chúng ra khỏi thành phố."
+  bp3_survey.1010.a.win: "Tập hợp lực lượng đồn trú địa phương và loại bỏ bọn cướp"
+  bp3_survey.1010.a.win_short: "Đã tập hợp đồn trú"
+  bp3_survey.1010.a.lose: "Mọi chuyện trở nên tệ hơn nữa"
+  bp3_survey.1010.a.lose_short: "Bọn Cướp Cố Thủ"
+  bp3_survey.1010.b: "Có lẽ chúng sẵn sàng nhận một lời đề nghị công việc..."
+  bp3_survey.1010.b.flavor: "Dù sao thì chúng cũng tỏ ra khá giỏi trong việc đối phó với dân địa phương."
+  bp3_survey.1010.c: "Ta phải can thiệp!"
+  bp3_survey.1010.c.win: "Dọa cho tên du côn bỏ chạy"
+  bp3_survey.1010.c.win_short: "Đã dọa chạy du côn"
+  bp3_survey.1010.c.lose: "Bị thương bởi tên du côn"
+  bp3_survey.1010.d: "Đừng để [bandit_character.GetHerHim] lại gần ta!"
+  bp3_survey.1010.d.flavor: "[bandit_character.GetSheHe|U] đang bận cướp người khác, mau tránh đi!"
+
+  inspection_bandits_in_x_domain_modifier: "Đồn Trú Lính Đánh Thuê"
+  inspection_bandits_in_x_domain_modifier_desc: "Một nhóm lính đánh thuê và bọn cướp đã được thuê để tăng cường cho lực lượng đồn trú địa phương."
+  inspection_bandits_in_x_populace_modifier: "Lãnh Chúa Bảo Hộ"
+  inspection_bandits_in_x_populace_modifier_desc: "Nhân vật này đã không ngần ngại bảo vệ thần dân của mình, thậm chí còn đặt cả tính mạng bản thân vào nguy hiểm."
+  inspection_bandits_in_x_border_negative_modifier: "Bọn Cướp Tàn Nhẫn"
+  inspection_bandits_in_x_border_negative_modifier_desc: "Bọn tội phạm kiểm soát chặt chẽ hạt này, phần lớn điều hành các hoạt động thường nhật sau hậu trường."
+  inspection_bandits_in_x_border_positive_modifier: "Đường Phố An Toàn"
+  inspection_bandits_in_x_border_positive_modifier_desc: "Người dân trong khu vực cảm thấy an tâm khi biết rằng bọn cướp không còn là một vấn đề hay mối đe dọa lớn."
+
+  bp3_survey.1020.t: "Những Con Đường Cũ Của [province.GetCounty.GetName]"
+  bp3_survey.1020.desc: "Khi Ta di chuyển qua [province.Custom('HoldingNoHoldingTerrainRoamingTooltip')], Ta suy ngẫm về một vấn đề quá đỗi quen thuộc. Ngay khi rời khỏi thành phố, chúng Ta đã mắc kẹt trong những vũng bùn lầy và phải đi theo những lối mòn chẳng dẫn tới đâu.\n\nNhững con đường cũ này hầu như không còn tác dụng gì, nếu còn có thể gọi là có tác dụng. Trừ khi ta dành người ra để bắt đầu sửa chữa, tình trạng này rất có thể sẽ ảnh hưởng tới người dân địa phương và các thương nhân ngoại quốc, nếu như nó chưa xảy ra."
+  bp3_survey.1020.a: "Ta sẽ phân bổ khoản kinh phí cần thiết cho việc này."
+  bp3_survey.1020.b: "Trưng dụng dân chúng."
+  bp3_survey.1020.c: "Lực lượng đồn trú có thể lo liệu việc này."
+  bp3_survey.1020.d: "Đây không phải là vấn đề quá nghiêm trọng."
+
+  inspection_value_old_roads_desc: "\t#weak Tăng thêm cho mỗi #bold 3#! [development|E] thấp hơn #bold 30#!#!"
+  MODIFIER_DEFINITION_OLD_ROADS_DESC: "\nChỉ số này tăng lên khi [development|E] càng thấp"
+
+  inspection_old_roads_of_x_border_modifier: "Đường Mới"
+  inspection_old_roads_of_x_border_modifier_desc: "Một khoản vàng đáng kể đã được phân bổ để duy tu hệ thống đường sá địa phương."
+  inspection_old_roads_of_x_domain_modifier: "Bảo Trì Đồn Trú"
+  inspection_old_roads_of_x_domain_modifier_desc: "Lực lượng đồn trú địa phương đã được giao nhiệm vụ bảo trì những con đường cũ kỹ, xuống cấp của hạt."
+  inspection_old_roads_of_x_populace_modifier: "Bảo Trì Bởi Dân Chúng"
+  inspection_old_roads_of_x_populace_modifier_desc: "Người dân trong hạt đã bị ép buộc tham gia vào công tác bảo trì đường sá."
+  inspection_old_roads_negative_modifier: "Đường Sá Xuống Cấp"
+  inspection_old_roads_negative_modifier_desc: "Những con đường cũ trong hạt đã rơi vào tình trạng xuống cấp từ lâu và đang rất cần được bảo trì."
+
+  bp3_survey.1030.t: "Xung Đột Giữa Các Phường Hội"
+  bp3_survey.1030.desc: "Khi ta đang ở giữa cuộc thảo luận với một viên quan lại, ta đột ngột bị gián đoạn bởi hai nhóm người đang la hét vào mặt nhau chỉ cách đó vài bước chân. Đội cận vệ của ta khó nhọc lắm mới tách được họ ra, trong khi đại diện của hai phe vẫn tiếp tục gào thét vào nhau.\n\nSau nhiều lần cố gắng trấn an họ, cuối cùng ta cũng hiểu rằng đây là một cuộc đối đầu giữa [city_province.Custom('InspectionFightingGuilds1Loc')] và [city_province.Custom('InspectionFightingGuilds2Loc')] về quyền sở hữu tài sản tại khu vực quan trọng nhất của trung tâm thành phố."
+  bp3_survey.1030.a: "Cả hai đều có chỗ đứng!"
+  bp3_survey.1030.a.win: "Họ đạt được một thỏa hiệp"
+  bp3_survey.1030.a.loss: "Nó biến thành một cuộc tranh giành quyền lực, ảnh hưởng đến toàn bộ [city_province.GetNameNoTooltip]"
+  bp3_survey.1030.a.loss_short: "Họ từ chối thỏa hiệp"
+  bp3_survey.1030.b: "Ủng hộ [city_province.Custom('InspectionFightingGuilds1Loc')]."
+  bp3_survey.1030.c: "Hỗ trợ [city_province.Custom('InspectionFightingGuilds2Loc')]."
+  bp3_survey.1030.d: "[city_province.Custom('InspectionFightingGuilds1Loc')] ư? [city_province.Custom('InspectionFightingGuilds2Loc')] á?! Hừ, đó là vàng của ta!"
+
+  InspectionFightingGuildsMillers: "$LocalGuildsMillers$"
+  InspectionFightingGuildsBakers: "$LocalGuildsBakers$"
+  InspectionFightingGuildsFishmongers: "$LocalGuildsFishmongers$"
+  InspectionFightingGuildsShoemakers: "$LocalGuildsShoemakers$"
+  InspectionFightingGuildsTanners: "$LocalGuildsTanners$"
+  InspectionFightingGuildsTailors: "$LocalGuildsTailors$"
+  InspectionFightingGuildsWeavers: "$LocalGuildsWeavers$"
+  InspectionFightingGuildsSkinners: "$LocalGuildsSkinners$"
+  InspectionFightingGuildsButchers: "$LocalGuildsButchers$"
+  InspectionFightingGuildsFurriers: "$LocalGuildsFurriers$"
+  InspectionFightingGuildsVintners: "$LocalGuildsVintners$"
+  InspectionFightingGuildsCarpenters: "$LocalGuildsCarpenters$"
+  InspectionFightingGuildsMasons: "$LocalGuildsMasons$"
+  InspectionFightingGuildsMiners: "$LocalGuildsMiners$"
+  InspectionFightingGuildsBlacksmiths: "$LocalGuildsBlacksmiths$"
+  InspectionFightingGuildsSaddlers: "$LocalGuildsSaddlers$"
+  InspectionFightingGuildsMerchants: "$LocalGuildsMerchants$"
+  InspectionFightingGuildsPhysicians: "$LocalGuildsPhysicians$"
+  InspectionFightingGuildsPharmacists: "$LocalGuildsPharmacists$"
+  InspectionFightingGuildsToolmakers: "$LocalGuildsToolmakers$"
+  InspectionFightingGuildsInnkeepers: "Phường Hội Chủ Quán Trọ"
+  InspectionFightingGuildsArtists: "Phường Hội Nghệ Sĩ"
+
+  inspection_fighting_guilds_innkeepers_guild_modifier: "Phường Hội Chủ Quán Trọ"
+  inspection_fighting_guilds_innkeepers_guild_modifier_desc: "Thành phố này chịu ảnh hưởng mạnh mẽ từ một $inspection_fighting_guilds_innkeepers_guild_modifier$ hùng mạnh."
+  inspection_fighting_guilds_artists_guild_modifier: "Phường Hội Nghệ Sĩ"
+  inspection_fighting_guilds_artists_guild_modifier_desc: "Các nghệ sĩ từ khắp nơi đổ về để tham gia vào những hoạt động sáng tạo mà ta có thể dễ dàng bắt gặp ở mọi góc phố."
+  inspection_learning_intent_local_guilds_modifier: "Các Phường Hội Địa Phương"
+  inspection_learning_intent_local_guilds_modifier_desc: "Một số phường hội mới đã định cư tại lãnh địa này sau khi giao thiệp với chúa thượng ở những vùng khác trong lãnh thổ."
+
+  bp3_survey.1040.t: "Ngọn Lửa Lan Rộng"
+  bp3_survey.1040.desc: "Khi đang di chuyển qua các con phố của [province.GetName], đoàn tùy tùng của ta và ta bất ngờ bắt gặp một đám cháy đang tàn phá một trong những khu phố cổ nhất của thành phố. Nhiều người đứng chết lặng, mắt mở to vì kinh hoàng, hoặc lặng lẽ khóc bên những thi thể nằm rải rác trên mặt đường.\n\nKhoảng hơn chục binh lính đang tuyệt vọng cố gắng dập lửa trước khi nó kịp bùng lên khắp phần còn lại của thành phố và chỉ để lại tro tàn phía sau."
+  bp3_survey.1040.a: "Phải cứu dân chúng!"
+  bp3_survey.1040.a.win: "Ngươi giúp dập tắt đám cháy"
+  bp3_survey.1040.a.loss: "Ngọn lửa vẫn lan rộng dù ngươi đã cố hết sức"
+  bp3_survey.1040.a.death: "Mắc kẹt trong biển lửa"
+  bp3_survey.1040.b: "Ta sẽ cấp ngân quỹ sau, trước mắt hãy cứu được gì thì cứu."
+  bp3_survey.1040.c: "Một đám cháy còn lớn hơn sẽ đặt [county_owner.GetFirstNameNoTooltip] vào đúng vị trí của [county_owner.GetHerHis]."
+  bp3_survey.1040.c.win: "Mọi người tin rằng ngươi đã cố gắng giúp đỡ"
+  bp3_survey.1040.c.loss: "Mọi người biết rõ ngươi thực sự đã làm gì"
+  bp3_survey.1040.d: "Ta không thể làm gì hơn ở đây..."
+  bp3_survey.1040.destroyed_building: "Ngọn lửa lan rộng"
+
+  inspection_fire_spreading_modifier: "Những Con Phố Bị Thiêu Rụi"
+  inspection_fire_spreading_modifier_desc: "Việc thiêu rụi một phần mục nát cũ kỹ đã mở ra những cơ hội mới."
+  inspection_selfless_ruler_modifier: "Vị Quân Chủ Vị Tha"
+  inspection_selfless_ruler_modifier_desc: "Nhân vật này đã đặt sức khỏe của bản thân vào vòng nguy hiểm để giúp đỡ dân chúng."
+
+  bp3_survey.1050.t: "Mở Rộng Tường Thành"
+  bp3_survey.1050.desc: "Một lần nữa, ta lại thấy mình đang trò chuyện với một số người dân địa phương về việc nên ưu tiên tái cấu trúc [province.GetName] như thế nào. \"Hãy dời và xây lại những bức tường thành cũ, thưa chúa thượng,\" Đại úy [soldier_character.GetNameNoTooltip] của đội đồn trú địa phương nói với một nụ cười tinh quái, \"Hãy nghĩ xem chúng ta sẽ có thêm bao nhiêu không gian cho một khu dân cư mới!\"\n\n\"Không, không! Khu thương nhân cũ đang rất cần được tu sửa.\" [merchant_character.GetNameNoTooltip], một đại diện của các phường hội địa phương, chen ngang vào cuộc trò chuyện một cách không chút e dè. \"Hãy tưởng tượng xem thị trấn sẽ sôi động đến mức nào với một khu thương mại nhộn nhịp!\""
+  bp3_survey.1050.a: "Hãy tập trung vào những bức tường thành cũ kỹ của [province.GetNameNoTooltip]."
+  bp3_survey.1050.b: "Các thương nhân nói đúng."
+  bp3_survey.1050.c: "Chúng ta không có đủ vàng để phân phát cho bất kỳ ai."
+
+  inspection_expanding_walls_new_modifier: "Không Gian Mở Rộng"
+  inspection_expanding_walls_new_modifier_desc: "Thị trấn này đã tìm được thêm không gian để mở rộng sau khi di dời một phần tường thành."
+  inspection_expanding_walls_old_modifier: "Đầu Tư Cho Phường Hội"
+  inspection_expanding_walls_old_modifier_desc: "Các phường hội địa phương đã nhận được một khoản lợi nhỏ sau khi một khoản vàng không nhỏ được phân bổ cho việc duy tu khu thương mại."
+  inspection_learning_intent_building_modifier: "Thực Hành Xây Dựng"
+  inspection_learning_intent_building_modifier_desc: "Sau khi tiếp thu một số phương thức từ những vùng khác trong lãnh thổ, thủ phủ đang tràn đầy sức sống."
+
+  inspection_expanding_walls_new_desc: "\t#weak Tăng lên cho mỗi ô [building|E] trống#!"
+  MODIFIER_DEFINITION_EXPANDING_WALLS_NEW_DESC: "\nHiệu ứng này tăng lên khi số ô [building|E] trống trong [barony|E] càng nhiều"
+
+  inspection_expanding_walls_old_desc: "\t#weak Tăng lên cho mỗi [building|E]#!"
+  MODIFIER_DEFINITION_EXPANDING_WALLS_OLD_DESC: "\nHiệu ứng này tăng lên khi số lượng [buildings|E] trong [barony|E] càng nhiều"
+
+  bp3_survey.1060.t: "Mỏ Nhà Ai, Người Nấy Lo"
+  bp3_survey.1060.desc: "Khi ta khảo sát vùng ngoại vi của [province.GetName], đoàn tùy tùng của ta và ta bắt gặp một con đường cũ hẻo lánh. Dù được che giấu khá kỹ, nó dẫn tới một mỏm đồi nhỏ, và cụ thể là một hang động, nơi chúng ta phát hiện nhiều dụng cụ khai thác bị bỏ hoang nằm rải rác trên nền hang.\n\n"
+  bp3_survey.1060.desc.copper: "\"Thưa chúa thượng,\" một trong những binh sĩ của ta, [soldier_character.GetFirstNameNoTooltip], bất chợt thốt lên, \"Chẳng phải đây là một mạch đồng sao?\""
+  bp3_survey.1060.desc.silver: "\"[ROOT.Char.Custom('FormOfAddressForLiege')|U],\" một trong những binh sĩ của ta, [soldier_character.GetFirstNameNoTooltip], bất chợt kêu lên, \"Thứ lấp lánh này hẳn là bạc!\""
+  bp3_survey.1060.desc.gold: "\"[ROOT.Char.Custom('FormOfAddressForLiege')|U],\" một trong những binh sĩ của ta, [soldier_character.GetFirstNameNoTooltip], mắt mở to kinh ngạc, thốt lên, \"Đây có phải là một cục vàng không?\""
+  bp3_survey.1060.a: "Chúng ta còn chờ gì nữa? Đào! ĐÀO!"
+
+  inspection_learning_intent_flourishing_metal_trade_modifier: "Thị Trường Hưng Thịnh"
+  inspection_learning_intent_flourishing_metal_trade_modifier_desc: "Lãnh địa này đã có được một thị trường hưng thịnh sau khi một mỏ được phát hiện ở nơi khác trong lãnh thổ."
+
+  bp3_survey.1070.t: "Những Sai Lệch Thường Kỳ"
+  bp3_survey.1070.desc.intro.personal: "Khi rà soát các khoản thuế do các quản lý và phó vương địa phương của ta thu về, ta nhận thấy những sai lệch rõ ràng giữa số liệu được ghi chép tại một số khu vực và số tiền thực tế ta nhận được.\n\n"
+  bp3_survey.1070.desc.intro.vassal: "Khi rà soát các khoản thuế thu được trong thời gian [province.GetName] nằm dưới quyền cai trị của [county_owner.GetFirstNamePossessive], ta nhận thấy sự chênh lệch rõ ràng giữa số tiền ta đáng lẽ phải nhận và số tiền thực tế được nộp. Dù [county_owner.GetFirstNameNoTooltip] lẽ ra phải phát hiện ra điều này, các con số sai lệch đã được ghi nhận ngay từ trước khi chúng đến bàn làm việc của [county_owner.GetHerHis].\n\n"
+  bp3_survey.1070.desc: "Bất kể rốt cuộc ai là người có lỗi, rõ ràng là phải có kẻ trả giá. Dân địa phương đã nộp đủ phần của họ, nhưng họ vẫn dễ bị bóc lột hơn so với những kẻ thực sự chịu trách nhiệm cho những 'sai sót' này."
+  bp3_survey.1070.a: "Bọn quý tộc #emp sẽ#! phải trả đủ phần của chúng, bằng cách này hay cách khác."
+  bp3_survey.1070.a.flavor: "Làm gương với những kẻ chịu trách nhiệm, để những kẻ còn lại biết điều gì đang chờ đợi."
+  bp3_survey.1070.b: "Một khoản thuế một lần áp lên dân địa phương sẽ bù đắp được tổn thất này."
+  bp3_survey.1070.b.flavor: "Dân chúng sẽ không hài lòng, nhưng số tiền này là cần thiết."
+  bp3_survey.1070.c: "Lần này ta sẽ bỏ qua..."
+  bp3_survey.1070.c.flavor: "Hy vọng sự khoan dung này sẽ được trân trọng."
+
+  inspection_regular_irregularities_local_modifier: "Thuế Một Lần"
+  inspection_regular_irregularities_local_modifier_desc: "Nhân vật này đã áp đặt một khoản thuế bất thường, chỉ thu một lần, lên dân địa phương để bù đắp cho những thiếu hụt do các chư hầu gây ra."
+  inspection_regular_irregularities_modifier: "Hình Phạt Cưỡng Chế"
+  inspection_regular_irregularities_modifier_desc: "Nhân vật này đã trừng phạt nghiêm khắc các chư hầu đã biển thủ tiền thuế cho bản thân."
+
+  bp3_survey.1080.t: "Một Nơi Đáng Để Ghé Thăm"
+  bp3_survey.1080.desc: "\"Hoàn toàn không an toàn chút nào đâu, [ROOT.Char.Custom('FormOfAddressForLiege')],\" một lữ khách trông tiều tụy nói với ta. \"Ta suýt nữa thì mất mạng.\" Đúng như lời [traveler_character.GetHerHis] nói, có vẻ như [traveler_character.GetSheHe] đã trải qua một chuyến đi vô cùng khắc nghiệt.\n\n"
+  bp3_survey.1080.desc.holy_poi: "Dường như các tín đồ [ROOT.GetCharacter.GetFaith.GetReligion.GetAdherentNamePluralNoTooltip] từ khắp nơi đã đổ về [location_province.GetName] để chiêm ngưỡng thánh tích linh thiêng nhất, [location_province.Custom('GetSpecialBuildingPrefix')][location_province.GetHolding.GetSpecialBuildingType.GetName], chỉ để rồi bị bọn tội phạm chặn đường."
+  bp3_survey.1080.desc.poi: "Dường như người từ khắp nơi đã đến đây để chiêm ngưỡng [location_province.Custom('GetSpecialBuildingPrefix')][location_province.GetHolding.GetSpecialBuildingType.GetName], chỉ để rồi bị bọn tội phạm chặn đường."
+  bp3_survey.1080.desc.holy_site: "Dường như các tín đồ [ROOT.GetCharacter.GetFaith.GetReligion.GetAdherentNamePluralNoTooltip] từ khắp nơi đã đến [location_province.GetName] để viếng thăm thánh địa địa phương, chỉ để rồi bị bọn tội phạm chặn đường."
+  bp3_survey.1080.desc.outro: "Nếu ta để cho bọn cướp và du đãng tiếp tục săn mồi trên những du khách này... thì chỉ còn là vấn đề thời gian trước khi họ bắt đầu tìm đến những nơi khác."
+  bp3_survey.1080.a: "Ta sẽ tuyển một đội tuần tra nhỏ để bảo vệ các lữ khách."
+  bp3_survey.1080.b: "Hãy để dân chúng tự lo cho khách viếng thăm của họ."
+  bp3_survey.1080.c: "Họ tự lo lấy thân mình."
+
+  protected_poi_modifier_desc: "\nXác suất nhận [skill|E] Point từ [monument_expedition|E]: #p +10%#!"
+  protected_holy_site_modifier_desc: "\nĐộ mộ đạo khi [pilgrimage|E]: #p +20#!"
+
+  inspection_proteted_poi_levy_modifier: "Di Tích Được Bảo Vệ"
+  inspection_proteted_poi_levy_modifier_desc: "Quân đồn trú đã được trưng dụng để bảo vệ di tích địa phương cùng vô số lữ khách.\n\n$protected_poi_modifier_desc$"
+
+  inspection_protected_holy_site_levy_modifier: "Thánh Địa Được Bảo Vệ"
+  inspection_protected_holy_site_levy_modifier_desc: "Quân đồn trú đã được trưng dụng để bảo vệ thánh địa địa phương cùng vô số khách hành hương.\n$protected_holy_site_modifier_desc$"
+
+  inspection_protected_holy_poi_levy_modifier: "$inspection_protected_holy_site_levy_modifier$"
+  inspection_protected_holy_poi_levy_modifier_desc: "Quân đồn trú đã được trưng dụng để bảo vệ thánh địa địa phương cùng vô số khách hành hương.\n$protected_poi_modifier_desc$ $protected_holy_site_modifier_desc$"
+
+  inspection_protected_poi_gold_modifier: "Di Tích Có Quân Đồn Trú"
+  inspection_protected_poi_gold_modifier_desc: "Di tích địa phương đã được bố trí một đội quân chuyên trách để bảo vệ nó cùng vô số lữ khách.\n$protected_poi_modifier_desc$"
+
+  inspection_protected_holy_site_gold_modifier: "Thánh Địa Có Quân Đồn Trú"
+  inspection_protected_holy_site_gold_modifier_desc: "Thánh địa địa phương đã được bố trí một đội quân chuyên trách để bảo vệ nó cùng vô số khách hành hương.\n$protected_holy_site_modifier_desc$"
+
+  inspection_protected_holy_poi_gold_modifier: "$inspection_protected_holy_site_gold_modifier$"
+  inspection_protected_holy_poi_gold_modifier_desc: "Thánh địa địa phương đã được bố trí một đội quân chuyên trách để bảo vệ nó cùng vô số khách hành hương.\n$protected_poi_modifier_desc$ $protected_holy_site_modifier_desc$"
+
+  bp3_survey.1090.t: "Vùng Hậu Địa Ẩn Khuất"
+  bp3_survey.1090.desc: ""Đến đây để tìm bọn săn trộm à?" Một thợ săn trông rách rưới hét lên với chúng ta khi ta tiến đến một khu trại nhỏ của [hunter_character.GetHerHis] trong chuyến khảo sát vùng hẻo lánh của [province.GetName]. \"Có rất nhiều thứ để tìm thấy, ngay cả khi đây không phải là đất hoàng gia thực sự. Ở [poaching_province.GetName] này, mọi [hunter_character.GetWomanMan] đều phải tự lo cho bản thân mình.\"\n\n\"Nếu ngài muốn khẳng định quyền sở hữu của mình trên những vùng đất này, ngài cần một người có thể thường xuyên xuất hiện thay mặt cho ngài, nếu ngài hiểu ý ta.\" [hunter_character.GetSheHe|U] tiếp tục nói với một cái nháy mắt, trước khi [hunter_character.GetSheHe] cắn một miếng thịt nướng. Một nhóm người có thể cho tất cả mọi người ở đây thấy rằng vùng đất này thực sự thuộc về ta? Có lẽ đó cũng không phải là một ý tưởng tồi..."
+  bp3_survey.1090.a: "Chúng ta sẽ thuê một số lính canh để tuần tra vùng hậu địa."
+  bp3_survey.1090.b: "Tuyển mộ các thợ săn địa phương vốn đã thông thạo khu vực này."
+  bp3_survey.1090.c: "Vài tên săn trộm thì có gì đáng bận tâm?"
+
+  inspection_hidden_hinterlands_modifier: "[hunt_success_chance|E]: #p +10%#!\n[hike|E] [prestige_experience|E]: #P +25%#!"
+
+  inspection_hidden_hinterlands_recruit_modifier: "Tuần Tra Hoang Dã"
+  inspection_hidden_hinterlands_recruit_modifier_desc: "Một đơn vị lính canh được bố trí nhằm đảm bảo khu vực này có ít thợ săn trộm và tội phạm nhất có thể.\n\n$inspection_hidden_hinterlands_modifier$"
+
+  inspection_hidden_hinterlands_hunters_modifier: "Thợ Săn Địa Phương"
+  inspection_hidden_hinterlands_hunters_modifier_desc: "Một nhóm thợ săn địa phương đã được chúa tể của họ thuê để bảo vệ lãnh địa khỏi bọn săn trộm và tội phạm.\n\n$inspection_hidden_hinterlands_modifier$"
+
+ ### Progression Events ###
+  bp3_survey.1200.t: "Đạt Được Tiến Triển"
+  bp3_survey.1200.desc: "Bất chấp vô số vấn đề và khó khăn mà ta đã đối mặt tại [province.GetName], ta cảm thấy mình đã dần hiểu rõ cách xoay xở và làm việc tại nơi này. Các địa chủ, các phường hội địa phương — tất cả đều đang bắt đầu chấp nhận cách làm của ta.\n\nGiờ đây, ta chỉ cần vạch ra một con đường cho tương lai của hạt này và tìm đúng những người có thể dẫn dắt nó đi theo con đường đó."
+  bp3_survey.1200.a: "Hy vọng đây sẽ là những thử thách cuối cùng của ta tại đây."
+
+  bp3_survey.1210.t: "Một Bước Đi Đúng Hướng"
+  bp3_survey.1210.desc: "Sau một buổi tối dài thảo luận với các địa chủ địa phương, cuối cùng ta cũng đã đạt được một thỏa thuận với một trong những phường hội thương nhân trong vùng.\n\nHy vọng đây chỉ là khởi đầu cho việc đưa hạt này trở lại đúng quỹ đạo mà ta mong muốn. Giá như ta có thể tìm thêm được những tiếng nói ôn hòa hơn để ủng hộ những nỗ lực của mình."
+  bp3_survey.1210.a: "Bước đầu tiên trong rất nhiều bước."
+
+  bp3_survey.1220.t: "Một Bước Sẩy Chân"
+  bp3_survey.1220.desc: "Sau một buổi tối dài thảo luận với các địa chủ địa phương, họ vẫn không thể tìm được tiếng nói chung. Dù đã cố gắng hết sức, ta cảm thấy động lực để duy trì trật tự nơi đây đang dần phai nhạt.\n\nSao họ không thể, chỉ một lần thôi, sống hòa thuận với nhau?"
+  bp3_survey.1220.a: "Chỉ cần #bold nói chuyện#! với nhau thôi!"
+
+  bp3_survey.1230.t: "Sai Lầm Nối Tiếp Sai Lầm"
+  bp3_survey.1230.desc: "Sau một ngày dài trò chuyện với các địa chủ địa phương, ta lại phải đối mặt với một tranh chấp nhỏ giữa các phường hội thương nhân, ngay sau đó là những màn cãi vã không dứt của giới quý tộc.\n\nDù nhìn về đâu, ta cũng có cảm giác như lại có thêm một vấn đề đang chờ ta giải quyết. Có chuyện gì với những con người sống tại [province.GetName] vậy chứ?!"
+  bp3_survey.1230.a: "Họ thậm chí có #emp muốn#! mọi thứ khá hơn không vậy?!"
+
+ ### APAs
+  apa_survey_bad_harvest_title: "Dấu Hiệu Mùa Mất"
+  apa_survey_bad_harvest_key_title: "Mùa Mất"
+  apa_survey_bad_harvest_key: "Khi khảo sát các vùng canh tác địa phương tại [apa_province.GetName], [first.GetShortUIName] đã bắt đầu nhận thấy những dấu hiệu cho thấy một vụ mùa thất bát sắp tới."
+
+  apa_survey_good_harvest_title: "Dấu Hiệu Mùa Bội Thu"
+  apa_survey_good_harvest_key_title: "Mùa Bội Thu"
+  apa_survey_good_harvest_key: "Khi khảo sát các vùng canh tác địa phương tại [apa_province.GetName], [first.GetShortUIName] đã bắt đầu nhận thấy những dấu hiệu cho thấy một vụ mùa bội thu sắp tới."
+
+  apa_survey_bad_merchant_guild_title: "Quan Hệ Với Phường Hội Thương Nhân Kém"
+  apa_survey_bad_merchant_guild_key_title: "Quan Hệ Phường Hội Thương Nhân"
+  apa_survey_bad_merchant_guild_key: "[first.GetShortUIName] đã xảy ra tranh cãi với một phường hội thương nhân địa phương tại [apa_province.GetName]."
+
+  apa_survey_good_merchant_guild_title: "Quan Hệ Tốt Với Phường Hội Thương Nhân"
+  apa_survey_good_merchant_guild_key_title: "Quan Hệ Phường Hội Thương Nhân"
+  apa_survey_good_merchant_guild_key: "[first.GetShortUIName] đã đạt được các thỏa thuận với một phường hội thương nhân địa phương tại [apa_province.GetName]."
+
+  apa_survey_bad_noble_title: "Quý Tộc Thù Địch"
+  apa_survey_bad_noble_key_title: "$apa_survey_bad_noble_title$"
+  apa_survey_bad_noble_key: "[first.GetShortUIName] đã xảy ra tranh cãi với một quý tộc địa phương tại [apa_province.GetName]."
+
+  apa_survey_good_noble_title: "Quý Tộc Thân Thiện"
+  apa_survey_good_noble_key_title: "$apa_survey_good_noble_title$"
+  apa_survey_good_noble_key: "[first.GetShortUIName] đã dành thời gian yến tiệc cùng một số quý tộc địa phương tại [apa_province.GetName]."
+
+  apa_survey_tax_problems_title: "Trốn Thuế"
+  apa_survey_tax_problems_key_title: "$apa_survey_tax_problems_title$"
+  apa_survey_tax_problems_key: "[first.GetShortUIName] đã phát hiện hành vi trốn thuế của một số quý tộc tại [apa_province.GetName], nhưng không thể giải quyết triệt để vấn đề."
+
+  apa_survey_extra_taxes_title: "Thuế Bổ Sung"
+  apa_survey_extra_taxes_key_title: "$apa_survey_extra_taxes_title$"
+  apa_survey_extra_taxes_key: "[first.GetShortUIName] đã phát hiện hành vi trốn thuế của một số quý tộc tại [apa_province.GetName] và đảm bảo rằng họ đã bị đánh thuế đúng mức."
+
+  apa_survey_old_bridge_title: "Cầu Xuống Cấp"
+  apa_survey_old_bridge_key_title: "$apa_survey_old_bridge_title$"
+  apa_survey_old_bridge_key: "[first.GetShortUIName] suýt nữa đã rơi xuống nước do một cây cầu cũ kỹ, xuống cấp nghiêm trọng và đang rất cần được sửa chữa, bảo trì."
+
+  apa_survey_bad_mercenaries_title: "Lính Đánh Thuê Gây Rối"
+  apa_survey_bad_mercenaries_key_title: "$apa_survey_bad_mercenaries_title$"
+  apa_survey_bad_mercenaries_key: "[first.GetShortUIName] đã phát hiện một số lính đánh thuê gây rối tàn phá vùng hậu địa của [apa_province.GetName]."
+
+  apa_survey_good_mercenaries_title: "Đã Xử Lý Lính Đánh Thuê"
+  apa_survey_good_mercenaries_key_title: "$apa_survey_good_mercenaries_title$"
+  apa_survey_good_mercenaries_key: "[first.GetShortUIName] đã phát hiện một số lính đánh thuê gây rối tại [apa_province.GetName] và cử một đội tuần tra nhỏ để xử lý chúng."
+
+  apa_survey_small_festival_title: "Lễ Hội Địa Phương"
+  apa_survey_small_festival_key_title: "$apa_survey_small_festival_title$"
+  apa_survey_small_festival_key: "[first.GetShortUIName] đã tham gia một lễ hội nhỏ tại [apa_province.GetName] và gây ấn tượng với cả dân thường lẫn giới quý tộc tham dự."
+
+  apa_survey_fishing_rights_title: "Tranh Chấp Quyền Đánh Bắt"
+  apa_survey_fishing_rights_key_title: "$apa_survey_fishing_rights_title$"
+  apa_survey_fishing_rights_key: "[first.GetShortUIName] đã bị cuốn vào một cuộc tranh chấp giữa phường hội ngư dân địa phương và một quý tộc tại [apa_province.GetName] xoay quanh quyền đánh bắt."
+
+  apa_survey_city_walls_title: "Tường Thành Xuống Cấp"
+  apa_survey_city_walls_key_title: "$apa_survey_city_walls_title$"
+  apa_survey_city_walls_key: "[first.GetShortUIName] đã lãng phí thời gian và công sức để cố gắng hỗ trợ việc bảo trì tường thành tại [apa_province.GetName], nhưng không đạt được kết quả nào."
+
+  apa_survey_local_gift_title: "Được Dân Chúng Yêu Mến"
+  apa_survey_local_gift_key_title: "$apa_survey_local_gift_title$"
+  apa_survey_local_gift_key: "[first.GetShortUIName] đã nhận được một món quà từ dân chúng tại [apa_province.GetName]."
+
+  neither_local_inspection_perk_nor_merit: "Ngài không có [GetPerk('local_inspection_perk').GetName(GetPlayer)] [perk|E], cũng không có một [government|E] dựa trên [government_bureaucratic_type|E]"

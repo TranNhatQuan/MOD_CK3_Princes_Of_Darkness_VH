@@ -1,0 +1,556 @@
+﻿POD_mass_demand_payment_interaction = {
+	interface_priority = 201
+	category = interaction_category_diplomacy
+	icon = icon_gold
+
+	desc = POD_mass_demand_payment_interaction_desc
+	use_diplomatic_range = no
+	
+	common_interaction = yes
+
+	is_shown = {
+		scope:actor = scope:recipient # self only
+		scope:actor = {
+			OR = {
+				has_perk = golden_obligations_perk
+				AND = {
+					any_character_struggle = {
+						involvement = involved
+						has_struggle_phase_parameter = unlocks_demand_payments_for_all
+						# is_secondary_character_involvement_either_trigger = {
+						# 	CHAR = scope:recipient
+						# }
+					}
+				}
+			}
+		}
+		scope:actor = {
+			any_hooked_character = {
+				count > 1
+
+				gold >= 1
+
+				is_ai = yes
+				is_imprisoned = no
+				NOT = { is_at_war_with = scope:actor }
+
+				prev = { has_usable_hook = prev }
+
+				in_diplomatic_range = scope:actor
+
+				# If payment was unlocked via struggle, check if both characters are in the same struggle
+				trigger_if = {
+					limit = {
+						scope:actor = {
+							NOT = { has_perk = golden_obligations_perk }
+							any_character_struggle = {
+								involvement = involved
+								has_struggle_phase_parameter = unlocks_demand_payments_for_all
+							}
+						}
+					}
+					any_character_struggle = {
+						involvement = involved
+						has_struggle_phase_parameter = unlocks_demand_payments_for_all
+						is_secondary_character_involvement_either_trigger = {
+							CHAR = scope:actor
+						}
+					}
+				}
+			}
+		}
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_physically_able_adult = yes
+		}
+		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+	}
+
+	send_options_exclusive = no
+
+	send_option = {
+		flag = exclude_partial_payments
+		localization = POD_mass_demand_payment_interaction_exclude_partial_payments
+	}
+
+	send_option = {
+		flag = strong_hooks_only
+		localization = POD_mass_demand_payment_interaction_strong_hooks_only
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				exists = house
+				any_hooked_character = {
+					house ?= { this = scope:actor.house }
+				}
+			}
+		}
+		flag = exclude_house_members
+		localization = POD_mass_demand_payment_interaction_exclude_house_members
+	}
+
+	send_option = {
+		is_shown = {
+			scope:strong_hooks_only = no
+			scope:actor = {
+				any_hooked_character = {
+					prev = {
+						has_hook_of_type = {
+							target = prev
+							type = necromancy_bind_hook
+						}
+					}
+				}
+			}
+		}
+		flag = exclude_necromancy_bind_hooks
+		localization = POD_mass_demand_payment_interaction_exclude_necromancy_bind_hooks
+	}
+
+	send_option = {
+		is_shown = {
+			scope:strong_hooks_only = no
+			scope:actor = {
+				any_hooked_character = {
+					prev = {
+						has_hook_of_type = {
+							target = prev
+							type = mesmerize_hook
+						}
+					}
+				}
+			}
+		}
+		flag = exclude_mesmerize_hooks
+		localization = POD_mass_demand_payment_interaction_exclude_mesmerize_hooks
+	}
+
+	on_accept = {
+		scope:actor = {
+			custom_description = {
+				text = POD_mass_demand_payment_num
+				subject = scope:actor
+				value = mass_payment_num_of_characters
+			}
+			custom_description = {
+				text = POD_mass_demand_payment_gold
+				subject = scope:actor
+				value = mass_payment_total_gold
+			}
+
+			hidden_effect = {
+				every_hooked_character = {
+					limit = { POD_can_demand_payment_trigger = yes }
+
+					save_scope_as = payment_recipient
+
+					if = {
+						limit = { gold > golden_obligation_value }
+						pay_short_term_gold = {
+							target = scope:actor
+							gold = golden_obligation_value
+						}
+					}
+					else = {
+						pay_short_term_gold = {
+							target = scope:actor
+							gold = {
+								value = scope:payment_recipient.gold
+								floor = yes
+							}
+						}
+					}
+
+					prev = {
+						use_hook = prev
+						
+						stress_impact = {
+							generous = medium_stress_impact_gain
+						}
+					}
+
+					# If we're a clan this interaction affects unity
+					add_clan_unity_interaction_effect = {
+						CHARACTER = scope:actor
+						TARGET = scope:payment_recipient
+						VALUE = minor_unity_loss
+						DESC = clan_unity_demand_payment.desc
+						REVERSE_NON_HOUSE_TARGET = no
+					}
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+}
+
+#POD_mass_demand_conversion_interaction = {
+#	interface_priority = 201
+#	category = interaction_category_religion
+#	icon = religious
+#
+#	desc = POD_mass_demand_conversion_interaction_desc
+#	use_diplomatic_range = no
+#
+#	common_interaction = yes
+#
+#	is_shown = {
+#		scope:actor = scope:recipient # self only
+#	}
+#
+#	is_valid = {
+#	}
+#
+#	is_valid_showing_failures_only = {
+#		POD_self_targeted_interaction_is_valid_showing_failures_only = yes
+#	}
+#
+#	send_options_exclusive = no
+#
+#	send_option = {
+#		is_shown = {
+#			scope:actor = { is_house_head = yes }
+#		}
+#		flag = house
+#		localization = FRAME_RELATION_HOUSE_MEMBER
+#	}
+#
+#	send_option = {
+#		flag = courtier
+#		localization = COURTIER
+#	}
+#
+#	send_option = {
+#		is_shown = {
+#			scope:below_vassal = no
+#		}
+#		flag = fellow_vassal
+#		localization = RELATION_FELLOW_VASSAL
+#	}
+#
+#	send_option = {
+#		is_shown = {
+#			scope:fellow_vassal = no
+#		}
+#		flag = below_vassal
+#		localization = RELATION_BELOW_VASSAL
+#	}
+#
+#	send_option = {
+#		is_shown = {
+#			scope:actor = { has_trait = mummy }
+#		}
+#		flag = neteru
+#		localization = worshipping_neteru
+#	}
+#
+#	on_accept = {
+#		custom_description = {
+#			text = POD_mass_demand_conversion_num
+#			subject = scope:actor
+#			value = mass_conversion_num_of_characters
+#		}
+#		hidden_effect = {
+#			if = {
+#				limit = { scope:house = yes }
+#				scope:actor.house = {
+#					every_house_member = {
+#						limit = {
+#							scope:actor = {
+#								is_character_interaction_valid = {
+#									recipient = prev
+#									interaction = demand_conversion_interaction
+#								}
+#							}
+#						}
+#						run_interaction = {
+#							interaction = demand_conversion_interaction
+#							actor = scope:actor
+#							recipient = this
+#							execute_threshold = maybe
+#						}
+#					}
+#				}
+#			}
+#			if = {
+#				limit = { scope:courtier = yes }
+#				scope:actor = {
+#					every_courtier = {
+#						limit = {
+#							scope:actor = {
+#								is_character_interaction_valid = {
+#									recipient = prev
+#									interaction = ask_for_conversion_courtier_interaction
+#								}
+#							}
+#						}
+#						run_interaction = {
+#							interaction = ask_for_conversion_courtier_interaction
+#							actor = scope:actor
+#							recipient = this
+#							execute_threshold = maybe
+#						}
+#					}
+#				}
+#			}
+#			if = {
+#				limit = { scope:fellow_vassal = yes }
+#				scope:actor = {
+#					every_vassal = {
+#						limit = {
+#							scope:actor = {
+#								is_character_interaction_valid = {
+#									recipient = prev
+#									interaction = demand_conversion_vassal_ruler_interaction
+#								}
+#							}
+#						}
+#						run_interaction = {
+#							interaction = demand_conversion_vassal_ruler_interaction
+#							actor = scope:actor
+#							recipient = this
+#							execute_threshold = maybe
+#						}
+#					}
+#				}
+#			}
+#			else_if = {
+#				limit = { scope:below_vassal = yes }
+#				scope:actor = {
+#					every_vassal_or_below = {
+#						limit = {
+#							scope:actor = {
+#								is_character_interaction_valid = {
+#									recipient = prev
+#									interaction = demand_conversion_vassal_ruler_interaction
+#								}
+#							}
+#						}
+#						run_interaction = {
+#							interaction = demand_conversion_vassal_ruler_interaction
+#							actor = scope:actor
+#							recipient = this
+#							execute_threshold = maybe
+#						}
+#					}
+#				}
+#			}
+#			if = {
+#				limit = { scope:neteru = yes }
+#				scope:actor = {
+#					every_relation = {
+#						type = worshipping_neteru
+#						limit = {
+#							scope:actor = {
+#								is_character_interaction_valid = {
+#									recipient = prev
+#									interaction = POD_ask_neteru_for_conversion_interaction
+#								}
+#							}
+#						}
+#						run_interaction = {
+#							interaction = POD_ask_neteru_for_conversion_interaction
+#							actor = scope:actor
+#							recipient = this
+#							execute_threshold = accept
+#						}
+#					}
+#				}
+#			}
+#		}
+#	}
+#
+#	ai_frequency = 0
+#
+#	auto_accept = yes
+#}
+
+POD_copy_clothing_colors_interaction = {
+	#interface_priority = 201
+	category = interaction_category_friendly
+	icon = icon_personal
+
+	desc = POD_copy_clothing_colors_interaction_desc
+	use_diplomatic_range = no
+
+	is_shown = {
+		scope:recipient = {
+			OR = {
+				house ?= { POD_has_any_clothing_color = yes }
+				var:coterie ?= { POD_has_any_clothing_color = yes }
+				POD_has_any_clothing_color = yes
+			}
+		}
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { POD_has_any_clothing_color = yes } }
+		flag = POD_colors_personal
+		localization = POD_copy_clothing_colors_interaction_personal
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { var:coterie ?= { POD_has_any_clothing_color = yes } } }
+		flag = POD_colors_coterie
+		localization = POD_copy_clothing_colors_interaction_coterie
+	}
+
+	send_option = {
+		is_shown = { scope:recipient = { house ?= { POD_has_any_clothing_color = yes } } }
+		flag = POD_colors_house
+		localization = POD_copy_clothing_colors_interaction_house
+	}
+
+	on_accept = {
+		scope:recipient = {
+			switch = {
+				trigger = yes
+				scope:POD_colors_personal = {
+					save_scope_as = color_root
+				}
+				scope:POD_colors_coterie = {
+					var:coterie = { save_scope_as = color_root }
+				}
+				scope:POD_colors_house = {
+					house = { save_scope_as = color_root }
+				}
+			}
+		}
+		scope:actor = {
+			custom_tooltip = POD_copy_clothing_colors_interaction_tt
+			custom_tooltip = POD_copy_clothing_colors_interaction_tt2
+			hidden_effect = {
+				save_scope_as = player
+				set_variable = {
+					name  = color_root
+					value = scope:color_root
+				}
+				POD_copy_clothing_colors = yes
+				remove_variable = color_root
+			}
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+}
+
+POD_expose_your_own_secret_interaction = {
+	category = interaction_category_hostile
+	icon = secret
+	common_interaction = yes
+	interface = blackmail
+
+	desc = POD_expose_your_own_secret_interaction_desc
+	use_diplomatic_range = no
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:recipient = {
+			any_secret = {
+				count > 0
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_courtier = {
+				save_scope_as = exposer
+			}
+			if = {
+				limit = {
+					exists = scope:target
+				}
+				scope:target = {
+					expose_secret = scope:exposer
+				}
+			}
+			else = {
+				every_secret = {
+					expose_secret = scope:exposer
+				}
+			}
+		}
+
+		stress_impact = {
+			honest = minor_stress_impact_loss
+			just = minor_stress_impact_loss
+			shy = miniscule_stress_impact_gain
+		}
+	}
+
+	ai_frequency = 0
+	
+	auto_accept = yes
+}
+
+POD_end_friendship_interaction = {
+	category = interaction_category_hostile
+	use_diplomatic_range = no
+	icon = icon_cross
+
+	desc = POD_end_friendship_interaction_desc
+
+	is_shown = {
+		scope:actor = {
+			has_relation_friend = scope:recipient
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_busy_in_events_localised = yes }
+	}
+	
+	cost = {
+		prestige = {
+			value = {
+				if = {
+					limit = { scope:actor = { has_relation_best_friend = scope:recipient } }
+					value = 1000
+				}
+				else = {
+					value = 100
+				}
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			send_interface_message = {
+				type = event_sway_neutral
+				title = POD_end_friendship_interaction_toast
+				right_icon = scope:recipient
+				if = {
+					limit = { has_relation_best_friend = scope:recipient }
+					remove_relation_best_friend = scope:recipient
+				}
+				else_if = {
+					limit = { has_relation_friend = scope:recipient }
+					remove_relation_friend = scope:recipient
+				}
+				add_stress = major_stress_gain
+				scope:recipient = {
+					add_opinion = {
+						target = scope:actor
+						modifier = friend_abandoned_me_opinion
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+}

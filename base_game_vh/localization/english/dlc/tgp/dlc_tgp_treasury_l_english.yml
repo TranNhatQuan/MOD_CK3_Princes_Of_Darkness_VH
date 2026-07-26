@@ -1,0 +1,105 @@
+﻿l_english: 
+  treasury_concept: "[treasury|E]"
+  treasury_icon_concept: "[treasury_i|E]"
+  transfer_small_gold_amount_to_treasury_interaction: "Bổ sung Kho bạc"
+  transfer_gold_amount_to_treasury_interaction_desc: ""
+  TRANSFER_GOLD_TO_TREASURY_INTERACTION_TOOLTIP: "#T Bổ sung ngân khố#!\n[Character.GetPlayerInteractionAcceptEffectDescription('transfer_small_gold_amount_to_treasury_interaction')]#!\n\n#i Nhấp chuột phải để chuyển [gold_i]#V 50#!\n#i Nhấp Ctrl+chuột trái để chuyển [gold_i]#V 500#!"
+  transfer_treasury_because_you_are_greedy: "Vì Ngài là [GetTrait('greedy').GetName( GetNullCharacter )]:"
+  transfer_treasury_because_you_are_generous: "Vì Ngài là [GetTrait('generous').GetName( GetNullCharacter)]:"
+
+  TRANSFER_TREASURY_TO_GOLD_DECISION_TOOLTIP: "#T Rút Vàng#!\nRút [gold_i][Character.CalcScriptedValue('medium_treasury_value')|0] từ Ngân khố của ngươi, kèm theo một số hệ quả.\n[AddLine( Decision.GetCommandDescForPlayer)]\n#i Nhấp để mở [Decision.GetName]#!"
+  extract_gold_from_treasury: "Rút Vốn từ Ngân khố"
+  extract_gold_from_treasury_desc: "Chúng ta có cơ hội và quyền tái phân bổ những nguồn lực nhà nước đã được dành sẵn từ [treasury|E] của [GetPlayer.GetPrimaryTitle.GetDefinitiveName], để sử dụng cho mục đích cá nhân.\nHành động công khai này có thể khiến một số người nhíu mày."
+  extract_gold_from_treasury_tooltip: "Chúng ta có cơ hội và quyền tái phân bổ những nguồn lực nhà nước đã được dành sẵn từ [treasury|E] của [GetPlayer.GetPrimaryTitle.GetDefinitiveName]."
+  extract_gold_from_treasury_confirm: "Ta không cần giải thích..."
+
+  tgp_dipped_into_treasury_modifier: "Lạm dụng Ngân khố"
+  tgp_dipped_into_treasury_modifier_desc: "Nhân vật này đã lạm dụng Ngân khố nhà nước cho chi tiêu cá nhân quá mức, điều này bị coi là không đúng mực.\n"
+
+  tgp_minister_dipped_into_treasury_modifier: "$tgp_dipped_into_treasury_modifier$"
+  tgp_minister_dipped_into_treasury_modifier_desc: "$tgp_dipped_into_treasury_modifier_desc$"
+
+  TREASURY_MONTHLY_INCOME: "Thu nhập hàng tháng"
+  TREASURY_MONTHLY_EXPENSES: "Chi tiêu hàng tháng"
+  CLICK_TO_OPEN_TREASURY_BUDGETING: "Nhấp để mở Ngân khố"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_TITLE: "Thay đổi Ngân sách Kho bạc"
+  WINDOW_TREASURY_BUDGET_CHANGE_ALLOCATED: "Tính toán [treasury_budget|E] mới"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECTS: "Hiệu quả khi ban hành Ngân sách"
+  WINDOW_TREASURY_BUDGET_CATEGORY_MINISTRY: "[treasury_ministry_budget|E]"
+  WINDOW_TREASURY_BUDGET_CATEGORY_SALARY: "[treasury_salary_budget|E]"
+  WINDOW_TREASURY_BUDGET_CATEGORY_MILITARY: "[treasury_military_budget|E]"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_TREASURY_LABEL: "Kho bạc: [treasury_i] [Character.GetTreasury|0]"
+  WINDOW_TREASURY_BUDGET_CHANGE_MONTHLY_INCOME_LABEL: "Thu nhập hàng tháng: [treasury_i] [GetPlayerMonthlyTreasury|1+=]"
+  WINDOW_TREASURY_BUDGET_CHANGE_PREVIOUS_BUDGET: "Ngân sách trước: [treasury_i] [TreasuryBudgetChangeWindow.GetCurrentBudgetCapacity|1=] (ban hành: [TreasuryBudgetChangeWindow.GetCurrentBudgetEnactDate.GetStringShort])"
+  WINDOW_TREASURY_BUDGET_CHANGE_BUDGET_CAPACITY: "Ngân sách hiện tại: [treasury_i] [TreasuryBudgetChangeWindow.GetNewBudgetCapacity|1=] (thay đổi: [TreasuryBudgetChangeWindow.GetBudgetCapacityDiff|1=+])"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_GROUP_HEADER: "Nhóm"
+  WINDOW_TREASURY_BUDGET_CHANGE_CHARACTERS_HEADER: "Người nhận"
+  WINDOW_TREASURY_BUDGET_CHANGE_ALLOCATION_HEADER: "Phân bổ"
+  WINDOW_TREASURY_BUDGET_CHANGE_BASE_RATE_HEADER: "[treasury_budget_base_rate_short|E]"
+  WINDOW_TREASURY_BUDGET_CHANGE_TOTAL_HEADER: "Tổng"
+  WINDOW_TREASURY_BUDGET_CHANGE_TREND_HEADER: "[treasury_budget_category_trend_short|E]"
+  WINDOW_TREASURY_BUDGET_CHANGE_CATEGORY_TREND: "[TreasuryBudgetChangeWindow.GetBudgetTotalDiff( GuiLawGroup.Self )|2+=]"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_RECEIVER_TOOLTIP: "Bắt đầu ban hành ngân sách trước: [TreasuryBudgetChangeWindow.GetCurrentBudgetReceiverCount( GuiLawGroup.Self )] (thay đổi: [TreasuryBudgetChangeWindow.GetBudgetRecipientCountDiff( GuiLawGroup.Self )|+=])"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_CATEGORY_BASE_RATE_TREASURY: "[treasury_i] [TreasuryBudgetChangeWindow.GetNewBudgetBaseRate( GuiLawGroup.Self )|2]"
+  WINDOW_TREASURY_BUDGET_CHANGE_CATEGORY_BASE_RATE_GOLD: "[gold_i] [TreasuryBudgetChangeWindow.GetNewBudgetBaseRate( GuiLawGroup.Self )|2]"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_SUMMARY_TOTAL: "Tổng"
+  WINDOW_TREASURY_BUDGET_CHANGE_SUMMARY_UNALLOCATED: "[treasury_budget_unallocated_short|E]"
+  WINDOW_TREASURY_BUDGET_CHANGE_SUMMARY_DEFICIT: "[treasury_budget_deficit_short|E]"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_EXPLANATION: "#weak Nếu Ngài dự định nhận thêm chư hầu trước khi ban hành ngân sách tiếp theo, Ngài có thể muốn lập ngân sách dưới 100% [treasury_budget_capacity|E], vì với mỗi [treasury_budget_category|E] [treasury_budget_base_rate|E] Ngài thiết lập khi ban hành ngân sách là cố định cho từng người nhận.#!"
+  WINDOW_TREASURY_BUDGET_CHANGE_DEFICIT_WARNING: "#warning @warning_icon! Tổng ngân sách vượt quá [treasury_budget_capacity|E] của Ngài và sẽ được lấy từ [treasury|E] đã thu.#!"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_ENACT_COST: "Chi phí: [TreasuryBudgetChangeWindow.GetTotalChangeCostShort]"
+  WINDOW_TREASURY_BUDGET_CHANGE_ENACT_COST_TOOLTIP: "#T Tổng chi phí#!\n[TreasuryBudgetChangeWindow.GetTotalChangeCostDescription]"
+  WINDOW_TREASURY_BUDGET_CHANGE_ALLOCATION_LAWS: "Thay đổi Quy định Phân bổ"
+  WINDOW_TREASURY_BUDGET_CHANGE_ENACT_BUDGET: "Ban hành Ngân sách"
+
+
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT: "Ngân sách cuối cùng đã ban hành: [TreasuryBudgetChangeWindow.GetCurrentBudgetEnactDate.GetStringShort]\n"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_BASE_RATE_TITLE: "\nThay đổi thu nhập người nhận:\n"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_BASE_RATE: "$BULLET$ #indent_newline:2 $CATEGORY_NAME$: $BASE_RATE_CHANGE_PERCENTAGE|%0+=$#!\n"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_OPINION_TITLE: "\nHiệu ứng quan điểm:\n"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_OPINION: "$CATEGORY_NAME$ người nhận nhận được:\n$BULLET$#indent_newline:2 $OPINION_MODIFIER_NAME$: $OPINION_CHANGE|+0$ [opinion|E]\n#!"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_OPINION_DURATION: "$CATEGORY_NAME$ người nhận nhận được:\n$BULLET$#indent_newline:2 $OPINION_MODIFIER_NAME$: $OPINION_CHANGE|+=0$ [opinion|E] trong $DURATION$#!\n"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_EFFECTS_TITLE: "\nHiệu quả phân bổ thay đổi:\n"
+  WINDOW_TREASURY_BUDGET_CHANGE_EFFECT_CATEGORY_EFFECTS: "$LAW_DESC$[AddLine('$ENACT_DESC|q$')]\n\n"
+
+  WINDOW_TREASURY_BUDGET_COST_LAW_CHANGE: "[LawGroup.GetName]: $BREAKDOWN$\n"
+  WINDOW_TREASURY_BUDGET_COST_ENACTMENT: "Ban hành: $BREAKDOWN$\n"
+
+  WINDOW_TREASURY_BUDGET_CHANGE_TOP_LIEGE: "@warning_icon! #X Chỉ [CHARACTER.GetUIName] có thể ban hành ngân sách mới#!"
+
+  treasury_budget_ministry_reduction_large: "Giảm lớn [treasury_ministry_budget|E]"
+  treasury_budget_ministry_reduction_medium: "Giảm vừa [treasury_ministry_budget|E]"
+  treasury_budget_ministry_reduction_small: "Giảm nhỏ [treasury_ministry_budget|E]"
+  treasury_budget_ministry_increase_large: "Tăng lớn [treasury_ministry_budget|E]"
+  treasury_budget_ministry_increase_medium: "Tăng vừa [treasury_ministry_budget|E]"
+  treasury_budget_ministry_increase_small: "Tăng nhỏ [treasury_ministry_budget|E]"
+
+  treasury_budget_military_reduction_large: "Giảm lớn [treasury_military_budget|E]"
+  treasury_budget_military_reduction_medium: "Giảm vừa [treasury_military_budget|E]"
+  treasury_budget_military_reduction_small: "Giảm nhỏ [treasury_military_budget|E]"
+  treasury_budget_military_increase_large: "Tăng lớn [treasury_military_budget|E]"
+  treasury_budget_military_increase_medium: "Tăng vừa [treasury_military_budget|E]"
+  treasury_budget_military_increase_small: "Tăng nhỏ [treasury_military_budget|E]"
+
+  treasury_budget_salary_reduction_large: "Giảm lớn [governor_salary|E]"
+  treasury_budget_salary_reduction_medium: "Giảm vừa [governor_salary|E]"
+  treasury_budget_salary_reduction_small: "Giảm nhỏ [governor_salary|E]"
+  treasury_budget_salary_increase_large: "Tăng lớn [governor_salary|E]"
+  treasury_budget_salary_increase_medium: "Tăng vừa [governor_salary|E]"
+  treasury_budget_salary_increase_small: "Tăng nhỏ [governor_salary|E]"
+
+  five_years_since_budget: "Năm thứ năm kể từ lần ban hành ngân sách cuối"
+  four_years_since_budget: "Năm thứ tư kể từ lần ban hành ngân sách cuối"
+  three_years_since_budget: "Năm thứ ba kể từ lần ban hành ngân sách cuối"
+  two_years_since_budget: "Năm thứ hai kể từ lần ban hành ngân sách cuối"
+  one_year_since_budget: "Năm thứ nhất kể từ lần ban hành ngân sách cuối"
+  treasury_in_debt: "Kho bạc đang thiếu nợ"

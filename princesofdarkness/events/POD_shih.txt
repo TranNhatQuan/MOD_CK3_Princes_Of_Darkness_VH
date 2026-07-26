@@ -1,0 +1,83 @@
+﻿namespace = podshih
+
+podshih.0001 = {
+	hidden = yes
+	scope = none
+	
+	immediate = {
+		every_player = {
+			limit = {
+				has_trait = shih
+			}
+			trigger_event = podshih.1010
+		}
+	}
+}
+
+podshih.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podshih.100.t
+	desc = podshih.100.desc
+	theme = faith
+	left_portrait = root
+	right_portrait = scope:shih
+	
+	trigger = {
+		is_independent_ruler = yes
+	}
+
+	option = {
+		name = podshih.100.a
+		
+		add_truce_both_ways = {
+			character = scope:shih
+			years = 3
+			name = TRUCE_SIGNED_SHIH
+		}
+		
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 50
+				scope:shih = { is_ai = no } 
+			}
+
+			ai_value_modifier = {
+				ai_compassion = 200
+				ai_honor = 200
+			}
+		}
+	}
+	
+	option = {
+		name = podshih.100.b
+	}
+}
+
+podshih.1010 = {
+	type = character_event
+	content_source = dlc_POD
+	title = podshih.1010.t
+	desc = podshih.1010.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"	
+	}
+	
+	trigger = {
+		has_global_variable = celestial_army_restored
+	}
+
+	option = {
+		name = podshih.1010.a
+		custom_tooltip = POD_unlocked_empire_ghw
+		
+		add_character_flag = enable_ghw
+	}
+}

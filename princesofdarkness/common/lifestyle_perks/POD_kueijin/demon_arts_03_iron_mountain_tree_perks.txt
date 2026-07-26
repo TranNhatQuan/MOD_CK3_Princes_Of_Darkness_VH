@@ -1,0 +1,59 @@
+﻿demon_arts_infernal_fortitude_perk = {
+	lifestyle = demon_arts_lifestyle
+	tree = iron_mountain
+	position = { 0 3 }
+	icon = year_of_lotus
+
+	can_be_picked = {
+		demon_arts_lifestyle_perk_points >= demon_arts_infernal_fortitude_perk_cost
+	}
+
+	effect = {
+		if = { 
+			limit = { 
+				NOT = { has_perk = demon_arts_infernal_fortitude_perk } 
+			} 
+			custom_description_no_bullet = { text = demon_arts_infernal_fortitude_perk_cost_effect }
+		}
+		custom_description_no_bullet = { text = demon_arts_infernal_fortitude_perk_effect }
+		hidden_effect = {
+			save_scope_value_as = {
+				name = perk_cost
+				value = {
+					value = demon_arts_infernal_fortitude_perk_cost
+					subtract = 1 # since taking the perk already costs a perk point by default
+					min = 0
+					multiply = -1
+				}
+			}
+			add_demon_arts_lifestyle_perk_points = scope:perk_cost
+		}
+	}
+}
+
+
+demon_arts_iron_mountain_perk = {
+	lifestyle = demon_arts_lifestyle
+	tree = iron_mountain
+	position = { 0 1 }
+	icon = year_of_lotus
+
+	can_be_picked = {
+		demon_arts_iron_mountain_modifier_stacks < 9
+	}
+	
+	effect = {
+		custom_description_no_bullet = {
+			text = demon_arts_stacking_effect
+			value = demon_arts_iron_mountain_modifier_stacks
+		}
+		POD_add_modifier_and_track_stacks = {
+			TYPE = character
+			MODIFIER = demon_arts_iron_mountain_modifier
+		}
+		custom_description_no_bullet = { text = demon_arts_iron_mountain_perk_effect }
+		hidden_effect = {
+			if = { limit = { demon_arts_iron_mountain_modifier_stacks < 9 } remove_perk = demon_arts_iron_mountain_perk }
+		}
+	}
+}

@@ -1,0 +1,102 @@
+﻿l_english:
+  LEGENDS_TITLE: "Truyền thuyết"
+ 
+  CREATE_LEGEND_TOOLTIP: "[LegendSeed.GetDescription( Character.Self )][AddLine( Character.GetCanCreateLegendDesc( LegendSeed.Self ) )][AddParagraph( GetLongCostString( LegendSeed.GetCreationCost( Character.Self ) ) )]"
+  CREATE_TRIGGERED_LEGEND_TOOLTIP: "[TriggeredLegendSeed.GetDescription( Character.Self )][AddParagraph( GetLongCostString( TriggeredLegendSeed.GetSeed.GetCreationCost( Character.Self ) ) )][AddLine( Character.GetCanCreateTriggeredLegendDesc( TriggeredLegendSeed.Self ) )]"
+ 
+  LEGEND_HEADER_TT: "#T [Legend.GetName]#![AddLine( Legend.GetDescription )]\n\n#i Nhấn để chọn và mở Biên niên sử\nChuột phải để chọn và đưa bản đồ tới Truyền thuyết#!"
+  SEED_LEGEND_HEADER_TT: "#T [LegendSeed.GetName( Character.Self )]#![AddLine( LegendSeed.GetDescription( Character.Self ) )]"
+  TRIGGERED_LEGEND_SEED_HEADER_TT: "#T [TriggeredLegendSeed.GetName( Character.Self )]#![AddLine( TriggeredLegendSeed.GetDescription( Character.Self ) )]"
+
+  PROMOTE_LEGEND_BUTTON_TT: "#T Bắt đầu Truyền thuyết#![AddLine( SelectLocalization( IsValidCommand( GetPlayer.StartPromotingLegend( Legend.Self ) ), 'PROMOTE_LEGEND_BUTTON_NOT_BLOCKED_TT', 'PROMOTE_LEGEND_BUTTON_BLOCKED_TT' ) )]"
+  PROMOTE_LEGEND_BUTTON_NOT_BLOCKED_TT: "Khởi đầu giai thoại của [Legend.GetOwner.GetNamePossessive].[AddLine( '#D what else do we put here?#!' )]"
+  PROMOTE_LEGEND_BUTTON_BLOCKED_TT: "Khởi đầu giai thoại của [Legend.GetOwner.GetNamePossessive].[AddLine( AddLine( '#X Ngài không thể khởi đầu giai thoại này:#!' ) )][AddLine( GetCommandDesc( GetPlayer.StartPromotingLegend( Legend.Self ) ) )]"
+
+  OPEN_CHRONICLE_BUTTON_TT: "#T Mở Biên niên sử#!"
+  PAN_TO_LEGEND_TT: "#T Di chuyển bản đồ tới Truyền thuyết#!"
+
+  LEGEND_HEADER_SUBTITLE: "[Legend.GetType.GetName] về [Legend.GetProtagonist.GetName]"
+
+  PROMOTED_LEGEND: "Đang quảng bá Truyền thuyết"
+  PROMOTED_OWNED_LEGEND: "Đang quảng bá Truyền thuyết của Ngài"
+  PROMOTED_LEGEND_EMPTY: "Ngài không [promoting_legend|El] một [legend|E] nào"
+  PROMOTED_LEGEND_EMPTY_INSTRUCTION: "Hãy bắt đầu hình thành một truyền thuyết từ danh sách [legend_seeds|E] bên dưới,\nhoặc tìm một [legend|E] đang được hình thành mà Ngài muốn quảng bá.\n\nQuảng bá một [legend|E] sẽ giúp nó lan truyền và mang lại lợi ích cho Ngài."
+  RETURN_TO_PROMOTED_LEGEND_TT: "Quay lại [promoted_legend|E]"
+
+  FOCUSED_LEGEND: "Truyền thuyết được chọn"
+  COMPLETED_LEGEND: "Truyền thuyết đã hoàn thành"
+  LEGEND_LIBRARY_INSTRUCTION: "$game_concept_legend_library_desc$"
+
+
+  LEGEND_SEEDS: "[legend_seeds|E] #weak ([Add_int32( GetDataModelSize( Character.GetLegendSeeds ), GetDataModelSize( LocalPlayerCachedData.GetTriggeredLegendSeeds ) )])#!"
+  LEGEND_SEEDS_EMPTY: "Ngài không có [legend_seeds|E] nào"
+  LEGENDS_REALM_ACTIVE_LEGENDS_SECTION: "Truyền thuyết đang hình thành #weak ([GetDataModelSize( LegendsWindow.GetRealmActiveLegends )])#!"
+  LEGENDS_REALM_ACTIVE_LEGENDS_EMPTY: "Hiện tại không có [legends|E] nào đang được hình thành trong [realm|E] của Ngài."
+  LEGENDS_DISTANT_ACTIVE_LEGENDS_SECTION: "Truyền thuyết đang hình thành #weak ([GetDataModelSize( LegendsWindow.GetDistantActiveLegends )])#!"
+  LEGENDS_DISTANT_ACTIVE_LEGENDS_EMPTY: "Hiện tại không có [legends|E] nào đang được hình thành ở các vùng đất xa xôi"
+  LEGEND_PROMOTERS: "[legend_promoters|E]: #L [GetDataModelSize( Legend.GetPromoters )|V]#!"
+  LEGEND_PROMOTERS_LABEL: "[legend_promoters|E]"
+  LEGEND_PROTAGONIST_LABEL: "[legend_protagonist|E]:"
+  LEGEND_PROTAGONIST: "[Legend.GetProtagonist.GetName]"
+
+  LEGEND_PROVINCE_AND_COUNTY_MODIFIERS_TOOLTIP: "#T $PROVINCE_AND_COUNTY_MODIFIERS$#!\n[JoinText( '\n\n', AddLocalizationIf( Legend.HasImpactModifiers( 'province' ), 'LEGEND_PROVINCE_MODIFIERS_SUBTEXT' ), AddLocalizationIf( Legend.HasImpactModifiers( 'county' ), 'LEGEND_COUNTY_MODIFIERS_SUBTEXT' ) )]"
+  LEGEND_OWNER_MODIFIERS_TOOLTIP: "#T $OWNER_MODIFIERS$#!\n[Legend.GetImpactModifiers( 'owner' )]"
+  LEGEND_PROMOTER_MODIFIERS_TOOLTIP: "#T $LEGEND_PROMOTER_MODIFIERS$#!\n[Legend.GetImpactModifiers( 'promoter' )]"
+ 
+  LEGEND_SEED_OWNER_MODIFIERS_TOOLTIP: "#T $OWNER_MODIFIERS$#!\n[LegendSeed.GetImpactModifiers( 'owner' )]"
+  LEGEND_SEED_PROMOTER_MODIFIERS_TOOLTIP: "#T $LEGEND_PROMOTER_MODIFIERS$#!\n[LegendSeed.GetImpactModifiers( 'promoter' )]"
+  LEGEND_SEED_PROVINCE_MODIFIERS_SUBTEXT: "#S $PROVINCE_MODIFIERS$#!\n[LegendSeed.GetImpactModifiers( 'province' )]"
+  LEGEND_SEED_COUNTY_MODIFIERS_SUBTEXT: "#S $COUNTY_MODIFIERS$#!\n[LegendSeed.GetImpactModifiers( 'county' )]"
+  LEGEND_SEED_PROVINCE_AND_COUNTY_MODIFIERS_TOOLTIP: "#T $PROVINCE_AND_COUNTY_MODIFIERS$#!\n[JoinText( '\n\n', AddLocalizationIf( LegendSeed.HasImpactModifiers( 'province' ), 'LEGEND_SEED_PROVINCE_MODIFIERS_SUBTEXT' ), AddLocalizationIf( LegendSeed.HasImpactModifiers( 'county' ), 'LEGEND_SEED_COUNTY_MODIFIERS_SUBTEXT' ) )]"
+
+  LEGENDS_CREATE_LEGEND: "Tạo Truyền thuyết"
+
+  LEGEND_UPGRADE_LABEL: "Nâng cấp:"
+  LEGEND_UPGRADE_COST: "[GetCostString( Legend.GetUpgradeCostDescription( Character.Self ) )]"
+  LEGEND_CREATION_LABEL: "Tạo lập:"
+  LEGEND_CREATION_COST: "[GetCostString( LegendSeed.GetCreationCost( Character.Self ) )]"
+  LEGEND_MAINTENANCE_LABEL: "Quảng bá:"
+  LEGEND_SEED_MAINTENANCE_COST: "[GetIntervalCostString( LegendSeed.GetMaintenanceCost( Character.Self ), 'monthly' )]"
+  LEGEND_MAINTENANCE_COST: "[GetIntervalCostString( Legend.GetMaintenanceCost( Character.Self ), 'monthly' )]"
+
+  HUD_LEGEND_SEEDS: "Ngài có [Add_int32( GetDataModelSize( Character.GetLegendSeeds ), GetDataModelSize( LocalPlayerCachedData.GetTriggeredLegendSeeds ) )|V] Mầm Truyền thuyết khả dụng"
+
+  COMPLETE_LEGEND_TITLE: "Hoàn tất [Legend.GetNameNoTooltip]"
+  COMPLETE_LEGEND_TEXT: "$LEGEND_COMPLETE_LEGEND$"
+  COMPLETE_LEGEND_ACCEPT: "Hoàn tất"
+
+  START_PROMOTING_LEGEND_TITLE: "Quảng bá [Legend.GetNameNoTooltip]"
+  START_PROMOTING_LEGEND_TEXT: "Bắt đầu [Concept( 'promoted_legend', 'Promoting' )|E] sự lan truyền của [Legend.GetName] thuộc sở hữu của [Legend.GetOwner.GetShortUIName] bên trong [realm|E] của ngài.\n\nPhí duy trì: [GetIntervalCostString( Legend.GetMaintenanceCost( GetPlayer ), 'monthly' )]"
+  START_PROMOTING_LEGEND_ACCEPT: "Quảng bá"
+
+  legend_tab_realm: "Truyền thuyết trong Lãnh thổ"
+  legend_tab_distant: "Truyền thuyết xa xôi"
+  legend_tab_library: "Thư viện Truyền thuyết"
+  legend_tab_seeds: "Mầm Truyền thuyết"
+  CREATE_LEGEND_TAB_FAMED: "Lừng danh"
+  CREATE_LEGEND_TAB_ILLUSTRIOUS: "Hiển hách"
+  CREATE_LEGEND_TAB_MYTHICAL: "Thần thoại"
+
+  REALM_COMPLETED_LEGENDS: "Truyền thuyết đã hoàn thành #weak ([GetDataModelSize( LegendsWindow.GetRealmCompletedLegends )])#!"
+  REALM_COMPLETED_LEGENDS_TT: "Truyền thuyết đã hoàn thành"
+  NO_REALM_ACTIVE_LEGENDS: "Hiện không có [legends|e] nào đang hình thành trong [realm|e] của Ngài"
+  NO_REALM_COMPLETED_LEGENDS: "Ngài không biết đến [legends|e] đã hoàn thành nào trong [realm|e] của mình"
+  DISTANT_COMPLETED_LEGENDS: "Truyền thuyết đã hoàn thành #weak ([GetDataModelSize( LegendsWindow.GetDistantCompletedLegends )])#!"
+  NO_DISTANT_ACTIVE_LEGENDS: "Hiện chưa có [legends|e] nào đang hình thành bên ngoài [realm|e] của Ngài"
+  NO_DISTANT_COMPLETED_LEGENDS: "Ngài không biết đến [legends|e] đã hoàn thành nào bên ngoài [realm|e] của mình"
+
+  LEGEND_SPREAD_UPGRADE_: "#weak (Nâng cấp [Concept( 'legend_quality', 'Quality' )|E] tại [Legend.GetMaxNumProvinces|V])#!"
+  LEGEND_SPREAD_UPGRADE: ""
+  LEGEND_SPREAD: "Lan truyền tại [baronies|E]: [Legend.GetCurrentNumProvinces|V] [AddLocalizationIf( Not( Legend.HasQuality( 'mythical' ) ), 'LEGEND_SPREAD_UPGRADE' )]"
+
+  SUMMARY_LEGEND_IS_COMPLETED: "#weak Truyền thuyết này đã hoàn thành và không còn được quảng bá tích cực nữa.#!"
+  LEGEND_DURATION_ACTIVE: "[Legend.GetCreationDate.GetYear] - ..."
+  LEGEND_DURATION_COMPLETED: "[Legend.GetCreationDate.GetYear] - [Legend.GetCompletionDate.GetYear]"
+
+  CREATE_LEGEND_TITLE: "Tạo [LegendSeed.GetNameWithProtagonist( Character.Self, LegendCreationWindow.GetProtagonist.Self )]"
+  CREATE_LEGEND_DESC: "[legend_seed|E] này dành cho một [LegendSeed.GetQualityLevel] [Concept( 'legend_type', LegendSeed.GetType.GetName )|E].\n#I Chọn [legend_protagonist|E] và tạo [legend|E] của Ngài.#!\n#weak Dựa trên Nhân vật chính Ngài chọn, Ngài sẽ nhận được các phần thưởng khác nhau khi hoàn tất Truyền thuyết.#!\n@alert_icon!#alert_trial Ngài không thể hoàn tất truyền thuyết trong vòng [GetTimeDifferenceWithDays( GetDefine( 'NLegend', 'DAYS_UNTIL_CAN_COMPLETE' ) )|V]#!"
+  CREATE_LEGEND_WARNING_DESC: "@warning_icon!#X Ngài không thể hoàn tất hoặc từ bỏ truyền thuyết trong vòng [GetTimeDifferenceWithDays( GetDefine( 'NLegend', 'DAYS_UNTIL_CAN_COMPLETE' ) )|V]#!"
+
+
+  LEGEND_REWARDS: "Phần thưởng khi hoàn tất"
+  RELATIONSHIP: "Mối quan hệ"

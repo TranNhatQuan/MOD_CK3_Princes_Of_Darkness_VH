@@ -1,0 +1,2973 @@
+﻿# Increment this value every time there's a change to common\scripted_effects\POD_journey_initialization_effects.txt
+current_journey_version = 16
+
+# Monthly Planning Speed values for journeys
+# called from character scope
+
+look_for_contracts_base_progress = 8.34 # 12 months
+
+wake_from_torpor_base_progress = 2
+assault_lair_base_progress = 3
+
+fera_training_base_progress = 1
+fera_spirit_quest_base_progress = 1
+mokole_mnesis_quest_base_progress = 1.25
+
+seek_knowledge_base_progress = 1
+find_artifact_base_progress = 1.5
+
+golconda_1_base_progress = 1.5
+golconda_2_base_progress = 0.5
+
+azhi_dahaka_1_base_progress = 0.75
+azhi_dahaka_2_base_progress = 0.25
+
+hunt_for_sargon_codex_shard_base_progress = 0.1
+
+study_true_name_journey_base_progress = 2
+
+seek_knowledge_bonus_per_member = 0.25
+
+# By how much does the cost of seek_knowledge Journeys increase per previously completed Journey?
+seek_knowledge_base_price_per_journey = 500
+
+# How many years after provoking the Vatican should the Inquisition start spawning?
+premature_inquisition_delay = 5
+
+
+journey_cost_mult = {
+	if = {
+		limit = { has_game_rule = journey_cost_mult_0 }
+		add = 0
+	}
+	else_if = {
+		limit = { has_game_rule = journey_cost_mult_05 }
+		add = 0.5
+	}
+	else_if = {
+		limit = { has_game_rule = journey_cost_mult_2 }
+		add = 2
+	}
+	else = {
+		add = 1
+	}
+}
+
+seek_knowledge_price_per_journey = {
+	if = {
+		limit = { POD_seek_knowledge_cost_increase_disabled = no }
+		value = seek_knowledge_base_price_per_journey
+		multiply = journey_cost_mult
+	}
+	else = {
+		value = 0
+	}
+}
+
+seek_knowledge_added_cost = {
+	value = 0
+	if = {
+		limit = { has_variable = seek_knowledge_journeys_completed }
+		add = {
+			value = seek_knowledge_price_per_journey
+			multiply = var:seek_knowledge_journeys_completed
+		}
+	}
+}
+
+journey_window_gold_cost = {
+	value = 0
+	if = {
+		limit = { has_variable = journey_detail_window_subtype }
+		add = var:journey_detail_window_subtype.var:gold_cost
+	}
+}
+
+journey_window_prestige_cost = {
+	value = 0
+	if = {
+		limit = { has_variable = journey_detail_window_subtype }
+		add = var:journey_detail_window_subtype.var:prestige_cost
+		if = {
+			limit = { var:journey_detail_window_subtype = { POD_is_seek_knowledge_journey_trigger = yes } }
+			add = seek_knowledge_added_cost
+		}
+	}
+}
+
+journey_window_piety_cost = {
+	value = 0
+	if = {
+		limit = { has_variable = journey_detail_window_subtype }
+		add = var:journey_detail_window_subtype.var:piety_cost
+	}
+	#Ashirra added cost for non-Sihr blood magic
+	if = {
+		limit = { 
+			ROOT.faith = { has_doctrine_parameter = non_sihr_bloodsorcery_learning_penalty }
+			OR = {
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_thaumaturgy
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_sielanic_thaumaturgy
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_dur_an_ki
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_akhu
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_sadhana
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_koldunic
+				var:journey_detail_window_subtype.var:journey_type = flag:seek_knowledge_abyssal_mysticism
+				#add future non-sihr blood magic here
+			}
+		}
+		add = 500
+	}
+}
+
+
+journey_progress_years = {
+	value = 100
+	subtract = scope:total_progress
+	divide = scope:monthly
+	divide = 12
+}
+
+journey_progress_months = {
+	value = 100
+	subtract = scope:total_progress
+	divide = scope:monthly
+	modulo = 12
+}
+
+
+inquisition_spawn_year = {
+	if = {
+		limit = { has_global_variable = premature_inquisition_year }
+		value = global_var:premature_inquisition_year
+	}
+	else = {
+		value = 1430
+	}
+}
+
+years_left_until_premature_inquisition_ends = {
+	value = global_var:premature_inquisition_year
+	add = 25
+	subtract = current_year
+}
+
+
+instant_progress = {
+	value = 100
+}
+
+
+five_months_progress = {
+	add = {
+		value = 20
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+ten_months_progress = {
+	add = {
+		value = 10
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+twelve_months_progress = {
+	add = {
+		value = 8.34
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+two_years_progress = {
+	add = {
+		value = 4.17
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+three_years_progress = {
+	add = {
+		value = 2.78
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+five_years_progress = {
+	add = {
+		value = 1.67
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+ten_years_progress = {
+	add = {
+		value = 0.834
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+
+look_for_contracts_progress = {
+	add = {
+		value = look_for_contracts_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = {
+		limit = { is_landed = yes }
+		if = {
+			limit = { highest_held_title_tier = tier_county }
+			divide = {
+				value = 2
+				desc = POD_journey_progress_landed_count
+				format = "POD_PROGRESS_FORMAT_NEGATIVE"
+			}
+		}
+		else_if = {
+			limit = { highest_held_title_tier = tier_duchy }
+			divide = {
+				value = 3
+				desc = POD_journey_progress_landed_duke
+				format = "POD_PROGRESS_FORMAT_NEGATIVE"
+			}
+		}
+		else_if = {
+			limit = { highest_held_title_tier = tier_kingdom }
+			divide = {
+				value = 4
+				desc = POD_journey_progress_landed_king
+				format = "POD_PROGRESS_FORMAT_NEGATIVE"
+			}
+		}
+		else_if = {
+			limit = { highest_held_title_tier = tier_empire }
+			divide = {
+				value = 5
+				desc = POD_journey_progress_landed_emperor
+				format = "POD_PROGRESS_FORMAT_NEGATIVE"
+			}
+		}
+		else_if = {
+			limit = { highest_held_title_tier = tier_hegemony }
+			divide = {
+				value = 6
+				desc = POD_journey_progress_landed_hegemon
+				format = "POD_PROGRESS_FORMAT_NEGATIVE"
+			}
+		}
+	}
+}
+
+
+hunt_journey_progress = {
+	if = {
+		limit = { has_game_rule = hunt_journey_speed_5 }
+		add = {
+			value = 20
+			desc = POD_journey_progress_base
+			format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = { has_game_rule = hunt_journey_speed_20 }
+		add = {
+			value = 5
+			desc = POD_journey_progress_base
+			format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = 10
+			desc = POD_journey_progress_base
+			format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+		}
+	}
+}
+
+
+wake_from_torpor_progress = {
+	add = {
+		value = wake_from_torpor_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.intrigue
+			add = 10
+			divide = 100
+			multiply = wake_from_torpor_base_progress
+		}
+		desc = POD_journey_progress_intrigue_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	
+	if = {
+		limit = { POD_has_coterie_members_trigger = yes }
+		add = {
+			value = {
+				value = coterie_intrigue_gui
+				divide = 100
+				multiply = wake_from_torpor_base_progress
+			}
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = intrigue
+				divide = 100
+				multiply = wake_from_torpor_base_progress
+			}
+			desc = POD_journey_progress_intrigue
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+assault_lair_progress = {
+	add = {
+		value = assault_lair_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.intrigue
+			divide = 100
+			multiply = assault_lair_base_progress
+		}
+		desc = POD_journey_progress_intrigue_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	
+	if = {
+		limit = { POD_has_coterie_members_trigger = yes }
+		add = {
+			value = {
+				value = coterie_intrigue_gui
+				divide = 100
+				multiply = assault_lair_base_progress
+			}
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = intrigue
+				divide = 100
+				multiply = assault_lair_base_progress
+			}
+			desc = POD_journey_progress_intrigue
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			var:current_journey.var:target = {
+				is_landed = no
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 1.5
+			desc = POD_journey_progress_target_rank_unlanded
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				highest_held_title_tier = tier_barony
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.5
+			desc = POD_journey_progress_target_rank_barony
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				highest_held_title_tier = tier_county
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_rank_county
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				highest_held_title_tier = tier_duchy
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_rank_duchy
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				highest_held_title_tier = tier_kingdom
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_target_rank_kingdom
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				highest_held_title_tier >= tier_empire
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.4
+			desc = POD_journey_progress_target_rank_empire
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	
+	if = {
+		limit = { var:current_journey.var:target.age >= 1000 }
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.3
+			desc = POD_journey_progress_target_age_1000
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = { var:current_journey.var:target.age >= 400 }
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_target_age_400
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = { var:current_journey.var:target.age >= 200 }
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_age_200
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_character_modifier = masquerade0_modifier
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_target_masquerade0
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_character_modifier = masquerade2_modifier
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_masquerade2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_character_modifier = masquerade3_modifier
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_target_masquerade3
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_character_modifier = masquerade4_modifier
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.3
+			desc = POD_journey_progress_target_masquerade4
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_character_modifier = masquerade5_modifier
+			}
+		}
+		add = {
+			value = assault_lair_base_progress
+			multiply = 0.4
+			desc = POD_journey_progress_target_masquerade5
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_trait = obfuscate
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_target_obfuscate
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_trait = obfuscateadvanced
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_obfuscateadvanced
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_trait = chimerstry
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_target_chimerstry
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			var:current_journey.var:target = {
+				has_trait = chimerstryadvanced
+			}
+		}
+		subtract = {
+			value = assault_lair_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_target_chimerstryadvanced
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			dynasty ?= { has_dynasty_perk = unity_legacy_2 }
+		}
+		multiply = {
+			value = 1.25
+			desc = POD_journey_progress_unity_2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	if = {
+		limit = {
+			any_directly_owned_province = {
+				has_building_with_flag = building_improves_find_lair
+				has_building_with_flag = rome
+			}
+		}
+		multiply = {
+			value = 2
+			desc = POD_journey_progress_san_michele_cloisters
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = {
+			any_directly_owned_province = {
+				has_building_with_flag = building_improves_find_lair
+				has_building_with_flag = paris
+			}
+		}
+		multiply = {
+			value = 2
+			desc = POD_journey_progress_knights_templar
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+fera_training_progress = {
+	add = {
+		value = fera_training_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+
+	if = {
+		limit = { coterie_size = 5 }
+		add = {
+			value = 0.5
+			desc = POD_journey_progress_fera_pack_size
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = { coterie_size = 4 }
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_fera_pack_size
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = { coterie_size = 2 }
+		add = {
+			value = -0.25
+			desc = POD_journey_progress_fera_pack_size
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+
+	if = {
+		limit = { prestige_level >= 2 }
+		add = {
+			value = prestige_level
+			divide = 10
+			desc = POD_journey_progress_prestige_level
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	add = {
+		value = {
+			value = coterie_prowess_gui
+			divide = 2
+			divide = 100
+			multiply = fera_training_base_progress
+		}
+		desc = POD_journey_progress_prowess_coterie
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	
+
+	if = {
+		limit = { POD_is_werewolf_trigger = yes }
+
+		add = {
+			value = {
+				value = coterie_martial_gui
+				divide = 2
+				divide = 100
+				multiply = fera_training_base_progress
+			}
+			desc = POD_journey_progress_martial_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = { POD_is_bastet_trigger = yes }
+
+		add = {
+			value = {
+				value = coterie_intrigue_gui
+				divide = 2
+				divide = 100
+				multiply = fera_training_base_progress
+			}
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = { has_perk = profaned_lungs_perk }
+		multiply = {
+			value = { value = 1 add = 0.25 }
+			desc = POD_journey_progress_profaned_lungs_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+fera_spirit_quest_progress = {
+	add = {
+		value = fera_spirit_quest_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+
+	add = {
+		value = { 
+			value = learning
+			divide = 2
+			divide = 100
+			multiply = fera_spirit_quest_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	if = {
+		limit = { piety_level >= 2 }
+		add = {
+			value = piety_level
+			divide = 10
+			desc = POD_journey_progress_piety_level
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { num_of_relation_spirit_companion >= 1 }
+		add = {
+            value = {
+                every_relation = {
+					type = spirit_companion
+					limit = { is_alive = yes }
+
+					if = {
+						limit = { POD_spirit_rank = 5 }
+						add = 5
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 4 }
+						add = 4
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 3 }
+						add = 3
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 2 }
+						add = 2
+					}
+					else = {
+						add = 1
+					}
+				}
+            }
+			divide = 100
+            desc = POD_journey_progress_spirit_companions
+            format = "POD_PROGRESS_FORMAT_POSITIVE"
+        }
+	}
+
+	if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_06 } } 
+		add = {
+			value = 0.75
+			desc = POD_journey_progress_spirit_offerings_06
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_05 } } 
+		add = {
+			value = 0.6
+			desc = POD_journey_progress_spirit_offerings_05
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_04 } } 
+		add = {
+			value = 0.45
+			desc = POD_journey_progress_spirit_offerings_04
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_03 } } 
+		add = {
+			value = 0.3
+			desc = POD_journey_progress_spirit_offerings_03
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_02 } } 
+		add = {
+			value = 0.2
+			desc = POD_journey_progress_spirit_offerings_02
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_spirit_offerings_01 } } 
+		add = {
+			value = 0.1
+			desc = POD_journey_progress_spirit_offerings_01
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+
+
+
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = zhong_lung_legacy_1 } } 
+		multiply = {
+			value = { value = 1 add = 0.15 }
+			desc = POD_journey_progress_zhong_lung_legacy
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+mokole_mnesis_quest_progress = {
+	add = {
+		value = mokole_mnesis_quest_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+
+	add = {
+		value = { 
+			value = learning
+			divide = 2
+			divide = 50
+			multiply = mokole_mnesis_quest_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = common_mokole_legacy_2 } }
+		add = {
+			value = 1
+			desc = POD_journey_progress_common_mokole_legacy
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = {
+			any_court_position_holder = {
+				type = hibernation_attendant_court_position
+				aptitude = { court_position = hibernation_attendant_court_position value = 4 }
+			}
+		}
+		add = {
+			value = 1
+			desc = POD_journey_progress_hibernation_attendant_5
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = hibernation_attendant_court_position
+				aptitude = { court_position = hibernation_attendant_court_position value = 3 }
+			}
+		}
+		add = {
+			value = 0.8
+			desc = POD_journey_progress_hibernation_attendant_4
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = hibernation_attendant_court_position
+				aptitude = { court_position = hibernation_attendant_court_position value = 2 }
+			}
+		}
+		add = {
+			value = 0.6
+			desc = POD_journey_progress_hibernation_attendant_3
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = hibernation_attendant_court_position
+				aptitude = { court_position = hibernation_attendant_court_position value = 1 }
+			}
+		}
+		add = {
+			value = 0.4
+			desc = POD_journey_progress_hibernation_attendant_2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			employs_court_position = hibernation_attendant_court_position
+		}
+		add = {
+			value = 0.2
+			desc = POD_journey_progress_hibernation_attendant_1
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	If = {
+		limit = { any_equipped_character_artifact = { has_variable = echo_of_ages prev = { can_benefit_from_artifact = prev } } }
+		add = {
+			value = 0.15
+			desc = POD_journey_progress_echo_of_ages
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	If = {
+		limit = { any_equipped_character_artifact = { has_variable = bowl_of_mnesis prev = { can_benefit_from_artifact = prev } } }
+		multiply = {
+			value = { value = 1 add = 0.5 }
+			desc = POD_journey_progress_bowl_of_mnesis
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = { 
+		limit = { has_character_modifier = horseshoe_crab_totem_modifier } 
+		multiply = {
+			value = { value = 1 add = 0.5 }
+			desc = POD_journey_progress_horseshoe_crab
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_06 } } 
+		multiply = {
+			value = { value = 1 add = 1 }
+			desc = POD_journey_progress_dream_hollow_6
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_05 } } 
+		multiply = {
+			value = { value = 1 add = 0.75 }
+			desc = POD_journey_progress_dream_hollow_5
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_04 } } 
+		multiply = {
+			value = { value = 1 add = 0.5 }
+			desc = POD_journey_progress_dream_hollow_4
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_03 } } 
+		multiply = {
+			value = { value = 1 add = 0.25 }
+			desc = POD_journey_progress_dream_hollow_3
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_02 } } 
+		multiply = {
+			value = { value = 1 add = 0.1 }
+			desc = POD_journey_progress_dream_hollow_2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = { 
+		limit = { domicile ?= { has_domicile_building = mokole_dream_hollow_01 } } 
+		multiply = {
+			value = { value = 1 add = 0.05 }
+			desc = POD_journey_progress_dream_hollow_1
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+
+	if = {
+		limit = { mokole_mnesis_age_value = 2 }
+		subtract = {
+			value = 0.25
+			desc = POD_journey_progress_mnesis_sleep_2
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = { mokole_mnesis_age_value = 3 }
+		subtract = {
+			value = 0.5
+			desc = POD_journey_progress_mnesis_sleep_3
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = { mokole_mnesis_age_value = 4 }
+		subtract = {
+			value = 0.75
+			desc = POD_journey_progress_mnesis_sleep_4
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+}
+
+
+learn_true_name_progress_base = {
+	value = coterie_learning_gui
+	divide = 20
+}
+learn_true_name_progress = {
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = learn_true_name_progress_base
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = learn_true_name_progress_base
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_character_modifier = nian_shun_modifier }
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.5
+			}
+			desc = POD_journey_progress_nian_shun_modifier
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_character_modifier = dreams_of_the_sleeper_modifier }
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.5
+			}
+			desc = POD_journey_progress_dreams_of_the_sleeper_modifier
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = lore_revelation_perk } 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 1
+			}
+			desc = POD_journey_progress_target_lore_revelation_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = echo_the_lesser_name_perk } 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.125
+			}
+			desc = POD_journey_progress_target_echo_the_lesser_name_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = echo_the_greater_name_perk } 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.25
+			}
+			desc = POD_journey_progress_target_echo_the_greater_name_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			has_trait_xp = {
+				trait = demonology
+				value >= 25
+			}
+		} 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.1
+			}
+			desc = POD_journey_progress_demonology_25
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			has_trait_xp = {
+				trait = demonology
+				value >= 50
+			}
+		} 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.1
+			}
+			desc = POD_journey_progress_demonology_50
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			has_trait_xp = {
+				trait = demonology
+				value >= 75
+			}
+		} 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.1
+			}
+			desc = POD_journey_progress_demonology_75
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			has_trait_xp = {
+				trait = demonology
+				value >= 100
+			}
+		} 
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.2
+			}
+			desc = POD_journey_progress_demonology_100
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { 
+		limit = { has_character_modifier = POD_shapeshift_form_darkfungus_modifier }
+		add = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.2
+			}
+			desc = POD_journey_progress_darkfungus_form
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = { limit = { var:current_journey.var:target = { has_perk = arcana_invocation_of_name_perk } } 
+		subtract = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.2
+			}
+			desc = POD_journey_progress_target_invocation_of_name_perk
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { limit = { var:current_journey.var:target = { has_character_modifier = house_eater_modifier } } 
+		subtract = {
+			value = { 
+				value = learn_true_name_progress_base
+				multiply = 0.2
+			}
+			desc = POD_journey_progress_target_house_eater_modifier
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.diplomacy
+			divide = 125
+		}
+		desc = POD_journey_progress_diplomacy_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.martial
+			divide = 125
+		}
+		desc = POD_journey_progress_martial_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.stewardship
+			divide = 125
+		}
+		desc = POD_journey_progress_stewardship_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.intrigue
+			divide = 125
+		}
+		desc = POD_journey_progress_intrigue_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.learning
+			divide = 125
+		}
+		desc = POD_journey_progress_learning_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	subtract = {
+		value = {
+			value = var:current_journey.var:target.prowess
+			divide = 125
+		}
+		desc = POD_journey_progress_prowess_target
+		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	}
+	min = 0.001
+}
+
+demon_temp_journey_progress_base = {
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = coterie_diplomacy_gui
+			divide = 25
+			desc = POD_journey_progress_diplomacy_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = coterie_diplomacy_gui
+			divide = 25
+			desc = POD_journey_progress_diplomacy
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = coterie_intrigue_gui
+			divide = 25
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = coterie_intrigue_gui
+			divide = 25
+			desc = POD_journey_progress_intrigue
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+demon_temp_journey_progress = {
+	add = demon_temp_journey_progress_base
+
+	if = {
+		limit = { has_perk = arcana_read_the_sin_perk }
+		add = {
+			value = { 
+				value = demon_temp_journey_progress_base
+				multiply = 0.25
+			}
+			desc = POD_journey_progress_read_the_sin_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = arcana_compel_sin_perk }
+		add = {
+			value = { 
+				value = demon_temp_journey_progress_base
+				multiply = 0.5
+			}
+			desc = POD_journey_progress_compel_sin_perk
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	save_temporary_scope_as = demon
+	if = {
+		limit = { "var:current_journey.var:target.opinion(scope:demon)" >= 0 }
+		add = {
+			value = "var:current_journey.var:target.opinion(scope:demon)"
+			divide = 100
+			desc = POD_journey_progress_target_opinion
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+
+	}
+	else = {
+		add = {
+			value = "var:current_journey.var:target.opinion(scope:demon)"
+			divide = 200
+			desc = POD_journey_progress_target_opinion
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = {
+		limit = { NOT = { has_trait = demon } }
+		add = {
+			divide = 3
+			desc = POD_journey_progress_not_demon
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+
+	min = 0.05
+}
+
+
+seek_knowledge_progress = {
+	add = seek_knowledge_progress_preview
+	
+	if = {
+		limit = { has_variable = coterie }
+		multiply = {
+			value = 1
+			desc = POD_journey_progress_seek_knowledge
+			var:coterie = {
+				every_in_list = {
+					variable = members
+					limit = {
+						POD_already_has_seek_knowledge_trait_trigger = {
+							VAR = root.var:current_journey.var:journey_type
+						}
+					}
+					add = seek_knowledge_bonus_per_member
+				}
+			}
+		}
+	}
+}
+seek_knowledge_progress_preview = {
+	add = {
+		value = seek_knowledge_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	if = {
+		limit = { NOT = { employs_court_position = court_tutor_court_position } }
+		subtract = {
+			value = seek_knowledge_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_court_tutor_none
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = court_tutor_court_position
+				aptitude = {
+					court_position = court_tutor_court_position
+					value = 1
+				}
+			}
+		}
+		add = {
+			value = seek_knowledge_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_court_tutor_1
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = court_tutor_court_position
+				aptitude = {
+					court_position = court_tutor_court_position
+					value = 2
+				}
+			}
+		}
+		add = {
+			value = seek_knowledge_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_court_tutor_2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = court_tutor_court_position
+				aptitude = {
+					court_position = court_tutor_court_position
+					value = 3
+				}
+			}
+		}
+		add = {
+			value = seek_knowledge_base_progress
+			multiply = 0.15
+			desc = POD_journey_progress_court_tutor_3
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = court_tutor_court_position
+				aptitude = {
+					court_position = court_tutor_court_position
+					value = 4
+				}
+			}
+		}
+		add = {
+			value = seek_knowledge_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_court_tutor_4
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	if = {
+		limit = { POD_has_coterie_members_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 100
+				multiply = seek_knowledge_base_progress
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 100
+				multiply = seek_knowledge_base_progress
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+realm_mastery_progress			= { value = seek_knowledge_progress }
+realm_mastery_progress_preview	= { value = seek_knowledge_progress_preview }
+
+
+find_artifact_progress = {
+	add = {
+		value = find_artifact_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	if = {
+		limit = {
+			has_perk = eyes_of_a_thief_perk 
+		}
+		add = {
+			value = find_artifact_base_progress
+			multiply = 0.8 #80%
+			desc = POD_journey_progress_eyes_of_a_thief
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = { NOT = { employs_court_position = antiquarian_court_position } }
+		subtract = {
+			value = find_artifact_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_antiquarian_none
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = antiquarian_court_position
+				aptitude = {
+					court_position = antiquarian_court_position
+					value = 1
+				}
+			}
+		}
+		add = {
+			value = find_artifact_base_progress
+			multiply = 0.05
+			desc = POD_journey_progress_antiquarian_1
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = antiquarian_court_position
+				aptitude = {
+					court_position = antiquarian_court_position
+					value = 2
+				}
+			}
+		}
+		add = {
+			value = find_artifact_base_progress
+			multiply = 0.1
+			desc = POD_journey_progress_antiquarian_2
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = antiquarian_court_position
+				aptitude = {
+					court_position = antiquarian_court_position
+					value = 3
+				}
+			}
+		}
+		add = {
+			value = find_artifact_base_progress
+			multiply = 0.15
+			desc = POD_journey_progress_antiquarian_3
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else_if = {
+		limit = {
+			any_court_position_holder = {
+				type = antiquarian_court_position
+				aptitude = {
+					court_position = antiquarian_court_position
+					value = 4
+				}
+			}
+		}
+		add = {
+			value = find_artifact_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_antiquarian_4
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_stewardship_gui
+				divide = 100
+				multiply = find_artifact_base_progress
+			}
+			desc = POD_journey_progress_stewardship_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = stewardship
+				divide = 100
+				multiply = find_artifact_base_progress
+			}
+			desc = POD_journey_progress_stewardship
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = { any_relation = { type = spirit_companion var:spirit_type = flag:spirit_harpy } }
+		add = {
+            value = {
+                every_relation = {
+					type = spirit_companion
+					limit = { is_alive = yes var:spirit_type = flag:spirit_harpy }
+					if = {
+						limit = { POD_spirit_rank = 5 }
+						add = 0.5
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 4 }
+						add = 0.4
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 3 }
+						add = 0.3
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 2 }
+						add = 0.2
+					}
+					else = { add = 0.1 }
+				}
+            }
+			desc = POD_journey_progress_harpy_companion
+            format = "POD_PROGRESS_FORMAT_POSITIVE"
+        }
+	}
+}
+
+
+golconda_1_progress = {
+	add = {
+		value = golconda_1_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 100
+				multiply = golconda_1_base_progress
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 100
+				multiply = golconda_1_base_progress
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+
+golconda_2_progress = {
+	add = {
+		value = golconda_2_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	# Golconda only uses your personal skill, not Coterie skill
+	add = {
+		value = {
+			value = learning
+			divide = 100
+			multiply = golconda_2_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	# Other Coterie members
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.5
+		multiply = golconda_coterie_member_count
+		desc = POD_journey_progress_golconda_members
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.2
+		multiply = golconda_seeker_coterie_member_count
+		desc = POD_journey_progress_golconda_seeker_members
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	if = {
+		limit = {
+			POD_has_coterie_trigger = no
+			has_trait = golconda_seeker
+		}
+		add = {
+			value = golconda_2_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_golconda_seeker
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	# Touchstones
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.5
+		multiply = touchstones_4_count
+		desc = POD_journey_progress_touchstones_4
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.4
+		multiply = touchstones_3_count
+		desc = POD_journey_progress_touchstones_3
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.3
+		multiply = touchstones_2_count
+		desc = POD_journey_progress_touchstones_2
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.2
+		multiply = touchstones_1_count
+		desc = POD_journey_progress_touchstones_1
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+	add = {
+		value = golconda_2_base_progress
+		multiply = 0.1
+		multiply = touchstones_0_count
+		desc = POD_journey_progress_touchstones_0
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	# Bonuses from traits
+	if = {
+		limit = { has_trait = confider }
+		add = {
+			value = golconda_2_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_confider
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_trait = journaller }
+		add = {
+			value = golconda_2_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_journaller
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_trait = reclusive }
+		add = {
+			value = golconda_2_base_progress
+			multiply = 0.2
+			desc = POD_journey_progress_reclusive
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	# if = {
+	# 	limit = { has_trait = calm }
+	# 	add = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_calm
+	# 		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = forgiving }
+	# 	add = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_forgiving
+	# 		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = patient }
+	# 	add = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_patient
+	# 		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = brave }
+	# 	add = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.1
+	# 		desc = POD_journey_progress_brave
+	# 		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = diligent }
+	# 	add = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.1
+	# 		desc = POD_journey_progress_diligent
+	# 		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	# 	}
+	# }
+
+	# Artifact bonus
+	if = {
+		limit = { any_character_artifact = { has_variable = golconda_lore } }
+		add = {
+			value = golconda_2_base_progress
+			multiply = 0.3
+			desc = POD_journey_progress_golcondalore
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	# Diablerist penalty
+	if = {
+		limit = { is_diablerist_trigger = yes }
+		subtract = {
+			value = golconda_2_base_progress
+			multiply = 0.5
+			desc = POD_journey_progress_diablerist
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+
+	# Instinct penalty
+	if = {
+		limit = { faith = { has_doctrine = doctrine_enlightenment_virtues_conviction_and_instinct } }
+		subtract = {
+			value = golconda_2_base_progress
+			multiply = 0.3
+			desc = POD_journey_progress_instinct_conviction
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	else_if = {
+		limit = { faith = { has_doctrine = doctrine_enlightenment_virtues_conscience_and_instinct } }
+		subtract = {
+			value = golconda_2_base_progress
+			multiply = 0.3
+			desc = POD_journey_progress_instinct_conscience
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+
+	# Penalties from traits
+	# if = {
+	# 	limit = { has_trait = impatient }
+	# 	subtract = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_impatient
+	# 		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = vengeful }
+	# 	subtract = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_vengeful
+	# 		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = wrathful }
+	# 	subtract = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.2
+	# 		desc = POD_journey_progress_wrathful
+	# 		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = craven }
+	# 	subtract = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.1
+	# 		desc = POD_journey_progress_craven
+	# 		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	# 	}
+	# }
+	# if = {
+	# 	limit = { has_trait = lazy }
+	# 	subtract = {
+	# 		value = golconda_2_base_progress
+	# 		multiply = 0.1
+	# 		desc = POD_journey_progress_lazy
+	# 		format = "POD_PROGRESS_FORMAT_NEGATIVE"
+	# 	}
+	# }
+}
+touchstones_0_count = {
+	every_court_position_holder = {
+		type = touchstones_court_position
+		limit = { aptitude = { court_position = touchstones_court_position value = 0 } }
+		add = 1
+	}
+}
+touchstones_1_count = {
+	every_court_position_holder = {
+		type = touchstones_court_position
+		limit = { aptitude = { court_position = touchstones_court_position value = 1 } }
+		add = 1
+	}
+}
+touchstones_2_count = {
+	every_court_position_holder = {
+		type = touchstones_court_position
+		limit = { aptitude = { court_position = touchstones_court_position value = 2 } }
+		add = 1
+	}
+}
+touchstones_3_count = {
+	every_court_position_holder = {
+		type = touchstones_court_position
+		limit = { aptitude = { court_position = touchstones_court_position value = 3 } }
+		add = 1
+	}
+}
+touchstones_4_count = {
+	every_court_position_holder = {
+		type = touchstones_court_position
+		limit = { aptitude = { court_position = touchstones_court_position value = 4 } }
+		add = 1
+	}
+}
+suspire_success_chance = {
+	value = 0
+	if = {
+		limit = { has_trait = golconda_seeker }
+		add = "this.has_trait_xp(golconda_seeker)"
+	}
+	if = {
+		limit = { has_trait = golconda }
+		add = 100
+	}
+}
+# If suspire_success_chance >= suspire_threshold, an AI character will attempt the Suspire
+# Goes from 50-100 based on bravery
+suspire_threshold = {
+	value = ai_boldness
+	multiply = -1
+	add = 100
+	divide = 4
+	add = 50
+}
+# IF THIS IS NOT WORKING, BLAME ME, VECSONON
+siochain_1_base_progress = 0.25
+
+siochain_1_progress = {
+	add = {
+		value = siochain_1_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = { limit = { global_banality >= 2 } 
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_after_shattering
+			format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+		}
+	}
+	add = {
+		value = {
+			value = learning
+			divide = 25
+			multiply = siochain_1_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+siochain_2_base_progress = 0.25
+
+siochain_2_progress = {
+	add = {
+		value = siochain_2_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = { limit = { global_banality < 2 } 
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_before_shattering
+			format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+		}
+	}
+	add = {
+		value = {
+			value = learning
+			divide = 25
+			multiply = siochain_2_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+siochain_3_base_progress = 5
+
+siochain_3_progress = {
+	add = {
+		value = siochain_3_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	add = {
+		value = {
+			value = learning
+			divide = 25
+			multiply = siochain_3_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+
+ritual_blood_sorcery_casting_progress = {
+	add = {
+		value = var:current_journey.var:ritual_monthly_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = {
+		limit = { POD_has_coterie_members_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 25
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 25
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = arcane_mastery_1_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = ARCANE_MASTERY_1_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = arcane_mastery_2_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = ARCANE_MASTERY_2_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = arcane_mastery_3_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = ARCANE_MASTERY_3_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = arcane_mastery_4_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = ARCANE_MASTERY_4_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { any_character_artifact = { has_variable = artifact_blood_magic_ritual_speed_10 } 	}
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = POD_journey_progress_ritual_speed_10
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = fc_arm_r_runed_arm_perk }
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_fc_arm_r_runed_arm
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = fc_arm_l_runed_arm_perk }
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_fc_arm_l_runed_arm
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+ritual_necromagic_casting_progress = {
+	add = {
+		value = var:current_journey.var:ritual_monthly_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = {
+		limit = { POD_has_coterie_members_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 25
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 25
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = death_mastery_1_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = DEATH_MASTERY_1_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = death_mastery_2_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = DEATH_MASTERY_2_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = death_mastery_3_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = DEATH_MASTERY_3_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_perk = death_mastery_4_perk } 
+		add = {
+			value = {
+				value = 0.1
+				multiply = var:current_journey.var:ritual_monthly_progress
+			}
+			desc = DEATH_MASTERY_4_PERK_BONUS_VALUE
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = fc_arm_r_necrotic_arm_perk }
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_fc_arm_r_necrotic_arm
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = fc_arm_l_necrotic_arm_perk }
+		add = {
+			value = 0.25
+			desc = POD_journey_progress_fc_arm_l_necrotic_arm
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+azhi_dahaka_1_progress = {
+	add = {
+		value = azhi_dahaka_1_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+
+	add = {
+		value = {
+			value = learning
+			divide = 100
+			multiply = azhi_dahaka_1_base_progress
+		}
+		desc = POD_journey_progress_learning
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	add = {
+		value = "this.has_trait_xp(fleshcrafted)"
+		divide = 100
+		desc = POD_journey_progress_fleshcrafted
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	if = {
+		limit = { num_of_relation_ghoul_thrall >= 1 }
+		add = {
+            value = {
+                every_relation = {
+					type = ghoul_thrall
+					limit = { has_trait = fleshcrafted }
+					add = "this.has_trait_xp(fleshcrafted)"
+				}
+            }
+			divide = 150
+			max = 2
+            desc = POD_journey_progress_fleshcrafted_ghouls
+            format = "POD_PROGRESS_FORMAT_POSITIVE"
+        }
+	}
+
+	if = {
+		limit = { faith = { has_doctrine = tenet_physical_ascension } } 
+		multiply = {
+			value = { value = 1 add = 0.25 }
+			desc = POD_journey_progress_tenet_physical_ascension
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+
+	if = {
+		limit = { has_trait_xp = { trait = azhi_dahaka_scholar value > 0 } }
+		add = {
+			value = "this.has_trait_xp(azhi_dahaka_scholar)"
+			divide = -100
+			desc = POD_journey_progress_azhi_dahaka_xp
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+}
+
+azhi_dahaka_2_progress = {
+	add = {
+		value = azhi_dahaka_2_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+
+	add = {
+		value = "this.has_trait_xp(fleshcrafted)"
+		divide = 100
+		desc = POD_journey_progress_fleshcrafted
+		format = "POD_PROGRESS_FORMAT_POSITIVE"
+	}
+
+	if = {
+		limit = { num_of_relation_ghoul_thrall >= 1 }
+		add = {
+            value = {
+                every_relation = {
+					type = ghoul_thrall
+					limit = { has_trait = fleshcrafted }
+					add = "this.has_trait_xp(fleshcrafted)"
+				}
+            }
+			divide = 200
+            desc = POD_journey_progress_fleshcrafted_ghouls
+            format = "POD_PROGRESS_FORMAT_POSITIVE"
+        }
+	}
+
+	if = {
+		limit = { faith = { has_doctrine = tenet_physical_ascension } } 
+		multiply = {
+			value = { value = 1 add = 0.25 }
+			desc = POD_journey_progress_tenet_physical_ascension
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+hunt_for_sargon_codex_shard_progress = {
+	add = {
+		value = hunt_for_sargon_codex_shard_base_progress
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_diplomacy_gui
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_diplomacy_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = diplomacy
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_diplomacy
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_intrigue_gui
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = intrigue
+				divide = 10
+				multiply = hunt_for_sargon_codex_shard_base_progress
+			}
+			desc = POD_journey_progress_intrigue
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { this = character:790140 }
+		add = {
+			value = {
+				value = 1
+			}
+			desc = POD_journey_progress_ambrogino
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+sorcery_legendary_studying_base = {
+	value = learning
+	divide = 100
+}
+sorcery_legendary_studying_progress = {
+	add = sorcery_legendary_studying_progress_preview
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_alchemy 
+			NOR = {
+				has_trait = mummy
+				any_relation = { type = friend has_trait = mummy }
+				any_relation = { type = best_friend has_trait = mummy }
+				any_relation = { type = lover has_trait = mummy }
+				any_relation = { type = soulmate has_trait = mummy }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_mummy_friend
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_conjuration 
+			NOT = { has_trait_xp = { trait = lifestyle_traveler track = danger value >= 100 } }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_traveler_danger
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_conveyance 
+			NOT = { has_trait_xp = { trait = lifestyle_traveler track = travel value >= 100 } }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_traveler_travel
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_divination 
+			NOT = { has_trait_xp = { trait = lifestyle_mystic value >= 100 } }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_mystic
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_enchantment 
+			NOR = { 
+				has_trait_xp = { trait = pod_crafter track = forging value >= 50 } 
+				has_trait_xp = { trait = pod_crafter track = brewing value >= 50 } 
+				has_trait_xp = { trait = pod_crafter track = enhancing value >= 50 } 
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_pod_crafter
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_ephemera 
+			NOR = {
+				has_trait = spirit
+				any_relation = { type = friend has_trait = spirit }
+				any_relation = { type = best_friend has_trait = spirit }
+				any_relation = { type = lover has_trait = spirit }
+				any_relation = { type = soulmate has_trait = spirit }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_spirit_friend
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_fascination 
+			NOT = {
+				num_of_relations_positive >= 5
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_friend_5
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_fortune 
+			NOT = { learning >= 30 }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_learning_30
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_healing 
+			NOT = {
+				AND = {
+					employs_court_position = court_physician_court_position
+					any_court_position_holder = {
+						type = court_physician_court_position
+						aptitude = {
+							court_position = court_physician_court_position
+							value = 4
+						}
+					}
+				}
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_exelent_physician
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_hellfire 
+			NOR = {
+				num_of_relation_demonic_master >= 1
+				has_trait = demon
+				any_relation = { type = friend has_trait = demon }
+				any_relation = { type = best_friend has_trait = demon }
+				any_relation = { type = lover has_trait = demon }
+				any_relation = { type = soulmate has_trait = demon }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_demon_buddy
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_illusion 
+			NOT = { intrigue >= 30 }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_intrigue_30
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_necromancy 
+			NOT = { bound_wraiths_summed_skills >= 200 }
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_bound_wraith_sum_skill_200
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_oneiromancy 
+			NOR = {
+				has_POD_fae_blood_trigger = yes
+				any_relation = { type = friend has_POD_fae_blood_trigger = yes }
+				any_relation = { type = best_friend has_POD_fae_blood_trigger = yes }
+				any_relation = { type = lover has_POD_fae_blood_trigger = yes }
+				any_relation = { type = soulmate has_POD_fae_blood_trigger = yes }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_fae_friend
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_quintessence_manipulation 
+			NOT = {
+				AND = {
+					stress = 0
+					stress_level = 0
+				}
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_0_stress
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_shadows 
+			NOT = {
+				any_prisoner = {
+					has_trait = vampire
+					has_trait = lasombra
+					count >= 5
+				}
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_10_lasombra_in_prison
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_shapeshifting 
+			NOR = {
+				has_trait = fera
+				any_relation = { type = friend has_trait = fera }
+				any_relation = { type = best_friend has_trait = fera }
+				any_relation = { type = lover has_trait = fera }
+				any_relation = { type = soulmate has_trait = fera }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_furry_friend
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = { 
+		limit = { 
+			var:current_journey.var:journey_type = flag:sorcery_legendary_studying_weather_control 
+			NOR = {
+				has_trait = mummy
+				any_relation = { type = friend has_trait = mummy }
+				any_relation = { type = best_friend has_trait = mummy }
+				any_relation = { type = lover has_trait = mummy }
+				any_relation = { type = soulmate has_trait = mummy }
+			}
+		} 
+		subtract = {
+			value = sorcery_legendary_studying_base
+			divide = 2
+			desc = POD_sorcery_legendary_studying_progress_mummy_friend
+			format = "POD_PROGRESS_FORMAT_NEGATIVE"
+		}
+	}
+	if = {
+		limit = { uses_cairo_isis_alternate_reward = yes }
+		add = {
+			value = 1
+			desc = POD_journey_progress_cairo_isis
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+sorcery_legendary_studying_progress_preview = {
+	add = {
+		value = sorcery_legendary_studying_base
+		desc = POD_journey_progress_learning
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+num_of_relations_positive = {
+	value = 0
+	every_relation = {
+		type = friend
+		add = 1
+	}
+	every_relation = {
+		type = best_friend
+		add = 1
+	}
+	every_relation = {
+		type = lover
+		add = 1
+	}
+	every_relation = {
+		type = soulmate
+		add = 1
+	}
+}
+
+
+study_true_name_journey_progress_base = {
+	add = {
+		value = learning
+		divide = 10
+		desc = POD_journey_progress_learning
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}
+study_true_name_journey_progress = {
+	add = study_true_name_journey_progress_base
+	if = {
+		limit = { has_perk = echo_the_lesser_name_perk }
+		add = {
+			value = {
+				value = learning
+				divide = 10
+				multiply = 0.5
+			}
+			desc = echo_the_lesser_name_perk_bonus_value
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { has_perk = echo_the_greater_name_perk }
+		add = {
+			value = {
+				value = learning
+				divide = 10
+				multiply = 1
+			}
+			desc = echo_the_greater_name_perk_bonus_value
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_character_modifier = nian_shun_modifier }
+		add = {
+			value = { 
+				value = study_true_name_journey_progress_base
+				multiply = 0.5
+			}
+			desc = POD_journey_progress_nian_shun_modifier
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = { limit = { has_character_modifier = dreams_of_the_sleeper_modifier }
+		add = {
+			value = { 
+				value = study_true_name_journey_progress_base
+				multiply = 0.5
+			}
+			desc = POD_journey_progress_dreams_of_the_sleeper_modifier
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+shih_training_progress_base = {
+	value = 8.34 # 12 Months
+	divide = 2
+}
+shih_training_progress = {
+	add = {
+		value = shih_training_progress_base
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_diplomacy_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_diplomacy_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = diplomacy
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_diplomacy
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_martial_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_martial_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = martial
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_martial
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_stewardship_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_stewardship_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = stewardship
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_stewardship
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_intrigue_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_intrigue_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = intrigue
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_intrigue
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_learning_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_learning_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = learning
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_learning
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	if = {
+		limit = { POD_has_coterie_trigger = yes }
+		add = {
+			value = {
+				value = coterie_prowess_gui
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_prowess_coterie
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+	else = {
+		add = {
+			value = {
+				value = prowess
+				divide = 100
+				multiply = shih_training_progress_base
+			}
+			desc = POD_journey_progress_prowess
+			format = "POD_PROGRESS_FORMAT_POSITIVE"
+		}
+	}
+}
+
+breaking_the_blond_bond_progress = {
+	add = {
+		value = 0.5
+		desc = POD_journey_progress_base
+		format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+	}
+}

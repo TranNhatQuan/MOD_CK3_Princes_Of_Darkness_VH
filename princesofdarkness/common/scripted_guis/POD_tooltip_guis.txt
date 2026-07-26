@@ -1,0 +1,108 @@
+﻿has_cappadocian_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_cappadocian_necromancy_trigger = yes }
+}
+
+has_giovanni_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_giovanni_necromancy_trigger = yes }
+}
+
+has_harbinger_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_harbinger_necromancy_trigger = yes }
+}
+
+has_impundulu_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_impundulu_necromancy_trigger = yes }
+}
+
+has_lamia_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_lamia_necromancy_trigger = yes }
+}
+
+has_nagaraja_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_nagaraja_necromancy_trigger = yes }
+}
+
+has_rosselini_necromancy_sgui = {
+	scope = character 
+	is_shown = { has_rosselini_necromancy_trigger = yes }
+}
+
+# need to pass scope:index
+POD_show_wound_box = {
+	scope = character
+	effect = {
+		if = {
+			limit = { scope:index <= POD_health_track_length }
+			if = {
+				limit = { scope:index <= POD_aggravated_damage_boxes }
+				custom_description_no_bullet = { text = POD_aggravated_damage_box_tt }
+			}
+			else_if = {
+				limit = { scope:index <= POD_total_damage_boxes }
+				custom_description_no_bullet = { text = POD_damage_box_tt }
+			}
+			else = {
+				custom_description_no_bullet = { text = POD_undamaged_box_tt }
+			}
+		}
+	}
+}
+
+# need to pass scope:value (a splat-agnostic energy value)
+# there is no ceiling() datafunction so we gotta go through script this way
+# even though it's not very performant
+POD_splat_energy_cost = {
+	scope = character
+	effect = {
+		save_scope_value_as = {
+			name = adjusted_value
+			value = {
+				value = scope:value
+				multiply = splat_energy_multiplier
+				# energy costs are rounded up so they're never 0
+				# same as the POD_scale_energy_count_to macro
+				ceiling = yes
+			}
+		}
+		custom_description_no_bullet = {
+			text = POD_splat_energy_cost_tt
+			value = scope:adjusted_value
+		}
+	}
+}
+
+# same as before but with a blood value (scaled to a "mana bar" of 0-5)
+POD_splat_blood_cost = {
+	scope = character
+	effect = {
+		save_scope_value_as = {
+			name = adjusted_value
+			value = {
+				value = scope:value
+				# make splat-agnostic
+				multiply = maximum_splat_agnostic_energy
+				divide   = maximum_blood
+				# then splat-specific
+				multiply = splat_energy_multiplier
+				# energy costs are rounded up so they're never 0
+				# same as the POD_scale_energy_count_to macro
+				ceiling = yes
+			}
+		}
+		custom_description_no_bullet = {
+			text = POD_splat_energy_cost_tt
+			value = scope:adjusted_value
+		}
+	}
+}
+
+POD_display_known_ren_sgui = {
+	scope = character
+	effect = { POD_display_known_ren = yes }
+}

@@ -1,0 +1,305 @@
+﻿change_hand_resistance_effect = {
+	change_variable = {
+		name = hand_resistance
+		add = hand_resistance_value
+	}
+	if = {
+		limit = { var:hand_resistance < 0 }
+		set_variable = {
+			name = hand_resistance
+			value = 0
+		}
+	}
+	else_if = {
+		limit = { var:hand_resistance > 100 }
+		set_variable = {
+			name = hand_resistance
+			value = { 0 75 }
+		}
+		hand_exposed_effect = yes
+	}
+}
+
+increase_hand_modifier_effect = {
+	switch = {
+		trigger = var:hand_status
+		2 = {
+			hidden_effect = { remove_hand_modifier_2_effect = yes }
+			add_hand_modifier_3_effect = yes 
+		}
+		1 = {
+			hidden_effect = { remove_hand_modifier_1_effect = yes }
+			add_hand_modifier_2_effect = yes 
+		}
+		0 = {
+			add_hand_modifier_1_effect = yes 
+		}
+	}
+}
+
+decrease_hand_modifier_effect = {
+	switch = {
+		trigger = var:hand_status
+		3 = {
+			hidden_effect = { remove_hand_modifier_3_effect = yes }
+			add_hand_modifier_2_effect = yes 
+		}
+		2 = {
+			hidden_effect = { remove_hand_modifier_2_effect = yes }
+			add_hand_modifier_1_effect = yes 
+		}
+		1 = {
+			remove_hand_modifier_1_effect = yes 
+		}
+	}
+}
+
+add_hand_modifier_3_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = sabbat_hand_wazir_3_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = camarilla_hand_wazir_3_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = ashirra_hand_wazir_3_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = setite_hand_wazir_3_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = kueijin_hand_wazir_3_modifier } }
+			religion:boneflowers_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:deviltigers_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thousandhells_religion = { every_faith = { add_doctrine = talmahera_manipulation_high_doctrine } }
+		}
+	}
+	every_faith = { add_doctrine = talmahera_manipulation_high_doctrine }
+}
+
+add_hand_modifier_2_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = sabbat_hand_wazir_2_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = camarilla_hand_wazir_2_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = ashirra_hand_wazir_2_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = setite_hand_wazir_2_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = kueijin_hand_wazir_2_modifier } }
+			religion:boneflowers_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:deviltigers_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thousandhells_religion = { every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine } }
+		}
+	}
+	every_faith = { add_doctrine = talmahera_manipulation_medium_doctrine }
+}
+
+add_hand_modifier_1_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = sabbat_hand_wazir_1_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = camarilla_hand_wazir_1_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = ashirra_hand_wazir_1_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = setite_hand_wazir_1_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir add_character_modifier = kueijin_hand_wazir_1_modifier } }
+			religion:boneflowers_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:deviltigers_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thousandhells_religion = { every_faith = { add_doctrine = talmahera_manipulation_low_doctrine } }
+		}
+	}
+	every_faith = { add_doctrine = talmahera_manipulation_low_doctrine }
+}
+
+remove_hand_modifier_3_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = sabbat_hand_wazir_3_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = camarilla_hand_wazir_3_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = ashirra_hand_wazir_3_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = setite_hand_wazir_3_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = kueijin_hand_wazir_3_modifier } }
+			religion:boneflowers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:deviltigers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+			religion:thousandhells_religion = { every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine } }
+		}
+	}
+	every_faith = { remove_doctrine = talmahera_manipulation_high_doctrine }
+}
+
+remove_hand_modifier_2_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = sabbat_hand_wazir_2_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = camarilla_hand_wazir_2_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = ashirra_hand_wazir_2_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = setite_hand_wazir_2_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = kueijin_hand_wazir_2_modifier } }
+			religion:boneflowers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:deviltigers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+			religion:thousandhells_religion = { every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine } }
+		}
+	}
+	every_faith = { remove_doctrine = talmahera_manipulation_medium_doctrine }
+}
+
+remove_hand_modifier_1_effect = {
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = sabbat_hand_wazir_1_modifier } }
+		}
+		religion:camarilla_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = camarilla_hand_wazir_1_modifier } }
+		}
+		religion:ashirra_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = ashirra_hand_wazir_1_modifier } }
+		}
+		religion:roadofset_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = setite_hand_wazir_1_modifier } }
+		}
+		religion:kueijin_religion = {
+			religion:talmahera_religion = { every_in_list = { variable = wazir remove_character_modifier = kueijin_hand_wazir_1_modifier } }
+			religion:boneflowers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:deviltigers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:resplendentcranes_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thousandwhispers_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thrashingdragons_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+			religion:thousandhells_religion = { every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine } }
+		}
+	}
+	every_faith = { remove_doctrine = talmahera_manipulation_low_doctrine }
+}
+
+
+hand_exposed_effect = {
+	set_variable = {
+		name = hand_status
+		value = 0
+	}
+	set_variable = {
+		name = hand_exposed
+		value = yes
+		years = 20
+	}
+	switch = {
+		trigger = this
+		religion:sabbat_religion = {
+			religion:sabbat_religion.var:regent ?= {
+				trigger_event = POD_talmahera.10
+			}
+			title:e_talmahera.holder = {
+				trigger_event = POD_talmahera.11
+			}
+		}
+		religion:camarilla_religion = {
+			faith:camahumanity = {
+				every_in_list = {
+					variable = inner_circle
+					trigger_event = POD_talmahera.10
+				}
+				every_in_list = {
+					variable = justicars
+					trigger_event = POD_talmahera.10
+				}
+			}
+			title:e_talmahera.holder = {
+				trigger_event = POD_talmahera.12
+			}
+		}
+		religion:ashirra_religion = {
+			title:e_ashirra.holder ?= {
+				trigger_event = POD_talmahera.10
+			}
+			title:e_talmahera.holder = {
+				trigger_event = POD_talmahera.13
+			}
+		}
+		religion:roadofset_religion = {
+			title:e_setite.holder ?= {
+				trigger_event = POD_talmahera.10
+			}
+			title:e_talmahera.holder = {
+				trigger_event = POD_talmahera.14
+			}
+		}
+		religion:kueijin_religion = {
+			title:h_scarlet_phoenix_court.holder ?= {
+				trigger_event = POD_talmahera.10
+			}
+			title:e_talmahera.holder = {
+				trigger_event = POD_talmahera.15
+			}
+		}
+	}
+}
+
+initiate_wazir_effect = {
+	ordered_ruler = {
+		limit = { 
+			religion = religion:talmahera_religion
+			POD_is_wazir_trigger = no
+		}
+		order_by = sub_realm_size
+		set_wazir_effect = yes
+	}
+}
+
+set_wazir_effect = {
+	religion:talmahera_religion = { add_to_variable_list = { name = wazir target = prev } }
+}
+
+remove_wazir_effect = {
+	religion:talmahera_religion = { remove_list_variable = { name = wazir target = prev } }
+}

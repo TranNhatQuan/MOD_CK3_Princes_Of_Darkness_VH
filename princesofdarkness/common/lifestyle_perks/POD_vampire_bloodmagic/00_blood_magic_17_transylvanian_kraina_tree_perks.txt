@@ -1,0 +1,87 @@
+﻿burebistas_throne_perk = {
+	lifestyle = blood_magic_lifestyle
+	tree = blood_magic_transylvanian_kraina
+	position = { 0 0 }
+	icon = node_sanguine
+	
+	can_be_picked = { show_bs_transylvanian_kraina_path = yes }
+	
+	auto_selection_weight = {
+		value = 11
+	}
+
+	character_modifier = {
+		scheme_discovery_chance_mult = 0.1
+		defender_advantage = 3
+	}
+
+	effect = {
+		custom_description_no_bullet = { text = burebistas_throne_perk_effect }
+	}
+}
+
+pietrosus_hospitality_perk = {
+	lifestyle = blood_magic_lifestyle
+	tree = blood_magic_transylvanian_kraina
+	position = { 0 1.25 }
+	icon = node_sanguine
+    parent = burebistas_throne_perk
+
+	character_modifier = {
+		winter_movement_speed = 0.1
+		winter_advantage = 3
+	}
+	
+	effect = {
+		custom_description_no_bullet = { text = pietrosus_hospitality_perk_effect }
+	}
+}
+
+the_banks_of_the_basca_perk = {
+	lifestyle = blood_magic_lifestyle
+	tree = blood_magic_transylvanian_kraina
+	position = { 0 2.5 }
+	icon = node_sanguine
+    parent = pietrosus_hospitality_perk
+	
+	character_modifier = {
+		coastal_advantage = 3
+	}
+
+	effect = {
+		custom_description_no_bullet = { text = the_banks_of_the_basca_perk_effect }
+	}
+}
+
+kupalas_exhalation_perk = {
+	lifestyle = blood_magic_lifestyle
+	tree = blood_magic_transylvanian_kraina
+	position = { 0 3.75 }
+	icon = node_sanguine
+    parent = the_banks_of_the_basca_perk
+	
+	character_modifier = {
+		siege_phase_time = -0.1
+	}
+
+	effect = {
+		custom_description_no_bullet = { text = kupalas_exhalation_perk_effect }
+	}
+}
+
+restless_medias_perk = {
+	lifestyle = blood_magic_lifestyle
+	tree = blood_magic_transylvanian_kraina
+	position = { 0 5 }
+	icon = koldun
+    parent = kupalas_exhalation_perk
+	
+	effect = {
+		custom_description_no_bullet = { text = restless_medias_perk_effect }
+		add_next_genius_loci_perk = yes
+		if = {
+			limit = { is_ai = yes }
+			set_focus = no
+		}
+	}
+}

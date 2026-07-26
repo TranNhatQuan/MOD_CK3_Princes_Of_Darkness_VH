@@ -1,0 +1,162 @@
+﻿namespace = POD_wraith_shadow
+
+#POD_wraith_shadow.001 = {
+#    type = character_event
+#	content_source = dlc_POD
+#    title = POD_wraith_shadow.001.t
+#	desc = POD_wraith_shadow.001.desc
+#	theme = wraith
+#	
+#	left_portrait = {
+#	    character = root
+#		animation = personality_bold 
+#	}
+#	
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#	    name = POD_wraith_shadow.001.option.a
+#		custom_tooltip = POD_wraith_shadow.001.option.a.tt
+#		
+#		duel = {
+#		    skill = learning
+#			value = 20
+#			desc = POD_wraith_shadow.001.option.a.desc
+#		
+#			50 = {
+#				compare_modifier = {
+#					value = scope:duel_value
+#					multiplier = high_positive_duel_skill_multiplier
+#				}
+#				
+#				custom_tooltip = POD_wraith_shadow.001.option.a.tt.success
+#				
+#				hidden_effect = {
+#				    POD_create_separated_shadow_effect = { SAVE_AS = separated_shadow }
+#					trigger_event = {
+#					    id = POD_wraith_shadow.002
+#						days = 2
+#					}
+#			    }
+#			}    
+#			
+#			50 = {
+#
+#				compare_modifier = {
+#					value = scope:duel_value
+#					multiplier = low_negative_duel_skill_multiplier
+#				}
+#				
+#				custom_tooltip = POD_wraith_shadow.001.option.a.tt.failure
+#				
+#			    hidden_effect = {
+#				    trigger_event = {
+#					    id = POD_wraith_shadow.003
+#						days = 2
+#					}
+#			    }
+#			}
+#		}
+#		add_piety = -800
+#	}
+#	
+#	option = {
+#	    name = POD_wraith_shadow.001.option.b
+#		custom_tooltip = POD_wraith_shadow.001.option.b.tt
+#		#remove_interaction_cooldown = POD_separate_shadow_interaction
+#	}
+#}
+
+#POD_wraith_shadow.002 = {
+#    type = character_event
+#	content_source = dlc_POD
+#	title = POD_wraith_shadow.002.t
+#	desc = POD_wraith_shadow.002.desc
+#	theme = wraith
+#	
+#	left_portrait = {
+#	    character = root
+#		animation = happiness
+#	}
+#	right_portrait = {
+#	    character = scope:separated_shadow
+#		animation = idle
+#	}
+#	
+#	option = {
+#	    name = POD_wraith_shadow.002.option.a
+#		custom_tooltip = POD_wraith_shadow.002.option.a.tt
+#	}
+#}
+#
+#POD_wraith_shadow.003 = {
+#    type = character_event
+#	content_source = dlc_POD
+#	title = POD_wraith_shadow.003.t
+#	desc = POD_wraith_shadow.003.desc
+#	theme = wraith
+#	
+#	left_portrait = {
+#	    character = root
+#		animation = stress
+#	}
+#	
+#	option = {
+#	    name = POD_wraith_shadow.003.option.a
+#		custom_tooltip = POD_wraith_shadow.003.option.a.tt
+#		
+#		add_stress = major_stress_gain
+#	}
+#}
+
+POD_wraith_shadow.004 = {
+    type = character_event
+	content_source = dlc_POD
+	title = {
+		first_valid = { 
+			triggered_desc = {
+				trigger = { 
+					has_trait = ferryman
+				}
+				desc = POD_wraith_shadow.004.t_ferryman
+			}
+			desc = POD_wraith_shadow.004.t
+		}
+	}
+	desc = {
+		first_valid = { 
+			triggered_desc = {
+				trigger = { 
+					has_trait = ferryman
+				}
+				desc = POD_wraith_shadow.004.desc_ferryman
+			}
+			desc = POD_wraith_shadow.004.desc
+		}
+	}
+	theme = wraith
+	
+	left_portrait = {
+	    character = root
+		animation = stress
+	}
+	
+	option = {
+	    name = POD_wraith_shadow.004.option.a
+		custom_tooltip = POD_wraith_shadow.004.option.a.tt
+		
+		trigger = { NOT = { has_trait = ferryman } }
+		
+		add_stress = monumental_stress_gain
+	}
+	
+	option = {
+	    name = POD_wraith_shadow.004.option.b
+		
+		trigger = { has_trait = ferryman }
+		
+		death = { death_reason = death_suicide }
+	}
+}

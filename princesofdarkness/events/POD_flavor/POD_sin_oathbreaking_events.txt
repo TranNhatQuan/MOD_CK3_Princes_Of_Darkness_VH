@@ -1,0 +1,28 @@
+﻿namespace = POD_sin_oathbreaking
+
+POD_sin_oathbreaking.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_sin_oathbreaking.100.t
+	desc = POD_sin_oathbreaking.100.desc
+	orphan = yes
+
+	theme = vampire
+	left_portrait = root
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+    trigger = {
+		NOT = { has_trait = "oathbreaker" }
+		has_character_modifier = broke_truce
+    }
+	
+	option = {
+		name = POD_POD_sin_oathbreaking.100.a
+		add_trait = oathbreaker
+	}
+}
+

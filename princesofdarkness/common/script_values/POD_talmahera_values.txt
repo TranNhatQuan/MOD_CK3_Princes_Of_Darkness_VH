@@ -1,0 +1,154 @@
+﻿talmahera_zeal = {
+	value = var:talmahera_influence
+	if = {
+		limit = { scope:player = { NOT = { has_title = title:e_talmahera } } }
+		divide = 10
+		floor = yes
+	}
+}
+
+hand_status = {
+	value = 0
+	if = {
+		limit = { exists = var:hand_status }
+		add = var:hand_status
+	}
+}
+
+talmahera_influence_value = {
+	value = 0
+	add = {
+		value = talmahera_county_value
+		desc = talmahera_county_mod
+	}
+	subtract = {
+		value = religion:sabbat_religion.manipulation_zeal_cost
+		desc = sabbat_hand_mod
+	}
+	subtract = {
+		value = religion:camarilla_religion.manipulation_zeal_cost
+		desc = camarilla_hand_mod
+	}
+	subtract = {
+		value = religion:ashirra_religion.manipulation_zeal_cost
+		desc = ashirra_hand_mod
+	}
+	subtract = {
+		value = religion:roadofset_religion.manipulation_zeal_cost
+		desc = setite_hand_mod
+	}
+	subtract = {
+		value = religion:kueijin_religion.manipulation_zeal_cost
+		desc = kueijin_hand_mod
+	}
+}
+
+talmahera_county_value = {
+	every_county = {
+		limit = { religion = religion:talmahera_religion }
+		add = 1
+	}
+}
+
+hand_resistance_base_value = {
+	value = 1
+	multiply = hand_status
+	subtract = 1
+}
+
+religion_county_value = {
+	every_county = {
+		limit = { religion = prev }
+		add = 1
+	}
+}
+
+religion_realm_size_value = {
+	every_independent_ruler = {
+		limit = { religion = prev }
+		add = sub_realm_size
+	}
+	divide = 50
+	floor = yes
+}
+
+talmahera_realm_size_value = {
+	title:e_talmahera.holder = {
+		add = sub_realm_size
+	}
+	divide = 50
+	floor = yes
+}
+
+manipulation_zeal_cost = {
+	if = {
+		limit = { this = religion:kueijin_religion }
+		value = kueijin_county_value
+	}
+	else = {
+		value = religion_county_value
+	}
+	multiply = hand_status
+	multiply = 0.2
+	floor = yes
+}
+
+kueijin_county_value = {
+	every_county = {
+		limit = { holder ?= { has_trait = kueijin } }
+		add = 1
+	}
+}
+
+hand_resistance_value = {
+	value = 0
+	add = {
+		value = hand_resistance_base_value
+		desc = BASE
+		format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+	}
+	add = {
+		value = talmahera_realm_size_value
+		desc = talmahera_realm_size_mod
+		format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+	}
+	if = {
+		limit = { this = religion:kueijin_religion }
+		add = {
+			value = 3
+			desc = trait_kueijin
+			format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+		}
+	}
+	else = {
+		subtract = {
+			value = religion_realm_size_value
+			desc = religion_realm_size_mod
+			format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+		}
+	}
+	if = {
+		limit = { any_faith = { has_doctrine_parameter = vampirethemasquerade_strict } }
+		add = {
+			value = 2
+			desc = strict_masquerade_mod
+			format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+		}
+	}
+	if = {
+		limit = { any_faith = { has_doctrine = doctrine_vampirethemasquerade_none } }
+		subtract = {
+			value = 2
+			desc = no_masquerade_mod
+			format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+		}
+	}
+	if = {
+		limit = { hand_status = 0 }
+		max = {
+			value = -1
+			desc = no_hand_status_mod
+			format = "BREAKDOWN_FORMAT_POSITIVE_IS_BAD"
+		}
+	}
+}

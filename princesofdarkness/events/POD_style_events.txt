@@ -1,0 +1,93 @@
+﻿namespace = POD_style
+
+# Select the color scheme of your house
+POD_style.1 = {
+	type = character_event
+	content_source = dlc_POD
+	
+	theme = toreador
+	override_background = { reference = colorpicker }
+
+	title = POD_style.1.t
+	desc = blank_line
+
+	immediate = {
+		save_scope_as = player
+		POD_save_clothing_color_presets = yes
+		POD_init_clothing_color_clipboard = yes
+		POD_backup_all_clothing_colors = yes
+	}
+	
+	left_portrait = {
+		character = scope:target
+		animation = personality_zealous
+		hide_info = yes
+	}
+	
+	right_portrait = {
+		trigger = { exists = scope:secondary_target }
+		character = scope:secondary_target
+		#animation = personality_zealous
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_clothing_shaders"
+		container = "custom_widgets_container"
+	}
+
+	option = {
+		name = POD_style.1.a
+	}
+
+	after = {
+		POD_clear_clothing_color_presets = yes
+		POD_clear_clothing_color_backup = yes
+		scope:target = { remove_variable = color_root }
+	}
+}
+
+# Select an idle animation
+POD_style.2 = {
+	type = character_event
+	content_source = dlc_POD
+	
+	theme = toreador
+	override_background = { reference = velvet }
+
+	title = POD_style.2.t
+	desc = blank_line
+
+	immediate = {
+		if = {
+			limit = { NOT = { exists = scope:recipient } }
+			save_scope_as = recipient
+		}
+		POD_flag_injector_idle_animations = {
+			EFFECT = POD_init_idle_animation_list
+		}
+	}
+	
+	left_portrait = {
+		character = scope:recipient
+		animation = idle
+		hide_info = yes
+	}
+
+	widget = {
+		gui = "POD_event_window_widget_set_idle_animation"
+		container = "custom_widgets_container"
+	}
+
+	option = {
+		name = POD_style.2.a
+	}
+
+	option = {
+		name = POD_style.2.b
+		scope:recipient = { POD_clear_custom_idle_animation = yes }
+	}
+
+	after = {
+		POD_clear_idle_animation_list = yes
+	}
+}

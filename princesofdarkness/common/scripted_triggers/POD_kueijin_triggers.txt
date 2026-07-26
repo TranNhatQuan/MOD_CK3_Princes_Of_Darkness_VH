@@ -1,0 +1,145 @@
+﻿has_dharma_greater_than_trigger = {
+	OR = {
+		has_trait = dhampyr
+		has_trait_rank = {
+			trait = dharma
+			rank >= $LEVEL$
+		}
+		has_perk = unfolding_scarlet_lotus_perk
+		#has_global_variable = wan_xian_wan_kuei
+		has_character_modifier = yama_king_modifier
+	}
+}
+has_dharma_lesser_than_trigger = {
+	OR = {
+		NOT = { has_trait = dhampyr }
+		has_trait_rank = {
+			trait = dharma
+			rank <= $LEVEL$
+		}
+		NOT = { has_perk = unfolding_scarlet_lotus_perk }
+		#NOT = { has_global_variable = wan_xian_wan_kuei }
+		NOT = { has_character_modifier = yama_king_modifier }
+	}
+}
+
+POD_gains_boneflowers_dharma_xp = {
+	religion = religion:boneflowers_religion
+}
+
+POD_gains_deviltigers_dharma_xp = {
+	religion = religion:deviltigers_religion
+}
+
+POD_gains_resplendentcranes_dharma_xp = {
+	religion = religion:resplendentcranes_religion
+}
+
+POD_gains_thousandwhispers_dharma_xp = {
+	religion = religion:thousandwhispers_religion
+}
+
+POD_gains_thrashingdragons_dharma_xp = {
+	religion = religion:thrashingdragons_religion
+}
+
+POD_gains_faceofthegods_dharma_xp = {
+	faith = faith:faceofthegods
+}
+
+POD_gains_faceofthegoddess_dharma_xp = {
+	faith = faith:faceofthegoddess
+}
+
+POD_gains_greatclans_dharma_xp = {
+	faith = faith:thegreatclans
+}
+
+POD_gains_inwardfocus_dharma_xp = {
+	faith = faith:inwardfocus
+}
+
+POD_gains_inwardway_dharma_xp = {
+	faith = faith:inwardway
+}
+
+POD_gains_kinofizanami_dharma_xp = {
+	faith = faith:kinofizanami
+}
+
+POD_gains_livingearth_dharma_xp = {
+	faith = faith:spiritlivingearth
+}
+
+POD_gains_risingphoenix_dharma_xp = {
+	faith = faith:flameoftherisingphoenix
+}
+
+POD_gains_screamer_dharma_xp = {
+	OR = {
+		faith = faith:wayofthetenthousandscreams
+		religion = religion:demons_religion
+	}
+}
+
+POD_gains_emma_o_dharma_xp = {
+	faith = faith:thousandhells_emma_o
+}
+POD_gains_mikaboshi_dharma_xp = {
+	faith = faith:thousandhells_mikaboshi
+}
+POD_gains_ravana_dharma_xp = {
+	faith = faith:thousandhells_ravana
+}
+POD_gains_rangda_dharma_xp = {
+	faith = faith:thousandhells_rangda
+}
+POD_gains_tou_mu_dharma_xp = {
+	faith = faith:thousandhells_tou_mu
+}
+POD_gains_dokhor_khan_dharma_xp = {
+	faith = faith:thousandhells_dokhor_khan
+}
+POD_gains_wu_hua_dharma_xp = {
+	faith = faith:thousandhells_wu_hua
+}
+POD_gains_the_wandering_overlord_dharma_xp = {
+	faith = faith:thousandhells_the_wandering_overlord
+}
+POD_gains_haha_no_fukami_dharma_xp = {
+	faith = faith:thousandhells_haha_no_fukami
+}
+POD_gains_honoyeta_dharma_xp = {
+	faith = faith:thousandhells_honoyeta
+}
+POD_gains_hine_nui_te_po_dharma_xp = {
+	faith = faith:thousandhells_hine_nui_te_po
+}
+POD_gains_malaveyovo_dharma_xp = {
+	faith = faith:thousandhells_malaveyovo
+}
+POD_gains_grandmother_witch_dharma_xp = {
+	faith = faith:thousandhells_grandmother_witch
+}
+POD_gains_tou_shen_dharma_xp = {
+	faith = faith:thousandhells_tou_shen
+}
+POD_gains_hluh_dharma_xp = {
+	faith = faith:thousandhells_hluh
+}
+POD_gains_ku_of_the_thousand_tears_dharma_xp = {
+	faith = faith:thousandhells_ku_of_the_thousand_tears
+}
+
+POD_shintai_dharma_check_trigger = {
+	trigger_if = {
+		limit = { $LEVEL$ <= 4 }
+		has_dharma_greater_than_trigger = { LEVEL = $LEVEL$ }
+	}
+	trigger_else = {
+		trigger_if = {
+			limit = { dharma_level < shinta_mastery_dharma_requirement }
+			has_dharma_greater_than_trigger = { LEVEL = shinta_mastery_dharma_requirement }
+		}
+	}
+}

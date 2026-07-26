@@ -1,0 +1,1549 @@
+﻿namespace = POD_embrace
+
+POD_embrace.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.100.t
+	desc =  POD_embrace.100.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = shock
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		scope:target = {
+			POD_is_supehunter_trigger = no
+		}
+	}
+
+	immediate = {
+		scope:target = {
+			save_scope_as = victim	
+			
+			
+			#set_father = root
+			#set_mother = root
+			#real_father = root		 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+		
+		
+		scope:victim = {
+			POD_set_resonance_effect = yes
+		}	
+
+		scope:target = {
+			save_scope_as = created_vampirechilde
+		}
+		scope:created_vampirechilde = {
+		   random_relation = {
+				type = ghoul_domitor
+				limit = {
+					is_alive = yes
+				}
+				save_scope_as = former_domitor
+			} 
+		}
+	}
+	
+	option = {
+		name = POD_embrace.100.option.a
+		custom_tooltip = POD_embrace.100.option.a.tt
+
+		POD_lose_golconda_in_storyteller_mode_effect = yes
+
+		if = {
+			limit = {
+				faith = {
+					OR = {
+						has_doctrine_parameter = vampirism_illegal
+						has_doctrine_parameter = hurt_mortal_lose_piety
+					}
+				}
+			}
+			add_piety = massive_piety_loss
+		}
+
+		else_if = {
+			limit = {
+				faith = {
+					has_doctrine_parameter = vampirism_shunned
+				}
+			}
+			add_piety = major_piety_loss
+		}
+
+		else = {
+			add_piety = medium_piety_loss
+		}
+		
+		stress_impact = {
+			gluttonous = major_stress_impact_loss
+			compassionate = major_stress_impact_gain
+		}	
+		
+		hidden_effect = {
+			# Already will set in POD_player_character_create_vampirechilde_effect
+		    # scope:vampiresire = {
+				# if = {
+					# limit = {
+						# is_female = yes
+					# }
+					# scope:created_vampirechilde = { 
+						# set_mother = scope:vampiresire 
+					# }
+				# }
+				# if = {
+					# limit = {
+						# is_female = no
+					# }
+					# scope:created_vampirechilde = { 
+						# set_father = scope:vampiresire 
+					# }
+				# }			
+			# }
+			POD_restore_hunger_from_victim_effect       = { VICTIM = scope:created_vampirechilde AMOUNT = 5 }
+			POD_resonance_from_feeding_on_victim_effect = { VICTIM = scope:created_vampirechilde AMOUNT = 5 }
+			POD_hunger_rouse_check_effect = yes
+			POD_player_character_create_vampirechilde_effect = yes
+			scope:created_vampirechilde = {
+				every_relation = {
+					type = herd_owner
+					POD_remove_herd_no_masquerade_effect = { TARGET = scope:created_vampirechilde }
+				}
+			}
+			if = {
+			     limit = {
+				     exists = scope:former_domitor
+				 }
+				 scope:created_vampirechilde = {
+				    remove_relation_ghoul_domitor = scope:former_domitor
+					remove_character_flag = blocked_from_leaving
+					remove_character_flag = blood_bonded
+				 }
+				 scope:former_domitor = {
+				     remove_hook = {
+					     target = scope:created_vampirechilde
+						 type = strong_bloodoath_hook
+					 }
+				 }
+			}
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_embrace.100.option.a.tt.beast
+		}
+	}
+	
+	option = {
+		name = POD_embrace.100.option.b
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_embrace.100.option.b.tt.beast
+		}
+	}	
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+}
+
+POD_embrace.200 = {
+
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.200.t
+	desc =  POD_embrace.200.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:target
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		scope:target = { POD_is_supehunter_trigger = yes }
+	}
+
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim			 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+	}
+	
+	option = {
+		name = POD_embrace.200.option.a
+		
+		duel = {
+			skill = prowess
+			target = scope:victim
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					 }
+				
+				custom_tooltip = POD_embrace.200.option.a.s.tt
+				trigger_event = { 	
+					id = POD_embrace.210
+					}
+				}
+		
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					 }
+
+				modifier = {
+					add = 5
+					scope:victim = { has_trait = orison_hierophant }
+				}
+				modifier = {
+					add = 35
+					scope:victim = { has_trait = acre_auto }
+				}
+				custom_tooltip = POD_embrace.200.option.a.f.tt
+				trigger_event = { 	
+					id = POD_embrace.220
+					}					
+				}
+		}	
+	}
+	
+	option = {
+		name = POD_embrace.200.option.b
+		
+		duel = {
+			skill = intrigue
+			target = scope:victim
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					 }
+				
+				
+				custom_tooltip = POD_embrace.200.option.b.s.tt
+				trigger_event = { 	
+					id = POD_embrace.210
+					}
+				}
+		
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					 }
+				
+				modifier = {
+					add = 10
+					scope:victim = { has_trait = orison_vigilance }
+				}
+				modifier = {
+					add = 10
+					scope:victim = { has_trait = red_forge }
+				}
+				modifier = {
+					add = 40
+					scope:victim = { has_trait = oculi_wine }
+				}
+				custom_tooltip = POD_embrace.200.option.b.f.tt
+				trigger_event = { 	
+					id = POD_embrace.230
+				}				
+			}
+		}	
+	}
+
+	option = {
+		name = POD_embrace.200.option.c
+		
+		duel = {
+			skill = diplomacy
+			target = scope:victim
+				13 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = 0.5
+					 }
+				
+				custom_tooltip = POD_embrace.200.option.c.s.tt
+				trigger_event = { 	
+					id = POD_embrace.210
+					}
+				}
+		
+				15 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = -0.5
+					 }
+				
+				modifier = {
+					add = 10
+					scope:victim = { has_trait = orison_talespinner }
+				}
+				modifier = {
+					add = 10
+					scope:victim = { has_trait = murnau_arcana }
+				}
+				modifier = {
+					add = 25
+					scope:victim = { has_trait = sisters_oratorio }
+				}
+				custom_tooltip = POD_embrace.200.option.c.f.tt
+				trigger_event = { 	
+					id = POD_embrace.240
+				}					
+			}
+		}	
+	}
+	
+	option = {
+		name = POD_embrace.200.option.d
+		custom_tooltip = POD_embrace.200.option.d.tt
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}	
+}
+
+POD_embrace.210 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.210.t
+	desc =  POD_embrace.210.desc
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.210.option.a
+		# Already will set in POD_player_character_create_vampirechilde_effect
+		# scope:vampiresire = {
+			# if = {
+				# limit = {
+					# is_female = yes
+				# }
+				# scope:victim = { 
+					# set_mother = scope:vampiresire 
+				# }
+			# }
+			# if = {
+				# limit = {
+					# is_female = no
+				# }
+				# scope:victim = { 
+					# set_father = scope:vampiresire 
+				# }
+			# }			
+		# }
+		
+		scope:victim = {
+			#POD_clear_resonance_effect = yes
+			if = {
+				limit = {
+					NOT = {	has_character_flag = POD_resonance_negligible_flag }
+					NOT = {	has_character_flag = POD_resonance_fleeting_flag }
+					NOT = {	has_character_flag = POD_resonance_intense_flag }
+					NOT = {	has_character_flag = POD_resonance_acute_flag }
+					NOT = {	has_character_flag = choleric_resonance }
+					NOT = {	has_character_flag = melancholic_resonance }
+					NOT = {	has_character_flag = phlegmatic_resonance }
+					NOT = {	has_character_flag = sanguine_resonance }
+				}
+				POD_set_resonance_effect = yes
+			}
+		}	
+
+		scope:victim = {
+			save_scope_as = created_vampirechilde
+		}
+		
+		POD_lose_golconda_in_storyteller_mode_effect = yes
+	
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = hurt_mortal_lose_piety }
+				scope:victim = { has_trait = orison_innocent }
+			}
+			add_piety = -500
+			add_stress = monumental_stress_gain
+		}
+		else = {
+			add_piety = medium_piety_loss
+		}
+		
+		POD_restore_hunger_from_victim_effect       = { VICTIM = scope:created_vampirechilde AMOUNT = 5 }
+		POD_resonance_from_feeding_on_victim_effect = { VICTIM = scope:created_vampirechilde AMOUNT = 5 }
+
+		hidden_effect = {
+			POD_hunger_rouse_check_effect = yes
+			POD_player_character_create_vampirechilde_effect = yes
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_embrace.220 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.220.t
+	desc =  POD_embrace.220.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.220.option.a
+		
+		trigger = { POD_immune_to_staking_trigger = no }
+		
+		scope:victim = {
+			pod_death = {
+				death_reason = death_duel
+				killer = scope:vampiresire
+			}
+		}
+		scope:vampiresire = {
+			pod_death = {
+				death_reason = death_duel
+				killer = scope:victim
+			}
+		}
+	}
+	
+	option = {
+		name = POD_mentoring_disciplines.180.a
+		
+		trigger = { POD_immune_to_staking_trigger = yes }
+		
+		scope:victim = {
+			pod_death = {
+				death_reason = death_duel
+				killer = scope:vampiresire
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_embrace.230 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.230.t
+	desc =  POD_embrace.230.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = personality_bold
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.230.option.a
+		
+		trigger = { POD_immune_to_fire_trigger = no }
+		
+		scope:victim = {
+			pod_death_no_killer = {
+				death_reason = death_burned
+			}
+		}
+		scope:vampiresire = {
+			pod_death_no_killer = {
+				death_reason = death_burned
+			}
+		}
+	}
+	
+	option = {
+		name = POD_mentoring_disciplines.180.a
+		
+		trigger = { POD_immune_to_fire_trigger = yes }
+		
+		scope:victim = {
+			pod_death_no_killer = {
+				death_reason = death_burned
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}	
+
+POD_embrace.240 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.240.t
+	desc =  POD_embrace.240.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = dismissive
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.240.option.a
+		scope:vampiresire = { 		
+			stress_impact = {
+			base = massive_stress_gain
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+###Willing Embrace
+#Initial event - how much do you reveal?
+POD_embrace.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.300.t
+	desc =  POD_embrace.300.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:target
+		animation = fear
+	}
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+
+	immediate = {
+		scope:target = { add_character_flag = { flag = willing_embrace_cd years = 10 } }
+	}
+
+	#tell them a little
+	option = {
+		name = POD_embrace.300.option.a
+		POD_moderate_risk_of_increasing_masquerade_exposure = yes
+
+		duel = {
+			skills = { diplomacy learning }
+			target = scope:target
+		
+			5 = {
+				compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_great_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_fully_accept.tooltip
+					trigger_event = { id = POD_embrace.310 days = 7 }
+				}
+			}
+			
+			30 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_partial_accept.tooltip
+					trigger_event = { id = POD_embrace.301 days = 7 }
+				}
+			}
+
+			65 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+				custom_tooltip = {
+					text = willing_embrace_failure.tooltip
+					trigger_event = { id = POD_embrace.340 days = 7 }
+				}
+			}
+		}
+	}
+	#tell them a lot
+	option = {
+		name = POD_embrace.300.option.b
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirethemasquerade_strict } }
+			POD_masquerade_exposure_increase_effect = yes
+			add_stress = medium_stress_gain
+		}
+		else = { 
+			POD_high_risk_of_increasing_masquerade_exposure = yes
+			add_stress = minor_stress_gain
+		}
+
+		duel = {
+			skills = { diplomacy learning }
+			target = scope:target
+		
+			20 = {
+				compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_great_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_fully_accept.tooltip
+					trigger_event = { id = POD_embrace.310 days = 7 }
+				}
+			}
+			
+			40 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_partial_accept.tooltip
+					trigger_event = { id = POD_embrace.301 days = 7 }
+				}
+			}
+
+			40 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+				custom_tooltip = {
+					text = willing_embrace_failure.tooltip
+					trigger_event = { id = POD_embrace.340 days = 7 }
+				}
+			}
+		}
+	}
+	#tell them everything
+	option = {
+		name = POD_embrace.300.option.c
+		add_piety = 50
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirethemasquerade_strict } }
+			POD_masquerade_exposure_increase_multiple_effect = { AMOUNT = 2 }
+			add_stress = major_stress_gain
+		}
+		else = { 
+			POD_masquerade_exposure_increase_effect = yes
+			add_stress = medium_stress_gain
+		}
+
+		duel = {
+			skills = { diplomacy learning }
+			target = scope:target
+		
+			40 = {
+				compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_great_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_fully_accept.tooltip
+					trigger_event = { id = POD_embrace.310 days = 7 }
+				}
+			}
+			
+			40 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_partial_accept.tooltip
+					trigger_event = { id = POD_embrace.301 days = 7 }
+				}
+			}
+
+			20 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+				custom_tooltip = {
+					text = willing_embrace_failure.tooltip
+					trigger_event = { id = POD_embrace.340 days = 7 }
+				}
+			}
+		}
+	}
+
+	#Give up
+	option = {
+		name = POD_embrace.300.option.d
+		add_piety = -50
+		scope:scheme ?= { end_scheme = yes }
+	}
+}
+
+#They're open to the idea but not convinced yet
+POD_embrace.301 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.301.t
+	desc =  POD_embrace.301.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:target
+		animation = thinking
+	}
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	#push a little more
+	option = {
+		name = POD_embrace.301.option.a
+		add_stress = medium_stress_gain
+		
+		duel = {
+			skills = { diplomacy learning }
+			target = scope:target
+		
+			50 = {
+				compare_modifier = { value = scope:duel_value multiplier = high_positive_duel_skill_multiplier }
+				modifier = { add = { value = willing_embrace_great_success_value } }
+				custom_tooltip = {
+					text = willing_embrace_fully_accept.tooltip
+					trigger_event = { id = POD_embrace.310 days = 7 }
+				}
+			}
+			50 = {
+				compare_modifier = { value = scope:duel_value multiplier = low_negative_duel_skill_multiplier }
+				custom_tooltip = {
+					text = willing_embrace_failure.tooltip
+					trigger_event = { id = POD_embrace.340 days = 7 }
+				}
+			}
+		}
+	}
+
+	#leave it to fate
+	option = {
+		name = POD_embrace.301.option.b
+		hidden_effect = {
+			random_list = {
+				50 = { trigger_event = { id = POD_embrace.310 days = 7 } }
+				50 = { trigger_event = { id = POD_embrace.340 days = 7 } }
+			}
+		}
+	}
+}
+
+
+
+
+#They accept
+POD_embrace.310 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.310.t
+	desc =  POD_embrace.310.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:target
+		animation = interested
+	}
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.310.option.a
+		add_piety = 50
+		trigger_event = POD_embrace.100
+	}
+}
+
+
+
+
+#They refuse
+POD_embrace.340 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.340.t
+	desc =  POD_embrace.340.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:target
+		animation = fear
+	}
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+
+	#let them go
+	option = {
+		name = POD_embrace.340.option.a
+		POD_masquerade_exposure_increase_effect = yes
+		hidden_effect = {
+			scope:scheme ?= { end_scheme = yes }
+		}
+	}
+
+	#Use a power to make them forget
+	option = {
+		name = POD_embrace.340.option.b
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+				has_trait = dominateadvanced
+				has_trait = presenceadvanced
+			}
+		}
+		trait = dominateadvanced
+		trait = presenceadvanced
+		POD_hunger_rouse_check_effect = yes
+		POD_moderate_chance_of_reducing_masquerade_exposure = yes
+		hidden_effect = {
+			scope:target = { remove_character_flag = willing_embrace_cd }
+			scope:scheme ?= { end_scheme = yes }
+		}
+	}
+
+	#Kill them
+	option = {
+		name = POD_embrace.340.option.c
+		add_piety = -100
+		add_tyranny = minor_tyranny_gain
+		POD_masquerade_exposure_decrease_effect = yes
+		scope:target = {
+			pod_death = {
+				death_reason = death_murder
+				killer = root
+			}
+		}
+		hidden_effect = {
+			scope:scheme ?= { end_scheme = yes }
+		}
+	}
+
+	#Embrace them anyways
+	option = {
+		name = POD_embrace.340.option.d
+		add_piety = -200
+		add_tyranny = major_tyranny_gain
+		custom_tooltip = unwilling_embrace_tt
+		scope:target = {
+			set_relation_rival = {
+				target = root
+				reason = rival_unwilling_embrace
+			}
+		}
+		trigger_event = POD_embrace.100
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+#They're a Shapeshifter
+POD_embrace.400 = {
+
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.400.t
+	desc =  POD_embrace.400.desc		
+	theme = embrace
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:target = {
+			save_scope_as = victim			 
+		}
+		
+		root = {
+			save_scope_as = vampiresire 
+		}
+	}
+	
+	### DOMINATE OPTION
+	option = {
+		name = POD_embrace.400.option.a
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+				has_perk = mesmerize_perk
+				has_perk = submerged_directive_perk
+				has_perk = rationalize_perk
+				has_perk = terminal_decree_perk
+				has_trait = dominateadvanced
+			}
+			POD_strong_mental_defenses_custom_trigger = { ACTOR = root RECIPIENT = scope:victim }
+		}
+		
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		scope:vampiresire = { 
+			if = {
+				limit = {
+					OR = {
+						has_perk = mesmerize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.mesmerize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = submerged_directive_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.submerged_directive
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = rationalize_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.rationalize
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = terminal_decree_perk
+						has_trait = dominateadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.d.tt.terminal_decree
+			}
+		}
+		
+		duel = {
+			skill = stewardship
+			value = scope:victim.stewardship
+			10 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				modifier = {
+					add = 5
+					scope:vampiresire = {
+						has_trait = dominateadvanced
+					}
+				}
+				
+				modifier = {
+					add = 15
+					scope:vampiresire = {
+						has_perk = will_conquers_perk
+					}
+				}
+				
+				custom_tooltip = POD_embrace.400.option.a.success.tt
+				trigger_event = { 	
+					id = POD_embrace.410
+				}
+			}
+		
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				 }
+					 
+				custom_tooltip = POD_embrace.400.option.a.fail.tt
+				trigger_event = { 	
+					id = POD_embrace.440
+				}					
+			}
+		}	
+	}
+	
+	### PRESENCE OPTION
+	option = {
+		name = POD_embrace.400.option.b
+		trigger = {
+			POD_has_enough_blood_for_discipline = { AMOUNT = 1 }
+			OR = {
+			    has_perk = entrancement_perk
+				has_trait = presenceadvanced
+			}
+			POD_strong_mental_defenses_custom_trigger = { ACTOR = root RECIPIENT = scope:victim }
+		}
+		
+		POD_hunger_rouse_check_effect = yes
+		POD_willpower_rouse_check_effect = yes
+		
+		scope:vampiresire = { 
+			if = {
+				limit = {
+					OR = {
+						has_perk = entrancement_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.entrancement
+			}
+			if = {
+				limit = {
+					OR = {
+						has_perk = majesty_perk
+						has_trait = presenceadvanced
+					}
+				}
+				custom_tooltip = POD_diablerize.200.option.c.tt.majesty
+			}
+		}
+		
+		duel = {
+			skill = diplomacy
+			value = scope:victim.diplomacy
+			10 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				modifier = {
+					add = 5
+					scope:vampiresire = {
+						has_trait = presenceadvanced
+					}
+				}
+				
+				modifier = {
+					add = 15
+					scope:vampiresire = {
+						has_perk = ironclad_command_perk
+					}
+				}
+				
+				custom_tooltip = POD_embrace.400.option.b.success.tt
+				trigger_event = { 	
+					id = POD_embrace.410
+				}
+			}
+		
+			15 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				 }
+					 
+				custom_tooltip = POD_embrace.400.option.b.fail.tt
+				trigger_event = { 	
+					id = POD_embrace.440
+				}					
+			}
+		}	
+	}
+	
+	### PROWESS OPTION
+	option = {
+		name = POD_embrace.400.option.c
+		
+		duel = {
+			skill = prowess
+			value = scope:victim.prowess
+			10 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.5
+				}
+				
+				custom_tooltip = POD_embrace.400.option.c.success.tt
+				trigger_event = { 	
+					id = POD_embrace.410
+				}
+			}
+		
+			20 = {
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -0.5
+				 }
+					 
+				custom_tooltip = POD_embrace.400.option.c.fail.tt
+				trigger_event = { 	
+					id = POD_embrace.440
+				}					
+			}
+		}	
+	}
+	
+	### ABORT OPTION
+	option = {
+		name = POD_embrace.400.option.d
+		custom_tooltip = POD_embrace.400.option.d.tt
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}	
+}
+
+POD_embrace.410 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.410.t
+	desc =  POD_embrace.410.desc
+	theme = embrace
+	
+	left_portrait = {
+		character = scope:vampiresire
+		animation = personality_bold
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = fear
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	immediate = {
+		scope:victim = {
+			save_scope_as = embraced_werewolf
+		}
+	}
+		
+	option = {
+		name = POD_embrace.410.option.a
+		custom_tooltip = POD_embrace.410.option.a.tt
+		
+		POD_lose_golconda_in_storyteller_mode_effect = yes
+		
+		random_list = {
+			1 = {
+				custom_tooltip = POD_embrace.410.option.a.success.tt
+				show_as_tooltip = {
+					scope:victim = { fera_embrace_effect = yes }
+				}
+				trigger_event = POD_embrace.420
+				modifier = {
+					factor = 0
+					scope:victim = {
+						POD_splat_mixing_haight_mode = no
+						NOR = {
+							has_trait = werewolf 
+							has_trait = ajaba
+							has_trait = bastet # TODO:trigger death without gnosis
+							has_trait = gurahl
+							has_trait = mokole # TODO:trigger death with frenzy
+							has_trait = rokea
+						}
+					}
+				}
+			}
+			
+			99 = {
+				custom_tooltip = POD_embrace.410.option.a.fail.tt
+				show_as_tooltip = {
+					failed_fera_embrace_effect = {
+						VAMPIRE = scope:vampiresire
+						VICTIM = scope:victim
+					}
+				}
+				trigger_event = { 	
+					id = POD_embrace.430
+				}
+				modifier = {
+					factor = 0
+					scope:victim = {
+						has_trait = flaying_plague
+					}
+				}
+			}
+			
+		}
+		
+		
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+POD_embrace.420 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.420.t
+	desc =  POD_embrace.420.desc		
+	theme = embrace
+	
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	
+	right_portrait = {
+		character = scope:embraced_werewolf
+		animation = stress
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.420.option.a
+		custom_tooltip = POD_embrace.420.option.a.tt
+		
+		scope:embraced_werewolf = {
+			add_trait = depressed_genetic
+			set_character_faith = root.faith
+		}
+
+		add_piety = medium_piety_loss
+		
+		POD_restore_hunger_from_victim_effect       = { VICTIM = scope:embraced_werewolf AMOUNT = 5 }
+		POD_resonance_from_feeding_on_victim_effect = { VICTIM = scope:embraced_werewolf AMOUNT = 5 }
+		
+		hidden_effect = {
+			scope:embraced_werewolf = {
+				save_scope_as = created_vampirechilde
+			}
+			POD_hunger_rouse_check_effect = yes
+			POD_player_character_create_vampirechilde_effect = yes
+			scope:created_vampirechilde = {
+				every_relation = {
+					type = herd_owner
+					POD_remove_herd_no_masquerade_effect = { TARGET = scope:created_vampirechilde }
+				}
+			}
+			if = {
+			     limit = {
+				     exists = scope:former_domitor
+				 }
+				 scope:created_vampirechilde = {
+				    remove_relation_ghoul_domitor = scope:former_domitor
+					remove_character_flag = blocked_from_leaving
+					remove_character_flag = blood_bonded
+				 }
+				 scope:former_domitor = {
+				     remove_hook = {
+					     target = scope:created_vampirechilde
+						 type = strong_bloodoath_hook
+					 }
+				 }
+			}
+		}
+	}
+}
+	
+POD_embrace.430 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.430.t
+	desc =  POD_embrace.430.desc		
+	theme = embrace
+	
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	
+	right_portrait = {
+		character = scope:embraced_werewolf
+		animation = sick
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.430.option.a
+		custom_tooltip = POD_embrace.430.option.a.tt
+		
+		failed_fera_embrace_effect = {
+			VAMPIRE = scope:vampiresire
+			VICTIM = scope:victim
+		}
+	}
+}
+
+POD_embrace.440 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_embrace.440.t
+	desc =  POD_embrace.440.desc		
+	theme = embrace
+	
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+	
+	right_portrait = {
+		character = scope:victim
+		animation = anger
+	}
+	
+	widget = {
+		gui = "POD_shader_event_blood"
+		container = "background_shader_vfx_container"
+	}
+	
+	option = {
+		name = POD_embrace.440.option.a
+		custom_tooltip = POD_embrace.440.option.a.tt
+		
+		increase_wounds_no_death_effect = { REASON = fight }
+	}
+	
+	after = {
+		if = {
+			limit = {
+				exists = scope:scheme
+			}
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}
+	}
+}
+
+#TODO
+# POD_embrace.500 = { #hunter gets in the way
+# 	type = character_event
+# 	title = POD_embrace.500.t
+# 	desc =  POD_embrace.500.desc		
+# 	theme = embrace #TODO:something different
+#
+# 	right_portrait = {
+# 		character = scope:victim
+# 		animation = anger
+# 	}
+# 	left_portrait = {
+# 		character = scope:hunter
+# 		animation = anger
+# 	}
+#
+#	widget = {
+#		gui = "POD_shader_event_blood"
+#		container = "background_shader_vfx_container"
+#	}
+#
+# 	weight_multiplier = {
+# 		modifier = {
+# 			scope:target.liege_or_court_owner = { POD_is_supehunter_trigger = yes }
+# 			factor = 15
+# 		}
+# 	}
+# 	immediate = {
+# 		#create hunter with decent prowess
+# 		create_character = {
+# 			location = scope:victim.location 
+# 			template = brother_character
+# 			prowess = { 3 10 }
+# 			save_scope_as = hunter
+# 		}
+# 	}
+# }
+
+# POD_embrace.510 = { #target runs to holy ground
+# 	type = character_event
+# 	title = POD_embrace.510.t
+# 	desc =  POD_embrace.510.desc		
+# 	theme = embrace #TODO:something different
+#	
+#	widget = {
+#		gui = "POD_shader_event_blood"
+#		container = "background_shader_vfx_container"
+#	}
+#
+# 	trigger = {
+# 		scope:target = {
+# 			POD_is_werewolf_trigger = no
+# 		}
+# 	}
+# 	weight_multiplier = {
+# 		modifier = {
+# 			scope:target = { POD_is_supehunter_trigger = yes }
+# 			factor = 10
+# 		}
+# 	}
+
+# 	cooldown = { years = 1 }
+# }
+
+# POD_embrace.600 = { #target wants you to embrace thier spouse/lover as well
+# 	ype = character_event
+# 	title = POD_embrace.600.t
+# 	desc =  POD_embrace.600.desc		
+# 	theme = embrace #TODO:something different
+#	
+#	widget = {
+#		gui = "POD_shader_event_blood"
+#		container = "background_shader_vfx_container"
+#	}
+#	
+# 	weight_multiplier = {
+# 		modifier = {
+# 			scope:target = { NOT = { faith = innocent }}
+# 			add = 50
+# 		}
+# 	}
+# }
+
+# POD_embrace.610 = { #target offers bribe to leave them alone
+
+# }
+
+# POD_embrace.620 = { #target commits suicide
+
+# }

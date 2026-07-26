@@ -1,0 +1,233 @@
+﻿POD_healing_bandages_interaction = {
+	category = interaction_category_mummy
+	interface_priority = 110
+	desc = POD_healing_bandages_interaction_desc
+	options_heading = POD_healing_bandages_interaction_options_heading
+	icon = POD_hekau_interaction
+
+	cooldown = { months = 3 }
+	
+	is_shown = {
+		scope:actor = { has_perk = wrapping_of_imhotep_perk }
+		POD_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				has_trait = scarred
+				has_trait = disfigured
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_sekhem_for_hekau = { AMOUNT = POD_healing_bandages_interaction_cost }
+		}
+		scope:recipient = {
+			POD_can_be_healed_trigger = yes
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = scarred
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = scarred } }
+		}
+		flag = scarred
+		localization = POD_heal_scarred
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				has_trait = disfigured
+			}
+		}
+		is_valid = {
+			scope:recipient = { POD_is_trait_not_permanent_trigger = { TRAIT = disfigured } }
+			scope:actor = { has_perk = wrappings_of_osiris_perk }
+		}
+		flag = disfigured
+		localization = POD_heal_disfigured
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_superficial_wound_trigger = yes
+			}
+		}
+		flag = wounded
+		localization = POD_heal_wounded
+	}
+	
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				POD_health_has_aggravated_wound_trigger = yes
+			}
+		}
+		is_valid = {
+			scope:actor = {
+				has_perk = wrappings_of_osiris_perk
+			}
+		}
+		flag = very_wounded
+		localization = POD_heal_wounded
+	}
+	
+	on_accept = {
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:actor = { POD_commit_heal_effect = yes }
+		}
+		scope:actor = {
+			POD_willpower_rouse_check_effect = yes
+			POD_hekau_cost_effect = { COUNT = POD_healing_bandages_interaction_cost }
+			POD_mummy_memory_check_effect = { LEVEL = 3 }
+		}
+		scope:recipient = {
+			play_music_cue = "mx_cue_peace_ensues"
+			switch = {
+				trigger = yes
+				scope:scarred		= { remove_trait = scarred }
+				scope:disfigured	= { remove_trait = disfigured }
+				scope:wounded		= { POD_heal_superficial_wound_effect = { COUNT = POD_base_heal_value } }
+				scope:very_wounded	= { POD_heal_aggravated_wound_effect = { COUNT = POD_base_aggravated_heal_value } }
+			}
+		}
+	
+		if = {
+			limit = { scope:actor != scope:recipient }
+			scope:recipient = {
+				add_opinion = {
+					target = scope:actor
+					modifier = pleased_opinion
+					opinion = 15
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = self
+	}
+	ai_targets = {
+		ai_recipients = courtiers
+		ai_recipients = peer_vassals
+		max = 10
+	}
+	ai_frequency = 36
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 100
+			scope:recipient = {
+				OR = {
+					this = scope:actor
+					is_knight_of = scope:actor
+				}
+			}
+		}
+	}
+}
+
+POD_eye_of_sakhmet_interaction = {
+	category = interaction_category_mummy
+	desc = POD_eye_of_sakhmet_interaction_desc
+	icon = POD_hekau_interaction
+
+	cooldown = { months = 3 }
+	
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = { has_perk = eye_of_sakhmet_perk }
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			POD_has_enough_sekhem_for_hekau = { AMOUNT = 2 }
+		}
+		scope:recipient = {
+			NOT = { has_character_modifier = eye_of_sakhmet_modifier }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			POD_hekau_cost_effect = { COUNT = 2 }
+			POD_mummy_memory_check_effect = { LEVEL = 4 }
+		}
+		scope:recipient = {
+			send_interface_toast = {
+				type = event_toast_effect_neutral
+				title = cursed_mummy_notification
+				left_icon = scope:actor
+	
+				show_as_tooltip = {
+					add_character_modifier = {
+						modifier = eye_of_sakhmet_modifier
+						years = 5
+					}
+				}
+			}
+	
+			add_character_modifier = {
+				modifier = eye_of_sakhmet_modifier
+				years = 5
+			}
+			add_opinion = {
+				target = scope:actor
+				modifier = hurt_opinion
+				opinion = -20
+			}
+		}
+	}
+	
+	auto_accept = yes
+	
+	ai_potential = {
+		# The basic requirements
+		is_imprisoned = no
+		is_landed = yes
+	}
+	ai_targets = {
+		ai_recipients = primary_war_enemies
+	}
+	ai_frequency = 60
+	ai_will_do = {
+		base = 0
+		
+		modifier = {
+			add = 45
+			scope:actor = {
+			    is_at_war_with = scope:recipient
+			}
+		}
+		modifier = {
+		    factor = 2
+			scope:actor = {
+				has_any_bad_relationship_with_character_trigger = {
+					CHARACTER = scope:recipient
+				}
+			}
+		}
+	}
+}

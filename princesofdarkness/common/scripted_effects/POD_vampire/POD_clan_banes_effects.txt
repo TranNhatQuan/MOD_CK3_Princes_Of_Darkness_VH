@@ -1,0 +1,33 @@
+﻿POD_ventrue_bane_effect = {
+	if = {
+		limit = {
+			is_ventrue_trigger = yes
+			NOT = { scope:victim = { is_vampire_trigger = yes } }
+		}
+		
+		if = {
+			limit = {
+				NOT = {
+					ventrue_weakness_compatible_trigger = {
+						ACTOR = this
+						RECIPIENT = scope:victim
+					}
+				}
+			}
+			POD_ventrue_bane_notification_effect = {
+				TARGET = scope:victim
+			}
+		}
+	}
+}
+
+POD_ventrue_bane_notification_effect = {
+	send_interface_message = {
+		type = event_generic_bad
+		title = POD_ventrue_bane_notification
+		left_icon = this
+		right_icon = $TARGET$
+		
+		custom_tooltip = ventrue_clan_bane
+	}
+}

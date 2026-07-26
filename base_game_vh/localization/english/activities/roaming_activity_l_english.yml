@@ -1,0 +1,550 @@
+﻿l_english:
+  activity_roaming: "Đi Bộ Đường Dài"
+  activity_roaming_desc: "Khởi hành một chuyến thám hiểm đơn độc đến những góc khuất của lãnh thổ. Cuộc phiêu lưu này mang lại khoảng lặng khỏi áp lực chốn triều đình, cho Ngài cơ hội nghỉ ngơi giữa những khu rừng cổ xưa và những ngọn đồi êm ả."
+  activity_roaming_host_desc: "$BULLET_WITH_TAB$[opinion_i|E][opinion|E]\n$BULLET_WITH_TAB$[stress_loss_i|E][stress_loss|E]\n$BULLET_WITH_TAB$[prestige_experience_i|E][prestige_experience|E]\n$BULLET_WITH_TAB$Có thể nhận [GetTrait('lifestyle_mystic').GetName( GetNullCharacter )] [trait|E] hoặc [trait_level_track_xp|E]"
+  activity_roaming_guest_desc: ""
+  activity_roaming_conclusion_desc: "Chuyến hành trình mang đến cơ hội tuyệt vời để tạm gác lại gánh nặng trị vì và tận hưởng khoảnh khắc thoát khỏi những áp lực đi kèm."
+  activity_roaming_selection_tooltip: "Lên đường cho một chuyến đi, tạm thời đặt sang một bên gánh nặng của việc cai trị.\n\nPhần thưởng dự kiến:\n$activity_roaming_host_desc$"
+  activity_roaming_destination_selection: "Địa hình [terrain|E] càng xa xôi thì [prestige_experience|E] và [stress_loss|E] nhận được từ [activity|E] càng cao."
+  honorary_guest_traveling_companion_for_host: "$honorary_guest_traveling_companion$"
+  honorary_guest_traveling_companion_desc_for_host: ""
+  honorary_guest_traveling_companion: "Ngài Đồng Hành"
+  activity_roaming_guest_help_text: "[activity_guest|E] sẽ có cơ hội giảm [stress|E] và nhận [prestige_experience|E]."
+  phase_roaming: "Lang Thang"
+  phase_roaming_desc: ""
+  activity_roaming_predicted_cost: "Chi phí của một chuyến [hike|E] chủ yếu phụ thuộc vào độ dài. Đi bộ càng lâu sẽ có nhiều cơ hội hơn, nhưng cũng tốn kém hơn."
+  hike_province_requirement_landless: "[adventurers|E] và [characters|E] không có [domain|E] chỉ có thể [hike_i][hike|E] tại [barony|E] đang đứng hoặc các nam tước lãnh lân cận"
+  hike_province_requirement_landed: "Ngài chỉ có thể [hike_i][hike|E] trong phạm vi [realm|E] của mình"
+
+  roaming_option_travel_length: "Độ Dài Hành Trình"
+  roaming_short_length: "Đi Bộ Ngắn Ngày"
+  roaming_short_length_desc: "$EFFECT_LIST_BULLET$ [activity|E] sẽ ngắn hơn và có ít cơ hội hơn\n\n#weak Một chuyến đi ngắn rời xa triều đình và giới quý tộc sẽ giúp đầu óc ta trở nên thanh thản.#!"
+  roaming_long_length: "Đi Bộ Dài Ngày"
+  roaming_long_length_desc: "$EFFECT_LIST_BULLET$ [activity|E] sẽ dài hơn và mang lại nhiều cơ hội hơn\n\n#weak Ta cần một chuyến đi dài, rời xa mọi thứ, chỉ để được là chính mình.#!"
+
+  roaming_befriend_intent: "Kết Giao"
+  roaming_befriend_intent_desc: "Ngài tìm kiếm cơ hội để tăng [opinion|E] với Ngài Đồng Hành. Hãy nhớ mang theo ai đó!"
+
+  roaming_mystic_intent: "Huyền Học"
+  roaming_mystic_intent_desc: "Ngài mong muốn những khoảnh khắc được ở một mình cùng suy tư. Tăng khả năng nhận [trait_level_track_xp|E]."
+
+  roaming_storyteller_intent: "Người Kể Chuyện"
+  roaming_storyteller_intent_desc: "Ngài tìm kiếm những khoảnh khắc đáng nhớ để tạo nên một câu chuyện hay! Tăng [prestige_experience|E] nhận được từ hoạt động."
+
+  activity_roaming_province_desc: "Ngài du hành đến [ROOT.Province.GetName]"
+  activity_roaming_astronomical_phenomenon: "\n#P ++ Hiện Tượng Thiên Văn#!"
+  activity_roaming_good_terrain: "\n#P ++ [ROOT.Province.GetTerrain.GetNameNoTooltip]#! ([terrain|E])"
+  activity_roaming_ok_terrain: "\n#P + [ROOT.Province.GetTerrain.GetNameNoTooltip]#! ([terrain|E])"
+  activity_roaming_empty_holding: "\n#P + Không Có Công Trình#! "
+
+  no_holding_roaming: "[ThisLocation.GetTerrain.GetNameNoTooltip] của [ThisLocation.GetNameNoTooltip]"
+  no_holding_roaming_tooltip: "[ThisLocation.GetTerrain.GetNameNoTooltip] của [ThisLocation.GetName]"
+  holding_roaming: "[ThisLocation.Custom('GetTerrainTypePlural')] quanh [ThisLocation.GetNameNoTooltip]"
+  holding_roaming_tooltip: "[ThisLocation.Custom('GetTerrainTypePlural')] quanh [ThisLocation.GetName]"
+
+  roaming_fame_reward_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: Ngài nhận #P [fame_value|0]#! [prestige_experience|E]"
+
+ ### Events
+ # Arrival Event
+  roaming_intro_terrain_snippet_forest: "Những tán cây cao vút, ánh nắng đùa giỡn trên nền rêu xanh, hương thiên nhiên tươi mới lan tỏa trong không khí."
+  roaming_intro_terrain_snippet_forest_2: "Tiếng chim hót trên những ngọn cây cao và thú rừng chuyển động trong bụi rậm."
+  roaming_intro_terrain_snippet_forest_winter: "Một khung cảnh yên bình nơi cây cối đứng lặng như những người canh gác, chỉ thỉnh thoảng bị phá vỡ bởi tiếng tuyết lạo xạo."
+  roaming_intro_terrain_snippet_forest_winter_2: "Một không gian tĩnh lặng được phủ kín bởi mùa đông, cây cối khoác lên mình lớp tuyết trắng."
+  roaming_intro_terrain_snippet_forest_monsoon: "Tiếng mưa rơi nhịp nhàng vang khắp nơi, những giọt nặng trĩu rơi xuống từ tán cây."
+
+  roaming_intro_terrain_snippet_mountain: "Ta ngước nhìn những ngọn núi sừng sững bao quanh, với các đỉnh cao như vươn tới tận trời."
+  roaming_intro_terrain_snippet_mountain_2: "Một khung cảnh ngoạn mục mở ra trước mắt, nơi cả con người lẫn muông thú đều nhỏ bé đến khó thấy."
+  roaming_intro_terrain_snippet_mountain_winter: "Những đỉnh núi được phủ tuyết trắng, bầu không khí sắc lạnh của mùa đông bao trùm."
+  roaming_intro_terrain_snippet_mountain_monsoon: "Những con sông và thác nước nhỏ đổ xuống sườn núi, biến các thung lũng thành thiên đường xanh mướt."
+
+  roaming_intro_terrain_snippet_hills: "Những ngọn đồi trải dài phía trước như biển xanh nâu bất tận."
+  roaming_intro_terrain_snippet_hills_2: "Ta nhìn thấy từng đỉnh đồi nối tiếp nhau, mỗi đỉnh là một mục tiêu nhỏ cần chinh phục."
+  roaming_intro_terrain_snippet_hills_winter: "Những ngọn đồi khoác lên mình lớp sương giá và tuyết, kéo dài đến tận chân trời."
+  roaming_intro_terrain_snippet_hills_winter_2: "Cái lạnh phủ trắng các ngọn đồi, sự tĩnh lặng chỉ bị phá vỡ bởi tiếng tuyết lạo xạo dưới chân."
+  roaming_intro_terrain_snippet_hills_monsoon: "Mưa tạo nên những dòng nước nhỏ chảy dọc sườn đồi, ngắn ngủi nhưng đầy ấn tượng."
+
+  roaming_intro_terrain_snippet_plains: "Chân trời vô tận dưới bầu trời rộng lớn, cỏ xanh đung đưa như biển nhẹ."
+  roaming_intro_terrain_snippet_plains_2: "Những đồng bằng trải dài, thỉnh thoảng có thú vật gặm cỏ từ xa."
+  roaming_intro_terrain_snippet_plains_winter: "Gió lạnh và tuyết phủ khắp mặt đất, trải dài đến tận tầm mắt."
+  roaming_intro_terrain_snippet_plains_winter_2: "Sự tĩnh mịch của mùa đông bao trùm, chỉ đôi lúc bị phá vỡ bởi thú hoang lang thang tìm thức ăn."
+  roaming_intro_terrain_snippet_plains_monsoon: "Đồng bằng lầy lội ướt đẫm dưới cơn mưa dữ dội."
+
+  roaming_intro_terrain_snippet_farmlands: "Những luống hoa màu nối tiếp nhau đến tận chân trời, với nông dân cặm cụi dưới nắng."
+  roaming_intro_terrain_snippet_farmlands_2: "Nông dân chăm sóc ruộng đồng trong khi gia súc thong thả gặm cỏ."
+  roaming_intro_terrain_snippet_farmlands_winter: "Đồng ruộng trống trải bị mùa đông bao phủ, không bóng người hay gia súc."
+  roaming_intro_terrain_snippet_farmlands_winter_2: "Những cánh đồng phủ sương giá lạnh lẽo, nhắc nhở về thời khắc trong năm."
+  roaming_intro_terrain_snippet_farmlands_monsoon: "Cánh đồng tràn đầy sức sống dưới những cơn mưa lớn, nông dân tận dụng tối đa điều kiện này."
+
+  roaming_intro_terrain_snippet_desert: "Biển cát vàng trải dài bất tận trước mắt, mặt trời treo thấp trên bầu trời."
+  roaming_intro_terrain_snippet_desert_2: "Không gian cát vàng trải rộng khắp mọi hướng, yên lặng và khắc nghiệt."
+  roaming_intro_terrain_snippet_desert_monsoon: "Cát tạm thời khuất phục trước mưa lớn, mang lại chút sự sống hiếm hoi."
+
+  roaming_intro_terrain_snippet_desert_mountains: "Những đỉnh núi gồ ghề vươn lên nền trời như những người gác câm lặng của vùng đất khô cằn."
+  roaming_intro_terrain_snippet_desert_mountains_2: "Những thung lũng ẩn giữa núi lớn, với các ốc đảo nhỏ mang lại phút giây nghỉ ngơi."
+  roaming_intro_terrain_snippet_desert_mountains_monsoon: "Nước mưa tạo nên những dòng chảy mới dọc sườn núi, làm dịu cảnh quan trong khoảnh khắc ngắn ngủi."
+
+  roaming_intro_terrain_snippet_oasis: "Hàng cọ đung đưa quanh một ốc đảo nhỏ, nơi thú vật tụ tập uống nước."
+  roaming_intro_terrain_snippet_oasis_2: "Cây xanh bao quanh làn nước trong vắt của ốc đảo, mang lại sự nghỉ ngơi cho lữ khách."
+  roaming_intro_terrain_snippet_oasis_monsoon: "Ốc đảo và vùng xung quanh trở nên trù phú dưới mưa lớn, cây cối lan xa hơn thường lệ."
+
+  roaming_intro_terrain_snippet_wetlands: "Đầm lầy trải dài bất tận, với vài nhóm người cẩn trọng di chuyển qua các lạch nước."
+  roaming_intro_terrain_snippet_wetlands_2: "Mặt nước phản chiếu bầu trời, lau sậy lay động trong gió, cùng tiếng côn trùng và gia súc vang vọng."
+  roaming_intro_terrain_snippet_wetlands_monsoon: "Mực nước dâng cao khiến việc di chuyển gần như bất khả thi. Khi ta suy nghĩ cách vượt qua, ta thấy một người lội nước chậm rãi, mực nước chạm tới ngực."
+
+  roaming_intro_second_half_generic: "Cuối cùng, ta có thể bỏ lại mọi đấu tranh phía sau và chỉ tập trung tìm lấy khoảnh khắc thư giãn — gác lại tất cả và thực sự nghỉ ngơi."
+  roaming_intro_second_half_winter: "Ta hy vọng đây sẽ là lúc thư giãn khỏi áp lực triều đình, nhưng... trời lạnh hơn ta tưởng."
+  roaming_intro_second_half_monsoon: "Mùa mưa ập đến khiến có lẽ đây không phải thời điểm thích hợp để trốn khỏi gánh nặng quý tộc. Giờ ta lại thấy nhớ mái nhà."
+
+  bp3_roaming.0005.t: "Đến Nơi"
+  bp3_roaming.0005.desc: "Ta và đoàn tùy tùng cuối cùng đã đến [province.GetName]. Trong khoảnh khắc ngắn ngủi, cảnh sắc trước mắt khiến ta sững sờ. [province.Custom('RoamingIntroTerrainSnippet')]\n\n[province.Custom('RoamingIntroSecondHalf')]"
+  bp3_roaming.0005.a: "À, cuối cùng cũng yên bình."
+  bp3_roaming.0005.b: "Thật là cảnh đẹp!"
+  bp3_roaming.0005.c: "Hy vọng ta mang đủ quần áo..."
+  bp3_roaming.0005.d: "Đúng là không đúng lúc..."
+
+  roaming_start_of_the_journey_key_title: "Khởi Hành"
+  roaming_start_of_the_journey_key: "[root_scope.GetShortUIName|U] bắt đầu hành trình của [root_scope.GetHerHis] băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+ # Outro Event
+  roaming_outro_snippet_stress_loss_weak: "Những vùng đất này đã xoa dịu tâm trí mệt mỏi của ta, dù chỉ rất khẽ. Một khoảng lắng nhẹ giữa cơn hỗn loạn của đời sống."
+  roaming_outro_snippet_stress_loss_weak_2: "Tại nơi trú ẩn này, ta đã tìm thấy đôi khoảnh khắc an yên, khiến tinh thần nhẹ nhõm hơn đôi chút."
+  roaming_outro_snippet_stress_loss_weak_3: "Nơi đây mang lại cho ta một lối thoát ngắn ngủi khỏi bổn phận. Chỉ là một niềm an ủi nhỏ, nhưng vẫn là an ủi."
+
+  roaming_outro_snippet_stress_loss_medium: "Ta cảm thấy như có một gánh nặng vừa được trút khỏi vai mình."
+  roaming_outro_snippet_stress_loss_medium_2: "Ở đây, được thiên nhiên bao bọc và cách xa con người, những phiền muộn của ta dường như không còn quá nặng nề."
+  roaming_outro_snippet_stress_loss_medium_3: "Một cảm giác bình yên bao trùm lấy ta, và những rắc rối quen thuộc giờ chỉ còn là cái bóng mờ nhạt của chính chúng. Ít nhất là lúc này."
+
+  roaming_outro_snippet_stress_loss_strong: "Ta cảm thấy được tái sinh, như thể vừa trút bỏ một tấm áo choàng nặng trĩu lo âu."
+  roaming_outro_snippet_stress_loss_strong_2: "Rời khỏi những vùng đất này, ta thấy tinh thần sảng khoái sâu sắc, tâm trí minh mẫn và trái tim nhẹ nhàng hơn."
+  roaming_outro_snippet_stress_loss_strong_3: "Áp lực từng đè nặng nay trở nên xa vời, như mây đen bị ánh mặt trời xua tan."
+
+  roaming_outro_snippet_stress_loss_very_strong: "Giữa chốn hoang dã tĩnh lặng, ta đã tìm thấy sự sáng tỏ và thấu hiểu sâu sắc hơn về con đường của mình."
+  roaming_outro_snippet_stress_loss_very_strong_2: "Mọi căng thẳng tan biến, và ta cảm thấy như đã tìm ra một ý nghĩa mới cho cuộc sống."
+  roaming_outro_snippet_stress_loss_very_strong_3: "Tại nơi yên bình này, ta có thể gác lại mọi lo âu, và trở về trong trạng thái hồi sinh, đổi khác như một [ROOT.Char.GetWomanMan]."
+
+  roaming_outro_snippet_returning_home: "Quay đầu lại, khẽ thở dài với chính mình, ta bắt đầu hành trình trở về."
+  roaming_outro_snippet_returning_home_2: "Miễn cưỡng quay đi, cất giữ ký ức sang một bên, ta lên đường trở về với những bổn phận đang chờ đợi."
+  roaming_outro_snippet_returning_home_3: "Ta hít một hơi thật sâu, tận hưởng những khoảnh khắc cuối cùng tại chốn trú ẩn này, trước khi bắt đầu hành trình về nhà."
+  roaming_outro_snippet_returning_home_4: "Với trái tim bình thản hơn nhiều so với bấy lâu nay, cuối cùng ta cũng nói lời từ biệt nơi này — đã đến lúc trở về."
+
+  bp3_roaming.0010.t: "Trở Về Nhà"
+  bp3_roaming.0010.desc: "Với bước chân cuối cùng, ta rời khỏi [province.Custom('HoldingNoHoldingTerrainRoaming')]. Ta ngoái nhìn lại lần cuối, hồi tưởng về hành trình của mình qua [province.GetTerrain.GetNameNoTooltip|l]. [ROOT.Char.Custom('RoamingOutroStressLoss')]\n\n[ROOT.Char.Custom('RoamingOutroReturningHome')]"
+  bp3_roaming.0010.a: "Than ôi, đời là thế..."
+
+  roaming_end_of_the_journey_key_title: "Kết Thúc Hành Trình"
+  roaming_end_of_the_journey_key: "[host.GetShortUIName|U] kết thúc hành trình của [host.GetHerHis] băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+ ### Mid-Activity Events
+  bp3_roaming.0050.t: "Khung Cảnh Ngoạn Mục"
+  bp3_roaming.0050.desc: "Chúng ta tiếp tục leo lên sườn dốc, chậm rãi, từng bước một. Đó là một ngày dài, và ta cảm nhận rõ đùi mình đang bỏng rát. Lúc này ta chỉ còn tập trung vào việc đặt từng bước chân lên phía trước, cho đến khi một vệ binh giúp ta vượt qua vài bước cuối cùng.\n\nBất chợt, chúng ta đứng trên một mỏm đá, và trước mắt ta là thung lũng trải dài bên dưới, như một tấm thảm xanh nâu đan xen. Vì kiệt sức và gian truân của chuyến đi, ta đã không nhận ra mình đã leo cao đến nhường nào — nhưng giờ thì... mọi thứ đều xứng đáng."
+  bp3_roaming.0050.a: "Quả là cảnh tượng làm dịu cả mắt lẫn đôi chân."
+
+  breathtaking_view_key_title: "$bp3_roaming.0050.t$"
+  breathtaking_view_key: "[host.GetShortUIName] đã lên đến điểm cao nhất của [province.GetName], nơi mang đến một khung cảnh tuyệt mỹ, và quyết định đã đến lúc quay về."
+
+  bp3_roaming.0060.t: "Ốc Đảo Nhỏ"
+  bp3_roaming.0060.desc: "Sau nhiều giờ băng qua vùng hoang mạc vàng rực, chúng ta bắt đầu thấy dấu hiệu của một ốc đảo phía xa. Ban đầu ta lo đó chỉ là ảo ảnh, nhưng khi đến gần hơn, ta thấy vài con vật đang gặm cỏ quanh đó.\n\nTa tìm một góc nhỏ trong bóng râm, nơi ta và các vệ binh cuối cùng cũng có thể nghỉ chân. Một nơi để tạm dừng — ít nhất là lúc này. Đây là điểm dừng hoàn hảo trước khi chúng ta tìm đường trở về."
+  bp3_roaming.0060.a: "Một nơi nhỏ bé mà xinh đẹp giữa chốn hoang vu."
+
+  the_oasis_key_title: "$bp3_roaming.0060.t$"
+  the_oasis_key: "[host.GetShortUIName] đã tình cờ bắt gặp một ốc đảo nhỏ yên bình tại [province.GetName], nơi [host.GetSheHe] nghỉ ngơi trước khi [host.GetSheHe] bắt đầu tìm đường trở về nhà."
+
+  bp3_roaming.0070.t: "Cuối Con Đường"
+  bp3_roaming.0070.desc.intro: "Chúng ta đã theo một lối mòn cũ xuyên qua khu rừng suốt nhiều giờ, khi nó dần mờ nhạt rồi hoàn toàn biến mất. Nhìn quanh, ta thấy mình đứng trong một khoảng trống nhỏ — chẳng có gì cả. Chỉ là... sự tĩnh lặng của hoang dã.\n\n"
+  bp3_roaming.0070.desc.landless: "Ta không xa lạ gì với cuộc sống nơi hoang dã, nhưng bằng cách nào đó, lúc này lại có cảm giác như chúng ta đã vượt qua ranh giới giữa thế giới con người và cõi vô danh. Đã đến lúc rời khỏi khoảng trống nhỏ này và quay về trại. Ta tự hỏi liệu mình có còn thấy lại nơi này nữa không."
+  bp3_roaming.0070.desc.landed: "Việc ở đây vốn đã khiến ta cảm thấy xa rời cuộc sống tại [ROOT.Char.GetCapitalLocation.GetTitle.GetNameNoTier], nhưng giờ đây dường như chúng ta đã vượt qua ranh giới giữa thế giới con người và điều chưa biết. Đã đến lúc rời khỏi khoảng trống này và bắt đầu đi về nhà. Ta tự hỏi liệu mình có còn gặp lại nó không."
+  bp3_roaming.0070.a: "Một nơi thật kỳ lạ."
+
+  paths_end_key_title: "$bp3_roaming.0070.t$"
+  paths_end_key: "[host.GetShortUIName] đã tình cờ bắt gặp một khoảng rừng nhỏ kỳ lạ giữa vùng hoang dã của [province.GetName], nơi [host.GetSheHe] dừng chân nghỉ ngơi một lúc trước khi [host.GetSheHe] bắt đầu lên đường trở về nhà."
+
+  bp3_roaming.0080.t: "Hơi Thở Đại Dương"
+  bp3_roaming.0080.desc: "Rất lâu trước khi nhìn thấy, chúng ta đã nghe tiếng hải âu kêu vang trên đầu và ngửi thấy mùi muối mằn mặn trong không khí. Rồi cảnh tượng mở ra trước mắt — một biển xanh mênh mông trải dài đến tận chân trời. Chúng ta ngồi xuống bên làn nước, lặng lẽ ngắm những con sóng nhẹ nhàng vỗ bờ.\n\nTrong khoảnh khắc ấy, ta cảm thấy mọi lo âu có thể tạm gác lại. Một khoảnh khắc mà ta chỉ đơn thuần tận hưởng trải nghiệm này. Ta biết mình sẽ sớm phải trở về nhà, nhưng lúc này đây — ta đang ở nơi này."
+  bp3_roaming.0080.a: "Quả là một cuộc sống yên bình."
+
+  ocean_scent_key_title: "$bp3_roaming.0080.t$"
+  ocean_scent_key: "[host.GetShortUIName] dẫn [host.GetHerHis] đoàn người đến bờ biển tại [province.GetName], nơi họ nghỉ chân trước khi bắt đầu hành trình dài trở về."
+
+  bp3_roaming.0090.t: "Dòng Sông Nơi Cuối Hành Trình"
+  bp3_roaming.0090.desc: "Trời đã xế chiều khi chúng ta cuối cùng cũng đến được một con sông nhỏ, không hề thấy bóng dáng cây cầu nào. Ta cố nhìn sang bờ bên kia, nhưng chẳng có gì hiện ra trước mắt. Ở một khía cạnh nào đó, nơi này giống như ranh giới giữa những tàn dư cuối cùng của văn minh và vùng hoang dã vô định phía đối diện.\n\nTa ngồi xuống nghỉ chân một lát. Đôi khi, ta có cảm giác như thấy có thứ gì đó chuyển động bên kia dòng nước, hoặc như có ai đang dõi theo mình — nhưng ta không thể nhận ra điều gì rõ ràng."
+  bp3_roaming.0090.a: "Một điểm dừng chân hợp lý, ta nghĩ vậy."
+
+  river_journeys_end_key_title: "$bp3_roaming.0090.t$"
+  river_journeys_end_key: "[host.GetShortUIName] đã gặp một con sông không thể vượt qua ở vùng hẻo lánh của [province.GetName], nơi [host.GetSheHe] dừng lại nghỉ ngơi trước khi tiếp tục hành trình trở về."
+
+ ### Random Events
+  bp3_roaming.0100.t: "Gặp Gỡ Một Người Lạ"
+  bp3_roaming.0100.desc: "Khi ta lang thang qua [activity.GetCurrentPhase.GetLocation.Custom('GetTerrainType')], ta bắt gặp một [ancient_traveler.GetWomanMan] lớn tuổi đang ngồi trên một tảng đá phong hoá ở ven đường. Một lúc lâu trôi qua trong im lặng, khi [ancient_traveler.GetWomanMan] dường như hoàn toàn đắm chìm trong suy tư, cho đến khi [ancient_traveler.GetSheHe] cuối cùng cũng nhận ra sự hiện diện của ta.\n\nKhẽ gật đầu chào, [ancient_traveler.GetSheHe] chậm rãi đứng dậy, mỗi cử động kèm theo tiếng xương cốt kẽo kẹt, rồi bước đi vào cõi vô định."
+  bp3_roaming.0100.desc.companion: "\n\n[special_guest.GetFirstName] ngồi xuống tảng đá cũ, thở phào nhẹ nhõm, tỏ ra quan tâm đến việc nghỉ ngơi hơn là trò chuyện cùng [ancient_traveler.GetWomanMan]."
+  bp3_roaming.0100.a: "Vậy rốt cuộc [ancient_traveler.GetSheHe] đang nghĩ gì giữa chốn hoang dã này?"
+  bp3_roaming.0100.a.flavor: "Dù sao thì đây cũng là nơi tuyệt vời để suy ngẫm."
+  bp3_roaming.0100.b: "Cuối cùng cũng có dịp ngồi xuống nghỉ ngơi."
+  bp3_roaming.0100.c: "Khoan đã, lão [ancient_traveler.GetWomanMan]!"
+  bp3_roaming.0100.c.flavor: "Biết đâu [ancient_traveler.GetSheHe] có điều gì khôn ngoan để chia sẻ?"
+  bp3_roaming.0100.c.win: "Ta có một cuộc trò chuyện đầy giá trị với [ancient_traveler.GetNameNoTooltip]"
+  bp3_roaming.0100.c.neutral: "Ta thuyết phục [ancient_traveler.GetNameNoTooltip] gia nhập triều đình của mình"
+  bp3_roaming.0100.c.loss: "[ancient_traveler.GetNameNoTooltip] không hề hứng thú trò chuyện"
+  bp3_roaming.0100.d: ""Và chỉ trong khoảnh khắc ta ngoảnh đi, [ancient_traveler.GetSheHe] đã biến mất không dấu vết...""
+
+  roaming_pondering_stone_mystic_key_title: "Mặc Khải"
+  roaming_pondering_stone_mystic_key: "[host.GetShortUIName] đã có nhiều mặc khải khi [host.GetSheHe] ngồi trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  roaming_pondering_stone_key_title: "Tảng Đá Trầm Tư"
+  roaming_pondering_stone_key: "[host.GetShortUIName|U] tìm thấy một tảng đá phong hoá yên tĩnh, nơi [host.GetSheHe] ngồi lại và suy ngẫm về cuộc đời của [host.GetHerHis] trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  roaming_resting_stone_key_title: "Tảng Đá Nghỉ Chân"
+  roaming_resting_stone_key: "[host.GetShortUIName|U] tìm thấy một tảng đá phong hoá yên tĩnh để nghỉ ngơi trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  roaming_old_man_key_title: "Lữ Khách Cổ Xưa"
+  roaming_old_man_key: "Trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [host.GetShortUIName|U] đã gặp một [ancient_traveler.GetWomanMan] già nua, từng trải."
+
+  roaming_ancient_traveler_poet_key_title: "Lữ Khách Huyền Bí"
+  roaming_ancient_traveler_poet_key: "Trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [host.GetShortUIName|U] đã gặp một [ancient_traveler.GetWomanMan] huyền bí."
+
+  pondering_rulership_modifier: "Trầm Tư Về Quyền Lực"
+  pondering_rulership_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về gánh nặng của việc trị vì."
+  pondering_religion_modifier: "Trầm Tư Về Đức Tin"
+  pondering_religion_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về tác động của tôn giáo đối với cuộc đời mình."
+  pondering_war_modifier: "Trầm Tư Về Chiến Tranh"
+  pondering_war_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về chiến tranh và chiến lược."
+  pondering_schemes_modifier: "Trầm Tư Về Âm Mưu"
+  pondering_schemes_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về các âm mưu và những kẻ có thể đang tìm cách gài bẫy họ."
+  pondering_management_modifier: "Trầm Tư Về Quản Trị"
+  pondering_management_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về cách cải thiện lãnh thổ của mình."
+  pondering_travel_modifier: "Trầm Tư Về Hành Trình"
+  pondering_travel_modifier_desc: "Nhân vật này đã dành nhiều thời gian để suy ngẫm về những chuyến đi của mình."
+
+  bp3_roaming.0110.t: "[sighting_province.GetTitle.GetDeJureLiege.Custom('GetAnimalType')|U] tại [sighting_province.GetNameNoTooltip]"
+  bp3_roaming.0110.desc: "Khi thời tiết dần xấu đi, ta bất chợt thấy thứ gì đó trồi lên từ bụi rậm phía trước. Một con [sighting_province.GetTitle.GetDeJureLiege.Custom('GetAnimalType')] to lớn một cách đáng ngạc nhiên dừng lại chỉ cách ta vài bước, ánh mắt nó chạm vào ta khi nhận ra sự hiện diện của mình.\n\nChỉ trong chốc lát, con vật bất ngờ quay đầu và lao vút trở lại vào hoang dã."
+  bp3_roaming.0110.desc.companion: " Bên cạnh ta, ta nghe thấy [special_guest.GetFirstName] thở phào nhẹ nhõm."
+  bp3_roaming.0110.a: "Có lẽ đã đến lúc chuẩn bị một cuộc săn."
+  bp3_roaming.0110.b.weakling: "Phù! Ta đã lo lắng trong chốc lát."
+  bp3_roaming.0110.b.hunter: "Thật là một sinh vật nhỏ bé kỳ lạ!"
+  bp3_roaming.0110.c: ""Sau một trận giao chiến dữ dội, con mãnh thú khổng lồ quay đầu bỏ chạy...""
+
+  roaming_animal_sighting_key_title: "Phát Hiện Động Vật"
+  roaming_animal_sighting_key: "[host.GetShortUIName] đã chạm trán một con thú hoang khi băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  roaming_animal_sighting_poet_key_title: "$roaming_animal_sighting_key_title$"
+  roaming_animal_sighting_poet_key: "[host.GetShortUIName] đã giao chiến với một con thú hoang trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  bp3_roaming.0120.t: "Một [sighting_province.GetTitle.GetDeJureLiege.Custom('GetAnimalType')|U] Huyền Thoại"
+  bp3_roaming.0120.desc: "Giữa lúc thời tiết khắc nghiệt, ta bất chợt thấy có thứ gì đó chuyển động nơi rìa tầm nhìn. Chỉ trong khoảnh khắc, khung cảnh trở nên rõ ràng, và ta trông thấy một con [sighting_province.GetTitle.GetDeJureLiege.Custom('GetLegendaryColor')] [sighting_province.GetTitle.GetDeJureLiege.Custom('GetAnimalType')] hoàn toàn khác thường đang nhìn thẳng về phía mình.\n\nTâm trí ta vội vàng lục lại những câu chuyện hiếm hoi từng nghe về sinh vật huyền bí ấy, khi nó đứng sừng sững ngay trước mắt. Nhưng cũng nhanh như lúc xuất hiện, nó lại biến mất vào [activity.GetCurrentPhase.GetLocation.Custom('RoamingLegendaryBeastProvinceWeather')]."
+  bp3_roaming.0120.desc.companion: "$bp3_roaming.0110.desc.companion$"
+  bp3_roaming.0120.a: "Nó phải thuộc về ta!"
+  bp3_roaming.0120.b: "Thật là một cảnh tượng kỳ vĩ!"
+  bp3_roaming.0120.c: ""Rồi con quái thú khổng lồ lao thẳng về phía ta...""
+
+  roaming_legendary_sighting_key_title: "Phát Hiện Huyền Thoại"
+  roaming_legendary_sighting_key: "[host.GetShortUIName] đã bắt gặp một sinh vật huyền thoại khi băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  roaming_legendary_sighting_poet_key_title: "$roaming_legendary_sighting_key_title$"
+  roaming_legendary_sighting_poet_key: "[host.GetShortUIName] đã bị một sinh vật huyền thoại tấn công trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  LegendaryBeastProvinceWeatherSnow: "tuyết"
+  LegendaryBeastProvinceWeatherRain: "mưa"
+  LegendaryBeastProvinceWeatherFog: "sương mù"
+
+  bp3_roaming.0130.t: "Chiến Trường Bị Lãng Quên"
+  bp3_roaming.0130.desc: "Ta nghe thấy tiếng chim ăn xác vang lên từ xa rất lâu trước khi tận mắt nhìn thấy cảnh tượng. Một chiến trường nhỏ đầy xác chết, rõ ràng đã bị bỏ mặc cho mục nát suốt một thời gian dài.\n\nNhững con chim, mỏ vấy máu, thỉnh thoảng ngẩng đầu lên khỏi bữa ăn khi ta đi ngang qua."
+  bp3_roaming.0130.desc.companion: " [special_guest.GetFirstName] bị nghẹn lời khi chứng kiến toàn bộ cảnh tượng trước mắt, rồi tìm cách rời khỏi khu vực này."
+  bp3_roaming.0130.a: "Ta nên dâng một lời cầu nguyện nhỏ cho những người đã khuất."
+  bp3_roaming.0130.b: "Xem thử ta có thể tìm được thứ gì giá trị không."
+  bp3_roaming.0130.c: ""Rồi ta thấy người chết trỗi dậy từ lòng đất...""
+
+  roaming_battlefield_prayer_key_title: "Chiến Trường Bị Lãng Quên"
+  roaming_battlefield_prayer_key: "Tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], [host.GetShortUIName] đã phát hiện một chiến trường bị lãng quên, nơi [host.GetSheHe] dâng lên một lời cầu nguyện cho những người đã khuất."
+
+  roaming_battlefield_scavenging_key_title: "$roaming_battlefield_prayer_key_title$"
+  roaming_battlefield_scavenging_key: "Tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], [host.GetShortUIName] đã phát hiện một chiến trường bị lãng quên, nơi [host.GetSheHe] tranh thủ lục soát để tìm kiếm vật giá trị."
+
+  roaming_battlefield_poet_key_title: "$roaming_battlefield_prayer_key_title$"
+  roaming_battlefield_poet_key: "Tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], [host.GetShortUIName] đã phát hiện một chiến trường bị lãng quên, nơi [host.GetSheHe] khẳng định rằng mình đã thấy người chết trỗi dậy."
+
+  bp3_roaming.0140.t: "Một Đêm Giữa Hoang Dã"
+  bp3_roaming.0140.desc: "Bóng tối tĩnh lặng bao trùm trại khi chúng ta chuẩn bị nghỉ ngơi qua đêm. Một lính gác đứng canh, nhưng chẳng mấy ai có thể thực sự an tâm. Những âm thanh lách cách, bò trườn và chuyển động của các sinh vật trong đêm phá vỡ sự im lặng.\n\nTrên cao, bầu trời đêm là một tấm thảm vô tận của những đốm sáng li ti. Trong khoảnh khắc, ta cố xua tan mọi âm thanh xung quanh để tập trung vào cảnh tượng ấy."
+  bp3_roaming.0140.desc.companion: "\n\nTrong lúc đó, ta nghe thấy [special_guest.GetFirstName] khẽ ngáy gần bên. Có vẻ như không ai khác gặp khó khăn trong việc tìm giấc ngủ..."
+  bp3_roaming.0140.a: "Đừng nghĩ ngợi nữa, cứ nhắm mắt lại và cầu nguyện."
+  bp3_roaming.0140.b: ""Lính gác! Lục soát khu rừng tìm mọi sinh vật — dù là huyền bí hay bình thường!""
+  bp3_roaming.0140.b.1: "Ngài thức trắng đêm để tìm kiếm mối đe doạ"
+  bp3_roaming.0140.b.2: "Ngài xua đuổi được thứ gì đó đang rình rập"
+  bp3_roaming.0140.b.3: "Ngài thiếp đi trong lúc chờ lính gác hoàn thành nhiệm vụ"
+  bp3_roaming.0140.c: ""Ta thấy những sinh vật phi nhân bé nhỏ nhảy múa bên rìa ánh lửa...""
+  bp3_roaming.0140.d: "Một thời điểm và nơi chốn hoàn hảo để suy ngẫm."
+
+  roaming_night_scare_key_title: "Đêm Giữa Hoang Dã"
+  roaming_night_scare_key: "[host.GetShortUIName] đã trải qua trọn một đêm tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip] trong nỗi sợ hãi bởi những âm thanh của màn đêm."
+
+  roaming_night_threat_key_title: "$roaming_night_scare_key_title$"
+  roaming_night_threat_key: "[host.GetShortUIName] đã trải qua trọn một đêm tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip] để tìm kiếm những mối đe doạ tưởng tượng."
+
+  roaming_night_sleep_key_title: "$roaming_night_scare_key_title$"
+  roaming_night_sleep_key: "[host.GetShortUIName] đã có một giấc ngủ ngon sau khi xua đuổi những sinh vật quấy rầy [host.GetHerHim] tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip]."
+
+  roaming_night_poet_key_title: "$roaming_night_scare_key_title$"
+  roaming_night_poet_key: "[host.GetShortUIName] được cho là đã thức suốt đêm để quan sát những sinh vật phi nhân nhảy múa quanh trại của [host.GetHerHis]."
+
+  roaming_night_mystic_key_title: "Bầu Trời Đêm"
+  roaming_night_mystic_key: "[host.GetShortUIName] đã dành trọn một đêm ngắm nhìn bầu trời đêm và suy ngẫm về cuộc đời."
+
+  bp3_roaming.0150.t: "Ao Nước Tĩnh Lặng"
+  bp3_roaming.0150.desc: "Sau một ngày dài băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], ta bất chợt bắt gặp một ao nước yên tĩnh giữa chốn hoang dã. Ngoài vài con chim lặng lẽ uống nước bên bờ, không thấy bóng dáng con người hay dã thú nào.\n\n"
+  bp3_roaming.0150.desc.no_companion: "Ta ngồi xuống bên mặt nước, nghỉ đôi chân mỏi và hít một hơi thật sâu."
+  bp3_roaming.0150.desc.companion: "Chúng ta ngồi xuống bên mặt nước, nghỉ đôi chân, và ta nghe [special_guest.GetFirstName] thở dài nặng nhọc."
+  bp3_roaming.0150.a: "À, một khoảnh khắc để nghỉ ngơi."
+  bp3_roaming.0150.b: ""Ta rời đi khi nghe thấy một giai điệu mê hoặc vang vọng trên mặt nước...""
+
+  roaming_quiet_pond_key_title: "Ao Nước Tĩnh Lặng"
+  roaming_quiet_pond_key: "[host.GetShortUIName] đã bắt gặp một ao nước yên tĩnh giữa vùng hoang dã của [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], nơi [host.GetSheHe] tìm được sự nghỉ ngơi."
+
+  roaming_quiet_pond_poet_key_title: "$roaming_quiet_pond_key_title$"
+  roaming_quiet_pond_poet_key: "[host.GetShortUIName] đã bắt gặp một ao nước yên tĩnh, nhưng được cho là đã bỏ chạy khi một giai điệu mê hoặc thôi thúc [host.GetHerHim] tiến sâu hơn vào làn nước..."
+
+  bp3_roaming.0160.t: "Trang Trại Bốc Cháy"
+  bp3_roaming.0160.desc: "Từ rất lâu trước khi nhìn thấy, ta đã ngửi thấy mùi gỗ cháy khét lẫn với mùi thịt bị thiêu. Khi đến nơi, thứ duy nhất còn lại trước mắt ta chỉ là bộ khung âm ỉ khói của một trang trại từng rất lớn.\n\n"
+  bp3_roaming.0160.desc.no_companion: "Lính gác của ta chỉ mất một thoáng để chỉ ra rằng nơi này không còn ai, cũng chẳng còn gì để cứu."
+  bp3_roaming.0160.desc.companion: "Ta nghe [special_guest.GetFirstName] nói chuyện với lính gác; nơi này không còn ai, cũng chẳng còn gì để cứu."
+  bp3_roaming.0160.desc.outro: " Thứ duy nhất còn sót lại chỉ là tro tàn của một mái nhà và những con người từng sinh sống tại đó."
+  bp3_roaming.0160.a: "Tìm hài cốt và cho họ được yên nghỉ tử tế."
+  bp3_roaming.0160.b: "Lính gác, lục soát sạch nơi này."
+  bp3_roaming.0160.c: ""Chúng Ta đã nhiều lần cố xông vào toà nhà đang cháy, nhưng đều vô ích...""
+
+  roaming_burning_farm_piety_key_title: "Trang Trại Bốc Cháy"
+  roaming_burning_farm_piety_key: "Trong chuyến hành trình của mình, [host.GetShortUIName] đã tình cờ bắt gặp một trang trại đang cháy. [host.GetSheHe|U] cùng những người lính canh của [host.GetHerHis] đã an táng những gì còn sót lại trước khi rời đi."
+
+  roaming_burning_farm_greedy_key_title: "$roaming_burning_farm_piety_key_title$"
+  roaming_burning_farm_greedy_key: "Trong chuyến hành trình của mình, [host.GetShortUIName] đã tình cờ bắt gặp một trang trại đang cháy. [host.GetSheHe|U] cùng những người lính canh của [host.GetHerHis] đã vét sạch nơi này trước khi rời đi."
+
+  roaming_burning_farm_poet_key_title: "$roaming_burning_farm_piety_key_title$"
+  roaming_burning_farm_poet_key: "Trong chuyến hành trình của mình, [host.GetShortUIName] đã tình cờ bắt gặp một trang trại đang cháy. Người ta cho rằng [host.GetSheHe|U] đã cố gắng hết sức để giúp đỡ những người còn sống tại đó, nhưng không thể làm gì được."
+
+  bp3_roaming.0170.t: "Một Ngày Yên Ả"
+  bp3_roaming.0170.desc: "Bất chấp bao kỳ vọng, ngày hôm nay trôi qua một cách lạ lùng — giản dị và yên tĩnh đến lạ. Ban đầu, ta giật mình trước mọi hình ảnh và âm thanh. Thế nhưng, khi thời gian dần trôi, chẳng có điều gì thực sự đáng nhớ, và sự chú ý của ta cũng dần phai nhạt.\n\n"
+  bp3_roaming.0170.desc.no_companion: "Dần dần, ta lại bắt đầu tận hưởng chính sự đơn giản của cuộc dạo bước. Đó trở thành khoảng thời gian chỉ dành cho ta và những suy nghĩ của mình."
+  bp3_roaming.0170.desc.companion: "Dần dần, ta nhận ra mình trân trọng khoảng thời gian bên [special_guest.GetFirstName]. Không có chuyện gì quan trọng xảy ra, nhưng vẫn thật dễ chịu."
+  bp3_roaming.0170.a: "Có lẽ đây chính là điều ta cần."
+
+  roaming_quiet_day_key_title: "Một Ngày Yên Ả"
+  roaming_quiet_day_key: "[host.GetShortUIName|U] đã có một ngày yên bình đến kỳ lạ khi [host.GetSheHe] đi qua [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip]."
+
+  bp3_roaming.0180.t: "Những Lời Lẩm Bẩm Mệt Mỏi"
+  bp3_roaming.0180.desc: "Ta khá tận hưởng chuyến đi bộ qua [ROOT.Char.GetCurrentLocation.GetName], nhưng rõ ràng người Ngài đồng hành của ta thì không. [special_guest.GetFirstName] bắt đầu tụt lại phía sau khá nhiều, và ta nghe thấy những lời càu nhàu phát ra từ [special_guest.GetHerHim], đôi khi còn kèm theo cả tên ta. Với giọng đầy bực bội, cuối cùng [special_guest.GetSheHe] cũng lên tiếng: \"Chúng ta tới chưa vậy?\"\n\nTa khá chắc rằng đích đến vẫn còn rất xa, và vẫn còn một quãng đường dài phía trước. [special_guest.GetSheHe|U] nhìn ta với vẻ mong đợi câu trả lời."
+  bp3_roaming.0180.a: "Không sao đâu, chỉ quanh góc kia thôi!"
+  bp3_roaming.0180.a_short: "Ngài tiếp tục đi!"
+  bp3_roaming.0180.b: "Có lẽ đã đến lúc nghỉ ngơi..."
+
+  roaming_tired_mutterings_lies_key_title: "Những Lời Lẩm Bẩm Mệt Mỏi"
+  roaming_tired_mutterings_lies_key: "Bất chấp những lời than vãn mệt mỏi từ [special_guest.GetShortUIName|U], [host.GetShortUIName|U] vẫn phớt lờ."
+
+  roaming_tired_mutterings_break_key_title: "Những Lời Lẩm Bẩm Mệt Mỏi"
+  roaming_tired_mutterings_break_key: "Sau những lời lẩm bẩm và than phiền mệt mỏi từ [special_guest.GetShortUIName|U], [host.GetShortUIName|U] quyết định nghỉ ngơi."
+
+  roaming_tired_mutterings_athletic_key_title: "Một Cuộc Dạo Bước Dài"
+  roaming_tired_mutterings_athletic_key: "[host.GetShortUIName|U] đã dành khá nhiều thời gian băng qua [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], rèn luyện thể lực và tìm thấy niềm vui trong hành trình."
+
+  bp3_roaming.0190.t: "Cơ Hội Trò Chuyện"
+  bp3_roaming.0190.desc: "Khi băng qua vùng hoang dã quanh [ROOT.Char.GetCurrentLocation.GetName], [special_guest.GetFirstName] và ta có rất nhiều thời gian để trò chuyện. Ta từng hy vọng chúng ta sẽ có khoảng thời gian dễ chịu bên nhau, nhưng lại bất ngờ hơn nữa khi mọi thứ diễn ra tốt đẹp đến vậy.\n\n[special_guest.GetFirstNameNoTooltip] mang đến vô số chủ đề thú vị — từ những con người ở quê nhà [ROOT.Char.GetCapitalLocation.GetName], chuyện đồn địa phương, cho đến những câu chuyện đáng nhớ. Thời gian trôi qua hàng giờ lúc nào không hay, mà cảm giác chỉ như một khoảnh khắc."
+  bp3_roaming.0190.a: "Ta không thể tin được [random_courtier.GetFirstNameNoTooltip] lại nói vậy! Thật là buồn cười!"
+
+  roaming_chance_to_talk_key_title: "Cơ Hội Trò Chuyện"
+  roaming_chance_to_talk_key: "[special_guest.GetShortUIName|U] và [host.GetShortUIName|U] đã tận hưởng khoảng thời gian trò chuyện khi băng qua [activity.GetCurrentPhase.GetLocation.GetName]."
+
+  bp3_roaming.0200.t: "Tấm Toan Trên Bầu Trời"
+  bp3_roaming.0200.desc: "Đã nhiều giờ trôi qua kể từ khi mặt trời lặn thì bầu trời bỗng chuyển sang những sắc màu tuyệt đẹp của tím, xanh lam và cam. Cứ như thể [ROOT.Char.GetFaith.HighGodName] đang dùng chính bầu trời làm tấm toan của [ROOT.Char.GetFaith.HighGodHerselfHimself].\n\nTrong sự kính sợ và choáng ngợp, tất cả chúng ta lặng lẽ dõi theo cảnh tượng ấy. Chỉ đến khi nó kết thúc, mọi người mới bắt đầu bàn tán về quang cảnh vừa rồi — vừa tôn kính, vừa sợ hãi."
+  bp3_roaming.0200.a: "Thật là một cảnh tượng!"
+
+  roaming_nightsky_canvas_key_title: "Tấm Toan Trên Bầu Trời"
+  roaming_nightsky_canvas_key: "[host.GetShortUIName|U] đã chứng kiến một hiện tượng thiên văn ấn tượng diễn ra trên bầu trời phía trên [activity.GetCurrentPhase.GetLocation.GetName]."
+
+  bp3_roaming.0210.t: "Những Con Chim Trên Cao"
+  bp3_roaming.0210.desc: "Khi chúng ta băng qua [province.GetName], có hai con chim đã theo sát chúng ta suốt nhiều giờ. Chúng chậm rãi bay vòng quanh, đậu ở khoảng cách đủ xa để không gây nguy hiểm, và cất tiếng hót về phía chúng ta từ xa. Khi chúng bay sà lại gần trong giây lát, ta thấy rõ bộ lông đen trắng của chúng.\n\nMột lúc sau, chúng bay vòng thêm một vòng nữa rồi rời đi. Ngay cả khi đã khuất bóng, ta vẫn còn nghe thấy tiếng hót của chúng vang vọng từ xa."
+  bp3_roaming.0210.a: "Một là buồn, hai là may mắn."
+
+  the_birds_overhead_key_title: "$bp3_roaming.0210.t$"
+  the_birds_overhead_key: "[host.GetShortUIName] đã có một cặp chim theo sau [host.GetHerHim] khi băng qua [province.GetName], cất tiếng hót về phía đoàn từ xa."
+
+  bp3_roaming.0220.t: "Ngôi Làng Bị Lãng Quên"
+  bp3_roaming.0220.desc: "\"#emp Ở đây có một ngôi làng sao?!#!\" ta thốt lên, vô cùng bối rối.\n\nNó không hề xuất hiện trên bất kỳ tấm bản đồ nào, và cũng chưa từng có ai nhắc đến. Vậy mà nó vẫn ở đây. Khi ta hỏi tên ngôi làng, người dân chỉ đơn giản đáp: \"Ngôi làng à? Thì là ngôi làng thôi.\" Với một giọng địa phương dày đặc mà ta chưa từng nghe qua.\n\nNhững con người này là ai?! Vì sao ta chưa từng nghe nói về họ?"
+  bp3_roaming.0220.a: "Khoan đã, chẳng phải họ đang nợ ta rất nhiều thuế sao?"
+  bp3_roaming.0220.a.landless: "Hãy xem thử họ có gì ở quanh đây..."
+  bp3_roaming.0220.b: "Ta phải tìm hiểu tất cả về những con người này!"
+  bp3_roaming.0220.b.mystic: "Học hỏi từ Pháp Sư Làng"
+  bp3_roaming.0220.c: "Thật kỳ lạ! Họ sẽ trở thành một câu chuyện hay."
+
+  roaming_forgotten_village_modifier: "$bp3_roaming.0220.t$"
+  roaming_forgotten_village_modifier_desc: "Một ngôi làng bị lãng quên trong khu vực gần đây đã kết nối lại với nhiều láng giềng , chia sẻ kiến thức và truyền thống của mình."
+
+  the_forgotten_village_key_title: "$bp3_roaming.0220.t$"
+  the_forgotten_village_key: "[host.GetShortUIName] đã bắt gặp một ngôi làng cổ bị lãng quên khi băng qua vùng hẻo lánh của [province.GetName]."
+
+  the_forgotten_village_mystic_key_title: "Pháp Sư Ngôi Làng"
+  the_forgotten_village_mystic_key: "[host.GetShortUIName] đã học hỏi những truyền thống của một pháp sư làng tại [province.GetName]."
+
+  bp3_roaming.0230.t: "Ẩn Sĩ"
+  bp3_roaming.0230.desc: "Khi chúng ta đi qua vùng hẻo lánh của [province.GetName], ta cùng những người lính canh của mình bất ngờ bắt gặp một [hermit_character.GetWomanMan] khoác trên người bộ y phục bẩn thỉu, đang ngồi một mình bên cạnh [hermit_character.GetHerselfHimself]. Ngay khi [hermit_character.GetSheHe] nhận ra sự hiện diện của chúng ta, [hermit_character.GetSheHe] lớn tiếng kêu lên: \"Ngươi có phải là thử thách mới nhất mà [hermit_character.GetFaith.HighGodName] gửi đến không?!\"\n\n\"Xin lỗi?\" Ta khó hiểu đáp lại, đồng thời cảm thấy có chút bị xúc phạm.\n\n\"Đến đây, ta sẽ kể cho ngươi nghe tất cả về những thử thách và nỗi thống khổ của [hermit_character.GetName] Người Khôn Ngoan...\""
+  bp3_roaming.0230.a: "Ngươi có những ý tưởng thật kỳ lạ đấy, [hermit_character.GetNameNoTooltip]."
+  bp3_roaming.0230.a.hermit: "Trò chuyện với Ẩn Sĩ"
+  bp3_roaming.0230.b: "#emp Hãy kể ta nghe thêm...#!"
+  bp3_roaming.0230.b.tooltip: "Ngài bí mật cải đạo sang [hermit_faith.GetName]"
+  bp3_roaming.0230.c: "Ngươi vừa nói gì về [ROOT.Char.GetFaith.HighGodName]? Không thể chấp nhận được, đồ dị giáo!"
+
+  the_hermit_key_title: "Ẩn Sĩ"
+  the_hermit_key: "[host.GetShortUIName] đã gặp một ẩn sĩ kỳ lạ giữa chốn hoang dã."
+
+  the_hermit_learning_key_title: "Giáo Huấn Của Ẩn Sĩ"
+  the_hermit_learning_key: "[host.GetShortUIName] đã trò chuyện rất lâu với một ẩn sĩ tại vùng hẻo lánh của [province.GetName]."
+
+  roaming_the_hermit_modifier: "Những Tư Tưởng Phi Truyền Thống"
+  roaming_the_hermit_modifier_desc: "Nhân vật này thường xuyên chia sẻ những ý tưởng và quan điểm phi truyền thống về tôn giáo."
+
+  bp3_roaming.0240.t: "Một Đêm Đáng Nhớ"
+  bp3_roaming.0240.desc: "Khi chúng ta chuẩn bị nghỉ ngơi cho đêm nay, cả bầu trời bừng sáng với vô vàn vì sao. Đây là một trong những đêm quang đãng nhất kể từ khi rời [ROOT.Char.GetCapitalLocation.GetTitle.GetNameNoTier].\n\nMọi thứ tĩnh lặng đến mức không một âm thanh nào vang lên — dù là từ con người hay muông thú. Như thể chính [province.GetTerrain.GetNameNoTooltip|l] đang nín thở, khi tất cả chúng ta cùng chiêm ngưỡng bầu trời đêm. Ta nên đi ngủ để lấy sức cho buổi sáng, nhưng... có lẽ ta có thể thức thêm một hoặc hai giờ nữa."
+  bp3_roaming.0240.a: "Ta sẽ ghi nhớ khoảnh khắc này suốt cuộc đời."
+
+  a_night_to_remember_key_title: "Một Đêm Đáng Nhớ"
+  a_night_to_remember_key: "[host.GetShortUIName] đã thức gần như suốt đêm để ngắm nhìn bầu trời sao quang đãng."
+
+  bp3_roaming.0250.t: "Một Ngôi Mộ Nhỏ"
+  bp3_roaming.0250.desc: "Khi băng qua [province.Custom('HoldingNoHoldingTerrainRoaming')], chúng ta bắt gặp thứ trông giống như một ngôi mộ. Nó có [province.Custom('RoamingGraveVariants')]. Không có dấu hiệu nào cho biết vì sao ngôi mộ lại nằm ở nơi hẻo lánh, xa rời văn minh như thế này.\n\nDù ở vị trí xa xôi, rõ ràng đã có rất nhiều công sức được bỏ ra để chăm chút cho khu vực xung quanh. Xét hoàn cảnh này, ta nên..."
+  bp3_roaming.0250.a: "Dâng lên vài lời cầu nguyện."
+  bp3_roaming.0250.b: "Đào bới để tìm bất kỳ vật có giá trị nào được chôn theo."
+
+  roaming_grave_variant_cross: "một cây thánh giá nhỏ nhưng tinh xảo nhô lên khỏi mặt đất"
+  roaming_grave_variant_burial_mound: "một gò mộ nhỏ với nhiều hòn đá được xếp cẩn thận phía trên"
+  roaming_grave_variant_stone: "một tảng đá nhỏ, khắc tên lên trên"
+
+  no_treasure: "Không Có Kho Báu"
+  small_treasure: "Kho Báu Nhỏ"
+  medium_treasure: "Kho Báu Vừa"
+  large_treasure: "Kho Báu Lớn"
+  bp3_roaming.0250.artifact: "Ngài khai quật được một [artifact|E]"
+
+  a_small_grave_key_title: "Một Ngôi Mộ Nhỏ"
+  a_small_grave_key: "[host.GetShortUIName] đã phát hiện một ngôi mộ nhỏ giữa vùng hoang dã của [province.GetName]."
+
+ # APAs
+  roaming_fame_very_small_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: "#EMP Nó sẽ trở thành một câu chuyện.#!"
+  roaming_fame_small_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: "#EMP Nó sẽ trở thành một câu chuyện hay!#!"
+  roaming_fame_medium_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: "#EMP Nó sẽ trở thành một câu chuyện đáng nhớ!#!"
+  roaming_fame_high_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: "#EMP Nó sẽ trở thành một câu chuyện tuyệt vời!#!"
+  roaming_fame_very_high_tt: "[GetPerk('roaming_perk').GetName( GetNullCharacter )] [perk|E]: "#EMP Nó sẽ trở thành một câu chuyện huyền thoại!#!"
+
+  apa_roaming_feather_title: "[first.GetShortUIName|U] Tìm Thấy Một Chiếc Lông Vũ Rực Rỡ"
+  apa_roaming_feather_key_title: "Chiếc Lông Vũ Rực Rỡ"
+  apa_roaming_feather_key: "Khi [first.GetSheHe] đang du hành qua [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], [first.GetShortUIName] đã tình cờ bắt gặp một chiếc lông vũ rực rỡ đến mức đáng kinh ngạc."
+
+  apa_roaming_ancient_runestone_title: "[first.GetShortUIName|U] Bắt Gặp Một Tảng Đá Rune Cổ"
+  apa_roaming_ancient_runestone_key_title: "Tảng Đá Rune Cổ"
+  apa_roaming_ancient_runestone_key: "Giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] đã bắt gặp một tảng đá rune cổ với những ký tự đã phai mờ."
+
+  apa_roaming_ancient_megalith_title: "[first.GetShortUIName|U] Bắt Gặp Một Cự Thạch Cổ Đại"
+  apa_roaming_ancient_megalith_key_title: "Cự Thạch Cổ Đại"
+  apa_roaming_ancient_megalith_key: "Tại [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip], [first.GetShortUIName] phát hiện một chứng nhân lặng thầm của thời đại đã qua — một công trình cự thạch cổ."
+
+  apa_roaming_natural_arch_title: "[first.GetShortUIName|U] Phát Hiện Một Vòm Đá Tự Nhiên Giữa Hoang Dã"
+  apa_roaming_natural_arch_key_title: "Vòm Đá Tự Nhiên"
+  apa_roaming_natural_arch_key: "[first.GetShortUIName] không khỏi kinh ngạc khi [first.GetSheHe] tình cờ bắt gặp một vòm đá tự nhiên hùng vĩ giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')]."
+
+  apa_roaming_coast_seashells_title: "[first.GetShortUIName|U] Tìm Thấy Những Vỏ Sò Quý Giá"
+  apa_roaming_coast_seashells_key_title: "Những Vỏ Sò Quý Giá"
+  apa_roaming_coast_seashells_key: "Khám phá một hang động ven biển, [first.GetShortUIName] đã phát hiện một bộ sưu tập vỏ sò hiếm và ngọc trai, được giấu kín bởi thủy triều lên xuống."
+
+  apa_roaming_forest_gnarled_oak_title: "[first.GetShortUIName|U] Phát Hiện Chim Làm Tổ"
+  apa_roaming_forest_gnarled_oak_key_title: "Những Tổ Chim"
+  apa_roaming_forest_gnarled_oak_key: "Khi lang thang qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] bắt gặp một cây sồi cổ thụ xù xì với thân rỗng — nơi trú ngụ lý tưởng cho những đàn chim làm tổ."
+
+  apa_roaming_rabbit_family_title: "[first.GetShortUIName|U] Bắt Gặp Một Gia Đình Thỏ Nhỏ"
+  apa_roaming_rabbit_family_key_title: "Những Con Thỏ Địa Phương"
+  apa_roaming_rabbit_family_key: "Trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] phát hiện một khoảng đất đầy nắng, nơi một gia đình thỏ đang vui đùa giữa thảm cỏ."
+
+  apa_roaming_desert_lilies_title: "[first.GetShortUIName|U] Phát Hiện Hoa Huệ Sa Mạc"
+  apa_roaming_desert_lilies_key_title: "Hoa Huệ Sa Mạc"
+  apa_roaming_desert_lilies_key: "Giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] tìm thấy một cánh đồng hoa huệ sa mạc mong manh, những cánh hoa nhạt màu hé nở như báu vật phù du giữa hoang mạc."
+
+  apa_roaming_desert_lilies_oasis_title: "$apa_roaming_desert_lilies_title$"
+  apa_roaming_desert_lilies_oasis_key_title: "$apa_roaming_desert_lilies_key_title$"
+  apa_roaming_desert_lilies_oasis_key: "Giữa sắc xanh của ốc đảo, [first.GetShortUIName] nhận ra một cụm hoa huệ sa mạc, những đóa hoa mảnh mai tô điểm nét duyên dáng cho khung cảnh cát vàng."
+
+  apa_roaming_desert_fox_title: "[first.GetShortUIName|U] Trông Thấy Một Con Cáo Sa Mạc"
+  apa_roaming_desert_fox_key_title: "Cáo Sa Mạc"
+  apa_roaming_desert_fox_key: "Giữa những cồn cát tĩnh lặng, [first.GetShortUIName] để ý một con cáo sa mạc đơn độc, bộ lông vàng hòa lẫn hoàn hảo với cát khi nó lướt đi đầy uyển chuyển."
+
+  apa_roaming_mountain_river_title: "[first.GetShortUIName|U] Nghỉ Chân Bên Một Dòng Sông Yên Ả"
+  apa_roaming_mountain_river_key_title: "Dòng Sông Cao Nguyên"
+  apa_roaming_mountain_river_key: "Khi băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] tìm thấy một dòng suối núi trong vắt, mang đến một khoảng nghỉ ngơi sảng khoái."
+
+  apa_roaming_lonely_yurt_title: "[first.GetShortUIName|U] Bắt Gặp Một Lều Du Mục Hoang Vắng"
+  apa_roaming_lonely_yurt_key_title: "Chiếc Lều Cô Độc"
+  apa_roaming_lonely_yurt_key: "Băng qua thảo nguyên rộng mở, [first.GetShortUIName] phát hiện một chiếc lều du mục đơn độc — nơi trú ẩn giản đơn giữa thiên nhiên khắc nghiệt."
+
+  apa_roaming_standing_stone_title: "[first.GetShortUIName|U] Trông Thấy Một Cột Đá Dựng"
+  apa_roaming_standing_stone_key_title: "Cột Đá Dựng"
+  apa_roaming_standing_stone_key: "Giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] khám phá một cột đá dựng cổ xưa — một dấu mốc cô độc giữa cảnh vật xung quanh."
+
+  apa_roaming_wildflowers_title: "[first.GetShortUIName|U] Phát Hiện Hoa Dại"
+  apa_roaming_wildflowers_key_title: "Những Đóa Hoa Dại"
+  apa_roaming_wildflowers_key: "Trong [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] trầm trồ trước một thảm hoa dại rực rỡ, tô điểm sắc màu cho những cánh đồng cỏ bát ngát."
+
+  apa_roaming_lost_sheep_title: "[first.GetShortUIName|U] Trông Thấy Một Con Cừu Lạc"
+  apa_roaming_lost_sheep_key_title: "Con Cừu Lạc"
+  apa_roaming_lost_sheep_key: "Khi băng qua những cánh đồng canh tác, [first.GetShortUIName] trông thấy một con cừu lạc đang gặm cỏ một mình trên bãi cỏ xanh."
+
+  apa_roaming_friendly_dog_title: "[first.GetShortUIName|U] Gặp Một Chú Chó Thân Thiện"
+  apa_roaming_friendly_dog_key_title: "Chú Chó Thân Thiện"
+  apa_roaming_friendly_dog_key: "Lang thang giữa những thửa ruộng, [first.GetShortUIName] bắt gặp một chú chó trang trại thân thiện đang vẫy đuôi vui vẻ."
+
+  apa_roaming_grazing_cattle_title: "[first.GetShortUIName|U] Trông Thấy Một Đàn Bò"
+  apa_roaming_grazing_cattle_key_title: "Đàn Bò Ung Dung"
+  apa_roaming_grazing_cattle_key: "Giữa những cánh đồng, [first.GetShortUIName] quan sát một đàn bò đang ung dung gặm cỏ."
+
+  apa_roaming_lonely_tree_title: "[first.GetShortUIName|U] Phát Hiện Một Cây Cô Độc Giữa Đồng Bằng"
+  apa_roaming_lonely_tree_key_title: "Cây Cô Độc"
+  apa_roaming_lonely_tree_key: "Giữa đồng bằng bao la, [first.GetShortUIName] trông thấy một cây cổ thụ đơn độc, cành lá vươn cao hướng về bầu trời."
+
+  apa_roaming_rock_outcrop_plains_title: "[first.GetShortUIName|U] Bắt Gặp Một Cảnh Quan Tuyệt Vời"
+  apa_roaming_rock_outcrop_plains_key_title: "Cảnh Quan Tuyệt Vời"
+  apa_roaming_rock_outcrop_plains_key: "Giữa đồng bằng rộng mở, [first.GetShortUIName] phát hiện một mỏm đá tự nhiên, mang đến tầm nhìn toàn cảnh khắp vùng đất bằng phẳng xung quanh."
+
+  apa_roaming_rock_outcrop_hills_title: "$apa_roaming_rock_outcrop_plains_title$"
+  apa_roaming_rock_outcrop_hills_key_title: "$apa_roaming_rock_outcrop_plains_key_title$"
+  apa_roaming_rock_outcrop_hills_key: "Khi băng qua những ngọn đồi, [first.GetShortUIName] bắt gặp một mỏm đá, mang lại một vị trí quan sát với tầm nhìn ra địa hình nhấp nhô."
+
+  apa_roaming_waterfall_title: "[first.GetShortUIName|U] Tìm Được Chốn Nghỉ Bên Thác Nước Êm Đề"
+  apa_roaming_waterfall_key_title: "Thác Nước"
+  apa_roaming_waterfall_key: "Giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] tìm thấy một thác nước nhỏ, dòng chảy êm dịu mang lại khoảnh khắc yên bình."
+
+  apa_roaming_heron_title: "[first.GetShortUIName|U] Bắt Gặp Một Con Diệc Ấn Tượng"
+  apa_roaming_heron_key_title: "Con Diệc Bất Động"
+  apa_roaming_heron_key: "Giữa [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] bắt gặp một con diệc đứng im bất động, chờ đợi thời cơ bắt mồi."
+
+  apa_roaming_dragonfly_title: "[first.GetShortUIName|U] Bắt Gặp Một Con Chuồn Chuồn Rực Rỡ"
+  apa_roaming_dragonfly_key_title: "Chuồn Chuồn"
+  apa_roaming_dragonfly_key: "Khi bước qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] bắt gặp một con chuồn chuồn lơ lửng trên mặt nước, đôi cánh óng ánh bắt lấy ánh mặt trời."
+
+  apa_roaming_ducklings_title: "[first.GetShortUIName|U] Gặp Một Cặp Vịt Con"
+  apa_roaming_ducklings_key_title: "Những Chú Vịt"
+  apa_roaming_ducklings_key: "Trong lúc băng qua vùng đất ngập nước, [first.GetShortUIName] quan sát thấy một cặp vịt lướt nhẹ trên làn nước tĩnh lặng, để lại những gợn sóng phía sau."
+
+  apa_roaming_dates_title: "[first.GetShortUIName|U] Bắt Gặp Một Cây Chà Là"
+  apa_roaming_dates_key_title: "Những Cây Chà Là"
+  apa_roaming_dates_key: "Lang thang trong ốc đảo, [first.GetShortUIName] tìm thấy một cụm cây chà là nhỏ, những trái ngọt của chúng mang lại sự bù đắp dễ chịu giữa cái nóng sa mạc."
+
+  apa_roaming_oasis_shelter_title: "[first.GetShortUIName|U] Tìm Được Chỗ Trú Ẩn Trong Ốc Đảo"
+  apa_roaming_oasis_shelter_key_title: "Chỗ Trú Ẩn Trong Ốc Đảo"
+  apa_roaming_oasis_shelter_key: "Khám phá ốc đảo, [first.GetShortUIName] phát hiện một nơi trú ẩn tạm bợ làm từ lá cọ đan, mang lại bóng râm giữa cái nóng sa mạc."
+
+  apa_roaming_oasis_traders_title: "[first.GetShortUIName|U] Gặp Một Đoàn Thương Nhân"
+  apa_roaming_oasis_traders_key_title: "Đoàn Lữ Hành Ốc Đảo"
+  apa_roaming_oasis_traders_key: "Khi băng qua ốc đảo, [first.GetShortUIName] gặp một đoàn thương nhân, lạc đà của họ chở đầy hàng hóa."
+
+  apa_roaming_traders_title: "[first.GetShortUIName|U] Gặp Một Nhóm Thương Nhân"
+  apa_roaming_traders_key_title: "Những Thương Nhân Của [activity.GetCurrentPhase.GetLocation.GetNameNoTooltip]"
+  apa_roaming_traders_key: "Trong hành trình qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] gặp một nhóm thương nhân cùng những con vật thồ hàng của họ."
+
+  apa_roaming_luminescent_mushrooms_title: "[first.GetShortUIName|U] Phát Hiện Một Bụi Nấm Phát Sáng"
+  apa_roaming_luminescent_mushrooms_key_title: "Những Cây Nấm Phát Sáng"
+  apa_roaming_luminescent_mushrooms_key: "Băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] trầm trồ trước một cụm nấm phát sáng, tỏa ra ánh sáng huyền ảo trong tầng cây rậm rạp."
+
+  apa_roaming_wild_berries_title: "[first.GetShortUIName|U] Phát Hiện Một Bụi Quả Dại"
+  apa_roaming_wild_berries_key_title: "Những Quả Dại"
+  apa_roaming_wild_berries_key: "Băng qua [activity.GetCurrentPhase.GetLocation.Custom('HoldingNoHoldingTerrainRoaming')], [first.GetShortUIName] tìm thấy một cụm quả dại, một món quà thú vị và bất ngờ giữa khung cảnh xanh tươi."

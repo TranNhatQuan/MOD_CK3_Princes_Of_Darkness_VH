@@ -1,0 +1,46 @@
+﻿l_english: 
+ ##################################################
+ # CHINA CB'S
+ ##################################################
+ ### Internal county conquest during corruption
+  china_seize_county_cb: "$CHINA_SEIZE_COUNTY_CB_NAME$"
+  CHINA_SEIZE_COUNTY_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetPrimaryTitle.GetAdjective] Chiếm Huyện [TITLE.GetBaseName]"
+  CHINA_SEIZE_COUNTY_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  CHINA_SEIZE_COUNTY_CB_NAME: "Chiếm Hạt Bá Quyền"
+## duchy conquest variant
+  china_seize_duchy_cb: "$CHINA_SEIZE_DUCHY_CB_NAME$"
+  CHINA_SEIZE_DUCHY_WAR_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetPrimaryTitle.GetAdjective] Chiếm Lãnh Huyện [TITLE.GetBaseName]"
+  CHINA_SEIZE_DUCHY_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  CHINA_SEIZE_DUCHY_CB_NAME: "Chiếm Quận Bá Quyền"
+ ## Great Project Conquest
+  grand_campaign_kingdom_invasion_cb: "[GetTitleByKey('h_china').Custom('OrdinalChineseConquest')] [GetTitleByKey('h_china').GetNameNoTierPossessiveNoTooltip] Chiến Dịch Lớn"
+  GP_KINGDOM_INVASION_WAR_NAME: "$grand_campaign_kingdom_invasion_cb$"
+  GP_KINGDOM_INVASION_WAR_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  GP_KINGDOM_INVASION_CB_NAME: "$grand_campaign_kingdom_invasion_cb$ ([great_project|E])"
+
+  grand_campaign_kingdom_invasion_cb_victory_desc_attacker:2 "[attacker.GetTopLiege.GetShortUIName|U] chiếm được [titles|E] tranh chấp."
+  grand_campaign_kingdom_invasion_cb_victory_desc:1 "[attacker.GetTopLiege.GetShortUIName|U] chiếm được [title|E] tranh chấp."
+ 
+ ### CB for neighbors to attempt to seize the mandate of heaven and become hegemon of China
+  claim_the_mandate_cb: "$CLAIM_THE_MANDATE_CB_NAME$"
+  CLAIM_THE_MANDATE_NAME: "[ConcatIfNeitherEmpty('$ORDER|q$', ' ')][ATTACKER.GetPrimaryTitle.GetAdjective] Chiếm Thiên Mệnh"
+  CLAIM_THE_MANDATE_NAME_BASE: "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+  CLAIM_THE_MANDATE_CB_NAME: "Chiếm Thiên Mệnh"
+  dynastic_cycle_hegemon_legitimacy_level_cost_desc: "[defender.GetShortUINamePossessive] [legitimacy_level|E]"
+
+ # CONSOLIDATION WAR
+  chinese_consolidation_cb: "$CHINESE_CONSOLIDATION_WAR_NAME$"
+  CHINESE_CONSOLIDATION_WAR_NAME: "Chiến Tranh Hợp Nhất Hegemon"
+  CHINESE_CONSOLIDATION_WAR_NAME_BASE: "$CHINESE_CONSOLIDATION_WAR_NAME$"
+  CHINESE_CONSOLIDATION_CB_NAME: "Hợp Nhất Đất Dưới Trời ([dynastic_cycle|E])"
+  chinese_consolidation_cb_victory_desc_attacker: "Ngài chiếm tất cả [defender.GetShortUINamePossessive] [titles|E] cùng hạng hoặc cao hơn [title_tier|E] so với [primary_title|E] của Ngài và biến tất cả chư hầu của [defender.GetShortUINameNoTooltip] thành chư hầu thuộc [de_jure|E] [GetTitleByKey('h_china').GetDefinitiveName]."
+  chinese_consolidation_cb_victory_desc: "[attacker.GetShortUIName|U] biến [defender.GetShortUIName|U] thành chư hầu hoặc chiếm tất cả [titles|E] của [defender.GetHerHis] thuộc [GetTitleByKey('h_china').GetDefinitiveName] cùng hạng hoặc cao hơn [title_tier|E] so với [attacker.GetShortUINamePossessive|U] [primary_title|E]."
+
+  silk_road_vassalization_cb: "$SILK_ROAD_VASSALIZATION_WAR_NAME$"
+  SILK_ROAD_VASSALIZATION_WAR_NAME: "$VASSALIZATION_WAR_NAME$ ([dynastic_cycle|E])"
+  SILK_ROAD_VASSALIZATION_WAR_NAME_BASE: "$VASSALIZATION_WAR_NAME_BASE$ ([dynastic_cycle|E])"
+  SILK_ROAD_VASSALIZATION_CB_NAME: "$VASSALIZATION_CB_NAME$ ([dynastic_cycle|E])"
+
+  gok_ending_warning_offer_sub_or_ruin: "#X @warning_icon! Ngài sẽ mất quyền truy cập vào #high $mpo_offer_submission_or_ruin$#! [interaction|E]#!"
+  gok_ending_warning_onslaught: "#X @warning_icon! Ngài sẽ mất quyền truy cập vào #high $mpo_gok_onslaught_cb$#! [casus_belli|E]#!"
+  gok_ending_warning_end_decision: "#X @warning_icon! Ngài sẽ mất quyền truy cập vào #high $mpo_gok_world_conquest_decision$#! [decision|E]#!"

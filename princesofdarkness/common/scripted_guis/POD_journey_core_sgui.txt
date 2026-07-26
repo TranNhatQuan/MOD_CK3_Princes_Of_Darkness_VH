@@ -1,0 +1,644 @@
+﻿POD_refresh_journeys_sgui = {
+	scope = character
+	is_shown = {
+		NOT = { global_var:POD_journey_version ?= current_journey_version }
+	}
+	effect = {
+		POD_refresh_journey_GUI = yes
+	}
+}
+
+POD_journey_detail_open = {
+	scope = character
+	saved_scopes = { story }
+	is_shown = {
+		exists = var:journey_detail_window
+	}
+	effect = {
+		POD_journey_detail_open_effect = {
+			STORY = scope:story
+		}
+	}
+}
+
+POD_journey_detail_close = {
+	scope = character
+	effect = {
+		remove_variable = journey_detail_window
+		remove_variable = journey_detail_window_widget
+		remove_variable = journey_detail_window_subtype
+		if = {
+			limit = { has_variable_list = hunt_in_capital_types }
+			clear_variable_list = hunt_in_capital_types
+		}
+	}
+}
+
+POD_journey_detail_select_subtype = {
+	scope = character
+	saved_scopes = { story }
+	effect = {
+		set_variable = {
+			name = journey_detail_window_subtype
+			value = scope:story
+		}
+	}
+}
+
+POD_journey_detail_go_back = {
+	scope = character
+	effect = {
+		remove_variable = journey_detail_window_subtype
+	}
+}
+
+POD_show_great_journeys = {
+	scope = character
+	is_shown = {
+		OR = {
+			POD_assemble_artifact_shown_trigger = yes
+			POD_golconda_1_shown_trigger = yes
+			POD_golconda_2_shown_trigger = yes
+			POD_golconda_3_shown_trigger = yes
+			POD_provoke_vatican_shown_trigger = yes
+			POD_provoke_vatican_caelestius_shown_trigger = yes
+			POD_siochain_1_shown_trigger = yes
+			POD_siochain_2_shown_trigger = yes
+			POD_siochain_3_shown_trigger = yes
+			POD_azhi_dahaka_1_shown_trigger = yes
+			POD_azhi_dahaka_2_shown_trigger = yes
+		}
+	}
+}
+
+POD_journey_is_selected = {
+	scope = character
+	saved_scopes = { story }
+	is_valid = {
+		var:journey_detail_window ?= {
+			this = scope:story
+		}
+	}
+}
+
+POD_current_journey_is_instant = {
+	scope = character
+	is_shown = {
+		var:current_journey ?= { POD_is_instant_journey_trigger = yes }
+	}
+}
+
+POD_journey_has_cost = {
+	scope = character
+	is_shown = {
+		var:journey_detail_window = {
+			NAND = {
+				var:gold_cost     = 0
+				var:prestige_cost = 0
+				var:piety_cost    = 0
+			}
+		}
+	}
+}
+
+POD_hunt_in_capital_selection_sgui = {
+	scope = character
+	is_shown = { var:journey_detail_window.var:journey_type = flag:hunt_in_capital }
+	effect = { set_variable = { name = hunt_in_capital_selection value = scope:selection } }
+}
+
+POD_seek_knowledge_preview_sgui = {
+	scope = character
+	is_shown = { var:journey_detail_window = { POD_is_seek_knowledge_journey_trigger = yes } }
+}
+
+POD_has_current_journey = {
+	scope = character
+	is_shown = {
+		has_variable = current_journey
+	}
+}
+
+POD_has_paused_journeys = {
+	scope = character
+	is_shown = {
+		any_in_list = {
+			variable = paused_journeys
+			count > 0
+			var:total_progress < 100
+		}
+	}
+}
+
+POD_has_travel_ready_journeys = {
+	scope = character
+	is_shown = {
+		any_in_list = {
+			variable = paused_journeys
+			count > 0
+			var:total_progress >= 100
+		}
+	}
+}
+
+POD_journey_is_paused = {
+	scope = character
+	saved_scopes = { story }
+	is_valid = {
+		scope:story = { var:phase = flag:paused }
+	}
+}
+
+POD_journey_is_travel_ready = {
+	scope = character
+	saved_scopes = { story }
+	is_valid = {
+		scope:story = { var:total_progress >= 100 }
+	}
+}
+
+POD_resume_paused_journey = {
+	scope = character
+	saved_scopes = { story }
+	effect = {
+		POD_set_as_current_journey = { JOURNEY = scope:story }
+	}
+}
+
+POD_resume_travel_ready_journey = {
+	scope = character
+	saved_scopes = { story }
+	effect = {
+		POD_pause_journey_effect = yes
+		
+		set_variable = {
+			name = current_journey
+			value = scope:story
+		}
+		
+		remove_list_variable = {
+			name = paused_journeys
+			target = scope:story
+		}
+		
+		var:current_journey = {
+			set_variable = {
+				name = phase
+				value = flag:planning_phase
+			}
+		}
+		
+		POD_journey_planning_finished_effect = yes
+	}
+}
+
+POD_abandon_journey_sgui = {
+	scope = character
+	saved_scopes = { story }
+	confirm_title = POD_abandon_journey_confirm_title
+	confirm_text  = POD_abandon_journey_confirm_text
+	effect = {
+		POD_abandon_journey = {
+			JOURNEY = scope:story
+		}
+	}
+}
+
+POD_set_coterie_status_sgui = {
+	scope = character
+	effect = {
+		if = {
+			limit = { POD_has_coterie_members_trigger = no }
+			remove_variable = traveling_with_coterie
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_variable = traveling_with_coterie } }
+				set_variable = traveling_with_coterie
+			}
+		}
+	}
+}
+
+POD_toggle_coterie_travel = {
+	scope = character
+	effect = {
+		POD_toggle_variable = { VAR = traveling_with_coterie }
+	}
+}
+
+POD_toggle_journey_moving_camp = {
+	scope = character
+	effect = {
+		POD_toggle_variable = { VAR = journey_moves_camp }
+	}
+}
+
+POD_journey_requirements = {
+	scope = character
+	saved_scopes = { story }
+	
+	is_shown = {
+		NOR = {
+			var:current_journey ?= {
+				var:journey_type = scope:story.var:journey_type
+			}
+			any_in_list = {
+				variable = paused_journeys
+				count > 0
+				var:journey_type = scope:story.var:journey_type
+			}
+		}
+	}
+	
+	is_valid = {
+		POD_can_start_planning_phase_trigger = yes
+		
+		trigger_if = {
+			limit = { scope:story = { has_variable = gold_cost } } # do not check for paused journeys
+			
+			custom_tooltip = {
+				text = POD_journey_requirements_gold
+				OR = {
+					scope:story.var:gold_cost = 0
+					gold >= scope:story.var:gold_cost
+				}
+			}
+			custom_tooltip = {
+				text = POD_journey_requirements_prestige
+				save_temporary_scope_value_as = {
+					name = adjusted_prestige_cost
+					value = {
+						value = scope:story.var:prestige_cost
+						if = {
+							limit = { scope:story = { POD_is_seek_knowledge_journey_trigger = yes } }
+							add = seek_knowledge_added_cost
+						}
+					}
+				}
+				OR = {
+					scope:adjusted_prestige_cost = 0
+					prestige >= scope:adjusted_prestige_cost
+				}
+			}
+			custom_tooltip = {
+				text = POD_journey_requirements_piety
+				OR = {
+					scope:story.var:piety_cost = 0
+					piety >= scope:story.var:piety_cost
+				}
+			}
+		}
+
+		# Safeguards for targeted Journeys
+		trigger_if = {
+			limit = { scope:story = { has_variable = target } }
+			custom_tooltip = {
+				text = POD_journey_requirements_target_dead
+				scope:story.var:target = { is_alive = yes }
+			}
+		}
+
+		trigger_if = {
+			limit = { scope:story = { has_variable = target_artifact } }
+			custom_tooltip = {
+				text = POD_journey_requirements_target_artifact_destroyed
+				scope:story = { exists = var:target_artifact }
+			}
+		}
+	}
+}
+
+POD_journey_on_start = {
+	scope = character
+	saved_scopes = { story }
+	effect = {
+		# Pay upfront costs
+		remove_short_term_gold = scope:story.var:gold_cost
+		if = {
+			limit = { scope:story = { POD_is_seek_knowledge_journey_trigger = yes } }
+			add_prestige = {
+				value = 0
+				subtract = scope:story.var:prestige_cost
+				subtract = seek_knowledge_added_cost
+			}
+		}
+		else = {
+			add_prestige = { value = 0 subtract = scope:story.var:prestige_cost }
+		}
+		add_piety    = { value = 0 subtract = scope:story.var:piety_cost }
+		
+		remove_variable = journey_detail_window
+		
+		# hunt_in_capital has a separate effect to determine costs based on the type of mortal
+		if = {
+			limit = { scope:story.var:journey_type = flag:hunt_in_capital }
+			POD_hunt_in_capital_cost_effect = yes
+		}
+		
+		if = {
+			limit = { scope:story.var:journey_type = flag:fera_spirit_quest }
+			trigger_event = { id = POD_fera_spirit_quest.1 }
+		}
+		else = {
+			POD_start_journey_from_template_effect = {
+				TEMPLATE = scope:story
+			}
+		}
+	}
+}
+
+POD_journey_on_end = {
+	scope = character
+	effect = {
+		add_character_flag = POD_is_in_travel_phase
+	}
+}
+
+POD_hunt_in_capital_event_widget = {
+	scope = character
+	# for selecting mortals via radio button
+	effect = {
+		set_variable = {
+			name = hunt_in_capital_selected_mortal
+			value = scope:selection
+		}
+	}
+}
+
+POD_toggle_hunt_in_capital = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_variable = continue_hunting }
+			remove_variable = continue_hunting
+		}
+		else = {
+			set_variable = continue_hunting
+		}
+	}
+}
+
+POD_toggle_cthonic_womb = {
+	scope = character
+	is_shown = {
+		has_perk = ns_chthonic_womb_perk
+	}
+	effect = {
+		if = {
+			limit = { has_variable = cthonic_womb_enabled }
+			remove_variable = cthonic_womb_enabled
+		}
+		else = {
+			set_variable = cthonic_womb_enabled
+		}
+	}
+}
+
+POD_toggle_fera_training = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_variable = continue_fera_training }
+			remove_variable = continue_fera_training
+		}
+		else = {
+			set_variable = continue_fera_training
+		}
+	}
+}
+
+POD_toggle_mnesis_quest = {
+	scope = character
+	effect = {
+		if = {
+			limit = { has_variable = continue_mokole_mnesis_quest }
+			remove_variable = continue_mokole_mnesis_quest
+		}
+		else = {
+			set_variable = continue_mokole_mnesis_quest
+		}
+	}
+}
+
+POD_toggle_golconda = {
+	scope = character
+	is_shown = { piety >= 1000 }
+	effect = {
+		if = {
+			limit = { has_variable = continue_golconda }
+			remove_variable = continue_golconda
+		}
+		else = {
+			set_variable = continue_golconda
+		}
+	}
+}
+
+POD_toggle_azhi_dahaka = {
+	scope = character
+	is_shown = { always = yes }
+	effect = {
+		if = {
+			limit = { has_variable = continue_azhi_dahaka }
+			remove_variable = continue_azhi_dahaka
+		}
+		else = {
+			set_variable = continue_azhi_dahaka
+		}
+	}
+}
+
+POD_renaming_the_hekau_init = {
+	scope = character
+	effect = { POD_renaming_the_hekau_initialize_journey_list = yes }
+}
+
+POD_renaming_the_hekau_button = {
+	scope = character
+	effect = {
+		set_variable = {
+			name = renaming_the_hekau_selection
+			value = scope:selection
+		}
+	}
+}
+
+POD_shattering_sgui = {
+	is_shown = { global_var:fae_era > 2 }
+}
+
+POD_has_coterie_sgui = {
+	scope = character
+	
+	is_valid = {
+		POD_has_coterie_trigger = yes
+	}
+}
+
+POD_has_coterie_members_sgui = {
+	scope = character
+	
+	is_valid = {
+		POD_has_coterie_members_trigger = yes
+	}
+}
+
+POD_is_available_sgui = {
+	scope = character
+	
+	is_valid = {
+		is_available = yes
+	}
+}
+
+POD_is_coterie_member_present_sgui = {
+	scope = character
+	saved_scopes = { target } # root is player, target is other coterie member
+	
+	is_valid = {
+		scope:target = { POD_is_in_same_journey_trigger = { TARGET = root } }
+	}
+}
+
+POD_should_pause_on_travel_phase_sgui = {
+	scope = character
+	
+	is_valid = {
+		# Pause if a travel plan should start
+		var:current_journey ?= {
+			has_variable = destination
+			NOT = { var:destination = prev.capital_province }
+		}
+	}
+}
+
+POD_can_start_travel_phase_sgui = {
+	scope = character
+	
+	is_valid = {
+		trigger_if = {
+			limit = { var:current_journey ?= { NOT = { exists = var:destination } } }
+			always = no
+		}
+		trigger_else = { 
+			POD_can_start_travel_phase_trigger = yes
+		}
+	}
+}
+
+POD_can_travel_with_coterie_sgui = {
+	scope = character
+	
+	is_valid = {
+		POD_has_coterie_members_trigger = yes
+		trigger_if = {
+			limit = { var:current_journey ?= { NOT = { exists = var:destination } } }
+			always = no
+		}
+		trigger_else = { 
+			POD_can_start_travel_phase_trigger = yes
+		}
+	}
+}
+
+POD_journey_can_move_camp_sgui = {
+	scope = character
+	
+	is_valid = {
+		is_landless_adventurer = yes
+	}
+}
+
+POD_create_coterie_sgui = {
+	scope = character
+	
+	is_valid = {
+		NOT = { has_character_flag = coterie_creation_in_progress }
+	}
+	
+	effect = {
+		trigger_event = POD_coterie_maintenance.1
+	}
+}
+
+POD_rename_coterie_sgui = {
+	scope = character
+	
+	is_valid = {
+		NOT = { has_character_flag = coterie_creation_in_progress }
+	}
+	
+	effect = {
+		trigger_event = POD_coterie_maintenance.2
+	}
+}
+
+POD_disband_coterie_sgui = {
+	scope = character
+	
+	is_valid = {
+		is_character_interaction_valid = {
+			recipient = root
+			interaction = POD_disband_coterie_interaction
+		}
+	}
+	
+	effect = {
+		open_interaction_window = {
+			interaction = POD_disband_coterie_interaction
+			actor = root
+			recipient = root
+		}
+	}
+}
+
+POD_hunt_in_capital_sgui = {
+	scope = character
+	
+	effect = {
+		every_in_global_list = {
+			variable = journey_GUI_list
+			limit = { var:journey_type = flag:hunt_in_capital }
+			save_scope_as = story
+		}
+
+		POD_journey_detail_open_effect = {
+			STORY = scope:story
+		}
+	}
+}
+
+POD_fera_training_sgui = {
+	scope = character
+	
+	effect = {
+		every_in_global_list = {
+			variable = journey_GUI_list
+			limit = { var:journey_type = flag:fera_training }
+			save_scope_as = story
+		}
+
+		POD_journey_detail_open_effect = {
+			STORY = scope:story
+		}
+	}
+}
+
+POD_hunt_in_capital_alert = {
+	scope = character
+
+	is_shown = {
+		NOT = { has_variable = current_journey }
+		NOT = { POD_is_on_journey_trigger = { TYPE = hunt_in_capital } }
+	}
+}
+
+POD_fera_training_alert = {
+	scope = character
+
+	is_shown = {
+		NOT = { has_variable = current_journey }
+		NOT = { POD_is_on_journey_trigger = { TYPE = fera_training } }
+	}
+}

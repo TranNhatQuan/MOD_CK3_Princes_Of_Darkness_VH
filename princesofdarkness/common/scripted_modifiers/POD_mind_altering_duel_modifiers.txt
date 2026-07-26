@@ -1,0 +1,379 @@
+﻿#The basis of the math is that what you add to the attacker you subtract from the defender
+#This allows for using a base 50/50 chance that makes the modifiers more readable
+#each modifier point, if done on both sides should represent 1% of change
+POD_entrance_attacker_modifier = {
+	modifier = {
+		add = {
+			value = scope:duel_value
+			multiply = 1.5
+		}
+	}
+	modifier = {
+		add = 5
+		scope:attacker = { has_perk = majesty_perk } 
+	}
+	modifier = {
+		add = 8
+		scope:attacker = { has_trait = presenceadvanced }
+	}
+	modifier = {
+		add = 12
+		scope:attacker = { has_perk = ironclad_command_perk } 
+	}
+	#defender values
+	modifier = {
+		add = -5
+		scope:defender = { has_perk = unswayable_mind_perk }
+	}
+	modifier = {
+		add = -8
+		scope:defender = { has_perk = fortify_the_inner_facade_perk }
+	}
+	##### old bloodsorcery
+	# modifier = {
+	# 	add = -15
+	# 	scope:defender = { has_character_flag = song_of_jupiter }
+	# }
+	#if player chracter add the -10 for willpower spent by attacker in duel chance as this will usually not be intialized before being called
+	modifier = {
+		add = -10
+		scope:defender = { has_character_flag = willpower_spent }
+	}
+}
+POD_mesmerize_defender_modifier = { 
+	modifier = {
+		add = {
+			value = scope:duel_value
+			multiply = -1
+		}
+	}
+	modifier = {
+		add = 5
+		scope:defender = { has_perk = unswayable_mind_perk }
+	}
+	modifier = {
+		add = 8
+		scope:defender = { has_perk = fortify_the_inner_facade_perk }
+	}
+	##### old bloodsorcery
+	# modifier = {
+	# 	add = 15
+	# 	scope:defender = { has_character_flag = song_of_jupiter }
+	# }
+	#if player chracter add the +10 for willpower spent by attacker in duel chance as this will usually not be intialized before being called
+	modifier = {
+		add = 10
+		scope:defender = { has_character_flag = willpower_spent }
+	}
+	modifier = {
+		add = {
+			value = scope:attacker.generation_value
+			subtract = scope:defender.generation_value
+			multiply = -3
+		}
+		scope:defender = { is_vampire_trigger = yes }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_trait = dominateadvanced }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_trait = presenceadvanced }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_trait = auspexadvanced }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_trait = fortitudeadvanced }
+	}
+	#kuei jin
+	
+	#mummy
+	#shih
+	modifier = {
+		add = 40 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = mountain_meditation_perk }
+	}
+	#psi 
+	modifier = {
+		add = 10
+		scope:defender = { has_perk = anti_psi_1_perk }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_perk = anti_psi_2_perk }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_perk = anti_psi_3_perk }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_perk = anti_psi_4_perk }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_perk = anti_psi_5_perk }
+	}
+	#tf
+	modifier = {
+		add = 40 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = holy_bulwark_perk }
+	}
+	#werewolves
+	modifier = {
+		add = 20 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = release_from_bondage_perk }
+	}
+	#fae
+	modifier = {
+		add = 8 
+		scope:defender = { has_perk = fair_is_foul_foul_is_fair_perk }
+	}
+	modifier = {
+		add = 14 
+		scope:defender = { has_perk = captive_heart_perk }
+	}
+	modifier = {
+		add = 18 
+		scope:defender = { has_perk = geas_ban_perk }
+	}
+	#artifact
+	modifier = {
+		add = 20 
+		scope:defender = { 
+			any_equipped_character_artifact = {	has_variable = ancestor_talisman } 
+		}
+	}
+	#personality bonus or malus
+	modifier = {
+		add = 10
+		has_personality_dominant_trigger = yes
+	}
+	modifier = {
+		add = -10
+		has_personality_submissive_trigger = yes
+	}
+	#mortals have lowered defenses
+	modifier = {
+		add = -20
+		has_trait = mortal
+	}
+	#attacker values
+	modifier = {
+		add = -5
+		scope:attacker = {
+			OR = {
+				has_perk = rationalize_perk
+			} 
+		} 
+	}
+	modifier = {
+		add = -8
+		scope:attacker = { has_trait = dominateadvanced } 
+	}
+	modifier = {
+		add = -12
+		scope:attacker = { has_perk = will_conquers_perk } 
+	}
+}
+POD_entrance_defender_modifier = { 
+	modifier = {
+		add = {
+			value = scope:duel_value
+			multiply = -1.5
+		}
+	}
+	modifier = {
+		add = 5
+		scope:defender = { has_perk = unswayable_mind_perk }
+	}
+	modifier = {
+		add = 8
+		scope:defender = { has_perk = fortify_the_inner_facade_perk }
+	}
+	##### old bloodsorcery
+	# modifier = {
+	# 	add = 15
+	# 	scope:defender = { has_character_flag = song_of_jupiter }
+	# }
+	#if player chracter add the +5 for willpower spent by attacker in duel chance as this will usually not be intialized before being called
+	modifier = {
+		add = 10
+		scope:defender = { has_character_flag = willpower_spent }
+	}
+	#attacker values
+	modifier = {
+		add = -5
+		scope:attacker = { has_perk = majesty_perk } 
+	}
+	modifier = {
+		add = -8
+		scope:attacker = { has_trait = presenceadvanced }
+	}
+	modifier = {
+		add = -12
+		scope:attacker = { has_perk = ironclad_command_perk } 
+	}
+}
+POD_mesmerize_attacker_modifier = {
+	modifier = {
+		add = {
+			value = scope:duel_value
+			multiply = 1
+		}
+	}
+	modifier = {
+		add = 5
+		scope:attacker = {
+			OR = {
+				has_perk = rationalize_perk
+			} 
+		} 
+	}
+	modifier = {
+		add = 8
+		scope:attacker = { has_trait = dominateadvanced } 
+	}
+	modifier = {
+		add = 12
+		scope:attacker = { has_perk = will_conquers_perk } 
+	}
+	modifier = {
+		add = {
+			value = scope:attacker.generation_value
+			subtract = scope:defender.generation_value
+			multiply = 3
+		}
+		scope:defender = { is_vampire_trigger = yes }
+	}
+	#mortals have lowered defenses
+	modifier = {
+		add = 20 
+		scope:defender = { has_trait = mortal }
+	}
+	#defender values
+	modifier = {
+		add = -5
+		scope:defender = { has_perk = unswayable_mind_perk }
+	}
+	modifier = {
+		add = -8
+		scope:defender = { has_perk = fortify_the_inner_facade_perk }
+	}
+	##### old bloodsorcery
+	# modifier = {
+	# 	add = -15
+	# 	scope:defender = { has_character_flag = song_of_jupiter }
+	# }
+	#if player chracter add the +10 for willpower spent by attacker in duel chance as this will usually not be intialized before being called
+	modifier = {
+		add = -10
+		scope:defender = { has_character_flag = willpower_spent }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_trait = dominateadvanced }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_trait = presenceadvanced }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_trait = auspexadvanced }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_trait = fortitudeadvanced }
+	}
+	#kuei jin
+	
+	#mummy
+	#shih
+	modifier = {
+		add = -40 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = mountain_meditation_perk }
+	}
+	#psi 
+	modifier = {
+		add = -10
+		scope:defender = { has_perk = anti_psi_1_perk }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_perk = anti_psi_2_perk }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_perk = anti_psi_3_perk }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_perk = anti_psi_4_perk }
+	}
+	modifier = {
+		add = -10
+		scope:defender = { has_perk = anti_psi_5_perk }
+	}
+	#tf
+	modifier = {
+		add = -40 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = holy_bulwark_perk }
+	}
+	#werewolves
+	modifier = {
+		add = -20 #bigger buff as they have less options for defense
+		scope:defender = { has_perk = release_from_bondage_perk }
+	}
+	#fae
+	modifier = {
+		add = -8 
+		scope:defender = { has_perk = fair_is_foul_foul_is_fair_perk }
+	}
+	modifier = {
+		add = -14 
+		scope:defender = { has_perk = captive_heart_perk }
+	}
+	modifier = {
+		add = -18 
+		scope:defender = { has_perk = geas_ban_perk }
+	}
+	#artifact
+	modifier = {
+		add = -20 
+		scope:defender = { 
+			any_equipped_character_artifact = {	has_variable = ancestor_talisman } 
+		}
+	}
+	#personality bonus or malus
+	modifier = {
+		add = -10
+		scope:defender = { has_personality_dominant_trigger = yes }
+	}
+	modifier = {
+		add = 10
+		scope:defender = { has_personality_submissive_trigger = yes }
+	}
+}
+POD_dominate_actor_modifier = {
+	modifier = {
+		add = scope:actor.stewardship
+		always = yes
+	}
+	modifier = {
+		add = 5
+		scope:actor = {
+			has_trait = dominateadvanced
+		}
+	}
+	modifier = {
+		factor = 2
+		scope:actor = {
+			has_perk = will_conquers_perk
+		}
+	}
+}

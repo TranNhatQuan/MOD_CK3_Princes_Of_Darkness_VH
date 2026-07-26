@@ -1,0 +1,617 @@
+﻿# action_can_set_fetter_alert = {
+#     type = alert
+# 	icon = action_dying
+
+# 	check_create_action = {
+# 		if = {
+# 			limit = {
+# 				root = {
+# 					has_trait = wraith
+# 					unset_fetter_point > 0
+# 				}
+# 			}
+# 			try_create_important_action = {
+# 				important_action_type = action_can_set_fetter_alert
+# 				actor = root
+# 				recipient = root
+# 			}
+# 		}
+# 	}
+
+# 	effect = {
+# 		open_interaction_window = {
+# 			interaction = POD_set_fetter_title_interaction
+# 			actor = scope:actor
+# 			recipient = scope:recipient
+# 		}
+# 	}
+# }
+
+action_reactive_advice_gain_resolve = {
+	type = tutorial
+	icon = generic_reactive_advice
+	soundeffect = "event:/SFX/UI/Notifications/TopBar/sfx_ui_notifications_topbar_reactive_advice"
+	
+	check_create_action = {
+		if = {
+			limit = {
+				has_trait = demon
+				should_show_tutorial_alert = { LESSON = reactive_advice_gain_resolve }	
+			}
+			try_create_important_action = {
+				important_action_type = action_reactive_advice_gain_resolve
+				actor = root
+			}
+		}
+	}
+
+	effect = {
+		start_tutorial_lesson = reactive_advice_gain_resolve
+	}
+}
+
+# action_reactive_advice_gain_pathos = {
+# 	type = tutorial
+# 	icon = generic_reactive_advice
+# 	soundeffect = "event:/SFX/UI/Notifications/TopBar/sfx_ui_notifications_topbar_reactive_advice"
+	
+# 	check_create_action = {
+# 		if = {
+# 			limit = {
+# 				has_trait = wraith
+# 				NOT = { has_trait = spectre }
+# 				should_show_tutorial_alert = { LESSON = reactive_advice_gain_pathos }	
+# 			}
+# 			try_create_important_action = {
+# 				important_action_type = action_reactive_advice_gain_pathos
+# 				actor = root
+# 			}
+# 		}
+# 	}
+
+# 	effect = {
+# 		start_tutorial_lesson = reactive_advice_gain_pathos
+# 	}
+# }
+
+action_reactive_advice_gain_glamour = {
+	type = tutorial
+	icon = generic_reactive_advice
+	soundeffect = "event:/SFX/UI/Notifications/TopBar/sfx_ui_notifications_topbar_reactive_advice"
+	
+	check_create_action = {
+		if = {
+			limit = {
+				has_POD_fae_blood_trigger = yes
+				should_show_tutorial_alert = { LESSON = reactive_advice_gain_glamour }	
+			}
+			try_create_important_action = {
+				important_action_type = action_reactive_advice_gain_glamour
+				actor = root
+			}
+		}
+	}
+
+	effect = {
+		start_tutorial_lesson = reactive_advice_gain_glamour
+	}
+}
+
+action_reactive_advice_umbra = {
+	type = tutorial
+	icon = generic_reactive_advice
+	soundeffect = "event:/SFX/UI/Notifications/TopBar/sfx_ui_notifications_topbar_reactive_advice"
+	
+	check_create_action = {
+		if = {
+			limit = {
+				has_variable = spirit_location
+				should_show_tutorial_alert = { LESSON = reactive_advice_umbra }	
+			}
+			try_create_important_action = {
+				important_action_type = action_reactive_advice_umbra
+				actor = root
+			}
+		}
+	}
+
+	effect = {
+		start_tutorial_lesson = reactive_advice_umbra
+	}
+}
+
+
+action_can_add_herd_alert = {
+    type = alert
+	icon = action_can_add_herd_alert
+
+	check_create_action = {
+		if = {
+			limit = {
+				POD_has_potential_mortal_herd_trigger = yes
+			}
+			POD_save_potential_mortal_herd_effect = yes
+			try_create_important_action = {
+				important_action_type = action_can_add_herd_alert
+				actor = root
+				recipient = scope:potential_mortal_herd
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_herdify_mortal_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+action_can_add_dreamer_alert = {
+    type = alert
+	icon = action_can_add_herd_alert
+
+	check_create_action = {
+		if = {
+			limit = {
+				POD_has_potential_dreamer_trigger = yes
+			}
+			POD_save_potential_dreamer_effect = yes
+			try_create_important_action = {
+				important_action_type = action_can_add_dreamer_alert
+				actor = root
+				recipient = scope:potential_dreamer
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_musing_mortal_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+action_can_cover_up_masquerade = {
+	priority = 750
+	check_create_action = {
+		if = {
+			limit = {
+				is_character_interaction_valid = {
+					recipient = root
+					interaction = POD_cover_masquerade_interaction
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_can_cover_up_masquerade
+				actor = root
+				recipient = root
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_cover_masquerade_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+action_can_demand_mass_payment = {
+	check_create_action = {
+		if = {
+			limit = {
+				is_character_interaction_valid = {
+					recipient = root
+					interaction = POD_mass_demand_payment_interaction
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_can_demand_mass_payment
+				actor = root
+				recipient = root
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_mass_demand_payment_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+action_can_call_pet_to_war_alert = {
+    type = alert
+	icon = action_lifestyle_martial
+
+	check_create_action = {
+		if = {
+			limit = {
+				POD_unlock_animals_maa_trigger = yes
+				has_pet_to_call_trigger = yes
+				is_at_war = yes
+				OR = {
+					NOT = { has_variable = pet_summon }
+					NOT = { any_character_war = { this = root.var:pet_summon } }
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_can_call_pet_to_war_alert
+				actor = root
+				recipient = root
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_call_pet_to_war_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+#action_can_call_sin_dragon_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				has_character_modifier = sin_dragon_trainer_modifier
+#				is_at_war = yes
+#				OR = {
+#					NOT = { has_variable = sin_dragon_summon }
+#					NOT = { any_character_war = { this = root.var:sin_dragon_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_sin_dragon_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_sin_dragon_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+#action_can_call_the_unnamable_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				has_perk = summon_outsider_perk
+#				is_at_war = yes
+#				OR = {
+#					NOT = { has_variable = outsider_summon }
+#					NOT = { any_character_war = { this = root.var:outsider_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_the_unnamable_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_the_unnamable_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+#action_can_call_forgotten_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				has_perk = names_of_the_forgotten_perk
+#				is_at_war = yes
+#				OR = {
+#					NOT = { has_variable = forgotten_summon }
+#					NOT = { any_character_war = { this = root.var:forgotten_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_forgotten_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_forgotten_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+#action_can_call_fenris_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				has_perk = call_great_fenris_perk
+#				is_at_war = yes
+#				NOR = {
+#					faith = { has_doctrine = wyrm_tainted_doctrine }
+#					faith = { has_doctrine = doctrine_fera_triat_alignment_wyrm }
+#				}
+#				OR = {
+#					NOT = { has_variable = fenris_summon }
+#					NOT = { any_character_war = { this = root.var:fenris_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_fenris_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_fenris_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+#action_can_call_zmei_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				OR = {
+#					dynasty ?= { has_variable = zmei_unlock_variable }
+#					has_character_flag = bezariel_loyal_flag
+#				}
+#				is_at_war = yes
+#				OR = {
+#					NOT = { has_variable = zmei_summon }
+#					NOT = { any_character_war = { this = root.var:zmei_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_zmei_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_zmei_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+#action_can_call_leviathan_to_war_alert = {
+#    type = alert
+#	icon = action_lifestyle_martial
+#
+#	check_create_action = {
+#		if = {
+#			limit = {
+#				has_character_flag = access_to_leviathan
+#				is_at_war = yes
+#				OR = {
+#					NOT = { has_variable = leviathan_summon }
+#					NOT = { any_character_war = { this = root.var:leviathan_summon } }
+#				}
+#			}
+#			try_create_important_action = {
+#				important_action_type = action_can_call_leviathan_to_war_alert
+#				actor = root
+#				recipient = root
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		open_interaction_window = {
+#			interaction = POD_call_leviathan_to_war_interaction
+#			actor = scope:actor
+#			recipient = scope:recipient
+#		}
+#	}
+#}
+
+
+action_reactive_advice_fetters_and_passions = {
+	type = tutorial
+	icon = generic_reactive_advice
+	soundeffect = "event:/SFX/UI/Notifications/TopBar/sfx_ui_notifications_topbar_reactive_advice"
+	
+	check_create_action = {
+		if = {
+			limit = {
+				has_trait = wraith
+				NOT = { has_trait = spectre }
+				should_show_tutorial_alert = { LESSON = reactive_advice_fetters_and_passions }	
+			}
+			try_create_important_action = {
+				important_action_type = action_reactive_advice_fetters_and_passions
+				actor = root
+			}
+		}
+	}
+
+	effect = {
+		start_tutorial_lesson = reactive_advice_fetters_and_passions
+	}
+}
+
+action_can_craft_alert = {
+	type = alert
+	icon = action_inspiration
+
+	check_create_action = {
+		if = {
+			limit = {
+				OR = {
+					trigger_if = { limit = { has_variable = forge_cooldown_alert } NOT = { has_variable = forge_cooldown } }
+					trigger_if = { limit = { has_variable = brew_cooldown_alert } NOT = { has_variable = brew_cooldown } }
+					trigger_if = { limit = { has_variable = enhance_cooldown_alert } NOT = { has_variable = enhance_cooldown } }
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_can_craft_alert
+				actor = root
+				recipient = root
+			}
+		}
+	}
+
+	effect = {
+		
+	}
+}
+
+action_can_weaken_or_bind_wraith_alert = {
+	type = alert
+	icon = action_can_add_herd_alert
+
+	check_create_action = {
+		if = {
+			limit = {
+				any_relation = {
+					type = bound_wraith
+					save_temporary_scope_as = bound_wraith
+					ROOT = {
+						OR = {
+							is_character_interaction_valid = {
+								recipient = scope:bound_wraith
+								interaction = POD_weaken_fetter_interaction
+							}
+							is_character_interaction_valid = {
+								recipient = scope:bound_wraith
+								interaction = POD_bind_interaction
+							}
+						}
+					}
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_can_weaken_or_bind_wraith_alert
+				actor = root
+				recipient = scope:bound_wraith
+			}
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				is_character_interaction_valid = {
+					recipient = scope:recipient
+					interaction = POD_weaken_fetter_interaction
+				}
+			}
+			open_interaction_window = {
+				interaction = POD_weaken_fetter_interaction
+				actor = scope:actor
+				recipient = scope:recipient
+			}
+		}
+		else = {
+			open_interaction_window = {
+				interaction = POD_bind_interaction
+				actor = scope:actor
+				recipient = scope:recipient
+			}
+
+		}
+	}
+}
+
+action_ghoul_can_drink_safety_from_vampire_alert = {
+	type = alert
+	icon = action_can_add_herd_alert
+
+	check_create_action = {
+		if = {
+			limit = {
+				POD_is_masterless_ghoul_trigger = yes
+				any_prisoner = {
+					has_trait = vampire
+					is_adult = yes
+					POD_is_thinblooded_trigger = no
+					NOT = { has_character_flag = POD_was_drunk_from }
+					save_temporary_scope_as = safe_vampire
+				}
+			}
+			try_create_important_action = {
+				important_action_type = action_ghoul_can_drink_safety_from_vampire_alert
+				actor = root
+				recipient = scope:safe_vampire
+			}
+		}
+	}
+
+	effect = {
+		open_interaction_window = {
+			interaction = POD_consume_vitae_of_prisoner_interaction
+			actor = scope:actor
+			recipient = scope:recipient
+		}
+	}
+}
+
+action_ghoul_dangerous_vitae_level_alert = {
+	type = alert
+	icon = action_dying
+
+	check_create_action = {
+		if = {
+			limit = {
+				POD_is_masterless_ghoul_trigger = yes
+				trigger_if = {
+					limit = { POD_years_to_lose_vitae_passively >= 10 }
+					blood_level <= 1
+				}
+				trigger_else = { blood_level <= 2 }
+			}
+			try_create_important_action = {
+				important_action_type = action_ghoul_dangerous_vitae_level_alert
+				actor = root
+			}
+		}
+	}
+}

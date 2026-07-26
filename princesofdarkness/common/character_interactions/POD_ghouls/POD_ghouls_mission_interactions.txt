@@ -1,0 +1,370 @@
+﻿POD_ghoul_mission_bribe_officials_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_bribe_officials_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_bribe_officials
+				task_contract_employer = scope:recipient
+				POD_ghoul_mission_can_be_finished = yes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	cost = {
+		gold = scope:actor.minor_gold_max_value
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_bribe_officials
+				limit = {
+					task_contract_employer = scope:recipient
+					POD_ghoul_mission_can_be_finished = yes
+				}
+				complete_task_contract = success_standard
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ghoul_mission_indoctrinate_plant_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_indoctrinate_plant_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = {
+			has_trait = mortal
+		}
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_indoctrinate_plant
+				POD_ghoul_mission_can_be_finished = yes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_a_thrall = no
+			# TODO YK: no defiled
+			NOT = { has_trait = truepossessed }
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_indoctrinate_plant
+				limit = { POD_ghoul_mission_can_be_finished = yes }
+				save_scope_as = task_contract
+				task_contract_employer = { save_scope_as = domitor }
+			}
+			duel = {
+				skills = { diplomacy intrigue }
+				target = scope:recipient
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = high_positive_duel_skill_multiplier
+					}
+					scope:task_contract = { complete_task_contract = success_standard }
+					
+					if = {
+						limit = { scope:domitor = { is_ruler = yes } }
+						scope:domitor = { add_courtier = scope:recipient }
+						scope:recipient = {
+							add_opinion = {
+								modifier = love_opinion
+								opinion = 75
+								target = scope:domitor
+							}
+							set_character_faith = scope:domitor.faith
+							hidden_effect = { return_to_court = yes }
+						}
+					}
+					else = {
+						hidden_effect = {
+							scope:recipient = { death = { death_reason = death_disappearance } }
+						}
+					}
+				}
+				50 = {
+					compare_modifier = {
+						value = scope:duel_value
+						multiplier = low_negative_duel_skill_multiplier
+					}
+					scope:task_contract = { complete_task_contract = failure_standard }
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ghoul_mission_send_desirable_mortal_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_send_desirable_mortal_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = {
+			has_trait = mortal
+		}
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_abduct_desirable_mortal
+				var:target ?= scope:recipient
+				POD_ghoul_mission_can_be_finished = yes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				is_courtier_of = scope:actor
+				is_imprisoned_by = scope:actor
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_ruler = no # safeguard
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_abduct_desirable_mortal
+				limit = {
+					var:target ?= scope:recipient
+					POD_ghoul_mission_can_be_finished = yes
+				}
+				complete_task_contract = success_standard
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ghoul_mission_damage_rivals_image_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_damage_rivals_image_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_damage_rivals_image
+				POD_ghoul_mission_can_be_finished = yes
+				task_contract_employer = {
+					has_relation_rival = scope:recipient
+				}
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	cost = {
+		prestige = 250
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_damage_rivals_image
+				limit = {
+					POD_ghoul_mission_can_be_finished = yes
+					task_contract_employer = {
+						has_relation_rival = scope:recipient
+					}
+				}
+				complete_task_contract = success_standard
+			}
+		}
+		scope:recipient = {
+			add_prestige = -300
+			add_opinion = {
+				modifier = respect_opinion
+				opinion = -20
+				target = scope:actor
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ghoul_mission_slander_rival_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_slander_rival_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_slander_rival
+				POD_ghoul_mission_can_be_finished = yes
+				task_contract_employer = {
+					has_relation_rival = scope:recipient
+				}
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+	
+	is_valid_showing_failures_only = {
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	cost = {
+		piety = 250
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_slander_rival
+				limit = {
+					POD_ghoul_mission_can_be_finished = yes
+					task_contract_employer = {
+						has_relation_rival = scope:recipient
+					}
+				}
+				complete_task_contract = success_standard
+			}
+		}
+		scope:recipient = {
+			add_piety = -300
+			add_opinion = {
+				modifier = respect_opinion
+				opinion = -20
+				target = scope:actor
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+POD_ghoul_mission_give_relative_away_interaction = {
+	category = interaction_category_ghoul
+	icon = POD_ghoulify_interaction
+	desc = POD_ghoul_mission_give_relative_away_interaction_desc
+
+	is_shown = {
+		scope:actor != scope:recipient
+		scope:recipient = {
+			is_close_family_of = scope:actor
+			NOT = { has_relation_ghoul_thrall = scope:actor }
+		}
+		scope:actor = {
+			any_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_give_relative_away
+				POD_ghoul_mission_can_be_finished = yes
+			}
+		}
+		POD_hostile_interaction_is_shown = yes
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				is_courtier_of = scope:actor
+				is_imprisoned_by = scope:actor
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_ruler = no
+			POD_is_vampire_trigger = no
+		}
+		POD_interaction_is_valid_showing_failures_only = yes
+	}
+
+	on_accept = {
+		scope:actor = {
+			random_character_active_contract = {
+				task_contract_type = POD_ghoul_mission_give_relative_away
+				limit = { POD_ghoul_mission_can_be_finished = yes }
+				complete_task_contract = success_standard
+			}
+			hidden_effect = {
+				scope:recipient = {
+					death = {
+						death_reason = death_disappearance
+					}
+				}
+			}
+		}
+	}
+
+	ai_frequency = 0
+
+	auto_accept = yes
+
+	ai_will_do = {
+		base = 0
+	}
+}

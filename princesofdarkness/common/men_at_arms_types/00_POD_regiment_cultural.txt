@@ -1,0 +1,222 @@
+﻿# standard costs
+@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+@cultural_maa_extra_ai_score = 25 # Equivalent to having 2.5 extra regiments beyond what the code scoring would indicate (see NEGATIVE_SCORE_PER_EXISTING_REGIMENT)
+
+@provisions_cost_infantry_cheap = 3
+@provisions_cost_infantry_moderate = 7
+@provisions_cost_infantry_expensive = 12
+@provisions_cost_infantry_bankrupting = 15
+
+@provisions_cost_cavalry_cheap = 7
+@provisions_cost_cavalry_moderate = 15
+@provisions_cost_cavalry_expensive = 21
+@provisions_cost_cavalry_bankrupting = 30
+
+@provisions_cost_special_cheap = 6
+@provisions_cost_special_moderate = 12
+@provisions_cost_special_expensive = 18
+@provisions_cost_special_bankrupting = 24
+
+enochian_guards = {
+	type = heavy_infantry
+
+	damage = 26
+	toughness = 40
+	pursuit = 0
+	screen = 40
+	
+	terrain_bonus = {
+	}
+	
+	counters = {
+		pikemen = 1
+		archers = 1
+	}
+
+	can_recruit = {
+		POD_valid_for_maa_trigger = {
+			TRIGGER = POD_culture_unlocks_enochian_guards_maa
+		}
+	}
+	
+	buy_cost = { gold = huscarls_recruitment_cost }
+	low_maintenance_cost = { gold = huscarls_low_maint_cost }
+	high_maintenance_cost = { gold = huscarls_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_infantry
+}
+
+
+maryannu = {
+	type = light_cavalry
+	
+	damage = 42
+	toughness = 10
+	pursuit = 35
+	screen = 20
+	
+	terrain_bonus = {
+		drylands = { damage = 5 toughness = 5 screen = 10 pursuit = 5 }
+		desert = { damage = 20 toughness = 5 screen = 20 pursuit = 10 }
+		plains = { damage = 20 toughness = 3 screen = 5 pursuit = 5 }
+		oasis = { damage = 10 }
+		
+		mountains = { damage = -30 pursuit = -10 }
+		desert_mountains = { damage = -30 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -20 screen = -20
+		}
+	}
+
+	counters = {
+		archers = 1
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -5 toughness = -2 }
+	}
+
+	can_recruit = {
+		POD_valid_for_maa_trigger = {
+			TRIGGER = POD_culture_unlocks_maryannu_maa
+		}
+	}
+
+	buy_cost = { gold = hobelar_recruitment_cost }
+	low_maintenance_cost = { gold = hobelar_low_maint_cost }
+	high_maintenance_cost = { gold = hobelar_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_moderate
+	
+	stack = 100
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = light_cavalry
+}
+
+romani_scouts = {
+	type = light_cavalry
+	
+	damage = 15
+	toughness = 25
+	pursuit = 60
+	screen = 25
+	
+	terrain_bonus = {
+		plains = { damage = 15 }
+		drylands = { damage = 15 }
+		hills = { damage = -10 }
+		mountains = { damage = -10 pursuit = -40 }
+		desert_mountains = { damage = -10 pursuit = -50 }
+		wetlands = { damage = -10 toughness = -10 pursuit = -50 screen = -20 }
+	}
+
+	counters = {
+		archers = 1
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -5 }
+	}
+
+	can_recruit = {
+		POD_valid_for_maa_trigger = {
+			TRIGGER = POD_culture_unlocks_romani_scouts_maa
+		}
+	}
+
+	buy_cost = { gold = hobelar_recruitment_cost }
+	low_maintenance_cost = { gold = hobelar_low_maint_cost }
+	high_maintenance_cost = { gold = hobelar_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_cheap
+	
+	stack = 100
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 10] }
+	icon = light_cavalry
+}
+
+hoplites = {
+	type = heavy_infantry
+	
+	damage = 25
+	toughness = 30
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { damage = 5 toughness = 15 }
+		desert_mountains = { damage = 5 toughness = 12 }
+		hills = { damage = 3 toughness = 15 }
+	}
+
+	counters = {
+		light_cavalry = 2
+		heavy_cavalry = 2
+	}
+	
+	can_recruit = {
+		OR = {
+			POD_valid_for_maa_trigger = {
+				TRIGGER = POD_culture_unlocks_hoplites_maa
+			}
+			dynasty ?= { has_dynasty_perk = psyche_mummy_legacy_2 }
+		}
+		
+	}
+	
+	buy_cost = { gold = landsknecht_recruitment_cost }
+	low_maintenance_cost = { gold = landsknecht_low_maint_cost }
+	high_maintenance_cost = { gold = landsknecht_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_infantry
+}
+
+companion_cavalry = {
+	type = heavy_cavalry
+	
+	damage = 80
+	toughness = 60
+	pursuit = 30
+	screen = 10
+	
+	terrain_bonus = {
+		oasis = { damage = 30 }
+		drylands = { damage = 25 }
+		desert = { damage = 10 pursuit = 10 }
+		mountains = { damage = -30 }
+		wetlands = { damage = -80 toughness = -15 pursuit = -20 }
+	}
+
+	counters = {
+		heavy_infantry = 1
+		heavy_cavalry = 0.5
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -10 toughness = -5 }
+		harsh_winter = { damage = -20 toughness = -5 }
+	}
+	
+	can_recruit = {
+		OR = {
+			POD_valid_for_maa_trigger = {
+				TRIGGER = POD_culture_unlocks_companion_cavalry_maa
+			}
+			dynasty ?= { has_dynasty_perk = psyche_mummy_legacy_2 }
+		}
+	}
+
+	buy_cost = { gold = cataphract_recruitment_cost }
+	low_maintenance_cost = { gold = cataphract_low_maint_cost }
+	high_maintenance_cost = { gold = cataphract_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_expensive
+	
+	stack = 50
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = heavy_cavalry
+}

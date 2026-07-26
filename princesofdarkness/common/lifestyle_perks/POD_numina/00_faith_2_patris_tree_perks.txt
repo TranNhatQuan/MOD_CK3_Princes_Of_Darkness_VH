@@ -1,0 +1,145 @@
+﻿pry_open_perk = {
+	lifestyle = faith_lifestyle
+	tree = patris
+	position = { 0 0 }
+	icon = node_learning
+
+	can_be_picked = {
+		has_trait = supehunter
+		OR = {
+			faith = faith:shadowinquisition
+			faith = { has_doctrine_parameter = access_to_holy_arts }
+		}
+		OR = {
+			has_lay_order_dynasty_trigger = yes
+			POD_has_true_faith_trigger = yes
+		}
+	}
+
+	auto_selection_weight = {
+		value = 2000
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+	}
+	
+	character_modifier = {
+		personal_scheme_phase_duration_add = -10
+		contract_scheme_phase_duration_add = -5
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = pry_open_perk_effect
+		}
+		if = {
+			limit = {
+				has_lay_order_dynasty_trigger = no
+				POD_has_true_faith_trigger = no
+			}
+			custom_description_no_bullet = { 
+				text = PATRIS_NOT_PRIMARY_TEXT
+			}
+		}
+		if = {
+			limit = {
+				NAND = {
+					OR = {
+						faith = { has_doctrine_parameter = access_to_holy_arts }
+						faith = faith:shadowinquisition
+					}
+					has_trait = supehunter
+				}
+			}
+			custom_description_no_bullet = { 
+				text = SHADOW_INQUISITION_ONLY_TEXT
+			}
+		}
+	}
+}
+
+unwavering_vision_perk = {
+	lifestyle = faith_lifestyle
+	tree = patris
+	position = { 0 1.25 }
+	icon = node_learning
+	
+	parent = pry_open_perk
+	
+	character_modifier = {
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = unwavering_vision_perk_effect
+		}
+	}
+}
+
+unearth_perk = {
+	lifestyle = faith_lifestyle
+	tree = patris
+	position = { 0 2.5 }
+	icon = node_learning
+	
+	parent = unwavering_vision_perk
+	
+	character_modifier = {
+	}
+	
+	effect = {
+		custom_description_no_bullet = {
+			text = unearth_perk_effect
+		}
+	}
+}
+
+lifting_the_veil_perk = {
+	lifestyle = faith_lifestyle
+	tree = patris
+	position = { 0 3.75 }
+	icon = node_learning
+	
+	parent = unearth_perk
+	
+	character_modifier = {
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = lifting_the_veil_perk_effect
+		}
+	}
+}
+
+revelation_perk = {
+	lifestyle = faith_lifestyle
+	tree = patris
+	position = { 0 5 }
+	icon = ha_patris_mastery
+	
+	parent = lifting_the_veil_perk
+	
+	character_modifier = {
+	}
+
+	effect = {
+		custom_description_no_bullet = {
+			text = revelation_perk_effect
+		}
+		add_trait_force_tooltip = ha_patris_mastery
+		if = {
+			limit = { 
+				POD_has_true_faith_trigger = no
+				OR = { 
+					POD_is_infernalist_trigger = no
+					POD_splat_mixing_haight_mode = yes
+				}
+			}
+			add_trait = truefaith
+		}
+	}
+}

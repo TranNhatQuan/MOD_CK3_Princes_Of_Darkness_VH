@@ -1,0 +1,1580 @@
+﻿
+POD_set_resonance_effect = {
+
+	#POD_clear_resonance_effect = yes
+
+	if = {
+		limit = {
+			NOT = { has_character_flag = POD_resonance_negligible_flag }
+			NOT = { has_character_flag = POD_resonance_fleeting_flag }
+			NOT = { has_character_flag = POD_resonance_intense_flag }
+			NOT = { has_character_flag = POD_resonance_acute_flag }		
+		}
+		# Determine the quality of the resonance
+		POD_determine_quality_of_resonance_effect = yes	
+	}
+	if = {
+		limit = {
+			NOT = { has_character_flag = choleric_resonance }
+			NOT = { has_character_flag = phlegmatic_resonance }
+			NOT = { has_character_flag = melancholic_resonance }
+			NOT = { has_character_flag = sanguine_resonance }
+		}
+		# Determine the flavor of resonance 
+		POD_determine_flavor_of_resonance_effect = yes
+	}
+}
+
+POD_determine_quality_of_resonance_effect = {
+	#Well-balanced.  Negligible.
+	#Fleeting
+	#Intesne
+	#Acute
+	
+	hidden_effect = {		
+		random_list = {
+			50 = {
+				modifier = {
+					add = 25
+					health <= poor_health
+				}
+
+				modifier = {
+					add = 20
+					has_character_modifier = slightbloodloss_modifier
+				}
+
+				modifier = {
+					add = 30
+					has_character_modifier = smallbloodloss_modifier
+				}
+				
+				modifier = {
+					add = 50
+					has_character_modifier = majorbloodloss_modifier
+				}
+				modifier = {
+					add = 80
+					has_character_modifier = catastrophicbloodloss_modifier
+				}
+				modifier = {
+					add = 50
+					POD_is_vampire_trigger = yes
+				}
+				#Ghouling your herd is not something we want so ghouls should have worse resonance
+				modifier = {
+					add = 150
+					POD_is_ghoul_trigger = yes
+				}
+				modifier = {
+					add = 50
+					age >= 200
+				}
+				add_character_flag = POD_resonance_negligible_flag	
+			}
+			50 = {
+				modifier = {
+					add = 20
+					has_trait = psychic
+				}
+				modifier = {
+					add = 25
+					has_character_flag = POD_great_person_flag
+				}
+				modifier = {
+					add = 5
+					health >= fine_health
+				}
+				modifier = {
+					add = 5
+					number_of_commander_traits >= 1
+				}
+				modifier = {
+					add = 5
+					OR = {
+						has_trait = lifestyle_reveler
+						has_trait = lifestyle_hunter
+						has_trait = lifestyle_mystic
+						has_trait = lifestyle_physician
+						has_trait = lifestyle_herbalist
+						has_trait = lifestyle_blademaster
+						has_trait = diplomat
+						has_trait = family_first
+						has_trait = august
+						has_trait = strategist
+						has_trait = overseer
+						has_trait = gallant
+						has_trait = architect
+						has_trait = administrator
+						has_trait = avaricious
+						has_trait = schemer
+						has_trait = seducer
+						has_trait = torturer
+						has_trait = whole_of_body
+						has_trait = scholar
+						has_trait = theologian
+					}
+				}
+				modifier = {
+					add = 5
+					has_trait = pure_blooded
+				}
+				modifier = {
+					add = 5
+					has_trait = fecund
+				}
+				modifier = {
+					add = 5
+					has_trait = strong
+				}
+				modifier = {
+					add = 5
+					has_trait = shrewd
+				}	
+				modifier = {
+					add = 5
+					OR = {
+						has_trait = athletic
+						has_trait = confider
+						has_trait = journaller
+					}
+				}
+				modifier = {
+					add = 5
+					OR = {
+						has_trait = education_intrigue_3
+						has_trait = education_martial_3
+						has_trait = education_stewardship_3
+						has_trait = education_learning_3
+						has_trait = education_martial_prowess_3
+					}
+				}		
+				modifier = {
+					add = 10
+					OR = {
+						has_trait = education_intrigue_4
+						has_trait = education_martial_4
+						has_trait = education_stewardship_4
+						has_trait = education_learning_4
+						has_trait = education_martial_prowess_4
+					}
+				}
+				modifier = {
+					add = 15
+					OR = {
+						has_trait = education_intrigue_5
+						has_trait = education_martial_5
+						has_trait = education_stewardship_5
+						has_trait = education_learning_5
+					}
+				}
+				modifier = {
+					add = 10
+					has_trait = beauty_good
+				}
+				modifier = {
+					add = 10
+					has_trait = physique_good
+				}
+				modifier = {
+					add = 10
+					has_trait = intellect_good
+				}
+				
+				random_list = {
+					60 = {
+						modifier = {
+							add = 75
+							POD_is_vampire_trigger = yes
+						}
+						#Ghouling your herd is not something we want so ghouls should have worse resonance
+						modifier = {
+							add = 150
+							POD_is_ghoul_trigger = yes
+						}
+						modifier = {
+							add = 75
+							age >= 350
+						}
+						add_character_flag = POD_resonance_fleeting_flag
+					}
+					40 = {
+						modifier = {
+							add = 20
+							has_trait = psychic
+						}
+						modifier = {
+							add = 25
+							has_character_flag = POD_great_person_flag
+						}
+						modifier = {
+							add = 5
+							number_of_commander_traits >= 2
+						}
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = lifestyle_reveler
+								has_trait = lifestyle_hunter
+								has_trait = lifestyle_mystic
+								has_trait = lifestyle_reveler
+								has_trait = lifestyle_blademaster
+								has_trait = lifestyle_herbalist
+								has_trait = diplomat
+								has_trait = family_first
+								has_trait = august
+								has_trait = strategist
+								has_trait = overseer
+								has_trait = gallant
+								has_trait = architect
+								has_trait = administrator
+								has_trait = avaricious
+								has_trait = schemer
+								has_trait = seducer
+								has_trait = torturer
+								has_trait = whole_of_body
+								has_trait = scholar
+								has_trait = theologian
+							}
+						}					
+						modifier = {
+							add = 5
+							has_trait = pure_blooded
+						}
+						modifier = {
+							add = 5
+							has_trait = fecund
+						}
+						modifier = {
+							add = 5
+							has_trait = strong
+						}
+						modifier = {
+							add = 5
+							has_trait = shrewd
+						}	
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = athletic
+								has_trait = confider
+								has_trait = journaller
+							}
+						}				
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = education_intrigue_4
+								has_trait = education_martial_4
+								has_trait = education_stewardship_4
+								has_trait = education_learning_4
+								has_trait = education_martial_prowess_4
+							}
+						}	
+						modifier = {
+							add = 10
+							OR = {
+								has_trait = education_intrigue_5
+								has_trait = education_martial_5
+								has_trait = education_stewardship_5
+								has_trait = education_learning_5
+								has_trait = education_martial_prowess_5
+							}
+						}
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = beauty_good_2
+								has_trait = beauty_good_3
+							}
+						}
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = physique_good_2
+								has_trait = physique_good_3
+							}
+						}
+						modifier = {
+							add = 5
+							OR = {
+								has_trait = intellect_good_2
+								has_trait = intellect_good_3
+							}
+						}
+						random_list = {
+							80 = {
+								modifier = {
+									add = 100
+									POD_is_vampire_trigger = yes
+								}
+								#Ghouling your herd is not something we want so ghouls should have worse resonance
+								modifier = {
+									add = 150
+									POD_is_ghoul_trigger = yes
+								}
+								modifier = {
+									add = 100
+									age >= 500
+								}
+								add_character_flag = POD_resonance_intense_flag
+							}
+							20 = {
+								modifier = {
+									add = 20
+									has_trait = psychic
+								}
+								modifier = {
+									add = 25
+									has_character_flag = POD_great_person_flag
+								}
+								modifier = {
+									add = 5
+									number_of_commander_traits >= 3
+								}
+								modifier = {
+									add = 5
+									OR = {
+										has_trait = lifestyle_reveler
+										has_trait = lifestyle_hunter
+										has_trait = lifestyle_mystic
+										has_trait = lifestyle_physician
+										has_trait = lifestyle_blademaster
+										has_trait = lifestyle_herbalist
+										has_trait = diplomat
+										has_trait = family_first
+										has_trait = august
+										has_trait = strategist
+										has_trait = overseer
+										has_trait = gallant
+										has_trait = architect
+										has_trait = administrator
+										has_trait = avaricious
+										has_trait = schemer
+										has_trait = seducer
+										has_trait = torturer
+										has_trait = whole_of_body
+										has_trait = scholar
+										has_trait = theologian
+									}
+								}								
+								modifier = {
+									add = 5
+									has_trait = pure_blooded
+								}
+								modifier = {
+									add = 5
+									has_trait = fecund
+								}
+								modifier = {
+									add = 5
+									has_trait = strong
+								}
+								modifier = {
+									add = 5
+									has_trait = shrewd
+								}	
+								modifier = {
+									add = 5
+									OR = {
+										has_trait = athletic
+										has_trait = confider
+										has_trait = journaller
+									}
+								}
+								modifier = {
+									add = 5
+									OR = {
+										has_trait = education_intrigue_4
+										has_trait = education_martial_4
+										has_trait = education_stewardship_4
+										has_trait = education_learning_4
+										has_trait = education_martial_prowess_4
+									}
+								}
+								modifier = {
+									add = 10
+									OR = {
+										has_trait = education_intrigue_5
+										has_trait = education_martial_5
+										has_trait = education_stewardship_5
+										has_trait = education_learning_5
+									}
+								}
+								modifier = {
+									add = 5
+									has_trait = beauty_good_3
+								}
+								modifier = {
+									add = 5
+									has_trait = physique_good_3
+								}
+								modifier = {
+									add = 5
+									has_trait = intellect_good_3
+								}								
+								add_character_flag = POD_resonance_acute_flag
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+POD_determine_flavor_of_resonance_effect = {
+	#Choleric: Wrathful, Envious, Sadist, 
+	#Melancholic: Depressed, Craven, Shy, Gluttonous, Paranoid
+	#Phlegmatic: Slothful, Content, Patient, 
+	#Sanguine: Lustful, Hedonist, Gregarious, Ambitious
+
+	hidden_effect = {
+		random_list = {
+			25 = { 
+				modifier = {
+					add = 50
+					has_trait = wrathful
+				}		
+				modifier = {
+					add = 50
+					has_trait = greedy
+				}			
+				modifier = {
+					add = 50
+					has_trait = vengeful
+				}	
+				modifier = {
+					add = 50
+					has_trait = sadistic
+				}
+				modifier = {
+					add = 50
+					has_trait = torturer
+				}		
+				modifier = {
+					add = 50
+					has_trait = avaricious
+				}	
+				modifier = {
+					add = 50
+					has_trait = brave
+				}			
+				modifier = {
+					add = 50
+					has_trait = impatient
+				}
+				modifier = {
+					add = 50
+					has_trait = irritable
+				}
+				modifier = {
+					add = 50
+					has_trait = arrogant
+				}	
+				modifier = {
+					add = 50
+					has_trait = callous
+				}
+				modifier = {
+					add = 50
+					has_trait = stubborn
+				}
+				modifier = {
+					add = 50
+					has_trait = athletic
+				}
+				add_character_flag = {
+					flag = choleric_resonance
+				}	
+			}
+			25 = { 
+				modifier = {
+					add = 50
+					has_trait = gluttonous
+				}
+				modifier = {
+					add = 50
+					has_trait = craven 
+				}	
+				modifier = {
+					add = 50
+					has_trait = shy
+				}				
+				modifier = {
+					add = 50
+					has_trait = paranoid
+				}	
+				modifier = {
+					add = 50
+					has_trait = depressed_genetic
+				}
+				modifier = {
+					add = 50
+					has_trait = depressed_1
+				}	
+				modifier = {
+					add = 50
+					has_trait = chaste
+				}			
+				modifier = {
+					add = 50
+					has_trait = honest
+				}
+				modifier = {
+					add = 50
+					has_trait = cynical
+				}
+				modifier = {
+					add = 50
+					has_trait = reclusive
+				}
+				modifier = {
+					add = 50
+					has_trait = contrite
+				}
+				modifier = {
+					add = 50
+					has_trait = confider
+				}
+				modifier = {
+					add = 50
+					has_trait = flagellant
+				}
+				modifier = {
+					add = 50
+					has_trait = comfort_eater
+				}
+				add_character_flag = {
+					flag = melancholic_resonance
+				}	
+			}
+			25 = { 
+				modifier = {
+					add = 50
+					has_trait = lazy
+				}
+				modifier = {
+					add = 50
+					has_trait = temperate
+				}			
+				modifier = {
+					add = 50
+					has_trait = content
+				}			
+				modifier = {
+					add = 50
+					has_trait = patient
+				}
+				modifier = {
+					add = 50
+					has_trait = calm
+				}		
+				modifier = {
+					add = 50
+					has_trait = lunatic
+				}
+				modifier = {
+					add = 50
+					has_trait = possessed
+				}
+				modifier = {
+					add = 50
+					has_trait = compassionate
+				}
+				modifier = {
+					add = 50
+					has_trait = zealous
+				}
+				modifier = {
+					add = 50
+					has_trait = diligent
+				}
+				modifier = {
+					add = 50
+					has_trait = humble
+				}
+				modifier = {
+					add = 50
+					has_trait = just
+				}	
+				modifier = {
+					add = 50
+					has_trait = trusting
+				}
+				modifier = {
+					add = 50
+					has_trait = improvident
+				}
+				modifier = {
+					add = 50
+					has_trait = inappetetic
+				}
+				add_character_flag = {
+					flag = phlegmatic_resonance
+				}	
+			}
+			25 = { 
+				modifier = {
+					add = 50
+					has_trait = ambitious
+				}
+				modifier = {
+					add = 50
+					has_trait = lustful
+				}	
+				modifier = {
+					add = 50
+					has_trait = rakish
+				}	
+				modifier = {
+					add = 50
+					has_trait = lifestyle_reveler
+				}
+				modifier = {
+					add = 50
+					has_trait = gregarious
+				}	
+				modifier = {
+					add = 50
+					has_trait = fickle
+				}		
+				modifier = {
+					add = 50
+					has_trait = eccentric
+				}	
+				modifier = {
+					add = 50
+					has_trait = arbitrary
+				}
+				modifier = {
+					add = 50
+					has_trait = seducer
+				}
+				modifier = {
+					add = 50
+					has_trait = generous
+				}
+				modifier = {
+					add = 50
+					has_trait = deceitful
+				}
+				modifier = {
+					add = 50
+					has_trait = profligate
+				}
+				modifier = {
+					add = 50
+					has_trait = forgiving
+				}
+				add_character_flag = {
+					flag = sanguine_resonance
+				}	
+			}		
+		}
+	}
+}
+
+POD_clear_resonance_effect = {
+	POD_clear_resonance_flavor_effect = yes
+	POD_clear_resonance_intensity_effect = yes
+}
+
+POD_clear_resonance_flavor_effect = {
+	if = {
+		limit = { has_character_flag = choleric_resonance }
+		remove_character_flag = choleric_resonance
+	}
+	if = {
+		limit = { has_character_flag = melancholic_resonance }
+		remove_character_flag = melancholic_resonance
+	}
+	if = {
+		limit = { has_character_flag = phlegmatic_resonance }
+		remove_character_flag = phlegmatic_resonance
+	}
+	if = {
+		limit = { has_character_flag = sanguine_resonance }
+		remove_character_flag = sanguine_resonance
+	}
+}
+
+POD_clear_resonance_intensity_effect = {
+	if = {
+		limit = { has_character_flag = POD_resonance_negligible_flag }
+		remove_character_flag = POD_resonance_negligible_flag
+	}
+	if = {
+		limit = { has_character_flag = POD_resonance_fleeting_flag }
+		remove_character_flag = POD_resonance_fleeting_flag
+	}
+	if = {
+		limit = { has_character_flag = POD_resonance_intense_flag }
+		remove_character_flag = POD_resonance_intense_flag
+	}
+	
+	if = {
+		limit = { has_character_flag = POD_resonance_acute_flag }
+		remove_character_flag = POD_resonance_acute_flag
+	}		
+}
+
+POD_resonance_from_feeding_on_victim_effect = {
+	$VICTIM$ = { POD_set_resonance_effect = yes }
+	
+	if = {
+		limit = { POD_gains_resonance_from_feeding_trigger = no }
+		# no resonance for Éntomos
+	}
+	else_if = {
+		limit = { POD_is_hungerless_trigger = yes }
+		custom_description = {
+			text = POD_resonance_hungerless_desc
+			object = $VICTIM$
+		}
+	}
+	else_if = {
+		limit = { $VICTIM$ = { POD_has_infinite_blood_trigger = yes } }
+		custom_description = {
+			text = POD_resonance_hungerless_victim_desc
+			object = $VICTIM$
+		}
+	}
+	else_if = {
+		limit = { $VICTIM$ = { is_amenti_trigger = yes } }
+		custom_tooltip = POD_resonance_mummy.tt
+	}
+	else_if = {
+		limit = {
+			OR = {
+				is_ventrue_trigger = no
+				ventrue_weakness_compatible_trigger = {
+					ACTOR = this
+					RECIPIENT = $VICTIM$
+				}
+			}
+		}
+		
+		custom_description = {
+			text = POD_resonance_desc
+			object = $VICTIM$
+		}
+
+		if = {
+			limit = { $VICTIM$.drinkable_blood_left < $AMOUNT$ }
+			# no more blood left = drain
+			# draining takes all the blood left in the victim, plus 1
+			save_temporary_scope_value_as = {
+				name  = blood_amount
+				value = {
+					value = $VICTIM$.drinkable_blood_left
+					add   = 1
+				}
+			}
+		}
+		else = {
+			save_temporary_scope_value_as = {
+				name  = blood_amount
+				value = $AMOUNT$
+			}
+		}
+
+		POD_save_resonance_gain_multiplier = yes
+
+		save_temporary_scope_value_as = {
+			name  = resonance_gain
+			value = {
+				value    = $VICTIM$.resonance_xp_sip_value
+				multiply = scope:blood_amount
+				multiply = additional_resonance_multipliers
+				multiply = domicile_resonance_multiplier
+				multiply = scope:resonance_gain_multiplier
+			}
+		}
+		
+		POD_select_resonance_xp_effect = {
+			VICTIM = $VICTIM$
+			VALUE  = scope:resonance_gain
+		}
+
+		POD_show_storyteller_mode_resonance_tooltip = yes
+	}
+	else = {
+		POD_ventrue_bane_notification_effect = {
+			TARGET = $VICTIM$
+		}
+	}
+}
+
+POD_resonance_from_herdmember_effect = {
+	if = {
+		limit = { $VICTIM$ = { POD_has_infinite_blood_trigger = no } }
+
+		POD_save_resonance_gain_multiplier = yes
+
+		save_temporary_scope_value_as = {
+			name = herdfeed_xp_gain
+			value = {
+				value    = $VICTIM$.resonance_xp_value
+				multiply = additional_resonance_multipliers
+				multiply = domicile_resonance_multiplier
+				multiply = herd_effectiveness_multiplier
+				multiply = $AMOUNT$
+				multiply = scope:resonance_gain_multiplier
+			}
+		}
+		
+		custom_description = {
+			text = POD_resonance_desc
+			object = $VICTIM$
+		}
+	
+		POD_select_resonance_xp_effect = {
+			VICTIM = $VICTIM$
+			VALUE  = scope:herdfeed_xp_gain
+		}
+		
+		if = {
+			limit = { 
+				NOT = { has_character_modifier = excessive_choleric_modifier }
+				NOT = { has_character_modifier = degulo_choleric_modifier }
+				$VICTIM$ = { has_character_flag = choleric_resonance }
+			}
+			change_variable = { name = resonance_earned add = scope:herdfeed_xp_gain }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_character_modifier = excessive_melancholy_modifier }
+				NOT = { has_character_modifier = degulo_melancholy_modifier }
+				$VICTIM$ = { has_character_flag = melancholic_resonance }
+			}
+			change_variable = { name = resonance_earned add = scope:herdfeed_xp_gain }
+		}
+		else_if = {
+			limit = { 
+				NOT = { has_character_modifier = excessive_phlegmatic_modifier }
+				NOT = { has_character_modifier = degulo_phlegmatic_modifier }
+				$VICTIM$ = { has_character_flag = phlegmatic_resonance }
+			}
+			 
+			change_variable = { name = resonance_earned add = scope:herdfeed_xp_gain }
+		}
+		else_if = {
+			limit = { 
+				NOT = { has_character_modifier = excessive_sanguine_modifier }
+				NOT = { has_character_modifier = degulo_sanguine_modifier }
+				$VICTIM$ = { has_character_flag = sanguine_resonance }
+			}
+			change_variable = { name = resonance_earned add = scope:herdfeed_xp_gain }
+		}
+		
+		if = {
+			limit = {
+				NOT = { has_character_modifier = excessive_animal_modifier }
+				NOT = { has_character_modifier = degulo_animal_modifier }
+				$VICTIM$ = { has_animal_resonance_trigger = yes }
+			}
+			change_variable = { name = resonance_earned add = scope:herdfeed_xp_gain }
+		}
+	}
+}
+
+# this doesn't work as a script_value for some reason
+POD_save_resonance_gain_multiplier = {	
+	save_scope_value_as = {
+		name = resonance_gain_multiplier
+		value = 1
+	}
+	if = {
+		limit = { POD_resonance_has_diminishing_returns = yes }
+		
+		save_scope_value_as = {
+			name = resonance_gain_exponent
+			value = {
+				value = num_of_discipline_perks
+				subtract = 18 # 2 filled out perk trees, roughly (based on vanilla tree size)
+				min = 0
+				divide = 6 # half of a filled out perk tree, roughly (based on POD's perk trees)
+				floor = yes
+			}
+		}
+
+		switch = {
+			trigger = scope:resonance_gain_exponent
+
+			# paradox please add a POW() function to script math. i am in severe pain
+			# switch statement because while = {} loops don't get proper previews in tooltips
+			# formula is 0.9 ^ resonance_gain_exponent
+			# at 87 the values become too small so that's the cut-off
+
+			# auto-generated via jinja template:
+			# {% for num in range(88) %}
+			# {{ num }} = { save_scope_value_as = { name = resonance_gain_multiplier value = {{ (0.9**num)|round(5) }} } }
+			# {% endfor %}
+
+			0 = { save_scope_value_as = { name = resonance_gain_multiplier value = 1.0 } }
+			1 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.9 } }
+			2 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.81 } }
+			3 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.729 } }
+			4 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.6561 } }
+			5 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.59049 } }
+			6 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.53144 } }
+			7 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.4783 } }
+			8 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.43047 } }
+			9 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.38742 } }
+			10 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.34868 } }
+			11 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.31381 } }
+			12 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.28243 } }
+			13 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.25419 } }
+			14 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.22877 } }
+			15 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.20589 } }
+			16 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.1853 } }
+			17 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.16677 } }
+			18 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.15009 } }
+			19 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.13509 } }
+			20 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.12158 } }
+			21 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.10942 } }
+			22 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.09848 } }
+			23 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.08863 } }
+			24 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.07977 } }
+			25 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.07179 } }
+			26 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.06461 } }
+			27 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.05815 } }
+			28 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.05233 } }
+			29 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0471 } }
+			30 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.04239 } }
+			31 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.03815 } }
+			32 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.03434 } }
+			33 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0309 } }
+			34 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.02781 } }
+			35 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.02503 } }
+			36 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.02253 } }
+			37 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.02028 } }
+			38 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.01825 } }
+			39 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.01642 } }
+			40 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.01478 } }
+			41 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0133 } }
+			42 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.01197 } }
+			43 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.01078 } }
+			44 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0097 } }
+			45 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00873 } }
+			46 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00786 } }
+			47 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00707 } }
+			48 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00636 } }
+			49 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00573 } }
+			50 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00515 } }
+			51 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00464 } }
+			52 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00417 } }
+			53 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00376 } }
+			54 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00338 } }
+			55 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00304 } }
+			56 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00274 } }
+			57 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00247 } }
+			58 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00222 } }
+			59 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.002 } }
+			60 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0018 } }
+			61 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00162 } }
+			62 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00146 } }
+			63 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00131 } }
+			64 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00118 } }
+			65 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00106 } }
+			66 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00096 } }
+			67 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00086 } }
+			68 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00077 } }
+			69 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0007 } }
+			70 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00063 } }
+			71 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00056 } }
+			72 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00051 } }
+			73 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00046 } }
+			74 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00041 } }
+			75 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00037 } }
+			76 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00033 } }
+			77 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0003 } }
+			78 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00027 } }
+			79 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00024 } }
+			80 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00022 } }
+			81 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0002 } }
+			82 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00018 } }
+			83 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00016 } }
+			84 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00014 } }
+			85 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00013 } }
+			86 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.00012 } }
+			87 = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0001 } }
+
+			fallback = { save_scope_value_as = { name = resonance_gain_multiplier value = 0.0001 } }
+		}
+	}
+}
+
+POD_show_storyteller_mode_resonance_tooltip = {
+	if = {
+		limit = { NOT = { scope:resonance_gain_multiplier = 1 } }
+
+		save_scope_value_as = {
+			name = resonance_xp_penalty
+			value = {
+				value = 1
+				subtract = scope:resonance_gain_multiplier
+				multiply = 100
+			}
+		}
+		custom_description = {
+			text = POD_resonance_gain_multiplier_desc
+			value = scope:resonance_xp_penalty
+		}
+	}
+}
+
+POD_select_resonance_xp_effect = {
+	if = {
+		limit = { 
+			NOT = { has_character_modifier = excessive_choleric_modifier }
+			$VICTIM$ = { has_character_flag = choleric_resonance }
+		}
+		add_choleric_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = {
+			NOT = { has_character_modifier = excessive_melancholy_modifier }
+			$VICTIM$ = { has_character_flag = melancholic_resonance }
+		}
+		add_melancholy_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { 
+			NOT = { has_character_modifier = excessive_phlegmatic_modifier }
+			$VICTIM$ = { has_character_flag = phlegmatic_resonance }
+		}
+		 
+		add_phlegmatic_lifestyle_xp = $VALUE$
+	}
+	else_if = {
+		limit = { 
+			NOT = { has_character_modifier = excessive_sanguine_modifier }
+			$VICTIM$ = { has_character_flag = sanguine_resonance }
+		}
+		add_sanguine_lifestyle_xp = $VALUE$
+	}
+	
+	if = {
+		limit = {
+			NOT = { has_character_modifier = excessive_animal_modifier }
+			$VICTIM$ = { has_animal_resonance_trigger = yes }
+		}
+		add_animal_lifestyle_xp = $VALUE$
+	}
+}
+
+# for compatibility
+POD_resonance_feeding_drain_effect = {
+	POD_resonance_from_feeding_on_victim_effect = {
+		VICTIM = scope:victim
+		AMOUNT = 4
+	}
+}
+
+
+POD_resonance_feeding_small_animal_effect = {
+	if = {
+		limit = { POD_is_hungerless_trigger = no }
+		add_animal_lifestyle_xp = medium_lifestyle_xp
+	}
+}
+
+POD_resonance_feeding_large_animal_effect = {
+	if = {
+		limit = { POD_is_hungerless_trigger = no }
+		add_animal_lifestyle_xp = major_lifestyle_xp
+	}
+}
+
+POD_resonance_feeding_famulus_effect = {
+	if = {
+		limit = { POD_is_hungerless_trigger = no }
+		add_animal_lifestyle_xp = massive_lifestyle_xp
+	}
+}
+
+POD_resonance_change_to_choleric_effect = {
+	
+	POD_clear_resonance_flavor_effect = yes
+	
+	add_character_flag = {
+		flag = choleric_resonance
+	}
+	
+	if = { 
+		limit = {
+			has_trait = calm
+		}
+		random = {
+			chance = 30
+			remove_trait = calm
+			add_trait = wrathful
+		}
+	}
+	
+	if = { 
+		limit = {
+			has_trait = generous
+		}
+		random = {
+			chance = 30
+			remove_trait = generous
+			add_trait = greedy
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = forgiving
+		}
+		random = {
+			chance = 30
+			remove_trait = forgiving
+			add_trait = vengeful
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = compassionate
+		}
+		random = {
+			chance = 30
+			remove_trait = compassionate
+			random_list = {
+				50 = { add_trait = sadistic }
+				50 = { add_trait = callous }
+			}
+		}
+	}
+
+	if = { 
+		limit = {
+			has_trait = craven
+		}
+		random = {
+			chance = 30
+			remove_trait = craven
+			add_trait = brave
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = patient
+		}
+		random = {
+			chance = 30
+			remove_trait = patient
+			add_trait = impatient
+		}
+	}		
+	
+	if = { 
+		limit = {
+			has_trait = humble
+		}
+		random = {
+			chance = 30
+			remove_trait = humble
+			add_trait = arrogant
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = fickle
+		}
+		random = {
+			chance = 30
+			remove_trait = fickle
+			add_trait = stubborn
+		}
+	}	
+	if = { 
+		limit = {
+			has_trait = eccentric
+		}
+		random = {
+			chance = 30
+			remove_trait = eccentric
+			add_trait = stubborn
+		}
+	}		
+}
+
+POD_resonance_change_to_melancholic_effect = {
+	
+	POD_clear_resonance_flavor_effect = yes
+	
+	add_character_flag = {
+		flag = melancholic_resonance
+	}
+	
+	if = { 
+		limit = {
+			has_trait = temperate
+		}
+		random = {
+			chance = 30
+			remove_trait = temperate
+			add_trait = gluttonous
+		}
+	}
+
+	if = { 
+		limit = {
+			has_trait = brave
+		}
+		random = {
+			chance = 30
+			remove_trait = brave
+			add_trait = craven
+		}
+	}	
+
+	if = { 
+		limit = {
+			has_trait = gregarious
+		}
+		random = {
+			chance = 30
+			remove_trait = gregarious
+			add_trait = shy
+		}
+	}	
+
+	if = { 
+		limit = {
+			has_trait = trusting
+		}
+		random = {
+			chance = 30
+			remove_trait = trusting
+			add_trait = paranoid
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = lustful
+		}
+		random = {
+			chance = 30
+			remove_trait = lustful
+			add_trait = chaste
+		}
+	}		
+	
+	if = { 
+		limit = {
+			has_trait = deceitful
+		}
+		random = {
+			chance = 30
+			remove_trait = deceitful
+			add_trait = honest
+		}
+	}		
+	
+	if = { 
+		limit = {
+			has_trait = zealous
+		}
+		random = {
+			chance = 30
+			remove_trait = zealous
+			add_trait = cynical
+		}
+	}	
+}
+
+POD_resonance_change_to_phlegmatic_effect = {
+	
+	POD_clear_resonance_flavor_effect = yes
+	
+	add_character_flag = {
+		flag = phlegmatic_resonance
+	}
+
+	if = { 
+		limit = {
+			has_trait = diligent
+		}
+		random = {
+			chance = 30
+			remove_trait = diligent
+			add_trait = lazy
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = gluttonous
+		}
+		random = {
+			chance = 30
+			remove_trait = gluttonous
+			add_trait = temperate
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = ambitious
+		}
+		random = {
+			chance = 30
+			remove_trait = ambitious
+			add_trait = content
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = impatient
+		}
+		random = {
+			chance = 30
+			remove_trait = impatient
+			add_trait = patient
+		}
+	}		
+
+	if = { 
+		limit = {
+			has_trait = wrathful
+		}
+		random = {
+			chance = 30
+			remove_trait = wrathful
+			add_trait = calm
+		}
+	}
+	
+	if = { 
+		limit = {
+			has_trait = sadistic
+		}
+		random = {
+			chance = 30
+			remove_trait = sadistic
+			add_trait = compassionate
+		}
+	}	
+
+	if = { 
+		limit = {
+			has_trait = callous
+		}
+		random = {
+			chance = 30
+			remove_trait = callous
+			add_trait = compassionate
+		}
+	}
+	
+	if = { 
+		limit = {
+			has_trait = cynical
+		}
+		random = {
+			chance = 30
+			remove_trait = cynical
+			add_trait = zealous
+		}
+	}	
+
+	if = { 
+		limit = {
+			has_trait = lazy
+		}
+		random = {
+			chance = 30
+			remove_trait = lazy
+			add_trait = diligent
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = ambitious
+		}
+		random = {
+			chance = 30
+			remove_trait = ambitious
+			add_trait = humble
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = arbitrary
+		}
+		random = {
+			chance = 30
+			remove_trait = arbitrary
+			add_trait = just
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = deceitful
+		}
+		random = {
+			chance = 30
+			remove_trait = deceitful
+			add_trait = trusting
+		}
+	}		
+}
+
+POD_resonance_change_to_sanguine_effect = {
+	
+	POD_clear_resonance_flavor_effect = yes
+	
+	add_character_flag = {
+		flag = sanguine_resonance
+	}
+	
+	if = { 
+		limit = {
+			has_trait = deceitful
+		}
+		random = {
+			chance = 30
+			remove_trait = deceitful
+			add_trait = ambitious
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = chaste
+		}
+		random = {
+			chance = 30
+			remove_trait = chaste
+			add_trait = lustful
+		}
+	}
+
+	if = { 
+		limit = {
+			has_trait = shy
+		}
+		random = {
+			chance = 30
+			remove_trait = shy
+			add_trait = gregarious
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = stubborn
+		}
+		random = {
+			chance = 30
+			remove_trait = stubborn
+			add_trait = fickle
+		}
+	}	
+	
+	if = { 
+		limit = {
+			has_trait = just
+		}
+		random = {
+			chance = 30
+			remove_trait = just
+			add_trait = arbitrary
+		}
+	}	
+
+	if = { 
+		limit = {
+			has_trait = greedy
+		}
+		random = {
+			chance = 30
+			remove_trait = greedy
+			add_trait = generous
+		}
+	}
+
+	if = { 
+		limit = {
+			has_trait = honest
+		}
+		random = {
+			chance = 30
+			remove_trait = honest
+			add_trait = deceitful
+		}
+	}
+
+	if = { 
+		limit = {
+			has_trait = vengeful
+		}
+		random = {
+			chance = 30
+			remove_trait = vengeful
+			add_trait = forgiving
+		}
+	}	
+}
+
+POD_resonance_increase_intensity_effect = {
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_intense_flag
+		}
+		remove_character_flag = POD_resonance_intense_flag
+		add_character_flag = POD_resonance_acute_flag	
+		custom_tooltip = POD_drink_herd_increase_intensity_to_accute.tt
+	}
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_fleeting_flag
+		}
+		remove_character_flag = POD_resonance_fleeting_flag
+		add_character_flag = POD_resonance_intense_flag
+		custom_tooltip = POD_drink_herd_increase_intensity_to_intense.tt
+	}	
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_negligible_flag
+		}
+		remove_character_flag = POD_resonance_negligible_flag
+		add_character_flag = POD_resonance_fleeting_flag
+		custom_tooltip = POD_drink_herd_increase_intensity_to_fleeting.tt
+	}	
+}
+
+POD_resonance_decrease_effect = {
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_acute_flag
+		}
+		remove_character_flag = POD_resonance_acute_flag
+	}
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_intense_flag
+		}
+		remove_character_flag = POD_resonance_intense_flag
+	}
+	if = {
+		limit = {
+			has_character_flag = POD_resonance_fleeting_flag
+		}
+		remove_character_flag = POD_resonance_fleeting_flag
+	}	
+	add_character_flag = POD_resonance_negligible_flag
+	custom_tooltip = POD_drink_herd_increase_intensity_to_negligible.tt	
+}

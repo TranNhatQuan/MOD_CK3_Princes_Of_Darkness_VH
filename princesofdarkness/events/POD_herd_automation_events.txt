@@ -1,0 +1,215 @@
+﻿namespace = POD_herd_automation
+
+
+#The recurring event that handles automatic feeding
+POD_herd_automation.100 = {
+	hidden = yes
+
+	immediate = {
+
+		#Checks if this is the first time that the herd owner adds someone to their herd (by checking for the variable we add here) and sets up the variables used for the yearly xp summary if it is.
+		if = {
+			limit = {
+				scope:herd_owner = { 
+					NOT = { has_variable = resonance_earned }
+				}
+			}
+			scope:herd_owner = {
+				#This variable is used to track how much resonance xp has been earned during the year
+				set_variable = { name = resonance_earned value = 0 }
+				#Triggers the xp summary event one year after the first feeding
+				trigger_event = {
+					id = POD_herd_automation.150
+					years = 1
+				}
+			}
+		}
+
+		#Checks if there's bloodloss and if there is then we don't feed. Gotta keep the herd alive after all. Or in the case of vampires, if they're empty then there's nothing to drink.
+		if = {
+			limit = {
+				OR = {
+					has_character_modifier = slightbloodloss_modifier
+					has_character_modifier = smallbloodloss_modifier
+					has_character_modifier = majorbloodloss_modifier
+					has_character_modifier = catastrophicbloodloss_modifier
+					has_character_modifier = bloodhunger5_modifier
+					has_character_flag = POD_recently_fed_upon_flag
+				}
+			}
+		}
+
+		#And if there's no bloodloss then we feed and update the yearly summary
+		else = {
+			if = {
+				limit = { scope:herd_owner = { POD_is_hungerless_trigger = no } }
+				scope:herd_owner = { POD_recurring_herd_feed_effect = { VICTIM = scope:herdmember } }
+			}
+		}
+		
+		#Waits 10 days and triggers the event again but only if they still have a owner
+		if = {
+			limit = {
+				has_relation_herd_owner = scope:herd_owner
+			}
+			trigger_event = {
+				id = POD_herd_automation.100
+				days = 10
+			}
+			if = {
+				limit = {
+					scope:herd_owner = {
+						is_ventrue_trigger = yes
+						is_ai = no
+					}
+				}
+				trigger_event = POD_herd_automation.200
+			}
+		}
+	}
+}
+
+
+#The XP gain summary event
+POD_herd_automation.150 = {
+	hidden = yes
+
+	immediate = {
+
+		#Sends the summary message
+		send_interface_message = {
+			type = POD_event_vampire_neutral
+			title = POD_drink_herd_summary
+			left_icon = THIS
+			desc = POD_drink_herd_summary.tt
+
+			
+			if = {
+				limit = { POD_resonance_has_diminishing_returns = yes }
+
+				POD_save_resonance_gain_multiplier = yes
+				POD_show_storyteller_mode_resonance_tooltip = yes
+			}
+
+			if = {
+				limit = {
+					num_of_relation_herd_member > max_herd_cap
+				}
+				
+				save_scope_value_as = {
+					name = herd_xp_penalty
+					value = {
+						value = 1
+						subtract = herd_effectiveness_multiplier
+						multiply = 100
+					}
+				}
+
+				custom_description = {
+					text = POD_herd_over_capacity_desc
+					value = scope:herd_xp_penalty
+				}
+			}
+		}
+
+		#Resets the xp summary variable and makes the event trigger again when the right amount of time has elapsed
+		set_variable = { name = resonance_earned value = 0 }
+		trigger_event = {
+			id = POD_herd_automation.150
+			years = 1
+		}		
+	}
+}
+
+
+#Automatically remove unfit ventrue herd members
+POD_herd_automation.200 = {
+	hidden = yes
+
+	immediate = {
+		save_scope_as = herdmember
+		if = {
+			limit = {
+				scope:herd_owner = {
+					is_ventrue_trigger = yes
+					is_ai = no
+				}
+				scope:herdmember = {
+					POD_has_mundane_blood_trigger = yes
+					is_alive = yes
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						ventrue_weakness_compatible_trigger = {
+							ACTOR = scope:herd_owner
+							RECIPIENT = scope:herdmember
+						}
+					}
+				}
+				scope:herd_owner = {
+					POD_remove_herd_no_masquerade_effect = { TARGET = scope:herdmember }
+					send_interface_message = {
+						type = POD_event_vampire_bad
+						title = POD_drink_herd_ventrue_weakness.t
+						left_icon = scope:herdmember
+						desc = POD_drink_herd_ventrue_weakness_desc
+					}						
+				}
+			}
+		}
+	}
+}
+#Auto drain animals
+POD_herd_automation.4010 = {
+	hidden = yes
+	orphan = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_character_flag = autodrinkanimalsflag }
+			}
+			add_character_flag = autodrinkanimalsflag
+		}
+		
+		send_interface_toast = {
+			title = POD_herd_automation.4010.toast
+			left_icon = root
+			random_list = {
+				1 = { add_animal_lifestyle_xp = miniscule_lifestyle_xp }
+				10 = { add_animal_lifestyle_xp = minor_lifestyle_xp }
+				40 = { add_animal_lifestyle_xp = medium_lifestyle_xp }
+			}
+			add_stress = 10
+		}
+				
+		trigger_event = { id = POD_herd_automation.4011 months = 6 }
+	}
+}
+
+#Auto drain animals
+POD_herd_automation.4011 = {
+	hidden = yes
+
+	trigger = {
+		has_character_flag = autodrinkanimalsflag
+		POD_is_hungerless_trigger = no
+	}
+	
+	immediate = {
+		send_interface_toast = {
+			title = POD_herd_automation.4010.toast
+			left_icon = root
+			random_list = {
+				1 = { add_animal_lifestyle_xp = miniscule_lifestyle_xp }
+				10 = { add_animal_lifestyle_xp = minor_lifestyle_xp }
+				40 = { add_animal_lifestyle_xp = medium_lifestyle_xp }
+			}
+			add_stress = 10	
+		}
+				
+		trigger_event = { id = POD_herd_automation.4011 months = 6 }
+	}
+}

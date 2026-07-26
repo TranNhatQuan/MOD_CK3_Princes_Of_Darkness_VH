@@ -1,0 +1,531 @@
+﻿POD_character_create_vampirelord_effect = {
+	add_trait = vampire
+	
+	random_list = {
+		30 = { #Ancilla
+			set_age = { 100 199 }
+			# trigger_event = {
+				# id = POD_ai_vampire_embrace.1
+				# days = 30
+			# }
+		}
+		60 = { #Elder
+			set_age = { 200 499 }
+			trigger_event = {
+				id = POD_ai_vampire_embrace.1
+				days = 30
+			}
+		}
+		10 = { #Ancient
+			set_age = { 500 800 }
+			trigger_event = {
+				id = POD_ai_vampire_embrace.1
+				days = 30
+			}
+		}
+	}
+
+	POD_vampires_look_younger_effect = yes
+	POD_remove_all_terrible_traits_effect = yes
+	POD_character_vampire_clan_initialization_effect = yes
+	POD_character_vampire_clan_traits_effect = yes
+	POD_character_vampire_clan_special_effect = yes
+	POD_character_new_dynasty_effect = yes
+	if = {
+		limit = {
+			is_a_cultist = no
+			POD_is_supehunter_trigger = no
+			NOT = { religion = { is_in_family = rf_kindred } }
+		}
+		POD_character_vampire_faith_initialization_effect = yes
+	}
+	if = {
+		limit = {
+			exists = liege
+			liege = { has_trait = risen }
+		}
+		set_character_faith = faith:viaossium
+	}
+	random_list = {
+		60 = { add_trait = vampgeneration10 }
+		20 = { add_trait = vampgeneration9 }
+		20 = { add_trait = vampgeneration8 } 
+	}
+	POD_character_vampire_bloodpotency_initialization_effect = yes
+	POD_assign_random_bloodhunger = yes
+	POD_character_vampire_discipline_initialization_effect = yes
+	#POD_character_vampire_predatortype_initialization_effect = yes
+	POD_character_masquerade_initialization_effect = yes
+	# if = {
+		# limit = { 
+			# is_ventrue_trigger = yes 
+		# }
+		# POD_character_ventrue_prey_exclusion_initialization_effect = yes
+	# }	
+	POD_character_initialization_random_background_effect = yes
+	add_character_flag = {
+		flag = had_POD_character_initialization
+	}
+	POD_remove_disease_traits_effect = yes
+	add_character_flag = immune_to_disease
+	#POD_clear_resonance_effect = yes
+	POD_set_resonance_effect = yes
+	POD_commander_trait_initialization_effect = yes
+	POD_salubri_caste_new_vampire_initialization_effect = yes
+}
+
+POD_character_create_vampirechilde_effect = {
+
+	#Gender
+	random_list = {
+		50 = { #Female
+			dummy_female = { save_temporary_scope_as = vampire_gender }
+		}
+		50 = { #Male
+			dummy_male = { save_temporary_scope_as = vampire_gender }
+		}
+	}
+	
+	if = {
+		limit = {
+			scope:vampiresire = {
+				is_female = yes
+				OR = {
+					is_lamia_trigger = yes
+					is_ahrimane_trigger = yes
+				}
+			}
+		}
+		dummy_female = { save_temporary_scope_as = vampire_gender }
+	}
+	
+	create_character = {
+		save_temporary_scope_as = created_vampirechilde
+		age = { 18 60 }
+		location = scope:vampiresire.capital_province
+		dynasty_house = scope:vampiresire.house
+		culture = scope:vampiresire.capital_province.culture
+		faith = scope:vampiresire.faith
+		gender = scope:vampire_gender
+		trait = vampire
+		random_traits = yes
+	}
+	
+	# for some reason, the first character always looks like a clone of the sire
+	# and setting parentage after the fact doesn't work
+	# so we create a second one and take their dna
+	create_character = {
+		save_temporary_scope_as = created_vampirechilde_dna
+		age = { 60 75 }
+		location = scope:vampiresire.capital_province
+		culture = scope:vampiresire.capital_province.culture
+		faith = faith:innocence
+		gender = scope:vampire_gender
+		trait = mortal
+		trait = incapable
+		random_traits = yes
+	}
+	
+	hidden_effect_new_object = {
+		scope:created_vampirechilde = {
+			POD_set_parent_effect = { PARENT = scope:vampiresire }
+			POD_remove_all_terrible_traits_effect = yes
+			POD_character_vampire_inherit_generation_effect = yes
+			POD_character_vampire_inherit_clan_effect = yes
+			POD_character_vampire_clan_traits_effect = yes
+			random = {
+				chance = 30
+				POD_character_vampire_faith_initialization_effect = yes
+			}
+			POD_character_vampire_clan_special_effect = yes
+			POD_character_vampire_bloodpotency_initialization_effect = yes
+			POD_assign_random_bloodhunger = yes
+			POD_character_vampire_discipline_initialization_effect = yes
+			#POD_character_vampire_predatortype_initialization_effect = yes
+			POD_character_masquerade_initialization_effect = yes
+			# if = {
+				# limit = { 
+					# is_ventrue_trigger = yes 
+				# }
+				# POD_character_ventrue_prey_exclusion_initialization_effect = yes
+			# }						
+			#set_house = scope:vampiresire.house
+			POD_character_initialization_random_background_effect = yes
+			#POD_clear_resonance_effect = yes
+			POD_set_resonance_effect = yes
+			
+			POD_commander_trait_initialization_effect = yes
+			POD_salubri_caste_new_vampire_initialization_effect = yes
+			
+			POD_remove_disease_traits_effect = yes
+			add_character_flag = immune_to_disease
+			
+			copy_inheritable_appearance_from = scope:created_vampirechilde_dna
+			
+			if = {
+				limit = {
+					house.house_head ?= { is_amenti_trigger = yes }
+				}
+				set_relation_worshipped_reborn = scope:child.house.house_head
+			}
+				
+			if = {
+				limit = { scope:vampiresire = { is_a_cultist = yes } }
+				scope:vampiresire = {
+					every_relation = {
+						type = worshipped_demon
+						scope:created_vampirechilde = { set_relation_worshipped_demon = prev }
+					}
+				}
+			}
+			
+			add_character_flag = {
+				flag = had_POD_character_initialization
+			}
+		}
+		
+		scope:created_vampirechilde_dna = { death = { death_reason = death_disappearance } }
+		
+		clear_saved_scope = created_vampirechilde_dna
+		clear_saved_scope = vampire_gender
+		
+		scope:vampiresire = {
+			if = {
+				limit = { highest_held_title_tier >= tier_county }
+				add_courtier = scope:created_vampirechilde
+				scope:created_vampirechilde = { return_to_court = yes }
+			}
+		}
+	}
+}
+
+POD_remove_all_terrible_traits_effect = {
+	remove_trait = inbred
+	remove_trait = physique_bad_3
+	remove_trait = physique_bad_2
+	remove_trait = intellect_bad_3
+	remove_trait = intellect_bad_2
+	remove_trait = intellect_bad_1
+	remove_trait = blind
+	remove_trait = incapable
+	remove_trait = infirm
+	remove_trait = one_legged
+}
+
+POD_vampires_look_younger_effect = {
+
+	random_list = {
+		10 = {
+			set_immortal_age = 16
+		}	
+		30 = {
+			set_immortal_age = 20
+		}
+		25 = {
+			set_immortal_age = 26
+		}
+		20 = {
+			set_immortal_age = 35
+		}	
+		10 = {
+			set_immortal_age = 50
+		}
+		5 = {
+			set_immortal_age = 90
+		}
+#			random_list = {
+#				98 = {
+#					set_immortal_age = 90
+#				}
+#				1 = {
+#					set_immortal_age = 12
+#				}		
+#				1 = {
+#					set_immortal_age = 8
+#				}	
+#			}
+#		}			
+	}
+}
+
+POD_embrace_remove_incompatible_trait_effect = {
+	# In the case of a pregnant female who is Embraced, there is usually an immediate miscarriage.
+	POD_end_pregnancy = yes
+	
+	POD_remove_food_based_coping_strategies = yes
+	remove_trait = rakish
+	
+	remove_trait = mortal
+	remove_trait = revenant
+	remove_trait = ghoul
+	remove_trait = kinfolk
+	remove_trait = gnosis
+	remove_trait = dhampir
+	remove_trait = dhampyr
+	remove_trait = asekh_sen
+	remove_trait = kami
+	
+	if = { 
+		limit = { has_trait = supehunter }
+		remove_trait = supehunter
+		POD_hunterembrace_effect = yes
+	}
+	if = {
+		limit = { has_trait = changeling }
+		remove_trait = changeling
+		if = {
+			limit = { POD_splat_mixing_haight_mode = yes }
+			add_trait = kinain
+		}
+		if = {
+			limit = { scope:vampiresire = { has_trait = kiasyd } }
+			add_trait = kiasyd
+		}
+		else = {
+			add_trait = maeghar
+		}
+		assign_mytherceria_effect = yes
+	}
+	if = {
+		limit = { has_trait = kinain }
+		if = {
+			limit = { POD_splat_mixing_haight_mode = no }
+			remove_trait = kinain
+		}
+		if = {
+			limit = { scope:vampiresire = { has_trait = kiasyd } }
+			add_trait = kiasyd
+		}
+		else = {
+			add_trait = maeghar
+		}
+	}
+	if = {
+		limit = { has_trait = fera }
+		fera_embrace_effect = yes
+	}
+}
+
+POD_become_vampire_effect = {
+	save_temporary_scope_value_as = {
+		name = saved_immortal_age
+		value = POD_visual_age
+	}
+	POD_embrace_remove_incompatible_trait_effect = yes
+	if = {
+		limit = { is_alive = yes }
+		add_trait_force_tooltip = vampire
+		if = {
+			limit = { exists = scope:saved_immortal_age }
+			hidden_effect = { set_immortal_age = scope:saved_immortal_age }
+		}
+		hidden_effect = {
+			POD_remove_bloodpotency_modifiers_effect = yes # for embraced ghouls
+			POD_remove_wrong_supernatural_traits_on_existing_character = yes
+			POD_remove_supernatural_relation_effect = yes
+			POD_change_government_if_landed = { GOVERNMENT = traditions_government }
+			POD_side_effects_from_changing_splats = yes
+		}
+		if = {
+			limit = { is_ai = no }
+			trigger_event = podintroductions.2002
+		}
+		add_character_flag = {
+			flag = recent_embraced
+			days = 280
+		}
+	}
+}
+
+POD_player_character_create_vampirechilde_effect = {
+
+	scope:created_vampirechilde = {
+		POD_become_vampire_effect = yes
+		
+		if = {
+			limit = { is_alive = yes }
+			POD_remove_child_relation_effect = yes
+			POD_set_parent_effect = { PARENT = scope:vampiresire }
+			if = { 
+				limit = {
+					has_opinion_modifier = {
+						modifier = POD_scornedghoulthrall_opinion
+						target = scope:vampiresire
+					}				
+				}
+				remove_opinion = {
+					target = scope:vampiresire
+					modifier = POD_scornedghoulthrall_opinion
+				}
+			}
+		
+			set_house = scope:vampiresire.house	
+			
+			POD_character_vampire_inherit_generation_effect = yes
+			POD_character_vampire_inherit_clan_effect = yes
+			if = { 
+				limit = { scope:vampiresire = { religion = { is_in_family = rf_kindred } } }
+				set_character_faith = scope:vampiresire.faith
+			}
+			else = { 
+				POD_character_vampire_faith_initialization_effect = yes
+			}
+			random = {
+				chance = 30
+				POD_character_vampire_faith_initialization_effect  = yes
+			}
+			POD_character_vampire_bloodpotency_initialization_effect = yes
+			# bandaid
+			hidden_effect = { POD_remove_hunger_modifiers_effect = yes }
+			POD_assign_random_bloodhunger = yes
+			POD_character_vampire_discipline_initialization_effect = yes
+			#POD_character_vampire_predatortype_initialization_effect = yes
+			POD_character_masquerade_initialization_effect = yes
+			# if = {
+				# limit = { 
+					# is_ventrue_trigger = yes 
+				# }
+				# POD_character_ventrue_prey_exclusion_initialization_effect = yes
+			# }
+			POD_character_vampire_clan_special_effect = yes
+			POD_salubri_caste_new_vampire_initialization_effect = yes
+			
+			POD_remove_disease_traits_effect = yes
+			add_character_flag = immune_to_disease
+			
+			POD_set_resonance_effect = yes	
+			
+			POD_commander_trait_initialization_effect = yes
+			
+			add_character_flag = {
+				flag = had_POD_character_initialization
+			}
+		}
+	}
+		
+		if = {
+			limit = {
+				scope:vampiresire = { is_ai = no }
+				}
+		scope:created_vampirechilde = {
+			trigger_event = {
+				id = POD_education_events.1000
+				days = 1
+				}
+			}
+		}
+}
+
+fera_embrace_effect = {
+	add_trait = abomination
+	if = {
+		limit = {
+			OR = {
+				POD_splat_mixing_haight_mode = yes
+				has_trait = werewolf 
+				has_trait = ajaba
+				has_trait = bastet # TODO:trigger death without gnosis
+				has_trait = gurahl
+			}
+		}
+		POD_save_fera_shape_effect = yes
+		POD_remove_fera_on_embrace_effect = yes
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_trait = mokole # TODO:trigger death with frenzy
+				has_trait = rokea
+			}
+		}
+		POD_save_fera_shape_effect = yes
+		POD_remove_fera_on_embrace_effect = yes
+		POD_become_wight_effect = yes
+	}
+	else_if = {
+		limit = { has_trait = corax }
+		death = { death_reason = death_sun }
+		if = {
+			limit = { 
+				exists = scope:vampiresire 
+				scope:vampiresire = { POD_sunny_again_trigger = no }
+			}
+			scope:vampiresire = { pod_death_no_killer = { death_reason = death_sun } }
+		}
+	}
+	else_if = {
+		limit = { has_trait = kitsune }
+		death = { death_reason = death_fire }
+		if = {
+			limit = { 
+				exists = scope:vampiresire 
+				scope:vampiresire = { POD_immune_to_fire_trigger = no }
+			}
+			scope:vampiresire = { pod_death_no_killer = { death_reason = death_fire } }
+		}
+	}
+	else_if = {
+		limit = { has_trait = ratkin }
+		death = { death_reason = death_old_age }
+	}
+	else = {
+		death = { death_reason = death_failed_embrace }
+	}
+}
+
+failed_fera_embrace_effect = {
+	$VICTIM$ = {
+		if = {
+			limit = { has_trait = corax }
+			$VAMPIRE$ = {
+				death = {
+					death_reason = death_sun
+					killer = $VICTIM$
+				}
+			}
+		}
+		if = {
+			limit = { has_trait = kitsune }
+			$VAMPIRE$ = {
+				death = {
+					death_reason = death_fire
+					killer = $VICTIM$
+				}
+			}
+		}
+		death = {
+	       	death_reason = death_failed_embrace
+			killer = $VAMPIRE$
+	    }
+	}
+}
+
+POD_create_random_vampire_effect = {
+	custom_description = {
+		text = POD_create_random_vampire_effect
+		value = $GEN$
+		save_scope_as = created_vampirechilde
+		random_living_character = {
+			limit = { 
+				has_trait = vampgeneration$GEN$
+				age > PREV.age
+			}
+			weight = { # Closer Sire, Better Chance
+				base = 50
+				modifier = {
+					add = {
+						add = "scope:created_vampirechilde.location.squared_distance(THIS)"
+						multiply = -1
+					}
+				}
+			}
+			save_scope_as = vampiresire
+		}
+		POD_remove_vampire_generation_traits_effect = yes
+		POD_remove_vampire_clan_traits_effect = yes
+		
+		POD_set_parent_effect = { PARENT = scope:vampiresire }
+		POD_character_vampire_inherit_clan_effect = yes
+		POD_character_vampire_inherit_generation_effect = yes
+	}
+}

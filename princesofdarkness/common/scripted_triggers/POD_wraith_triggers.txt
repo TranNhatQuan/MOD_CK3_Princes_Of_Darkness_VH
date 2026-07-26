@@ -1,0 +1,153 @@
+﻿
+
+can_convert_to_wraith_trigger = { # Even Forced
+	NOT = { has_trait = wraith }
+	NOT = { has_trait = spirit }
+	NOT = { has_trait = automaton }
+	NOT = { has_trait = mummy } # Technically they are wraith in resurrection
+	NOT = { has_trait = demon } 
+	NOT = { has_trait = fae } 
+	is_adult = yes
+	POD_is_clone_trigger = no
+}
+
+can_become_wraith_trigger = { # Naturally
+	NOT = { has_trait = mage } # Mages by and large reincarnate
+	NOT = { has_trait = fera } # Garou, like mages, reincarnate
+	NOT = { has_trait = changeling } # Changelings are only susceptible to becoming one of the Restless Dead if killed with cold iron.
+}
+
+has_any_pathos_modifier = {
+	OR = {
+		has_character_modifier = pathos0_modifier
+		has_character_modifier = pathos1_modifier
+		has_character_modifier = pathos2_modifier
+		has_character_modifier = pathos3_modifier
+		has_character_modifier = pathos4_modifier
+		has_character_modifier = pathos5_modifier
+	}
+}
+
+has_any_angst_modifier = {
+	OR = {
+		has_character_modifier = angst0_modifier
+		has_character_modifier = angst1_modifier
+		has_character_modifier = angst2_modifier
+		has_character_modifier = angst3_modifier
+		has_character_modifier = angst4_modifier
+		has_character_modifier = angst5_modifier
+	}
+}
+
+has_conduit_trigger = {
+	OR = {
+		has_character_modifier = cat_conduit_modifier
+		has_character_modifier = dog_conduit_modifier
+		has_character_modifier = horse_conduit_modifier
+		has_character_modifier = wolf_conduit_modifier
+		has_character_modifier = bear_conduit_modifier
+		has_character_modifier = lion_conduit_modifier
+		has_character_modifier = tiger_conduit_modifier
+		has_character_modifier = rat_conduit_modifier
+		has_character_modifier = cockroach_conduit_modifier
+	}
+}
+
+has_arcanos_trigger = {
+	OR = {
+		has_trait = arcanos_argos
+		has_trait = arcanos_castigate
+		has_trait = arcanos_embody
+		has_trait = arcanos_fatalism
+		has_trait = arcanos_flux
+		has_trait = arcanos_inhabit
+		has_trait = arcanos_intimation
+		has_trait = arcanos_keening
+		has_trait = arcanos_lifeweb
+		has_trait = arcanos_mnemosynis
+		has_trait = arcanos_moliate
+		has_trait = arcanos_outrage
+		has_trait = arcanos_pandemonium
+		has_trait = arcanos_phantasm
+		has_trait = arcanos_puppetry
+		has_trait = arcanos_usury
+	}
+}
+
+not_has_fetter_trigger = {
+	OR = {
+		NOT = { has_variable_list = owned_fetter_list }
+		variable_list_size = {
+			name = owned_fetter_list
+			value = 0
+		}
+	}
+}
+
+is_my_fetter_trigger = {
+	is_target_in_variable_list = { name = owned_fetter_list target = $FETTER$ }
+}
+
+is_fetter_of_actor_trigger = {
+	has_variable = fetter_owner
+	var:fetter_owner = scope:actor
+}
+
+is_fetter_of_trigger = {
+	has_variable = fetter_owner
+	var:fetter_owner = $OWNER$
+}
+
+
+POD_has_fetter_of_type = {
+	has_variable_list = owned_fetter_list
+	any_in_list = {
+		variable = owned_fetter_list
+		var:type = flag:$TYPE$
+	}
+}
+POD_has_fetter_of_type_and_level = {
+	has_variable_list = owned_fetter_list
+	any_in_list = {
+		variable = owned_fetter_list
+		var:type = flag:$TYPE$
+		var:level = $LEVEL$
+	}
+}
+
+POD_is_fetter_at_max_level = {
+	custom_tooltip = {
+		text = POD_is_fetter_at_max_level
+		has_variable_list = owned_fetter_list
+		any_in_list = {
+			variable = owned_fetter_list
+			var:type = flag:$TYPE$
+			var:level = 5
+		}
+	}
+}
+
+POD_is_fetter_at_min_level = {
+	custom_tooltip = {
+		text = POD_is_fetter_at_min_level
+		has_variable_list = owned_fetter_list
+		any_in_list = {
+			variable = owned_fetter_list
+			var:type = flag:$TYPE$
+			var:level = 1
+		}
+	}
+}
+
+POD_has_any_fetter_seed = {
+	has_variable_list = owned_fetter_list
+	any_in_list = {
+		variable = owned_fetter_list
+		var:level = 0
+	}
+}
+
+POD_has_dark_passion = {
+	has_variable_list = owned_dark_passion_list
+	is_target_in_variable_list = { name = owned_dark_passion_list target = flag:$TYPE$ }
+}

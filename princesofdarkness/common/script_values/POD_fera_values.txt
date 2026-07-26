@@ -1,0 +1,560 @@
+﻿
+gnosis_regen_chance = {
+	value = 0
+
+	add = {
+		value = 20
+		desc = BASE_VALUE
+		format = "POD_FORMAT_PERCENTAGE_BASE"
+	}
+	if = {
+		limit = { has_trait = beast_born }
+		add = {
+			value = 10
+			desc = POD_gnosis_regen_beast_born
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { piety_level = 5 }
+		add = {
+			value = 10
+			desc = POD_gnosis_regen_piety_level
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+	else_if = {
+		limit = { piety_level = 4 }
+		add = {
+			value = 7.5
+			desc = POD_gnosis_regen_piety_level
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+	else_if = {
+		limit = { piety_level = 3 }
+		add = {
+			value = 5
+			desc = POD_gnosis_regen_piety_level
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+	else_if = {
+		limit = { piety_level = 2 }
+		add = {
+			value = 2.5
+			desc = POD_gnosis_regen_piety_level
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	###Spirit Companions
+	if = {
+		limit = { num_of_relation_spirit_companion >= 1 }
+		add = {
+            value = {
+                every_relation = {
+					type = spirit_companion
+					limit = { is_alive = yes }
+
+					if = {
+						limit = { POD_spirit_rank = 5 }
+						add = 10
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 4 }
+						add = 8
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 3 }
+						add = 6
+					}
+					else_if = {
+						limit = { POD_spirit_rank = 2 }
+						add = 4
+					}
+					else = {
+						add = 2
+					}
+				}
+            }
+            desc = POD_gnosis_regen_spirit_companions
+            format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+        }
+	}
+
+	###Buildings
+	if = {
+        limit = { is_landed = yes }
+        add = {
+            value = {
+                every_held_title = {
+                    limit = { 
+						tier = tier_barony 
+						is_landless_type_title = no
+					}
+                    title_province = {
+                        if = {
+                            limit = { has_building_with_flag = building_gnosis_regen_2_5 }
+                            add = 2.5
+                        }
+						else_if = {
+							limit = { has_building_with_flag = building_gnosis_regen_5 }
+                            add = 5
+						}
+                    }
+                }
+            }
+            desc = POD_gnosis_regen_buildings
+            format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+        }
+    }
+
+	###Domicile Buildings
+	if = {
+        limit = { domicile ?= { has_domicile_building_or_higher = mokole_main_meditation_chamber_01 } }
+		domicile = {
+			add = {
+				value = {
+					switch = {
+						trigger = has_domicile_building
+
+						mokole_main_meditation_chamber_06 = { add = 15 }
+						mokole_main_meditation_chamber_05 = { add = 12.5 }
+						mokole_main_meditation_chamber_04 = { add = 10 }
+						mokole_main_meditation_chamber_03 = { add = 7.5 }
+						mokole_main_meditation_chamber_02 = { add = 5 }
+						mokole_main_meditation_chamber_01 = { add = 2.5 }
+					}
+				}
+				desc = POD_gnosis_regen_domicile
+				format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+			}
+		}
+    }
+
+	###Artifacts, DO NOT PUSH A FETISH HERE
+	if = {
+        limit = { any_equipped_character_artifact = { has_variable = increases_gnosis_regen } }
+        add = {
+            value = {
+                every_equipped_character_artifact = {
+                    limit = { has_variable = increases_gnosis_regen }
+					if = {
+						limit = { has_variable = archeorex }
+						add = 5
+					}
+                }
+            }
+            desc = POD_gnosis_regen_artifacts
+            format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+        }
+    }
+
+	###Perks
+	if = {
+		limit = {
+			OR = {
+				has_perk = fomori_spirit_ties_perk
+				has_perk = gorgon_spirit_ties_perk
+				has_perk = drone_spirit_ties_perk
+				has_perk = kami_spirit_ties_perk
+			}
+		}
+		add = {
+			value = 5
+			desc = POD_gnosis_regen_spirit_ties
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { has_perk = dream_of_a_thousand_cranes_perk }
+		add = {
+			value = 5
+			desc = POD_gnosis_regen_thousand_cranes
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { has_perk = sleep_of_the_dragon_perk }
+		add = {
+			value = 10
+			desc = POD_gnosis_regen_sleep_of_the_dragon
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+	if = {
+		limit = { has_perk = fools_luck_perk }
+		add = {
+			value = 10
+			desc = POD_gnosis_regen_fools_luck
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	###Legacies
+	if = {
+		limit = { dynasty ?= { has_dynasty_perk = gumagan_legacy_5 } }
+		add = {
+			value = 5
+			desc = POD_gnosis_regen_gumagan_legacy_5
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+	
+	###Modifiers
+	if = {
+		limit = { has_character_modifier = pegasus_totem_modifier }
+		add = {
+			value = 5
+			desc = pegasus_totem_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { has_character_modifier = scarab_totem_modifier }
+		add = {
+			value = 10
+			desc = scarab_totem_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { has_character_modifier = tsukiyomi_totem_modifier }
+		add = {
+			value = 5
+			desc = tsukiyomi_totem_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { has_character_modifier = mokole_gaias_memory_character_modifier }
+		add = {
+			value = 10
+			desc = mokole_gaias_memory_character_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { dynasty ?= { has_dynasty_modifier = wyrm_eater_of_souls_dynasty_modifier } }
+		add = {
+			value = 5
+			desc = wyrm_eater_of_souls_dynasty_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	if = {
+		limit = { dynasty ?= { has_dynasty_modifier = wyrm_servants_hydra_dynasty_modifier } }
+		add = {
+			value = 10
+			desc = wyrm_servants_hydra_dynasty_modifier
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+
+	###Faiths
+	if = {
+		limit = { faith = { has_doctrine_parameter = gnosis_from_river_provinces } }
+		add = {
+			value = {
+				every_held_title = {
+					limit = { 
+						tier = tier_county
+						is_riverside_county = yes
+					}
+					add = 2.5
+				}
+			}
+			desc = POD_gnosis_regen_faith_tenets
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER"
+		}
+	}
+
+	##################
+	#### Negative ####
+	##################
+
+	#Fetish Upkeep
+	if = {
+		limit = {
+			any_character_artifact = { 
+				is_equipped = yes
+				has_variable = fetish_artifact
+			}
+		}
+		add = {
+            value = {
+                every_equipped_character_artifact = {
+                    limit = { 
+						has_variable = fetish_artifact
+						NAND = {
+							OR = {
+								artifact_type = sword
+								artifact_type = katana
+							}
+							prev = { faith = { has_doctrine_parameter = no_sword_fetish_upkeep } }
+						}
+					}
+					add = -5
+                }
+            }
+            desc = POD_gnosis_regen_fetish_upkeep
+            format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+        }
+	}
+
+	#Stress
+	if = {
+		limit = { stress_level >= 1 }
+		
+		subtract = {
+			value = stress_level
+			multiply = 5
+
+			desc = POD_gnosis_regen_stress
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+		}
+	}
+
+
+	#Modifiers
+	if = {
+		limit = { has_character_modifier = innocent_drained_modifier }
+		
+		add = {
+			value = -10
+
+			desc = POD_gnosis_regen_modifiers
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+		}
+	}
+	if = {
+		limit = { has_character_modifier = innocent_stolen_form_modifier }
+		
+		add = {
+			value = -5
+
+			desc = POD_gnosis_regen_modifiers
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+		}
+	}
+	if = {
+		limit = { has_character_modifier = innocent_hallowed_net_cd }
+		add = {
+			value = -5
+
+			desc = POD_gnosis_regen_modifiers
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+		}
+	}
+	if = {
+		limit = { has_character_modifier = wyrm_splintered_soul_modifier }
+		
+		add = {
+			value = -10
+
+			desc = POD_gnosis_regen_modifiers
+			format = "POD_FORMAT_PERCENTAGE_MODIFIER_NEGATIVE"
+		}
+	}
+
+
+	#Kinfolk Limiter
+	if = {
+		limit = {
+			POD_is_kinfolk_trigger = yes
+			gnosis_level >= 3
+		}
+		multiply = {
+			value = 0
+			desc = POD_gnosis_regen_kinfolk_cap
+			format = "POD_FORMAT_PERCENTAGE_NULLIFIED"
+		}
+	}
+
+
+
+
+
+	min = 0
+	max = 100
+}
+
+
+fera_shapeshifter_chance = {
+	value = 25
+
+
+	if = {
+		limit = { mother ?= { has_trait = fera } }
+		add = 25
+	}
+	
+	if = {
+		limit = { father ?= { has_trait = fera } }
+		add = 25
+	}
+
+	if = {
+		limit = {
+			real_father ?= {
+				has_trait = fera
+				is_ai = yes
+				is_landed = yes
+			}
+		}
+		add = 10
+	}
+
+	if = {
+		limit = {
+			mother ?= {
+				has_trait = fera
+				is_ai = yes
+				is_landed = yes
+			}
+		}
+		add = 10
+	}
+
+	if = {
+		limit = {
+			any_close_family_member = {
+				is_landed = yes
+				is_ai = yes
+				has_trait = fera
+			}
+		}
+		add = 20
+	}
+
+	if = {
+		limit = {
+			OR = {
+				real_father ?= {
+					has_trait = bastet
+					any_character_artifact = { has_variable = lotus_petals }
+				}
+				mother ?= {
+					has_trait = bastet
+					any_character_artifact = { has_variable = lotus_petals }
+				}
+			}
+		}
+		add = 100
+	}
+
+
+	min = 0
+	max = 100
+}
+
+gnosis_lifestyle_xp_mult = {
+	switch = {
+		trigger = has_character_modifier
+		POD_gnosis_1_modifier = { value = 0.1 }
+		POD_gnosis_2_modifier = { value = 0.2 }
+		POD_gnosis_3_modifier = { value = 0.3 }
+		POD_gnosis_4_modifier = { value = 0.4 }
+		POD_gnosis_5_modifier = { value = 0.5 }
+	}
+}
+
+
+
+
+#######################
+#### Spirit Quests ####
+#######################
+
+
+fera_spirit_quest_difficulty_1_progress = 2.5
+fera_spirit_quest_difficulty_2_progress = 5
+fera_spirit_quest_difficulty_3_progress = 7.5
+fera_spirit_quest_difficulty_4_progress = 10
+fera_spirit_quest_difficulty_5_progress = 15
+
+fera_spirit_quest_difficulty_1_neg_progress = -1
+fera_spirit_quest_difficulty_2_neg_progress = -2
+fera_spirit_quest_difficulty_3_neg_progress = -3.5
+fera_spirit_quest_difficulty_4_neg_progress = -6
+fera_spirit_quest_difficulty_5_neg_progress = -10
+
+fera_spirit_quest_difficulty = {
+	value = 0
+
+	add = var:current_journey.var:quest_difficulty
+}
+
+
+fera_spirit_quest_progress_success_value = {
+	value = 0
+
+	if = {
+		limit = { fera_spirit_quest_difficulty = 5 }
+		add = 0.5
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 4 }
+		add = 0.75
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 3 }
+		add = 1
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 2 }
+		add = 1.25
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 1 }
+		add = 1.5
+	}
+}
+
+fera_spirit_quest_lifestyle_reward_value = {
+	value = 100
+	
+	add = {
+		value = learning
+		multiply = 10
+		multiply = 1.5
+	}
+	add = {
+		value = piety_level
+		multiply = 10
+		multiply = 4
+	}
+	
+	if = {
+		limit = { fera_spirit_quest_difficulty = 5 }
+		multiply = 3
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 4 }
+		multiply = 2
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 3 }
+		multiply = 1.5
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 2 }
+		multiply = 1
+	}
+	else_if = {
+		limit = { fera_spirit_quest_difficulty = 1 }
+		multiply = 0.75
+	}
+
+	max = 2000
+}

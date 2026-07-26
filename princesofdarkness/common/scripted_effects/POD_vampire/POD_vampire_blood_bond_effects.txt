@@ -1,0 +1,46 @@
+﻿POD_bloodbond_effect = {
+	if = {
+		limit = {
+			OR = {
+				$REGENT$ = {
+					has_hook_of_type = {
+						target = $THRALL$
+						type = weak_bloodoath_hook
+					}
+				}
+				AND = {
+					$THRALL$ = {
+						OR = {
+							AND = {
+								is_tremere_trigger = yes
+								NOT = { has_global_variable = POD_tremere_bane_change }
+							}
+							is_banpaia_trigger = yes
+						}
+						POD_suppress_clan_curse_trigger = no
+					}
+				}
+			}
+			
+			$THRALL$ = { NOT = { has_character_flag = blood_bonded } }
+			
+		}
+		custom_tooltip = POD_bond_prisoner_interaction_growingbloodbond
+		$REGENT$ = {
+			add_hook = {
+				target = $THRALL$
+				type = strong_bloodoath_hook
+			}
+		}
+	}
+	else = {
+		$REGENT$ = {
+				add_hook = {
+					target = $THRALL$
+					type = weak_bloodoath_hook
+				}
+		}
+	}
+	$REGENT$ = { POD_hunger_rouse_check_effect = yes }
+
+}

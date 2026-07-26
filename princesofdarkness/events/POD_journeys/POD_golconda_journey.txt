@@ -1,0 +1,1006 @@
+﻿namespace = POD_golconda_journey
+
+scripted_trigger POD_golconda_teacher_requirements = {
+	POD_knows_about_golconda_trigger = yes
+	opinion = {
+		target = root
+		value >= 0
+	}
+	is_adult = yes
+	POD_is_available_for_events = yes
+}
+
+# You find a teacher
+POD_golconda_journey.1 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.1.t
+	theme = vampire
+	override_background = { reference = garden }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = POD_golconda_journey.1.desc
+
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	right_portrait = {
+		character = scope:teacher
+		animation = personality_zealous
+	}
+
+	immediate = {
+		POD_pause_journey_travel_plan_effect = yes
+		# check local ruler
+		if = {
+			limit = {
+				root.location.county_controller = {
+					POD_golconda_teacher_requirements = yes
+				}
+			}
+			root.location.county_controller = { save_scope_as = teacher }
+		}
+		else = {
+			# check wanderers
+			if = {
+				limit = {
+					any_pool_character = {
+						province = root.capital_province
+						POD_golconda_teacher_requirements = yes
+					}
+				}
+				random_pool_character = {
+					province = root.capital_province
+					limit = {
+						POD_golconda_teacher_requirements = yes
+					}
+					save_scope_as = teacher
+				}
+			}
+			# create new character
+			else = {
+				create_character = {
+					template = POD_journey_teacher_template
+					dynasty = none
+					faith = faith:viahumanitatis
+					location = root.location
+					save_scope_as = teacher
+				}
+				
+				scope:teacher = {
+					add_trait = salubri
+					add_trait = salubri_healer
+					POD_character_initialization_for_vampire_barons_effect = yes
+					add_character_flag = temporary_teacher
+					
+					set_employer = character:POD_wraith_01
+					return_to_court = yes
+					add_character_flag = blocked_from_leaving
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.1.option.a
+		trigger_event = {
+			id = POD_golconda_journey.2
+			days = 7
+		}
+	}
+}
+
+# Learning the rules
+POD_golconda_journey.2 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.2.t
+	theme = vampire
+	override_background = { reference = garden }
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+
+	desc = POD_golconda_journey.2.desc
+
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+
+	right_portrait = {
+		character = scope:teacher
+		animation = personality_zealous
+	}
+
+	immediate = {
+		custom_tooltip = {
+			text = POD_golconda_journey.2.effect
+
+			add_character_flag = knows_about_golconda
+
+			var:coterie ?= {
+				every_in_list = {
+					variable = members
+					limit = {
+						POD_is_in_same_journey_trigger = { TARGET = root }
+						NOT = { has_character_flag = knows_about_golconda }
+					}
+					add_character_flag = knows_about_golconda
+				}
+			}
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.2.option.a
+		POD_end_journey_effect = yes
+		hidden_effect = {
+			scope:teacher = {
+				if = {
+					limit = { has_character_flag = temporary_teacher }
+					POD_disappearance_effect = yes
+				}
+			}
+		}
+	}
+}
+
+
+# Hidden event for rolling Golconda Seeker XP
+POD_golconda_journey.20 = {
+	hidden = yes
+	immediate = {
+		random_list = {
+			1 = { save_scope_value_as = { name = golconda_xp value = 3 } }
+			1 = { save_scope_value_as = { name = golconda_xp value = 4 } }
+			1 = { save_scope_value_as = { name = golconda_xp value = 5 } }
+			1 = { save_scope_value_as = { name = golconda_xp value = 6 } }
+			1 = { save_scope_value_as = { name = golconda_xp value = 7 } }
+		}
+		trigger_event = POD_golconda_journey.10
+	}
+}
+
+# Contemplating the Inner Predator
+POD_golconda_journey.10 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.10.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = {
+		desc = POD_golconda_journey.10.desc
+		random_valid = {
+			desc = POD_golconda_journey.10.desc.1
+			desc = POD_golconda_journey.10.desc.2
+			desc = POD_golconda_journey.10.desc.3
+			desc = POD_golconda_journey.10.desc.4
+			desc = POD_golconda_journey.10.desc.5
+			desc = POD_golconda_journey.10.desc.6
+			desc = POD_golconda_journey.10.desc.7
+			desc = POD_golconda_journey.10.desc.8
+			desc = POD_golconda_journey.10.desc.9
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	
+	widget = {
+		gui = "POD_event_window_widget_golconda"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		add_stress = medium_stress_gain
+		if = {
+			limit = { NOT = { has_trait = golconda_seeker } }
+			add_trait = golconda_seeker
+		}
+		add_trait_xp = {
+			trait = golconda_seeker
+			value = scope:golconda_xp
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.10.option.a
+		if = {
+			limit = { NOT = { has_character_flag = ready_for_suspire } }
+			random_list = {
+				0 = {
+					modifier = { add = { value = suspire_success_chance multiply = 0.5 } }
+					custom_tooltip = POD_golconda_journey.10.option.a.success
+					trigger_event = POD_golconda_journey.11
+				}
+				100 = {
+					modifier = { add = { value = 0 subtract = suspire_success_chance multiply = 0.5 } }
+					modifier = { factor = 0 suspire_success_chance = 100 }
+					#custom_tooltip = POD_golconda_journey.1000.option.a.failure
+					POD_end_journey_effect = yes
+					if = {
+						limit = {
+							has_variable = continue_golconda
+							piety >= 1000
+						}
+						custom_tooltip = {
+							text = golconda_widget_tt
+							add_piety = -1000
+							POD_find_and_start_journey_effect = {
+								TYPE = golconda_2
+							}
+						}
+					}
+				}
+			}
+		}
+		else = {
+			POD_end_journey_effect = yes
+			if = {
+				limit = {
+					has_variable = continue_golconda
+					piety >= 1000
+				}
+				custom_tooltip = {
+					text = golconda_widget_tt
+					add_piety = -1000
+					POD_find_and_start_journey_effect = {
+						TYPE = golconda_2
+					}
+				}
+			}
+		}
+	}
+}
+
+# Unlocking the Suspire
+POD_golconda_journey.11 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.11.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+
+	desc = POD_golconda_journey.11.desc
+
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	immediate = {
+		custom_tooltip = {
+			text = POD_golconda_journey.11.effect
+			add_character_flag = ready_for_suspire
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.11.option.a
+		POD_end_journey_effect = yes
+	}
+}
+
+# Suspire start
+POD_golconda_journey.100 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.100.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = {
+		desc = POD_golconda_journey.100.desc
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:suspire_type = flag:compassion }
+				desc = POD_golconda_journey.100.desc.compassion
+			}
+			triggered_desc = {
+				trigger = { scope:suspire_type = flag:selfreliance }
+				desc = POD_golconda_journey.100.desc.selfreliance
+			}
+			# triggered_desc = {
+			# 	trigger = { scope:suspire_type = flag:rationality }
+			# 	desc = POD_golconda_journey.100.desc.rationality
+			# }
+			# triggered_desc = {
+			# 	trigger = { scope:suspire_type = flag:intuition }
+			# 	desc = POD_golconda_journey.100.desc.intuition
+			# }
+		}
+	}
+
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+	
+	immediate = {
+		# Add more Suspire event chains?
+		save_scope_value_as = {
+			name = compassion_weight
+			value = ai_compassion
+		}
+		save_scope_value_as = {
+			name = selfreliance_weight
+			value = { value = ai_compassion multiply = -1 }
+		}
+		# save_scope_value_as = {
+		# 	name = rationality_weight
+		# 	value = ai_rationality
+		# }
+		# save_scope_value_as = {
+		# 	name = intuition_weight
+		# 	value = { value = ai_rationality multiply = -1 }
+		# }
+
+		if = {
+			limit = {
+				scope:compassion_weight >= scope:selfreliance_weight
+				# scope:compassion_weight >= scope:rationality_weight
+				# scope:compassion_weight >= scope:intuition_weight
+			}
+			save_scope_value_as = {
+				name  = suspire_type
+				value = flag:compassion
+			}
+		}
+		else_if = {
+			limit = {
+				scope:selfreliance_weight >= scope:compassion_weight
+				# scope:selfreliance_weight >= scope:rationality_weight
+				# scope:selfreliance_weight >= scope:intuition_weight
+			}
+			save_scope_value_as = {
+				name  = suspire_type
+				value = flag:selfreliance
+			}
+		}
+		# else_if = {
+		# 	limit = {
+		# 		scope:rationality_weight >= scope:compassion_weight
+		# 		scope:rationality_weight >= scope:selfreliance_weight
+		# 		scope:rationality_weight >= scope:intuition_weight
+		# 	}
+		# 	save_scope_value_as = {
+		# 		name  = suspire_type
+		# 		value = flag:rationality
+		# 	}
+		# }
+		# else_if = {
+		# 	limit = {
+		# 		scope:intuition_weight >= scope:compassion_weight
+		# 		scope:intuition_weight >= scope:selfreliance_weight
+		# 		scope:intuition_weight >= scope:rationality_weight
+		# 	}
+		# 	save_scope_value_as = {
+		# 		name  = suspire_type
+		# 		value = flag:intuition
+		# 	}
+		# }
+	}
+
+	option = {
+		name = POD_golconda_journey.100.option.a
+		trigger_event = POD_golconda_journey.101
+	}
+}
+
+# Unmoored
+POD_golconda_journey.101 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.101.t
+	theme = vampire
+	override_background = { reference = shader_event_unmoored }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_bad" }
+
+	desc = POD_golconda_journey.101.desc
+	
+	widget = {
+		gui = "POD_shader_event_unmoored"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = POD_golconda_journey.101.option.a
+		add_character_modifier = {
+			modifier = golconda_focusing_inward_modifier
+			years    = 10
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.101.option.b
+		add_character_modifier = {
+			modifier = golconda_comforted_modifier
+			years    = 10
+		}
+	}
+
+	after = {
+		trigger_event = POD_golconda_journey.102
+	}
+}
+
+# Floating
+POD_golconda_journey.102 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.102.t
+	theme = vampire
+	override_background = { reference = shader_event_kaleidoscope }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_stress" }
+
+	desc = POD_golconda_journey.102.desc
+	
+	widget = {
+		gui = "POD_shader_event_kaleidoscope"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = POD_golconda_journey.102.option.a
+		add_prestige = -2000
+		add_prestige_level = -5
+	}
+
+	option = {
+		name = POD_golconda_journey.102.option.b
+		add_piety = -2000
+		add_piety_level = -5
+	}
+
+	after = {
+		trigger_event = POD_golconda_journey.103
+	}
+}
+
+# Grounded
+POD_golconda_journey.103 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.103.t
+	theme = vampire
+	override_background = { reference = pod_sunny_riverside }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = POD_golconda_journey.103.desc
+
+	right_portrait = {
+		character = character:505001 # Caine
+		animation = idle
+		animate_if_dead = yes
+	}
+
+	option = {
+		name = POD_golconda_journey.103.option.a
+		add_character_modifier = {
+			modifier = golconda_guilt_modifier
+			years    = 10
+		}
+		save_scope_value_as = {
+			name  = hunger_insight
+			value = flag:guilt
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.103.option.b
+		add_character_modifier = {
+			modifier = golconda_confusion_modifier
+			years    = 10
+		}
+		save_scope_value_as = {
+			name  = hunger_insight
+			value = flag:confusion
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.103.option.c
+		add_character_modifier = {
+			modifier = golconda_rage_modifier
+			years    = 10
+		}
+		save_scope_value_as = {
+			name  = hunger_insight
+			value = flag:rage
+		}
+	}
+
+	after = {
+		trigger_event = POD_golconda_journey.104
+	}
+}
+
+# Final frenzy test
+POD_golconda_journey.104 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.104.t
+	theme = vampire
+	override_background = { reference = shader_event_hypertrip }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_bad" }
+
+	desc = {
+		desc = POD_golconda_journey.104.desc
+		triggered_desc = {
+			trigger = { scope:hunger_insight = flag:guilt }
+			desc = POD_golconda_journey.104.desc.guilt
+		}
+		triggered_desc = {
+			trigger = { scope:hunger_insight = flag:confusion }
+			desc = POD_golconda_journey.104.desc.confusion
+		}
+		triggered_desc = {
+			trigger = { scope:hunger_insight = flag:rage }
+			desc = POD_golconda_journey.104.desc.rage
+		}
+		desc = POD_golconda_journey.104.desc.end
+	}
+
+	right_portrait = {
+		character = character:505001 # Caine
+		animation = personality_vengeful
+		animate_if_dead = yes
+	}
+	
+	widget = {
+		gui = "POD_shader_event_hypertrip"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = ELLIPSIS
+		custom_tooltip = POD_golconda_journey.104.option.a.tt
+		
+		random_list = {
+			0 = {
+				modifier = { add = { value = suspire_success_chance } }
+				custom_tooltip = POD_golconda_journey.104.option.a.success
+				trigger_event = POD_golconda_journey.105
+			}
+			100 = {
+				modifier = { add = { value = 0 subtract = suspire_success_chance } }
+				custom_tooltip = POD_golconda_journey.104.option.a.failure
+				trigger_event = POD_golconda_journey.106
+			}
+		}
+	}
+}
+
+# Golconda
+POD_golconda_journey.105 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.105.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+
+	desc = POD_golconda_journey.105.desc
+
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	immediate = {
+		POD_achieve_golconda_effect = yes
+		POD_apply_temporary_portrait_flag = { FLAG = POD_bloodskin_form_flag }
+	}
+
+	option = {
+		name = POD_golconda_journey.105.option.a
+	}
+
+	option = {
+		name = POD_golconda_journey.105.option.b
+		add_internal_flag = dangerous
+		custom_tooltip = POD_golconda_journey.105.option.b.tt
+		trigger_event = POD_golconda_journey.107
+	}
+	
+	after = {
+		POD_end_journey_effect = yes
+		POD_remove_temporary_portrait_flag = { FLAG = POD_bloodskin_form_flag }
+	}
+}
+
+# Wassail
+POD_golconda_journey.106 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.106.t
+	theme = vampire
+	override_background = { reference = shader_event_hypertrip }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_bad" }
+
+	desc = POD_golconda_journey.106.desc
+	
+	widget = {
+		gui = "POD_shader_event_hypertrip"
+		container = "background_shader_vfx_container"
+	}
+
+	option = {
+		name = POD_golconda_journey.106.option.a
+		POD_end_journey_effect = yes
+		POD_become_wight_effect = yes
+	}
+}
+
+# Becoming mortal again
+POD_golconda_journey.107 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.107.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = POD_golconda_journey.107.desc
+
+	left_portrait = {
+		character = root
+		animation = shiver
+	}
+
+	option = {
+		name = POD_golconda_journey.107.option.a
+		add_internal_flag = dangerous
+		custom_tooltip = {
+			text = POD_golconda_journey.107.option.a.tt
+			POD_make_vampire_mortal = {
+				ADD_MORTAL_TRAIT = yes
+			}
+			POD_leave_coterie_effect = yes
+			set_global_variable = {
+				name = the_end_of_the_world
+				value = yes
+			}
+		}
+		ai_chance = { base = 0 }
+	}
+
+	option = {
+		name = POD_golconda_journey.107.option.b
+		player_heir ?= { save_scope_as = heir_tooltip }
+		custom_tooltip = {
+			text = POD_golconda_journey.107.option.b.tt
+			POD_make_vampire_mortal = {
+				ADD_MORTAL_TRAIT = yes
+			}
+			if = {
+				limit = { is_ai = no }
+				POD_leave_coterie_effect = yes
+			}
+		}
+		ai_chance = { base = 100 }
+	}
+	
+	option = {
+		name = POD_golconda_journey.107.option.c
+		trigger = { has_ep3_dlc_trigger = yes }
+		custom_tooltip = {
+			text = POD_golconda_journey.107.option.c.tt
+			POD_make_vampire_mortal = {
+				ADD_MORTAL_TRAIT = no
+			}
+			remove_trait = turnedhunter
+			add_trait = supehunter
+			set_character_faith = faith:independenthunters
+			
+			POD_lose_incompatible_splat_relationships = yes
+			
+			POD_depose_effect = yes
+		}
+		ai_chance = { base = 0 }
+	}
+}
+
+
+# You fell out of Golconda...
+POD_golconda_journey.1000 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.1000.t
+	theme = vampire
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+	
+	desc = POD_golconda_journey.1000.desc
+
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		NOT = { has_character_flag = losing_golconda } # So the event doesn't trigger multiple times
+	}
+
+	immediate = {
+		add_character_flag = losing_golconda
+		if = {
+			limit = { NOT = { has_character_flag = ready_for_suspire } }
+			add_character_flag = ready_for_suspire
+		}
+	}
+
+	option = {
+		name = ELLIPSIS
+		custom_tooltip = POD_golconda_journey.1000.option.a.tt
+		remove_character_flag = losing_golconda
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.1000.option.b
+		custom_tooltip = POD_golconda_journey.1000.option.b.tt
+		remove_trait = golconda_seeker
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_character_flag = knows_about_golconda } }
+				add_character_flag = knows_about_golconda
+			}
+		}
+		remove_character_flag = losing_golconda
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+# You fell off the path as a Golconda Seeker
+POD_golconda_journey.1001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.1001.t
+	theme = vampire
+	override_sound = { reference = "event:/DLC/FP2/SFX/UI/fp2_struggle_ui_intro_animate" }
+	
+	desc = POD_golconda_journey.1001.desc
+
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	
+	widget = {
+		gui = "POD_shader_event_fog_alley_night"
+		container = "background_shader_vfx_container"
+	}
+
+	trigger = {
+		NOT = { has_character_flag = losing_golconda } # So the event doesn't trigger multiple times
+	}
+
+	immediate = {
+		add_character_flag = losing_golconda
+	}
+
+	option = {
+		name = ELLIPSIS
+		custom_tooltip = POD_golconda_journey.1001.option.a.tt
+		remove_character_flag = losing_golconda
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.1000.option.b
+		custom_tooltip = POD_golconda_journey.1000.option.b.tt
+		remove_trait = golconda_seeker
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_character_flag = knows_about_golconda } }
+				add_character_flag = knows_about_golconda
+			}
+		}
+		remove_character_flag = losing_golconda
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+scripted_effect POD_golconda_end_mentorship = {
+	send_interface_toast = {
+		title = POD_golconda_journey.2000.toast.t
+		left_icon = root
+		right_icon = scope:golconda_mentee
+		custom_tooltip = $REASON_TOOLTIP$
+	}
+	var:golconda_mentee ?= { remove_variable = golconda_mentor }
+	remove_variable = golconda_mentee
+}
+
+# Golconda mentoring automation (wrapper event)
+POD_golconda_journey.2000 = {
+	hidden = yes
+	
+	trigger = {
+		has_variable = golconda_mentee
+		scope:golconda_mentee ?= var:golconda_mentee
+	}
+
+	immediate = {
+		if = {
+			limit = { scope:golconda_mentee = { has_trait = golconda } }
+			POD_golconda_end_mentorship = {
+				REASON_TOOLTIP = POD_golconda_journey.2000.toast.golconda
+			}
+		}
+		else_if = {
+			limit = { scope:golconda_mentee = { suspire_success_chance >= prev.suspire_success_chance } }
+			POD_golconda_end_mentorship = {
+				REASON_TOOLTIP = POD_golconda_journey.2000.toast.insight
+			}
+		}
+		else_if = {
+			limit = { suspire_success_chance < 20 }
+			POD_golconda_end_mentorship = {
+				REASON_TOOLTIP = POD_golconda_journey.2000.toast.lowinsight
+			}
+		}
+		else_if = {
+			limit = {
+				scope:golconda_mentee = {
+					OR = {
+						POD_is_available = no
+						is_alive = no
+						is_imprisoned = yes
+					}
+				}
+			}
+			POD_golconda_end_mentorship = {
+				REASON_TOOLTIP = POD_golconda_journey.2000.toast.invalid
+			}
+		}
+		else = {
+			trigger_event = POD_golconda_journey.2001
+		}
+	}
+}
+
+# Golconda mentoring automation
+POD_golconda_journey.2001 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_golconda_journey.2001.t
+	theme = vampire
+	override_background = { reference = sitting_room }
+	override_sound = { reference = "event:/SFX/Events/Themes/sfx_event_theme_type_health_good" }
+
+	desc = {
+		desc = POD_golconda_journey.2001.desc
+		triggered_desc = {
+			trigger = { scope:golconda_mentee = { has_trait = golconda_seeker } }
+			desc = POD_golconda_journey.2001.desc.xp
+		}
+		desc = POD_golconda_journey.2001.desc.end
+	}
+
+	left_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	right_portrait = {
+		character = scope:golconda_mentee
+		animation = personality_content
+	}
+
+	option = {
+		name = POD_golconda_journey.2001.option.a
+
+		add_piety = -500
+		
+		POD_golconda_mentoring_effect = {
+			STUDENT = scope:golconda_mentee
+		}
+
+		custom_tooltip = {
+			text = POD_golconda_journey.2001.option.a.tt
+			trigger_event = {
+				id = POD_golconda_journey.2000
+				years = 1
+			}
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.2001.option.b
+
+		add_piety = -500
+		
+		POD_golconda_mentoring_effect = {
+			STUDENT = scope:golconda_mentee
+		}
+
+		custom_tooltip = {
+			text = POD_golconda_journey.2001.option.b.tt
+			remove_variable = golconda_mentee
+		}
+	}
+
+	option = {
+		name = POD_golconda_journey.2001.option.c
+
+		custom_tooltip = {
+			text = POD_golconda_journey.2001.option.b.tt
+			remove_variable = golconda_mentee
+		}
+	}
+}
+
+# Maintenance event for AI Golconda Seekers
+POD_golconda_journey.3000 = {
+	hidden = yes
+
+	trigger = {
+		has_trait = golconda_seeker
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				is_ai = yes
+				POD_is_available = yes
+			}
+			
+			POD_golconda_mentoring_effect = {
+				STUDENT = this
+			}
+
+			if = {
+				limit = {
+					suspire_success_chance >= suspire_threshold
+					NOR = {
+						# Don't attempt the Suspire if in a player's Coterie
+						any_relation = {
+							type = coterie_member
+							is_ai = no
+						}
+						# Don't attempt the Suspire if being mentored
+						has_variable = golconda_mentor
+					}
+				}
+				random_list = {
+					0 = {
+						modifier = { add = { value = suspire_success_chance } }
+						POD_achieve_golconda_effect = yes
+					}
+					100 = {
+						modifier = { add = { value = 0 subtract = suspire_success_chance } }
+						POD_become_wight_effect = yes
+						POD_golconda_seeker_maintenance_effect = yes
+					}
+				}
+			}
+			else = {
+				POD_golconda_seeker_maintenance_effect = yes
+			}
+		}
+		else = {
+			POD_golconda_seeker_maintenance_effect = yes
+		}
+	}
+}

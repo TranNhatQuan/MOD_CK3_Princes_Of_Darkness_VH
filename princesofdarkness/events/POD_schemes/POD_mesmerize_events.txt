@@ -1,0 +1,342 @@
+﻿namespace = POD_mesmerize
+
+POD_mesmerize.100 = { #determine if defender will use willpower
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.100.t
+	desc =  POD_mesmerize.100.desc		
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+	
+	immediate = {
+		scope:scheme.scheme_target_character = {
+			save_scope_as = target
+		}
+		scope:scheme.scheme_owner = {
+			save_scope_as = actor
+		}
+		#needed for modifier and tt effect
+		scope:scheme.scheme_target_character = { save_scope_as = defender }
+		scope:scheme.scheme_owner = { save_scope_as = attacker }
+	}
+	option = {
+		name = POD_mesmerize.100.option.a
+		trigger = {
+			stress < very_high_stress
+		}
+		
+		POD_willpower_rouse_check_effect = yes
+		
+		add_character_flag = {
+			flag = willpower_spent
+			days = 2
+		}
+		
+		scope:scheme.scheme_owner = {
+			trigger_event = POD_mesmerize.200
+		}
+		
+		ai_chance = {
+			base = 95
+		}	
+	}
+
+	option = {
+		name = POD_mesmerize.100.option.b
+		save_scope_value_as = {
+			name = mental_duel_defender_will
+			value = flag:willpower_unspent
+		}
+		scope:scheme.scheme_owner = {
+			trigger_event = POD_mesmerize.200
+		}		
+	}	
+}
+
+POD_mesmerize.200 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.200.t
+	desc = POD_mesmerize.200.desc		
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = { #willpower unspent
+		name = POD_mesmerize.200.option.a
+		POD_hunger_rouse_check_effect = yes
+		duel = {
+			skill = stewardship
+			target = scope:defender
+			50 = {
+				max = 95
+				POD_mesmerize_attacker_modifier = yes
+				POD_mesmerize_attacker_tt_effect = yes
+				desc = POD_mesmerize.200.a.success.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = {
+						trigger_event = POD_mesmerize.300 #mesmerize success
+					}
+				}
+			}
+			50 = {
+				min = 5
+				POD_mesmerize_defender_modifier = yes
+				POD_mesmerize_defender_tt_effect = yes
+				desc = POD_mesmerize.200.a.failure.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = { 
+						trigger_event = POD_mesmerize.500 #mesmerize failure
+					}
+				}
+			}
+		}
+	}
+
+	option = { #willpower spent
+		name = POD_mesmerize.200.option.b
+		
+		POD_willpower_rouse_check_effect = yes
+		POD_hunger_rouse_check_effect = yes
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_mesmerize.200.option.b.tt.beast
+		}
+		duel = {
+			skill = stewardship
+			target = scope:defender
+			60 = { #+10 for willpower spent
+				max = 95
+				POD_mesmerize_attacker_modifier = yes
+				POD_mesmerize_attacker_tt_effect = yes
+				desc = POD_mesmerize.200.a.success.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = {
+						trigger_event = POD_mesmerize.300 #mesmerize success
+					}
+				}
+			}
+			40 = { #-10 for willpower spent
+				min = 5
+				POD_mesmerize_defender_modifier = yes
+				POD_mesmerize_defender_tt_effect = yes
+				desc = POD_mesmerize.200.a.failure.desc
+				hidden_effect = {
+					scope:scheme.scheme_owner = { 
+						trigger_event = POD_mesmerize.500 #mesmerize failure
+					}
+				}
+			}
+		}		
+	}
+	
+	option = {
+		name = POD_mesmerize.200.option.c
+
+		#Cancel the scheme 
+		scope:scheme = {
+			end_scheme = yes
+		}
+		custom_tooltip = POD_mesmerize.200.option.c.tt
+	}		
+}
+
+# Scheme Success, mesmerizer Notified
+
+POD_mesmerize.300 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.300.t
+	desc = { 
+		desc = POD_mesmerize.300.desc
+		triggered_desc = {
+			trigger = {
+				NOR = { 
+					has_perk = submerged_directive_perk 
+				}
+			}
+			desc = POD_mesmerize.300.desc.short_term
+		}
+	}
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_mesmerize.300.option.a
+		scope:scheme.scheme_owner = {
+			POD_dominate_effect = {
+				TARGET = scope:scheme.scheme_target_character
+			}
+		}
+
+		scope:scheme.scheme_target_character = {
+			trigger_event = POD_mesmerize.400
+		
+		}
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_mesmerize.300.option.a.tt.beast
+		}
+	}		
+}
+
+# Sceme Success, mesmerizee Notified
+
+POD_mesmerize.400 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.400.t
+	desc =  POD_mesmerize.400.desc		
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	option = {
+		name = POD_mesmerize.400.option.a	
+	}
+	
+	after = {
+		scope:scheme = {
+			end_scheme = yes
+		}
+	}
+}
+
+# Sceme Failure, mesmerizer Notified
+
+POD_mesmerize.500 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.500.t	
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+
+	desc = {
+		desc = POD_mesmerize.500.desc
+		triggered_desc = {
+			trigger = { exists = local_var:botched_mesmerize }
+			desc = POD_mesmerize.500.botched_mesmerize
+		}
+	}	
+
+	immediate = {
+		if = {
+			limit = {
+				scope:target = { is_vampire_trigger = yes }
+			}
+			scope:target = {
+				add_opinion = {
+					target = root
+					#opinion = -200
+					modifier = tried_to_mesmerize
+				}
+			}
+		}
+		#chance for botch
+		random = {
+			chance = 33
+			scope:defender = {
+				set_variable = {
+					name = immune_to_mesmerize_from_actor
+					value = scope:attacker
+					years = 10
+				}
+			}
+			set_local_variable = botched_mesmerize
+		}
+	}
+
+	option = {
+		name = POD_mesmerize.500.option.a
+		
+		if = {
+			limit = { POD_has_a_beast_trigger = yes }
+			custom_tooltip = POD_mesmerize.500.option.a.tt.beast
+		}
+		scope:scheme.scheme_target_character = {
+			trigger_event = POD_mesmerize.600
+		}		
+	}
+}
+
+# Scene Failure, mesmerizee Notified
+
+POD_mesmerize.600 = {
+	type = character_event
+	content_source = dlc_POD
+	title = POD_mesmerize.600.t
+	desc =  POD_mesmerize.600.desc		
+	theme = dominate
+	right_portrait = scope:scheme.scheme_owner
+	left_portrait = scope:scheme.scheme_target_character
+	
+	option = {
+		name = POD_mesmerize.600.option.a
+
+		scope:scheme.scheme_owner = {
+			scope:scheme = {
+				end_scheme = yes
+			}
+		}	
+	}
+	option = { #revenge
+		name = POD_embrace_ongoing.1000.option.c
+		progress_towards_rival_effect = {
+			CHARACTER = scope:scheme.scheme_owner
+			REASON = rival_attempted_mesmerize
+			OPINION = 0
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 20
+				ai_vengefulness >= medium_positive_ai_value
+				ai_vengefulness < very_high_positive_ai_value
+			}
+			modifier = {
+				add = 60
+				ai_vengefulness >= very_high_positive_ai_value
+			}
+		}
+	}
+	after = {
+		scope:scheme ?= {
+			end_scheme = yes
+		}
+	}
+}
+
+POD_mesmerize.700 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { 
+				has_relation_dominate_target = scope:dominate_target 
+				NOR = {
+					has_hook_of_type = {
+						target = scope:dominate_target 
+						type = mesmerize_hook
+					}
+					has_hook_of_type = {
+						target = scope:dominate_target 
+						type = rationalize_hook
+					}
+					has_strong_hook = scope:dominate_target 
+				}
+			}
+			send_interface_toast = {
+				title = POD_mesmerize.700_toast_title
+				left_icon = root
+				right_icon = scope:scheme.scheme_target_character
+				custom_tooltip = POD_mesmerize.700_toast_ct
+				remove_relation_dominate_target = scope:dominate_target 
+			}
+		}
+	}
+}
+
