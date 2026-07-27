@@ -3033,3 +3033,21 @@ Cũng phát hiện lỗi thuật ngữ: 4 chỗ rarity artifact (`#COMMONBROWN`/
 | Tan, Feng Tan, Lung Tan *(hệ pháp thuật Trung Hoa của Mummy, đối xứng Hekau Ai Cập)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng WoD gốc Trung Hoa |
 | True Name(s) *(tham số 1 của Glossary, nhắc lại)* | Chân Danh | tái xác nhận B3c |
 | Common/Masterwork/Famed/Illustrious *(rarity artifact, tag `#COMMONBROWN` v.v, nhắc lại)* | Thường/Tinh xảo/Danh tiếng/Lừng lẫy | ✅ **tái xác nhận B5c — sửa lại khi merge**, KHÔNG dùng "Thông Thường"/"Kiệt Tác"/"Lỗi Lạc" |
+
+## B8-lifestyles-p8. Thuật ngữ `POD_fae_lifestyle_l_english.yml` (868/868 dòng — Common/Rare/Kith Art, Slivers, Wu Tan)
+
+Nguồn: dịch qua 4 agent chia đoạn (1-254, 255-354, 355-609, 610-868) — lần đầu áp dụng cảnh báo rõ ràng về lỗi khoảng trắng đầu dòng (đã gặp nghiêm trọng ở `mummy_lifestyles` B8-lifestyles-p7 ngay trước đó). **Kết quả: cả 4 agent đều tự kiểm tra và giữ đúng khoảng trắng đầu dòng — 0 lỗi loại này ở đợt này, xác nhận cảnh báo rõ trong prompt thực sự hiệu quả.** Chỉ **1 lỗi merge nhỏ**: dòng `ANCHOR_PERK_EFFECT` mất bracket `[building|E]` (agent dịch "building" trần thay vì giữ concept-link) — đã khôi phục.
+
+**Quan sát về phong cách tên Cantrip khác biệt giữa các đoạn — KHÔNG phải lỗi:** đoạn 1 (Common Art, dòng 203+: Fuddle/Veiled Eyes/Fugue/Haunted Heart...) giữ nguyên tên riêng tiếng Anh cổ vì đây là danh xưng Cantrip đặc thù WoD gốc Anh; đoạn 2 (Rare Art, dòng 255+: fancy/yearn/covet/crave...) dịch nghĩa vì tên gốc chỉ là danh từ thường tiếng Anh, không phải tên riêng. Hai cách xử lý khác nhau vì hai LOẠI nội dung khác nhau trong cùng file — không cần thống nhất về một hướng.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Fae, Cantrip, Art (Chicanery/Legerdemain/Primal/Pyretics/Soothsay/Sovereign/Wayfare), Kith, Glamour, Realm, Chimera, Sidhe, Gallain, Kithain, Changeling, Solarium *(nhắc lại)* | giữ nguyên tiếng Anh | tái xác nhận B4g/B5-fae |
+| Fire/Wood/Metal/Earth Soul *(tham số 1 của `Concept()`/`Glossary()`, 5 "Hồn nguyên tố" Wu Tan)* | Hỏa Hồn/Mộc Hồn/Kim Hồn/Địa Hồn | đặt mới, mô-típ "Hồn nguyên tố" nhất quán với cách xử lý tương tự ở `POD_mummy_lifestyles` (B8-p7) |
+| True Jade *(tham số 1 của Glossary, Wu Tan)* | Ngọc Thật | đặt mới |
+| Wu Tan, I Chih *(hệ pháp thuật Fae Trung Hoa và kỹ năng liên quan, đối xứng Hekau Ai Cập của Mummy)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng WoD gốc Trung Hoa; "I Chih" chưa rõ nghĩa Hán tự chính xác, giữ nguyên an toàn |
+| Tieh/Lin/Shui/Hou/Di/Nei Tan *(6 trường phái Wu Tan theo nguyên tố)* | Tiêu Đàn/Lâm Đàn/Thủy Đàn/Hầu Đàn/Địa Đàn/Nội Đàn | đặt mới, Hán Việt |
+| Pan Ku, Monkey King *(2 tên thần thoại Trung Hoa xuất hiện trong Wu Tan)* | Bàn Cổ, Tôn Ngộ Không | dịch theo tên gọi phổ biến sẵn có trong tiếng Việt, khác các danh từ riêng WoD khác (giữ nguyên) vì đây là thần thoại dân gian đã có tên Việt hóa quen thuộc |
+| Black Tortoise *(linh vật Tứ Tượng)* | Huyền Vũ | dịch theo tên gọi có sẵn tiếng Việt |
+| Sliver *(mảnh cõi/hệ Art riêng của Inanimae, heading `### Slivers ###`)* | Sliver *(giữ nguyên)* | đặt mới; không dịch "Mảnh Cõi" vì ngữ cảnh là tên hệ thống Art riêng (như Cantrip/Art), không phải danh từ chung mô tả |
+| Fuddle, Veiled Eyes, Fugue, Haunted Heart, Captive Heart, Go Ask Alice, Will-O'-the-Wisp, Fair Is Foul & Foul is Fair *(tên Cantrip Common Art gốc Anh cổ)* | giữ nguyên tiếng Anh | đặt mới; xem ghi chú "Quan sát phong cách" phía trên |
