@@ -2748,3 +2748,34 @@ Nguồn: Shadow Offer (6 chỉ số dùng "của Bóng"), Forbidden Arcanoi (Ren
 | Puppet *(actor_secondary label của Fascinate-chain)* | Con Rối | tái dùng nguyên trạng B5-wraith-p2 (`Control Puppet` = "Điều Khiển Con Rối") |
 
 Ghi chú: dòng 104 (gốc, trong đoạn 370-495) là dòng trống **hoàn toàn rỗng** (không có space) — khác các dòng trống khác trong đoạn này đều có 1 space — đã giữ nguyên chính xác khi ghi file scratch. Đã đối chiếu số lượng `$ref$` (6), bracket `[...]` (32), tag mở/đóng (5/5), icon (0), `\n` (0), `\"` (0) giữa bản gốc và bản dịch — khớp tuyệt đối.
+
+## B5-wraith-p3. Thuật ngữ đoạn `interactions/POD_character_interactions_wraith_l_english.yml` dòng 247-369, việc #5
+
+Nguồn: tương tác Escher's Stair (Labyrinth), các tương tác artifact (Strengthen/Impress/Reweave Artifact), Corpus Heal, cụm 9 tương tác Transfer/Facilitate Pathos/Corpus/Arcanos In-Out, cụm Angst Vessel (Create/Store/Extract, 12 key biến thể you/they/quá khứ), Shadow Wrack, Purchase Arcanoi, Weaken Dark Passion, Trimming Thorns, Transfer Angst, và khối comment `# Thorn #` mở đầu nhóm Catharsis/Shadow Familiar/Tainted Relic/Pact of Doom/Separate Shadow. Có 3 lần `[UmbraGlossary('pod_realm_labyrinth')]` (1 tham số, không dịch). Không có `Glossary()`/`UmbraGlossaryLocalized()` hai tham số trong đoạn này.
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Command Wraith *(nhãn phụ `#weak (...)#!` sau tên tương tác)* | Sai khiến Oan hồn | khớp theo cách dịch của B5-wraith-p2/p4 (2 đoạn liền kề) — không tự đặt "Ra Lệnh Oan Hồn" dù nghĩa tương đương, để tránh 3 cách dịch khác nhau cho cùng cụm trong 1 file (part1 dùng "Điều Khiển Oan Hồn") |
+| actor_secondary label "Wraith" trong các tương tác Command Wraith | Oan hồn *(viết hoa O, chữ sau thường)* | khớp cách viết hoa của B5-wraith-p2/p4; khác cách viết "Oan Hồn" (hoa cả 2 chữ) của phần part1 — ưu tiên khớp 2 đoạn liền kề trực tiếp |
+| "Command one of your bound wraiths to..." *(mở đầu câu `_desc` của mọi tương tác Command Wraith)* | "Sai khiến một trong những oan hồn bị ràng buộc của ngươi..." | tái dùng nguyên cụm mở đầu đã dùng ở B5-wraith-p2/p4 (11 lần), thay cho bản dịch ban đầu "Ra lệnh cho một oan hồn bị ràng buộc của ngươi" để nhất quán tại ranh giới ghép file |
+| Angst | Angst *(giữ nguyên)* | tái xác nhận quyết định đã chốt ở B5-wraith-p5 — KHÔNG dịch thành "Sầu Muộn"/từ khác; đoạn này có cụm 19 lần Angst (Angst Vessel, Store/Extract/Transfer/Siphon Angst) — bản nháp đầu tiên đã dịch nhầm thành "Sầu Muộn" trước khi đối chiếu B5-wraith-p5 và sửa lại toàn bộ |
+| Angst Vessel | Bình Chứa Angst | đặt mới, dịch nghĩa "Vessel"="Bình Chứa", giữ "Angst" nguyên theo trên |
+| Escher's Stair *(trùng tên với B5-wraith-p6 dòng 716 khác? không — đây là power riêng của Pandemonium xuất hiện lại)* | Cầu Thang Escher | tái dùng nguyên trạng B5-wraith-p6 (đã đặt "Escher's Stair"="Cầu Thang Escher" ở đoạn dòng 616-738) — cùng power, xuất hiện 2 lần trong file dưới 2 khối khác nhau (thường + Command Wraith) |
+| Strengthen Artifact / Impress Artifact | Củng Cố Hiện Vật / In Dấu Hiện Vật | đặt mới, dịch nghĩa; "Impress" = "in dấu/khắc dấu" (đặt ký ức vào vật) |
+| Reweave Artifact | Dệt Lại Hiện Vật | nhất quán "Reweave"="Dệt Lại" đã chốt B4y/B5, áp dụng cho "Hiện Vật" thay vì "artifact" chung chung |
+| Corpus Heal | Chữa Lành bằng [Corpus\|E] | đặt mới, dịch nghĩa, giữ "Corpus" nguyên theo B4h; nhất quán cấu trúc "Chữa Lành bằng Pathos" đã có ở B5-wraith-p5 (Moliate) |
+| Transfer Pathos/Corpus/Arcanos In/Out | Chuyển Pathos/[Corpus\|E]/Arcanos Vào/Ra | đặt mới, dịch nghĩa; "Pathos"/"Corpus"/"Arcanos" đều giữ nguyên theo B0/B4h |
+| Facilitate Pathos/Corpus/Arcanos *(tương tác 3 bên, có tù nhân trung gian)* | Hỗ Trợ Chuyển Pathos/[Corpus\|E]/Arcanos | đặt mới, dịch nghĩa ("facilitate" = hỗ trợ/tạo điều kiện cho việc chuyển) |
+| Purchase Arcanoi | Mua Arcanoi | đặt mới, dịch nghĩa; "Arcanoi" (số nhiều của Arcanos) giữ nguyên theo B4h/B4u |
+| Weaken Dark Passion | Làm Suy Yếu Đam Mê Đen Tối | đặt mới; "Dark Passion(s)"="Đam Mê Đen Tối" tái dùng nguyên trạng B4h |
+| Trimming Thorns *(tên tương tác, khác `# Thorn #` là dòng comment)* | Tỉa Gai | đặt mới, dịch nghĩa; "Thorns" ở đây là danh từ chung (gai/hiệu ứng tiêu cực từ `thorn_lifestyle`), khác "Thorns" danh từ riêng phe phái Giáo phái đã giữ nguyên ở B4h/nơi khác — ngữ cảnh này rõ ràng là nghĩa đen "cái gai" nên dịch nghĩa |
+| Transfer Angst *(khác "Transfer Pathos/Corpus/Arcanos" ở trên — đây là đổi "coping trait" sang stress, không phải chuyển tài nguyên giữa 2 nhân vật)* | Chuyển Hóa Angst | dịch "Transfer" thành "Chuyển Hóa" thay vì "Chuyển" đơn thuần để phân biệt rõ với nhóm Transfer Pathos/Corpus/Arcanos (chuyển tài nguyên qua lại giữa người), vì bản chất cơ chế khác nhau (đổi loại đặc điểm, không chuyển giữa 2 nhân vật) |
+| Instigate Catharsis | Khơi Mào Tịnh Hóa | đặt mới, dịch nghĩa; đặt "Catharsis"="Tịnh Hóa" — LƯU Ý: đây là lần đầu "Catharsis" được dịch trong repo (chưa có tiền lệ ở B5-wraith-p1/p2/p4/p5/p6), cần rà soát lại nếu gặp mô tả khác của Catharsis mâu thuẫn nghĩa (bản chất game: Shadow thắng thế/chiếm quyền kiểm soát, không phải "thanh lọc" tích cực — "Tịnh Hóa" chọn theo nghĩa "được giải phóng/bộc lộ hoàn toàn" của Shadow, gần nghĩa gốc "catharsis" tâm lý học hơn là nghĩa tôn giáo) |
+| Resist Catharsis | Kháng Cự Tịnh Hóa | nhất quán với trên |
+| Tainted Relic | Thánh Tích Nhiễm Độc | đặt mới, dịch nghĩa |
+| Pact of Doom | Khế Ước Diệt Vong | đặt mới, dịch nghĩa |
+| Shadow Familiar | linh thú của Bóng *(thường, trong câu văn xuôi)* / Linh Thú của Bóng *(hoa, trong tên tương tác)* | "Familiar"="linh thú" tái dùng tiền lệ đã chốt (Kuei-Jin Goblin Cat, dòng ~2289) — áp dụng cách viết hoa/thường theo vị trí (tiêu đề UI vs câu mô tả), "Bóng" tái dùng B4h |
+| Siphon Angst | Rút Cạn Angst | đặt mới, dịch nghĩa |
+| Materialize (your Shadow) *(tên tương tác `POD_separate_shadow_interaction`, key có "separate" nhưng chữ hiển thị dùng "Materialize")* | Hiện Hình (Bóng của Ngươi) | dịch theo chữ hiển thị thực tế "Materialize", không dịch theo tên key "separate" |
+
+Ghi chú: dòng 108 (`artifact_tainted_relic_description`) chứa cặp dấu ngoặc kép kiểu Unicode cong `"..."` (U+201C/U+201D, KHÔNG phải escape `\"`) quanh "lost"/"destroyed" — đã giữ nguyên đúng ký tự Unicode gốc trong bản dịch (`"mất"`/`"hủy diệt`), không đổi thành `\"` hay bỏ dấu. Dòng 369 (gốc) là dòng trống chứa 1 space — giữ nguyên. Bản nháp đầu tiên có 2 lỗi đã tự phát hiện và sửa trước khi ghi file: (1) dịch "Angst" thành "Sầu Muộn" thay vì giữ nguyên (mâu thuẫn B5-wraith-p5), (2) dùng "Ra Lệnh Oan Hồn"/"Oan Hồn" thay vì "Sai khiến Oan hồn"/"Oan hồn" (mâu thuẫn B5-wraith-p2/p4 liền kề). Đã đối chiếu số lượng `$ref$` (17), bracket `[...]` (47), tag mở/đóng (6/6), icon (0), `\n` (1), `\"` (0), tổng dòng (123) giữa bản gốc và bản dịch — khớp tuyệt đối. Không có BOM trong file scratch output.

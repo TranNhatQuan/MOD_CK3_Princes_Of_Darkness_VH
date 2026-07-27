@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` xong 100% + commit, `interactions/` đạt 27/28. `wraith` đã dịch xong bản nháp 6/6 đoạn qua agent nhưng CHƯA merge/verify/commit — bàn giao session sau, xem mục ĐỢT 8 để biết chi tiết vị trí file nháp).
+Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` VÀ `wraith` đều xong 100% + verify + commit. `interactions/` đạt 28/28 → **việc #5 HOÀN TẤT**. Việc tiếp theo: #6 `decisions/`).
 
 ---
 
@@ -16,34 +16,25 @@ Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` xong 100% + commit
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **27/28 file interactions/ (việc #5, đang làm — chỉ còn `wraith`)** |
-| Việc tiếp theo | **việc #5 — hoàn tất nốt 1 file cuối `interactions/`: `POD_character_interactions_wraith_l_english.yml` (738 dòng thật, xem ĐỢT 8)**, rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** |
+| Việc tiếp theo | **việc #6 — `decisions/`, 2.441 key, 11 file**, rồi tiếp tục tuần tự #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
 
-### ⏸️ ĐỢT 8 (2026-07-27) — `vampire` XONG + COMMIT, `interactions/` đạt 27/28. `wraith` đã dịch nháp 6/6 đoạn nhưng CHƯA merge/verify/commit — BÀN GIAO session sau
+### ✅ ĐỢT 8 (2026-07-27) — `vampire` + `wraith` xong, `interactions/` đạt 28/28, việc #5 HOÀN TẤT
 
-**Việc đã xong hoàn toàn trong đợt này:**
-- `interactions/POD_character_interactions_vampire_l_english.yml` (1187/1187 dòng thật — `grep -c ''`, KHÔNG phải 1186 như `wc -l` báo vì dòng cuối không có newline) — dịch qua 8 agent chia đoạn (1-155, 156-321, 322-444, 445-592, 593-726, 727-889, 890-1033, 1034-1187), merge, verify đủ 3 lớp + 2 grep bổ sung (English-sót loại trừ dòng comment, Glossary tham số 1 nhất quán), **commit `99ecb29`**.
-- 2 lỗi merge tự phát hiện và sửa trước khi commit: (1) đoạn 322-444 thiếu đúng 1 dòng trống cuối (dòng 444) do agent xuất scratch ngắn hơn 1 dòng — khôi phục đúng vị trí; (2) BOM đôi do agent phần 1 tự thêm BOM vào scratch, script merge coordinator lại thêm 1 lần nữa — đã gỡ bớt.
-- Thuật ngữ mới → TERMINOLOGY.md heading `B5-vampire-p1` đến `p8` (~150 mục).
+Cả 2 file lớn cuối cùng của `interactions/` đã dịch xong, verify xong, commit xong:
 
-**Việc CHƯA xong — bàn giao chính xác cho session sau:**
+- `interactions/POD_character_interactions_vampire_l_english.yml` (1187/1187 dòng thật — `grep -c ''`, KHÔNG phải 1186 như `wc -l` báo vì dòng cuối không có newline) — commit `99ecb29`. Dịch qua 8 agent chia đoạn (1-155, 156-321, 322-444, 445-592, 593-726, 727-889, 890-1033, 1034-1187). 2 lỗi merge tự phát hiện và sửa trước khi commit: (1) đoạn 322-444 thiếu đúng 1 dòng trống cuối (dòng 444) do agent xuất scratch ngắn hơn 1 dòng; (2) BOM đôi do agent phần 1 tự thêm BOM vào scratch, script merge coordinator lại thêm 1 lần nữa. Thuật ngữ mới → TERMINOLOGY.md `B5-vampire-p1` đến `p8` (~150 mục).
+- `interactions/POD_character_interactions_wraith_l_english.yml` (738/738 dòng thật, KHÔNG phải 737 như `wc -l` báo) — commit `616da91`. Dịch qua 6 agent chia đoạn (1-132, 133-246, 247-369, 370-495, 496-615, 616-738). 2 lỗi merge tự phát hiện và sửa trước khi commit: (1) đoạn 247-369 agent ghi bằng LF thay vì CRLF — đã chuyển đổi khi merge; (2) đoạn 496-615 thiếu đúng 1 dòng trống cuối đoạn (dòng 615) — khôi phục bằng cách so khớp key tuần tự với bản gốc. Thuật ngữ mới → TERMINOLOGY.md `B5-wraith-p1` đến `p6`.
 
-`interactions/POD_character_interactions_wraith_l_english.yml` — **6/6 đoạn ĐÃ dịch xong qua agent** (baseline đã đo: 738 dòng thật `grep -c ''`, KHÔNG phải 737 như `wc -l` báo vì dòng cuối không có newline; blank 130, key 1-space 600, ref 58, bracket 279, icon 0, close-tag 45, open-tag 45, `\n` 1, `\"` 0, key 2-space 0, BOM `efbbbf`), nhưng **CHƯA merge vào file thật, CHƯA verify, CHƯA commit** — hết token giữa chừng lúc đang merge.
+**Bài học lặp lại lần thứ N (đã thấy ở cả 2 file trong đợt này): khi chia file cho nhiều agent dịch theo đoạn dòng, luôn có khả năng 1 agent xuất scratch thiếu đúng 1 dòng trống ở ranh giới cuối đoạn (do dùng `split()` rồi lỡ bỏ luôn phần tử rỗng hợp lệ), hoặc dùng sai line-ending (LF thay vì CRLF) dù đã được dặn kỹ trong prompt.** Coordinator PHẢI tự chạy lại đúng số dòng từng file scratch trước khi ghép (`len(data.split(b'\r\n'))`, cẩn thận phân biệt "phần tử rỗng cuối vì có `\r\n` thừa hợp lệ" với "thiếu 1 dòng thật") — không tin báo cáo "đã khớp 100%" của agent, dù agent tự claim đã verify. Cách xử lý an toàn khi phát hiện thiếu 1 dòng: so khớp KEY tuần tự (regex bắt tên key trước dấu `:`) giữa đoạn gốc (`git show HEAD:<file>` cắt đúng range) và đoạn dịch, tìm đúng vị trí lệch, chèn dòng trống bị thiếu vào đúng chỗ.
 
-Ranh giới 6 đoạn đã dùng (đều rơi đúng dòng trống, đã kiểm tra không cắt ngang entry): **1-132, 133-246, 247-369, 370-495, 496-615, 616-738.**
+**Nghi vấn thuật ngữ chưa giải quyết dứt điểm ở `wraith` (không phải lỗi kỹ thuật, chỉ là chưa rà toàn cục), cần lưu ý khi gặp lại các từ này ở file khác:**
+- "Conduit" (cơ chế biến động vật thành vật trung gian liên lạc của Wraith) — giữ nguyên tiếng Anh, chưa dịch nghĩa.
+- "Angst" (chỉ số nội tâm Wraith, khác Pathos) — giữ nguyên tiếng Anh, chưa có tiền lệ dịch nghĩa.
+- "Catharsis" — dịch tạm là "Tịnh Hóa" (lần đầu trong repo, B5-wraith-p3), nhưng agent tự ghi chú nghi ngờ nghĩa gốc là "Bóng thắng thế/chiếm quyền kiểm soát" chứ không phải "thanh tẩy" tích cực — nên rà lại khi gặp mô tả Catharsis đầy đủ hơn ở file khác.
+- Viết hoa "Oan Hồn Bị Ràng Buộc" (nhãn UI) vs "oan hồn bị ràng buộc" (văn xuôi thường) — đã thống nhất theo ngữ cảnh (nhãn ngắn viết hoa, câu văn dài viết thường), không phải lỗi.
 
-**6 file bản dịch nháp đã lưu tại `.wraith_handoff_scratch/` trong repo (untracked, chưa add vào git — session sau đọc trực tiếp, ĐỪNG xóa trước khi dùng xong):**
-- `part1_1-132.yml`, `part2_133-246.yml`, `part3_247-369.yml`, `part4_370-495.yml`, `part5_496-615.yml`, `part6_616-738.yml`
-
-**Vấn đề đã phát hiện khi thử merge (chưa kịp sửa hết — session sau phải xử lý trước khi ghi vào file thật):**
-1. Tất cả 6 file scratch được yêu cầu ghi KHÔNG có BOM (đúng) và CRLF — nhưng `part3_247-369.yml` thực tế được ghi bằng **LF thuần, không phải CRLF** (đã xác nhận: `crlf count = 0`, `lone lf = 123`). Phải tự chuyển LF→CRLF khi merge đoạn này, đừng ghép thẳng.
-2. `part5_496-615.yml` **thiếu đúng 1 dòng** so với kỳ vọng (119 dòng thực tế, cần 120) — giống hệt lỗi đã gặp ở `vampire` part3 (thiếu 1 dòng trống cuối đoạn do agent cắt scratch bằng split() làm rớt phần tử rỗng cuối). Cần tự dò xem dòng nào bị thiếu (nhiều khả năng là dòng trống ở ranh giới 615/616) bằng cách so key thứ tự với bản gốc `git show HEAD:<file>`, rồi bổ sung đúng vị trí — theo đúng cách đã xử lý ở batch `vampire`.
-3. Do (1)+(2), TUYỆT ĐỐI đừng ghép 6 file này bằng cách nối chuỗi đơn giản — phải viết lại script Python kiểu đã dùng cho `vampire` (xem commit `99ecb29`, hoặc lịch sử hội thoại đợt này): với mỗi phần, `split(b'\r\n')`, bỏ phần tử rỗng cuối nếu có, so `len(lines)` với số dòng kỳ vọng của đoạn đó, và xử lý riêng phần3 (dùng `split(b'\n')` vì không có CRLF) + phần5 (bổ sung đúng 1 dòng thiếu, tìm vị trí bằng cách so sánh key tuần tự với bản gốc).
-4. Sau khi ghép đủ 738 dòng: chạy đủ 3 lớp kiểm tra chuẩn (số liệu, BOM/loneLF/UTF-8, diff 6 mẫu ID) + 2 lệnh grep bổ sung (English-sót loại trừ dòng comment, Glossary/UmbraGlossaryLocalized tham số nhất quán — file này CÓ dùng `UmbraGlossaryLocalized('shadowlands','Underworld')` ở dòng 55 theo báo cáo agent phần 1, phải kiểm tra kỹ tham số 2 = "Âm Phủ") rồi mới ghi đè vào file thật và commit.
-5. TERMINOLOGY.md đã có sẵn heading `B5-wraith-p2`, `B5-wraith-p4`, `B5-wraith-p5`, `B5-wraith-p6` (p1 và p3 không cần thêm mục mới theo báo cáo agent, hoặc p3 chưa xác nhận được do mất thông báo — kiểm tra lại báo cáo p3 nếu cần). Không có heading nào trùng lặp tại thời điểm bàn giao (đã grep xác nhận).
-6. Nghi vấn thuật ngữ agent tự nêu, chưa giải quyết: "Conduit" (p1 hỏi, p6 đã tự đặt là giữ nguyên tiếng Anh — cần xác nhận thống nhất khi merge), viết hoa "Oan Hồn Bị Ràng Buộc" vs "oan hồn bị ràng buộc" giữa p2 và p6 (cần thống nhất 1 cách viết hoa), "Angst" (p5 giữ nguyên tiếng Anh tạm thời, chưa có tiền lệ).
-
-Sau khi xong `wraith`: `interactions/` đạt 28/28 → việc #5 HOÀN TẤT → chuyển sang việc #6 (`decisions/`, 2.441 key, 11 file).
+interactions/ đạt 28/28 file → **việc #5 HOÀN TẤT.** Việc tiếp theo: #6 (`decisions/`, 2.441 key, 11 file).
 
 ### ⏸️ ĐỢT 7 (2026-07-27) — việc #5 `interactions/` đạt 25/28 file, BÀN GIAO 2 file cuối cho session sau
 
