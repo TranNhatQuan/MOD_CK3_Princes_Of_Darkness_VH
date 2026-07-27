@@ -1803,3 +1803,16 @@ Nguồn: file lớn nhất `religion/` (1652 dòng, 1121 bracket — nhiều `Gl
 > ⚠️ **Bài học quy trình quan trọng nhất rút ra từ file này:** khi giao nhiều agent song song dịch các đoạn của **cùng một file**, KHÔNG được để agent ghi trực tiếp vào file thật (dù chỉ sửa đúng đoạn dòng được giao) — mỗi agent đọc-toàn file-rồi-ghi-toàn file để splice đúng đoạn của mình, nên 2 agent ghi gần như đồng thời sẽ ghi đè lẫn nhau, mất bản dịch của agent kia mà không có cảnh báo lỗi nào. Quy trình an toàn: mỗi agent chỉ ghi ra 1 file scratch riêng (đường dẫn ngoài repo), điều phối viên tự đọc tất cả file scratch, đối chiếu thuật ngữ chéo, rồi tự ghép + ghi 1 lần duy nhất vào file thật.
 >
 > Bài học thứ hai: **3 lớp kiểm tra kỹ thuật (đếm token/bracket/ref, kiểm tra BOM/CRLF, diff ID) đều PASS 100%** dù có ~165 dòng bị bỏ sót hoàn toàn (không dịch 1 chữ nào) — vì các dòng đó vẫn giữ nguyên cấu trúc bracket/ref hợp lệ, không "hỏng" theo nghĩa kỹ thuật. Chỉ phát hiện được nhờ bước `grep` riêng tìm từ tiếng Anh thông dụng (`the/and/of/with/are/is...`) loại trừ script ID, đúng như cảnh báo ở TRANSLATION_RULES.md mục 8 rằng đếm token không đủ — nhưng ở quy mô lớn hơn nhiều so với các lỗi lẻ tẻ 1-2 dòng đã gặp trước đây.
+
+## B4x. Thuật ngữ Resonance intensity (từ `custom_localization/POD_resonance_custom_loc_l_english.yml`)
+
+File chỉ có 4 dòng chữ thật; 16 dòng `POD_<temperament>_N_i` là tooltip-ID/icon thuần (không dịch), 4 dòng `POD_resonance_flavor_*` là concept-link thuần (không dịch). Không có tiền lệ dịch 4 tính từ mức độ Resonance (`negligible/fleeting/intense/acute`) trong `base_game_vh` hay TERMINOLOGY.md, nên đặt mới theo nghĩa dễ hiểu (ưu tiên hơn thuật ngữ y học cổ Hy Lạp gốc của 4 temperament Choleric/Phlegmatic/Melancholy/Sanguine mà các tính từ này mô tả mức độ):
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| negligible *(POD_resonance_intensity_1)* | không đáng kể | mức thấp nhất |
+| fleeting *(POD_resonance_intensity_2)* | thoáng qua | mức 2 |
+| intense *(POD_resonance_intensity_3)* | mạnh mẽ | mức 3 |
+| acute *(POD_resonance_intensity_4)* | gay gắt | mức cao nhất |
+
+Ghi chú: đây chỉ là các tính từ mức độ dùng chung cho cả 4 temperament (ví dụ "acute Sanguine Resonance"); tên riêng 4 temperament (Choleric/Phlegmatic/Melancholy/Sanguine) và ID `#TOOLTIP:*_RESONANCE_0N_TT` không thuộc phạm vi dịch của file này — nội dung tooltip thật nằm ở file khác ngoài `custom_localization/`.
