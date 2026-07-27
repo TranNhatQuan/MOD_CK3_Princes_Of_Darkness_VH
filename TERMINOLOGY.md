@@ -1737,3 +1737,34 @@ Nguồn: file neo faith Wraith (750 dòng, 657 key) — faith chính "Hierarchy"
 | Ritual of Severance | Nghi Lễ Cắt Đứt | tái dùng bản dịch đã chốt B4h |
 
 > ⚠️ **Bẫy đã tránh:** bản gốc dùng `[UmbraGlossaryLocalized('shadowlands','Underworld')]` **6 lần** trong file này (dòng `ferrymen_religion_desc`, `ferrymen_desc`, `fishers_religion_desc`, `fishers_desc`, `yellow_springs_religion_desc`, `yellow_springs_desc`). Theo B4j đã chốt, tham số 2 ("Underworld") của macro này phải dịch → đã dịch thành `'Âm Phủ'` ở cả 6 chỗ, giữ tham số 1 (`'shadowlands'`) nguyên vẹn. Bản nháp đầu tiên đã bỏ sót bẫy này (chỉ giữ "Underworld" tiếng Anh) — phát hiện và sửa khi đối chiếu bracket giữa bản gốc/bản dịch trước khi ghi file.
+
+## B4v. Thuật ngữ `religion/POD_religion_gaia_l_english.yml` — faith Gaia (Garou/Fera chính thống), 860/860 dòng
+
+Nguồn: file faith trung tâm của Garou/Fera thờ Gaia, cùng vô số camp/tribe con (13 bộ tộc Garou, Bastet, Mokolé, Gurahl…). File này dùng hậu tố `:0` (1 trong 6 file đặc biệt của mod, xem TRANSLATION_RULES.md mục 6) — chỉ ở 12 dòng cuối (`holy_site_*` của Gurahl). Đối chiếu trực tiếp với B4s (`POD_religion_wyrm`, faith đối lập thờ Wyrm) vì hai file dùng chung khuôn mẫu cấu trúc (`_house_of_worship`, `_religious_symbol`, `_religious_text`, `_devotee_*`, `_priest_*`, `_bishop*`) — tái sử dụng gần như toàn bộ bản dịch đã chốt ở B4s cho các key tương ứng.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| caern / caerns *(house_of_worship)* | caern *(giữ nguyên số ít lẫn số nhiều)* | ✅ tái dùng B4s; khác B4s ở chỗ B4s giữ hậu tố `-s` tiếng Anh cho số nhiều (`"caerns"`) — ở đây áp dụng đúng mục 7 TRANSLATION_RULES.md (tiếng Việt không biến đổi số nhiều) nên số ít = số nhiều = "caern", coi là sửa nhất quán chứ không phải sai khác |
+| glyph *(religious_symbol)* | phù văn | ✅ tái dùng B4s nguyên văn |
+| lore *(religious_text)* | truyền thuyết | ✅ tái dùng mẫu B3g/B3h (không dùng "cổ tích" của B3x vì đó là ngữ cảnh riêng `roadofbeast`) |
+| Lorekeeper(s) *(religious_head_title + mọi biến thể devotee/priest/bishop)* | Người Giữ Truyền Thuyết | ✅ tái dùng B3g/B3h, khớp với "truyền thuyết" ở trên |
+| earth *(divine_realm)* | đất | dịch nghĩa thường, khác "Trái Đất" viết hoa (tên hành tinh, `gaia_good_god_earth`) |
+| wilds *(positive_afterlife)* | hoang địa | đặt mới; khác "vùng hoang dã" của B4s (Wyrm's `negative_afterlife`) — chọn từ ngắn hơn "hoang địa" vì đây là cõi giới tích cực của Gaia, cần sắc thái trung tính hơn "hoang dã" |
+| the spiral *(negative_afterlife)* | xoáy trôn ốc | đặt mới; mô tả cõi chết tiêu cực của tín đồ Gaia — hình ảnh xoáy ốc lặp lại vô nghĩa, dịch nghĩa trực tiếp |
+| spirit *(health_god_name — danh từ thường dùng làm tên thần)* | linh hồn | ✅ tái dùng B4s nguyên văn (`wyrm_health_god_name`="linh hồn") |
+| `_possessive` (`"X's"` / `"$ref$'s"`) | mẫu `"của X"` / `"của $ref$"` | ✅ tái dùng quy ước đã chốt xuyên suốt `religion/` — bỏ hậu tố `'s`, thêm "của" phía trước, kể cả khi X là một `$ref$` |
+| Beast Courts | Thú Triều | ✅ tái dùng B4c, 6/6 lần dùng nhất quán |
+| Changing Breeds | Chủng Biến Hình | ✅ tái dùng B4c/B4, 4/4 lần dùng nhất quán |
+| Litany | Litany *(giữ nguyên)* | ✅ tái dùng B4s, 6 lần trong file này |
+| Impergium | Impergium *(giữ nguyên)* | danh từ riêng WoD (sự kiện lịch sử — cuộc thanh trừng nhân loại thời tiền sử của Garou); đã xuất hiện chưa dịch ở `buildings_fera_POD`, `event_localization` — giữ nguyên nhất quán với các file đó |
+| Harano | Harano *(giữ nguyên)* | danh từ riêng WoD (dạng trầm cảm/tuyệt vọng đặc thù của Garou), không có tiền lệ |
+| Wyrmsign | Wyrmsign *(giữ nguyên)* | ghép "Wyrm" (bắt buộc giữ nguyên, B3) + "sign"; giữ nguyên cả cụm vì đây là thuật ngữ chuyên biệt chỉ dấu hiệu/điềm báo về Wyrm, tách "sign" ra dịch riêng sẽ phá vỡ từ ghép |
+| kuklos / kukloi *(đơn vị xã hội con của Black Furies, không phải "camp" thường)* | kuklos *(giữ nguyên)* | danh từ Hy Lạp riêng của Black Furies, khác "camp"→"Trại" (B4s) dùng cho các bộ tộc khác; giữ nguyên vì là thuật ngữ chuyên biệt không có tương đương tự nhiên |
+| Astral Umbra *(tham số 2 của `UmbraGlossaryLocalized('astral_reaches', …)`)* | Umbra Thiên Giới | ✅ mới đặt — lần đầu dịch giá trị này của flag `astral_reaches` (giá trị khác `'High Umbra'` gặp ở file khác chưa dịch, sẽ đặt khi tới lượt); giữ "Umbra" nguyên theo tiền lệ B3b, "Astral"→"Thiên Giới" theo tiền lệ "Celestial Arrows"→"Mũi Tên Thiên Giới" đã có trong repo |
+| Nun *(orderofourmercifulmother_adherent, tín đồ nữ tu Kitô giáo trong Black Furies)* | Nữ Tu | ✅ tra base_game_vh (`nick_the_nun`="Nữ Tu") |
+| Vật Tổ *(totem)* | Vật Tổ | dịch nghĩa thường, dùng cho các lần nhắc "Totem"/"totem" của Griffon, Crow, Sable trong mô tả camp; không có tiền lệ base nhưng "vật tổ" là từ tiếng Việt phổ thông sẵn có, không cần đặt thuật ngữ WoD riêng |
+| sept *(đơn vị lãnh thổ/cộng đồng Garou lớn hơn caern)* | sept *(giữ nguyên)* | danh từ riêng WoD, không có tương đương tự nhiên; xuất hiện nhiều lần xuyên suốt mô tả camp |
+| Balance / Trimurti / Rta *(vũ trụ luận Ấn Độ giáo của Mokolé Cosmic Order)* | Sự Cân Bằng / Trimurti / Rta | "Balance" dịch nghĩa vì là danh từ trừu tượng thường; "Trimurti", "Rta" giữ nguyên phiên âm Sanskrit gốc, không có tiền lệ base tương đương |
+| Astral/Wani/Bushidō/samurai | Astral *(chỉ trong tên ghép "Umbra Thiên Giới" ở trên)* / Wani *(giữ nguyên)* / Bushidō *(giữ nguyên)* / samurai *(giữ nguyên, có tiền lệ base)* | tên riêng văn hóa Nhật Bản trong mô tả Hakken/Zhong Guo, giữ nguyên theo B0 |
+
+> ⚠️ **Sửa sót khi tự kiểm tra:** bản nháp đầu tiên bỏ sót dịch `gaia_health_god_name: "spirit"` → "linh hồn" (đã có tham chiếu `$gaia_health_god_name$` ở 4 dòng khác cần khớp) và bỏ sót dịch tham số 2 của `UmbraGlossaryLocalized('astral_reaches','Astral Umbra')`. Cả hai phát hiện và sửa khi đối chiếu `git diff -U0` các lệnh `Glossary()`/`UmbraGlossaryLocalized()` trước khi hoàn tất, đúng quy trình mục 4 TRANSLATION_RULES.md.
