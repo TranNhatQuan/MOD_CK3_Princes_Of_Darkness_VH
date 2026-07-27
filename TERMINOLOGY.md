@@ -605,6 +605,26 @@ Tên clan/bloodline/lineage giữ nguyên toàn bộ (danh từ riêng, theo B0)
 | Arcana *(trait Murnau)* | Áo Nghĩa | Dòng săn ma cà rồng Von Murnau, không nhầm với "Arcanos" của Wraith (giữ nguyên tiếng Anh, xem B4g) |
 | Sisters (of the Sisterhood, Inquisition) | Nữ Tu | ngữ cảnh giáo phái nữ tu trừ tà, dịch nghĩa |
 
+## B4g. Thuật ngữ Dharma cấp độ / Mummy / bệnh ma cà rồng (từ `traits_POD` dòng 1002-1147)
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Dharma N *(tên trait cấp độ, không phải tham số Glossary)* | Pháp Môn N | `trait_dharma0`…`trait_dharma10` — giữ số Ả Rập như Generation (B4e) |
+| Insight *(thanh kinh nghiệm dharma track)* | Ngộ Tính | `trait_track_dharma1..9` |
+| Ancestor / Mandarin / Brahmin (Hindu) / Jina / Ksatriya (Hindu) / Disciple / Vaisya (Hindu) / Hin / Sudra (Hindu) | Tổ Tiên / Quan Lại / Brahmin / Chiến Binh / Ksatriya / Đệ Tử / Vaisya / Hin / Sudra | hệ thống đẳng cấp Kuei-Jin song song Hindu; các từ Hindu (Brahmin, Ksatriya, Vaisya, Sudra) giữ nguyên vì là thuật ngữ Ấn Độ giáo có thật, không dịch |
+| Feng Shui | Phong Thủy | Chi Art, có tiền lệ tiếng Việt phổ biến |
+| Tzu Wei | Tử Vi | Chi Art, có tiền lệ tiếng Việt phổ biến |
+| Tapestry *(Chi Art)* | Dệt Cảnh | đặt mới, mô tả khai thác long mạch |
+| Obligation *(Chi Art)* | Nghĩa Vụ | khác với "Vassal Obligations" (A9), ngữ cảnh riêng của Kuei-Jin |
+| Prana / Kiai | Prana / Kiai *(giữ nguyên)* | thuật ngữ gốc tiếng Phạn/Nhật không có bản dịch tự nhiên |
+| Bulwark *(trait Holy Alliance)* | Thành Lũy | `trait_ha_holy_bulwark`→"Thành Lũy Thánh" |
+| Arts Mastery *(tiền tố trait Holy Alliance)* | Tinh Thông Nghệ Thuật | mẫu chung `Tinh Thông Nghệ Thuật: [Tên Latin]`, tên Latin giữ nguyên (Sophia Patris, Sedulitas Filius, Boni Spiritus) |
+| Demonic Plague | Ôn Dịch Ma Quỷ | bệnh dịch riêng của POD |
+| Integrity *(hệ thống đức hạnh Mummy)* | Chính Trực | không nhầm với "Legitimacy"="Tính chính danh" (A3) |
+| Bane *(linh hồn ô uế chiếm xác Mummy)* | Tà Linh | khác "Bane" của Fera (Tà Linh, đã chốt B4c) — cùng thuật ngữ, cùng bản dịch, đúng nguyên tắc |
+| Shemsu-Heru, Bane Mummy→"Xác Ướp Tà Linh", Cabiri, Wu T'ian, Wu Kuei, Asekh-Sen | *(tên bộ tộc Mummy giữ nguyên, trừ Bane Mummy dịch nghĩa)* | danh từ riêng theo B0, trừ "Bane Mummy" là cụm mô tả nên dịch |
+| **Bệnh ma cà rồng** (`trait_vampire_*`) — Smallpox/Bubonic Plague/Typhus/Cancer/Consumption/Gout Ridden/Pneumonic/Great Pox/Leper/Ill | Đậu Mùa / Dịch Hạch / Thương Hàn / Ung Thư / Lao Phổi / Gút Hành Hạ / Viêm Phổi / "Đại Hoa Liễu" / Phong Cùi / Bệnh — tất cả + hậu tố "Ma Cà Rồng" | ✅ tra được nguyên bản từ `base_game_vh/traits_l_english.yml` (bệnh vanilla), giữ đúng thuật ngữ base rồi thêm "Ma Cà Rồng" |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
