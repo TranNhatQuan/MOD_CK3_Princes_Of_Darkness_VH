@@ -1511,3 +1511,87 @@ Nguồn: `religion/POD_religion_mummy_l_english.yml` (119 dòng, đã dịch xon
 | White Lotus Society | Hội Bạch Liên | dịch nghĩa, "Bạch Liên" (hoa sen trắng) là cụm Hán Việt quen thuộc |
 | Twilight Scholars | Học Giả Hoàng Hôn | dịch nghĩa |
 | Jade Sentinels | Vệ Binh Ngọc Bích | dịch nghĩa |
+
+## B4o. Thuật ngữ bổ sung (từ `POD_religion_ordos`) — việc #2, faith Ordos (Malkavian)
+
+Nguồn: `religion/POD_religion_ordos_l_english.yml` (119 dòng, đã dịch xong 100%). Faith chính "Ordos" (giáo phái bí ẩn Malkavian, giữ nguyên tên — đã liệt kê là danh từ riêng ở dòng tra cứu B0 "tên riêng giáo phái/tổ chức WoD") và 8 faith con/tổ chức: Ordo Aenigmatis, Ordo Ecstasis, Ordo Maleficus, Jocastian, Mnemosyne, Ordo Vaticinii (phi chính thống), Daughters of the Sun, Eyes of Malakai. 1 lần `[Glossary('Ashirra','game_concept_ashirra_desc')]` trong `daughtersofthesun_desc` — tham số 1 giữ nguyên "Ashirra" (đã chốt B2b, danh từ riêng giáo phái Hồi giáo ma cà rồng), tham số 2 giữ nguyên là key. Dùng `$pod_clan$`, `$pod_cainites$`, `$pod_diablerie$` đúng như bản gốc, không thêm/bớt ref.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Ordos *(tên faith chính)* | Ordos *(giữ nguyên)* | đã liệt kê sẵn trong B0 (dòng tra cứu "tên riêng giáo phái/tổ chức WoD: ...Ordos..."), áp dụng lần đầu vào văn xuôi thật |
+| Mystai *(religion_adj/adherent/devotee/priest/bishop)* | Mystai *(giữ nguyên)* | đặt mới theo B0: danh từ Hy Lạp cổ chỉ "người được điểm đạo vào bí pháp" (mystes/mystai), không có bản dịch tự nhiên tương xứng registrer cổ; dùng cho cả số ít/số nhiều/mọi giống theo đúng bản gốc (bản gốc cũng dùng "mystai" cho mọi ô) |
+| Mystery *(high_god_name, thực thể trừu tượng được thờ)* | Bí Ẩn | đặt mới, dịch nghĩa; "The Mystery" (high_god_name_alternate) → "Đấng Bí Ẩn" theo mẫu thêm "Đấng" cho biến thể trang trọng, nhất quán cách base xử lý alternate name (vd. `dualism_high_god_name_alternate`) |
+| Mysteries *(religious_text, kinh sách)* | Những Điều Bí Ẩn | dịch nghĩa, số nhiều của "Mystery"/"Bí Ẩn" ở trên nhưng đứng vai trò tên kinh sách nên thêm "Những Điều" cho tự nhiên, khác hẳn ngữ pháp so với tên thần |
+| The Beast *(devil_name, witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B4i (`The Beast/Frenzy`→`Dã Thú/Phẫn Cuồng`), áp dụng lại |
+| Destruction *(death_deity_name)* | Hủy Diệt | dịch nghĩa thông thường; nhất quán với cách dùng ở B4l/B4m (`roadofmetamorphosis`/`roadofsin` cùng giá trị gốc "Destruction"→"Hủy Diệt") |
+| labyrinth(s) *(house_of_worship)* | mê cung | dịch nghĩa; có tiền lệ tra được trong `base_game_vh/localization/english/adventurer_name_sections_l_english.yml:401` (`labyrinth: "Mê cung"`) |
+| skull *(religious_symbol)* | đầu lâu | đặt mới, dịch nghĩa phổ thông; base dùng "sọ" ở một số nơi nhưng "đầu lâu" tự nhiên hơn cho biểu tượng tôn giáo/tử vong |
+| Deacon *(religious_head_title/_name)* | Phó Tế | đặt mới; không có tiền lệ base cho từ này (base chỉ có Giáo hoàng/Thượng phụ/Tổng giám mục... cho các chức sắc Cơ Đốc khác) nhưng "Phó Tế" là thuật ngữ tôn giáo tiếng Việt phổ biến, đúng nghĩa "deacon" (chức sắc cấp dưới linh mục) |
+| Mind *(divine_realm)* | Tâm Trí | đặt mới, dịch nghĩa; phù hợp lore Ordos (giáo phái tập trung vào tâm trí/sự điên loạn của Malkavian) |
+| Underworld *(positive_afterlife, không qua UmbraGlossaryLocalized ở đây — chỉ là chữ thường trong key faith)* | Âm Giới | dùng "Âm Giới" (khác "Âm Phủ" đã dành riêng cho tham số 2 `UmbraGlossaryLocalized('shadowlands','Underworld')` ở B4j) vì đây là ngữ cảnh khác — giá trị trực tiếp của `positive_afterlife`, không qua macro; chọn "Âm Giới" để tránh đụng "Âm Phủ" đã có nghĩa cố định khác |
+| Oblivion *(negative_afterlife)* | Hư Vô | ✅ nhất quán với `roadofbones_negative_afterlife`/`talmahera_negative_afterlife` đã dịch "Hư Vô" cho cùng khái niệm hư vô/tận diệt |
+| blood *(health_god_name, chữ thường)* | máu | dịch nghĩa phổ thông, giữ chữ thường như bản gốc |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ có tiền lệ base: `christianity_trickster_god_name:0 "Fortuna"` — giữ nguyên tên nữ thần La Mã |
+| Ordo Aenigmatis, Ordo Ecstasis, Ordo Maleficus, Ordo Vaticinii *(4 tên faith con dạng "Ordo + tính từ Latin")* | *(giữ nguyên toàn bộ)* | tên riêng Latin, theo B0; phần `_adj` cũng giữ nguyên tính từ Latin (Aenigmatis, Ecstasis, Maleficus, Vaticinii) |
+| Jocastian(s) | Jocastian *(giữ nguyên)* | tên riêng giáo phái tự đặt theo "Jocasta" (nhân vật thần thoại Hy Lạp), không có tiền lệ base, giữ nguyên theo B0; số nhiều tiếng Anh "Jocastians" giữ nguyên ở `adherent_plural` vì đây là danh xưng tự thân bằng tiếng Anh, không phải văn xuôi tiếng Việt cần áp quy tắc gộp số nhiều |
+| Mnemosyne | Mnemosyne *(giữ nguyên)* | tên nữ thần Hy Lạp của ký ức, danh từ riêng, giữ nguyên theo B0; văn xuôi mô tả dịch nghĩa "Memory-Seekers"→"những Kẻ Tầm Ký Ức" |
+| diablerized/diablerise *(động từ mượn từ "Diablerie", 2 lần trong `jocastian_desc`/`mnemosyne_desc`)* | hành Diablerie *(ai đó)* | đặt mới: thay vì chia động từ tiếng Anh trần trụi kiểu "diablerize", dùng cụm động từ tiếng Việt "hành Diablerie [đối tượng]" — "Diablerie" giữ nguyên danh từ đã chốt B2, "hành" là động từ tiếng Việt nghĩa "thực hiện/tiến hành" |
+| The Harbingers of Malkav, The Lamia Mystery, The Order of Argaeus, The Cult of Hecate, Sworn to Cecil *(5 `holy_order_*` của Ordos)* | Những Kẻ Báo Điềm của Malkav, Bí Ẩn Lamia, Dòng tu Argaeus, Giáo phái Hecate, Thề Trung với Cecil | dịch nghĩa theo mẫu chung của các `holy_order_*` khác (B4m): "The Harbingers of X"→"Những Kẻ Báo Điềm của X"; "The X Mystery"→"Bí Ẩn X"; "The Order of X"→"Dòng tu X"; "The Cult of X"→"Giáo phái X"; "Sworn to X"→"Thề Trung với X". Tên riêng (Malkav, Lamia, Argaeus, Hecate, Cecil) giữ nguyên |
+| Daughters of the Sun / Daughter(s) | Những Người Con Gái của Mặt Trời / Người Con Gái, Những Người Con Gái | dịch nghĩa; faith con thờ ba "Nữ Thần" Hậu duệ Cain, tiền Hồi giáo |
+| Eyes of Malakai / Eye(s) | Những Con Mắt của Malakai / Con Mắt, Những Con Mắt | dịch nghĩa; "Malakai" là tên riêng (chị em song sinh huyền thoại của Malkav), giữ nguyên |
+
+## B4o. Thuật ngữ bổ sung (từ `POD_religion_roadofzarathustra`) — việc #2 file 28/36
+
+Nguồn: `religion/POD_religion_roadofzarathustra_l_english.yml` (117 dòng, đã dịch xong 100%). Faith chính "Road of Zarathustra" (đã khóa cứng B3f/B3k = "Con Đường Zarathustra") cho Ma cà rồng theo đạo đức phỏng theo Bái Hỏa giáo (Zoroastrianism), và 3 faith con: Road of Angra Mainyu (Corrupter), Road of Ahura Mazda (Penitent), Path of Daena (Behdin), cộng 1 faith riêng biệt không theo mẫu "Road of X": Cult of Zilah (dòng dõi Thế Hệ Thứ Hai). File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0). 21 ref, toàn bộ là tự tham chiếu nội bộ file (`$roadofzarathustra_*$`, `$cultofzilah_*$`) và `$pod_cainites$` — không có ref nào cần dịch.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Road of Zarathustra *(roadofzarathustra_religion)* | Con Đường Zarathustra | ✅ đã khóa cứng B3f/B3k, áp dụng ở đây lần đầu cho file riêng |
+| Zarathustrian *(religion_adj/adherent)* | Zarathustrian *(giữ nguyên)* | danh xưng phái sinh từ tên riêng "Zarathustra" (đã giữ nguyên theo B0); khác với "Zoroastrian" của vanilla CK3 (`zoroastrianism_religion_adj`="Bái Hỏa", có bản dịch riêng) — đây là demonym tự chế của POD cho faith ma cà rồng, không phải cùng thực thể nên không dùng "Bái Hỏa" |
+| Destruction *(death_deity_name)* | Hủy Diệt | ✅ nhất quán với B4l/B4m (`roadofmetamorphosis`/`roadofsin` cùng giá trị gốc "Destruction") |
+| refuge(s) *(house_of_worship)* | nơi trú ẩn / những nơi trú ẩn | đặt mới; cùng trường nghĩa "nơi ẩn náu" với B3w (`roadofbones`="chốn nương thân") và B3z (`roadofhumanity`="nơi ẩn náu/những nơi ẩn náu") nhưng chọn biến thể riêng để tránh trùng lặp y hệt giữa các faith khác nhau — lưu ý: cụm "nơi ẩn náu" (không "những") trùng với B3z, "những nơi trú ẩn" là biến thể số nhiều mới |
+| Farahavar *(religious_symbol)* | Farahavar *(giữ nguyên)* | biến thể chính tả POD của "faravahar" — biểu tượng thiêng liêng Zoroastrian có thật; base giữ nguyên "faravahar" (`zoroastrianism_religious_symbol`), áp dụng cùng cách xử lý (giữ nguyên tên gốc, không sửa chính tả POD) |
+| Avesta *(religious_text)* | Avesta *(giữ nguyên)* | ✅ tra base (`zoroastrianism_religious_text`="Avesta") |
+| dastur *(religious_head_title/devotee/priest/bishop)* | dastur *(giữ nguyên)* | ✅ tra base (`zoroastrianism_bishop_male`="dastur") — chức sắc tôn giáo Zoroastrian có thật, giữ nguyên theo B0 giống "mobed" |
+| heaven *(divine_realm/positive_afterlife)* | thiên đường | theo base "thiên đường" (`zoroastrianism_positive_afterlife`, chữ thường) và tiền lệ POD (`roadofblood_positive_afterlife`="thiên đường"); không dùng "Thiên Giới" của base vì đó là bản dịch cho `divine_realm` cụ thể của vanilla Zoroastrianism, còn ở đây một key "heaven" dùng chung cho cả hai trường |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ tiền lệ POD đã dùng thống nhất ở nhiều file `roadof*`/`codeoftremere`/`bloodgnosticism`/`calomenasforsaken` |
+| blood *(health/water_god_name, danh từ thường làm tên thần)* | máu | ✅ theo B3q — "Blood" đứng riêng làm tên thần dùng "Máu"/"máu" thuần Việt, không dùng "Huyết" (dành cho từ ghép Hán Việt) |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | tên nữ thần may mắn La Mã có thật, danh từ riêng theo B0 |
+| Corrupter(s) *(roadofagramainyu_adherent)* | Kẻ Tha Hóa | ✅ tiền lệ B3t (`roadofset`/`pathofsubversion_adherent`="Kẻ Tha Hóa") cho cùng từ gốc "Corrupter" |
+| Penitent(s) *(roadofahuramazda_adherent)* | Kẻ Sám Hối | ✅ tiền lệ B3y (`roadofheaven`/`viapenaculum_adherent`="Kẻ Sám Hối") cho cùng từ gốc "Penitent" |
+| Path of Daena *(pathofdaena)* | Con Đường Daena | "Path" dùng như đồng nghĩa "Road" (đã chốt B3h/B3y), "Daena" (khái niệm lương tâm/tôn giáo trong Zoroastrianism) giữ nguyên vì không có bản dịch tự nhiên ngắn gọn |
+| Behdin(s) *(pathofdaena_adherent)* | Behdin *(giữ nguyên)* | thuật ngữ tôn giáo Zoroastrian có thật (tín đồ "Đạo Tốt"), không có tiền lệ base nhưng theo B0 giữ nguyên vì là danh xưng tôn giáo chuyên biệt, giống cách xử lý "dastur"/"mobed" |
+| Cult of Zilah *(cultofzilah)* | Giáo Phái Zilah | ✅ mẫu "Cult of X (danh từ riêng)" → "Giáo Phái X", theo tiền lệ B4m (`roadofsin`, "Cult of Augurs"→"Giáo Phái Augur") |
+| Cultist(s) *(cultofzilah_adherent)* | Tín Đồ | đặt mới, dịch nghĩa phổ thông phù hợp với "Giáo Phái" ở trên |
+| The Weeping Stone / The Weeping Master *(cultofzilah_house_of_worship/good_god_weeping_master)* | The Weeping Stone / The Weeping Master *(giữ nguyên)* | tên riêng chuyên biệt của cốt truyện (thánh tích + chức sắc sáng lập giáo phái), xuất hiện đồng nhất bằng tiếng Anh ở các file POD khác chưa dịch (`struggle_POD_l_english.yml`, `bookmark/bookmarks_POD_l_english.yml`, `event_localization/schemes/POD_investigate_l_english.yml`) — giữ nguyên để nhất quán khi các file đó tới lượt dịch, tránh tạo hai tên cho cùng thực thể |
+| Second Generation *(pantheon_term)* | Thế Hệ Thứ Hai | dịch nghĩa theo mẫu "Thế Hệ Thứ N" đã chốt B4e (Generation), áp dụng cho văn xuôi thay vì tên trait |
+| evil_god_* (Zapathustra, Set, Ventru, Arikel, Ennoia, Ashur, Absimilliard, Malkav, Lasombra, Tzimisce) | *(giữ nguyên toàn bộ)* | tên các Antediluvian bị bóp méo qua góc nhìn dị giáo Cult of Zilah — danh từ riêng, giữ nguyên theo B0, khớp tên clan gốc đã giữ nguyên ở `traits_POD` (B4d) |
+| Zilah, Anosh, Irad, Haqim, Caine, Enoch | *(giữ nguyên)* | danh từ riêng — nhân vật/tên thần gốc Kinh Thánh hoặc lore VtM, theo B0 |
+
+## B4p. Thuật ngữ `religion/POD_religion_demons_l_english.yml` — faith Demon (Sin), việc #2 file 29/36
+
+File 141/141 dòng, dịch xong 100%. Faith này là ác quỷ (`trait_demon`="Ác quỷ", đã chốt B4) tôn thờ "Sin" được nhân cách hóa. Không nhầm với `religion/POD_religion_roadofsin_l_english.yml` (faith ma cà rồng "Road of Sin/Con Đường Tội Lỗi") — hai faith khác nhau cùng dùng ý niệm "Sin"/"Tội Lỗi", đã tra để tránh xung đột nhưng không có key trùng nhau.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Sin *(demons_religion/high_god_name/health_god_name, danh xưng vị thần tối cao ác quỷ thờ)* | Tội Lỗi | nhất quán với cách `roadofsin_high_god_name`="Tội Lỗi" đã dịch cùng khái niệm trừu tượng ở faith khác |
+| Corruption *(high_god_name_alternate)* | Sự Sa Đọa | đặt mới, tên gọi khác của "Sin" khi nhân cách hóa |
+| Archduke *(good_god_archduke, danh hiệu quỷ vương cai trị Địa Ngục)* | Đại Công Tước | đặt mới; không có tiền lệ base (tra không thấy "Archduke"); dùng thang bậc quý tộc dịch nghĩa, cao hơn "Công Tước"=Duke (A7); áp dụng cho các nơi khác nhắc "Infernal Archduke" sau này |
+| the Great Betrayer *(devil_name)* | Kẻ Phản Bội Vĩ Đại | dịch nghĩa |
+| Lucifer, Malhim, Elohim, Michael *(evil_god_*, tên riêng thiên thần/nhóm Kinh Thánh-WoD)* | *(giữ nguyên)* | danh từ riêng Kinh Thánh/WoD theo B0; "Elohim"/"Malhim" là tên nhóm thiên thần trong lore Demon (`Bene Elohim`), không dịch |
+| Death *(death_deity_name)* | Cái Chết | ✅ tiền lệ base (`religion_christianity_l_english.yml`: `christianity_death_deity_name`="Cái Chết") |
+| church/churches *(house_of_worship)* | nhà thờ | theo tiền lệ base (`christianity_house_of_worship`="nhà thờ") |
+| pentagram *(religious_symbol)* | ngôi sao năm cánh | đặt mới, không có tiền lệ base; mô tả trực quan biểu tượng thay vì phiên âm |
+| scriptures *(religious_text)* | thánh kinh | đặt mới, dịch nghĩa chung chung phù hợp giáo phái thờ quỷ không có kinh sách cụ thể được đặt tên |
+| Leader *(religious_head_title)* | Thủ Lĩnh | dịch nghĩa thông thường |
+| Faction *(religious_head_title_name)* | Phe Phái | ✅ dùng lại bản dịch đã chốt ở A6 (`game_concept_faction`) |
+| Heart *(divine_realm, cõi giới ác quỷ hướng về)* | Trái Tim | đặt mới, dịch nghĩa đen; không đủ ngữ cảnh khác trong repo để xác định đây có phải danh từ riêng của một địa danh cụ thể hay không, tạm dịch nghĩa theo B0 (chỉ giữ nguyên khi là danh từ riêng xác nhận được) |
+| Redemption *(positive_afterlife)* | Sự Cứu Rỗi | đặt mới, dịch nghĩa |
+| Abyss *(negative_afterlife)* | Vực Thẳm | ✅ tiền lệ base (`religion_christianity_l_english.yml`: `christianity_negative_afterlife_2`="Vực Thẳm"; `religion_paganism_l_english.yml`: `basque_negative_afterlife_3`="Vực Thẳm") |
+| God *(creator_god_name, Thượng Đế nguyên thủy — khác "Sin" mà quỷ thờ)* | Thượng Đế | dịch nghĩa chung, nhất quán với cách gọi "Thượng Đế" đã dùng ở B3 cho "Abrahamic God" |
+| Fortuna *(fate_god_name/trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ đã chốt B3h, áp dụng lại kèm possessive "của Fortuna" |
+| Avarice / Envy / Gluttony / Lust / Pride / Sloth / Wrath *(7 mối tội đầu, tên splat con của faith Demon)* | Tham Lam / Đố Kỵ / Háu Ăn / Dục Vọng / Kiêu Ngạo / Lười Biếng / Thịnh Nộ | đặt mới; không có tiền lệ base (7 mối tội đầu không xuất hiện dưới dạng key religion trong `base_game_vh`); dùng từ tiếng Việt phổ thông mô tả tội lỗi, tính từ và danh từ trừu tượng dùng chung một từ (theo cách gốc tiếng Anh cũng dùng chung, ví dụ `avarice`/`avarice_adj` đều "Avarice") |
+| Demon of Greed/Envy/Gluttony/Lust/Pride/Sloth/Wrath *(adherent của từng splat tội lỗi)* | Ác quỷ của Lòng Tham / Sự Đố Kỵ / Sự Háu Ăn / Dục Vọng / Sự Kiêu Ngạo / Sự Lười Biếng / Sự Thịnh Nộ | ghép "Ác quỷ của" + danh từ trừu tượng tội lỗi tương ứng ở trên |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k/B3s, kể cả tên riêng (`"Lucifer's"`→"của Lucifer") |
+
+> Dòng 111-142 (splat `faustian`, `cryptic`, `luciferan` + 3 holy order liên quan, `ravener`, `reconciler`) đều là **key bị comment** (`#` ở đầu dòng) trong bản gốc — giữ nguyên hoàn toàn, không dịch, theo mục 5 TRANSLATION_RULES.md.
