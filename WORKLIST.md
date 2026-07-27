@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 9 — `decisions/` đạt 11/11 file → **việc #6 HOÀN TẤT**. Việc tiếp theo: #7 `modifiers/`).
+Cập nhật lần cuối: 2026-07-27 (đợt 10 — việc #7 `modifiers/` đang tiến hành, 47/54 file xong, còn 6 file lớn).
 
 ---
 
@@ -16,8 +16,37 @@ Cập nhật lần cuối: 2026-07-27 (đợt 9 — `decisions/` đạt 11/11 fi
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** |
-| Việc tiếp theo | **việc #7 — `modifiers/`, 4.344 key, 54 file**, rồi tiếp tục tuần tự #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **47/54 file modifiers/ (việc #7 đang làm)** |
+| Việc tiếp theo | **Hoàn tất nốt 6 file lớn còn lại của `modifiers/`**: `houses_POD_modifiers` (770 dòng), `POD_fera_modifiers` (326), `misc_POD_modifiers` (378), `1230objectives_POD_modifiers` (233), `artifact_POD_modifiers` (447), `umbra_expedition_POD_modifiers` (241) — rồi việc #7 HOÀN TẤT, chuyển #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ⏸️ ĐỢT 10 (2026-07-27) — việc #7 `modifiers/` đạt 47/54 file, BÀN GIAO 6 file lớn cuối cho session sau
+
+**Người dùng đã yêu cầu dừng lại** khi context vượt 300k token, để verify + cập nhật worklist trước khi tiếp tục — KHÔNG phải do gặp lỗi kỹ thuật.
+
+47/54 file `modifiers/` đã dịch xong, verify xong, commit xong theo 5 đợt nhỏ trong cùng session:
+- **Đợt nhỏ 1** (9 file rất nhỏ ≤10 dòng, commit `281f002`): `POD_kai`, `health_POD`, `POD_serpentis`, `POD_flavour_events`, `POD_cultural`, `POD_rift`, `POD_numina_theurgy`, `POD_shapeshift_bestial_form`, `vampire_discipline_draught` — coordinator tự dịch trực tiếp.
+- **Đợt nhỏ 2** (18 file vừa, commit `6893811`): `00_POD_heritage_house`, `POD_clan`, `POD_gargoyle_caste`, `POD_government`, `POD_journey`, `POD_obtenebration`, `POD_presence`, `POD_province`, `POD_shih`, `daimonion_POD`, `gehenna_POD`, `gehenna_seer_POD`, `masquerade_POD`, `possessed_POD`, `scheme_POD`, `vampire_predatortypes`, `visual_looks_POD`, `vampire_bloodhunger`, `vampire_camarilla` — coordinator tự dịch. **Phát hiện mẫu lỗi mới: Edit tool tự động rút gọn các dòng "chỉ chứa 1 khoảng trắng" (hợp lệ trong CRLF gốc) thành dòng trống thật khi search/replace chạm gần đó** — đã khôi phục byte-for-byte bằng perl ở 8 file bị ảnh hưởng.
+- **Đợt nhỏ 3** (7 file, commit `d9cbeda`): `POD_infernalism`, `vampire_blood_surge`, `vampire_discipline_shapeshift_forms` (184 dòng, nhiều tên hình dạng biến hình), `POD_kueijin/POD_kueijin_modifiers`, `POD_kueijin/kueijin_arts_POD_modifiers`, `POD_kueijin/kueijin_regular_activity_POD_modifiers`, `POD_necromancy`. **Từ đợt này coordinator chuyển hẳn sang dùng script perl trực tiếp (đọc/ghi binary, thay thế theo cặp chuỗi khớp chính xác) thay vì Edit tool — giải quyết dứt điểm vấn đề rút gọn khoảng trắng, 0 lỗi phát sinh từ đợt 3 trở đi.**
+- **Đợt nhỏ 4** (3 file, commit `81e95b8`): `POD_numina_psi` (61 dòng "Channelling a weak/strong X wraith" lặp lại), `POD_numina_sorcery`, `vampire_bloodpotency` (23 dòng key thụt 2 space, mỗi dòng desc dài lặp mẫu theo ngưỡng Blood Potency 0-10, dịch nhất quán bằng regex theo từng cụm câu).
+- **Đợt nhỏ 5** (9 file, commit `e1bdea5`): `POD_bloodmagic`, `demon_POD`, `mummy_POD`, `POD_custom_modifiers`, `umbra_gauntlet_POD`, `umbra_POD` (170 dòng, nhiều `UmbraGlossaryLocalized`), `wraith_POD`, `fae_POD`, `craft_POD` (212 dòng, rất nhiều tên thuốc/linh dược lặp mẫu). **8/9 file dịch qua agent song song** (mỗi agent 1 file, ghi scratch riêng ngoài repo — không đụng file thật), coordinator tự merge bằng script perl key-matching (đối chiếu tuần tự key giữa bản gốc CRLF và bản dịch LF của agent, giữ nguyên byte-for-byte mọi thứ ngoài phần giá trị dịch) + verify đủ 3 lớp. `craft_POD` dịch trực tiếp bằng script perl (không qua agent).
+
+**2 lỗi thật bắt được khi merge kết quả agent (đáng chú ý — xác nhận quy trình merge cẩn thận vẫn cần thiết dù có agent-generated content):**
+1. `umbra_gauntlet_POD`: agent dịch `UmbraGlossaryLocalized('shadowlands','Underworld')` thành tham số 2 = "Âm Giới" thay vì "Âm Phủ" đã chốt cứng ở TERMINOLOGY.md B4j — nhầm lẫn với quy tắc "Yin World"→"Âm Giới" khác. Sửa lại đúng 10 chỗ.
+2. `fae_POD`: agent tự thêm 2 bracket `[dreamers|E]`/`[cantrips|E]` không có trong bản gốc (bản gốc dùng chữ thường "dreamers"/"Cantrips", không phải concept-link) — bracket count lệch 25 vs baseline 23, bắt được nhờ diff bracket-set với HEAD, đã sửa về đúng 23.
+
+`umbra_POD` verify đúng cả 2 giá trị `UmbraGlossaryLocalized('shadowlands',...)` khác nhau trong cùng 1 file (`Underworld`→"Âm Phủ" dòng 75/164, `Yin World`→"Âm Giới" dòng 94) không bị lẫn lộn — agent xử lý đúng ngay từ đầu.
+
+**6 file lớn CHƯA dịch — làm tiếp theo, theo đúng thứ tự (đã đo baseline sẵn, xem lệnh baseline chuẩn ở mục "Quy trình bắt buộc" bên dưới):**
+1. `modifiers/1230objectives_POD_modifiers_l_english.yml` (233 dòng)
+2. `modifiers/POD_fera_modifiers_l_english.yml` (326 dòng)
+3. `modifiers/artifact_POD_modifiers_l_english.yml` (447 dòng, rất nhiều `#tag` — 223 tag mở/đóng)
+4. `modifiers/misc_POD_modifiers_l_english.yml` (378 dòng)
+5. `modifiers/umbra_expedition_POD_modifiers_l_english.yml` (241 dòng, RẤT NHIỀU bracket — 623, file nhiều bracket nhất `modifiers/`)
+6. `modifiers/houses_POD_modifiers_l_english.yml` (770 dòng — **file lớn nhất `modifiers/`**, để cuối cùng)
+
+Khuyến nghị: file 1-4 giao agent song song (mỗi agent 1 file, ghi scratch riêng), file `umbra_expedition` và `houses` nên chia nhỏ theo đoạn dòng cho nhiều agent (giống cách đã làm với `decisions/POD_decisions_l_english.yml` 1972 dòng ở đợt 9) vì quá lớn cho 1 agent duy nhất — nhớ luôn diff bracket-set/ref-set với HEAD sau khi merge, không chỉ đếm số lượng, và kiểm tra kỹ mọi `UmbraGlossaryLocalized('shadowlands',...)` xem giá trị tham số 2 là "Underworld" (→"Âm Phủ") hay "Yin World" (→"Âm Giới") — đây là lỗi đã xảy ra thật ở đợt này.
+
+Sau khi xong 6 file này, `modifiers/` đạt 54/54 → **việc #7 HOÀN TẤT** → chuyển sang việc #8 (`lifestyles/`, 6.740 key, 27 file).
 
 ### ✅ ĐỢT 9 (2026-07-27) — `decisions/` đạt 11/11, việc #6 HOÀN TẤT
 
