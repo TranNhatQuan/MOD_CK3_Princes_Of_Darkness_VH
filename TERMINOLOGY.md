@@ -1157,6 +1157,45 @@ Nguồn: `religion/POD_religion_roadofbones_l_english.yml` (99 dòng, đã dịc
 | Avatar *(viaprimordia_desc)* | Hóa Thân | dịch nghĩa thường, không nhầm với "Avatar" gốc của Cappadocius trong `POD_journeys_l_english.yml` (chưa dịch, sẽ đồng bộ khi tới việc #11/#12) |
 | Lupine(s) *(viaprimordia_desc, cách gọi người sói của phe khác)* | Lupine *(giữ nguyên)* | danh từ tiếng Latin chỉ "người sói" dùng như biệt danh ngoại lai trong văn cảnh WoD, không có tiền lệ base, giữ nguyên vì là cách gọi đặc thù (khác `trait_werewolf`="Người sói" chính thức) |
 
+## B3u. Thuật ngữ bổ sung (từ `POD_religion_vampirespecialdoctrines`) — việc #2 file 19/36
+
+Nguồn: `religion/POD_religion_vampirespecialdoctrines_l_english.yml` (92 dòng, đã dịch xong 100%) — các giáo lý đặc biệt (`special_doctrine_*`) gắn với sự kiện/tổ chức ma cà rồng cụ thể (Undead Aesir, Restored Republic Roma cổ đại, Carthage, Anda Mông Cổ, Inquisition, Wu Feng, Hunter Schism, Piyau Payung Đông Nam Á…), không phải tên faith gốc.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Aesir *(Undead Aesir)* | Aesir *(giữ nguyên)* | danh từ riêng thần thoại Bắc Âu, theo B0 |
+| Einherjar *(tham số 1 của `Glossary('Einherjar',...)`)* | Einherjar *(giữ nguyên)* | thuật ngữ Bắc Âu nguyên tác (chiến binh tử trận được Odin chọn), không có tiền lệ base — giữ nguyên như các thuật ngữ ngoại lai khác theo B0 |
+| Canarl *(warriors of Canarl)* | Canarl *(giữ nguyên)* | danh từ riêng địa danh/tổ chức POD |
+| Senate / Senatorial | Viện Nguyên Lão / Nguyên Lão | không có tiền lệ base; đặt theo Hán-Việt "Nguyên Lão" (nghị viên cấp cao) cho hệ thống chính trị La Mã cổ đại của ma cà rồng |
+| Republic | Cộng Hòa | ✅ tra base (`republic_government`="Cộng Hòa") |
+| Carthage | Carthage *(giữ nguyên)* | ✅ tiền lệ base giữ nguyên tên địa danh (`e_carthage`="Carthaginian Empire", `b_cartaghe`="Carthage") |
+| Utopia | Không Tưởng | đặt mới, không có tiền lệ base dịch nghĩa trực tiếp (base chỉ dùng "utopia" giữ nguyên 1 lần trong văn cảnh khác); dịch nghĩa Hán-Việt phổ biến "Không Tưởng" |
+| Prometheans | Prometheus *(giữ nguyên, số nhiều gộp)* | danh từ riêng thần thoại Hy Lạp làm tên nhóm, không có tiền lệ base; giữ nguyên theo B0 |
+| Curia | Giáo Triều | ✅ tra base (`christianity_religious_head_title_name`="Giáo triều") — dùng cho "Crimson Curia" |
+| See *(Restored See of Nod, khác "Holy See"="Tòa Thánh" của base)* | Tòa *(ghép "Tòa Nod")* | phỏng theo mẫu base "Tòa Thánh" nhưng đối tượng là "Nod" (Sách Nod, đã chốt B2b) chứ không phải Rome, nên không dùng "Tòa Thánh" nguyên xi |
+| Church of the Third Caine | Giáo Hội Caine Đệ Tam | "Caine" giữ nguyên (B2b), "Đệ Tam" theo lối Hán-Việt số thứ tự đã dùng cho "Thế Hệ Thứ N" (B4e) |
+| Warden(s) | Quản Giáo | ✅ tra base (`relation_warden`="quản giáo") |
+| Order of Moloch | Order of Moloch *(giữ nguyên)* | tên tổ chức riêng, không có tiền lệ base cho "Moloch"; giữ nguyên theo B0 vì dịch nghĩa "Hội/Dòng Moloch" không thêm rõ ràng và tên tổ chức WoD thường giữ nguyên |
+| Eyes and Ears | Tai Mắt Khắp Nơi | ✅ tra base, thành ngữ "tai mắt" xác nhận qua nhiều key (`prelude_events.0020.b`, `councillor_spouse_stewardship.2001.c`) |
+| Acre *(Knights of Acre)* | Acre *(giữ nguyên)* | ✅ tiền lệ base giữ nguyên tên địa danh (`b_acre`="Acre", `c_acre`="Acre") — không dịch |
+| Oculi Dei | Oculi Dei *(giữ nguyên)* | tên tổ chức Latin, không dịch (nhất quán với cách các tên Latin khác trong `traits_POD` B4g được giữ nguyên) |
+| St. John *(Sisters of St. John)* | Thánh John | dịch "St." thành "Thánh", giữ tên riêng "John" |
+| Red Order | Hội Đỏ | đặt mới, "Order" (tổ chức tôn giáo/hội kín) dịch "Hội" theo văn phong POD, nhất quán với cách các tổ chức Inquisition khác trong file này được dịch |
+| House von Murnau | Gia Tộc Von Murnau | "House" ở nghĩa dòng họ quý tộc — dùng "Gia Tộc" theo A10 (`House`="Gia tộc"); "von Murnau" viết hoa "Von" theo quy ước tên riêng đầu câu |
+| Hounds of God | Chó Săn của Chúa | dịch nghĩa; "hounds"→"chó săn" có tiền lệ base (`hounds`="Chó săn") |
+| Wu Feng | Wu Feng *(giữ nguyên)* | danh từ riêng, tên một giáo phái/nhân vật Kuei-Jin, không dịch |
+| Hunter Schism | Ly Giáo Thợ Săn | "Schism"→"Ly Giáo" (tiền lệ base `mend_the_great_schism_decision`="Hàn gắn Đại Ly giáo"); "Hunter"="Thợ săn" đã chốt B4 |
+| Shadow Inquisition | Shadow Inquisition *(giữ nguyên)* | "Inquisition" giữ nguyên xuyên suốt file (không có tiền lệ base dịch nghĩa, tổ chức WoD riêng), ghép "Shadow" giữ nguyên theo tên tổ chức đầy đủ |
+| Holy Arts | Thánh Thuật | đặt mới, "Holy"→"Thánh" theo văn phong POD, "Arts" ở nghĩa hệ thống phép thuật dịch "Thuật" (nhất quán cách B4g dịch "Arts Mastery"→"Tinh Thông Nghệ Thuật", nhưng ở đây ghép ngắn gọn hơn vì là tên giáo lý) |
+| Theurgist / Theurgy | Theurgist / Theurgy *(giữ nguyên)* | thuật ngữ ma thuật nghi lễ gốc Hy Lạp, không có tiền lệ base; giữ nguyên vì đã dùng trong `traits_POD` (B4h nhắc "Theurgist" trong ngữ cảnh "Nhà Thần Thuật" nhưng đó là dịch nghĩa cho vai trò Wraith khác — ở đây giữ nguyên tên riêng trait `theurgist` vì `[GetTrait('theurgist').GetName(...)]` trỏ tới tên trait chưa dịch, tránh tạo hai bản dịch cho cùng ID khi chưa xác nhận) |
+| Ordination | Lễ Tấn Phong | đặt mới, dịch nghĩa nghi lễ tôn giáo phổ thông |
+| Sorcerer Ordination | Lễ Tấn Phong Pháp Sư | "Sorcerer"→"Pháp Sư" đã chốt B4h (phân biệt khỏi "Pháp sư"=Mage bằng viết hoa) |
+| Psychic(s) | Người Có Năng Lực Ngoại Cảm | đặt mới, không có tiền lệ base; dịch nghĩa đầy đủ vì không có thuật ngữ ngắn tương đương trong tiếng Việt phổ thông |
+| Devil *(mark from the Devil, ngữ cảnh Cơ Đốc chung, khác witchgodname riêng)* | Quỷ Dữ | ✅ nhất quán B3g (`witchgodname_the_horned_god`="Quỷ Dữ") |
+| Piyau Payung | Piyau Payung *(giữ nguyên)* | danh từ riêng (giáo chủ/nhà tiên tri) Đông Nam Á, không dịch |
+
+> Lưu ý kỹ thuật: dòng `undead_aesir_doctrine_name` gốc là `"Rejuvenated [Glossary('Einherjar','game_concept_einherjar_desc')]"`. Vì tham số 1 của `Glossary()` là "Einherjar" (giữ nguyên, không phải chữ tiếng Anh thường cần dịch), toàn bộ phần dịch được nằm ở chữ "Rejuvenated" đứng ngoài — dịch thành `"[Glossary('Einherjar','game_concept_einherjar_desc')] Được Hồi Sinh"` (đảo vị trí tính từ ra sau cho đúng ngữ pháp tiếng Việt, cụm Glossary giữ nguyên vị trí đầu vì đó là chủ ngữ).
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
