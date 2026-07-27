@@ -1617,3 +1617,37 @@ File 125/125 dòng, dịch xong 100%. Nhóm faith ma cà rồng hiện đại: M
 | Patriot(s) / Necronomist(s) / Unifier(s) / Metamorphosist(s) / Albigensian(s) / Noddist(s) / Harmonist(s) / Nihilist(s) / Martyr(s) *(tên tín đồ 9 Path Sabbat trong file này)* | Người Ái Quốc / Người Nghiên Cứu Tử Vong / Người Hợp Nhất / Người Biến Hóa / Người Albigensia / Người Theo Sách Nod / Người Hài Hòa / Người Hư Vô / Kẻ Tuẫn Đạo | mẫu "Người/Kẻ + tính chất", nhất quán văn phong gothic |
 
 > Dòng `camahumanity_desc` có cặp dấu `"Path"` không escape (`\"`) ngay trong bản gốc tiếng Anh (lỗi cú pháp có sẵn của POD, không phải `\"`) — bản dịch giữ nguyên byte-for-byte cặp dấu bare-quote đó quanh cụm dịch "Con Đường", đúng theo quy tắc giữ nguyên lỗi gốc.
+
+## B4s. Thuật ngữ `religion/POD_religion_wyrm_l_english.yml` — faith Wyrm (Garou sa ngã), 243/243 dòng
+
+File faith thờ Wyrm và các camp/sub-tribe Garou đã ngả theo nó (Black Spiral Dancers, Bone Gnawer/Shadowlord/Silent Strider/Star Gazer/Ceilican/Warders-of-Men camp bị nhiễm độc). Wyrm/Wyld/Weaver giữ nguyên tiếng Anh xuyên suốt theo B3 (bắt buộc, không phải tùy chọn). Tên camp/tribe là danh từ riêng, giữ nguyên hoặc dịch nghĩa tùy trường hợp — xem bảng dưới.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Litany *(bộ luật Garou)* | Litany *(giữ nguyên)* | Chưa có bản dịch nào tồn tại trong repo (file gốc chứa khái niệm này — `POD_religion_docrtineandtenets`, `POD_religion_gaia` — đều chưa dịch tại thời điểm này). Xử lý theo B0: danh từ riêng WoD lõi, tránh đụng "Masquerade"→"Luật Che Giấu" đã có tiền lệ (khác khái niệm) |
+| caern | caern *(giữ nguyên)* | Đã có tiền lệ nhiều nơi trong POD dùng "Caern" nguyên dạng làm tên công trình/địa điểm linh thiêng Garou (`buildings_fera_POD_l_english.yml`, `POD_court_positions_l_english.yml`) — chưa dịch, giữ nguyên để nhất quán với các key khác |
+| glyph *(biểu tượng tôn giáo Wyrm)* | phù văn | dịch nghĩa theo mẫu `religious_symbol` của base (thường là danh từ vật lý ngắn gọn, ví dụ "thánh giá", "hiža") |
+| lore *(kinh sách Wyrm)* | cổ thư | dịch nghĩa theo mẫu `religious_text` của base |
+| High Priest *(chức sắc tôn giáo Wyrm)* | Đại Tư Tế | theo tiền lệ `dualism_religious_head_title`="Đại Tư Tế" trong base_game_vh cho một giáo phái ngoại giáo tương tự |
+| Cultist *(tín đồ Wyrm, khác `predatortype_cultist`="Giáo Chủ Tà Giáo")* | Tín đồ | theo mẫu `_devotee_male` phổ biến của base (thường là danh từ chung viết thường) |
+| Priest / Bishop *(Wyrm)* | Tư Tế | gộp chung vì bản gốc cũng dùng "Priest" cho cả hai key |
+| the wilds *(cõi chết tiêu cực của tín đồ Wyrm)* | vùng hoang dã | dịch nghĩa, không phải tên riêng |
+| Black Spiral Dancers | Vũ Công Xoáy Đen | tên bộ tộc Garou sa ngã, dịch nghĩa vì là cụm mô tả tiếng Anh thường, không phải danh xưng ngoại lai kiểu Ahroun/Sidhe |
+| Princes of Ruin | Chúa Tể Diệt Vong | tên camp, dịch nghĩa (đổi "Princes"→"Chúa Tể" cho hợp giọng gothic, tránh trùng "Hoàng tử" của vanilla) |
+| Seekers of the Ancient | Kẻ Tìm Kiếm Đấng Cổ Xưa | dịch nghĩa |
+| Wyrm-bound | Kẻ Bị Wyrm Ràng Buộc | tên camp/trạng thái, dịch nghĩa, giữ "Wyrm" |
+| Man-eaters (Bone Gnawer camp) | Kẻ Ăn Thịt Người | dịch nghĩa |
+| Masks (Shadowlord camp) | Mặt Nạ | dịch nghĩa |
+| Society of Nidhogg | Hội Nidhogg | dịch nghĩa, giữ tên riêng "Nidhogg" |
+| Ebon Centipede (Hakken camp) | Rết Đen | dịch nghĩa |
+| Eaters of the Dead (Silent Strider camp) | Kẻ Ăn Xác | dịch nghĩa |
+| Metastic Birth (Star Gazer camp) | Sinh Nở Di Căn | dịch nghĩa |
+| Ouroboroans | Ouroboroan | giữ nguyên dạng danh từ riêng (tên phái gốc Hy Lạp "Ouroboros"), chỉ bỏ hậu tố số nhiều "-s" theo mục 7 TRANSLATION_RULES.md |
+| Boli Zouhisze (Warders of Men offshoot) | Boli Zouhisze *(giữ nguyên)* | tên riêng Trung Hoa, không dịch |
+| Hellcats (Ceilican camp) | Hellcat | giữ nguyên danh từ riêng, chỉ bỏ số nhiều |
+| Mnetics (Mokolé camp) | Mnetic | giữ nguyên danh từ riêng, chỉ bỏ số nhiều; "Eaters of Secrets" (tên gọi khác) → "Kẻ Ăn Bí Mật" dịch nghĩa |
+| camp *(đơn vị xã hội con trong một bộ tộc Garou)* | trại | dịch nghĩa thường, theo tiền lệ base dùng "Trại" cho danh từ camp vật lý/tổ chức (`lifestyle_adventurers`, `msg_domicile_moved`) |
+| `_possessive` *(mẫu ngữ pháp sở hữu cách)* | "của [Tên]" | **Xác nhận lại quy ước đã có ở các file religion trước** (`POD_religion_talmahera`, `POD_religion_naktanchara`): key `X_possessive: "Name's"` trong tiếng Anh dịch thành `"của Name"` — bỏ hậu tố `'s`, thêm giới từ "của" phía trước, **không giữ `'s` nguyên văn**. Đã tự phát hiện và sửa lỗi này trong quá trình tự kiểm tra trước khi hoàn tất |
+| Glossary('Centipede'/'Dissolver'/'Cahlash', 'glossary_wyrm_tt') | Glossary('Rết'/'Kẻ Hòa Tan'/'Cahlash', 'glossary_wyrm_tt') | tham số 1 dịch ("Centipede"→"Rết", "Dissolver"→"Kẻ Hòa Tan", "Cahlash" giữ nguyên vì là tên riêng phát âm lạ), tham số 2 `glossary_wyrm_tt` giữ nguyên |
+
+> Toàn bộ tên god (`wyrm_trickster_god_name`="Pseulak", `wyrm_night_god_name`="Foebok", `wyrm_water_god_name`="Wakshaa", `wyrm_fertility_god_name`="Karnala", `wyrm_wealth_god_name`="Vorus") là danh từ riêng WoD, giữ nguyên hoàn toàn.
