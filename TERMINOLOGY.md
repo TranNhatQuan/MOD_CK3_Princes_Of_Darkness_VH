@@ -2779,3 +2779,28 @@ Nguồn: tương tác Escher's Stair (Labyrinth), các tương tác artifact (St
 | Materialize (your Shadow) *(tên tương tác `POD_separate_shadow_interaction`, key có "separate" nhưng chữ hiển thị dùng "Materialize")* | Hiện Hình (Bóng của Ngươi) | dịch theo chữ hiển thị thực tế "Materialize", không dịch theo tên key "separate" |
 
 Ghi chú: dòng 108 (`artifact_tainted_relic_description`) chứa cặp dấu ngoặc kép kiểu Unicode cong `"..."` (U+201C/U+201D, KHÔNG phải escape `\"`) quanh "lost"/"destroyed" — đã giữ nguyên đúng ký tự Unicode gốc trong bản dịch (`"mất"`/`"hủy diệt`), không đổi thành `\"` hay bỏ dấu. Dòng 369 (gốc) là dòng trống chứa 1 space — giữ nguyên. Bản nháp đầu tiên có 2 lỗi đã tự phát hiện và sửa trước khi ghi file: (1) dịch "Angst" thành "Sầu Muộn" thay vì giữ nguyên (mâu thuẫn B5-wraith-p5), (2) dùng "Ra Lệnh Oan Hồn"/"Oan Hồn" thay vì "Sai khiến Oan hồn"/"Oan hồn" (mâu thuẫn B5-wraith-p2/p4 liền kề). Đã đối chiếu số lượng `$ref$` (17), bracket `[...]` (47), tag mở/đóng (6/6), icon (0), `\n` (1), `\"` (0), tổng dòng (123) giữa bản gốc và bản dịch — khớp tuyệt đối. Không có BOM trong file scratch output.
+
+## B6-decisions-sorcery. Thuật ngữ 14 trường phái Sorcery (`decisions/POD_numina_sorcery_decisions_l_english.yml`), việc #6
+
+Lần đầu dịch tên đầy đủ 14 trường phái pháp thuật (lifestyle Sorcery của phàm nhân), xuất hiện dạng `sorcery_<school>_tier_6_unlock_decision`. Tái dùng 4 tên đã chốt sẵn ở B5-numina (`interactions/POD_character_interactions_numina_l_english.yml`): Conveyance, Cursing, Fascination, Oneiromancy. Đặt mới 10 tên còn lại theo mẫu hậu tố "Thuật" nhất quán với các tên đã chốt (Thuật Dò Tìm, Thuật Nhập Mộng, Thuật Khống Thời Tiết).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Alchemy | Giả Kim Thuật | đặt mới; tái dùng gốc Hán Việt "Giả Kim" đã có ở B5-numina (Alchemical Product=Sản Phẩm Giả Kim) |
+| Conjuration | Triệu Hoán Thuật | đặt mới, dịch nghĩa (gọi/triệu ra qua ma pháp), khác "Triệu Hồi" (Summon) và "Triệu Hồn" (Channel) đã chốt B5-numina — 3 khái niệm riêng biệt |
+| Conveyance | Vận Chuyển Thuật | ✅ tái dùng B5-numina |
+| Cursing | Chú Thuật | ✅ tái dùng B5-numina |
+| Divination | Bói Toán Thuật | đặt mới, dịch nghĩa Hán Việt phổ thông |
+| Enchantment | Phù Chú Thuật | đặt mới, dịch nghĩa; tránh trùng "Chú Thuật" (Cursing) bằng cách thêm "Phù" (bùa/phù phép) |
+| Ephemera | Linh Thể Thuật | đặt mới; "Ephemera" trong ngữ cảnh Sorcery/Numina WoD chỉ các linh thể/vật thể phù du liên quan tinh linh nhỏ, dịch nghĩa mô tả |
+| Fascination | Mê Hoặc Thuật | ✅ tái dùng B5-numina (`Fascination`="Mê Hoặc"), thêm hậu tố "Thuật" cho nhất quán tên trường phái ở file này |
+| Healing | Trị Liệu Thuật | đặt mới; "Trị Liệu" tái dùng từ B5-numina (Psychic Healing), thêm "Thuật" |
+| Hellfire | Hỏa Ngục Thuật | đặt mới, dịch nghĩa |
+| Mana Manipulation | Thao Túng Mana | đặt mới; "Mana" giữ nguyên (thuật ngữ ma pháp phổ thông không có bản dịch tự nhiên), "Manipulation"="Thao Túng" |
+| Oneiromancy | Thuật Nhập Mộng | ✅ tái dùng B5-numina |
+| Shadow Casting | Chú Bóng Thuật | đặt mới, dịch nghĩa (đọc chú thuật qua bóng tối), khác "Shadowcasting" của Wraith (không xuất hiện trong file này) |
+| Shapeshifting *(trường phái Sorcery của phàm nhân, khác trait biến hình của Garou/Fera)* | Biến Hình Thuật | đặt mới, dịch nghĩa; thêm "Thuật" để phân biệt ngữ cảnh với trait `shapeshifter` (Fera) |
+| Summoning Warding and Binding | Triệu Hồi, Trấn Ải và Trói Buộc | đặt mới; tách 3 khái niệm ghép trong tên gốc — "Summoning"="Triệu Hồi" (tái dùng tiền lệ toàn mod), "Warding"="Trấn Ải" (bùa trấn/phòng ngự), "Binding"="Trói Buộc" (tái dùng "Oan Hồn Bị Ràng Buộc"→ ở đây dùng "Trói Buộc" cho động từ) |
+| Weather Control | Khống Chế Thời Tiết | đặt mới, dịch nghĩa; khác "Weathercraft"="Thuật Khống Thời Tiết" đã chốt B5-numina (tên khác cho khái niệm tương tự, giữ 2 bản dịch riêng vì 2 key gốc khác nhau) |
+
+Lỗi gốc đã giữ nguyên (không sửa "bug" của game): `sorcery_shapeshifting_tier_6_unlock_decision_desc`/`_confirm` bị đảo lẫn nội dung so với format chuẩn của 13 trường phái còn lại (desc chứa câu đáng lẽ ở confirm, và ngược lại) — dịch đúng theo nội dung tiếng Anh thực tế ở đúng vị trí, không hoán đổi lại.
