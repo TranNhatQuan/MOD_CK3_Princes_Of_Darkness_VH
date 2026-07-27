@@ -1768,3 +1768,38 @@ Nguồn: file faith trung tâm của Garou/Fera thờ Gaia, cùng vô số camp/
 | Astral/Wani/Bushidō/samurai | Astral *(chỉ trong tên ghép "Umbra Thiên Giới" ở trên)* / Wani *(giữ nguyên)* / Bushidō *(giữ nguyên)* / samurai *(giữ nguyên, có tiền lệ base)* | tên riêng văn hóa Nhật Bản trong mô tả Hakken/Zhong Guo, giữ nguyên theo B0 |
 
 > ⚠️ **Sửa sót khi tự kiểm tra:** bản nháp đầu tiên bỏ sót dịch `gaia_health_god_name: "spirit"` → "linh hồn" (đã có tham chiếu `$gaia_health_god_name$` ở 4 dòng khác cần khớp) và bỏ sót dịch tham số 2 của `UmbraGlossaryLocalized('astral_reaches','Astral Umbra')`. Cả hai phát hiện và sửa khi đối chiếu `git diff -U0` các lệnh `Glossary()`/`UmbraGlossaryLocalized()` trước khi hoàn tất, đúng quy trình mục 4 TRANSLATION_RULES.md.
+
+## B4w. Thuật ngữ `religion/POD_religion_docrtineandtenets_l_english.yml` — toàn bộ doctrine/tenet của mọi splat, 1652/1652 dòng, việc #2 file 36/36 (HOÀN TẤT `religion/`)
+
+Nguồn: file lớn nhất `religion/` (1652 dòng, 1121 bracket — nhiều `Glossary()`/`UmbraGlossaryLocalized()` nhất trong thư mục). Không phải 1 faith mà là **kho doctrine/tenet dùng chung cho mọi splat** (Vampire mọi Clan, Fera mọi breed/tribe, Kuei-Jin, Mummy, Demon, Wraith, Hunter, Mage, Fae) — mỗi khối là bản mẫu lặp `_name/_crime_name/_shunned_name/_accepted_name/_evil_name` + `doctrine_parameter_*_illegal/shunned/accepted`. Dịch bằng 6 agent song song theo 6 đoạn dòng (1-279, 280-560, 561-838, 839-1120, 1121-1400, 1401-1652), mỗi agent ghi ra file scratch riêng (không ghi trực tiếp vào file thật để tránh race condition khi nhiều agent cùng sửa 1 file — bài học rút ra sau khi phát hiện thiết kế ban đầu cho 3 agent đầu ghi đè trực tiếp lên cùng 1 file, đã dừng kịp trước khi mất dữ liệu), rồi điều phối viên tự ghép + đối chiếu thuật ngữ chéo giữa các đoạn trước khi hợp nhất vào file thật.
+
+**✅ Nhãn trạng thái doctrine (bắt buộc dùng thống nhất, xuất hiện hàng trăm lần xuyên suốt religion/ từ đây về sau nếu còn gặp mẫu `_crime_name/_shunned_name/_accepted_name/_evil_name`):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Criminal *(`_crime_name`)* | Tội Phạm | ✅ khớp tiền lệ base `game_concept_criminal`="Tội phạm" (chỉ khác viết hoa — ở đây dùng Title Case vì là tên nhãn hiển thị độc lập, không phải câu văn) |
+| Shunned *(`_shunned_name`)* | Bị Xa Lánh | ✅ base `game_concept_shunned`="Xa lánh"; thêm "Bị" theo tiền lệ đã có sẵn trong chính `religion/POD_religion_vampirespecialdoctrines_l_english.yml` (`psychic_shunned_name`="...Bị Xa Lánh") |
+| Accepted *(`_accepted_name`)* | Được Chấp Nhận | đặt mới (không có tiền lệ base "Accepted" độc lập), ghép "Được" cho đối xứng với "Bị Xa Lánh" |
+| Evil *(`_evil_name`)* | Tà Ác | đặt mới, dùng cho nhãn thù địch tuyệt đối (thường đi kèm câu "We will destroy them all, or die trying") |
+
+> ⚠️ 3 trong 6 agent ban đầu tự chọn biến thể khác nhau cho "Shunned"/"Accepted" (`"Xa Lánh"` không "Bị", `"Chấp Nhận"` không "Được", `"Bị Ruồng Bỏ"` thay vì "Bị Xa Lánh") — điều phối viên đã chuẩn hóa toàn bộ về bảng trên trước khi hợp nhất. Từ nay nếu gặp mẫu này ở file `religion/` khác (không còn file nào theo WORKLIST.md, nhưng có thể tái sử dụng cho `interactions/`/`decisions/` sau này), dùng đúng 4 nhãn trên.
+
+**Thuật ngữ mới đặt / xác nhận trong file này:**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Masquerade *(doctrine ma cà rồng, khác `[the_masquerade\|E]` khái niệm game)* | Màn Che | đặt mới, dùng riêng cho tên doctrine; "Silence of Blood" (cụm lặp lại nhiều lần trong văn phong Kinh Litany) → "Sự Im Lặng của Máu" |
+| The Veil *(doctrine tương đương của Garou/werewolf, `doctrine_werewolf_veil_*`)* | Tấm Màn | tách riêng khỏi "Màn Che" (Masquerade) dù cùng cơ chế game, vì đây là 2 khái niệm lore khác nhau ở 2 splat khác nhau |
+| Oathbreaking | Phản Thệ | ghép từ Hán Việt, khớp "Kẻ Phản Thệ" (Oathbreaker trait, B4e) |
+| Prodigal(s) *(cụm "X-Prodigal Pacts", "a conclave of early Prodigals")* | Kẻ Hoang Đàng | ✅ tái dùng B3z nguyên văn — 2/6 agent ban đầu dịch sai thành giữ nguyên "Prodigal" tiếng Anh hoặc phiên âm hóa thành tính từ ("Cainite Ấn Độ" thay vì "Hậu Duệ Cain người Ấn" cho `"Indian Cainites"`), điều phối viên đã sửa cả hai về đúng thuật ngữ đã khóa |
+| Justicar | Justicar *(giữ nguyên)* | vì `game_concept_justicar` (nguồn `Glossary()` tham số 2 trỏ tới) trong `game_POD_concepts_l_english.yml` **bản thân nó cũng chưa dịch** — giữ nguyên nhất quán, sẽ đổi đồng loạt nếu sau này `game_POD_concepts` được dịch |
+| Blush of Life, Auctoritas Ritae, Monomacy, Enkrateia, Legacy of Trinity/Ashes/Shadow *(thuật ngữ Sabbat/Tzimisce gốc WoD)* | *(giữ nguyên tên riêng, chỉ dịch câu mô tả xung quanh)* | theo B0 — thuật ngữ WoD người chơi quen đọc tiếng Anh |
+| Osirian League, Cabiri, Shemsu-Heru, Apophis, Ishmaelite *(faction Mummy)* | Liên minh Osiris ✅ tái dùng B2; các tên khác giữ nguyên | không có tiền lệ dịch nghĩa cho Cabiri/Shemsu-Heru/Ishmaelite, giữ nguyên theo B0 |
+| "X Hostility" *(nhãn nhóm doctrine thù địch, mẫu `<faction>_hostility_name` KHÁC `<faction>_hostility_doctrine_name`)* | "Thù Địch với X" | đặt mới, tái dùng nhất quán ở mọi lần gặp mẫu này trong file (Anda, Yomi Wan, Oblivion, Apophis, Stygia…) |
+| "X-Y Pacts" *(mẫu liên minh Fae Seelie/Unseelie/Wyrm/Garou, `special_doctrine_*_pact_hostility_name`)* | "Hiệp Ước X-Y" | đặt mới, giữ nguyên thứ tự 2 vế X-Y như bản gốc |
+| "Characters with the/a [trait] are [criminals\|E]/[shunned\|E]/fully accepted" *(mẫu điều kiện `doctrine_parameter_*_illegal/shunned/accepted`, ~165 dòng trong file)* | "Nhân vật có [trait] là/bị [criminals\|E]/[shunned\|E] / được chấp nhận hoàn toàn" | ⚠️ **3/6 agent (132/165 dòng) để nguyên tiếng Anh hoàn toàn** ở mẫu câu này, tưởng nhầm đây là chuỗi script nội bộ không cần dịch — thực ra đây là tooltip hiển thị cho người chơi trong UI giáo lý đức tin. Điều phối viên phát hiện qua bước rà `grep` từ tiếng Anh còn sót sau khi hợp nhất (không phải qua báo cáo của agent), rồi viết script Python thay thế mẫu câu hàng loạt (không giao lại cho agent, vì mẫu đã đủ đều để làm tay an toàn hơn) |
+| Can recruit / Can employ *(mẫu tuyển quân MAA, chức vụ triều đình)* | Có thể chiêu mộ / Có thể tuyển dụng một | áp dụng cùng lúc với sửa mẫu "Characters with..." ở trên |
+
+> ⚠️ **Bài học quy trình quan trọng nhất rút ra từ file này:** khi giao nhiều agent song song dịch các đoạn của **cùng một file**, KHÔNG được để agent ghi trực tiếp vào file thật (dù chỉ sửa đúng đoạn dòng được giao) — mỗi agent đọc-toàn file-rồi-ghi-toàn file để splice đúng đoạn của mình, nên 2 agent ghi gần như đồng thời sẽ ghi đè lẫn nhau, mất bản dịch của agent kia mà không có cảnh báo lỗi nào. Quy trình an toàn: mỗi agent chỉ ghi ra 1 file scratch riêng (đường dẫn ngoài repo), điều phối viên tự đọc tất cả file scratch, đối chiếu thuật ngữ chéo, rồi tự ghép + ghi 1 lần duy nhất vào file thật.
+>
+> Bài học thứ hai: **3 lớp kiểm tra kỹ thuật (đếm token/bracket/ref, kiểm tra BOM/CRLF, diff ID) đều PASS 100%** dù có ~165 dòng bị bỏ sót hoàn toàn (không dịch 1 chữ nào) — vì các dòng đó vẫn giữ nguyên cấu trúc bracket/ref hợp lệ, không "hỏng" theo nghĩa kỹ thuật. Chỉ phát hiện được nhờ bước `grep` riêng tìm từ tiếng Anh thông dụng (`the/and/of/with/are/is...`) loại trừ script ID, đúng như cảnh báo ở TRANSLATION_RULES.md mục 8 rằng đếm token không đủ — nhưng ở quy mô lớn hơn nhiều so với các lỗi lẻ tẻ 1-2 dòng đã gặp trước đây.

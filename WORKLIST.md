@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 2).
+Cập nhật lần cuối: 2026-07-27 (đợt 3 — `religion/` đã HOÀN TẤT 36/36).
 
 ---
 
@@ -16,16 +16,31 @@ Cập nhật lần cuối: 2026-07-27 (đợt 2).
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **35/36 file religion/** |
-| Còn lại | ~419 file khác + 1 file `docrtineandtenets` (1652 dòng) |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/ (HOÀN TẤT)** |
+| Còn lại | ~419 file khác — chuyển sang việc #3 (`custom_localization/` phần còn lại) |
 
 Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~200 mục, B3/B4 đầy đủ cho VtM/Fae/Fera/Wraith/Mummy/Kuei-Jin/Demon/Garou). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
 
 **Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.**
 
-**Việc #2 (`religion/`) tiến độ: 35/36 file đã dịch + verify + commit. CHỈ CÒN 1 FILE: `docrtineandtenets` (1652 dòng).** Danh sách commit theo thứ tự (rút gọn — 27 file đầu, xem chi tiết trong lịch sử git nếu cần): `2952a68`…`d5d2cd7` (27/36, xem bản WORKLIST cũ trong git log nếu cần tra lại), rồi tiếp: `1b41e1e`(mummy, 28/36) `93321dd`(demons, 29/36) `722a757`(modern, 30/36) `b61c2d0`(sửa trùng heading B4q) `c4a49cf`(roadofzarathustra, 31/36) `47fc7a6`(ordos, 32/36) `4223927`(wyrm, 33/36) `627f794`(fae, 34/36) `13742c8`(wraiths, 35/36) `83164a2`(gaia, 36/36 trừ docrtineandtenets).
+**Việc #2 (`religion/`) đã HOÀN TẤT 36/36 file.** Danh sách commit theo thứ tự (rút gọn — 27 file đầu, xem chi tiết trong lịch sử git nếu cần): `2952a68`…`d5d2cd7` (27/36, xem bản WORKLIST cũ trong git log nếu cần tra lại), rồi tiếp: `1b41e1e`(mummy, 28/36) `93321dd`(demons, 29/36) `722a757`(modern, 30/36) `b61c2d0`(sửa trùng heading B4q) `c4a49cf`(roadofzarathustra, 31/36) `47fc7a6`(ordos, 32/36) `4223927`(wyrm, 33/36) `627f794`(fae, 34/36) `13742c8`(wraiths, 35/36) `83164a2`(gaia, 36/36 trừ docrtineandtenets) và cuối cùng `docrtineandtenets` (36/36, xem đợt 3 bên dưới).
 
-### ⚠️ BÀN GIAO GIỮA SESSION (2026-07-27, đợt 2, do gần chạm ~300k token context)
+### ✅ ĐỢT 3 (2026-07-27) — hoàn tất `docrtineandtenets`, `religion/` đạt 36/36
+
+File cuối cùng của `religion/` (1652 dòng, 1121 bracket — nhiều `Glossary()`/`UmbraGlossaryLocalized()` nhất thư mục, kho doctrine/tenet dùng chung mọi splat) đã dịch xong, verify xong, commit xong. Chi tiết thuật ngữ mới → TERMINOLOGY.md mục **B4w**.
+
+**⚠️ Sự cố suýt xảy ra, đã ngăn kịp thời:** thiết kế ban đầu giao 3 agent song song mỗi agent tự đọc-toàn file-rồi-ghi-đè-toàn file (chỉ sửa đúng đoạn dòng được giao) — đây là race condition thật sự vì 3 agent ghi cùng 1 đường dẫn gần như đồng thời, agent ghi sau cùng sẽ xóa sạch bản dịch của các agent ghi trước mà không có cảnh báo lỗi nào. Phát hiện ra vấn đề ngay sau khi phóng agent (trước khi agent nào kịp ghi file thật) và dừng cả 3 bằng TaskStop, xác nhận file gốc chưa bị chạm (`git status` sạch, đếm ký tự tiếng Việt vẫn = baseline). **Sửa lại thiết kế: mỗi agent chỉ ghi ra 1 file scratch riêng ngoài repo (không đụng file thật), điều phối viên tự đọc toàn bộ 6 file scratch, đối chiếu thuật ngữ chéo giữa các đợt, rồi tự ghép + ghi 1 lần duy nhất vào file thật.** Bài học: **không bao giờ giao ≥2 agent song song ghi trực tiếp vào cùng 1 file**, kể cả khi mỗi agent chỉ phụ trách 1 đoạn dòng riêng biệt — luôn dùng file scratch trung gian + hợp nhất thủ công ở agent điều phối.
+
+**Lỗi hệ thống nghiêm trọng phát hiện SAU KHI cả 6 lớp kiểm tra kỹ thuật đã PASS 100%:** 3/6 agent (132/165 dòng, tương đương ~8% toàn file) để nguyên **hoàn toàn tiếng Anh** ở mẫu câu `doctrine_parameter_*_illegal/shunned/accepted`: `"Characters with the [trait] [trait|E] are [criminals|E]/[shunned|E]/fully accepted"` — nhầm tưởng đây là chuỗi script nội bộ không cần dịch, trong khi thực ra đây là tooltip hiển thị cho người chơi trong UI giáo lý đức tin (không có tiền lệ mẫu này ở bất kỳ file `religion/` nào khác nên agent không có gì để đối chiếu). **Toàn bộ 3 lớp kiểm tra chuẩn (đếm token/bracket/ref, BOM/CRLF, diff ID script) đều PASS dù thiếu sót này** — vì các dòng bị bỏ sót vẫn giữ nguyên cấu trúc bracket/ref hợp lệ 100%, không "hỏng" theo nghĩa kỹ thuật. Chỉ phát hiện được nhờ chạy thêm 1 lệnh `grep` riêng tìm từ tiếng Anh thông dụng (`the/and/of/with/are/is...`) loại trừ script ID sau khi hợp nhất — đúng như cảnh báo TRANSLATION_RULES.md §8 rằng đếm token không đủ, nhưng lần này ở quy mô lớn hơn nhiều (132 dòng) so với các lỗi lẻ tẻ 1-2 dòng đã gặp ở các file trước. Đã sửa bằng script Python thay thế mẫu câu hàng loạt (mẫu đủ đều để làm tay an toàn hơn giao lại cho agent).
+
+**Lỗi thuật ngữ chéo giữa các đợt cũng phát hiện qua rà thủ công (không phải agent tự báo):**
+- Nhãn trạng thái doctrine ("Criminal"/"Shunned"/"Accepted"/"Evil") — 3 agent dùng 3 biến thể khác nhau ("Bị Xa Lánh" vs "Xa Lánh" vs "Bị Ruồng Bỏ", "Được Chấp Nhận" vs "Chấp Nhận") → chuẩn hóa về 1 bộ duy nhất (xem B4w).
+- `Prodigal(s)` đã khóa "Kẻ Hoang Đàng" ở B3z nhưng 2 agent dịch lệch (giữ nguyên tiếng Anh, hoặc phiên âm hóa thành tính từ "Cainite Ấn Độ" thay vì "Hậu Duệ Cain người Ấn" cho `"Indian Cainites"`) — sửa lại khớp B3z.
+- Cụm "can appoint Justicar" — 1 agent dùng "bổ nhiệm" trong khi 15 chỗ khác dùng "chỉ định" — thống nhất về "chỉ định" (đa số thắng).
+
+**Việc cần làm tiếp theo:** chuyển sang việc #3 (`custom_localization/` phần còn lại, xem mục "#3" bên dưới).
+
+### ⚠️ BÀN GIAO GIỮA SESSION (2026-07-27, đợt 2, do gần chạm ~300k token context) — LỊCH SỬ, đã xử lý xong ở đợt 3
 
 9 file còn lại của đợt trước (`demons`, `mummy`, `ordos`, `roadofzarathustra`, `modern`, `wyrm`, `fae`, `wraiths`, `gaia`) đã dịch xong, verify xong, commit xong **trong chính session này** trước khi bàn giao — **không có agent nào dở dang, không cần resume gì cả**. `religion/` giờ chỉ còn thiếu đúng 1 file: `docrtineandtenets` (1652 dòng, lớn nhất thư mục).
 
@@ -88,7 +103,7 @@ Sắp theo **đòn bẩy giảm dần**: việc trước là nguồn của việ
 
 Làm trước tiên vì trait được **hàng nghìn** chuỗi khác trỏ tới qua `[GetTrait('x').GetName]`. Tất cả 4 file (`traits_POD`, `POD_fera_traits`, `POD_fae_traits`, `traits_predator_types_POD`) đã dịch 100%.
 
-### #2 — `religion/`  6.689 key, 36 file  — **35/36 xong, chỉ còn `docrtineandtenets`**
+### #2 — `religion/`  6.689 key, 36 file  — ✅ **HOÀN TẤT 36/36**
 
 Ưu tiên cao vì **có 2 chỗ trỏ ngược về bước 1**, phải khớp:
 
