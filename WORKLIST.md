@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` VÀ `wraith` đều xong 100% + verify + commit. `interactions/` đạt 28/28 → **việc #5 HOÀN TẤT**. Việc tiếp theo: #6 `decisions/`).
+Cập nhật lần cuối: 2026-07-27 (đợt 9 — `decisions/` đạt 11/11 file → **việc #6 HOÀN TẤT**. Việc tiếp theo: #7 `modifiers/`).
 
 ---
 
@@ -16,8 +16,35 @@ Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` VÀ `wraith` đề
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** |
-| Việc tiếp theo | **việc #6 — `decisions/`, 2.441 key, 11 file**, rồi tiếp tục tuần tự #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** |
+| Việc tiếp theo | **việc #7 — `modifiers/`, 4.344 key, 54 file**, rồi tiếp tục tuần tự #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ✅ ĐỢT 9 (2026-07-27) — `decisions/` đạt 11/11, việc #6 HOÀN TẤT
+
+Toàn bộ 11 file của `decisions/` (2.973 dòng thật — đo bằng `grep -c ''`, khớp đúng baseline) đã dịch xong, verify xong, commit xong theo 6 đợt nhỏ trong cùng session:
+
+- **Đợt nhỏ 1** (5 file nhỏ, commit `06914b1`): `POD_decisions_book_of_nod` (9 dòng), `POD_decisions_demon` (83 dòng), `POD_decisions_kj` (50 dòng), `POD_fera/POD_decisions_bastet` (19 dòng), `POD_fera/POD_decisions_werewolves` (19 dòng) — coordinator tự dịch trực tiếp, không qua agent.
+- **Đợt nhỏ 2** (`POD_fera/POD_decisions_fera` 40 dòng + `POD_numina_sorcery_decisions` 98 dòng, commit `561b665`): coordinator tự dịch. Lần đầu dịch đầy đủ 14 trường phái Sorcery (Alchemy/Conjuration/Conveyance/Cursing/Divination/Enchantment/Ephemera/Fascination/Healing/Hellfire/Mana Manipulation/Oneiromancy/Shadow Casting/Shapeshifting/Summoning Warding and Binding/Weather Control) → TERMINOLOGY.md `B6-decisions-sorcery`.
+- **Đợt nhỏ 3** (`POD_decisions_wraiths`, 192 dòng, commit `cb20a62`): coordinator tự dịch. Tự phát hiện thiếu 1 dòng trống cuối file (byte-for-byte so với HEAD) và tự sửa trước khi commit.
+- **Đợt nhỏ 4** (`POD_decisions_fae`, 207 dòng, commit `31f654c`): coordinator tự dịch. Tự phát hiện + sửa 2 lỗi: đổi nhầm `[rulers|E]`→`[ruler|E]` ở 3 dòng, và làm mất bracket `[marriages|E]` ở 1 câu văn dài khi diễn đạt lại — bắt được nhờ diff nội dung bracket (không chỉ đếm số lượng).
+- **Đợt nhỏ 5** (`POD_decisions_misc`, 284 dòng, commit `00932f3`): coordinator tự dịch. Tự phát hiện + sửa 2 lỗi byte-for-byte: mất 1 dấu cách trong dòng trống cuối file, và mất 1 dấu cách cuối dòng comment `#Visceratika ` (lộ ra qua đếm tag mở lệch 45 vs 46 dù đây chỉ là comment, không phải tag thật).
+- **Đợt nhỏ 6** (`POD_decisions_l_english.yml`, 1972 dòng — **file lớn nhất `decisions/`**, commit `3f979b2` + `2865de1`): dịch qua 6 agent chia đoạn (1-415, 416-773, 774-988, 989-1319, 1320-1649, 1650-1972), mỗi agent ghi 1 file scratch riêng ngoài repo. **6 lỗi merge tự phát hiện và sửa trước khi commit** (xem chi tiết bên dưới — đây là đợt phát hiện nhiều lỗi nhất từ trước đến nay trong 1 lần merge).
+
+**6 lỗi phát hiện khi merge `POD_decisions_l_english.yml` (đáng chú ý vì đa dạng loại lỗi hơn hẳn các đợt trước):**
+1. "the Masquerade" dịch nhầm "Lớp Mặt Nạ" thay vì "Màn Che" đã chốt (B3/B4h).
+2. "Hun"/"P'o" (2 khái niệm hồn phách Kuei-Jin) dịch nghĩa nhầm thành "Hồn"/"Phách" thay vì giữ nguyên tiếng Anh đã chốt.
+3. "Underworld" (tham số 2 của `UmbraGlossaryLocalized('shadowlands',...)`) bị dịch sai ở 2 chỗ khác nhau ("Địa Ngục Giới" và giữ nguyên tiếng Anh) thay vì "Âm Phủ" đã chốt cứng B4j.
+4. "Antediluvians" (số nhiều) bị agent tự rút gọn nhầm thành "Antediluvian" (số ít) — trái với chốt "giữ nguyên kể cả dạng số nhiều".
+5. "Demon Emperor" chỉ dịch đúng 1/4 lần thành "Ma Hoàng", 3 lần còn lại bỏ sót hoàn toàn — phát hiện nhờ lệnh gom nhóm `Glossary()` theo tham số 2.
+6. **Toàn bộ 28 lần "Second/Third/Fourth/Fifth/Sixth Age" (tham số 1 của `Glossary()`) bị bỏ sót hoàn toàn ở 2 trong 6 đoạn** (không phải 1-2 chỗ lẻ tẻ mà là cả một mẫu lặp xuyên suốt 2 đoạn ~650 dòng) — cùng loại lỗi với #5, chỉ bắt được bằng lệnh gom nhóm theo tham số 2, đếm bracket thường không phát hiện được vì Glossary vẫn còn 1 bracket dù tham số 1 sai ngôn ngữ.
+7. Thiếu đúng 1 dòng trống cuối 1 đoạn (agent xuất scratch ngắn hơn 1 dòng — lỗi quen thuộc đã gặp nhiều lần trước đây).
+8. **Lỗi line-ending nghiêm trọng nhất từ trước đến nay: 2/6 đoạn (653/1972 dòng, ~1/3 toàn file) bị ghi bằng LF thuần thay vì CRLF**, dù prompt đã dặn rất kỹ. Đáng chú ý: lệnh `file <path>` báo **"CRLF line terminators"** cho CẢ FILE ĐÃ MERGE dù 1/3 nội dung bên trong là LF thuần — `file` chỉ lấy mẫu đầu file, không quét toàn bộ, nên KHÔNG đủ tin cậy để xác nhận line-ending của file lớn đã ghép từ nhiều nguồn. Chỉ lệnh đếm "lone LF" trên toàn file (`perl -0777 -ne '$c=()=/(?<!\r)\n/g; print $c'`, phải bằng 0 nếu file thuần CRLF) mới bắt được chính xác.
+
+**Cảnh báo công cụ mới phát hiện trong đợt này: `sed -i` trên Git Bash/MinGW tự ý strip byte CR khi sửa tại chỗ một file CRLF** — coordinator tự gây ra lỗi #8 ở trên khi dùng `sed -i` để sửa hàng loạt tham số `Glossary()` cho lỗi #6, vô tình biến 2 file từ CRLF thành LF. **Từ nay: dùng `perl -pi -e 's/pattern/replacement/'` thay cho `sed -i` khi cần sửa tại chỗ trên file `.yml` của repo này (vốn luôn là CRLF)**, hoặc nếu bắt buộc dùng `sed -i`, phải convert lại LF→CRLF (`perl -pi -e 's/\n/\r\n/' file` sau khi xác nhận file gốc không có CR nào để tránh nhân đôi) ngay sau đó và verify lại bằng lệnh đếm lone-LF.
+
+Thuật ngữ mới → TERMINOLOGY.md `B6-decisions-sorcery`, `B6-decisions-l`.
+
+decisions/ đạt 11/11 file → **việc #6 HOÀN TẤT.** Việc tiếp theo: #7 (`modifiers/`, 4.344 key, 54 file). Tra TERMINOLOGY.md phần A trước khi dịch — phần lớn modifier là thuật ngữ vanilla đã có bản dịch.
 
 ### ✅ ĐỢT 8 (2026-07-27) — `vampire` + `wraith` xong, `interactions/` đạt 28/28, việc #5 HOÀN TẤT
 
@@ -197,8 +224,8 @@ Nhỏ nhưng là nguồn của nhiều chuỗi khác. Toàn bộ 6 file đã xon
 
 Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ layout. Có `:0` trong `gui/POD_hud_l_english.yml`.
 
-### #5 — `interactions/`  3.780 key, 28 file — ⏳ **25/28 file xong**, còn `wraith` (737 dòng) + `vampire` (1186 dòng, lớn nhất)
-### #6 — `decisions/`  2.441 key, 11 file
+### #5 — `interactions/`  3.780 key, 28 file — ✅ **HOÀN TẤT 28/28**
+### #6 — `decisions/`  2.441 key, 11 file — ✅ **HOÀN TẤT 11/11**
 ### #7 — `modifiers/`  4.344 key, 54 file
 
 Tên modifier ngắn, lặp nhiều. Tra TERMINOLOGY.md phần A trước — phần lớn là thuật ngữ vanilla đã có bản dịch.
