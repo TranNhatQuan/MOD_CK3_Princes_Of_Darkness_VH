@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 10 — việc #7 `modifiers/` đang tiến hành, 47/54 file xong, còn 6 file lớn).
+Cập nhật lần cuối: 2026-07-27 (đợt 11 — việc #7 `modifiers/` đạt 54/54, HOÀN TẤT).
 
 ---
 
@@ -16,8 +16,24 @@ Cập nhật lần cuối: 2026-07-27 (đợt 10 — việc #7 `modifiers/` đan
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **47/54 file modifiers/ (việc #7 đang làm)** |
-| Việc tiếp theo | **Hoàn tất nốt 6 file lớn còn lại của `modifiers/`**: `houses_POD_modifiers` (770 dòng), `POD_fera_modifiers` (326), `misc_POD_modifiers` (378), `1230objectives_POD_modifiers` (233), `artifact_POD_modifiers` (447), `umbra_expedition_POD_modifiers` (241) — rồi việc #7 HOÀN TẤT, chuyển #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** |
+| Việc tiếp theo | Chuyển sang việc **#8 (`lifestyles/`, 6.740 key, 27 file)** → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ✅ ĐỢT 11 (2026-07-27) — 6 file lớn cuối `modifiers/` xong, việc #7 HOÀN TẤT 54/54
+
+6 file lớn còn lại của `modifiers/` bàn giao từ đợt 10 đã dịch xong, verify xong, commit xong theo 2 đợt nhỏ:
+
+- **Đợt nhỏ 1** (5 file, commit `2cc1c71`): `1230objectives_POD_modifiers` (233 dòng), `POD_fera_modifiers` (326 dòng), `artifact_POD_modifiers` (447 dòng, 223 tag mở/đóng nhiều nhất `modifiers/`), `misc_POD_modifiers` (378 dòng) — dịch qua agent song song (mỗi agent 1 file, ghi scratch riêng), coordinator tự merge bằng key-matching + verify 3 lớp. `umbra_expedition_POD_modifiers` (241 dòng, 623 bracket nhiều nhất `modifiers/`) — dịch trực tiếp bằng script perl (không qua agent) vì 99% nội dung là công thức lặp `"[umbra|E] Blessing: ..."`.
+  - Lỗi merge phát hiện và sửa: `1230objectives` mất khoảng trắng cuối 4 dòng comment; `POD_fera` mất khoảng trắng ở 17 dòng "chỉ chứa 1 khoảng trắng"; `misc` bị agent ghi **thiếu BOM và dùng LF thuần thay vì CRLF cho toàn bộ file** (lỗi nặng nhất đợt này) + 27 dòng blank/space-only lệch độ dài — khôi phục toàn bộ bằng script perl trước khi merge vào repo.
+- **Đợt nhỏ 2** (`houses_POD_modifiers`, 770 dòng — **file lớn nhất `modifiers/`**, commit `5906ddf`): dịch qua 4 agent chia đoạn (1-197, 198-465, 466-680, 681-770). **4 lỗi merge phát hiện và sửa, đáng chú ý vì xảy ra ngay tại ranh giới giữa các đoạn:**
+  1. Dòng 681 (`dynn_horus_modifier: "Shemsu-Heru"`) bị **bỏ sót hoàn toàn** — đoạn 3 dừng đúng ở dòng 680, nhưng đoạn 4 lại bắt đầu nhầm từ dòng 682 thay vì 681, cả 2 agent đều tự tin báo đúng phạm vi. Phát hiện nhờ cộng tổng số dòng 4 đoạn ra thiếu 2 so với 770, rồi dò từng ranh giới bằng `awk 'NR==...'` trên bản gốc.
+  2. Đoạn 2 (198-465) thiếu đúng 1 dòng trống ở cuối (dòng 465) dù agent tự báo "268 dòng khớp" — phát hiện nhờ so khớp key-sequence + vị trí dòng trống toàn file bằng script, không chỉ đếm số lượng dòng trống.
+  3. Đoạn 1 tự đặt "House"→"Chi Hệ" dù được nhắc tra TERMINOLOGY.md trước — bỏ lỡ tiền lệ đã chốt từ lâu ("House"="Gia tộc", mục A10). 3 đoạn còn lại tự tra và dùng đúng "Gia Tộc". Sửa lại 120 chỗ ở đoạn 1 khi merge.
+  4. Dòng 151 mất 1 dấu cách thừa cuối dòng so với bản gốc — khôi phục thủ công.
+
+Diff bracket-set/ref-set với HEAD cho cả 6 file xác nhận không lệch (trừ các thay đổi chủ đích: `Underworld`→"Âm Phủ" B4j, `Demon Emperor`→"Ma Hoàng" B3c, `Beast`→"Dã Thú"). Thuật ngữ mới → TERMINOLOGY.md `B7-modifiers-houses`.
+
+**modifiers/ đạt 54/54 file → việc #7 HOÀN TẤT.** Việc tiếp theo: #8 (`lifestyles/`, 6.740 key, 27 file).
 
 ### ⏸️ ĐỢT 10 (2026-07-27) — việc #7 `modifiers/` đạt 47/54 file, BÀN GIAO 6 file lớn cuối cho session sau
 
@@ -255,9 +271,7 @@ Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ lay
 
 ### #5 — `interactions/`  3.780 key, 28 file — ✅ **HOÀN TẤT 28/28**
 ### #6 — `decisions/`  2.441 key, 11 file — ✅ **HOÀN TẤT 11/11**
-### #7 — `modifiers/`  4.344 key, 54 file
-
-Tên modifier ngắn, lặp nhiều. Tra TERMINOLOGY.md phần A trước — phần lớn là thuật ngữ vanilla đã có bản dịch.
+### #7 — `modifiers/`  4.344 key, 54 file — ✅ **HOÀN TẤT 54/54**
 
 ### #8 — `lifestyles/`  6.740 key, 27 file
 
