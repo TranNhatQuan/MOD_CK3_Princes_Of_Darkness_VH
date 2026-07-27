@@ -1698,3 +1698,42 @@ Nguồn: `religion/POD_religion_fae_l_english.yml` (566 dòng, 381 key) — fait
 | Dragon Nests | Tổ Rồng | dịch nghĩa |
 | holy_order_winters_teeth/green_blades/sun_guard/crunch_of_leaves/sunset_mercenaries/grey_monks *(6 holy order của các Triều đình Mùa)* | Răng Mùa Đông / Lưỡi Kiếm Xanh / Vệ Binh Mặt Trời / Tiếng Lá Vỡ Vụn / Lính Đánh Thuê Hoàng Hôn / Tu Sĩ Xám | dịch nghĩa theo mẫu base (`holy_orders_l_english.yml` dịch nghĩa toàn bộ tên holy order); "Green Blades" dịch "Lưỡi Kiếm Xanh" nhất quán với cách văn xuôi trong cùng file nhắc "Seigfreid Hein's Green Blade" |
 | `_possessive` (`"X's"`) | mẫu `"của X"` | tiếp tục áp dụng quy ước đã chốt xuyên suốt các file `religion/` trước (B3g/B3h/B3s...) |
+
+## B4u. Thuật ngữ `religion/POD_religion_wraiths_l_english.yml` — faith Oan hồn (Wraith), 750/750 dòng
+
+Nguồn: file neo faith Wraith (750 dòng, 657 key) — faith chính "Hierarchy" (hiển thị "Legion"), 4 nhóm con "Legion" (Iron/Skeletal/Grim/Penitent/Emerald/Silent/Legion of Paupers/Legion of Fate), 10 Guild Arcanoi (Artificers/Masquers/Pardoners/Usurers/Chanteurs/Harbingers/Oracles/Sandmen/Haunters/Monitors/Spooks/Proctors/Puppeteers/Alchemists/Mnemoi/Solicitors), faith "Renegade" và 4 sub-faith chính trị (Drop-Outs/Idealists/Outlaws/Protesters), faith "Ferrymen" (+ Shining Ones, Fishers), faith "Yellow Springs" (Wraith Đông Á), và faith "Spectre" (+ Malfean, Grand Maw). Áp dụng B0/B4h: danh từ WoD lõi giữ nguyên tiếng Anh.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Stygia, Charon | *(giữ nguyên)* | danh từ riêng WoD — xác nhận qua tiền lệ có sẵn `e_stygia: "Stygia"` (`titles_POD_l_english.yml`, chưa dịch nhưng cho thấy quy ước không phiên âm) |
+| Hierarchy *(tên nội bộ của faith chính, giá trị hiển thị thực tế là "Legion")* | Quân Đoàn | `hierarchy_religion: "@wraith_icon! Legion"` — dịch giá trị hiển thị, không dịch tên biến |
+| Legion *(tổ chức nói chung + hậu tố tên 8 Legion con)* | Quân Đoàn | dịch nghĩa nhất quán cho mọi Legion: Iron→Sắt, Skeletal→Xương, Grim→U Ám, Penitent→Sám Hối, Emerald→Lục Bảo, Silent→Câm Lặng, Legion of Paupers→Quân Đoàn Kẻ Bần Cùng, Legion of Fate→Quân Đoàn Số Mệnh |
+| Legionnaire(s) | Quân Đoàn Binh | lính/tín đồ thường của mọi Legion, số ít/số nhiều gộp theo mục 7 TRANSLATION_RULES.md |
+| Deathlord / Deathlady | Tử Chủ / Nữ Tử Chủ | chức sắc cao nhất của Hierarchy |
+| Centurion(s) | Bách Phu Trưởng | cấp bậc quân sự La Mã, thuật ngữ Hán Việt lịch sử quen thuộc |
+| Anacreon(s) | Đại Bách Phu Trưởng | cấp trên Centurion, đặt theo thang bậc quân sự nhất quán |
+| Seat *(house_of_worship của Hierarchy — tổng hành dinh mỗi Legion)* | Bản Doanh | |
+| Shadow *(hierarchy/renegade/ferrymen_devil_name, witchgodname)* | Bóng | tái dùng bản dịch đã chốt B4h cho "Shadow" (khía cạnh đen tối của oan hồn) |
+| Underworld *(hierarchy/renegade/ferrymen/yellow_springs_divine_realm)* | Âm Phủ | tái dùng bản dịch đã chốt B4j |
+| Transcendence *(positive_afterlife)* | Siêu Thoát | đặt mới, mượn thuật ngữ Phật giáo phù hợp phong cách kiếp sau/giải thoát, ngắn gọn cho UI |
+| Oblivion *(negative_afterlife của Hierarchy/Renegade/Ferrymen; positive_afterlife của Spectre)* | Hư Vô | tái dùng bản dịch đã chốt B3q/B4n cho cùng khái niệm hư vô/tận diệt |
+| Tempest *(water_god_name dùng chung mọi faith trong file)* | Bão Tố | dịch nghĩa, không phải danh từ riêng lõi hệ thống Wraith |
+| Renegade(s) | Kẻ Nổi Loạn | tên faith ly khai khỏi Hierarchy |
+| Ferryman / Ferrymen | Ferryman / Ferrymen *(giữ nguyên)* | đã chốt B4h |
+| Shining Ones, Fishers, Spectre(s), Malfean, Grandmother, Grand Maw | *(giữ nguyên)* | tên riêng faith/thực thể WoD, theo B0; "Grand Maw" là biệt danh của Grandmother — giữ nguyên vì gắn với lối chơi chữ "Grand Maw" ≈ "Grandma" trong nguyên bản tiếng Anh, không thể tái tạo bằng tiếng Việt nên không dịch nghĩa (tránh mất nghĩa gốc) |
+| Yu Huang, Kuei, Ti Yu | *(giữ nguyên)* | tên riêng phiên âm vũ trụ luận Đạo giáo của faith "Yellow Springs" — cố ý KHÔNG dùng "Ngọc Hoàng" (đã dùng cho vũ trụ luận Kuei-Jin ở B3e) để tránh lẫn hai hệ thống thần thoại Trung Hoa khác nhau trong POD |
+| P'eng Lai *(positive_afterlife của Yellow Springs)* | Bồng Lai | địa danh thần thoại Đạo giáo quen thuộc trong tiếng Việt |
+| Yellow Springs | Suối Vàng | dịch nghĩa trực tiếp, tên faith Wraith Đông Á |
+| Jade Wraith(s) | Oan Hồn Ngọc Bích | adherent của Yellow Springs |
+| Psyche *(spectre_devil_name/witchgodname)* | Tâm Thức | tái dùng bản dịch đã chốt B4h |
+| Labyrinth *(spectre_divine_realm)* | Labyrinth *(giữ nguyên)* | địa danh riêng WoD (mê cung giam giữ Spectre), theo B0, không có tiền lệ base |
+| Hive / Hive Mind | Tổ Ong / Tâm Trí Bầy Đàn | house_of_worship và religious_head_title của Spectre — dịch nghĩa, "Hive Mind" ghép "Tâm Trí"+"Bầy Đàn" để truyền tải khái niệm ý thức tập thể |
+| Arcanoi, Arcanos *(và tên riêng: Argos/Fatalism/Flux/Inhabit/Intimation/Keening/Lifeweb/Mnemosynis/Moliate/Outrage/Pandemonium/Phantasm/Puppetry/Usury)* | *(giữ nguyên)* | tái xác nhận B4h, xuất hiện dày đặc trong mọi mô tả Guild |
+| Guildmaster, Guild | Hội Trưởng, Hội | chức danh/tổ chức chung |
+| Artificers, Masquers, Pardoners, Usurers, Chanteurs, Harbingers, Oracles, Sandmen, Haunters, Monitors, Spooks, Proctors, Puppeteers, Alchemists, Mnemoi, Solicitors *(15 Guild Arcanoi)* | Thợ Chế Tác, Thợ Nhào Nặn, Người Xá Tội, Người Cho Vay Nặng Lãi, Ca Sĩ, Sứ Giả, Nhà Tiên Tri, Người Ru Mộng, Kẻ Ám Ảnh, Người Giám Sát, Bóng Ma, Giám Thị, Múa Rối, Nhà Giả Kim, Mnemoi *(giữ nguyên)*, Người Chào Mời | dịch nghĩa theo chức năng của mỗi Guild; "Mnemoi" giữ nguyên vì là danh xưng tự nhận không có nghĩa dịch tự nhiên rõ ràng trong tiếng Việt |
+| Fetters | Fetters *(giữ nguyên)* | tái xác nhận B4h qua `[Fetters\|E]` concept-link |
+| Skinlands | Skinlands *(giữ nguyên)* | tái xác nhận B4h qua `[Glossary('Skinlands','game_concept_skinlands_desc')]` — tham số 1 KHÔNG dịch vì là danh từ lõi Wraith |
+| Dark Kingdom *(tham số 1 của `Glossary('Dark Kingdom','game_concept_dark_kingdom_desc')`, mô tả Yellow Springs)* | Vương Quốc Bóng Tối | dịch nghĩa vì đây là cụm tính từ mô tả thường, không phải danh từ riêng lõi hệ thống |
+| Ritual of Severance | Nghi Lễ Cắt Đứt | tái dùng bản dịch đã chốt B4h |
+
+> ⚠️ **Bẫy đã tránh:** bản gốc dùng `[UmbraGlossaryLocalized('shadowlands','Underworld')]` **6 lần** trong file này (dòng `ferrymen_religion_desc`, `ferrymen_desc`, `fishers_religion_desc`, `fishers_desc`, `yellow_springs_religion_desc`, `yellow_springs_desc`). Theo B4j đã chốt, tham số 2 ("Underworld") của macro này phải dịch → đã dịch thành `'Âm Phủ'` ở cả 6 chỗ, giữ tham số 1 (`'shadowlands'`) nguyên vẹn. Bản nháp đầu tiên đã bỏ sót bẫy này (chỉ giữ "Underworld" tiếng Anh) — phát hiện và sửa khi đối chiếu bracket giữa bản gốc/bản dịch trước khi ghi file.
