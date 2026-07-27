@@ -728,6 +728,38 @@ Ngoài ra ~30 tên tiểu phái/hội bên trong 5 Pháp Môn (Empty Hands→Kh�
 | Hundred Devils / Thousand Devils | Bách Quỷ / Thiên Quỷ | |
 | Lost Lineages | Chi Hệ Thất Lạc | |
 
+## B3g. Thuật ngữ bổ sung (từ `POD_religion_ghoul_l_english.yml`) — việc #2, faith Bộc huyết
+
+Nguồn: `religion/POD_religion_ghoul_l_english.yml` (70 dòng) — tôn giáo "Unmastered" của các Bộc huyết vô chủ (ghoul không có Domitor). File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Unmastered *(tên faith)* | Vô Chủ | đặt mới; đối lập với "Chủ Nhân" (Regnant, đã chốt B4e) — tiền tố "Vô" có tiền lệ base (`Vô Số`, `Vô Sợ`, `Vô Danh`…) |
+| Free Ghoul(s) | Bộc huyết Tự do | Ghoul = "Bộc huyết" đã chốt B4; "Freedom"→"Tự do" có tiền lệ base (`game_concept_faction_liberty`) |
+| Lorekeeper(s) *(chức sắc tôn giáo)* | Người Giữ Truyền Thuyết | đặt mới, không có tiền lệ base; ghép với `religious_text`="truyền thuyết" |
+| bastion *(house_of_worship)* | pháo đài | theo tiền lệ base (`fortress`→"Pháo đài", `building_castle_04`) |
+| broken chain *(religious_symbol)* | xiềng xích gãy | đặt mới, mô tả biểu tượng thoát khỏi ràng buộc Domitor |
+| lore *(religious_text)* | truyền thuyết | đặt mới, gốc của "Người Giữ Truyền Thuyết" ở trên |
+| Heaven *(divine_realm/positive_afterlife, danh từ thường)* | Thiên Đường | dùng danh từ tôn giáo phổ thông, khác "Âm Phủ" (B4j, chỉ dành riêng cho `UmbraGlossaryLocalized('shadowlands','Underworld')`) |
+| Hell *(negative_afterlife, danh từ thường)* | Địa Ngục | tiền lệ base (`christianity_negative_afterlife`="địa ngục") |
+| Devil *(witchgodname_the_horned_god — thực thể ma quái, KHÔNG phải "Caine")* | Quỷ Dữ | khác `trait_demon`="Ác quỷ" (B4) để tránh trùng với splat Demon; tương tự cách base dùng từ riêng cho mỗi witchgodname |
+| blood *(health_god_name, danh từ thường dùng làm tên thần)* | máu | chữ thường, theo mẫu base (`taoism_devil_name`="sự bất hòa" — danh từ thường làm tên thần) |
+| Caine *(devil_name/death_deity_name)* | Caine *(giữ nguyên)* | danh từ riêng đã chốt B2b |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | theo tiền lệ base đã ghi ở B3e (`zoroastrianism`, `taoism`…) |
+
+## B3g. Thuật ngữ bổ sung (từ `POD_religion_roadoflaibon`) — việc #2 file 7/36
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Ebony *(tính từ, "gỗ mun")* | gỗ mun | ✅ tra `base_game_vh` (`appropriate_generic_words_l_english.yml:165`, `artifacts_l_english.yml:188`) |
+| Ebony Kingdom | Vương Quốc Mun | thần tối cao của Con Đường Laibon |
+| Kholo *(chức sắc Laibon)* | Kholo *(giữ nguyên)* | danh xưng WoD châu Phi, không có tiền lệ base |
+| Spiritual *(ghép "Spiritual Kholo")* | Tâm Linh | ✅ tra base (`religion_l_english.yml:1188`, `doctrine_clerical_succession_spiritual_appointment_name`="Tâm linh, Có thể bãi nhiệm") |
+| Lorekeeper | Người Giữ Truyền Thuyết | |
+| the abyss *(cõi âm ty)* | vực thẳm | ✅ tra base (`religion_christianity_l_english.yml:51`, `religion_paganism_l_english.yml:1478` = "Vực Thẳm") |
+| possessive `"X's"` | mẫu `"của X"` | ✅ tiền lệ base (`religion_christianity_l_english.yml:73`="của Fortuna"), dùng nhất quán mọi file `religion/` từ nay |
+| Fortuna *(thần lừa lọc/may rủi)* | Fortuna *(giữ nguyên)* | ✅ tiền lệ base giữ nguyên y hệt (`religion_christianity_l_english.yml:72`) |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
