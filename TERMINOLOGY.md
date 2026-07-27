@@ -649,6 +649,25 @@ Nguồn: phần Oan hồn (Wraith), Ác quỷ Fallen/Earthbound, và pháp sư p
 
 > ⚠️ **Sorcerer (Wraith/phàm nhân) không phải Mage.** `trait_sorcerer_desc` viết rõ "they are still a far cry from Mages" — dịch "Pháp Sư" cho Sorcerer và giữ "Pháp sư" (chữ thường, đã chốt B4) cho Mage tạo ra sự trùng chữ không tránh được trong tiếng Việt (cả hai đều là "pháp sư" theo nghĩa đen); đã xử lý bằng cách viết hoa khác nhau và chú thích "(Mage)" ngay trong câu để giữ rõ ràng cho người đọc — xem `trait_sorcerer_desc`.
 
+## B4i. Thuật ngữ bổ sung (từ `traits_POD` dòng 1298-1446) — Anathema/Golconda/bệnh/Ashen
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Possessed | Bị Chiếm Hữu | trait chung cho nhân vật bị linh thể nhập |
+| Permanent *(hậu tố các trait tàn tật vĩnh viễn)* | Vĩnh Viễn | ghép với tên trait tàn tật đã có ở base (Tàn Phế, Chột Mắt, Cụt Một Chân, Biến Dạng, Sẹo Sần, Hoạn Quan, Mù — tra từ `base_game_vh/traits_l_english.yml`) |
+| Blood Hunt | Blood Hunt *(giữ nguyên tạm thời)* | `game_concept_blood_hunt` trong `game_POD_concepts_l_english.yml` **chưa được dịch** (thuộc việc #11 sau này) — khi dịch file đó, quay lại đồng bộ tên gọi này trong `traits_POD` |
+| Golconda | Golconda *(giữ nguyên)* | trạng thái giác ngộ tối thượng của ma cà rồng, danh từ riêng WoD |
+| Golconda Seeker | Kẻ Tầm Golconda | |
+| The Beast / Frenzy | Dã Thú / Phẫn Cuồng | ✅ đã dùng khi dịch `Glossary('The Beast',...)`/`Glossary('Frenzy',...)` — tham số 1 dịch, tham số 2 (`game_concept_beast_desc`) giữ nguyên là key dùng chung cho cả hai |
+| Azhi Dahaka | Azhi Dahaka *(giữ nguyên)* | trạng thái giác ngộ đặc thù của Tzimisce, danh từ riêng |
+| Zombu | Zombu *(giữ nguyên)* | loại xác sống gọi hồn |
+| Alien | Ngoài Hành Tinh | trait khoa học viễn tưởng hiếm gặp trong POD |
+| Crimson Fever, Chulorviosis, Gift of Melancholia, Flaying Plague, Scourge, Entobanic Plague | Sốt Đỏ, Chulorviosis *(giữ nguyên)*, Món Quà U Sầu, Ôn Dịch Lột Da, Scourge *(giữ nguyên)*, Ôn Dịch Entoban | tên bệnh WoD; giữ nguyên tên riêng khi không có nghĩa dịch tự nhiên (Chulorviosis, Scourge — đã là danh từ riêng trong văn cảnh) |
+| Craftsman / Expert Craftsman / Master Craftsman | Thợ Thủ Công / Thợ Thủ Công Chuyên Nghiệp / Đại Sư Thợ Thủ Công | thang bậc 3 cấp trait chế tác POD |
+| Forging / Brewing / Enhancing *(track chế tác)* | Rèn Đúc / Chưng Cất / Tăng Cường | 3 nhánh kinh nghiệm chế tác hiện vật |
+| Ashen Adventurer / Ashen Ambassador / Ashen Grandmaster / Ashen Caravan (Master) | Nhà Thám Hiểm Tro Tàn / *("Ashen" giữ nguyên trong `[ashen_ambassador|E]` v.v. vì đó là concept-link key, không dịch)* | "Ashen" chỉ ma cà rồng/kueijin vô địa (landless) lang bạt; chỉ dịch phần mô tả văn xuôi, không dịch bên trong `[ashen_*|E]` vì đó là tên concept key |
+| landless *(ma cà rồng/kueijin không lãnh địa)* | vô địa | dùng nhất quán trong mô tả Ashen |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
