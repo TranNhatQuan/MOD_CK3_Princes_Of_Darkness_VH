@@ -2065,3 +2065,184 @@ File tổng hợp các tương tác/hiệu ứng dùng chung cho mọi splat: c�
 | Evaluate / Scrutinize *(2 lựa chọn hành động trong minigame gián điệp Kuei-Jin `POD_kueijin_spy`)* | Đánh giá / Xem xét kỹ | đặt mới, dịch nghĩa thường |
 | Exchange Necromantic Knowledge *(quyết định Impundulu trao đổi tri thức gọi hồn với vampire khác)* | Trao đổi Tri thức Gọi Hồn | đặt mới; "Necromantic"→"Gọi Hồn" tái dùng `trait_necromancy`="Thuật Gọi Hồn" (traits_POD, dòng 336) |
 | scholars of the grave *(cách gọi hoa mỹ các pháp sư gọi hồn trong sự kiện Impundulu)* | học giả của mộ phần | đặt mới, dịch nghĩa thường giữ giọng trung cổ |
+
+## B5l. Thuật ngữ `interactions/POD_demons/POD_character_interactions_demon_arcana_l_english.yml` — tương tác Arcana của Demon (Demon: The Fallen), 45/45 dòng, việc #5
+
+File đầu tiên trong nhóm `interactions/POD_demons/` được dịch. Chứa các tương tác thuộc lifestyle `[arcana_lifestyle|E]` ("Arcana" — giữ nguyên tiếng Anh làm tên lifestyle, xem `lifestyles/POD_arcana_lifestyle_l_english.yml`, chưa dịch, chỉ dùng qua concept link `[arcana_lifestyle|E]` nên không cần quyết định ở đây). Không có `Glossary()`/`UmbraGlossaryLocalized()` trong file này.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Resolve *(chỉ số năng lượng riêng của Demon, nhiên liệu cho quyền năng Arcana — xem `lesson_gain_resolve_desc` ở `POD_important_actions_l_english.yml`, chưa dịch)* | Quyết Tâm | đặt mới; khác "Vitae" (giữ nguyên, B3) và "Rage"/"Phẫn Nộ" (B3b) — đây là từ tiếng Anh thường (không phải danh từ riêng WoD), nên dịch nghĩa theo đúng nghĩa gốc "ý chí/quyết tâm" nuôi dưỡng quyền năng quỷ dữ; áp dụng cho mọi lần xuất hiện "Resolve" của Demon (`resolve0_modifier`...`resolve10_modifier`, `POD_energy_resolve`, `reactive_advice_gain_resolve`... — chưa dịch, cần tái dùng khi tới lượt) |
+| Divine Potential *(`POD_divine_potential_interaction`)* | Tiềm Năng Thần Thánh | đặt mới, dịch nghĩa thường |
+| Ravage *(`POD_ravage_interaction`, tương tác tiêu thụ Nô Bộc để hồi Quyết Tâm)* | Tàn Phá | đặt mới, dịch nghĩa thường |
+| Revelations *(`POD_revelations_interaction`)* | Khải Thị | đặt mới; tái dùng tinh thần tôn giáo của "Revelation" (Khải Thị/Khải Huyền) theo văn phong trung cổ |
+| Twist of Fate *(`POD_twist_of_fate_interaction`)* | Bước Ngoặt Định Mệnh | đặt mới, dịch nghĩa thường |
+| Tempt to Sin *(`POD_read_the_heart_interaction`, tên hiển thị khác với tên key "read the heart")* | Cám Dỗ Sa Ngã | đặt mới, dịch theo tên hiển thị thực tế (không dịch theo tên key) |
+| Contagion Mastery *(`POD_contagion_mastery_interaction`)* | Tinh Thông Bệnh Dịch | đặt mới, dịch nghĩa thường |
+| Healing Touch *(`POD_healing_touch_interaction`)* | Bàn Tay Chữa Lành | đặt mới, dịch nghĩa thường |
+| Read the Mind *(`POD_read_the_mind_interaction`)* | Đọc Tâm Trí | đặt mới, dịch nghĩa thường |
+| Reshape Flesh *(`POD_reshape_flesh_interaction`)* | Tái Tạo Hình Hài | đặt mới, dịch nghĩa thường |
+| Command the Eternal Soul *(`POD_command_the_ethereal_soul_interaction`; lưu ý key gốc ghi "ethereal" nhưng chữ hiển thị là "Eternal" — dịch theo chữ hiển thị)* | Sai Khiến Linh Hồn Vĩnh Cửu | đặt mới, dịch nghĩa thường theo chữ hiển thị |
+| Portal Mastery *(`POD_portal_mastery_interaction`)* | Tinh Thông Cổng Không Gian | đặt mới, dịch nghĩa thường |
+| Raise the Dead *(`POD_raise_the_dead_interaction`, biến mục tiêu thành `[GetTrait('risen')...]`)* | Hồi Sinh Kẻ Chết | đặt mới; tái dùng "Kẻ Hồi Sinh" đã chốt cho `trait_risen` (traits_POD_l_english.yml:1171) làm gốc động từ |
+| Beyond Now *(`POD_beyond_now_interaction`)* | Vượt Ngoài Hiện Tại | đặt mới, dịch nghĩa thường |
+| Shapeshift *(`POD_arcana_shapeshift_interaction`, tương tác Arcana — khác trait/cơ chế shapeshift của Garou)* | Biến Hình | đặt mới, dịch nghĩa thường |
+| Arsenal of the Beast *(`POD_shapeshift_interaction_purchase_arsenal_of_the_beast`, tên một gói mua trong tương tác Shapeshift)* | Binh Khí Khố của Dã Thú | đặt mới; "Arsenal"→"Binh Khí Khố" (kho vũ khí), "Beast"→"Dã Thú" tái dùng thuật ngữ Beast đã chốt (B3) |
+
+## B5m. Thuật ngữ `interactions/POD_fera/POD_character_interactions_bastet_l_english.yml` — tương tác riêng của Bastet (Fera dạng mèo), 49/49 dòng, việc #5
+
+File nhỏ chứa 12 tương tác/năng lực đặc trưng của tộc Bastet (Werecat). Không có `Glossary()`/`UmbraGlossaryLocalized()`. "Bastet" không xuất hiện trực tiếp trong text của file này (chỉ nằm trong đường dẫn thư mục).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Withering Stare | Ánh Nhìn Héo Tàn | đặt mới, dịch nghĩa thường cho năng lực nhìn gây tổn hại |
+| Deny the Hungry *(tên tương tác + modifier cùng tên)* | Từ Chối Kẻ Đói Khát | đặt mới, dịch nghĩa thường |
+| Madness *(`POD_madness_perk_interaction`, khác `The Madness of Crowds` cùng file)* | Điên Loạn | đặt mới, dịch nghĩa thường |
+| Absorb Disease / Release Disease *(cặp tương tác hấp thụ–giải phóng bệnh tật)* | Hấp Thụ Bệnh Tật / Giải Phóng Bệnh Tật | đặt mới, dịch nghĩa thường |
+| Ojas Surge *("Ojas" là thuật ngữ Vệ Đà/Ấn Độ giáo chỉ năng lượng sinh lực, gắn với Bastet nhánh Qualmi/Simba gốc Ấn Độ trong WoD)* | Ojas Trào Dâng | giữ nguyên "Ojas" (danh từ riêng ngoại lai, không có bản dịch tương xứng), dịch nghĩa "Surge"→"Trào Dâng" |
+| Summons Shadowy Duplicate *(tên tương tác, khác `POD_shadow_brethren_interaction.tt` là tooltip cùng khái niệm)* | Triệu Hồi Bản Sao Bóng Tối | tái dùng "Bản Sao Bóng Tối" đã chốt B4h (dòng 643, "Shadowy Duplicate") |
+| Rallying Challenge | Thách Thức Tập Hợp | đặt mới, dịch nghĩa thường |
+| Ghost Caress | Vuốt Ve Của Hồn Ma | đặt mới, dịch nghĩa thường |
+| Mother's Blessing/Curse *(tên tương tác ghép + 2 modifier riêng `mothers_blessing_perk_modifier`/`mothers_curse_perk_modifier`)* | Phước Lành/Lời Nguyền Của Mẹ *(tên ghép)*, Phước Lành Của Mẹ, Lời Nguyền Của Mẹ | đặt mới, dịch nghĩa thường |
+| The Madness of Crowds | Cơn Điên Của Đám Đông | đặt mới, dịch nghĩa thường |
+| Reveal Scheme | Vạch Trần Âm Mưu | "Scheme"→"Âm mưu" tái dùng `game_concept_scheme` (base_game_vh, dòng 107) |
+
+## B5o. Thuật ngữ `interactions/POD_fera/POD_character_interactions_mokole_l_english.yml` — tương tác riêng của Mokolé (Fera dạng bò sát), 117/117 dòng, việc #5
+
+File chứa 21 tương tác/năng lực đặc trưng của tộc Mokolé (Werelizard). Không có `Glossary()`/`UmbraGlossaryLocalized()`, 0 string reference. `Garou` (trong `#TOOLTIP:GAME_TRAIT,werewolf,[GetNullCharacter] #L Garou#!`) và `Umbra`, `Gaia`, `Helios` giữ nguyên theo B0/B3. `[innocent|E]` là concept link chưa dịch tại `game_POD_concepts_l_english.yml` (`game_concept_innocent`) — chỉ dịch chữ hiển thị xung quanh, không đổi key.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Stampede *(tên tương tác, triệu hồi khủng long)* | Bầy Thú Xéo Nát | đặt mới, dịch nghĩa hình ảnh đàn thú giẫm đạp thay vì dịch sát "Cuộc Rượt Đuổi Hoảng Loạn" (không hợp bối cảnh gọi khủng long tấn công) |
+| Lizard King(s) | Vua Thằn Lằn | tái dùng `Lizard Kings`="Vua Thằn Lằn" đã chốt (dòng 470), số ít giữ nguyên "Vua Thằn Lằn" không thêm "những" |
+| Banish Tormentor / `[innocent|E]` (as Tormentor) | Trục Xuất Kẻ Hành Hạ | đặt mới; "Tormentor" (linh thể ám ảnh sinh ra từ ký ức đen tối của Mokolé qua Mnesis, xem `game_concept_innocent_desc`) dịch "Kẻ Hành Hạ" cho tên tương tác, còn `[innocent|E]` giữ nguyên key — khi tới `game_POD_concepts_l_english.yml` cần đối chiếu lại cách gọi "Innocent" cho nhất quán |
+| Silver Claws | Vuốt Bạc | đặt mới, dịch nghĩa thường ("silver"→"bạc" theo cách base dịch kim loại bạc, "claws"→"vuốt") |
+| Walk Into my Eyes | Bước Vào Mắt Ta | đặt mới, dịch nghĩa thường |
+| Nightmare Mnesis *("Mnesis" là năng lực hồi tưởng ký ức tổ tiên đặc trưng của Mokolé)* | Mnesis Ác Mộng | giữ nguyên "Mnesis" (thuật ngữ WoD riêng của Mokolé, chưa có bản dịch nghĩa tương xứng, theo B0), dịch "Nightmare"→"Ác Mộng" |
+| View the Seed | Nhìn Vào Hạt Giống | đặt mới, dịch nghĩa thường |
+| Dragon Milk / The Dragon's Tongue / A Thousand Secret Faces / Dream Semblance | Sữa Rồng / Lưỡi Rồng / Ngàn Gương Mặt Bí Mật / Dáng Vẻ Trong Mơ | đặt mới, dịch nghĩa thường; "True Dragon" (trong `POD_dream_semblence_interaction_desc`) → "Chân Long" |
+| Scream of Gaia / Tame Sunbeam / Open Sun Bridge | Tiếng Thét Của Gaia / Thuần Hóa Tia Nắng / Mở Cầu Mặt Trời | đặt mới, dịch nghĩa thường; "Gaia" và "Helios" giữ nguyên danh từ riêng |
+| Fossilize | Hóa Thạch | đặt mới, dịch nghĩa thường |
+| Take the True Form / Gorgon's Gaze | Hiện Chân Hình / Ánh Nhìn Của Gorgon | đặt mới; "Gorgon" giữ nguyên (quái vật thần thoại Hy Lạp, danh từ riêng ngoại lai, không có bản dịch tương xứng) |
+| Mother's Touch / Strength of the Dominator / Mastery *(`POD_mokole_mastery_interaction`)* | Cái Chạm Của Mẫu Thân / Sức Mạnh Của Kẻ Thống Trị / Uy Quyền | đặt mới, dịch nghĩa thường; "Mastery" ở đây dịch "Uy Quyền" (khác `Realm Actor Mastery`="Tinh Thông Realm Actor" ở B3 — bối cảnh khác, đây là tương tác áp chế đối phương chứ không phải học phép) |
+| attribute *(danh từ chung, xuất hiện ở 2 tương tác Ojas Surge/Rallying Challenge: "boost an attribute")* | thuộc tính | đặt mới, dịch nghĩa thường cho danh từ chung chỉ số nhân vật (không phải key riêng, không có tiền lệ base_game_vh dùng key `attribute`) |
+
+## B5-demon-lores. Thuật ngữ `interactions/POD_demons/POD_character_interactions_demon_lores_l_english.yml` — tương tác Lore của Demon (Demon: The Fallen), 74/74 dòng, việc #5
+
+File thứ hai trong nhóm `interactions/POD_demons/`, song song với B5l (`POD_character_interactions_demon_arcana_l_english.yml`). Chứa các tương tác thuộc lifestyle `[lore_lifestyle|E]` ("Lore" — giữ nguyên tiếng Anh làm tên lifestyle/hệ thống quyền năng, cùng cách xử lý "Arcana" ở B5l; xem `lifestyles/POD_lore_lifestyle_l_english.yml`, chưa dịch, chỉ dùng qua concept link `[lore_lifestyle|E]` nên không cần quyết định ở đây). "Lore" ở đây khác nghĩa "truyền thuyết/cổ thư" (`religious_text`, đã chốt B3g/B3h/B3x) — đây là danh từ riêng chỉ hệ thống 7 House quyền năng thiên thần của Demon, viết hoa và giữ nguyên tiếng Anh mỗi lần xuất hiện dạng "Lore of the X"/"Lore X". Có 2 lần `[Glossary('True Name','podgloss.truename')]` (tham số 1 giữ nguyên theo tiền lệ toàn mod, xem dòng 363), không có `UmbraGlossaryLocalized()`.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Demand Knowledge of Lores *(`POD_demand_lore_teaching_interaction`)* | Đòi hỏi Tri thức về các Lore | đặt mới, dịch nghĩa; "Lore" giữ nguyên (xem trên) |
+| Lore of the Herald | Lore của Sứ Giả | đặt mới; "Herald" (1 trong 7 House Lore của Elohim/Demon) → "Sứ Giả", dịch nghĩa thường |
+| Lore of the Life-Bringer | Lore của Đấng Ban Sự Sống | đặt mới, dịch nghĩa thường |
+| Lore of Creation | Lore Sáng Thế | đặt mới; "Creation" → "Sáng Thế" tái dùng nghĩa tôn giáo quen dùng trong repo (vd. "outside Creation" ở cùng file → "bên ngoài Sáng Thế") |
+| Lore of the Seer | Lore của Nhà Tiên Tri | đặt mới, dịch nghĩa thường |
+| Lore of Beauty | Lore Vẻ Đẹp | đặt mới, dịch nghĩa thường |
+| Lore of the Living | Lore của Sự Sống | đặt mới, dịch nghĩa thường |
+| Lore of the Ethereal | Lore của Cõi Phi Vật Chất | đặt mới; "Ethereal" → "Phi Vật Chất" (tính từ mô tả cõi giới vô hình/không xác thịt), thêm "Cõi" cho tự nhiên trong cụm "Lore của Cõi X" |
+| Manipulate Adhesion *(`POD_lore_world_manipulate_adhesion_interaction`, tăng cường quan hệ)* | Thao túng Sự Gắn Kết | đặt mới, dịch nghĩa thường |
+| Manipulate Inertia *(`POD_lore_world_manipulate_inertia_interaction`, phá hủy quan hệ)* | Thao túng Sự Trì Trệ | đặt mới, dịch nghĩa thường |
+| Manipulate Cohesion: Personality / Sexuality *(2 tương tác riêng, thao túng tính cách/xu hướng tính dục nhân vật)* | Thao túng Sự Liên Kết: Tính Cách / Thao túng Sự Liên Kết: Xu Hướng Tính Dục | đặt mới, dịch nghĩa thường |
+| Fade *(`POD_lore_world_fade_interaction`, khiến mục tiêu "fade into obscurity")* | Phai Mờ | đặt mới, dịch nghĩa thường |
+| Summon Outsider *(`POD_lore_corrupption_summon_outsider_interaction`, phá công trình bằng cách gọi thực thể ngoài Sáng Thế)* | Triệu hồi Kẻ Ngoại Lai | đặt mới, dịch nghĩa thường |
+| Mark of the Celestials *(`POD_lore_the_mark_of_the_celesitals_interaction`, ban phước/nguyền số phận; lưu ý key gốc gõ sai "celesitals")* | Ấn Ký của các Đấng Thiên Giới | đặt mới; "Celestials" → "các Đấng Thiên Giới" tái dùng "Thiên Giới" đã chốt cho "Celestial" (dòng 825, 1508, 1763) |
+| Revelation *(`POD_lore_revelation_interaction`, phơi bày bí mật/âm mưu mục tiêu)* | Khải Thị | tái dùng "Khải Thị" đã chốt B5l cho "Revelations" (`POD_revelations_interaction` của Arcana) — cùng gốc tôn giáo, giữ nhất quán |
+| Cleanse *(`POD_lore_cleanse_interaction`, chữa mọi bệnh tật)* | Tẩy Trừ | đặt mới, dịch nghĩa thường |
+| Restore Life | Phục Sinh | đặt mới, dịch nghĩa thường |
+| Teleport | Dịch Chuyển Tức Thời | đặt mới, dịch nghĩa thường |
+| Manipulate Weather | Thao túng Thời Tiết | đặt mới, dịch nghĩa thường |
+| Inspire *(2 biến thể `_interaction`/`_no_dlc_interaction`, cùng tên hiển thị "Inspire")* | Khơi Nguồn Cảm Hứng | đặt mới, dịch nghĩa thường |
+| Alter Appearance / Enhance Beauty / Wither Beauty | Biến Đổi Dung Mạo / Tôn Vinh Vẻ Đẹp / Làm Tàn Úa Vẻ Đẹp | đặt mới, dịch nghĩa thường |
+| Shapechange *(`POD_lore_shapechange_interaction`, khác "Shapeshift" của Arcana ở B5l — cùng nghĩa biến hình nhưng tên tiếng Anh khác nhau theo từng Lore)* | Biến Hình | dịch nghĩa giống "Shapeshift" (B5l) vì cùng khái niệm biến hình thể chất, không có lý do tách nghĩa |
+| Command the Wild / Give Life to the Flora / Drain Life from the Flora | Hiệu Lệnh Hoang Dã / Ban Sự Sống cho Thảo Mộc / Rút Cạn Sự Sống từ Thảo Mộc | đặt mới; "Flora" → "Thảo Mộc" (thực vật nói chung, văn phong cổ điển hơn "cây cỏ") |
+
+## B5p. Thuật ngữ `interactions/POD_fera/POD_character_interactions_wyrm_l_english.yml` — tương tác Garou/Fera sa ngã theo Wyrm, 14/14 dòng, việc #5
+
+File nhỏ 4 tương tác của Fera đã ngả theo Wyrm (song song với `POD_religion_wyrm`, B4s). Không có `Glossary()`/`UmbraGlossaryLocalized()`. Có 1 `$glossary_wyrm$` — giữ nguyên ref, không dịch; "Wyrm" trong câu văn `POD_embrace_oblivion_interaction_desc` giữ nguyên tiếng Anh theo B3 (bắt buộc).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Dancing Shadows *(tên tương tác)* | Vũ điệu Bóng tối | đặt mới, dịch nghĩa thường; "shadow" ở đây là cái bóng vật lý của nhân vật (không phải "Shadow" đặc thù Wraith B4h), theo mẫu compound thông thường |
+| Splintered Soul *(tên tương tác, tạo bản sao Linh thể của chính mình — cùng khái niệm với `SPLINTERED_SOUL_PERK_EFFECT` ở `POD_urgetaints_lifestyle_l_english.yml`, file đó chưa dịch)* | Linh hồn Phân mảnh | đặt mới; "Soul"→"Linh hồn" (danh từ chung, khác "Spirit"→"Linh thể" đã chốt B4c cho `trait_spirit`) |
+| ancestor_spirit *(`[ancestor_spirit\|E]`, concept link)* | *(giữ nguyên key, không dịch)* | key game_concept `game_concept_ancestor_spirit`="Ancestor Spirit" ở `game_POD_concepts_l_english.yml` chưa được dịch — khi file đó tới lượt, đối chiếu lại "Ancestor"="Tổ Tiên" (B0/B3c dòng 614) + "Spirit"="Linh thể" (B4c) để đặt tên hiển thị nhất quán |
+| Maniacal Mind *(tên tương tác, whispers của Wyrm dụ dỗ)* | Tâm trí Điên cuồng | đặt mới, dịch nghĩa thường; "Maniacal" dịch "Điên cuồng" thay vì "Điên loạn" (đã dùng cho `Madness`/`The Madness of Crowds` ở B5l Bastet) để tránh trùng hai khái niệm khác nhau |
+| Embrace Oblivion *(tên tương tác)* | Ôm lấy Hư Vô | "Oblivion"→"Hư Vô" ✅ tái dùng tiền lệ đã khóa cứng nhiều lần (B3q/B4n/B4u/B4w) |
+
+## B5-demon-thrall. Thuật ngữ `interactions/POD_demons/POD_character_interactions_demon_thrall_l_english.yml` — tương tác Demon/Thrall/Cultist, 53/53 dòng, việc #5
+
+Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()`. Điểm mấu chốt: `[thrall|E]` ở đây trỏ tới `game_concept_thrall` (Demon-cultist context, `game_POD_concepts_l_english.yml:251`, chưa dịch) — **khác** "Thrall" đã chốt "Nô Bộc" ở B5j (ngữ cảnh domitor-ghoul, `[ghoul|E]`). Hai khái niệm hoàn toàn khác nhau trong lore WoD (ghoul uống máu vs. người bị ác quỷ thu phục làm tay sai/tín đồ) nên **không thể dùng chung một bản dịch**.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Thrall(s) *(Demon-cultist context, `game_concept_thrall`, khác Nô Bộc B5j)* | Nô Lệ | đặt mới; base_game_vh dịch "thrall" vanilla (`rival_thrall_scapegoat`) là "nô lệ" — tái dùng tiền lệ đó cho nhánh Demon để tách biệt rõ với "Nô Bộc" (ghoul, B5j) |
+| Enthrall / Enthrallment | Thu phục | đặt mới, hành động ác quỷ khuất phục một nhân vật thành Nô Lệ |
+| Cultist(s) *(`[cultist\|E]`, context Demon; cùng nghĩa với `cultofzilah_adherent`="Tín Đồ" dòng 1565, khác `predatortype_cultist`="Giáo Chủ Tà Giáo")* | Tín Đồ | tái dùng "Tín Đồ" đã có tiền lệ ở dòng 1565/1632, phù hợp nghĩa phổ thông "kẻ sùng bái" |
+| Pact *(khế ước giữa Demon và Thrall, `POD_remove_thrall_interaction`="Cancel Pact", khác `demonic_pact`=game concept "Pact" chưa dịch và khác `[spirit_pact\|E]`="Hiệp ước Linh hồn")* | Khế ước | đặt mới; dùng khi file này nhắc "pact" ở câu văn thường (không phải concept link), tránh trùng với "Hiệp ước Linh hồn" đã chốt cho spirit_pact |
+| Power behind the Throne *(tên tương tác `POD_demonic_submission_interaction`, thề trung thành đổi lấy quyền lực ngầm)* | Quyền lực Sau Ngai Vàng | đặt mới, dịch nghĩa thường theo idiom "power behind the throne" |
+
+## B5s. Thuật ngữ `interactions/POD_fera/POD_character_interactions_werewolf_l_english.yml` — tương tác Garou/Fera nói chung, 106/106 dòng, việc #5
+
+Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()`. 4 dòng cuối (99-102, key `#POD_call_fenris_to_war_interaction*`) bị comment sẵn trong bản gốc — giữ nguyên tiếng Anh, không dịch theo mục 5 TRANSLATION_RULES.md. "gnosis" ở dòng `POD_break_the_bonds_interaction_desc`/`POD_storyteller_interaction_desc` là từ thường trong câu (không phải `$POD_energy_gnosis$`) — giữ nguyên cách viết thường của bản gốc, không viết hoa hay đổi thành ref.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Alpha *(người đứng đầu bầy Garou, `POD_inspiration_interaction`)* | Alpha *(giữ nguyên)* | danh từ tổ chức lõi WoD, theo B0 tương tự tiền lệ "pack"/"Coterie" (B4r/B5f) — cộng đồng quen đọc tiếng Anh, dịch nghĩa ("Đầu Lĩnh") sẽ mất sắc thái |
+| pack *(bầy Garou, `pack_tactics_modifier_desc`)* | bầy | ✅ tái dùng tiền lệ B0 dòng 1611 (dịch nghĩa thường "bầy" cho pack Garou, khác pack Sabbat giữ nguyên tiếng Anh) |
+| Divide *(tên tương tác reo rắc bất hòa giữa liege/vassal)* | Chia Rẽ | đặt mới, dịch nghĩa thường |
+| Primal Song / Song of the Siren | Khúc Ca Nguyên Thủy / Khúc Ca Nàng Tiên Cá | đặt mới, dịch nghĩa thường |
+| Break the Bonds *(dùng gnosis buộc đối tượng trả hook)* | Phá Vỡ Ràng Buộc | đặt mới, dịch nghĩa thường |
+| Share Strength / Shared Strength | Chia Sẻ Sức Mạnh | đặt mới; các biến thể `_gain`/`_loss` theo 6 chỉ số (Diplomacy/Martial/Stewardship/Intrigue/Learning/Prowess) dịch theo bảng A1 đã chốt (Ngoại Giao/Chỉ Huy/Quản Lý/Mưu Mô/Học Thức/Võ Dũng), ghép "Tăng"/"Giảm" |
+| Storm of Mother's Wrath *(phép Garou gây bão tàn phá lãnh thổ đối phương)* | Cơn Thịnh Nộ của Mẫu Thần | đặt mới; "Mother Goddess"="Mẫu Thần" ✅ tái dùng B3b, "Wrath"="Thịnh Nộ" theo văn phong trung cổ, tách khỏi "Rage"="phẫn nộ" (B3b, chỉ số Garou) để tránh trùng hai khái niệm |
+| Tagalong *(tương tác nhận phước lành totem)* | Đi Theo | đặt mới, dịch nghĩa thường |
+| totem *(vật tổ, `POD_tagalong_interaction_desc`)* | vật tổ | ✅ tái dùng tiền lệ B0 dòng 1765 (dịch nghĩa thường, không cần thuật ngữ WoD riêng) |
+| Provoke Riot | Kích Động Bạo Loạn | đặt mới, dịch nghĩa thường |
+| Turn into a Crinos Werewolf / Crinos werewolf | Biến thành Người Sói Crinos / người sói Crinos | "Crinos" giữ nguyên (tên hình dạng chiến binh của Fera, đã có tiền lệ giữ nguyên ở `POD_fera_common_l_english.yml`); "Werewolf"→"Người Sói" dịch nghĩa thường |
+| Summons Shadowy Duplicate(s) | Triệu Hồi Bản Sao Bóng Tối | đặt mới, dịch nghĩa thường |
+| Renew the Cycle | Tái Sinh Chu Kỳ | đặt mới, dịch nghĩa thường |
+| Attain True Spiritual Balance *(Kuei-Jin, "Thought Form of the Twelve Ministers")* | Đạt Chân Quân Bình Tâm Linh | đặt mới, dịch nghĩa thường |
+| Burning Scars | Sẹo Lửa | đặt mới, dịch nghĩa thường |
+| Garbage Diving / Great Trash Heap *(Ratkin, dịch chuyển qua các điện thờ Đống Rác)* | Lục Thùng Rác / Đống Rác Vĩ Đại | đặt mới, dịch nghĩa thường; "Great Trash Heap" là địa danh thiêng liêng của Ratkin trong lore WoD, chưa có tiền lệ trong repo |
+| Appear *(`POD_home_in_all_lands_perk_interaction`, dịch chuyển "sideways" tới nơi có sói)* | Xuất Hiện | đặt mới, dịch nghĩa thường |
+| Storm Winds Slash *(Hakken/Tribalgifts, chém từ xa bằng Katana)* | Chém Gió Bão | đặt mới, dịch nghĩa thường; "Katana" giữ nguyên (danh từ vũ khí Nhật, đã có tiền lệ giữ nguyên ở `pod_canon_artifacts_events`) |
+| Dark of Night / Blindness | Bóng Tối Đêm Trường / Mù Lòa | đặt mới, dịch nghĩa thường |
+| Moon Bridge *(dịch chuyển qua caern bằng đường trăng trong Umbra)* | Cầu Trăng | đặt mới, dịch nghĩa thường; "caern" giữ nguyên ✅ tái dùng B4s/B4v |
+| Blooding Fury | Cuồng Nộ Huyết Thống | đặt mới, dịch nghĩa thường |
+| Pack Tactics / Strength of Will | Chiến Thuật Bầy Đàn / Sức Mạnh Ý Chí | đặt mới, dịch nghĩa thường |
+
+## B5q. Thuật ngữ `interactions/POD_fera/POD_character_interactions_fera_l_english.yml` — tương tác Fera chung (không riêng loài), 54/54 dòng, việc #5
+
+Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()`. Tái dùng thuật ngữ Fera đã chốt: Gnosis→`$POD_energy_gnosis$` (ref, không dịch), Willpower→"ý chí" (theo tiền lệ base_game_vh, không viết hoa vì xuất hiện dạng câu văn thường "willpower" chứ không phải chỉ số riêng có key). "Homid" giữ nguyên tiếng Anh theo B4c (tên Dòng Sinh, `trait_homid_born`). "Flaying Plague" tái dùng "Ôn Dịch Lột Da" đã chốt ở dòng 665 (B?, tên bệnh WoD).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Gift *(viết hoa, năng lực tâm linh Garou/Fera học được, tương đương "Discipline" của ma cà rồng nhưng là hệ thống riêng — `POD_train_gift_interaction`, và tên các lifestyle `*gifts_lifestyle_name` như "Breed Gifts", "Planetary Gifts", "Tribal Gifts" đều chưa dịch)* | Thiên Phú | đặt mới; không dùng "Dị năng" (đã khóa cứng cho Discipline, B2) để tránh nhầm hai hệ thống siêu nhiên khác nhau; bản Trung dịch "灵赋" (linh phú) — tham khảo cấu trúc, không có thẩm quyền thuật ngữ; "Thiên Phú" giữ văn phong Hán Việt trang trọng nhất quán base_game_vh |
+| Ebon Binding *(tên tương tác + modifier, Gift trói buộc hình phạt siêu nhiên lên mục tiêu)* | Xiềng Xích Bóng Tối | đặt mới, dịch nghĩa thường; "Ebon" (đen tối) ghép "Binding" (trói buộc/xiềng xích) |
+| Savagery of the Taloned Hunter *(tên tương tác, đổi Gnosis+ý chí lấy Gnosis)* | Man Rợ Của Kẻ Săn Mồi Móng Vuốt | đặt mới, dịch nghĩa thường |
+| Burden of Knowledge *(tên tương tác, gây điên loạn/tự sát cho mục tiêu)* | Gánh Nặng Tri Thức | đặt mới, dịch nghĩa thường |
+| Essential Transformation *(tên tương tác, đổi vết thương lấy Gnosis)* | Biến Đổi Cốt Lõi | đặt mới, dịch nghĩa thường |
+| Shapeshift *(tương tác đổi hình dạng Fera)* | Biến Hình | đặt mới, dịch nghĩa thường; nhất quán với "Shapechange" (B4l, Lore Demon) đã dịch cùng là "Biến Hình" vì cùng khái niệm biến đổi thể chất |
+| Totem form | Hình dạng Vật Tổ | tái dùng "Vật Tổ" đã chốt dòng 1765 cho "totem" |
+| Weather Magic *(context Fera, tương tác gây thiên tai)* | Phép Thuật Thời Tiết | đặt mới, dịch nghĩa thường; file `POD_shared_loca`/mummy interactions dùng chung khái niệm này nhưng chưa dịch — khi tới lượt, tái dùng "Phép Thuật Thời Tiết" để nhất quán |
+
+## B5n. Thuật ngữ `interactions/POD_demons/POD_character_interactions_demon_infernalist_l_english.yml` — tương tác Infernalist (thảo Khế ước/triệu hồi/trói buộc Demon), 69/69 dòng, việc #5
+
+File chứa toàn bộ tương tác lối sống Infernalist (Demon: The Fallen): Shapeshift, ký/thực thi Khế ước (`demonic_pact`), Triệu hồi, Trói buộc (Diabolism), các quyền năng cá nhân (Serpent Skin, Devil's Eyes, Apportation, Teleportation, Bond-Breaking, Mammon's Gift, Talons of the Plague-Crow, Army of the Damned, Black Whispers) và 4 tương tác hoàn thành điều khoản Khế ước (`POD_pact_*`). Không có `UmbraGlossaryLocalized()`. Có 4 lần `UmbraGlossary('abyss')` (1 tham số, không dịch gì — tự lấy tên "Vực Thẳm" qua `Localize()`) và 2 lần `Glossary('True Name','podgloss.truename')` / `Glossary('Yama Kings','podgloss.yamaking')` (tham số 1 giữ nguyên tiếng Anh theo tiền lệ toàn mod, xem dòng 363/342).
+
+**Quan trọng:** `POD_request_pact_interaction`="Sign Demonic Pact" dịch là "Ký Khế Ước Ma Quỷ" — tái dùng "Khế ước" đã chốt ở B5q (`interactions/POD_demons/POD_character_interactions_demon_thrall_l_english.yml`, dòng 2181) cho khái niệm Pact giữa Demon và Thrall/Infernalist trong câu văn thường, **không** dùng "Hợp đồng" (đã dành cho `game_concept_contract`/`Vassal Contract` ở vanilla, A9) để tránh lẫn hai khái niệm khác nhau.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Sign Demonic Pact *(`POD_request_pact_interaction`)* | Ký Khế Ước Ma Quỷ | tái dùng "Khế ước" đã chốt B5q cho `demonic_pact` prose context (khác "Hợp đồng" vanilla, khác "Hiệp ước Linh hồn"=`spirit_pact`) |
+| Banish Demon / Bind Demon / Weaken Demon | Trục Xuất Ác Quỷ / Trói Buộc Ác Quỷ / Làm Suy Yếu Ác Quỷ | dịch nghĩa thường; "Ác quỷ" tái dùng `trait_demon` (dòng 608); "Trục Xuất" nhất quán với concept `POD_banish`=`game_concept_POD_banish`="Banish" (chưa dịch ở nơi định nghĩa, nhưng dùng khi câu văn nhắc bằng chữ thường) |
+| Initiate Demonology / Perform Demonic Summoning | Khai Tâm Quỷ Học / Thực Hiện Nghi Thức Triệu Hồi Ác Quỷ | "Demonology"→"Quỷ Học" tái dùng `trait_demonology` (dòng 1532); "Initiate" dịch "Khai Tâm" (dạy nhập môn) để tránh trùng "Bắt đầu"/"Khởi động" đã dùng nơi khác |
+| Serpent Skin | Lột Da Rắn | đặt mới, dịch nghĩa thường |
+| Devil's Eyes *(tương tác khơi mào dịch bệnh)* | Mắt Quỷ | đặt mới, dịch nghĩa thường, giữ ngắn gọn như tên gốc |
+| Apportation *(thuật lấy trộm hiện vật từ xa, thuật ngữ huyền học có thật)* | Di Vật Thuật | đặt mới, Hán Việt ("di vật" = chuyển dời vật thể + "thuật" = pháp thuật), tránh dịch thô "Thuật Chuyển Vật" |
+| Teleportation *(tương tác né tránh khoảng cách, khác `Teleport`="Dịch Chuyển" B5k)* | Dịch Chuyển Tức Thời | thêm "Tức Thời" để phân biệt với tương tác `Teleport` đơn giản (B5k dòng 2061) vốn chỉ dịch "Dịch Chuyển" |
+| Bond-Breaking *(tương tác xóa Hook)* | Phá Vỡ Ràng Buộc | đặt mới, dịch nghĩa thường; "Hook"="Kiềm chế" (`game_concept_hook`) giữ nguyên concept link, không đổi |
+| Mammon's Gift *(Mammon = Ác quỷ Tham lam trong Kinh Thánh/WoD, danh từ riêng)* | Món Quà của Mammon | "Mammon" giữ nguyên (danh từ riêng ngoại lai, không có tiền lệ base_game_vh) |
+| Talons of the Plague-Crow | Móng Vuốt của Quạ Ôn Dịch | đặt mới, dịch nghĩa thường; "Plague"→"Ôn Dịch" nhất quán với "Flaying Plague"→"Ôn Dịch Lột Da" (dòng 665) |
+| Army of the Damned | Đội Quân của Kẻ Bị Đọa Đày | đặt mới, dịch nghĩa thường; "the Damned" (số nhiều ẩn, chỉ những linh hồn bị đọa đày ở Địa Ngục) → "Kẻ Bị Đọa Đày" |
+| Sacrifice of Gold / Infernal Prayer / Show of Submission / Offering of Artifact *(4 tương tác hoàn thành điều khoản Khế ước, đổi Vàng/Mộ đạo/Uy tín/Hiện vật lấy điểm Investiture)* | Hiến Tế Vàng / Lời Cầu Nguyện Địa Ngục / Màn Thể Hiện Quy Phục / Dâng Hiến Vật | dịch nghĩa thường; "Sacrifice"→"Hiến Tế" (tái dùng B5? `Sacrifice to Soultaker`="Hiến Tế cho Soultaker" dòng 2051); "Gold"/"Piety"/"Prestige"/"Artifact(s)" đều giữ nguyên concept link `[gold\|E]`/`[piety\|E]`/`[prestige\|E]`/`[artifacts\|E]`, không đổi |
+| Black Whispers *(tương tác mua tri thức từ Yama Kings để biết bí mật/âm mưu đối phương)* | Những Lời Thì Thầm Đen Tối | đặt mới, dịch nghĩa thường |
