@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27.
+Cập nhật lần cuối: 2026-07-27 (đợt 2).
 
 ---
 
@@ -16,30 +16,36 @@ Cập nhật lần cuối: 2026-07-27.
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file**: glossary_POD, POD_misc_custom_loc, traits_predator_types_POD, POD_fae_traits, POD_fera_traits, **traits_POD** (mới xong) |
-| Còn lại | ~454 file khác |
+| Đã xong hoàn toàn | **6 file traits/** + **35/36 file religion/** |
+| Còn lại | ~419 file khác + 1 file `docrtineandtenets` (1652 dòng) |
 
-Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~150 mục, đã bổ sung B4b–B4j cho Fae/Fera/VtM/Wraith/Mummy/Kuei-Jin). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
+Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~200 mục, B3/B4 đầy đủ cho VtM/Fae/Fera/Wraith/Mummy/Kuei-Jin/Demon/Garou). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
 
-**Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.** Việc tiếp theo là **#2 — `religion/`** (xem chi tiết bên dưới). Đừng nhảy bậc sang #3 trở đi trước khi xong `religion/`.
+**Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.**
 
-**Việc #2 (`religion/`) tiến độ: 27/36 file đã dịch + verify + commit.** Danh sách commit theo thứ tự: `2952a68`(kueijin) `5b9051f` `50b5f57`(framework+unexamined_horizons) `dbc28f0`(roadoflaibon) `7354a25`(ghoul+ashirra+ignorance) `2ed606c`(POD_religion_l — file neo thứ 2) `2fd168c` `917b421`(calomenasforsaken) `2f2943f`(talmahera+naktanchara+codeoftremere+hunter) `6126548`(bloodgnosticism) `8f196bc` `0fe45f0`(roadofblood) `30c2110`(roadofset) `8aef336`(roadoflilith) `f9a2fb5`(raktasadhus) `b10442b`(roadofbones) `3fa8ac8`(vampirespecialdoctrines) `8825ac1` `4b6a855`(roadofbeast) `6993ff4`(roadofheaven) `644bcc8`(roadofmetamorphosis) `f510d34`(roadofhumanity) `3e786fb`(roadofkings) `512ce7d`(sửa nốt roadofbeast) `74a8443`(roadofsin) `d5d2cd7`(TERMINOLOGY.md bổ sung B3x/B4k/B4l).
+**Việc #2 (`religion/`) tiến độ: 35/36 file đã dịch + verify + commit. CHỈ CÒN 1 FILE: `docrtineandtenets` (1652 dòng).** Danh sách commit theo thứ tự (rút gọn — 27 file đầu, xem chi tiết trong lịch sử git nếu cần): `2952a68`…`d5d2cd7` (27/36, xem bản WORKLIST cũ trong git log nếu cần tra lại), rồi tiếp: `1b41e1e`(mummy, 28/36) `93321dd`(demons, 29/36) `722a757`(modern, 30/36) `b61c2d0`(sửa trùng heading B4q) `c4a49cf`(roadofzarathustra, 31/36) `47fc7a6`(ordos, 32/36) `4223927`(wyrm, 33/36) `627f794`(fae, 34/36) `13742c8`(wraiths, 35/36) `83164a2`(gaia, 36/36 trừ docrtineandtenets).
 
-**Còn 9 file chưa dịch:** `demons`(141 dòng), `docrtineandtenets`(1652 dòng — lớn nhất, để cuối cùng), `fae`(566 dòng), `gaia`(860 dòng), `mummy`(119 dòng), `ordos`(119 dòng), `roadofzarathustra`(117 dòng), `wraiths`(750 dòng), `wyrm`(243 dòng), `modern`(124 dòng).
+### ⚠️ BÀN GIAO GIỮA SESSION (2026-07-27, đợt 2, do gần chạm ~300k token context)
 
-### ⚠️ BÀN GIAO GIỮA SESSION (2026-07-27, do vượt ~400k token context)
+9 file còn lại của đợt trước (`demons`, `mummy`, `ordos`, `roadofzarathustra`, `modern`, `wyrm`, `fae`, `wraiths`, `gaia`) đã dịch xong, verify xong, commit xong **trong chính session này** trước khi bàn giao — **không có agent nào dở dang, không cần resume gì cả**. `religion/` giờ chỉ còn thiếu đúng 1 file: `docrtineandtenets` (1652 dòng, lớn nhất thư mục).
 
-Toàn bộ lô 6 file (`roadofbeast`, `roadofheaven`, `roadofhumanity`, `roadofkings`, `roadofmetamorphosis`, `roadofsin`) đã dịch xong, verify xong, commit xong **trong chính session này** trước khi bàn giao — session mới bắt đầu sạch, **không có agent nào dở dang, không cần resume gì cả**. Đã phát hiện và sửa 3 lỗi trong đợt verify này (ghi lại để session sau rút kinh nghiệm, các lỗi này lặp đi lặp lại nên rất đáng chú ý):
-- `roadofbeast`: agent tự thêm `$pod_Embrace$` mới (không có trong bản gốc) khi dịch động từ "Embraced" → sửa lại thành văn xuôi thường "chỉ Trao truyền". Sau đó phát hiện thêm 1 dòng "World of Darkness" bị bỏ sót (agent tự sửa tiếp sau khi tôi đã commit, phải commit thêm lần nữa).
-- `roadofmetamorphosis`: bắt gặp giữa lúc agent đang ghi đè file → có khoảnh khắc file **mất BOM và CRLF→LF** (đúng kiểu lỗi nguy hiểm nhất theo TRANSLATION_RULES.md §6) — nhưng agent tự sửa lại đúng trước khi kết thúc, verify lại lần 2 mới thấy ổn. **Bài học: nếu bắt gặp file mất BOM/CRLF giữa chừng lúc agent còn đang chạy, đợi agent ghi xong rồi kiểm tra lại, đừng vội kết luận lỗi.**
-- `POD_religion_vampirespecialdoctrines` (đã xong trước lô này): agent giữ nguyên "Theurgist"/"Theurgy" trong văn xuôi vì tưởng trait chưa dịch — thực ra `trait_theurgist`="Nhà Thần Thuật" đã chốt ở B4h từ lâu. Bài học: **luôn grep `traits/traits_POD_l_english.yml` để xác nhận trạng thái dịch của trait được nhắc tới trong file khác, đừng tin agent tự đánh giá "chưa chốt".**
-- `roadofkings`: agent tự báo cáo đã sửa lỗi tự thêm `$pod_cainite$` mới khi dịch từ "Cainite" bare — đã tự phát hiện và tự sửa trước khi báo cáo, không cần coordinator can thiệp thêm, nhưng vẫn nên double-check khi verify các file `roadof*` còn lại.
-- ⚠️ **`roadofsin`: agent tự báo cáo SAI rằng `religion/POD_religion_docrtineandtenets_l_english.yml` "đã hoàn tất 100%"** và dùng file đó làm tiền lệ để giữ nguyên "Sire". Đã kiểm tra lại bằng `grep` trực tiếp nội dung file — **`docrtineandtenets` vẫn 100% tiếng Anh**, không phải bản dịch, agent đã hallucinate. Đã đính chính lại trong TERMINOLOGY.md (mục B4m, ghi chú Sire). **Bài học quan trọng nhất rút ra từ session này: một agent tự nhận "file X đã dịch xong/đã có tiền lệ" KHÔNG phải bằng chứng — luôn tự `grep` nội dung thật của file được nhắc tới để xác nhận, đặc biệt khi agent dùng nó làm căn cứ cho quyết định thuật ngữ.**
+**Lỗi phát hiện và sửa trong đợt verify này (đọc kỹ, các lỗi lặp lại + lỗi mới):**
+- **TERMINOLOGY.md bị trùng heading NHIỀU LẦN trong đợt này** — không phải 1 lần mà liên tiếp: `demons` tự đặt `B4k` trùng với `roadofkings` đã dùng trước → đổi thành `B4p`. `modern` tự đặt `B4q` trùng với `ordos` cũng tự đặt `B4q` cùng lúc → đổi `modern` thành `B4r`. **Bài học: khi chạy ≥2 agent song song viết TERMINOLOGY.md, luôn chạy lại `grep -n "^## B[34]" TERMINOLOGY.md | awk -F'[.#]' '{print $2}' | awk '{print $1}' | sort | uniq -d` SAU KHI cả hai agent đã xong, không chỉ trước khi mỗi agent bắt đầu — vì chúng đọc file cùng một thời điểm và không thấy heading của nhau.**
+- `modern`: agent không tự ghi mục TERMINOLOGY.md nào dù báo cáo có liệt kê thuật ngữ mới (Gehenna, Convention of Thorns, pack, 9 tên tín đồ Path Sabbat...) — coordinator phải tự viết mục B4r thay agent trước khi commit. **Bài học: đừng giả định agent đã ghi TERMINOLOGY.md chỉ vì báo cáo liệt kê thuật ngữ — luôn `grep` xác nhận mục đó thực sự tồn tại trong file trước khi commit.**
+- `fae`: phát hiện **2 lỗi thật khi đọc git diff** (số liệu tự kiểm tra của agent vẫn khớp 100% dù có lỗi — đúng như cảnh báo ở TRANSLATION_RULES.md §8 rằng đếm token không đủ):
+  1. Dòng 369 (`holy_order_winters_teeth`): agent để **cả giá trị gốc tiếng Anh và giá trị dịch tiếng Việt dính liền nhau trên cùng 1 dòng** (`"Winter's Teeth" holy_order_winters_teeth: "Răng Mùa Đông"`) — dạng lỗi merge/ghi đè hỏng, chưa từng gặp trước đây. Đã dọn về 1 dòng sạch.
+  2. Dòng 104 (comment dịch thêm, không bắt buộc): sót đúng 1 từ tiếng Anh "obsession" giữa câu văn tiếng Việt đã dịch phần còn lại — sửa thành "nỗi ám ảnh". **Bài học mới: khi agent dịch cả các đoạn comment dài (không bắt buộc theo TRANSLATION_RULES.md §5 nhưng agent tự chọn dịch để nhất quán), phải rà kỹ hơn vì khả năng sót từ lẻ tăng theo độ dài đoạn — nên grep tìm các từ tiếng Anh thông dụng còn sót (`the/and/of/with/seek/believe/obsession...`) trong toàn bộ file sau khi agent báo hoàn tất.**
+- `wyrm`: agent tự phát hiện và tự sửa **BOM đôi** (`ef bb bf ef bb bf`) do lỗi trong chính script Python của nó trước khi báo cáo hoàn tất — không cần coordinator can thiệp nhưng đã verify lại kỹ (đếm BOM bằng `d[:3]==b'\xef\xbb\xbf' and d[3:6]!=b'\xef\xbb\xbf'`) để chắc chắn.
+- `wraiths`: agent tự phát hiện và tự sửa sót dịch tham số 2 của `UmbraGlossaryLocalized('shadowlands','Underworld')` (6 lần trong file) trước khi báo cáo — verify lại xác nhận đúng cả 6 chỗ.
+- `gaia`: agent tự phát hiện và tự sửa 2 chỗ sót (`gaia_health_god_name`, tham số 2 của `UmbraGlossaryLocalized('astral_reaches',...)`) trước khi báo cáo — verify lại xác nhận đúng.
+- ⚠️ **Phát hiện KHÔNG PHẢI lỗi kỹ thuật nhưng đáng lưu ý: `wyrm` và `gaia` xử lý tên riêng "camp" (đơn vị xã hội con của bộ tộc Garou) KHÔNG nhất quán với nhau.** `wyrm` dịch nghĩa tên camp (`Black Spiral Dancers`→"Vũ Công Xoáy Đen", `Princes of Ruin`→"Chúa Tể Diệt Vong"…) trong khi `gaia` giữ nguyên tiếng Anh phần lớn tên camp (`Servants of the Unicorn`, `Children of Gaia`, `Get of Fenris`…, chỉ dịch nghĩa vài cái như holy order). TERMINOLOGY.md chỉ chốt "camp" (danh từ chung) = "Trại", không chốt quy tắc dịch hay giữ nguyên **tên riêng** của từng camp cụ thể. **Việc cần làm: session sau nên rà lại 2 file này (và các file `religion/` khác có nhắc tên camp) để quyết định 1 quy tắc nhất quán — có thể chấp nhận "camp lore quan trọng/dịch được nghĩa thì dịch, camp chỉ là danh xưng khó dịch thì giữ nguyên" nhưng cần ghi rõ vào TERMINOLOGY.md, không để tùy hứng từng agent.**
 
-**Việc cần làm tiếp theo, theo thứ tự:**
-1. Dịch 9 file còn lại: `demons`, `fae`, `gaia`, `mummy`, `ordos`, `roadofzarathustra`, `wraiths`, `wyrm`, `modern` — thứ tự không quan trọng, có thể dịch song song theo lô như đã làm (5-6 agent/lô là hợp lý).
-2. Để `docrtineandtenets` (1652 dòng, file lớn nhất `religion/`) làm cuối cùng của việc #2 — nên chia nhỏ thành nhiều đợt/agent theo đoạn dòng như đã làm với `traits_POD_l_english.yml` trước đây, đừng giao nguyên file 1652 dòng cho 1 agent.
-3. Xong hết `religion/` (36/36) thì chuyển sang việc #3 (`custom_localization/` phần còn lại).
+**Việc cần làm tiếp theo (session mới), theo thứ tự:**
+1. **Dịch nốt `religion/POD_religion_docrtineandtenets_l_english.yml`** (1652 dòng — file lớn nhất `religion/`, để cuối cùng của việc #2). Baseline đã đo (dùng để đối chiếu sau khi dịch xong toàn bộ): dòng 1652, dòng trống 260, key thụt 1 space 1328, ref `$...$` 124, bracket `[...]` 1121 (RẤT NHIỀU — file này chắc chắn dùng nhiều `Glossary()`/`UmbraGlossaryLocalized()`, phải cẩn thận đặc biệt), icon 0, tag mở 39, tag đóng 31, `\n` 106, `\"` 2, `:0` 0 lần (không dùng hậu tố này).
+2. Chia `docrtineandtenets` thành nhiều đợt/agent theo đoạn dòng (như đã làm với `traits_POD_l_english.yml` — ví dụ 5-6 đợt ~300 dòng/đợt), đừng giao nguyên file 1652 dòng cho 1 agent. Đọc trước để xem cấu trúc file (nhiều faith con hay 1 khối lớn?) rồi chia theo ranh giới tự nhiên (theo faith/đoạn `###`), không chia cứng theo số dòng nếu cắt ngang giữa 1 khối logic.
+3. **CẢNH BÁO ĐÃ CÓ TIỀN LỆ SAI (xem mục B4m TERMINOLOGY.md):** một agent từng hallucinate rằng `docrtineandtenets` "đã dịch xong 100%" — đã xác nhận lại bằng `grep`/đếm ký tự tiếng Việt, **file này KHÔNG có bản dịch nào, 100% tiếng Anh tính đến hết session này**. Đừng tin bất kỳ claim nào khác nói ngược lại mà không tự grep xác nhận.
+4. Xong `docrtineandtenets` → `religion/` đạt 36/36 → chuyển sang việc #3 (`custom_localization/` phần còn lại, xem mục "#3" bên dưới).
+5. Trước hoặc sau khi làm `docrtineandtenets`, cân nhắc dành 1 đợt nhỏ rà soát nhất quán tên camp giữa `wyrm`/`gaia` (xem mục cảnh báo phía trên) — không bắt buộc phải làm ngay, có thể để dồn vào lúc rà soát toàn bộ `religion/` sau này.
 
 **Nhắc lại quy trình bắt buộc mỗi khi verify file agent con vừa dịch xong (đúc kết từ ~27 file đã làm):**
 - Luôn tự chạy lại đủ 3 lớp kiểm tra bằng lệnh riêng, KHÔNG tin số liệu agent tự báo cáo trong phần tóm tắt (đã bắt được ít nhất 2 lần agent tự báo cáo sai số baseline).
@@ -82,7 +88,7 @@ Sắp theo **đòn bẩy giảm dần**: việc trước là nguồn của việ
 
 Làm trước tiên vì trait được **hàng nghìn** chuỗi khác trỏ tới qua `[GetTrait('x').GetName]`. Tất cả 4 file (`traits_POD`, `POD_fera_traits`, `POD_fae_traits`, `traits_predator_types_POD`) đã dịch 100%.
 
-### #2 — `religion/`  6.689 key, 36 file
+### #2 — `religion/`  6.689 key, 36 file  — **35/36 xong, chỉ còn `docrtineandtenets`**
 
 Ưu tiên cao vì **có 2 chỗ trỏ ngược về bước 1**, phải khớp:
 
