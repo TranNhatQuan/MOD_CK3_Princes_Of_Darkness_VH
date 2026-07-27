@@ -686,7 +686,31 @@ File `traits_POD_l_english.yml` **hoàn tất 100% (1563/1563 dòng)** ở đợ
 | Complexity *(track fleshcrafted)* | Mức Độ Phức Tạp | |
 | Pilgrim of Enoch | Lữ Khách Enoch | |
 | Itarajana Sorcerer | Pháp Sư Itarajana | Huyết Thuật bản địa Ấn Độ |
-| **Underworld** *(tham số 2 của `UmbraGlossaryLocalized('shadowlands', …)`)* | **Âm Phủ** ✅ mới đặt | Chưa có trong B0 (chỉ liệt kê 'Underworld' là 1 trong các giá trị khả dĩ của flag `shadowlands`, chưa dịch). Đây là lần đầu giá trị này được dịch thật — dùng "Âm Phủ" cho mọi `UmbraGlossaryLocalized('shadowlands','Underworld')` từ nay. Các giá trị khác cùng flag (`Limbo`, `Yin World`, `Dark Umbra`) chưa gặp, sẽ đặt khi tới lượt. |
+| **Underworld** *(tham số 2 của `UmbraGlossaryLocalized('shadowlands', …)`)* | **Âm Phủ** ✅ mới đặt | Chưa có trong B0 (chỉ liệt kê 'Underworld' là 1 trong các giá trị khả dĩ của flag `shadowlands`, chưa dịch). Đây là lần đầu giá trị này được dịch thật — dùng "Âm Phủ" cho mọi `UmbraGlossaryLocalized('shadowlands','Underworld')` từ nay. Các giá trị khác cùng flag (`Limbo`, `Dark Umbra`) chưa gặp, sẽ đặt khi tới lượt. |
+| **Yin World** *(tham số 2 của `UmbraGlossaryLocalized('shadowlands', …)`)* | **Âm Giới** ✅ đã dùng trong `traits/traits_POD_l_english.yml` (dòng 51, 512, 593) | Cùng flag `shadowlands` nhưng giá trị param 2 khác `Underworld` → bản dịch khác (Âm Giới ≠ Âm Phủ), đúng bản chất tham số 2 biến thiên theo ngữ cảnh (xem TRANSLATION_RULES.md §4) |
+| **Yang World** *(tham số 1 của `Glossary('Yang World','game_concept_yang_world_desc')`)* | **Dương Giới** ✅ mới đặt | `religion/POD_religion_kueijin_l_english.yml`; đối xứng với "Âm Giới" ở trên, nhất quán Yin/Yang = Âm/Dương đã chốt B3c |
+
+## B3e. Thuật ngữ bổ sung (từ `religion/POD_religion_kueijin_l_english.yml`) — việc #2 file 1/36
+
+Nguồn: file neo của `religion/` (436 dòng). Đã chốt `Glossary()` tham số 1 phải dịch cho toàn bộ 15 loại thuật ngữ Kuei-Jin lõi (Dharma→Pháp Môn, Yama King(s)→Diêm Ma Vương, Yama Queen→Diêm Ma Nữ Vương, Demon Emperor→Ma Hoàng, August Personage of Jade→Ngọc Hoàng, Arhat→La Hán, Hell of Spiked Chains→Địa Ngục Xiềng Gai, Hundred Clouds→Bách Vân, Wheel of Ages→Bánh Xe Kỷ Nguyên, Wicked City→Thành Đô Tà Nghiệt) — tất cả đã có sẵn trong B3c, đây chỉ là lần đầu áp dụng thực tế vào văn xuôi. Kakuri/Shikome/Wan Kuei giữ nguyên (danh từ riêng).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Yang World | Dương Giới | ✅ xem B3e phía trên (đối xứng Âm Giới) |
+| Temple *(kueijin_house_of_worship)* | Miếu | nơi thờ tự Kuei-Jin |
+| Scarlet Queen | Xích Nữ Hoàng | thần Sức khỏe/Sinh sản/Của cải/Gia đình của Kuei-Jin |
+| Ebon Dragon | Hắc Long | thần Chiến tranh/Nước của Kuei-Jin |
+| Jade Emperor *(kueijin_high_god_name_alternate)* | Ngọc Đế | tên gọi khác của Ngọc Hoàng |
+| Thousand Hells *(kueijin_negative_afterlife, không qua Glossary)* | Thiên Địa Ngục | cõi âm ty phản diện của Kuei-Jin |
+| Heretical Dharma *(kueijin_religion)* | Pháp Môn Dị Giáo | tên gọi chung các giáo phái ngoài Ngũ Pháp Môn chính thống |
+| Song of the Shadow *(tên hiển thị của `boneflowers_religion`)* | Ảnh Ca | ✅ đã chốt B3c, lần đầu dùng trong văn xuôi đầy đủ |
+| Devil Tiger *(tên hiển thị của `deviltigers_religion`)* | Ma Hổ | ✅ đã chốt B3c |
+| Resplendent Crane *(tên hiển thị của `resplendentcranes_religion`)* | Thụy Hạc | ✅ đã chốt B3c |
+| Thrashing Dragon *(tên hiển thị của `thrashingdragons_religion`)* | Đằng Long | ✅ đã chốt B3c |
+| Thousand Whispers | Thiên Ngữ | Dharma dị giáo thứ 5 (ngoài Ngũ Pháp Môn chính thống + Thousand Hells) |
+| possessive `"...'s"` của thực thể/thần | mẫu `"của X"` | xác nhận theo tiền lệ `base_game_vh/localization/english/religion/religion_zoroastrianism_l_english.yml` (vd. "của Ohrmazd") |
+
+Ngoài ra ~30 tên tiểu phái/hội bên trong 5 Pháp Môn (Empty Hands→Không Thủ, Fishhooks→Lưỡi Câu, Black Iron Talons→Hắc Thiết Trảo, Crimson Tiger→Xích Hổ, Wandering Overlord→Chúa Tể Lang Thang, Grandmother Witch→Bà Phù Thủy, Ku of the Thousand Tears→Ku Ngàn Giọt Lệ…) — đặt theo giọng Hán-Việt nhất quán, xem trực tiếp trong file nếu cần tra lại vì đây là danh xưng ít khi bị trỏ tới từ file khác.
 
 ## B5. Xung đột cần giải quyết trước khi dịch
 

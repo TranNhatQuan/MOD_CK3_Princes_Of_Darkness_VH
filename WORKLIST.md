@@ -23,6 +23,8 @@ Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. 
 
 **Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.** Việc tiếp theo là **#2 — `religion/`** (xem chi tiết bên dưới). Đừng nhảy bậc sang #3 trở đi trước khi xong `religion/`.
 
+**Việc #2 (`religion/`) tiến độ: 1/36 file xong** — `POD_religion_kueijin_l_english.yml` (436/436 dòng, commit `2952a68`). Còn 35 file khác. Quy trình đã dùng: giao agent con dịch từng file, người điều phối tự chạy đủ 3 lớp kiểm tra + đọc git diff trước khi commit — **agent đầu tiên để sót lỗi Glossary() tham số 1 (không dịch) trên toàn bộ file, phải yêu cầu sửa lại.** Luôn kiểm tra kỹ tham số 1 của mọi `Glossary(...)` trong file mới, không chỉ tin báo cáo của agent.
+
 ---
 
 ## ✅ ĐÃ XONG — đừng dịch lại
