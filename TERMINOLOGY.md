@@ -1512,7 +1512,7 @@ Nguồn: `religion/POD_religion_mummy_l_english.yml` (119 dòng, đã dịch xon
 | Twilight Scholars | Học Giả Hoàng Hôn | dịch nghĩa |
 | Jade Sentinels | Vệ Binh Ngọc Bích | dịch nghĩa |
 
-## B4o. Thuật ngữ bổ sung (từ `POD_religion_ordos`) — việc #2, faith Ordos (Malkavian)
+## B4q. Thuật ngữ bổ sung (từ `POD_religion_ordos`) — việc #2, faith Ordos (Malkavian)
 
 Nguồn: `religion/POD_religion_ordos_l_english.yml` (119 dòng, đã dịch xong 100%). Faith chính "Ordos" (giáo phái bí ẩn Malkavian, giữ nguyên tên — đã liệt kê là danh từ riêng ở dòng tra cứu B0 "tên riêng giáo phái/tổ chức WoD") và 8 faith con/tổ chức: Ordo Aenigmatis, Ordo Ecstasis, Ordo Maleficus, Jocastian, Mnemosyne, Ordo Vaticinii (phi chính thống), Daughters of the Sun, Eyes of Malakai. 1 lần `[Glossary('Ashirra','game_concept_ashirra_desc')]` trong `daughtersofthesun_desc` — tham số 1 giữ nguyên "Ashirra" (đã chốt B2b, danh từ riêng giáo phái Hồi giáo ma cà rồng), tham số 2 giữ nguyên là key. Dùng `$pod_clan$`, `$pod_cainites$`, `$pod_diablerie$` đúng như bản gốc, không thêm/bớt ref.
 
@@ -1595,3 +1595,25 @@ File 141/141 dòng, dịch xong 100%. Faith này là ác quỷ (`trait_demon`="�
 | `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k/B3s, kể cả tên riêng (`"Lucifer's"`→"của Lucifer") |
 
 > Dòng 111-142 (splat `faustian`, `cryptic`, `luciferan` + 3 holy order liên quan, `ravener`, `reconciler`) đều là **key bị comment** (`#` ở đầu dòng) trong bản gốc — giữ nguyên hoàn toàn, không dịch, theo mục 5 TRANSLATION_RULES.md.
+
+## B4q. Thuật ngữ `religion/POD_religion_modern_l_english.yml` — Anarch/Camarilla/Sabbat hiện đại, việc #2 file 30/36
+
+File 125/125 dòng, dịch xong 100%. Nhóm faith ma cà rồng hiện đại: Modern Anarch, Camarilla, và 13 "Path of Enlightenment" thuộc Sabbat. Phần lớn dùng lại thuật ngữ đã chốt (Path of X → Con Đường X theo B3f/B3k, Camarilla/Sabbat/Anarch giữ nguyên B0, Kindred → Huyết Tộc B3k, Masquerade → Màn Che, Antediluvians/Caine/Priscus giữ nguyên B0/B2b, Book of Nod → Sách Nod B2b).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| status quo | hiện trạng | dịch nghĩa thường, không có khái niệm WoD riêng |
+| Traditions *(7 Luật Camarilla)* | Luật | số ít/nhiều gộp theo mục 7 TRANSLATION_RULES.md |
+| Sword of Caine | Thanh Kiếm của Caine | dịch nghĩa cụm mô tả, chưa có tiền lệ ở file khác |
+| Gehenna | Gehenna *(giữ nguyên)* | biến cố tận thế ma cà rồng, danh từ riêng WoD gốc Kinh Thánh, chưa có tiền lệ dịch ở bất kỳ file POD nào |
+| Convention of Thorns | Công Ước Thorns | "Convention"→"Công Ước", giữ tên riêng "Thorns"; lần đầu xuất hiện trong mod |
+| Blood Bond | Ràng Buộc Máu | dịch nghĩa thông thường |
+| pack *(đơn vị tổ chức Sabbat)* | pack *(giữ nguyên)* | danh từ tổ chức lõi WoD, theo B0, không có tiền lệ dịch |
+| ritae, ritus | *(giữ nguyên)* | danh từ nghi lễ Latin của Sabbat, không có tiền lệ |
+| War Parties | các đoàn chinh chiến | dịch nghĩa thường |
+| Dark Ages *(bối cảnh lịch sử, không phải game-concept)* | thời Trung Cổ Đen Tối | dịch nghĩa tự nhiên |
+| the Damned | Những Kẻ Bị Nguyền Rủa | cách gọi ma cà rồng, dịch nghĩa |
+| Demiurge, Jyhad, vinculum | *(giữ nguyên)* | thuật ngữ lore VtM không có bản dịch tự nhiên |
+| Patriot(s) / Necronomist(s) / Unifier(s) / Metamorphosist(s) / Albigensian(s) / Noddist(s) / Harmonist(s) / Nihilist(s) / Martyr(s) *(tên tín đồ 9 Path Sabbat trong file này)* | Người Ái Quốc / Người Nghiên Cứu Tử Vong / Người Hợp Nhất / Người Biến Hóa / Người Albigensia / Người Theo Sách Nod / Người Hài Hòa / Người Hư Vô / Kẻ Tuẫn Đạo | mẫu "Người/Kẻ + tính chất", nhất quán văn phong gothic |
+
+> Dòng `camahumanity_desc` có cặp dấu `"Path"` không escape (`\"`) ngay trong bản gốc tiếng Anh (lỗi cú pháp có sẵn của POD, không phải `\"`) — bản dịch giữ nguyên byte-for-byte cặp dấu bare-quote đó quanh cụm dịch "Con Đường", đúng theo quy tắc giữ nguyên lỗi gốc.
