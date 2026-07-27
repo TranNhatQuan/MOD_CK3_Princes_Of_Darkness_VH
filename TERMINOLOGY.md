@@ -747,7 +747,7 @@ Nguồn: `religion/POD_religion_ghoul_l_english.yml` (70 dòng) — tôn giáo "
 | Caine *(devil_name/death_deity_name)* | Caine *(giữ nguyên)* | danh từ riêng đã chốt B2b |
 | `_possessive` (`"X's"`) | mẫu `"của X"` | theo tiền lệ base đã ghi ở B3e (`zoroastrianism`, `taoism`…) |
 
-## B3g. Thuật ngữ bổ sung (từ `POD_religion_roadoflaibon`) — việc #2 file 7/36
+## B3h. Thuật ngữ bổ sung (từ `POD_religion_roadoflaibon`) — việc #2 file 8/36
 
 | English | Tiếng Việt | Ghi chú |
 |---|---|---|
@@ -759,6 +759,32 @@ Nguồn: `religion/POD_religion_ghoul_l_english.yml` (70 dòng) — tôn giáo "
 | the abyss *(cõi âm ty)* | vực thẳm | ✅ tra base (`religion_christianity_l_english.yml:51`, `religion_paganism_l_english.yml:1478` = "Vực Thẳm") |
 | possessive `"X's"` | mẫu `"của X"` | ✅ tiền lệ base (`religion_christianity_l_english.yml:73`="của Fortuna"), dùng nhất quán mọi file `religion/` từ nay |
 | Fortuna *(thần lừa lọc/may rủi)* | Fortuna *(giữ nguyên)* | ✅ tiền lệ base giữ nguyên y hệt (`religion_christianity_l_english.yml:72`) |
+
+## B3i. Thuật ngữ bổ sung (từ `POD_religion_ashirra`) — việc #2 file 5/36
+
+Nguồn: `religion/POD_religion_ashirra_l_english.yml` (63 dòng) — giáo phái ma cà rồng Hồi giáo. Đối chiếu với `base_game_vh/localization/english/religion/religion_islam_l_english.yml` (giữ nguyên Caliph/Caliphate/Imam/Imamate/mullah/Muhammad/Allah).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Ashirra, Mullah, Sultanate *(chức danh)*, Muhammad, Allah, Qabilat al-Mawt, mọi tên `Tariq el-*`, Road of Bones | *(giữ nguyên)* | danh từ riêng tôn giáo/tên phái, theo B0 và tiền lệ base Islam |
+| The Prophet | Nhà Tiên Tri | ✅ tra base (`islam_good_god_the_prophet`="Nhà Tiên tri") |
+| Companions of the Prophet | Bằng Hữu của Nhà Tiên Tri | theo mẫu base `holy_order_companions_of_hira` |
+| Defenders of the Ashirra | Hộ Vệ Ashirra | theo mẫu base cho holy order kiểu phòng vệ |
+| Warrior/Tribesman/Witness/Scholar *(tên tín đồ các Tariq)* | Chiến Binh / Người Bộ Tộc / Nhân Chứng / Học Giả | dịch nghĩa thường |
+
+## B3j. Thuật ngữ bổ sung (từ `POD_religion_ignorance`) — việc #2 file 9/36
+
+Nguồn: `religion/POD_religion_ignorance_l_english.yml` (71 dòng) — tôn giáo mặc định của phàm nhân không biết về siêu nhiên. Không có `Glossary()`/`UmbraGlossaryLocalized()`.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Ignorance *(tên faith)* | Vô Minh | ✅ tra base (`dualism_evil_god_ignorance`, `jainism_evil_god_ignorance` đều ="Vô Minh") |
+| Ignorant(s) | Kẻ Vô Minh / Những Kẻ Vô Minh | |
+| Innocence *(faith con)* | Vô Tội | khác "Vô Minh" — khái niệm riêng (vô tội đạo đức, không phải không biết) |
+| God *(high_god_name_alternate)* | Chúa | ✅ tra base (`christianity_high_god_name_alternate`="Chúa") |
+| Death *(death_deity_name)* | Cái Chết | ✅ tra base (`christianity_death_deity_name`="Cái Chết") |
+| pastor | mục sư | chức sắc Tin Lành, phân biệt "linh mục"/"giám mục" Công giáo |
+| home(s) *(house_of_worship)* | mái nhà / những mái nhà | giữ tinh thần "nhà" đời thường thay vì "nhà thờ" trang trọng |
 
 ## B5. Xung đột cần giải quyết trước khi dịch
 
