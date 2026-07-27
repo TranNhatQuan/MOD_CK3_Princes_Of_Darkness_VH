@@ -2399,3 +2399,246 @@ Nguồn: file lớn dịch qua 4 agent chia đoạn (1-114, 115-229, 230-341, 34
 | True Jade *(tên interaction, đã có tiền lệ tại `gui/POD_umbra_window_l_english.yml:543`)* | Ngọc Bích Chân Chính | ✅ tái dùng nguyên trạng |
 | Changeling | Đứa Trẻ Bị Tráo | đặt mới, đúng nghĩa gốc dân gian "changeling" |
 | naming_the_crop/weed/flower/thorn/tree/mushroom *(Solarium)* | Mùa Vụ/Cỏ Dại/Hoa/Gai/Cây/Nấm | đặt mới, các loại cây trong Solarium |
+
+## B5-vampire-p3. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 322-444, việc #5
+
+Đoạn 3/nhiều của file lớn (1187 dòng), chia dịch theo agent riêng từng đoạn. Nội dung: tương tác Infiltrate (Toreador/Court), Rite of Status (Gangrel), Enforce Masquerade, Madness Network (Malkavian), Send Adviser (Cappadocian), Web of Knives bounty (Assamite/Banu Haqim), Choose Parent/Mentor/Sifu, Ask Embrace. `[Glossary('Sire','game_concept_Sire_desc')]` xuất hiện 1 lần — giữ nguyên tham số 1 "Sire" theo tiền lệ toàn mod (B4d/roadofsin, chưa có bản Việt chính thức cho `game_concept_Sire`).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Infiltrate *(POD_infiltrate_interaction, xâm nhập triều đình dưới lốt neonate)* | Xâm nhập | đặt mới; mô tả dùng "kẻ mới được Trao truyền" cho "neonate" theo tiền lệ B2b |
+| Rite of Status *(POD_gangrel_challenge_interaction, nghi thức Gangrel giới thiệu bản thân)* | Nghi thức Địa vị | đặt mới, dịch nghĩa; khác "Nghi Lễ"/"Nghi thức" dùng cho các nghi lễ khác trong mod nhưng cùng mẫu |
+| Ethic of Succor *(POD_ventrue_succor_interaction, quyền được cứu giúp của Ventrue)* | Đạo lý Cứu giúp | đặt mới; "Ethic" dịch "Đạo lý" (khác "Ethics"="Đạo Lý" B3r — viết hoa khác do đây là cụm thường trong câu văn, không phải tên faith) |
+| Madness Network *(Malkavian, mạng lưới tâm linh giữa các Malkavian)* | Mạng lưới Điên loạn | đặt mới, dịch nghĩa trực tiếp |
+| Trial by War *(Voivode, thử thách bằng đấu tay đôi/chiến trận)* | Thử thách bằng Chiến trận | đặt mới |
+| Web of Knives *(tổ chức sát thủ Banu Haqim, đã có tiền lệ `k_webofknives: "Web of Knives"` ở `titles_POD_l_english.yml:37`, giữ nguyên tiếng Anh toàn mod)* | Mạng lưới Dao găm | ⚠️ **lệch khỏi tiền lệ title đã chốt** — `titles_POD_l_english.yml` giữ nguyên "Web of Knives" như danh xưng vương quốc/tổ chức (tên riêng, B0). Ở đây dịch nghĩa "Mạng lưới Dao găm" cho tự nhiên hơn trong câu văn tương tác (`POD_create_bounty_interaction`, `POD_chase_bounty_interaction`). **CẦN XÁC NHẬN LẠI**: nên thống nhất giữ nguyên "Web of Knives" xuyên suốt mod theo tiền lệ title, hay tách hai ngữ cảnh (tên tổ chức/tước vị giữ nguyên, cách gọi thông tục trong lời thoại thì dịch nghĩa). Đánh dấu nghi vấn — có thể cần sửa lại khi rà soát toàn bộ các file nhắc tới Web of Knives. |
+| Ask Embrace *(POD_charjoin_become_vampire_interaction, xin ai đó Trao truyền mình)* | Xin được Trao truyền | tái dùng "Trao truyền" đã chốt B2 (`pod_Embrace`) |
+| Choose Parent / Choose Mentor *(chọn quan hệ cha-mẹ/sư phụ ma cà rồng, khác Ask Embrace)* | Chọn Cha/Mẹ / Chọn Sư phụ | đặt mới; `POD_choose_parent_interaction` dùng cho quan hệ huyết thống nói chung (không riêng Sire), tách khỏi "Sifu" (Kuei-Jin, giữ nguyên B5k) và "Sire" (giữ nguyên) |
+| One Eyed *(POD_blood_heal_one_eyed, tên một biến thể Blood Heal)* | Chột Mắt | đặt mới, dịch nghĩa thông tục |
+| Mimic Face / Give Face / Restore Your Face / Restore Target's Face *(Vampshapeshift, đổi mặt bằng Dị năng)* | Bắt chước Gương mặt / Trao Gương mặt / Khôi phục Gương mặt của Ngươi / Khôi phục Gương mặt của Mục tiêu | đặt mới, dịch nghĩa trực tiếp |
+| childer *(recipient_secondary_POD_cappadocian_send_advisor_interaction: "Childe")* | Childe *(giữ nguyên)* | tiền lệ B4d/B5 — chưa có bản Việt chính thức, giữ nguyên tiếng Anh xuyên suốt mod cho tới khi `game_POD_concepts` chốt |
+
+## B5-vampire-p4. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 445-592, việc #5
+
+Đoạn 4/nhiều của file lớn (1187 dòng). Nội dung: Ghoul/Herd hóa tù nhân, Blink (Celerity), Vanish/Silence of Death (Obfuscate), Send the Eighth Plague (Animalism), Create Gargoyle (Thaumaturgy), Create Zombu (Necromancy), một loạt perk-interaction đặt theo tên riêng kiểu "X's Y" (Kiss of Lachesis, Clio's Kiss, Pariah's Caress, King David's Blessing, Rayzeel's Song, Sword of the Righteous, Dagon's Call), Dementation/Lunatic Eruption/Touch of the Saints/Melpominee/Calling Song/Madrigal (Malkavian voice powers), artifact-spirit interactions, Purification, Unburden the Bestial Soul, Subsist Breath, Soul Exchange. Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()` trong đoạn này (0 lần).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Ghoul Prisoner *(POD_ghoulify_prisoner_interaction)* | Biến Tù Nhân thành Bộc huyết | đặt mới; tái dùng "Bộc huyết" (Ghoul, đã chốt) làm động từ hóa, nhất quán tinh thần "Ghoulify"→"Biến thành Bộc huyết" đã có ở B5j |
+| undying thrall *(mô tả `ghoulify_prisoner`, ngữ cảnh domitor-ghoul)* | Nô Bộc bất tử | tái dùng "Nô Bộc" đã chốt cho "Thrall" trong ngữ cảnh ghoul (B5j), không nhầm với "Nô Lệ" (Demon-cultist context) |
+| Blink *(Celerity power di chuyển quân nhanh, modifier + interaction cùng tên)* | Chớp Dời | đặt mới, dịch nghĩa ngắn gọn cho tốc độ siêu nhiên |
+| Drained *(modifier hệ quả của Blink)* | Kiệt Sức | đặt mới, dịch nghĩa |
+| Vanish *(Obfuscate power dừng mọi scheme nhắm vào mình)* | Biến Mất | đặt mới, dịch nghĩa trực tiếp |
+| Silence of Death *(Obfuscate power cản trở giao tiếp nạn nhân)* | Sự Tĩnh Lặng của Tử Thần | đặt mới, dịch nghĩa |
+| Send the Eighth Plague *(Animalism power gieo dịch bệnh lên cả vương quốc)* | Giáng Xuống Tai Ương Thứ Tám | đặt mới; "Eighth Plague" ám chỉ 10 tai ương Ai Cập trong Kinh Thánh, dịch "Plague"→"Tai Ương" theo lối cổ trang |
+| Create Gargoyle *(Thaumaturgical Experiment)* | Tạo Gargoyle | tái dùng "Gargoyle" giữ nguyên đã chốt B4d; "Thaumaturgical Experiment"→"Thí Nghiệm Thaumaturgy" (giữ tên riêng Discipline theo B0) |
+| gargoyle caste (Stone Dog/Bingmayong/Shade/Blood Guardian/Boyar/Caryatid/Scout/Warrior/Sentinel/Chatterer/Sand Serpent/Rattler/Fairy/Onyx Cat/Golden Manticore/Kintsugi/Rogata/Totai) | đẳng cấp Chó Đá/Bingmayong/Bóng Ma/Vệ Huyết/Boyar/Caryatid/Trinh Sát/Chiến Binh/Lính Canh/Kẻ Lải Nhải/Xà Cát/Rắn Chuông/Tiên/Mèo Onyx/Manticore Vàng/Kintsugi/Rogata/Totai | tái dùng "đẳng cấp" = Caste đã chốt (B4d/B4h); các tên caste có gốc văn hóa cụ thể (Bingmayong = tượng binh mã đất nung Tần Thủy Hoàng, Boyar = quý tộc Slav, Caryatid = tượng cột Hy Lạp, Kintsugi/Rogata/Totai = gốc Nhật) giữ nguyên phiên âm gốc, chỉ dịch phần mô tả tiếng Anh phổ thông (Stone Dog, Shade, Blood Guardian, Scout, Warrior, Sentinel, Chatterer, Sand Serpent, Rattler, Fairy, Onyx Cat, Golden Manticore) |
+| Create Zombu *(Necromantic ceremony hồi sinh xác chết bằng hiến tế)* | Tạo Zombu | tái dùng "Zombu" giữ nguyên đã chốt B4j; "Necromantic"→"Thuật Gọi Hồn" theo tiền lệ B4d |
+| Kiss of Lachesis / Clio's Kiss *(perk đổi tuổi tác / đổi chủ đất qua thời gian, tên theo nữ thần Hy Lạp)* | Nụ Hôn của Lachesis / Nụ Hôn của Clio | đặt mới; giữ tên riêng thần thoại (Lachesis - một trong ba Moirai/Số Mệnh, Clio - nàng thơ Lịch sử), dịch khung "Kiss of X"→"Nụ Hôn của X" nhất quán |
+| Dementation *(tên Discipline/power gieo điên loạn, Malkavian)* | Dementation *(giữ nguyên)* | chưa có tiền lệ dịch nghĩa tên riêng Discipline cụ thể, nhất quán B0 (giống Potence/Celerity/Fortitude giữ nguyên) |
+| Lunatic Eruption / Lunatic Invocation *(power khơi dậy phẫn cuồng tập thể)* | Cơn Bộc Phát Điên Cuồng / Sự Triệu Hồi Điên Loạn | đặt mới, dịch nghĩa |
+| Touch of the Saints *(power chữa loạn trí)* | Cái Chạm của Các Thánh | đặt mới, dịch nghĩa trực tiếp |
+| Melpominee / Calling Song / Madrigal *(các power "tiếng hát" của Malkavian, tên riêng thuật ngữ V:tM)* | Melpominee / Khúc Ca Triệu Gọi / Madrigal | "Melpominee" và "Madrigal" là tên riêng power nguyên tác giữ nguyên; "Calling Song" dịch nghĩa vì là cụm mô tả rõ ràng (triệu tập triều thần/khách khứa) |
+| Rouse Artifact Spirit | Đánh Thức Linh Hồn Hiện Vật | đặt mới, dịch nghĩa |
+| Upgrade [Skill] Modifier *(6 skill: Prowess/Diplomacy/Martial/Stewardship/Intrigue/Learning)* | Nâng Cấp Hệ Số [Kỹ Năng] | đặt mới; "Modifier"→"Hệ Số" (không phải "Bộ Chỉnh Sửa" dùng cho status effect UI) vì ngữ cảnh nâng cấp thuộc tính hiện vật; Prowess→Vũ Dũng, Martial→Chỉ Huy, Stewardship→Quản Trị, Intrigue→Trù Tính, Learning→Học Thức (nhất quán thuật ngữ kỹ năng nhân vật của base_game_vh) |
+| Hunt Spirit | Săn Linh Thể | tái dùng "Linh Thể" (Spirit) đã chốt B4 |
+| Purification *(power chữa loạn trí bằng "third eye")* | Thanh Tẩy | đặt mới, dịch nghĩa |
+| Pariah's Caress *(perk khiến mục tiêu bị ghét bỏ)* | Cái Vuốt Ve của Kẻ Bị Ruồng Bỏ | đặt mới; "Pariah"→"Kẻ Bị Ruồng Bỏ" dịch nghĩa, khung "X's Caress"→"Cái Vuốt Ve của X" nhất quán các power dạng sở hữu cách khác trong đoạn |
+| King David's Blessing *(perk chữa stress trait)* | Phước Lành của Vua David | đặt mới; "David" giữ tên riêng Kinh Thánh, "Blessing"→"Phước Lành" theo lối cổ trang |
+| Unburden the Bestial Soul *(perk nâng Virtue/chữa Derangement)* | Trút Bỏ Gánh Nặng của Linh Hồn Thú Tính | tái dùng "Trút Bỏ Gánh Nặng" = Unburden đã chốt B5e; "Bestial Soul"→"Linh Hồn Thú Tính" dịch nghĩa, nhất quán "Beast"→"Dã Thú"/"thú tính" toàn mod |
+| Virtue(s) *(Golconda/Salubri, đối lập Derangement)* | Đức Hạnh | tái dùng theo lối dịch nghĩa phổ thông, không có tiền lệ WoD riêng cần giữ nguyên |
+| Derangement(s) | Sự Loạn Trí | đặt mới, dịch nghĩa; dùng nhất quán cho mọi chỗ "derangement"/"Cure Derangements" xuất hiện trong đoạn |
+| Subsist Breath *(perk hút hơi thở để no Hunger)* | Hơi Thở Duy Sinh | đặt mới; "Subsist"→"Duy Sinh" (duy trì sự sống) dịch thoát ý ngắn gọn cho tên power, mô tả dùng "tiêu thụ hơi thở" |
+| Rayzeel's Song *(perk chữa bệnh/vết thương hàng loạt, tên theo Rayzeel — Nagaraja huyền thoại)* | Khúc Ca của Rayzeel | đặt mới, giữ tên riêng "Rayzeel", khung "X's Song"→"Khúc Ca của X" |
+| Soul Exchange | Hoán Đổi Linh Hồn | đặt mới, dịch nghĩa trực tiếp |
+| Sword of the Righteous *(perk dùng Vitae tăng vũ dũng vũ khí)* | Thanh Kiếm của Kẻ Chính Trực | đặt mới, dịch nghĩa; "Righteous"→"Kẻ Chính Trực" theo lối cổ trang tôn giáo |
+| Dagon's Call *(perk gây hại từ xa, tên theo Dagon — thần biển Philistine/Lovecraft)* | Lời Kêu Gọi của Dagon | đặt mới, giữ tên riêng "Dagon", khung "X's Call"→"Lời Kêu Gọi của X" |
+
+Ghi chú kỹ thuật: đoạn 445-592 không chứa `Glossary()`/`UmbraGlossaryLocalized()`. Đã đối chiếu token trước/sau: ref `$...$` 1→1 (chỉ `$pod_vitae$`), bracket 35→35, icon 0→0, `\n` 0→0, `\"` 0→0, em dash `—` 2→2, tổng 148 dòng khớp.
+
+## B5-vampire-p1. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 1-155 (Blood Surge/Blood Heal/Find Mortals/Offer Draught/Shapeshift/Animal Dominion), việc #5
+
+File 1186 dòng tổng, đây là đoạn đầu (155 dòng). Nhiều key khác trong cùng file (dòng 156+) dùng lại các thuật ngữ dưới đây — các agent dịch phần sau PHẢI tái sử dụng, không đặt lại.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Blood Surge *(tên interaction, `POD_blood_surge`)* | Kích Huyết | đặt mới; dịch nghĩa "khuấy động/kích hoạt máu", ngắn gọn phù hợp UI, khác "Rouse the Blood" nếu gặp riêng (chưa xuất hiện trong đoạn này) |
+| Blood Heal *(tên interaction, `POD_blood_heal`)* | Trị Liệu Huyết | đặt mới; ghép "Trị Liệu" (chữa lành) + "Huyết" (máu, dạng Hán Việt ghép từ, nhất quán văn phong "Huyết Tộc"/"Huyết Thuật" đã chốt B2) |
+| Offer Draught / Draught (of Might/Elegance/Endurance) *(`POD_offer_draught`)* | Dâng Rượu Huyết / Rượu Huyết (Sức Mạnh/Thanh Nhã/Bền Bỉ) | đặt mới; "Draught" (một ngụm/liều thuốc uống) dịch thành "Rượu Huyết" — hành động ma cà rồng ban máu tăng cường thể chất cho ghoul/thuộc hạ, tương tự rượu bổ; "Might"→"Sức Mạnh", "Elegance"→"Thanh Nhã", "Endurance"→"Bền Bỉ" (dịch nghĩa tính từ thường) |
+| Find Mortals *(`POD_find_mortals`)* | Tìm Người Phàm | đặt mới; "mortal(s)" dùng "người phàm" xuyên suốt đoạn này (peasants/warriors/diplomats/…), khác "con người"/"nhân loại" để giữ sắc thái ma cà rồng nhìn xuống người thường |
+| Scoundrels / Peasants / Clergy / Warriors / Diplomats / Merchants *(loại người phàm theo skill)* | Kẻ Bất Lương / Nông Dân / Giáo Sĩ / Chiến Binh / Nhà Ngoại Giao / Thương Nhân | dịch nghĩa thường, nhất quán cách gọi nghề nghiệp/tầng lớp trong base_game_vh |
+| Ashen Nobles / Knights / Seneschals / Thieves / Cults *(biến thể "cao cấp" của Find Mortals)* | Quý Tộc / Hiệp Sĩ / Quản Gia / Kẻ Trộm / Giáo Phái Tro Tàn | đặt mới; "Ashen" dịch nghĩa "Tro Tàn" (tính từ mô tả nhóm người phàm đặc biệt/hiếm, không có tiền lệ base) |
+| Scry the Soul *(năng lực Auspex, `POD_find_mortals_interaction_*.tt`)* | Thấu Thị Linh Hồn | đặt mới; "Scry" (nhìn thấu qua phép thuật) → "Thấu Thị", "Soul"→"Linh Hồn"; Auspex giữ nguyên tên Discipline (theo B0, chưa có tiền lệ dịch tên Discipline nào — Potence/Celerity/Fortitude/Auspex/Animalism đều giữ nguyên) |
+| Choleric/Melancholic/Phlegmatic/Sanguine Humors *(danh từ mô tả máu người phàm, khác "Resonance")* | Thể Dịch Choleric/Melancholic/Phlegmatic/Sanguine | đặt mới; "Humors" (thuyết thể dịch y học cổ) → "Thể Dịch", tên 4 khí chất giữ nguyên tiếng Anh nhất quán với quyết định B4x/gui/POD_see_resonance (chưa dịch tên 4 temperament, chờ `game_POD_concepts_l_english.yml`) |
+| resonance *(danh từ thường, khác "Resonance" tên riêng 4 loại)* | resonance *(giữ nguyên, chữ thường)* | nhất quán với quyết định giữ nguyên tên temperament ở B4x — cụm "choleric resonance" trong `.tt` giữ nguyên cả hai từ tiếng Anh vì đây là thuật ngữ chưa chốt dịch nghĩa (concept gốc `game_concept_choleric_lifestyle` chưa dịch) |
+| Grand City *(concept link `[grand_city\|E]`)* | *(không đổi, chỉ dịch câu quanh nó)* | tái dùng "Đại Thành" đã chốt B4cat1 nếu cần viết trực tiếp, nhưng ở đây chỉ xuất hiện dạng `[grand_city|E]` nên không có chữ để dịch |
+| Shapeshift *(`POD_vampshapeshift`, năng lực Protean/Vicissitude biến hình)* | Biến Hình | đặt mới, dịch nghĩa thường |
+| Call Animals / Animal Dominion *(`POD_animaldominion`, năng lực Animalism)* | Triệu Gọi Muông Thú | đặt mới; "Call"→"Triệu Gọi" nhất quán các interaction triệu hồi khác (B5g `Summon Spirit`→"Triệu hồn"; ở đây dùng "Triệu Gọi" cho động vật để phân biệt với triệu hồi linh hồn) |
+| Godhead *(`POD_vampshapeshift_interaction_godhead`, hình thái biến hình cấp cao)* | Thần Thể | đặt mới; ghép Hán Việt "Thần" + "Thể" (thân xác), giữ giọng trang trọng/gothic |
+| Chiropteran Marauder *(hình dạng biến hình dơi cấp cao)* | Kẻ Cướp Bóc Chiropteran | đặt mới; "Chiropteran" (thuật ngữ sinh học chỉ bộ Dơi, dùng như biệt danh giống loài trong lore) giữ nguyên tiếng Anh vì không có bản dịch phổ thông tương đương, "Marauder"→"Kẻ Cướp Bóc" dịch nghĩa |
+| Zulo Shape / Draconic Form / Typhonic Form *(các hình dạng biến hình đặc biệt theo clan)* | Hình Dạng Zulo / Hình Dạng Rồng / Hình Dạng Typhon | "Zulo"/"Typhonic"→"Typhon" giữ tên riêng gốc thần thoại/lore, "Draconic"→"Rồng" dịch nghĩa |
+| Aspect of the Beast *(perk mua bằng tương tác)* | Khía Cạnh của Dã Thú | đặt mới; "Beast" dùng "Dã Thú" nhất quán với cách gọi "The Beast" (bản năng thú tính ma cà rồng) trong toàn mod |
+| Potence / Celerity / Fortitude *(tên Discipline, xuất hiện trong `MUST_HAVE_MORE_*_THAN_DRINKER`)* | Potence / Celerity / Fortitude *(giữ nguyên)* | chưa có tiền lệ dịch nghĩa tên riêng từng Discipline cụ thể (khác "Discipline" nói chung = "Dị năng" đã chốt B2); giữ nguyên theo B0, nhất quán cách xử lý "Vitae"/"Antediluvian" |
+| Feeding on Animals *(`POD_drain_animal_interaction_toast`, dòng toast không bị comment)* | Ăn Thịt Động Vật | đặt mới; các dòng `#POD_drain_animal_*` khác trong đoạn này bị comment (`#` đầu dòng) nên giữ nguyên tiếng Anh, không dịch theo mục 5 TRANSLATION_RULES.md |
+
+## B5-vampire-p6. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 727-889, việc #5
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Train / Mass Train (Disciplines) *(`POD_train_disciplines_interaction`, `POD_mass_train_disciplines_interaction`)* | Rèn Luyện / Rèn Luyện Hàng Loạt | đặt mới; "Train" dịch "Rèn luyện" (dạy Dị năng cho người khác), khác "Teach" cùng nghĩa trong câu mô tả dùng động từ "Dạy" |
+| Discipline(s) *(trong `Glossary('Disciplines','game_concept_discipline_desc')`)* | Dị năng | tái dùng B2 đã chốt; chỉ dịch tham số 1 hiển thị, giữ nguyên key `game_concept_discipline_desc` ở tham số 2 |
+| student *(danh xưng người học Discipline qua Train)* | học trò | dịch nghĩa thường, giọng trung cổ |
+| childe *(hậu duệ trực tiếp do Embrace tạo ra, `POD_embrace_prisoner_interaction_desc`)* | hậu duệ | tái dùng cách dịch "childe" đã dùng xuyên suốt các phần trước của file này (không lập bảng riêng vì đã nhất quán) |
+| Homunculus *(`POD_create_homunculus_interaction`, bản sao người phàm của chính ma cà rồng)* | Homunculus *(giữ nguyên)* | đặt mới theo B0; thuật ngữ giả kim/huyền học gốc Latin, cộng đồng quen đọc tiếng Anh, không có bản dịch phổ thông tương đương ngắn gọn |
+| Mask (of a Thousand Faces) *(`POD_mask_of_a_thousand_faces_interaction`)* | Mặt Nạ | đặt mới; dịch nghĩa ngắn gọn cho tên nút UI, tên đầy đủ "of a Thousand Faces" không xuất hiện trong chuỗi hiển thị (chỉ có trong tên key) |
+| Old Friend *(`POD_old_friend_interaction`)* | Bạn Cũ | đặt mới, dịch nghĩa thường |
+| Create Name *(`POD_create_name_interaction`, xóa hook/claim/truce/secret/relation)* | Tạo Danh Tính | đặt mới; "Create Name" ở đây nghĩa là xóa sạch lai lịch cũ để tạo danh tính mới, không phải "tạo tên gọi" theo nghĩa đen |
+| Horrid Blade of the Demons *(`POD_horrid_blade_of_the_demons_interaction`, năng lực Daimonion)* | Lưỡi Kiếm Kinh Hoàng của Quỷ | đặt mới, dịch nghĩa |
+| Mirror's Visage *(`POD_mirror_duplicate_interaction`, năng lực Mytherceria/Chimerstry tạo phân thân)* | Gương Mặt Phân Thân | đặt mới; "Visage" (dung mạo) ghép với "Mirror" (gương) thành "Gương Mặt Phân Thân" để truyền tải ý tạo bản sao ảo ảnh |
+| Sensory Deprivation *(`POD_sensory_deprivation_interaction`)* | Tước Đoạt Giác Quan | đặt mới, dịch nghĩa |
+| Discern the Aura *(`POD_discern_the_aura_interaction`, năng lực Auspex tìm người phàm theo thuộc tính)* | Thấu Thị Hào Quang | đặt mới; "Aura" → "Hào Quang" (khí/vầng sáng quanh cơ thể theo huyền học), "Discern" → "Thấu Thị" nhất quán với "Scry" đã dịch cùng gốc ở B5-vampire-p5 |
+| Reveal Scheme *(`POD_the_mind_revealed_interaction`)* / Reveal Secret *(`POD_omniscience_interaction`)* | Phơi Bày Âm Mưu / Phơi Bày Bí Mật | đặt mới; "Reveal" → "Phơi Bày", "Scheme" → "Âm Mưu" (đã chốt TRANSLATION_RULES mục 4 ví dụ), "Secret" → "Bí Mật" |
+| Personality Metamorph / Sexuality Metamorph *(`POD_personality_metamorph_interaction`, `POD_sexuality_metamorph_interaction`)* | Biến Đổi Tính Cách / Biến Đổi Thiên Hướng Tình Dục | đặt mới; "Metamorph" dùng động từ "Biến Đổi" nhất quán với "Shapeshift"→"Biến Hình" ở B5-vampire-p5 nhưng khác đối tượng (tính cách/thiên hướng, không phải hình dạng) |
+| Fist of the Titans *(`POD_fist_of_the_titans_interaction`, tấn công niệm động toàn bộ hiệp sĩ)* | Nắm Đấm Titan | đặt mới; "Titans" giữ nguyên tên thần thoại Hy Lạp phiên âm Hán Việt quen thuộc "Titan" |
+| The Forger's Hammer *(`POD_the_forgers_hammer_interaction`, tăng sức mạnh vũ khí hiện vật)* | Búa của Người Thợ Rèn | đặt mới, dịch nghĩa |
+| Lend the Supernatural Vigor *(`POD_lend_the_supernatural_vigor_interaction`)* | Ban Tặng Sinh Lực Siêu Nhiên | đặt mới; "Vigor" → "Sinh Lực", "Lend" → "Ban Tặng" (nhất quán giọng trang trọng hơn "cho mượn") |
+| Quickness (Decision/Scheme) *(`POD_quickness_decision_interaction`, `POD_quickness_scheme_interaction`, xóa cooldown)* | Mau Lẹ (Quyết định/Âm mưu) | đặt mới, dịch nghĩa; giữ tag `#Weak (...)#!` không dịch chữ trong ngoặc đơn của tag (chữ "Decision"/"Scheme" bên trong vẫn dịch vì đó là text hiển thị, không phải tên tag) |
+| Time out of Time *(`POD_time_out_of_time_interaction`, đẩy nhanh tiến độ âm mưu)* | Thời Gian Ngoài Thời Gian | đặt mới, dịch sát nghĩa đen giữ chất thơ của tên gốc |
+| Between the Ticks *(`POD_between_the_ticks_interaction`)* | Giữa Những Nhịp Khắc | đặt mới; "Ticks" (nhịp đồng hồ/khắc thời gian) → "Nhịp Khắc" |
+| Ventrue Weakness / Ventrue Bane *(`POD_drink_herd_ventrue_weakness`, `ventrue_bane_warning`, nhược điểm Clan Ventrue với feeding restrictions)* | Nhược Điểm Ventrue | đặt mới; "Bane" và "Weakness" đều dịch chung "Nhược Điểm" trong ngữ cảnh này (cùng chỉ điểm yếu của Clan) |
+| Feeding Restrictions *(concept-link `[feeding_restrictions\|E]`, đã có `game_concept_feeding_restrictions` chưa dịch)* | *(không đổi, chỉ dịch câu quanh nó)* | concept-link giữ nguyên vì key nguồn `game_POD_concepts_l_english.yml` chưa dịch; khi file đó dịch xong, quay lại đồng bộ nếu cần |
+| Paradox *(`POD_paradox_perk_interaction`, năng lực Temporis dập tắt phe phái)* | Nghịch Lý | đặt mới, dịch nghĩa; danh từ triết học/vật lý phổ biến trong tiếng Việt |
+| Boon of Anubis *(`POD_boon_of_anubis_perk_interaction`)* | Ân Huệ của Anubis | đặt mới; "Boon" → "Ân Huệ", "Anubis" giữ nguyên tên thần Ai Cập |
+| Mummification Ritual *(`POD_mummification_ritual_perk_interaction`, khiến mục tiêu vào Torpor)* | Nghi Lễ Ướp Xác | đặt mới, dịch nghĩa; "Torpor" dùng lại "$pod_torpor$" = "Miên trạng" đã chốt B2 |
+| Negotiate Vote (Caucus/Abstention) *(`POD_thorns_caucus_interaction`, `POD_thorns_abstention_interaction`, `POD_thorns_negotiate_doctrine_vote_interaction`, cơ chế bỏ phiếu Thorns/giáo phái)* | Thương Lượng Lá Phiếu (Hội Nghị Kín/Bỏ Phiếu Trắng) | đặt mới; "Vote" → "Lá Phiếu", "Caucus" (họp kín trước bỏ phiếu) → "Hội Nghị Kín", "Abstention" → "Bỏ Phiếu Trắng" (thuật ngữ chính trị tiếng Việt chuẩn) |
+| Blood Hunt *(`blood_hunt_call_interaction`, giữ nguyên tiếng Anh)* | Blood Hunt *(giữ nguyên)* | tái dùng B4i đã chốt "giữ nguyên tạm thời" chờ `game_concept_blood_hunt` dịch |
+| Wild Hunt *(`wild_hunt_call_interaction`, tương đương Blood Hunt nhưng của Sabbat)* | Wild Hunt *(giữ nguyên)* | đặt mới theo cùng logic B4i — "Blood Hunt" của Camarilla giữ nguyên tiếng Anh chờ concept gốc dịch, nên "Wild Hunt" của Sabbat (cùng cơ chế casus belli, chỉ khác phe) cũng giữ nguyên để nhất quán, không dịch lệch một bên |
+| Camarilla, Sabbat *(tổ chức, xuất hiện trong `actor.Custom('CamarillaStatus')` mô tả và câu văn)* | Camarilla, Sabbat *(giữ nguyên)* | tái dùng B3k/B4r đã chốt, danh từ riêng tổ chức WoD |
+| Justicar *(chức sắc tư pháp Camarilla, `actor_secondary_POD_request_anathema_interaction`, `conclave_debate`)* | Justicar *(giữ nguyên)* | tái dùng B4o đã chốt — `game_concept_justicar` nguồn `Glossary()` chưa dịch, giữ nguyên nhất quán |
+| Seize Gold/Artifact/Courtier/Prisoner, Claim Title, Depose *(loạt tương tác lạm quyền Justicar)* | Tịch Thu Vàng/Hiện Vật/Cận Thần/Tù Nhân, Chiếm Đoạt Tước Vị, Phế Truất | đặt mới; "Seize" → "Tịch Thu" nhất quán cho vàng/hiện vật/cận thần/tù nhân, "Claim" → "Chiếm Đoạt" (khác "Yêu Sách" dùng cho claim tước vị theo nghĩa pháp lý thông thường — ở đây là hành vi cưỡng đoạt lạm quyền nên chọn "Chiếm Đoạt"), "Depose" → "Phế Truất" |
+| Conclave Petition / Improvised Conclave *(`POD_request_anathema_interaction`, `conclave_debate.t`, hội đồng Justicar xét xử Anathema)* | Thỉnh Cầu Conclave / Conclave Bất Thường | đặt mới; "Conclave" giữ nguyên tiếng Anh (danh từ tổ chức WoD, theo B0 tương tự "pack"/"Coterie"), "Petition" → "Thỉnh Cầu", "Improvised" → "Bất Thường" (tính chất họp gấp, không định kỳ) |
+| Anathema *(trait/tội danh ma cà rồng bị Camarilla truy nã, `POD_set_anathema_interaction`…)* | Anathema *(giữ nguyên)* | tái dùng B4i đã chốt, danh từ riêng WoD |
+| Alastor *(sát thủ săn Anathema thay mặt Justicar, `POD_send_alastor_interaction`)* | Alastor *(giữ nguyên)* | đặt mới theo B0; danh xưng chức năng gốc WoD (Justicar's Alastor), không có bản dịch phổ thông tương đương, cộng đồng quen đọc tiếng Anh |
+| Bounty / Trophy *(`POD_camarilla_add_bounty_interaction`, tiền thưởng săn Anathema)* | Tiền Thưởng / Chiến Lợi Phẩm | đặt mới, dịch nghĩa thường |
+
+## B5-vampire-p7. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 890-1033, việc #5
+
+Nguồn: đoạn Sabbat (Wild Hunt/Cardinal/excommunication/Black Hand) + humors + Golconda mentoring + Suspire + Nocturne + Heart of Darkness. Câu `POD_sabbat_excommunicate_interaction_desc` gần như sao chép nguyên văn `excommunicate_interaction_desc` vanilla (`base_game_vh/localization/english/interactions_l_english.yml:658`) — đã tái dùng đúng cụm "Rút Phép Thông Công" / "bị [excommunicated|E]" / "chất độc gặm nhấm" từ bản dịch vanilla có sẵn.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Wild Hunt *(`wild_hunt_call_interaction`, chiến tranh Sabbat)* | Cuộc Săn Hoang Dã | đặt mới; dịch nghĩa "cuộc săn man rợ/không luật lệ" |
+| Cardinal (Region) *(`POD_cardinal_*`, chức vụ + đơn vị lãnh thổ Sabbat)* | Hồng y (Khu vực Hồng y) | đặt mới; mượn danh xưng Công giáo "Hồng y" đã quen thuộc, ghép "Khu vực" cho đơn vị lãnh thổ |
+| Abuse of Power: Depose | Lạm Quyền: Phế Truất | dịch nghĩa thường, "Depose"→"Phế Truất" nhất quán cách dùng vanilla cho phế truất quân chủ |
+| excommunicate/excommunicated/excommunication *(Sabbat, `POD_sabbat_excommunicate*`)* | Rút Phép Thông Công / bị rút phép thông công / Rút Phép Thông Công | ✅ tái dùng nguyên bản dịch vanilla `excommunicate_interaction`/`excommunicate_interaction_desc` (`interactions_l_english.yml`), giữ đúng cụm "chất độc gặm nhấm Đức tin", "khai trừ"/"rút phép thông công" xen kẽ như bản gốc vanilla |
+| Black Hand Hunting *(`POD_black_hand_hunting_interaction`)* | Truy Lùng | dịch nghĩa; "Black Hand" (tên tổ chức, đã chốt B4d = "Bàn Tay Đen") chỉ xuất hiện trong câu mô tả, không lặp lại trong tên interaction |
+| mesmerized / conditioned *(`mesmerized_or_conditioned`)* | thôi miên / điều kiện hóa | dịch nghĩa thường, "conditioned" theo nghĩa tâm lý học "bị điều kiện hóa" (WoD Dominate/Vicissitude) |
+| tenet of Continued Life *(`POD_hunger_risk_increase_tenet_continued_life_tt`)* | giáo lý Sự Sống Tiếp Diễn | đặt mới; "Continued Life" dịch nghĩa thường, ghép "giáo lý" nhất quán cách gọi tenet tôn giáo khác trong mod |
+| Meditate on Humors *(`POD_piety_for_perk_interaction`)* | Chiêm Nghiệm về Thể Dịch | dùng lại "Thể Dịch" đã chốt cho `humors`/`humorism` ở đoạn trước trong cùng file; `[humorism\|E]`/`[humors\|E]` là concept link nên giữ nguyên chữ trong ngoặc, chỉ dịch câu quanh |
+| Golconda Mentoring *(`POD_golconda_mentoring_interaction`)* | Dẫn Dắt Golconda | đặt mới; "Golconda" giữ nguyên theo B4i đã chốt, "Mentoring"→"Dẫn Dắt" dịch nghĩa |
+| Sharing Insights *(`POD_golconda_mentoring_interaction_toast`)* | Chia Sẻ Ngộ Tính | dùng lại "Ngộ Tính" đã chốt cho "Insight" (B4g/B4i, thanh kinh nghiệm Golconda Seeker/Dharma) |
+| Suspire *(`POD_guide_through_suspire_interaction`, khái niệm giác ngộ riêng — có thể là biến thể/route khác của enlightenment)* | Suspire *(giữ nguyên)* | đặt mới; danh từ riêng WoD/POD chưa rõ nghĩa Việt tương xứng, giữ nguyên theo B0 tương tự Golconda |
+| Nocturne *(`POD_nocturne_*`, năng lực rút sinh lực kẻ địch trong trận)* | Nocturne *(giữ nguyên)* | đặt mới; tên riêng năng lực/Discipline đặc biệt, giữ nguyên tiếng Anh nhất quán cách xử lý Potence/Celerity/Fortitude (B0) |
+| Drain the Life *(`POD_drain_the_life_interaction`)* | Rút Cạn Sự Sống | dịch nghĩa thường |
+| Shadow Twin *(nhắc lại)* | Song Sinh Bóng Tối | ✅ tái dùng nguyên bản dịch đã chốt B4h (dòng 643 TERMINOLOGY.md) |
+| Feed the Darkness *(`POD_feed_the_darkness_interaction`)* | Nuôi Dưỡng Bóng Tối | dịch nghĩa thường |
+| Sense the Sin *(`POD_sense_the_sin_interaction`)* | Cảm Nhận Tội Lỗi | dịch nghĩa thường |
+| Fear the Void Below *(`POD_fear_the_void_below_interaction`)* | Sợ Hãi Vực Thẳm Bên Dưới | dịch nghĩa thường, "Void Below" gợi Địa Ngục |
+| Psychomachia *(`POD_psychomachia_interaction`, thuật ngữ Latin/thần học chỉ cuộc chiến tâm hồn)* | Psychomachia *(giữ nguyên)* | đặt mới; thuật ngữ văn học/thần học Latin đặc thù, không có bản dịch phổ thông tương xứng, giữ nguyên theo B0 |
+| Condemnation *(`POD_condemnation_interaction`)* | Nguyền Rủa | dịch nghĩa thường theo ngữ cảnh "đặt lời nguyền suy nhược" |
+| Hell-Born Investiture *(`POD_hell_born_investiture_interaction`, liên quan quyền năng Namtaru)* | Sắc Phong Từ Địa Ngục | đặt mới; "Investiture"→"Sắc Phong" (nghi thức trao quyền/phẩm hàm, dùng trong bối cảnh tôn giáo/phong kiến), "Hell-Born"→"Từ Địa Ngục" |
+| Namtaru *(tên quỷ/thế lực Setite, `POD_hell_born_investiture_interaction_desc`)* | Namtaru *(giữ nguyên)* | tên riêng thần thoại Lưỡng Hà, giữ nguyên theo B0 |
+| Bring the Plague *(`POD_bring_the_plague_interaction`)* | Mang Đến Ôn Dịch | dịch nghĩa thường, "Plague"→"Ôn Dịch" nhất quán cách gọi dịch bệnh kiểu trung cổ trong base_game_vh |
+| Daimonion *(quyền năng địa ngục gây hao tổn linh hồn, `POD_non_infernalists_pay`)* | Daimonion *(giữ nguyên)* | tên riêng thế lực/khái niệm ma quỷ, giữ nguyên theo B0 |
+| infernalist *(bí mật/trait, nhắc tới trong `POD_non_infernalists_pay`)* | infernalist *(giữ nguyên)* | ✅ nhất quán B5-demon-infernalist đã chốt, thuật ngữ Demon: The Fallen |
+| Re-Embrace / Propose Re-Embrace *(`POD_the_re_embrace_*`, biến người thành childe bằng ma thuật quỷ dữ)* | Ôm Ấp Lại / Đề Nghị Ôm Ấp Lại | dùng lại "Ôm Ấp" đã chốt cho "the Embrace" (B5-hunter dòng 2339: "Turn Vampire / the Embrace"→"Hóa Ma Cà Rồng / Sự Ôm Ấp"), ghép tiền tố "Lại" cho "Re-" |
+| childe *(nhắc tới trong `POD_the_re_embrace_*_desc`)* | childe *(giữ nguyên)* | ✅ nhất quán B4e/B3s đã chốt giữ nguyên tiếng Anh, đi cặp với "Sire" |
+| Heart of Darkness *(cụm interaction quyền năng Serpentis liên quan trái tim, `POD_heart_of_darkness_*`)* | Trái Tim Bóng Tối | đặt mới; dịch nghĩa thường, nhất quán với "Bóng Tối" dùng cho darkness xuyên suốt các interaction khác trong đoạn này |
+| Steal Heart (Scheme) *(`POD_heart_of_darkness_steal_interaction`, có `#weak (Scheme)#!`)* | Đánh Cắp Trái Tim (Âm mưu) | "Scheme"→"Âm mưu" theo README Consistency Rules (một thuật ngữ = một bản dịch, không luân phiên Kế hoạch/Mưu kế) |
+| Serpentis *(tên Discipline clan Setite, `POD_heart_of_darkness_forcetorpor_option.tt`)* | Serpentis *(giữ nguyên)* | ✅ nhất quán B0/B4d — tên riêng Discipline giữ nguyên như Potence/Celerity/Fortitude/Auspex |
+| torpor *(nhắc lại, `$pod_torpor$`/`torpor` chữ thường trong câu văn)* | miên trạng | ✅ tái dùng "Miên trạng" đã chốt B2 (`pod_torpor`), áp dụng cho cả dạng chữ thường đứng một mình trong câu |
+
+## B5-vampire-p8. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` — đoạn cuối file (dòng 1034-1187/1187), việc #5
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Fortitude / Vicissitude *(tên Discipline)* | Fortitude / Vicissitude *(giữ nguyên)* | tiếp tục B0, khớp `traits_POD_l_english.yml:430` (`trait_vicissitude`) và tiền lệ giữ nguyên tên riêng Discipline ở mục ngay trên |
+| Justicar | Justicar *(giữ nguyên)* | tái dùng đúng tiền lệ đã chốt (dòng ~1795 file này): key nguồn `game_concept_justicar_desc` mà tham số 2 của `Glossary()` trỏ tới vẫn chưa dịch, giữ nguyên nhất quán |
+| rouse (hunger) check | lượt kiểm tra rouse (đói khát) | đặt mới; "rouse check" là thuật ngữ cơ chế V5 (kiểm tra máu để kích hoạt dị năng) chưa có tiền lệ — giữ "rouse" nguyên tiếng Anh theo lối B0 (thuật ngữ cơ chế WoD/V5 chuyên biệt), dịch "check"→"lượt kiểm tra" |
+| Prowess from Pain | Sức Mạnh Từ Cơn Đau | đặt mới, dịch nghĩa; perk Fortitude tăng sức mạnh khi bị thương |
+| Resilient Mind | Tâm Trí Kiên Cường | đặt mới, dịch nghĩa; perk Fortitude chống loạn thần |
+| soak (damage) | hấp thụ (sát thương) | đặt mới; dịch nghĩa cơ chế "soak" của Fortitude (né/giảm sát thương) |
+| Blood Vessel *(item lưu trữ Máu, `POD_store_blood_interaction` nhóm)* | Bình Chứa Máu | đặt mới, dịch nghĩa; "Blood"→"Máu" viết hoa nhất quán vì là tài nguyên đếm được trong game (giống cách vanilla viết hoa tên tài nguyên) |
+| Alchemical Product(s) *(Thin-Blood Alchemy)* | Sản Phẩm Giả Kim | tái dùng đúng "Alchemical"→"Giả Kim" đã chốt tại B5-numina |
+| Mask of Empathy | Mặt Nạ Đồng Cảm | đặt mới, dịch nghĩa; interaction Presence phá vỡ quan hệ đối phương |
+| Perfect World | Thế Giới Hoàn Hảo | đặt mới, dịch nghĩa |
+| Ambassadorial Patron | Người Bảo Trợ Ngoại Giao | đặt mới; tái dùng "Người Bảo Trợ" đã chốt (B5-fae `Call Patron`), thêm "Ngoại Giao" vì gắn với vai trò `ashen_ambassador` |
+| Book Eating *(Malkavian)* | Ăn Sách | đặt mới, dịch sát nghĩa; interaction Malkavian hấp thụ tri thức từ hiện vật sách |
+| Force Frenzy | Ép Buộc Cuồng Nộ | đặt mới; "Frenzy" dịch "Cuồng Nộ" theo lối dịch nghĩa trạng thái mất kiểm soát của ma cà rồng (nhất quán tinh thần B0 — không có tiền lệ khác ghi nhận, để "Cuồng Nộ" thay vì giữ nguyên vì đây là trạng thái phổ thông không phải danh từ riêng) |
+| Fleshcraft / fleshcraft / fleshcrafting *(tên Discipline-power Vicissitude, `[fleshcraft\|E]` `[fleshcrafting\|E]`)* | Fleshcraft *(giữ nguyên)* | khớp `game_concept_fleshcraft`/`game_concept_fleshcrafting` trong `game_POD_concepts_l_english.yml:815-817` — các key nguồn này **cũng chưa dịch** (vẫn "Fleshcraft"/"Fleshcrafting" tiếng Anh), nên giữ nguyên nhất quán theo đúng tiền lệ Justicar; nếu sau này `game_POD_concepts` dịch, phải quay lại đổi đồng loạt |
+| Liquefy the Mortal Coil | Hóa Lỏng Xác Thân Phàm Tục | đặt mới, dịch nghĩa; "mortal coil" là thành ngữ cổ chỉ thân xác phàm nhân (Shakespeare), dịch thoát ý |
+| Study Anatomy | Nghiên Cứu Giải Phẫu | đặt mới, dịch nghĩa |
+| Transmogrify *(Tzimisce, biến người thành đồ vật)* | Biến Hóa | đặt mới, dịch nghĩa ngắn gọn cho tên interaction; mô tả (`_desc`) vẫn là placeholder gốc "TODO Tzimisce" chưa có nội dung — giữ nguyên |
+| Zmei *(3 dòng bị comment `#POD_call_zmei_to_war_interaction*`)* | *(không dịch)* | giữ nguyên tiếng Anh theo mục 5 TRANSLATION_RULES.md — dòng comment `#` đầu dòng |
+
+Xác nhận: file gốc `POD_character_interactions_vampire_l_english.yml` có đúng 1187 dòng, dòng cuối cùng (1187, `POD_transmogrify_interaction_odious_chalice: ""`) **không có `\r\n` theo sau** (không có newline cuối file). Bản dịch đoạn 1034-1187 xuất ra 154 dòng khớp, đã tự dựng CRLF thủ công (không dùng LF của Write tool) và giữ nguyên việc không có newline thừa ở cuối để khớp byte-for-byte với quy ước gốc.
+
+## B5-vampire-p2. Thuật ngữ đoạn 156-321 `interactions/POD_character_interactions_vampire_l_english.yml` — Bind Famulus / Blood Bond / Cover Masquerade / Drink Herd / Resonance / Herdify / Awaken Torpor, việc #5
+
+Đoạn dịch xoay quanh 5 cụm tương tác: `POD_bind_famulus` (trói buộc thú làm famulus), `POD_bond_prisoner_interaction` (Ràng Buộc Máu tù nhân), `POD_cover_masquerade_interaction` (che đậy Masquerade), `POD_drink_herd`/`POD_resonance_*`/`POD_herdify_*` (quản lý Herd/vessel/Resonance), và chuỗi sự kiện dài `POD_awaketorpor.*` (tìm và đánh thức ma cà rồng đang Miên trạng).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Famulus *(`POD_bind_famulus`, thú vật bị dùng máu trói buộc phục vụ ma cà rồng, khác Ghoul/Thrall người)* | Thú Nô Bộc | đặt mới; tái dùng gốc "Nô Bộc" đã chốt cho Thrall/Ghoul (B5j, dòng 2035) vì famulus về bản chất là "ghoul động vật", thêm "Thú" để phân biệt rõ đối tượng là con vật, không phải người; đối chiếu bản Trung của cùng file dịch nghĩa tương tự ("动物伙伴" = bạn đồng hành động vật) nhưng bản Việt giữ sát tinh thần "bị trói buộc bằng máu" hơn thay vì "bạn đồng hành" |
+| blood bind / bloodbind *(động từ, `POD_bind_famulus_interaction_desc` và 3 dòng `.tt`)* | dùng máu trói buộc | dịch nghĩa động từ, nhất quán với danh từ "Thú Nô Bộc" ở trên; không dùng "Ràng Buộc Máu" (dành riêng cho `Blood Bond` ở mục dưới) để tránh lẫn hai cơ chế khác nhau trong cùng file |
+| Blood Bond *(`POD_bond_prisoner_interaction` = "Blood Bond Prisoner", cơ chế thao túng tù nhân bằng máu)* | Ràng Buộc Máu | tái dùng đúng bản dịch đã chốt tại B4 (dòng 1610, "Blood Bond"→"Ràng Buộc Máu") |
+| hook *(danh từ thường, `POD_bond_prisoner_interaction_growingbloodbond`, khác `game_concept_hook`)* | Kiềm chế | tái dùng "Hook"→"Kiềm chế" đã chốt nhiều lần (B5k dòng 2057/2243) áp dụng cho câu văn thường nhắc tới hook, không riêng concept-link |
+| Cover up Masquerade / Masquerade *(danh từ thường trong câu văn, không phải `[the_masquerade\|E]` concept-link)* | Che Đậy Màn Che / Màn Che | tái dùng "Masquerade"→"Màn Che" đã đặt tại B4 (dòng 1332/1791); áp dụng cho toàn bộ cụm `POD_cover_masquerade_*` trong đoạn này vì đều là câu văn thường, không đụng khái niệm `game_concept_the_masquerade` (file gốc chưa dịch, vẫn giữ "The Masquerade" khi xuất hiện dạng concept-link) |
+| vessel *(danh từ chỉ nạn nhân/mortal bị hút máu, khác "energy vessel"=bình năng lượng ở B5c)* | vật chứa | đặt mới cho ngữ cảnh này; "vessel" ở đây chỉ một con người/kindred bị biến thành nguồn cấp máu — dùng "vật chứa" (nghĩa đen, giữ sắc thái phi nhân hóa nạn nhân mà nguyên tác VtM cố ý truyền tải), khác nghĩa "bình" đã dùng cho vật phẩm năng lượng ở B5c |
+| Herdify *(`POD_herdify_mortal_interaction`/`_vampire_interaction`, tên tương tác đưa mục tiêu vào Herd)* | Đưa vào Herd | đặt mới; giữ nguyên "Herd" tiếng Anh vì `game_concept_POD_herd` (`game_POD_concepts_l_english.yml:199`) **vẫn chưa dịch** (còn "Herd") — áp dụng đúng tiền lệ "Justicar/Fleshcraft" (giữ nguyên khi concept nguồn chưa dịch), kể cả trong câu văn thường như "herd limit", "herd member" |
+| kindred *(danh từ thường, `POD_herdify_vampire_interaction_desc`, chỉ ma cà rồng nói chung)* | Huyết Tộc | tái dùng "Kindred"→"Huyết Tộc" đã khóa cứng B3k, áp dụng cho chữ thường "kindred" trong câu văn (không chỉ dạng viết hoa) |
+| torpid vampire *(cụm tính từ lặp lại nhiều lần suốt chuỗi `POD_awaketorpor.*`)* | ma cà rồng đang Miên trạng | tái dùng nguyên văn tiền lệ đã chốt tại B5i (dòng 2020) |
+| in thrall to *(thành ngữ, `POD_awaketorpor.1.desc`, KHÔNG phải danh từ Thrall/Ghoul)* | bị nô dịch bởi | dịch nghĩa thành ngữ tiếng Anh "in thrall to" (bị khống chế/chi phối bởi), không liên quan tới bản dịch danh từ "Thrall"→"Nô Bộc"/"Nô Lệ" đã chốt ở nơi khác — tránh nhầm lẫn vì đây là idiom tính từ, không phải nhắc tới nhân vật ghoul |
+
+Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()` nào khác ngoài 1 lần `Glossary('Disciplines','game_concept_discipline_desc')` tại dòng 172 — dịch tham số 1 thành "Dị năng" (đã chốt B2), giữ nguyên tham số 2.
+
+## B5-vampire-p5. Thuật ngữ `interactions/POD_character_interactions_vampire_l_english.yml` dòng 593-726, việc #5
+
+Nội dung: các perk-interaction Necromancy (Cleansed in Blood, Purification, Thin Blood, Erosion, Aura Absorption, Steal the Mind, Absorb the Mind, Basilisk's Touch, Stone Travel, Curse of the Maelstrom, Wails and Whispers, Intimations of Mortality, Gift of Melancholia, Witch's Fruit, Raise the Green One, Song of the Dead), Degulo/Exchange Attribute/Exchange Discipline (Samedi?), Taming the Beast, Predator's Mastery, và bắt đầu Discipline Training. Không có `Glossary()`/`UmbraGlossaryLocalized()` nào trong đoạn này (bracket count không đổi 53→53, ref 2→2, tất cả đều `$pod_discipline$`).
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Cleansed in Blood | Tẩy Sạch trong Máu | đặt mới, dịch nghĩa; perk gột rửa hiệu ứng biến hình xấu |
+| shapeshift *(danh từ thường, `POD_cleansed_in_blood_perk_interaction_desc`)* | dạng Biến Hình | tái dùng "Shapeshift"→"Biến Hình" đã chốt (dòng 2089 file này, `POD_arcana_shapeshift_interaction`) |
+| Purification | Thanh Tẩy | đặt mới, dịch nghĩa |
+| Erosion | Xói Mòn | đặt mới, dịch nghĩa |
+| Aura Absorption | Hấp Thụ Hào Quang | đặt mới, dịch nghĩa; "Aura" dịch "Hào Quang" theo nghĩa hào quang/khí chất huyền bí |
+| Resonance *(nhắc lại, `POD_aura_absorption_perk_interaction_desc`)* | Cộng hưởng | ✅ đã chốt B5 (dòng 1286 file này) |
+| Steal the Mind / Absorb the Mind | Đánh Cắp Tâm Trí / Nuốt Chửng Tâm Trí | đặt mới; hai perk khác nhau nên dùng hai cách dịch khác nhau dù cùng gốc "the Mind" — "Steal"→"Đánh Cắp" (lấy tạm thời), "Absorb"→"Nuốt Chửng" (hấp thụ vĩnh viễn, ăn luôn cả tâm trí) để phân biệt sắc thái |
+| Basilisk's Touch | Cái Chạm của Basilisk | đặt mới; "Basilisk" giữ nguyên tên quái vật thần thoại, không có tiền lệ dịch nghĩa trong repo |
+| Stone Travel | Xuyên Đá | đặt mới, dịch thoát ý (đào hầm xuyên đất đá di chuyển) thay vì dịch sát "Du Hành Đá" để ngắn gọn hơn cho UI |
+| Necromancy $pod_discipline$ *(nhắc lại)* | Dị năng $pod_discipline$ Thuật Gọi Hồn | ✅ "Necromancy"="Thuật Gọi Hồn" đã chốt (dòng 556 file này); giữ nguyên thứ tự cụm để câu tự nhiên tiếng Việt ("Dị năng ABC Thuật Gọi Hồn của ta, tên X, làm giảm...") |
+| Ashes to Ashes / Tend the Body Garden *(tên 2 power Necromancy cụ thể)* | Tro Về Với Tro / Chăm Sóc Khu Vườn Xác Thân | đặt mới, dịch nghĩa; chưa có tiền lệ dịch 2 tên power này trong repo |
+| masquerade_exposure\|E *(nhắc lại)* | nguy cơ [masquerade_exposure\|E] | concept-link giữ nguyên bracket, không đổi ID; dùng "nguy cơ ... của ta" bám câu gốc "my risk of" |
+| Find Wraith | Tìm Oan Hồn | đặt mới; "Wraith"="Oan Hồn" đã chốt B4/B4u |
+| Curse of the Maelstrom | Lời Nguyền Xoáy Lốc | đặt mới, dịch nghĩa; "Maelstrom" (xoáy nước khổng lồ) dịch "Xoáy Lốc" |
+| Spectre(s) | Spectre | *(giữ nguyên)* — danh từ riêng WoD (loại thực thể Wraith cấp thấp/hung dữ), chưa có tiền lệ dịch nghĩa trong repo, theo B0 |
+| Wails and Whispers | Ai Oán và Thì Thầm | đặt mới, dịch nghĩa |
+| Intimations of Mortality | Điềm Báo của Sự Hữu Hạn | đặt mới; "Mortality" dịch "Sự Hữu Hạn" (tính hữu hạn/hữu tử của kiếp người) thay vì "Kiếp Phàm Nhân" để tránh trùng nghĩa với dòng mô tả liền sau ("aspects of mortality"→"kiếp phàm nhân") |
+| Blood Surge *(nhắc lại, `POD_intimations_of_mortality_interaction.tt`)* | Bộc Phát Máu | tái dùng thuật ngữ đã dùng nơi khác trong file (dòng B5-vampire-p1, cơ chế đốt máu tăng sức mạnh tạm thời) |
+| Gift of Melancholia | Món Quà Sầu Muộn | đặt mới, dịch nghĩa |
+| Witch's Fruit | Trái Cây của Phù Thủy | đặt mới, dịch nghĩa |
+| "How do you like them apples" *(thành ngữ Mỹ, actor_toast)* | "Ngươi thấy những trái táo đó thế nào" | dịch thoát ý giữ hình ảnh "táo" ăn khớp với "Witch's Fruit", bỏ sắc thái khiêu khích thành ngữ gốc (không có tương đương tiếng Việt) |
+| Raise the Green One | Triệu Hồi Kẻ Xanh | đặt mới; "Raise" (triệu hồi/hồi sinh xác chết, Necromancy) dịch "Triệu Hồi" nhất quán với "raise/animate the dead" trong lore Wraith/Necromancy; "the Green One" dịch trực tiếp "Kẻ Xanh" (biệt danh xác chết được thực vật bao phủ) |
+| Song of the Dead | Khúc Ca của Kẻ Chết | đặt mới, dịch nghĩa |
+| Soul Feasting | Yến Tiệc Linh Hồn | đặt mới, dịch nghĩa |
+| Degulo *(tên riêng interaction, không dịch)* | Degulo | *(giữ nguyên)* — không phải từ tiếng Anh thường, có vẻ là danh từ WoD/nghi lễ riêng, không có nghĩa để dịch |
+| Exchange Attribute / Exchange Discipline | Trao Đổi Chỉ Số / Trao Đổi Dị Năng | đặt mới; "Attribute"→"Chỉ Số" (thuộc tính nhân vật cơ bản, khác "Skill"), "Discipline"="Dị Năng" đã chốt B2 |
+| boiled skull *(nhắc lại 2 lần, Exchange Attribute/Discipline)* | hộp sọ đã luộc | dịch sát nghĩa, gắn với "Degulo" (nghi lễ chặt đầu + luộc sọ) |
+| Taming the Beast | Thuần Hóa Dã Thú | đặt mới; "Beast"="Dã Thú" nhất quán B3/B5-vampire-p8 |
+| Prowess / Health / Martial skill *(3 lựa chọn Taming the Beast)* | Sức Mạnh / Sức Khỏe / Kỹ năng Quân sự | dịch nghĩa phổ thông theo thuộc tính CK3 vanilla (`prowess`→"Sức Mạnh", `martial`→"Quân sự" theo base_game_vh) |
+| Predator's Mastery | Sự Thống Trị của Kẻ Săn Mồi | đặt mới, dịch nghĩa |
+| strong hook *(cơ chế game, nhắc lại 3 lần)* | mối liên hệ ràng buộc mạnh mẽ | dịch theo "hook" = cơ chế Hook của CK3 vanilla (tài liệu base dùng "Mối quan hệ ràng buộc"/"Hook" tùy ngữ cảnh); dùng cụm dịch nghĩa đầy đủ vì không có key `hook` ngắn gọn nào xuất hiện riêng trong đoạn này để tra chính xác thuật ngữ base — cần đối chiếu lại khi gặp `game_concept_hook` |
+| Incarnate Darkness *(tên 1 dạng shapeshift vampire)* | Hiện Thân Bóng Tối | đặt mới, dịch nghĩa |
+
+Ghi chú phạm vi: đã đọc thêm dòng 727-729 (`POD_train_disciplines_interaction*`) chỉ để nắm ngữ cảnh câu cuối đoạn 726, nhưng KHÔNG dịch/xuất ra file `part5_593-726.yml` — nằm ngoài phạm vi 593-726 được giao, dành cho agent phần tiếp theo.
