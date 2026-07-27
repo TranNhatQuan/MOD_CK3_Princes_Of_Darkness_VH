@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 11 — việc #7 `modifiers/` đạt 54/54, HOÀN TẤT).
+Cập nhật lần cuối: 2026-07-27 (đợt 12 — việc #8 `lifestyles/` đạt 26/27, BÀN GIAO 1 file cuối cho session sau).
 
 ---
 
@@ -16,8 +16,36 @@ Cập nhật lần cuối: 2026-07-27 (đợt 11 — việc #7 `modifiers/` đ�
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** |
-| Việc tiếp theo | Chuyển sang việc **#8 (`lifestyles/`, 6.740 key, 27 file)** → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **26/27 file lifestyles/ (việc #8, 1 file cuối còn lại)** |
+| Việc tiếp theo | **Dịch `lifestyles/POD_wraith_lifestyle_l_english.yml` (1064 dòng, file lớn nhất `lifestyles/`)** → `lifestyles/` đạt 27/27 → việc #8 HOÀN TẤT → chuyển việc #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ⏸️ ĐỢT 12 (2026-07-27) — việc #8 `lifestyles/` đạt 26/27 file, BÀN GIAO 1 file cuối (lớn nhất) cho session sau
+
+**Người dùng đã yêu cầu dừng lại** khi context của session gần cạn, để verify + cập nhật worklist trước khi tiếp tục — KHÔNG phải do gặp lỗi kỹ thuật.
+
+26/27 file `lifestyles/` (6.740 key, đã đo baseline `grep -c ''` cho từng file, không tin số liệu cũ) đã dịch xong, verify xong, commit xong theo 8 đợt nhỏ trong cùng session:
+
+- **Đợt nhỏ 1** (6 file rất nhỏ ≤93 dòng, commit `18cc18d`): `POD_fera_common_lifestyle`, `POD_hengeyokai_lifestyle`, `POD_demon_arts_lifestyle`, `POD_urgetaints_lifestyle`, `POD_theurgy`, `POD_qiao_lifestyle` — coordinator tự dịch trực tiếp (không qua agent). Chốt thuật ngữ nền tảng mới cho toàn `lifestyles/`: **"Gift"/"Gifts"→"Ân Huệ"** (quyết định người dùng), Auspice→Tướng Trăng, 4 tên Demon Art cụ thể (Ma Quyền/Hắc Phong/Thiết Sơn/Ma Bào), Qiao/Shih/shen giữ nguyên. Phát hiện + sửa: tự thêm bracket `[experience|E]` sai (gốc dùng chữ "Experience" trần), "Yang World"→sửa lại "Dương Giới" (khớp tiền lệ B3e cũ hơn, không dùng "Cõi Dương" nháp đầu), "Hungry Dead"→"Người Chết Đói Khát" (đặt mới).
+- **Đợt nhỏ 2** (8 file 130-190 dòng, commit `59b8529`): `POD_shintai_lifestyle`, `POD_discipline_lifestyle`, `POD_lore_lifestyle`, `POD_investiture_lifestyle`, `POD_planetarygifts_lifestyle`, `POD_werewolf_lifestyle`, `POD_chi_arts_lifestyle`, `POD_soul_arts_lifestyle` — 8 agent song song, mỗi agent 1 file, ghi scratch riêng. **5 lỗi thật phát hiện khi merge:** "Dharma"→"Đạo Pháp" sai (phải "Pháp Môn"), mất bracket `[umbra|E]`, "lifestyle"→"Chí Nghiệp" lệch với 26 file khác dùng "Lối sống", "Righteousness" nhầm với "Path of Righteousness" đã chốt khác nghĩa, "Yama Kings" giữ nguyên sai (phải "Diêm Ma Vương"). "Vulcan" bị dịch thừa "Sao Hỏa Vulcan".
+- **Đợt nhỏ 3** (4 file 183-298 dòng, commit `105cc87`): `POD_bastet_lifestyle`, `POD_arcana_lifestyle`, `POD_necro_magic_lifestyle`, `POD_tribalgifts_lifestyle` — 4 agent song song. **3 lỗi thật:** "Bane" giữ nguyên sai (phải "Tà Linh" — agent tự claim "không có tiền lệ" dù đã chốt nhiều lần), "True Name" giữ nguyên sai (phải "Chân Danh"), "Dark Kingdoms" dịch thừa "Các" so với tiền lệ.
+- **Đợt nhỏ 4** (4 file 345-439 dòng, commit `3eb621a`): `POD_numina_lifestyle`, `POD_numina_sorcery`, `POD_possessed_lifestyle`, `POD_mokole_lifestyle` — 4 agent song song. **4 lỗi thật:** tự thêm bracket `[scheme|E]` sai, "Dissolver"→"Kẻ Hủy Diệt" sai (phải "Kẻ Hòa Tan"), `Select_CString` point/points dịch lặp từ, và đáng chú ý: **5 tên trường phái Sorcery lệch với 14 tên đã chốt ở B6-decisions-sorcery** vì B6 nằm ở thư mục `decisions/` khác — bài học: phải tra cứu TERMINOLOGY xuyên toàn bộ thư mục, không chỉ trong phạm vi thư mục đang dịch.
+- **Đợt nhỏ 5** (`POD_blood_magic_lifestyle`, 564 dòng — file lớn thứ 2, commit `ce85ab8`): dịch qua 4 agent chia đoạn (1-139, 140-286, 287-421, 422-564). 2 lỗi: thiếu 1 dòng trống cuối đoạn 3, mất bracket `[bloodmagic_path|E]`. Phát hiện quan trọng: "Bane Mummy"/"Bane Rite" **KHÔNG phải khái niệm "Bane"=Tà Linh** mà là nghĩa gốc "tai ương" áp cho splat khác hẳn — bài học: đọc ngữ cảnh splat trước khi áp thuật ngữ máy móc.
+- **Đợt nhỏ 6** (`perks_POD_l_english.yml`, 698 dòng — danh sách tên perk Discipline theo 4 temperament, commit `56db838`): dịch qua 4 agent chia đoạn (1-175, 176-324, 325-525, 526-698). 1 lỗi: "Yama Kings" giữ nguyên sai (agent nhầm lẫn với "Wan Kuei" — cái đúng giữ nguyên, cái này phải dịch).
+- **Đợt nhỏ 7** (`POD_mummy_lifestyles_l_english.yml`, 755 dòng, commit `96802a0`): dịch qua 4 agent chia đoạn (1-195, 196-372, 373-590, 591-755). **⚠️ Lỗi merge nghiêm trọng nhất từ trước đến nay — loại lỗi hoàn toàn mới:** 3/4 đoạn (~74% file) bị **THIẾU KHOẢNG TRẮNG ĐẦU DÒNG** ở gần như mọi dòng nội dung, dù mỗi agent tự báo cáo "khớp chính xác" và SỐ DÒNG vẫn đúng. Phát hiện nhờ diff key-pattern có neo `^ ` (khoảng trắng đầu) vô tình bắt được — nếu chỉ đếm `wc -l`/bracket-count sẽ KHÔNG phát hiện được vì bracket/ref/text vẫn nguyên, chỉ thiếu 1 ký tự khoảng trắng đầu dòng. Sửa bằng `perl -i -pe 's/^(?=\S)/ /'`. Cũng sửa rarity artifact tags lệch tiền lệ B5c.
+- **Đợt nhỏ 8** (`POD_fae_lifestyle_l_english.yml`, 868 dòng, commit `32798f5`): dịch qua 4 agent chia đoạn (1-254, 255-354, 355-609, 610-868). **Lần đầu áp dụng cảnh báo RÕ RÀNG, CHI TIẾT về lỗi khoảng trắng đầu dòng trong prompt** (rút kinh nghiệm từ đợt nhỏ 7 ngay trước) — kết quả: cả 4 agent tự kiểm tra và giữ đúng, **0 lỗi khoảng trắng ở đợt này**, xác nhận cảnh báo cụ thể trong prompt thực sự hiệu quả. Chỉ 1 lỗi nhỏ: mất bracket `[building|E]`.
+
+**Bài học tổng hợp quan trọng nhất của đợt 12 (ghi nhớ cho các đợt chia-đoạn-nhiều-agent sau này):**
+1. **Luôn kiểm tra `grep -c '^ '` so với tổng dòng nội dung (loại dòng trống) cho MỌI đoạn agent trả về, trước khi ghép** — đây là lớp kiểm tra mới, bổ sung vào quy trình 3 lớp cũ. Lỗi thiếu khoảng trắng đầu dòng không bị bất kỳ lớp kiểm tra cũ nào (đếm dòng, đếm bracket/ref, diff key-set không neo boundary) phát hiện một cách chắc chắn.
+2. **Nếu prompt cảnh báo cụ thể, rõ ràng về một loại lỗi cụ thể đã từng xảy ra, agent thường tự tránh được** — đợt nhỏ 8 là bằng chứng trực tiếp (0/4 lỗi so với 3/4 đoạn lỗi ở đợt nhỏ 7 dùng prompt chung chung hơn).
+3. **Tra cứu TERMINOLOGY.md phải xuyên toàn bộ repo, không chỉ trong thư mục đang dịch** — lỗi tên trường phái Sorcery lệch giữa `lifestyles/` và `decisions/` xảy ra vì agent (và cả prompt của coordinator) chỉ nghĩ tới ngữ cảnh cùng thư mục.
+4. **"Bane" không phải luôn là khái niệm Garou/Wyrm-tainted đã chốt "Tà Linh"** — khi ghép với splat khác (Mummy: "Bane Mummy"/"Bane Rite"), đó là nghĩa gốc tiếng Anh "tai ương". Luôn đọc ngữ cảnh splat xung quanh trước khi áp thuật ngữ máy móc.
+
+**Thuật ngữ mới → TERMINOLOGY.md `B8-lifestyles-p1` đến `p8`** (8 mục, tổng ~150 thuật ngữ mới đặt/tái xác nhận).
+
+**1 file CHƯA dịch — làm tiếp theo, PHẢI làm để hoàn tất việc #8:**
+- `lifestyles/POD_wraith_lifestyle_l_english.yml` (1064 dòng — **file lớn nhất `lifestyles/`**, chưa đo lại baseline chính xác trong session này, PHẢI tự `grep -c ''` trước khi chia đoạn, đừng tin số 1064 cũ nếu file đã đổi)
+
+Khuyến nghị: chia 5-6 agent theo ranh giới tự nhiên (dòng trống trước heading comment `###` hoặc `#` nếu có, giống cách đã làm với 5 file lớn ở đợt này) — **wraith là splat có rất nhiều thuật ngữ đã chốt sẵn (Corpus/Fetter(s)/Skinlands/Shroud/Gauntlet/Spectre/Arcanos — B4h), tra kỹ TERMINOLOGY.md B4h + B5-wraith-p1..p6 (đã dịch ở `interactions/`) trước khi để agent tự đặt lại**. Sau khi xong, `lifestyles/` đạt 27/27 → **việc #8 HOÀN TẤT** → chuyển việc #9 (4 file root-level ưu tiên: `game_POD_concepts`, `factions_POD`, `government_POD`, `titles_POD`).
 
 ### ✅ ĐỢT 11 (2026-07-27) — 6 file lớn cuối `modifiers/` xong, việc #7 HOÀN TẤT 54/54
 
@@ -273,7 +301,7 @@ Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ lay
 ### #6 — `decisions/`  2.441 key, 11 file — ✅ **HOÀN TẤT 11/11**
 ### #7 — `modifiers/`  4.344 key, 54 file — ✅ **HOÀN TẤT 54/54**
 
-### #8 — `lifestyles/`  6.740 key, 27 file
+### #8 — `lifestyles/`  6.740 key, 27 file — ⏸️ **26/27, còn `POD_wraith_lifestyle_l_english.yml` (1064 dòng)**
 
 ### #9 — 4 file ưu tiên từ root-level (tách ra làm sớm)
 
