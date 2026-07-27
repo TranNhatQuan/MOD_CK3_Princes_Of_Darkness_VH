@@ -968,6 +968,46 @@ Nguồn: `religion/POD_religion_codeoftremere_l_english.yml` (85 dòng, đã d�
 | The Covenant *(holy_order)* | Giao Ước | dịch nghĩa thường; "Giao Ước" là từ phổ thông cho "Covenant" (tôn giáo/lời thề) |
 | The Astors *(holy_order — tên riêng bịa của POD)* | Astors *(giữ nguyên)* | danh từ riêng không rõ gốc, không có nghĩa từ điển để dịch, theo B0 |
 
+## B3l. Thuật ngữ bổ sung (từ `POD_religion_bloodgnosticism`) — việc #2 file 10/36
+
+Nguồn: `religion/POD_religion_bloodgnosticism_l_english.yml` (236 dòng, đã dịch xong 100%) — faith "Huyết Ngộ Đạo Luận" (đã chốt B3k) và 9 faith con theo Ngộ đạo luận Cơ Đốc (Cainite Heresy, Via Pura/Katharoi, Calomena's Chosen, Eschatologists, Black Magdalene, Swarm of Samael, Red Temptation, Third Caine + Apostles, Sancta Mater). Đối chiếu trực tiếp với `base_game_vh/localization/english/religion/religion_dualism_l_english.yml` (Nhị Nguyên Luận — cùng gốc Ngộ đạo/nhị nguyên Cơ Đốc thời Trung Cổ) và `religion_christianity_l_english.yml` (Bogomil, Cathar, Ecumenical Patriarch, Apostle, Synod).
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Demiurge | Demiurge *(giữ nguyên)* | ✅ tiền lệ base trực tiếp: `dualism_devil_name`="Đấng Demiurge" (nhưng ở đây đứng một mình làm tên khái niệm thần học, không kèm "Đấng" vì key `bloodgnosticism_evil_god_demiurge` chỉ là danh xưng ngắn) |
+| Ialdabaoth | Ialdabaoth *(giữ nguyên)* | danh từ riêng Ngộ đạo luận (tên gọi khác của Demiurge trong thần thoại Gnostic), không có bản dịch tự nhiên |
+| 30th Aeon of God | Vô Lượng Kỷ Thứ 30 của Thần | đặt mới; "Aeon" trong vũ trụ luận Ngộ đạo là một cấp bậc/thời kỳ phát xuất thần linh — dùng "Vô Lượng Kỷ" (mượn Phật giáo, có tiền lệ `Wuliang`="Vô Lượng" trong `base_game_vh/names/chinese_character_names`) để giữ sắc thái siêu hình, tránh nhầm với "Kỷ Nguyên" thường (Wheel of Ages, B3c) |
+| Destruction *(death_deity_name)* | Hủy Diệt | dịch nghĩa thường, danh từ trừu tượng làm tên thần |
+| chapel *(house_of_worship)* | nhà nguyện | đặt mới; phân biệt với `christianity_house_of_worship`="nhà thờ" (nhà thờ lớn) — "nhà nguyện" nhỏ hơn, hợp giáo phái bí mật |
+| principle of faith *(religious_head_title/devotee/priest)* | Nguyên Tắc Đức Tin | ⚠️ đã chốt trước ở `calomenasforsaken` (xem mục ngay dưới, "đã chốt trước") — **KHÔNG** phải "nguyên lý đức tin" (bản dịch ban đầu của đợt này, đã sửa lại cho khớp). Số ít/số nhiều gộp làm một theo mục 7 TRANSLATION_RULES.md |
+| the abyss *(negative_afterlife, nhắc lại)* | vực thẳm | ✅ đã chốt B3h/B3m, áp dụng lại |
+| heaven/thiên đàng *(divine_realm/positive_afterlife, danh từ thường)* | thiên đàng | ✅ theo `christianity_positive_afterlife`="thiên đàng" (chữ thường); khác "Thiên Đường" viết hoa đã dùng ở `POD_religion_ghoul` (B3g) — file đó không phải tiền lệ khóa cứng, ở đây bám sát dạng base hơn |
+| Cainite Heresy | Dị Giáo Hậu Duệ Cain | ghép "Hậu duệ Cain" (đã chốt B2, `pod_cainite`) với "Heresy"→"Dị Giáo" (đã chốt B3k) |
+| Katharoi / Kathar / Cathar(s) | Katharoi / Kathar / Cathar *(giữ nguyên)* | ✅ tiền lệ base trực tiếp: `cathar`="Cathar" (giữ nguyên tên riêng dị giáo) |
+| Bogomil (heresy) | Bogomil *(giữ nguyên)* | ✅ tiền lệ base: `bogomilist`="Bogomil" |
+| Neoplatonism | Chủ nghĩa Tân Plato | đặt mới; theo mẫu tên trường phái triết học phổ biến trong tiếng Việt |
+| Zealot(s) *(viapura_desc, không phải trait/chức danh có sẵn)* | Zealot *(giữ nguyên)* | danh từ riêng chỉ nhóm tín đồ Via Pura trong văn cảnh này, không dịch để tránh nhầm "zealot" nghĩa thường ("kẻ cuồng tín") |
+| Calomena | Calomena *(giữ nguyên)* | danh từ riêng — Em Gái Song Sinh của Caine trong thần thoại POD |
+| Clanless *(calomenaschosen_desc — nhóm ma cà rồng không Clan)* | Vô Clan | đặt mới; ghép tiền tố "Vô" (đã có tiền lệ B3g: Vô Chủ, Vô Minh) với "Clan" (giữ nguyên, đã chốt B2) |
+| martyr(ed) | tử đạo | ✅ tiền lệ base rộng rãi (`nick_the_apostle_desc`, `historical_character.thomas_becket`…) |
+| Eschatologist(s) | Nhà Mạt Thế Luận | đặt mới; "mạt thế luận" (eschatology) là thuật ngữ thần học phổ thông trong tiếng Việt, ghép "Nhà" theo mẫu "Nhà Quỷ Học" (Demonologist, B3c/B4j) |
+| Blood Communion | Thánh Thể Máu | đặt mới; ghép "Thánh Thể" (Eucharist/Communion — chưa có key base riêng nhưng là thuật ngữ Công giáo phổ thông) với "Máu" |
+| Church of the Black Magdalene | Giáo Hội Magdalene Đen | "Giáo Hội" dịch nghĩa thường cho "Church" khi đứng đầu tên riêng giáo phái (khác "nhà thờ" là house_of_worship vật lý) |
+| Swarm of Samael | Bầy Đàn Samael | đặt mới, "Bầy Đàn" dịch nghĩa "Swarm" |
+| Crimson Curia | Triều Đình Đỏ Thẫm | đặt mới; "Curia" (triều đình Giáo hoàng) dịch là "Triều Đình" theo nghĩa hành chính tôn giáo, "Crimson"→"Đỏ Thẫm" phân biệt với "Đỏ" thường (Red Temptation/Red Cainite) |
+| infernalism | thuyết thờ quỷ | đặt mới, dịch nghĩa mô tả |
+| Red Temptation / Red Cainite(s) | Cám Dỗ Đỏ / Hậu Duệ Cain Đỏ | dịch nghĩa; "Cainite" ghép tính từ màu vẫn dùng "Hậu Duệ Cain" nhất quán (khác lệ thường chỉ dùng khi đứng riêng, ở đây là tên phe) |
+| Ecumenical Patriarchate | Tòa Thượng Phụ Đại Kết | ✅ tiền lệ base: `ecumenical_patriarch`="Thượng phụ Đại kết" (`culture_titles_l_english.yml`); thêm "Tòa" cho tên định chế theo mẫu `orthodox_religious_head_title_name`="Tòa Thượng phụ" |
+| Synod | Công Đồng | ✅ tiền lệ base (`historical_character.gemistus_pletho`="Công đồng Florence") |
+| Eastern Orthodoxy / Orthodox Christianity | Chính Thống giáo Đông phương | ✅ tiền lệ base cho "Orthodox"→"Chính Thống" (nhiều nơi, vd. `historical_character.basilios_bessarion`) |
+| non canon *(thirdcaine_desc)* | phi chính thống | dịch nghĩa thường, mô tả tôn giáo không thuộc chính thống Kuei-Jin/vampire lore gốc |
+| Apostle(s) | Tông Đồ | ✅ tiền lệ base (`nick_the_apostle`="Tông Đồ") |
+| See of Nod *(tòa thánh Cainite Heresy)* | Tòa Nod | dịch "See" (tòa giám mục) theo mẫu "Tòa Thượng Phụ"/"Tòa Thượng phụ" ở trên |
+| Sancta Mater, Sancta *(tên riêng Latin — "Mẹ Thánh")* | Sancta Mater, Sancta *(giữ nguyên)* | theo B0, tên riêng tiếng Latin của giáo phái, dịch nghĩa sẽ phá vỡ tính trang trọng/bí ẩn |
+| holder of Sophia (the wisdom) | người nắm giữ Sophia (trí tuệ) | Sophia giữ nguyên (đã chốt B3c/dualism precedent = nữ thần Trí Tuệ Ngộ đạo), "wisdom" dịch "trí tuệ" |
+| corrupted warden *(ám chỉ Giáo Hội La Mã, chưa phải danh xưng chính thức)* | vị lãnh chúa băng hoại | dịch nghĩa; "warden" trong văn cảnh Ngộ đạo (kẻ cai quản/giam giữ linh hồn) dịch "lãnh chúa" để giữ sắc thái cai trị/giam cầm |
+| Handmaidens of Sophia | Nữ Tỳ của Sophia | dịch nghĩa "Handmaiden"→"Nữ Tỳ", theo mẫu "của X" đã chốt |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
