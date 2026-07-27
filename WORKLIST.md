@@ -16,13 +16,12 @@ Cập nhật lần cuối: 2026-07-27.
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **5 file**: glossary_POD, POD_misc_custom_loc, traits_predator_types_POD, POD_fae_traits, POD_fera_traits |
-| Đang dở | `traits/traits_POD_l_english.yml` — **837/1563 dòng** đã dịch (xem chi tiết ở mục "✅ ĐÃ XONG" bên dưới) |
-| Còn lại | ~454 file khác + ~726 dòng cuối của traits_POD |
+| Đã xong hoàn toàn | **6 file**: glossary_POD, POD_misc_custom_loc, traits_predator_types_POD, POD_fae_traits, POD_fera_traits, **traits_POD** (mới xong) |
+| Còn lại | ~454 file khác |
 
-Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~150 mục, đã bổ sung B4b/B4c/B4d/B4e cho Fae/Fera/VtM). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
+Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~150 mục, đã bổ sung B4b–B4j cho Fae/Fera/VtM/Wraith/Mummy/Kuei-Jin). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
 
-**Việc #1 (`traits/`) đang dở ở `traits_POD_l_english.yml` dòng 838.** Đây là việc tiếp theo cần làm — đừng nhảy sang việc #2 (`religion/`) trước khi xong hẳn `traits/`.
+**Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.** Việc tiếp theo là **#2 — `religion/`** (xem chi tiết bên dưới). Đừng nhảy bậc sang #3 trở đi trước khi xong `religion/`.
 
 ---
 
@@ -35,21 +34,15 @@ Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. 
 | `traits/traits_predator_types_POD_l_english.yml` | 48/48 dòng, 30/30 key — **xong cả file** | `9701e54` |
 | `traits/POD_fae_traits_l_english.yml` | 330/330 dòng, 241 key — **xong cả file** | `94e6593` |
 | `traits/POD_fera_traits_l_english.yml` | 479/479 dòng — **xong cả file** (18 tên tộc + 16 desc từ trước, phần còn lại ~223 key) | `9d4ba47` + `2481866` |
-| `traits/traits_POD_l_english.yml` | **837/1563 dòng đã dịch** — xem chi tiết dưới | `a88f55d` `c05c30d` + đợt dòng 600-837 |
+| `traits/traits_POD_l_english.yml` | **1563/1563 dòng — xong cả file** | `a88f55d` `c05c30d` + 6 đợt dòng 600→1563 |
 
-### Trạng thái `traits_POD_l_english.yml` (file lớn nhất, 1563 dòng)
+### `traits_POD_l_english.yml` — HOÀN TẤT 100%
 
-**Đã dịch (dòng 1–837):** tên splat, toàn bộ clan/bloodline/lineage chính và phụ của VtM (Assamite, Baali, Brujah, Caitiff, Cappadocian, Gangrel, Gargoyle, Giovanni, Kiasyd, Lasombra, Maeghar, Malkavian, Nosferatu, Ravnos, Salubri, Samedi, Setite, Toreador, Tremere, True Brujah, Tzimisce, Ventrue + Laibon/Ashirra/lineage Á Đông), clan curse flags, toàn bộ mô tả Dị năng chính (Animalism → Bardo) và 8 trường phái Huyết Thuật, các trạng thái torpor/ngủ (Long Sleep, Dragon Sleep, Cocoon...), Thế Hệ 1-16, Nagaraja/Hecata/Impundulu/Lamia/Anda/Ahrimane, các trait "làm gương" theo clan, Đẳng Cấp Salubri, orison, oculi/acre (Inquisition, phần chưa comment-out).
+File lớn nhất trong `traits/` (1563 dòng). Toàn bộ: tên splat, mọi clan/bloodline/lineage VtM, Dị năng (Discipline) và Huyết Thuật, torpor, Thế Hệ 1-16, bloodline phụ (Nagaraja/Hecata/Impundulu/Lamia/Anda/Ahrimane), trait "làm gương" theo clan, Đẳng Cấp Salubri, Inquisition (orison/oculi/acre/Murnau/Sisters/Red/Holy Alliance), Pháp Môn Kuei-Jin 0-10, Khí Thuật, Mummy (Shemsu-Heru/Cabiri/Wu Tian/Wu Kuei), bệnh ma cà rồng + bệnh WoD khác, Wraith (Spectre castes, Arcanos, Corpus/Fetter/Skinlands), Fallen/Earthbound/Demon, Anathema/Golconda, Ashen landless traits, thanh máu (wound track), Quỷ Học, Chén Thánh, Fleshcrafted.
 
-**Việc tiếp theo — bắt đầu từ dòng 838:** `trait_murnau_knowledge` trở đi — bloodsorcery paths chi tiết hơn, Inquisition traits còn lại, bệnh tật, và phần chưa khảo sát.
+Baseline cuối cùng khớp hoàn toàn với TRANSLATION_RULES.md §8: ref 305, bracket 501, icon 29, mở tag 75, đóng tag 88, `\n` 256, `\"` 0, dòng 1563, rawquote 2385.
 
-Baseline đã khớp lại sau khi dịch xong 837 (đối chiếu TRANSLATION_RULES.md §8): ref 305, bracket 501, icon 29, mở tag 75, đóng tag 88, `\n` 256, `\"` 0, dòng 1563, rawquote 2385 — **tất cả khớp**.
-
-**Batch còn lại theo kế hoạch cũ (có thể đổi mốc dòng khi khảo sát thực tế):**
-- [x] dòng 600–837 (Thế Hệ, bloodline phụ, warrior traits, orison/oculi) — đã dịch và áp dụng
-- [ ] dòng 837–950
-- [ ] dòng 950–1200
-- [ ] dòng 1200–1563 (bệnh tật + phần còn lại)
+**Việc #1 (toàn bộ `traits/`) đã xong.** Chuyển sang việc #2 (`religion/`).
 
 ---
 
@@ -57,18 +50,9 @@ Baseline đã khớp lại sau khi dịch xong 837 (đối chiếu TRANSLATION_R
 
 Sắp theo **đòn bẩy giảm dần**: việc trước là nguồn của việc sau. Làm sai thứ tự sẽ phải dịch lại.
 
-### #1 — `traits/` phần còn lại  ~1.660 key, 4 file
+### #1 — `traits/`  ✅ HOÀN TẤT — cả 4 file
 
-Làm trước tiên vì trait được **hàng nghìn** chuỗi khác trỏ tới qua `[GetTrait('x').GetName]`.
-
-| File | Dòng | Nội dung còn lại |
-|---|---|---|
-| `traits_POD_l_english.yml` | 1563 | Dị năng, thế hệ, trait tính cách, trait bệnh |
-| `POD_fera_traits_l_english.yml` | 479 | trait phụ của Fera (đã xong 18 tên tộc + 16 mô tả) |
-| `POD_fae_traits_l_english.yml` | 330 | kith Fae (đã xong `trait_fae`, `trait_changeling`) |
-| `traits_predator_types_POD_l_english.yml` | 48 | kiểu kiếm ăn — **chưa dịch dòng nào** |
-
-Chia nhỏ theo khối 100–150 key, commit từng đợt.
+Làm trước tiên vì trait được **hàng nghìn** chuỗi khác trỏ tới qua `[GetTrait('x').GetName]`. Tất cả 4 file (`traits_POD`, `POD_fera_traits`, `POD_fae_traits`, `traits_predator_types_POD`) đã dịch 100%.
 
 ### #2 — `religion/`  6.689 key, 36 file
 

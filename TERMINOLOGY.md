@@ -668,6 +668,26 @@ Nguồn: phần Oan hồn (Wraith), Ác quỷ Fallen/Earthbound, và pháp sư p
 | Ashen Adventurer / Ashen Ambassador / Ashen Grandmaster / Ashen Caravan (Master) | Nhà Thám Hiểm Tro Tàn / *("Ashen" giữ nguyên trong `[ashen_ambassador|E]` v.v. vì đó là concept-link key, không dịch)* | "Ashen" chỉ ma cà rồng/kueijin vô địa (landless) lang bạt; chỉ dịch phần mô tả văn xuôi, không dịch bên trong `[ashen_*|E]` vì đó là tên concept key |
 | landless *(ma cà rồng/kueijin không lãnh địa)* | vô địa | dùng nhất quán trong mô tả Ashen |
 
+## B4j. Thuật ngữ cuối `traits_POD` (dòng 1447-1563) — thanh máu, Quỷ Học, Chén Thánh, Underworld
+
+File `traits_POD_l_english.yml` **hoàn tất 100% (1563/1563 dòng)** ở đợt này.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Bruised / Hurt / Injured / Wounded / Mauled / Crippled *(6 cấp thanh máu POD)* | Bầm Dập / Bị Thương / Bị Tổn Thương / Trọng Thương / Bị Xé Nát / Tàn Phế | không có tiền lệ base (base dùng hệ khác); đặt mới theo thang tăng dần mức độ nghiêm trọng |
+| Impairment | Suy Nhược | tên track đo % ô máu đã lấp đầy |
+| Mod Guardian | Người Gác Mod | nhân vật kỹ thuật ẩn, không phải lore thật |
+| Midnight Warrior / Midnight General / Midnight Master, Twilight Warrior / Twilight General / Twilight Master | Chiến Binh/Tướng Quân/Bậc Thầy Nửa Đêm, Chiến Binh/Tướng Quân/Bậc Thầy Hoàng Hôn | 2 truyền thống chiến tranh nghi thức của Kuei-Jin (Midnight Wars gây sát thương thật, Twilight Wars phi sát thương) |
+| Wayang Kulit (Disciple/Mistress/Penangallan) | Wayang Kulit *(giữ nguyên tên)*, Đệ Tử/Nữ Chủ/Penangallan Wayang Kulit | phong cách chiến tranh Đông Nam Á, tên riêng nghệ thuật kịch bóng Java giữ nguyên |
+| Angered Madness Network | Mạng Lưới Điên Loạn Nổi Giận | hiệu ứng liên quan mạng lưới Malkavian |
+| Demonology / Demonologist | Quỷ Học / Nhà Quỷ Học | ✅ "Nhà Quỷ Học" đã có tiền lệ ở B3c (`podgloss.truename`) cho "Demonologist" — dùng nhất quán |
+| Grail Knight, Grail of the Bitter Ashes | Hiệp Sỹ Chén Thánh, Chén Thánh Tro Đắng | "Hiệp Sỹ" viết y (theo base, xem A4) |
+| Fleshcrafted | Bị Nhào Nặn Thân Xác | trait mô tả nạn nhân Vicissitude |
+| Complexity *(track fleshcrafted)* | Mức Độ Phức Tạp | |
+| Pilgrim of Enoch | Lữ Khách Enoch | |
+| Itarajana Sorcerer | Pháp Sư Itarajana | Huyết Thuật bản địa Ấn Độ |
+| **Underworld** *(tham số 2 của `UmbraGlossaryLocalized('shadowlands', …)`)* | **Âm Phủ** ✅ mới đặt | Chưa có trong B0 (chỉ liệt kê 'Underworld' là 1 trong các giá trị khả dĩ của flag `shadowlands`, chưa dịch). Đây là lần đầu giá trị này được dịch thật — dùng "Âm Phủ" cho mọi `UmbraGlossaryLocalized('shadowlands','Underworld')` từ nay. Các giá trị khác cùng flag (`Limbo`, `Yin World`, `Dark Umbra`) chưa gặp, sẽ đặt khi tới lượt. |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
