@@ -1846,6 +1846,15 @@ File 37 dòng, toàn bộ đã bị comment-out trong bản gốc tiếng Anh (m
 | English | Tiếng Việt | Ghi chú |
 |---|---|---|
 | Quincunx *(tổ chức chính trị cấp cao của Kuei-jin, tab_quincunx)* | Ngũ Hành Hội | không có tiền lệ base (danh từ riêng WoD hiếm); dịch nghĩa vì "quincunx" = hình sắp xếp 5 điểm kiểu hoa mai, hợp nghĩa "ngũ hành" trong văn hóa Hán mà Kuei-jin lấy cảm hứng; đối chiếu `simp_chinese/gui/POD_quincunx_l_simp_chinese.yml` dùng "五行宗" (Ngũ Hành Tông) xác nhận hướng dịch nghĩa theo ngũ hành là hợp lý; dùng "Hội" thay "Tông" vì đây là hội đồng/triều đình chính trị, không phải môn phái tu luyện |
+
+## B5e. "Unburden" (Grand City character interaction, từ `interactions/POD_character_interactions_grand_city_l_english.yml`), việc #5
+
+Không có tiền lệ trong `base_game_vh` (không phải khái niệm vanilla) và chưa có trong `TERMINOLOGY.md`. Interaction cho phép nhân vật từ bỏ một stress trait tiêu cực (thông qua `POD_unburden_*`, mỗi key ứng với một trait vanilla đã có bản dịch sẵn trong `traits_l_english.yml`: Bợm Rượu/drunkard, Tự Hành Xác/flagellant, Ăn Uống Giải Sầu/comfort_eater, Ăn Năn/contrite, Hoang Tán/improvident, Chán Ăn/inappetetic, Ẩn Dật/reclusive, Cáu Kỉnh/irritable, Trác Táng/rakish, Phung Phí/profligate, Cường Tráng/athletic, Viết Nhật Ký/journaller, Tâm Sự/confider). `hashishiyah` là trait POD-specific, không có tiền lệ base; giữ "hashish" nguyên như base_game_vh đã làm (`stress_hashish_habit` → "Thói Quen Hút Hashish").
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Unburden *(character interaction, POD_grand_city_unburden_interaction)* | Trút Bỏ Gánh Nặng | dịch nghĩa ("un-" + "burden" = trút bỏ gánh nặng), không có tiền lệ; áp dụng nhất quán nếu key `unburden` xuất hiện lại ở file khác |
+| hashish *(trait `hashishiyah`, chỉ dùng trong `POD_unburden_hashishiyah`)* | hashish *(giữ nguyên)* | theo tiền lệ base `stress_hashish_habit` = "Thói Quen Hút Hashish" — không dịch thành "cần sa"/"thuốc phiện" |
 | Zeal *(quincunx_influence, tài nguyên/điểm ảnh hưởng của Quincunx)* | Nhiệt Thành | tái dùng nghĩa "Zeal"→"Nhiệt thành" đã có trong `base_game_vh` (`modifiers_l_english.yml` key `player_facing_ai_zeal`), viết hoa "Nhiệt Thành" khi dùng như tên tài nguyên riêng |
 | August Court *(chính thể/triều đình cai trị Kuei-jin, quincunx_county_mod)* | Thượng Triều | đặt mới; "August" ở đây là tính từ tôn xưng ("cao quý, tôn kính") giống trong `August Personage of Jade`→"Ngọc Hoàng" (B3c) chứ không dịch chữ-đối-chữ; "Thượng" ngắn gọn mang nghĩa cao quý/tối cao, hợp UI chật |
 | August Ancestor *(cấp bậc Kuei-jin cao nhất, thành viên Quincunx)* | Thượng Tổ | ghép "Thượng" (như August Court) + gốc "Tổ" từ "Ancestor"→"Tổ Tiên" (đã chốt B3, dòng 614) để nhất quán và ngắn gọn |
@@ -1931,3 +1940,128 @@ File lớn nhất `gui/`. Dịch qua 6 agent chia đoạn (1-160, 161-324, 325-5
 **Fetish** (đồ vật ràng buộc linh hồn của Fera/Garou, khác nghĩa "witch's fetish" thông thường) → đặt mới **"Bùa Chú"** (3/6 đoạn dùng nhất quán, không xung đột). Chưa có trong TERMINOLOGY.md trước đây — ghi nhận tại đây. Cần đối chiếu lại khi dịch `game_POD_concepts_l_english.yml` (`game_concept_fetish: "Fetish"`, chưa dịch) và `[fetish|E]`/`[fetish_smithing|E]` concept link ở các file khác để xem có nên thống nhất hay giữ khác biệt theo splat.
 
 Áp dụng lại các bảng trên khi gặp lại ở `game_POD_concepts_l_english.yml` (việc #9, nguồn định nghĩa gốc nhiều khái niệm `game_concept_*` file này tham chiếu qua `Glossary()`), `religion/` (đã xong, không cần sửa lại), và các file `event_localization/POD_umbra/` (việc #13, chưa tới lượt).
+
+## B5f. "Coterie" (từ `interactions/POD_character_interactions_coterie_l_english.yml`), việc #5 file 1
+
+File 27/27 dòng, dịch xong 100%. Cụm tương tác tạo/mời/đuổi/giải tán Coterie (nhóm ma cà rồng thân cận, khái niệm gốc VtM).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Coterie | Coterie *(giữ nguyên)* | danh từ tổ chức lõi VtM, chưa có tiền lệ dịch ở bất kỳ file POD nào; áp dụng B0 tương tự tiền lệ `pack` (B4r dòng 1611) — nhóm ma cà rồng Camarilla, cộng đồng quen đọc tiếng Anh, dịch nghĩa ("bang hội", "nhóm") sẽ đụng nghĩa chung và dài dòng hơn UI cho phép |
+
+`PODCoterie`/`PODGetCoterieName`/`PODCoterieNoTooltip` là hàm data-binding (`GetPlayer.Custom(...)`), không phải chữ hiển thị trực tiếp — tự thay bằng "Coterie" (kèm/không kèm tên riêng) khi hiển thị trong game; không có gì để dịch ở tham số `'...'` của các hàm này.
+
+## B4cat1. Thuật ngữ category menu tương tác (từ `interactions/POD_categories_l_english.yml`, 32/32 dòng, việc #5)
+
+Nguồn: file định nghĩa tên category hiển thị trong menu tương tác nhân vật + key `*_ACTIONS` nội bộ tương ứng (đối chiếu `base_game_vh/localization/english/interactions/categories_l_english.yml` dùng mẫu "hành động X" chữ thường cho các key `*_ACTIONS`, đã áp dụng lại mẫu này).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Grand City *(category, không phải `game_concept_grand_city` — file gốc chưa dịch)* | Đại Thành | đặt mới, chưa có tiền lệ; đối chiếu lại khi dịch `game_POD_concepts_l_english.yml` (`game_concept_grand_city: "Grand City"`, 5 Grand City: Eternal Rome, Constantinople, Paris, Cairo, Jerusalem) để thống nhất |
+| Journey(s) | Hành Trình | tái dùng cách gọi đã xuất hiện ở `religion/POD_religion_roadofbeast_l_english.yml` ("Con Đường Hành Trình") và `gui/POD_achievement_l_english.yml` ("Hành Trình Vatican"); áp dụng lại cho `game_concept_journey`/`game_concept_journeys` khi tới file đó |
+| Coterie | Coterie *(giữ nguyên)* | danh từ WoD lõi, không có khái niệm vanilla tương đương, theo B0; xuất hiện lặp lại qua `[GetPlayer.Custom('PODCoterie')]`/`PODCoterieNoTooltip` ở nhiều file khác — giữ nguyên nhất quán |
+| Sect | Giáo phái | tái dùng B4e (`sect`→"giáo phái", đã chốt ở `raktasadhus_desc`) |
+| Spirit *(category, danh từ splat)* | Linh thể | tái dùng `trait_spirit`="Linh thể" (B4c) |
+| Psychic | Người Có Năng Lực Ngoại Cảm | tái dùng tiền lệ đã đặt trước đó (dòng ~1193) |
+| Fae *(category ngắn cho splat `trait_fae`)* | Fae Chân Chính | tái dùng `trait_fae`="Fae Chân Chính" (đã chốt, KHÔNG dịch trơn "Fae") |
+| Vampire/Wraith/Ghoul/Mummy/Demon/Mage/Possessed/Fera/Holy Arts | Ma cà rồng/Oan hồn/Bộc huyết/Xác ướp/Ác quỷ/Pháp sư/Bị Chiếm Hữu/Fera/Thánh Thuật | tái dùng nguyên trạng các bảng đã chốt ở B4/B4h (`trait_*`) và Holy Arts đã đặt trước |
+
+Key `*_ACTIONS` (nội bộ, dùng mẫu vanilla "hành động X" chữ thường): tất cả 16 key dịch theo mẫu "hành động " + tên splat/category số ít không viết hoa (`VAMPIRE_ACTIONS`→"hành động ma cà rồng", `GRAND_CITY_ACTIONS`→"hành động đại thành", `JOURNEYS_ACTIONS`→"hành động hành trình", `COTERIE_ACTIONS`→"hành động coterie", v.v.), trừ `HOLYARTS_ACTIONS` giữ "Thánh Thuật" viết hoa (bản gốc tiếng Anh cũng viết hoa "Holy Arts" khác các key khác toàn chữ thường, giữ theo cách viết gốc).
+
+## B5g. Thuật ngữ `interactions/POD_character_interactions_spirits_l_english.yml`, 29/29 dòng, việc #5
+
+File tương tác Garou/Fera với Linh hồn (Spirit): học Ngôn ngữ Linh hồn, triệu hồn Linh hồn, lập Hiệp ước, Cống Vật, tăng cường Tà Linh, chịu chiếm hữu.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Summon Spirit *(tên tương tác)* | Triệu hồn Linh hồn | đặt mới; `spirit`="linh hồn" đã chốt (B4/B4s, dùng 20+ lần trong base); "Triệu hồn" khác "Gọi hồn" (đã dùng cho Necromancy, `trait_necromancy`="Thuật Gọi Hồn") — tránh trùng với thuật gọi hồn ma cà rồng, vì đây là Garou/Fera triệu tập một thực thể linh hồn sống, không phải thuật gọi hồn người chết |
+| Spiritual Pact / `[spirit_pact\|E]` | Hiệp ước Linh hồn | đặt mới; concept link `[spirit_pact\|E]` giữ nguyên (key), chỉ dịch tên tương tác hiển thị trực tiếp |
+| Chiminage | Cống Vật | tái dùng nguyên trạng bản dịch đã có ở `gui/sorcery_POD_l_english.yml` (`spell_false_chiminage_name`="Cống Vật Giả") — nghi thức Garou/Fera hiến tặng linh hồn để đổi lấy sự giúp đỡ |
+| Bane (Spirit) | Tà Linh | tái dùng B4c (`Bane`="Tà Linh", linh thể bị Wyrm làm ô uế) |
+| Gaian *(tính từ splat, "Gaian Spirit")* | Gaian *(giữ nguyên)* | chưa có bản dịch nghĩa nào cho tính từ này ở bất kỳ file POD nào (kể cả `religion/POD_religion_gaia_l_english.yml` — file này chưa dịch); theo B0 giữ nguyên tên riêng/tính từ gốc cho đến khi file gaia được dịch và chốt cách xử lý chung |
+| Submit to [possession\|E] | Khuất phục trước [possession\|E] | đặt mới; concept link `[possession\|E]` giữ nguyên; "possess" (động từ, "to possess you") → "chiếm hữu", tái dùng B4 (`Possessed`="Bị Chiếm Hữu") |
+| "Is busy" *(lý do tương tác không khả dụng)* | "Đang bận" | đặt mới, không có tiền lệ tương tự trong base_game_vh; dịch tự nhiên cho tooltip lý do bị khóa |
+
+## B5h. Thuật ngữ `interactions/POD_character_interactions_debug_l_english.yml` — tương tác debug (dev tool), 61/61 dòng, việc #5
+
+File tương tác debug (menu dev tool, người chơi bật debug mode để test): dịch chuyển, giết nhân vật, ép vào ngục, hoàn tất hành trình, nạp trait XP, nạp năng lượng, phát hiện Umbra, hiện Võ Dũng thật, sửa tư thế/màu trang phục/shader/chân dung Vicissitude, thêm Nửa-Splat, dạy Chú Thuật Sự Sống, tạo bản đồ Umbra, biến thành Nhà Phiêu Lưu Vô Địa.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Squared Distance | Khoảng Cách Bình Phương | đặt mới, thuật ngữ hình học thường, không có tiền lệ WoD/CK3 |
+| Kill Character | Giết Nhân Vật | đặt mới; `slay_character_interaction` (vanilla, không dịch được vì thuộc `base_game_vh` chỉ còn key) được nhắc tới nguyên trạng qua `$slay_character_interaction$`, không đổi |
+| Force into Prison | Ép vào Ngục | đặt mới; "prison"→"ngục" theo cách dùng thường của base cho nhà tù CK3 |
+| Teleport | Dịch Chuyển | đặt mới, dịch nghĩa thường |
+| "wheeee" *(placeholder desc vui của dev)* | "hoooo" | dòng debug đùa của tác giả mod, không có nghĩa thật; dịch tự do giữ tính hài hước tương đương, không dịch sát nghĩa |
+| Journey (tên tương tác/hành động) | Hành Trình | tái dùng B4cat1 đã chốt (`Journey(s)`→"Hành Trình"); áp dụng cho `POD_debug_instacomplete_journey_interaction` |
+| Trait Experience / Trait XP | Kinh Nghiệm Trait | đặt mới; giữ "Trait" nguyên (chưa có bản dịch nghĩa thống nhất cho "trait" nói chung trong repo — các file đã dịch chỉ dịch tên trait cụ thể, không dịch từ "trait" chung); "Experience"→"Kinh Nghiệm" dịch nghĩa thường |
+| Refill Energy / energy vessels / "mana bar" | Nạp Đầy Năng Lượng / bình năng lượng / "thanh mana" | đặt mới; "mana" giữ nguyên trong dấu ngoặc kép lồng (thuật ngữ game phổ biến, đã có tiền lệ giữ nguyên ở nhiều RPG Việt hóa); "vessel"→"bình" theo nghĩa vật chứa |
+| Gain [umbra\|E] Discovery | Nhận Phát Hiện [umbra\|E] | đặt mới; `[umbra\|E]` là concept link giữ nguyên key, "Umbra" hiển thị của nó giữ nguyên theo B0/B4v (`Umbra`→giữ nguyên) |
+| Prowess (uncapped) | Võ Dũng (không giới hạn) | tái dùng `game_concept_prowess`="Võ dũng" (base, `game_concepts_l_english.yml:735`), viết hoa theo quy ước tên nút giao diện |
+| Idle Pose | Tư Thế Nghỉ | đặt mới, dịch nghĩa thường cho pose mặc định của nhân vật khi đứng yên |
+| Clothing Colors / Personal Colors / Coterie Colors / House Colors | Màu Trang Phục / Màu Cá Nhân / Màu Coterie / Màu Gia Tộc | "Coterie" giữ nguyên theo B5f/B4cat1 đã chốt; "House"→"Gia Tộc" theo cách base dùng cho `house|E` (khác `dynasty`="Triều đại") |
+| Portrait Shader Playground / Event Shader Test / Toggle Portrait Modifiers | Khu Thử Nghiệm Shader Chân Dung / Thử Nghiệm Shader Sự Kiện / Bật/Tắt Hiệu Ứng Chân Dung | đặt mới; "Shader" giữ nguyên (thuật ngữ kỹ thuật đồ họa, không có bản dịch tiếng Việt phổ biến, tương tự cách các mod Việt hóa khác giữ nguyên "shader"); "Modifier"→"Hiệu Ứng" (khác `game_concept_modifier` nếu có, nhưng ở đây ngữ cảnh là hiệu ứng hình ảnh chân dung, không phải modifier gameplay) |
+| Vicissitude Portrait Editor | Bộ Sửa Chân Dung Vicissitude | "Vicissitude" giữ nguyên theo tiền lệ đã chốt (`trait_vicissitude`, `traits_POD_l_english.yml:430`) |
+| Half-Splat | Nửa-Splat | đặt mới; "Splat" giữ nguyên theo B4 (khung phân loại chủng loài WoD, không dịch), ghép tiền tố "Nửa-" dịch nghĩa "Half-" |
+| Spell of Life | Chú Thuật Sự Sống | đặt mới, dịch nghĩa; "Spell"→"Chú Thuật" (chưa có tiền lệ thống nhất cho "spell" chung trong repo, chọn từ Hán-Việt phù hợp giọng gothic/huyền thuật, tương tự "Thuật Gọi Hồn" cho Necromancy) |
+| Umbra Map Generation Prototype | Nguyên Mẫu Tạo Bản Đồ Umbra | đặt mới; "Umbra" giữ nguyên (B0/B4v) |
+| Landless Adventurer | Nhà Phiêu Lưu Vô Địa | tái dùng `lifestyle_adventurers_l_english.yml` (base, "Nhà Phiêu Lưu"), thêm "Vô Địa" dịch nghĩa "Landless" (khác `landless_adventurer_government`, chưa có bản dịch tên chính phủ, dùng tạm cụm mô tả) |
+| Gallivanter *(trait, chỉ xuất hiện trong `[GetTrait('gallivanter').GetName(...)]`, không dịch trực tiếp ở đây)* | *(không dịch — tên trait nằm trong script function, sẽ dịch khi tới `traits/` chứa `trait_gallivanter`)* | trait chưa có key `trait_gallivanter` trong bất kỳ file `traits/*.yml` nào đã dịch; khi dịch file traits tương ứng cần đối chiếu lại dòng này |
+| "prevents inheriting landed titles" | "ngăn kế thừa tước vị có đất" | đặt mới; "landed titles"→"tước vị có đất" (khác tước vị của landless adventurer), dịch nghĩa thường cho tooltip `#weak` |
+
+## B5i. Thuật ngữ `interactions/POD_character_interactions_journeys_l_english.yml` — tương tác Hunt/Torpor/Heist dùng cơ chế Journey, 41/41 dòng, việc #5
+
+File định nghĩa 4 nhóm tương tác dùng [journey|E]/[infiltration_mission|E] (concept link, giữ nguyên key, KHÔNG dịch — chỉ file định nghĩa `game_concept_journey` mới dịch chữ hiển thị): Hunt (rút máu/ăn thịt mục tiêu), Find Hiding Place (tìm ma cà rồng đang Miên trạng), Find Lair (tìm sào huyệt quái vật), Heist (trộm Vàng/Hiện vật).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Hunt *(tên tương tác `POD_hunt_target_interaction`)* | Săn Đuổi | đặt mới, dịch nghĩa thường cho hành động truy lùng mục tiêu để rút máu/ăn thịt |
+| Find Hiding Place | Tìm Nơi Ẩn Náu | đặt mới; tương tác tìm ma cà rồng đang $pod_torpor$ (Miên trạng, B3-đã chốt "Torpor"→"Miên trạng") |
+| torpid vampire *(cụm tính từ, KHÔNG dùng shortcut `$pod_torpor$` để tránh lệch ref-count baseline)* | ma cà rồng đang Miên trạng | tái dùng "Torpor"→"Miên trạng" (đã chốt, dòng 265) ở dạng tính từ; `game_concept_torpid` (`game_POD_concepts_l_english.yml:49`) vẫn còn tiếng Anh, đối chiếu lại khi dịch file đó |
+| Find Lair | Tìm Sào Huyệt | đặt mới; "lair"→"sào huyệt" dịch nghĩa thường cho hang ổ quái vật |
+| fiend *(chỉ mục tiêu cần săn, không phải ác quỷ theo nghĩa tôn giáo)* | quái vật | KHÔNG tái dùng `fiend`="ác quỷ" của `base_game_vh` (`insult_custom_loc_l_english.yml:13`) vì ngữ cảnh khác — ở đây là mục tiêu chung (có thể là bất kỳ splat nào), dịch nghĩa rộng hơn "quái vật" |
+| Steal Gold | Trộm Vàng | đặt mới, dịch nghĩa thường |
+| Artifact Heist | Trộm Hiện Vật | đặt mới; "Heist"→"Trộm" (gộp vào động từ, không dịch riêng "cuộc trộm") cho gọn theo UI CK3 |
+| Prepare quickly / Scout thoroughly | Chuẩn bị nhanh / Trinh sát kỹ càng | đặt mới, hai lựa chọn tương phản trước khi vào [infiltration_mission|E] |
+| "mortal enemies" | "kẻ tử địch" | đặt mới, dịch nghĩa thường, giữ giọng trung cổ (tránh "kẻ thù không thể hòa giải" dài dòng) |
+| vault *(nơi giấu mục tiêu heist)* | hầm chứa | đặt mới, dịch nghĩa thường |
+
+## B5j. Thuật ngữ `interactions/POD_character_interactions_ghoul_l_english.yml` — tương tác quản lý/tạo Bộc huyết, 65/65 dòng, việc #5
+
+File xoay quanh domitor điều khiển Nô Bộc/[ghoul|E] của mình: tạo ghoul (`ghoulify`), rút vitae, các nhiệm vụ (`ghoul_mission_*`) domitor giao cho bound ghoul, và tương tác trốn khỏi blood bond.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Thrall(s) *(đồng nghĩa với `[ghoul\|E]` trong ngữ cảnh domitor-ghoul, khác `game_concept_thrall` của Demon-cultist chưa dịch)* | Nô Bộc | tái dùng "Nô Bộc" đã chốt cho `viaservilis_adherent` (dòng 963) và khớp cách `trait_ghoul_desc`/`DHARMA_PASSIVE_5_GHOUL` mô tả ghoul là "nô bộc"; áp dụng cho các nút UI `Heal Thrall`→"Chữa lành Nô Bộc", `Reward/Release Thrall`… |
+| Manipulate [ghoul\|E] *(tên tương tác `POD_ghoul`/`POD_manipulate_bound_ghouls`)* | Điều khiển [ghoul\|E] | đặt mới, dịch nghĩa "manipulate" trong ngữ cảnh domitor sai khiến ghoul, tránh dùng "Lợi dụng" (nặng nghĩa xấu hơn ý gốc) |
+| Ghoulify *(động từ, tên tương tác `POD_ghoulify_mortal_interaction`)* | Biến thành Bộc huyết | đặt mới, dịch nghĩa hành động biến kẻ phàm thành ghoul, dùng lại "Bộc huyết" (Ghoul, đã chốt dòng 437) thay vì để "ghoul" tiếng Anh ở tên tương tác chính (khác các key khác trong file vẫn giữ `[ghoul\|E]` là concept link) |
+| Bribe Officials / Indoctrinate a Contact | Hối lộ Quan Chức / Dẫn dụ một Đầu mối | đặt mới, dịch nghĩa thường cho 2 loại nhiệm vụ domitor giao cho bound ghoul |
+| master's lair *(nơi domitor gửi ghoul đến)* | hang ổ của chủ nhân | đặt mới, dịch nghĩa thường; "Domitor" giữ nguyên không dịch (theo `game_concept_domitor: "Domitor"`) nên câu văn dùng "chủ nhân" khi không nhắc trực tiếp đến key Domitor |
+
+## B5k. Thuật ngữ `interactions/character_interactions_POD_l_english.yml` — tương tác chung/tổng hợp toàn mod, 287/287 dòng, việc #5
+
+File tổng hợp các tương tác/hiệu ứng dùng chung cho mọi splat: các key `EXECUTION_*` (lựa chọn hành quyết tù nhân của nhiều loại nhân vật siêu nhiên khác nhau — Wraith, Mummy, Kuei-Jin, Soultaker...), tương tác Hook/Friendship/Government/Teleport, và 2 sự kiện quyết định "Knowledge Exchange" của tộc Impundulu (Kuei-Jin). Không có `UmbraGlossaryLocalized()` trong file này, chỉ có 5 lần `Glossary('Sire'/'True Name', ...)` — cả hai vẫn đang giữ nguyên tiếng Anh ở tham số 1 theo tiền lệ toàn mod (xem B3/B5 "Sire" và mọi lần dùng `Glossary('True Name','podgloss.truename')` ở các file khác), không phải quyết định riêng của file này.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Exsanguination *(`EXECUTION_EXSANGUINATION`, tên một lựa chọn hành quyết)* | Rút Cạn Máu | đặt mới, dịch nghĩa thường; chưa có tiền lệ ở file khác (grep toàn mod không thấy) |
+| Spirit Eating / Devour Soul / Feed the Caul / Absorb the Mind *(4 tên lựa chọn hành quyết dùng chung, lặp lại trong tooltip cooldown `used_*`/`execution_*_tooltip`)* | Ăn Linh Hồn / Nuốt Linh Hồn / Cho Caul Ăn / Hấp Thụ Tâm Trí | đặt mới, dịch nghĩa thường cho 4 khái niệm riêng biệt (không đồng nghĩa dù cùng nhóm "ăn tâm trí/linh hồn tù nhân"); "Caul" giữ nguyên tiếng Anh (danh từ riêng WoD chỉ thực thể/vật thể đặc biệt, không có bản dịch tương xứng) |
+| Erase from Existence *(`EXECUTION_UNMAKING`)* | Xóa Sổ Khỏi Tồn Tại | đặt mới, dịch nghĩa thường |
+| Fill Canopic Jars *(`EXECUTION_FILL_JARS`, hành quyết kiểu Mummy Ai Cập)* | Lấp đầy Bình Canopic | đặt mới; "Canopic jar" là thuật ngữ khảo cổ Ai Cập có phiên âm quen dùng "bình Canopic" trong tiếng Việt phổ thông, giữ nguyên "Canopic" |
+| Sacrifice to Soultaker *(`EXECUTION_SOULTAKER`; "Soultaker" là tên riêng một thanh kiếm/thực thể WoD, xem `soultaker_betray`)* | Hiến Tế cho Soultaker | đặt mới; "Soultaker" giữ nguyên (danh từ riêng) |
+| Feed to wild animals in the Colosseum *(`EXECUTION_COLOSSEUM`)* | Cho Thú Hoang Ăn trong Đấu trường | đặt mới; "Colosseum" ở đây là danh từ chung (đấu trường La Mã kiểu Nhà hát Đấu Sư Tử), dịch nghĩa "Đấu trường" — khác `building_type_rome_colosseum_01: "The Colosseum"` (danh từ riêng chỉ công trình Đại Hí Trường ở Roma, chưa dịch, sẽ cần quyết định riêng khi tới lượt file đó có nên giữ nguyên tên riêng hay không) |
+| Eat Sins *(`EXECUTION_SIN_EATING`)* | Ăn Tội Lỗi | đặt mới, dịch nghĩa thường |
+| Call the Khaibit *(`EXECUTION_CALL_KHAIBIT`; "Khaibit" là thuật ngữ Ai Cập cổ chỉ "bóng"/hồn phách, xem thêm B4h dòng 643 "Shadow Twin...Separated Khaibit")* | Gọi Khaibit | đặt mới; giữ nguyên "Khaibit" (danh từ riêng WoD/Ai Cập, chưa có bản dịch tương xứng, nhất quán với B4h) |
+| Sun's Judgement *(`EXECUTION_EDGE_OF_THE_SUN`)* | Sự Phán Xét của Mặt Trời | đặt mới, dịch nghĩa thường |
+| Adopt/Demand Government Conversion *(`convert_to_government_interaction`/`demand_conversion_government_interaction`, dùng chung `[government\|E]`)* | Áp dụng/Yêu cầu Chuyển đổi Chính thể | đặt mới; "Government"→"Chính thể" tái dùng `game_concept_government` (base_game_vh) |
+| Demand Payment for all Hooks *(`POD_mass_demand_payment_interaction`, tương tác đòi tiền hàng loạt theo Kiềm chế)* | Yêu cầu Chi trả cho mọi Kiềm chế | đặt mới; "Hook"→"Kiềm chế" tái dùng `game_concept_hook` (base_game_vh) |
+| Copy Clothing Colors *(`POD_copy_clothing_colors_interaction`, tương tác sao chép bảng màu trang phục giữa nhân vật)* | Sao chép Màu Trang phục | đặt mới, dịch nghĩa thường |
+| Coterie colors | Màu Coterie | tái dùng "Coterie" giữ nguyên tiếng Anh đã chốt B5f |
+| End Friendship *(`POD_end_friendship_interaction`)* | Kết thúc Tình bạn | đặt mới, dịch nghĩa thường; "friend"→"bằng hữu"/"tình bạn" tùy ngữ cảnh, tái dùng tinh thần `game_concept_friend`="Bằng hữu" (base_game_vh) nhưng dùng "Tình bạn" cho tên tương tác/toast vì ngắn gọn hơn khi làm tiêu đề UI |
+| Teleport your [army\|E] / [travel\|E] entourage *(2 tương tác dịch chuyển quân đội/đoàn lữ hành, dùng phép thuật POD)* | Dịch chuyển [army\|E] của ngài / Dịch chuyển đoàn tùy tùng [travel\|E] của ngài | đặt mới; "Teleport"→"Dịch chuyển" (dịch nghĩa thường, không dùng "Dịch chuyển tức thời" dài dòng); "entourage"→"đoàn tùy tùng" |
+| The Cathedral of Flesh Grows Hungry *(`POD_interface_cathedral_hungry`, tên artifact/công trình "Cathedral of Flesh")* | Đại giáo đường Xác Thịt Bắt đầu Đói | đặt mới; "Cathedral"→"Đại giáo đường" (tái dùng cách base_game_vh dịch "cathedral" trong công trình tôn giáo Kitô giáo), ghép với "Xác Thịt" (Flesh) thành danh từ riêng công trình POD |
+| Choose Sifu / your Sifu *(`POD_choose_sifu_interaction`, chức danh sư phụ của Kuei-Jin, tương đương "Sire" của vampire)* | Chọn Sifu / Sifu của mình | giữ nguyên "Sifu" không dịch — tiền lệ đã có ở `gui/POD_character_window_l_english.yml:48` (`POD_sidebar_choose_sifu: "@dynasty_icon! Chọn Sifu"`), nhất quán với "Sire" giữ nguyên (danh từ riêng chức danh WoD) |
+| Learn/Study True Name(s) *(tên 2 tương tác học/nghiên cứu Chân Danh, khác tham số 1 của `Glossary('True Name',...)` vẫn giữ tiếng Anh)* | Học Chân Danh / Nghiên cứu Chân Danh | dùng "Chân Danh" đã chốt cho `podgloss.truename` (dòng 363) khi câu văn nhắc tới khái niệm bằng chữ thường (không qua `Glossary()`); tên tương tác chính dịch hẳn ra "Chân Danh" dù tham số 1 wrapper vẫn để "True Name" — hai việc độc lập (xem ghi chú đầu mục) |
+| Evaluate / Scrutinize *(2 lựa chọn hành động trong minigame gián điệp Kuei-Jin `POD_kueijin_spy`)* | Đánh giá / Xem xét kỹ | đặt mới, dịch nghĩa thường |
+| Exchange Necromantic Knowledge *(quyết định Impundulu trao đổi tri thức gọi hồn với vampire khác)* | Trao đổi Tri thức Gọi Hồn | đặt mới; "Necromantic"→"Gọi Hồn" tái dùng `trait_necromancy`="Thuật Gọi Hồn" (traits_POD, dòng 336) |
+| scholars of the grave *(cách gọi hoa mỹ các pháp sư gọi hồn trong sự kiện Impundulu)* | học giả của mộ phần | đặt mới, dịch nghĩa thường giữ giọng trung cổ |
