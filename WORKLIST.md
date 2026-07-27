@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 6 — hoàn tất `POD_craft` + `POD_umbra_window`, `gui/` đạt 30/30, việc #4 HOÀN TẤT).
+Cập nhật lần cuối: 2026-07-27 (đợt 7 — việc #5 `interactions/` đạt 25/28 file, còn 2 file lớn cuối `wraith` + `vampire` bàn giao session sau).
 
 ---
 
@@ -16,8 +16,34 @@ Cập nhật lần cuối: 2026-07-27 (đợt 6 — hoàn tất `POD_craft` + `P
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** |
-| Việc tiếp theo | **việc #5** — `interactions/` (3.780 key, 28 file), rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **25/28 file interactions/ (việc #5, đang làm)** |
+| Việc tiếp theo | **việc #5 — hoàn tất 2 file cuối `interactions/`: `POD_character_interactions_wraith_l_english.yml` (737 dòng) + `POD_character_interactions_vampire_l_english.yml` (1186 dòng, file lớn nhất)**, rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ⏸️ ĐỢT 7 (2026-07-27) — việc #5 `interactions/` đạt 25/28 file, BÀN GIAO 2 file cuối cho session sau
+
+**Người dùng đã yêu cầu dừng lại sau khi xong đợt này** — batch 6 (`wraith`) và batch 7 (`vampire`) để session sau làm tiếp, KHÔNG phải do gặp lỗi hay hết context.
+
+25/28 file `interactions/` đã dịch xong, verify xong, commit xong, theo 5 đợt nhỏ (batch) trong cùng session:
+- **Batch 1** (12 file nhỏ <100 dòng, commit `39a44c1`): `POD_categories`, `character_interactions_blood_tithe_POD` (toàn comment, không sửa), `POD_character_interactions_coterie/artifact/debug/ghoul/grand_city/hint/journeys/qiao/spirits`, `character_interactions_POD` (287 dòng).
+- **Batch 2** (9 file `POD_demons/` + `POD_fera/`, commit `395a575`): `demon_arcana/demon_infernalist/demon_lores/demon_thrall`; `bastet/fera/mokole/werewolf/wyrm`.
+- **Batch 3** (3 file 150-290 dòng, commit `f416c1b`): `mummy` (158 dòng), `kuejin` (158 dòng), `numina` (275 dòng).
+- **Batch 4** (`hunter`, 369 dòng — chú ý KHÔNG phải 368 vì dòng cuối không có newline, `wc -l` báo thiếu 1 dòng, commit `4d9b7f1`): dịch qua 4 agent chia đoạn (1-92, 93-183, 184-276, 277-369).
+- **Batch 5** (`fae`, 458 dòng, commit `56dc1d2`): dịch qua 4 agent chia đoạn (1-114, 115-229, 230-341, 342-458).
+
+**2 file lớn cuối cùng CHƯA dịch — làm tiếp theo, theo đúng thứ tự:**
+1. `interactions/POD_character_interactions_wraith_l_english.yml` (737 dòng) — chia ~4-6 agent theo đoạn dòng (giống cách đã làm với `hunter`/`fae`), ranh giới tự nhiên theo dòng trống, KHÔNG cắt ngang giữa 1 entry logic.
+2. `interactions/POD_character_interactions_vampire_l_english.yml` (1186 dòng, **file lớn nhất trong `interactions/`**) — chia ~6-8 agent theo đoạn dòng.
+
+Sau khi xong cả 2 file này, `interactions/` đạt 28/28 → việc #5 HOÀN TẤT → chuyển sang việc #6 (`decisions/`, 2.441 key, 11 file).
+
+**Lỗi thật đã bắt được trong đợt này (bằng chứng tiếp tục xác nhận: đếm token/bracket KHÔNG đủ, phải đối chiếu NỘI DUNG bracket byte-for-byte bằng diff, không chỉ đếm số lượng):**
+- `numina`: agent tự thêm 7 bracket `[artifact|E]`/`[piety|E]`/`[knight|E]`/`[councillor|E]`/`[house|E]`/`[consort|E]` không có trong bản gốc (bản gốc dùng chữ thường, không phải concept link) ở 1 dòng — bracket count lệch 65→72 lộ ra lỗi. Agent tự phát hiện và tự sửa trước khi báo cáo.
+- `kuejin`: agent tự phát hiện và tự sửa lỗi `UmbraGlossaryLocalized('shadowlands','Underworld')` chưa dịch tham số 2 (phải là "Âm Phủ" theo B4j) trước khi báo cáo.
+- `hunter`: file thật có **369 dòng**, không phải 368 như `wc -l` báo (dòng cuối `gotchiweapon_notification` không có newline theo sau) — agent phụ trách đoạn cuối tự phát hiện dòng lẻ này nằm ngoài phạm vi 4 đoạn ban đầu (1-92/93-183/184-276/277-368) và tự dịch bổ sung. **Bài học: luôn `grep -c ''` để xác nhận số dòng THẬT trước khi chia đoạn cho nhiều agent, đừng tin `wc -l` nếu dòng cuối không có newline.**
+- `fae`: merge 4 đoạn làm mất 2 script token `[target.GetHerHis]` và `[oath_guardian.GetHerselfHimself]` ở 2 câu văn dài (agent diễn đạt lại câu và bỏ sót token possessive/reflexive lặp) — bracket count lệch 264→262 lộ ra lỗi, coordinator tự sửa lại đúng vị trí ngữ nghĩa sau khi merge.
+- **Kết luận chung: luôn chạy `diff <(git show HEAD:<file> | grep -oE '\[[^]]*\]' | sort) <(grep -oE '\[[^]]*\]' <file> | sort)` sau khi merge — đối chiếu NỘI DUNG bracket, không chỉ đếm SỐ LƯỢNG, vì 2 lỗi mất-1-thêm-1 hoặc thêm-mới ở chỗ khác có thể làm số lượng vẫn khớp trong khi nội dung sai.**
+
+**Race condition TERMINOLOGY.md tiếp diễn (đã biết từ trước, xảy ra nhiều lần hơn ở đợt này do 4-9 agent chạy đồng thời):** heading `B5a`-`B5s` gần như bị dùng hết và trùng lặp liên tục (`B5b`, `B5e`, `B5f`, `B5m`, `B5n`, `B5o`, `B5p`, `B5q`, `B5r` mỗi cái đều bị ≥2 agent chọn trùng ở các thời điểm khác nhau trong session). Coordinator phải chạy lại `grep -n "^## B[34][a-zA-Z_-]*\." TERMINOLOGY.md | sed -E 's/^[0-9]+:## (B[34][a-zA-Z_-]*)\..*/\1/' | sort | uniq -d` nhiều lần trong lúc các agent còn đang chạy (không chỉ 1 lần cuối) và đổi tên các heading trùng ngay khi phát hiện. Một số agent tự chuyển sang đặt heading dạng slug (`B5-mummy`, `B5-kuejin`, `B5-numina`, `B5-hunter`, `B5-fae`, `B5-demon-lores`, `B5-demon-thrall`) để giảm khả năng đụng độ — cách này hiệu quả hơn ký tự tuần tự khi có nhiều agent song song, **nên áp dụng cho các đợt sau có ≥4 agent chạy đồng thời viết TERMINOLOGY.md.**
 
 ### ✅ ĐỢT 6 (2026-07-27) — hoàn tất `POD_craft` + `POD_umbra_window`, `gui/` đạt 30/30, việc #4 HOÀN TẤT
 
@@ -154,7 +180,7 @@ Nhỏ nhưng là nguồn của nhiều chuỗi khác. Toàn bộ 6 file đã xon
 
 Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ layout. Có `:0` trong `gui/POD_hud_l_english.yml`.
 
-### #5 — `interactions/`  3.780 key, 28 file
+### #5 — `interactions/`  3.780 key, 28 file — ⏳ **25/28 file xong**, còn `wraith` (737 dòng) + `vampire` (1186 dòng, lớn nhất)
 ### #6 — `decisions/`  2.441 key, 11 file
 ### #7 — `modifiers/`  4.344 key, 54 file
 
