@@ -1855,3 +1855,21 @@ File 37 dòng, toàn bộ đã bị comment-out trong bản gốc tiếng Anh (m
 | Edicts *(QUINCUNX_WINDOW_TAB_EDICTS, tab sắc lệnh)* | Sắc Lệnh | dịch nghĩa phổ thông, không có tiền lệ base riêng cần đối chiếu |
 
 Áp dụng lại khi gặp lại các khái niệm này ở file khác (nếu có): `Quincunx`→"Ngũ Hành Hội", `August Court`→"Thượng Triều", `August Ancestor`→"Thượng Tổ", `Zeal` (nghĩa tài nguyên Kuei-jin, không phải tính từ chung)→"Nhiệt Thành".
+
+## B5b. "Ephorate" và cấp bậc nội bộ Ventrue (từ `gui/POD_ventrue_ephorate_l_english.yml`), 151/151 dòng
+
+File 151 dòng, mô tả tổ chức chính trị nội bộ của clan Ventrue: Ephorate (12 elder quyền lực nhất) và các cấp bậc dưới quyền — Ephor, Lictor, Tribune, Strategoi — cùng 5 phe phái (Patricians, Eternal Senate, Sinner Rome, Merchant Princes, Ashen Knights).
+
+**Quyết định: giữ nguyên toàn bộ các danh xưng Hy Lạp/La Mã cổ, không dịch nghĩa.**
+
+| English | Xử lý | Ghi chú |
+|---|---|---|
+| Ephorate *(tổ chức 12 elder Ventrue quyền lực nhất)* | Giữ nguyên "Ephorate" | không có tiền lệ base_game_vh; đây là danh từ riêng lịch sử (ephor = quan chức giám sát ở Sparta cổ đại), không phải danh từ chung có thể dịch nghĩa gọn; dịch thành "Hội Đồng Giám Sát" sẽ làm mất sắc thái cổ điển Hy Lạp mà lore World of Darkness cố tình dùng, và không ngắn hơn bản gốc |
+| Ephor(s) *(thành viên Ephorate)* | Giữ nguyên "Ephor" | cùng nhóm danh xưng lịch sử với Ephorate |
+| Lictor(s) *(cảnh sát ngầm/phản ứng nhanh của Ephorate)* | Giữ nguyên "Lictor" | danh xưng La Mã cổ (cận vệ mang bó gậy fasces); không có tiền lệ base, nhưng cùng nhóm với Strategos/Strategoi mà base_game_vh đã giữ nguyên (`dlc_ep3_game_concepts_l_english.yml` dòng 14-17, game_concept chính thức không dịch) |
+| Tribune(s) *(mật vụ/thông tin viên cấp thấp nhất của Ephorate)* | Giữ nguyên "Tribune" | danh xưng La Mã cổ (quan bảo dân); base_game_vh cũng giữ nguyên "tribunes" khi xuất hiện trong bối cảnh tương tự (`dlc_ep2_locale_events_l_english.yml` dòng 448, không dịch) |
+| Strategoi / Strategos *(đặc vụ trực tiếp của các Ephor)* | Giữ nguyên "Strategoi"/"Strategos" | ✅ tái dùng tiền lệ base_game_vh đã chốt — giữ nguyên trong game_concept chính thức (`dlc_ep3_game_concepts_l_english.yml` dòng 14-17: `game_concept_strategos: "Strategos"`, `game_concept_strategoi: "Strategoi"`) và trong tên riêng (`bookmark_call_of_the_empire_1178_l_english.yml`: "Strategos Andronikos") |
+| Patricians / Patriarchs, Eternal Senate / Antasians, Sinner Rome, Merchant Princes, Ashen Knights *(5 phe phái Ephorate)* | Giữ nguyên tên tiếng Anh | tên riêng phe phái trong lore, giữ nguyên như POD giữ nguyên tên clan/dòng máu; không dịch nghĩa để tránh dài dòng trong UI chật |
+| Road of Kings, Road of Humanity, Road of Sin, Path of the Merchant *(hệ thống đạo lý/Road trong WoD, xuất hiện dạng chú giải song ngữ)* | Dịch nghĩa kèm tên gốc trong ngoặc | "Con Đường Đế Vương (Road of Kings)", "Con Đường Nhân Tính (Road of Humanity)", "Con Đường Tội Lỗi (Road of Sin)", "Con Đường Con Buôn (Path of the Merchant)" — đặt mới, dịch nghĩa vì đây là mô tả lore cho người đọc chưa biết WoD, giữ tên gốc trong ngoặc để tra cứu chéo với các file khác nhắc đến cùng khái niệm |
+
+Áp dụng lại khi gặp lại các khái niệm này ở file khác (nếu có): `Ephorate`/`Ephor`/`Lictor`/`Tribune`/`Strategoi`/`Strategos` đều giữ nguyên tiếng Anh, không dịch.
