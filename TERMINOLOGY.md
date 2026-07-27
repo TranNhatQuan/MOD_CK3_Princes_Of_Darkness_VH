@@ -2979,3 +2979,22 @@ Nguồn: 4 file dịch qua agent song song. **4 lỗi thật phát hiện khi me
 | Lord Sun *(danh xưng mô tả, không phải tên riêng cố định)* | Thần Mặt Trời | đặt mới, dịch nghĩa vì là danh xưng mô tả |
 | Dissolver *(tham số 1 của `Glossary('Dissolver','glossary_wyrm_tt')`, nhắc lại)* | Kẻ Hòa Tan | ✅ tái xác nhận tiền lệ dòng ~1651 — agent ban đầu dịch sai "Kẻ Hủy Diệt", đã sửa khi merge |
 | Devisor, Designer *(2 danh xưng ẩn dụ Wyld/Weaver, tên perk Mnesis Mokolé, đối xứng với "Dissolver" của Wyrm)* | Devisor, Designer *(giữ nguyên, tạm thời)* | agent để nguyên tiếng Anh vì chưa có chỉ định dịch nghĩa rõ — coordinator xác nhận tạm giữ nguyên an toàn, rà soát dịch nghĩa "Người Kiến Tạo"/"Nhà Thiết Kế" nếu gặp lại ở file khác cần nhất quán hơn |
+
+## B8-lifestyles-p5. Thuật ngữ `POD_blood_magic_lifestyle_l_english.yml` (564/564 dòng — file lớn thứ 2 `lifestyles/`, đầu tiên chia đoạn cho nhiều agent)
+
+Nguồn: dịch qua 4 agent chia đoạn (1-139, 140-286, 287-421, 422-564), coordinator merge bằng ghép nối trực tiếp (đã xác nhận key-sequence khớp 100% theo số dòng tuyệt đối trước khi ghép, khác cách key-matching dùng cho các file trước vì ranh giới đoạn được chọn đúng theo dòng trống tự nhiên). **2 lỗi merge phát hiện và sửa:**
+1. Đoạn 3 (287-421) thiếu đúng 1 dòng trống cuối đoạn (dòng 421) — agent tự báo "khớp 135/135" nhưng thực tế xuất scratch chỉ có 134 dòng, thiếu dòng trống cuối cùng — lỗi quen thuộc đã gặp nhiều lần ở ranh giới đoạn.
+2. Dòng 77 (`REVERSE_CONJURATION_PERK_EFFECT`): agent dịch "of this [bloodmagic_path|E]" thành "của đạo phái này" — mất bracket concept-link. Khôi phục `[bloodmagic_path|E]`.
+3. Dòng 504 (`THE_SORCERY_OF_LIFE_PERK_EFFECT`): "Bane" xuất hiện ghép "Bane Mummy"/"Bane Rite" — **KHÔNG phải khái niệm "Bane"=Tà Linh (Garou/Wyrm-tainted spirit) đã chốt B4c/B5j**, mà là nghĩa gốc tiếng Anh "tai ương/hủy hoại" áp cho một biến thể Mummy khác splat hoàn toàn. Agent tự nhận "không chắc, giữ nguyên tiếng Anh" — coordinator quyết định dịch nghĩa "Tai Ương" (không dùng "Tà Linh" máy móc vì sai nghĩa splat) → "Bane Mummy"="$POD_splat_mummy$ Tai Ương", "Bane Rite"="Nghi Thức Tai Ương". **Bài học: "Bane" không phải lúc nào cũng là khái niệm Garou đã chốt — phải đọc ngữ cảnh splat xung quanh trước khi áp máy móc "Tà Linh".**
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Blood Magic *(lifestyle chính ma cà rồng, tương tự Thaumaturgy/Blood Sorcery)* | Chú Thuật Huyết Mạch | đặt mới, nhất quán "Chú Thuật" đã dùng cho Necromancy |
+| Thaumaturgy, Vitae *(nhắc lại)* | giữ nguyên tiếng Anh | tái xác nhận |
+| Path of Mars/Blood/Duat/Karma/the Blood's Curse *(5 Path Blood Magic)* | Đạo Chiến Thần/Huyết Mạch/Duat/Nghiệp Báo/Lời Nguyền Huyết Mạch | đặt mới, "Đạo" nhất quán cho "Path" ở Blood Magic (khác "Con Đường" dùng cho Numina Sorcery, 2 hệ thống riêng biệt không cần thống nhất) |
+| Way of Earth/Wind/Water/Fire/Sorrow *(5 nhánh, tên comment header — không dịch vì là comment)* | *(giữ nguyên tiếng Anh, chỉ là dòng `#` comment)* | không áp dụng dịch |
+| Koldun, Koldunic, kraina *(Path Tzimisce witch gốc Đông Âu)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng WoD |
+| Genius Loci *(khái niệm La Mã, linh hồn bảo hộ địa điểm)* | Genius Loci *(giữ nguyên)* | đặt mới, thuật ngữ Latin cổ không có tiền lệ dịch |
+| Diablerist *(người thực hiện Diablerie, tham số 1 của Glossary)* | Diablerist *(giữ nguyên)* | nhất quán với "Diablerie" đã chốt B2 giữ nguyên |
+| Abyssal Mysticism | Huyền Học Vực Sâu | đặt mới, dịch nghĩa |
+| Bane Mummy, Bane Rite *(nhắc lại, xem lỗi #3 phía trên)* | $POD_splat_mummy$ Tai Ương, Nghi Thức Tai Ương | ⚠️ **KHÁC "Bane"=Tà Linh** — đây là nghĩa gốc "tai ương", áp cho biến thể Mummy, không liên quan Garou/Wyrm-tainted spirit |
