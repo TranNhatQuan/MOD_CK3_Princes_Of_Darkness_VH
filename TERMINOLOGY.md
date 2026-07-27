@@ -2372,3 +2372,30 @@ Nguồn: file lớn dịch qua 4 agent chia đoạn dòng (1-92, 93-183, 184-276
 | Chi Exorcism *(phân biệt với "Cleanse"="Tẩy Trừ" đã dùng ở nơi khác)* | Trừ Tà Bằng Khí | đặt mới, tránh trùng "Tẩy Trừ" |
 | trait_depressed_genetic / trait_lunatic_genetic *(biến thể "genetic" của Trầm Cảm/Loạn Trí)* | U Sầu / Tâm Thần | ✅ tái dùng đúng bản dịch riêng của base_game_vh cho biến thể di truyền, KHÔNG dùng "Trầm Cảm"/"Loạn Trí" thường |
 | gotchiweapon_notification *(Got a Chi Enhanced Weapon)* | Đã nhận Vũ Khí Tăng Cường Bằng Khí | đặt mới, dòng lẻ cuối file không thuộc đoạn của agent nào — đã dịch bổ sung khi phát hiện file thật có 369 dòng chứ không phải 368 |
+
+## B5-fae. Thuật ngữ `interactions/POD_character_interactions_fae_l_english.yml` — tương tác Fae (Cantrip/Art/Realm/Solarium/Oath Guardian), 458/458 dòng, việc #5
+
+Nguồn: file lớn dịch qua 4 agent chia đoạn (1-114, 115-229, 230-341, 342-458). Nội dung: tên các Art Fae (Chicanery/Legerdemain/Primal/Soothsay/Wayfare/Aphrodesia/Kryos/Metamorphosis/Pyretics/Chronos/Dream Craft/Naming/Sovereign/Infusion/Tale Craft/Petros/Aquis/Pyros/Stratus/Verdage — giữ nguyên theo B4b), perk/interaction riêng (Ravaging/Rhapsody/Reaving/Musing/Fuddle/Fugue/Haunted Heart/Veiled Eyes — giữ nguyên tạm thời, xem ghi chú), sự kiện Oath Guardian bảo vệ nhân vật, Solarium (naming các loại cây/hoa), True Jade, Changeling. Đã sửa 2 lỗi thật trước khi lưu: đoạn ghép giữa agent 230-341 và 342-458 làm mất 2 script token `[target.GetHerHis]` (dòng 266) và `[oath_guardian.GetHerselfHimself]` (dòng 267) khi agent diễn đạt lại câu — bracket count lệch 264→262 lộ ra lỗi, đã bổ sung lại token vào đúng vị trí ngữ nghĩa.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Oath Guardian | Người Bảo Hộ Lời Thề | đặt mới, danh xưng nhân vật NPC hộ vệ do Fae ràng buộc lời thề bảo vệ |
+| Ravaging / Rhapsody / Reaving / Musing *(tên interaction/quyền năng Cantrip-Realm)* | Ravaging / Rhapsody / Reaving / Musing *(giữ nguyên tạm thời)* | `lifestyles/POD_fae_lifestyle_l_english.yml` (chưa dịch) cũng để các perk_name này ở dạng tiếng Anh thô — chưa có tiền lệ chính thức; cần xác nhận lại (dịch nghĩa hay giữ nguyên) khi dịch tới file lifestyle đó, rồi áp dụng ngược lại nếu đổi quyết định |
+| Fuddle / Fugue / Haunted Heart / Veiled Eyes *(tên perk Cantrip)* | Fuddle / Fugue / Haunted Heart / Veiled Eyes *(giữ nguyên tạm thời)* | cùng lý do với Ravaging/Rhapsody/Reaving/Musing — chờ đối chiếu `POD_fae_lifestyle_l_english.yml` |
+| Reverie *(tên riêng loại triều đình/sự kiện Fae)* | Reverie *(giữ nguyên)* | chưa có tiền lệ dịch nghĩa |
+| Mooch (perk) | Trộm Vặt | đặt mới, tránh dùng từ lóng hiện đại |
+| Omen / Augury (perk) | Điềm Báo / Điềm Triệu | đặt mới, phân biệt 2 khái niệm gần nghĩa |
+| Tattletale (perk) | Kẻ Mách Lẻo | đặt mới |
+| Fair is Foul / Foul is Fair *(cặp đối lập hệ Soothsay, chơi chữ Macbeth)* | Dữ / Lành | đặt mới, cần xác nhận lại nếu gặp cụm này ở file khác |
+| Dream Time / Dream-Riding | Thời Gian Mộng Cảnh / Cưỡi Mộng | đặt mới, nhất quán với "Cõi Mộng"=Dreaming đã chốt B4b |
+| Permanence | Trường Tồn | đặt mới |
+| Trait Editor *(nhóm interaction `POD_fae_interactions.200.*`)* | Bộ Chỉnh Sửa Đặc Tính | đặt mới |
+| Fancy / Yearn / Covet / Crave / Need *(perk hệ ham muốn)* | Say Mê / Khao Khát / Thèm Muốn / Thèm Khát / Nhu Cầu | đặt mới, 5 mức độ ham muốn khác nhau |
+| Cold Shock / Frost Facsimile / Crystal Prison / Coldheart *(perk hệ Kryos)* | Sốc Lạnh / Bản Sao Băng Giá / Ngục Pha Lê / Tim Băng Giá | đặt mới |
+| Coalesce / Mold *(interaction hệ Petros/tạo hình)* | Hợp Nhất / Nhào Nặn | đặt mới |
+| Transmute Metal / Transmute Earth | Biến Kim Loại / Biến Đất Đá | đặt mới |
+| Banish Fae | Trục Xuất Fae | tái dùng "Trục Xuất" đã chốt B4h/B4j |
+| Call Patron | Triệu Gọi Người Bảo Trợ | tái dùng "Người Bảo Trợ" đã chốt |
+| True Jade *(tên interaction, đã có tiền lệ tại `gui/POD_umbra_window_l_english.yml:543`)* | Ngọc Bích Chân Chính | ✅ tái dùng nguyên trạng |
+| Changeling | Đứa Trẻ Bị Tráo | đặt mới, đúng nghĩa gốc dân gian "changeling" |
+| naming_the_crop/weed/flower/thorn/tree/mushroom *(Solarium)* | Mùa Vụ/Cỏ Dại/Hoa/Gai/Cây/Nấm | đặt mới, các loại cây trong Solarium |
