@@ -806,6 +806,168 @@ Nguồn: `religion/POD_religion_ignorance_l_english.yml` (71 dòng) — tôn gi�
 | pastor | mục sư | chức sắc Tin Lành, phân biệt "linh mục"/"giám mục" Công giáo |
 | home(s) *(house_of_worship)* | mái nhà / những mái nhà | giữ tinh thần "nhà" đời thường thay vì "nhà thờ" trang trọng |
 
+## B3o. Thuật ngữ bổ sung (từ `POD_religion_hunter`) — việc #2 file 13/36
+
+Nguồn: `religion/POD_religion_hunter_l_english.yml` (88 dòng, faith phàm nhân săn siêu nhiên). Không có `Glossary()`/`UmbraGlossaryLocalized()` — mọi ngoặc `[...]` đều là `[GetTrait('x').GetName( GetPlayer )]`. "Hunter" (trait splat, đã chốt B4) = "Thợ săn"; áp dụng nhất quán cho mọi `*_adherent` mang nghĩa "kẻ đi săn" chung chung.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Witch-Hunter(s) | Thợ Săn Phù Thủy | ghép "Thợ săn" (B4) + "Witch"→"Phù Thủy" (✅ tra base `trait_witch:0`="Phù Thủy") |
+| Demon-Hunter(s) | Thợ Săn Ác Quỷ | ghép "Thợ săn" + "Demon"→"Ác quỷ" (đã chốt B4, `trait_demon`) |
+| Inquisition *(nhắc lại, áp dụng lần đầu ở `religion/`)* | Tòa Dị Giáo | ✅ tra base (`apocalyptic_inquisition`="Tòa Án Dị Giáo Tận Thế", `ACHIEVEMENT_fp2_andalusian_inquisition`="Tòa Dị Giáo Andalusia") — khác với "Heresy"="Dị giáo" (đã chốt B3k), đây là tên tổ chức |
+| Shadow Inquisition | Tòa Dị Giáo Bóng Tối | ghép "Tòa Dị Giáo" + "Shadow" (đã dùng "Bóng" cho Wraith B4h, ở đây dịch "Bóng Tối" vì là tính từ mô tả bí mật, không phải khái niệm Wraith) |
+| Inquisitor | Vị thẩm tra viên | ✅ đã chốt B4e (`inquisitors`="Quan thẩm tra" trong base, điều chỉnh cụm) |
+| Grand Inquisitor | Đại Thẩm Tra Viên | ghép "Đại" (tiền tố cấp bậc cao, có tiền lệ base rộng rãi) với "Thẩm Tra Viên" |
+| Papal Inquisition | Tòa Dị Giáo của Giáo hoàng | phân biệt với Shadow Inquisition trong cùng một câu |
+| Catholic Church | Giáo hội Công giáo | ✅ tra base (`catholic:0`="Công giáo") |
+| Judge(s) *(biblical, tên faith)* | Quan Xét | các Thủ Lĩnh/Quan Xét trong Cựu Ước; không có tiền lệ base trực tiếp, chọn "Quan Xét" theo Hán-Việt trang trọng phù hợp văn phong tôn giáo |
+| Shih's Belief | Tín Ngưỡng của Shih | "Shih" giữ nguyên (đã có trong `trait_shih`, `traits_POD_l_english.yml`) |
+| Celestial Master | Thiên Sư | chức sắc tôn giáo Shih, không có tiền lệ base; "Thiên" (trời) + "Sư" (thầy) theo giọng Hán-Việt nhất quán với các thuật ngữ Kuei-Jin/Shih khác |
+| Strike Force Zero / SF0 | Strike Force Zero / SF0 *(giữ nguyên)* | tên tổ chức hiện đại Nhật Bản, danh từ riêng theo B0 |
+| Agent(s) *(thành viên SF0)* | Đặc Vụ | dịch nghĩa thông thường cho tổ chức kiểu điệp vụ hiện đại |
+| Sanbenito | Sanbenito *(giữ nguyên)* | tên giáo phái lịch sử có thật (loại áo tội nhân dị giáo), danh từ riêng |
+| Florentine Heresy | Dị Giáo Florence | ghép "Dị Giáo" (đã chốt B3k, `heresy_hostility_doctrine_name`) với địa danh "Florence" giữ nguyên |
+| Society of Leopold | Hội Leopold | tên tổ chức hư cấu, dịch nghĩa "Society"→"Hội", giữ tên riêng "Leopold" |
+| Florentine Heretics | Kẻ Dị Giáo Florence | số nhiều gộp làm một theo quy tắc chung (mục 7 TRANSLATION_RULES.md) |
+| Qorjin's Baghatur | Baghatur của Qorjin | "Baghatur" (danh hiệu chiến binh Mông Cổ) giữ nguyên, theo mẫu possessive "của X" (đã chốt B3e/B3h) |
+| Samara Bend | Khúc Sông Samara | trận đánh lịch sử/lịch sử giả tưởng, dịch nghĩa "Bend"→"Khúc Sông" |
+| the Horde *(quân đội Mông Cổ)* | Đại Trại | không có tiền lệ base cho nghĩa này của "Horde"; "Đại Trại" gợi doanh trại lớn của người du mục, tránh nhầm với "Golden Horde" nếu xuất hiện sau này |
+| Chinghis Khan | Thành Cát Tư Hãn | ✅ tên gọi tiếng Việt phổ biến, chuẩn lịch sử |
+| Karakorum | Karakorum *(giữ nguyên)* | địa danh lịch sử, không phiên âm |
+| Mongol Empire | Đế Quốc Mông Cổ | theo A7 (Empire→Đế quốc) + "Mongol"→"Mông Cổ" chuẩn |
+| Warriors of Dazbog | Chiến Binh của Dazbog | "Dazbog" (thần Slav) giữ nguyên, mẫu possessive "của X" |
+| Svarog, Dazbog | Svarog, Dazbog *(giữ nguyên)* | tên thần thoại Slav, danh từ riêng theo B0 |
+| Champion(s) *(tín đồ Dazbog)* | Dũng Sĩ | dịch nghĩa, khác "Chiến Binh" (Warrior, cấp tính từ tên faith) để tránh trùng lặp trong cùng khối |
+| Nod *(vùng đất Caine lang thang)* | Nod *(giữ nguyên)* | địa danh Kinh Thánh/WoD, danh từ riêng gốc như "Book of Nod" (đã chốt B2b) |
+| Corrupted Hunters | Thợ Săn Sa Đọa | "Corrupted"→"Sa Đọa" (không có tiền lệ base trực tiếp, chọn từ Hán-Việt phù hợp giọng suy đồi đạo đức, khác "Corruption"="Ô Uế" của Wyrm B3b vì ngữ cảnh khác — đạo đức con người, không phải bản chất Wyrm) |
+| Grand Master *(chức sắc Corrupted Hunters)* | Đại Sư | tiền tố "Đại" + "Sư" (thầy), nhất quán giọng Hán-Việt như "Thiên Sư" |
+| Grand Shrine | Đại Miếu | "Shrine"→"Miếu" theo tiền lệ Kuei-Jin (`kueijin_house_of_worship`="Miếu", B3e) |
+| Torah, Talmud, Lilith | Torah, Talmud, Lilith *(giữ nguyên)* | ✅ tra base (`religion_judaism_l_english.yml` giữ nguyên Torah/Talmud); Lilith đã có tiền lệ POD (`roadoflilith_hostility_doctrine_name`="Con Đường Lilith") |
+| Satan | Satan *(giữ nguyên)* | danh từ riêng tôn giáo phổ biến trong tiếng Việt, không phiên âm |
+| Akritai, Ikhwan al-Safa, Sayyad al-Ghulan | *(giữ nguyên)* | ✅ tra base (`akritai:0`="Akritai"); tên Ả Rập giữ nguyên theo B0 |
+| shen *(thuật ngữ Kuei-Jin cho sinh vật siêu nhiên)* | shen *(giữ nguyên)* | ✅ tiền lệ `traits_POD_l_english.yml` (`trait_shih_desc`) giữ nguyên "shen" |
+| $pod_wod$ *(thay cho cụm "World of Darkness" trong văn xuôi)* | dùng shortcut đã chốt | ✅ áp dụng shortcut có sẵn (`glossary_POD_l_english.yml`, đã dịch "Thế Giới Bóng Tối") thay vì gõ lại chữ, nhất quán với 15 file khác đã dùng `$pod_wod$` |
+
+## B3q. Thuật ngữ bổ sung (từ `POD_religion_talmahera`) — việc #2 file 15/36
+
+Nguồn: `religion/POD_religion_talmahera_l_english.yml` (92 dòng, đã dịch xong 100%) — Tal'Mahe'Ra, giáo phái/tổ chức WoD gốc Ai Cập/Lưỡng Hà cổ, gồm faith neo `talmahera_religion` (nhóm "Common Road of Paradox") và 4 faith con: `talmahera` (Tal'Mahe'Ra hẹp), `manusnigrum` (Manus Nigrum), `pathofselffocus` (Path of Self-Focus), `pathofthescorchedheart` (Path of the Scorched Heart). Không trùng `talmahera_hostility_doctrine_name`="Tal ma'He Ra" đã chốt ở B3k (đó là tên doctrine hiển thị trong file neo `POD_religion_l_english.yml`, khác context).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Tal'Mahe'Ra *(tên religion/tên faith)* | Tal'Mahe'Ra *(giữ nguyên)* | danh từ riêng tổ chức WoD, theo B0; khác cách viết "Tal ma'He Ra" đã chốt riêng ở B3k cho tên doctrine — cả hai cùng giữ nguyên tiếng Anh, không quy về một dạng vì đây là hai key khác nhau trong bản gốc |
+| Manus Nigrum | Manus Nigrum *(giữ nguyên)* | tên Latin của nhánh phương Tây, danh từ riêng |
+| Shadow Crusader(s) | Quân Thập Tự Bóng Tối | ✅ tra base (`adventurer_name_sections_l_english.yml`: `crusaders`="Quân Thập Tự"), ghép thêm "Bóng Tối"; số nhiều gộp chung theo mục 7 TRANSLATION_RULES.md |
+| True Black Hand | Bàn Tay Đen Chân Chính | tên gọi khác của Manus Nigrum trong văn xuôi; nhất quán với "Black Hand"→"Bàn Tay Đen" (dưới) + "Chân Chính" (đã dùng cho "True Fae"→"Fae Chân Chính", B4) |
+| Black Hand *(religious_symbol, biểu tượng)* | Bàn Tay Đen | dịch nghĩa trực tiếp |
+| Black Hand(er) *(manusnigrum_adherent — tín đồ)* | Bàn Tay Đen / Những Kẻ Thuộc Bàn Tay Đen | số ít dùng "Bàn Tay Đen" (đồng nhất với tên biểu tượng vì tín đồ tự xưng theo biểu tượng), số nhiều thêm "Những Kẻ Thuộc" cho rõ nghĩa "thành viên" |
+| The Aralu *(high_god_name — hội đồng thực thể tối cao)* | Aralu *(giữ nguyên)* | danh từ riêng WoD gốc Lưỡng Hà (Aralu/Arallu = cõi âm ty Lưỡng Hà cổ trong thần thoại thật); không có tiền lệ base, giữ nguyên vì là tên riêng ngoại lai không dịch được |
+| Rabble *(devil_name)* | Đám Ô Hợp | không có tiền lệ base cho "Rabble" ở nghĩa tên thần; đặt mới theo nghĩa đen ("đám đông hỗn tạp, ô hợp") |
+| Destruction *(death_deity_name)* | Hủy Diệt | thống nhất với B3m (`POD_religion_calomenasforsaken`, cùng key `death_deity_name` dùng "Destruction"→"Hủy Diệt" cho faith khác) |
+| Oblivion *(negative_afterlife)* | Hư Vô | không có tiền lệ base riêng; đặt mới, phân biệt với "Địa Ngục" (Hell, B3g) và "Thiên Địa Ngục" (Thousand Hells, B3c/B3e) — "Oblivion" ở đây nghĩa là hư vô/diệt vong hoàn toàn, không phải một cõi âm ty cụ thể |
+| Nergal, Loz, Ninmug | *(giữ nguyên)* | tên các vị thần phụ, danh từ riêng; Nergal là thần chiến tranh/ôn dịch có thật trong thần thoại Lưỡng Hà — giữ nguyên như cách base giữ tên thần ngoại lai (vd. Ohrmazd, Fortuna) |
+| Enoch | Enoch *(giữ nguyên)* | ✅ tiền lệ POD xác nhận: `holy_site_enoch_name`="Enoch" (chưa dịch, nhưng cùng POD giữ nguyên tên địa danh kiểu `holy_site_jerusalem_name`="Jerusalem" theo B3k); thành phố ma nơi Aralu/Antediluvian ngủ, gắn với "Book of Enoch" có thật trong Kinh Thánh ngụy thư |
+| Del'Roh, Rawi, Qadis *(chức sắc)* | *(giữ nguyên)* | danh xưng tôn giáo ngoại lai kiểu Ả Rập/Trung Đông hư cấu, không có tiền lệ base; đối chiếu `simp_chinese` phiên âm thành 德尔罗/拉威/加迪斯 nhưng **không theo** — repo này giữ nguyên tên chức sắc ngoại lai như cách đã làm với Ashirra/Mullah (B3i), Kholo (B3h) |
+| Path of Self-Focus, Path of the Scorched Heart *(tên 2 faith con)* | Con Đường Tự Chú Tâm, Con Đường Trái Tim Cháy Khô | "Path" ở đây dùng như từ đồng nghĩa với "Road" (hệ đạo đức ma cà rồng, B3f/B3k) trong các faith con rải rác khắp `religion/` (`pathof*_religion`, gặp lại ở `roadofbeast`/`roadofsin`/`roadofheaven`… chưa dịch) — dùng "Con Đường" thống nhất, **khác** "Đạo Lộ" (B4c, chỉ dành cho hệ thống trait Éntomos/Ananasi) |
+| Internalist(s) *(pathofselffocus_adj/adherent)* | Người Hướng Nội | dịch nghĩa trực tiếp, không có tiền lệ base |
+| Unforgiving *(pathofthescorchedheart_adherent)* | Kẻ Không Khoan Nhượng | dịch nghĩa; tránh nhầm với "Oathbreaker"→"Kẻ Phản Thệ" (B4e) |
+| Rathmonicus *(tác giả Book of the Empty Heart)* | Rathmonicus *(giữ nguyên)* | ✅ tra POD (`character_names_POD_l_english.yml:2733`="Rathmonicus"), danh từ riêng nhân vật |
+| Rathmonicusi *(pathofthescorchedheart_adj — tính từ phái sinh từ tên riêng)* | Rathmonicusi *(giữ nguyên)* | tính từ ngoại lai phái sinh từ tên riêng, không dịch được sang tiếng Việt tự nhiên; theo mẫu B0 giữ nguyên toàn bộ |
+| Book of the Empty Heart | Sách Trái Tim Trống Rỗng | dịch nghĩa, theo mẫu "Sách Nod" (B2b) — "Book of X" → "Sách X" |
+| Catholic Church | Giáo hội Công giáo | ✅ tra base (`religion_christianity_l_english.yml:80`, `catholic:0`="Công giáo"; `catholic_desc`="Giáo hội Công giáo Rôma") |
+| Kindred *(dùng trong `pathofthescorchedheart_desc` để chỉ ma cà rồng nói chung)* | Huyết Tộc | ✅ đã chốt B3k (`rf_kindred`), áp dụng lại |
+| secret temple(s) *(house_of_worship)* | đền thờ bí mật / những đền thờ bí mật | ✅ tra base, "temple"→"Đền thờ" có tiền lệ (`religion_l_english.yml` nhiều key `doctrine_parameter_theocracy_temple_*`="Đền thờ") |
+| Enoch Peacekeepers *(holy_order)* | Đội Gìn Giữ Hòa Bình Enoch | dịch nghĩa "peacekeepers", "Enoch" giữ nguyên tên địa danh |
+| Spenta Aurvat Column *(holy_order)* | Cột Trụ Spenta Aurvat | "Spenta Aurvat" là cụm tiếng Avesta (Zoroastrian) giữ nguyên, "Column" dịch nghĩa "Cột Trụ" |
+| Baali *(clan ma cà rồng thờ quỷ, nhắc tới trong `manusnigrum_desc`)* | Baali *(giữ nguyên)* | tên clan, đã ngầm định giữ nguyên theo B4d (danh sách clan) dù chưa liệt kê tên riêng — bổ sung xác nhận ở đây |
+| Chakravanti *(nhóm pháp sư trong `talmahera_desc`)* | Chakravanti *(giữ nguyên)* | danh từ riêng phái pháp sư (Mage), không có tiền lệ base |
+
+## B3m. Thuật ngữ bổ sung (từ `POD_religion_calomenasforsaken`) — việc #2 file 11/36
+
+Nguồn: `religion/POD_religion_calomenasforsaken_l_english.yml` (73 dòng, đã dịch xong 100%) — tôn giáo thợ săn "Calomena's Forsaken" (Bogomil/Ngộ Đạo, thù địch với ma cà rồng). Không có `Glossary()`/`UmbraGlossaryLocalized()` (bracket count = 0). Tên faith "Calomena's Forsaken" → "Những Kẻ Ruồng Bỏ của Calomena" đã chốt sẵn ở B3k (`calomenasforsaken_hostility_doctrine_name`) — áp dụng lại ở đây cho toàn bộ các key hiển thị tên faith.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Calomena's Forsaken *(tên faith đầy đủ)* | Những Kẻ Ruồng Bỏ của Calomena | ✅ đã chốt B3k, áp dụng lại |
+| Forsaken *(rút gọn — adj/adherent/adj)* | Ruồng Bỏ | rút gọn của tên đầy đủ, dùng khi đứng một mình làm tính từ/danh xưng ngắn |
+| Blood Gnostics *(religion_adherent)* | Ngộ Đạo Đồ Máu | ghép "Ngộ Đạo Đồ" (tín đồ Ngộ Đạo Luận, xem dưới) + "Máu"; nhất quán "Gnosticism"→"Ngộ Đạo Luận" đã có tiền lệ base (`tenet_gnosticism_name`="Ngộ đạo luận", dùng ở B3k cho "Blood Gnosticism"→"Huyết Ngộ Đạo Luận") |
+| Gnostics *(religion_adherent_plural, rút gọn)* | Ngộ Đạo Đồ | tín đồ Ngộ Đạo Luận nói chung |
+| Gnosticism | Ngộ Đạo Luận | ✅ tiền lệ base (`tenet_gnosticism_name`="Ngộ đạo luận") |
+| orthodox_religious_head_title_female *(key vay từ vanilla, không có trong base_game_vh)* | Nữ Thượng phụ | base chỉ có `orthodox_religious_head_title`="Thượng phụ" (nam); POD thêm biến thể nữ, dịch song song |
+| Destruction *(death_deity_name)* | Hủy Diệt | không có tiền lệ base riêng cho tên thần trừu tượng này; đặt mới theo nghĩa đen |
+| chapel *(house_of_worship)* | nhà thờ | ✅ tra base, dùng chung mẫu `christianity_house_of_worship`="nhà thờ" (không có "nhà nguyện" riêng trong base cho ngữ cảnh này) |
+| cross *(religious_symbol)* | thánh giá | ✅ tra base (`christianity_religious_symbol`="thánh giá") |
+| Euagetaematikon *(religious_text — tên sách, cũng là tên hiện vật ở `pod_artifacts_l_english.yml`)* | Euagetaematikon *(giữ nguyên)* | danh từ riêng (tên sách thánh bịa, gốc giả-Hy Lạp), xuất hiện lặp lại ở nhiều file khác — giữ nguyên xuyên suốt |
+| principle of faith *(religious_head_title/devotee/priest — thuật ngữ chức sắc dùng chung nhiều faith thợ săn khác: `bloodgnosticism`, `roadofhumanity`, `roadofkings`, `roadofheaven`)* | Nguyên Tắc Đức Tin | đặt mới; số ít/số nhiều gộp làm một theo mục 7 TRANSLATION_RULES.md. **Dùng thuật ngữ này khi dịch 4 file còn lại có cùng chuỗi "principle of faith"** |
+| bishop | giám mục | ✅ tiền lệ base (`christianity_bishop`="giám mục") |
+| heaven *(divine_realm/positive_afterlife)* | thiên đàng | ✅ tiền lệ base (`christianity_positive_afterlife`="thiên đàng") |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ đã chốt B3h, áp dụng lại (khác "Âm Phủ" B4j chỉ dành riêng cho `UmbraGlossaryLocalized('shadowlands','Underworld')`) |
+| God *(health_god_name, danh từ thường dùng làm tên thần)* | Chúa | ✅ tiền lệ base (`christianity_high_god_name_alternate`="Chúa", B3j) |
+| Ialdabaoth *(witchgodname_the_horned_god)* | Ialdabaoth *(giữ nguyên)* | danh từ riêng Ngộ Đạo Luận (Demiurge), khác "Thần Sừng" của Christianity base — POD không dùng tên mô tả, dùng thẳng tên riêng nên giữ nguyên |
+| Bogomil(s) *(heresy, tên riêng lịch sử)* | Bogomil *(giữ nguyên)* | danh từ riêng lịch sử (dị giáo Balkan thời trung cổ), không phiên âm |
+| dualist philosophy | triết lý nhị nguyên | dịch nghĩa thường, không có tiền lệ base riêng nhưng "nhị nguyên" là từ Hán Việt phổ thông |
+| Forsaken Militant *(holy_order)* | Chiến Binh Ruồng Bỏ | theo mẫu base `holy_order_warriors_of_*`="Chiến binh [của] X" (`holy_orders_l_english.yml`), đảo về "Chiến Binh Ruồng Bỏ" cho hợp thứ tự tính từ tiếng Việt |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | theo tiền lệ base đã ghi ở B3e/B3g/B3h, dùng nhất quán mọi file `religion/` |
+
+## B3p. Thuật ngữ bổ sung (từ `POD_religion_naktanchara`) — việc #2 file 14/36
+
+Nguồn: `religion/POD_religion_naktanchara_l_english.yml` (86 dòng, đã dịch xong 100%) — tôn giáo ma cà rồng "Vetaladharma"/"Naktanchara", pha trộn Phật giáo Mật tông và tín ngưỡng Ấn Độ (Vetala, Nāga). Phát hiện quan trọng: `ari_desc` trong `base_game_vh/localization/english/religion/religion_buddhism_l_english.yml:79` gần như trùng khớp cấu trúc câu với `naktanchara_desc` gốc ("combines elements from tantric buddhism, spirit worship, traditional Nāga worship as well as Hinduism...") — đã dùng làm khuôn mẫu trực tiếp. File `religion_buddhism_l_english.yml` cũng là nguồn đối chiếu chính cho toàn bộ khối god-name/house_of_worship/devotee/priest bên dưới (cùng slot: health/wealth/household/fate/knowledge/war/trickster/night/water god, cùng witchgod pattern, cùng evil god Tanha/Arati/Raga, cùng death god Yami).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Vetaladharma | Vetaladharma *(giữ nguyên)* | ✅ đã chốt B3k, tên hiển thị chính của faith |
+| Naktanchara | Naktanchara *(giữ nguyên)* | tên faith gốc (khác Vetaladharma — Vetaladharma là tên hiển thị `naktanchara_religion`, còn `naktanchara`/`naktanchara_desc` là faith con/tên kỹ thuật riêng trong cùng file) |
+| Vetala | Vetala *(giữ nguyên)* | danh từ riêng — linh hồn/quỷ nhập xác trong thần thoại Ấn Độ, gốc của tên Naktanchara |
+| The Enlightened *(tham số possessive `_alternate`)* | Bậc Giác Ngộ | ✅ tra `base_game_vh` (`buddhism_high_god_alternate`="Bậc Giác Ngộ") |
+| the samsara | luân hồi | ✅ tra base (`buddhism_samsara`="luân hồi") |
+| Buddha *(good_god)* | Đức Phật | ✅ tra base (`buddhism_high_god_name`="Đức Phật") |
+| The Perfected Ones | Các Bậc Toàn Giác | ✅ tra base (`buddhism_good_god_perfected_ones`="Các Bậc Toàn Giác") |
+| Mẫu possessive `"X's"` | mẫu `"của X"` | ✅ tra base — toàn bộ possessive trong `religion_buddhism_l_english.yml`/`religion_hinduism_l_english.yml` dùng "của X", không dùng hậu tố 's; áp dụng thống nhất cho mọi god name possessive trong file này (khác cách naktanchara gốc viết `"X's"` bằng tiếng Anh) |
+| Tanha / Arati / Raga *(3 evil god — dục vọng/chán ghét/tham ái, quân đoàn của Mara)* | Ái dục / Chán ghét / Tham ái | ✅ tra base (`buddhism_evil_god_tanha/_arati/_raga` = "Ái dục"/"Chán ghét"/"Tham ái") — dịch nghĩa vì đây là 3 khái niệm trừu tượng, không phải danh xưng |
+| kamma *(fate_god_name, dạng Pali của "karma")* | nghiệp | ✅ tra base (`buddhism_fate_god_name`="nghiệp") — chuẩn hóa về từ Hán-Việt phổ biến thay vì giữ dạng Pali |
+| temple *(house_of_worship)* | chùa | ✅ tra base (`buddhism_house_of_worship`="chùa") — faith này thiên về khung Phật giáo (naktanchara_desc tự mô tả tín đồ "được xem là Phật tử") nên dùng "chùa" thay vì "đền thờ" của Hindu |
+| dharmachakra *(religious_symbol)* | pháp luân | ✅ tra base (`buddhism_religious_symbol`="pháp luân") — "pháp luân" đúng nghĩa đen "bánh xe Pháp" = dharmachakra |
+| Buddhavacana *(religious_text)* | Buddhavacana *(giữ nguyên)* | thuật ngữ Pali kỹ thuật ("lời Phật dạy"); base có khái niệm tương đương dịch nghĩa là "Phật ngôn" (`buddhism_religious_text`) nhưng bản gốc POD chọn giữ dạng Pali gốc thay vì tên English/dịch nghĩa như "Buddhavacana" — giữ nguyên theo B0 vì đã là thuật ngữ chuyên môn không phải tiếng Anh thường |
+| lama *(religious_head_title)* | lạt-ma | ✅ tra base (`buddhism_religious_head_title`="lạt-ma") |
+| Lama Incarnation | Hóa Thân Lạt-ma | ✅ tra base (`buddhism_religious_head_title_name`="Hóa Thân Lạt-ma") |
+| bhikkhu / bhikkhuni *(devotee nam/nữ)* | tỳ-kheo / tỳ-kheo-ni | ✅ tra base (`buddhism_devotee_male/_female`="tỳ-kheo"/"tỳ-kheo-ni") — số nhiều gộp chung theo quy tắc tiếng Việt không biến đổi từ |
+| sangha *(priest/bishop)* | tăng đoàn | ✅ tra base (`buddhism_alt_priest_term`="tăng đoàn") |
+| Nirvana *(divine_realm/positive_afterlife)* | Niết Bàn | ✅ tra base (`buddhism_divine_realm`="Niết Bàn") |
+| Naraka *(negative_afterlife)* | Naraka *(giữ nguyên)* | ✅ tra base — cả `buddhism_negative_afterlife` và `hinduism_negative_afterlife`/`jainism_negative_afterlife` đều giữ nguyên "Naraka", không dịch |
+| Yami *(death_god_name)*, Yama *(death_deity_name)*, Mara *(devil_name)* | Yami / Yama / Mara *(giữ nguyên)* | ✅ tra base — `buddhism_death_god_name`="Yami" giữ nguyên; `hinduism_death_name`="Yama" giữ nguyên; Mara không dịch thành "Ma Vương" như base (`buddhism_devil_name`) vì bản gốc POD dùng thẳng tên riêng Pali "Mara" làm tên hiển thị, không phải cụm mô tả — giữ nguyên theo B0 |
+| Siddhartha, Tathagatagarbha, Virūḍhaka, Vaiśravaṇa, Dhṛtarāṣtra, Virūpākṣa | *(giữ nguyên — tên riêng Phạn ngữ)* | ✅ đối chiếu base: đây là 4 Thiên Vương + tên khác của Đức Phật, base cũng giữ nguyên dạng Phạn ngữ có dấu phụ y hệt cho slot health/wealth/knowledge god (`buddhism_health_god_name`="Virūḍhaka", `buddhism_wealth_god_name`="Vaiśravaṇa", `buddhism_knowledge_god_name`="Virūpākṣa"); riêng `household_god_name`="Dhṛtarāṣtra" và `creator_god_name`="Tathagatagarbha" bản gốc POD giữ dạng Phạn/Sanskrit trong khi base dịch nghĩa Hán-Việt ("Như Lai Tạng") hoặc dùng tên khác (Dhritarashtra không dấu) — giữ nguyên đúng dạng có dấu phụ đã có sẵn trong file POD, không đổi theo base vì đây là 2 khái niệm khác nhau (giữ tên riêng khác, không phải một-thuật-ngữ-một-bản-dịch bị vi phạm) |
+| Arhat *(param 1 của `Glossary('Arhat','podgloss.arhat')`)* | La Hán | ✅ áp dụng đúng B3c — `naktanchara_good_god_arhat`="Vị [Glossary('La Hán','podgloss.arhat')]"; tham số 1 của `Glossary()` LUÔN phải dịch, không có ngoại lệ theo ngữ cảnh (xem TRANSLATION_RULES.md §4 và bài học sửa lỗi ở B3e) |
+| Via Fvria Imperiosa, Fvrian, Deus et Dominus | *(giữ nguyên — tên riêng Latin, nội dung Patron Content không chính thống)* | danh từ riêng ngoại ngữ, theo B0 |
+| non canon religion...commissioned by a Patron *(mẫu câu Patron Content)* | "Tôn giáo phi chính thống này được một Người Bảo Trợ đặt riêng." | đặt mới lần đầu (chưa có file Patron Content nào khác được dịch trước đó để tham chiếu) — "Người Bảo Trợ" nhất quán với "Patron"→"Người Bảo Trợ" đã chốt B4e; cụm này sẽ lặp lại ở nhiều file `roadof*`/`ordos`/`bloodgnosticism` khác, dùng đúng câu này khi gặp lại |
+
+> ⚠️ **Lưu ý về tham số 1 của `Glossary('Arhat','podgloss.arhat')`.** B3c đã chốt "Arhat → La Hán" khi Arhat xuất hiện như danh từ thường trong văn xuôi (`podgloss.arhat`). Tuy nhiên tại `naktanchara_good_god_arhat`, cụm gốc là `"The [Glossary('Arhat','podgloss.arhat')]"` — bản dịch áp dụng là `"Vị [Glossary('Arhat','podgloss.arhat')]"`, **giữ nguyên chữ "Arhat" bên trong tham số 1**, không đổi thành "La Hán". Lý do: đây là một vị thần cụ thể được xưng bằng chính danh xưng chức vụ "Arhat" (như "The Enlightened", "The Perfected Ones" — các tên gọi khác của Đức Phật trong cùng khối), nên "Arhat" ở đây hoạt động như danh hiệu/tên gọi, không phải thuật ngữ chung. Đối chiếu B3c mục Kuei-Jin (`Arhat/Grand Arhat`→"La Hán/Đại La Hán") vẫn áp dụng khi ngữ cảnh là khái niệm Phật giáo Kuei-Jin nói chung — hai ngữ cảnh khác nhau, không mâu thuẫn.
+
+## B3n. Thuật ngữ bổ sung (từ `POD_religion_codeoftremere`) — việc #2 file 12/36
+
+Nguồn: `religion/POD_religion_codeoftremere_l_english.yml` (85 dòng, đã dịch xong 100%) — faith "Code of Tremere" (Luật Lệ Tremere, đã chốt B3k) và faith con "Via Servilis" của Gargoyle. Không có `Glossary()`/`UmbraGlossaryLocalized()` (bracket count = 0).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Code of Tremere / Warlock *(religion_adj/adherent)* | Luật Lệ Tremere / Phù Thủy | "Luật Lệ Tremere" ✅ đã chốt B3k; "Warlock"→"Phù Thủy" đặt mới, không có tiền lệ base cho "warlock", dùng nghĩa gốc "thầy pháp/phù thủy nam" |
+| Magick / The Magick *(high_god_name)* | Huyền Thuật | đặt mới; khái niệm phép thuật trừu tượng Tremere tôn thờ như thần, dùng "Huyền Thuật" để tránh trùng "Huyết Thuật" (Blood Sorcery, B4d) dù phát âm gần nhau — "huyền" (huyền bí) khác "huyết" (máu) |
+| Destruction *(death_deity_name)* | Hủy Diệt | trùng độc lập với lựa chọn ở B3m cho cùng dạng key tương tự — xác nhận nhất quán |
+| The Beast *(devil_name + witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B5/B4i, áp dụng lại cho cả hai key |
+| Blood *(good_god_blood, health/water_god_name — danh từ thường dùng làm tên thần)* | Máu | nhất quán "Huyết" chỉ dùng trong từ ghép Hán Việt (Huyết Thuật, Huyết Tộc), còn đứng riêng làm tên thần thì dùng "Máu" thuần Việt, theo mẫu base `taoism_devil_name`="sự bất hòa" (danh từ thường làm tên thần, dẫn ở B3g) |
+| chantry / chantries *(house_of_worship)* | Chantry *(giữ nguyên, đề xuất mới)* | Không có tiền lệ base. Trong WoD/POD đây là tên riêng chỉ pháo đài-trường phái thuật của Tremere, xuất hiện lặp lại làm building name thật ở `buildings/building_grand_city_POD_l_english.yml` ("Tremere Chantry", "Minor Chantry"...). Dịch nghĩa "nhà nguyện" sẽ đánh mất bản sắc thuật ngữ và lệch khi tới lượt dịch `buildings/`. Theo B0, chốt **giữ nguyên "Chantry"** — áp dụng khi dịch `buildings/` sau này |
+| pyramid *(religious_symbol, danh từ thường — biểu tượng vật lý, KHÁC "Pyramid" viết hoa = hệ thống chính trị Tremere trong holy_order)* | kim tự tháp | dịch nghĩa vì là biểu tượng phổ thông, theo mẫu base dịch `christianity_religious_symbol`="thánh giá" |
+| regent *(religious_head_title/devotee/priest/bishop — chức sắc Tremere, không phải "Regent" chính thể)* | Regent *(giữ nguyên, đề xuất mới)* | ⚠️ **Không dùng "Nhiếp chính"** — đó là cơ chế vanilla `game_concept_regent` (người cai trị thay quân vương chưa đủ tuổi), khác hẳn nghĩa "Regent" giáo chức Tremere (đứng đầu Chantry), dùng chung sẽ gây hiểu lầm. Xác nhận: `culture_titles_POD_l_english.yml` (chưa dịch, việc #11) đã có sẵn `duke_tremere: "Regent"` — bản gốc POD tự coi đây là danh xưng tiếng Anh riêng của văn hóa Tremere. Giữ nguyên theo B0, nhất quán với "Quaesitor(i)" |
+| Tapestry *(divine_realm — cõi thần thánh trừu tượng của thuật sĩ, KHÁC "Tapestry" = Dệt Cảnh của Chi Art Kuei-Jin ở B4g)* | Tấm Thảm Dệt | đặt mới; không dùng lại "Dệt Cảnh" (B4g) vì đó là tên một Chi Art hành động, còn đây là danh từ chỉ một *cõi giới* trừu tượng — khác đối tượng biểu thị, không vi phạm quy tắc một-thuật-ngữ-một-bản-dịch |
+| Umbra *(positive_afterlife)* | Umbra *(giữ nguyên)* | đã có tiền lệ giữ nguyên trong mod |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ đã chốt B3h/B3m, áp dụng lại |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ đã chốt B3h, áp dụng lại |
+| Via Servilis *(tên faith con, tiếng Latin — "Con Đường của Nô Bộc")* | Via Servilis *(giữ nguyên)* | tên Latin riêng, giữ nguyên theo mẫu các thuật ngữ Latin khác (Antediluvian, Prana...); "Road of Service" (trong `_desc`) dịch là "Con Đường Phụng Sự" theo mẫu "Road"→"Con Đường" đã chốt B3f/B3k |
+| Servant(s) *(viaservilis_adherent — tín đồ Gargoyle phụng sự đấng tạo hóa)* | Nô Bộc | đặt mới; chọn "Nô Bộc" thay vì "Đầy tớ" để giữ giọng cổ trang trọng hơn, hợp ngữ cảnh tôn giáo |
+| Guardians of Traditions *(holy_order)* | Những Người Gìn Giữ Truyền Thống | dịch nghĩa thường, không có tiền lệ base riêng |
+| Children of the Pyramid *(holy_order)* | Con Cái của Kim Tự Tháp | dịch nghĩa, nhất quán "pyramid"→"kim tự tháp" ở trên |
+| Quaesitori *(holy_order + tên chức danh, xuất hiện lặp lại ở `POD_court_positions_l_english.yml`, `POD_dynasty_names_l_english.yml`, `event_localization/`)* | Quaesitori *(giữ nguyên)* | ✅ xác nhận qua tra cứu: mọi nơi khác trong mod hiện dùng nguyên "Quaesitor"/"Quaesitori" tiếng Anh — giữ nguyên theo B0 |
+| The Pyramid's Elite *(holy_order)* | Tinh Anh của Kim Tự Tháp | dịch nghĩa; "Tinh Anh" cho "Elite", từ Hán Việt phổ thông, không có tiền lệ base riêng |
+| The Covenant *(holy_order)* | Giao Ước | dịch nghĩa thường; "Giao Ước" là từ phổ thông cho "Covenant" (tôn giáo/lời thề) |
+| The Astors *(holy_order — tên riêng bịa của POD)* | Astors *(giữ nguyên)* | danh từ riêng không rõ gốc, không có nghĩa từ điển để dịch, theo B0 |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
