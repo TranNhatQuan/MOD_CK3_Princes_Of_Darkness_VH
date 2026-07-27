@@ -2804,3 +2804,24 @@ Lần đầu dịch tên đầy đủ 14 trường phái pháp thuật (lifestyl
 | Weather Control | Khống Chế Thời Tiết | đặt mới, dịch nghĩa; khác "Weathercraft"="Thuật Khống Thời Tiết" đã chốt B5-numina (tên khác cho khái niệm tương tự, giữ 2 bản dịch riêng vì 2 key gốc khác nhau) |
 
 Lỗi gốc đã giữ nguyên (không sửa "bug" của game): `sorcery_shapeshifting_tier_6_unlock_decision_desc`/`_confirm` bị đảo lẫn nội dung so với format chuẩn của 13 trường phái còn lại (desc chứa câu đáng lẽ ở confirm, và ngược lại) — dịch đúng theo nội dung tiếng Anh thực tế ở đúng vị trí, không hoán đổi lại.
+
+## B6-decisions-l. Thuật ngữ `decisions/POD_decisions_l_english.yml` (1972/1972 dòng, file lớn nhất trong decisions/), việc #6
+
+Nguồn: file lớn nhất `decisions/`, dịch qua 6 agent chia đoạn (1-415, 416-773, 774-988, 989-1319, 1320-1649, 1650-1972). Nội dung chính: mục tiêu thống nhất từng clan Vampire (`X_victory_objective_decision`), khôi phục các tổ chức/tước vị lịch sử đã sụp đổ (`restore_X`), Inquisition/Hunter/Web of Knives, các quyết định Kuei-Jin (Hun/P'o, Wheel of Ages, Fourth/Fifth/Sixth Age), Demon (Ma Hoàng), Wraith/Fera rải rác.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Web of Knives | Web of Knives *(giữ nguyên)* | tên tổ chức sát thủ Banu Haqim, danh từ riêng WoD, không dịch theo B0 (agent ban đầu tự đặt "Mạng Lưới Dao Găm" nhưng đã sửa lại giữ nguyên để nhất quán với các key `restore_web`/`k_webofknives` khác trong cùng file dùng nguyên "Web of Knives") |
+| Sword of St James, Sisters of St John/Sisters of St. John, Knights of Acre, Oculi Dei, House Murnau/Gia Tộc Murnau | *(tên riêng dòng tu/tổ chức Inquisition giữ nguyên tiếng Anh, trừ "House"→"Gia Tộc" theo A10)* | tái dùng tiền lệ B4g (Acre, Oculi Dei giữ nguyên), "St."→"Thánh" khi đứng trước tên (Thánh John) |
+| Little Death *(trạng thái ngủ đông của Kuei-Jin, khác Torpor của ma cà rồng phương Tây)* | Tiểu Tử | đặt mới, dịch sát nghĩa Hán Việt, phân biệt với "Miên trạng" (Torpor) đã chốt |
+| Kaja *(văn tự biểu ý của Kuei-Jin)* | Kaja *(giữ nguyên)* | danh từ riêng hệ thống chữ viết, không có tiền lệ dịch |
+| Demiurge *(heretic_victory, thuật ngữ Ngộ đạo)* | Đấng Sáng Tạo Giả | đặt mới, dịch nghĩa triết học Ngộ đạo, không có tiền lệ vanilla |
+| Underworld *(tham số 2 của `UmbraGlossaryLocalized('shadowlands',...)`)* | Âm Phủ | ✅ tái xác nhận B4j — 2 agent ban đầu dịch sai thành "Địa Ngục Giới"/giữ nguyên tiếng Anh, đã sửa khi merge |
+| Second Age / Third Age | Kỷ Nguyên Thứ Hai / Kỷ Nguyên Thứ Ba | đặt mới, nối tiếp "Kỷ Nguyên Thứ Tư/Năm/Sáu" đã chốt B3c/B6-decisions-sorcery, hoàn thiện chuỗi 6 kỷ nguyên Kuei-Jin |
+| Blood Bond / Blood Bonded | Khế Ước Máu | tái dùng `game_concept_bloodbond_desc` đã có bản dịch, áp dụng cho cả 2 dạng danh từ/tính từ |
+| Demon Emperor | Ma Hoàng | ✅ tái xác nhận B3c (`podgloss.demonemperor`) — 3/4 agent ban đầu bỏ sót không dịch tham số 1, đã sửa khi merge |
+| The Beast | Dã Thú | ✅ tái xác nhận tiền lệ toàn mod (B4/B5), áp dụng cho tham số 1 của `Glossary('The Beast',...)` |
+
+**Bài học lặp lại (đợt thứ N với ≥4 agent song song dịch cùng 1 file lớn chia đoạn):**
+1. Khi 1 khái niệm lặp lại nhiều lần xuyên suốt CẢ file (ví dụ "Age" 28 lần, "Demon Emperor" 4 lần), một agent phụ trách 1 đoạn có thể dịch đúng còn agent khác phụ trách đoạn khác lại bỏ sót hoàn toàn — không phải lỗi ngẫu nhiên 1-2 chỗ mà có thể là **toàn bộ một đoạn 300+ dòng bỏ sót một mẫu Glossary cụ thể**. Lệnh gom nhóm theo tham số 2 của `Glossary()` (đã dùng ở các đợt trước) vẫn là cách duy nhất bắt được loại lỗi này.
+2. **Lỗi line-ending LF thay vì CRLF lần này xảy ra ở quy mô lớn hơn nhiều so với các đợt trước**: 2/6 đoạn (653/1972 dòng, tức 1/3 toàn file) bị ghi bằng LF thuần dù prompt đã dặn rất kỹ "dùng CRLF, không dùng LF". Đáng chú ý: lệnh `file <path>` báo **"CRLF line terminators"** cho cả file dù 2/6 đoạn bên trong là LF thuần — `file` chỉ lấy mẫu, không quét toàn bộ. Chỉ lệnh đếm "lone LF" (`perl -0777 -ne '$c=()=/(?<!\r)\n/g; print $c'`) trên TOÀN FILE mới bắt được chính xác. Cảnh báo bổ sung: **lệnh `sed -i` trên Git Bash/MinGW cũng tự ý strip CR** khi sửa nội dung 1 file CRLF tại chỗ (đã tự gây ra lỗi này 1 lần trong chính đợt merge này khi dùng `sed -i` để sửa hàng loạt tham số Glossary) — dùng `perl -pi -e` thay vì `sed -i` khi cần sửa tại chỗ trên file CRLF, hoặc convert LF→CRLF lại ngay sau mỗi lần `sed -i`.
