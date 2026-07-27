@@ -1907,3 +1907,27 @@ File giao diện chế tác hiện vật. Dịch qua 4 agent chia đoạn (1-403
 **Elixir/Potion/Tonic/Philtre** — 4 loại "thuốc" khác nhau trong hệ crafting POD, phân biệt: Potion→Thuốc, Elixir→Linh dược, Tonic→Bổ dược, Philtre→Mê dược. Intrigue→"Mưu kế" (áp dụng cho cả lỗi chính tả gốc `node_alchemy_skill_intrigue_loca: "Elixir of Intiruge"` — dịch đúng nghĩa "Intrigue", không giữ lỗi chính tả vì đây là chữ hiển thị không phải key).
 
 Áp dụng lại 4 bảng thuật ngữ trên khi gặp lại ở `artifacts/` (việc #11), `modifiers/` (việc #7 — các `*_modifier` như `divine_elixir_diplomacy_modifier` định nghĩa tên thật của elixir, chưa dịch).
+
+## B5d. Thuật ngữ `gui/POD_umbra_window_l_english.yml` — cửa sổ cõi giới Umbra, 1572/1572 dòng, việc #4 file 28/30 (HOÀN TẤT `gui/`, 30/30)
+
+File lớn nhất `gui/`. Dịch qua 6 agent chia đoạn (1-160, 161-324, 325-540, 541-798, 799-1189, 1190-1572), coordinator hợp nhất + phát hiện/sửa 17 dòng sót tiếng Anh (13 dòng `court_of_*_effect_desc` giống hệt nhau + 4 dòng `*_duchy_effect_desc`, các agent nhầm tưởng đây là dòng script-only vì đứng cạnh dòng `$ref$`-only khác) + chuẩn hóa 4 thuật ngữ lệch giữa các đoạn.
+
+**Chuẩn hóa thuật ngữ `Glossary()` tham số 1 xuyên suốt file (tái dùng tiền lệ đã chốt B3c/dòng 1736, không tự đặt mới):**
+
+| English (tham số 1 gốc) | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Dark Kingdom(s) | Vương Quốc Bóng Tối | ✅ tái dùng tiền lệ dòng 1736; 1/24 agent để sót tiếng Anh, đã sửa |
+| Home Realm | Cõi Giới Gốc | đặt mới nhất quán, 2/6 lần lệch đã sửa |
+| Yama King(s) | Diêm Ma Vương / Các Diêm Ma Vương | ✅ tái dùng tiền lệ B3c dòng 342; 3/7 lần agent dịch nhầm "Vua Yama", đã sửa |
+| Stable Point(s) | Điểm Ổn Định / Các Điểm Ổn Định | đặt mới nhất quán |
+| Nightmare Realm(s), Dream Realm(s), Shard Realm, Shade Realm, Skinlands | *(giữ nguyên tiếng Anh)* | chưa có tiền lệ dịch nghĩa, giữ nguyên nhất quán theo B0 |
+
+**Umbra Realm — quy tắc chung đã áp dụng:** tên cõi giới ngắn/mô tả rõ nghĩa → dịch (Goblin Market→Chợ Yêu Tinh, Sea of Silver→Biển Bạc, Abyss→Vực Thẳm, Oblivion→Hư Vô…); tên riêng/phiên âm ngoại lai khó dịch → giữ nguyên (Mahâraurava, Chakravada, Malfeas, Kakuri…, kể cả tên có dấu Latin trông giống tiếng Việt như "â" trong Mahâraurava — KHÔNG được sửa/bỏ dấu); tên Tribe Garou (Black Furies, Get of Fenris, Silver Fangs…) giữ nguyên tiếng Anh xuyên suốt (khác với `wyrm`/`gaia` trước đây chưa nhất quán, xem cảnh báo cũ trong WORKLIST.md — file này áp dụng "giữ nguyên" làm chuẩn); "Court of X"/"Homeland of X" (X = tên thần Garou Astrology hoặc Tribe) giữ nguyên cụm tiếng Anh trong tên hiển thị, chỉ dịch phần mô tả văn xuôi.
+
+**Tên hành tinh (Mage lore):** Mercury/Venus/Mars/Jupiter/Saturn/Uranus/Neptune/Pluto/Sun/Moon → Sao Thủy/Kim/Hỏa/Mộc/Thổ/Thiên Vương/Hải Vương/Diêm Vương/Mặt Trời/Mặt Trăng.
+
+**Wyld/Weaver/Wyrm** → giữ nguyên tiếng Anh xuyên suốt kể cả trong tên cõi giới ghép ("Weaver Reaches", "Wyld Reaches", "Wyrm Reaches") — ✅ tái dùng B3.
+
+**Fetish** (đồ vật ràng buộc linh hồn của Fera/Garou, khác nghĩa "witch's fetish" thông thường) → đặt mới **"Bùa Chú"** (3/6 đoạn dùng nhất quán, không xung đột). Chưa có trong TERMINOLOGY.md trước đây — ghi nhận tại đây. Cần đối chiếu lại khi dịch `game_POD_concepts_l_english.yml` (`game_concept_fetish: "Fetish"`, chưa dịch) và `[fetish|E]`/`[fetish_smithing|E]` concept link ở các file khác để xem có nên thống nhất hay giữ khác biệt theo splat.
+
+Áp dụng lại các bảng trên khi gặp lại ở `game_POD_concepts_l_english.yml` (việc #9, nguồn định nghĩa gốc nhiều khái niệm `game_concept_*` file này tham chiếu qua `Glossary()`), `religion/` (đã xong, không cần sửa lại), và các file `event_localization/POD_umbra/` (việc #13, chưa tới lượt).
