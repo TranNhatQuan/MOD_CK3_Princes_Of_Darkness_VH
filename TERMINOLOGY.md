@@ -1196,6 +1196,40 @@ Nguồn: `religion/POD_religion_vampirespecialdoctrines_l_english.yml` (92 dòng
 
 > Lưu ý kỹ thuật: dòng `undead_aesir_doctrine_name` gốc là `"Rejuvenated [Glossary('Einherjar','game_concept_einherjar_desc')]"`. Vì tham số 1 của `Glossary()` là "Einherjar" (giữ nguyên, không phải chữ tiếng Anh thường cần dịch), toàn bộ phần dịch được nằm ở chữ "Rejuvenated" đứng ngoài — dịch thành `"[Glossary('Einherjar','game_concept_einherjar_desc')] Được Hồi Sinh"` (đảo vị trí tính từ ra sau cho đúng ngữ pháp tiếng Việt, cụm Glossary giữ nguyên vị trí đầu vì đó là chủ ngữ).
 
+## B3y. Thuật ngữ bổ sung (từ `POD_religion_roadofheaven`) — việc #2 file 23/36
+
+Nguồn: `religion/POD_religion_roadofheaven_l_english.yml` (169 dòng, đã dịch xong 100%) — faith chính "Road of Heaven" (Con Đường Thiên Đường, đã khóa cứng ở B3k) và 15 faith con Noddist (Via Caeli, Via Divinitatis, Via Penaculum, Via Vindicta, Via Dolorosa, Via Christi, Derech Chaim, Code of Samiel, Via Archangeli, Consumptionism, Divisionism, Via Aesigard, Via Noctis, Path of the Heavenly Abode, Via Redemptio). Đây là faith "neo" mà `bloodgnosticism`/`calomenasforsaken` đã trỏ tới khi chốt "principle of faith"→"Nguyên Tắc Đức Tin" (11/11 dòng đã áp dụng đúng, khớp tuyệt đối với số lần xuất hiện gốc). File không có `UmbraGlossaryLocalized()`; chỉ 1 `Glossary('Diablerize','game_concept_diablerie_desc')` — tham số 1 giữ nguyên "Diablerize" (chưa có tiền lệ dịch verb này ở bất kỳ file POD nào khác tính đến nay, nhất quán với "Diablerie" giữ nguyên tiếng Anh đã chốt B2).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| God *(high_god_name, tổng quát nhiều nhánh Cơ Đốc/Do Thái/Bắc Âu)* | Thượng Đế | ✅ tra base (`dualism_high_god_name`="Thượng Đế") — dùng bản trung tính, không dùng "Thiên Chúa" (đặc thù Công giáo) vì faith này bao trùm cả Do Thái giáo (Derech Chaim) và ngoại giáo Bắc Âu (Via Aesigard) |
+| The Devil *(devil_name/witchgodname_the_horned_god)* | Ác Quỷ | đặt mới cho ngữ cảnh chung; khác "Quỷ Dữ" đã dùng ở B3u cho ngữ cảnh khác — cả hai đều hợp lệ tùy file, không phải xung đột vì không cùng nguồn |
+| Destruction *(death_deity_name)* | Hủy Diệt | đặt mới, dịch nghĩa trực tiếp |
+| chapel *(house_of_worship)* | nhà nguyện | ✅ tra base_game_vh (`building_vihara_halls_03_desc` dùng "nhà nguyện"; phân biệt với `christianity_house_of_worship`="nhà thờ" quy mô lớn hơn) |
+| cross *(religious_symbol)* | thánh giá | ✅ tra base (`christianity_religious_symbol`="thánh giá") |
+| Gospel of Laodice | Phúc Âm Laodice | ✅ tra base, "Gospel"→"Phúc Âm" là thuật ngữ Cơ Đốc phổ biến; "Laodice" giữ nguyên tên riêng |
+| bishop | giám mục | dịch nghĩa phổ thông, phân biệt với `councillor_court_chaplain`="Giáo sĩ Triều đình" (chức sắc hội đồng khác) |
+| heaven *(divine_realm/positive_afterlife)* | thiên đàng | ✅ tra base (`christianity_positive_afterlife`="thiên đàng") |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ tra base (`christianity_negative_afterlife_2`="Vực Thẳm") và tiền lệ POD đã dùng ở nhiều file `roadof*`/`codeoftremere`/`calomenasforsaken` khác |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ tiền lệ base y hệt (`christianity_trickster_god_name`="Fortuna") |
+| Noddist(s) *(religion_adherent, tự xưng tín đồ Road of Heaven nói chung)* | Tín đồ Nod | đặt mới, ghép "Tín đồ" + "Nod" (Sách Nod đã chốt B2b); dùng thống nhất số ít/số nhiều theo mục 7 TRANSLATION_RULES.md |
+| Divinist(s) *(viadivinitatis_adherent)* | Tín đồ Thần Thánh | đặt mới, "Divinity"→"Thần Thánh" cho nhánh Via Divinitatis |
+| Penitent(s) *(viapenaculum_adherent)* | Kẻ Sám Hối | đặt mới, dịch nghĩa "penitent" (người sám hối) |
+| Crusader(s) *(viavindicta_adherent)* | Thập Tự Quân | ✅ tra base — "Crusade"/"Crusader" thường dịch "Thập Tự Chinh"/"Thập Tự Quân" trong văn cảnh trung cổ |
+| Martyr(s) *(viadolorosa_adherent)* | Kẻ Tuẫn Đạo | đặt mới, "martyr" (người tử vì đạo) dịch "kẻ tuẫn đạo", nhất quán dùng lại cho `codeofsamiel_desc` ("the martyred founder"→"vị sáng lập tuẫn đạo") |
+| Christian(s) *(viachristi_adherent)* | Tín Đồ Cơ Đốc | dịch nghĩa phổ thông |
+| Code of Samiel | Luật Lệ Samiel | nhất quán mẫu "Code of X"→"Luật Lệ X" đã chốt B3k (`Code of Tremere`→"Luật Lệ Tremere") |
+| Redeemer(s) *(vianoctis_adherent)* | Kẻ Cứu Chuộc | đặt mới, dịch nghĩa "redeemer" |
+| Avenger(s) *(pathoftheheavenlyabode_adherent)* | Kẻ Báo Oán | đặt mới, dịch nghĩa "avenger" |
+| Redeemed *(viaredemptio_adherent, tính từ dùng như danh từ)* | Kẻ Được Cứu Chuộc | phân biệt với "Redeemer" (Kẻ Cứu Chuộc) ở trên — "Redeemed" là thể bị động, dịch "Kẻ Được Cứu Chuộc" để tránh trùng nghĩa |
+| Order of X *(12 holy order)* | Hội X | đặt mới, "Order"→"Hội" theo văn phong tổ chức tôn giáo POD, nhất quán với B3u (`Red Order`→"Hội Đỏ") |
+| Path of Tears *(tên khác của Via Dolorosa)* | Con Đường Nước Mắt | dịch nghĩa, "Path"→"Con Đường" nhất quán B3f/B3k |
+| Path of the Heavenly Abode | Con Đường Nơi Ở Thiên Đàng | dịch nghĩa đầy đủ tên faith con |
+| Kindred *(viacaeli_desc, chỉ ma cà rồng nói chung)* | Huyết Tộc | ✅ đã chốt B3k (`rf_kindred`), áp dụng lại |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k/B3s, kể cả `"Fortuna's"`→"của Fortuna" |
+
+> ⚠️ Baseline trailing-whitespace: file gốc có 9 dòng với khoảng trắng thừa cuối dòng trước CRLF (dòng 1 `l_english: `, dòng 37-38 sau `"the Devil"`/`"the Devil's"`, và 6 dòng trống 64/100/106/118/138/144 với 1-4 space). Đã khôi phục đúng y hệt số lượng space ở từng dòng sau khi dịch — đây là bẫy "Formatter" (mục 6 TRANSLATION_RULES.md) suýt bị bỏ sót vì các công cụ đọc/ghi text mode thường tự động strip trailing whitespace.
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
