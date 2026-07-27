@@ -728,6 +728,26 @@ Ngoài ra ~30 tên tiểu phái/hội bên trong 5 Pháp Môn (Empty Hands→Kh�
 | Hundred Devils / Thousand Devils | Bách Quỷ / Thiên Quỷ | |
 | Lost Lineages | Chi Hệ Thất Lạc | |
 
+## B3k. Thuật ngữ bổ sung (từ `religion/POD_religion_l_english.yml`) — việc #2 file 4/36, file neo `rf_*`/`hostility_doctrine`/`holy_site`
+
+Nguồn: file neo thứ hai của `religion/` (439 dòng, đã dịch xong 100%). Chứa nhãn "religion family" (`rf_*`), tên các giáo lý thù nghịch (`*_hostility_doctrine_name`), và tên thánh địa (`holy_site_*`).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Kindred *(tự xưng của ma cà rồng, khác `trait_vampire`="Ma cà rồng")* | Huyết Tộc | `rf_kindred`; nhất quán với cách B3c đã dịch "Kindred of the East"→"Huyết tộc Đông phương" |
+| Ignorance *(nhãn giáo phái phàm nhân không biết về siêu nhiên)* | Vô Minh | `rf_ignorance`; ✅ có tiền lệ base (`jainism_evil_god_ignorance`, `dualism_evil_god_ignorance` đều = "Vô Minh") |
+| Infernal *(nhãn giáo phái thờ quỷ)* | Ma Quỷ | `rf_thousandhells`; không có tiền lệ base, đặt mới theo tính từ mô tả thường, nhất quán với "Demonic Plague"→"Ôn Dịch Ma Quỷ" (B4g) |
+| Heresy | Dị Giáo | `vampirecainite_hostility_doctrine_name`; ✅ tiền lệ base `heresy_hostility_doctrine_name`="Dị giáo" — viết hoa theo quy ước tên riêng giáo lý trong POD |
+| Code of Tremere | Luật Lệ Tremere | `codeoftremere_hostility_doctrine_name`; không có tiền lệ base cho "Code" ở nghĩa này, Tremere là danh từ riêng giữ nguyên |
+| Road *(nhắc lại B3f, áp dụng thêm)* | Con Đường | dùng cho toàn bộ 13 `roadof*_hostility_doctrine_name` trong file này: Road of the Beast→Con Đường Dã Thú, Road of Blood→Con Đường Máu, Road of Bones→Con Đường Xương Cốt, Road of Heaven→Con Đường Thiên Đường, Road of Hive→Con Đường Tổ Ong, Road of Humanity→Con Đường Nhân Tính, Road of Kings→Con Đường Quân Vương, Road of Lilith→Con Đường Lilith, Road of Metamorphosis→Con Đường Biến Hóa, Road of Sin→Con Đường Tội Lỗi, Road of Zarathustra→Con Đường Zarathustra, Road of Laibon→Con Đường Laibon, Road of Set→Con Đường Set |
+| Thousand Hells *(nhắc lại B3e, áp dụng thêm)* | Thiên Địa Ngục | `thousandhells_hostility_doctrine_name` — khớp bản đã chốt ở B3e |
+| Blood Gnosticism | Huyết Ngộ Đạo Luận | `bloodgnosticism_hostility_doctrine_name`; ✅ tiền lệ base cho "Gnosticism" = "Ngộ đạo luận" (`tenet_gnosticism_name`), ghép thêm "Huyết" (máu) |
+| Calomena's Forsaken | Những Kẻ Ruồng Bỏ của Calomena | `calomenasforsaken_hostility_doctrine_name`; Calomena là danh từ riêng (một vị thần/nhân vật), "Forsaken" dịch nghĩa |
+| Ashirra, Raktasadhus, Camarilla, Sabbat, Inconnu, Autarkis, Tal ma'He Ra, Vetaladharma, Kuei-Jin, Ordos, Anarchs, Gaia, Wyrm | *(giữ nguyên)* | tên riêng giáo phái/tổ chức WoD, theo B0 |
+| From *(trong `holy_site_*_effect_name`)* | Từ | ✅ tiền lệ base xác nhận (`holy_site_jerusalem_effect_name`="Từ [holy_site\|E]…") — áp dụng cho toàn bộ 169 dòng `holy_site_*_effect_name` |
+| Tên thánh địa (`holy_site_*_name`, vd. Paris, Rome tương đương ở POD) | *(giữ nguyên tiếng Anh, không dịch/không phiên âm)* | ✅ tiền lệ base xác nhận: `holy_site_jerusalem_name`="Jerusalem", `holy_site_rome_name`="Rome" — base_game_vh giữ nguyên tên địa danh tiếng Anh dù các dòng khác trong cùng file đã dịch. Khác với `simp_chinese` (phiên âm/dịch tên) — không theo simp_chinese ở điểm này |
+| Patron faith | đức tin Bảo Trợ | `faith_conversion_cost_patron_religion`; nhất quán với "Patron Council"→"Hội đồng Bảo Trợ" (B4b) và "Patron"→"Người Bảo Trợ" (B4e) |
+
 ## B3g. Thuật ngữ bổ sung (từ `POD_religion_ghoul_l_english.yml`) — việc #2, faith Bộc huyết
 
 Nguồn: `religion/POD_religion_ghoul_l_english.yml` (70 dòng) — tôn giáo "Unmastered" của các Bộc huyết vô chủ (ghoul không có Domitor). File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0).
