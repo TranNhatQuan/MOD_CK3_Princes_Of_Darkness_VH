@@ -2928,3 +2928,30 @@ Nguồn: 8 file dịch qua agent song song (mỗi agent 1 file, ghi scratch riê
 | Soul Arts *(lifestyle Kuei-Jin, tái xác nhận)* | Pháp Nghệ Linh Hồn | tái xác nhận B5-kuejin |
 | Ghost Arts / Heavenly Arts / Beast Arts / Devil Arts / Dragon Tear / Hellweaving *(6 nhóm Art con của Soul Arts, tương ứng P'o/Hun)* | Quỷ Nghệ / Thiên Nghệ / Thú Nghệ / Ma Nghệ / Long Lệ / Địa Ngục Chức Pháp | đặt mới, Hán Việt nhất quán giọng huyền bí |
 | Devil Soul, Suffering, Fetters, Gauntlet *(thuật ngữ hệ thống WoD trong `soul_arts`, chưa có bản dịch chốt)* | giữ nguyên tiếng Anh | đặt mới, tạm giữ nguyên tương tự P'o/Hun đến khi có tiền lệ dịch rõ hơn ở file khác |
+
+## B8-lifestyles-p3. Thuật ngữ đợt nhỏ 3 việc #8 `lifestyles/` — 4 file 183-298 dòng (bastet, arcana, necro_magic, tribalgifts)
+
+Nguồn: 4 file dịch qua agent song song. **3 lỗi thật phát hiện khi merge** (tiếp tục xác nhận bài học cũ — agent tự claim "không có tiền lệ" cho thuật ngữ THỰC RA đã chốt từ trước, coordinator phải tự grep xác nhận, không tin báo cáo):
+1. `tribalgifts`: agent viết "Bane giữ nguyên tiếng Anh — không có tiền lệ dịch" — SAI, "Bane"="Tà Linh" đã chốt nhiều lần (B4c/B5j/B5-numina). Sửa lại 2 chỗ.
+2. `arcana`: "True Name" (tham số 1 của `Glossary('True Name','podgloss.truename')` + 2 lần trong văn xuôi thường "true name") giữ nguyên tiếng Anh — SAI, phải dịch "Chân Danh" đã chốt B3c. Sửa lại cả 3 chỗ.
+3. `necro_magic`: "Dark Kingdoms" dịch thành "Các Vương Quốc Bóng Tối" — thừa "Các" so với tiền lệ đã chốt "Vương Quốc Bóng Tối" (không thêm "Các" dù số nhiều, theo TRANSLATION_RULES §7). Sửa lại 2 chỗ. Cũng thiếu đúng 1 dòng cuối (dòng 213, gốc kết thúc bằng 1 space không newline) — khôi phục khi merge.
+4. `arcana`: agent tự phát hiện và báo cáo (không cần coordinator sửa lỗi merge) — "Ravage" (tên perk gốc, dòng 44) để nguyên tiếng Anh trong khi "Ravage Sinner" (perk khác) dịch "Tàn Sát Kẻ Tội Lỗi" — không nhất quán. Coordinator dịch nghĩa "Ravage"→"Cưỡng Đoạt" (phù hợp nội dung effect: quỷ nuốt linh hồn thrall để lấy sức mạnh).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Bastet, Homid, Sokto, Crinos, Juddho *(dạng Breed/biến hình Bastet — Fera hình mèo)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng WoD |
+| Bagheera, Bubasti, Khan, Simba, Swara, Ceilican *(6 bộ tộc Bastet)* | giữ nguyên tiếng Anh | đặt mới |
+| Rahjah *(vị thần loài mèo Bastet)*, Unmaker *(thế lực phản-Gaia phía Bastet, tương tự Wyrm phía Garou)* | giữ nguyên tiếng Anh / "Kẻ Hủy Diệt" khi dùng như danh xưng mô tả trong văn xuôi | đặt mới |
+| Arcana *(lifestyle Demon: the Fallen, tương tự cách xử lý "Lore")* | Arcana *(giữ nguyên tên hệ thống)* | đặt mới, nhất quán cách xử lý "Lore" |
+| Torment *(chỉ số nội tâm Demon)* | Torment *(giữ nguyên)* | đặt mới, chưa có tiền lệ dịch |
+| Elohim, Thrall, Yahweh, Metatron *(danh từ riêng thần học/WoD-Demon)* | giữ nguyên tiếng Anh | đặt mới |
+| Scry *(tên perk Arcana, hành động bói toán/thấu thị)* | Chiêm Bốc | đặt mới, dịch nghĩa |
+| Ravage *(tên perk Arcana, quỷ nuốt linh hồn thrall lấy sức mạnh)* | Cưỡng Đoạt | đặt mới, dịch nghĩa; sửa lại khi merge (agent để nguyên tiếng Anh, không nhất quán với "Ravage Sinner"→"Tàn Sát Kẻ Tội Lỗi") |
+| Dark Kingdoms *(tham số 1 của Glossary, tái xác nhận)* | Vương Quốc Bóng Tối | tái xác nhận tiền lệ B4/dòng ~1928, KHÔNG thêm "Các" dù số nhiều |
+| Necromancy *(lifestyle pháp sư phàm nhân điều khiển Wraith, khác Necro Psi của Numina)* | Chú Thuật Tử Linh | đặt mới; ghép "Chú Thuật" (đã dùng cho Blood Sorcery) + "Tử Linh" (đã dùng cho Necro Psi), giữ nhất quán gốc "necro-" |
+| Fetter(s), Corpus, Skinlands, Spectre *(nhắc lại, thuật ngữ Wraith)* | giữ nguyên tiếng Anh | tái xác nhận B4h |
+| Mortuus in Vultus, Algor Mortis, Calvaria Emissicius, Consilium Mortuus, Ammorsus Vicarius, Exedo Animus, Degulo, Ex Nihilo, Benedicto Mortem/Vitae, Rigor Mortis *(tên Latin các perk Necromancy)* | giữ nguyên tiếng Anh (tên riêng Latin, chỉ dịch phần mô tả xung quanh) | đặt mới |
+| Tribal Gifts *(lifestyle Garou theo Bộ Tộc, tái xác nhận)* | Ân Huệ Bộ Tộc | tái xác nhận B8-lifestyles-p2 |
+| Black Furies, Bone Gnawer(s), Children of Gaia, Fianna, Get of Fenris, Red Talon(s), Shadow Lord, Silent Strider, Silver Fang, Stargazer, Warder(s) of Men, Glass Walker, Black Spiral Dancer(s), White Howler, Hakken *(15 bộ tộc/nhóm Garou)* | giữ nguyên tiếng Anh | ✅ **quyết định coordinator: giữ nguyên toàn bộ tên bộ tộc Garou trong `lifestyles/`**, để nhất quán và tránh lặp lại xung đột đã ghi nhận giữa `religion/POD_religion_wyrm` (dịch nghĩa tên camp) và `religion/POD_religion_gaia` (giữ nguyên) — TERMINOLOGY.md chưa chốt quy tắc chung cho tên camp/tribe, việc rà soát toàn diện để lại sau |
+| Maeljin Incarna *(thực thể Wyrm cấp cao)*, Muladhara/Manipura/Anahata/Visuddha/Atma *(5 chakra Stargazer)* | giữ nguyên tiếng Anh/Phạn ngữ | đặt mới |
+| Bane *(linh hồn Wyrm-tainted, nhắc lại)* | Tà Linh | tái xác nhận B4c/B5j — agent ban đầu giữ nguyên sai, đã sửa khi merge |
