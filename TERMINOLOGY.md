@@ -1596,7 +1596,7 @@ File 141/141 dòng, dịch xong 100%. Faith này là ác quỷ (`trait_demon`="�
 
 > Dòng 111-142 (splat `faustian`, `cryptic`, `luciferan` + 3 holy order liên quan, `ravener`, `reconciler`) đều là **key bị comment** (`#` ở đầu dòng) trong bản gốc — giữ nguyên hoàn toàn, không dịch, theo mục 5 TRANSLATION_RULES.md.
 
-## B4q. Thuật ngữ `religion/POD_religion_modern_l_english.yml` — Anarch/Camarilla/Sabbat hiện đại, việc #2 file 30/36
+## B4r. Thuật ngữ `religion/POD_religion_modern_l_english.yml` — Anarch/Camarilla/Sabbat hiện đại, việc #2 file 30/36
 
 File 125/125 dòng, dịch xong 100%. Nhóm faith ma cà rồng hiện đại: Modern Anarch, Camarilla, và 13 "Path of Enlightenment" thuộc Sabbat. Phần lớn dùng lại thuật ngữ đã chốt (Path of X → Con Đường X theo B3f/B3k, Camarilla/Sabbat/Anarch giữ nguyên B0, Kindred → Huyết Tộc B3k, Masquerade → Màn Che, Antediluvians/Caine/Priscus giữ nguyên B0/B2b, Book of Nod → Sách Nod B2b).
 
