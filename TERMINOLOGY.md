@@ -2296,3 +2296,79 @@ Nguồn: 158 dòng, tên và mô tả các tương tác Art của Kuei-Jin, chia
 | P'o, Hun *(hai "hồn phách" — bản chất thấp/Ma tính và bản chất cao/giác ngộ của Kuei-Jin)* | P'o, Hun *(giữ nguyên)* | "P'o" đã có tiền lệ giữ nguyên xuyên suốt mod (kể cả trong văn xuôi tiếng Việt đã dịch ở `POD_religion_kueijin_l_english.yml:170`); "Hun" đi cùng cặp, chưa từng dịch ở đâu — giữ nguyên nhất quán theo B0 |
 | Rakshasa Blade | Lưỡi Kiếm Rakshasa | "Rakshasa" giữ nguyên (đã chốt B3c-liên-quan, danh từ riêng Ấn Độ giáo/WoD gốc Phạn ngữ) |
 | horoscope *(`already has a horoscope [modifier|E]`)* | lá số tử vi | dịch nghĩa thuật ngữ chiêm tinh phổ thông tiếng Việt |
+
+## B5-numina. Thuật ngữ `interactions/POD_character_interactions_numina_l_english.yml` — tương tác các hệ năng lực Numina (Psi/phàm nhân ngoại cảm, Sorcery, Theurgy, Possessed/Fomori), 275/275 dòng, việc #5
+
+Nguồn: file tổng hợp tương tác của "Numina" — hệ năng lực tâm linh dành cho phàm nhân/psychic (không phải splat siêu nhiên riêng), gồm 5 khối: Psi (ngoại cảm), Necro Psi (tử linh), Sorcery (pháp thuật phàm nhân, gồm Cursing/Dowsing/Oneiromancy/Shapeshift/Spirit Chasing/Alchemical Products), Theurgy (Thần Thuật, đã có tiền lệ B4 `trait_theurgist`="Nhà Thần Thuật"), và Possessed/Fomori (linh thể chiếm hữu phàm nhân, tái dùng "Bane"="Tà Linh" đã chốt B4c). Không có `Glossary()` hai tham số trong file; có 2 lần `[UmbraGlossary('shadowlands')]` (1 tham số, không dịch gì — tự lấy tên qua `Localize()`, theo B4). Đã sửa một lỗi tự thêm bracket không có trong bản gốc trước khi lưu (xem ghi chú dưới).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Psi / Psychic (talent/training/testing) | Ngoại Cảm | tái dùng B0/B5 (`Psychic`="Người Có Năng Lực Ngoại Cảm", dòng ~1193/~1965); ở đây "Psi"/"Psychic" đứng trước danh từ khác (Training/Talents/Invisibility…) nên rút gọn thành "Ngoại Cảm" làm tính từ ghép, giữ nhất quán gốc |
+| Necro Psi | Ngoại Cảm Tử Linh | đặt mới, ghép "Ngoại Cảm" + "Tử Linh" (linh hồn người chết), phân biệt với Necromancer/Wraith (B4h) — đây là năng lực phàm nhân giao tiếp người chết, không phải hệ thống Wraith |
+| Channel / Unchannel / Partial Channel *(năng lực Necro Psi giao tiếp/chiếm hồn ma)* | Triệu Hồn / Ngừng Triệu Hồn / Triệu Hồn Bán Phần | đặt mới; "Channel" ở đây nghĩa "gọi hồn nhập vào mình" — dùng "Triệu Hồn" (khác "Triệu Hồi" dùng cho gọi thực thể đến, xem dưới) để phân biệt hai khái niệm gần nhau trong cùng file |
+| Summon (ghost/wraith/animal — gọi thực thể đến chứ không nhập hồn) | Triệu Hồi | dùng lại tiền lệ vanilla/toàn mod "Triệu Hồi", phân biệt với "Triệu Hồn" (Channel, xem trên) |
+| Biocontrol | Điều Khiển Cơ Thể | dịch nghĩa thường, đặt mới |
+| Psychic Healing / Psychic Treatment | Trị Liệu Ngoại Cảm / Điều Trị Ngoại Cảm | đặt mới; "Healing"="Trị Liệu", "Treatment"="Điều Trị" — hai từ khác nhau trong bản gốc nên giữ hai bản dịch khác nhau theo quy tắc "một thuật ngữ = một bản dịch" áp dụng ngược lại (hai thuật ngữ gốc khác nhau, không gộp) |
+| Precognition | Tiên Tri | dịch nghĩa Hán Việt phổ thông, đặt mới |
+| Psychometry | Thần Giao Vật Lý | đặt mới; ghép "Thần Giao" (đã dùng cho Telepathy, xem dưới) + "Vật Lý" (đọc được lịch sử của vật thể qua chạm), phân biệt khỏi Telepathy dù cùng gốc "thần giao" |
+| Psychoportation | Dịch Chuyển Ngoại Cảm | đặt mới, dịch nghĩa mô tả (di chuyển bằng tâm trí) |
+| Telepathy | Thần Giao Cách Cảm | thuật ngữ Hán Việt phổ thông có sẵn trong tiếng Việt cho "telepathy", không cần đặt mới |
+| Psychic Hypnosis / Suggestion / Conditioning / Mind Control | Thôi Miên Ngoại Cảm / Gợi Ý / Điều Kiện Hóa / Điều Khiển Tâm Trí | dịch nghĩa thường, đặt mới cho cả bốn, không có tiền lệ base |
+| Psychic Vampirism / Leech Emotions / Leech Life Force | Hút Máu Ngoại Cảm / Hút Cạn Cảm Xúc / Hút Cạn Sinh Lực | đặt mới; "Leech" (động từ hút cạn) dịch nhất quán "Hút Cạn" trong cả file, kể cả ở khối Soulstealing dưới |
+| Soulstealing | Đánh Cắp Linh Hồn | đặt mới, dịch nghĩa; "Lifeforce"="Sinh Lực", "Willpower"="Ý Chí" (đã có tiền lệ toàn mod), "Health" ở options heading này dịch "Sức Khỏe" (không dùng "Máu" vì context là hút sinh lực/ý chí/sức khỏe, ba khái niệm tách biệt) |
+| Gnosis *(năng lực Fera/Garou — ở đây dùng làm một loại "năng lượng" có thể hút của Numina)* | Gnosis *(giữ nguyên)* | tái dùng tiền lệ giữ nguyên tên WoD gốc; chưa tìm thấy bản dịch nghĩa nào trong toàn mod, giữ nguyên theo B0 |
+| Sorcerous Artifact Theft / Mark Artifact / Remove Mark | Trộm Hiện Vật Bằng Pháp Thuật / Đánh Dấu Hiện Vật / Xóa Dấu | dịch nghĩa; "Artifact" viết hoa thường trong tên tương tác dịch thành "Hiện Vật" (danh từ thường, không phải concept link `[artifact|E]` — bản gốc các dòng này không dùng bracket, chỉ dùng chữ "Artifact" trần) |
+| Conveyance | Vận Chuyển Thuật | đặt mới, ghép "Vận Chuyển" + "Thuật" theo mẫu Hán Việt các phép thuật khác trong file (Dowsing="Thuật Dò Tìm", Oneiromancy="Thuật Nhập Mộng") |
+| Cursing (interaction, nghệ thuật bùa chú/lời nguyền/phước lành) | Chú Thuật | đặt mới; khác "Curse of Gaia" (Lời Nguyền của Gaia, dịch nghĩa trực tiếp "curse"="lời nguyền" ở tên riêng đó) — ở đây "Cursing" là tên nhóm năng lực chung nên dùng "Chú Thuật" (thuật bùa chú) |
+| Dowsing | Thuật Dò Tìm | dịch nghĩa, đặt mới |
+| Fascination | Mê Hoặc | dịch nghĩa thường |
+| Oneiromancy / dreamless / Touch Dream / Bad Dreams / Good Dreams | Thuật Nhập Mộng / vô mộng / Chạm Vào Mộng / Ác Mộng / Mộng Đẹp | dịch nghĩa nhất quán chủ đề "mộng" (dream) xuyên suốt khối |
+| Saturnal - Manes | Saturnal - Manes *(giữ nguyên)* | tên riêng nghi lễ La Mã cổ (Saturnalia/Manes — vong hồn tổ tiên La Mã), giữ nguyên theo B0 vì không có tiền lệ dịch và là danh từ lịch sử-tôn giáo cụ thể |
+| Weathercraft | Thuật Khống Thời Tiết | đặt mới, dịch nghĩa mô tả |
+| Ward against Death | Bùa Trừ Tử | đặt mới; "Ward" (bùa hộ/bùa trấn) dịch "Bùa", "against Death"→"Trừ Tử" (Hán Việt, ngắn gọn cho UI) |
+| My current knights/councillors/house members/consorts | Các hiệp sĩ/cận thần/thành viên chi tộc/phối ngẫu hiện tại của ta | dịch nghĩa thường theo văn phong vanilla CK3 (Knight/Councillor/House/Consort đã có bản dịch quen thuộc trong `base_game_vh`); KHÔNG dùng concept link `[knight|E]`/`[councillor|E]`/`[house|E]`/`[consort|E]` vì bản gốc các dòng này chỉ dùng chữ thường "knights"/"councillors"/"house members"/"consorts", không có bracket — tự thêm bracket là lỗi (đã phát hiện và sửa trước khi lưu) |
+| Theurgical Heal / Discover True Name / Theurgy Training | Trị Liệu Thần Thuật / Tìm Ra Chân Danh / Huấn Luyện Thần Thuật | tái dùng "Thần Thuật" đã chốt B4 (`trait_theurgist`); "True Name" dịch nghĩa "Chân Danh" (tên thật/danh xưng chân thực), đặt mới |
+| Rite of Making *(tương tác triệu hồi Bane-spirit chiếm hữu, tạo Fomori)* | Nghi Thức Tạo Tác | đặt mới, dịch nghĩa; "Making" ở đây nghĩa "tạo ra Fomori", không liên quan "Via Faciendi/Maker" của Road of Lilith (B3k) dù cùng gốc từ "make" — ngữ cảnh WoD khác hẳn (Garou/Fera spirit, không phải giáo phái ma cà rồng) nên không dùng lại "Tạo Tác" của khối đó để tránh gây nhầm, nhưng vẫn là dịch nghĩa tự nhiên trùng ngẫu nhiên |
+| bane spirit *(chữ thường, mô tả `POD_create_fomori_interaction_desc`)* | Tà Linh | tái dùng B4c/B5j (`Bane`="Tà Linh"), áp dụng cho cả dạng chữ thường "bane spirit" trong câu văn xuôi |
+| $glossary_wyld$-spirit Possession / $glossary_weaver$-spirit Possession | Chiếm Hữu bởi Linh hồn $glossary_wyld$ / Chiếm Hữu bởi Linh hồn $glossary_weaver$ | dịch nghĩa, đảo cấu trúc câu tiếng Việt (đưa "Possession" lên đầu) vì tiếng Việt không ghép tính từ-danh từ kiểu "X-spirit" tự nhiên như tiếng Anh; giữ nguyên `$glossary_wyld$`/`$glossary_weaver$` (ref, không đổi) |
+| Touch of Gaia / Command the Earth / Curse of Gaia | Cái Chạm của Gaia / Chỉ Huy Đất Đai / Lời Nguyền của Gaia | dịch nghĩa, mẫu possessive "của X" (Gaia) theo tiền lệ toàn mod |
+| Homogeneity | Đồng Hóa | dịch nghĩa Hán Việt, đặt mới |
+| Stasis Touch | Cái Chạm Bất Động | dịch nghĩa, đặt mới |
+| Bless Artifact | Ban Phước Hiện Vật | dịch nghĩa thường |
+| Transcendence *(tương tác Holy Arts giúp Wraith siêu thoát)* | Siêu Thoát | tái dùng tiền lệ B3u (`Transcendence`="Siêu Thoát", positive_afterlife) |
+| Turn Vampire / the Embrace / Golconda | Hóa Ma Cà Rồng / Sự Ôm Ấp / Golconda *(giữ nguyên)* | "the Embrace" dùng lại bản dịch quen thuộc toàn mod cho nghi thức biến người thành ma cà rồng; "Golconda" giữ nguyên theo B4i đã chốt |
+| Flagrum of the Passion *(tên Hiện vật/artifact cụ thể)* | Cây Roi của Đam Mê | đặt mới, dịch nghĩa; "Flagrum" (roi La Mã cổ dùng tra hình) dịch "Cây Roi" cho dễ hiểu, giữ possessive "của X" |
+| Alchemical Product(s) | Sản Phẩm Giả Kim | đặt mới, dịch nghĩa; "Alchemical"→"Giả Kim" (thuật ngữ giả kim thuật quen thuộc tiếng Việt), dùng nhất quán cho cả khối Use/Offer/Sell/Buy/Poison |
+| Via Medicamenti *(tên con đường Theurgy cụ thể, tiếng Latin "đường thuốc chữa")* | Via Medicamenti *(giữ nguyên)* | tên Latin riêng của một con đường Theurgy, giữ nguyên theo mẫu "Via Faciendi"/"Via Spinae"/"Via Calantica" đã chốt B3k (không dịch các tên "Via X" trong toàn mod) |
+| Hedge magic *(Numina dùng "hedge magic" mô tả Sorcery/Shapeshift của phàm nhân)* | thuật huyền bí dân gian | dịch nghĩa mô tả; "hedge magic/witch" trong văn hóa dân gian phương Tây chỉ phép thuật truyền miệng/nghiệp dư, không phải trường phái chính thống — dùng "dân gian" để truyền tải sắc thái đó, không dùng "Huyền Thuật" (đã dành riêng cho Tremere Magick, B4) |
+
+## B5-hunter. Thuật ngữ `interactions/POD_character_interactions_hunter_l_english.yml` — sự kiện Inquisition Hunt + Holy Arts + Chi Exorcism, 369/369 dòng, việc #5
+
+Nguồn: file lớn dịch qua 4 agent chia đoạn dòng (1-92, 93-183, 184-276, 277-369 — chú ý file thật có 369 dòng dù `wc -l` báo 368 do dòng cuối không có newline). Nội dung: chuỗi sự kiện tường thuật "Inquisition Hunt" (`POD_inquihunt.*`, có biến thể `.fera` khi mục tiêu là Garou/Fera thay vì ma cà rồng), nhóm tương tác Holy Arts (`POD_ha_*`), danh sách tật/bệnh bị Holy Arts chữa (`POD_exorcism_*`), và 1 dòng lẻ cuối file `gotchiweapon_notification` (Kuei-Jin Chi weapon).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| leech *(danh từ miệt thị Fera gọi ma cà rồng, khác nghĩa "hút cạn" đã có)* | con đỉa | đặt mới, dịch nghĩa hình ảnh cho ngữ cảnh miệt thị; áp dụng nhất quán nếu gặp lại ở event_localization/ |
+| witch hunt *(loại crime, `INQUIHUNT_DISCOVERY_DESC`)* | săn lùng tà thuật | đặt mới, chưa có tiền lệ `crime_witch_hunt` trong base_game_vh |
+| Pyrrhic Victory *(tên sự kiện `.6.t`)* | Chiến Thắng Kiểu Pyrros | đặt mới, phiên âm "Pyrros" theo cách base_game_vh phiên âm tên riêng lịch sử |
+| Sons against Fathers *(tên sự kiện `.3.t`)* | Con Cái Chống Lại Cha Mẹ | đặt mới, dịch nghĩa thường |
+| Lay on Hands *(interaction Holy Arts)* | Đặt Tay Chữa Lành | đặt mới, không có tiền lệ vanilla (CK3 gốc không có tương tác này) |
+| Intercession | Cầu Bầu | đặt mới |
+| Penance *(interaction Holy Arts, phạt/nguyền — khác "Sám Hối" nghĩa tôn giáo thường)* | Sám Hối | giữ nghĩa gốc, phù hợp văn cảnh trừng phạt của interaction |
+| Unwavering Vision | Tầm Nhìn Kiên Định | đặt mới |
+| Lifting the Veil | Vén Màn Bí Mật | đặt mới |
+| Sunder | Xé Toạc | đặt mới |
+| Rod and Staff *(điển tích Thi Thiên 23)* | Trượng Và Gậy | đặt mới, theo điển tích Kinh Thánh |
+| Wrath of God | Thịnh Nộ Của Chúa | đặt mới |
+| Disrupted Contacts *(modifier)* | Liên Lạc Bị Gián Đoạn | đặt mới |
+| Transform Ailing Flesh | Biến Đổi Xác Thịt Bệnh Hoạn | đặt mới |
+| Gout *(tiêu đề ngắn trong danh sách chữa bệnh, khác `trait_gout_ridden`="Gút Hành Hạ")* | Gút | rút ngắn cho tiêu đề danh sách, không dùng bản dịch trait đầy đủ |
+| Pox | Đậu Mùa | đặt mới, không có `trait_pox` để đối chiếu |
+| Plague *(không có `trait_plague` trong base)* | Dịch Bệnh | đặt mới |
+| Castration *(mô tả tình trạng bị chữa, khác `trait_eunuch`="Hoạn Quan" là danh xưng nhân vật)* | Thiến | đặt mới, phân biệt danh xưng vs. hành động/tình trạng |
+| Touch of Peace | Chạm Tay Bình Yên | đặt mới |
+| Judgement of Heaven | Sự Phán Xét Của Thiên Đường | tái dùng "Heaven"="Thiên Đường" đã chốt |
+| Spiritual Guidance | Hướng Dẫn Tâm Linh | đặt mới |
+| Chi Exorcism *(phân biệt với "Cleanse"="Tẩy Trừ" đã dùng ở nơi khác)* | Trừ Tà Bằng Khí | đặt mới, tránh trùng "Tẩy Trừ" |
+| trait_depressed_genetic / trait_lunatic_genetic *(biến thể "genetic" của Trầm Cảm/Loạn Trí)* | U Sầu / Tâm Thần | ✅ tái dùng đúng bản dịch riêng của base_game_vh cho biến thể di truyền, KHÔNG dùng "Trầm Cảm"/"Loạn Trí" thường |
+| gotchiweapon_notification *(Got a Chi Enhanced Weapon)* | Đã nhận Vũ Khí Tăng Cường Bằng Khí | đặt mới, dòng lẻ cuối file không thuộc đoạn của agent nào — đã dịch bổ sung khi phát hiện file thật có 369 dòng chứ không phải 368 |
