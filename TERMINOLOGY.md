@@ -1476,3 +1476,38 @@ Nguồn: `religion/POD_religion_roadofsin_l_english.yml` (186 dòng, đã dịch
 | Blood Tribe / Anarch(s) | Blood Tribe / Anarch | "Blood Tribe" giữ nguyên (tên tổ chức riêng, không phải "Road of X" chuẩn nên không áp khuôn "Con Đường"); "Anarch" đã là tên phe phái WoD phổ biến, giữ nguyên theo B0 |
 | Night World *(bloodtribe_desc)* | Thế Giới Đêm Tối | đặt mới, dịch nghĩa; khác "World of Darkness"→"Thế Giới Bóng Tối" (B2, `pod_wod`) để không trùng hai khái niệm khác nhau trong nguyên bản |
 | Traditionless *(bloodtribe_desc, tính từ mô tả Furores không theo truyền thống)* | Vô Truyền Thống | đặt mới, ghép tiền tố "Vô" (đã có tiền lệ base: Vô Số, Vô Sợ, Vô Danh — dùng lại ở B3m cho "Vô Chủ") + "Truyền Thống" |
+
+## B4n. Thuật ngữ bổ sung (từ `POD_religion_mummy`) — việc #2, faith Xác Ướp
+
+Nguồn: `religion/POD_religion_mummy_l_english.yml` (119 dòng, đã dịch xong 100%). Faith nhóm Mummy: Amenti (Ai Cập), Wu T'ian/Wu Kuei (Trung Hoa), và các faith con: Code of Horus (Shemsu-Heru), Ishmaelite, Faces of Apophis (Bane Mummy), Cabiri, Ten Mandates of Heaven, Ten Mandates of Hell (Slaves of the Yama Kings), cộng 8 `holy_order_*`. Chỉ có 2 `Glossary()` (`August Personage of Jade`/`podgloss.augustpersonageofjade`, `Yama Kings`/`podgloss.yamaking` — cả hai đã chốt B3c, dùng lại nguyên tham số, không đổi) và 2 ref `$glossary_wyrm_apep$`/`$glossary_wyrm_apophis$` (đã chốt B3, giữ nguyên).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Amun-Re, Re-Horakhty, Horus, Osiris, Hathor, Taweret, Bes, Ptah, Montu, Nephthys, Hapi, Ammit | *(giữ nguyên)* | tên thần Ai Cập cổ có thật, danh từ riêng theo B0; không có tiền lệ base (CK3 vanilla không có tôn giáo Ai Cập cổ) |
+| `X's` *(sở hữu cách tên thần, mọi `_possessive` key)* | "của X" | ✅ theo đúng khuôn mẫu đã dùng ở mọi file `religion/` khác (kueijin, roadofkings, roadofsin…) — tiếng Việt không có 's, luôn đảo thành "của + tên riêng" |
+| Temple *(mummies_house_of_worship)* | Đền Thờ | đặt mới; phân biệt với "nhà thờ" (Christianity, base) và "giáo đường" (Judaism, base) — nơi thờ phụng phong cách Ai Cập cổ |
+| Wadjet *(mummies_religious_symbol)* | Wadjet *(giữ nguyên)* | tên riêng biểu tượng Con Mắt Wadjet trong thần thoại Ai Cập, không dịch nghĩa |
+| scriptures *(mummies_religious_text)* | kinh văn | ✅ theo tiền lệ `kueijin_religious_text`="kinh văn" |
+| High Priest / High Priesthood | Đại Tư Tế / Đại Tư Tế Đoàn | đặt mới; "Đại Tư Tế" = chức sắc tôn giáo cao cấp cổ đại, "Đoàn" hậu tố cho tổ chức tập thể |
+| devotee *(mọi giới tính)* | tín đồ | dịch nghĩa phổ thông, theo mẫu base (Judaism `bosnian_devotee_male`="tín đồ") |
+| priest / bishop *(mummies_priest_*, mummies_bishop_*)* | tư tế | dịch nghĩa phổ thông, phù hợp giọng văn tôn giáo cổ đại thay vì "linh mục" (Christianity) |
+| Duat | Duat *(giữ nguyên)* | cõi giới thần thoại Ai Cập có thật (dùng cho cả divine_realm và positive_afterlife), theo tiền lệ base giữ nguyên tên cõi giới ngoại lai (Araboth, Takamagahara, Gangging Siring) |
+| Nun *(mummies_negative_afterlife)* | Nun *(giữ nguyên)* | vực hỗn mang nguyên thủy trong thần thoại Ai Cập, danh từ riêng, không dịch |
+| Code of Horus / Wat Hor | Luật Lệ Horus / Wat Hor *(giữ nguyên)* | "Code"→"Luật Lệ" dịch nghĩa, "Wat Hor" là tên bản địa (Ai Cập cổ) giữ nguyên theo B0 |
+| Ishmaelite(s) | Ishmaelite *(giữ nguyên)* | tên nhóm đặt theo nhân vật riêng "Ishmael", theo B0 giữ nguyên danh từ riêng |
+| Faces of Apophis | Diện Mạo của Apophis | "Faces"→"Diện Mạo" dịch nghĩa, "Apophis" giữ nguyên (đã chốt B3 `glossary_wyrm_apophis`) |
+| Isfret, Ma'at | Isfret, Ma'at *(giữ nguyên)* | khái niệm triết học/tôn giáo Ai Cập cổ có thật (hỗn mang/trật tự vũ trụ), không có bản dịch tự nhiên, giữ nguyên theo B0 |
+| Cabiri / Cabirus | Cabiri / Cabirus *(giữ nguyên)* | tên riêng nhóm/nhân vật sáng lập, theo B0 |
+| Ten Mandates of Heaven | Mười Điều Răn của Thiên Đình | dịch nghĩa; "Thiên Đình" đã chốt B3c (`kueijin_divine_realm`) |
+| Ten Mandates of Hell / Slaves of the Yama Kings | Nô Lệ của các Diêm Ma Vương | tên hiển thị chính (`ten_mandates_of_hell`) dùng luôn bản dịch của tên gọi khác "Slaves of the Yama Kings" vì đây mới là tên thực tế xuất hiện trong game; "Diêm Ma Vương" đã chốt B3c |
+| Undying *(danh xưng chung của Mummy, "a newly created Undying", "their own Undying slaves")* | Xác Ướp | dùng lại bản dịch đã chốt B4 cho `trait_mummy`="Xác Ướp" — "Undying" là cách gọi khác của Mummy trong văn xuôi, không phải thuật ngữ riêng biệt cần dịch khác |
+| Family of Heaven *(ten_mandates_of_hell_desc)* | Gia Tộc Thiên Đình | đặt mới, dịch nghĩa, ghép với "Thiên Đình" đã chốt |
+| Hand of Thoth | Bàn Tay Thoth | dịch nghĩa "Hand of"→"Bàn Tay", "Thoth" (thần trí tuệ Ai Cập) giữ nguyên |
+| Judges of Ma'at | Các Phán Quan của Ma'at | dịch nghĩa, "Ma'at" giữ nguyên như trên |
+| Children of Apophis *(holy_order, khác `holy_order_children_of_apophis` dùng ref `$glossary_wyrm_apophis$`)* | Con Cái của $glossary_wyrm_apophis$ | dịch nghĩa "Children of"→"Con Cái của", giữ nguyên ref |
+| Celestial Arrows | Mũi Tên Thiên Giới | dịch nghĩa |
+| Righteous Peach Blossoms | Đào Hoa Chính Trực | dịch nghĩa; "Chính Trực" đã chốt B4g (Integrity) nhưng ở đây dùng nghĩa tính từ thông thường "ngay thẳng", không phải hệ thống đức hạnh Mummy — ngữ cảnh khác nhau nhưng từ vựng trùng hợp lý |
+| Brotherhood of the Scarlet Lantern | Huynh Đệ Hội Đèn Lồng Đỏ | dịch nghĩa |
+| White Lotus Society | Hội Bạch Liên | dịch nghĩa, "Bạch Liên" (hoa sen trắng) là cụm Hán Việt quen thuộc |
+| Twilight Scholars | Học Giả Hoàng Hôn | dịch nghĩa |
+| Jade Sentinels | Vệ Binh Ngọc Bích | dịch nghĩa |
