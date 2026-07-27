@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 4 — `custom_localization/` đã HOÀN TẤT).
+Cập nhật lần cuối: 2026-07-27 (tách 4 file ưu tiên từ root-level thành việc #9 mới, đôn lên trước `buildings/`; các việc từ buildings trở đi đánh lại số #10-#16).
 
 ---
 
@@ -148,26 +148,34 @@ Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ lay
 Tên modifier ngắn, lặp nhiều. Tra TERMINOLOGY.md phần A trước — phần lớn là thuật ngữ vanilla đã có bản dịch.
 
 ### #8 — `lifestyles/`  6.740 key, 27 file
-### #9 — `buildings/`  6.309 key, 8 file
+
+### #9 — 4 file ưu tiên từ root-level (tách ra làm sớm)
+
+**Quyết định 2026-07-27:** tách 4 file sau ra khỏi khối root-level (việc #12), đôn lên làm trước `buildings/` — vì đây là những thứ người chơi thấy sớm nhất và nhiều nhất khi mới vào ván (tên khái niệm tra cứu, phe phái, chính thể, tước vị):
+
+- `game_POD_concepts_l_english.yml` — **làm trước tiên trong 4 file này**, chứa các key `_desc` mà `Glossary()` ở bước glossary trỏ tới.
+- `factions_POD_l_english.yml`
+- `government_POD_l_english.yml`
+- `titles_POD_l_english.yml`
+
+### #10 — `buildings/`  6.309 key, 8 file
 
 Có `:0` trong `building_grand_city_POD_l_english.yml`.
 
-### #10 — `artifacts/`  1.489 key, 4 file
-### #11 — root-level `*.yml`  17.974 key, 62 file
+### #11 — `artifacts/`  1.489 key, 4 file
+### #12 — root-level `*.yml` còn lại  17.974 key, 58 file (đã tách 4 file sang việc #9)
 
-Khối lớn thứ hai. Gồm `secrets_POD_l_english.yml` (có `:0`), `effects_POD`, `POD_regiments`, `game_POD_concepts`…
+Khối lớn thứ hai. Gồm `secrets_POD_l_english.yml` (có `:0`), `effects_POD`, `POD_regiments`…
 
-`game_POD_concepts_l_english.yml` nên làm **sớm trong khối này** — nó chứa các key `_desc` mà `Glossary()` ở bước 1 trỏ tới.
-
-### #12 — `event_localization/`  20.530 key, 160 file
+### #13 — `event_localization/`  20.530 key, 160 file
 
 **Khối lớn nhất.** Văn xuôi thuần, đòn bẩy thấp → để cuối. Chia theo thư mục con (`POD_chargen/`, `POD_umbra/`, `POD_wraith/`, `POD_gehenna/`, `schemes/`, `POD_journeys/`…), mỗi thư mục 1–2 commit.
 
-### #13 — `bookmark/`  1.128 key, 1 file
+### #14 — `bookmark/`  1.128 key, 1 file
 
 Mô tả nhân vật mở đầu. Văn phong quan trọng — người chơi đọc đầu tiên.
 
-### #14 — `replace/`  481 key, 6 file  ⚠️ CẨN TRỌNG — **TẠM BỎ QUA**
+### #15 — `replace/`  481 key, 6 file  ⚠️ CẨN TRỌNG — **TẠM BỎ QUA**
 
 **Ghi đè key vanilla** → sửa ở đây là đổi luôn UI của CK3 gốc, đè lên bản dịch trong `base_game_vh`. Phần lớn là template tên (`CHARACTER_FIRST_NAME_AND_DYNASTY: "$NAME$"`) — **chỉ dịch dòng có chữ thật**. Có `:0`.
 
@@ -175,7 +183,7 @@ Mô tả nhân vật mở đầu. Văn phong quan trọng — người chơi đ�
 
 **Quyết định 2026-07-27:** tạm bỏ qua toàn bộ khối này. Không dịch không gây lỗi kỹ thuật — chỉ để lại vài chục dòng tiếng Anh lẻ tẻ trong `pod_replace_artifact_modifiers_l_english.yml`, `pod_replace_fog_of_war_l_english.yml`, `pod_replace_vanilla_temporary_l_english.yml` (các file có chữ thật, không phải template tên). Sẽ quyết định có dịch tiếp hay không sau khi trải nghiệm game thực tế.
 
-### #15 — `names/` `dynasties/`  6.528 key, 4 file  → **KHÔNG DỊCH**
+### #16 — `names/` `dynasties/`  6.528 key, 4 file  → **KHÔNG DỊCH**
 
 Tên riêng. Để nguyên, giống cách `base_game_vh` xử lý tên vanilla. Liệt kê ở đây chỉ để khỏi ai tưởng bị bỏ sót.
 
