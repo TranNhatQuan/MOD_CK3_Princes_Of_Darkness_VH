@@ -2246,3 +2246,53 @@ File chứa toàn bộ tương tác lối sống Infernalist (Demon: The Fallen)
 | Army of the Damned | Đội Quân của Kẻ Bị Đọa Đày | đặt mới, dịch nghĩa thường; "the Damned" (số nhiều ẩn, chỉ những linh hồn bị đọa đày ở Địa Ngục) → "Kẻ Bị Đọa Đày" |
 | Sacrifice of Gold / Infernal Prayer / Show of Submission / Offering of Artifact *(4 tương tác hoàn thành điều khoản Khế ước, đổi Vàng/Mộ đạo/Uy tín/Hiện vật lấy điểm Investiture)* | Hiến Tế Vàng / Lời Cầu Nguyện Địa Ngục / Màn Thể Hiện Quy Phục / Dâng Hiến Vật | dịch nghĩa thường; "Sacrifice"→"Hiến Tế" (tái dùng B5? `Sacrifice to Soultaker`="Hiến Tế cho Soultaker" dòng 2051); "Gold"/"Piety"/"Prestige"/"Artifact(s)" đều giữ nguyên concept link `[gold\|E]`/`[piety\|E]`/`[prestige\|E]`/`[artifacts\|E]`, không đổi |
 | Black Whispers *(tương tác mua tri thức từ Yama Kings để biết bí mật/âm mưu đối phương)* | Những Lời Thì Thầm Đen Tối | đặt mới, dịch nghĩa thường |
+
+---
+
+## B5-mummy. Thuật ngữ `interactions/POD_character_interactions_mummy_l_english.yml` — tương tác Mummy (Shemsu-Heru/Cabiri Ai Cập + Wu Tan Trung Hoa), 157/157 dòng, việc #5
+
+Nguồn: 157 dòng, các tương tác Hekau (pháp thuật Mummy Ai Cập) và Wu Tan (`POD_tan_*`, pháp thuật Mummy Trung Hoa). Không có `UmbraGlossaryLocalized()`; chỉ có `UmbraGlossary('tempest')`/`UmbraGlossary('shadowlands')`/`UmbraGlossary('oblivion')` (1 tham số, không dịch — tự lấy tên qua `Localize()`, đã dịch sẵn "Hư Vô"=oblivion ở B3q/B4n/B4u/B4w/B5p) và 1 `Glossary('True Name','podgloss.truename')` (tham số 1 giữ nguyên theo tiền lệ toàn mod). "Hekau", "Khaibit", "Neteru", "Ma'at", "Asekh-sen", "Shroud", "Tan" (trong `POD_tan_*`) đều giữ nguyên tiếng Anh — danh từ riêng WoD/Ai Cập/Trung Hoa đã có tiền lệ giữ nguyên ở B4h/B0 (Nomenclature Hekau, Judges of Ma'at, Duat…).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Neteru *(danh hiệu "thần" mà Mummy được tín đồ tôn thờ, key `[neteru\|E]`)* | Neteru *(giữ nguyên)* | danh từ riêng Ai Cập, nhất quán với "Nomenclature Hekau" giữ nguyên (B4) |
+| Recognize Neteru / Reject Neteru | Công nhận Neteru / Từ chối Neteru | dịch nghĩa động từ, giữ "Neteru" nguyên |
+| Command Creature Effigy / Effigy | Điều khiển Effigy Sinh Vật / Effigy | "Effigy" giữ nguyên theo tiền lệ B4h (Golem, Automaton, Effigy, Animantis, Servitor, Manifestation — nhóm danh từ riêng kỹ thuật gọi hồn/pháp thuật giữ nguyên) |
+| Command the Crawling Eye / Command Stalking Hound of Typhon | Điều khiển Con Mắt Bò / Điều khiển Chó Săn Rình Rập của Typhon | dịch nghĩa tên effigy cụ thể; "Typhon" giữ nguyên (danh từ riêng thần thoại Hy Lạp) |
+| Eye of Sekhmet *(key `sakhmet` nhưng hiển thị "Sekhmet")* | Mắt của Sekhmet | "Sekhmet" giữ nguyên (nữ thần Ai Cập có thật) |
+| Spell of Life | Chú Thuật Sự Sống | tái dùng "Chú Thuật" đã có tiền lệ trong mod (Spell of Life là năng lực nổi tiếng nhất của Mummy, cho bất tử) |
+| Ma'at *(khái niệm triết học Ai Cập, trật tự vũ trụ)* | Ma'at *(giữ nguyên)* | tái dùng tiền lệ B0/B4h ("Isfret, Ma'at giữ nguyên") |
+| Asekh-sen *(vật thế thân/chattel của Mummy)* | Asekh-sen *(giữ nguyên)* | danh từ riêng WoD-Mummy, theo B0 (nhóm tên bộ tộc/thuật ngữ Mummy giữ nguyên) |
+| Chattel of [X] *(`POD_copy_artifact_name`)* | Vật Sở Hữu của [X] | đặt mới, dịch nghĩa "chattel" = tài sản/vật sở hữu (hiện vật sao chép) |
+| Dragon Line(s) / Dragon Chariot / Tread (Thread) the Dragon Tracks | Long Mạch / Xa Long / Dấn Bước theo Vết Rồng | đặt mới; "Dragon Line"→"Long Mạch" (thuật ngữ phong thủy Hán Việt có sẵn, khớp bối cảnh Mummy Trung Hoa); "Dragon Chariot"→"Xa Long" (Hán Việt, xe rồng); lưu ý bản gốc có 2 key gần giống nhau ở 2 chỗ khác nhau trong file — `POD_tread_the_dragon_tracks_interaction`="Tread the Dragon Tracks" và `POD_tan_tread_the_dragon_tracks_interaction`="Thread the Dragon Tracks" (lỗi chính tả gốc "Thread" thay vì "Tread") — cả hai đều dịch thống nhất "Dấn Bước theo Vết Rồng" |
+| Khaibit *(hồn phách/"bóng" trong Mummy lore Ai Cập)* | Khaibit *(giữ nguyên)* | tái dùng tiền lệ B4h ("Separated Khaibit"→"Khaibit Bị Tách Rời") |
+| Shroud *(mức độ, level, giữa Skinlands và Shadowlands)* | Shroud *(giữ nguyên)* | tái dùng tiền lệ toàn mod — "Shroud" không dịch xuyên suốt (khác "Màn Che"=Masquerade riêng vampire, B4/B5) |
+| Ammut's Scales *(cán cân phán xét linh hồn của nữ thần Ammut)* | Cán Cân của Ammut | "Ammut" giữ nguyên (nữ thần Ai Cập có thật), "Scales" dịch nghĩa "Cán Cân" |
+| Wu Tan / Tan *(hệ pháp thuật Mummy Trung Hoa, key `POD_tan_*`)* | Tan *(giữ nguyên)* | tái dùng tiền lệ B4h/B0 (Tieh Tan, Lin Tan, Shui Tan, Hou Tan, Di Tan, Nei Tan — nhóm tên hệ phái Tan giữ nguyên) |
+| Servant *(context Apophis/Demon's Servant, `POD_ask_neteru_for_apophis_conversion`/`POD_tan_bind_the_demons_servant`)* | Nô Bộc | tái dùng tiền lệ đã chốt (dòng 963, `viaservilis_adherent`) thay vì "Đầy tớ", giữ giọng cổ trang trọng nhất quán |
+| Sweet Dream's Caress / Opening the Third Eye / Scroll of the Mind's Eye / Death's Touch | Sự Vuốt Ve của Giấc Mộng Ngọt Ngào / Khai Mở Con Mắt Thứ Ba / Cuộn Kinh Con Mắt Tâm Trí / Cái Chạm của Cái Chết | dịch nghĩa thường, giữ giọng thơ/huyền bí như tên gốc |
+| Shen *(thế giới ẩn giấu, WoD Trung Hoa — linh thể/thần linh nói chung)* | Thần *(giữ nguyên nghĩa Hán Việt, không phiên âm)* | đặt mới; "Shen" trong bối cảnh Kuei-Jin/Wu Tan là khái niệm rộng chỉ linh hồn/thần linh, dịch nghĩa "Thần" cho tự nhiên hơn giữ nguyên phiên âm |
+
+## B5-kuejin. Thuật ngữ `interactions/POD_character_interactions_kuejin_l_english.yml` — 4 nhóm Art của Kuei-Jin (Demon Arts/Soul Arts/Chi Arts/Shintai), 158/158 dòng, việc #5
+
+Nguồn: 158 dòng, tên và mô tả các tương tác Art của Kuei-Jin, chia theo 4 lifestyle chưa dịch (`lifestyles/POD_kueijin/`: `POD_demon_arts_lifestyle`, `POD_soul_arts_lifestyle`, `POD_chi_arts_lifestyle`, `POD_shintai_lifestyle`). Đây là file đầu tiên đụng các tên Art cụ thể — đặt mới toàn bộ, đối chiếu B3c (Dharma=Pháp Môn, Chi=Khí đã chốt) và B4g (Feng Shui/Tzu Wei/Tapestry/Obligation — các Chi Art đã đặt). Chỉ 1 cặp `Glossary()`/`UmbraGlossaryLocalized()` trong file (dòng `POD_soul_arts_graveyard_song_interaction_desc`): `Glossary('Skinlands',...)` giữ nguyên tham số 1 theo tiền lệ B4h/toàn mod; `UmbraGlossaryLocalized('shadowlands','Underworld')` → tham số 2 phải dịch theo B4j đã chốt cứng — sửa thành `'Âm Phủ'` (KHÔNG phải "Âm Giới", "Âm Phủ" dành riêng cho tham số 2 chính xác là "Underworld" của flag `shadowlands`).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Art / Arts *(hậu tố tên nhóm lifestyle Kuei-Jin: Demon Arts, Soul Arts, Chi Arts)* | Pháp Nghệ | đặt mới; khác "Art" giữ nguyên của Changeling (Chicanery…, B4g) — ở Kuei-Jin "Art" là danh từ thường chỉ "thuật/nghệ thuật tu luyện", không phải tên riêng, nên dịch nghĩa; "Nghệ" gợi tinh thông kỹ năng, "Pháp" gợi tu luyện siêu nhiên, khớp giọng Hán Việt của mảng Kuei-Jin |
+| Demon Arts *(lifestyle, sức mạnh từ P'o)* | (không dịch tên lifestyle trong file này — chỉ xuất hiện qua tên trait cụ thể: Devil Fist→Ma Quyền, Black Wind→Hắc Phong, Iron Mountain→Thiết Sơn, Demon Regalia→Ma Bào) | tên 4 "Art" cụ thể của Demon Arts được nhắc tới trong mô tả perk (`the Devil Fist Art`, `the Black Wind Art`…) — dịch nghĩa Hán Việt ngắn gọn, khớp phong cách kungfu; "Demon Regalia"→"Ma Bào" (áo bào của ma, gợi trang bị/vẻ ngoài) |
+| Soul Arts *(lifestyle, tu luyện Tứ Đức qua P'o/Hun)* | Pháp Nghệ Linh Hồn | ghép "Pháp Nghệ" (B5-kuejin, mới đặt) + "Linh Hồn" (đã có sẵn toàn mod); chỉ dùng trong diễn giải, không phải key dịch trực tiếp trong file này |
+| Chi Arts *(lifestyle, điều khiển Khí/phong thủy/tử vi)* | Pháp Nghệ Khí | ghép "Pháp Nghệ" + "Khí" (đã chốt B3c) |
+| Shintai *(lifestyle, hóa thân biểu tượng giác ngộ — giữ nguyên tên riêng Nhật ngữ)* | Shintai *(giữ nguyên)* | danh từ riêng WoD-Kuei-Jin gốc Nhật, không có tiền lệ dịch nghĩa tự nhiên; đã xác nhận `shintai_lifestyle_name`/các key `shintai_*_visible` trong `lifestyles/POD_kueijin/POD_shintai_lifestyle_l_english.yml` đều chưa dịch — giữ nguyên nhất quán theo B0 |
+| Wisp *(`Like a Wisp`)* | làn khói | dịch nghĩa hình ảnh (làn khói/hơi mỏng tan biến), không phải danh từ riêng |
+| Wayward *(`Wayward's Brand`)* | Kẻ Lạc Lối | dịch nghĩa, tính từ chỉ kẻ đi sai đường/bị các thần từ bỏ |
+| Familiar *(`Bind an animal as your familiar`, năng lực Goblin Cat)* | linh thú | đặt mới; chưa có tiền lệ base cho "familiar" (thú linh gắn bó/hộ vệ pháp sư) — "linh thú" ngắn gọn, quen thuộc trong văn học kỳ ảo tiếng Việt |
+| Goblin Cat | Mèo Yêu Tinh | dịch nghĩa, tên năng lực triệu hồi/trói buộc linh thú của Kuei-Jin |
+| Tortoise Shell *(`Crack the Tortoise Shell`)* | Mai Rùa | dịch nghĩa, ẩn dụ "lớp vỏ bảo vệ của sự tồn tại" trong văn hóa Trung Hoa (rùa = biểu tượng trường tồn) |
+| Dragon Medicine | Dược Long | Hán Việt "dược" (thuốc/phương thuốc) + "long" (rồng), khớp văn phong Kuei-Jin/Trung Hoa |
+| Joss *(vị thần Trickster đã chốt giữ nguyên ở `POD_religion_kueijin_l_english.yml`/`POD_religion_fae_l_english.yml`)* | Joss *(giữ nguyên)* | tái dùng — "Joss Weaving"→"Dệt Joss", "Give/Take Joss"→"Ban/Lấy Joss"; không dịch thành "vận may"/"phước lành" vì đây là danh xưng thần, không phải danh từ thường |
+| Middle Kingdom | Trung Nguyên | dùng lại đề xuất đã có ở dòng ~1695 (ngữ cảnh Hsien/Kuei-Jin, gần với file này hơn "Trung Vương Quốc" ở dòng ~464 vốn thuộc ngữ cảnh Fera/Garou); ⚠️ **hai đề xuất khác nhau đang tồn tại trong TERMINOLOGY.md cho "Middle Kingdom", chưa có key nào thực sự đã dịch trong repo tại thời điểm này** — cần thống nhất một trong hai khi dịch tiếp `religion/`, `game_POD_concepts`, `decisions/` (nhiều chục lần xuất hiện) |
+| Dragon Nest(s) *(`own at least one Dragon Nest in your realm`)* | Tổ Rồng | tái dùng bản dịch đã có ở dòng ~1698 |
+| P'o, Hun *(hai "hồn phách" — bản chất thấp/Ma tính và bản chất cao/giác ngộ của Kuei-Jin)* | P'o, Hun *(giữ nguyên)* | "P'o" đã có tiền lệ giữ nguyên xuyên suốt mod (kể cả trong văn xuôi tiếng Việt đã dịch ở `POD_religion_kueijin_l_english.yml:170`); "Hun" đi cùng cặp, chưa từng dịch ở đâu — giữ nguyên nhất quán theo B0 |
+| Rakshasa Blade | Lưỡi Kiếm Rakshasa | "Rakshasa" giữ nguyên (đã chốt B3c-liên-quan, danh từ riêng Ấn Độ giáo/WoD gốc Phạn ngữ) |
+| horoscope *(`already has a horoscope [modifier|E]`)* | lá số tử vi | dịch nghĩa thuật ngữ chiêm tinh phổ thông tiếng Việt |
