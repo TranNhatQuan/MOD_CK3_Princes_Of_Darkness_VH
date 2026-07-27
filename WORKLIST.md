@@ -23,7 +23,9 @@ Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. 
 
 **Việc #1 (`traits/`) đã HOÀN TẤT — cả 4 file trong thư mục này đã xong 100%.** Việc tiếp theo là **#2 — `religion/`** (xem chi tiết bên dưới). Đừng nhảy bậc sang #3 trở đi trước khi xong `religion/`.
 
-**Việc #2 (`religion/`) tiến độ: 1/36 file xong** — `POD_religion_kueijin_l_english.yml` (436/436 dòng, commit `2952a68`). Còn 35 file khác. Quy trình đã dùng: giao agent con dịch từng file, người điều phối tự chạy đủ 3 lớp kiểm tra + đọc git diff trước khi commit — **agent đầu tiên để sót lỗi Glossary() tham số 1 (không dịch) trên toàn bộ file, phải yêu cầu sửa lại.** Luôn kiểm tra kỹ tham số 1 của mọi `Glossary(...)` trong file mới, không chỉ tin báo cáo của agent.
+**Việc #2 (`religion/`) tiến độ: 9/36 file xong** — `POD_religion_kueijin` (436/436, `2952a68`), `POD_religion_framework` + `POD_religion_unexamined_horizons` (`50b5f57`), `POD_religion_roadoflaibon` (`dbc28f0`), `POD_religion_ghoul` + `POD_religion_ashirra` + `POD_religion_ignorance` (`7354a25`), `POD_religion_l_english.yml` (439/439, `2ed606c` — file neo thứ hai, khóa cứng 13 tên "Road of X"→"Con Đường X" và 169 dòng `holy_site_*_effect_name`, dùng làm tham chiếu bắt buộc khi dịch các file `roadof*` riêng lẻ còn lại). Còn 27 file khác.
+
+Quy trình đã dùng: giao agent con dịch từng file (song song theo lô), người điều phối tự chạy đủ 3 lớp kiểm tra + đọc git diff trước khi commit — **agent đầu tiên để sót lỗi Glossary() tham số 1 (không dịch) trên toàn bộ file, phải yêu cầu sửa lại.** Luôn kiểm tra kỹ tham số 1 của mọi `Glossary(...)` trong file mới, không chỉ tin báo cáo của agent. Lưu ý: khi chạy nhiều agent song song, chúng có thể cùng thêm mục TERMINOLOGY.md với cùng số thứ tự (vd. hai agent cùng tạo "B3g") — luôn kiểm tra và đánh số lại cho khỏi trùng trước khi commit.
 
 ---
 
@@ -102,11 +104,13 @@ Khối lớn thứ hai. Gồm `secrets_POD_l_english.yml` (có `:0`), `effects_P
 
 Mô tả nhân vật mở đầu. Văn phong quan trọng — người chơi đọc đầu tiên.
 
-### #14 — `replace/`  481 key, 6 file  ⚠️ CẨN TRỌNG
+### #14 — `replace/`  481 key, 6 file  ⚠️ CẨN TRỌNG — **TẠM BỎ QUA**
 
 **Ghi đè key vanilla** → sửa ở đây là đổi luôn UI của CK3 gốc, đè lên bản dịch trong `base_game_vh`. Phần lớn là template tên (`CHARACTER_FIRST_NAME_AND_DYNASTY: "$NAME$"`) — **chỉ dịch dòng có chữ thật**. Có `:0`.
 
 `POD_do_not_translate_this_l_english.yml` (cả bản trong `replace/`) → **bỏ qua cả file**.
+
+**Quyết định 2026-07-27:** tạm bỏ qua toàn bộ khối này. Không dịch không gây lỗi kỹ thuật — chỉ để lại vài chục dòng tiếng Anh lẻ tẻ trong `pod_replace_artifact_modifiers_l_english.yml`, `pod_replace_fog_of_war_l_english.yml`, `pod_replace_vanilla_temporary_l_english.yml` (các file có chữ thật, không phải template tên). Sẽ quyết định có dịch tiếp hay không sau khi trải nghiệm game thực tế.
 
 ### #15 — `names/` `dynasties/`  6.528 key, 4 file  → **KHÔNG DỊCH**
 
