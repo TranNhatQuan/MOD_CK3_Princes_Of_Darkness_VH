@@ -1651,3 +1651,50 @@ File faith thờ Wyrm và các camp/sub-tribe Garou đã ngả theo nó (Black S
 | Glossary('Centipede'/'Dissolver'/'Cahlash', 'glossary_wyrm_tt') | Glossary('Rết'/'Kẻ Hòa Tan'/'Cahlash', 'glossary_wyrm_tt') | tham số 1 dịch ("Centipede"→"Rết", "Dissolver"→"Kẻ Hòa Tan", "Cahlash" giữ nguyên vì là tên riêng phát âm lạ), tham số 2 `glossary_wyrm_tt` giữ nguyên |
 
 > Toàn bộ tên god (`wyrm_trickster_god_name`="Pseulak", `wyrm_night_god_name`="Foebok", `wyrm_water_god_name`="Wakshaa", `wyrm_fertility_god_name`="Karnala", `wyrm_wealth_god_name`="Vorus") là danh từ riêng WoD, giữ nguyên hoàn toàn.
+
+## B4t. Thuật ngữ `religion/POD_religion_fae_l_english.yml` — faith Fae/Changeling, việc #2 file 31/36
+
+Nguồn: `religion/POD_religion_fae_l_english.yml` (566 dòng, 381 key) — faith chính "Fae" cùng 5 sub-faith Triều đình Mùa (Winter/Spring/Summer/Autumn/Solstice Court), sub-faith Eshu (Ojo/Iku), và sub-faith Shinma (Mu Courts, Daityas, Kura Sau, Shu Shen, Li Shen, Tu Shen, Xian Mo, Xian Mun, Yellow Lotus, Yü, Wu Hsien). Áp dụng B0/B4b: danh từ WoD lõi của Fae giữ nguyên tiếng Anh.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Death *(fae_death_deity_name — thực thể thần chết, khác `Death` chung chung)* | Tử Thần | dịch nghĩa như danh xưng thần, theo mẫu base đặt tên riêng cho mỗi witchgodname/death_deity |
+| glyph *(fae_religious_symbol, khác `glyph` Wyrm đã dịch "phù văn" ở B4s)* | hình khắc | đặt mới cho ngữ cảnh Fae — "glyph" ở đây mô tả biểu tượng khắc trên đá/gỗ của tổ ấm Changeling, không phải phù chú Wyrm, nên tách nghĩa |
+| legends *(fae_religious_text)* | truyền thuyết | nhất quán với "Lorekeeper"→"Người Giữ Truyền Thuyết" bên dưới, theo tiền lệ B3g/B3h (không dùng "Người Giữ Cổ Tích" của B4c/B4j — đó là ngữ cảnh roadofbeast/`religious_text`="cổ tích", khác file) |
+| Lorekeeper(s) | Người Giữ Truyền Thuyết | tái sử dụng bản dịch đã chốt ở B3g (`POD_religion_ghoul`) và B3h (`POD_religion_roadoflaibon`), áp dụng cho mọi biến thể `devotee_*`/`priest_*`/`bishop*` |
+| Dream *(fae_divine_realm)* | Cõi Mộng | nhất quán với "Dreaming"→"Cõi Mộng" đã chốt ở B4b (áp dụng cho cả `Dream` số ít và `[UmbraGlossary('dreaming')]`/`[UmbraGlossary('deep_dreaming')]` — tag giữ nguyên, chỉ dịch văn xuôi nhắc "the Dreaming") |
+| Militants *(phe phái chính trị Fae)* | Phe Hiếu Chiến | đặt mới; các phe chính trị Fae (Militants/Truce-Bearers/Humanists/Constantinians) là khái niệm riêng của POD, không trùng "Militant" nào trong base |
+| Truce-Bearers | Phe Người Mang Đình Chiến / Truce-Bearer *(giữ nguyên khi ghép sau tên Triều đình, ví dụ "Winter-kin Truce-Bearer")* | đặt mới; "Oath-Truce"→"Hiệp ước Đình chiến" |
+| Humanists | Phe Nhân Đạo / Humanist *(giữ nguyên khi ghép, ví dụ "Ojo Humanist")* | đặt mới |
+| Constantinians | Phe Constantine / Constantinian *(giữ nguyên khi ghép)* | đặt mới; tên phe bắt nguồn từ "Emperor Constantine I" — dịch tên hoàng đế thành "Hoàng đế Constantine Đệ Nhất" khi văn xuôi nhắc đến, còn danh từ phe phái giữ dạng ghép "Constantinian" khi đứng sau tên Triều đình (ví dụ "Winter Court Constantinian" → giữ dạng gốc trong key, chỉ dịch mô tả) |
+| Oath-Truce | Hiệp ước Đình chiến | đặt mới, thuật ngữ chính trị trung tâm của lore Fae POD (100 năm hòa hoãn giữa Chiến tranh Mùa) |
+| War of Seasons | Chiến tranh Mùa | đặt mới |
+| Season Courts / Winter/Spring/Summer/Autumn Court | Triều đình Mùa Đông/Mùa Xuân/Mùa Hạ/Mùa Thu | dịch nghĩa tên mùa, "Court"→"Triều đình" nhất quán với B2 (Courts of Love→"Tòa Ái Tình" dùng "Tòa"; ở đây dùng "Triều đình" vì đây là triều đình cai trị theo nghĩa đen, không phải tòa án) |
+| Solstice Court / Solstice fae | Triều đình Mùa Giao / fae Mùa Giao | đặt mới — "Solstice" ở đây chỉ phe fae Courtless/trung lập không thuộc 4 mùa chính, dịch "Mùa Giao" (thời điểm giao mùa) để phân biệt với 4 Triều đình Mùa thật; tránh dịch "Chí" (Đông Chí/Hạ Chí) vì gây nhầm với các ngày lễ `Winter Solstice Festival` |
+| *-kin (hậu tố dân cư Triều đình, vd. Winter-kin, Spring-kin, Autumn-kin, Solstice-kin)* | *-kin (giữ nguyên)* | theo B0 — giữ nguyên hậu tố tiếng Anh gắn với tên mùa, vì dịch nghĩa "-kin" (dòng dõi/thân tộc) sẽ phá vỡ tính nhất quán khi ghép với tên riêng mùa (Winter, Spring...) |
+| Courtless / unSained | Vô Triều đình / unSained *(giữ nguyên "unSained")* | "Courtless" dịch nghĩa ("không triều đình"); "unSained" là biến thể phủ định của nghi lễ "Saining" (xem dưới) nên giữ nguyên theo B0 |
+| Sained / Saining | Sained / Saining *(giữ nguyên)* | nghi lễ tôn giáo cốt lõi biến một người phàm/changeling thành thành viên chính thức của một Triều đình; danh từ riêng WoD không có khái niệm vanilla tương đương, giữ nguyên theo B0 |
+| oathcircle | oathcircle *(giữ nguyên)* | thuật ngữ WoD chuyên biệt (nhóm lời thề ràng buộc fae-người phàm), không có tiền lệ base |
+| Battle of Stone | Trận Đá | đặt mới, sự kiện lịch sử trung tâm của lore Fae POD (trận chiến lớn 800 năm trước mốc thời gian game) |
+| the Mists | Sương Mù | đặt mới, khái niệm ẩn dụ cho sự lãng quên/mất kết nối giữa fae và loài người (khác "Cõi Mộng"/Dreaming) |
+| Patrons / Patron *(tổ chức chính trị Fae, khác "Patron Council"→"Hội đồng Bảo Trợ" B4b)* | Những Người Bảo Trợ / Người Bảo Trợ | tái dùng gốc từ "Bảo Trợ" đã chốt ở B4b cho nhất quán |
+| Seekers, Vanguard, Austere Conclave *(3 nhánh của Patrons)* | Seeker, Vanguard, Austere Conclave *(giữ nguyên)* | tên riêng tổ chức con, không dịch theo B0 |
+| Empire of Seeds/Stones/Flames/Tears/Skies/Dolls *(6 đế chế Inanimae)* | Đế Chế Hạt Giống/Đá/Ngọn Lửa/Nước Mắt/Bầu Trời/Búp Bê | dịch nghĩa tên đế chế theo mẫu "Empire of X" → "Đế Chế X", nhất quán với cách B4b dịch "Empire of Seeds" chưa có tiền lệ — đặt mới ở đây |
+| Kubera, Glome, Solimond, Ondine, Paroseme, Mannikin *(6 Phyla Inanimae, cai trị 6 đế chế trên)* | *(giữ nguyên)* | tên riêng chủng loài Inanimae, đã có trong danh sách giữ nguyên B4b |
+| Dryad, Nymph, Sylph, Nereid, Salamander, Silfar, Sprite *(biệt danh dân gian cho các Phyla/thành viên đế chế)* | *(giữ nguyên)* | danh từ thần thoại phương Tây dùng làm biệt danh, không dịch để khớp văn phong gothic-cổ điển; ngoại lệ "Sylph" dùng làm adherent của Empire of Skies vẫn giữ nguyên dạng số ít/số nhiều gộp chung theo mục 7 TRANSLATION_RULES.md |
+| Homeland *(quê hương nguyên thủy trong Cõi Mộng của mỗi đế chế Inanimae)* | Quê Hương | dịch nghĩa, viết hoa vì là danh xưng địa danh riêng trong lore |
+| War of Making | Chiến tranh Tạo Tác | đặt mới, sự kiện lịch sử của Inanimae (Salamander phản bội, gây chia rẽ 6 đế chế) |
+| Anchor *(vật neo giữ Inanimae với thế giới vật chất)* | Neo | dịch nghĩa ngắn gọn, nhất quán với "Glade" dịch "Khu Rừng Thưa" khi ghép ("Anchors of the Glade"→"Neo của Khu Rừng Thưa") |
+| Moot *(lễ hội thường niên của Kubera)*, Spring Equinox/Autumn Equinox/Summer Solstice/Winter Solstice Festival *(4 lễ hội mùa)* | Moot *(giữ nguyên tên riêng lễ hội)*; Xuân Phân/Thu Phân/Hạ Chí/Lễ Hội Đông Chí | dịch nghĩa các lễ hội theo mùa (thuật ngữ thiên văn phổ thông), "Moot" giữ nguyên vì là danh xưng riêng không dịch được sát nghĩa |
+| Eshu, Ojo, Iku *(sub-faith châu Phi của Fae, tương ứng Sidhe/Season Courts)* | *(giữ nguyên)* | danh từ riêng dân tộc/triết lý châu Phi, theo B0 và danh sách B4b đã có "Elegbara" |
+| Uhuru *(bộ quy tắc danh dự chung của Eshu)* | Uhuru *(giữ nguyên)* | thuật ngữ tiếng Swahili, danh từ riêng không dịch |
+| Seelie Code *(bộ luật của Triều đình Seelie)* | Luật Seelie | dịch nghĩa "Code"→"Luật" (nhất quán `Litany`→giữ nguyên B4s là ngoại lệ khác, ở đây "Code" là từ tiếng Anh thường không phải danh xưng WoD), giữ "Seelie" theo B0 |
+| Hsien Court, Shinma *(tổng danh xưng fae Đông Á, tương đương Season Courts phương Tây)* | *(giữ nguyên)* | đã có trong danh sách kith giữ nguyên B4b (Hsien) |
+| Mu Courts, Daityas, Kura Sau, Shu Shen, Li Shen, Tu Shen, Xian Mo, Xian Mun, Yellow Lotus, Yü, Wu Hsien *(11 giáo phái/triều đình Hsien-Shinma)* | *(giữ nguyên)* | tên riêng giáo phái Đông Á theo B0, không có tiền lệ base; áp dụng cho cả dạng số ít/số nhiều |
+| Yama Kings, August Personage of Jade, Demon Emperor, Tao Te Hsien, Fourth Age, Sixth Age *(6 khái niệm lõi Hsien, xuất hiện qua `Glossary()`)* | *(giữ nguyên tham số 1 hiển thị — đã có sẵn trong file gốc bằng tiếng Anh, không đổi)* | các khái niệm này được định nghĩa & dịch tại `glossary_POD_l_english.yml` (khối Kuei-Jin/lịch sử `podgloss.*`) — file này chỉ **tham chiếu** qua `[Glossary('Tên Hiển Thị','podgloss.key')]`, tham số 1 giữ nguyên y hệt bản gốc vì đó là chữ hiển thị đã được định nghĩa nơi khác, không tự dịch lại ở đây để tránh lệch với bản dịch gốc (thời điểm dịch file này, `glossary_POD` các key `podgloss.yamaking` v.v. chưa được xác nhận đã dịch hay chưa — giữ nguyên tiếng Anh là lựa chọn an toàn, không tự sáng tác bản dịch mới) |
+| Middle Kingdom | Trung Nguyên | đặt mới, thuật ngữ địa lý-thần thoại Trung Hoa quen thuộc |
+| Kamuii, Hirayanu | Kamuii, Hirayanu *(giữ nguyên)* | tên riêng phân loại Hsien theo mức độ giác ngộ, không có tiền lệ base |
+| Tongs, Triads | Bang Hội, Tam Hoàng | dịch nghĩa (tổ chức tội phạm Hoa kiều lịch sử), thuật ngữ phổ thông trong văn học/phim ảnh tiếng Việt |
+| Dragon Nests | Tổ Rồng | dịch nghĩa |
+| holy_order_winters_teeth/green_blades/sun_guard/crunch_of_leaves/sunset_mercenaries/grey_monks *(6 holy order của các Triều đình Mùa)* | Răng Mùa Đông / Lưỡi Kiếm Xanh / Vệ Binh Mặt Trời / Tiếng Lá Vỡ Vụn / Lính Đánh Thuê Hoàng Hôn / Tu Sĩ Xám | dịch nghĩa theo mẫu base (`holy_orders_l_english.yml` dịch nghĩa toàn bộ tên holy order); "Green Blades" dịch "Lưỡi Kiếm Xanh" nhất quán với cách văn xuôi trong cùng file nhắc "Seigfreid Hein's Green Blade" |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | tiếp tục áp dụng quy ước đã chốt xuyên suốt các file `religion/` trước (B3g/B3h/B3s...) |
