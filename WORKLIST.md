@@ -17,12 +17,12 @@ Cập nhật lần cuối: 2026-07-27.
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
 | Đã xong hoàn toàn | **5 file**: glossary_POD, POD_misc_custom_loc, traits_predator_types_POD, POD_fae_traits, POD_fera_traits |
-| Đang dở | `traits/traits_POD_l_english.yml` — **599/1563 dòng** đã dịch (xem chi tiết ở mục "✅ ĐÃ XONG" bên dưới) |
-| Còn lại | ~454 file khác + ~964 dòng cuối của traits_POD |
+| Đang dở | `traits/traits_POD_l_english.yml` — **837/1563 dòng** đã dịch (xem chi tiết ở mục "✅ ĐÃ XONG" bên dưới) |
+| Còn lại | ~454 file khác + ~726 dòng cuối của traits_POD |
 
-Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~150 mục, đã bổ sung B4b/B4c/B4d cho Fae/Fera/VtM). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
+Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~150 mục, đã bổ sung B4b/B4c/B4d/B4e cho Fae/Fera/VtM). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
 
-**Việc #1 (`traits/`) đang dở ở `traits_POD_l_english.yml` dòng 600.** Đây là việc tiếp theo cần làm — đừng nhảy sang việc #2 (`religion/`) trước khi xong hẳn `traits/`.
+**Việc #1 (`traits/`) đang dở ở `traits_POD_l_english.yml` dòng 838.** Đây là việc tiếp theo cần làm — đừng nhảy sang việc #2 (`religion/`) trước khi xong hẳn `traits/`.
 
 ---
 
@@ -35,20 +35,18 @@ Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. 
 | `traits/traits_predator_types_POD_l_english.yml` | 48/48 dòng, 30/30 key — **xong cả file** | `9701e54` |
 | `traits/POD_fae_traits_l_english.yml` | 330/330 dòng, 241 key — **xong cả file** | `94e6593` |
 | `traits/POD_fera_traits_l_english.yml` | 479/479 dòng — **xong cả file** (18 tên tộc + 16 desc từ trước, phần còn lại ~223 key) | `9d4ba47` + `2481866` |
-| `traits/traits_POD_l_english.yml` | **599/1563 dòng đã dịch** — xem chi tiết dưới | `a88f55d` `c05c30d` |
+| `traits/traits_POD_l_english.yml` | **837/1563 dòng đã dịch** — xem chi tiết dưới | `a88f55d` `c05c30d` + đợt dòng 600-837 |
 
 ### Trạng thái `traits_POD_l_english.yml` (file lớn nhất, 1563 dòng)
 
-**Đã dịch (dòng 1–599):** tên splat, toàn bộ clan/bloodline/lineage chính và phụ của VtM (Assamite, Baali, Brujah, Caitiff, Cappadocian, Gangrel, Gargoyle, Giovanni, Kiasyd, Lasombra, Maeghar, Malkavian, Nosferatu, Ravnos, Salubri, Samedi, Setite, Toreador, Tremere, True Brujah, Tzimisce, Ventrue + Laibon/Ashirra/lineage Á Đông), clan curse flags, toàn bộ mô tả Dị năng chính (Animalism → Bardo) và 8 trường phái Huyết Thuật, các trạng thái torpor/ngủ (Long Sleep, Dragon Sleep, Cocoon...).
+**Đã dịch (dòng 1–837):** tên splat, toàn bộ clan/bloodline/lineage chính và phụ của VtM (Assamite, Baali, Brujah, Caitiff, Cappadocian, Gangrel, Gargoyle, Giovanni, Kiasyd, Lasombra, Maeghar, Malkavian, Nosferatu, Ravnos, Salubri, Samedi, Setite, Toreador, Tremere, True Brujah, Tzimisce, Ventrue + Laibon/Ashirra/lineage Á Đông), clan curse flags, toàn bộ mô tả Dị năng chính (Animalism → Bardo) và 8 trường phái Huyết Thuật, các trạng thái torpor/ngủ (Long Sleep, Dragon Sleep, Cocoon...), Thế Hệ 1-16, Nagaraja/Hecata/Impundulu/Lamia/Anda/Ahrimane, các trait "làm gương" theo clan, Đẳng Cấp Salubri, orison, oculi/acre (Inquisition, phần chưa comment-out).
 
-**Việc tiếp theo — bắt đầu từ dòng 600:** đã có bản nháp dịch cho dòng 600–837 (Thế Hệ 1–16, Nagaraja/Hecata/Impundulu/Lamia/Anda/Ahrimane, các trait "làm gương" theo clan, Đẳng Cấp Salubri, orison, oculi/acre) nhưng **CHƯA áp dụng vào file** — chỉ tồn tại dưới dạng script nháp, chưa chạy, chưa commit. Khi làm tiếp:
-1. Đọc lại dòng 600–837 trong file (vẫn là tiếng Anh)
-2. Dịch mới từ đầu (đừng tin bản nháp cũ nếu tìm lại được — an toàn nhất là dịch lại) hoặc viết script binary-safe mới theo đúng mẫu 2 đợt trước
-3. Baseline cần khớp lại sau khi dịch xong 837: `grep -c ''` v.v. — nhớ **so với baseline gốc của toàn file** ghi trong TRANSLATION_RULES.md §8 (ref 305, bracket 501, icon 29, mở tag 75, đóng tag 88, `\n` 256, `\"` 0, dòng 1563), **cộng thêm** kiểm tra rawquote (raw `"` chưa escape) = 2385 — đây là chỉ số bổ sung do file có nhiều dòng dùng ngoặc kép thô không escape.
-4. Dòng 837 trở đi (~726 dòng) vẫn hoàn toàn tiếng Anh — Dị năng phụ (bloodsorcery paths chi tiết hơn), Inquisition traits, bệnh tật, và phần còn lại chưa khảo sát.
+**Việc tiếp theo — bắt đầu từ dòng 838:** `trait_murnau_knowledge` trở đi — bloodsorcery paths chi tiết hơn, Inquisition traits còn lại, bệnh tật, và phần chưa khảo sát.
+
+Baseline đã khớp lại sau khi dịch xong 837 (đối chiếu TRANSLATION_RULES.md §8): ref 305, bracket 501, icon 29, mở tag 75, đóng tag 88, `\n` 256, `\"` 0, dòng 1563, rawquote 2385 — **tất cả khớp**.
 
 **Batch còn lại theo kế hoạch cũ (có thể đổi mốc dòng khi khảo sát thực tế):**
-- [ ] dòng 600–837 (Thế Hệ, bloodline phụ, warrior traits, orison/oculi) — có nháp, cần dịch lại và áp dụng
+- [x] dòng 600–837 (Thế Hệ, bloodline phụ, warrior traits, orison/oculi) — đã dịch và áp dụng
 - [ ] dòng 837–950
 - [ ] dòng 950–1200
 - [ ] dòng 1200–1563 (bệnh tật + phần còn lại)
