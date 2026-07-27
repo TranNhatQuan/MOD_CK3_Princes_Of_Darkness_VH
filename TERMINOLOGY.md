@@ -1008,6 +1008,26 @@ Nguồn: `religion/POD_religion_bloodgnosticism_l_english.yml` (236 dòng, đã 
 | corrupted warden *(ám chỉ Giáo Hội La Mã, chưa phải danh xưng chính thức)* | vị lãnh chúa băng hoại | dịch nghĩa; "warden" trong văn cảnh Ngộ đạo (kẻ cai quản/giam giữ linh hồn) dịch "lãnh chúa" để giữ sắc thái cai trị/giam cầm |
 | Handmaidens of Sophia | Nữ Tỳ của Sophia | dịch nghĩa "Handmaiden"→"Nữ Tỳ", theo mẫu "của X" đã chốt |
 
+## B3s. Thuật ngữ bổ sung (từ `POD_religion_roadofblood`) — việc #2 file 17/36
+
+Nguồn: `religion/POD_religion_roadofblood_l_english.yml` (90 dòng, đã dịch xong 100%) — faith chính "Con Đường Máu" (tên đã khóa cứng ở B3k, dùng lại ở `roadofblood_religion`) và 3 faith con: Tariq el-Haqim (Sentinel gốc), Path of Righteousness (Watcher), Sisterhood of Erinyes (Sister). File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0).
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Sentinel(s) *(tên tín đồ Con Đường Máu/Tariq el-Haqim)* | Vệ Binh / Các Vệ Binh | đặt mới; số ít/số nhiều gộp bằng tiền tố "Các" theo mẫu base (`islam_religion_adherent_plural`="Các tín đồ Hồi giáo") |
+| Watcher(s) *(tên tín đồ Path of Righteousness)* | Người Canh Giữ / Các Người Canh Giữ | ✅ tiền lệ trực tiếp `trait_salubri_watcher`="Salubri Người Canh Giữ" (`traits_POD_l_english.yml:775`) |
+| Sister(s) *(tên tín đồ Sisterhood of Erinyes)* | Chị Em / Các Chị Em | dịch nghĩa thường, nhất quán với tên hội "Hội Chị Em Erinyes" |
+| Path of Righteousness | Con Đường Chính Nghĩa | đặt mới; "Path" ở đây cùng vai trò với "Road" (Con Đường, đã chốt B3f) trong hệ thống đạo đức ma cà rồng — không nhầm với "Path" của Éntomos/Ananasi (đã chốt B4c = "Đạo Lộ", hệ thống khác hẳn của Fera) |
+| Righteousness | Chính Nghĩa | tính từ gốc của Path of Righteousness |
+| Tariq el-Haqim, Banu Haqim, Haqim, Alamut, da'i, ace, Fortuna, vizir, Caine, Sisterhood of Erinyes/Erinyes | *(giữ nguyên)* | danh từ riêng/chức danh WoD hoặc gốc Ả Rập-Hy Lạp có sẵn trong bản gốc, theo B0; "Fortuna" và possessive "của Fortuna" khớp tiền lệ B3h |
+| The Beast *(devil_name và witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B5 |
+| Destruction *(death_deity_name, danh từ trừu tượng làm tên thần)* | Hủy Diệt | dịch nghĩa thường, cùng cách xử lý với `bloodgnosticism_evil_god_name`="Hủy Diệt" (B3l) |
+| blood *(health_god_name/water_god_name, danh từ thường)* | máu | chữ thường, theo mẫu đã chốt B3g (`taoism_devil_name` kiểu danh từ thường làm tên thần) — khác "Máu"/"Dòng Máu" viết hoa của `high_god_name`/`high_god_name_alternate` |
+| dagger *(religious_symbol)* | dao găm | dịch nghĩa thường |
+| vein *(divine_realm)* | huyết quản | đặt mới, tránh trùng "vực thẳm" (the abyss) |
+| The Sentinels of Haqim / The Knives in the Dark / The Judges / The Warriors of Alamut *(4 holy order)* | Vệ Binh của Haqim / Những Lưỡi Dao Trong Bóng Tối / Các Quan Tòa / Chiến Binh của Alamut | theo mẫu base bỏ mạo từ "The" khi dịch tên holy order (`holy_order_knights_hospitaller`="Hiệp sĩ Cứu Tế", không giữ "The") |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k, kể cả khi giá trị gốc không viết hoa "The" (`"the Beast's"` → "của Dã Thú") |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
