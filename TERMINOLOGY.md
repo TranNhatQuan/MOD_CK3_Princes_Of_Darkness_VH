@@ -1873,3 +1873,37 @@ File 151 dòng, mô tả tổ chức chính trị nội bộ của clan Ventrue:
 | Road of Kings, Road of Humanity, Road of Sin, Path of the Merchant *(hệ thống đạo lý/Road trong WoD, xuất hiện dạng chú giải song ngữ)* | Dịch nghĩa kèm tên gốc trong ngoặc | "Con Đường Đế Vương (Road of Kings)", "Con Đường Nhân Tính (Road of Humanity)", "Con Đường Tội Lỗi (Road of Sin)", "Con Đường Con Buôn (Path of the Merchant)" — đặt mới, dịch nghĩa vì đây là mô tả lore cho người đọc chưa biết WoD, giữ tên gốc trong ngoặc để tra cứu chéo với các file khác nhắc đến cùng khái niệm |
 
 Áp dụng lại khi gặp lại các khái niệm này ở file khác (nếu có): `Ephorate`/`Ephor`/`Lictor`/`Tribune`/`Strategoi`/`Strategos` đều giữ nguyên tiếng Anh, không dịch.
+
+## B5c. Thuật ngữ `gui/POD_craft_l_english.yml` — UI chế tác (Craft/Alchemy/Smith/Forge/Enhance/Automaton), 1187/1187 dòng, việc #4 file 27/30
+
+File giao diện chế tác hiện vật. Dịch qua 4 agent chia đoạn (1-403, 404-825, 826-1049, 1050-1187), coordinator hợp nhất thủ công + chuẩn hóa thuật ngữ lệch giữa các đoạn trước khi ghi vào file thật.
+
+**⚠️ Độ hiếm Artifact Piece — chốt cứng cho toàn repo (sẽ tái xuất hiện ở `artifacts/`, `lifestyles/`, nhiều file khác dùng `POD_rarity_*`):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Common *(độ hiếm hiện vật)* | Thường | |
+| Masterwork *(độ hiếm hiện vật)* | Tinh xảo | 2 agent khác nhau ban đầu dùng "Chế Tác Bậc Thầy" và "Tuyệt Tác" ở vài chỗ — đã chuẩn hóa thống nhất về "Tinh xảo" (chữ thường, viết hoa đầu câu tùy ngữ cảnh UI) trên toàn file |
+| Famed *(độ hiếm hiện vật)* | Danh tiếng | tương tự, đã sửa từ "Nổi Danh"/"Trứ Danh" |
+| Illustrious *(độ hiếm hiện vật)* | Lừng lẫy | tương tự, đã sửa từ "Lẫy Lừng"/"Tuyệt Tác" |
+
+**Artifact Piece** → "Mảnh Hiện vật"/"Mảnh Cổ vật" (2 cách gọi cùng khái niệm xuất hiện trong file — "Hiện vật" ở nhóm `GAINS/LOSES/HAS_..._ARTIFACT_PIECES`, "Cổ vật" ở nhóm `material_*_artifact_piece`; chưa thống nhất 1 từ duy nhất, cân nhắc rà lại khi gặp `artifacts/` việc #11).
+
+**Reweave/Reweaving** → "Dệt Lại" ✅ tái dùng B4y, áp dụng cho `reweave_*_method`, `node_reweave_*_loca`.
+
+**Tên hiện vật riêng (Mokolé/Garou, dòng 1033-1042, 1067-1071):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Lungin | Lungin *(giữ nguyên)* | không rõ từ nguyên, không dịch được — cần xác nhận lại nếu gặp ngữ cảnh khác |
+| Arrows of the Sun | Mũi Tên Mặt Trời | đã chuẩn hóa (2 agent ra 2 biến thể "Mũi Tên Của Mặt Trời"/"Những Mũi Tên Mặt Trời") |
+| Thunder Dart | Phi Tiêu Sấm Sét | |
+| Edge of the Sun | Lưỡi Kiếm Mặt Trời | bản gốc gọi là "machete"; chọn "Lưỡi Kiếm" cho gọn, không dịch sát "mã tấu" |
+| Blade of the Kings | Lưỡi Kiếm Của Các Vương | "Kings" = "Lizard Kings"/Vương Thằn Lằn của Mokolé, không phải vua người |
+| Archid | Archid *(giữ nguyên)* | dạng biến hình lớn nhất của Mokolé, không có tiền lệ dịch |
+
+**Vũ khí/áo giáp/đồ vật chế tác (forge_name, dòng ~911-938)** — tra `base_game_vh` theo key vanilla tương đương: Axe→Rìu chiến, Hammer→Búa chiến, Spear→Giáo, Mace→Chùy, Dagger→Dao găm, Sword→Kiếm, Plate/Scale/Lamellar/Brigandine/Mail Armor→Giáp tấm/vảy/phiến/phân đoạn/xích, Crown→Vương miện, Regalia→Nghi trượng, Throne→Ngai vàng, Amulet→Bùa hộ mệnh (từ `adventurer_name_sections_l_english.yml`), Durability→Độ bền (từ `dlc_ep1_game_concepts_l_english.yml`).
+
+**Elixir/Potion/Tonic/Philtre** — 4 loại "thuốc" khác nhau trong hệ crafting POD, phân biệt: Potion→Thuốc, Elixir→Linh dược, Tonic→Bổ dược, Philtre→Mê dược. Intrigue→"Mưu kế" (áp dụng cho cả lỗi chính tả gốc `node_alchemy_skill_intrigue_loca: "Elixir of Intiruge"` — dịch đúng nghĩa "Intrigue", không giữ lỗi chính tả vì đây là chữ hiển thị không phải key).
+
+Áp dụng lại 4 bảng thuật ngữ trên khi gặp lại ở `artifacts/` (việc #11), `modifiers/` (việc #7 — các `*_modifier` như `divine_elixir_diplomacy_modifier` định nghĩa tên thật của elixir, chưa dịch).
