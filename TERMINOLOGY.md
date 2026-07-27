@@ -712,6 +712,22 @@ Nguồn: file neo của `religion/` (436 dòng). Đã chốt `Glossary()` tham s
 
 Ngoài ra ~30 tên tiểu phái/hội bên trong 5 Pháp Môn (Empty Hands→Không Thủ, Fishhooks→Lưỡi Câu, Black Iron Talons→Hắc Thiết Trảo, Crimson Tiger→Xích Hổ, Wandering Overlord→Chúa Tể Lang Thang, Grandmother Witch→Bà Phù Thủy, Ku of the Thousand Tears→Ku Ngàn Giọt Lệ…) — đặt theo giọng Hán-Việt nhất quán, xem trực tiếp trong file nếu cần tra lại vì đây là danh xưng ít khi bị trỏ tới từ file khác.
 
+## B3f. Thuật ngữ bổ sung (từ `POD_religion_framework` + `POD_religion_unexamined_horizons`) — việc #2 file 2-3/36
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Doctrines of the Blood | Giáo Lý của Dòng Máu | tiêu đề nhóm giáo lý ma cà rồng, `FAITH_DOCTRINES_VAMPIRIC` |
+| Tolerances *(splat/subsplat)* | Khoan Dung | mức độ khoan dung của một tôn giáo với loài khác |
+| Road *(hệ thống đạo đức ma cà rồng, khác "Path" của Éntomos = Đạo Lộ)* | Con Đường | đặt mới, phân biệt khỏi "Đạo Lộ" (B4c) |
+| Road of Unexamined Horizons | Con Đường Chân Trời Chưa Xét | |
+| Courtier *(hậu tố `-courtiers`, không phải `game_concept_courtier`=Cận thần vanilla)* | Cận Thần | dùng lại "Cận thần" viết hoa "Thần" cho tên riêng ghép, ngữ cảnh khác Cận thần triều đình thường |
+| Corpse Courtiers | Tử Thi Cận Thần | |
+| Ghost Courtiers | U Hồn Cận Thần | |
+| Lordly Courtiers | Quân Tử Cận Thần | |
+| Dream Courtiers | Mộng Cảnh Cận Thần | |
+| Hundred Devils / Thousand Devils | Bách Quỷ / Thiên Quỷ | |
+| Lost Lineages | Chi Hệ Thất Lạc | |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
