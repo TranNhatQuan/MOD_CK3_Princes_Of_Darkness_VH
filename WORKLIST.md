@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 5 — `gui/` đạt 26/30, dừng lại để bàn giao do gần chạm giới hạn context; tách 4 file ưu tiên từ root-level thành việc #9 mới, đôn lên trước `buildings/`; các việc từ buildings trở đi đánh lại số #10-#16).
+Cập nhật lần cuối: 2026-07-27 (đợt 6 — hoàn tất `POD_craft` + `POD_umbra_window`, `gui/` đạt 30/30, việc #4 HOÀN TẤT).
 
 ---
 
@@ -16,28 +16,21 @@ Cập nhật lần cuối: 2026-07-27 (đợt 5 — `gui/` đạt 26/30, dừng 
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **26/30 file gui/** |
-| Còn lại | việc #4 (`gui/`) còn đúng **2 file lớn**: `POD_craft_l_english.yml` (1187 dòng) và `POD_umbra_window_l_english.yml` (1572 dòng) — xem mục "BÀN GIAO" ngay dưới |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** |
+| Việc tiếp theo | **việc #5** — `interactions/` (3.780 key, 28 file), rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
 
-### ⚠️ BÀN GIAO GIỮA SESSION (2026-07-27, đợt 5, do gần chạm giới hạn context) — ĐỌC TRƯỚC KHI LÀM GÌ TIẾP
+### ✅ ĐỢT 6 (2026-07-27) — hoàn tất `POD_craft` + `POD_umbra_window`, `gui/` đạt 30/30, việc #4 HOÀN TẤT
 
-**Không có agent nào dở dang — mọi file đã giao đều đã dịch xong, verify xong, commit xong trong chính session này.** Chỉ đơn giản dừng lại trước khi bắt đầu 2 file lớn cuối của `gui/` để tránh vượt giới hạn context.
+Cả 2 file lớn cuối cùng của `gui/` đã dịch xong, verify xong, commit xong:
+- `gui/POD_craft_l_english.yml` (1187/1187 dòng) — commit `f40fd0d`. Dịch qua 4 agent chia đoạn (1-403, 404-825, 826-1049, 1050-1187). Phát hiện + sửa lệch thuật ngữ độ hiếm hiện vật (Common/Masterwork/Famed/Illustrious) giữa các đoạn — chuẩn hóa về Thường/Tinh xảo/Danh tiếng/Lừng lẫy (ghi TERMINOLOGY.md B5c).
+- `gui/POD_umbra_window_l_english.yml` (1572/1572 dòng) — commit `5acdce5`. Dịch qua 6 agent chia đoạn (1-160, 161-324, 325-540, 541-798, 799-1189, 1190-1572). Phát hiện + sửa **17 dòng sót tiếng Anh** (13 dòng `court_of_*_effect_desc` giống hệt nhau + 4 dòng `*_duchy_effect_desc` — agent nhầm tưởng đây là dòng chỉ chứa `$ref$`/script vì đứng cạnh các dòng thật sự rỗng khác) — **bẫy y hệt lỗi 132 dòng ở `docrtineandtenets`**, chỉ bắt được nhờ chạy grep English-sót riêng, KHÔNG phải nhờ 3 lớp kiểm tra số liệu chuẩn (số liệu vẫn khớp 100% dù thiếu 17 dòng này). Cũng chuẩn hóa 4 thuật ngữ `Glossary()` tham số 1 lệch giữa các đoạn (Dark Kingdom, Home Realm, Yama King, Stable Point) về đúng tiền lệ đã chốt trong TERMINOLOGY.md. Ghi TERMINOLOGY.md mục B5d.
 
-**Việc #4 (`gui/`, 30 file) hiện trạng 26/30:**
-- 24 file nhỏ/vừa (2-240 dòng) đã dịch xong theo 2 batch song song, mỗi agent 1 file riêng — an toàn, không có race condition.
-- `blood_sorcery_POD_l_english.yml` (498 dòng) đã dịch xong bằng 1 agent duy nhất (đủ nhỏ để 1 agent xử lý an toàn, không cần chia đoạn) — verify kỹ (đọc toàn bộ 768 dòng git diff bằng mắt), commit `8867dcd`.
-- **CÒN LẠI ĐÚNG 2 FILE, CHƯA ĐỘNG TỚI:**
-  - `gui/POD_craft_l_english.yml` — 1187 dòng, baseline: 163 dòng trống, 1013 key thụt 1 space, 369 ref, 693 bracket, 11 icon, 172 tag đóng, 6 `\n`, BOM=efbbbf, CRLF. UI menu chế tác (Craft) — nhiều artifact/công thức, khả năng cao có nhiều đoạn văn xuôi mô tả dài (giống các artifact đã gặp ở `blood_sorcery`).
-  - `gui/POD_umbra_window_l_english.yml` — 1572 dòng, baseline: 287 dòng trống, 1273 key thụt 1 space, 503 ref, 936 bracket, 18 icon, 142 tag đóng, 231 `\n`, BOM=efbbbf, CRLF. UI cửa sổ Umbra — tên các cõi giới (`umbra_realm_*`), có văn xuôi lore dài (đã xem trước, chứa các đoạn mô tả cõi giới như Kingdom of Dán, Ariké, Mahâraurava — nhiều tên riêng ngoại lai có dấu Latin trông giống dấu tiếng Việt, ĐỪNG NHẦM là đã dịch — đã tự grep xác nhận 100% tiếng Anh tính đến hết session này).
+**Bài học nhắc lại (lần thứ N):** dù chia đoạn cẩn thận theo ranh giới tự nhiên và mỗi agent chỉ ghi 1 file scratch riêng (không có race condition), vẫn luôn phải:
+1. Tự chạy grep bắt English-sót riêng sau khi merge — đừng tin 3 lớp số liệu chuẩn, vì dòng sót vẫn giữ cấu trúc `$ref$`/bracket hợp lệ nên số liệu không đổi.
+2. Tự chạy lệnh gom nhóm `Glossary()`/`UmbraGlossaryLocalized()` theo tham số 2 (key) để phát hiện tham số 1 (chữ hiển thị) bị dịch lệch giữa các đoạn — ví dụ lệnh: `grep -oE "Glossary\('[^']*','[^']*'\)" <file> | sed -E "s/Glossary\('([^']*)','([^']*)'\)/\2\t\1/" | sort | awk -F'\t' '{c[$1]++; v[$1]=v[$1]" \| "$2} END{for(k in c) if(c[k]>1) print k": "v[k]}'` — bất kỳ key nào có ≥2 biến thể tham số 1 khác nhau (không phải chỉ số ít/nhiều của cùng 1 bản dịch) là lỗi cần sửa.
+3. Tra TERMINOLOGY.md trước khi để agent tự đặt thuật ngữ mới — nhiều thuật ngữ tưởng là "đặt mới" thực ra đã có tiền lệ chốt từ trước (vd. Yama King→Diêm Ma Vương đã chốt ở B3c từ khi dịch `religion/`, nhưng 2 agent trong đợt này không tra mà tự dịch thành "Vua Yama").
 
-**CÁCH LÀM 2 FILE NÀY — theo đúng bài học từ `docrtineandtenets` (file duy nhất từng phải chia nhiều agent cho 1 file):**
-1. Vì cả 2 file đều >1000 dòng, **PHẢI chia thành nhiều đoạn ~250-300 dòng/đợt** (không giao nguyên file 1187/1572 dòng cho 1 agent — quá dài, rủi ro sót nội dung như đã xảy ra ở `docrtineandtenets`).
-2. Đọc trước cấu trúc file (nhiều mục `###############` hoặc đoạn trống lớn ngăn cách các artifact/cõi giới) rồi chia theo ranh giới tự nhiên, không chia cứng theo số dòng nếu cắt ngang giữa 1 khối logic (1 artifact hoặc 1 cõi giới).
-3. **TUYỆT ĐỐI không giao ≥2 agent song song ghi trực tiếp vào CÙNG 1 file này** — dùng quy trình scratch file: mỗi agent chỉ ghi ra 1 file scratch riêng ngoài repo (`/tmp/.../scratchpad/`), điều phối viên tự đọc tất cả scratch file, đối chiếu thuật ngữ chéo, rồi tự ghép + ghi 1 lần duy nhất vào file thật.
-4. Sau khi hợp nhất, **BẮT BUỘC chạy lệnh grep bắt sót tiếng Anh riêng** (xem mục "6 cái bẫy" bên dưới, bẫy đã gây ra lỗi 132 dòng ở `docrtineandtenets`) — đừng chỉ tin 3 lớp kiểm tra số liệu chuẩn.
-5. Tra TERMINOLOGY.md trước khi dịch — `POD_craft` chắc sẽ nhắc lại tên artifact đã xuất hiện ở `artifacts/` (chưa dịch) hoặc `blood_sorcery_POD` vừa xong; `POD_umbra_window` chắc sẽ nhắc lại tên cõi giới Umbra đã gặp ở `gui/POD_umbra_l_english.yml` (đã dịch, commit `0d6d96d`) — dùng đúng tên đã có (Astral Reaches/Spirit Wilds/Deep Umbra/Penumbra giữ nguyên, Underworld="Âm Giới" khi là danh từ thường / "Âm Phủ" khi qua `UmbraGlossaryLocalized('shadowlands','Underworld')`, xem B4j).
-
-**Sau khi xong 2 file này → `gui/` đạt 30/30 → việc #4 HOÀN TẤT**, chuyển sang việc #5 theo đúng thứ tự MỚI đã ghi ở mục "Thứ tự công việc" bên dưới (đã đổi số — không dùng số thứ tự cũ trong trí nhớ).
+**Việc cần làm tiếp theo:** chuyển sang việc #5 (`interactions/`, 3.780 key, 28 file), rồi tiếp tục tuần tự #6 → #7 → #8 → #9 theo đúng thứ tự ghi ở mục "Thứ tự công việc" bên dưới. Đã xác nhận lại với người dùng: đi tuần tự 5-6-7-8-9, KHÔNG nhảy thẳng lên #9.
 
 ### ✅ ĐỢT 4 (2026-07-27) — hoàn tất việc #3 (`custom_localization/` phần còn lại)
 
