@@ -625,6 +625,30 @@ Tên clan/bloodline/lineage giữ nguyên toàn bộ (danh từ riêng, theo B0)
 | Shemsu-Heru, Bane Mummy→"Xác Ướp Tà Linh", Cabiri, Wu T'ian, Wu Kuei, Asekh-Sen | *(tên bộ tộc Mummy giữ nguyên, trừ Bane Mummy dịch nghĩa)* | danh từ riêng theo B0, trừ "Bane Mummy" là cụm mô tả nên dịch |
 | **Bệnh ma cà rồng** (`trait_vampire_*`) — Smallpox/Bubonic Plague/Typhus/Cancer/Consumption/Gout Ridden/Pneumonic/Great Pox/Leper/Ill | Đậu Mùa / Dịch Hạch / Thương Hàn / Ung Thư / Lao Phổi / Gút Hành Hạ / Viêm Phổi / "Đại Hoa Liễu" / Phong Cùi / Bệnh — tất cả + hậu tố "Ma Cà Rồng" | ✅ tra được nguyên bản từ `base_game_vh/traits_l_english.yml` (bệnh vanilla), giữ đúng thuật ngữ base rồi thêm "Ma Cà Rồng" |
 
+## B4h. Thuật ngữ Wraith / Demon / Sorcerer (từ `traits_POD` dòng 1148-1296)
+
+Nguồn: phần Oan hồn (Wraith), Ác quỷ Fallen/Earthbound, và pháp sư phàm nhân. Không có tiền lệ base cho các khái niệm lõi Wraith — theo B0, giữ nguyên các danh từ riêng WoD (Spectre, Arcanos, tên các Arcanos cụ thể, Corpus, Fetter(s), Skinlands, tên các loại Spectre).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Shadow *(khía cạnh đen tối của oan hồn, không phải "shadow" thường)* | Bóng | `trait_shadow`, dùng xuyên suốt mọi mô tả Wraith |
+| Psyche | Tâm Thức | phần "lý trí/ý thức" của oan hồn, đối lập với Bóng |
+| Corpus, Fetter(s), Skinlands, Shadowlands, Arcanos (và tên riêng: Argos/Castigate/Embody/Fatalism/Flux/Inhabit/Intimation/Keening/Lifeweb/Mnemosynis/Moliate/Outrage/Pandemonium/Phantasm/Puppetry/Usury/Kinesis) | *(giữ nguyên tiếng Anh)* | thuật ngữ lõi hệ thống Wraith, không có khái niệm base tương ứng, theo B0 |
+| Spectre, Doppelganger, Mortwight, Haint, Shade, Apparition, Nephwrack, Onceborn, Hekatonkhire, Neverborn, Stripling, Barghest, Pasiphae | *(giữ nguyên — tên các Đẳng Cấp/loại Spectre)* | danh từ riêng phân loại, theo B0 |
+| Caste *(track của Spectre)* | Đẳng Cấp | dùng nhất quán với "Caste" của Assamite (B4d) — cùng khái niệm phân cấp |
+| Dark Passions | Đam Mê Đen Tối | cảm xúc tiêu cực chi phối Spectre |
+| Deathmarks | Dấu Chết | dấu hiệu thể chất của Doppelganger |
+| Golem, Automaton, Effigy, Animantis, Servitor, Manifestation | *(giữ nguyên — tên các loại thây máy/vật thế thân)* | danh từ riêng kỹ thuật gọi hồn/pháp thuật |
+| Replica *(trait_mindless_clone)* | Bản Sao | |
+| Shadow Twin / Mirror Duplicate / Shadowy Duplicate / Phantom Shadow / Separated Khaibit / Separated Shadow / Shadow Self | Song Sinh Bóng Tối / Bản Sao Gương / Bản Sao Bóng Tối / Bóng Ma / Khaibit Bị Tách Rời / Bóng Bị Tách Rời / Bản Ngã Bóng Tối | dịch nghĩa các loại "bản sao"/tách đôi linh hồn |
+| Risen | Kẻ Hồi Sinh | oan hồn quay lại xác |
+| Ferryman, Ritual of Severance | Ferryman *(giữ nguyên tên riêng)*, Nghi Lễ Cắt Đứt | |
+| Sorcerer / Sorceress / Rune Mage / Theurgist | Pháp Sư / Nữ Pháp Sư / Pháp Sư Rune / Nhà Thần Thuật | phân biệt "Sorcerer" (phàm nhân dùng hedge magic) khỏi "Mage" (Pháp sư, đã chốt B4) — xem ghi chú dưới |
+| Fallen (thiên thần) | Sa Ngã | khác `trait_fallen` của thiên thần và `Earthbound` của ác quỷ — hai splat riêng biệt cùng chủ đề Thiên Thần Sa Ngã |
+| Laham, Nephilim | *(giữ nguyên — hậu duệ ác quỷ)* | danh từ riêng Kinh Thánh/WoD |
+
+> ⚠️ **Sorcerer (Wraith/phàm nhân) không phải Mage.** `trait_sorcerer_desc` viết rõ "they are still a far cry from Mages" — dịch "Pháp Sư" cho Sorcerer và giữ "Pháp sư" (chữ thường, đã chốt B4) cho Mage tạo ra sự trùng chữ không tránh được trong tiếng Việt (cả hai đều là "pháp sư" theo nghĩa đen); đã xử lý bằng cách viết hoa khác nhau và chú thích "(Mage)" ngay trong câu để giữ rõ ràng cho người đọc — xem `trait_sorcerer_desc`.
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
