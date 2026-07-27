@@ -1028,6 +1028,67 @@ Nguồn: `religion/POD_religion_roadofblood_l_english.yml` (90 dòng, đã dịc
 | The Sentinels of Haqim / The Knives in the Dark / The Judges / The Warriors of Alamut *(4 holy order)* | Vệ Binh của Haqim / Những Lưỡi Dao Trong Bóng Tối / Các Quan Tòa / Chiến Binh của Alamut | theo mẫu base bỏ mạo từ "The" khi dịch tên holy order (`holy_order_knights_hospitaller`="Hiệp sĩ Cứu Tế", không giữ "The") |
 | `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k, kể cả khi giá trị gốc không viết hoa "The" (`"the Beast's"` → "của Dã Thú") |
 
+## B3t. Thuật ngữ bổ sung (từ `POD_religion_roadofset`) — việc #2 file 18/36
+
+Nguồn: `religion/POD_religion_roadofset_l_english.yml` (90 dòng, đã dịch xong 100%) — faith chính "Road of Set" (đã khóa cứng ở B3k = "Con Đường Set") và 4 faith con: Via Set (nhánh chính clan Setite), Via Apep (thờ Apep — rắn hỗn loạn), Path of Subversion (Corrupter), Path of Heliopolis (Typhonian/Theophidian). 2 lần `Glossary('Antediluvian','game_concept_antediluvian_desc')` — param 1 giữ nguyên "Antediluvian" theo B0/B2b (đã chốt là thuật ngữ giữ tiếng Anh), không phải lỗi bỏ sót dịch param 1.
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Setite(s) *(religion_adj/adherent/devotee/priest)* | Setite *(giữ nguyên)* | ✅ đã chốt B2b — tên clan/giáo phái, số ít/số nhiều gộp làm một |
+| Osiris *(devil_name + witchgodname_the_horned_god)* | Osiris *(giữ nguyên)* | thần Ai Cập có thật, danh từ riêng — nhất quán với `glossary_osirian_league`/`glossary_children_of_osiris` đã chốt B2 |
+| Destruction *(death_deity_name)* | Hủy Diệt | ✅ nhất quán với B3l/B3m/B3s cùng dạng key |
+| temple *(house_of_worship, số ít = số nhiều trong bản gốc)* | đền thờ | theo tiền lệ base (`religion_l_english.yml` `doctrine_parameter_theocracy_temple_*`="Đền thờ") và tiền lệ POD B3n (`secret temple(s)`="đền thờ bí mật") |
+| ankh *(religious_symbol)* | ankh *(giữ nguyên)* | không có tiền lệ base cho biểu tượng Ai Cập cổ này; giữ nguyên theo B0 vì là tên riêng của một vật thể tôn giáo cụ thể, không phải danh từ chung dịch được như "cross"→"thánh giá" |
+| Hierophant *(religious_head_title)* | Đại Tư Tế | đặt mới; tra base thấy "High Priest"→"Đại Tư tế" (`decisions_l_english.yml:597`, `jewish_restore_high_priesthood_decision`) — Hierophant là chức tư tế tối cao trong tôn giáo huyền bí Hy Lạp/Ai Cập cổ, tương đương chức năng "Đại Tư Tế" |
+| Priest *(bishop, chức sắc thường dưới Hierophant)* | Tư Tế | ghép cặp với "Đại Tư Tế" ở trên thành hệ thống phân cấp Tư Tế/Đại Tư Tế; khác "giám mục" (dành riêng cho từ gốc "bishop", B3j) vì giá trị gốc ở đây là chữ "Priest" |
+| Set's Embrace *(divine_realm/positive_afterlife)* | Vòng Tay của Set | đặt mới; "Embrace" ở đây là vòng tay/cõi thiên đường ẩn dụ của thần Set, KHÔNG phải "Embrace"=Nghi lễ Trao truyền (B2, nghi thức biến thành ma cà rồng) — hai nghĩa khác hẳn của cùng một từ tiếng Anh, dùng "Vòng Tay" cho nghĩa cõi giới ở đây để tránh lẫn với nghi lễ Trao truyền |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ đã chốt B3h/B3m/B3s, áp dụng lại |
+| Antediluvian | Antediluvian *(giữ nguyên)* | ✅ đã chốt B0/B2b, param 1 của `Glossary()` ở đây |
+| Via Set *(tên faith con — nhánh chính clan Setite, tiếng Latin "Con Đường Set")* | Con Đường Set | cùng dịch với `roadofset`/`viaset` — cả hai key đều hiển thị "Road of Set" trong bản gốc, dùng chung một bản dịch |
+| Apep *(via Apep — rắn hỗn loạn, hóa thân của Set)* | Apep *(giữ nguyên)* | ✅ đã chốt B3 (`glossary_wyrm_apep`) |
+| Apepite(s) *(viaapep_adj/adherent)* | Apepite *(giữ nguyên)* | đặt mới theo mẫu "Setite" — demonym WoD gốc từ "Apep", không có từ Việt tương đương, giữ nguyên theo B0 |
+| Path of Subversion | Con Đường Lật Đổ | đặt mới; "Path" đồng vai trò "Road" (Con Đường, B3f/B3k) trong hệ đạo đức ma cà rồng, khác "Đạo Lộ" của Éntomos/Ananasi (B4c) |
+| Corruption *(pathofsubversion_adj — sự tha hóa định chế xã hội, KHÁC "Corruption" của Wyrm)* | Tha Hóa | đặt mới; tránh trùng "Ô Uế"/"Bôi Nhọ" đã chốt cho `glossary_wyrm_corruption` (B3/B3b) vì đây là khái niệm chính trị-xã hội, không phải Wyrm học thuyết Fera |
+| Corrupter(s) *(pathofsubversion_adherent)* | Kẻ Tha Hóa | theo "Corruption"→"Tha Hóa" ở trên |
+| Path of Heliopolis | Con Đường Heliopolis | "Heliopolis" là địa danh Ai Cập cổ có thật (trung tâm thờ thần mặt trời), giữ nguyên tên riêng theo B0 |
+| Typhonian *(pathofheliopolis_adj)* | Typhonian *(giữ nguyên)* | tính từ WoD gốc từ "Typhon" (tên Hy Lạp của Set), không có bản dịch tương đương gọn, giữ nguyên theo B0 |
+| Theophidian(s) *(pathofheliopolis_adherent)* | Theophidian *(giữ nguyên)* | demonym WoD tự đặt (theo + ophidian = rắn-thần), không có tiền lệ base, giữ nguyên theo B0 |
+| Cohort of Set *(holy_order)* | Đội Cấm Vệ của Set | đặt mới; "Cohort" = đơn vị quân đội La Mã, dịch theo tinh thần "Đội" (mẫu `holy_order_enoch_peacekeepers`="Đội Gìn Giữ Hòa Bình Enoch", B3o) + possessive "của X" |
+| The Medjay *(holy_order)* | Medjay *(giữ nguyên)* | tên lực lượng cảnh vệ/chiến binh Ai Cập cổ có thật trong lịch sử, danh từ riêng — bỏ mạo từ "The" theo mẫu base dịch holy order (B3s) |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k/B3s |
+
+## B3v. Thuật ngữ bổ sung (từ `POD_religion_roadoflilith`) — việc #2 file 20/36
+
+Nguồn: `religion/POD_religion_roadoflilith_l_english.yml` (96 dòng, đã dịch xong 100%) — faith chính "Con Đường Lilith" (tên đã khóa cứng ở B3k, dùng lại ở `roadoflilith_religion`) và 5 faith con/tổ chức: Derech Lilit (nhóm Lilin gốc), Via Faciendi (Con Đường Tạo Tác), Via Spinae (Con Đường Gai Nhọn), Via Calantica (Con Đường Màn Che), Daughters of Gorgo. File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0, chỉ có 1 icon `@vampire_icon!`).
+
+| English | Tiếng Việt | Nguồn / ghi chú |
+|---|---|---|
+| Road of Lilith *(tên faith chính)* | Con Đường Lilith | ✅ đã khóa cứng B3k, áp dụng ở `roadoflilith_religion` |
+| Lilin *(tên tín đồ Con Đường Lilith)* | Lilin *(giữ nguyên)* | danh từ riêng WoD, theo B0; số ít/số nhiều gộp làm một theo mục 7 TRANSLATION_RULES.md |
+| The Dark Mother *(high_god_name_alternate — biệt danh của Lilith)* | Mẹ Bóng Tối | dịch nghĩa, ghép "Mẹ" + "Bóng Tối" (đã có tiền lệ `pod_wod`="Thế Giới Bóng Tối") |
+| Destruction *(death_deity_name)* | Hủy Diệt | ✅ khớp tiền lệ B3s (`roadofblood`) — cùng cách dịch danh từ trừu tượng làm tên thần |
+| coven / covens *(house_of_worship)* | hội phù thủy / các hội phù thủy | đặt mới; tiền lệ gần base `witch_coven`="Hội Phù Thủy" (`event_modifiers_l_english.yml`), hạ chữ thường theo mẫu clergy/house_of_worship (base dùng "tu sĩ", "linh mục" viết thường) |
+| ashen crown *(religious_symbol)* | vương miện tro tàn | dịch nghĩa thường |
+| Cycle of Lilith *(religious_text)* | Chu Kỳ Lilith | dịch nghĩa, viết hoa theo tên tác phẩm tôn giáo |
+| grandmother *(religious_head_title/-name, chức sắc nữ tối cao)* | bà | dịch nghĩa, chữ thường theo mẫu base cho chức sắc tôn giáo (`christianity_bishop`="giám mục") |
+| brother(s)/sister(s) *(devotee)* | anh/các anh, chị/các chị | dịch nghĩa thường, xưng hô huynh đệ tôn giáo kiểu Kindred; số nhiều thêm "các" theo mẫu base |
+| father(s)/mother(s) *(priest_male/bishop, chức sắc)* | cha/các cha, mẹ/các mẹ | dịch nghĩa thường, giữ tương phản với "bà" (chức sắc tối cao) |
+| the abyss *(negative_afterlife)* | vực thẳm | ✅ đã chốt B3h/B3m/B3s, áp dụng lại |
+| the Beast *(witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B5/B3s, áp dụng lại cho cả hai key (`witchgodname_the_horned_god` và `_possessive`) |
+| blood *(health_god_name, danh từ thường làm tên thần)* | máu | ✅ khớp mẫu B3s/B3g — chữ thường |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ đã chốt B3h, áp dụng lại kèm possessive "của Fortuna" |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k/B3s |
+| Derech Lilit, Via Faciendi, Via Spinae, Via Calantica, Ba'ham, Bahari, Ki-sikil-lil-la-ke, Lhaka, Gorgo, Gorgon(s) | *(giữ nguyên)* | danh từ riêng/thuật ngữ Latin-Hebrew-Sumer của giáo phái, theo B0 |
+| Via Faciendi *(tên hiển thị, nghĩa "Path of Making")* | Con Đường Tạo Tác | dịch nghĩa faith con, cùng mẫu "Road/Path"→"Con Đường" (B3f/B3k/B3s) |
+| Maker(s) *(tên tín đồ Via Faciendi)* | Kẻ Tạo Tác / Những Kẻ Tạo Tác | dịch nghĩa thường, gắn với "Via Faciendi"→"Con Đường Tạo Tác" |
+| Via Spinae *(tên hiển thị, nghĩa "Path of Thorns")* | Con Đường Gai Nhọn | dịch nghĩa faith con |
+| Via Calantica *(tên hiển thị, nghĩa "Path of Veils")* | Con Đường Màn Che | dịch nghĩa faith con |
+| rabbinical figure *(mô tả Lilith trong `derechlilit_desc`)* | nhân vật trong truyền thống Do Thái giáo | ✅ tra base (`religion_judaism_l_english.yml` giữ nguyên "Rabbinism"/"Rabbinic" không dịch) — dịch thoát ý "rabbinical" thành cụm mô tả thay vì gượng ép một tính từ Hán-Việt, tránh đặt ra một thuật ngữ mới không cần thiết |
+| demon-children *(viafaciendi_desc)*, Mother of Monsters | những đứa con quỷ dữ, Mẹ của Quái Vật | dịch nghĩa thường |
+| Abrahamic God *(viacalantica_desc)* | Thượng Đế của Abraham | dịch nghĩa, "Abrahamic" ghép possessive "của Abraham" theo mẫu "của X" |
+| Daughters of Gorgo *(tên tổ chức)* | Con Gái của Gorgo | dịch nghĩa, mẫu possessive "của X" |
+| neonate(s) *(daughtersofgorgo_desc, ma cà rồng mới được Trao truyền)* | kẻ mới được Trao truyền | đặt mới, ghép với "Nghi lễ Trao truyền/được Trao truyền" đã chốt B2 (`pod_Embrace(d)`) thay vì dịch từng chữ "neonate" tách biệt |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
