@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 3 — `religion/` đã HOÀN TẤT 36/36).
+Cập nhật lần cuối: 2026-07-27 (đợt 4 — `custom_localization/` đã HOÀN TẤT).
 
 ---
 
@@ -16,8 +16,21 @@ Cập nhật lần cuối: 2026-07-27 (đợt 3 — `religion/` đã HOÀN TẤT
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/ (HOÀN TẤT)** |
-| Còn lại | ~419 file khác — chuyển sang việc #3 (`custom_localization/` phần còn lại) |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/ (HOÀN TẤT việc #3)** |
+| Còn lại | ~413 file khác — chuyển sang việc #4 (`gui/`, 4.458 key, 30 file) |
+
+### ✅ ĐỢT 4 (2026-07-27) — hoàn tất việc #3 (`custom_localization/` phần còn lại)
+
+5 file cuối của `custom_localization/` đã xử lý xong, verify xong, commit xong (`1c28cc3`, `bd3b4d0`, `642e27f`, `6d6b2f4`):
+- `insult_POD_custom_loc_l_english.yml` (272/272 dòng) — danh sách từ sỉ nhục giữa các splat, tên clan/splat giữ nguyên (chỉ xuất hiện ở key), chỉ dịch danh từ/tính từ/hành vi sỉ nhục.
+- `POD_signature_weapon_custom_loc_l_english.yml` (31/31 dòng) — từ vựng vũ khí tự nhiên (móng vuốt/răng nanh) lắp ráp combat log.
+- `POD_resonance_custom_loc_l_english.yml` (30/30 dòng) — **chỉ 4/30 dòng có chữ thật** (`POD_resonance_intensity_1-4`), 16 dòng tooltip-ID/icon + 4 dòng concept-link giữ nguyên không dịch. Thuật ngữ mới → TERMINOLOGY.md **B4x**.
+- `secrets_POD_custom_loc_l_english.yml` (177/177 dòng) — mô tả bí mật nhân vật, tra đúng tên trait/education vanilla từ `base_game_vh` (Nóng giận/Tham lam/Trinh khiết/Hào phóng/Chăm chỉ/Khoan dung/Nhân hậu/Khiêm tốn/Tiết độ/Dâm dục/Kiêu ngạo/Phàm ăn...).
+- `POD_modifier_custom_loc_l_english.yml` (38 dòng) — **không sửa gì, không commit riêng.** Xác nhận toàn bộ 34 dòng có nội dung đều là `key: "[GetModifier('...').GetNameWithTooltip]"` — 100% script reference, không có chữ hiển thị nào để dịch. Bản dịch thật của các modifier này (`bloodpotency<N>_modifier`, `gauntlet<N>_modifier`, `shroud<N>_modifier`) nằm ở file khác thuộc `modifiers/` (việc #7, chưa tới lượt).
+
+Quy trình: 5 agent song song, mỗi agent 1 file riêng (an toàn, không đụng file chung — khác với race condition suýt xảy ra ở `docrtineandtenets`). Coordinator tự verify từng file: đếm dòng/bracket/ref/icon khớp baseline, diff ref/key/Glossary param với `git show HEAD`, chạy grep bắt sót tiếng Anh + lỗi dính dòng, đọc git diff đầy đủ, kiểm tra không trùng heading TERMINOLOGY.md — không có sai sót nào bị phát hiện ở đợt này (khác các đợt trước).
+
+**Việc cần làm tiếp theo:** chuyển sang việc #4 (`gui/`, 4.458 key, 30 file). Chú ý `gui/POD_hud_l_english.yml` dùng hậu tố `:0`, và UI CK3 chật nên phải giữ bản dịch ngắn gọn tương đương độ dài tiếng Anh gốc.
 
 Ba bước nền (glossary → custom_loc → tên splat) **đã hoàn tất**. Toàn bộ thuật ngữ gốc đã chốt trong TERMINOLOGY.md (~200 mục, B3/B4 đầy đủ cho VtM/Fae/Fera/Wraith/Mummy/Kuei-Jin/Demon/Garou). Phần còn lại là **tra bảng và áp dụng**, không còn phải tự đặt thuật ngữ nền.
 
@@ -80,6 +93,11 @@ Quy trình đã dùng: giao agent con dịch từng file (song song theo lô), n
 |---|---|---|
 | `glossary_POD_l_english.yml` | 105/105 key | `fb969bd` `81cbd59` `18a6716` |
 | `custom_localization/POD_misc_custom_loc_l_english.yml` | 121/121 key | `152c52c` |
+| `custom_localization/insult_POD_custom_loc_l_english.yml` | 272/272 dòng — **xong cả file** | `1c28cc3` |
+| `custom_localization/POD_signature_weapon_custom_loc_l_english.yml` | 31/31 dòng — **xong cả file** | `bd3b4d0` |
+| `custom_localization/POD_resonance_custom_loc_l_english.yml` | 30/30 dòng — **xong cả file** | `642e27f` |
+| `custom_localization/secrets_POD_custom_loc_l_english.yml` | 177/177 dòng — **xong cả file** | `6d6b2f4` |
+| `custom_localization/POD_modifier_custom_loc_l_english.yml` | 38 dòng — 100% script reference, không có gì để dịch | *(không sửa, không commit)* |
 | `traits/traits_predator_types_POD_l_english.yml` | 48/48 dòng, 30/30 key — **xong cả file** | `9701e54` |
 | `traits/POD_fae_traits_l_english.yml` | 330/330 dòng, 241 key — **xong cả file** | `94e6593` |
 | `traits/POD_fera_traits_l_english.yml` | 479/479 dòng — **xong cả file** (18 tên tộc + 16 desc từ trước, phần còn lại ~223 key) | `9d4ba47` + `2481866` |
@@ -115,9 +133,9 @@ Làm trước tiên vì trait được **hàng nghìn** chuỗi khác trỏ tớ
 
 Chi tiết ở TERMINOLOGY.md mục B3c.
 
-### #3 — `custom_localization/` phần còn lại  ~510 key, 5 file
+### #3 — `custom_localization/`  ✅ HOÀN TẤT — cả 6 file
 
-Nhỏ nhưng là nguồn của nhiều chuỗi khác. `POD_misc_custom_loc` đã xong.
+Nhỏ nhưng là nguồn của nhiều chuỗi khác. Toàn bộ 6 file đã xong: `POD_misc_custom_loc` (121/121 key), `insult_POD_custom_loc` (272/272 dòng), `POD_signature_weapon_custom_loc` (31/31 dòng), `POD_resonance_custom_loc` (30/30 dòng, chỉ 4 dòng có chữ thật), `secrets_POD_custom_loc` (177/177 dòng), `POD_modifier_custom_loc` (38 dòng — 100% script reference, xác nhận không có gì để dịch).
 
 ### #4 — `gui/`  4.458 key, 30 file
 
