@@ -1816,3 +1816,42 @@ File chỉ có 4 dòng chữ thật; 16 dòng `POD_<temperament>_N_i` là toolti
 | acute *(POD_resonance_intensity_4)* | gay gắt | mức cao nhất |
 
 Ghi chú: đây chỉ là các tính từ mức độ dùng chung cho cả 4 temperament (ví dụ "acute Sanguine Resonance"); tên riêng 4 temperament (Choleric/Phlegmatic/Melancholy/Sanguine) và ID `#TOOLTIP:*_RESONANCE_0N_TT` không thuộc phạm vi dịch của file này — nội dung tooltip thật nằm ở file khác ngoài `custom_localization/`.
+
+**Cập nhật (file `gui/POD_see_resonance_l_english.yml`, nội dung tooltip thật nói ở trên):** 20 dòng, cấu trúc `#bold <Temperament> Resonance#!\nThis character has blood with <intensity> [<temperament>_lifestyle|E]`. Đã dịch bằng 4 bảng cường độ B4x (`negligible→không đáng kể`, `fleeting→thoáng qua`, `intense→mạnh mẽ`, `acute→gay gắt`) và câu khung `This character has blood with → Nhân vật này có máu với`. **Quyết định mới:** giữ nguyên tiếng Anh "Choleric/Phlegmatic/Melancholy/Sanguine Resonance" trong cả `#bold...#!` header — áp dụng cùng logic B0 (thuật ngữ WoD giữ nguyên, chưa có tiền lệ dịch nghĩa, và concept nguồn `game_concept_choleric_lifestyle` v.v. trong `game_POD_concepts_l_english.yml` **bản thân cũng chưa dịch** — giữ nguyên nhất quán chờ file gốc dịch trước, theo đúng tiền lệ "Justicar" ở bảng trên). `[choleric_lifestyle|E]` v.v. là concept-link tới `game_concept_choleric_lifestyle` = "Choleric Resonance" — không đổi tham số trong bracket. Nếu sau này `game_POD_concepts_l_english.yml` dịch tên 4 temperament sang tiếng Việt, phải quay lại đổi đồng loạt ở đây và ở `focuses_POD_l_english.yml`, `POD_discipline_lifestyle_l_english.yml` cho khớp.
+
+## B4y. "Reweaving" (từ `gui/POD_reweaving_l_english.yml`), việc #2
+
+File 19 dòng: tên và các nhãn con của cửa sổ GUI đổi đặc tính nhân vật (`TRAIT_CHANGE_WINDOW_*`), mở ra từ interaction Fae `POD_reweaving_interaction` (thuật thuật của Changeling dùng Truename để sửa lại đặc tính cốt lõi của một người/vật — xem `lifestyles/POD_fae_lifestyle_l_english.yml` key `reweaving_perk_name`/`REWEAVING_PERK_EFFECT` khi tới lượt). Đây **không phải** danh từ riêng "Weaver" của Garou/Wyrm (đã chốt giữ nguyên tiếng Anh ở B3/B4s) — không áp dụng quy tắc "Wyld/Weaver/Wyrm giữ nguyên". "Reweaving" ở đây là **động từ thường** mô tả hành động dệt lại true-name/đặc tính, nên dịch nghĩa.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Reweaving *(TRAIT_CHANGE_WINDOW_TITLE, tên cửa sổ)* | Dệt Lại | dịch nghĩa; đối chiếu `simp_chinese` dùng "再织造" (Tái Dệt/Dệt Lại) cho cùng key — xác nhận đây là ẩn dụ "dệt lại" thông thường của thuật Fae, không phải danh xưng Weaver splat |
+| Change Trait *(TRAIT_CHANGE_WINDOW_CHANGE, nút hành động)* | Đổi Đặc Tính | ngắn gọn cho nút UI |
+| Trait *(trong các nhãn `TRAIT_CHANGE_WINDOW_*`)* | Đặc Tính | dùng "Đặc Tính" thay "Trait" xuyên suốt file này cho ngắn gọn (UI chật); nếu file khác đã có tiền lệ dịch "trait" khác (ví dụ "Tính Trạng") cần đối chiếu lại khi gặp |
+
+Áp dụng lại khi tới `POD_reweaving_interaction`/`POD_reweaving_interaction_desc` (`interactions/POD_character_interactions_fae_l_english.yml`) và `reweaving_perk_name`/`REWEAVING_PERK_EFFECT` (`lifestyles/POD_fae_lifestyle_l_english.yml`): dùng cùng "Dệt Lại" cho tên interaction/perk, giữ nhất quán với tên cửa sổ GUI ở đây.
+
+## B4z. "Hideout" (Vampire domicile type, từ `gui/POD_mod_compatibility_l_english.yml`), việc #2
+
+Chưa có tiền lệ dịch trước khi file này được dịch (kiểm tra `TERMINOLOGY.md`, `buildings/`, `common/buildings/` đều không có). Key gốc `haven_landed_domicile_type` (`buildings/building_domicile_POD_l_english.yml`, chưa dịch) dùng "Hideout" cho loại công trình domicile của Vampire.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Hideout *(building/domicile type của Vampire)* | Nơi Ẩn Náu | dịch nghĩa, phù hợp lore (chỗ trú ẩn ma cà rồng); áp dụng lại khi dịch `buildings/building_domicile_POD_l_english.yml` (key `haven_landed_domicile_type` và các key liên quan) để giữ nhất quán |
+
+## B5a. "Quincunx" (từ `gui/POD_quincunx_l_english.yml`), 37/37 dòng
+
+File 37 dòng, toàn bộ đã bị comment-out trong bản gốc tiếng Anh (mỗi dòng dạng ` #key: "..."` — dấu `#` ngay sau 1 space đầu dòng, không phải cú pháp key thường ` key: "..."`). Đã dịch giữ đúng định dạng comment này (không bỏ `#`, không tự bật lại). Nội dung: hệ thống chính trị/tài nguyên "Zeal" (Nhiệt Thành) của tổ chức Kuei-jin cấp cao gọi là "Quincunx" — hoàn toàn khác Tremere Pyramid (đã tra `TERMINOLOGY.md` xác nhận không liên quan; Quincunx chỉ xuất hiện cùng `August Court`, `August Ancestor`, `Kuei-jin` — thuộc nhóm thuật ngữ Kuei-jin B3c/B3e, không phải nhóm Tremere B3n).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Quincunx *(tổ chức chính trị cấp cao của Kuei-jin, tab_quincunx)* | Ngũ Hành Hội | không có tiền lệ base (danh từ riêng WoD hiếm); dịch nghĩa vì "quincunx" = hình sắp xếp 5 điểm kiểu hoa mai, hợp nghĩa "ngũ hành" trong văn hóa Hán mà Kuei-jin lấy cảm hứng; đối chiếu `simp_chinese/gui/POD_quincunx_l_simp_chinese.yml` dùng "五行宗" (Ngũ Hành Tông) xác nhận hướng dịch nghĩa theo ngũ hành là hợp lý; dùng "Hội" thay "Tông" vì đây là hội đồng/triều đình chính trị, không phải môn phái tu luyện |
+| Zeal *(quincunx_influence, tài nguyên/điểm ảnh hưởng của Quincunx)* | Nhiệt Thành | tái dùng nghĩa "Zeal"→"Nhiệt thành" đã có trong `base_game_vh` (`modifiers_l_english.yml` key `player_facing_ai_zeal`), viết hoa "Nhiệt Thành" khi dùng như tên tài nguyên riêng |
+| August Court *(chính thể/triều đình cai trị Kuei-jin, quincunx_county_mod)* | Thượng Triều | đặt mới; "August" ở đây là tính từ tôn xưng ("cao quý, tôn kính") giống trong `August Personage of Jade`→"Ngọc Hoàng" (B3c) chứ không dịch chữ-đối-chữ; "Thượng" ngắn gọn mang nghĩa cao quý/tối cao, hợp UI chật |
+| August Ancestor *(cấp bậc Kuei-jin cao nhất, thành viên Quincunx)* | Thượng Tổ | ghép "Thượng" (như August Court) + gốc "Tổ" từ "Ancestor"→"Tổ Tiên" (đã chốt B3, dòng 614) để nhất quán và ngắn gọn |
+| Ancestor *(ancestor_kueijin, cấp bậc Kuei-jin thường)* | Tổ Tiên | ✅ tái dùng tiền lệ đã chốt (dòng 614 TERMINOLOGY.md, hệ đẳng cấp Kuei-jin) |
+| Twilight War / Promote Twilight War | Chiến Tranh Hoàng Hôn / Cổ Vũ Chiến Tranh Hoàng Hôn | ✅ tái dùng gốc "Twilight War(s)"→"Hoàng Hôn" đã chốt (dòng 680, từ cặp Midnight/Twilight Warrior-General-Master) |
+| Midnight War / Promote Midnight War | Chiến Tranh Nửa Đêm / Cổ Vũ Chiến Tranh Nửa Đêm | ✅ tái dùng gốc "Midnight War(s)"→"Nửa Đêm" đã chốt (dòng 680) |
+| Edicts *(QUINCUNX_WINDOW_TAB_EDICTS, tab sắc lệnh)* | Sắc Lệnh | dịch nghĩa phổ thông, không có tiền lệ base riêng cần đối chiếu |
+
+Áp dụng lại khi gặp lại các khái niệm này ở file khác (nếu có): `Quincunx`→"Ngũ Hành Hội", `August Court`→"Thượng Triều", `August Ancestor`→"Thượng Tổ", `Zeal` (nghĩa tài nguyên Kuei-jin, không phải tính từ chung)→"Nhiệt Thành".
