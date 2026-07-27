@@ -1089,6 +1089,74 @@ Nguồn: `religion/POD_religion_roadoflilith_l_english.yml` (96 dòng, đã dị
 | Daughters of Gorgo *(tên tổ chức)* | Con Gái của Gorgo | dịch nghĩa, mẫu possessive "của X" |
 | neonate(s) *(daughtersofgorgo_desc, ma cà rồng mới được Trao truyền)* | kẻ mới được Trao truyền | đặt mới, ghép với "Nghi lễ Trao truyền/được Trao truyền" đã chốt B2 (`pod_Embrace(d)`) thay vì dịch từng chữ "neonate" tách biệt |
 
+## B3r. Thuật ngữ bổ sung (từ `POD_religion_raktasadhus`) — việc #2 file 16/36
+
+Nguồn: `religion/POD_religion_raktasadhus_l_english.yml` (97 dòng, đã dịch xong 100%) — nhóm faith ma cà rồng Ấn Độ "Rakta-sadhus" và 5 faith con (Mayaparisatya, Path of Paradox/Deceivers, Path of Devaraja, Path of Daitya, Samsara/Rakshasa). Đối chiếu trực tiếp với `base_game_vh/localization/english/religion/religion_hinduism_l_english.yml` cho mẫu possessive, house_of_worship, tên thần. Chỉ có **một** `Glossary()` trong toàn file (`raktasadhus_religion_desc`), tham số 1 `'Wan Kuei'` xác nhận **giữ nguyên tiếng Anh** — tra toàn mod thấy "Wan Kuei" chưa từng được dịch ở bất kỳ file nào khác, kể cả file đã xong (`POD_religion_kueijin_l_english.yml` dòng 103, 308 đều giữ "Wan Kuei" nguyên trong cả tham số 1 của Glossary lẫn văn xuôi thường).
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Wan Kuei *(tham số 1 của `Glossary('Wan Kuei','game_concept_kuei_jin_desc')`, và trong văn xuôi thường)* | Wan Kuei *(giữ nguyên)* | ✅ xác nhận tiền lệ toàn mod — không dịch, kể cả khi là tham số 1 dịch được của Glossary (ngoại lệ với quy tắc "luôn dịch tham số 1", vì đây là danh từ riêng WoD đã chốt giữ nguyên ở mọi nơi khác trong repo, giống "Kuei-Jin") |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ tiền lệ base_game_vh (`religion_hinduism_l_english.yml`: "của Brahman", "của Vishnu"…), áp dụng cho toàn bộ god-name possessive trong file |
+| temple(s) *(house_of_worship)* | đền thờ / các đền thờ | ✅ tiền lệ base (`hinduism_house_of_worship`="đền thờ") |
+| rose *(religious_symbol)* | hoa hồng | dịch nghĩa thường |
+| Destruction *(death_deity_name)* | Hủy Diệt | nhất quán với B3m/B3n/B3q (cùng key `death_deity_name` dùng "Destruction"→"Hủy Diệt" ở nhiều faith khác) |
+| blood *(health_god_name, danh từ thường dùng làm tên thần)* | máu | ✅ nhất quán mẫu B3g/B3n (danh từ thường làm tên thần → chữ thường thuần Việt) |
+| the Beast *(witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B4i/B3n, áp dụng lại |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ đã chốt B3h, áp dụng lại |
+| Blood-Brahmin *(religious_head_title/bishop)* | Brahmin Máu | đặt mới; "Brahmin" giữ nguyên theo B4g (thuật ngữ Ấn Độ giáo có thật đã chốt), ghép với "Máu" (thuần Việt) theo mẫu compound chấp nhận được của B0 (`Clan Curse`→`Lời nguyền Clan`) — thứ tự "Danh từ riêng + tính từ Việt" nhất quán với "Wyrm Ô Uế", "Wyrm Tai Ương" |
+| Mahakala, Kali, Ravana, Shilmulo, Atharva-Veda, Swarga Loka, Naraka, Sadhana, Asura, Devaraja, Rakshasa | *(giữ nguyên)* | tên riêng/thuật ngữ Ấn Độ giáo có thật hoặc thuật ngữ WoD gốc Phạn ngữ, theo B0 và tiền lệ base (Naraka đã có ở `hinduism_negative_afterlife`) |
+| Rakta-sadhus / Rakta-sadhu | Rakta-sadhus / Rakta-sadhu *(giữ nguyên)* | tên nhóm faith, biến thể chính tả của "Raktasadhus" — giữ dạng gốc có gạch nối vì đây là key/tên hiển thị riêng biệt trong bản gốc |
+| Cathayan *(tính từ, "ma cà rồng vùng Cathay")* | Cathay *(giữ nguyên tên địa danh, ghép thành "ma cà rồng Cathay")* | "Cathay" là tên gọi cổ của Trung Hoa trong tiếng Anh trung đại — không có tiền lệ base, giữ nguyên tên riêng địa danh như cách base giữ tên địa danh ngoại lai khác (Jerusalem, Rome ở B3k) |
+| Court *(Infinite Thunders Court, Scarlet Phoenix Court — tổ chức Kuei-Jin)* | Triều Đình | ✅ nhất quán B3e (Kuei-Jin Courts = "Triều Đình") |
+| Infinite Thunders Court | Triều Đình Vạn Lôi vô hạn | đặt mới; "Vạn Lôi" (vạn tiếng sấm) dịch nghĩa Hán-Việt "Infinite Thunders", theo giọng các tên tổ chức Kuei-Jin khác |
+| Scarlet Phoenix Court | Triều Đình Phượng Hoàng Đỏ Thẫm | đặt mới; "Đỏ Thẫm" nhất quán với "Crimson"→"Đỏ Thẫm" đã chốt B3l (`Crimson Curia`), phân biệt "Scarlet" khỏi "Đỏ" thường |
+| Path of Paradox / Deceiver(s) *(viaparadox)* | Con Đường Nghịch Lý / Kẻ Lừa Dối | "Path"→"Con Đường" nhất quán B3f/B3k/B3q (Path dùng đồng nghĩa Road trong các faith `pathof*`); "Nghịch Lý" dịch nghĩa "Paradox" |
+| Divine(s) *(pathofdevaraja_adherent)* | Đấng Thần Thánh | dịch nghĩa; số nhiều thêm "Các" vì ngữ cảnh liệt kê nhóm người theo mục 7 TRANSLATION_RULES.md (không gộp trơn vì câu văn cần phân biệt số ít/nhiều rõ) |
+| Snake-Charmer(s) *(pathofdaitya_adherent)* | Kẻ Dụ Rắn / Những Kẻ Dụ Rắn | dịch nghĩa trực tiếp |
+| Brahminism *(mortal Brahminism — hệ tôn giáo, KHÁC "Brahmin" danh xưng đẳng cấp)* | Bà-la-môn giáo | ✅ tiền lệ base xác nhận: `hinduism_priest_term_plural`="Bà-la-môn" — dùng "giáo" cho hệ thống tôn giáo, giữ "Brahmin" nguyên khi là danh xưng đẳng cấp/cá nhân trong cùng đoạn văn (hai từ tiếng Anh khác nhau biểu thị hai khái niệm khác nhau, không vi phạm một-thuật-ngữ-một-bản-dịch) |
+| Kindred *(mayaparisatya_desc/viaparadox_desc, chỉ ma cà rồng nói chung)* | Huyết Tộc | ✅ đã chốt B3k, áp dụng lại |
+| neonate(s) *(samsara_desc — ma cà rồng mới hóa)* | ma cà rồng mới hóa | đặt mới; chưa có tiền lệ base/POD nào dịch từ này trước đây (tra toàn mod chỉ thấy các file chưa dịch dùng "neonate"), đặt theo nghĩa đen "mới được Trao truyền/mới hóa thành ma cà rồng", đối lập ngầm với "Elder" (chưa gặp, sẽ đặt khi tới lượt) |
+| Ethics *(samsara_desc — giáo lý đạo đức của Path)* | Đạo Lý | đặt mới, không có tiền lệ base/POD riêng cho nghĩa hệ thống đạo đức tôn giáo này |
+| Hierarchy of Sins *(samsara_desc)* | Thang Tội Lỗi | đặt mới; "Thang" (bậc thang) gợi ý hệ thống phân cấp tội lỗi có thứ bậc, không có tiền lệ base/POD |
+| sect *(raktasadhus_desc, danh từ thường "giáo phái/môn phái")* | giáo phái | dịch nghĩa thường |
+| Hinduism *(mayaparisatya_desc)* | Ấn Độ giáo | ✅ tiền lệ base (`hinduism_religion`="Ấn Độ giáo") |
+
+## B3w. Thuật ngữ bổ sung (từ `POD_religion_roadofbones`) — việc #2 file 21/36
+
+Nguồn: `religion/POD_religion_roadofbones_l_english.yml` (99 dòng, đã dịch xong 100%) — tôn giáo "Road of Bones" (Con Đường Xương Cốt, đã khóa cứng ở B3k), ma cà rồng nghiên cứu về cái chết, chủ yếu Cappadocian. File không có `Glossary()`/`UmbraGlossaryLocalized()` nào (bracket count = 0). 4 faith con dùng mẫu "Road/Path of X" → "Con Đường X" đã có sẵn từ B3f/B3k/B3s.
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Road of Bones *(roadofbones_religion)* | Con Đường Xương Cốt | ✅ đã khóa cứng B3k, áp dụng lại |
+| Scholar(s) *(religion_adj/adherent/devotee/priest/bishop, tên tín đồ)* | Học Giả | đặt mới, không có tiền lệ base cho "Scholar" ở nghĩa tên tín đồ tôn giáo; dùng nhất quán cho toàn bộ các biến thể chức sắc trong file |
+| Death *(high_god_name)* | Cái Chết | ✅ tiền lệ base (`christianity_death_deity_name`="Cái Chết") — dùng cho danh từ trừu tượng làm tên thần |
+| The Death *(high_god_name_alternate)* | Tử Thần | biến thể thứ hai của cùng vị thần "Cái Chết", tránh lặp từ, "Tử Thần" là cách gọi nhân cách hóa phổ biến trong tiếng Việt |
+| the Beast *(devil_name/witchgodname_the_horned_god)* | Dã Thú | ✅ đã chốt B5, áp dụng lại |
+| Destruction *(death_deity_name)* | Hủy Diệt | ✅ khớp tiền lệ đã dùng nhiều lần cho cùng dạng key ở B3m/B3n/B3p/B3q (`death_deity_name`="Destruction"→"Hủy Diệt") — không nhầm với "Entropy"="Hoại Diệt" (B3b) |
+| refuge(s) *(house_of_worship)* | chốn nương thân | đặt mới, không có tiền lệ base trực tiếp; phù hợp giọng văn ma cà rồng ẩn dật nghiên cứu cái chết |
+| skull *(religious_symbol)* | đầu lâu | dịch nghĩa thường |
+| Sargon Codex *(religious_text)* | Sargon Codex *(giữ nguyên)* | ✅ tiền lệ POD xác nhận: xuất hiện nguyên dạng ở `modifiers/1230objectives_POD_modifiers_l_english.yml` và `POD_journeys_l_english.yml` (tên hiện vật/nhiệm vụ riêng, chưa dịch — giữ nguyên tên riêng tránh lệch với các file đó) |
+| first scholar *(religious_head_title)* | học giả đệ nhất | dịch nghĩa, giữ chữ thường như bản gốc (khác các tên chức sắc viết hoa ở các faith khác) |
+| Underworld *(divine_realm/positive_afterlife, danh từ thường, KHÔNG phải tham số `UmbraGlossaryLocalized('shadowlands',…)`)* | Âm Giới | đặt mới cho ngữ cảnh này; phân biệt với "Âm Phủ" (B4j, chỉ dành riêng cho tham số 2 của macro `UmbraGlossaryLocalized('shadowlands','Underworld')`) — ở đây "Underworld" là danh từ thường trong key tôn giáo, không đi qua macro đó |
+| Oblivion *(negative_afterlife)* | Hư Vô | ✅ khớp tiền lệ đã dùng nhiều lần cho cùng key ở B3q và nơi khác |
+| blood *(health_god_name, danh từ thường làm tên thần)* | máu | ✅ khớp mẫu B3g/B3h/B3s — chữ thường |
+| Fortuna *(trickster_god_name)* | Fortuna *(giữ nguyên)* | ✅ đã chốt B3h, áp dụng lại kèm possessive "của Fortuna" |
+| `_possessive` (`"X's"`) | mẫu `"của X"` | ✅ áp dụng nhất quán theo B3e/B3g/B3h/B3k |
+| Via Ossium, Ossium, Via Primordia, Primordia | *(giữ nguyên — không dịch)* | tên Latin của 2 faith con; khác "Road/Path of X" (là cụm tiếng Anh thường), đây là cụm Latin nguyên bản kiểu "Tal'Mahe'Ra"/"Manus Nigrum" (B3q) — giữ nguyên theo B0. **Chưa hoàn toàn chắc chắn, cần xác nhận thêm nếu gặp lại "Via X" ở file khác** |
+| Followers of Lazarus *(followersoflazarus, tên faith con)* | Tín Đồ của Lazarus | dịch nghĩa "Followers of" + giữ nguyên tên riêng Kinh Thánh "Lazarus", mẫu possessive "của X" |
+| Lazarene *(followersoflazarus_adj)*, Infitiore(s) *(followersoflazarus_adherent)* | *(giữ nguyên — không dịch)* | tính từ/danh xưng ngoại lai phái sinh từ tên riêng, không dịch được tự nhiên sang tiếng Việt, theo mẫu B0 (giống "Rathmonicusi", B3q) |
+| Path of the Wheel *(pathofthewheel)* | Con Đường Bánh Xe | dịch nghĩa theo mẫu "Road/Path of X"→"Con Đường X" |
+| Scientist(s) *(pathofthewheel_adherent)* | Nhà Khoa Học | dịch nghĩa thường |
+| Road of the Abyss *(roadoftheabyss)* | Con Đường Vực Thẳm | dịch nghĩa, "vực thẳm" đã có tiền lệ base/POD (B3h/B3m/B3s) |
+| Mystic(s) *(roadoftheabyss_adherent)* | Nhà Huyền Học | đặt mới, không có tiền lệ base cho "Mystic" ở nghĩa danh xưng tín đồ; "Huyền Học" gợi nghiên cứu bí ẩn/siêu hình, phù hợp mô tả file |
+| The Harbingers *(holy_order_harbringers_cappa)* | Điềm Báo Giả | ✅ tiền lệ base (`adventurer_name_sections_l_english.yml`: `harbingers`="Điềm báo giả") — viết hoa theo quy ước tên riêng holy order |
+| Guardians of the Erciyes *(holy_order_erciyes)* | Vệ Binh Erciyes | "Erciyes" là địa danh có thật (núi lửa Thổ Nhĩ Kỳ) → giữ nguyên theo mẫu giữ tên địa danh (B3k); "Guardians" dịch "Vệ Binh", khác "Defenders"→"Hộ Vệ" (đã dùng cho `holy_order_defenders_ashirra`, B3i) để tránh trùng từ giữa hai holy order khác nhau |
+| Via Primordia *(viaprimordia)*, Primordian(s) *(viaprimordia_adherent)* | Via Primordia *(giữ nguyên)*, Primordian *(giữ nguyên)* | xem dòng "Via Ossium/Primordia" ở trên; "Primordian" là danh xưng phái sinh từ tên Latin, không dịch |
+| the 'Three' *(viaprimordia_desc, ba linh hồn Creation/Destruction/Preservation)* | 'Tam Vị' | dịch nghĩa, giữ dấu nháy đơn như bản gốc |
+| Creation / Destruction / Preservation *(3 linh hồn của viaprimordia_desc)* | Sáng Tạo / Hủy Diệt / Bảo Tồn | dịch nghĩa thường; "Destruction" ở đây khớp lại "Hủy Diệt" như trên dù ngữ cảnh khác (tên thần vs. một trong ba linh hồn) — cùng từ tiếng Anh, cùng bản dịch, đúng nguyên tắc một-thuật-ngữ-một-bản-dịch |
+| Avatar *(viaprimordia_desc)* | Hóa Thân | dịch nghĩa thường, không nhầm với "Avatar" gốc của Cappadocius trong `POD_journeys_l_english.yml` (chưa dịch, sẽ đồng bộ khi tới việc #11/#12) |
+| Lupine(s) *(viaprimordia_desc, cách gọi người sói của phe khác)* | Lupine *(giữ nguyên)* | danh từ tiếng Latin chỉ "người sói" dùng như biệt danh ngoại lai trong văn cảnh WoD, không có tiền lệ base, giữ nguyên vì là cách gọi đặc thù (khác `trait_werewolf`="Người sói" chính thức) |
+
 ## B5. Xung đột cần giải quyết trước khi dịch
 
 | Từ POD | Vanilla đã chiếm | Hướng xử lý |
