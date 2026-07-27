@@ -3014,3 +3014,22 @@ Toàn bộ tên Discipline trong comment heading (Potence/Celerity/Fortitude/Obf
 | Auto da Fé, Fiat Lux *(2 tên perk Latin, Endowments Hunter)* | giữ nguyên tiếng Anh/Latin | đặt mới, thuật ngữ tôn giáo Latin |
 | Apophis *(tên riêng thần thoại Ai Cập, Serpentis)* | Apophis *(giữ nguyên)* | tái xác nhận B3 (`glossary_wyrm_apophis`) |
 | Silence of Death, Dagon's Call, Baal's Caress, Purification *(4 tên perk lặp lại ở nhiều temperament)* | Sự Im Lặng Của Tử Thần, Tiếng Gọi Của Dagon, Vuốt Ve Của Baal, Thanh Tẩy | đặt mới, dịch nhất quán mọi lần xuất hiện |
+
+## B8-lifestyles-p7. Thuật ngữ `POD_mummy_lifestyles_l_english.yml` (755/755 dòng — 6 nhóm Hekau: Alchemy/Amulets/Celestial/Effigy/Necromancy/Nomenclature + phần "Tan" Trung Hoa)
+
+Nguồn: dịch qua 4 agent chia đoạn (1-195, 196-372, 373-590, 591-755). **Lỗi merge nghiêm trọng nhất từ trước đến nay phát hiện ở đợt này — loại lỗi hoàn toàn mới:**
+
+**3/4 đoạn (p2, p3, p4 — tổng 560/755 dòng, ~74% file) bị THIẾU KHOẢNG TRẮNG ĐẦU DÒNG ở gần như mọi dòng nội dung** (171/177 dòng ở p2, 211/218 ở p3, toàn bộ 165/165 ở p4) — trong khi SỐ DÒNG vẫn đúng và mỗi agent tự báo cáo "khớp chính xác". Cách phát hiện: `diff` so sánh tập hợp key theo pattern `^ key:` (có khoảng trắng đầu) giữa gốc và bản dịch báo hàng trăm dòng "bị thiếu" — ban đầu tưởng lỗi ghép sai thứ tự nghiêm trọng, nhưng kiểm tra bằng `grep -c '^ '` vs `grep -cv '^ '` mới lộ ra bản chất: agent Write ra file KHÔNG có khoảng trắng ở đầu dòng dù đã đọc đúng nội dung có khoảng trắng từ Read tool. Sửa bằng `perl -i -pe 's/^(?=\S)/ /'` (thêm 1 space vào đầu mọi dòng không trống chưa có sẵn) cho cả 3 file trước khi ghép.
+
+**Bài học mới, quan trọng hơn mọi lỗi merge trước đó:** kiểm tra "số dòng khớp" và "key-theo-thứ-tự khớp" (không tính khoảng trắng đầu dòng, dùng `grep -oE '^ [A-Za-z_]...'`) là KHÔNG ĐỦ nếu lệnh grep dùng để verify cũng yêu cầu khoảng trắng đầu dòng — trong trường hợp này lỗi lại tự lộ ra đúng vì pattern verify chuẩn (`^ [A-Za-z_]`) vô tình bắt được. Nhưng nếu người merge chỉ đếm số dòng (`wc -l`) và số bracket/ref (không neo `^ `), lỗi này **hoàn toàn không bị phát hiện** vì bracket/ref/key text vẫn còn nguyên, chỉ mất 1 ký tự khoảng trắng đầu mỗi dòng. **Từ nay: luôn kiểm tra `grep -c '^ '` so với tổng số dòng nội dung (loại trừ dòng trống) cho MỌI file/đoạn agent dịch, không chỉ dựa vào diff key-pattern có neo `^ ` (vì nó có thể tình cờ bắt được lỗi này, nhưng không phải lúc nào cũng bắt được nếu chọn pattern verify khác).**
+
+Cũng phát hiện lỗi thuật ngữ: 4 chỗ rarity artifact (`#COMMONBROWN`/`#color_dark_green`/`#ILLUSTRIOUSPURPLE`) dùng "Thông Thường"/"Kiệt Tác"/"Lỗi Lạc" — lệch tiền lệ B5c đã chốt "Thường"/"Tinh xảo"/"Lừng lẫy" (hệ thống rarity artifact CHUNG toàn mod, không riêng Mummy). Sửa lại khớp B5c.
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Hekau *(hệ pháp thuật riêng Mummy, nhắc lại)*, Sekhem, Ma'at, Ka/Ba/Khaibit/Khu *(linh hồn Ai Cập)* | giữ nguyên tiếng Anh | tái xác nhận B3c + đặt mới cho Ka/Ba/Khaibit/Khu |
+| Alchemy/Amulets/Celestial/Effigy/Necromancy/Nomenclature *(6 nhóm Hekau, tên comment heading — không dịch)* | Giả Kim/Bùa Hộ Mệnh/Thiên Văn/Hình Nhân/Triệu Hồn/Xưng Danh *(chỉ dùng trong mô tả văn xuôi, KHÔNG áp vào comment `# X`)* | đặt mới; phân biệt rõ: comment heading giữ nguyên tiếng Anh theo §5, nhưng khi từ này xuất hiện trong câu văn xuôi/tên hiển thị thật thì dịch nghĩa |
+| Chattel, Reflection, Bond of Fate, Inertion, Wrest *(nhóm perk Effigy)* | Vật Phẩm, Phản Chiếu, Liên Kết Định Mệnh, Trơ Ứng, Đoạt Quyền | đặt mới |
+| Tan, Feng Tan, Lung Tan *(hệ pháp thuật Trung Hoa của Mummy, đối xứng Hekau Ai Cập)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng WoD gốc Trung Hoa |
+| True Name(s) *(tham số 1 của Glossary, nhắc lại)* | Chân Danh | tái xác nhận B3c |
+| Common/Masterwork/Famed/Illustrious *(rarity artifact, tag `#COMMONBROWN` v.v, nhắc lại)* | Thường/Tinh xảo/Danh tiếng/Lừng lẫy | ✅ **tái xác nhận B5c — sửa lại khi merge**, KHÔNG dùng "Thông Thường"/"Kiệt Tác"/"Lỗi Lạc" |
