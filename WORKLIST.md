@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 7 — việc #5 `interactions/` đạt 25/28 file, còn 2 file lớn cuối `wraith` + `vampire` bàn giao session sau).
+Cập nhật lần cuối: 2026-07-27 (đợt 8 — `vampire` xong 100% + commit, `interactions/` đạt 27/28. `wraith` đã dịch xong bản nháp 6/6 đoạn qua agent nhưng CHƯA merge/verify/commit — bàn giao session sau, xem mục ĐỢT 8 để biết chi tiết vị trí file nháp).
 
 ---
 
@@ -16,8 +16,34 @@ Cập nhật lần cuối: 2026-07-27 (đợt 7 — việc #5 `interactions/` đ
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **25/28 file interactions/ (việc #5, đang làm)** |
-| Việc tiếp theo | **việc #5 — hoàn tất 2 file cuối `interactions/`: `POD_character_interactions_wraith_l_english.yml` (737 dòng) + `POD_character_interactions_vampire_l_english.yml` (1186 dòng, file lớn nhất)**, rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **27/28 file interactions/ (việc #5, đang làm — chỉ còn `wraith`)** |
+| Việc tiếp theo | **việc #5 — hoàn tất nốt 1 file cuối `interactions/`: `POD_character_interactions_wraith_l_english.yml` (738 dòng thật, xem ĐỢT 8)**, rồi tiếp tục tuần tự #6 `decisions/` → #7 `modifiers/` → #8 `lifestyles/` → #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+
+### ⏸️ ĐỢT 8 (2026-07-27) — `vampire` XONG + COMMIT, `interactions/` đạt 27/28. `wraith` đã dịch nháp 6/6 đoạn nhưng CHƯA merge/verify/commit — BÀN GIAO session sau
+
+**Việc đã xong hoàn toàn trong đợt này:**
+- `interactions/POD_character_interactions_vampire_l_english.yml` (1187/1187 dòng thật — `grep -c ''`, KHÔNG phải 1186 như `wc -l` báo vì dòng cuối không có newline) — dịch qua 8 agent chia đoạn (1-155, 156-321, 322-444, 445-592, 593-726, 727-889, 890-1033, 1034-1187), merge, verify đủ 3 lớp + 2 grep bổ sung (English-sót loại trừ dòng comment, Glossary tham số 1 nhất quán), **commit `99ecb29`**.
+- 2 lỗi merge tự phát hiện và sửa trước khi commit: (1) đoạn 322-444 thiếu đúng 1 dòng trống cuối (dòng 444) do agent xuất scratch ngắn hơn 1 dòng — khôi phục đúng vị trí; (2) BOM đôi do agent phần 1 tự thêm BOM vào scratch, script merge coordinator lại thêm 1 lần nữa — đã gỡ bớt.
+- Thuật ngữ mới → TERMINOLOGY.md heading `B5-vampire-p1` đến `p8` (~150 mục).
+
+**Việc CHƯA xong — bàn giao chính xác cho session sau:**
+
+`interactions/POD_character_interactions_wraith_l_english.yml` — **6/6 đoạn ĐÃ dịch xong qua agent** (baseline đã đo: 738 dòng thật `grep -c ''`, KHÔNG phải 737 như `wc -l` báo vì dòng cuối không có newline; blank 130, key 1-space 600, ref 58, bracket 279, icon 0, close-tag 45, open-tag 45, `\n` 1, `\"` 0, key 2-space 0, BOM `efbbbf`), nhưng **CHƯA merge vào file thật, CHƯA verify, CHƯA commit** — hết token giữa chừng lúc đang merge.
+
+Ranh giới 6 đoạn đã dùng (đều rơi đúng dòng trống, đã kiểm tra không cắt ngang entry): **1-132, 133-246, 247-369, 370-495, 496-615, 616-738.**
+
+**6 file bản dịch nháp đã lưu tại `.wraith_handoff_scratch/` trong repo (untracked, chưa add vào git — session sau đọc trực tiếp, ĐỪNG xóa trước khi dùng xong):**
+- `part1_1-132.yml`, `part2_133-246.yml`, `part3_247-369.yml`, `part4_370-495.yml`, `part5_496-615.yml`, `part6_616-738.yml`
+
+**Vấn đề đã phát hiện khi thử merge (chưa kịp sửa hết — session sau phải xử lý trước khi ghi vào file thật):**
+1. Tất cả 6 file scratch được yêu cầu ghi KHÔNG có BOM (đúng) và CRLF — nhưng `part3_247-369.yml` thực tế được ghi bằng **LF thuần, không phải CRLF** (đã xác nhận: `crlf count = 0`, `lone lf = 123`). Phải tự chuyển LF→CRLF khi merge đoạn này, đừng ghép thẳng.
+2. `part5_496-615.yml` **thiếu đúng 1 dòng** so với kỳ vọng (119 dòng thực tế, cần 120) — giống hệt lỗi đã gặp ở `vampire` part3 (thiếu 1 dòng trống cuối đoạn do agent cắt scratch bằng split() làm rớt phần tử rỗng cuối). Cần tự dò xem dòng nào bị thiếu (nhiều khả năng là dòng trống ở ranh giới 615/616) bằng cách so key thứ tự với bản gốc `git show HEAD:<file>`, rồi bổ sung đúng vị trí — theo đúng cách đã xử lý ở batch `vampire`.
+3. Do (1)+(2), TUYỆT ĐỐI đừng ghép 6 file này bằng cách nối chuỗi đơn giản — phải viết lại script Python kiểu đã dùng cho `vampire` (xem commit `99ecb29`, hoặc lịch sử hội thoại đợt này): với mỗi phần, `split(b'\r\n')`, bỏ phần tử rỗng cuối nếu có, so `len(lines)` với số dòng kỳ vọng của đoạn đó, và xử lý riêng phần3 (dùng `split(b'\n')` vì không có CRLF) + phần5 (bổ sung đúng 1 dòng thiếu, tìm vị trí bằng cách so sánh key tuần tự với bản gốc).
+4. Sau khi ghép đủ 738 dòng: chạy đủ 3 lớp kiểm tra chuẩn (số liệu, BOM/loneLF/UTF-8, diff 6 mẫu ID) + 2 lệnh grep bổ sung (English-sót loại trừ dòng comment, Glossary/UmbraGlossaryLocalized tham số nhất quán — file này CÓ dùng `UmbraGlossaryLocalized('shadowlands','Underworld')` ở dòng 55 theo báo cáo agent phần 1, phải kiểm tra kỹ tham số 2 = "Âm Phủ") rồi mới ghi đè vào file thật và commit.
+5. TERMINOLOGY.md đã có sẵn heading `B5-wraith-p2`, `B5-wraith-p4`, `B5-wraith-p5`, `B5-wraith-p6` (p1 và p3 không cần thêm mục mới theo báo cáo agent, hoặc p3 chưa xác nhận được do mất thông báo — kiểm tra lại báo cáo p3 nếu cần). Không có heading nào trùng lặp tại thời điểm bàn giao (đã grep xác nhận).
+6. Nghi vấn thuật ngữ agent tự nêu, chưa giải quyết: "Conduit" (p1 hỏi, p6 đã tự đặt là giữ nguyên tiếng Anh — cần xác nhận thống nhất khi merge), viết hoa "Oan Hồn Bị Ràng Buộc" vs "oan hồn bị ràng buộc" giữa p2 và p6 (cần thống nhất 1 cách viết hoa), "Angst" (p5 giữ nguyên tiếng Anh tạm thời, chưa có tiền lệ).
+
+Sau khi xong `wraith`: `interactions/` đạt 28/28 → việc #5 HOÀN TẤT → chuyển sang việc #6 (`decisions/`, 2.441 key, 11 file).
 
 ### ⏸️ ĐỢT 7 (2026-07-27) — việc #5 `interactions/` đạt 25/28 file, BÀN GIAO 2 file cuối cho session sau
 

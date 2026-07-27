@@ -2642,3 +2642,109 @@ Nội dung: các perk-interaction Necromancy (Cleansed in Blood, Purification, T
 | Incarnate Darkness *(tên 1 dạng shapeshift vampire)* | Hiện Thân Bóng Tối | đặt mới, dịch nghĩa |
 
 Ghi chú phạm vi: đã đọc thêm dòng 727-729 (`POD_train_disciplines_interaction*`) chỉ để nắm ngữ cảnh câu cuối đoạn 726, nhưng KHÔNG dịch/xuất ra file `part5_593-726.yml` — nằm ngoài phạm vi 593-726 được giao, dành cho agent phần tiếp theo.
+
+## B5-wraith-p5. Thuật ngữ `interactions/POD_character_interactions_wraith_l_english.yml` (dòng 496-615)
+
+Nguồn: các tương tác Fetter (Manipulate/Sprout/Resolve/Allocate/Downgrade/Destroy [Fetter|E]), tương tác Transfuse/Reconfigure (chuyển Pathos/Corpus), Contaminate, Fetter Rape, Resist against Shadow, và các tương tác Arcanoi Argos/Castigate/Embody/Keening/Lifeweb/Moliate/Pandemonium (Haunt). Không có `Glossary()`/`UmbraGlossaryLocalized()` trong đoạn này.
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Pathos | Pathos *(giữ nguyên)* | danh từ lõi hệ thống Wraith, không có tiền lệ base tương ứng, theo B0/B4h — nhất quán với "Pathos" đã dùng giữ nguyên ở B5-wraith-p6 |
+| Manipulate [Fetter\|E] | Thao Túng [Fetter\|E] | đặt mới, dịch nghĩa |
+| Sprout [Fetter\|E] | Gieo Mầm [Fetter\|E] | đặt mới, dịch nghĩa ("sprout" = nảy mầm/gieo mầm) |
+| Resolve [Fetter\|E] | Hóa Giải [Fetter\|E] | đặt mới, dịch nghĩa (quá trình buông bỏ Fetter không hối tiếc) |
+| Fetter Rape *(tên tương tác biến mục tiêu thành Risen)* | Cưỡng Đoạt Fetter | đặt mới, dịch nghĩa phần động từ, giữ "Fetter" nguyên theo B4h |
+| Transfuse / Reconfigure *(tương tác chuyển Pathos/Corpus)* | Truyền Dẫn / Tái Cấu Trúc | đặt mới, dịch nghĩa |
+| Contaminate | Vấy Nhiễm | đặt mới, dịch nghĩa |
+| Resist against Shadow | Kháng Cự Bóng | đặt mới; "Shadow" = "Bóng" tái dùng tiền lệ B4h (khía cạnh đen tối của Wraith) |
+| Angst *(nhắc trong tên/hiệu ứng tương tác Castigate)* | Angst *(giữ nguyên)* | chưa có tiền lệ dịch nghĩa trong repo; thuật ngữ tâm lý-Wraith (Ác cảm/nỗi thống khổ tích tụ), tạm giữ nguyên tiếng Anh theo B0 vì không tìm thấy khái niệm base tương đương; cần rà soát lại nếu gặp key `_desc` giải thích rõ nghĩa |
+| Trimming the Black Rose *(tên tương tác Castigate)* | Tỉa Bớt Đóa Hồng Đen | đặt mới, dịch nghĩa trực tiếp |
+| Whispers *(tên power Embody)* | Những Lời Thì Thầm | đặt mới, dịch nghĩa, nhất quán với cách dịch "Whispers" ở nơi khác trong mod (Black Whispers, Wails and Whispers — B4x/B5) |
+| Mood music / Satire and Requiem / Siren Song *(tên power Keening)* | Nhạc Điệu Tâm Trạng / Châm Biếm và Khúc Cầu Hồn / Khúc Hát Nàng Tiên Cá | đặt mới, dịch nghĩa; "Requiem" = "Khúc Cầu Hồn" |
+| Walk the Web *(tên power Lifeweb)* | Dạo Bước Trên Mạng Lưới | đặt mới, dịch nghĩa |
+| Pathos heal *(tên power Moliate)* | Chữa Lành bằng Pathos | đặt mới, dịch nghĩa, giữ "Pathos" nguyên |
+| Haunt *(tên power Pandemonium, tương tác quấy nhiễu mục tiêu)* | Ám Ảnh | đặt mới, dịch nghĩa |
+
+## B5-wraith-p6. Thuật ngữ đoạn cuối `interactions/POD_character_interactions_wraith_l_english.yml` (dòng 616-738)
+
+Nguồn: các tương tác Arcanoi (Pandemonium/Phantasm/Puppetry/Usury/Intimation/Mnemosynis/Fascinate) và tương tác "Command Bound Wraiths". Không có `UmbraGlossaryLocalized()` trong đoạn này; chỉ có `UmbraGlossary('pod_realm_labyrinth')` (1 tham số, không dịch) và 4 lần `Glossary('Skinlands','game_concept_skinlands_desc')` (giữ nguyên tham số 1 theo tiền lệ B4h — "Skinlands" là danh từ lõi Wraith không dịch).
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Escher's Stair *(tên power Pandemonium)* | Cầu Thang Escher | đặt mới; giữ tên riêng "Escher" (họa sĩ M.C. Escher, ám chỉ cầu thang nghịch lý), dịch phần còn lại |
+| Morphean Embrace *(tên power Phantasm)* | Vòng Tay Morphean | đặt mới; giữ "Morphean" (gốc thần Morpheus - thần giấc mộng), dịch "Embrace"="Vòng Tay" |
+| Drain Pathos / Stop Dreaming *(tên power Phantasm)* | Rút Cạn Pathos / Chấm Dứt Giấc Mơ | đặt mới, dịch nghĩa; "Pathos" giữ nguyên theo tiền lệ B0/toàn mod |
+| Possess / End Possession *(Puppetry)* | Chiếm Hữu / Kết Thúc Chiếm Hữu | đặt mới, dịch nghĩa; nhất quán với "possess/possessed" đã dùng nơi khác trong mod (Bane/Fomori numina) |
+| Control Puppet / Cancel Control Puppet / Control Creature *(Puppetry)* | Điều Khiển Con Rối / Hủy Điều Khiển Con Rối / Điều Khiển Sinh Vật | đặt mới, dịch nghĩa |
+| Create Conduit / Conduit *(Puppetry/Usury, danh từ vật thể chứa năng lượng)* | Tạo Ống Dẫn / Ống Dẫn | đặt mới; "Conduit" dịch "Ống Dẫn" (vật trung gian truyền Pathos/Corpus) |
+| the Risen *(nhắc đến nhóm Wraith gọi hồn động vật, `POD_puppetry_create_conduit_interaction_desc`)* | kẻ Risen | *(giữ nguyên tên riêng "Risen")* — chưa có tiền lệ dịch nghĩa, danh từ riêng nhóm/phe WoD |
+| Exchange Rate / Pathos Vessel *(Usury)* | Tỷ Giá Trao Đổi / Bình Chứa Pathos | đặt mới, dịch nghĩa; "Pathos"/"Corpus" giữ nguyên theo B0 |
+| Store Pathos / Extract Stored Pathos *(Usury)* | Lưu Trữ Pathos / Rút Pathos Đã Lưu Trữ | đặt mới, dịch nghĩa |
+| The Gleaming *(tên power Intimation)* | Ánh Rạng Rỡ | đặt mới, dịch nghĩa |
+| Ignite *(tên power Intimation)* | Khơi Mào | đặt mới, dịch nghĩa |
+| Erasure / Relation Manipulation / Gray Man *(tên power Mnemosynis)* | Xóa Bỏ / Thao Túng Quan Hệ / Người Xám | đặt mới, dịch nghĩa |
+| Driving Urge *(tên power Fascinate)* | Thôi Thúc Nội Tâm | đặt mới, dịch nghĩa |
+| Command Bound Wraiths *(tên tương tác chính)* | Ra Lệnh Cho Oan Hồn Bị Ràng Buộc | đặt mới; "Wraith"="Oan Hồn" đã chốt B4/B4u |
+| Bound Wraith *(secondary recipient label)* | Oan Hồn Bị Ràng Buộc | đặt mới, nhất quán với dòng trên |
+
+Ghi chú: đoạn này chỉ toàn tên/mô tả tương tác — không phát sinh mâu thuẫn thuật ngữ với các đoạn trước. Ba dòng mô tả bị lặp lại y hệt trong bản gốc tiếng Anh (`POD_phantasm_morphean_embrace_interaction_desc: ""`, và 3 key `_desc` khác nhau đều mang cùng chuỗi `"Intimation: The Gleaming"` dù thuộc Mnemosynis/Fascinate) — đây là lỗi có sẵn trong bản gốc (đặt nhầm text), đã dịch y hệt bản gốc lặp lại tương ứng, không tự sửa nội dung.
+
+## B5-wraith-p2. Thuật ngữ đoạn `interactions/POD_character_interactions_wraith_l_english.yml` dòng 133-246, việc #5
+
+Nguồn: Pathos Heal, Allocate/Resolve/Manipulate Fetter, Ask for Mentoring (Arcanoi), Walk the Web, Remove Caul, Inspire, Drain Energy (Pathos), Stop Dreaming/Awaking, Convert/Control Barghest (Bloodhound), Create Rumor, Enthrall, Upgrade Relation, Create/Gift Foul Food — cùng các biến thể "Command Wraith" (sai khiến oan hồn bị ràng buộc thay mặt). Không có `Glossary()`/`UmbraGlossaryLocalized()` trong đoạn này. Có 3 lần `Select_CString( actor.IsLocalPlayer, 'you', 'the bound wraith' )` — cả hai chuỗi là chữ hiển thị thường (không phải ID) nên đã dịch thành `'ngươi'` / `'oan hồn bị ràng buộc'`.
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Pathos Heal | Chữa Lành bằng Pathos | đặt mới; "Pathos" giữ nguyên theo tiền lệ B4h/B0 (danh từ lõi Wraith) |
+| Command Wraith *(nhãn `#weak (...)` cho biến thể sai khiến oan hồn bị ràng buộc)* | Sai khiến Oan hồn | đặt mới, dịch nghĩa ngắn gọn cho vừa UI |
+| Allocate [Fetters\|E] | Phân bổ [Fetters\|E] | đặt mới; "Fetter(s)" giữ nguyên theo B4h (concept-link, không dịch chữ trong `[...\|E]`) |
+| Resolving/Resolve [Fetters\|E] | Giải Quyết [Fetters\|E] | đặt mới, dịch nghĩa "Resolve/Resolution" nhất quán với `trait_track_fetter_resolved` = "Fetter Đã Giải Quyết" đã có ở `traits_POD_l_english.yml` |
+| Ask for Mentoring *(oan hồn xin học Arcanoi từ bạn/người tình/tri kỷ)* | Xin Được Chỉ Dạy | đặt mới; dùng "Chỉ Dạy" thay vì "Dẫn Dắt" (đã dùng cho "Golconda Mentoring" ở B5-vampire) vì ngữ cảnh khác — đây là truyền thụ Arcanoi cụ thể, không phải dẫn dắt hành trình Golconda |
+| Walk the Web *(di chuyển nhanh đến Fetter)* | Bước Đi Trên Mạng Lưới | đặt mới, dịch nghĩa |
+| Remove Caul / Reaper | Loại Bỏ Caul / Reaper | "Caul" giữ nguyên theo tiền lệ `trait_caul` (traits_POD); "Reaper" giữ nguyên — chưa có tiền lệ dịch nghĩa, danh từ riêng WoD (chuyên gia gỡ Caul cho Enfant) |
+| Drain Energy *(rút Pathos từ mục tiêu)* | Rút Cạn Năng Lượng | đặt mới, dịch nghĩa |
+| Stop Dreaming / Stop Awaking | Ngừng Mơ Màng / Ngừng Tỉnh Giấc | đặt mới, dịch nghĩa cặp đối lập |
+| Create/Control Bloodhound *(`trait_barghest`/`GetTrait('barghest')`)* | Tạo/Điều Khiển Chó Săn Máu | đặt mới; "Barghest" (ID trait giữ nguyên không dịch) hiển thị là "Bloodhound" trong tên tương tác — dịch nghĩa "Chó Săn Máu" cho chữ hiển thị "Bloodhound", còn "Barghest" (tên riêng WoD, đã liệt ở B4h) tiếp tục giữ nguyên trong ngữ cảnh khác |
+| Create Rumor | Tạo Tin Đồn | đặt mới, dịch nghĩa |
+| Enthrall | Mê Hoặc | đặt mới, dịch nghĩa |
+| Upgrade Relation / Relation Target | Nâng Cấp Mối Quan Hệ / Mục Tiêu Quan Hệ | đặt mới, dịch nghĩa |
+| Create/Gift Foul Food | Tạo/Tặng Thức Ăn Ôi Thiu | đặt mới, dịch nghĩa |
+
+Ghi chú: `Select_CString( actor.IsLocalPlayer, 'you', 'the bound wraith' )` xuất hiện 3 lần (dòng `POD_mentoring_disciplines.0002.desc`, `POD_learn_arcanos_custom`) — dịch `'you'`→`'ngươi'`, `'the bound wraith'`→`'oan hồn bị ràng buộc'` (chữ thường, vì nằm giữa câu văn xuôi, khác nhãn UI "Oan Hồn Bị Ràng Buộc" viết hoa ở B5-wraith-p6). Dòng `POD_resolve_fetter_interaction_desc` là comment (bắt đầu bằng `#`) — giữ nguyên tiếng Anh theo quy tắc §5 TRANSLATION_RULES.md. Dòng chỉ chứa khoảng trắng (index gốc 10/27/34/46/51/54/57/65/72/77/83/92/94/103/114) giữ nguyên y hệt byte gốc.
+
+## B5-wraith-p4. Thuật ngữ đoạn `interactions/POD_character_interactions_wraith_l_english.yml` dòng 370-495, việc #5
+
+Nguồn: Shadow Offer (6 chỉ số dùng "của Bóng"), Forbidden Arcanoi (Render Relic/Automaton/Gleaming/Ignite/Erasure/Set Relation/Erase from Memory — mỗi tương tác có biến thể "Command Wraith"), Jade Arcanoi (Shackle/Snare/Net/Reap the Hungry Ghost, True/White Jade, Rework/Empower Relic, Gold↔Pathos, Alter Demeanor, Convert Arcanoi Perk, Control/Switch/Stop Control Puppet, Choose a Necromancer, Create Manifestation, Fascinate + Charge of Duty/Driving Urge/Target Lock). Không có `Glossary()`/`UmbraGlossaryLocalized()`/`Select_CString()` trong đoạn này.
+
+| Thuật ngữ gốc | Bản dịch | Ghi chú |
+|---|---|---|
+| Shadow Offer *(và 6 modifier `shadow_offer_*`)* | Lời Đề Nghị của Bóng / [Ngoại giao/Quân sự/Quản trị/Mưu mô/Học thức/Vũ dũng] của Bóng | đặt mới; "Shadow" = "Bóng" tái dùng tiền lệ B4h (`trait_shadow`) |
+| Forbidden Arcanoi *(comment heading)* | *(comment, giữ nguyên `#` đầu dòng)* | không dịch — dòng comment `# Forbidden Arcanoi #` giữ style comment nhưng đã dịch phần chữ trong các comment khác của mod theo tiền lệ; ở đây giữ style nhất quán các heading khối trong file này |
+| Render Relic | Hủy Diệt Di Vật | đặt mới; "Relic" dịch "Di Vật" (khác "Relic" trong ngữ cảnh khác đôi khi dịch "Thánh Tích" tùy tôn giáo — ở đây là hiện vật Wraith phá hủy để lấy Pathos, dùng "Di Vật" trung tính) |
+| Automaton *(tên interaction, khác trait `automaton` giữ nguyên theo B4h)* | Vận Hành Tự Động | đặt mới; đây là tên tương tác nhận buff từ hiện vật trang bị, dịch nghĩa hành động — không nhầm với danh từ riêng "Automaton" (Golem/Effigy nhóm B4h) vẫn giữ nguyên khi là tên loại thây máy |
+| Artifact of Desire *(Gleaming)* | Hiện Vật Khao Khát | đặt mới, dịch nghĩa |
+| Land of Obsession *(Ignite)* | Vùng Đất Nỗi Ám Ảnh | đặt mới, dịch nghĩa |
+| Erasure | Xóa Bỏ | đặt mới, dịch nghĩa (xóa một ký ức ngẫu nhiên) |
+| Create Relation | Tạo Quan Hệ | đặt mới, dịch nghĩa |
+| Erase from Memory *(khỏi "ký ức tập thể")* | Xóa Khỏi Ký Ức | đặt mới, dịch nghĩa |
+| Command Wraith *(nhãn `#weak (...)`)* | Sai khiến Oan hồn | tái dùng nguyên trạng B5-wraith-p2 |
+| Shackle / Snare / Net *(Jade Arcanoi, Puppetry)* | Xiềng Xích / Bẫy Lưới / Lưới Chụp | đặt mới, dịch nghĩa theo hình ảnh trói buộc bằng dây/lưới |
+| Reap the Hungry Ghost | Gặt Hái Quỷ Đói | đặt mới; "Hungry Ghost" dịch "Quỷ Đói" theo khái niệm ngạ quỷ phổ biến trong văn hóa Á Đông (phù hợp ngữ cảnh Yellow Springs/Jade Wraith Đông Á) |
+| True Jade | Ngọc Bích Chân Chính | tái dùng nguyên trạng tiền lệ `gui/POD_umbra_window_l_english.yml:543` (đã ghi ở B5-fae) |
+| White Jade | Bạch Ngọc | đặt mới, dịch nghĩa song song với "True Jade" |
+| Rework Relic | Cải Tạo Di Vật | đặt mới, dịch nghĩa |
+| Imbue Relic *(key `POD_empower_jade_interaction`)* | Truyền Sức Di Vật | đặt mới, dịch nghĩa (tăng cường hiện vật bằng Pathos, khác "Rework" dùng Jade) |
+| Withdraw White Jade | Rút Bạch Ngọc | đặt mới, dịch nghĩa |
+| Alter Demeanor | Đổi Dạng Vẻ | đặt mới; "Demeanor" dịch "Dạng Vẻ" (tính cách bề ngoài thể hiện, khác "Nature"/"tính cách" nội tại) |
+| Hun *(một trong hai "hồn phách" Kuei-Jin)* | Hun *(giữ nguyên)* | tái xác nhận tiền lệ B5-kuejin (`P'o, Hun` giữ nguyên) |
+| Convert Arcanoi Perk Point | Chuyển Đổi Điểm Lợi Thế Arcanoi | đặt mới, dịch nghĩa; "Arcanoi" giữ nguyên theo B4h |
+| Manifestation *(key `POD_create_manifestation_interaction`, chữ hiển thị "Manifestation")* | Manifestation *(giữ nguyên)* | tái xác nhận B4h — nhóm danh từ riêng kỹ thuật gọi hồn/pháp thuật (Golem/Automaton/Effigy/Animantis/Servitor/Manifestation) giữ nguyên tiếng Anh; chỉ dịch động từ bao quanh ("Tạo Manifestation") |
+| Choose a Necromancer | Chọn Một Nhà Gọi Hồn | đặt mới; "Necromancer" = "Nhà Gọi Hồn" tái dùng tiền lệ `necromancy`/`necromancer` đã dịch ở `traits_POD_l_english.yml` (`Cenotaph Path của [necromancy\|E]`) |
+| Black Torc of Carniog *(tên artifact)* | Vòng Cổ Đen của Carniog | đặt mới; "Torc" dịch "Vòng Cổ" (vòng cổ kim loại kiểu Celtic), "Carniog" là tên riêng giữ nguyên |
+| Fascinate | Mê Hoặc | đặt mới, dịch nghĩa (cấy ý nghĩ vào mục tiêu trước khi ra lệnh) |
+| Charge of Duty | Trọng Trách | đặt mới, dịch nghĩa |
+| Driving Urge | Thôi Thúc Mãnh Liệt | đặt mới, dịch nghĩa |
+| Target Lock | Khóa Mục Tiêu | đặt mới, dịch nghĩa |
+| Puppet *(actor_secondary label của Fascinate-chain)* | Con Rối | tái dùng nguyên trạng B5-wraith-p2 (`Control Puppet` = "Điều Khiển Con Rối") |
+
+Ghi chú: dòng 104 (gốc, trong đoạn 370-495) là dòng trống **hoàn toàn rỗng** (không có space) — khác các dòng trống khác trong đoạn này đều có 1 space — đã giữ nguyên chính xác khi ghi file scratch. Đã đối chiếu số lượng `$ref$` (6), bracket `[...]` (32), tag mở/đóng (5/5), icon (0), `\n` (0), `\"` (0) giữa bản gốc và bản dịch — khớp tuyệt đối.
