@@ -2998,3 +2998,19 @@ Nguồn: dịch qua 4 agent chia đoạn (1-139, 140-286, 287-421, 422-564), coo
 | Diablerist *(người thực hiện Diablerie, tham số 1 của Glossary)* | Diablerist *(giữ nguyên)* | nhất quán với "Diablerie" đã chốt B2 giữ nguyên |
 | Abyssal Mysticism | Huyền Học Vực Sâu | đặt mới, dịch nghĩa |
 | Bane Mummy, Bane Rite *(nhắc lại, xem lỗi #3 phía trên)* | $POD_splat_mummy$ Tai Ương, Nghi Thức Tai Ương | ⚠️ **KHÁC "Bane"=Tà Linh** — đây là nghĩa gốc "tai ương", áp cho biến thể Mummy, không liên quan Garou/Wyrm-tainted spirit |
+
+## B8-lifestyles-p6. Thuật ngữ `perks_POD_l_english.yml` (698/698 dòng — danh sách tên TẤT CẢ perk Discipline ma cà rồng theo 4 temperament)
+
+Nguồn: file tổng hợp TÊN perk (không có mô tả `_EFFECT` dài) của mọi Discipline ma cà rồng, chia theo comment heading `#Choleric: X`/`#Melancholic: X`/`#Phlegmatic: X`/`#Sanguine: X`/`#Animal: X`/`#Faith: X`/`#Endowments: X`. Dịch qua 4 agent chia đoạn (1-175, 176-324, 325-525, 526-698). **1 lỗi thật phát hiện khi merge:**
+1. Dòng 669 (`voice_of_the_yama_kings_perk_name`): agent p4 giữ nguyên "Yama Kings" trong tham số 1 của `Glossary('Yama Kings','podgloss.yamaking')` với lý do "Wan Kuei và Yama Kings là tên riêng nên giữ nguyên" — chỉ ĐÚNG cho Wan Kuei (đã chốt B4f), SAI cho Yama Kings (phải dịch "Diêm Ma Vương" theo B3c). Sửa lại 1 chỗ.
+2. Cũng thiếu đúng 1 dòng trống cuối đoạn ở CẢ 2 đoạn giữa (p2 thiếu dòng 324, p3 thiếu dòng 525) — lỗi quen thuộc lặp lại.
+
+Toàn bộ tên Discipline trong comment heading (Potence/Celerity/Fortitude/Obfuscate/Visceratika/Chimerstry/Bardo/Necromancy/Auspex/Dominate/Temporis/Dementation/Melpominee/Blood Sorcery/Presence/Kai/Rift/Protean/Animalism/Spiritus/Flight/Abombwe/Valeren/Quietus/Mytherceria/Thin-Blood Alchemy/True Faith/Sophia Patris/Sedulitas Filius/Boni Spiritus/Oculi Dei/Knights of Acre/House Murnau/Sisters of St John/Red Order/Daimonion/Serpentis/Qiao) → **giữ nguyên tiếng Anh, không dịch** — đây là dòng comment (`#` đầu dòng), áp dụng đúng theo TRANSLATION_RULES §5 dù chứa tên Discipline lạ chưa từng gặp (Bardo, Temporis, Dementation, Rift, Spiritus, Flight, Abombwe, Valeren, Sophia Patris, Sedulitas Filius, Boni Spiritus — không cần lo lập tiền lệ dịch nghĩa vì các tên này CHỈ xuất hiện trong comment, không phải chữ hiển thị người chơi thấy).
+
+| English | Tiếng Việt chốt | Ghi chú |
+|---|---|---|
+| Advanced X *(mọi Discipline, mẫu "Advanced Potence"/"Advanced Celerity"...)* | X Cao Cấp | đặt mới, áp dụng nhất quán cho mọi Discipline |
+| Ignis Fatuus, Fata Morgana, Dweomer *(3 tên perk gốc Latin/fantasy, Melpominee/Chimerstry)* | giữ nguyên tiếng Anh/Latin | đặt mới, không có bản dịch tiếng Việt chuẩn cho thuật ngữ fantasy/hiện tượng quang học |
+| Auto da Fé, Fiat Lux *(2 tên perk Latin, Endowments Hunter)* | giữ nguyên tiếng Anh/Latin | đặt mới, thuật ngữ tôn giáo Latin |
+| Apophis *(tên riêng thần thoại Ai Cập, Serpentis)* | Apophis *(giữ nguyên)* | tái xác nhận B3 (`glossary_wyrm_apophis`) |
+| Silence of Death, Dagon's Call, Baal's Caress, Purification *(4 tên perk lặp lại ở nhiều temperament)* | Sự Im Lặng Của Tử Thần, Tiếng Gọi Của Dagon, Vuốt Ve Của Baal, Thanh Tẩy | đặt mới, dịch nhất quán mọi lần xuất hiện |
