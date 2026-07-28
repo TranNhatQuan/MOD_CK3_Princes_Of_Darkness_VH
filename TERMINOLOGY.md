@@ -3299,3 +3299,25 @@ Nguồn: tên/mô tả các scheme (âm mưu) đặc thù POD (Mesmerize, Diable
 **Thuật ngữ mới ghi nhận, CHƯA CÓ tiền lệ, giữ nguyên tiếng Anh tạm thời (cần rà lại khi gặp file Wraith khác):** "Skuld" (khái niệm Wraith — món nợ nghiệp phải trả qua scheme `PODskuldfulfilled`), "evocation" (trong `PODenslave`, có thể là tên power/discipline đặc thù chưa rõ).
 
 **Kết quả kiểm tra cuối:** đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 74, bracket 263, icon 4, mở tag 30, đóng tag 31, `\n` 35, `\"` 0, dòng 377, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 377 dòng. 13 `Glossary()` (multiset tham số 2 khớp HEAD, sau khi sửa: 3× "Thế Hệ", 1× "Đức Tin Chân Chính", 4× "Diablerize", 1× "Diablerist", 1× "Beast", 1× "Blood Bond", 1× "Revenant", 1× "Wan Kuei"). 0 `UmbraGlossaryLocalized()`. "Embrace"→"Trao Truyền" (2 lần, khớp B12-struggle), 0 lỗi Discipline-name-in-prose. Quét English-sót: 0 dòng nghi vấn.
+
+## B12-coterie. Thuật ngữ `POD_coterie_l_english.yml` (372/372 dòng) — việc #12 (tiếp, FILE CUỐI CÙNG của việc #12)
+
+Nguồn: cơ chế "Coterie" (nhóm ma cà rồng liên minh) — tên nhóm theo splat (`POD_coterieloc_*`: Harem/Pack/Column/Gang/Nest/Sentai/Rat Pack/Cell/Conspiracy/Cabal/Corby/Covey/Circle/Wu/Covenant/Coven/Pride/Clutch/Cluster/Party), tên coterie canon cụ thể (`POD_coteriename_*`, 30 nhóm), mô tả tính cách nhân vật trong hành trình chung với Coterie. Dịch qua 3 agent chia đoạn (1-131, 132-273, 274-372), coordinator merge bằng Python. Toàn bộ 3 đoạn khớp key-tuần-tự/dòng trống/token ngay từ lần verify đầu — 0 lỗi merge phát hiện khi coordinator kiểm tra lại.
+
+**Quy ước áp dụng nhất quán 3 đoạn:** "Coterie" giữ nguyên tiếng Anh (B5f); toàn bộ tên nhóm `POD_coterieloc_*` (Harem/Pack/Wu/...) giữ nguyên vì là danh từ tổ chức lõi WoD theo từng splat, không có tiền lệ dịch nghĩa; toàn bộ 30 tên coterie canon cụ thể (`POD_coteriename_*`, "The First Sinners", "Mithras' Praetorians"...) giữ nguyên vì là danh xưng riêng (proper noun) trong lore, không phải mô tả chung. 1 `Glossary('Wu','podgloss.wu')` — tham số 1 giữ nguyên đúng ("Wu" là danh từ WoD, không thuộc 2 ngoại lệ True Faith/Generation).
+
+**Agent đoạn 3 tự phát hiện và sửa 1 lỗi trước khi nộp:** paraphrase làm mất token `[ROOT.Char.GetHerHis|l]`/`[ROOT.Char.GetHerselfHimself|l]` ở 9 dòng `POD_coterieflavor_*` (arbitrary_1/calm_1/craven_1/cynical_1/eccentric_1/gregarious_1/honest_1/humble_1/impatient_1) — tự phát hiện qua bracket-count lệch, chèn lại đúng vị trí ngữ nghĩa.
+
+**Kết quả kiểm tra cuối:** đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 21, bracket 143, icon 9, mở tag 91, đóng tag 178, `\n` 6, `\"` 0, dòng 372, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 372 dòng. 1 `Glossary()` khớp HEAD, 0 `UmbraGlossaryLocalized()`, 0 lỗi Discipline-name-in-prose, 0 "Embrace"/"torpor" trong file này. Quét English-sót: 36 dòng nghi vấn, toàn bộ false positive (30 tên coterie canon cố ý giữ nguyên + 6 dòng script/ref thuần).
+
+---
+
+## ✅ VIỆC #12 HOÀN TẤT (2026-07-28) — 57/57 file (13 SKIP + 6 MOSTLY SKIP + 38/38 TRANSLATE)
+
+6 file lớn cuối cùng (`single_combat_POD`, `POD_regiments`, `struggle_POD`, `game_POD_rules`, `schemes_POD`, `POD_coterie`) đã dịch xong trong phiên này, khép lại toàn bộ việc #12 (root-level `*.yml` còn lại của `princesofdarkness/localization/english/`, trừ `nicknames_POD_l_english.yml` đã tách riêng ngoài phạm vi theo quyết định người dùng).
+
+**Việc nợ lại, CHƯA làm trong phiên này:**
+1. `game_POD_concepts_l_english.yml:66` — `game_concept_blood_magic_lifestyle` hiện dùng "Huyết Thuật" trùng với `game_concept_bloodsorcery`, cần sửa thành "Chú Thuật Huyết Mạch" để tách bạch Blood Magic (lifestyle)/Blood Sorcery (Discipline). Xem `B12-effects`.
+2. **Xung đột thuật ngữ "the Embrace" chưa giải quyết dứt điểm toàn repo** (xem `B12-struggle`): `glossary_POD`/15 file khác dùng "Trao truyền" (nguồn gốc, ưu tiên), nhưng `game_POD_concepts`/`effects_POD`/`POD_journeys` dùng "Hiến Máu" (từ định nghĩa `game_concept_Embrace`/`_desc`), và `interactions/POD_character_interactions_vampire`/`POD_ashirra`/`interactions/POD_character_interactions_numina` dùng "Sự Ôm Ấp". Người dùng đã chọn "Trao truyền" làm chuẩn cho các file MỚI dịch từ nay, nhưng 3+3 file cũ nói trên CHƯA được thống nhất lại — cần quay lại xử lý khi có dịp, hoặc hỏi ý kiến người dùng có muốn làm 1 đợt riêng để thống nhất toàn repo hay không.
+
+**Việc tiếp theo theo đúng thứ tự gốc:** quay lại làm việc #10 (`buildings/`, 6.309 key, 8 file — có hậu tố `:0` trong `building_grand_city_POD_l_english.yml`, cẩn thận không đổi) rồi việc #11 (`artifacts/`).
