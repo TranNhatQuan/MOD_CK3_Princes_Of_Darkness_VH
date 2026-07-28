@@ -7,7 +7,15 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT, chuyển việc #10 `buildings/`).
+Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT; quyết định làm việc #12 TRƯỚC #10/#11 — xem "NGOẠI LỆ THỨ TỰ" bên dưới).
+
+---
+
+## ⚠️ NGOẠI LỆ THỨ TỰ (2026-07-28) — làm việc #12 TRƯỚC việc #10/#11
+
+**Người dùng đã yêu cầu rõ ràng, xác nhận qua hỏi lại:** làm **việc #12** (root-level `*.yml` còn lại, 56 file, ~18.125 dòng thật) **trước** việc #10 (`buildings/`) và việc #11 (`artifacts/`). Đây KHÔNG phải nhảy bậc do nhầm lẫn — là ngoại lệ có chủ đích, giống các ngoại lệ trước đó (việc #9 cũng từng được tách ra làm sớm hơn thứ tự gốc). Sau khi xong việc #12, quay lại làm #10 rồi #11 theo đúng thứ tự.
+
+**Prompt bàn giao đầy đủ cho session tiếp theo → xem mục "## 🔜 SESSION TIẾP THEO — việc #12" ngay dưới đây.**
 
 ---
 
@@ -17,7 +25,100 @@ Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
 | Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** |
-| Việc tiếp theo | **Việc #10 — `buildings/`, 6.309 key, 8 file** (có `:0` trong `building_grand_city_POD_l_english.yml`) |
+| Việc tiếp theo | **Việc #12 (làm trước #10/#11 theo ngoại lệ) — root-level còn lại, 56 file, ~18.125 dòng** |
+
+## 🔜 SESSION TIẾP THEO — việc #12: root-level `*.yml` còn lại (56 file)
+
+### Bối cảnh
+
+Thư mục `princesofdarkness/localization/english/` gốc (không tính subfolder) có 62 file `.yml`. **6 file đã xong**, không đụng vào:
+`factions_POD`, `game_POD_concepts`, `government_POD`, `titles_POD` (việc #9, xong đợt 14), `glossary_POD` (xong từ trước), `POD_do_not_translate_this` (100% ID script, cố ý bỏ qua theo CLAUDE.md — đừng dịch).
+
+**56 file còn lại, tất cả xác nhận 100% tiếng Anh** (đã tự kiểm bằng script quét ký tự có dấu tiếng Việt — mọi kết quả dương tính đều là false positive từ tên riêng có dấu ngoại ngữ khác, vd "Mokolé", "Dazbóga", "Certámen", không phải bản dịch thật).
+
+### Danh sách 56 file, xếp theo số dòng giảm dần (đo bằng đếm byte `\n`, không tin `wc -l` nếu nghi ngờ dòng cuối thiếu newline — luôn tự `grep -c ''` lại trước khi chia đoạn)
+
+```
+4365  nicknames_POD_l_english.yml          ← LỚN NHẤT, để cuối cùng, chia nhiều agent
+2164  effects_POD_l_english.yml            ← nhiều Glossary(47)/UmbraGlossaryLocalized(12) nhất
+2092  POD_journeys_l_english.yml           ← Glossary(26)/UmbraGlossaryLocalized(1)
+1988  single_combat_POD_l_english.yml      ← Glossary(1)/UmbraGlossaryLocalized(1)
+ 729  POD_regiments_l_english.yml          ← Glossary(25)/UmbraGlossaryLocalized(4)
+ 490  struggle_POD_l_english.yml           ← Glossary(13)
+ 466  game_POD_rules_l_english.yml         ← Glossary(4)
+ 450  POD_journeys_script_values_l_english.yml
+ 390  POD_soldier_modifiers_l_english.yml
+ 377  schemes_POD_l_english.yml            ← Glossary(9)
+ 372  POD_coterie_l_english.yml            ← Glossary(1)
+ 332  POD_court_positions_l_english.yml    ← Glossary(6)/UmbraGlossaryLocalized(4)
+ 319  focuses_POD_l_english.yml
+ 261  culture_titles_POD_l_english.yml     ← Glossary(2) — CẨN THẬN: có thể là tên riêng như titles_POD, kiểm tra trước khi dịch toàn bộ
+ 246  POD_mokole_l_english.yml
+ 234  POD_important_actions_l_english.yml  ← Glossary(3)
+ 204  POD_actvities_l_english.yml          ← chú ý tên file SAI CHÍNH TẢ (activities), giữ nguyên tên file
+ 176  POD_journeys_core_l_english.yml
+ 166  secrets_prey_restriction_POD_l_english.yml
+ 160  wars_POD_l_english.yml               ← Glossary(4)
+ 157  POD_regiments_fera_l_english.yml     ← Glossary(1)
+ 137  POD_accolades_l_english.yml
+ 125  POD_wyrm_l_english.yml               ← Glossary(4)
+ 121  POD_spirits_l_english.yml
+ 120  POD_epidemics_l_english.yml
+ 118  POD_shared_loca_l_english.yml
+ 118  POD_fera_common_l_english.yml
+ 113  death_reasons_POD_l_english.yml      ← Glossary(3)
+ 108  secrets_predator_types_POD_l_english.yml
+  99  POD_april_fools_l_english.yml
+  92  mottos_POD_l_english.yml
+  90  POD_ashirra_l_english.yml            ← Glossary(3)
+  84  POD_regiments_spirits_l_english.yml  ← Glossary(2)/UmbraGlossaryLocalized(1)
+  78  POD_scheme_countermeasures_l_english.yml
+  68  relations_POD_l_english.yml          ← Glossary(2)
+  64  secrets_POD_l_english.yml            ← ⚠️ CÓ HẬU TỐ `:0` — giữ y nguyên, đừng thêm/bớt số. Glossary(9)
+  53  secrets_vampgeneration_POD_l_english.yml
+  52  hook_types_POD_l_english.yml
+  51  interactions_POD_l_english.yml       ← UmbraGlossaryLocalized(1) — LƯU Ý tên file GẦN GIỐNG `interactions/` (thư mục, đã xong việc #5) nhưng đây là file RIÊNG ở root, khác nhau
+  45  POD_legends_l_english.yml
+  35  POD_relationship_reasons_l_english.yml
+  32  music_POD_l_english.yml
+  31  POD_script_values_l_english.yml
+  23  POD_succession_laws_l_english.yml
+  19  POD_personal_coa_localization_l_english.yml
+  16  POD_flags_l_english.yml
+  15  POD_custom_nickname_l_english.yml
+  14  POD_fog_of_war_l_english.yml
+  14  POD_decision_group_types_l_english.yml
+  12  POD_inquiobjectives_l_english.yml
+  11  POD_messages_l_english.yml
+  10  POD_story_cycles_l_english.yml
+   8  POD_masquerade_l_english.yml
+   5  POD_court_position_changes_localization_l_english.yml
+   3  rcm_l_english.yml
+   3  POD_content_source_l_english.yml     ← ⚠️ THỤT 2 SPACE (không phải 1 space chuẩn) — GIỮ NGUYÊN độ thụt gốc, đừng "sửa" về 1 space
+```
+
+### Quy trình bắt buộc
+
+1. **Đo lại baseline bằng `grep -c ''` cho từng file trước khi chia đoạn** — đừng tin bảng số dòng ở trên nếu nghi file đã đổi từ lúc khảo sát.
+2. **Tra TERMINOLOGY.md xuyên toàn repo trước khi đặt thuật ngữ mới.** Nhiều khái niệm ở các file này (Yama King, Demon Emperor, Masquerade, Blood Hunt→Săn Máu, Blood Oath→Huyết Thệ, Sire→giữ nguyên, Discipline→Dị Năng, Grand City→Đại Thành, World of Darkness→Thế Giới Bóng Tối, True Faith→Đức Tin Chân Chính — tất cả vừa chốt lại ở `B9-concepts`/`B9-government`) đã có tiền lệ, đừng để agent tự đặt lại.
+3. **File nhỏ (< 100 dòng): coordinator tự dịch trực tiếp bằng script Python** (không qua agent, tránh phí tài nguyên). File vừa (100-400 dòng): giao 1 agent/file, chạy song song nhiều file cùng lúc. File lớn (>400 dòng: `POD_soldier_modifiers`, `POD_coterie`, `POD_court_positions`, `schemes_POD`, `POD_journeys_script_values`, `game_POD_rules`, `struggle_POD`, `POD_regiments`, `single_combat_POD`, `POD_journeys`, `effects_POD`, `nicknames_POD`): chia 3-8 agent theo ranh giới dòng trống, không cắt ngang entry logic — đo lại boundary bằng `awk '{print NR, length($0)}' | awk '$2==0||$2==1'` trước khi chia.
+4. **Cảnh báo agent RÕ RÀNG, CỤ THỂ về lỗi khoảng trắng đầu dòng** — kể cả dòng trống có nhiều loại khác nhau theo độ dài (0/1/2+ khoảng trắng) xen kẽ nhau, phải giữ đúng loại ở từng vị trí, KHÔNG tự ý chuẩn hóa hết về rỗng. Đây là lỗi lặp lại nhiều lần nhất trong toàn bộ dự án.
+5. **⚠️ CẢNH BÁO MỚI TỪ ĐỢT 14 (government_POD):** nếu file có nhiều dòng bị comment-out (bắt đầu bằng ` #key: "..."`), PHẢI nhắc agent rõ ràng, cụ thể — kèm số lượng ước tính nếu biết — rằng các dòng này phải giữ NGUYÊN VĂN tiếng Anh, không dịch. Yêu cầu agent tự chạy `grep -c '^\s*#[A-Za-z]'` trên đoạn được giao và xác nhận số đó khớp giữa bản gốc và bản dịch trước khi nộp. Đã xảy ra thật: 114/555 dòng ở `government_POD` bị dịch nhầm dù prompt có nhắc chung chung.
+6. **Nếu nhiều file/đoạn cùng dùng 1 pattern lặp lại** (tên splat, tên thuật ngữ chốt sẵn), PHẢI gom nhóm để so sánh song song trước khi merge.
+7. **Merge bằng Python** (đọc/ghi `'rb'`/`'wb'`, không dùng Edit tool hay `sed -i` trên file CRLF): đối chiếu key-thứ-tự + dòng trống byte-for-byte với `git show HEAD`, diff bracket-set + `Glossary()` tham số 2 + `UmbraGlossaryLocalized()` tham số với HEAD.
+8. **Sau merge: grep bắt English-sót riêng** (không tin số liệu đếm token, xem mục "3 lỗi mà self-check không bắt được" ở dưới trong file này).
+9. Xong 56 file → việc #12 HOÀN TẤT → cập nhật WORKLIST.md → **quay lại làm việc #10 (`buildings/`) rồi #11 (`artifacts/`)** theo đúng thứ tự gốc.
+
+### Lưu ý đặc biệt
+
+- `POD_do_not_translate_this_l_english.yml`: **BỎ QUA HOÀN TOÀN**, giá trị là ID script GUI đọc trực tiếp.
+- `culture_titles_POD_l_english.yml`: tên file gợi ý có thể chứa tên văn hóa/tước vị riêng — kiểm tra nội dung thật trước khi coi là văn xuôi cần dịch toàn bộ (có thể một phần là tên riêng như `titles_POD`).
+- `secrets_POD_l_english.yml`: có hậu tố `:0`, giữ nguyên.
+- `POD_content_source_l_english.yml`: thụt 2 space, giữ nguyên độ thụt.
+- `interactions_POD_l_english.yml` (root, 51 dòng) ≠ thư mục `interactions/` (đã xong việc #5) — đừng nhầm hai thứ.
+- `POD_actvities_l_english.yml`: tên file gốc bị lỗi chính tả (thiếu "i" trong "activities") — giữ nguyên tên file, không đổi.
+
+---
 
 ### ✅ ĐỢT 14 (2026-07-28) — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT
 
