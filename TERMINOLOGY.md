@@ -3287,3 +3287,15 @@ Nguồn: tên/mô tả game rule trong màn hình tạo game POD (World of Darkn
 | Patreon Characters | Nhân Vật Nhà Tài Trợ | phân biệt với "Người Bảo Trợ" = Patron trait |
 | Overextension | Quá Sức Cai Trị | |
 | Shattered World | Thế Giới Vỡ Vụn | |
+
+## B12-schemes. Thuật ngữ `schemes_POD_l_english.yml` (377/377 dòng) — việc #12 (tiếp)
+
+Nguồn: tên/mô tả các scheme (âm mưu) đặc thù POD (Mesmerize, Diablerize, Enthrall, Enslave, Rite of Vinculum...). Dịch qua 3 agent chia đoạn (1-119, 120-247, 248-377), coordinator merge bằng Python.
+
+**1 lỗi merge phát hiện và sửa:** dòng 124 (`diablerize_desc_general`, thuộc đoạn 3) còn sót 1/3 lần `Glossary('Generation','game_concept_vampgeneration_desc')` chưa dịch tham số 1 — 2 lần khác của cùng key này ở đoạn 1 đã được agent đoạn 1 tự phát hiện và sửa đúng thành "Thế Hệ" (theo quy tắc chốt cứng "Glossary('True Faith'/'Generation',...) tham số 1 PHẢI dịch", TERMINOLOGY.md dòng 595), nhưng agent đoạn 3 không tự rà lại cùng pattern này. Sửa lại đúng "Thế Hệ" ở dòng 124.
+
+**Đáng chú ý — agent đoạn 1 tự phát hiện và sửa đúng 2 lỗi trước khi nộp:** (1) tự thêm bracket `[scheme|E]` sai cho các chỗ "scheme" là danh từ chung trong văn xuôi (không có bracket ở bản gốc) — tự phát hiện qua bracket-count lệch và sửa lại 9 chỗ; (2) `Glossary('Generation'/'True Faith',...)` tham số 1 lúc đầu giữ nguyên tiếng Anh, tự tra lại TERMINOLOGY.md dòng 595 và sửa đúng thành "Thế Hệ"/"Đức Tin Chân Chính".
+
+**Thuật ngữ mới ghi nhận, CHƯA CÓ tiền lệ, giữ nguyên tiếng Anh tạm thời (cần rà lại khi gặp file Wraith khác):** "Skuld" (khái niệm Wraith — món nợ nghiệp phải trả qua scheme `PODskuldfulfilled`), "evocation" (trong `PODenslave`, có thể là tên power/discipline đặc thù chưa rõ).
+
+**Kết quả kiểm tra cuối:** đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 74, bracket 263, icon 4, mở tag 30, đóng tag 31, `\n` 35, `\"` 0, dòng 377, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 377 dòng. 13 `Glossary()` (multiset tham số 2 khớp HEAD, sau khi sửa: 3× "Thế Hệ", 1× "Đức Tin Chân Chính", 4× "Diablerize", 1× "Diablerist", 1× "Beast", 1× "Blood Bond", 1× "Revenant", 1× "Wan Kuei"). 0 `UmbraGlossaryLocalized()`. "Embrace"→"Trao Truyền" (2 lần, khớp B12-struggle), 0 lỗi Discipline-name-in-prose. Quét English-sót: 0 dòng nghi vấn.
