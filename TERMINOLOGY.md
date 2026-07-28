@@ -2922,9 +2922,9 @@ Nguồn: 8 file dịch qua agent song song (mỗi agent 1 file, ghi scratch riê
 | Auspice (tái xác nhận), Homid/Lupus/Ragabash/Theurge/Philodox/Galliard/Ahroun *(Tướng Trăng Garou)* | Tướng Trăng / giữ nguyên tiếng Anh | tái xác nhận B8-lifestyles-p1; 7 dòng comment `#Gifts: Homid` v.v giữ nguyên tiếng Anh (không phải chữ hiển thị) |
 | Axis Mundi, Incarna *(nhắc lại, khái niệm Umbra/vũ trụ học Garou)* | giữ nguyên tiếng Anh | đặt mới, danh từ riêng huyền học không có tiền lệ dịch |
 | Chi Arts *(lifestyle Kuei-Jin, tái xác nhận)* | Pháp Nghệ Khí | tái xác nhận B5-kuejin |
-| Feng Shui, Tzu Wei, Kiai, Prana *(4 tên Art cụ thể của Chi Arts, nhóm liệt kê cùng nhau)* | giữ nguyên tiếng Anh | đặt mới; giữ nguyên nhất quán cả nhóm vì đều là tên riêng phương Đông, không dịch riêng "Feng Shui"="Phong Thủy" để tránh lệch tông với 3 tên còn lại |
+| Feng Shui, Tzu Wei, Kiai, Prana *(4 tên Art cụ thể của Chi Arts)* | ~~giữ nguyên tiếng Anh~~ → **Feng Shui="Phong Thủy", Tzu Wei="Tử Vi", Kiai/Prana giữ nguyên** | ⚠️ **ĐẢO NGƯỢC 2026-07-28** (xem B12-journeys) — người dùng xác nhận dùng lại bản B4g (dòng 615-619) khi phát hiện xung đột với `traits_POD_l_english.yml` đã commit trước. Đã sửa `lifestyles/POD_kueijin/POD_chi_arts_lifestyle_l_english.yml` (dòng 12,17) cho khớp. |
 | Obligation *(tên Art cụ thể Chi Arts)* | Nghĩa Vụ | đặt mới, dịch nghĩa |
-| Tapestry *(tên Art cụ thể Chi Arts, liên quan vận số/định mệnh)* | Thiên Cơ | đặt mới, dịch nghĩa ẩn dụ "cơ trời/vận số" |
+| Tapestry *(tên Art cụ thể Chi Arts, liên quan vận số/định mệnh)* | ~~Thiên Cơ~~ → **Dệt Cảnh** | ⚠️ **ĐẢO NGƯỢC 2026-07-28** — dùng lại B4g. Đã sửa `POD_chi_arts_lifestyle_l_english.yml:14`. |
 | Soul Arts *(lifestyle Kuei-Jin, tái xác nhận)* | Pháp Nghệ Linh Hồn | tái xác nhận B5-kuejin |
 | Ghost Arts / Heavenly Arts / Beast Arts / Devil Arts / Dragon Tear / Hellweaving *(6 nhóm Art con của Soul Arts, tương ứng P'o/Hun)* | Quỷ Nghệ / Thiên Nghệ / Thú Nghệ / Ma Nghệ / Long Lệ / Địa Ngục Chức Pháp | đặt mới, Hán Việt nhất quán giọng huyền bí |
 | Devil Soul, Suffering, Fetters, Gauntlet *(thuật ngữ hệ thống WoD trong `soul_arts`, chưa có bản dịch chốt)* | giữ nguyên tiếng Anh | đặt mới, tạm giữ nguyên tương tự P'o/Hun đến khi có tiền lệ dịch rõ hơn ở file khác |
@@ -3202,6 +3202,30 @@ Nguồn: file lặp mẫu message/tooltip effect (GAINS/GAINED/PERKPOINT theo li
 | Koldun, Koldunic, kraina, Genius Loci, Devisor/Designer | giữ nguyên tiếng Anh | tái xác nhận từ B8-lifestyles-p5 |
 
 **Kết quả kiểm tra cuối:** sau khi sửa cả 3 lỗi, đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 558, bracket 2143, icon 90, mở tag 735, đóng tag 717, `\n` 384, `\"` 0, dòng 2164, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 2164 dòng. Quét riêng English-sót bằng heuristic (dòng có ≥8 ký tự Latin liên tục mà không có dấu tiếng Việt) chỉ ra 3 dòng, cả 3 đều là false positive (2 câu trích Latin cố ý giữ nguyên, 1 placeholder tooltip `X Y`).
+
+## B12-journeys. Thuật ngữ `POD_journeys_l_english.yml` (2092/2092 dòng) — việc #12 (tiếp)
+
+Nguồn: file định nghĩa toàn bộ "Journey" (Hành Trình) — cơ chế du hành tìm kiếm Dị Năng/Art/Sorcery hiếm, Golconda, Sargon Codex, hunt/quest ngắn. Dịch qua 7 agent chia đoạn (1-294, 295-602, 603-902, 903-1196, 1197-1496, 1497-1795, 1796-2092), coordinator merge bằng Python. **Lần đầu tất cả 7 đoạn khớp key-tuần-tự/dòng trống/trailing-whitespace/token count ngay từ lần chạy verify đầu tiên** — không có lỗi merge kiểu "thiếu 1 dòng trống" như `effects_POD` ngay trước, nhờ prompt đã bổ sung yêu cầu agent tự đối chiếu key-tuần-tự (không chỉ đếm tổng dòng trống) trước khi nộp.
+
+**3 lỗi thuật ngữ phát hiện và sửa khi merge (agent tự phát hiện, báo cáo, coordinator xác nhận rồi sửa):**
+1. `golconda_3_name: "The Suspire"` bị dịch thành "Hơi Thở Cuối" — sai, đã chốt cứng "Suspire" giữ nguyên tiếng Anh (TERMINOLOGY.md dòng 2540, cùng khái niệm giác ngộ với tên tương tác `POD_guide_through_suspire_interaction`). Sửa lại 1 chỗ.
+2. `sorcery_legendary_studying_divination_*` (3 dòng) dịch "Divination" thành "Bốc Thuật" — sai, B6-decisions-sorcery (dòng 2793) đã chốt "Divination"→"Bói Toán Thuật". Sửa lại cả 3 chỗ.
+3. **Xung đột thuật ngữ Feng Shui/Tzu Wei/Tapestry giữa 2 file đã commit trước** — `traits_POD_l_english.yml` dùng B4g (Feng Shui→"Phong Thủy", Tzu Wei→"Tử Vi", Tapestry→"Dệt Cảnh"), nhưng `lifestyles/POD_kueijin/POD_chi_arts_lifestyle_l_english.yml` (dịch sau, trực tiếp từ file định nghĩa các Art này) dùng B8-lifestyles-p8 (giữ nguyên Feng Shui/Tzu Wei, Tapestry→"Thiên Cơ"). Đoạn 3 của `POD_journeys` tự chọn theo B8 (mới hơn). **Hỏi lại người dùng — quyết định: dùng B4g** (bản cũ hơn, coi 2 từ Feng Shui/Tzu Wei là Hán Việt phổ thông nên ưu tiên dịch nghĩa). Đã sửa: 4 chỗ trong `POD_journeys` (đoạn 3, dòng ~856-907) + 3 chỗ trong `POD_chi_arts_lifestyle_l_english.yml` (dòng 12,14,17, đã commit trước — sửa lại trong đợt này). TERMINOLOGY.md dòng 2925/2927 đã đánh dấu đảo ngược.
+
+**Thuật ngữ mới đề xuất bổ sung (nhiều agent tự đặt, coordinator xác nhận hợp lý, chưa phát sinh xung đột khác ngoài mục 3 trên):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| "The Quest for X" (X = tên Discipline/Art) | Cuộc Tìm Kiếm X / Cuộc Truy Tìm X | 2 agent dùng 2 cách dịch gần nghĩa khác nhau cho cùng mẫu câu ở đoạn khác nhau — CHƯA đồng bộ tuyệt đối trong file, cần rà lại nếu thấy lệch khi đọc lại toàn file |
+| Sorcery/Theurgy/Demonology/Psychic Powers (nhánh lifestyle Numina) | Huyền Thuật/Thần Thuật/Ác Ma Học/Năng Lực Tâm Linh | đặt mới |
+| Fae Realm (Actor/Fae/Prop/Nature/Scene/Time) | Cõi Diễn Viên/Fae/Vật Thể/Tự Nhiên/Bối Cảnh/Thời Gian | đặt mới |
+| Grey World / Colorful World / Confluence of Worlds | Thế Giới Xám / Thế Giới Sặc Sỡ / Nơi Giao Thoa của các Thế Giới | lore Changeling Autumn/Dreaming, đặt mới |
+| Blademaster, Physician (tên lifestyle) | Kiếm Sư, Y Sư | chưa có key trait để đối chiếu chính xác, cần rà lại khi dịch `traits_POD` |
+| Underworld (bare text, không qua macro) | Âm Giới | phân biệt với "Âm Phủ" (chỉ dành cho tham số 2 của `UmbraGlossaryLocalized('shadowlands',...)`) |
+| the Quick (WoD, người sống theo góc nhìn Wraith) | giữ nguyên tiếng Anh | chưa có tiền lệ dịch nghĩa |
+| Metamorphosist (dạng tính từ sở hữu) | giữ nguyên tiếng Anh | phân biệt dạng danh từ đã chốt "kẻ theo Biến Hóa Luận" |
+
+**Kết quả kiểm tra cuối:** sau khi sửa cả 3 lỗi, đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 1090, bracket 1545, icon 0, mở tag 219, đóng tag 398, `\n` 633, `\"` 8, dòng 2092, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 2092 dòng ngay từ lần merge đầu (không cần vá lỗi cấu trúc như effects_POD). Quét English-sót bằng heuristic: 0 dòng nghi vấn.
 
 ## B9-titles. `titles_POD_l_english.yml` (879/879 dòng) — việc #9 file 4/4 — QUYẾT ĐỊNH: KHÔNG DỊCH
 
