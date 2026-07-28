@@ -3267,3 +3267,23 @@ Nguồn: cơ chế "Struggle" (Xung Đột, B5 dòng 196) giữa các phe phái 
 **1 lỗi nhỏ khác:** đoạn 3 dùng "Torpor" giữ nguyên (viết hoa, đứng độc lập trong câu) thay vì "Miên Trạng" đã chốt B3/B2 (dòng 265, áp dụng cho cả dạng bare-word theo B5i dòng 2020 "torpid vampire"→"ma cà rồng đang Miên trạng"). Sửa 1 chỗ (dòng 396 gốc, `pod_french_struggle.105.desc`, "trở về từ Torpor"→"trở về từ Miên Trạng").
 
 **Kết quả kiểm tra cuối:** đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 3, bracket 33, icon 0, mở tag 1, đóng tag 1, `\n` 92, `\"` 0, dòng 490, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 490 dòng. 13 `Glossary()` (multiset tham số 2 khớp HEAD, toàn bộ là `Ashirra`/`Sire` giữ nguyên tham số 1). 0 `UmbraGlossaryLocalized()` trong file này. 0 lỗi dịch nhầm tên Discipline. Quét English-sót: 0 dòng nghi vấn.
+
+## B12-rules. Thuật ngữ `game_POD_rules_l_english.yml` (466/466 dòng) — việc #12 (tiếp)
+
+Nguồn: tên/mô tả game rule trong màn hình tạo game POD (World of Darkness modes, Samuel Haight Mode, Roguelike Mode, Patreon Characters, Cappadocian skeleton settings, Massasa War, Baybars Purge). Dịch qua 3 agent chia đoạn (1-155, 156-313, 314-466), coordinator merge bằng Python. Toàn bộ 3 đoạn khớp key-tuần-tự/dòng trống/token ngay từ lần verify đầu — 0 lỗi merge.
+
+**0 lỗi phát hiện khi merge** — cả 3 đoạn đều: dùng đúng "Miên Trạng" cho 4 lần "torpor" bare-word (theo quyết định B12-struggle), giữ nguyên toàn bộ 3 `Glossary()` (Dharma×2, tham số 1 giữ nguyên theo B3c) và 1 `UmbraGlossary('shadowlands')` 1-tham-số, giữ nguyên 29 dòng comment không sửa, 0 lỗi Discipline-name-in-prose.
+
+**Kết quả kiểm tra cuối:** đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 123, bracket 95, icon 14, mở tag 144, đóng tag 153, `\n` 8, `\"` 8, dòng 466, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 466 dòng. Quét English-sót: 0 dòng nghi vấn.
+
+**Thuật ngữ mới đề xuất (chưa có tiền lệ, game-rule specific, dùng nhất quán trong file):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| World of Ignorance/Secrets/Corruption/Shadow (WoD mode) | Thế Giới Ngu Muội/Bí Mật/Tha Hóa/Bóng Đêm | đặt mới, mô tả game rule không phải lore chính thức |
+| Samuel Haight Mode | Chế Độ Samuel Haight | Samuel Haight giữ nguyên (tên riêng WoD) |
+| Supernatural Dominance | Ưu Thế Siêu Nhiên | |
+| Fang and Claw | Nanh và Vuốt | |
+| Patreon Characters | Nhân Vật Nhà Tài Trợ | phân biệt với "Người Bảo Trợ" = Patron trait |
+| Overextension | Quá Sức Cai Trị | |
+| Shattered World | Thế Giới Vỡ Vụn | |
