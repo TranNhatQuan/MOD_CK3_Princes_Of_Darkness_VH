@@ -3077,3 +3077,103 @@ Nguồn: dịch qua 6 agent chia đoạn theo ranh giới dòng trống (1-180, 
 | Connaissance *(nhóm Arcanoi gốc Vodou/Haiti, các tên riêng bên trong: Baka, Serviteur, Loa, houngan, Les Invisibles, Mait' Tete)* | giữ nguyên tiếng Anh/Pháp/Creole | đặt mới; toàn bộ cụm từ chuyên môn Vodou giữ nguyên, không dịch nghĩa hay phiên âm |
 
 **Kết quả kiểm tra cuối:** đối chiếu bracket-set, `Glossary()` tham số 2, `UmbraGlossary()` tham số toàn file với `git show HEAD` — khớp tuyệt đối 100% (0 khác biệt). Đối chiếu 7 loại token (`$ref$` 105, bracket 568, icon 16, tag mở/đóng 310/310, `\n` 172, `\"` 0) giữa bản gốc và bản dịch — khớp tuyệt đối. Số dòng trống (160) khớp. `lifestyles/` đạt **27/27 file → việc #8 HOÀN TẤT.**
+
+## B9-concepts. Thuật ngữ `game_POD_concepts_l_english.yml` (825/825 dòng) — việc #9 file 1/4
+
+Nguồn: file định nghĩa toàn bộ "game concept" hiển thị qua `[Glossary('X','Y')]`/`[Concept('id','X')]` xuyên suốt UI POD — vai trò tương tự `game_concepts_l_english.yml` của vanilla. Dịch qua 5 agent chia đoạn (1-169, 170-337, 338-502, 503-691, 692-825), coordinator merge bằng Python (đối chiếu key-tuần-tự + vị trí/độ dài dòng trống byte-for-byte với `git show HEAD`, diff `Glossary()`/`UmbraGlossaryLocalized()` tham số).
+
+**3 lỗi merge phát hiện và sửa:**
+1. **"Discipline"/"Disciplines" không nhất quán giữa các đoạn** — đoạn 1 (và 4, 5) dùng đúng "Dị Năng" (đã chốt B2 dòng 261), nhưng đoạn 2 và 3 giữ nguyên tiếng Anh "Discipline"/"Disciplines" ở 8 lần `Glossary('Discipline(s)','game_concept_discipline_desc')` — sửa lại toàn bộ 8 chỗ thành "Dị Năng". Bài học lặp lại: thuật ngữ đã chốt cứng ở B2 (từ khi dịch file rất sớm) vẫn bị 2/5 agent bỏ sót dù được nhắc trong prompt — luôn phải tự gom nhóm `Glossary()` theo tham số 2 (key) để so tham số 1 giữa các đoạn, không tin riêng báo cáo agent.
+2. **"Grand City" dịch "Đại Đô thị"** (viết hoa/thường lẫn lộn, "thị" viết thường) ở 3 dòng định nghĩa concept gốc (`game_concept_grand_city`/`_cities`/`_desc`), trong khi chính agent đó lại dùng đúng "Đại Thành" (đã chốt sẵn TERMINOLOGY.md dòng 1960 từ `interactions/POD_character_interactions_grand_city`) ở các dòng mô tả Constantinople/Paris trong CÙNG đoạn — mâu thuẫn nội bộ ngay trong 1 đoạn do agent. Sửa lại toàn bộ 6 chỗ "Đại Đô thị" → "Đại Thành" để nhất quán toàn file.
+3. **"World of Darkness" (bare, không qua `$pod_wod$`) bị bỏ sót tiếng Anh** ở 2 dòng (`game_concept_ashen_caravan_desc`, `game_concept_ashen_cult_desc`) — đã có tiền lệ chốt cứng "Thế Giới Bóng Tối" cho đúng trường hợp bare-text này (TERMINOLOGY.md dòng 1266). Sửa lại 2 chỗ.
+4. **"True Faith" bị bỏ sót tiếng Anh** ở 6 lần xuất hiện (`game_concept_true_faith`, `_desc` ×4, `game_concept_mesmerize_defenses_desc` ×1) — đã chốt cứng "Đức Tin Chân Chính" từ khi dịch `traits_POD` (dòng 584). Sửa lại cả 6 chỗ.
+5. **Mất cặp `\"..\"` escape ở 1 dòng** (`game_concept_cainite_desc`, chữ "Western") — agent viết `"phương Tây"` (dấu ngoặc trần) thay vì `\"phương Tây\"` (escape đúng theo bản gốc `\"Western\"`) — chỉ phát hiện được nhờ đếm số `\"` lệch 8 so với baseline 10, không phải nhờ đếm bracket/ref. Đúng loại lỗi TRANSLATION_RULES.md §8 cảnh báo.
+
+**Không có lỗi khoảng trắng đầu dòng/dòng trống lần này** — tất cả 5 đoạn giữ đúng байte-for-byte 2-3 loại dòng trống (rỗng hoàn toàn / 1 space / hiếm khi 2 space) nhờ agent tự đo bằng `awk`/Python trước khi nộp.
+
+**`UmbraGlossaryLocalized()` xử lý đúng cả 2 flag khác nhau:** `shadowlands`→`Underworld` (5 lần, tất cả → "Âm Phủ" theo B4j) và `yomi_wan`→`Yomi Hell` (3 lần, tất cả → "Địa Ngục Yomi" theo B3c/B4j) — không lẫn lộn giữa 2 flag. `kingdom_of_dan`→`Dán` (1 lần) giữ nguyên đúng theo tiền lệ dòng 499 (khái niệm Số phận Kithain gốc Đông Á).
+
+**Thuật ngữ MỚI đặt trong file này** (chưa có tiền lệ, xác nhận dùng nhất quán toàn file sau merge):
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Blood Potency | Huyết Lực | thang đo sức mạnh máu ma cà rồng, tăng chậm theo thời gian |
+| Blood Bond / Blood Oath | Huyết Ước / Huyết Thệ | 2 khái niệm ràng buộc khác nhau |
+| Resonance (và Choleric/Sanguine/Phlegmatic/Melancholy/Animal) | Cộng Hưởng (Nóng Nảy/Đa Cảm/Điềm Đạm/U Sầu/Thú Tính) | 5 loại tính khí máu |
+| Necromancy | Tử Linh Thuật | Discipline liên quan Underworld/wraith |
+| Blood Magic/Blood Sorcery, Blood Sorcerer | Huyết Thuật, Huyết Thuật Sư | |
+| Embrace | Hiến Máu | nghi thức biến người thành ma cà rồng — ✅ xác nhận lại (đã có tiền lệ nhưng ghi rõ ở đây vì dùng rất nhiều trong file) |
+| Herd | Đàn | nhóm người phàm hiến máu |
+| Realm (và Shard/Shade/Oneiric/Heart's/Home/Nightmare/Dream Realm) | Cõi (Cõi Mảnh Vỡ/Cõi Bóng Ảnh/Cõi Mộng Ảo/Cõi Trái Tim/Cõi Quê Nhà/Cõi Ác Mộng/Cõi Giấc Mơ) | hệ thống các cõi giới huyền bí |
+| Stable Point / Dark Kingdom | Điểm Ổn Định / Vương Quốc Bóng Tối | thuật ngữ Wraith |
+| Oblivion Pull | Lực Kéo Oblivion | giữ "Oblivion" nguyên (qua `UmbraGlossary('oblivion')`), chỉ dịch "Pull" |
+| San Yuan | Tam Nguyên | khái niệm Trung Hoa, phân biệt "Tam Vị" của Garou |
+| Sundering/Shattering/Interregnum/Resurgence | giữ nguyên | tên kỷ nguyên lore Changeling/Fae, không có mẫu dịch |
+| Mythic Age | Kỷ Nguyên Thần Thoại | |
+| Dreamer (Kithain) | Người Mộng Mơ | |
+| Glamour, Banality, Cantrip | giữ nguyên | thuật ngữ Changeling/Fae, chưa có tiền lệ dịch nghĩa tự nhiên |
+| Discipline/Disciplines | **Dị Năng** | ⚠️ ĐÃ CHỐT TỪ B2 (dòng 261) — không phải thuật ngữ mới, ghi lại vì bị 2/5 agent bỏ sót khi merge |
+| Grand City | **Đại Thành** | ⚠️ ĐÃ CHỐT TỪ B5e (dòng 1960) — không phải thuật ngữ mới |
+| World of Darkness (bare text) | **Thế Giới Bóng Tối** | ⚠️ ĐÃ CHỐT sẵn (dòng 1266) |
+| True Faith | **Đức Tin Chân Chính** | ⚠️ ĐÃ CHỐT sẵn (dòng 584) |
+| Health Track | Thanh Máu | tái dùng tiền lệ có sẵn trong `traits_POD` |
+| Damage / Superficial Damage / Aggravated Damage | Tổn hại / Tổn Hại Bề Mặt / Tổn Hại Trầm Trọng | "Damage" tra từ `base_game_vh/game_concepts_l_english.yml:1424` |
+| Diabolism / Diabolist, Thralldom, Demonic Pact | Quỷ Thuật / Quỷ Thuật Sư, Nô Dịch, Khế Ước | 2 nhánh Infernalist lifestyle |
+| Fetish(es), Domitor, Kraina, Balefire | giữ nguyên | danh từ riêng WoD không có tiền lệ dịch |
+| Grand City tên riêng: Constantinople "Giấc Mơ Tàn Phai" | giữ nguyên cấu trúc tên phụ | |
+| Ashen Ambassador/Grandmaster/Caravan Master/Cult Master | Đại Sứ/Đại Sư/Chủ Đoàn Lữ Hành/Chủ Giáo Phái *(Tro Tàn)* | thang bậc nhân vật vô địa Ashen |
+| Roguelike Mode, Storyteller Mode, Samuel Haight Mode | Chế Độ Roguelike, Chế Độ Người Kể Chuyện, Chế Độ Samuel Haight | các chế độ chơi đặc biệt |
+
+**Kết quả kiểm tra cuối:** đối chiếu 7 loại token với `git show HEAD` sau khi sửa cả 5 lỗi — khớp tuyệt đối 100% (`$ref$` 566, bracket 1108, icon 64, `\n` 780, `\"` 10, dòng 825, BOM `efbbbf`). Key-sequence và vị trí/độ dài dòng trống khớp byte-for-byte toàn bộ 825 dòng.
+
+## B9-government. Thuật ngữ `government_POD_l_english.yml` (555/555 dòng) — việc #9 file 3/4
+
+Nguồn: định nghĩa các loại chính quyền POD (Traditions/Camarilla-style Vampire, Inquisition Order, August Court Kuei-Jin, Infernal Court Demon, Dark Kingdom Wraith, Household Changeling, Fera Tribe, Mummy Cult, Hunter Cell) và toàn bộ `tax_collector`/`vassal_rights` flavor text đi kèm. Dịch qua 3 agent chia đoạn (1-230, 231-391, 392-555), merge bằng Python.
+
+**⚠️ LỖI MERGE NGHIÊM TRỌNG PHÁT HIỆN LẦN ĐẦU — loại lỗi hoàn toàn mới:** file này có **114 dòng bị comment-out** (bắt đầu bằng ` #key: "..."`, đại diện cho các lựa chọn `tax_collector`/`vassal_rights` không active trong bản build hiện tại của mod) rải khắp gần như toàn bộ file (dòng 55-530). Theo TRANSLATION_RULES.md §5, các dòng comment PHẢI giữ nguyên y hệt tiếng Anh. Nhưng **cả 3 agent đều dịch những dòng này y như dòng active bình thường**, dù prompt có nhắc chung chung về "dòng comment giữ nguyên". Phát hiện được nhờ coordinator tự kiểm tra thủ công khi thấy các dòng `#destruction_rights`/`#blood_oaths` có nội dung dịch — sau đó viết script Python quét TOÀN BỘ file gốc tìm mọi dòng khớp pattern `^\s*#[A-Za-z_]` hoặc `^\s*#\s*$`, đối chiếu với bản dịch, khôi phục byte-for-byte **73 dòng bị dịch sai** (dòng đã đúng comment giữ nguyên từ trước thì không đụng). Bài học quan trọng nhất: **"giữ nguyên dòng comment" trong TRANSLATION_RULES §5 KHÔNG được agent áp dụng đúng khi file có MẬT ĐỘ COMMENT RẤT CAO xen kẽ dòng active** — cần cảnh báo cụ thể hơn trong prompt lần sau: liệt kê rõ số lượng dòng comment ước tính và nhắc kiểm tra riêng bằng `grep -c '^\s*#[A-Za-z]'` trước khi nộp, không chỉ nhắc chung "giữ nguyên comment".
+
+**1 lỗi Glossary/UmbraGlossaryLocalized:** `UmbraGlossaryLocalized('shadowlands','Underworld')` ở dòng 151 (`dark_kingdom_government_desc`) bị bỏ sót tiếng Anh dù đây là dòng ACTIVE (không phải comment) — đã sửa thành "Âm Phủ" theo B4j.
+
+**1 lỗi terminology cross-segment:** `POD_inquisition_vassal` (đoạn 3) dịch "Dị Giáo Pháp Đình" trong khi `inquisition_government`/`_adjective`/`_realm` (đoạn 1, cùng khái niệm Inquisition) dùng đúng "Tòa Dị Giáo" đã chốt (B4e/dòng 817) — sửa lại đồng bộ về "Tòa Dị Giáo".
+
+**2 thuật ngữ đồng bộ theo quyết định mới chốt ở `game_POD_concepts` (dịch cùng đợt việc #9):**
+- Sire → xác nhận **giữ nguyên "Sire"** (quyết định cuối cùng, xem B9-concepts) — cả 3 đoạn đều đã dùng đúng ngay từ đầu.
+- Blood Hunt → **Săn Máu** (theo `game_concept_blood_hunt` vừa chốt) — đoạn 1 còn sót 1 chỗ giữ nguyên tiếng Anh, đã sửa.
+- Blood Oath → **Huyết Thệ** (theo B9-concepts) — đoạn 1 còn sót 3 chỗ giữ nguyên tiếng Anh, đã sửa.
+
+**Thuật ngữ MỚI đặt trong file này:**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| Traditions (chính quyền Vampire) | Truyền Thống | tên chính quyền, không nhầm với "traditions" chung chung |
+| The First/Second/.../Sixth Tradition | Truyền Thống Thứ Nhất/Hai/Ba/Tư/Năm/Sáu | 6 điều luật Caine |
+| Inquisition Order | Tòa Dị Giáo | tái dùng tiền lệ B4e |
+| August Court (Kuei-Jin) | Thánh Triều | chính quyền sớm nhất Wan-Kuei |
+| Infernal Court | Triều Đình Địa Ngục | chính quyền Demon |
+| Household (Changeling) | Gia Hộ | |
+| Fera Tribe | Bộ Tộc Fera | |
+| Mummy Cult | Giáo Phái Xác Ướp | |
+| Hunter Cell | Biệt Đội Thợ Săn | |
+| Roaming Court | Triều Đình Du Mục | |
+| Free State | Tự Do Bang | |
+| The Pyramid (Tremere contract) | Kim Tự Tháp / Khế Ước Kim Tự Tháp | |
+| Tzimisce Hospitality | Hiếu Khách Tzimisce | |
+| Family Business | Chuyện Gia Đình / Gia Đình Trên Hết | |
+| Eternal Senate/Senator | Nguyên Lão Vĩnh Cửu | |
+| Progeny | Dòng Dõi | |
+| Blood Tithe | Thuế Máu | |
+| Domain Revocation | Thu Hồi Lãnh Địa |  |
+| Inner Circle (Camarilla) | Vòng Trong | |
+| Rose Treaty | Hiệp Ước Hoa Hồng | |
+| Mandate of Hell | Thiên Mệnh Địa Ngục | |
+| Seru Court / Kenbet Court / Djadjat Court (Mummy oversight) | Triều Đình Seru/Kenbet/Djadjat | giữ nguyên tên riêng Ai Cập |
+| Nomarch Oversight | Giám Sát Nomarch | giữ "Nomarch" |
+| "Pact" (Infernal/Faith/Obedience/Iron/Gold/Glory Pact — Demon tax_collector) | Khế Ước [X] | tái dùng "Khế Ước" nhưng áp dụng ngữ cảnh vassal-obligation trung lập |
+
+**Kết quả kiểm tra cuối:** sau khi sửa cả 3 lỗi (comment, UmbraGlossaryLocalized, terminology), đối chiếu 6 loại token với `git show HEAD` khớp tuyệt đối (`$ref$` 26, bracket 235, icon 9, `\n` 81, `\"` 0, dòng 555, BOM `efbbbf`). Bracket-content diff chỉ còn đúng 1 khác biệt chủ đích (Underworld→Âm Phủ). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 555 dòng, bao gồm cả 114 dòng comment được khôi phục nguyên trạng tiếng Anh.
+
+## B9-titles. `titles_POD_l_english.yml` (879/879 dòng) — việc #9 file 4/4 — QUYẾT ĐỊNH: KHÔNG DỊCH
+
+Toàn bộ file là tên tước vị/danh hiệu (`e_`/`d_`/`k_`/`c_`/`b_` prefix) và biến thể `_adj` (tên tính từ/văn hóa dùng trong UI, vd `e_voivodate_adj: "Tzimisce"`), giống hệt cách `base_game_vh` xử lý tên tước vị/địa danh vanilla — **giữ nguyên tiếng Anh, không dịch**, đúng theo CLAUDE.md ("names/, dynasties/ và bookmark/ là danh từ riêng, thường để nguyên như base_game_vh làm với tên vanilla") và xác nhận qua khảo sát `base_game_vh/localization/english/titles_l_english.yml` (hàng nghìn dòng `_adj:` vẫn giữ nguyên tiếng Anh, vd `NORTHUMBERLAND_adj: "Northumberland"`, `HEREFORD_adj: "Hereford"`).
+
+Không có dòng văn xuôi mô tả nào trong file (dòng dài nhất chỉ là 1 chuỗi tên tước vị ngắn, vd `d_third_caine: "Ecumenical Patriarchate of the Third Caine"`). Đã xác nhận với người dùng trước khi quyết định — **giữ nguyên toàn bộ 879 dòng, không sửa gì, không cần commit riêng** (file không đổi so với HEAD).

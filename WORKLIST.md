@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-28 (đợt 13 — `POD_wraith_lifestyle_l_english.yml` xong, việc #8 `lifestyles/` đạt 27/27 HOÀN TẤT, chuyển việc #9).
+Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT, chuyển việc #10 `buildings/`).
 
 ---
 
@@ -16,8 +16,21 @@ Cập nhật lần cuối: 2026-07-28 (đợt 13 — `POD_wraith_lifestyle_l_eng
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** |
-| Việc tiếp theo | **Việc #9 — 4 file root-level ưu tiên, ĐÚNG THỨ TỰ:** `game_POD_concepts` → `factions_POD` → `government_POD` → `titles_POD` |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** |
+| Việc tiếp theo | **Việc #10 — `buildings/`, 6.309 key, 8 file** (có `:0` trong `building_grand_city_POD_l_english.yml`) |
+
+### ✅ ĐỢT 14 (2026-07-28) — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT
+
+4 file theo đúng thứ tự đã bàn giao (`game_POD_concepts` → `factions_POD` → `government_POD` → `titles_POD`) đã xử lý xong trong cùng session:
+
+- **`game_POD_concepts_l_english.yml`** (825/825 dòng, 79 Glossary, 9 UmbraGlossaryLocalized): dịch qua 5 agent chia đoạn (1-169, 170-337, 338-502, 503-691, 692-825). **5 lỗi merge phát hiện và sửa:** (1) "Discipline"/"Disciplines" không nhất quán — 2/5 đoạn bỏ sót thuật ngữ đã chốt cứng từ B2 "Dị Năng", sửa 8 chỗ; (2) "Grand City" dịch "Đại Đô thị" ở 3 dòng định nghĩa concept gốc trong khi cùng đoạn lại dùng đúng "Đại Thành" đã chốt B5e ở chỗ khác — mâu thuẫn nội bộ ngay trong 1 đoạn, sửa 6 chỗ; (3) "World of Darkness" (bare text) bỏ sót tiếng Anh ở 2 chỗ dù đã chốt "Thế Giới Bóng Tối"; (4) "True Faith" bỏ sót tiếng Anh ở 6 chỗ dù đã chốt "Đức Tin Chân Chính" từ `traits_POD`; (5) mất cặp `\"..\"` escape ở 1 dòng (`game_concept_cainite_desc`, chữ "Western") — chỉ phát hiện nhờ đếm `\"` lệch 8 vs baseline 10. Xác nhận chính thức "Sire" → **giữ nguyên tiếng Anh** (agent dịch đoạn chứa `game_concept_Sire` tự quyết định giữ nguyên, trở thành tiền lệ chốt). Thuật ngữ mới → TERMINOLOGY.md `B9-concepts`.
+- **`factions_POD_l_english.yml`** (23/23 dòng): coordinator tự dịch trực tiếp bằng script Python (không qua agent, file quá nhỏ). 0 lỗi.
+- **`government_POD_l_english.yml`** (555/555 dòng, 7 Glossary, 1 UmbraGlossaryLocalized): dịch qua 3 agent chia đoạn (1-230, 231-391, 392-555). **⚠️ LỖI MERGE NGHIÊM TRỌNG MỚI, LẦN ĐẦU GẶP:** file có **114 dòng bị comment-out** (` #key: "..."`, các lựa chọn `tax_collector`/`vassal_rights` không active) rải khắp file — theo TRANSLATION_RULES §5 phải giữ nguyên tiếng Anh, nhưng **cả 3 agent đều dịch nhầm** dù prompt có nhắc chung "giữ nguyên dòng comment". Phát hiện nhờ coordinator tự đọc thấy `#destruction_rights`/`#blood_oaths` có nội dung tiếng Việt, viết script Python quét toàn bộ dòng khớp pattern `^\s*#[A-Za-z_]`/`^\s*#\s*$`, khôi phục byte-for-byte **73 dòng bị dịch sai**. Cũng sửa 1 lỗi bỏ sót `UmbraGlossaryLocalized('shadowlands','Underworld')` ở dòng active thật, và 1 lỗi lệch thuật ngữ Inquisition giữa 2 đoạn (`POD_inquisition_vassal`="Dị Giáo Pháp Đình" lệch với "Tòa Dị Giáo" đã chốt). Đồng bộ "Blood Hunt"→"Săn Máu"/"Blood Oath"→"Huyết Thệ" theo quyết định vừa chốt ở `game_POD_concepts`. Thuật ngữ mới → TERMINOLOGY.md `B9-government`.
+- **`titles_POD_l_english.yml`** (879/879 dòng): **QUYẾT ĐỊNH (xác nhận với người dùng): KHÔNG DỊCH.** Toàn bộ file là tên tước vị/danh hiệu (`e_`/`d_`/`k_`/`c_`/`b_` prefix) và biến thể `_adj`, không có văn xuôi mô tả — giống hệt cách `base_game_vh` giữ nguyên tiếng Anh cho tên tước vị/địa danh vanilla (đã khảo sát `base_game_vh/localization/english/titles_l_english.yml` xác nhận mẫu này). File không đổi so với HEAD, không cần commit riêng. Ghi chú → TERMINOLOGY.md `B9-titles`.
+
+**Bài học quan trọng nhất đợt này:** mật độ dòng comment rất cao xen kẽ dòng active (114/555 dòng ở `government_POD`) khiến agent không áp dụng đúng quy tắc "giữ nguyên comment" dù được nhắc — cần cảnh báo cụ thể số lượng ước tính và yêu cầu agent tự `grep -c '^\s*#[A-Za-z]'` trước khi nộp ở các file tương tự sau này (nhiều file khác trong repo cũng có nhiều dòng bị comment-out, xem trước khi chia đoạn).
+
+**`việc #9` HOÀN TẤT (4/4 file).** Việc tiếp theo: **#10 (`buildings/`, 6.309 key, 8 file)** — có hậu tố `:0` trong `building_grand_city_POD_l_english.yml`, cẩn thận không đổi.
 
 ### ✅ ĐỢT 13 (2026-07-28) — hoàn tất `POD_wraith_lifestyle_l_english.yml`, `lifestyles/` đạt 27/27, việc #8 HOÀN TẤT
 
@@ -320,14 +333,14 @@ Text giao diện. **Giữ ngắn** — UI CK3 chật, tooltip dài sẽ vỡ lay
 
 ### #8 — `lifestyles/`  6.740 key, 27 file — ⏸️ **26/27, còn `POD_wraith_lifestyle_l_english.yml` (1064 dòng)**
 
-### #9 — 4 file ưu tiên từ root-level (tách ra làm sớm)
+### #9 — 4 file ưu tiên từ root-level (tách ra làm sớm)  — ✅ **HOÀN TẤT 4/4**
 
 **Quyết định 2026-07-27:** tách 4 file sau ra khỏi khối root-level (việc #12), đôn lên làm trước `buildings/` — vì đây là những thứ người chơi thấy sớm nhất và nhiều nhất khi mới vào ván (tên khái niệm tra cứu, phe phái, chính thể, tước vị):
 
-- `game_POD_concepts_l_english.yml` — **làm trước tiên trong 4 file này**, chứa các key `_desc` mà `Glossary()` ở bước glossary trỏ tới.
-- `factions_POD_l_english.yml`
-- `government_POD_l_english.yml`
-- `titles_POD_l_english.yml`
+- `game_POD_concepts_l_english.yml` — ✅ đã dịch (825/825 dòng)
+- `factions_POD_l_english.yml` — ✅ đã dịch (23/23 dòng)
+- `government_POD_l_english.yml` — ✅ đã dịch (555/555 dòng)
+- `titles_POD_l_english.yml` — ✅ QUYẾT ĐỊNH KHÔNG DỊCH (toàn bộ tên tước vị/danh hiệu, giữ nguyên như base_game_vh)
 
 ### #10 — `buildings/`  6.309 key, 8 file
 
