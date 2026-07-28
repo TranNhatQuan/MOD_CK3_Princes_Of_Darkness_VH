@@ -3172,6 +3172,37 @@ Nguồn: định nghĩa các loại chính quyền POD (Traditions/Camarilla-sty
 
 **Kết quả kiểm tra cuối:** sau khi sửa cả 3 lỗi (comment, UmbraGlossaryLocalized, terminology), đối chiếu 6 loại token với `git show HEAD` khớp tuyệt đối (`$ref$` 26, bracket 235, icon 9, `\n` 81, `\"` 0, dòng 555, BOM `efbbbf`). Bracket-content diff chỉ còn đúng 1 khác biệt chủ đích (Underworld→Âm Phủ). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 555 dòng, bao gồm cả 114 dòng comment được khôi phục nguyên trạng tiếng Anh.
 
+## B12-effects. Thuật ngữ `effects_POD_l_english.yml` (2164/2164 dòng) — việc #12 (tiếp), file lớn nhất còn lại
+
+Nguồn: file lặp mẫu message/tooltip effect (GAINS/GAINED/PERKPOINT theo lifestyle, mô tả perk theo Discipline/Path Necromancy/Blood Magic, hiệu ứng bound ghoul/wraith/demon...). Dịch qua 7 agent chia đoạn (1-311, 312-615, 616-926, 927-1246, 1247-1545, 1546-1856, 1857-2164), coordinator merge bằng Python (đối chiếu key-tuần-tự, dòng trống byte-for-byte, trailing-whitespace, token count, `Glossary()`/`UmbraGlossaryLocalized()` tham số với `git show HEAD`).
+
+**3 lỗi merge phát hiện và sửa:**
+1. Đoạn 3 (616-926) thiếu đúng 1 dòng trống giữa comment `#Ash Path` và `SHROUDSIGHT_PERK_EFFECT` (dòng gốc 879) — toàn bộ phần còn lại của đoạn bị lệch 1 dòng cho tới hết đoạn (925/926 trùng khớp ngẫu nhiên do 2 dòng trống liên tiếp ở cuối đoạn). Agent tự báo "khớp 100%" nhưng sai — chỉ phát hiện được nhờ đối chiếu key-tuần-tự từng dòng, không chỉ đếm tổng số dòng trống. Khôi phục bằng cách chèn lại đúng vị trí.
+2. Đoạn 3 cũng bỏ sót dịch tham số 2 của cả 8 lần `UmbraGlossaryLocalized('shadowlands','Underworld')` — để nguyên "Underworld" thay vì "Âm Phủ" dù agent tự nhận ra mâu thuẫn với đề bài và chủ động hỏi lại thay vì tự sửa. Sửa cả 8 chỗ theo B4j.
+3. Đoạn 4 (927-1246) làm mất khoảng trắng thừa cuối dòng ở 3 dòng comment header (` # Potence # `, ` # Presence # `, ` # Kai # ` → mất space cuối trước CRLF) — loại lỗi trailing-whitespace-sau-nội-dung đã biết từ trước, không phải trailing sau dấu `"`.
+
+**1 hiện tượng KHÔNG phải lỗi, chỉ là false positive khi so vị trí tuyệt đối:** dòng `POD_become_bound_ghoul_effect_domitor_disciplines` (2111) có 2 lệnh `Glossary()` trong cùng 1 dòng (`Domitor` và `Disciplines`) — bản dịch đổi thứ tự xuất hiện của 2 lệnh trong câu do trật tự cụm danh từ tiếng Việt ("[Disciplines] tiêu chuẩn của [Domitor]" thay vì "[Domitor]'s standard [Disciplines]"), khiến script so theo **vị trí tuyệt đối toàn file** báo "lệch tham số" giữa 2 lệnh liền kề — nhưng multiset tham số vẫn nguyên vẹn, không có gì bị dịch sai. Bài học: khi 1 dòng có ≥2 lệnh Glossary/UmbraGlossaryLocalized cùng loại, so theo vị trí tuyệt đối có thể báo dương giả nếu ngữ pháp Việt đảo trật tự cụm — cần đọc lại chính dòng đó trước khi kết luận là lỗi.
+
+**Quyết định người dùng xác nhận trong đợt này — xung đột thuật ngữ "Blood Magic":** phát hiện 2 bản dịch khác nhau cho cùng khái niệm "Blood Magic" tồn tại song song trong repo — `lifestyles/POD_blood_magic_lifestyle_l_english.yml` (đã commit trước) dùng **"Chú Thuật Huyết Mạch"**, còn `game_POD_concepts_l_english.yml:66` định nghĩa `game_concept_blood_magic_lifestyle: "Huyết Thuật"` (trùng với "Bloodsorcery/Blood Sorcery"→"Huyết Thuật" đã chốt B4d). Người dùng xác nhận: **giữ "Chú Thuật Huyết Mạch"** cho khái niệm lifestyle Blood Magic (state trong `lifestyles/POD_blood_magic_lifestyle`), coi đây là tên riêng hệ thống khác với "Huyết Thuật" (=Blood Sorcery, Dị năng Tremere). **Còn nợ:** `game_POD_concepts_l_english.yml:66` cần sửa lại để tách biệt 2 khái niệm (không dùng chung "Huyết Thuật" cho cả `game_concept_blood_magic_lifestyle` và `game_concept_bloodsorcery`/`game_concept_bloodsorcerer`) — chưa sửa trong đợt này, cần làm ở lần sau khi đụng lại `game_POD_concepts_l_english.yml`. Các cụm tên riêng trường phái ghép "Thaumaturgy/Sielanic/Dur-An-Ki/Akhu/Sadhana Blood Magic" trong `effects_POD` giữ nguyên tiếng Anh cả cụm (không dùng từ nào trong 2 bản dịch tranh chấp), nhất quán với cách các Path/tradition riêng lẻ đã giữ nguyên ở nơi khác.
+
+**Thuật ngữ mới đề xuất bổ sung (agent các đoạn tự đặt, chưa có tiền lệ, coordinator xác nhận hợp lý, dùng nhất quán trong file):**
+
+| English | Tiếng Việt | Ghi chú |
+|---|---|---|
+| bound wraith | oan hồn bị ràng buộc | vai trò servant/property giống bound ghoul/bound demon |
+| bound demon | ác quỷ bị ràng buộc | |
+| puppet / puppetmaster | con rối / kẻ giật dây | vai trò bị Dominate/Fascinate khống chế |
+| effigy | hình nộm | |
+| manifestation | hiện thân | |
+| Generation (bare, không kèm số) | Thế Hệ | khác "Thế Hệ Thứ N" (có số) đã chốt cho trait |
+| the Beyond (lore Baali/Daimonion) | cõi Vượt Ngoài | |
+| the Faithful (Faith perks) | Người Mộ Đạo | |
+| Wraith Maintenance / Host Possession / Demonic Investment | Duy Trì Wraith / Chiếm Hữu Vật Chủ / Đầu Tư Ác Quỷ | tên nhóm hiệu ứng .tt |
+| Diao (thuật ngữ Phật giáo/Kuei-Jin) | giữ nguyên tiếng Anh | chưa rõ nghĩa Việt tương xứng |
+| Koldun, Koldunic, kraina, Genius Loci, Devisor/Designer | giữ nguyên tiếng Anh | tái xác nhận từ B8-lifestyles-p5 |
+
+**Kết quả kiểm tra cuối:** sau khi sửa cả 3 lỗi, đối chiếu token với `git show HEAD` khớp tuyệt đối (`$ref$` 558, bracket 2143, icon 90, mở tag 735, đóng tag 717, `\n` 384, `\"` 0, dòng 2164, BOM `efbbbf`). Key-sequence và dòng trống khớp byte-for-byte toàn bộ 2164 dòng. Quét riêng English-sót bằng heuristic (dòng có ≥8 ký tự Latin liên tục mà không có dấu tiếng Việt) chỉ ra 3 dòng, cả 3 đều là false positive (2 câu trích Latin cố ý giữ nguyên, 1 placeholder tooltip `X Y`).
+
 ## B9-titles. `titles_POD_l_english.yml` (879/879 dòng) — việc #9 file 4/4 — QUYẾT ĐỊNH: KHÔNG DỊCH
 
 Toàn bộ file là tên tước vị/danh hiệu (`e_`/`d_`/`k_`/`c_`/`b_` prefix) và biến thể `_adj` (tên tính từ/văn hóa dùng trong UI, vd `e_voivodate_adj: "Tzimisce"`), giống hệt cách `base_game_vh` xử lý tên tước vị/địa danh vanilla — **giữ nguyên tiếng Anh, không dịch**, đúng theo CLAUDE.md ("names/, dynasties/ và bookmark/ là danh từ riêng, thường để nguyên như base_game_vh làm với tên vanilla") và xác nhận qua khảo sát `base_game_vh/localization/english/titles_l_english.yml` (hàng nghìn dòng `_adj:` vẫn giữ nguyên tiếng Anh, vd `NORTHUMBERLAND_adj: "Northumberland"`, `HEREFORD_adj: "Hereford"`).
