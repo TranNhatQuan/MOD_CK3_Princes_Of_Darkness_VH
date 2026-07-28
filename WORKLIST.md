@@ -36,65 +36,85 @@ Thư mục `princesofdarkness/localization/english/` gốc (không tính subfold
 
 **56 file còn lại, tất cả xác nhận 100% tiếng Anh** (đã tự kiểm bằng script quét ký tự có dấu tiếng Việt — mọi kết quả dương tính đều là false positive từ tên riêng có dấu ngoại ngữ khác, vd "Mokolé", "Dazbóga", "Certámen", không phải bản dịch thật).
 
-### Danh sách 56 file, xếp theo số dòng giảm dần (đo bằng đếm byte `\n`, không tin `wc -l` nếu nghi ngờ dòng cuối thiếu newline — luôn tự `grep -c ''` lại trước khi chia đoạn)
+**Cập nhật 2026-07-28 sau khi đọc nội dung thật từng file:** `nicknames_POD_l_english.yml` (4365 dòng) bị tách ra, không dịch trong việc #12 (quyết định người dùng). 13 file thuộc nhóm SKIP (chỉ chứa ID/tên riêng/mẫu lặp) và 6 file nhóm MOSTLY SKIP (chỉ vài dòng có chữ thật) — xem bảng phân loại chi tiết ngay dưới, KHÔNG CẦN quét lại nội dung các file này. Số file thật sự cần dịch đầy đủ cho việc #12: **38 file** (nhóm TRANSLATE).
+
+### ✅ ĐÃ KIỂM TRA NỘI DUNG TOÀN BỘ 58 FILE (2026-07-28) — kết quả phân loại, KHÔNG CẦN QUÉT LẠI
+
+Đã mở và đọc thật nội dung từng file (không chỉ suy đoán theo tên) để phân loại file nào có văn xuôi thật cần dịch và file nào chỉ chứa định danh/tên riêng/mẫu lặp không cần dịch. Kết quả dưới đây là **chốt cuối, không cần agent nào quét lại nội dung các file SKIP/MOSTLY SKIP để "kiểm tra xem có cần dịch không" nữa** — chỉ cần dịch đúng theo phân loại.
+
+**`glossary_POD_l_english.yml` đã dịch xong từ trước** (không nằm trong 56 file, đã trừ ra ở trên).
+
+**`nicknames_POD_l_english.yml` (4365 dòng) — BỎ RA KHỎI VIỆC #12, không dịch trong đợt này** (quyết định người dùng 2026-07-28). Còn lại **57 file** cần xử lý cho việc #12.
+
+#### Nhóm SKIP — không dịch, giá trị chỉ là định danh/tên riêng/mẫu lặp thuần (13 file, không tính glossary_POD/nicknames_POD đã tách riêng)
 
 ```
-4365  nicknames_POD_l_english.yml          ← LỚN NHẤT, để cuối cùng, chia nhiều agent
-2164  effects_POD_l_english.yml            ← nhiều Glossary(47)/UmbraGlossaryLocalized(12) nhất
+ 384  POD_do_not_translate_this_l_english.yml   ← ID script GUI, quy tắc CLAUDE.md
+ 449  POD_journeys_script_values_l_english.yml  ← toàn bộ là [GetPerk/GetModifier...GetName], không văn xuôi
+ 390  POD_soldier_modifiers_l_english.yml       ← nhãn số liệu quân sự lặp mẫu qua macro $POD_x_maa$
+ 331  POD_court_positions_l_english.yml         ← toàn bộ [GetTrait(...).GetName], không chữ thật
+ 260  culture_titles_POD_l_english.yml          ← danh sách tên riêng tước vị (Khagan, Khatun, Voivode...)
+ 245  POD_mokole_l_english.yml                  ← nhãn ngắn dạng thẻ (Archid: Horn...)
+  67  relations_POD_l_english.yml               ← nhãn vai trò quan hệ ngắn (Owner, Puppet, Muse...)
+  53  secrets_vampgeneration_POD_l_english.yml  ← mẫu lặp "Thế hệ thứ N" ×16
+  51  hook_types_POD_l_english.yml              ← danh sách tên riêng loại hook (Loyalty, Geas, Vinculum...)
+  31  music_POD_l_english.yml                   ← tên bài nhạc (tên riêng)
+  15  POD_flags_l_english.yml                   ← nhãn cờ trạng thái ngắn
+  14  POD_decision_group_types_l_english.yml    ← tên nhóm menu quyết định ngắn
+```
+
+#### Nhóm MOSTLY SKIP — chỉ dịch vài dòng có chữ thật, còn lại là mẫu lặp/tham chiếu (6 file)
+
+```
+ 175  POD_journeys_core_l_english.yml           ← vài dòng UI thật ("List of Journeys"...), còn lại datafunction ref
+ 118  POD_shared_loca_l_english.yml             ← vài chuỗi thật ("Success!"), phần lớn số đếm POD_num0-100 + tag màu
+  78  POD_scheme_countermeasures_l_english.yml  ← ~70% dòng chỉ trỏ $key$ sang tier khác, phần thật chỉ ở tier gốc
+  63  secrets_POD_l_english.yml                 ← ⚠️ CÓ HẬU TỐ `:0`, giữ nguyên. Nhiều dòng chỉ [GetTrait...GetName], phần thật ít
+  14  POD_custom_nickname_l_english.yml         ← 2 đoạn văn thật, còn lại câu trả lời 1 từ
+   7  POD_masquerade_l_english.yml              ← ngắn nhưng đều câu thật, biên giới — dịch hết cho chắc
+```
+
+#### Nhóm TRANSLATE — có văn xuôi/UI thật, cần dịch đầy đủ (38 file, xếp theo số dòng giảm dần)
+
+```
+2163  effects_POD_l_english.yml            ← nhiều Glossary(47)/UmbraGlossaryLocalized(12) nhất
 2092  POD_journeys_l_english.yml           ← Glossary(26)/UmbraGlossaryLocalized(1)
-1988  single_combat_POD_l_english.yml      ← Glossary(1)/UmbraGlossaryLocalized(1)
- 729  POD_regiments_l_english.yml          ← Glossary(25)/UmbraGlossaryLocalized(4)
+1987  single_combat_POD_l_english.yml      ← Glossary(1)/UmbraGlossaryLocalized(1)
+ 728  POD_regiments_l_english.yml          ← Glossary(25)/UmbraGlossaryLocalized(4) — có tên riêng đơn vị lẫn mô tả thật, dịch phần mô tả
  490  struggle_POD_l_english.yml           ← Glossary(13)
- 466  game_POD_rules_l_english.yml         ← Glossary(4)
- 450  POD_journeys_script_values_l_english.yml
- 390  POD_soldier_modifiers_l_english.yml
+ 465  game_POD_rules_l_english.yml         ← Glossary(4)
  377  schemes_POD_l_english.yml            ← Glossary(9)
- 372  POD_coterie_l_english.yml            ← Glossary(1)
- 332  POD_court_positions_l_english.yml    ← Glossary(6)/UmbraGlossaryLocalized(4)
+ 371  POD_coterie_l_english.yml            ← Glossary(1)
  319  focuses_POD_l_english.yml
- 261  culture_titles_POD_l_english.yml     ← Glossary(2) — CẨN THẬN: có thể là tên riêng như titles_POD, kiểm tra trước khi dịch toàn bộ
- 246  POD_mokole_l_english.yml
- 234  POD_important_actions_l_english.yml  ← Glossary(3)
- 204  POD_actvities_l_english.yml          ← chú ý tên file SAI CHÍNH TẢ (activities), giữ nguyên tên file
- 176  POD_journeys_core_l_english.yml
+ 233  POD_important_actions_l_english.yml  ← Glossary(3) — xác nhận văn xuôi thật, dịch đầy đủ
+ 203  POD_actvities_l_english.yml          ← chú ý tên file SAI CHÍNH TẢ (activities), giữ nguyên tên file
  166  secrets_prey_restriction_POD_l_english.yml
  160  wars_POD_l_english.yml               ← Glossary(4)
  157  POD_regiments_fera_l_english.yml     ← Glossary(1)
- 137  POD_accolades_l_english.yml
- 125  POD_wyrm_l_english.yml               ← Glossary(4)
- 121  POD_spirits_l_english.yml
- 120  POD_epidemics_l_english.yml
- 118  POD_shared_loca_l_english.yml
- 118  POD_fera_common_l_english.yml
- 113  death_reasons_POD_l_english.yml      ← Glossary(3)
+ 136  POD_accolades_l_english.yml          ← xác nhận là tên hiệu/danh xưng thật (Bloody Lackey...), không phải ID
+ 124  POD_wyrm_l_english.yml               ← Glossary(4)
+ 120  POD_spirits_l_english.yml
+ 119  POD_epidemics_l_english.yml
+ 117  POD_fera_common_l_english.yml
+ 112  death_reasons_POD_l_english.yml      ← Glossary(3)
  108  secrets_predator_types_POD_l_english.yml
-  99  POD_april_fools_l_english.yml
+  98  POD_april_fools_l_english.yml
   92  mottos_POD_l_english.yml
-  90  POD_ashirra_l_english.yml            ← Glossary(3)
-  84  POD_regiments_spirits_l_english.yml  ← Glossary(2)/UmbraGlossaryLocalized(1)
-  78  POD_scheme_countermeasures_l_english.yml
-  68  relations_POD_l_english.yml          ← Glossary(2)
-  64  secrets_POD_l_english.yml            ← ⚠️ CÓ HẬU TỐ `:0` — giữ y nguyên, đừng thêm/bớt số. Glossary(9)
-  53  secrets_vampgeneration_POD_l_english.yml
-  52  hook_types_POD_l_english.yml
-  51  interactions_POD_l_english.yml       ← UmbraGlossaryLocalized(1) — LƯU Ý tên file GẦN GIỐNG `interactions/` (thư mục, đã xong việc #5) nhưng đây là file RIÊNG ở root, khác nhau
-  45  POD_legends_l_english.yml
-  35  POD_relationship_reasons_l_english.yml
-  32  music_POD_l_english.yml
-  31  POD_script_values_l_english.yml
-  23  POD_succession_laws_l_english.yml
-  19  POD_personal_coa_localization_l_english.yml
-  16  POD_flags_l_english.yml
-  15  POD_custom_nickname_l_english.yml
-  14  POD_fog_of_war_l_english.yml
-  14  POD_decision_group_types_l_english.yml
-  12  POD_inquiobjectives_l_english.yml
-  11  POD_messages_l_english.yml
-  10  POD_story_cycles_l_english.yml
-   8  POD_masquerade_l_english.yml
-   5  POD_court_position_changes_localization_l_english.yml
+  89  POD_ashirra_l_english.yml            ← Glossary(3)
+  83  POD_regiments_spirits_l_english.yml  ← Glossary(2)/UmbraGlossaryLocalized(1)
+  50  interactions_POD_l_english.yml       ← UmbraGlossaryLocalized(1) — LƯU Ý tên file GẦN GIỐNG `interactions/` (thư mục, đã xong việc #5) nhưng đây là file RIÊNG ở root, khác nhau
+  44  POD_legends_l_english.yml
+  34  POD_relationship_reasons_l_english.yml
+  30  POD_script_values_l_english.yml
+  22  POD_succession_laws_l_english.yml
+  18  POD_personal_coa_localization_l_english.yml
+  13  POD_fog_of_war_l_english.yml
+  11  POD_inquiobjectives_l_english.yml
+  10  POD_messages_l_english.yml
+   9  POD_story_cycles_l_english.yml
+   4  POD_court_position_changes_localization_l_english.yml
    3  rcm_l_english.yml
-   3  POD_content_source_l_english.yml     ← ⚠️ THỤT 2 SPACE (không phải 1 space chuẩn) — GIỮ NGUYÊN độ thụt gốc, đừng "sửa" về 1 space
+   2  POD_content_source_l_english.yml     ← ⚠️ THỤT 2 SPACE (không phải 1 space chuẩn) — GIỮ NGUYÊN độ thụt gốc, đừng "sửa" về 1 space
 ```
 
 ### Quy trình bắt buộc
@@ -112,11 +132,13 @@ Thư mục `princesofdarkness/localization/english/` gốc (không tính subfold
 ### Lưu ý đặc biệt
 
 - `POD_do_not_translate_this_l_english.yml`: **BỎ QUA HOÀN TOÀN**, giá trị là ID script GUI đọc trực tiếp.
-- `culture_titles_POD_l_english.yml`: tên file gợi ý có thể chứa tên văn hóa/tước vị riêng — kiểm tra nội dung thật trước khi coi là văn xuôi cần dịch toàn bộ (có thể một phần là tên riêng như `titles_POD`).
-- `secrets_POD_l_english.yml`: có hậu tố `:0`, giữ nguyên.
+- `culture_titles_POD_l_english.yml`: **đã xác nhận là tên riêng (Khagan, Khatun, Voivode...) — thuộc nhóm SKIP, không dịch**, giống `titles_POD`.
+- `nicknames_POD_l_english.yml`: **BỎ RA KHỎI VIỆC #12, không dịch trong đợt này** (quyết định người dùng 2026-07-28) — dù nội dung là văn xuôi thật (lore biệt danh nhân vật), để dành riêng, xử lý sau ngoài phạm vi #12.
+- `secrets_POD_l_english.yml`: có hậu tố `:0`, giữ nguyên. Thuộc nhóm MOSTLY SKIP — chỉ vài dòng có chữ thật.
 - `POD_content_source_l_english.yml`: thụt 2 space, giữ nguyên độ thụt.
-- `interactions_POD_l_english.yml` (root, 51 dòng) ≠ thư mục `interactions/` (đã xong việc #5) — đừng nhầm hai thứ.
+- `interactions_POD_l_english.yml` (root, 50 dòng) ≠ thư mục `interactions/` (đã xong việc #5) — đừng nhầm hai thứ.
 - `POD_actvities_l_english.yml`: tên file gốc bị lỗi chính tả (thiếu "i" trong "activities") — giữ nguyên tên file, không đổi.
+- Xem bảng phân loại đầy đủ SKIP/MOSTLY SKIP/TRANSLATE ở mục "✅ ĐÃ KIỂM TRA NỘI DUNG..." phía trên — đã đọc nội dung thật từng file, không cần quét lại.
 
 ---
 
