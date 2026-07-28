@@ -3318,7 +3318,14 @@ Nguồn: cơ chế "Coterie" (nhóm ma cà rồng liên minh) — tên nhóm the
 
 **✅ Đã sửa ngay sau khi đóng việc #12:** `game_POD_concepts_l_english.yml:66` — `game_concept_blood_magic_lifestyle` đã sửa từ "Huyết Thuật" (trùng với `game_concept_bloodsorcery`) thành **"Chú Thuật Huyết Mạch"**, tách bạch Blood Magic (lifestyle)/Blood Sorcery (Discipline). Đã đồng bộ luôn dòng `_desc` liền kề (2 chỗ "huyết thuật"→"Chú Thuật Huyết Mạch", giữ nguyên "Blood Sorcery" tiếng Anh trong câu vì đó là câu văn cố ý đối chiếu 2 khái niệm). File vẫn 825/825 dòng, CRLF/BOM nguyên vẹn, chỉ 2 dòng thay đổi.
 
-**Việc nợ lại, CHƯA làm:**
-1. **Xung đột thuật ngữ "the Embrace" chưa giải quyết dứt điểm toàn repo** (xem `B12-struggle`): `glossary_POD`/15 file khác dùng "Trao truyền" (nguồn gốc, ưu tiên), nhưng `game_POD_concepts`/`effects_POD`/`POD_journeys` dùng "Hiến Máu" (từ định nghĩa `game_concept_Embrace`/`_desc`), và `interactions/POD_character_interactions_vampire`/`POD_ashirra`/`interactions/POD_character_interactions_numina` dùng "Sự Ôm Ấp". Người dùng đã chọn "Trao truyền" làm chuẩn cho các file MỚI dịch từ nay, nhưng 3+3 file cũ nói trên CHƯA được thống nhất lại — cần quay lại xử lý khi có dịp, hoặc hỏi ý kiến người dùng có muốn làm 1 đợt riêng để thống nhất toàn repo hay không.
+**✅ Đã sửa ngay sau đó — thống nhất "the Embrace" = "Trao truyền" trên toàn repo (2026-07-28):** đã tìm và sửa hết 3+3 file cũ dùng bản dịch lệch:
+- `game_POD_concepts_l_english.yml`: `game_concept_Embrace`("Hiến Máu"→"Trao truyền"), `_desc` (2 chỗ), `game_concept_Embraced`("Đã Hiến Máu"→"Đã được Trao truyền"), và 2 chỗ dùng lại trong `game_concept_Sire_desc`/`game_concept_Clan_desc`. Sửa xong bị mất 2 dòng trống 1-space (lỗi Edit tool quen thuộc) ở dòng 173/177 — đã khôi phục byte-for-byte.
+- `effects_POD_l_english.yml`: `THE_RE_EMBRACE_PERK_EFFECT` (2 chỗ "Hiến Máu lại"/"Tái Hiến Máu"→"Trao truyền lại"/"Tái Trao Truyền", theo mẫu ghép "Re-"→"Tái"), `BOON_OF_ANUBIS_PERK_EFFECT`, `POD_create_random_vampire_effect` (`Glossary('Hiến Máu',...)`→`Glossary('Trao truyền',...)`).
+- `POD_journeys_l_english.yml`: `seek_knowledge_dur_an_ki_desc`.
+- `POD_ashirra_l_english.yml`: `willing_embrace_cd_tooltip` ("Sự Ôm Ấp"→"cuộc Trao truyền").
+- `interactions/POD_character_interactions_numina_l_english.yml`: `POD_ha_turn_vampire_interaction_desc`.
+- `interactions/POD_character_interactions_vampire_l_english.yml`: `POD_the_re_embrace_interaction`/`_willing_interaction` ("Ôm Ấp Lại"→"Tái Trao Truyền", cùng mẫu ghép "Re-"→"Tái" như `effects_POD`).
+
+Đã đối chiếu key-tuần-tự + dòng trống byte-for-byte + token count (`$ref$`/`[...]`) với `git show HEAD` cho cả 6 file — khớp tuyệt đối, chỉ đúng số dòng dự kiến thay đổi. Quét lại toàn `princesofdarkness/localization/english/` xác nhận 0 file còn "Hiến Máu"/"Sự Ôm Ấp"/"Ôm Hôn" — "Trao truyền" giờ là bản dịch DUY NHẤT cho "the Embrace" trên toàn bộ 21 file có nhắc tới khái niệm này.
 
 **Việc tiếp theo theo đúng thứ tự gốc:** quay lại làm việc #10 (`buildings/`, 6.309 key, 8 file — có hậu tố `:0` trong `building_grand_city_POD_l_english.yml`, cẩn thận không đổi) rồi việc #11 (`artifacts/`).
