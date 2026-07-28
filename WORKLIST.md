@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-27 (đợt 12 — việc #8 `lifestyles/` đạt 26/27, BÀN GIAO 1 file cuối cho session sau).
+Cập nhật lần cuối: 2026-07-28 (đợt 13 — `POD_wraith_lifestyle_l_english.yml` xong, việc #8 `lifestyles/` đạt 27/27 HOÀN TẤT, chuyển việc #9).
 
 ---
 
@@ -16,8 +16,25 @@ Cập nhật lần cuối: 2026-07-27 (đợt 12 — việc #8 `lifestyles/` đ�
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **26/27 file lifestyles/ (việc #8, 1 file cuối còn lại)** |
-| Việc tiếp theo | **Dịch `lifestyles/POD_wraith_lifestyle_l_english.yml` (1064 dòng, file lớn nhất `lifestyles/`)** → `lifestyles/` đạt 27/27 → việc #8 HOÀN TẤT → chuyển việc #9 (4 file root-level ưu tiên) theo đúng thứ tự trong mục "Thứ tự công việc" |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** |
+| Việc tiếp theo | **Việc #9 — 4 file root-level ưu tiên, ĐÚNG THỨ TỰ:** `game_POD_concepts` → `factions_POD` → `government_POD` → `titles_POD` |
+
+### ✅ ĐỢT 13 (2026-07-28) — hoàn tất `POD_wraith_lifestyle_l_english.yml`, `lifestyles/` đạt 27/27, việc #8 HOÀN TẤT
+
+File cuối cùng của `lifestyles/` (1064/1064 dòng — đo lại baseline bằng `grep -c ''` đúng như bàn giao đợt 12, không đổi) đã dịch xong, verify xong, commit xong.
+
+Quy trình: đo baseline, tra kỹ TERMINOLOGY.md B4h + B5-wraith-p1..p6 trước khi chia việc (toàn bộ tên Arcanos/Guild/Corpus/Fetter/Skinlands/Shadowlands đã có tiền lệ chốt sẵn từ `interactions/`), chia 6 agent song song theo ranh giới dòng trống (1-180, 181-366, 367-531, 532-716, 717-900, 901-1064), mỗi agent ghi 1 file scratch riêng ngoài repo. Coordinator tự merge bằng Python: đối chiếu key-theo-thứ-tự + vị trí dòng trống byte-for-byte giữa bản gốc và từng đoạn dịch (không dùng `grep`/`wc -l` một mình vì agent xác nhận các lệnh đó cho kết quả sai lệch trên file CRLF/không có newline cuối — phải dùng Python đọc byte-chính-xác), diff bracket-set/`Glossary()` tham số 2/`UmbraGlossary()` tham số với `git show HEAD`, đối chiếu 7 loại token.
+
+**3 lỗi merge phát hiện và sửa (xem chi tiết đầy đủ ở TERMINOLOGY.md `B8-lifestyles-p9`):**
+1. Agent đoạn 1 (dòng 1-180) dùng "Chú tâm vào X mang lại:" lệch với mẫu chuẩn "Tập trung vào X mang lại:" đã dùng xuyên suốt các file `lifestyles/` khác — sửa 35 chỗ.
+2. Agent đoạn 2 (dòng 181-366) bỏ sót hoàn toàn 8 dòng `arcanos_X_focus: "X Focus"` (chưa dịch tên focus, dù `_desc`/`_effect_desc` đi kèm đã dịch) — chỉ phát hiện được nhờ coordinator tự gom nhóm TOÀN BỘ 37 dòng `_focus:`/`_focus_effect_desc:` xuyên suốt cả 6 đoạn để so sánh song song, không phải đọc lướt từng đoạn riêng lẻ. Sửa 8 chỗ thành "Trọng Tâm X".
+3. "Hive-Mind" dịch không nhất quán giữa đoạn 1 (giữ nguyên tiếng Anh theo mẫu tên Arcanos khác) và đoạn 5 (dịch "Tâm Trí Bầy Đàn" theo tiền lệ B4v đã chốt cho khái niệm này ở `religion/`) — ưu tiên tiền lệ đã chốt, đồng bộ đoạn 1 theo đoạn 5.
+
+**Lỗi khoảng trắng đầu dòng (loại lỗi nghiêm trọng nhất từ đợt mummy_lifestyles trước) — ĐÃ NGĂN ĐƯỢC PHẦN LỚN nhờ cảnh báo rõ ràng trong mỗi prompt, nhưng vẫn phát hiện 2/6 đoạn (1 và 3) bị mất khoảng trắng ở các DÒNG TRỐNG có 1 space (không phải dòng nội dung) — do agent coi "dòng trống" là đồng nhất và tự ý chuẩn hóa hết về rỗng hoàn toàn, dù bản gốc có 2 loại dòng trống khác nhau (rỗng hoàn toàn xen kẽ với dòng chỉ có 1 space). Sửa bằng cách khôi phục byte-for-byte từ bản gốc cho từng dòng trống lệch. Bài học bổ sung cho lần sau: cảnh báo về khoảng trắng đầu dòng cần nói rõ luôn CẢ dòng trống cũng có 2 loại khác nhau cần giữ nguyên, không chỉ dòng có nội dung.**
+
+Không có `UmbraGlossaryLocalized()`/`Select_CString()` trong file này nên không gặp 2 bẫy kinh điển đó. Thuật ngữ mới → TERMINOLOGY.md `B8-lifestyles-p9`.
+
+**`lifestyles/` đạt 27/27 file → việc #8 HOÀN TẤT.** Việc tiếp theo: #9 (4 file root-level ưu tiên: `game_POD_concepts` → `factions_POD` → `government_POD` → `titles_POD`, đúng thứ tự này).
 
 ### ⏸️ ĐỢT 12 (2026-07-27) — việc #8 `lifestyles/` đạt 26/27 file, BÀN GIAO 1 file cuối (lớn nhất) cho session sau
 
