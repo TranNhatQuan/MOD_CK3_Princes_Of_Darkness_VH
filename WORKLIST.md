@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-28 (đợt 15 — việc #12 đạt 48/57 file, 9 file lớn còn lại BÀN GIAO cho session sau — xem "🔜 SESSION TIẾP THEO — việc #12 (tiếp)" ngay dưới).
+Cập nhật lần cuối: 2026-07-28 (đợt 16 — việc #12 đạt 50/57 file, 6 file lớn còn lại BÀN GIAO cho session sau — xem "🔜 SESSION TIẾP THEO — việc #12 (tiếp, đợt 16)" ngay dưới).
 
 ---
 
@@ -24,10 +24,22 @@ Cập nhật lần cuối: 2026-07-28 (đợt 15 — việc #12 đạt 48/57 fil
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** + **48/57 file việc #12 (13 SKIP + 6 MOSTLY SKIP + 29/38 TRANSLATE)** |
-| Việc tiếp theo | **Việc #12 (tiếp) — 9 file TRANSLATE lớn còn lại, xem mục ngay dưới** |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** + **50/57 file việc #12 (13 SKIP + 6 MOSTLY SKIP + 31/38 TRANSLATE)** |
+| Việc tiếp theo | **Việc #12 (tiếp) — 6 file TRANSLATE lớn còn lại, xem mục ngay dưới** |
 
-## 🔜 SESSION TIẾP THEO — việc #12 (tiếp): 9 file lớn còn lại
+## 🔜 SESSION TIẾP THEO — việc #12 (tiếp, đợt 16): 6 file lớn còn lại
+
+### Đã xong thêm 2 file lớn trong đợt 16 (2026-07-28, phiên này)
+
+- **`effects_POD_l_english.yml`** (2164/2164 dòng): dịch qua 7 agent chia đoạn (1-311, 312-615, 616-926, 927-1246, 1247-1545, 1546-1856, 1857-2164). 3 lỗi merge phát hiện+sửa (thiếu 1 dòng trống ở đoạn 3, 8 chỗ `UmbraGlossaryLocalized('shadowlands','Underworld')` chưa dịch tham số 2, mất trailing whitespace 3 dòng comment header). Chi tiết đầy đủ → TERMINOLOGY.md `B12-effects`. Đã commit (`4fa30cf`).
+- **`POD_journeys_l_english.yml`** (2092/2092 dòng): dịch qua 7 agent chia đoạn (1-294, 295-602, 603-902, 903-1196, 1197-1496, 1497-1795, 1796-2092). Lần đầu cả 7 đoạn khớp merge ngay từ lần verify đầu (không lỗi cấu trúc dòng). 3 lỗi thuật ngữ phát hiện+sửa: "The Suspire" dịch nhầm, "Divination" dịch nhầm "Bốc Thuật" (phải "Bói Toán Thuật"), và xung đột Feng Shui/Tzu Wei/Tapestry giữa `traits_POD` (B4g) và `POD_chi_arts_lifestyle` (B8) — **người dùng xác nhận dùng lại B4g**, đã sửa cả 2 file liên quan. Chi tiết đầy đủ → TERMINOLOGY.md `B12-journeys`. Đã commit (`9131374`).
+
+**Bài học quan trọng nhất đợt này:** khi phát hiện 2 mục TERMINOLOGY.md mâu thuẫn nhau cho cùng 1 khái niệm (do chốt ở 2 thời điểm khác nhau, mỗi lần "đúng" theo ngữ cảnh lúc đó), **PHẢI dừng lại hỏi người dùng bằng AskUserQuestion trước khi merge** — đã xảy ra 2 lần trong phiên này (Blood Magic: "Chú Thuật Huyết Mạch" vs "Huyết Thuật"; Feng Shui/Tzu Wei/Tapestry: B4g vs B8-lifestyles-p8). Không tự chọn 1 bên dựa trên suy luận "bản mới hơn luôn đúng" — bản cũ có thể đúng hơn nếu lý do đặt tên (ví dụ Hán Việt phổ thông) mạnh hơn.
+
+### 2 việc NỢ lại từ phiên này — PHẢI làm khi có dịp đụng lại các file liên quan
+
+1. **`game_POD_concepts_l_english.yml:66`** — `game_concept_blood_magic_lifestyle: "Huyết Thuật"` hiện dùng chung 1 bản dịch với `game_concept_bloodsorcery`/`game_concept_bloodsorcerer` (dòng 88-89), nhưng người dùng đã xác nhận "Blood Magic" (khái niệm lifestyle, dùng "Chú Thuật Huyết Mạch") và "Blood Sorcery" (Dị năng Tremere, dùng "Huyết Thuật") là 2 khái niệm KHÁC NHAU. Cần sửa dòng 66 thành "Chú Thuật Huyết Mạch" để tách bạch — CHƯA sửa trong đợt này vì chưa đụng lại file đó, chỉ mới ghi nhận quyết định. Xem TERMINOLOGY.md `B12-effects`.
+2. Khi dịch tiếp các file còn lại của việc #12 (đặc biệt file nào nhắc tới Chi Arts Kuei-Jin hoặc Blood Magic), nhớ dùng đúng quyết định đã chốt lại: Feng Shui→Phong Thủy, Tzu Wei→Tử Vi, Tapestry→Dệt Cảnh, Kiai/Prana giữ nguyên; Blood Magic (lifestyle)→Chú Thuật Huyết Mạch, Blood Sorcery (Discipline)→Huyết Thuật.
 
 ### Đã xong 48/57 file (đợt 15, phiên này)
 
@@ -48,12 +60,10 @@ Cập nhật lần cuối: 2026-07-28 (đợt 15 — việc #12 đạt 48/57 fil
 
 **Bài học quan trọng nhất đợt này:** ngoài lỗi "dòng trống 1-space bị Edit tool xóa mất" đã biết từ trước, đợt này phát hiện thêm 1 biến thể mới — **trailing whitespace SAU dấu `"` đóng ở dòng CÓ nội dung** cũng bị mất tương tự (khác dòng trống thuần túy). Đã bổ sung bước kiểm tra `re.match(r'^(.*?)(\s*)\Z')` so khớp riêng phần đuôi mỗi dòng, không chỉ so dòng trống. Script `merge_check.py` đã lưu ở scratchpad (đường dẫn xem cuối file) có sẵn cả 2 lớp kiểm tra này — dùng lại cho các file còn lại của việc #12 và các việc sau.
 
-**9 file TRANSLATE LỚN còn lại (>350 dòng, PHẢI chia nhiều agent theo đoạn dòng, không giao 1 agent/file nguyên):**
+**6 file TRANSLATE LỚN còn lại (>350 dòng, PHẢI chia nhiều agent theo đoạn dòng, không giao 1 agent/file nguyên) — `effects_POD` và `POD_journeys` đã xong đợt 16, xem mục trên:**
 
-| File | Số dòng (đo bằng `grep -c ''`, xác nhận đúng lúc bàn giao) |
+| File | Số dòng (đo bằng `grep -c ''`, xác nhận lúc bàn giao đợt 15, PHẢI đo lại) |
 |---|---|
-| `effects_POD_l_english.yml` | 2164 |
-| `POD_journeys_l_english.yml` | 2092 |
 | `single_combat_POD_l_english.yml` | 1988 |
 | `POD_regiments_l_english.yml` | 729 |
 | `struggle_POD_l_english.yml` | 490 |
@@ -61,18 +71,20 @@ Cập nhật lần cuối: 2026-07-28 (đợt 15 — việc #12 đạt 48/57 fil
 | `schemes_POD_l_english.yml` | 377 |
 | `POD_coterie_l_english.yml` | 372 |
 
-Lưu ý: bảng WORKLIST cũ ghi số dòng theo `wc -l` (thiếu 1 nếu file không có newline cuối) — số trên đã đo lại bằng `grep -c ''`, khớp baseline đo lúc đầu phiên này, nhưng **PHẢI tự đo lại lần nữa trước khi chia đoạn** nếu nghi ngờ file đã đổi.
+Lưu ý: số trên đo bằng `grep -c ''` lúc đầu đợt 15, nhưng **PHẢI tự đo lại lần nữa trước khi chia đoạn** nếu nghi ngờ file đã đổi (2 file đã dịch xong đợt 16 xác nhận số dòng không đổi so với lúc khảo sát).
 
-### Quy trình cho 9 file lớn còn lại
+**Ranh giới chia đoạn gợi ý cho `single_combat_POD_l_english.yml` (1988 dòng, PHẢI tự đo lại `grep -c ''` để xác nhận trước) — chia 7 đoạn theo dòng trống gần nhất với các mốc 1/7-6/7:** 1-245, 246-566, 567-879, 880-1090, 1091-1412, 1413-1726, 1727-1988 (đã tính sẵn ở đợt 15, chưa dùng — verify lại boundary có đúng là dòng trống trong bản hiện tại trước khi giao agent).
+
+### Quy trình cho 6 file lớn còn lại
 
 1. Tự đo lại baseline `grep -c ''` cho từng file trước khi chia đoạn.
-2. Chia 5-8 agent theo ranh giới dòng trống tự nhiên (không cắt ngang 1 entry logic) — 3 file lớn nhất (`effects_POD` 2164, `POD_journeys` 2092, `single_combat_POD` 1988) chia 6-8 đoạn; 5 file còn lại (729 xuống 372 dòng) chia 3-5 đoạn.
-3. Prompt mỗi agent PHẢI có cảnh báo khoảng trắng đầu dòng/dòng trống/trailing whitespace như đã dùng phiên này (xem mẫu prompt trong lịch sử phiên — đã hiệu quả, 0 lỗi loại "dòng trống flatten" sống sót tới bước merge cuối).
-4. Coordinator merge bằng script Python — dùng lại `merge_check.py` đã lưu (xem đường dẫn dưới), bổ sung: đối chiếu key-tuần-tự, dòng trống byte-for-byte, trailing-whitespace byte-for-byte, token count, `Glossary()`/`UmbraGlossaryLocalized()` tham số với `git show HEAD`.
-5. Đặc biệt chú ý tra TERMINOLOGY.md trước khi dịch — các file này (đặc biệt `effects_POD`, `single_combat_POD`, `game_POD_rules`) nhiều khả năng có mật độ cao thuật ngữ đã chốt (Discipline/Dị Năng, Sire, Ghoul/Bộc huyết, Wyrm/Wyld/Weaver, Diablerie...).
-6. Sau khi xong 9 file → việc #12 HOÀN TẤT (57/57, trừ nicknames_POD đã tách riêng ngoài phạm vi) → cập nhật WORKLIST.md → quay lại làm việc #10 (`buildings/`) rồi #11 (`artifacts/`) theo đúng thứ tự gốc.
-
-**Script kiểm tra dùng lại được** (không cần viết lại): `/tmp/claude-1963401254/-home-quan-tran-MyProject-MOD-CK3-Princes-Of-Darkness-VH/d35b4219-2f99-4602-93f0-21c8b693de86/scratchpad/viec12/merge_check.py` — LƯU Ý đường dẫn này nằm trong scratchpad của phiên cũ, có thể đã bị dọn dẹp; nếu không còn, viết lại theo mẫu: đối chiếu key trước dấu `:` theo thứ tự, so blank-line byte-for-byte, so trailing-whitespace bằng regex `^(.*?)(\s*)\Z`, đếm 7 loại token (`$ref$`, `[bracket]`, `@icon!`, `#opentag `, `#!`, `\n` literal, `\"`), đối chiếu chuỗi tham số 2 của mọi `Glossary()` và flag của mọi `UmbraGlossaryLocalized()` với `git show HEAD`.
+2. Chia agent theo ranh giới dòng trống tự nhiên (không cắt ngang 1 entry logic, dùng Python xác nhận từng mốc chia là dòng trống thật trước khi giao agent — xem cách làm đợt 16 ở `effects_POD`/`POD_journeys`) — `single_combat_POD` (1988) chia 6-8 đoạn; 5 file còn lại (729 xuống 372 dòng) chia 3-5 đoạn.
+3. Prompt mỗi agent PHẢI có cảnh báo khoảng trắng đầu dòng/dòng trống/trailing whitespace, VÀ THÊM yêu cầu mới rút ra từ đợt 16: **agent phải tự đối chiếu KEY-THEO-THỨ-TỰ (trích key trước dấu `:` theo đúng vị trí tuần tự, không chỉ đếm tổng số dòng trống) giữa bản gốc và bản dịch trước khi nộp** — đây là bổ sung quan trọng nhất rút ra từ lỗi thật ở `effects_POD` đoạn 3 (agent tự báo "khớp 100%" nhưng thực ra thiếu 1 dòng trống giữa file, chỉ phát hiện được nhờ so key-tuần-tự, không phải đếm tổng). Nhờ thêm yêu cầu này vào prompt, cả 7 đoạn của `POD_journeys` merge sạch ngay từ lần verify đầu.
+4. Coordinator merge bằng script Python (viết mới theo mẫu `merge_effects_pod.py`/`merge_journeys.py` đã dùng đợt 16, có thể đã bị dọn dẹp khỏi scratchpad — viết lại theo mẫu: đối chiếu key-tuần-tự, so blank-line byte-for-byte, so trailing-whitespace bằng regex `^(.*?)(\s*)\Z`, đếm 7 loại token, đối chiếu **multiset** tham số 2 của mọi `Glossary()` và multiset tham số 1 của mọi `UmbraGlossaryLocalized()` với `git show HEAD` — dùng multiset thay vì so vị trí tuyệt đối, vì 1 dòng có ≥2 lệnh cùng loại có thể đổi thứ tự xuất hiện do trật tự từ tiếng Việt khác tiếng Anh, không phải lỗi).
+5. Đặc biệt chú ý tra TERMINOLOGY.md trước khi dịch — các file này (đặc biệt `single_combat_POD`, `game_POD_rules`) nhiều khả năng có mật độ cao thuật ngữ đã chốt (Discipline/Dị Năng, Sire, Ghoul/Bộc huyết, Wyrm/Wyld/Weaver, Diablerie, Blood Magic→Chú Thuật Huyết Mạch, Blood Sorcery→Huyết Thuật, Feng Shui→Phong Thủy, Tzu Wei→Tử Vi, Tapestry→Dệt Cảnh — 2 mục cuối vừa chốt lại đợt 16, xem TERMINOLOGY.md `B12-journeys`).
+6. **Nếu phát hiện 2 mục TERMINOLOGY.md mâu thuẫn nhau cho cùng 1 khái niệm** (đã xảy ra 2 lần ở đợt 16: Blood Magic, Feng Shui/Tzu Wei/Tapestry) → DỪNG LẠI, dùng AskUserQuestion hỏi người dùng chọn bản nào trước khi merge, đừng tự quyết theo "bản mới hơn luôn đúng".
+7. Sau khi xong 6 file → việc #12 HOÀN TẤT (57/57, trừ nicknames_POD đã tách riêng ngoài phạm vi) → cập nhật WORKLIST.md → quay lại làm việc #10 (`buildings/`) rồi #11 (`artifacts/`) theo đúng thứ tự gốc.
+8. **Việc nợ chưa làm** (xem chi tiết ở mục trên): sửa `game_POD_concepts_l_english.yml:66` tách bạch Blood Magic/Blood Sorcery — làm khi có dịp đụng lại file đó, không bắt buộc phải làm ngay trước 6 file này.
 
 ---
 
