@@ -111,9 +111,20 @@ Có `:0` trong `building_grand_city_POD_l_english.yml`.
 
 Khối lớn thứ hai. Gồm `secrets_POD_l_english.yml` (có `:0`), `effects_POD`, `POD_regiments`, `single_combat_POD`, `struggle_POD`, `game_POD_rules`, `schemes_POD`, `POD_coterie`… Chi tiết đầy đủ → TERMINOLOGY.md các mục `B12-*`.
 
-### #13 — `event_localization/`  20.530 key, 160 file
+### #13 — `event_localization/`  20.530 key, 160 file — ⚠️ NGOẠI LỆ THỨ TỰ, làm trước #10/#11 theo yêu cầu người dùng 2026-07-28
 
-**Khối lớn nhất.** Văn xuôi thuần, đòn bẩy thấp → để cuối. Chia theo thư mục con (`POD_chargen/`, `POD_umbra/`, `POD_wraith/`, `POD_gehenna/`, `schemes/`, `POD_journeys/`…), mỗi thư mục 1–2 commit.
+**Khối lớn nhất.** Văn xuôi thuần, đòn bẩy thấp → để cuối theo thứ tự gốc, nhưng người dùng đã yêu cầu làm trước #10 (`buildings/`)/#11 (`artifacts/`) — giống ngoại lệ đã áp dụng cho việc #9/#12 trước đó. Sau khi xong #13, quay lại làm #10 rồi #11.
+
+**Cấu trúc thật (đã khảo sát 2026-07-28):** 48 file trực tiếp trong `event_localization/` (~10.485 dòng, file lớn nhất `POD_canon_chars_l_english.yml` 2739 dòng, `POD_1230objectives_l_english.yml` 1370 dòng) + 29 thư mục con. Thư mục con lớn nhất: `schemes/` (19 file, ~3.338 dòng), `POD_journeys/` (14 file, ~1.796 dòng), `POD_1230endgame/` (5 file, ~1.728 dòng), `POD_umbra/` (2 file, ~1.329 dòng), `POD_chargen/` (1 file, ~1.345 dòng), `POD_disciplines/` (12 file, ~458 dòng), `POD_flavor/` (10 file, ~766 dòng), `POD_introductions/` (3 file, ~724 dòng), `POD_fera/` (6 file, ~450 dòng), `POD_wraith/` (8 file, ~294 dòng). Nhiều thư mục nhỏ ≤200 dòng (`POD_gehenna`, `POD_inquisition`, `POD_masquerade`, `POD_powers`, `POD_interactions_misc`, `stress_events`, `secret_events`, `POD_negotiation`, `POD_numina`, `POD_gargoyles`, `POD_knights`, `POD_worldgen`, `POD_ghoul`, `POD_fae`, `POD_decisions`, `POD_sins`).
+
+**Quy trình đề xuất:**
+1. Xử lý 48 file trực tiếp trong `event_localization/` trước (không phải thư mục con) — chia theo độ lớn giống các đợt trước: file khổng lồ (`POD_canon_chars` 2739 dòng, `POD_1230objectives` 1370 dòng) chia nhiều agent theo đoạn dòng trống; file vừa (100-700 dòng) mỗi file 1 agent chạy song song; file nhỏ (<100 dòng) coordinator tự dịch trực tiếp.
+2. Sau đó xử lý từng thư mục con theo thứ tự lớn dần hoặc nhỏ dần tùy chọn — khuyến nghị làm các thư mục nhỏ trước để tích lũy tiến độ nhanh, dồn `schemes/`/`POD_journeys/`/`POD_1230endgame`/`POD_umbra`/`POD_chargen` (5 thư mục lớn nhất, tổng ~8.656 dòng) vào các đợt riêng cuối cùng.
+3. **Tra TERMINOLOGY.md xuyên suốt trước khi dịch** — đây là văn xuôi event thuần, mật độ thuật ngữ đã chốt (Discipline giữ nguyên kể cả giữa câu, Embrace→Trao truyền, Torpor→Miên Trạng, Blood Hunt/Oath, True Faith, Feng Shui/Tzu Wei/Tapestry...) sẽ cao hơn hẳn các file rule/mechanic đã dịch ở việc #12.
+4. Áp dụng đầy đủ bài học từ việc #12: cảnh báo rõ ràng về Discipline-name-in-prose, dòng trống 2 loại (rỗng/1-space), agent tự đối chiếu key-tuần-tự trước khi nộp, coordinator luôn tự chạy lại đối chiếu Glossary()/UmbraGlossaryLocalized() với `git show HEAD` chứ không tin báo cáo agent.
+5. Đo lại baseline `grep -c ''` cho từng file trước khi chia đoạn — đừng tin số liệu ở bảng trên nếu nghi file đã đổi.
+6. Nếu gặp mâu thuẫn thuật ngữ giữa 2 mục TERMINOLOGY.md → DỪNG LẠI, hỏi người dùng bằng AskUserQuestion trước khi merge.
+7. Xong toàn bộ `event_localization/` (160 file) → việc #13 HOÀN TẤT → cập nhật WORKLIST.md → quay lại làm việc #10 (`buildings/`) rồi #11 (`artifacts/`) theo đúng thứ tự gốc.
 
 ### #14 — `bookmark/`  1.128 key, 1 file
 
