@@ -7,7 +7,7 @@ Danh sách công việc theo thứ tự. **Làm từ trên xuống, không nhả
 - Chính sách dịch → [README.md](README.md)
 - Cấu trúc repo → [CLAUDE.md](CLAUDE.md)
 
-Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên xong, việc #9 HOÀN TẤT; quyết định làm việc #12 TRƯỚC #10/#11 — xem "NGOẠI LỆ THỨ TỰ" bên dưới).
+Cập nhật lần cuối: 2026-07-28 (đợt 15 — việc #12 đạt 48/57 file, 9 file lớn còn lại BÀN GIAO cho session sau — xem "🔜 SESSION TIẾP THEO — việc #12 (tiếp)" ngay dưới).
 
 ---
 
@@ -15,7 +15,7 @@ Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên
 
 **Người dùng đã yêu cầu rõ ràng, xác nhận qua hỏi lại:** làm **việc #12** (root-level `*.yml` còn lại, 56 file, ~18.125 dòng thật) **trước** việc #10 (`buildings/`) và việc #11 (`artifacts/`). Đây KHÔNG phải nhảy bậc do nhầm lẫn — là ngoại lệ có chủ đích, giống các ngoại lệ trước đó (việc #9 cũng từng được tách ra làm sớm hơn thứ tự gốc). Sau khi xong việc #12, quay lại làm #10 rồi #11 theo đúng thứ tự.
 
-**Prompt bàn giao đầy đủ cho session tiếp theo → xem mục "## 🔜 SESSION TIẾP THEO — việc #12" ngay dưới đây.**
+**Prompt bàn giao đầy đủ cho session tiếp theo → xem mục "## 🔜 SESSION TIẾP THEO — việc #12 (tiếp)" ngay dưới đây.**
 
 ---
 
@@ -24,8 +24,57 @@ Cập nhật lần cuối: 2026-07-28 (đợt 14 — 4 file root-level ưu tiên
 | | Số liệu |
 |---|---|
 | Tổng cộng | **460 file, 104.366 dòng** |
-| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** |
-| Việc tiếp theo | **Việc #12 (làm trước #10/#11 theo ngoại lệ) — root-level còn lại, 56 file, ~18.125 dòng** |
+| Đã xong hoàn toàn | **6 file traits/** + **36/36 file religion/** + **6/6 file custom_localization/** + **30/30 file gui/ (việc #4 HOÀN TẤT)** + **28/28 file interactions/ (việc #5 HOÀN TẤT)** + **11/11 file decisions/ (việc #6 HOÀN TẤT)** + **54/54 file modifiers/ (việc #7 HOÀN TẤT)** + **27/27 file lifestyles/ (việc #8 HOÀN TẤT)** + **4/4 file root-level ưu tiên (việc #9 HOÀN TẤT)** + **48/57 file việc #12 (13 SKIP + 6 MOSTLY SKIP + 29/38 TRANSLATE)** |
+| Việc tiếp theo | **Việc #12 (tiếp) — 9 file TRANSLATE lớn còn lại, xem mục ngay dưới** |
+
+## 🔜 SESSION TIẾP THEO — việc #12 (tiếp): 9 file lớn còn lại
+
+### Đã xong 48/57 file (đợt 15, phiên này)
+
+**13 file SKIP** — không đụng vào theo phân loại đã chốt (xem mục "✅ ĐÃ KIỂM TRA NỘI DUNG..." phía dưới).
+
+**6 file MOSTLY SKIP** — đã dịch xong các dòng có chữ thật: `POD_journeys_core`, `POD_shared_loca`, `POD_scheme_countermeasures`, `secrets_POD`, `POD_custom_nickname`, `POD_masquerade`.
+
+**29/38 file TRANSLATE đã xong** (coordinator tự dịch trực tiếp 13 file root nhỏ + `POD_regiments_spirits`/`mottos_POD` + 15 file qua agent song song):
+`rcm`, `POD_content_source`, `POD_court_position_changes_localization`, `POD_story_cycles`, `POD_messages`, `POD_inquiobjectives`, `POD_fog_of_war`, `POD_personal_coa_localization`, `POD_succession_laws`, `POD_relationship_reasons`, `POD_script_values`, `POD_legends`, `interactions_POD`, `mottos_POD`, `POD_regiments_spirits`, `POD_ashirra`, `POD_april_fools`, `secrets_predator_types_POD`, `death_reasons_POD`, `POD_fera_common`, `POD_epidemics`, `POD_spirits`, `POD_wyrm`, `POD_accolades`, `POD_regiments_fera`, `secrets_prey_restriction_POD`, `POD_important_actions`, `focuses_POD`, `wars_POD`, `POD_actvities`.
+
+**Lỗi phát hiện và sửa khi merge đợt này:**
+1. `death_reasons_POD`: agent dịch "True Faith" thành "Chân Tín Ngưỡng" thay vì "Đức Tin Chân Chính" đã chốt B9-concepts — sửa 2 chỗ.
+2. `interactions_POD`: `UmbraGlossaryLocalized('shadowlands','Underworld')` chưa dịch tham số 2 — sửa thành `'Âm Phủ'` theo B4j.
+3. `interactions_POD`, `POD_succession_laws`, `POD_masquerade`: Edit tool làm mất khoảng trắng ở dòng trống 1-space (giống lỗi mummy_lifestyles cũ) — khôi phục bằng script Python đối chiếu byte-for-byte với `git show HEAD`.
+4. `secrets_POD`: mất trailing whitespace sau dấu `"` đóng ở ~20 dòng (khác lỗi dòng trống — đây là dòng CÓ nội dung nhưng mất khoảng trắng thừa cuối dòng) — khôi phục bằng script đối chiếu byte-for-byte.
+5. `POD_important_actions`: "Dreamer" dịch "người mơ mộng" lệch tiền lệ "Người Mộng Mơ" đã có ở B4b/nơi khác — sửa lại.
+6. `POD_actvities`: agent tự ý chuyển 3 cặp dấu ngoặc kép lồng nhau kiểu bare-quote gốc (`"modern"`, không escape) thành dạng `\"modern\"` — bản gốc file này dùng bare quote (quirk có sẵn, không phải lỗi cần sửa), đã khôi phục lại đúng kiểu bare-quote.
+
+**Bài học quan trọng nhất đợt này:** ngoài lỗi "dòng trống 1-space bị Edit tool xóa mất" đã biết từ trước, đợt này phát hiện thêm 1 biến thể mới — **trailing whitespace SAU dấu `"` đóng ở dòng CÓ nội dung** cũng bị mất tương tự (khác dòng trống thuần túy). Đã bổ sung bước kiểm tra `re.match(r'^(.*?)(\s*)\Z')` so khớp riêng phần đuôi mỗi dòng, không chỉ so dòng trống. Script `merge_check.py` đã lưu ở scratchpad (đường dẫn xem cuối file) có sẵn cả 2 lớp kiểm tra này — dùng lại cho các file còn lại của việc #12 và các việc sau.
+
+**9 file TRANSLATE LỚN còn lại (>350 dòng, PHẢI chia nhiều agent theo đoạn dòng, không giao 1 agent/file nguyên):**
+
+| File | Số dòng (đo bằng `grep -c ''`, xác nhận đúng lúc bàn giao) |
+|---|---|
+| `effects_POD_l_english.yml` | 2164 |
+| `POD_journeys_l_english.yml` | 2092 |
+| `single_combat_POD_l_english.yml` | 1988 |
+| `POD_regiments_l_english.yml` | 729 |
+| `struggle_POD_l_english.yml` | 490 |
+| `game_POD_rules_l_english.yml` | 466 |
+| `schemes_POD_l_english.yml` | 377 |
+| `POD_coterie_l_english.yml` | 372 |
+
+Lưu ý: bảng WORKLIST cũ ghi số dòng theo `wc -l` (thiếu 1 nếu file không có newline cuối) — số trên đã đo lại bằng `grep -c ''`, khớp baseline đo lúc đầu phiên này, nhưng **PHẢI tự đo lại lần nữa trước khi chia đoạn** nếu nghi ngờ file đã đổi.
+
+### Quy trình cho 9 file lớn còn lại
+
+1. Tự đo lại baseline `grep -c ''` cho từng file trước khi chia đoạn.
+2. Chia 5-8 agent theo ranh giới dòng trống tự nhiên (không cắt ngang 1 entry logic) — 3 file lớn nhất (`effects_POD` 2164, `POD_journeys` 2092, `single_combat_POD` 1988) chia 6-8 đoạn; 5 file còn lại (729 xuống 372 dòng) chia 3-5 đoạn.
+3. Prompt mỗi agent PHẢI có cảnh báo khoảng trắng đầu dòng/dòng trống/trailing whitespace như đã dùng phiên này (xem mẫu prompt trong lịch sử phiên — đã hiệu quả, 0 lỗi loại "dòng trống flatten" sống sót tới bước merge cuối).
+4. Coordinator merge bằng script Python — dùng lại `merge_check.py` đã lưu (xem đường dẫn dưới), bổ sung: đối chiếu key-tuần-tự, dòng trống byte-for-byte, trailing-whitespace byte-for-byte, token count, `Glossary()`/`UmbraGlossaryLocalized()` tham số với `git show HEAD`.
+5. Đặc biệt chú ý tra TERMINOLOGY.md trước khi dịch — các file này (đặc biệt `effects_POD`, `single_combat_POD`, `game_POD_rules`) nhiều khả năng có mật độ cao thuật ngữ đã chốt (Discipline/Dị Năng, Sire, Ghoul/Bộc huyết, Wyrm/Wyld/Weaver, Diablerie...).
+6. Sau khi xong 9 file → việc #12 HOÀN TẤT (57/57, trừ nicknames_POD đã tách riêng ngoài phạm vi) → cập nhật WORKLIST.md → quay lại làm việc #10 (`buildings/`) rồi #11 (`artifacts/`) theo đúng thứ tự gốc.
+
+**Script kiểm tra dùng lại được** (không cần viết lại): `/tmp/claude-1963401254/-home-quan-tran-MyProject-MOD-CK3-Princes-Of-Darkness-VH/d35b4219-2f99-4602-93f0-21c8b693de86/scratchpad/viec12/merge_check.py` — LƯU Ý đường dẫn này nằm trong scratchpad của phiên cũ, có thể đã bị dọn dẹp; nếu không còn, viết lại theo mẫu: đối chiếu key trước dấu `:` theo thứ tự, so blank-line byte-for-byte, so trailing-whitespace bằng regex `^(.*?)(\s*)\Z`, đếm 7 loại token (`$ref$`, `[bracket]`, `@icon!`, `#opentag `, `#!`, `\n` literal, `\"`), đối chiếu chuỗi tham số 2 của mọi `Glossary()` và flag của mọi `UmbraGlossaryLocalized()` với `git show HEAD`.
+
+---
 
 ## 🔜 SESSION TIẾP THEO — việc #12: root-level `*.yml` còn lại (56 file)
 
